@@ -1,142 +1,59 @@
 
+(* A package for dealing with numerical relativity data *)
+
+BeginPackage["NR`", {"DataTable`", "Memo`"}];
+
+FileInRun;
+ReadColumnFile;
+ReadPsi4;
+ReadMinTrackerCoordinates;
+ReadMinTrackerCoordinate;
+ReadMinTrackerRadius;
+ReadMinTrackerPhase;
+ConvergenceMultiplier;
+LoadConvergenceSeries;
+RescaledErrors;
+ConvergenceRate;
+ExtrapolateScalarFull;
+ExtrapolateScalar;
+ExtrapolatedValue;
+Data;
+ExtrapolatedCurve;
+ExtrapolateDataTables;
+AlignPhases;
+RadiusTimeDataToTimeRadiusData;
+ExtrapolatePhases;
+ReadADMMass;
+TortoiseCoordinate;
+UseTortoiseCoordinate;
+FilterDCT;
+ApplyToPhases;
+
+Begin["`Private`"];
+
 (*--------------------------------------------------------------------
-  Functional Programming
+  File reading
   --------------------------------------------------------------------*)
 
-SetAttributes[DefineMemoFunction, HoldAll];
-
-Memo[f_] :=
-   Function[
-       If[Head[DataCache[f, {##}]] === DataCache,
-          DataCache[f, {##}] = Apply[f,{##}]];
-       DataCache[f, {##}]];
-
-DefineMemoFunction[name_[args___], body_] :=
-  Module[{f},
-    SetDelayed[f[args], body];
-    name = Memo[f]];
-
-SetAttributes[Redefine, HoldAll];
-
-Redefine[f_[args___], newDef_] :=
-  Module[{},
-    Unprotect[f];
-    f[args] := newDef;
-    Protect[f]];
-
-(* List functions *)
-
-Phase[tb:{{_, {_, _}}...}] :=
-  Module[{phaseTb,x,y,t,previousPhase, i, currentPhase = 0, cycles =
-          0, nPoints},
-  nPoints = Length[tb];
-  phaseTb = Table[i, {i, 1, nPoints}];
-  For[i = 1, i <= nPoints, i++,
-   t = tb[[i, 1]];
-   x = tb[[i, 2, 1]];
-   y = tb[[i, 2, 2]];
-   currentPhase = ArcTan[x, y];
-   If[currentPhase - previousPhase > Pi, cycles--];
-   If[currentPhase - previousPhase < -Pi, cycles++];
-   previousPhase = currentPhase;
-   phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
-  Return[phaseTb]];
-
-Downsample[l_List, n_Integer] :=
-  Take[l, {1, Length[l], n}];
-
-(* DataTable definitions *)
-
-(* Make sure that we preserve all attributes where it makes sense *)
-
-Format[DataTable[l_, attrs___]] := "DataTable"["..."];
-
-MakeDataTable[l_List] :=
-  DataTable[l];
-
-ToList[DataTable[l_, ___]] := l;
-
-DepVar[DataTable[l_, ___]] :=
-  Map[#[[2]]&, l];
-
-IndVar[DataTable[l_, ___]] :=
-  Map[#[[1]]&, l];
-
-MakeDataTable[xs_, ys_] :=
-  MakeDataTable[MapThread[List, {xs,ys}]];
-
-MapData[f_, DataTable[l_, ___]] :=
-  DataTable[Map[{#[[1]], f[#[[2]]]}&, l]];
-
-ApplyToList[f_, d_DataTable] :=
-  d /. DataTable[l_, x___] -> DataTable[f[l], x];
-
-commonAttributes[ds:List[DataTable[__]..]] :=
-  Module[{attrs},
-    attrs = Map[ListAttributes, ds];
-    Print[attrs];
-    Return[Apply[Intersection, attrs]]];
-
-MapThreadData[f_, ds:List[DataTable[__]...]] :=
-  Module[{lists, vals, xs, fOfVals},
-    lists = Map[ToList, ds];
-    vals = Map[DepVar, ds];
-    xs = IndVar[First[ds]];
-    fOfVals = MapThread[f, vals];
-    MakeDataTable[xs,fOfVals]];
-
-Redefine[Plus[d1:DataTable[__], d2:DataTable[__]],
-  MapThreadData[#1+#2&, {d1,d2}]];
-
-Redefine[Plus[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
-  MapData[a + # &, d]]];
-
-Redefine[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
-  MapData[a * # &, d]];
-
-Redefine[Length[DataTable[d_,___]],
-  Length[d]];
-
-Redefine[Take[d:DataTable[___], args__],
-  d /. DataTable[l_, x___] :> DataTable[Take[l,args],x]];
-
-AddAttribute[d:DataTable[x__], name_ -> val_] :=
-  DataTable[x, name -> val];
-
-ReadAttribute[d:DataTable[l_, attrs___], name_] :=
-  Module[{val},
-    val = name /. {attrs};
-    If[val === name,
-      Throw["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
-    Return[val]];
-
-ListAttributes[d:DataTable[l_, attrs___]] :=
-  {attrs};
-
-Downsample[d_DataTable, n_Integer] :=
-  ApplyToList[Downsample[#, n] &, d];
-
-(* File reading *)
-
 FileInRun[runName_String, fileName_] :=
-  RunDirectory <> "/" <> runName <> "-all/" <> fileName;
+  Global`RunDirectory <> "/" <> runName <> "-all/" <> fileName;
 
 ReadColumnFile[fileName_String, cols_List] :=
   Module[{list},
-    If[FileType[fileName] === None, Throw["File " <> name <> " not found"]];
+    If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
     list = ReadList[fileName, Real, RecordLists->True];
     Return[Map[Extract[#, Map[List, cols]] &, list]]];
 
 (* Simulation data *)
 
-ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
+DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
   Module[{fileName, list, psi4},
     fileName = FileInRun[runName, "Ylm_WEYLSCAL4::Psi4ri_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
              ToString[rad] <> ".00.asc"];
     list = ReadColumnFile[fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, list];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
+    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]];
 
 DefineMemoFunction[ReadMinTrackerCoordinates[runName_String, tracker_Integer],
   Module[{name},
@@ -151,10 +68,12 @@ ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
     coords = ReadMinTrackerCoordinates[runName, tracker];
     MapData[#[[coord]]&, coords]];
 
-(* Data conversion *)
+ReadADMMass[runName_String] :=
+  ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
 
-Phase[d:DataTable[__]] :=
-    MakeDataTable[Phase[ToList[d]]];
+(*--------------------------------------------------------------------
+  Data conversion 
+  --------------------------------------------------------------------*)
 
 ReadMinTrackerRadius[runName_String] :=
   Module[{x0, x1, rad},
@@ -173,22 +92,9 @@ ReadMinTrackerPhase[runName_String] :=
   ];
 
 
-
-(* Plotting *)
-
-Redefine[ListPlot[d:DataTable[___], args___],
-   ListPlot[ToList[d], args]];
-
-Redefine[ListPlot[ds:List[DataTable[___]..], args___],
-   ListPlot[Map[ToList,ds], args]];
-
-Redefine[ListLinePlot[d:DataTable[___], args___],
-   ListLinePlot[ToList[d], args]];
-
-Redefine[ListLinePlot[ds:List[DataTable[___]..], args___],
-   ListLinePlot[Map[ToList,ds], args]];
-
-(* Convergence *)
+(*--------------------------------------------------------------------
+  Convergence
+  --------------------------------------------------------------------*)
 
 ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
   Module[{eq, eqs, f, f0, f1},
@@ -207,16 +113,16 @@ LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
     
     fs = Map[reader, Map[runBase <> namer[#] &, ns]];
     dts = Map[Spacing, fs];
-    Print[dts];
+(*    Print[dts];*)
     If[!(Length[Union[dts]] === 1) && !downsample && !interpolate,
        downsample = True;
        Print["Automatically downsampling"]];
 
     If[downsample,
       gcd = Apply[GCD, ns];
-      Print[gcd];
+(*      Print[gcd];*)
       dsFacs = Map[#/gcd&, ns];
-      Print[dsFacs];
+(*      Print[dsFacs];*)
       fs = MapThread[Downsample[#1, #2] &, {fs, dsFacs}]];
 
     If[interpolate,
@@ -229,20 +135,6 @@ LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
 
     Return[tsWithAttrs];
   ];
-
-Spacing[d:DataTable[__]] :=
-  Module[{ts},
-    ts = IndVar[d];
-    ts[[2]] - ts[[1]]];
-
-MakeInterpolatingDataTable[d:DataTable[__], dt_] :=
-  Module[{l, t1, t2, f, l2},
-    l = ToList[d];
-    t1 = First[l][[1]];
-    t2 = Last[l][[1]];
-    f = Interpolation[l];
-    l2 = Table[{t, f[t]}, {t, t1, t2, dt}];
-    d /. DataTable[_, x___] -> DataTable[l2, x]];
 
 RescaledErrors[p_, ds:List[DataTable[__]..]] :=
   Module[{d1, d2, d3, ns, hs, d12, d23, cm},
@@ -277,3 +169,199 @@ ConvergenceRate[ds:{DataTable[__]..}] :=
   Module[{hs},
     hs = Map[1/ReadAttribute[#, NPoints] &, ds];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds]];
+
+(*--------------------------------------------------------------------
+  Extrapolation
+  --------------------------------------------------------------------*)
+
+ExtrapolateScalarFull[order_, rfTb_] :=
+  Module[{radModel, rfCompact, a, x, fit, curve, rMin},
+   radModel = Sum[a[i] x^i, {i, 0, order}];
+   rfCompact = Map[{1/#[[1]] // N, #[[2]]} &, rfTb];
+   fit = FindFit[rfCompact, radModel, Table[a[i], {i, 0, order}], x];
+   rMin = rfTb[[1]][[1]];
+   curve = Table[{x, radModel /. fit},
+     {x, 0, 1./rMin, 1./rMin/10}];
+   Return[
+    {ExtrapolatedValue -> a[0] /. fit,
+     Data -> rfCompact,
+     ExtrapolatedCurve -> curve}]];
+
+(*
+ ExtrapolateScalarFull[order_, rfTb_] :=
+  Module[{radModel, rfCompact, a, x, fit, curve, rMin},
+   radModel = Sum[a[i] x^i, {i, 0, order}];
+   rfCompact = Map[{1/#[[1]] // N, #[[2]]} &, rfTb];
+   d = Map[Last, rfCompact];
+   xs = Map[First, rfCompact];
+   m = Map[Table[#^r, {r, 0, order}] &, xs];
+   ls = LeastSquares[m, d];
+   rs = Table[r, {r, 0, order}];
+   fit = MapThread[a[#1] -> #2 &, {rs, ls}];
+(*   fit = FindFit[rfCompact, radModel, Table[a[i], {i, 0, order}], x];*)
+   rMin = rfTb[[1]][[1]];
+   curve = Table[{x, radModel /. fit},
+     {x, 0, 1./rMin, 1./rMin/10}];
+   Return[
+    {ExtrapolatedValue -> a[0] /. fit,
+     Data -> rfCompact,
+     ExtrapolatedCurve -> curve}]]; 
+*)
+
+ExtrapolateScalar[args__] :=
+ ExtrapolatedValue /. ExtrapolateScalarFull[args];
+
+RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
+ Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads},
+  rads = Map[First, rdTb];
+(*  Print["rads = ", rads];*)
+  dts = Map[Last, rdTb];
+  lists = Map[ToList, dts];
+  lengths = Map[Length, lists];
+  If[! (Length[Union[lengths]] === 1), 
+  Throw["ExtrapolateDataTables: Input DataTable objects do not have \
+  the same number of points: ", lengths]];
+  ts = Map[First, First[lists]];
+  tbToVec[tb_] := Map[Last, tb];
+  vecs = Map[tbToVec, lists];
+  rfTbs = Transpose[vecs];
+  combineWithRads[v_] := MapThread[List, {rads, v}];
+  rfWithRads = Map[combineWithRads, rfTbs];
+  MapThread[List, {ts, rfWithRads}]];
+
+ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}] :=
+ Module[{trd, rds, ts, extraps},
+  trd = RadiusTimeDataToTimeRadiusData[rdTb];
+  rds = Map[Last,trd];
+  ts = Map[First,trd];
+  extraps = Map[ExtrapolateScalar[p, #] &, rds];
+  MakeDataTable[MapThread[List, {ts, extraps}]]];
+
+ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}] :=
+  ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &]];
+
+AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
+  Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted},
+    If[Length[phaseTbs] < 2, Return[phaseTbs]];
+    phaseFns = Map[Interpolation, phaseTbs];
+    refPhases = Map[#[t]&, phaseFns];
+    adjustments = Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases];
+    adjusted = MapThread[#1-#2 &, {phaseTbs, adjustments}]];
+
+TortoiseCoordinate[r_, Madm_] :=
+  r + 2 Madm Log[r/(2. Madm) - 1.];
+
+TortoiseCoordinate[r_, 0] :=
+  r;
+
+Options[ExtrapolatePhases] = {UseTortoiseCoordinate -> True, ApplyToPhases -> False};
+
+ExtrapolatePhases[p_Integer, runName_String, range:{rMin_, rMax_}, 
+                  tAlign_?NumberQ, opts___] :=
+  Module[{allRads, rads, phases, rdTb, Madm, useTort},
+    Madm = ReadADMMass[runName];
+    allRads = Table[r,{r, 30, 150, 10}];
+    rads = Select[allRads, # >= rMin && # <= rMax &];
+    phases = Map[Phase[ReadPsi4[runName, 2, 2, #]] &, rads];
+    rdTb = MapThread[List, {rads, phases}];
+    ExtrapolatePhases[p, rdTb , range, tAlign, Madm, opts]];
+
+ExtrapolatePhases[p_Integer, rdTb : {{_, DataTable[__]} ...}, range:{rMin_, rMax_}, 
+                  tAlign_?NumberQ, Madm_?NumberQ, opts___] :=
+  Module[{rdTb2, rdTbShift, rdTbShiftAlign,res, rads, dats, resWithr, applyToPhases},
+    useTort = UseTortoiseCoordinate /. {opts} /. Options[ExtrapolatePhases];
+    rdTb2 = Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &];
+    rads = Map[First, rdTb2];
+    phaseTbs = Map[Last, rdTb2];
+
+    If[useTort,
+      phaseTbsShift = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, Madm],#2]&, 
+                                {rads, phaseTbs}],
+      phaseTbsShift = MapThread[ShiftDataTable[-#1, #2] &, 
+                                {rads, phaseTbs}]];
+                                
+    phaseTbsAlign = AlignPhases[phaseTbsShift, tAlign];
+    phaseTbsRes = ResampleDataTables[phaseTbsAlign];
+
+    applyToPhases = ApplyToPhases /. {opts} /. Options[ExtrapolatePhases];
+
+    phaseTbsRes2 = If[!(applyToPhases === False),
+      Map[applyToPhases, phaseTbsRes],
+      phaseTbsRes];
+
+    resWithr = MapThread[List, {rads, phaseTbsRes2}];
+    ExtrapolateDataTables[p, resWithr, range]];
+
+zeroAfter[l_, n_] :=
+ Module[{len},
+  len = Length[l];
+  Join[Take[l, n], Table[0, {i, n + 1, len}]]];
+
+(* FilterDCT[f_List, nModes_Integer] := *)
+(*  Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil}, *)
+(*   times = Map[First, f]; *)
+(*   data = Map[Last, f]; *)
+(*   dataDCT = FourierDCT[data, 2]; *)
+(*   dataFilDCT = zeroAfter[dataDCT, nModes]; *)
+(*   dataFil = FourierDCT[dataFilDCT, 3]; *)
+(*   fFil = MapThread[List, {times, dataFil}]; *)
+(*   Return[fFil]; *)
+(*   ]; *)
+
+(* PartitionTable[d_DataTable, {tMin_?NumberQ, tMax_?NumberQ}] := *)
+(*  Module[{before, middle, after, t1, t2}, *)
+(*   {t1,t2} = DataTableRange[d]; *)
+(*   before = DataTableInterval[d, t1, tMin]; *)
+(*   middle = DataTableInterval[d, tMin, tMax]; *)
+(*   after = DataTableInterval[d, tMax, t2]; *)
+(*   Return[{before, middle, after}] *)
+(*   ]; *)
+
+(* FilterDCT[f_List, nModes_Integer, *)
+(*    range1 : {tMin1_?NumberQ, tMax1_?NumberQ}, *)
+(*    range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] := *)
+(*   Module[{filtered, t1, t2, t3}, *)
+(*    filtered =  *)
+(*     DataTableInterval[FilterDCT[DataTableInterval[f, range1], nModes], range2]; *)
+(*    {t1, t2, t3} = PartitionTable[f, range2]; *)
+(*    Return[Join[t1, filtered, t3]]]; *)
+
+TableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
+  Select[t, 
+   (#[[1]] >= tStart && #[[1]] < tEnd) &];
+
+TableRange[t_List, range_List] :=
+  TableRange[t,range[[1]],range[[2]]];
+
+FilterDCT[f_List, nModes_Integer] :=
+ Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil},
+  times = Map[First, f];
+  data = Map[Last, f];
+  dataDCT = FourierDCT[data, 2];
+  dataFilDCT = zeroAfter[dataDCT, nModes];
+  dataFil = FourierDCT[dataFilDCT, 3];
+  fFil = MapThread[List, {times, dataFil}];
+  Return[fFil];
+  ];
+
+
+PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
+ Module[{before, middle, after},
+  before = TableRange[t, First[t][[1]], tMin];
+  middle = TableRange[t, tMin, tMax];
+  after = TableRange[t, tMax, Last[t][[1]] + 1];
+  Return[{before, middle, after}]
+  ];
+
+FilterDCT[f_List, nModes_Integer,
+   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
+   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
+  Module[{filtered, t1, t2, t3},
+   filtered = 
+    TableRange[FilterDCT[TableRange[f, range1], nModes], range2];
+   {t1, t2, t3} = PartitionTable[f, range2];
+   Return[Join[t1, filtered, t3]]];
+
+End[];
+
+EndPackage[];
