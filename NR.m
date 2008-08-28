@@ -229,7 +229,9 @@ RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
   rfWithRads = Map[combineWithRads, rfTbs];
   MapThread[List, {ts, rfWithRads}]];
 
-ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}] :=
+Options[ExtrapolateDataTables] = {Resample -> False};
+
+ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, opts___] :=
  Module[{trd, rds, ts, extraps},
   trd = RadiusTimeDataToTimeRadiusData[rdTb];
   rds = Map[Last,trd];
@@ -237,8 +239,8 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}] :=
   extraps = Map[ExtrapolateScalar[p, #] &, rds];
   MakeDataTable[MapThread[List, {ts, extraps}]]];
 
-ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}] :=
-  ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &]];
+ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}, opts___] :=
+  ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &], opts];
 
 AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
   Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted},
@@ -254,43 +256,70 @@ TortoiseCoordinate[r_, Madm_] :=
 TortoiseCoordinate[r_, 0] :=
   r;
 
-Options[ExtrapolatePhases] = {UseTortoiseCoordinate -> True, ApplyToPhases -> False};
+Options[ExtrapolateRadiatedQuantity] = {UseTortoiseCoordinate -> True, ApplyFunction -> None, AlignPhaseAt -> None};
 
-ExtrapolatePhases[p_Integer, runName_String, range:{rMin_, rMax_}, 
-                  tAlign_?NumberQ, opts___] :=
-  Module[{allRads, rads, phases, rdTb, Madm, useTort},
+fs = Map[Phase[ReadPsi4[runName, 2, 2, #]] &, rads];
+
+ExtrapolatePhase[p_Integer, runName_String, l_, m_, range:{rMin_, rMax_}, opts___] :=
+  Module[{reader},
+    reader[run_, rad_] := Phase[ReadPsi4[run, l, m, #]];
+    ExtrapolateRadiatedQuantity[p, runName, reader, range, opts]];
+
+
+ExtrapolateRadiatedQuantity[p_Integer, runName_String, reader_, range:{rMin_, rMax_}, opts___] :=
+  Module[{allRads, rads, fs, rdTb, Madm, useTort},
     Madm = ReadADMMass[runName];
     allRads = Table[r,{r, 30, 150, 10}];
     rads = Select[allRads, # >= rMin && # <= rMax &];
-    phases = Map[Phase[ReadPsi4[runName, 2, 2, #]] &, rads];
-    rdTb = MapThread[List, {rads, phases}];
-    ExtrapolatePhases[p, rdTb , range, tAlign, Madm, opts]];
+    fs = Map[reader[runName, #] &, rads];
+    rdTb = MapThread[List, {rads, fs}];
+    ExtrapolatePhases[p, rdTb , range, Madm, opts]];
 
-ExtrapolatePhases[p_Integer, rdTb : {{_, DataTable[__]} ...}, range:{rMin_, rMax_}, 
-                  tAlign_?NumberQ, Madm_?NumberQ, opts___] :=
-  Module[{rdTb2, rdTbShift, rdTbShiftAlign,res, rads, dats, resWithr, applyToPhases},
-    useTort = UseTortoiseCoordinate /. {opts} /. Options[ExtrapolatePhases];
+ExtrapolateRadiatedQuantity[p_Integer, rdTb : {{_, DataTable[__]} ...}, range:{rMin_, rMax_}, 
+                            Madm_?NumberQ, opts___] :=
+  Module[{useTort, rdTb2, rads, fTbs, alignPhaseAt, fTbsRes, applyFunction, fTbsRes2, resWithr},
+    useTort = UseTortoiseCoordinate /. {opts} /. Options[ExtrapolateRadiatedQuantity];
     rdTb2 = Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &];
     rads = Map[First, rdTb2];
-    phaseTbs = Map[Last, rdTb2];
+    fTbs = Map[Last, rdTb2];
 
     If[useTort,
-      phaseTbsShift = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, Madm],#2]&, 
-                                {rads, phaseTbs}],
-      phaseTbsShift = MapThread[ShiftDataTable[-#1, #2] &, 
-                                {rads, phaseTbs}]];
+      fTbs = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, Madm],#2]&, 
+                                {rads, fTbs}],
+      fTbs = MapThread[ShiftDataTable[-#1, #2] &, 
+                                {rads, fTbs}]];
+
+    alignPhaseAt = AlignPhaseAt /. {opts} /. Options[ExtrapolateRadiatedQuantity];
+    If[!(alignPhaseAt === None),
+      fTbs = AlignPhases[fTbs, alignPhaseAt];
                                 
-    phaseTbsAlign = AlignPhases[phaseTbsShift, tAlign];
-    phaseTbsRes = ResampleDataTables[phaseTbsAlign];
+    fTbsRes = ResampleDataTables[fTbs];
 
-    applyToPhases = ApplyToPhases /. {opts} /. Options[ExtrapolatePhases];
+    applyFunction = ApplyFunction /. {opts} /. Options[ExtrapolateRadiatedQuantity];
 
-    phaseTbsRes2 = If[!(applyToPhases === False),
-      Map[applyToPhases, phaseTbsRes],
-      phaseTbsRes];
+    fTbsRes2 = If[!(applyFunction === None),
+      Map[applyFunction, fTbsRes],
+      fTbsRes];
 
-    resWithr = MapThread[List, {rads, phaseTbsRes2}];
+    resWithr = MapThread[List, {rads, fTbsRes2}];
     ExtrapolateDataTables[p, resWithr, range]];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 zeroAfter[l_, n_] :=
  Module[{len},
