@@ -22,12 +22,29 @@ ExtrapolatedCurve;
 ExtrapolateDataTables;
 AlignPhases;
 RadiusTimeDataToTimeRadiusData;
-ExtrapolatePhases;
+ExtrapolateRadiatedQuantity;
+ExtrapolatePsi4Phase;
 ReadADMMass;
 TortoiseCoordinate;
 UseTortoiseCoordinate;
 FilterDCT;
 ApplyToPhases;
+ExtrapolationError;
+ExtrapolatePsi4Amplitude;
+ExtrapolatePsi4;
+StrainFromPsi4;
+ResolutionCode;
+RichardsonExtrapolate;
+
+Options[ExtrapolateRadiatedQuantity] = 
+  {ExtrapolationOrder -> 1,
+   UseTortoiseCoordinate -> True,
+   MassADM -> None,
+   ApplyFunction -> None, 
+   AlignPhaseAt -> None,
+   RadiusRange -> All};
+
+Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
 
@@ -57,7 +74,7 @@ DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ
 
 DefineMemoFunction[ReadMinTrackerCoordinates[runName_String, tracker_Integer],
   Module[{name},
-      Print["Reading..."];
+(*      Print["Reading..."];*)
       fileName = FileInRun[runName, "MinTracker" <> ToString[tracker] <> ".asc"];
       list = ReadColumnFile[fileName, {2,3,4,5}];
       list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}}&, list];
@@ -70,6 +87,9 @@ ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
 
 ReadADMMass[runName_String] :=
   ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
+
+ReadPsi4Radii[runName_] :=
+  Table[r,{r, 30, 150, 10}];
 
 (*--------------------------------------------------------------------
   Data conversion 
@@ -95,6 +115,13 @@ ReadMinTrackerPhase[runName_String] :=
 (*--------------------------------------------------------------------
   Convergence
   --------------------------------------------------------------------*)
+ResolutionCode[n_Integer] := 
+ Module[{}, 
+  If[! (Mod[n, 4] === 0), 
+   Throw["Number of points must be a multiple of 4"]];
+  If[n < 16, Throw["Number of points must be at least 16"]];
+  If[n > 116, Throw["Number of points must be less than 116"]];
+  Return[FromCharacterCode[n/4 - 4 + 97]]];
 
 ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
   Module[{eq, eqs, f, f0, f1},
@@ -116,7 +143,7 @@ LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
 (*    Print[dts];*)
     If[!(Length[Union[dts]] === 1) && !downsample && !interpolate,
        downsample = True;
-       Print["Automatically downsampling"]];
+(*       Print["Automatically downsampling"] *) ];
 
     If[downsample,
       gcd = Apply[GCD, ns];
@@ -150,6 +177,17 @@ RescaledErrors[p_, ds:List[DataTable[__]..]] :=
 ConvergenceRateEquations = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp, {i, 1, 3}];
 ConvergenceRatePEquation = Eliminate[ConvergenceRateEquations, {CRf0, CRf1}];
 
+RichardsonExtrapolationEquation = Eliminate[Take[ConvergenceRateEquations, 2], {CRf1}];
+RichardExtrapolationExpression = CRf0 /. Solve[RichardsonExtrapolationEquation, CRf0][[1]];
+
+
+ConvergenceRateEquations3 = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp + CRf2 CRh[i]^(CRp+1), {i, 1, 3}];
+
+RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations, {CRf1, CRf2}];
+RichardExtrapolationExpression3 = CRf0 /. Solve[RichardsonExtrapolationEquation3, CRf0][[1]];
+
+
+
 ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] := 
  Module[{rateEq, rate}, 
   rateEq = 
@@ -169,6 +207,18 @@ ConvergenceRate[ds:{DataTable[__]..}] :=
   Module[{hs},
     hs = Map[1/ReadAttribute[#, NPoints] &, ds];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds]];
+
+RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
+  Module[{},
+    Return[RichardExtrapolationExpression /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, 
+      CRh[1] -> h1, CRh[2] -> h2}//N];
+  ];
+
+RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
+  Module[{ns, hs},
+    ns = Map[ReadAttribute[#, NPoints] &, ds];
+    hs = Map[1/#&, ns];
+    Return[MapThreadData[RichardsonExtrapolate[#1,#2, ns[[1]], ns[[2]], p] &, {d1,d2}]]];
 
 (*--------------------------------------------------------------------
   Extrapolation
@@ -253,56 +303,76 @@ AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
 TortoiseCoordinate[r_, Madm_] :=
   r + 2 Madm Log[r/(2. Madm) - 1.];
 
-TortoiseCoordinate[r_, 0] :=
-  r;
+ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :=
+  Module[{radRange, rdTb2, rMin, rMax, rads, fTbs, alignPhaseAt, fTbsRes, applyFunction, 
+          fTbsRes2, resWithr},
 
-Options[ExtrapolateRadiatedQuantity] = {UseTortoiseCoordinate -> True, ApplyFunction -> None, AlignPhaseAt -> None};
+    radRange = OptionValue[RadiusRange];
+    rdTb2 = If[radRange === All, 
+      rdTb, 
+      {rMin, rMax} = radRange; Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &]];
 
-fs = Map[Phase[ReadPsi4[runName, 2, 2, #]] &, rads];
-
-ExtrapolatePhase[p_Integer, runName_String, l_, m_, range:{rMin_, rMax_}, opts___] :=
-  Module[{reader},
-    reader[run_, rad_] := Phase[ReadPsi4[run, l, m, #]];
-    ExtrapolateRadiatedQuantity[p, runName, reader, range, opts]];
-
-
-ExtrapolateRadiatedQuantity[p_Integer, runName_String, reader_, range:{rMin_, rMax_}, opts___] :=
-  Module[{allRads, rads, fs, rdTb, Madm, useTort},
-    Madm = ReadADMMass[runName];
-    allRads = Table[r,{r, 30, 150, 10}];
-    rads = Select[allRads, # >= rMin && # <= rMax &];
-    fs = Map[reader[runName, #] &, rads];
-    rdTb = MapThread[List, {rads, fs}];
-    ExtrapolatePhases[p, rdTb , range, Madm, opts]];
-
-ExtrapolateRadiatedQuantity[p_Integer, rdTb : {{_, DataTable[__]} ...}, range:{rMin_, rMax_}, 
-                            Madm_?NumberQ, opts___] :=
-  Module[{useTort, rdTb2, rads, fTbs, alignPhaseAt, fTbsRes, applyFunction, fTbsRes2, resWithr},
-    useTort = UseTortoiseCoordinate /. {opts} /. Options[ExtrapolateRadiatedQuantity];
-    rdTb2 = Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &];
     rads = Map[First, rdTb2];
     fTbs = Map[Last, rdTb2];
 
-    If[useTort,
-      fTbs = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, Madm],#2]&, 
+    If[OptionValue[UseTortoiseCoordinate],
+      fTbs = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, OptionValue[MassADM]],#2]&, 
                                 {rads, fTbs}],
       fTbs = MapThread[ShiftDataTable[-#1, #2] &, 
                                 {rads, fTbs}]];
 
-    alignPhaseAt = AlignPhaseAt /. {opts} /. Options[ExtrapolateRadiatedQuantity];
+    alignPhaseAt = OptionValue[AlignPhaseAt];
     If[!(alignPhaseAt === None),
-      fTbs = AlignPhases[fTbs, alignPhaseAt];
+      fTbs = AlignPhases[fTbs, alignPhaseAt]];
                                 
     fTbsRes = ResampleDataTables[fTbs];
 
-    applyFunction = ApplyFunction /. {opts} /. Options[ExtrapolateRadiatedQuantity];
+    applyFunction = OptionValue[ApplyFunction];
 
     fTbsRes2 = If[!(applyFunction === None),
       Map[applyFunction, fTbsRes],
       fTbsRes];
 
     resWithr = MapThread[List, {rads, fTbsRes2}];
-    ExtrapolateDataTables[p, resWithr, range]];
+    ExtrapolateDataTables[OptionValue[ExtrapolationOrder], resWithr, range]];
+
+ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
+  Module[{allRads, rads, fs, rdTb, rMin, rMax},
+    allRads = ReadPsi4Radii[runName];
+    rads = If[OptionValue[RadiusRange] === All,
+      allRads,
+      {rMin, rMax} = OptionValue[RadiusRange]; 
+      Select[allRads, # >= rMin && # <= rMax &]];
+
+    fs = Map[reader[runName, #] &, rads];
+    rdTb = MapThread[List, {rads, fs}];
+    If[!(OptionValue[MassADM] === None),
+      Print["ExtrapolateRadiatedQuantity: warning: you have specified MassADM unnecessarily, and it is being ignored"]];
+    ExtrapolateRadiatedQuantity[rdTb, opts, MassADM -> ReadADMMass[runName]]];
+
+ExtrapolatePsi4Phase[runName_String, l_, m_, opts:OptionsPattern[]] :=
+  Module[{reader, tAlign},
+    reader[run_, rad_] := Phase[ReadPsi4[run, l, m, rad]];
+    ExtrapolateRadiatedQuantity[runName, reader, opts, AlignPhaseAt -> 200]];
+
+ExtrapolatePsi4Amplitude[runName_String, l_, m_, opts:OptionsPattern[]] :=
+  Module[{reader},
+    reader[run_, rad_] := rad Abs[ReadPsi4[run, l, m, rad]];
+    ExtrapolateRadiatedQuantity[runName, reader, opts]];
+
+ExtrapolatePsi4[runName_String, l_, m_, opts:OptionsPattern[]] :=
+  Module[{phase,amp,psi4},
+    phase = ExtrapolatePsi4Phase[runName, l, m, opts];
+    amp = ExtrapolatePsi4Amplitude[runName, l, m, opts];
+    psi4 = MapThreadData[#1 Exp[I #2] &, {amp, phase}];
+    psi4];
+
+ExtrapolationError[f_, args__, opts:OptionsPattern[]] :=
+  Module[{p, newOpts},
+    p = OptionValue[ExtrapolationOrder];
+    newOpts = DeleteCases[{opts}, ExtrapolationOrder -> _];
+    Identity[f[args, Apply[Sequence,newOpts], ExtrapolationOrder -> p+1] - 
+        f[args, opts]]];
 
 
 
@@ -313,6 +383,35 @@ ExtrapolateRadiatedQuantity[p_Integer, rdTb : {{_, DataTable[__]} ...}, range:{r
 
 
 
+
+
+
+StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
+  Module[{tStart, tStep, tEnd, psi4Fn, ints, dataRealTb, modelReal, 
+          fitReal, dataImagTb, modelImag, fitImag, hTb},
+    {tStart, tEnd} = DataTableRange[psi4];
+    tStep = Spacing[psi4];
+    psi4Fn = Interpolation[psi4, InterpolationOrder->4];
+    ints = NDSolve[{psi4I'[t] == psi4Fn[t], psi4II'[t] == psi4I[t], 
+      psi4I[tStart] == 0, psi4II[tStart] == 0},
+     {psi4I, psi4II}, {t, tStart, tEnd}][[1]];
+
+    dataRealTb = Table[{t, Re[psi4II[t]] /. ints}, {t, fitStart, fitEnd}];
+    modelReal = ar + br t;
+    fitReal = FindFit[dataRealTb, modelReal, {ar,br}, t];
+
+    dataImagTb = Table[{t, Im[psi4II[t]] /. ints}, {t, fitStart, fitEnd}];
+    modelImag = ai + bi t;
+    fitImag = FindFit[dataImagTb, modelImag, {ai,bi}, t];
+
+    hTb = Table[{t, (psi4II/.ints)[t] - 
+      (modelReal /. fitReal)  - I (modelImag /. fitImag) }, 
+      {t, tStart, tEnd, tStep}];
+    hDotTb = Table[{t, (psi4I/.ints)[t]   - 
+      (br /. fitReal) - I (bi /. fitImag)  }, 
+      {t, tStart, tEnd, tStep}];
+    Return[{MakeDataTable[hTb], MakeDataTable[hDotTb]}];
+];
 
 
 
