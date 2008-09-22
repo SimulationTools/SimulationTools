@@ -23,6 +23,7 @@ ResampleDataTable;
 ResampleDataTables;
 Spacing;
 DataTableInterval;
+NDerivative;
 
 Begin["`Private`"];
 
@@ -88,6 +89,15 @@ Redefine[Length[DataTable[d_,___]],
 Redefine[Take[d:DataTable[___], args__],
   d /. DataTable[l_, x___] :> DataTable[Take[l,args],x]];
 
+Redefine[Drop[d:DataTable[___], args__],
+  d /. DataTable[l_, x___] :> DataTable[Drop[l,args],x]];
+
+Redefine[Re[d:DataTable[___]],
+  MapData[Re, d]];
+
+Redefine[Im[d:DataTable[___]],
+  MapData[Im, d]];
+
 AddAttribute[d:DataTable[x__], name_ -> val_] :=
   DataTable[x, name -> val];
 
@@ -124,7 +134,9 @@ Phase[tb:{{_, {_, _}}...}] :=
   Return[phaseTb]];
 
 Phase[d:DataTable[__]] :=
-    MakeDataTable[Phase[ToList[d]]];
+  ApplyToList[Phase, d];
+
+(*    MakeDataTable[Phase[ToList[d]]];*)
 
 Downsample[l_List, n_Integer] :=
   Take[l, {1, Length[l], n}];
@@ -197,7 +209,18 @@ ResampleDataTables[ds:{DataTable[__]...}] :=
     Map[ResampleDataTable[#, {t1, t2, dt}] &, ds]];
 
 DataTableInterval[d_DataTable, {t1_, t2_}] :=
-  d /. DataTable[l_, x___] -> DataTable[Select[l,#[[1]] >= t1 && #[[2]] < t2 &], x];
+  d /. DataTable[l_, x___] :> DataTable[Select[l,#[[1]] >= t1 && #[[1]] < t2 &], x];
+
+NDerivative[d_DataTable] :=
+ Module[{diff, table1, table2, deriv},
+  diff[{t1_, f1_}, {t2_, f2_}] :=
+   {t1, (f2 - f1)/(t2 - t1)};
+  table1 = Drop[ToList[d], 1];
+  table2 = Drop[ToList[d], -1];
+  deriv = MapThread[diff, {table2, table1}];
+  Return[MakeDataTable[deriv]];
+  ]
+
 
 End[];
 
