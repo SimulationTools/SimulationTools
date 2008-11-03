@@ -35,6 +35,7 @@ ExtrapolatePsi4;
 StrainFromPsi4;
 ResolutionCode;
 RichardsonExtrapolate;
+RichardsonExtrapolate3;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -183,10 +184,8 @@ RichardExtrapolationExpression = CRf0 /. Solve[RichardsonExtrapolationEquation, 
 
 ConvergenceRateEquations3 = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp + CRf2 CRh[i]^(CRp+1), {i, 1, 3}];
 
-RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations, {CRf1, CRf2}];
+RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations3, {CRf1, CRf2}];
 RichardExtrapolationExpression3 = CRf0 /. Solve[RichardsonExtrapolationEquation3, CRf0][[1]];
-
-
 
 ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] := 
  Module[{rateEq, rate}, 
@@ -218,7 +217,19 @@ RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
   Module[{ns, hs},
     ns = Map[ReadAttribute[#, NPoints] &, ds];
     hs = Map[1/#&, ns];
-    Return[MapThreadData[RichardsonExtrapolate[#1,#2, ns[[1]], ns[[2]], p] &, {d1,d2}]]];
+    Return[MapThreadData[RichardsonExtrapolate[#1,#2, hs[[1]], hs[[2]], p] &, {d1,d2}]]];
+
+RichardsonExtrapolate3[F1_, F2_, F3_, h1_, h2_, h3_, p_] :=
+  Module[{},
+    Return[RichardExtrapolationExpression3 /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, CRF[3] -> F3,
+      CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3}//N];
+  ];
+
+RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
+  Module[{ns, hs},
+    ns = Map[ReadAttribute[#, NPoints] &, ds];
+    hs = Map[1/#&, ns];
+    Return[MapThreadData[RichardsonExtrapolate3[#1,#2,#3, hs[[1]], hs[[2]], hs[[3]], p] &, {d1,d2,d3}]]];
 
 (*--------------------------------------------------------------------
   Extrapolation
