@@ -36,6 +36,7 @@ StrainFromPsi4;
 ResolutionCode;
 RichardsonExtrapolate;
 RichardsonExtrapolate3;
+FitFunction;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -43,7 +44,8 @@ Options[ExtrapolateRadiatedQuantity] =
    MassADM -> None,
    ApplyFunction -> None, 
    AlignPhaseAt -> None,
-   RadiusRange -> All};
+   RadiusRange -> All,
+   ExtrapolationErrorRelative -> False};
 
 Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 
@@ -382,20 +384,30 @@ ExtrapolationError[f_, args__, opts:OptionsPattern[]] :=
   Module[{p, newOpts},
     p = OptionValue[ExtrapolationOrder];
     newOpts = DeleteCases[{opts}, ExtrapolationOrder -> _];
-    Identity[f[args, Apply[Sequence,newOpts], ExtrapolationOrder -> p+1] - 
-        f[args, opts]]];
 
+    fpp1 = f[args, Apply[Sequence,newOpts], ExtrapolationOrder -> p+1];
+    fp = f[args, opts];
 
+    If[OptionValue[ExtrapolationErrorRelative],
+      (fpp1 - fp)/fp,
+      (fpp1 - fp)]];
 
+(*
+ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
+  Module[{phase,amp,psi4},
+    ampReader[run_, rad_] :=
+      Amp[reader[run_, rad]];
+    phaseReader[run_, rad_] :=
+      Phase[reader[run_, rad]];
 
+    ampExt = ExtrapolateRadiatedQuantity[runName, ampReader, opts];
+    phaseExt = ExtrapolateRadiatedQuantity[runName, phaseReader, opts];
 
-
-
-
-
-
-
-
+    phase = reader[runName];
+    amp = ExtrapolatePsi4Amplitude[runName, l, m, opts];
+    psi4 = MapThreadData[#1 Exp[I #2] &, {amp, phase}];
+    psi4];
+*)
 
 StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
   Module[{tStart, tStep, tEnd, psi4Fn, ints, dataRealTb, modelReal, 
@@ -500,6 +512,62 @@ FilterDCT[f_List, nModes_Integer,
     TableRange[FilterDCT[TableRange[f, range1], nModes], range2];
    {t1, t2, t3} = PartitionTable[f, range2];
    Return[Join[t1, filtered, t3]]];
+
+(*--------------------------------------------------------------------
+  Model fitting
+  --------------------------------------------------------------------*)
+
+FitFunction[d_, f_, paramSpecs_] :=
+  FitFunction[d, f, paramSpecs, FindMinimum, Automatic];
+
+(* Take a table d of data from a simulation and work out values of a set
+   of parameters ps which cause the data to match best to a given
+   function f over a given interval tMin to tMax. *)
+
+FitFunction[d_, f_, paramSpecs_, method_, subMethod_] :=
+  Module[{squareDiff,lastFitMessageTime, it, pList, fit, fit2},
+    squareDiff[params__?NumberQ] :=
+      Module[{fSoln, diffs, sqDiff, interval},
+(*        FitFunctionParamPath = Append[FitFunctionParamPath, {it, params}];*)
+        fSoln = f[params];
+        If[fSoln === Indeterminate, Return[100]];
+        interval = Last[d][[1]] - First[d][[1]];
+        diffs = Map[#[[2]] - fSoln[#[[1]]] &, d];
+        Map[If[!NumberQ[#], Return[100]] &, diffs];
+        sqDiff = Sqrt[diffs . diffs / Length[diffs]];
+(*        sqDiff = (diffs . diffs / Length[diffs]);*)
+        If[SessionTime[] - lastFitMessageTime > 5,
+          lastFitMessageTime = SessionTime[]; 
+          Print[ToString[it]<> " "<>ToString[sqDiff,CForm]<>" "<>ToString[Map[ToString[#,CForm] &, {params}]]]];
+        it++;
+        Return[sqDiff]];
+
+    pList = Map[First, paramSpecs];
+(*    Print["pList = ",  pList];*)
+
+    pList2 = Map[Unique, pList];
+    p2 = Map[#[[2]]&, paramSpecs];
+    p3 = Map[#[[3]]&, paramSpecs];
+
+    paramSpecs2 = MapThread[List, {pList2, p2, p3}];
+
+    lastFitMessageTime = SessionTime[];
+    it = 0;
+(*    FitFunctionParamPath = {};*)
+
+    If[method === FindMinimum,
+      fit = FindMinimum[Apply[squareDiff, pList2], paramSpecs2, 
+               (* AccuracyGoal -> 2,  PrecisionGoal->2, *)  Method-> PrincipalAxis   ],
+      fit = NMinimize[Apply[squareDiff, pList2], paramSpecs2, 
+                AccuracyGoal -> Infinity, PrecisionGoal->3,   Method->subMethod]
+    ];
+
+
+    fit2 = fit /. MapThread[(#1 -> #2) &, {pList2, pList}];
+
+(*    Print["fit = ", fit2];*)
+    Return[fit2];
+  ];
 
 End[];
 
