@@ -37,6 +37,14 @@ Redefine[f_[args___], newDef_] :=
     f[args] := newDef;
     Protect[f]];
 
+SetAttributes[RedefineAsDataTable, HoldAll];
+
+RedefineAsDataTable[f_[args___], newDef_] :=
+  Module[{},
+    Unprotect[f];
+    DataTable /: f[args] := newDef;
+    Protect[f]];
+
 MakeDataTable[l_List] :=
   DataTable[l];
 
@@ -71,31 +79,37 @@ MapThreadData[f_, ds:List[DataTable[__]...]] :=
     fOfVals = MapThread[f, vals];
     MakeDataTable[xs,fOfVals]];
 
-Redefine[Plus[d1:DataTable[__], d2:DataTable[__]],
+RedefineAsDataTable[Plus[d1:DataTable[__], d2:DataTable[__]],
   MapThreadData[#1+#2&, {d1,d2}]];
 
-Redefine[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
+RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[a + # &, d]];
 
-Redefine[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
+RedefineAsDataTable[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[a * # &, d]];
 
-Redefine[Abs[d:DataTable[__]],
+RedefineAsDataTable[Times[d1:DataTable[__], d2:DataTable[__]],
+  MapThreadData[Times, {d1, d2}]];
+
+RedefineAsDataTable[Power[d:DataTable[__], n_Integer],
+  MapData[Power[#,n] &, d]];
+
+RedefineAsDataTable[Abs[d:DataTable[__]],
   MapData[Abs, d]];
 
-Redefine[Length[DataTable[d_,___]],
+RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
 
-Redefine[Take[d:DataTable[___], args__],
+RedefineAsDataTable[Take[d:DataTable[___], args__],
   d /. DataTable[l_, x___] :> DataTable[Take[l,args],x]];
 
-Redefine[Drop[d:DataTable[___], args__],
+RedefineAsDataTable[Drop[d:DataTable[___], args__],
   d /. DataTable[l_, x___] :> DataTable[Drop[l,args],x]];
 
-Redefine[Re[d:DataTable[___]],
+RedefineAsDataTable[Re[d:DataTable[___]],
   MapData[Re, d]];
 
-Redefine[Im[d:DataTable[___]],
+RedefineAsDataTable[Im[d:DataTable[___]],
   MapData[Im, d]];
 
 AddAttribute[d:DataTable[x__], name_ -> val_] :=
@@ -183,12 +197,14 @@ DataTableRange[dt:DataTable[__]] :=
     {t1,t2}];
 
 ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
-  Module[{f, dt1, dt2},
+  Module[{f, dt1, dt2, l, l2},
     {dt1,dt2} = DataTableRange[d];
     If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
       Throw["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
             " for DataTable with range " <> ToString[{dt1,dt2}]]];
-    f = Interpolation[ToList[d]];
+    l = ToList[d];
+    l2 = Select[l, Abs[#[[2]]] < 10^20 &];
+    f = Interpolation[l2];
     MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]]];
 
 Spacing[d:DataTable[__]] :=
@@ -210,6 +226,20 @@ ResampleDataTables[ds:{DataTable[__]...}] :=
 
 DataTableInterval[d_DataTable, {t1_, t2_}] :=
   d /. DataTable[l_, x___] :> DataTable[Select[l,#[[1]] >= t1 && #[[1]] < t2 &], x];
+
+(*
+IntersectDataTables[d1_DataTable, d2_DataTable] :=
+  Module[{},
+    {d1Min, d1Max} = DataTableRange[d1];
+    {d2Min, d2Max} = DataTableRange[d2];
+
+    dMin = Max[d1
+
+    Return[{DataTableInterval[d1,{
+*)
+
+
+
 
 NDerivative[d_DataTable] :=
  Module[{diff, table1, table2, deriv},
