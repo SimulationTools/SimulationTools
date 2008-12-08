@@ -37,6 +37,7 @@ ResolutionCode;
 RichardsonExtrapolate;
 RichardsonExtrapolate3;
 FitFunction;
+RichardsonExtrapolationError;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -56,13 +57,22 @@ Begin["`Private`"];
   --------------------------------------------------------------------*)
 
 FileInRun[runName_String, fileName_] :=
-  Global`RunDirectory <> "/" <> runName <> "-all/" <> fileName;
+  If[StringMatchQ[runName, __ ~~ "/" ~~ __],
+      runName <> "/" <> fileName,
+      Global`RunDirectory <> "/" <> runName <> "-all/" <> fileName];
 
 ReadColumnFile[fileName_String, cols_List] :=
-  Module[{list},
+  Module[{list, list2, isComment},
     If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
-    list = ReadList[fileName, Real, RecordLists->True];
-    Return[Map[Extract[#, Map[List, cols]] &, list]]];
+    list = Import[fileName, "TSV"];
+
+    isComment[x_] :=
+      StringQ[x[[1]]] && StringMatchQ[x[[1]], "#" ~~ ___];
+
+    list2 = Select[list, !isComment[#] &];
+
+(*    list = ReadList[fileName, Real, RecordLists->True];*)
+    Return[Map[Extract[#, Map[List, cols]] &, list2]]];
 
 (* Simulation data *)
 
@@ -232,6 +242,9 @@ RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
     ns = Map[ReadAttribute[#, NPoints] &, ds];
     hs = Map[1/#&, ns];
     Return[MapThreadData[RichardsonExtrapolate3[#1,#2,#3, hs[[1]], hs[[2]], hs[[3]], p] &, {d1,d2,d3}]]];
+
+RichardsonExtrapolationError[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
+    RichardsonExtrapolate[Drop[ds,1], p] - RichardsonExtrapolate3[ds, p];
 
 (*--------------------------------------------------------------------
   Extrapolation
