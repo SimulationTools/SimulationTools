@@ -83,6 +83,23 @@ ReadColumnFile[fileName_String, cols_List] :=
 (*    list = ReadList[fileName, Real, RecordLists->True];*)
     Return[Map[Extract[#, Map[List, cols]] &, list2]]];
 
+ReadColumnFile2[fileName_String, cols_List] :=
+  Module[{list, list2, isComment},
+    If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
+
+    list = ReadList[fileName, String];
+
+    isComment[x_] :=
+      StringQ[x] && StringMatchQ[x, "#" ~~ ___];
+
+    list2 = Select[list, !isComment[#] &];
+
+    list3 = Map[StringSplit, list2];
+    list4 = Map[Map[ToExpression, #] &, list3];
+
+    Return[Map[Extract[#, Map[List, cols]] &, list4]]];
+
+
 (* Simulation data *)
 
 DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
