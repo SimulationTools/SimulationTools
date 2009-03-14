@@ -58,9 +58,17 @@ Begin["`Private`"];
   --------------------------------------------------------------------*)
 
 FileInRun[runName_String, fileName_] :=
-  If[StringMatchQ[runName, __ ~~ "/" ~~ __],
-      runName <> "/" <> fileName,
-      Global`RunDirectory <> "/" <> runName <> "-all/" <> fileName];
+  Module[{fullPath = ToFileName[runName, fileName],
+          runPath = ToFileName[{Global`RunDirectory, runName <> "-all"}, fileName],
+          sfPath1 = ToFileName[{Global`RunDirectory, runName, "output-0000-active", runName}, fileName],
+          sfPath2 = ToFileName[{Global`RunDirectory, runName, "output-0000", runName}, fileName]},
+
+    Which[
+      StringMatchQ[runName, __ ~~ "/" ~~ __], fullPath,
+      FileType[runPath] =!= None, runPath,
+      FileType[sfPath1] =!= None, sfPath1,
+      FileType[sfPath2] =!= None, sfPath2,
+      Throw["Can't find file "<>fileName<>" in run "<>runName], Null]];
 
 ReadColumnFile[fileName_String, cols_List] :=
   Module[{list, list2, isComment},
