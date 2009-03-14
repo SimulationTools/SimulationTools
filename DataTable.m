@@ -81,8 +81,13 @@ commonAttributes[ds:List[DataTable[__]..]] :=
     Return[Apply[Intersection, attrs]]];
 
 MapThreadData[f_, ds:List[DataTable[__]..]] :=
-  Module[{lists, vals, xs, fOfVals},
+  Module[{lists, vals, xs, fOfVals, lengths},
     lists = Map[ToList, ds];
+    lengths = Map[Length, lists];
+
+    If[!Apply[Equal,lengths],
+      Throw["MapThreadData: DataTables are not all of the same length"]];
+
     vals = Map[DepVar, ds];
     xs = IndVar[First[ds]];
     fOfVals = MapThread[f, vals];
