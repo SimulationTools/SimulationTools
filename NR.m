@@ -225,6 +225,13 @@ RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
       CRh[1] -> h1, CRh[2] -> h2}//N];
   ];
 
+RichardsonExtrapolate[{F1_, F2_}, {h1_, h2_}, p_] :=
+  Module[{},
+    Return[RichardExtrapolationExpression /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, 
+      CRh[1] -> h1, CRh[2] -> h2}//N];
+  ];
+
+
 RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
   Module[{ns, hs},
     ns = Map[ReadAttribute[#, NPoints] &, ds];
