@@ -228,7 +228,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
     l = ToList[d];
     l2 = Select[l, Abs[#[[2]]] < 10^20 &];
     f = Interpolation[l2];
-    MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]]];
+    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
 
 Spacing[d:DataTable[__]] :=
   Module[{ts},
