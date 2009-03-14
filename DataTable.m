@@ -239,6 +239,17 @@ IntersectDataTables[d1_DataTable, d2_DataTable] :=
     Return[{DataTableInterval[d1,{dMin, dMax}], 
             DataTableInterval[d2,{dMin, dMax}]}]];
 
+IntersectDataTables[{d1_DataTable, d2_DataTable}] :=
+  Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
+    {d1Min, d1Max} = DataTableRange[d1];
+    {d2Min, d2Max} = DataTableRange[d2];
+
+    dMin = Max[d1Min, d2Min];
+    dMax = Min[d1Max, d2Max];
+
+    Return[{DataTableInterval[d1,{dMin, dMax}], 
+            DataTableInterval[d2,{dMin, dMax}]}]];
+
 NDerivative[d_DataTable] :=
  Module[{diff, table1, table2, deriv},
   diff[{t1_, f1_}, {t2_, f2_}] :=
