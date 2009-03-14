@@ -177,9 +177,14 @@ LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
   ];
 
 RescaledErrors[p_, ds:List[DataTable[__]..]] :=
-  Module[{d1, d2, d3, ns, hs, d12, d23, cm},
-    {d1, d2, d3} = ds;
-    ns = Map[ReadAttribute[#, NPoints] &, ds];
+  Module[{d1, d2, d3, ns, hs, d12, d23, cm, ds2, dts},
+    dts = Map[Spacing, ds];
+    ranges = Map[DataTableRange, ds];
+    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
+      ds2 = ResampleDataTables[ds],
+      ds2 = ds];
+    {d1, d2, d3} = ds2;
+    ns = Map[ReadAttribute[#, NPoints] &, ds2];
     hs = Map[1/#&, ns];
     d12 = d1 - d2;
     d23 = d2 - d3;
