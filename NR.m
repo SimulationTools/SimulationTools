@@ -107,7 +107,7 @@ ReadColumnFile2[fileName_String, cols_List] :=
 
 DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
   Module[{fileName, list, psi4},
-    fileName = FileInRun[runName, "Ylm_WEYLSCAL4::Psi4ri_l" <>
+    fileName = FileInRun[runName, "Ylm_WEYLSCAL4::Psi4r_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
              ToString[rad] <> ".00.asc"];
     list = ReadColumnFile[fileName, {1,2,3}];
