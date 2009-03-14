@@ -38,6 +38,7 @@ RichardsonExtrapolate;
 RichardsonExtrapolate3;
 FitFunction;
 RichardsonExtrapolationError;
+ResName;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -135,6 +136,8 @@ ResolutionCode[n_Integer] :=
   If[n < 16, Throw["Number of points must be at least 16"]];
   If[n > 116, Throw["Number of points must be less than 116"]];
   Return[FromCharacterCode[n/4 - 4 + 97]]];
+
+ResName[s_String, n_] := s <> ResolutionCode[n];
 
 ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
   Module[{eq, eqs, f, f0, f1},
