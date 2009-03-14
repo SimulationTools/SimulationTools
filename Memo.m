@@ -3,6 +3,7 @@ BeginPackage["Memo`"];
 
 Memo;
 DefineMemoFunction;
+ClearAllMemos;
 
 Begin["`Private`"];
 
@@ -18,6 +19,9 @@ DefineMemoFunction[name_[args___], body_] :=
   Module[{f},
     SetDelayed[f[args], body];
     name = Memo[f]];
+
+ClearAllMemos[] :=
+  Clear[DataCache];
 
 End[];
 
