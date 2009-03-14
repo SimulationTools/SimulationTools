@@ -16,7 +16,6 @@ Phase;
 AddAttribute;
 ReadAttribute;
 ListAttributes;
-NPoints;
 ShiftDataTable;
 DataTableRange;
 ResampleDataTable;
