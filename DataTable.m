@@ -111,6 +111,12 @@ RedefineAsDataTable[Power[d:DataTable[__], n_Integer],
 RedefineAsDataTable[Abs[d:DataTable[__]],
   MapData[Abs, d]];
 
+RedefineAsDataTable[Conjugate[d:DataTable[__]],
+  MapData[Conjugate, d]];
+
+RedefineAsDataTable[Log[d:DataTable[__]],
+  MapData[Log, d]];
+
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
 
