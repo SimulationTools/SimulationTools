@@ -319,8 +319,15 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
   ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &], opts];
 
 AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
-  Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted},
+  Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted,
+          ranges, min, max},
     If[Length[phaseTbs] < 2, Return[phaseTbs]];
+
+    ranges = Map[DataTableRange, phaseTbs];
+    min = Apply[Max, Map[First, ranges]];
+    max = Apply[Min, Map[Last, ranges]];
+    If[t < min || t > max, Throw["Cannot align phases at " <> ToString[t] <> " because not all the inputs exist there"]];
+
     phaseFns = Map[Interpolation, phaseTbs];
     refPhases = Map[#[t]&, phaseFns];
     adjustments = Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases];
