@@ -81,7 +81,7 @@ commonAttributes[ds:List[DataTable[__]..]] :=
 (*    Print[attrs];*)
     Return[Apply[Intersection, attrs]]];
 
-MapThreadData[f_, ds:List[DataTable[__]...]] :=
+MapThreadData[f_, ds:List[DataTable[__]..]] :=
   Module[{lists, vals, xs, fOfVals},
     lists = Map[ToList, ds];
     vals = Map[DepVar, ds];
