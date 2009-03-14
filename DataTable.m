@@ -49,6 +49,18 @@ RedefineAsDataTable[f_[args___], newDef_] :=
 MakeDataTable[l_List] :=
   DataTable[l];
 
+MakeDataTable[l_List, attrRules:{_ -> _}...] :=
+  DataTable[l, Apply[Sequence,attrRules]];
+
+MakeDataTable[f_InterpolatingFunction, dt_] :=
+  Module[{tMin,tMax},
+    tMin = f[[1]][[1]][[1]];
+    tMax = f[[1]][[1]][[2]];
+    MakeDataTable[Table[{t,f[t]},{t,tMin,tMax,dt}]]];                  
+
+MakeDataTable[xs_List, ys_List] :=
+  MakeDataTable[MapThread[List, {xs,ys}]];
+
 ToList[DataTable[l_, ___]] := l;
 
 DepVar[DataTable[l_, ___]] :=
@@ -56,9 +68,6 @@ DepVar[DataTable[l_, ___]] :=
 
 IndVar[DataTable[l_, ___]] :=
   Map[#[[1]]&, l];
-
-MakeDataTable[xs_, ys_] :=
-  MakeDataTable[MapThread[List, {xs,ys}]];
 
 MapData[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[{#[[1]], f[#[[2]]]}&, l], attrs];
