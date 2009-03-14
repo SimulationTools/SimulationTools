@@ -215,9 +215,14 @@ ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
     p /. FindRoot[el, {p, 1, 10}]];
 
 ConvergenceRate[ds:{DataTable[__]..}] :=
-  Module[{hs},
-    hs = Map[1/ReadAttribute[#, NPoints] &, ds];
-    MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds]];
+  Module[{hs,dts,ds2},
+    dts = Map[Spacing, ds];
+    ranges = Map[DataTableRange, ds];
+    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
+      ds2 = ResampleDataTables[ds],
+      ds2 = ds];
+    hs = Map[1/ReadAttribute[#, NPoints] &, ds2];
+    MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
 
 RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
   Module[{},
