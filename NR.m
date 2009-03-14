@@ -243,6 +243,12 @@ RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
     hs = Map[1/#&, ns];
     Return[MapThreadData[RichardsonExtrapolate[#1,#2, hs[[1]], hs[[2]], p] &, {d1,d2}]]];
 
+RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
+  RichardsonExtrapolate[{d2,d3},p];
+
+RichardsonExtrapolate[{F1_, F2_, F3_}, {h1_, h2_, h3_}, p_] :=
+  RichardsonExtrapolate[F2, F3, h2, h3, p];
+
 RichardsonExtrapolate3[F1_, F2_, F3_, h1_, h2_, h3_, p_] :=
   Module[{},
     Return[RichardExtrapolationExpression3 /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, CRF[3] -> F3,
