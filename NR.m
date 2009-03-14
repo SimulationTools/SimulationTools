@@ -40,6 +40,7 @@ RichardsonExtrapolate3;
 FitFunction;
 RichardsonExtrapolationError;
 ResName;
+NPoints;
 ReadRunSpeed;
 
 Options[ExtrapolateRadiatedQuantity] = 
