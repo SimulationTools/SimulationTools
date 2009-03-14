@@ -5,6 +5,7 @@ BeginPackage["NR`", {"DataTable`", "Memo`"}];
 
 FileInRun;
 ReadColumnFile;
+ReadColumnFile2;
 ReadPsi4;
 ReadMinTrackerCoordinates;
 ReadMinTrackerCoordinate;
