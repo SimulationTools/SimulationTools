@@ -151,7 +151,7 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 Downsample[d_DataTable, n_Integer] :=
   ApplyToList[Downsample[#, n] &, d];
 
-Phase[tb:List[{_, _Complex}...]] :=
+Phase[tb:List[{_, _}...]] :=
   Phase[Map[{#[[1]],{Re[#[[2]]], Im[#[[2]]]}} &, tb]];
 
 Phase[tb:{{_, {_, _}}...}] :=
