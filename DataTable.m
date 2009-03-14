@@ -135,6 +135,9 @@ RedefineAsDataTable[Im[d:DataTable[___]],
 AddAttribute[d:DataTable[x__], name_ -> val_] :=
   DataTable[x, name -> val];
 
+AddAttributes[d:DataTable[x__], attrRules_List] :=
+  DataTable[x, Apply[Sequence, attrRules]];
+
 ReadAttribute[d:DataTable[l_, attrs___], name_] :=
   Module[{val},
     val = name /. {attrs};
