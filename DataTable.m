@@ -93,8 +93,10 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     fOfVals = MapThread[f, vals];
     MakeDataTable[xs,fOfVals]];
 
-RedefineAsDataTable[Plus[d1:DataTable[__], d2:DataTable[__]],
-  MapThreadData[#1+#2&, {d1,d2}]];
+(* FIXME: For some reason, this one doesn't work with more than two *)
+RedefineAsDataTable[Plus[ds:(DataTable[__]...)],
+  Module[{},
+    MapThreadData[Plus[##] &, {ds}]]];
 
 RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[a + # &, d]];
