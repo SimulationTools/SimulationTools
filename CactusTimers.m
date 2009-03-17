@@ -112,11 +112,6 @@ largestTimers[ts_,n_]:=
 independentTimers[timersFile_String]:=
   independentTimers[ParseTimersFile[timersFile]];
 
-IndependentTimers[runName_String] :=
-  Module[{},
-    Return[independentTimers[parseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]]];
-  ];
-
 independentTimers[allTimers_List]:=
   Module[{scheduleTimers,nonScheduleTimers,vTimers,totalTime,scheduleTime,
           virtualTime,deficit,independentTimers,insTimers,insTime},
@@ -144,6 +139,15 @@ isInitialTimer[{n_,v_}]:=
 evolutionTimers[timers_]:=
   Select[timers,!isInitialTimer[#]&];
 
+timerScaling[ts1_List,ts2_List,nFac_,tName_String]:=
+  Module[{t1,t2,s},
+    t1=readTimer[ts1,tName];
+    t2=readTimer[ts2,tName];
+    s=t2*nFac/(t1 );
+    Return[s]];
+
+(* Interface with NR system *)
+
 TimerScaling[run1_String, run2_String, n1_Integer, n2_Integer, tName_String] :=
   Module[{ts1, ts2, t1, t2, s},
     ts1 = IndependentTimers[run1];
@@ -154,13 +158,6 @@ TimerScaling[run1_String, run2_String, n1_Integer, n2_Integer, tName_String] :=
     Return[s];
   ];
 
-timerScaling[ts1_List,ts2_List,nFac_,tName_String]:=
-  Module[{t1,t2,s},
-    t1=readTimer[ts1,tName];
-    t2=readTimer[ts2,tName];
-    s=t2*nFac/(t1 );
-    Return[s]];
-
 TimerPieChart[runName_] :=
   TimerPieChart[runName, 20];
 
@@ -168,6 +165,11 @@ TimerPieChart[runName_String, n_Integer] :=
   Module[{timers},
     timers = independentTimers[ParseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]];
     Return[chartTimers[largestTimers[evolutionTimers[timers],n]]]];
+
+IndependentTimers[runName_String] :=
+  Module[{},
+    Return[independentTimers[parseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]]];
+  ];
 
 End[];
 
