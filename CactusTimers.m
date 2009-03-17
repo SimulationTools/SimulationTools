@@ -3,6 +3,7 @@ BeginPackage["CactusTimers`", {"NR`"}];
 
 TimerPieChart;
 IndependentTimers;
+ParseTimersFile;
 TimerScaling::usage = "TimerScaling[run1, run2, n1, n2, tName] returns the scaling of the given timer between runs run1 and run2, defined as (n2 t2) / (n1 t1).";
 
 Begin["`Private`"];
@@ -13,25 +14,39 @@ stringToReal[s_]:=
     x=Read[stream,Real];
     Return[x]];
 
-parseTimersFile[fileName_]:=
-  Module[{timers,column,parseLine,lines},
+ParseTimersFile[fileName_]:=
+  Module[{timers,column,parseLine,lines, ts, col, return, isColumnDesc, columnDescs, tList, maxCol = 0, timerVals},
     parseLine[l_]:=
-      Module[{stream,words},
+      Module[{stream,words,return},
         stream=StringToStream[l];
         words=ReadList[stream,Word];
 
         If[words[[1]]=="#" && words[[2]]=="Column",
-          column[Evaluate[ToExpression[words[[3]]]]]=StringJoin[Riffle[Drop[words,3]," "]]];
-
-        If[NumberQ[ToExpression[words[[1]]]],
-          timers=Map[stringToReal,words]];
+          colNo = ToExpression[words[[3]]];
+          column[Evaluate[colNo]]=StringJoin[Riffle[Drop[words,3]," "]];
+          maxCol=Max[colNo,maxCol]];
 
         Close[stream];
         ];
 
     lines=ReadList[fileName,String];
-    Scan[parseLine,lines];
-    Table[{column[c],timers[[c]]},{c,3,Length[timers]}]
+
+    isColumnDesc[l_] := StringMatchQ[l, "# Column *"];
+
+    columnDescs = Select[lines, isColumnDesc];
+
+    Scan[parseLine, columnDescs];
+    timerVals=Map[stringToReal,StringSplit[Last[lines]]];
+
+    If[Length[timerVals] != maxCol,
+      timerVals=Map[stringToReal,StringSplit[lines[[-2]]]];
+        If[Length[timerVals] != maxCol,
+          Throw["Timers file " <> fileName <> " might be corrupt; there are not enough columns in the output"]]];
+
+    tList = Table[{column[c],timerVals[[c]]},{c,3,Length[timerVals]}];
+
+    Return[tList];
+
     ];
 
 
@@ -95,7 +110,7 @@ largestTimers[ts_,n_]:=
     Return[Append[topN,{"Rest",restTime}]]];
 
 independentTimers[timersFile_String]:=
-  independentTimers[parseTimersFile[timersFile]];
+  independentTimers[ParseTimersFile[timersFile]];
 
 IndependentTimers[runName_String] :=
   Module[{},
@@ -151,7 +166,7 @@ TimerPieChart[runName_] :=
 
 TimerPieChart[runName_String, n_Integer] :=
   Module[{timers},
-    timers = independentTimers[parseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]];
+    timers = independentTimers[ParseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]];
     Return[chartTimers[largestTimers[evolutionTimers[timers],n]]]];
 
 End[];
