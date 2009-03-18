@@ -42,6 +42,7 @@ RichardsonExtrapolationError;
 ResName;
 NPoints;
 ReadRunSpeed;
+ReadPsi4Radii;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -131,7 +132,17 @@ ReadADMMass[runName_String] :=
   ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
 
 ReadPsi4Radii[runName_] :=
-  Table[r,{r, 30, 150, 10}];
+  Module[{dirs, names, radiusFromFileName, radii},
+    dirs = {Global`RunDirectory <> "/" <> runName <> "-all",
+            Global`RunDirectory <> "/" <> runName <> "/output-0000-active/" <> runName,
+            Global`RunDirectory <> "/" <> runName <> "/output-0000" <> runName};
+    names = FileNames[{"*Ylm_WEYLSCAL4::Psi4r_l2_m2_r*.asc"}, dirs];
+    radiusFromFileName[name_] :=
+      Round[ToExpression[
+        StringReplace[name,
+          __ ~~ "Ylm_WEYLSCAL4::Psi4r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+          ~~ x__ ~~ ".asc" -> x]]];
+    radii = Map[radiusFromFileName, names]];
 
 ReadRunSpeed[runName_] := 
  ReadColumnFile2[FileInRun[runName, "runstats.asc"], {2, 4}];
