@@ -389,7 +389,7 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
 
 AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
   Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted,
-          ranges, min, max},
+          ranges, min, max, constTb},
     If[Length[phaseTbs] < 2, Return[phaseTbs]];
 
     ranges = Map[DataTableRange, phaseTbs];
@@ -400,7 +400,13 @@ AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
     phaseFns = Map[Interpolation, phaseTbs];
     refPhases = Map[#[t]&, phaseFns];
     adjustments = Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases];
-    adjusted = MapThread[#1-#2 &, {phaseTbs, adjustments}]];
+    
+    constTb[a_, d_DataTable] := 
+      MapData[a&,d];
+
+    adjusted = MapThread[#1-constTb[#2,#1] &, {phaseTbs, adjustments}];
+    Return[adjusted];
+];
 
 TortoiseCoordinate[r_, Madm_] :=
   r + 2 Madm Log[r/(2. Madm) - 1.];
