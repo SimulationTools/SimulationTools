@@ -445,7 +445,7 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     ExtrapolateDataTables[OptionValue[ExtrapolationOrder], resWithr, range]];
 
 ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
-  Module[{allRads, rads, fs, rdTb, rMin, rMax},
+  Module[{allRads, rads, fs, rdTb, rMin, rMax, mADM},
     allRads = ReadPsi4Radii[runName];
     rads = If[OptionValue[RadiusRange] === All,
       allRads,
@@ -454,9 +454,11 @@ ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
 
     fs = Map[reader[runName, #] &, rads];
     rdTb = MapThread[List, {rads, fs}];
-    If[!(OptionValue[MassADM] === None),
-      Print["ExtrapolateRadiatedQuantity: warning: you have specified MassADM unnecessarily, and it is being ignored"]];
-    ExtrapolateRadiatedQuantity[rdTb, opts, MassADM -> ReadADMMass[runName]]];
+
+    mADM = If[OptionValue[MassADM] === None,
+              ReadADMMass[runName],
+              OptionValue[MassADM]];
+    ExtrapolateRadiatedQuantity[rdTb, opts, MassADM -> mADM]];
 
 ExtrapolatePsi4Phase[runName_String, l_, m_, opts:OptionsPattern[]] :=
   Module[{reader, tAlign},
