@@ -54,6 +54,7 @@ Options[ExtrapolateRadiatedQuantity] =
    ExtrapolationErrorRelative -> False};
 
 Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
+Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
 
@@ -454,7 +455,10 @@ ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
 ExtrapolatePsi4Phase[runName_String, l_, m_, opts:OptionsPattern[]] :=
   Module[{reader, tAlign},
     reader[run_, rad_] := Phase[ReadPsi4[run, l, m, rad]];
-    ExtrapolateRadiatedQuantity[runName, reader, opts, AlignPhaseAt -> 200]];
+    tAlign = If[OptionValue[AlignPhaseAt] === None,
+      100,
+      OptionValue[AlignPhaseAt]];
+    ExtrapolateRadiatedQuantity[runName, reader, opts, AlignPhaseAt -> tAlign]];
 
 ExtrapolatePsi4Amplitude[runName_String, l_, m_, opts:OptionsPattern[]] :=
   Module[{reader},
