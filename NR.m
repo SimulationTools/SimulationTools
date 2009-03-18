@@ -43,6 +43,7 @@ ResName;
 NPoints;
 ReadRunSpeed;
 ReadPsi4Radii;
+LocateMaximum;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -668,6 +669,20 @@ FitFunction[d_, f_, paramSpecs_, method_, subMethod_] :=
 (*    Print["fit = ", fit2];*)
     Return[fit2];
   ];
+
+LocateMaximum[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, fn, max, t1, t2, t, tMax2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{t_, f_}] :=
+   If[f > fMax, fMax = f; tMax = t];
+  Scan[maxFind, l];
+  fn = Interpolation[d];
+  tMax2 = 
+   t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
+       tMax}][[2]];
+  Return[tMax2]]
 
 End[];
 
