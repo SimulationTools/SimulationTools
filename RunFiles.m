@@ -4,60 +4,107 @@ BeginPackage["RunFiles`"];
 FileInRun;
 ReadColumnFile;
 ReadColumnFile2;
+FindRunFile;
+FindRunSegments;
+FindRunFilesFromPattern;
 
 Begin["`Private`"];
+
+RunDirectory = Global`RunDirectory;
 
 (*--------------------------------------------------------------------
   File reading
   --------------------------------------------------------------------*)
 
-FileInRun[runName_String, fileName_] :=
-  Module[{fullPath = ToFileName[runName, fileName],
-          runPath = ToFileName[{Global`RunDirectory, runName <> "-all"}, fileName],
-          sfPath1 = ToFileName[{Global`RunDirectory, runName, "output-0000-active", runName}, fileName],
-          sfPath2 = ToFileName[{Global`RunDirectory, runName, "output-0000", runName}, fileName]},
+FindRunSegments[runName_] :=
+  Module[{dirName1, dirName2, restarts, files1, files2},
+    dirName1 = 
+      If[FileNameDepth[runName] == 1,
+        FileNameJoin[{RunDirectory, runName}],
+        runName];
+    dirName2 = 
+      If[FileType[dirName1] === None,
+        If[FileType[dirName1 <> "-all"] =!= None,
+          dirName1 <> "-all",
+          Throw["Cannot find run directory for run " <> runName]],
+        dirName1];
 
-    Which[
-      StringMatchQ[runName, __ ~~ "/" ~~ __], fullPath,
-      FileType[runPath] =!= None, runPath,
-      FileType[sfPath1] =!= None, sfPath1,
-      FileType[sfPath2] =!= None, sfPath2,
-      Throw["Can't find file "<>fileName<>" in run "<>runName], Null]];
+    If[FileType[FileNameJoin[{dirName2, "SIMULATION_ID"}]] =!= None,
+      restarts = Select[FileNames["output-*", dirName2], ! StringMatchQ[#, "*-*-*"] &];
+      segments = Map[FileNameJoin[{#, runName}] &, restarts];
+      Return[segments],
+      Return[{dirName2}]];
+  ];
 
-ReadColumnFile[fileName_String, cols_List] :=
-  Module[{list, list2, isComment},
+FindRunFile[runName_String, fileName_String] :=
+  Module[{segments, files1, files2},
+    segments = FindRunSegments[runName];
+    files1 = Map[FileNameJoin[{#, fileName}] &, segments];
+    files2 = Select[files1, FileType[#] =!= None &];
+    Return[files2];
+  ];
+
+FindRunFilesFromPattern[runName_String, filePattern_String] :=
+  Module[{segments, files1, files2},
+    segments = FindRunSegments[runName];
+    names = Union[Map[FileNameTake, Flatten[Map[FileNames[filePattern, #] &, segments], 1]]]
+  ];
+
+ReadColumnFile[fileName_String] :=
+  Module[{list, list2, isComment, file2},
     If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
-    list = Import[fileName, "TSV"];
-
-    isComment[x_] :=
-      StringQ[x[[1]]] && StringMatchQ[x[[1]], "#" ~~ ___];
-
-    list2 = Select[list, !isComment[#] &];
-
-(*    list = ReadList[fileName, Real, RecordLists->True];*)
-    Return[Map[Extract[#, Map[List, cols]] &, list2]]];
-
-ReadColumnFile2[fileName_String, cols_List] :=
-  Module[{list, list2, isComment},
-    If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
-
-    list = ReadList[fileName, String];
-
+    list = ReadList[fileName, String]; (* Blank lines omitted *)
     isComment[x_] :=
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
-
     list2 = Select[list, !isComment[#] &];
+    file2 = StringJoin[Riffle[list2, "\n"]];
+    ImportString[file2,"Table"]];
 
-    list3 = Map[StringSplit, list2];
-    list4 = Map[Map[ToExpression, #] &, list3];
+ReadColumnFile[fileName_String, cols_List] :=
+  extractColumns[ReadColumnFile[fileName], cols];
 
-    Return[Map[Extract[#, Map[List, cols]] &, list4]]];
+extractColumns[file_List, cols_List] := 
+  Map[Extract[#, Map[List, cols]] &, file];
 
+mergeFiles[files_List] :=
+  Module[{file1, fileEndIndex, rest, rest0, restIndex, truncated},
+    If[Length[files] == 0, Return[{}]];
+    If[Length[files] == 1, Return[First[files]]];
 
+    file1 = First[files];
 
+    (* The first column of the files will be taken to be an
+    index. Usually this will be an interation number or a coordinate
+    time. *)
+    fileEndIndex = First[Last[file1]];
+    rest = mergeFiles[Rest[files]];
 
+    rest0 = First[rest];
+    restIndex = First[rest0];
 
+    (* The most common case: no overlap *)
+    If[restIndex > fileEndIndex,
+      Return[Join[file1, rest]]];
 
+    (* We have some overlap *)
+    truncated = Select[file1, (First[#] < restIndex) &];
+    Return[Join[truncated, rest]];
+  ];
+
+ReadColumnFile[fileNames_List] :=
+  Module[{files},
+    files = Select[Map[ReadColumnFile, fileNames], Length[#] != 0 &];
+    mergeFiles[files]
+  ];
+
+ReadColumnFile[fileNames_List, cols_List] :=
+  extractColumns[ReadColumnFile[fileNames], cols];
+
+ReadColumnFile[runName_String, fileName_String] :=
+  ReadColumnFile[FindRunFile[runName, fileName]];
+
+ReadColumnFile[runName_String, fileName_String, cols_List] :=
+  extractColumns[ReadColumnFile[runName, fileName], cols];
 
 End[];
 

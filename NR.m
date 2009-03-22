@@ -75,21 +75,19 @@ Begin["`Private`"];
 (* Simulation data *)
 
 DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
-  Module[{fileName, list, psi4},
-    fileName = FileInRun[runName, "Ylm_WEYLSCAL4::Psi4r_l" <>
+  Module[{fileName, threeCols, psi4},
+    fileName = "Ylm_WEYLSCAL4::Psi4r_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
-             ToString[rad] <> ".00.asc"];
-    list = ReadColumnFile[fileName, {1,2,3}];
-    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, list];
+             ToString[rad] <> ".00.asc";
+    threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
+    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]];
 
 DefineMemoFunction[ReadMinTrackerCoordinates[runName_String, tracker_Integer],
-  Module[{name},
-(*      Print["Reading..."];*)
-      fileName = FileInRun[runName, "MinTracker" <> ToString[tracker] <> ".asc"];
-      list = ReadColumnFile[fileName, {2,3,4,5}];
-      list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}}&, list];
-      Return[MakeDataTable[list2]]]];
+  Module[{list, list2},
+    list = ReadColumnFile[runName, fileName, {2,3,4,5}];
+    list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
+    Return[MakeDataTable[list2]]]];
 
 ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
   Module[{coords},
@@ -107,20 +105,18 @@ ReadADMMass[runName_String] :=
   ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
 
 ReadPsi4Radii[runName_] :=
-  Module[{dirs, names, radiusFromFileName, radii},
-    dirs = {Global`RunDirectory <> "/" <> runName <> "-all",
-            Global`RunDirectory <> "/" <> runName <> "/output-0000-active/" <> runName,
-            Global`RunDirectory <> "/" <> runName <> "/output-0000/" <> runName};
-    names = FileNames[{"*Ylm_WEYLSCAL4::Psi4r_l2_m2_r*.asc"}, dirs];
+  Module[{names, radiusFromFileName, radii},
+    names = FindRunFilesFromPattern[runName, 
+      "Ylm_WEYLSCAL4::Psi4r_l*_m*_r*.asc"];
     radiusFromFileName[name_] :=
       Round[ToExpression[
         StringReplace[name,
-          __ ~~ "Ylm_WEYLSCAL4::Psi4r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+          "Ylm_WEYLSCAL4::Psi4r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
           ~~ x__ ~~ ".asc" -> x]]];
-    radii = Map[radiusFromFileName, names]];
+    radii = Union[Map[radiusFromFileName, names]]];
 
 ReadRunSpeed[runName_] := 
- MakeDataTable[ReadColumnFile2[FileInRun[runName, "runstats.asc"], {2, 4}]];
+ MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]];
 
 (*--------------------------------------------------------------------
   Data conversion 
@@ -660,11 +656,16 @@ LocateMaximum[d_DataTable] :=
 (* Parameter file parsing *)
 
 ParseParameterFile[from_String] :=
- Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName},
-
+ Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName, fileNames},
   If[StringMatchQ[from, __ ~~ ".par"],
-    fileName = from,
-    fileName = FileInRun[from, from <> ".par"]];
+    fileNames = {from},
+    fileNames = FindRunFile[from, from <> ".par"];
+    If[Length[fileNames] == 0,
+      fileNames = FindRunFile[from, from <> "-1.par"];
+      If[Length[fileNames] == 0,
+        Throw["Cannot find parameter file " <> ToString[from]]]]];
+
+  fileName = First[fileNames];
 
   lines = ReadList[fileName, String];
   removeWhiteSpace[t_] := 
