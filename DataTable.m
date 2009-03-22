@@ -98,6 +98,7 @@ RedefineAsDataTable[Plus[ds:(DataTable[__]...)],
   Module[{},
     MapThreadData[Plus[##] &, {ds}]]];
 
+(* FIXME: this doesn't work any more *)
 RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[a + # &, d]];
 
@@ -165,7 +166,7 @@ Phase[tb:{{_, {_, _}}...}] :=
    t = tb[[i, 1]];
    x = tb[[i, 2, 1]];
    y = tb[[i, 2, 2]];
-   currentPhase = ArcTan[x, y];
+   currentPhase = If[!(x==0 && y ==0), ArcTan[x, y], 0];
    If[currentPhase - previousPhase > Pi, cycles--];
    If[currentPhase - previousPhase < -Pi, cycles++];
    previousPhase = currentPhase;
@@ -220,6 +221,12 @@ DataTableRange[dt:DataTable[__]] :=
     t1 = First[list][[1]];
     t2 = Last[list][[1]];
     {t1,t2}];
+
+ResampleDataTable[d:DataTable[__], dt_?NumberQ] :=
+  Module[{t1, t2},
+    {t1, t2} = DataTableRange[d];
+    ResampleDataTable[d, {t1, t2, dt}]
+  ];
 
 ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
   Module[{f, dt1, dt2, l, l2},
