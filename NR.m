@@ -160,7 +160,7 @@ ReadPsi4Radii[runName_] :=
   Module[{dirs, names, radiusFromFileName, radii},
     dirs = {Global`RunDirectory <> "/" <> runName <> "-all",
             Global`RunDirectory <> "/" <> runName <> "/output-0000-active/" <> runName,
-            Global`RunDirectory <> "/" <> runName <> "/output-0000" <> runName};
+            Global`RunDirectory <> "/" <> runName <> "/output-0000/" <> runName};
     names = FileNames[{"*Ylm_WEYLSCAL4::Psi4r_l2_m2_r*.asc"}, dirs];
     radiusFromFileName[name_] :=
       Round[ToExpression[
