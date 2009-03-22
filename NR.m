@@ -1,7 +1,7 @@
 
 (* A package for dealing with numerical relativity data *)
 
-BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`"}];
+BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`"}];
 
 ReadPsi4;
 ReadMinTrackerCoordinates;
