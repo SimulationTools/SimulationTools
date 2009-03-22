@@ -11,6 +11,8 @@ ReadMinTrackerCoordinates;
 ReadMinTrackerCoordinate;
 ReadMinTrackerRadius;
 ReadMinTrackerPhase;
+ReadMinTrackerTrajectory;
+ReadMinTrackerTrajectories;
 ConvergenceMultiplier;
 LoadConvergenceSeries;
 RescaledErrors;
@@ -129,6 +131,13 @@ ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
   Module[{coords},
     coords = ReadMinTrackerCoordinates[runName, tracker];
     MapData[#[[coord]]&, coords]];
+
+ReadMinTrackerTrajectory[runName_String, tracker_Integer] :=
+  Map[Take[Last[#], 2] &, 
+    ToList[ReadMinTrackerCoordinates[runName, tracker]]];
+
+ReadMinTrackerTrajectories[runName_String] :=
+  {ReadMinTrackerTrajectory[runName, 0], ReadMinTrackerTrajectory[runName, 1]};
 
 ReadADMMass[runName_String] :=
   ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
