@@ -170,7 +170,7 @@ ReadPsi4Radii[runName_] :=
     radii = Map[radiusFromFileName, names]];
 
 ReadRunSpeed[runName_] := 
- ReadColumnFile2[FileInRun[runName, "runstats.asc"], {2, 4}];
+ MakeDataTable[ReadColumnFile2[FileInRun[runName, "runstats.asc"], {2, 4}]];
 
 (*--------------------------------------------------------------------
   Data conversion 
