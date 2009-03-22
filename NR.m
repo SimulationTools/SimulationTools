@@ -57,6 +57,9 @@ TimeRefinementFactors;
 CourantFactorOnLevel;
 LevelExistsEvery;
 RadialPoints;
+RunCost::usage = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
+CPUHours;
+WallTimeDays;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -814,6 +817,10 @@ CourantFactorOnLevel[runName_String, level_] :=
 LevelExistsEvery[runName_String, level_Integer] :=
   TimeRefinementFactor[runName, CountRefinementLevels[runName]-1] / 
     TimeRefinementFactor[runName, level];
+
+RunCost[length_, speed_, nProcs_] :=
+ {CPUHours -> nProcs length/speed // N,
+  WallTimeDays -> length/speed/24 // N};
 
 End[];
 
