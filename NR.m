@@ -46,6 +46,17 @@ NPoints;
 ReadRunSpeed;
 ReadPsi4Radii;
 LocateMaximum;
+LookupParameter;
+FindParameters;
+GridSpacingOnLevel;
+BoxRadiiOnLevel;
+RefinementLevels;
+GridStructure;
+FinestGridSpacing;
+TimeRefinementFactors;
+CourantFactorOnLevel;
+LevelExistsEvery;
+RadialPoints;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -692,6 +703,117 @@ LocateMaximum[d_DataTable] :=
    t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
        tMax}][[2]];
   Return[tMax2]]
+
+(* Parameter file parsing *)
+
+ParseParameterFile[from_String] :=
+ Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName},
+
+  If[StringMatchQ[from, __ ~~ ".par"],
+    fileName = from,
+    fileName = FileInRun[from, from <> ".par"]];
+
+  lines = ReadList[fileName, String];
+  removeWhiteSpace[t_] := 
+   StringReplace[
+    t, (StartOfString ~~ Whitespace) | (Whitespace ~~ EndOfString) :> 
+     ""];
+  
+  parseLine[s_] :=
+   If[StringMatchQ[s, RegularExpression["[ \t]*#.*"]],
+    Comment[s],
+    If[StringMatchQ[
+      s, (Whitespace | StartOfString) ~~ 
+       "ActiveThorns" ~~ (Whitespace | "=") ~~ __, IgnoreCase -> True],
+     ActiveThorns[
+      StringSplit[
+       StringCases[s, "\"" ~~ thorns__ ~~ "\"" -> thorns][[1]]]],
+     If[StringMatchQ[s, RegularExpression[".*::.*=.*"]],
+      ParameterSetting[
+       ToLowerCase[
+        removeWhiteSpace[
+         StringCases[s, param__ ~~ "=" ~~ val__ -> param][[1]]]], 
+       removeWhiteSpace[
+        StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
+      Throw["Unrecognized line in parameter file: " <> s]]]];
+  Map[parseLine, lines]
+  ];
+
+LookupParameter[parFile_List, name_] :=
+ Module[{l},
+  l = Cases[parFile, ParameterSetting[ToLowerCase[name], x_] -> x];
+  If[Length[l] == 0, Throw["Parameter " <> name <> " not found"]];
+  First[l]];
+
+LookupParameter[from_String, name_] :=
+  Module[{},
+    (* Assume the parameter file is named after the run *)
+    LookupParameter[ParseParameterFile[from], name]
+  ];
+
+FindParameters[parFile_String, pattern_] :=
+  FindParameters[ParseParameterFile[parFile], pattern];
+
+FindParameters[parFile_List, pattern_] :=
+  Module[{parameters},
+    parameters = Cases[parFile, ParameterSetting[name_,value_] -> name];
+    Select[parameters, StringMatchQ[#, pattern] &]];
+
+GridSpacingOnLevel[runName_, l_] :=
+  Module[{h0},
+    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx"]];
+    h0 / 2^l
+  ];
+
+FinestGridSpacing[runName_] :=
+  GridSpacingOnLevel[runName, Max[RefinementLevels[runName]]];
+
+BoxRadiiOnLevel[runName_, l_] :=
+  Module[{h0},
+    If[l == 0, Return[{ToExpression[LookupParameter[runName, "CoordBase::xmax"]]}]];
+    params = FindParameters[runName, "regridboxes::centre_*_radius" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"];
+    Map[ToExpression[LookupParameter[runName, #]] &, params]
+  ];
+
+CountRefinementLevels[runName_String] :=
+  ToExpression[LookupParameter[runName, "CarpetRegrid::refinement_levels"]];
+
+RefinementLevels[runName_String] :=
+  Table[l, {l, 0, CountRefinementLevels[runName]-1}];
+
+RadialPoints[runName_String, level_Integer] :=
+   Round[BoxRadiiOnLevel[runName, level] / GridSpacingOnLevel[runName, level]];
+
+GridStructure[runName_String] :=
+  Map[{#, BoxRadiiOnLevel[runName, #],
+       GridSpacingOnLevel[runName, #], 
+       RadialPoints[runName, #],
+       CourantFactorOnLevel[runName, #],
+       LevelExistsEvery[runName, #]} &, RefinementLevels[runName]];
+
+TimeRefinementFactors[runName_String] :=
+  Module[{s1, s2, s3s, facs},
+    s1 = LookupParameter[runName, "Carpet::time_refinement_factors"];
+    s2 = StringCases[s1, ("[" ~~ facs__ ~~ "]") -> facs][[1]];
+    s3s = StringSplit[s2, ","];
+    facs = Map[ToExpression, s3s];
+    Return[facs];
+  ];
+
+TimeRefinementFactor[runName_String, level_] :=
+  TimeRefinementFactors[runName][[level+1]];
+
+CourantFactorOnLevel[runName_String, level_] :=
+  Module[{},
+    dtfac = ToExpression[LookupParameter[runName, "Time::dtfac"]];
+    trf = TimeRefinementFactor[runName, level];
+    srf = 2^level;
+    Return[dtfac * srf/trf];
+  ];
+
+LevelExistsEvery[runName_String, level_Integer] :=
+  TimeRefinementFactor[runName, CountRefinementLevels[runName]-1] / 
+    TimeRefinementFactor[runName, level];
 
 End[];
 
