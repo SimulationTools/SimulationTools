@@ -1,22 +1,25 @@
 
-BeginPackage["Timers`", {"CactusTimers`", "RunFiles`"}];
+BeginPackage["Timers`", {"CactusTimers`", "RunFiles`", "Memo`"}];
 
 (* Interface with CactusTimers package *)
 
 ReadTimerFromRun;
 ChartTimersFromRun;
+TimersFile;
+IndependentTimersFromRun;
+ParseTimersFileFromRun;
 
 Begin["`Private`"];
 
 TimersFile[runName_] :=
- FileInRun[runName, "AllTimers.0000.txt"];
+ FindRunFile[runName, "AllTimers.000000.txt"][[1]];
 
 ReadTimerFromRun[runName_String, timerName_String] :=
   Module[{},
   ReadTimer[ParseTimersFileFromRun[runName], timerName]];
 
-ParseTimersFileFromRun[runName_String] :=
-  ParseTimersFile[TimersFile[runName]];
+DefineMemoFunction[ParseTimersFileFromRun[runName_String],
+  ParseTimersFile[TimersFile[runName]]];
 
 ChartTimersFromRun[runName_String] :=
   ChartTimers[TimersFile[runName]];
@@ -39,10 +42,10 @@ ChartTimersFromRun[runName_String] :=
 (*     timers = IndependentTimers[ParseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]]; *)
 (*     Return[chartTimers[largestTimers[evolutionTimers[timers],n]]]]; *)
 
-(* IndependentTimers[runName_String] := *)
-(*   Module[{}, *)
-(*     Return[IndependentTimers[ParseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]]]; *)
-(*   ]; *)
+IndependentTimersFromRun[runName_String] :=
+  Module[{},
+    Return[IndependentTimers[ParseTimersFileFromRun[runName]]];
+  ];
 
 End[];
 
