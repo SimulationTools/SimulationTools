@@ -78,6 +78,8 @@ Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
 
+RunDirectory = Global`RunDirectory;
+
 (* Simulation data *)
 
 DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
