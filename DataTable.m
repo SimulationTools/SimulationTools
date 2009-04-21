@@ -49,7 +49,7 @@ RedefineAsDataTable[f_[args___], newDef_] :=
 MakeDataTable[l_List] :=
   DataTable[l];
 
-MakeDataTable[l_List, attrRules:{_ -> _}...] :=
+MakeDataTable[l_List, attrRules:{(_ -> _) ...}] :=
   DataTable[l, Apply[Sequence,attrRules]];
 
 MakeDataTable[f_InterpolatingFunction, dt_] :=
