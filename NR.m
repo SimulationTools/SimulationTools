@@ -602,6 +602,13 @@ PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
   Return[{before, middle, after}]
   ];
 
+FilterDCT[f_DataTable,  nModes_Integer,
+   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
+   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
+  Module[{},
+    MakeDataTable[FilterDCT[ToList[f], nModes, range1, range2]]
+  ];
+
 FilterDCT[f_List, nModes_Integer,
    range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
    range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
