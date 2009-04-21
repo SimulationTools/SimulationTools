@@ -91,11 +91,11 @@ DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]];
 
-DefineMemoFunction[ReadMinTrackerCoordinates[runName_String, tracker_Integer],
+ReadMinTrackerCoordinates[runName_String, tracker_Integer] :=
   Module[{list, list2},
-    list = ReadColumnFile[runName, fileName, {2,3,4,5}];
+    list = ReadColumnFile[runName, "MinTracker"<>ToString[tracker]<>".asc", {2,3,4,5}];
     list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-    Return[MakeDataTable[list2]]]];
+    Return[MakeDataTable[list2, {RunName -> runName}]]];
 
 ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
   Module[{coords},
