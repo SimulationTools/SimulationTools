@@ -143,18 +143,20 @@ ReadCores[runName_] :=
   --------------------------------------------------------------------*)
 
 ReadMinTrackerRadius[runName_String] :=
-  Module[{x0, x1, rad},
+  Module[{x0, x1, rad, l},
     x0 = ReadMinTrackerCoordinates[runName, 0];
     x1 = ReadMinTrackerCoordinates[runName, 1];
-    rad = MapThreadData[Norm[#1-#2] &, {x0, x1}];
+    l = Min[Length[x0],Length[x1]];
+    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
     Return[rad];
   ];
 
 ReadMinTrackerPhase[runName_String] :=
-  Module[{x0, x1, rad},
+  Module[{x0, x1, rad,l},
     x0 = ReadMinTrackerCoordinates[runName, 0];
     x1 = ReadMinTrackerCoordinates[runName, 1];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {x0, x1}]; (* Project into xy plane *)
+    l = Min[Length[x0],Length[x1]];
+    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
     Return[Phase[xyTrans]];
   ];
 
