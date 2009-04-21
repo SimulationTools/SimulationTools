@@ -118,6 +118,9 @@ RedefineAsDataTable[Power[d:DataTable[__], n_Integer],
 RedefineAsDataTable[Abs[d:DataTable[__]],
   MapData[Abs, d]];
 
+RedefineAsDataTable[Sqrt[d:DataTable[__]],
+  MapData[Sqrt, d]];
+
 RedefineAsDataTable[Conjugate[d:DataTable[__]],
   MapData[Conjugate, d]];
 
