@@ -86,7 +86,7 @@ commonAttributes[ds:List[DataTable[__]..]] :=
     Return[Apply[Intersection, attrs]]];
 
 MapThreadData[f_, ds:List[DataTable[__]..]] :=
-  Module[{lists, vals, xs, fOfVals, lengths},
+  Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
     lists = Map[ToList, ds];
     lengths = Map[Length, lists];
 
@@ -96,7 +96,9 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     vals = Map[DepVar, ds];
     xs = IndVar[First[ds]];
     fOfVals = MapThread[f, vals];
-    MakeDataTable[xs,fOfVals]];
+    tb = MapThread[List, {xs,fOfVals}];
+    attrs = Apply[Intersection, Map[ListAttributes, ds]];
+    MakeDataTable[tb,attrs]];
 
 (* FIXME: For some reason, this one doesn't work with more than two *)
 RedefineAsDataTable[Plus[ds:(DataTable[__]...)],
