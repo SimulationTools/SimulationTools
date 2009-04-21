@@ -58,6 +58,7 @@ MakeDataTable[f_InterpolatingFunction, dt_] :=
     tMax = f[[1]][[1]][[2]];
     MakeDataTable[Table[{t,f[t]},{t,tMin,tMax,dt}]]];                  
 
+(* This should be deprecated *)
 MakeDataTable[xs_List, ys_List] :=
   MakeDataTable[MapThread[List, {xs,ys}]];
 
