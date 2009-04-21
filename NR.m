@@ -57,6 +57,11 @@ RadialPoints;
 RunCost::usage = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
 CPUHours;
 WallTimeDays;
+ReadMemory;
+RunName;
+ReadCPUHours;
+ReadWalltimeHours;
+ReadCores;
 ReadIHSpin;
 
 Options[ExtrapolateRadiatedQuantity] = 
@@ -118,6 +123,18 @@ ReadPsi4Radii[runName_] :=
 
 ReadRunSpeed[runName_] := 
  MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]];
+
+ReadCPUHours[runName_] := 
+ Last[ReadColumnFile[runName, "runstats.asc", {6}]][[1]];
+
+ReadWalltimeHours[runName_] := 
+  ReadCPUHours[runName] / ReadCores[runName] //N;
+
+ReadMemory[runName_] :=
+ MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]];
+
+ReadCores[runName_] :=
+  ReadList[FileNameJoin[{RunDirectory, runName, "output-0000", "PROCS"}], Number][[1]];
 
 (*--------------------------------------------------------------------
   Data conversion 
