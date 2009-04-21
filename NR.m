@@ -57,6 +57,7 @@ RadialPoints;
 RunCost::usage = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
 CPUHours;
 WallTimeDays;
+ReadIHSpin;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -772,6 +773,10 @@ LevelExistsEvery[runName_String, level_Integer] :=
 RunCost[length_, speed_, nProcs_] :=
  {CPUHours -> nProcs length/speed // N,
   WallTimeDays -> length/speed/24 // N};
+
+ReadIHSpin[runName_, hn_] :=
+ MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
+  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
 
 End[];
 
