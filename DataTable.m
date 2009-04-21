@@ -229,13 +229,16 @@ DataTableRange[dt:DataTable[__]] :=
     t2 = Last[list][[1]];
     {t1,t2}];
 
-ResampleDataTable[d:DataTable[__], dt_?NumberQ] :=
+ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
   Module[{t1, t2},
     {t1, t2} = DataTableRange[d];
-    ResampleDataTable[d, {t1, t2, dt}]
+    ResampleDataTable[d, {t1, t2, dt}, p]
   ];
 
 ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
+   ResampleDataTable[d, {t1, t2, dt}, 3];
+
+ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
   Module[{f, dt1, dt2, l, l2},
     {dt1,dt2} = DataTableRange[d];
     If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
@@ -243,7 +246,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
             " for DataTable with range " <> ToString[{dt1,dt2}]]];
     l = ToList[d];
     l2 = Select[l, Abs[#[[2]]] < 10^20 &];
-    f = Interpolation[l2];
+    f = Interpolation[l2, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
 
 Spacing[d:DataTable[__]] :=
