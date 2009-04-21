@@ -8,6 +8,7 @@ DepVar;
 IndVar;
 MakeDataTable;
 MapData;
+MapIndVar;
 ApplyToList;
 MapThreadData;
 Downsample;
@@ -70,6 +71,9 @@ IndVar[DataTable[l_, ___]] :=
 
 MapData[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[{#[[1]], f[#[[2]]]}&, l], attrs];
+
+MapIndVar[f_, DataTable[l_, attrs___]] :=
+  DataTable[Map[{#[[1]], f[#[[1]]]}&, l], attrs];
 
 ApplyToList[f_, d_DataTable] :=
   d /. DataTable[l_, x___] -> DataTable[f[l], x];
