@@ -629,7 +629,7 @@ FitFunction[d_, f_, paramSpecs_] :=
    of parameters ps which cause the data to match best to a given
    function f over a given interval tMin to tMax. *)
 
-FitFunction[d_, f_, paramSpecs_, method_, subMethod_] :=
+FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
   Module[{squareDiff,lastFitMessageTime, it, pList, fit, fit2},
     squareDiff[params__?NumberQ] :=
       Module[{fSoln, diffs, sqDiff, interval},
