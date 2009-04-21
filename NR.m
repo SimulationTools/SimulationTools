@@ -471,12 +471,12 @@ ExtrapolatePsi4Amplitude[runName_String, l_, m_, opts:OptionsPattern[]] :=
     reader[run_, rad_] := rad Abs[ReadPsi4[run, l, m, rad]];
     ExtrapolateRadiatedQuantity[runName, reader, opts]];
 
-ExtrapolatePsi4[runName_String, l_, m_, opts:OptionsPattern[]] :=
+DefineMemoFunction[ExtrapolatePsi4[runName_String, l_, m_, opts:OptionsPattern[]],
   Module[{phase,amp,psi4},
     phase = ExtrapolatePsi4Phase[runName, l, m, opts];
     amp = ExtrapolatePsi4Amplitude[runName, l, m, opts];
     psi4 = MapThreadData[#1 Exp[I #2] &, {amp, phase}];
-    psi4];
+    psi4]];
 
 ExtrapolationError[f_, args__, opts:OptionsPattern[]] :=
   Module[{p, newOpts},
