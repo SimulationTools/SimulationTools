@@ -63,6 +63,11 @@ ReadCPUHours;
 ReadWalltimeHours;
 ReadCores;
 ReadIHSpin;
+ReadIHSpinX;
+ReadIHSpinY;
+ReadIHSpinPhase;
+ReadAHMass;
+ReadAHRadius;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -811,6 +816,31 @@ RunCost[length_, speed_, nProcs_] :=
 ReadIHSpin[runName_, hn_] :=
  MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
   ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+
+ReadIHSpinX[runName_, hn_] :=
+ MakeDataTable[Map[{#[[1]], #[[2]]} &, 
+  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+
+ReadIHSpinY[runName_, hn_] :=
+ MakeDataTable[Map[{#[[1]], #[[3]]} &, 
+  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+
+ReadIHSpinPhase[runName_, hn_] :=
+ Module[{spin, sx, sy},
+  spin = ReadIHSpin[runName, hn];
+  sx = MakeDataTable[Map[{#[[1]], #[[2]][[1]]} &, ToList[spin]]];
+  sy = MakeDataTable[Map[{#[[1]], #[[2]][[2]]} &, ToList[spin]]];
+  Phase[sx + I sy]];
+
+ReadAHMass[runName_, hn_] :=
+ Module[{},
+  MakeDataTable[
+   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 27}]]];
+
+ReadAHRadius[runName_, hn_] :=
+ Module[{},
+  MakeDataTable[
+   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 8}]]];
 
 End[];
 
