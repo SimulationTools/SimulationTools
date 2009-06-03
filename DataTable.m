@@ -25,6 +25,7 @@ Spacing;
 DataTableInterval;
 NDerivative;
 IntersectDataTables;
+Frequency;
 
 Begin["`Private`"];
 
@@ -186,6 +187,9 @@ Phase[tb:{{_, {_, _}}...}] :=
 Phase[d:DataTable[__]] :=
   ApplyToList[Phase, d];
 
+Frequency[d:DataTable[__]] :=
+  NDerivative[Phase[d]];
+
 (*    MakeDataTable[Phase[ToList[d]]];*)
 
 Downsample[l_List, n_Integer] :=
@@ -293,6 +297,19 @@ IntersectDataTables[{d1_DataTable, d2_DataTable}] :=
 
     Return[{DataTableInterval[d1,{dMin, dMax}], 
             DataTableInterval[d2,{dMin, dMax}]}]];
+
+IntersectDataTables[ds:{(_DataTable)...}] :=
+  Module[{ranges, mins, maxs, min, max, ds2},
+    ranges = Map[DataTableRange, ds];
+    mins = Map[First, ranges];
+    maxs = Map[Last, ranges];
+
+    min = Max[mins];
+    max = Min[maxs];
+
+    ds2 = Map[DataTableInterval[#,{min, max}] &, ds];
+    ds2];
+
 
 NDerivative[d_DataTable] :=
  Module[{diff, table1, table2, deriv},
