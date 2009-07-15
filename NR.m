@@ -68,6 +68,10 @@ ReadIHSpinY;
 ReadIHSpinPhase;
 ReadAHMass;
 ReadAHRadius;
+ReadPsi4Modes;
+ExportWaveform;
+ExportBHCoords;
+ExportBHRelativeCoords;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -841,6 +845,72 @@ ReadAHRadius[runName_, hn_] :=
  Module[{},
   MakeDataTable[
    ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 8}]]];
+
+functionOfPhase[d_DataTable, p_DataTable, dp_: 0.01] :=
+ Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
+  phiOft = ToList[p];
+  tOfphi = Map[Reverse, phiOft];
+  (*Return[tOfphi];*)
+  tOfphiFn = Interpolation[tOfphi];
+  phiMin = First[tOfphi][[1]];
+  phiMax = Last[tOfphi][[1]];
+  (*Return[{phiMin,phiMax}];*)
+  dOftFn = Interpolation[d];
+  dOfphiTb = 
+   Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
+  MakeDataTable[dOfphiTb]];
+
+ReadPsi4Modes[runName_] :=
+  Module[{names, modeFromFileName, radii}, 
+   names = FindRunFilesFromPattern[runName, 
+     "Ylm_WEYLSCAL4::Psi4r_l*_m*_r*.asc"];
+   modeFromFileName[name_] := 
+    Round[ToExpression[
+      StringReplace[name, 
+       "Ylm_WEYLSCAL4::Psi4r_l" ~~ x__ ~~ "_m" ~~ __ ~~ "r" ~~ __ ~~ 
+         ".asc" -> x]]];
+   radii = Union[Map[modeFromFileName, names]]];
+
+ExportWaveform[run_String, dir_String, l_Integer, m_Integer, 
+  r_?NumberQ] :=
+ Module[{},
+  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
+  Monitor`status = {"Exporting waveform", run, l, m, r};
+  Export[dir <> "/psi4_l" <> ToString[l] <> "_m" <> ToString[m] <> 
+    "_r" <> ToString[r] <> ".asc", 
+   Map[{#[[1]], Re[#[[2]]], Im[#[[2]]]} &, 
+    ToList[ReadPsi4[run, l, m, r]]], "TSV"]]
+
+ExportBHCoords[run_String, dir_String, tracker_Integer] :=
+ Module[{},
+  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
+  Export[dir <> "/bh_coords_cart_" <> ToString[tracker] <> ".asc", 
+   Map[{#[[1]], #[[2, 1]], #[[2, 2]], #[[2, 3]]} &, 
+    ToList[ReadMinTrackerCoordinates[run, tracker]]], "TSV"]];
+
+ExportBHRelativeCoords[run_String, dir_String] :=
+ Module[{},
+  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
+  Export[dir <> "/bh_coords_polar.asc", 
+   MapThread[{#[[1]], #1[[2]], #2[[2]]} &, {ToList[
+      ReadMinTrackerRadius[run]], ToList[ReadMinTrackerRadius[run]]}],
+    "TSV"]];
+
+ExportBHCoords[run_String, dir_String] :=
+ Module[{},
+  Table[ExportBHCoords[run, dir, t], {t, 0, 1}]];
+
+selectInRange[xs_, range_] :=
+ If[range === All,
+  xs,
+  Select[xs, (# >= range[[1]] && # <= range[[2]]) &]];
+
+ExportWaveforms[run_String, dir_String, lRange_: All, rRange_: All] :=
+  Module[{rs, ls},
+  rs = selectInRange[ReadPsi4Radii[run], rRange];
+  ls = selectInRange[ReadPsi4Modes[run], lRange];
+  Table[ExportWaveform[run, dir, l, m, r], {l, ls}, {m, -l, l}, {r, 
+    rs}]];
 
 End[];
 
