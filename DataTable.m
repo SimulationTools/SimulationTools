@@ -104,12 +104,10 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     attrs = Apply[Intersection, Map[ListAttributes, ds]];
     MakeDataTable[tb,attrs]];
 
-(* FIXME: For some reason, this one doesn't work with more than two *)
-RedefineAsDataTable[Plus[ds:(DataTable[__]...)],
-  Module[{},
-    MapThreadData[Plus[##] &, {ds}]]];
+RedefineAsDataTable[Plus[d1_DataTable, d2_DataTable],
+  Profile["dtPlus",
+    MapThreadData[Plus[##] &, {d1, d2}]]];
 
-(* FIXME: this doesn't work any more *)
 RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[(a + #) &, d]];
 
