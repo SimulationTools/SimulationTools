@@ -12,6 +12,19 @@ Begin["`Private`"];
 
 RunDirectory = Global`RunDirectory;
 
+If[FileNameJoin[{"a","b"}] =!= "a/b",
+
+FileNameJoin[elems_] :=
+  StringJoin[Riffle[elems, "/"]];
+
+FileNameDepth[s_] :=
+  Length[StringCases[s,"/"]] + 1;
+
+FileNameTake[s_] :=
+  Last[StringSplit[s, "/"]];
+
+]; 
+
 (*--------------------------------------------------------------------
   File reading
   --------------------------------------------------------------------*)
