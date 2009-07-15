@@ -700,6 +700,11 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
                 AccuracyGoal -> Infinity, PrecisionGoal->3,   Method->subMethod]
     ];
 
+    If[Head[fit] === FindMinimum,
+      Throw["FindMinimum failed"]];
+
+    If[Head[fit] === NMinimize,
+      Throw["NMinimize failed"]];
 
     fit2 = fit /. MapThread[(#1 -> #2) &, {pList2, pList}];
 
