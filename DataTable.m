@@ -26,6 +26,9 @@ DataTableInterval;
 NDerivative;
 IntersectDataTables;
 Frequency;
+IntegrateDataTable;
+IntegrateDataTableZeroStart;
+IntegrateDataTableZeroEnd;
 
 Begin["`Private`"];
 
@@ -320,6 +323,26 @@ NDerivative[d_DataTable] :=
   deriv = MapThread[diff, {table2, table1}];
   Return[MakeDataTable[deriv]];
   ]
+
+IntegrateDataTable[d_DataTable, {tbc_, fbc_}] :=
+ Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
+  {tMin, tMax} = DataTableRange[d];
+  If[tbc < tMin || tbc > tMax,
+   Throw["integrateDataTable: boundary condition is not within range of \
+DataTable"]];
+  dt = Spacing[d];
+  dFn = Interpolation[d];
+  gFn = g /. 
+    NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}][[
+     1]];
+  gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], 
+    ListAttributes[d]]];
+
+IntegrateDataTableZeroStart[d_DataTable] := 
+  IntegrateDataTable[d, {DataTableRange[d][[1]], 0}];
+
+IntegrateDataTableZeroEnd[d_DataTable] := 
+  IntegrateDataTable[d, {DataTableRange[d][[2]], 0}];
 
 
 End[];
