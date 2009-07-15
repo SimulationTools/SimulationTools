@@ -126,7 +126,9 @@ ReadColumnFile[fileNames_List, cols_List] :=
   extractColumns[ReadColumnFile[fileNames], cols];
 
 ReadColumnFile[runName_String, fileName_String] :=
-  ReadColumnFile[FindRunFile[runName, fileName]];
+  Module[{files = FindRunFile[runName, fileName]},
+    If[files === {}, Throw["Cannot find file " <> fileName <> " in run " <> runName]];
+  ReadColumnFile[files]];
 
 ReadColumnFile[runName_String, fileName_String, cols_List] :=
   extractColumns[ReadColumnFile[runName, fileName], cols];
