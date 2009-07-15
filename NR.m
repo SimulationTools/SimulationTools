@@ -18,6 +18,7 @@ ConvergenceRate;
 ExtrapolateScalarFull;
 ExtrapolateScalar;
 ExtrapolatedValue;
+ExtrapolateScalarWithRadii;
 Data;
 ExtrapolatedCurve;
 ExtrapolateDataTables;
@@ -382,6 +383,9 @@ ExtrapolateScalarFull[order_, rfTb_] :=
 
 ExtrapolateScalar[args__] :=
  ExtrapolatedValue /. ExtrapolateScalarFull[args];
+
+ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
+  ExtrapolatedValue /. ExtrapolateScalarFull[order, MapThread[List, {rads, Map[f, rads]}]];
 
 RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
  Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads},
