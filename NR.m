@@ -696,8 +696,8 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
     If[method === FindMinimum,
       fit = FindMinimum[Apply[squareDiff, pList2], paramSpecs2, 
                (* AccuracyGoal -> 2,  PrecisionGoal->2, *)  Method-> PrincipalAxis   ],
-      fit = NMinimize[Apply[squareDiff, pList2], paramSpecs2, 
-                AccuracyGoal -> Infinity, PrecisionGoal->3,   Method->subMethod]
+      fit = Quiet[NMinimize[Apply[squareDiff, pList2], paramSpecs2, 
+                  (* AccuracyGoal -> Infinity, PrecisionGoal->3,*)   Method->subMethod], {NMinimize::cvmit}]
     ];
 
     If[Head[fit] === FindMinimum,
