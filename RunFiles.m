@@ -63,6 +63,18 @@ FindRunFilesFromPattern[runName_String, filePattern_String] :=
     names = Union[Map[FileNameTake, Flatten[Map[FileNames[filePattern, #] &, segments], 1]]]
   ];
 
+stringToReal[s_String] :=
+  Profile["stringToReal",
+ Module[{p, n, mantissa, exponent},
+  p = StringPosition[s, "e", 1];
+  If[Length[p] == 0,
+   ToExpression[s],
+   n = p[[1, 1]];
+   mantissa = ToExpression[StringTake[s, n - 1]];
+   exponent = ToExpression[StringDrop[s, n]];
+   1.0*mantissa*10^exponent]
+  ]];
+
 ReadColumnFile[fileName_String] :=
   Module[{list, list2, isComment, file2},
     If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
