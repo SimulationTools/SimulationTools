@@ -703,7 +703,7 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
 
     fit2 = fit /. MapThread[(#1 -> #2) &, {pList2, pList}];
 
-(*    Print["fit = ", fit2];*)
+    Print["fit = ", fit2];
     Return[fit2];
   ];
 
