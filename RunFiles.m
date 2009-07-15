@@ -1,5 +1,5 @@
 
-BeginPackage["RunFiles`"];
+BeginPackage["RunFiles`", {"Profile`"}];
 
 FileInRun;
 ReadColumnFile;
@@ -77,13 +77,14 @@ stringToReal[s_String] :=
 
 ReadColumnFile[fileName_String] :=
   Module[{list, list2, isComment, file2},
+  Profile["ReadColumnFile[fileName]",
     If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
     list = ReadList[fileName, String]; (* Blank lines omitted *)
     isComment[x_] :=
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
     list2 = Select[list, !isComment[#] &];
     file2 = StringJoin[Riffle[list2, "\n"]];
-    ImportString[file2,"Table"]];
+    Return[Profile["ReadColumnFile:ImportString", ImportString[file2,"Table"]]]]];
 
 ReadColumnFile[fileName_String, cols_List] :=
   extractColumns[ReadColumnFile[fileName], cols];
