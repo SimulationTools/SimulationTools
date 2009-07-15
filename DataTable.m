@@ -111,7 +111,7 @@ RedefineAsDataTable[Plus[ds:(DataTable[__]...)],
 
 (* FIXME: this doesn't work any more *)
 RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
-  MapData[a + # &, d]];
+  MapData[(a + #) &, d]];
 
 RedefineAsDataTable[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[a * # &, d]];
