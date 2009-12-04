@@ -217,7 +217,8 @@ Express[h,x] =
 
     hPlusFullinx - I hCrossFullinx];
 
-SpinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] =(Factorial[l + m] Factorial[
+SpinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] =
+ (Factorial[l + m] Factorial[
               l - m] (2l + 1) Factorial[l + s]^(-1) Factorial[
                 l - s]^(-1) (4 Pi)^(-1))^(1/2)(Sin[th/2])^(2l) Sum[
         Binomial[l - s, r] Binomial[l + s, r + s - m] (-1)^(l - r - s) Exp[
