@@ -37,7 +37,9 @@ CommandOutputFile[AsyncCommand[cmd_, dat_]] :=
  OutFile /. dat;
 
 CommandOutput[asc:AsyncCommand[cmd_, dat_]] :=
- ReadList[CommandOutputFile[asc], String];
+  If[FileExistsQ[CommandOutputFile[asc]],
+     ReadList[CommandOutputFile[asc], String],
+     {}];
 
 CommandErrorFile[AsyncCommand[cmd_, dat_]] :=
  ErrFile /. dat;
