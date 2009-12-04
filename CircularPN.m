@@ -112,7 +112,7 @@ RadiusOfOrbit[soln_, defs_] :=
   Function[t,
     Evaluate[
       Format[t] = Style["t",Bold];
-      Express[r, x] /. x -> x[t] /. mu -> Express[mu,nu]  /. soln /. defs]];
+      Normal[Express[r, x] /.(rp0->r) /. x -> x[t] /. mu -> Express[mu,nu]]  /. soln /. defs]];
 
 EnergyOfOrbit[soln_, defs_] :=
   Function[t,
