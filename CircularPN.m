@@ -93,7 +93,7 @@ Express[r,x] = Simplify[Express[r,gamma] /. gamma -> Express[gamma,x]];
 (* An "orbit" solution consists of interpolating function objects for
 om and phi.  How these are obtained is up to the particular solver. *)
 
-SolveOrbitxDotOfx[inits_List, defs_List, {t1_, t2_}] :=
+SolveOrbitxDotOfx[inits_List, defs_List, {t1_, t2_}, tInit_:0] :=
   Module[{x0, phi0, t, xDot, phiDot, soln},
     Format[t] = Style["t",Bold];
     {x0, phi0} = {x, phi} /. inits;
@@ -102,9 +102,9 @@ SolveOrbitxDotOfx[inits_List, defs_List, {t1_, t2_}] :=
     phiDot = (Normal[Express[om,x]] /. x->x[t] /. mu -> Express[mu,nu] /. defs);
 
     soln = NDSolve[{D[x[t],t] == xDot, 
-                    x[0] == x0, 
+                    x[tInit] == x0, 
                     D[phi[t],t] == phiDot, 
-                    phi[0] == phi0}, {x, phi}, {t, t1, t2}][[1]];
+                    phi[tInit] == phi0}, {x, phi}, {t, t1, t2}][[1]];
     Return[soln]];
 
 RadiusOfOrbit[soln_, defs_] :=
