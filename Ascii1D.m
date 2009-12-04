@@ -1,5 +1,5 @@
 
-BeginPackage["AsciiData1D`"];
+BeginPackage["AsciiData1D`", {"DataTable`"}];
 
 AsciiData1D::usage = "AsciiData1D[fileName] loads the 1D data in
 fileName (which should be in ygraph format) and returns it as a list
@@ -12,6 +12,8 @@ f}...}}...}";
 AsciiTimeOfIndex::usage = "AsciiTimeOfIndex[data,i] returns the time,
 t, of the ith element of data where data is in the form {{t, {{x,
 f}...}}...}";
+
+ReadCarpetASCII1D;
 
 Begin["`Private`"];
 
@@ -42,7 +44,7 @@ firstTimeString[lines_] :=
 AsciiData1D[fileName_] :=
   Module[{lines, useLines, firstTime},
    lines = ReadList[fileName, String, RecordLists -> True];
-   useLines = Take[lines, {2, Length[lines], 2}];
+   useLines = Take[lines, {1, Length[lines], 1}];
    Map[asciiTimeSlice, useLines]];
 
 AsciiDataOfIndex[data_, index_] :=
@@ -50,6 +52,28 @@ AsciiDataOfIndex[data_, index_] :=
 
 AsciiTimeOfIndex[data_, index_] :=
   data[[index]][[1]];
+
+fixData[d_] :=
+ Union[Sort[d, #1[[1]] < #2[[1]] &]];
+
+ReadCarpetASCII1D[fileName_, level_:0, dir_:1] :=
+ Module[{lines, lines2, lines3, lines4, takeCols, lines5, lines6, 
+   levels, splitIterations, levels2, levelsPresent, data, data2, 
+   data3, data4, data5, times, dataWithTimes},
+  lines = ReadList[fileName, String, NullRecords -> True];
+  data = Import[fileName, "Table"];
+  data2 = Select[data, Length[#] != 0 && #[[1]] != "#" &];
+  levelsPresent = Union[Map[#[[3]] &, data2]];
+  If[! MemberQ[levelsPresent, level], 
+   Throw["Refinement level " <> ToString[level] <> " not found in " <>
+      fileName]];
+  data3 = Select[data2, #[[3]] == level &];
+  data4 = SplitBy[data3, #[[1]] &];
+  takeCols[it_List, c1_, c2_] := Map[{#[[c1]], #[[c2]]} &, it];
+  data5 = Map[MakeDataTable@fixData[takeCols[#, 10+dir-1, 13]] &, data4];
+  times = Map[#[[1]][[9]] &, data4];
+  dataWithTimes = MapThread[List, {times, data5}];
+  Return[dataWithTimes]]
 
 End[];
 
