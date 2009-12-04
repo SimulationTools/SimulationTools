@@ -32,6 +32,7 @@ th::usage = "th is the polar spherical coordinate";
 ph::usage = "ph is the azimuthal spherical coordinate";
 R::usage = "R is the distance to the observer";
 om0::usage = "om0 is a constant frequency parameter relating orbital time to retarded time";
+gamma;
 
 (* Functions *)
 
