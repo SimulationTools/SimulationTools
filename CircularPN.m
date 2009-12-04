@@ -148,7 +148,7 @@ Express[psi,{om, Madm}] = phi - 2 Madm om Log[om/om0];
 
 Express[psi,om] = Express[psi,{om, Madm}] /. Madm -> Express[Madm,om];
 
-Express[psi,x] = Express[psi,om] /. om -> Express[om,x];
+Express[psi,x] = ComposeSeries[Express[psi, om], Express[om, x] + O[x]^10]
 
 (* Blanchet unnumbered Eq. between 239 and 240 *)
 Express[h,x] = 
