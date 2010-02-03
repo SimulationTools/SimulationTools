@@ -54,7 +54,7 @@ AsciiTimeOfIndex[data_, index_] :=
   data[[index]][[1]];
 
 fixData[d_] :=
- Union[Sort[d, #1[[1]] < #2[[1]] &]];
+ DeleteDuplicates[Sort[d, #1[[1]] < #2[[1]] &], (Abs[#1[[1]]-#2[[1]]] < 10^-10) &];
 
 ReadCarpetASCII1D[fileName_, level_:0, dir_:1] :=
  Module[{lines, lines2, lines3, lines4, takeCols, lines5, lines6, 
