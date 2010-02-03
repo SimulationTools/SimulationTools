@@ -245,7 +245,7 @@ Redefine[Interpolation[d:DataTable[___], args___],
    Interpolation[ToList[d], args]];
 
 ShiftDataTable[dt_, d : DataTable[__]] :=
- MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]];
+ AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
 
 DataTableRange[dt:DataTable[__]] :=
   Module[{list = ToList[dt], t1, t2},
