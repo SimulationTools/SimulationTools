@@ -332,7 +332,7 @@ DataTable"]];
   dt = Spacing[d];
   dFn = Interpolation[d];
   gFn = g /. 
-    NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}][[
+    NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
      1]];
   gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], 
     ListAttributes[d]]];
