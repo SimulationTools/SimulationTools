@@ -1,9 +1,9 @@
 
-BeginPackage["AsciiData1D`", {"DataTable`"}];
+BeginPackage["Ascii1D`", {"DataTable`"}];
 
-AsciiData1D::usage = "AsciiData1D[fileName] loads the 1D data in
+(* AsciiData1D::usage = "AsciiData1D[fileName] loads the 1D data in
 fileName (which should be in ygraph format) and returns it as a list
-in the form {{t, {{x, f}...}}...}.";
+in the form {{t, {{x, f}...}}...}."; *)
 
 AsciiDataOfIndex::usage = "AsciiDataOfIndex[data,i] returns the data,
 f, of the ith element of data where data is in the form {{t, {{x,
@@ -13,7 +13,7 @@ AsciiTimeOfIndex::usage = "AsciiTimeOfIndex[data,i] returns the time,
 t, of the ith element of data where data is in the form {{t, {{x,
 f}...}}...}";
 
-ReadCarpetASCII1D;
+ReadCarpetASCII1D::usage = "ReadCarpetASCII1D[filename, level, dir] reads a 1D CarpetIOASCII output file.  It selects the given refinement level and assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times.  If the 1D data is not contiguous, for example if there is a gap in this refinement level, the behaviour of the resulting DataTable objects with other DataTable functions is undefined.";
 
 Begin["`Private`"];
 
@@ -74,6 +74,12 @@ ReadCarpetASCII1D[fileName_, level_:0, dir_:1] :=
   times = Map[#[[1]][[9]] &, data4];
   dataWithTimes = MapThread[List, {times, data5}];
   Return[dataWithTimes]]
+
+MGraph[data__] :=
+  Manipulate[
+   ListLinePlot[data[[i, 2]], 
+    PlotLabel -> "t = " <> ToString[data[[i, 1]]]], {i, 1, Length[data],
+     1}];
 
 End[];
 
