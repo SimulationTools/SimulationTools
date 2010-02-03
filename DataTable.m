@@ -112,17 +112,29 @@ RedefineAsDataTable[Plus[d1_DataTable, d2_DataTable],
 RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   MapData[(a + #) &, d]];
 
+RedefineAsDataTable[First[DataTable[l_,___]],
+  l[[1]]];
+
+RedefineAsDataTable[Last[DataTable[l_,___]],
+  l[[-1]]];
+
 RedefineAsDataTable[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
   Profile["dtScalarTimes", MapData[a * # &, d]]];
 
 RedefineAsDataTable[Times[d1:DataTable[__], d2:DataTable[__]],
   Profile["dtTimes",MapThreadData[Times, {d1, d2}]]];
 
+RedefineAsDataTable[Dot[d1:DataTable[__], d2:DataTable[__]],
+  MapThreadData[Dot, {d1, d2}]];
+
 RedefineAsDataTable[Power[d:DataTable[__], n_Integer],
   MapData[Power[#,n] &, d]];
 
 RedefineAsDataTable[Abs[d:DataTable[__]],
   MapData[Abs, d]];
+
+RedefineAsDataTable[Norm[d:DataTable[__]],
+  MapData[Norm, d]];
 
 RedefineAsDataTable[Sqrt[d:DataTable[__]],
   MapData[Sqrt, d]];
@@ -132,6 +144,9 @@ RedefineAsDataTable[Conjugate[d:DataTable[__]],
 
 RedefineAsDataTable[Log[d:DataTable[__]],
   MapData[Log, d]];
+
+RedefineAsDataTable[Log[b_, d:DataTable[__]],
+  MapData[Log[b,#] &, d]];
 
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
