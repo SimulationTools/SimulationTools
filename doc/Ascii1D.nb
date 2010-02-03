@@ -1,0 +1,421 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     13444,        412]
+NotebookOptionsPosition[     11820,        350]
+NotebookOutlinePosition[     12181,        366]
+CellTagsIndexPosition[     12138,        363]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Ascii1D", "Title",
+ CellChangeTimes->{{3.4742249643133583`*^9, 3.47422496783888*^9}, {
+  3.474226200276156*^9, 3.4742262032986717`*^9}}],
+
+Cell["\<\
+The Ascii1D package provides functions for manipulating time-dependent 1D \
+data files.\
+\>", "Text",
+ CellChangeTimes->{{3.474224970343027*^9, 3.474224991365673*^9}, {
+  3.474226205445835*^9, 3.474226242872946*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{
+   RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\</..\>\""}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.474227557033618*^9, 3.474227572539591*^9}}],
+
+Cell[BoxData["\<\"/Users/ian/Projects/Code/nrmma\"\>"], "Output",
+ CellChangeTimes->{3.47422757791748*^9, 3.474227627253134*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"<<", "\"\<Ascii1D.m\>\""}]], "Input",
+ CellChangeTimes->{{3.474226645210515*^9, 3.4742266484457617`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Reading", "Section",
+ CellChangeTimes->{{3.474225004909935*^9, 3.474225006205621*^9}, {
+  3.474226270882313*^9, 3.474226271775813*^9}}],
+
+Cell["You can import a 1D CarpetIOASCII file:", "Text",
+ CellChangeTimes->{{3.47422500802991*^9, 3.474225025564742*^9}, {
+  3.4742262753041286`*^9, 3.4742262887036047`*^9}}],
+
+Cell["\tReadCarpetASCII1D[filename, rl, 1]", "Text",
+ CellChangeTimes->{{3.474226290554164*^9, 3.474226298256341*^9}, {
+   3.474226629824839*^9, 3.474226639510418*^9}, 3.474227229736211*^9}],
+
+Cell["\<\
+where filename is the name of the input file, rl is the refinement level to \
+take, and dir is the direction of the data, with {1,2,3} for {x,y,z}.  The \
+resulting structure (simulated here for the purpose of documentation) is of \
+the form\
+\>", "Text",
+ CellChangeTimes->{{3.4742266741175623`*^9, 3.47422668773908*^9}, {
+  3.474226964838008*^9, 3.4742269946339703`*^9}, {3.474227234804789*^9, 
+  3.474227242511697*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"data", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"t", ",", 
+      RowBox[{"MakeDataTable", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x", ",", 
+           RowBox[{"Sin", "[", 
+            RowBox[{"2", "Pi", " ", 
+             RowBox[{"(", 
+              RowBox[{"x", "-", "t"}], ")"}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
+       "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}]}]], "Input",\
+
+ CellChangeTimes->{{3.474226690304689*^9, 3.474226751876009*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0.`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.2`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.30000000000000004`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.4`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.6000000000000001`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.7000000000000001`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.8`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.9`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.`", ",", 
+     RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.4742267539024563`*^9, 3.474227246875195*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Using", "Section",
+ CellChangeTimes->{{3.4742251079559813`*^9, 3.474225116009762*^9}}],
+
+Cell["You can plot the elements of this structure directly:", "Text",
+ CellChangeTimes->{{3.474226805415773*^9, 3.474226815799375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"data", "[", 
+    RowBox[{"[", 
+     RowBox[{"3", ",", "2"}], "]"}], "]"}], ",", 
+   RowBox[{"PlotLabel", "\[Rule]", 
+    RowBox[{"\"\<t = \>\"", " ", "<>", " ", 
+     RowBox[{"ToString", "[", 
+      RowBox[{"data", "[", 
+       RowBox[{"[", 
+        RowBox[{"3", ",", "1"}], "]"}], "]"}], "]"}]}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.474226817167211*^9, 3.4742268502317467`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{0., -0.9510565162951535}, {0.1, -0.5877852522924731}, {0.2, 
+     0.}, {0.30000000000000004`, 0.5877852522924732}, {0.4, 
+     0.9510565162951535}, {0.5, 0.9510565162951536}, {0.6000000000000001, 
+     0.5877852522924728}, {0.7000000000000001, 1.2246467991473532`*^-16}, {
+     0.8, -0.5877852522924734}, {0.9, -0.9510565162951535}, {
+     1., -0.9510565162951536}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotLabel->FormBox["\"t = 0.2\"", TraditionalForm],
+  PlotRange->{{0., 1.}, {-0.9510565162951536, 0.9510565162951536}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{{3.474226828225339*^9, 3.4742268510716553`*^9}, 
+   3.47422725004198*^9}]
+}, Open  ]],
+
+Cell["\<\
+or you can use the provided functions AsciiTimeOfIndex and AsciiDataOfIndex:\
+\>", "Text",
+ CellChangeTimes->{{3.474227076165513*^9, 3.474227092852306*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"AsciiTimeOfIndex", "[", 
+  RowBox[{"data", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.474227094579897*^9, 3.474227117293126*^9}}],
+
+Cell[BoxData["0.2`"], "Output",
+ CellChangeTimes->{{3.4742271040103397`*^9, 3.4742271179288816`*^9}, 
+   3.474227251243289*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"AsciiDataOfIndex", "[", 
+  RowBox[{"data", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.4742271081138353`*^9, 3.474227119244493*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ CellChangeTimes->{{3.474227114340188*^9, 3.474227119665641*^9}, 
+   3.474227251813327*^9}]
+}, Open  ]],
+
+Cell["You can also use Manipulate to easily step through it:", "Text",
+ CellChangeTimes->{{3.474226856967284*^9, 3.474226876605215*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", 
+     RowBox[{"PlotLabel", "\[Rule]", 
+      RowBox[{"\"\<t = \>\"", " ", "<>", " ", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"data", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}]}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "1", ",", 
+     RowBox[{"Length", "[", "data", "]"}], ",", "1"}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.4742268777075157`*^9, 3.474226902079543*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`i$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`i$$], 1, 11, 1}}, Typeset`size$$ = {
+    360., {111., 115.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`i$540$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`i$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`i$$, $CellContext`i$540$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLinePlot[
+        Part[$CellContext`data, $CellContext`i$$, 2], PlotLabel -> 
+        StringJoin["t = ", 
+          ToString[
+           Part[$CellContext`data, $CellContext`i$$, 1]]]], 
+      "Specifications" :> {{$CellContext`i$$, 1, 11, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{403., {155.34375, 160.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.4742269029276648`*^9, 3.4742272529322433`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Full API", "Section",
+ CellChangeTimes->{{3.474225842435748*^9, 3.474225844800666*^9}}],
+
+Cell["\<\
+The full list of Ascii1D functions is below.  Click on one of them for \
+documentation:\
+\>", "Text",
+ CellChangeTimes->{{3.474225848168293*^9, 3.474225864215613*^9}, {
+  3.4742273109526243`*^9, 3.474227314013586*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Ascii1D`*"}]], "Input",
+ CellChangeTimes->{{3.474225866723322*^9, 3.474225869792914*^9}, {
+  3.47422718793302*^9, 3.4742271896986732`*^9}}],
+
+Cell[BoxData[
+ DynamicModuleBox[{Typeset`open$$ = True}, 
+  PaneSelectorBox[{False->
+   RowBox[{
+    OpenerBox[Dynamic[Typeset`open$$],
+     ImageSize->Small], 
+    StyleBox["Ascii1D`", "InfoHeading"]}], True->GridBox[{
+     {
+      RowBox[{
+       OpenerBox[Dynamic[Typeset`open$$],
+        ImageSize->Small], 
+       StyleBox["Ascii1D`", "InfoHeading"]}]},
+     {GridBox[{
+        {
+         ButtonBox["AsciiData1D",
+          BaseStyle->"InformationLink",
+          ButtonData:>{"Info3474230856-6454462", {"AsciiData1D", "Ascii1D`"}},
+          
+          ButtonNote->"Ascii1D`"], 
+         ButtonBox["AsciiTimeOfIndex",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info3474230856-6454462", {"AsciiTimeOfIndex", "Ascii1D`"}},
+          ButtonNote->"Ascii1D`"]},
+        {
+         ButtonBox["AsciiDataOfIndex",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info3474230856-6454462", {"AsciiDataOfIndex", "Ascii1D`"}},
+          ButtonNote->"Ascii1D`"], 
+         ButtonBox["ReadCarpetASCII1D",
+          BaseStyle->"InformationLink",
+          
+          ButtonData:>{
+           "Info3474230856-6454462", {"ReadCarpetASCII1D", "Ascii1D`"}},
+          ButtonNote->"Ascii1D`"]}
+       },
+       DefaultBaseStyle->"InfoGrid",
+       GridBoxItemSize->{"Columns" -> {{
+            Scaled[0.475]}}}]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}]}, 
+   Dynamic[Typeset`open$$],
+   ImageSize->Automatic]]], "Print", "InfoCell",
+ CellChangeTimes->{3.474227256913739*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{629, 719},
+WindowMargins->{{Automatic, 58}, {Automatic, 11}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 142, 2, 76, "Title"],
+Cell[712, 26, 226, 5, 26, "Text"],
+Cell[CellGroupData[{
+Cell[963, 35, 208, 5, 27, "Input"],
+Cell[1174, 42, 128, 1, 27, "Output"]
+}, Open  ]],
+Cell[1317, 46, 129, 2, 27, "Input"],
+Cell[CellGroupData[{
+Cell[1471, 52, 141, 2, 67, "Section"],
+Cell[1615, 56, 173, 2, 26, "Text"],
+Cell[1791, 60, 190, 2, 26, "Text"],
+Cell[1984, 64, 432, 8, 56, "Text"],
+Cell[CellGroupData[{
+Cell[2441, 76, 709, 21, 58, "Input"],
+Cell[3153, 99, 1475, 37, 73, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4677, 142, 92, 1, 67, "Section"],
+Cell[4772, 145, 135, 1, 26, "Text"],
+Cell[CellGroupData[{
+Cell[4932, 150, 454, 12, 27, "Input"],
+Cell[5389, 164, 857, 19, 241, "Output"]
+}, Open  ]],
+Cell[6261, 186, 166, 3, 26, "Text"],
+Cell[CellGroupData[{
+Cell[6452, 193, 161, 3, 27, "Input"],
+Cell[6616, 198, 127, 2, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6780, 205, 163, 3, 27, "Input"],
+Cell[6946, 210, 173, 3, 27, "Output"]
+}, Open  ]],
+Cell[7134, 216, 136, 1, 26, "Text"],
+Cell[CellGroupData[{
+Cell[7295, 221, 646, 18, 43, "Input"],
+Cell[7944, 241, 1687, 35, 333, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9680, 282, 93, 1, 67, "Section"],
+Cell[9776, 285, 228, 5, 26, "Text"],
+Cell[CellGroupData[{
+Cell[10029, 294, 168, 3, 27, "Input"],
+Cell[10200, 299, 1580, 46, 75, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
