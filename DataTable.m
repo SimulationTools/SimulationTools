@@ -15,6 +15,7 @@ Downsample;
 MakeInterpolatingDataTable;
 Phase;
 AddAttribute;
+AddAttributes;
 ReadAttribute;
 ListAttributes;
 ShiftDataTable;
