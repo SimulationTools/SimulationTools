@@ -1,37 +1,36 @@
 
 BeginPackage["DataTable`", {"Profile`"}];
 
-DataTable;
-MakeDataTable;
-ToList;
-DepVar;
-IndVar;
-MakeDataTable;
-MapData;
-MapIndVar;
-ApplyToList;
-MapThreadData;
-Downsample;
-MakeInterpolatingDataTable;
-Phase;
-AddAttribute;
-AddAttributes;
-ReadAttribute;
-ListAttributes;
-ShiftDataTable;
-DataTableRange;
-ResampleDataTable;
-ResampleDataTables;
-Spacing;
-DataTableInterval;
-NDerivative;
-IntersectDataTables;
-Frequency;
-IntegrateDataTable;
-IntegrateDataTableZeroStart;
-IntegrateDataTableZeroEnd;
-Sub;
-Div;
+DataTable::usage = "DataTable[{{x,f},...}, attrs] is a one-dimensional table of data with attributes attrs.  attrs is of the form {attr -> value, ...}.  DataTable objects print as DataTable[] to avoid printing the content.";
+MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
+ToList::usage = "ToList[d] returns the list content of the DataTable d";
+DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
+IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
+MapData::usage = "MapData[f, d] maps f over the data (independent variable) of the DataTable d";
+MapIndVar::usage = "MapIndVar[d, f] maps f over the independent variable of the DataTable d";
+ApplyToList::usage = "ApplyToList[f, d] maps f over the elements of the underlying list in DataTable d."
+MapThreadData::usage = "MapThreadData[f, {d, ...}] threads f over the independent variables in the DataTable objects d, much like MapThread for lists.";
+Downsample::usage = "Downsample[d, n] returns a version of DataTable d with only every nth element.";
+MakeInterpolatingDataTable::usage = "MakeInterpolatingDataTable[d, dt] returns a resampled version of DataTable d which has been interpolated to have a spacing dt.  Deprecated: use ResampleDataTable instead.";
+Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for smooth enough input data.";
+AddAttribute::usage = "AddAttribute[d, attrname -> attrval] returns a copy of d with a new attribute added.";
+AddAttributes::usage = "AddAttributes[d, {attrname -> attrvalue, ...}] returns a copy of DataTable d with new attributes added.";
+ReadAttribute::usage = "ReadAttribute[d, attrname] returns the value of the named attribute from the DataTable d.";
+ListAttributes::usage = "ListAttributes[d] returns a list of the attributes in the DataTable d in the form {attrname -> attrvalue, ...}.";
+ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
+DataTableRange::usage = "DataTableRange[d] returns the first and last independent variable in DataTable d in the form {x1, x2}.";
+ResampleDataTable::usage = "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy of DataTable d in which the data has been interpolated with order p and runs from t1 to t2 with spacing dx.  p defaults to 3 if not specified, as in Interpolation.";
+ResampleDataTables::usage = "ResampleDataTables[{d, ...}] returns the DataTables d after resampling to have a common range and spacing, which corresponds to the minimum spacing of the input set.";
+Spacing::usage = "Spacing[d] returns the spacing of the independent variable in DataTable d.  This is a constant for the DataTable.";
+DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
+NDerivative::usage = "NDerivative[d] returns the first derivative of the DataTable d.  This is first order accurate and the result omits the first and last points of d.";
+IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
+Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
+IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
+IntegrateDataTableZeroStart::usage = "IntegrateDataTableZeroStart[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x1] = 0, where x1 is the lowest value of the independent variable in d.";
+IntegrateDataTableZeroEnd::usage = "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x2] = 0, where x2 is the highest value of the independent variable in d.";
+Sub::usage = "Sub[d1, d2] returns a DataTable corresponding to d1 - d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Sub~ d2.";
+Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
 
 Begin["`Private`"];
 
