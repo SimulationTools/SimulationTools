@@ -82,7 +82,7 @@ MapIndVar[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[{#[[1]], f[#[[1]]]}&, l], attrs];
 
 ApplyToList[f_, d_DataTable] :=
-  d /. DataTable[l_, x___] -> DataTable[f[l], x];
+  d /. DataTable[l_, x___] :> DataTable[f[l], x];
 
 commonAttributes[ds:List[DataTable[__]..]] :=
   Module[{attrs},
