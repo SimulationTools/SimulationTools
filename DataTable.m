@@ -30,6 +30,8 @@ Frequency;
 IntegrateDataTable;
 IntegrateDataTableZeroStart;
 IntegrateDataTableZeroEnd;
+Sub;
+Div;
 
 Begin["`Private`"];
 
@@ -162,6 +164,12 @@ RedefineAsDataTable[Re[d:DataTable[___]],
 
 RedefineAsDataTable[Im[d:DataTable[___]],
   MapData[Im, d]];
+
+Sub[d1_DataTable, d2_DataTable] :=
+  Apply[Subtract, ResampleDataTables[{d1, d2}]];
+
+Div[d1_DataTable, d2_DataTable] :=
+  Apply[Divide, ResampleDataTables[{d1, d2}]];
 
 AddAttribute[d:DataTable[x__], name_ -> val_] :=
   DataTable[x, name -> val];
