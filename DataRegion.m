@@ -30,9 +30,6 @@ CarpetHDF5DatasetName;
 ReadCarpetHDF5Variable;
 ReadCarpetHDF5Components;
 StripGhostZones;
-MapDataRegion;
-
-Install["/Users/ian/Projects/h5mma/h5mma"];
 
 Begin["`Private`"];
 
@@ -82,7 +79,7 @@ GetDataRange[v_DataRegion] :=
     spacing = GetSpacing[v];
     dimensions = GetDimensions[v];
     min = origin;
-    max = origin + spacing * (dimensions - Table[1,{i,1,Length[origin]}]);
+    max = origin + spacing * (dimensions - {1,1,1});
     MapThread[List, {min, max}]];
 
 replaceRule[list_List, key_ -> newValue_] :=
@@ -187,7 +184,7 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
   cf = ScaledColorFunction[colorMap, {min, max}];
   GraphicsGrid[{{
      DataRegionArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
-       ColorFunction -> cf, ColorFunctionScaling -> False, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]];
+       ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]];
 
 (* Operations on DataRegion objects *)
 
@@ -222,19 +219,16 @@ chunkOffset[d_DataRegion, origin_, spacing_] :=
 
 MergeDataRegions[regions_List] :=
  Module[{headers, origins, dims, x1, y1, z1, spacings, spacing, x2s, x2, y2, z2,
-    X1, X2, n, dat, header, attrs, attrs2, dat2, diff},
+    X1, X2, n, dat, header, attrs, attrs2, dat2},
   origins = Map[GetOrigin, regions];
   dims = Map[GetDimensions, regions];
   x1 = Min[Map[#[[1]] &, origins]];
   y1 = Min[Map[#[[2]] &, origins]];
   z1 = Min[Map[#[[3]] &, origins]];
   spacings = Map[GetSpacing, regions];
-  spacing = First[spacings];
-
-  diff = Max@Map[Norm[# - spacing] &, spacings];
-  If[diff > 10^-8, 
+  If[!Apply[Equal, spacings], 
     Throw["MergeDataRegions: Attempt to merge DataRegions with different spacings"]];
-
+  spacing = First[spacings];
   x2s = MapThread[#1 + spacing * (#2 - 1) &, {origins, 
      dims}];
   x2 = Max[Map[#[[1]] &, x2s]];
@@ -250,112 +244,51 @@ MergeDataRegions[regions_List] :=
   attrs2 = replaceRules[attrs, {Dimensions -> n, Origin -> X1}];
   Return[DataRegion[attrs2, dat]]];
 
-MapDataRegion[f_, d_DataRegion] :=
-  DataRegion[d[[1]], Map[f, d[[2]], Length[Dimensions[d[[2]]]]]];
-
-(* ReadDatasets[file_] := *)
-(*  Module[{h5File}, *)
-(*   h5File =  *)
-(*    ReadList["!/Users/ian/Software/hdf5-1.8.1/bin/h5ls -f " <> file,  *)
-(*     String]; *)
-(*   First/@Map[StringCases[#,  *)
-(*      x__ ~~ " Dataset {" ~~ __ ~~ EndOfLine :>  *)
-(*       StringReplace[x, "\\" :> ""]] &, Drop[h5File,-1]]]; *)
-
 (* Carpet HDF5 functions *)
 
 CarpetHDF5DatasetName[var_String, it_Integer, rl_Integer, c_Integer] :=
-  "/" <> var <> " it=" <> ToString[it] <> " tl=0 m=0 rl=" <> ToString[rl] <> " c=" <> ToString[c];
+  "/" <> var <> " it=" <> ToString[it] <> " tl=0 rl=" <> ToString[rl] <> " c=" <> ToString[c];
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True};
 
-ReadCarpetHDF5[file_String, ds_String, OptionsPattern[]] :=
+ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
  Module[{data, annots, dims, origin, spacing, name, idx, strip, reg, ghosts, posns},
   strip = OptionValue[StripGhostZones];
   If[!StringQ[ds] && !IntegerQ[ds],
     Throw["ReadCarpetHDF5: expected a string or integer dataset specification, but instead got " <>ToString[ds]]];
 
-(*   If[IntegerQ[ds], idx = ds, *)
-(*     allds = ReadDatasets[file]; (\* Should at least cache this *\) *)
-(*     posns = Position[allds, ds]; *)
-(*     If[posns === {}, Throw["Cannot find dataset " <> ds <> " in HDF5 file " <> file]]; *)
-(*     idx = posns[[1]][[1]]]; *)
-  data = Global`ReadDataset[file, ds];
-  annots = Global`ReadDatasetAttributes[file, ds];
-  dims = Reverse@Dimensions[data];
+  If[IntegerQ[ds], idx = ds,
+    allds = Import[file, "Datasets"]; (* Should at least cache this *)
+    posns = Position[allds, ds];
+    If[posns === {}, Throw["Cannot find dataset " <> ds <> " in HDF5 file " <> file]];
+    idx = posns[[1]][[1]]];
+  data = Import[file, {"Datasets", idx}];
+  annots = Import[file, {"Annotations", idx}];
+  dims = Reverse@Import[file, {"Dimensions", idx}];
   origin = "origin" /. annots;
   spacing = "delta" /. annots;
   name = "name" /. annots;
   ghosts = "cctk_nghostzones" /. annots;
-  If[StringQ[ghosts], ghosts = 0];
-  If[Length[dims] == 2,
-    data = {data};
-    dims = Append[dims,1];
-    origin = Append[origin, 0];
-    spacing = Append[spacing, 1.0]];
-
   reg = MakeDataRegion[data, name, dims, origin, spacing];
   If[strip, Strip[reg, ghosts], reg]];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
-
-(* ReadCarpetHDF5Components[file_, var_, it_, rl_, OptionsPattern[]] := *)
-(*   Module[{filePrefix, fileNames, n, datasets, pattern, strip}, *)
-(*     strip = OptionValue[StripGhostZones]; *)
-(*     If[FileType[file] === None, *)
-(*       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]]; *)
-(*     filePrefix = StringReplace[file, ".file_0.h5" -> ""]; *)
-(*     pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"]; *)
-(*     fileNames = FileNames[FileNameTake[pattern, -1], FileNameDrop[pattern, -1]]; *)
-(*     (\* Should check here that the found files are a complete set *\) *)
-(*     n = Length[fileNames]; *)
-(*     datasets = Table[ReadCarpetHDF5[ *)
-(*       filePrefix<>".file_"<>ToString[c]<>".h5", *)
-(*       CarpetHDF5DatasetName[var, it, rl, c], StripGhostZones -> strip],  *)
-(*       {c,0,n-1}]; *)
-(*     datasets]; *)
-
-parseDatasetName[name_] :=
-  Module[{words, var, nums},
-    words = StringSplit[name];
-    var = First[words];
-    nums = Map[Module[{l = StringSplit[#, "="]}, l[[1]] -> ToExpression[l[[2]]]]&, Drop[words, 1]];
-    {"name" -> var} ~Join~ nums];
-
-datasetCache = {};
-
-readDatasets[file_String] :=
-  Module[{lookup,datasetNames},
-    lookup = file /. datasetCache;
-    If[StringQ[lookup],
-      datasetNames = Global`ReadDatasets[file];
-      AppendTo[datasetCache, file -> datasetNames];
-      Return[datasetNames],
-      Return[lookup]]];
 
 ReadCarpetHDF5Components[file_, var_, it_, rl_, OptionsPattern[]] :=
   Module[{filePrefix, fileNames, n, datasets, pattern, strip},
     strip = OptionValue[StripGhostZones];
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
-
-    If[StringMatchQ[file, __~~".file_0.h5"],
-      filePrefix = StringReplace[file, ".file_0.h5" -> ""];
-      pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
-      fileNames = FileNames[FileNameTake[pattern, -1], FileNameDrop[pattern, -1]];
-      (* Should check here that the found files are a complete set *)
-      n = Length[fileNames];
-      datasets = Table[ReadCarpetHDF5[
-        filePrefix<>".file_"<>ToString[c]<>".h5",
-        CarpetHDF5DatasetName[var, it, rl, c], StripGhostZones -> strip], 
-        {c,0,n-1}];
-      Return[datasets],
-
-      dsNames = readDatasets[file];
-(*       Print[parseDatasetName /@ dsNames]; *)
-      theseDatasets = Select[dsNames, (({"name", "it", "rl"} /. parseDatasetName[#]) === {"/" <> var, it, rl}) &];
-(*        Print["Selected datasets == ", theseDatasets]; *)
-      Map[ReadCarpetHDF5[file, #] &, theseDatasets]]];
+    filePrefix = StringReplace[file, ".file_0.h5" -> ""];
+    pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
+    fileNames = FileNames[FileNameTake[pattern, -1], FileNameDrop[pattern, -1]];
+    (* Should check here that the found files are a complete set *)
+    n = Length[fileNames];
+    datasets = Table[ReadCarpetHDF5[
+      filePrefix<>".file_"<>ToString[c]<>".h5",
+      CarpetHDF5DatasetName[var, it, rl, c], StripGhostZones -> strip], 
+      {c,0,n-1}];
+    datasets];
 
 ReadCarpetHDF5Variable[file_, var_, it_, rl_] :=
   MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl]];
