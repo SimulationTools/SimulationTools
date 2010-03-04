@@ -309,9 +309,9 @@ MergeDataRegions[regions_List] :=
 
 (* Carpet HDF5 functions *)
 
-CarpetHDF5DatasetName[var_String, it_Integer, m_Integer, rl_Integer, c_Integer] :=Module[{map="", component=""},
-  If[m>=0, map=" m="<>ToString[m]];
-  If[c>=0, component=" c="<>ToString[c]];
+CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(_Integer|None)] :=Module[{map="", component=""},
+  If[m =!= None, map=" m="<>ToString[m]];
+  If[c =!= None, component=" c="<>ToString[c]];
   "/" <> var <> " it=" <> ToString[it] <> " tl=0"<>map<>" rl=" <> ToString[rl] <> component];
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
@@ -393,7 +393,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 	Return[datasets]
 ];
 
-ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:-1, opts___]:= 
+ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
   MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]];
 
 End[];
