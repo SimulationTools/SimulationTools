@@ -1,7 +1,8 @@
+(* ::Package:: *)
 
-(* This package was written by Ian Hinder *)
+(* This package was originally written by Ian Hinder and modified to support arbitrary dimensional data by Barry Wardell *)
 
-BeginPackage["DataRegion`"];
+BeginPackage["DataRegion`","DataTable`"];
 
 (* Exported symbols *)
 
@@ -9,27 +10,32 @@ MakeDataRegion;
 ReadVTKFile;
 SliceData;
 DataRegion;
+ToDataTable;
 GetDataRange;
 GetOrigin;
 GetSpacing;
 GetDimensions;
+GetNumDimensions;
 GetData;
 GetAttributes;
 GetVariableName;
 DataRegionDensityPlot;
 DataRegionArrayPlot;
+DataRegionPlot3D;
+DataRegionPlot;
 ScaledColorFunction;
 ColorMapLegend;
 QuickSlicePlot;
 Outline;
 Strip;
 MergeDataRegions;
-MergeDataRegions2;
 ReadCarpetHDF5;
+ClearCarpetHDF5Cache;
 CarpetHDF5DatasetName;
 ReadCarpetHDF5Variable;
 ReadCarpetHDF5Components;
 StripGhostZones;
+VerboseRead;
 
 Begin["`Private`"];
 
@@ -37,7 +43,21 @@ Begin["`Private`"];
    the internal format of a DataRegion object. *)
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List] :=
-  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing}, data];
+  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims]}, data];
+
+DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
+  ndims = GetNumDimensions[v];
+  If[ ndims != 1,
+	Throw["Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
+          <> SymbolName[x] <> "' is greater than 1."]
+  ];
+
+  {{xmin, xmax}} = GetDataRange[v];
+  {spacing} = GetSpacing[v];
+  data = GetData[v];
+  MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}]]
+];
+
 
 GetData[DataRegion[h_, data_]] :=
   data;
@@ -50,6 +70,9 @@ GetSpacing[DataRegion[h_, data_]] :=
 
 GetDimensions[DataRegion[h_, data_]] :=
   Dimensions /. h;
+
+GetNumDimensions[DataRegion[h_, data_]] :=
+  NumDimensions /. h;
 
 GetAttributes[DataRegion[h_, data_]] := 
   h;
@@ -71,7 +94,7 @@ Format[v_DataRegion, StandardForm] :=
     range = GetDataRange[v];
     "DataRegion[" <>ToString[If[StringQ[name], name, "<unknown name>"]] <>", "
                  <>ToString[If[ListQ[dims],ToString[dims], "<unknown dims>"]]  <>", "
-                 <>ToString[If[ListQ[range],ToString[range],"<unknown range"]]];
+                 <>ToString[If[ListQ[range],ToString[range],"<unknown range"]]<>"]"];
 
 GetDataRange[v_DataRegion] :=
   Module[{origin, spacing, dimensions, min, max},
@@ -79,7 +102,7 @@ GetDataRange[v_DataRegion] :=
     spacing = GetSpacing[v];
     dimensions = GetDimensions[v];
     min = origin;
-    max = origin + spacing * (dimensions - {1,1,1});
+    max = origin + spacing * (dimensions - 1);
     MapThread[List, {min, max}]];
 
 replaceRule[list_List, key_ -> newValue_] :=
@@ -90,32 +113,44 @@ replaceRules[list_List, replacements_List] :=
      list, 
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
 
-(* This function can be replaced by more sophisticated use of Part *)
-SliceData[v:DataRegion[h_, data_], dim_:3, coord_:0] :=
- Module[{index, newOrigin, newDims, h2},
-  If[dim != 3, Throw["Can only slice in the z direction"]];
+SliceData[v:DataRegion[h_, data_], dim_, coord_:0] :=
+ Module[{index, newOrigin, newSpacing, newDims, newNDims, h2, origin, spacing, dims, range, slice, ndims},
   origin = GetOrigin[v];
   spacing = GetSpacing[v];
   dims = GetDimensions[v];
+  ndims = GetNumDimensions[v];
+  range = GetDataRange[v][[dim]];
+
+  If[dim > ndims,
+    Throw["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
+      ToString[ndims]<>" of the DataRegion."]
+  ];
+
+  If[(coord < range[[1]]) || (coord >range[[2]]),
+    Throw["Slice coordinate "<>ToString[coord]<>" is outside the range "<>
+      ToString[range]<>" of the DataRegion."]
+  ];
+
   index = Round[(coord - origin[[dim]])/spacing[[dim]]];
-  newOrigin = origin;
-  newOrigin[[dim]] = coord;
-  newDims = dims;
-  newDims[[dim]] = 1;
-  h2 = replaceRules[h, {Dimensions -> newDims, Origin -> newOrigin}];
-  Return[DataRegion[h2, {data[[index]]}]]];
+  newOrigin = Drop[origin, {dim}];
+  newSpacing = Drop[spacing, {dim}];
+  newDims = Drop[dims, {dim}];
+  newNDims = ndims-1;
+  h2 = replaceRules[h, {Dimensions -> newDims, Origin -> newOrigin, NumDimensions -> newNDims, Spacing-> newSpacing}];
+  slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
+  Return[DataRegion[h2, data[[slice]] ]]
+];
 
 Unprotect[Interpolation];
 
 Interpolation[v_DataRegion, opts___] :=
-  Module[{nz = GetDimensions[v][[3]], data = GetData[v]},
-    fn = If[nz == 1, ListInterpolation[data[[1]], Take[Reverse@GetDataRange[v], 2], opts],
-                     ListInterpolation[Transpose[data,{3,2,1}], Reverse[GetDataRange[v]]], opts]];
+  Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
+    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
+];
 
 Protect[Interpolation];
 
 (* VTK file reader *)
-
 ReadVTKFile[fileName_String] :=
   Module[{s,result},
     s = OpenRead[fileName, BinaryFormat->True];
@@ -157,17 +192,28 @@ ReadVTKFile[s_InputStream] :=
   Return[DataRegion[newHeader, data2]]];
 
 (* Plotting wrappers *)
+DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange},
+ ndims = GetNumDimensions[v];
+ If[ndims!=plotDims,
+   Throw[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
+     ". The provided data has dimensionality "<>ToString[ndims]<>"."];
+ ];
 
-DataRegionDensityPlot[v_DataRegion, args___] :=
- ListDensityPlot[GetData[v][[1]], 
-  DataRange -> Take[GetDataRange[v], 2]];
+ dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
 
-DataRegionArrayPlot[v_DataRegion, args___] :=
- ArrayPlot[GetData[v][[1]], args, 
-  DataRange -> Take[GetDataRange[v], 2]];
+ plotFunction[GetData[v], args,
+  DataRange -> dataRange]
+];
+
+DataRegion1DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 1, v, args];
+DataRegion2DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 2, v, args];
+
+DataRegionPlot[v_DataRegion, args___]        := DataRegion1DPlot[ListPlot, v, args]; 
+DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot, v, args];
+DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
+DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
 
 (* Convenient plotting functions *)
-
 ScaledColorFunction[name_, {min_, max_}] :=
  (ColorData[name][(# - min)/(max - min)] &);
 
@@ -184,15 +230,29 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
   cf = ScaledColorFunction[colorMap, {min, max}];
   GraphicsGrid[{{
      DataRegionArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
-       ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]];
+       ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]
+];
+
 
 (* Operations on DataRegion objects *)
 
-Outline[d_DataRegion] :=
-  Cuboid[GetOrigin[d], GetOrigin[d] + GetSpacing[d] * (GetDimensions[d] - {1,1,1})];
+Outline[d_DataRegion] := Module[{coords, ndims, shapes},
+  ndims = GetNumDimensions[d];
+  coords = {GetOrigin[d], GetOrigin[d] + GetSpacing[d] * (GetDimensions[d] - 1)};
+  If[ndims == 1, coords = {Thread[{ {0,0}, coords[[All,1]] }]}];
 
-Strip[d_DataRegion, n_Integer] :=
-  Strip[d, {n,n,n}];
+  shapes = {Line, Rectangle, Cuboid};
+
+  If[ndims > 3,
+    Throw["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
+  ];
+
+  shapes[[ndims]]@@coords
+];
+
+Strip[d_DataRegion, n_Integer] := Module[{ndims},
+  ndims = GetNumDimensions[d];
+  Strip[d, ConstantArray[n,ndims]]];
 
 Strip[d_DataRegion, n_List] :=
   Module[{data, data2, attrs, attrs2, d2},
@@ -207,35 +267,38 @@ Strip[d_DataRegion, n_List] :=
 Attributes[insertArray] = {HoldFirst};
 
 (* Insert a1 into a2, offsetting the indices by s *)
-insertArray[a2_, a1_, s : {sx_, sy_, sz_}] :=
- Module[{n1x, n1y, n1z, n2z, n2y, n2x},
-  {n1z, n1y, n1x} = Dimensions[a1];
-  {n2z, n2y, n2x} = Dimensions[a2];
-  a2[[sz+1 ;; sz + n1z, sy+1 ;; sy + n1y, sx+1 ;; sx + n1x]] = a1];
+insertArray[a2_, a1_, s_] :=
+ Module[{n1, n2, s2, position},
+  n1 = Dimensions[a1];
+  n2 = Dimensions[a2];
+  s2 = Reverse[s];
+  position = Table[s2[[n]]+1;;s2[[n]]+n1[[n]],{n,Length[s]}];
+  Part[a2, Sequence @@ position ] = a1];
 
 chunkOffset[d_DataRegion, origin_, spacing_] :=
  Module[{},
   Round[(GetOrigin[d] - origin)/spacing]];
 
 MergeDataRegions[regions_List] :=
- Module[{headers, origins, dims, x1, y1, z1, spacings, spacing, x2s, x2, y2, z2,
-    X1, X2, n, dat, header, attrs, attrs2, dat2},
+ Module[{headers, ndims, origins, dims, spacings, spacing,
+    X1, X2s, X2, n, dat, header, attrs, attrs2, dat2},
   origins = Map[GetOrigin, regions];
   dims = Map[GetDimensions, regions];
-  x1 = Min[Map[#[[1]] &, origins]];
-  y1 = Min[Map[#[[2]] &, origins]];
-  z1 = Min[Map[#[[3]] &, origins]];
+  ndims = GetNumDimensions[regions[[1]]];
+
+  (* Find the lower coordinate of the bounding box *)
+  X1 = Min[origins[[All,#]]]&/@ Range[ndims];
+
   spacings = Map[GetSpacing, regions];
   If[!Apply[Equal, spacings], 
     Throw["MergeDataRegions: Attempt to merge DataRegions with different spacings"]];
   spacing = First[spacings];
-  x2s = MapThread[#1 + spacing * (#2 - 1) &, {origins, 
+  
+  (* Find the upper coordinate of the bounding box *)
+  X2s = MapThread[#1 + spacing * (#2 - 1) &, {origins, 
      dims}];
-  x2 = Max[Map[#[[1]] &, x2s]];
-  y2 = Max[Map[#[[2]] &, x2s]];
-  z2 = Max[Map[#[[3]] &, x2s]];
-  X1 = {x1, y1, z1};
-  X2 = {x2, y2, z2};
+  X2 = Max[X2s[[All,#]]]&/@ Range[ndims];
+
   n = Round[(X2 - X1)/spacing] + 1;
   dat = ConstantArray[None, Reverse[n]];
   Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
@@ -246,52 +309,92 @@ MergeDataRegions[regions_List] :=
 
 (* Carpet HDF5 functions *)
 
-CarpetHDF5DatasetName[var_String, it_Integer, rl_Integer, c_Integer] :=
-  "/" <> var <> " it=" <> ToString[it] <> " tl=0 rl=" <> ToString[rl] <> " c=" <> ToString[c];
+CarpetHDF5DatasetName[var_String, it_Integer, m_Integer, rl_Integer, c_Integer] :=Module[{map="", component=""},
+  If[m>=0, map=" m="<>ToString[m]];
+  If[c>=0, component=" c="<>ToString[c]];
+  "/" <> var <> " it=" <> ToString[it] <> " tl=0"<>map<>" rl=" <> ToString[rl] <> component];
 
-Options[ReadCarpetHDF5] = {StripGhostZones -> True};
+Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
+
+Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
+Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
+Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
 
 ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
- Module[{data, annots, dims, origin, spacing, name, idx, strip, reg, ghosts, posns},
+ Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds},
   strip = OptionValue[StripGhostZones];
+  verbose = OptionValue[VerboseRead];
+
   If[!StringQ[ds] && !IntegerQ[ds],
     Throw["ReadCarpetHDF5: expected a string or integer dataset specification, but instead got " <>ToString[ds]]];
 
+  If[verbose, Print["Reading File: "<>file]];
+
   If[IntegerQ[ds], idx = ds,
-    allds = Import[file, "Datasets"]; (* Should at least cache this *)
+    If[verbose, Print["Reading Dataset Names"]];
+    allds = Datasets[file];
     posns = Position[allds, ds];
     If[posns === {}, Throw["Cannot find dataset " <> ds <> " in HDF5 file " <> file]];
-    idx = posns[[1]][[1]]];
+    idx = posns[[1]][[1]]
+  ];
+
+  If[verbose, Print["Reading Data"]];
   data = Import[file, {"Datasets", idx}];
-  annots = Import[file, {"Annotations", idx}];
-  dims = Reverse@Import[file, {"Dimensions", idx}];
+
+  If[verbose, Print["Reading Annotations"]];   
+  annots = Annotations[file][[idx]];
+
+  If[verbose, Print["Reading Dimensions"]];
+  dims = Reverse[Dims[file][[idx]]];
+
   origin = "origin" /. annots;
   spacing = "delta" /. annots;
   name = "name" /. annots;
+
   ghosts = "cctk_nghostzones" /. annots;
+  If[ghosts=="cctk_nghostzones", ghosts=0];
+
   reg = MakeDataRegion[data, name, dims, origin, spacing];
-  If[strip, Strip[reg, ghosts], reg]];
+  If[strip, Strip[reg, ghosts], reg]
+];
+
+ClearCarpetHDF5Cache[file_String] := Module[{}, 
+  Datasets[file]=.;
+  Annotations[file]=.;
+  Dims[file]=.;
+];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 
-ReadCarpetHDF5Components[file_, var_, it_, rl_, OptionsPattern[]] :=
-  Module[{filePrefix, fileNames, n, datasets, pattern, strip},
-    strip = OptionValue[StripGhostZones];
+ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
+  Module[{filePrefix, fileNames, n, datasets, pattern, Filetype1D, Filetype3D, components},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
-    filePrefix = StringReplace[file, ".file_0.h5" -> ""];
-    pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
-    fileNames = FileNames[FileNameTake[pattern, -1], FileNameDrop[pattern, -1]];
-    (* Should check here that the found files are a complete set *)
-    n = Length[fileNames];
-    datasets = Table[ReadCarpetHDF5[
-      filePrefix<>".file_"<>ToString[c]<>".h5",
-      CarpetHDF5DatasetName[var, it, rl, c], StripGhostZones -> strip], 
-      {c,0,n-1}];
-    datasets];
+ 
+    (* TODO: Add support for 2D.
+	 *       Check that the found files are a complete set. *)	
+    Filetype1D = RegularExpression["\\d*\\.[dxyz]\\.h5"];
+    Filetype3D = RegularExpression["file_\\d+\\.h5"];
+    If[StringCount[file, Filetype1D]>0,
+		components = Flatten[DeleteDuplicates[StringCases[Import[file],"c="~~x:DigitCharacter..:>ToExpression[x]]]];
+		datasets = Table[ReadCarpetHDF5[file,
+			CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,components}];
+    , If[StringCount[file, Filetype3D]>0,
+		filePrefix = StringReplace[file, ".file_0.h5" -> ""];
+		pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
+		fileNames = FileNames[FileNameTake[pattern, -1], FileNameDrop[pattern, -1]];
+		n = Length[fileNames];
+		datasets = Table[ReadCarpetHDF5[filePrefix<>".file_"<>ToString[c]<>".h5",
+			CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,0,n-1}];
+      , Throw["File " <> file <> " not a recoginzed Carpet HDF5 file type."]
+      ]
+    ];
 
-ReadCarpetHDF5Variable[file_, var_, it_, rl_] :=
-  MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl]];
+	Return[datasets]
+];
+
+ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:-1, opts___]:= 
+  MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]];
 
 End[];
 
