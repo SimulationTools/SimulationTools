@@ -367,26 +367,29 @@ ClearCarpetHDF5Cache[file_String] := Module[{},
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
-  Module[{filePrefix, fileNames, n, datasets, pattern, Filetype1D, Filetype3D, components},
+  Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, components},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
  
-    (* TODO: Add support for 2D.
-	 *       Check that the found files are a complete set. *)	
-    Filetype1D = RegularExpression["\\d*\\.[dxyz]\\.h5"];
-    Filetype3D = RegularExpression["file_\\d+\\.h5"];
+    (* TODO: Add support for 2D. *)	
+    Filetype1D = RegularExpression["\\.[dxyz]\\.h5"];
+    MultiFile = RegularExpression["file_\\d+\\.h5"];
     If[StringCount[file, Filetype1D]>0,
-		components = Flatten[DeleteDuplicates[StringCases[Import[file],"c="~~x:DigitCharacter..:>ToExpression[x]]]];
-		datasets = Table[ReadCarpetHDF5[file,
-			CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,components}];
-    , If[StringCount[file, Filetype3D]>0,
+		components = Flatten[DeleteDuplicates[StringCases[Datasets[file],"c="~~x:DigitCharacter..:>ToExpression[x]]]];
+		If[Length[components]==0,
+			datasets = {ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
+		,
+			datasets = Table[ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,components}];
+		];
+    , If[StringCount[file, MultiFile]>0,
 		filePrefix = StringReplace[file, ".file_0.h5" -> ""];
 		pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
-		fileNames = FileNames[FileNameTake[pattern, -1], FileNameDrop[pattern, -1]];
-		n = Length[fileNames];
+		fileNames = FileNames[FileNameTake[pattern], DirectoryName[pattern]];
+		components = Flatten[DeleteDuplicates[StringCases[fileNames,"file_"~~x:DigitCharacter..:>ToExpression[x]]]];
 		datasets = Table[ReadCarpetHDF5[filePrefix<>".file_"<>ToString[c]<>".h5",
-			CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,0,n-1}];
-      , Throw["File " <> file <> " not a recoginzed Carpet HDF5 file type."]
+			CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,components}];
+      , datasets={ReadCarpetHDF5[file,
+			CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
       ]
     ];
 
