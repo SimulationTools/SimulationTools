@@ -113,7 +113,7 @@ replaceRules[list_List, replacements_List] :=
      list, 
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
 
-SliceData[v:DataRegion[h_, data_], dim_, coord_:0] :=
+SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
  Module[{index, newOrigin, newSpacing, newDims, newNDims, h2, origin, spacing, dims, range, slice, ndims},
   origin = GetOrigin[v];
   spacing = GetSpacing[v];
@@ -141,6 +141,9 @@ SliceData[v:DataRegion[h_, data_], dim_, coord_:0] :=
   slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
   Return[DataRegion[h2, data[[slice]] ]]
 ];
+
+SliceData[v_DataRegion, dims_List, coords_:0] := 
+  Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
 
 Unprotect[Interpolation];
 
