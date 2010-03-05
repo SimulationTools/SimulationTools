@@ -92,9 +92,9 @@ Format[v_DataRegion, StandardForm] :=
     name = GetVariableName[v];
     dims = GetDimensions[v];
     range = GetDataRange[v];
-    "DataRegion[" <>ToString[If[StringQ[name], name, "<unknown name>"]] <>", "
-                 <>ToString[If[ListQ[dims],ToString[dims], "<unknown dims>"]]  <>", "
-                 <>ToString[If[ListQ[range],ToString[range],"<unknown range"]]<>"]"];
+    "DataRegion[" <>If[StringQ[name], name, "<unknown name>"] <>", "
+                  <>If[ListQ[dims], ToString[dims], "<unknown dims>"]  <>", "
+                  <>If[ListQ[range], ToString[range, StandardForm], "<unknown range>"]<>"]"];
 
 GetDataRange[v_DataRegion] :=
   Module[{origin, spacing, dimensions, min, max},
