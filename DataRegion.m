@@ -119,19 +119,20 @@ SliceData[v:DataRegion[h_, data_], dim_, coord_:0] :=
   spacing = GetSpacing[v];
   dims = GetDimensions[v];
   ndims = GetNumDimensions[v];
-  range = GetDataRange[v][[dim]];
 
   If[dim > ndims,
     Throw["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
       ToString[ndims]<>" of the DataRegion."]
   ];
 
+  range = GetDataRange[v][[dim]];
+
   If[(coord < range[[1]]) || (coord >range[[2]]),
     Throw["Slice coordinate "<>ToString[coord]<>" is outside the range "<>
-      ToString[range]<>" of the DataRegion."]
+      ToString[range, StandardForm]<>" of the DataRegion."]
   ];
 
-  index = Round[(coord - origin[[dim]])/spacing[[dim]]];
+  index = Round[(coord - origin[[dim]])/spacing[[dim]]+1];
   newOrigin = Drop[origin, {dim}];
   newSpacing = Drop[spacing, {dim}];
   newDims = Drop[dims, {dim}];
