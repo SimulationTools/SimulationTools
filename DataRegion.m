@@ -36,6 +36,13 @@ ReadCarpetHDF5Variable;
 ReadCarpetHDF5Components;
 StripGhostZones;
 VerboseRead;
+CarpetHDF5Iterations;
+CarpetHDF5Components;
+CarpetHDF5Maps;
+CarpetHDF5RefinementLevels;
+CarpetHDF5TimeLevels;
+CarpetHDF5Variables;
+CarpetHDF5FileInfo;
 
 Begin["`Private`"];
 
@@ -313,6 +320,34 @@ MergeDataRegions[regions_List] :=
 
 (* Carpet HDF5 functions *)
 
+(* Gather various information about a file *)
+carpetHDF5List[file_, item_]        := Sort[Flatten[DeleteDuplicates[StringCases[Datasets[file],item]]]];
+carpetHDF5ListN[file_, item_String] := carpetHDF5List[file, item<>"="~~x:DigitCharacter..:>ToExpression[x]];
+
+CarpetHDF5Iterations[file_]       := carpetHDF5ListN[file, "it"];
+CarpetHDF5Components[file_]       := carpetHDF5ListN[file, "c"];
+CarpetHDF5Maps[file_]             := carpetHDF5ListN[file, "m"];
+CarpetHDF5RefinementLevels[file_] := carpetHDF5ListN[file, "rl"];
+CarpetHDF5TimeLevels[file_]       := carpetHDF5ListN[file, "tl"];
+CarpetHDF5Variables[file_]        := carpetHDF5List [file, RegularExpression["^/([^ ]+) it="]:>"$1"];
+
+CarpetHDF5FileInfo[file_]:=
+  Module[{iterations, components, maps, refLevels, timeLevels, vars},
+  iterations = CarpetHDF5Iterations[file];
+
+  components = CarpetHDF5Components[file];
+
+  maps = CarpetHDF5Maps[file];
+
+  refLevels = CarpetHDF5RefinementLevels[file];
+
+  timeLevels = CarpetHDF5TimeLevels[file];
+
+  vars = CarpetHDF5Variables[file];
+
+  {Iterations->iterations, Components->components, Maps->maps, RefinemeneLevels->refLevels, TimeLevels->timeLevels, Vars->vars}
+];
+
 CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(_Integer|None)] :=Module[{map="", component=""},
   If[m =!= None, map=" m="<>ToString[m]];
   If[c =!= None, component=" c="<>ToString[c]];
@@ -379,7 +414,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
     Filetype1D = RegularExpression["\\.[dxyz]\\.h5"];
     MultiFile = RegularExpression["file_\\d+\\.h5"];
     If[StringCount[file, Filetype1D]>0,
-		components = Flatten[DeleteDuplicates[StringCases[Datasets[file],"c="~~x:DigitCharacter..:>ToExpression[x]]]];
+		components = CarpetHDF5Components[file];
 		If[Length[components]==0,
 			datasets = {ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
 		,
