@@ -116,6 +116,10 @@ GetDataRange[v_DataRegion] :=
     max = origin + spacing * (dimensions - 1);
     MapThread[List, {min, max}]];
 
+DataRegion/:Min[DataRegion[_,data_]]:=Min[data];
+
+DataRegion/:Max[DataRegion[_,data_]]:=Max[data];
+
 replaceRule[list_List, key_ -> newValue_] :=
   list /. (key -> _) :> (key -> newValue);  
 
