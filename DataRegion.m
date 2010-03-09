@@ -17,6 +17,7 @@ GetSpacing;
 GetDimensions;
 GetNumDimensions;
 GetData;
+GetTime;
 GetAttributes;
 GetVariableName;
 DataRegionDensityPlot;
@@ -49,8 +50,8 @@ Begin["`Private`"];
 (* DataRegion object low-level implementation; this is where we define
    the internal format of a DataRegion object. *)
 
-MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List] :=
-  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims]}, data];
+MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
+  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims], Time -> time}, data];
 
 DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
   ndims = GetNumDimensions[v];
@@ -80,6 +81,9 @@ GetDimensions[DataRegion[h_, data_]] :=
 
 GetNumDimensions[DataRegion[h_, data_]] :=
   NumDimensions /. h;
+
+GetTime[DataRegion[h_, _]] :=
+  Time /. h;
 
 GetAttributes[DataRegion[h_, data_]] := 
   h;
@@ -360,7 +364,7 @@ Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
 Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
 
 ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
- Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds},
+ Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds, time},
   strip = OptionValue[StripGhostZones];
   verbose = OptionValue[VerboseRead];
 
@@ -393,7 +397,9 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
   ghosts = "cctk_nghostzones" /. annots;
   If[ghosts=="cctk_nghostzones", ghosts=0];
 
-  reg = MakeDataRegion[data, name, dims, origin, spacing];
+  time = "time" /. annots;
+
+  reg = MakeDataRegion[data, name, dims, origin, spacing, time];
   If[strip, Strip[reg, ghosts], reg]
 ];
 
