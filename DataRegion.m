@@ -395,6 +395,7 @@ Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
 Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
 Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
+HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = Import[file, {"Datasets", dataset}];
 
 ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
  Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds, time},
@@ -415,7 +416,7 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
   ];
 
   If[verbose, Print["Reading Data"]];
-  data = Import[file, {"Datasets", idx}];
+  data = HDF5Data[file, idx];
 
   If[verbose, Print["Reading Annotations"]];   
   annots = Annotations[file][[idx]];
@@ -436,11 +437,7 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
   If[strip, Strip[reg, ghosts], reg]
 ];
 
-ClearCarpetHDF5Cache[file_String] := Module[{}, 
-  Datasets[file]=.;
-  Annotations[file]=.;
-  Dims[file]=.;
-];
+ClearCarpetHDF5Cache[] := Clear[Datasets, Annotations, Dims, HDF5Data];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 
