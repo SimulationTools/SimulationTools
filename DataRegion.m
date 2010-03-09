@@ -24,6 +24,7 @@ DataRegionDensityPlot;
 DataRegionArrayPlot;
 DataRegionPlot3D;
 DataRegionPlot;
+CarpetHDF5Manipulate;
 ScaledColorFunction;
 ColorMapLegend;
 QuickSlicePlot;
@@ -231,6 +232,34 @@ DataRegionPlot[v_DataRegion, args___]        := DataRegion1DPlot[ListPlot, v, ar
 DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot, v, args];
 DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
 DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
+
+CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts___]:= Module[{data, axesOrigin, numDims, plotType},
+  data = Table[ReadCarpetHDF5Variable[file, var, it, rl, map, opts], {it, CarpetHDF5Iterations[file]}];
+  numDims = GetNumDimensions[data[[1]]];
+
+  (*data = SliceData[#, {2,3}]&/@data;*)
+  axesOrigin = {Min[GetOrigin/@data], Automatic};
+
+  If[numDims == 1,
+    plotType = DataRegionPlot;
+  , If[numDims == 2,
+    plotType = DataRegionDensityPlot;
+  , Throw["CarpetHDF5Manipulate does not support HDF5 data with dimension "<>ToString[numDims]<>"."];
+  ]];
+
+  Manipulate[plotType[data[[i]], PlotLabel->"t="<>ToString[GetTime[data[[i]]]],
+                            PlotRange->{Min[data], Max[data]}, AxesOrigin-> axesOrigin],
+             {{i, 1, "Iteration"}, 1, Length[data], 1}]
+];
+
+CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
+  var  = First[Vars /. CarpetHDF5FileInfo[file]];
+  rl   = 0;
+  maps = Maps /. CarpetHDF5FileInfo[file];
+  map  = If[Length[maps]>0, First[maps], None];
+
+  CarpetHDF5Manipulate[file, var, rl, map, opts]
+];
 
 (* Convenient plotting functions *)
 ScaledColorFunction[name_, {min_, max_}] :=
