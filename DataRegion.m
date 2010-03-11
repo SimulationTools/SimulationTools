@@ -38,6 +38,7 @@ ReadCarpetHDF5Variable;
 ReadCarpetHDF5Components;
 StripGhostZones;
 VerboseRead;
+PreloadCarpetHDF5Data;
 CarpetHDF5Iterations;
 CarpetHDF5Components;
 CarpetHDF5Maps;
@@ -396,6 +397,16 @@ Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
 Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
 Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
 HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = Import[file, {"Datasets", dataset}];
+
+PreloadCarpetHDF5Data[file_]:= Module[{allData, data},
+  allData = Import[file, "Rules"];
+  data = "Data"/. allData;
+
+  Datasets[file] = "Datasets" /. allData;
+  Annotations[file] = "Annotations" /. allData;
+  Dims[file] = "Dimensions" /. allData;
+  (HDF5Data[file, #] = data[[#]])& /@ Range[Length[data]];
+];
 
 ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
  Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds, time},
