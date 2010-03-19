@@ -46,6 +46,7 @@ CarpetHDF5RefinementLevels;
 CarpetHDF5TimeLevels;
 CarpetHDF5Variables;
 CarpetHDF5FileInfo;
+CarpetManipulatePlotFunction;
 
 Begin["`Private`"];
 
@@ -244,8 +245,9 @@ DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot
 DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
 DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
 
-CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts___]:= Module[{data, axesOrigin, numDims, plotType},
-  data = Table[ReadCarpetHDF5Variable[file, var, it, rl, map, opts], {it, CarpetHDF5Iterations[file]}];
+Options[CarpetHDF5Manipulate] = {CarpetManipulatePlotFunction -> DataRegionDensityPlot};
+CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:= Module[{data, axesOrigin, numDims, plotType},
+  data = Table[ReadCarpetHDF5Variable[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]], {it, CarpetHDF5Iterations[file]}];
   numDims = GetNumDimensions[data[[1]]];
 
   (*data = SliceData[#, {2,3}]&/@data;*)
@@ -254,12 +256,12 @@ CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts___]:= Module[{data,
   If[numDims == 1,
     plotType = DataRegionPlot;
   , If[numDims == 2,
-    plotType = DataRegionDensityPlot;
+    plotType = OptionValue[CarpetManipulatePlotFunction];
   , Throw["CarpetHDF5Manipulate does not support HDF5 data with dimension "<>ToString[numDims]<>"."];
   ]];
 
-  Manipulate[plotType[data[[i]], PlotLabel->"t="<>ToString[GetTime[data[[i]]]],
-                            PlotRange->{Min[data], Max[data]}, AxesOrigin-> axesOrigin],
+  Manipulate[plotType[data[[i]], PlotLabel->"t="<>ToString[GetTime[data[[i]]]] (* ,
+                             PlotRange->{Min[data], Max[data]} *), AxesOrigin-> axesOrigin],
              {{i, 1, "Iteration"}, 1, Length[data], 1}]
 ];
 
@@ -373,11 +375,47 @@ MergeDataRegions[regions_List] :=
 (* Carpet HDF5 functions *)
 
 (* Gather various information about a file *)
-carpetHDF5List[file_, item_]        := Sort[Flatten[DeleteDuplicates[StringCases[Datasets[file],item]]]];
+carpetHDF5List[file_, item_]        := Sort[First /@ Select[DeleteDuplicates[StringCases[Datasets[file],item]], Length[#] > 0 &]];
 carpetHDF5ListN[file_, item_String] := carpetHDF5List[file, item<>"="~~x:DigitCharacter..:>ToExpression[x]];
 
-CarpetHDF5Iterations[file_]       := carpetHDF5ListN[file, "it"];
-CarpetHDF5Components[file_]       := carpetHDF5ListN[file, "c"];
+datasetNamesWith[file_, items_List] :=
+  Module[{patterns, datasetsMatching, allMatches, matchAll},
+    patterns = ((___ ~~ (# <> " ") ~~ ___) &) /@ items;
+    datasetsMatching[p_] :=
+      Select[Datasets[file], StringMatchQ[#, p] &];
+    allMatches = datasetsMatching /@ patterns;
+    matchAll = Intersection @@ allMatches];
+
+compOf[ds_] :=
+  StringCases[ds, "c="~~x:DigitCharacter..:>ToExpression[x]][[1]];
+
+itOf[ds_] :=
+  StringCases[ds, "it="~~x:DigitCharacter..:>ToExpression[x]][[1]];
+
+componentsWith[file_, items_List] :=
+  Sort[compOf /@ datasetNamesWith[file,items]];
+
+(*componentsWith[file_, items_List] :=
+  Module[{patterns, datasetsMatching, allMatches, matchAll},
+(*    patterns = (#<>"="~~DigitCharacter..) & /@ items;*)
+    patterns = ((___ ~~ (# <> " ") ~~ ___) &) /@ items;
+    datasetsMatching[p_] :=
+      Select[Datasets[file], StringMatchQ[#, p] &];
+    allMatches = datasetsMatching /@ patterns;
+    matchAll = Intersection @@ allMatches;
+    compOf[ds_]:=StringCases[ds, "c="~~x:DigitCharacter..:>ToExpression[x]][[1]];
+    Sort[compOf /@ matchAll]];*)
+
+CarpetHDF5Iterations[file_] := carpetHDF5ListN[file, "it"];
+
+CarpetHDF5Iterations[file_, rl_:0] := 
+  Union[itOf/@datasetNamesWith[file, {"rl="<>ToString@rl}]];
+
+CarpetHDF5Components[file_] := carpetHDF5ListN[file, "c"];
+
+CarpetHDF5Components[file_, it_, rl_] := 
+  componentsWith[file, {"it=" <> ToString[it], "rl=" <> ToString[rl]}];
+
 CarpetHDF5Maps[file_]             := carpetHDF5ListN[file, "m"];
 CarpetHDF5RefinementLevels[file_] := carpetHDF5ListN[file, "rl"];
 CarpetHDF5TimeLevels[file_]       := carpetHDF5ListN[file, "tl"];
@@ -467,15 +505,16 @@ ClearCarpetHDF5Cache[] := Clear[Datasets, Annotations, Dims, HDF5Data];
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
-  Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, components},
+  Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
  
     (* TODO: Add support for 2D. *)	
     Filetype1D = RegularExpression["\\.[dxyz]\\.h5"];
+    Filetype2D = RegularExpression["\\.[xyz]{2}\\.h5"];
     MultiFile = RegularExpression["file_\\d+\\.h5"];
-    If[StringCount[file, Filetype1D]>0,
-		components = CarpetHDF5Components[file];
+    If[StringCount[file, Filetype1D]>0 || StringCount[file, Filetype2D]>0,
+		components = CarpetHDF5Components[file, it, rl];
 		If[Length[components]==0,
 			datasets = {ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
 		,
