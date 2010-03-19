@@ -329,8 +329,10 @@ chunkOffset[d_DataRegion, origin_, spacing_] :=
   Round[(GetOrigin[d] - origin)/spacing]];
 
 MergeDataRegions[regions_List] :=
- Module[{headers, ndims, origins, dims, spacings, spacing,
+ Module[{headers, ndims, origins, dims, spacings, spacing, spacingDiffs,
     X1, X2s, X2, n, dat, header, attrs, attrs2, dat2},
+  If[Length[regions] === 0, Return[{}]];
+
   origins = Map[GetOrigin, regions];
   dims = Map[GetDimensions, regions];
   ndims = GetNumDimensions[regions[[1]]];
@@ -339,8 +341,10 @@ MergeDataRegions[regions_List] :=
   X1 = Min[origins[[All,#]]]&/@ Range[ndims];
 
   spacings = Map[GetSpacing, regions];
-  If[!Apply[Equal, spacings], 
-    Throw["MergeDataRegions: Attempt to merge DataRegions with different spacings"]];
+  spacingDiffs = (# - spacings[[1]]) & /@ spacings;
+
+  If[ Max[Norm/@spacingDiffs] > 10^-8,
+    Throw["MergeDataRegions: Attempt to merge DataRegions with different spacings: " <> ToString[spacings] <> ", " <> ToString[spacingDiffs]]];
   spacing = First[spacings];
   
   (* Find the upper coordinate of the bounding box *)
