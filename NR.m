@@ -118,6 +118,7 @@ ParseParameterFile;
 ReadHamiltonianConstraintNorm;
 
 ReadWaveformFile;
+ReadCarpetSpeed;
 ChristodoulouMass;
 ReadAHSeparation;
 ShiftPhase;
