@@ -760,13 +760,6 @@ StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
     Return[{MakeDataTable[hTb], MakeDataTable[hDotTb]}];
 ];
 
-
-
-
-
-
-
-
 zeroAfter[l_, n_] :=
  Module[{len},
   len = Length[l];
