@@ -42,56 +42,66 @@ segmentSummary[runName_] :=
 SimView[runName_String] := SimView[{runName}];
 
 SimView[runNames_List] :=
-  SimView[runNames, First[ReadPsi4Radii[First[runNames]]]];
+  Module[{r, rads},
+    rads = ReadPsi4Radii[First[runNames]];
+    r = If[rads === {}, 0, First[rads]];
+    SimView[runNames, r]];
 
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
     freqPsi4, segments, cost, costTable, phases, lastPhase, phaseDiffs},
   size = {350, 100};
   size = 250;
-  speed = 
+  speed = Catch[
    ListLinePlot[Map[ReadRunSpeed, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Speed", ImageSize -> size];
-  memory = 
+    PlotRange -> {0, All}, PlotLabel -> "Speed", ImageSize -> size]];
+  Catch[memory = 
    ListLinePlot[Map[ReadMemory, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Memory", ImageSize -> size];
-  trajectories = 
+    PlotRange -> {0, All}, PlotLabel -> "Memory", ImageSize -> size]];
+  trajectories = Catch[
    ListLinePlot[
     Flatten[Map[
-      ReadMinTrackerTrajectories, runNames], 1], 
+      ReadBHTrajectories, runNames], 1], 
     AspectRatio -> Automatic, PlotLabel -> "Trajectories", 
-    ImageSize -> size, PlotRange -> All];
-  radius = 
+    ImageSize -> size, PlotRange -> All]];
+  radius = Catch[
    ListLinePlot[
-    Map[ReadMinTrackerRadius, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Radius", ImageSize -> size];
-  frequency = 
+    Map[ReadBHSeparation, runNames], 
+    PlotRange -> {0, All}, PlotLabel -> "Separation", ImageSize -> size]];
+  frequency = Catch[
    ListLinePlot[
     Map[NDerivative[ReadMinTrackerPhase[#]]&, runNames],
     PlotRange -> {0, Automatic}, PlotLabel -> "Frequency", 
-    ImageSize -> size];
-  rePsi4 = 
+    ImageSize -> size]];
+  rePsi4 = Catch[
    ListLinePlot[
     Map[Re[ReadPsi4[#, 2, 2, r]]&, runNames], 
-    PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r], ImageSize -> size];
-  ampPsi4 = 
+    PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r], ImageSize -> size]];
+  ampPsi4 = Catch[
    ListLogPlot[
     Map[ToList[Abs[ReadPsi4[#, 2, 2, r]]]&, runNames], 
-    PlotRange -> All, Joined->True, PlotLabel -> "|Psi422|, R = "<>ToString[r], ImageSize -> size];
-  freqPsi4 = 
+    PlotRange -> All, Joined->True, PlotLabel -> "|Psi422|, R = "<>ToString[r], ImageSize -> size]];
+  freqPsi4 = Catch[
    ListLinePlot[
     Map[NDerivative[
       Phase[ReadPsi4[#, 2, 2, r]]]&,runNames], 
     PlotRange -> Automatic, PlotLabel -> "Freq Psi422, R = "<>ToString[r], 
-    ImageSize -> size];
+    ImageSize -> size]];
 
   segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
-  cost[run_] := {run, ReadCPUHours[run], ReadWalltimeHours[run]/24};
+  cost[run_] := 
+    {run, Print[1]; Catch@ReadCores[run],  Print[2]; Catch@ReadCPUHours[run],  
+     Print[3]; Catch@ReadWalltimeHours[run]/24,  Print[4]; Catch@ReadCores[run]*24};
 
-  costTable = Grid[{{Style["Simulation",Bold], Style["CPU hours",Bold], Style["Days",Bold]}} ~Join~
-                Map[cost, runNames]];
+  costTable = {}; (*Grid[{{Style["Simulation",Bold], 
+                     Style["Cores",Bold], 
+                     Style["CPU hours",Bold], 
+                     Style["Days",Bold], 
+                     Style["CPU hours per day",Bold]}}
+                    ~Join~
+                   Map[cost, runNames]];*)
 
   grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft},
        {speed, memory}, 
