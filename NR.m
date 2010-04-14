@@ -59,6 +59,7 @@ NPoints;
 ReadRunSpeed;
 ReadPsi4Radii;
 LocateMaximum;
+LocateMaximumPoint;
 LookupParameter;
 FindParameters;
 GridSpacingOnLevel;
@@ -885,6 +886,16 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
     Print["fit = ", fit2];
     Return[fit2];
   ];
+
+LocateMaximumPoint[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, fn, max, t1, t2, t, tMax2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{t_, f_}] :=
+   If[f > fMax, fMax = f; tMax = t];
+  Scan[maxFind, l];
+  Return[tMax]];
 
 LocateMaximum[d_DataTable] :=
  Module[{tMax, fMax, l, maxFind, fn, max, t1, t2, t, tMax2},
