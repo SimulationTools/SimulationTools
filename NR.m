@@ -108,6 +108,7 @@ FunctionOfPhase;
 
 ChristodoulouMass;
 ReadAHSeparation;
+ShiftPhase;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -1162,6 +1163,9 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
   dOfphiTb = 
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
   AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
+
+ShiftPhase[d_DataTable, dp_] :=
+  MapData[Exp[I dph] # &, d];
 
 ReadPsi4Modes[runName_] :=
   Module[{names, modeFromFileName, radii}, 
