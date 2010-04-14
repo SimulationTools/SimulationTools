@@ -122,6 +122,7 @@ ReadCarpetSpeed;
 AlignMaxima;
 ChristodoulouMass;
 ReadFineTimeStep;
+ReadTimeRange;
 ReadAHSeparation;
 ShiftPhase;
 
@@ -1318,6 +1319,13 @@ ReadFineTimeStep[run_] :=
     2];
   {{it1, t1}, {it2, t2}} = pairs;
   dtFine = (t2 - t1)/(it2 - it1)];
+
+ReadTimeRange[run_] :=
+  Module[{pairs, first, last},
+   pairs = ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}];
+   first = pairs[[1, 2]];
+   last = pairs[[-1, 2]];
+   {first, last}];
 
 
 
