@@ -617,11 +617,10 @@ AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
     phaseFns = Map[Interpolation, phaseTbs];
     refPhases = Map[#[t]&, phaseFns];
     adjustments = Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases];
-    
     constTb[a_, d_DataTable] := 
       MapData[a&,d];
 
-    adjusted = MapThread[#1-constTb[#2,#1] &, {phaseTbs, adjustments}];
+    adjusted = MapThread[(#1-constTb[#2,#1]) &, {phaseTbs, adjustments}];
     Return[adjusted];
 ];
 
