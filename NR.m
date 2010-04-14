@@ -725,6 +725,14 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
     psi4];
 *)
 
+StrainFromPsi4[psi4_DataTable, range_:All] :=
+  Module[{range2},
+    range2 = If[range === All,
+     DataTableRange[psi4],
+     range];
+    StrainFromPsi4[psi4, range2[[1]], range2[[2]]]
+  ];
+
 StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
   Module[{tStart, tStep, tEnd, psi4Fn, ints, dataRealTb, modelReal, 
           fitReal, dataImagTb, modelImag, fitImag, hTb},
