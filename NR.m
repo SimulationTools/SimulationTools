@@ -85,6 +85,7 @@ ReadIHSpinX;
 ReadIHSpinY;
 ReadIHSpinPhase;
 ReadIsolatedHorizonSpin;
+ReadCoarseGridSpacing;
 
 ReadAHMass;
 ReadAHRadius;
@@ -989,6 +990,11 @@ GridSpacingOnLevel[runName_, l_] :=
   Module[{h0},
     h0 = ToExpression[LookupParameter[runName, "CoordBase::dx"]];
     h0 / 2^l
+  ];
+
+ReadCoarseGridSpacing[runName_] :=
+  Module[{h0},
+    h0 = ToExpression[LookupParameter[runName, "Coordinates::h_cartesian"]]
   ];
 
 FinestGridSpacing[runName_] :=
