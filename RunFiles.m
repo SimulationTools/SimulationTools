@@ -8,6 +8,7 @@ FindRunFile;
 FindRunSegments;
 FindRunFilesFromPattern;
 StandardOutputOfRun;
+CarpetASCIIColumns;
 
 Begin["`Private`"];
 
@@ -149,7 +150,41 @@ ReadColumnFile[runName_String, fileName_String] :=
   ReadColumnFile[files]];
 
 ReadColumnFile[runName_String, fileName_String, cols_List] :=
-  extractColumns[ReadColumnFile[runName, fileName], cols];
+  Module[{cols2},
+    If[Or@@(StringQ /@ cols),
+      cols2 = ColumnNumbers[runName, fileName, cols],
+      cols2 = cols];
+  extractColumns[ReadColumnFile[runName, fileName], cols2]];
+
+(* Column numbering functions *)
+
+(*stripWhiteSpace[s_String] := StringCases[s, (StartOfLine ~~ (Whitespace ~~ x___ ~~ Whitespace ~~ EndOfLine) :> x][[1]];*)
+
+stripWhitespace[s_String] :=
+  StringReplace[StringReplace[s, StartOfString ~~ Whitespace -> ""], Whitespace ~~ EndOfString -> ""];
+
+CarpetASCIIColumns[fileName_String] :=
+ Module[{lines, descLine, colDescs, descLine1, descLine2},
+  lines = ReadList[fileName, String, 20];
+  descLine1 = 
+   First[Select[lines, 
+     StringMatchQ[#, StartOfLine ~~ "# column format" ~~ __] &]];
+  descLine2 = 
+   First[Select[lines, 
+     StringMatchQ[#, StartOfLine ~~ "# data columns" ~~ __] &]];
+  descLine = descLine2 <> " " <> descLine1;
+  colDescs = 
+   StringCases[descLine, 
+    col : (DigitCharacter ..) ~~ ":" ~~ 
+      id : Shortest[__ ~~ (Whitespace|EndOfString)] :> (stripWhitespace[id] -> ToExpression@col)]]
+
+CarpetASCIIColumns[run_String, fileName_String] :=
+ CarpetASCIIColumns[First@FindRunFile[run, fileName]];
+
+ColumnNumbers[run_String, fileName_String, colIDs_] :=
+ Module[{colMap},
+  colMap = CarpetASCIIColumns[run, fileName];
+  colIDs /. colMap];
 
 End[];
 
