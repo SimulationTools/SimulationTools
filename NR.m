@@ -1153,17 +1153,14 @@ AbsOfPhase[d_DataTable, {t1_, t2_}] :=
 
 FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
  Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
-  phiOft = ToList[p];
+  phiOft = ToList[DataTableInterval[p,{t1,t2}]];
   tOfphi = Map[Reverse, phiOft];
-  (*Return[tOfphi];*)
   tOfphiFn = Interpolation[tOfphi];
-  phiMin = First[tOfphi][[1]];
-  phiMax = Last[tOfphi][[1]];
-  (*Return[{phiMin,phiMax}];*)
+  {phiMin,phiMax} = Sort[{First[tOfphi][[1]], Last[tOfphi][[1]]}];
   dOftFn = Interpolation[d];
   dOfphiTb = 
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
-  MakeDataTable[dOfphiTb]];
+  AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
 
 ReadPsi4Modes[runName_] :=
   Module[{names, modeFromFileName, radii}, 
