@@ -30,6 +30,13 @@ FileNameTake[s_] :=
   File reading
   --------------------------------------------------------------------*)
 
+addDataSubDir[output_String] :=
+  Module[{},
+    parFiles = FileNames["*/*.par", {output}, 2];
+    If[Length[parFiles] === 0, Return[None]];
+    If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
+    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
+
 FindRunSegments[runName_] :=
   Module[{dirName1, dirName2, restarts, files1, files2},
     dirName1 = 
@@ -44,8 +51,8 @@ FindRunSegments[runName_] :=
         dirName1];
 
     If[FileType[FileNameJoin[{dirName2, "SIMULATION_ID"}]] =!= None,
-      restarts = Select[FileNames["output-*", dirName2], ! StringMatchQ[#, "*-*-*"] &];
-      segments = Map[FileNameJoin[{#, runName}] &, restarts];
+      restarts = Select[FileNames["output-*", dirName2], ! StringMatchQ[#, "*/output-*-*"] &];
+      segments = Select[Map[addDataSubDir, restarts], (# =!= None) &];
       Return[segments],
       Return[{dirName2}]];
   ];
