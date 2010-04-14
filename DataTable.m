@@ -31,6 +31,7 @@ IntegrateDataTableZeroStart::usage = "IntegrateDataTableZeroStart[d] returns the
 IntegrateDataTableZeroEnd::usage = "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x2] = 0, where x2 is the highest value of the independent variable in d.";
 Sub::usage = "Sub[d1, d2] returns a DataTable corresponding to d1 - d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Sub~ d2.";
 Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
+Monotonise;
 
 Begin["`Private`"];
 
@@ -365,6 +366,17 @@ IntegrateDataTableZeroStart[d_DataTable] :=
 IntegrateDataTableZeroEnd[d_DataTable] := 
   IntegrateDataTable[d, {DataTableRange[d][[2]], 0}];
 
+Monotonise[{}] := {};
+
+Monotonise[{{a_, b_}}] := {{a, b}};
+
+Monotonise[{{x1_, y1_}, {x2_, y2_}, rest___}] :=
+ If[y1 < y2, {{x1, y1}, {x2, y2}}~Join~Monotonise[{rest}],
+  {{x1, y1}, {x2, y2 + y1}}~Join~
+   Monotonise[Map[{#[[1]], #[[2]] + y1} &, {rest}]]];
+
+Monotonise[d_DataTable] :=
+ MakeDataTable[Monotonise[ToList[d]]];
 
 End[];
 
