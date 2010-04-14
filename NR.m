@@ -117,6 +117,7 @@ ParseParameterFile;
 
 ReadHamiltonianConstraintNorm;
 
+ReadWaveformFile;
 ChristodoulouMass;
 ReadAHSeparation;
 ShiftPhase;
@@ -1272,6 +1273,9 @@ PercentageDifference[ap_,bp_] :=
 
 ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
+
+ReadWaveformFile[file_] :=
+  MakeDataTable@Map[{#[[1]],#[[2]]+I#[[3]]}&, ReadColumnFile[file,{1,2,3}]]
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
