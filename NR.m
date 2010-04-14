@@ -104,6 +104,8 @@ ReadPsi4Modes;
 ExportWaveform;
 ExportBHCoords;
 ExportBHRelativeCoords;
+ExportRun;
+ExportGridStructure;
 FunctionOfPhase;
 
 ChristodoulouMass;
@@ -1218,6 +1220,18 @@ ExportWaveforms[run_String, dir_String, lRange_: All, rRange_: All] :=
   ls = selectInRange[ReadPsi4Modes[run], lRange];
   Table[ExportWaveform[run, dir, l, m, r], {l, ls}, {m, -l, l}, {r, 
     rs}]];
+
+ExportRun[run_String, dir_String] :=
+ Module[{},
+  ExportWaveforms[run, dir];
+  ExportBHCoords[run, dir];
+  ExportBHRelativeCoords[run, dir];
+  ExportGridStructure[run, dir]];
+
+ExportGridStructure[run_String, dir_String] :=
+ Module[{},
+  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
+  Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
 
 End[];
 
