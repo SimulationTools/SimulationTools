@@ -18,6 +18,7 @@ ReadMinTrackerVelocity;
 HaveMinTracker;
 ReadPunctureTrackerCoordinates;
 ReadBHCoordinates;
+ReadBHCoordinate;
 ReadBHTrajectory;
 ReadBHTrajectories;
 ReadBHSeparation;
@@ -228,6 +229,11 @@ ReadBHCoordinates[runName_, i_] :=
   If[HaveMinTracker[runName, i],
     ReadMinTrackerCoordinates[runName, i],
     ReadPunctureTrackerCoordinates[runName, i]];
+
+ReadBHCoordinate[runName_String, tracker_Integer, coord_Integer] :=
+  Module[{coords},
+    coords = ReadBHCoordinates[runName, tracker];
+    MapData[#[[coord]]&, coords]];
 
 ReadBHTrajectory[runName_String, tracker_Integer] :=
   Map[Take[Last[#], 2] &, 
