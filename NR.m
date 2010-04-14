@@ -107,6 +107,8 @@ ExportBHRelativeCoords;
 ExportRun;
 ExportGridStructure;
 FunctionOfPhase;
+ReadPunctureADMMasses;
+ReadPunctureADMMasses2;
 
 ChristodoulouMass;
 ReadAHSeparation;
@@ -1232,6 +1234,35 @@ ExportGridStructure[run_String, dir_String] :=
  Module[{},
   If[FileType[dir] =!= Directory, CreateDirectory[dir]];
   Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
+
+ReadPunctureADMMassesFromFiles[files_List] :=
+  Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
+    If[files === {}, Throw["Cannot find puncture ADM masses"]];
+    file = files[[1]];
+    lines = ReadList[file, String];
+    massLines = Select[lines, StringMatchQ[#, "INFO (TwoPunctures):   M_adm_" ~~ _ ~~ " = " ~~ __] &];
+    If[massLines === {}, Return[ReadPunctureADMMassesFromFiles[Drop[files, 1]]]];
+
+    plusLine = Select[massLines, StringMatchQ[#, "INFO (TwoPunctures):   M_adm_+ = " ~~ __] &][[1]];
+    minusLine = Select[massLines, StringMatchQ[#, "INFO (TwoPunctures):   M_adm_- = " ~~ __] &][[1]];
+
+    mPlus  = ToExpression[First@StringCases[plusLine, "INFO (TwoPunctures):   M_adm_+ = " ~~ x__ -> x]];
+    mMinus = ToExpression[First@StringCases[minusLine, "INFO (TwoPunctures):   M_adm_- = " ~~ x__ -> x]];
+
+    Return[{mPlus, mMinus}];
+    ];
+
+DefineMemoFunction[ReadPunctureADMMasses[run_String],
+  Module[{},
+    stdoutFiles = StandardOutputOfRun[run];
+    ReadPunctureADMMassesFromFiles[stdoutFiles]]];
+
+DefineMemoFunction[ReadPunctureADMMasses2[run_String],
+  ToExpression/@{LookupParameter[run, "TwoPunctures::target_M_plus"], 
+   LookupParameter[run, "TwoPunctures::target_M_minus"]}];
+
+
+
 
 End[];
 
