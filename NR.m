@@ -112,6 +112,7 @@ ReadPunctureADMMasses;
 ReadPunctureADMMasses2;
 CostAnalysis;
 PresentationCostAnalysis;
+PercentageDifference;
 
 ChristodoulouMass;
 ReadAHSeparation;
@@ -1260,6 +1261,11 @@ CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
     Select[Map[costElems, runs], # =!= None &], #1[[1]] < #2[[1]] &];
   header = {"Cores", "Speed", "Days", "CPU Hours"};
   Prepend[data, header]];
+
+PercentageDifference[ap_,bp_] :=
+  Module[{a,b},
+    {a,b} = Sort[{ap,bp}];
+    100 Abs[a-b]/a];
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
