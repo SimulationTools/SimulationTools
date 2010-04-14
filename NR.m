@@ -1055,6 +1055,10 @@ ReadIHSpin[runName_, hn_] :=
  MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
   ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
 
+ReadIHSpin[runName_, hn_, dir_] :=
+ MakeDataTable[Map[{#[[1]], #[[dir+1]]} &, 
+  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+
 ReadIHSpinX[runName_, hn_] :=
  MakeDataTable[Map[{#[[1]], #[[2]]} &, 
   ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
