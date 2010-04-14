@@ -6,10 +6,15 @@ SimView;
 Begin["`Private`"];
 
 segmentInfo[dirName_] :=
- Module[{mtFile, mtTimes, mtt1, mtt2, idNo, id, date},
-  mtFile = FileNameJoin[{dirName, "/MinTracker0.asc"}];
+ Module[{mtFile, mtTimes, mtt1, mtt2, idNo, id, date, col},
+  mtFile = FileNameJoin[{dirName, "/runstats.asc"}];
+  col=2;
+  If[FileType[mtFile] === None,
+  mtFile =  FileNameJoin[{dirName, "/carpet::timing..asc"}];
+  col=9];
+
   If[FileType[mtFile] =!= None,
-   mtTimes = Flatten[ReadColumnFile[mtFile, {2}]];
+   mtTimes = Flatten[ReadColumnFile[mtFile, {col}]];
    mtt1 = First[mtTimes];
    mtt2 = Last[mtTimes];
    date = DateString[FileDate[mtFile]],
