@@ -47,7 +47,6 @@ SimView[runNames_List] :=
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
     freqPsi4, segments, cost, costTable, phases, lastPhase, phaseDiffs},
-  ClearAllMemos[];
   size = {350, 100};
   size = 250;
   speed = 
