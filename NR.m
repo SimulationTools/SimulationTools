@@ -115,6 +115,8 @@ PresentationCostAnalysis;
 PercentageDifference;
 ParseParameterFile;
 
+ReadHamiltonianConstraintNorm;
+
 ChristodoulouMass;
 ReadAHSeparation;
 ShiftPhase;
@@ -1267,6 +1269,9 @@ PercentageDifference[ap_,bp_] :=
   Module[{a,b},
     {a,b} = Sort[{ap,bp}];
     100 Abs[a-b]/a];
+
+ReadHamiltonianConstraintNorm[run_] :=
+  ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
