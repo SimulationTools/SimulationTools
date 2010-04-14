@@ -326,7 +326,9 @@ ReadWalltimeHours[runName_] :=
     ReadCPUHours[runName] / ReadCores[runName] //N];
 
 ReadMemory[runName_] :=
- MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]];
+  If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
+     MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {2, 3}]],
+     MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
 ReadCores[runName_] :=
   ReadList[FileNameJoin[{RunDirectory, runName, "output-0000", "PROCS"}], Number][[1]];
