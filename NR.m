@@ -119,6 +119,7 @@ ReadHamiltonianConstraintNorm;
 
 ReadWaveformFile;
 ReadCarpetSpeed;
+AlignMaxima;
 ChristodoulouMass;
 ReadAHSeparation;
 ShiftPhase;
@@ -1277,6 +1278,11 @@ ReadHamiltonianConstraintNorm[run_] :=
 
 ReadWaveformFile[file_] :=
   MakeDataTable@Map[{#[[1]],#[[2]]+I#[[3]]}&, ReadColumnFile[file,{1,2,3}]]
+
+AlignMaxima[ds_List] :=
+  Module[{maxima},
+   maxima = Map[LocateMaximum, ds];
+   MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
