@@ -480,7 +480,7 @@ ConvergenceRate[ds:{DataTable[__]..}] :=
     If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
       ds2 = ResampleDataTables[ds],
       ds2 = ds];
-    hs = Map[1/ReadAttribute[#, NPoints] &, ds2];
+    hs = Map[1.0/ReadAttribute[#, NPoints] &, ds2];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
 
 RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
