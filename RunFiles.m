@@ -7,6 +7,7 @@ ReadColumnFile2;
 FindRunFile;
 FindRunSegments;
 FindRunFilesFromPattern;
+StandardOutputOfRun;
 
 Begin["`Private`"];
 
@@ -62,6 +63,12 @@ FindRunFilesFromPattern[runName_String, filePattern_String] :=
     segments = FindRunSegments[runName];
     names = Union[Map[FileNameTake, Flatten[Map[FileNames[filePattern, #] &, segments], 1]]]
   ];
+
+StandardOutputOfRun[runName_String] :=
+  Module[{segments, files1, files2},
+    segments = FindRunSegments[runName];
+    files1 = Map[FileNameJoin[{#, "../"<>runName<>".out"}] &, segments];
+    files2 = Select[files1, FileType[#] =!= None &]];
 
 stringToReal[s_String] :=
   Profile["stringToReal",
