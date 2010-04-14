@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[      9126,        313]
-NotebookOptionsPosition[      7068,        234]
-NotebookOutlinePosition[      7406,        249]
-CellTagsIndexPosition[      7363,        246]
+NotebookDataLength[     16200,        515]
+NotebookOptionsPosition[     13039,        399]
+NotebookOutlinePosition[     13378,        414]
+CellTagsIndexPosition[     13335,        411]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -45,6 +45,162 @@ than this though."
 
 Cell[CellGroupData[{
 
+Cell["Installation", "Section",
+ CellChangeTimes->{{3.480238974819901*^9, 3.480238975963613*^9}}],
+
+Cell[TextData[{
+ "You will need to make sure that the directory containing the NRMMA packages \
+is found on your ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " path.  The recommended way to do this is to edit your ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " kernel init.m file to contain the line"
+}], "Text",
+ CellChangeTimes->{{3.4802389807235193`*^9, 3.480239017482188*^9}}],
+
+Cell["\t$Path = Join[{\"<path containing nrmma>/nrmma\"}, $Path];", "Text",
+ CellChangeTimes->{{3.4802390553784943`*^9, 3.48023908397822*^9}, 
+   3.480239861149198*^9}],
+
+Cell[TextData[{
+ "On Mac OS, the init.m file can be found in \
+Library/Mathematica/Kernel/init.m in your home directory.  After doing this, \
+you should restart the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " kernel so that the file is re-read."
+}], "Text",
+ CellChangeTimes->{{3.480239085568019*^9, 3.480239136101857*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Getting Started", "Section",
+ CellChangeTimes->{{3.4802391511910057`*^9, 3.4802391530933313`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Loading packages", "Subsection",
+ CellChangeTimes->{{3.480239944771925*^9, 3.480239946498764*^9}}],
+
+Cell["In order to load one of the NRMMA packages, use", "Text",
+ CellChangeTimes->{{3.4802391564931383`*^9, 3.480239163549015*^9}}],
+
+Cell["\t<< \"package.m\"", "Text",
+ CellChangeTimes->{{3.480239167812935*^9, 3.480239176004702*^9}, 
+   3.4802394703696337`*^9}],
+
+Cell["For example,", "Text",
+ CellChangeTimes->{{3.480239177876499*^9, 3.4802391791722918`*^9}}],
+
+Cell["\t<< \"NR.m\"", "Text",
+ CellChangeTimes->{{3.480239181460348*^9, 3.4802391840043488`*^9}, 
+   3.480239471745679*^9}],
+
+Cell["\<\
+Packages load any other packages they need, and NR.m actually loads most of \
+the other packages. To get started, have a look at the NR package, which \
+contains most of the immediately useful functions. \
+\>", "Text",
+ CellChangeTimes->{{3.480239190044187*^9, 3.480239205747918*^9}, {
+  3.480240021951584*^9, 3.480240025112344*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finding simulation directories", "Subsection",
+ CellChangeTimes->{{3.480239949762188*^9, 3.480239953843713*^9}}],
+
+Cell["\<\
+NRMMA has an interface for accessing \"simulations\" which are directories \
+containing simulation output.  The name of the simulation is the name of the \
+directory.  You can either specify a simulation by a full path, or by the \
+simulation name.  For the latter, NRMMA needs to know which directory to look \
+in.  You can set the variable RunDirectory to this directory and NRMMA will \
+then know where to find your simulations. For example, in your init.m you can \
+set
+
+\tRunDirectory = \"/Users/username/Simulations\";
+
+if you have your simulations in that directory.
+\
+\>", "Text",
+ CellChangeTimes->{{3.480239221972322*^9, 3.480239282449183*^9}, {
+   3.480239375231709*^9, 3.480239468260503*^9}, {3.4802395108750057`*^9, 
+   3.4802395256880207`*^9}, {3.480239566976172*^9, 3.48023961313855*^9}, {
+   3.480239922451157*^9, 3.480239927611414*^9}, 3.4802399614272423`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["SimFactory", "Subsection",
+ CellChangeTimes->{{3.480239975777763*^9, 3.4802399769853687`*^9}}],
+
+Cell["\<\
+NRMMA supports SimFactory simulations, and should also support individual \
+Cactus output directories as simulations, though this has not been tested \
+recently.  \
+\>", "Text",
+ CellChangeTimes->{{3.4802399677966337`*^9, 3.48024003277852*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Chunking", "Subsection",
+ CellChangeTimes->{{3.48024004540891*^9, 3.4802400474467688`*^9}}],
+
+Cell["\<\
+Simulations usually take more than one job on a supercomputer, and the output \
+is spread across many different output directories (\"chunks\").  NRMMA \
+supports the SimFactory chunking mechanism and almost all the file reading \
+functions go through a layer which automatically merges the files in these \
+chunks together, taking care to eliminate any duplicate data.  As such, you \
+should never have to worry about merging chunks of data together, and in fact \
+you can probably forget about the fact that the simulation data is split into \
+chunks.\
+\>", "Text",
+ CellChangeTimes->{{3.4802400491508417`*^9, 3.480240140060001*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["DataTables", "Subsection",
+ CellChangeTimes->{{3.480239992104896*^9, 3.4802399935049143`*^9}}],
+
+Cell["\<\
+NRMMA uses the DataTable package extensively to represent tables of \
+simulation data, so you should also look at that package to familiarise \
+yourself with the concepts (it is documented; see below).\
+\>", "Text",
+ CellChangeTimes->{{3.480239999465416*^9, 3.48024000120901*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Memoisation", "Subsection",
+ CellChangeTimes->{{3.480239982993236*^9, 3.480239984433243*^9}}],
+
+Cell["\<\
+Note that some functions use \"memoisation\".  In other words, the first time \
+a particular quantity is accessed, for example a waveform, it is cached in \
+memory so that later calls to the function do not have to read the data off \
+the disk again.  When using very long simulations this can save a significant \
+amount of time.  However, beware that if the run data on the disk changes, \
+the copy in memory will not be.  To clear the cache, use the function
+
+\tClearAllMemos[]
+
+It would be possible to modify the caching algorithm to read the data again \
+when it changes on disk, but this has not been done yet.\
+\>", "Text",
+ CellChangeTimes->{{3.480239751925939*^9, 3.480239851038506*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["NR Packages", "Section",
  CellChangeTimes->{{3.4742278023401318`*^9, 3.474227803298568*^9}, {
   3.474228578212574*^9, 3.4742285785458727`*^9}}],
@@ -54,15 +210,20 @@ Cell[CellGroupData[{
 Cell["NR", "Subsection",
  CellChangeTimes->{{3.47422797928489*^9, 3.4742279794052963`*^9}}],
 
-Cell["\<\
-(undocumented) A large selection of NR-related functions.  Includes \
-interfaces to: read data from simulation output directories including \
-waveforms, BH trajectories, apparent horizons, isolated horizons.  \
-Extrapolation of radiated quantities to r = infinity.  Convergence testing.  \
-Computation of strain from Psi4.  Reading grid structure values.  Exporting \
-simulation data to a standard uniform format.  \
-\>", "Text",
- CellChangeTimes->{{3.4742280971532593`*^9, 3.474228295340266*^9}}],
+Cell[TextData[{
+ ButtonBox["(documentation)",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"NR.nb", None}],
+ " A large selection of NR-related functions.  Includes interfaces to: read \
+data from simulation output directories including waveforms, BH trajectories, \
+apparent horizons, isolated horizons.  Extrapolation of radiated quantities \
+to r = infinity.  Convergence testing.  Computation of strain from Psi4.  \
+Reading grid structure values.  Exporting simulation data to a standard \
+uniform format.  "
+}], "Text",
+ CellChangeTimes->{{3.4742280971532593`*^9, 3.474228295340266*^9}, {
+  3.480238920686363*^9, 3.480238921573749*^9}, {3.480238953501337*^9, 
+  3.4802389624523487`*^9}}],
 
 Cell["These will in future be split into separate packages.", "Text",
  CellChangeTimes->{{3.474228275667487*^9, 3.4742282888109217`*^9}}]
@@ -73,13 +234,17 @@ Cell[CellGroupData[{
 Cell["SimView", "Subsection",
  CellChangeTimes->{{3.474228013132503*^9, 3.474228014116336*^9}}],
 
-Cell["\<\
-(undocumented) Provide a quick graphical overview of a BBH simulation \
-including plots of the waveforms, trajectories, run speed, memory usage, \
-simulation chunks, start times, end times.\
-\>", "Text",
+Cell[TextData[{
+ ButtonBox["(documentation)",
+  BaseStyle->"Hyperlink",
+  ButtonData->{"SimView.nb", None}],
+ " Provide a quick graphical overview of a BBH simulation including plots of \
+the waveforms, trajectories, run speed, memory usage, simulation chunks, \
+start times, end times."
+}], "Text",
  CellChangeTimes->{{3.474228512683572*^9, 3.4742285547223387`*^9}, {
-  3.47422866722462*^9, 3.474228667823196*^9}}]
+  3.47422866722462*^9, 3.474228667823196*^9}, {3.480239716226738*^9, 
+  3.480239731266253*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -232,8 +397,8 @@ Cell["(undocumented) Reading and plotting Carpet grid structures.", "Text",
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{640, 656},
-WindowMargins->{{Automatic, 6}, {Automatic, 0}},
+WindowSize->{724, 981},
+WindowMargins->{{78, Automatic}, {Automatic, 0}},
 FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (November 10, 2008)",
 StyleDefinitions->"Default.nb"
 ]
@@ -253,65 +418,102 @@ Cell[567, 22, 90, 1, 76, "Title"],
 Cell[660, 25, 246, 7, 43, "Subsubtitle"],
 Cell[909, 34, 422, 9, 56, "Text"],
 Cell[CellGroupData[{
-Cell[1356, 47, 149, 2, 67, "Section"],
-Cell[CellGroupData[{
-Cell[1530, 53, 91, 1, 34, "Subsection"],
-Cell[1624, 56, 507, 8, 71, "Text"],
-Cell[2134, 66, 137, 1, 26, "Text"]
+Cell[1356, 47, 97, 1, 67, "Section"],
+Cell[1456, 50, 396, 10, 41, "Text"],
+Cell[1855, 62, 168, 2, 26, "Text"],
+Cell[2026, 66, 334, 8, 41, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2308, 72, 95, 1, 34, "Subsection"],
-Cell[2406, 75, 329, 6, 41, "Text"]
+Cell[2397, 79, 104, 1, 67, "Section"],
+Cell[CellGroupData[{
+Cell[2526, 84, 104, 1, 34, "Subsection"],
+Cell[2633, 87, 131, 1, 26, "Text"],
+Cell[2767, 90, 128, 2, 26, "Text"],
+Cell[2898, 94, 96, 1, 26, "Text"],
+Cell[2997, 97, 123, 2, 26, "Text"],
+Cell[3123, 101, 343, 6, 41, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2772, 86, 95, 1, 34, "Subsection"],
-Cell[2870, 89, 165, 3, 26, "Text"]
+Cell[3503, 112, 118, 1, 34, "Subsection"],
+Cell[3624, 115, 887, 17, 146, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3072, 97, 98, 1, 34, "Subsection"],
-Cell[3173, 100, 153, 3, 26, "Text"]
+Cell[4548, 137, 100, 1, 34, "Subsection"],
+Cell[4651, 140, 254, 5, 41, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4942, 150, 97, 1, 34, "Subsection"],
+Cell[5042, 153, 645, 10, 86, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5724, 168, 100, 1, 34, "Subsection"],
+Cell[5827, 171, 290, 5, 41, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6154, 181, 99, 1, 34, "Subsection"],
+Cell[6256, 184, 706, 13, 146, "Text"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3375, 109, 105, 1, 67, "Section"],
+Cell[7011, 203, 149, 2, 67, "Section"],
 Cell[CellGroupData[{
-Cell[3505, 114, 97, 1, 34, "Subsection"],
-Cell[3605, 117, 363, 8, 26, "Text"]
+Cell[7185, 209, 91, 1, 34, "Subsection"],
+Cell[7279, 212, 688, 13, 71, "Text"],
+Cell[7970, 227, 137, 1, 26, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4005, 130, 93, 1, 34, "Subsection"],
-Cell[4101, 133, 235, 5, 41, "Text"]
+Cell[8144, 233, 95, 1, 34, "Subsection"],
+Cell[8242, 236, 464, 10, 41, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4373, 143, 98, 1, 34, "Subsection"],
-Cell[4474, 146, 288, 6, 41, "Text"]
+Cell[8743, 251, 95, 1, 34, "Subsection"],
+Cell[8841, 254, 165, 3, 26, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4799, 157, 97, 1, 34, "Subsection"],
-Cell[4899, 160, 184, 4, 26, "Text"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5120, 169, 93, 1, 34, "Subsection"],
-Cell[5216, 172, 177, 4, 26, "Text"]
+Cell[9043, 262, 98, 1, 34, "Subsection"],
+Cell[9144, 265, 153, 3, 26, "Text"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5442, 182, 113, 1, 67, "Section"],
+Cell[9346, 274, 105, 1, 67, "Section"],
 Cell[CellGroupData[{
-Cell[5580, 187, 95, 1, 34, "Subsection"],
-Cell[5678, 190, 284, 7, 26, "Text"]
+Cell[9476, 279, 97, 1, 34, "Subsection"],
+Cell[9576, 282, 363, 8, 26, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5999, 202, 98, 1, 34, "Subsection"],
-Cell[6100, 205, 386, 6, 56, "Text"]
+Cell[9976, 295, 93, 1, 34, "Subsection"],
+Cell[10072, 298, 235, 5, 26, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6523, 216, 95, 1, 34, "Subsection"],
-Cell[6621, 219, 132, 1, 26, "Text"]
+Cell[10344, 308, 98, 1, 34, "Subsection"],
+Cell[10445, 311, 288, 6, 41, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6790, 225, 95, 1, 34, "Subsection"],
-Cell[6888, 228, 140, 1, 26, "Text"]
+Cell[10770, 322, 97, 1, 34, "Subsection"],
+Cell[10870, 325, 184, 4, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11091, 334, 93, 1, 34, "Subsection"],
+Cell[11187, 337, 177, 4, 26, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11413, 347, 113, 1, 67, "Section"],
+Cell[CellGroupData[{
+Cell[11551, 352, 95, 1, 34, "Subsection"],
+Cell[11649, 355, 284, 7, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11970, 367, 98, 1, 34, "Subsection"],
+Cell[12071, 370, 386, 6, 56, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12494, 381, 95, 1, 34, "Subsection"],
+Cell[12592, 384, 132, 1, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12761, 390, 95, 1, 34, "Subsection"],
+Cell[12859, 393, 140, 1, 26, "Text"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
