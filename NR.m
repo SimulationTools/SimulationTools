@@ -121,6 +121,7 @@ ReadWaveformFile;
 ReadCarpetSpeed;
 AlignMaxima;
 ChristodoulouMass;
+ReadFineTimeStep;
 ReadAHSeparation;
 ShiftPhase;
 
@@ -1310,6 +1311,13 @@ DefineMemoFunction[ReadPunctureADMMasses2[run_String],
   ToExpression/@{LookupParameter[run, "TwoPunctures::target_M_plus"], 
    LookupParameter[run, "TwoPunctures::target_M_minus"]}];
 
+ReadFineTimeStep[run_] :=
+ Module[{pairs, it1, it2, t1, t2, dtFine},
+  pairs = 
+   Take[ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}], 
+    2];
+  {{it1, t1}, {it2, t2}} = pairs;
+  dtFine = (t2 - t1)/(it2 - it1)];
 
 
 
