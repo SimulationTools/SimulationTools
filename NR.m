@@ -104,6 +104,7 @@ ReadPsi4Modes;
 ExportWaveform;
 ExportBHCoords;
 ExportBHRelativeCoords;
+FunctionOfPhase;
 
 ChristodoulouMass;
 ReadAHSeparation;
