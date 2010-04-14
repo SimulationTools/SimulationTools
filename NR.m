@@ -4,6 +4,7 @@
 BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`"}];
 
 ReadPsi4;
+ReadMultipolePsi4;
 ReadMinTrackerCoordinates;
 ReadMinTrackerCoordinate;
 ReadMinTrackerRadius;
@@ -91,16 +92,30 @@ Begin["`Private`"];
 
 RunDirectory = Global`RunDirectory;
 
-(* Simulation data *)
+(* Psi4 *)
 
 DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
+  If[HaveYlmDecompPsi4[runName],
+    ReadYlmDecompPsi4[runName, l, m, rad],
+    ReadMultipolePsi4[runName, l, m, rad]]];
+
+ReadYlmDecompPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
   Module[{fileName, threeCols, psi4},
     fileName = "Ylm_WEYLSCAL4::Psi4r_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
              ToString[rad] <> ".00.asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]];
+    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
+
+ReadMultipolePsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
+  Module[{fileName, threeCols, psi4},
+    fileName = "mp_psi4_l" <>
+             ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
+             ToString[rad] <> ".00.asc";
+    threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
+    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
+    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
 
 ReadMinTrackerCoordinates[runName_String, tracker_Integer] :=
   Module[{list, list2},
@@ -143,6 +158,24 @@ ReadADMMass[runName_String] :=
   ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
 
 ReadPsi4Radii[runName_] :=
+  Module[{mpl},
+    mpl = ReadMultipolePsi4Radii[runName];
+    If[Length[mpl] === 0,
+      ReadYlmDecompPsi4Radii[runName],
+      mpl]];
+
+ReadMultipolePsi4Radii[runName_] :=
+  Module[{names, radiusFromFileName, radii},
+    names = FindRunFilesFromPattern[runName, 
+      "mp_psi4_l*_m*_r*.asc"];
+    radiusFromFileName[name_] :=
+      Round[ToExpression[
+        StringReplace[name,
+          "mp_psi4_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+          ~~ x__ ~~ ".asc" -> x]]];
+    radii = Union[Map[radiusFromFileName, names]]];
+
+ReadYlmDecompPsi4Radii[runName_] :=
   Module[{names, radiusFromFileName, radii},
     names = FindRunFilesFromPattern[runName, 
       "Ylm_WEYLSCAL4::Psi4r_l*_m*_r*.asc"];
@@ -152,6 +185,9 @@ ReadPsi4Radii[runName_] :=
           "Ylm_WEYLSCAL4::Psi4r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
           ~~ x__ ~~ ".asc" -> x]]];
     radii = Union[Map[radiusFromFileName, names]]];
+
+HaveYlmDecompPsi4[runName_] :=
+  ReadYlmDecompPsi4Radii[runName] =!= {};
 
 ReadRunSpeed[runName_] := 
  MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]];
