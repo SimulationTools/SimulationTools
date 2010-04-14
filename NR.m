@@ -110,6 +110,8 @@ FunctionOfPhase;
 AbsOfPhase;
 ReadPunctureADMMasses;
 ReadPunctureADMMasses2;
+CostAnalysis;
+PresentationCostAnalysis;
 
 ChristodoulouMass;
 ReadAHSeparation;
@@ -1235,6 +1237,29 @@ ExportGridStructure[run_String, dir_String] :=
  Module[{},
   If[FileType[dir] =!= Directory, CreateDirectory[dir]];
   Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
+
+PresentationCostAnalysis[prefix_String, T_, tMerger_:None, mergerFactor_:2] :=
+  Module[{table},
+    table = CostAnalysis[prefix,T,tMerger,mergerFactor];
+    Grid@Prepend[Drop[table, 1], Style[#, Bold] & /@ table[[1]]]]
+
+CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
+ Module[{runs, costElems, header, tMerger},
+  tMerger = If[tMergerp === None, T, tMergerp];
+  runs = Last /@ 
+    FileNameSplit /@ FileNames[prefix <> "_*", RunDirectory];
+  costElems[run_] :=
+   Module[{speed, cores, days, cpuHours},
+    speed = Catch[Last@DepVar@ReadRunSpeed[run]];
+    If[! NumberQ[speed], Return[None]];
+    cores = ReadCores[run];
+    days = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) /24.0;
+    cpuHours = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) * cores;
+    {cores, speed, days, cpuHours}];
+  data = Sort[
+    Select[Map[costElems, runs], # =!= None &], #1[[1]] < #2[[1]] &];
+  header = {"Cores", "Speed", "Days", "CPU Hours"};
+  Prepend[data, header]];
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
