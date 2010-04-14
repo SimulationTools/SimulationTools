@@ -1334,8 +1334,6 @@ ReadTimeRange[run_] :=
    last = pairs[[-1, 2]];
    {first, last}];
 
-
-
 End[];
 
 EndPackage[];
