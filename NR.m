@@ -1286,6 +1286,13 @@ AlignMaxima[ds_List] :=
    maxima = Map[LocateMaximum, ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
+ChristodoulouMass[run_, ahn_, ihn_] :=
+ Module[{mIrr, S},
+  mIrr = ReadAHMass[run, ahn];
+  S = MapData[Norm, ReadIsolatedHorizonSpin[run, ihn]];
+  {mIrr, S} = ResampleDataTables[{mIrr, S}];
+  Sqrt[mIrr^2 + S^2/(4 mIrr^2)]];
+
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
     If[files === {}, Throw["Cannot find puncture ADM masses"]];
