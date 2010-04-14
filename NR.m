@@ -333,6 +333,9 @@ ReadMemory[runName_] :=
 ReadCores[runName_] :=
   ReadList[FileNameJoin[{RunDirectory, runName, "output-0000", "PROCS"}], Number][[1]];
 
+CPUHoursPerDay[runName_] :=
+  ReadCores[runName] * 24;
+
 (*--------------------------------------------------------------------
   Data conversion 
   --------------------------------------------------------------------*)
