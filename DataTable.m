@@ -150,6 +150,9 @@ RedefineAsDataTable[Log[d:DataTable[__]],
 RedefineAsDataTable[Log[b_, d:DataTable[__]],
   MapData[Log[b,#] &, d]];
 
+RedefineAsDataTable[Log10[d:DataTable[__]],
+  MapData[Log10, d]];
+
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
 
