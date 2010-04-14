@@ -77,6 +77,7 @@ WallTimeDays;
 ReadMemory;
 RunName;
 ReadCPUHours;
+ReadWalltime;
 ReadWalltimeHours;
 ReadCores;
 ReadIHSpin;
@@ -314,10 +315,15 @@ ReadCarpetSpeed[runName_] :=
   MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
 
 ReadCPUHours[runName_] := 
- Last[ReadColumnFile[runName, "runstats.asc", {6}]][[1]];
+  ReadWalltimeHours[runName] * ReadCores[runName];
+
+ReadWalltime[runName_] :=
+  Monotonise[MakeDataTable@Drop[ReadColumnFile[runName, "carpet::timing..asc", {"time", "time_total"}], 1]];
 
 ReadWalltimeHours[runName_] := 
-  ReadCPUHours[runName] / ReadCores[runName] //N;
+  If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
+    Last[ToList[ReadWalltime[runName]]][[2]]/3600.,
+    ReadCPUHours[runName] / ReadCores[runName] //N];
 
 ReadMemory[runName_] :=
  MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]];
