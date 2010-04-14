@@ -924,18 +924,20 @@ LocateMaximum[d_DataTable] :=
 
 (* Parameter file parsing *)
 
-ParseParameterFile[from_String] :=
+DefineMemoFunction[ParseParameterFile[from_String],
  Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName, fileNames},
+  (* Is "from" a full parameter file name? *)
   If[StringMatchQ[from, __ ~~ ".par"],
     fileNames = {from},
-    fileNames = FindRunFile[from, from <> ".par"];
+(*    fileNames = FindRunFile[from, from <> ".par"];*)
+    (* Is "from" a run name? *)
+    fileNames = FindRunFilesFromPattern[from, "*.par"];
     If[Length[fileNames] == 0,
       fileNames = FindRunFile[from, from <> "-1.par"];
       If[Length[fileNames] == 0,
-        Throw["Cannot find parameter file " <> ToString[from]]]]];
-
+        Throw["Cannot find parameter file " <> ToString[from]]],
+      fileNames = FindRunFile[from, fileNames[[1]]]]];
   fileName = First[fileNames];
-
   lines = ReadList[fileName, String];
   removeWhiteSpace[t_] := 
    StringReplace[
@@ -960,18 +962,19 @@ ParseParameterFile[from_String] :=
         StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
       Throw["Unrecognized line in parameter file: " <> s]]]];
   Map[parseLine, lines]
-  ];
+  ]];
 
-LookupParameter[parFile_List, name_] :=
+LookupParameter[parFile_List, name_, default_:None] :=
  Module[{l},
   l = Cases[parFile, ParameterSetting[ToLowerCase[name], x_] -> x];
+  If[l === {} && default =!= None, Return[default]];
   If[Length[l] == 0, Throw["Parameter " <> name <> " not found"]];
   First[l]];
 
-LookupParameter[from_String, name_] :=
+LookupParameter[from_String, name_, default_:None] :=
   Module[{},
     (* Assume the parameter file is named after the run *)
-    LookupParameter[ParseParameterFile[from], name]
+    LookupParameter[ParseParameterFile[from], name, default]
   ];
 
 FindParameters[parFile_String, pattern_] :=
