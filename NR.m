@@ -1008,7 +1008,7 @@ BoxRadiiOnLevel[runName_, l_] :=
   ];
 
 CountRefinementLevels[runName_String] :=
-  ToExpression[LookupParameter[runName, "CarpetRegrid::refinement_levels"]];
+  ToExpression[LookupParameter[runName, "Carpet::max_refinement_levels"]];
 
 RefinementLevels[runName_String] :=
   Table[l, {l, 0, CountRefinementLevels[runName]-1}];
