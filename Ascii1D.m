@@ -1,5 +1,5 @@
 
-BeginPackage["Ascii1D`", {"DataTable`"}];
+BeginPackage["Ascii1D`", {"DataTable`", "Profile`", "Memo`"}];
 
 (* AsciiData1D::usage = "AsciiData1D[fileName] loads the 1D data in
 fileName (which should be in ygraph format) and returns it as a list
@@ -53,27 +53,72 @@ AsciiDataOfIndex[data_, index_] :=
 AsciiTimeOfIndex[data_, index_] :=
   data[[index]][[1]];
 
-fixData[d_] :=
- DeleteDuplicates[Sort[d, #1[[1]] < #2[[1]] &], (Abs[#1[[1]]-#2[[1]]] < 10^-10) &];
+(* fixData[d_] :=
+  Profile["ReadCarpetASCII1D: Fixing data",
+    DeleteDuplicates[Sort[d, #1[[1]] < #2[[1]] &], 
+                     (Abs[#1[[1]]-#2[[1]]] < 10^-10) &]]; *)
 
-ReadCarpetASCII1D[fileName_, level_:0, dir_:1] :=
- Module[{lines, lines2, lines3, lines4, takeCols, lines5, lines6, 
+cmp = 
+  Compile[{{x1, _Real, 1}, {x2, _Real, 1}},  
+    Abs[x1[[1]] - x2[[1]]] < 10.^-10];
+
+fixData[d_] :=
+  Profile["ReadCarpetASCII1D: Fixing data",
+    DeleteDuplicates[d, 
+                     (Abs[#1[[1]]-#2[[1]]] < 10.^-10) &]];
+
+(*fixData[d_] :=
+  Profile["ReadCarpetASCII1D: Fixing data",
+    DeleteDuplicates[d, cmp]];*)
+
+(*fixData[d_] :=
+  Profile["ReadCarpetASCII1D: Fixing data",
+    DeleteDuplicates[d, 
+                     #1[[1]] != #2[[1]] &]];*)
+
+takeCols[it_List, c1_, c2_] := 
+  Profile["ReadCarpetASCII1D: takeCols", 
+    Map[{#[[c1]], #[[c2]]} &, it]];
+
+DefineMemoFunction[tableImport[fn_],
+  Import[fn, "Table"]];
+
+ReadCarpetASCII1D[fileName_, dir_:1] :=
+ Module[{lines, lines2, lines3, lines4, lines5, lines6, 
    levels, splitIterations, levels2, levelsPresent, data, data2, 
-   data3, data4, data5, times, dataWithTimes},
-  lines = ReadList[fileName, String, NullRecords -> True];
-  data = Import[fileName, "Table"];
-  data2 = Select[data, Length[#] != 0 && #[[1]] != "#" &];
-  levelsPresent = Union[Map[#[[3]] &, data2]];
-  If[! MemberQ[levelsPresent, level], 
-   Throw["Refinement level " <> ToString[level] <> " not found in " <>
-      fileName]];
-  data3 = Select[data2, #[[3]] == level &];
-  data4 = SplitBy[data3, #[[1]] &];
-  takeCols[it_List, c1_, c2_] := Map[{#[[c1]], #[[c2]]} &, it];
-  data5 = Map[MakeDataTable@fixData[takeCols[#, 10+dir-1, 13]] &, data4];
-  times = Map[#[[1]][[9]] &, data4];
-  dataWithTimes = MapThread[List, {times, data5}];
-  Return[dataWithTimes]]
+   rls, processLevel, prls},
+  Print[fileName];
+(*  lines = ReadList[fileName, String, NullRecords -> True];*)
+  If[FileType[fileName] === None, Throw["ReadCarpetASCII1D: File "<>fileName<>" not found"]];
+  Profile["ReadCarpetASCII1D: " <> fileName,
+  Profile["ReadCarpetASCII1D: Reading file", 
+    data = tableImport[fileName]];
+  Profile["ReadCarpetASCII1D: Eliminating white space", 
+    data2 = Select[data, Length[#] != 0 && #[[1]] != "#" &]];
+  Profile["ReadCarpetASCII1D: Determining levels present",
+    levelsPresent = Union[Map[#[[3]] &, data2]]];
+
+  levels = GatherBy[data2, #[[3]]&];
+  rls = Map[First[#][[3]]&, levels];
+
+  processLevel[data3_] :=
+    Module[{data4, data5, times, dataWithTimes},
+(*      Print["rl" <> ToString[data3[[1,3]]]];*)
+      Profile["ReadCarpetASCII1D: Splitting by iteration", 
+        data4 = N[SplitBy[data3, #[[1]] &]]];
+      data5 = Map[MakeDataTable@fixData[takeCols[#, 10+dir-1, 13]] &, data4];
+      Profile["ReadCarpetASCII1D: Extracting times",
+        times = Map[#[[1]][[9]] &, data4]];
+      dataWithTimes = MapThread[List, {times, data5}]];
+
+(*  prls = MapThread[List, {rls, processLevel /@ levels}];*)
+  prls = processLevel /@ levels;
+  Return[prls]]];
+
+ReadCarpetASCII1DFromRun[run_String, fileName_String, dir_] :=
+  Module[{},
+    files = FindRunFile[run, fileName];
+  ];
 
 MGraph[data__] :=
   Manipulate[
