@@ -305,7 +305,12 @@ HaveYlmDecompPsi4[runName_] :=
   ReadYlmDecompPsi4Radii[runName] =!= {};
 
 ReadRunSpeed[runName_] := 
- MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]];
+  If[FindRunFile[runName, "runstats.asc"] =!= {},
+     MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
+     ReadCarpetSpeed[runName]];
+
+ReadCarpetSpeed[runName_] :=
+  MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
 
 ReadCPUHours[runName_] := 
  Last[ReadColumnFile[runName, "runstats.asc", {6}]][[1]];
