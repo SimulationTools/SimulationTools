@@ -949,6 +949,21 @@ LocateMaximum[d_DataTable] :=
 
 (* Parameter file parsing *)
 
+unbreakBrokenStrings[lines2_List] :=
+  Module[{oddQuotes, positions, pairs, lines},
+    oddQuotes[s_String] := OddQ[Length[StringCases[s, "\""]]];
+    lines = lines2;
+    positions = First/@Position[lines, _?oddQuotes, {1}];
+    pairs = Partition[positions, 2];
+
+    Scan[Function[pair,
+      lines[[pair[[1]] ;; pair[[2]]]] =
+        StringJoin[Riffle[lines[[pair[[1]] ;; pair[[2]]]], " "]];
+      lines = Drop[lines, {pair[[1]]+1, pair[[2]]}]],
+
+      Reverse[pairs]];
+    Return[lines]];
+
 DefineMemoFunction[ParseParameterFile[from_String],
  Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName, fileNames},
   (* Is "from" a full parameter file name? *)
@@ -968,7 +983,9 @@ DefineMemoFunction[ParseParameterFile[from_String],
    StringReplace[
     t, (StartOfString ~~ Whitespace) | (Whitespace ~~ EndOfString) :> 
      ""];
-  
+
+  lines = unbreakBrokenStrings[lines];
+
   parseLine[s_] :=
    If[StringMatchQ[s, RegularExpression["[ \t]*#.*"]],
     Comment[s],
