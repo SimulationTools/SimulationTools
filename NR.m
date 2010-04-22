@@ -1025,7 +1025,7 @@ FindParameters[parFile_String, pattern_] :=
 FindParameters[parFile_List, pattern_] :=
   Module[{parameters},
     parameters = Cases[parFile, ParameterSetting[name_,value_] -> name];
-    Select[parameters, StringMatchQ[#, pattern] &]];
+    Select[parameters, StringMatchQ[#, pattern, IgnoreCase->True] &]];
 
 GridSpacingOnLevel[runName_, l_] :=
   Module[{h0},
