@@ -1,7 +1,6 @@
 
 BeginPackage["RunFiles`", {"Profile`", "Memo`"}];
 
-FileInRun;
 ReadColumnFile;
 ReadColumnFile2;
 FindRunFile;
@@ -9,6 +8,7 @@ FindRunSegments;
 FindRunFilesFromPattern;
 StandardOutputOfRun;
 CarpetASCIIColumns;
+MergeFiles;
 
 Begin["`Private`"];
 
@@ -110,7 +110,7 @@ ReadColumnFile[fileName_String, cols_List] :=
 extractColumns[file_List, cols_List] := 
   Map[Extract[#, Map[List, cols]] &, file];
 
-mergeFiles[files_List] :=
+MergeFiles[files_List] :=
   Module[{file1, fileEndIndex, rest, rest0, restIndex, truncated},
     If[Length[files] == 0, Return[{}]];
     If[Length[files] == 1, Return[First[files]]];
@@ -121,7 +121,7 @@ mergeFiles[files_List] :=
     index. Usually this will be an interation number or a coordinate
     time. *)
     fileEndIndex = First[Last[file1]];
-    rest = mergeFiles[Rest[files]];
+    rest = MergeFiles[Rest[files]];
 
     rest0 = First[rest];
     restIndex = First[rest0];
@@ -138,7 +138,7 @@ mergeFiles[files_List] :=
 ReadColumnFile[fileNames_List] :=
   Module[{files},
     files = Select[Map[ReadColumnFile, fileNames], Length[#] != 0 &];
-    mergeFiles[files]
+    MergeFiles[files]
   ];
 
 ReadColumnFile[fileNames_List, cols_List] :=
