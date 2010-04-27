@@ -343,11 +343,15 @@ ReadCPUHours[runName_] :=
   ReadWalltimeHours[runName] * ReadCores[runName];
 
 ReadWalltime[runName_] :=
-  Monotonise[MakeDataTable@Drop[ReadColumnFile[runName, "carpet::timing..asc", {"time", "time_total"}], 1]];
+  Module[{segmentTime, files},
+    segmentTime[file_] :=
+      ReadColumnFile[file, {9, 14}][[-1,2]];
+    files = FindRunFile[runName, "carpet::timing..asc"];
+    Plus@@(segmentTime /@ files)];
 
 ReadWalltimeHours[runName_] := 
   If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
-    Last[ToList[ReadWalltime[runName]]][[2]]/3600.,
+    ReadWalltime[runName]/3600.,
     ReadCPUHours[runName] / ReadCores[runName] //N];
 
 ReadMemory[runName_] :=
