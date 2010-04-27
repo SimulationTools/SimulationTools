@@ -92,16 +92,16 @@ SimView[runNames_List, r_] :=
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
   cost[run_] := 
-    {run, Print[1]; Catch@ReadCores[run],  Print[2]; Catch@ReadCPUHours[run],  
-     Print[3]; Catch@ReadWalltimeHours[run]/24,  Print[4]; Catch@ReadCores[run]*24};
+    {run, Catch@ReadCores[run],  Catch@ReadCPUHours[run],
+      Catch@ReadWalltimeHours[run]/24,  Catch@ReadCores[run]*24};
 
-  costTable = {}; (*Grid[{{Style["Simulation",Bold], 
+  costTable = Grid[{{Style["Simulation",Bold],
                      Style["Cores",Bold], 
                      Style["CPU hours",Bold], 
                      Style["Days",Bold], 
                      Style["CPU hours per day",Bold]}}
                     ~Join~
-                   Map[cost, runNames]];*)
+                   Map[cost, runNames]];
 
   grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft},
        {speed, memory}, 
