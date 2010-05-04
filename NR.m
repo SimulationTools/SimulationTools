@@ -24,6 +24,7 @@ ReadBHTrajectories;
 ReadBHSeparation;
 ReadBHPhase;
 ReadBHRadius;
+ReadBHPhaseOfFrequency;
 ReadBHInclination;
 ReadBHSpeed;
 ConvergenceMultiplier;
@@ -292,6 +293,14 @@ ReadBHPhase[runName_String, i_] :=
     xyTrans = MapData[Take[#,2] &, x0]; (* Project into xy plane *)
     Return[Phase[xyTrans]];
   ];
+
+ReadBHPhaseOfFrequency[run_] :=
+  Module[{phaseFreq, phaseFreqDeps, phaseOfFreq},
+    phaseFreq =
+     IntersectDataTables[{ReadBHPhase[run],
+       NDerivative@ReadBHPhase[run]}];
+    phaseFreqDeps = Reverse[DepVar /@ phaseFreq];
+    phaseOfFreq = MakeDataTable[MapThread[List, phaseFreqDeps]]];
 
 ReadBHSpeed[run_, bh_] :=
  Norm@NDerivative[ReadBHCoordinates[run, bh]];
