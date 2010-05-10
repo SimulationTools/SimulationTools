@@ -128,6 +128,12 @@ ReadTimeRange;
 ReadAHSeparation;
 ShiftPhase;
 
+ReturnValue;
+FittedFunction;
+Eccentricity;
+FitEcc;
+FitParameters;
+
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
    UseTortoiseCoordinate -> True,
@@ -139,6 +145,8 @@ Options[ExtrapolateRadiatedQuantity] =
 
 Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
+
+MultipolePsi4Variable = "psi4";
 
 Begin["`Private`"];
 
@@ -162,7 +170,7 @@ ReadYlmDecompPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
 
 ReadMultipolePsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
   Module[{fileName, threeCols, psi4},
-    fileName = "mp_psi4_l" <>
+    fileName = "mp_"<>MultipolePsi4Variable<>"_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
              ToString[rad] <> ".00.asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
@@ -501,8 +509,8 @@ ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] :=
   rateEq = 
    ConvergenceRatePEquation /. {CRF[1] -> F1, CRF[2] -> F2, 
       CRF[3] -> F3, CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3} // N;
-  rate = Check[CRp /. FindRoot[rateEq, {CRp, 1, 10}], None, FindRoot::lstol];
-  If[rate < 0.1 || rate > 9.9, Return[None], Return[rate]]];
+  rate = Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, FindRoot::lstol];
+  If[rate < 0.1 || rate > 14.9, Return[None], Return[rate]]];
 
 ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
   Module[{eq, eqs, el, a0, a1},
@@ -519,6 +527,15 @@ ConvergenceRate[ds:{DataTable[__]..}] :=
       ds2 = ResampleDataTables[ds],
       ds2 = ds];
     hs = Map[1.0/ReadAttribute[#, NPoints] &, ds2];
+    MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
+
+ConvergenceRate[ds:{DataTable[__]..}, hs_List] :=
+  Module[{dts,ds2},
+    dts = Map[Spacing, ds];
+    ranges = Map[DataTableRange, ds];
+    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
+      ds2 = ResampleDataTables[ds],
+      ds2 = ds];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
 
 RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
@@ -1315,7 +1332,7 @@ ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
 
 ReadWaveformFile[file_] :=
-  MakeDataTable@Map[{#[[1]],#[[2]]+I#[[3]]}&, Import[file,"Table"]];
+  MakeDataTable[Select[Map[{#[[1]],#[[2]]+I#[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]];
 
 AlignMaxima[ds_List] :=
   Module[{maxima},
@@ -1369,6 +1386,25 @@ ReadTimeRange[run_] :=
    first = pairs[[1, 2]];
    last = pairs[[-1, 2]];
    {first, last}];
+
+
+Options[FitEcc] = {ReturnValue -> FittedFunction};
+
+FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
+ Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t},
+  eccModel = a (1 - e Cos[n t + phi]) + 1/2 e^2 (1 - Cos[2 n t]) + b t;
+  eccPars = {{a, 10,11}, {b, -0.001, 0}, {e, -0.01, 0.01}, {n, 0.01, 0.1}, {phi, 0, Pi}};
+  eccData = DataTableInterval[sep, int];
+  eccFit = 
+   FindFit[ToList@eccData, eccModel, eccPars, t, 
+    MaxIterations -> 1000];
+  eccSepFitted = eccModel /. eccFit;
+  Switch[OptionValue[ReturnValue],
+   Eccentricity, e /. eccFit,
+   FittedFunction, Function[tp,Evaluate[eccSepFitted/.t->tp]],
+   FitParameters, eccFit,
+   _, Throw["Unknown option given to FitEcc"]]
+  ];
 
 End[];
 
