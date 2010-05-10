@@ -63,13 +63,20 @@ FindRunFile[runName_String, fileName_String] :=
     segments = FindRunSegments[runName];
     files1 = Map[FileNameJoin[{#, fileName}] &, segments];
     files2 = Select[files1, FileType[#] =!= None &];
+
+    If[files2 === {},
+      Return[FindRunFilesFromPattern[runName, fileName, FullFilenames->True]]];
+
     Return[files2];
   ];
 
-FindRunFilesFromPattern[runName_String, filePattern_String] :=
-  Module[{segments, files1, files2},
+Options[FindRunFilesFromPattern] = {FullFilenames -> False};
+FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]] :=
+  Module[{segments, files1, files2, nToDrop},
     segments = FindRunSegments[runName];
-    names = Union[Map[FileNameTake, Flatten[Map[FileNames[filePattern, #] &, segments], 1]]]
+    If[segments === {}, Return[{}]];
+    nToDrop = If[OptionValue[FullFilenames], 0, Length[FileNameSplit[segments[[1]]]]];
+    names = Union[Map[FileNameDrop[#, nToDrop] &, Flatten[Map[FileNames[filePattern, #, Infinity] &, segments], 1]]]
   ];
 
 StandardOutputOfRun[runName_String] :=
@@ -96,7 +103,7 @@ ReadColumnFile[fileName_String] :=
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
   Module[{list, list2, isComment, file2},
   Profile["ReadColumnFile[" <> fileName <> "]",
-    If[FileType[fileName] === None, Throw["File " <> fileName <> " not found"]];
+    If[FileType[fileName] === None, Throw["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
     list = ReadList[fileName, String]; (* Blank lines omitted *)
     isComment[x_] :=
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
