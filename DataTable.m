@@ -1,3 +1,4 @@
+(* ::Package:: *)
 
 BeginPackage["DataTable`", {"Profile`"}];
 
@@ -31,6 +32,7 @@ IntegrateDataTableZeroStart::usage = "IntegrateDataTableZeroStart[d] returns the
 IntegrateDataTableZeroEnd::usage = "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x2] = 0, where x2 is the highest value of the independent variable in d.";
 Sub::usage = "Sub[d1, d2] returns a DataTable corresponding to d1 - d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Sub~ d2.";
 Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
+InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 Monotonise;
 
 Begin["`Private`"];
@@ -167,6 +169,11 @@ RedefineAsDataTable[Re[d:DataTable[___]],
 
 RedefineAsDataTable[Im[d:DataTable[___]],
   MapData[Im, d]];
+
+InterpolateWhereFunction[d_DataTable, f_] :=
+  Module[{dInterpolater},
+  dInterpolater=Interpolation@MakeDataTable@DeleteCases[ToList[d],_?f];
+  MakeDataTable[ToList[d]/. {t_,x_}:>{t,dInterpolater[t]}/;f[{t,x}]]];
 
 Sub[d1_DataTable, d2_DataTable] :=
   Apply[Subtract, ResampleDataTables[{d1, d2}]];
