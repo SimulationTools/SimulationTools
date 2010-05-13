@@ -371,8 +371,8 @@ ReadWalltime[runName_] :=
 
 ReadWalltimeHours[runName_] := 
   If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
-    ReadWalltime[runName]/3600.,
-    ReadCPUHours[runName] / ReadCores[runName] //N];
+    ReadWalltime[runName]/3600,
+  Throw["ReadWalltimeHours: No walltime information in run " <> runName]];
 
 ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
