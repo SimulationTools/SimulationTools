@@ -47,6 +47,15 @@ SimView[runNames_List] :=
     r = If[rads === {}, 0, First[rads]];
     SimView[runNames, r]];
 
+memoryPlot[runNames_List, size_] :=
+  Module[{swaps, mems},
+   swaps = Catch[Map[ReadSwap, runNames]];
+   If[StringQ[swaps], swaps = {{0,0}}];
+   mems = Map[ReadMemory, runNames];
+
+   Show[ListLinePlot[mems], ListLinePlot[swaps, PlotStyle->Dashed],
+     PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory", ImageSize -> size]];
+
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
     freqPsi4, segments, cost, costTable, phases, lastPhase, phaseDiffs},
@@ -55,9 +64,7 @@ SimView[runNames_List, r_] :=
   speed = Catch[
    ListLinePlot[Map[ReadRunSpeed, runNames], 
     PlotRange -> {0, All}, PlotLabel -> "Speed", ImageSize -> size]];
-  Catch[memory = 
-   ListLinePlot[Map[ReadMemory, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Memory", ImageSize -> size]];
+  memory = memoryPlot[runNames, size];
   trajectories = Catch[
    ListLinePlot[
     Flatten[Map[
