@@ -379,7 +379,14 @@ ReadMemory[runName_] :=
      MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
 ReadCores[runName_] :=
-  ReadList[FileNameJoin[{RunDirectory, runName, "output-0000", "PROCS"}], Number][[1]];
+  Module[{readList},
+  read[file_, args__] :=
+    If[FileType[file] =!= None, ReadList[file, args][[1]], Throw[file, FileNotFound]];
+  Catch[read[FileNameJoin[{RunDirectory, runName, "output-0000",
+                           "SIMFACTORY", "PROCS"}], Number],
+    FileNotFound, Function[{value, tag},
+      read[FileNameJoin[{RunDirectory, runName, "output-0000",
+                         "PROCS"}], Number]]]];
 
 CPUHoursPerDay[runName_] :=
   ReadCores[runName] * 24;
