@@ -376,7 +376,7 @@ ReadWalltimeHours[runName_] :=
 
 ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
-     MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {2, 3}]],
+     MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {"time", "maxrss_mb"}]],
      MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
 ReadSwap[runName_] :=
