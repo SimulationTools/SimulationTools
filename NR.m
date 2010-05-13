@@ -77,6 +77,7 @@ RunCost::usage = "RunCost[length, speed, nprocs] returns information about the c
 CPUHours;
 WallTimeDays;
 ReadMemory;
+ReadSwap;
 RunName;
 ReadCPUHours;
 ReadWalltime;
@@ -377,6 +378,11 @@ ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
      MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {2, 3}]],
      MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
+
+ReadSwap[runName_] :=
+  MakeDataTable[ReadColumnFile[
+    runName, "systemstatistics::process_memory_mb.maximum.asc",
+    {"time", "swap_used_mb"}]];
 
 ReadCores[runName_] :=
   Module[{readList},
