@@ -4,7 +4,7 @@
 BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`"}];
 
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
-ReadMultipolePsi4;
+ReadMultipolePsi4 = "ReadMultipolePsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run using the output of the Multipole thorn.";
 ReadMinTrackerCoordinates;
 ReadMinTrackerCoordinate;
 ReadMinTrackerRadius;
