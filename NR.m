@@ -91,6 +91,8 @@ ReadCoarseGridSpacing;
 
 ReadAHMass;
 ReadAHRadius;
+ReadAHMinRadius;
+ReadAHMaxRadius;
 ReadAHCentroid;
 ReadAHCentroidCoord;
 ReadAHColumn;
@@ -1169,6 +1171,16 @@ DefineMemoFunction[ReadAHRadius[runName_, hn_],
  Module[{},
   MakeDataTable[
    ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 8}]]]];
+
+DefineMemoFunction[ReadAHMaxRadius[runName_, hn_],
+ Module[{},
+  MakeDataTable[
+   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 7}]]]];
+
+DefineMemoFunction[ReadAHMinRadius[runName_, hn_],
+ Module[{},
+  MakeDataTable[
+   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 6}]]]];
 
 DefineMemoFunction[ReadAHColumn[runName_, hn_, col_],
  Module[{},
