@@ -49,7 +49,7 @@ SimView[runNames_List] :=
 
 memoryPlot[runNames_List, size_] :=
   Module[{swaps, mems},
-   swaps = Catch[Map[ReadSwap, runNames]];
+   swaps = Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns];
    If[StringQ[swaps], swaps = {{0,0}}];
    mems = Map[ReadMemory, runNames];
 
