@@ -20,18 +20,18 @@ spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] =
 
 SpeedOfLight = 299792458.;
 
-DefineMemoFunction[KickMemo[run_String, dir_Integer, r_, lMax_Integer],
-  Kick[run,dir,r,lMax]]
-
-DefineMemoFunction[KickVectorMemo[run_String, r_, lMax_Integer],
-  Kick[run,r,lMax]]
-
 Kick[run_String, dir_Integer, r_, lMax_Integer] :=
    SpeedOfLight/1000*
      Last@DepVar@LinearMomentumRadiated[run,dir,r,lMax];
 
-Kick[run_String, r_, lMax_Integer] :=
+DefineMemoFunction[KickMemo[run_String, dir_Integer, r_, lMax_Integer],
+  Kick[run,dir,r,lMax]];
+
+KickVector[run_String, r_, lMax_Integer] :=
   Table[Kick[run, dir, r, lMax], {dir, 1, 3}];
+
+KickVectorMemo[run_String, r_, lMax_Integer] :=
+  Table[KickMemo[run, dir, r, lMax], {dir, 1, 3}];
 
 LinearMomentumRadiated[run_, dir_, r_, lMax_] :=
   IntegrateDataTableZeroStart[LinearMomentumFlux[run,dir,r,lMax]];
@@ -72,7 +72,7 @@ LinearMomentumFlux[run_String, dir_, r_, lMax_] :=
 
 LinearMomentumFlux[psi4Reader_, dir_, r_, lMax_] :=
   Module[{l,m,lp,mp,fluxTerm,intPsi4Cache1,intPsi4Cache,allOverlaps,nonZeroOverlaps,terms,
-          sum, nElems, tmp, nList},
+          sum, nElems, tmp, nList, pDot},
     mon = {run, dir, r, "Computing overlaps"};
     allOverlaps = tabulateModePairs[harmonicOverlap[#, dir] &, lMax];
     nonZeroOverlaps = Select[allOverlaps, (#[[2]] =!= 0) &];
@@ -104,7 +104,9 @@ LinearMomentumFlux[psi4Reader_, dir_, r_, lMax_] :=
             MakeDataTable[MapThread[List, {Take[IndVar[integratePsi4[psi4Reader,2,2,r]],nElems],
                                            Apply[Plus, terms]}]]];
     mon = {run, dir, r, "Real part..."};
-    N[r^2/(16 Pi)] Re[sum]];
+    pDot = N[r^2/(16 Pi)] Re[sum];
+    mon = "";
+    Return[pDot]];
 
 harmonicOverlapDirect[{l_, m_, lp_, mp_}, dir_] := 
  Profile["harmonicOverlapDirect",
