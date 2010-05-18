@@ -1,3 +1,4 @@
+(* ::Package:: *)
 
 BeginPackage["Kicks2`", {"NR`", "DataTable`", "Memo`", "Profile`"}];
 
@@ -40,6 +41,9 @@ integratePsi4[run_, l_, m_, r_] :=
 
 integratePsi4[psi4Reader_, l_, m_, r_] :=
  Profile["integratePsi4", IntegrateDataTableZeroEnd[Profile["ReadPsi4", psi4Reader[l, m, r]]]];
+
+integratePsi4Twice[psi4Reader_,l_,m_,r_] :=
+ IntegrateDataTableZeroEnd[integratePsi4[psi4Reader,l,m,r]];
 
 (*LinearMomentumFlux[run_, dir_, r_, lMax_] :=
   Module[{l,m,lp,mp,fluxTerm,intPsi4Cache},
@@ -154,10 +158,14 @@ unitVectorComponent[3, th_, ph_] =
 (************************************************************************************)
 (* Angular momentum *)
 (************************************************************************************)
+AngularMomentumFlux[run_String, dir_, r_, lMax_] :=
+  AngularMomentumFlux[
+    Function[{l,m,rp}, ReadPsi4[run, l, m, rp]], 
+    dir, r, lMax];
 
 AngularMomentumFlux[psi4Reader_, 3, r_, lMax_] :=
   Module[{l,m},
-    1.0/(4.0 Pi) Sum[m *
+    r^2/(4.0 Pi) Sum[m *
       Im[Conjugate[integratePsi4Twice[psi4Reader,l,m,r]] * 
                    integratePsi4[psi4Reader,l,m,r]], {l,2,lMax}, {m,-l,l}]];
 
