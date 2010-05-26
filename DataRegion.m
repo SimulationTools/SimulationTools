@@ -502,7 +502,7 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
 
 ClearCarpetHDF5Cache[] :=
   Module[{},
-    Remove[Datasets, Annotations, Dims, HDF5Data];
+    ClearAll[Datasets, Annotations, Dims, HDF5Data];
     Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
     Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
     Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
