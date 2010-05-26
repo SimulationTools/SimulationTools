@@ -51,7 +51,8 @@ memoryPlot[runNames_List, size_] :=
   Module[{swaps, mems},
    swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns]];
    If[StringQ[swaps], swaps = {{0,0}}];
-   mems = Map[ReadMemory, runNames];
+   mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns]];
+   If[StringQ[mems], mems = {{0,0}}];
 
    Show[ListLinePlot[mems], ListLinePlot[swaps, PlotStyle->Dashed],
      PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory", ImageSize -> size]];
