@@ -1,36 +1,12 @@
 
 (* A package for dealing with numerical relativity data *)
 
-BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`"}];
+BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`", 
+  "Horizons`", "Parameters`", "Statistics`", "BHCoordinates`",
+  "Convergence`"}];
 
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
-ReadMultipolePsi4;
-ReadMinTrackerCoordinates;
-ReadMinTrackerCoordinate;
-ReadMinTrackerRadius;
-ReadMinTrackerPhase;
-ReadPunctureTrackerPhase;
-ReadPunctureTrackerRadius;
-ReadMinTrackerTrajectory;
-ReadMinTrackerTrajectories;
-ReadMinTrackerSpeed;
-ReadMinTrackerVelocity;
-HaveMinTracker;
-ReadPunctureTrackerCoordinates;
-ReadBHCoordinates;
-ReadBHCoordinate;
-ReadBHTrajectory;
-ReadBHTrajectories;
-ReadBHSeparation;
-ReadBHPhase;
-ReadBHRadius;
-ReadBHPhaseOfFrequency;
-ReadBHInclination;
-ReadBHSpeed;
-ConvergenceMultiplier;
-LoadConvergenceSeries;
-RescaledErrors;
-ConvergenceRate;
+ReadMultipolePsi4::usage = "ReadMultipolePsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run using the output of the Multipole thorn.";
 ExtrapolateScalarFull;
 ExtrapolateScalar;
 ExtrapolatedValue;
@@ -51,19 +27,10 @@ ExtrapolationError;
 ExtrapolatePsi4Amplitude;
 ExtrapolatePsi4;
 StrainFromPsi4;
-ResolutionCode;
-RichardsonExtrapolate;
-RichardsonExtrapolate3;
 FitFunction;
-RichardsonExtrapolationError;
-ResName;
-NPoints;
-ReadRunSpeed;
 ReadPsi4Radii;
 LocateMaximum;
 LocateMaximumPoint;
-LookupParameter;
-FindParameters;
 GridSpacingOnLevel;
 BoxRadiiOnLevel;
 RefinementLevels;
@@ -73,36 +40,8 @@ TimeRefinementFactors;
 CourantFactorOnLevel;
 LevelExistsEvery;
 RadialPoints;
-RunCost::usage = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
-CPUHours;
-WallTimeDays;
-ReadMemory;
 RunName;
-ReadCPUHours;
-ReadWalltime;
-ReadWalltimeHours;
-ReadCores;
-ReadIHSpin;
-ReadIHSpinX;
-ReadIHSpinY;
-ReadIHSpinPhase;
-ReadIsolatedHorizonSpin;
 ReadCoarseGridSpacing;
-
-ReadAHMass;
-ReadAHRadius;
-ReadAHMinRadius;
-ReadAHMaxRadius;
-ReadAHCentroid;
-ReadAHCentroidCoord;
-ReadAHColumn;
-ReadAHColumns;
-ReadAHQuadrupoleXX;
-ReadAHQuadrupoleXY;
-ReadAHQuadrupoleXZ;
-ReadAHQuadrupoleYY;
-ReadAHQuadrupoleYZ;
-ReadAHQuadrupoleZZ;
 
 ReadPsi4Modes;
 ExportWaveform;
@@ -114,20 +53,14 @@ FunctionOfPhase;
 AbsOfPhase;
 ReadPunctureADMMasses;
 ReadPunctureADMMasses2;
-CostAnalysis;
-PresentationCostAnalysis;
 PercentageDifference;
-ParseParameterFile;
 
 ReadHamiltonianConstraintNorm;
 
 ReadWaveformFile;
-ReadCarpetSpeed;
 AlignMaxima;
-ChristodoulouMass;
 ReadFineTimeStep;
 ReadTimeRange;
-ReadAHSeparation;
 ShiftPhase;
 
 ReturnValue;
@@ -179,142 +112,6 @@ ReadMultipolePsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
 
-(* MinTracker *)
-
-HaveMinTracker[runName_, tracker_Integer] :=
-  FindRunFile[runName, "MinTracker"<>ToString[tracker]<>".asc"] =!= {};
-
-ReadMinTrackerCoordinates[runName_String, tracker_Integer] :=
-  Module[{list, list2},
-    list = ReadColumnFile[runName, "MinTracker"<>ToString[tracker]<>".asc", {2,3,4,5}];
-    list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-    Return[MakeDataTable[list2, {RunName -> runName}]]];
-
-ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
-  Module[{coords},
-    coords = ReadMinTrackerCoordinates[runName, tracker];
-    MapData[#[[coord]]&, coords]];
-
-ReadMinTrackerTrajectory[runName_String, tracker_Integer] :=
-  Map[Take[Last[#], 2] &, 
-    ToList[ReadMinTrackerCoordinates[runName, tracker]]];
-
-ReadMinTrackerTrajectory[runName_String] :=
-  Module[{coords1,coords2,rel},
-    coords1 = ReadMinTrackerCoordinates[runName, 0];
-    coords2 = ReadMinTrackerCoordinates[runName, 1];
-    rel = coords1 - coords2;
-    Map[Take[Last[#], 2] &, ToList[rel]]];
-
-ReadMinTrackerTrajectories[runName_String] :=
-  {ReadMinTrackerTrajectory[runName, 0], ReadMinTrackerTrajectory[runName, 1]};
-
-ReadMinTrackerVelocity[runName_String, tracker_Integer] :=
-  Module[{x,v},
-    x = Table[ReadMinTrackerCoordinate[runName, tracker, dir], {dir, 1 3}];
-    v = Map[NDerivative, x];
-    MapThreadData[{#1,#2,#3}&, v]];
-
-ReadMinTrackerVelocity[runName_String] :=
-  ReadMinTrackerVelocity[runName, 0] - ReadMinTrackerVelocity[runName, 1];
-
-ReadMinTrackerSpeed[runName_String] :=
-  MapData[Norm, ReadMinTrackerVelocity[runName]];
-
-ReadMinTrackerSpeed[runName_String, tr_Integer] :=
-  MapData[Norm, ReadMinTrackerVelocity[runName, tr]];
-
-(* PunctureTracker *)
-
-DefineMemoFunction[ReadPunctureTrackerCoordinates[runName_, i_],
- Module[{nTrackers},
-  nTrackers = 10;
-  MakeDataTable[{#[[1]], {#[[2]], #[[3]], #[[4]]}} & /@ 
-    ReadColumnFile[runName, 
-     "puncturetracker::pt_loc..asc", {9, 13 + nTrackers*1 + i, 
-      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]]]];
-
-(* General BH coordinates *)
-
-ReadBHCoordinates[runName_, i_] :=
-  If[HaveMinTracker[runName, i],
-    ReadMinTrackerCoordinates[runName, i],
-    ReadPunctureTrackerCoordinates[runName, i]];
-
-ReadBHCoordinate[runName_String, tracker_Integer, coord_Integer] :=
-  Module[{coords},
-    coords = ReadBHCoordinates[runName, tracker];
-    MapData[#[[coord]]&, coords]];
-
-ReadBHTrajectory[runName_String, tracker_Integer] :=
-  Map[Take[Last[#], 2] &, 
-    ToList[ReadBHCoordinates[runName, tracker]]];
-
-ReadBHTrajectory[runName_String] :=
-  Module[{coords1,coords2,rel},
-    coords1 = ReadBHCoordinates[runName, 0];
-    coords2 = ReadBHCoordinates[runName, 1];
-    rel = coords1 - coords2;
-    Map[Take[Last[#], 2] &, ToList[rel]]];
-
-ReadBHTrajectories[runName_String] :=
-  {ReadBHTrajectory[runName, 0], ReadBHTrajectory[runName, 1]};
-
-ReadBHSeparation[runName_String] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadBHCoordinates[runName, 0];
-    x1 = ReadBHCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
-    Return[rad];
-  ];
-
-ReadBHRadius[runName_String, i_] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadBHCoordinates[runName, i];
-    rad = MapData[Norm[#] &, x0];
-    Return[rad];
-  ];
-
-ReadBHPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
-    x0 = ReadBHCoordinates[runName, 0];
-    x1 = ReadBHCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
-    Return[Phase[xyTrans]];
-  ];
-
-ReadBHInclination[runName_String] :=
-  Module[{x0, x1, l, x0p, x1p, rp, theta},
-    x0 = ReadBHCoordinates[runName, 0];
-    x1 = ReadBHCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    x0p = Take[x0,l];
-    x1p = Take[x1,l];
-    rp = x0p - x1p;
-    theta = MapData[If[Norm[#] > 10^-4, ArcCos[#[[3]]/Norm[#]], 0.0] &, rp];
-    Return[Pi/2.0 - theta]];
-
-
-ReadBHPhase[runName_String, i_] :=
-  Module[{x0, xyTrans},
-    x0 = ReadBHCoordinates[runName, i];
-    xyTrans = MapData[Take[#,2] &, x0]; (* Project into xy plane *)
-    Return[Phase[xyTrans]];
-  ];
-
-ReadBHPhaseOfFrequency[run_] :=
-  Module[{phaseFreq, phaseFreqDeps, phaseOfFreq},
-    phaseFreq =
-     IntersectDataTables[{ReadBHPhase[run],
-       NDerivative@ReadBHPhase[run]}];
-    phaseFreqDeps = Reverse[DepVar /@ phaseFreq];
-    phaseOfFreq = MakeDataTable[MapThread[List, phaseFreqDeps]]];
-
-ReadBHSpeed[run_, bh_] :=
- Norm@NDerivative[ReadBHCoordinates[run, bh]];
-
 ReadADMMass[runName_String] :=
   ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
 
@@ -349,249 +146,6 @@ ReadYlmDecompPsi4Radii[runName_] :=
 
 HaveYlmDecompPsi4[runName_] :=
   ReadYlmDecompPsi4Radii[runName] =!= {};
-
-ReadRunSpeed[runName_] := 
-  If[FindRunFile[runName, "runstats.asc"] =!= {},
-     MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
-     ReadCarpetSpeed[runName]];
-
-ReadCarpetSpeed[runName_] :=
-  MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
-
-ReadCPUHours[runName_] := 
-  ReadWalltimeHours[runName] * ReadCores[runName];
-
-ReadWalltime[runName_] :=
-  Module[{segmentTime, files},
-    segmentTime[file_] :=
-      ReadColumnFile[file, {9, 14}][[-1,2]];
-    files = FindRunFile[runName, "carpet::timing..asc"];
-    Plus@@(segmentTime /@ files)];
-
-ReadWalltimeHours[runName_] := 
-  If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
-    ReadWalltime[runName]/3600.,
-    ReadCPUHours[runName] / ReadCores[runName] //N];
-
-ReadMemory[runName_] :=
-  If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
-     MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {2, 3}]],
-     MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
-
-ReadCores[runName_] :=
-  Module[{readList},
-  read[file_, args__] :=
-    If[FileType[file] =!= None, ReadList[file, args][[1]], Throw[file, FileNotFound]];
-  Catch[read[FileNameJoin[{RunDirectory, runName, "output-0000",
-                           "SIMFACTORY", "PROCS"}], Number],
-    FileNotFound, Function[{value, tag},
-      read[FileNameJoin[{RunDirectory, runName, "output-0000",
-                         "PROCS"}], Number]]]];
-
-CPUHoursPerDay[runName_] :=
-  ReadCores[runName] * 24;
-
-(*--------------------------------------------------------------------
-  Data conversion 
-  --------------------------------------------------------------------*)
-
-ReadMinTrackerRadius[runName_String] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadMinTrackerCoordinates[runName, 0];
-    x1 = ReadMinTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
-    Return[rad];
-  ];
-
-ReadMinTrackerPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
-    x0 = ReadMinTrackerCoordinates[runName, 0];
-    x1 = ReadMinTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
-    Return[Phase[xyTrans]];
-  ];
-
-ReadPunctureTrackerRadius[runName_String] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadPunctureTrackerCoordinates[runName, 0];
-    x1 = ReadPunctureTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
-    Return[rad];
-  ];
-
-ReadPunctureTrackerPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
-    x0 = ReadPunctureTrackerCoordinates[runName, 0];
-    x1 = ReadPunctureTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
-    Return[Phase[xyTrans]];
-  ];
-
-
-(*--------------------------------------------------------------------
-  Convergence
-  --------------------------------------------------------------------*)
-ResolutionCode[n_Integer] := 
- Module[{}, 
-  If[! (Mod[n, 4] === 0), 
-   Throw["Number of points must be a multiple of 4"]];
-  If[n < 16, Throw["Number of points must be at least 16"]];
-  If[n > 116, Throw["Number of points must be less than 116"]];
-  Return[FromCharacterCode[n/4 - 4 + 97]]];
-
-ResName[s_String, n_] := s <> ResolutionCode[n];
-
-ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
-  Module[{eq, eqs, f, f0, f1},
-    eq = f[h] == f0 + f1 h^p;
-    eqs = {eq /. h -> h1, eq /. h -> h2, eq /. h -> h3};
-    Return[C /. Solve[
-     f[h1] - f[h2] == C (f[h2] - f[h3]) 
-       /. (eqs /. Equal -> Rule), C][[1]] // N]];
-
-Options[LoadConvergenceSeries] = {Downsample -> False, Interpolate -> False};
-
-LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
-  Module[{downsample = Downsample /. {opts} /. Options[LoadConvergenceSeries],
-          interpolate = Interpolate /. {opts} /. Options[LoadConvergenceSeries],
-          fs,len,tables},
-    
-    fs = Map[reader, Map[runBase <> namer[#] &, ns]];
-    dts = Map[Spacing, fs];
-(*    Print[dts];*)
-    If[!(Length[Union[dts]] === 1) && !downsample && !interpolate,
-       downsample = True;
-(*       Print["Automatically downsampling"] *) ];
-
-    If[downsample,
-      gcd = Apply[GCD, ns];
-(*      Print[gcd];*)
-      dsFacs = Map[#/gcd&, ns];
-(*      Print[dsFacs];*)
-      fs = MapThread[Downsample[#1, #2] &, {fs, dsFacs}]];
-
-    If[interpolate,
-      dt = Apply[Min, dts];
-      fs = Map[MakeInterpolatingDataTable[#, dt] &, fs]];
-
-    len = Apply[Min, Map[Length, fs]];
-    tables = Map[Take[#, len] &, fs];
-    tsWithAttrs = MapThread[AddAttribute[#1, NPoints->#2] &, {tables, ns}];
-
-    Return[tsWithAttrs];
-  ];
-
-RescaledErrors[p_, ds:List[DataTable[__]..]] :=
-  Module[{d1, d2, d3, ns, hs, d12, d23, cm, ds2, dts},
-    dts = Map[Spacing, ds];
-    ranges = Map[DataTableRange, ds];
-    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
-      ds2 = ResampleDataTables[ds],
-      ds2 = ds];
-    {d1, d2, d3} = ds2;
-    ns = Map[ReadAttribute[#, NPoints] &, ds2];
-    hs = Map[1/#&, ns];
-    d12 = d1 - d2;
-    d23 = d2 - d3;
-    cm = ConvergenceMultiplier[hs, p];
-    Return[{d12/cm, d23}];
-  ];
-
-ConvergenceRateEquations = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp, {i, 1, 3}];
-ConvergenceRatePEquation = Eliminate[ConvergenceRateEquations, {CRf0, CRf1}];
-
-RichardsonExtrapolationEquation = Eliminate[Take[ConvergenceRateEquations, 2], {CRf1}];
-RichardExtrapolationExpression = CRf0 /. Solve[RichardsonExtrapolationEquation, CRf0][[1]];
-
-
-ConvergenceRateEquations3 = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp + CRf2 CRh[i]^(CRp+1), {i, 1, 3}];
-
-RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations3, {CRf1, CRf2}];
-RichardExtrapolationExpression3 = CRf0 /. Solve[RichardsonExtrapolationEquation3, CRf0][[1]];
-
-ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] := 
- Module[{rateEq, rate}, 
-  rateEq = 
-   ConvergenceRatePEquation /. {CRF[1] -> F1, CRF[2] -> F2, 
-      CRF[3] -> F3, CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3} // N;
-  rate = Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, FindRoot::lstol];
-  If[rate < 0.1 || rate > 14.9, Return[None], Return[rate]]];
-
-ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
-  Module[{eq, eqs, el, a0, a1},
-    eq = f == a0 + a1 h^p;
-    eqs = MapThread[eq /.{f -> #1, h -> #2} &, {fs, hs}];
-    el = Eliminate[eqs, {a0, a1}];
-    p /. FindRoot[el, {p, 1, 10}]];
-
-ConvergenceRate[ds:{DataTable[__]..}] :=
-  Module[{hs,dts,ds2},
-    dts = Map[Spacing, ds];
-    ranges = Map[DataTableRange, ds];
-    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
-      ds2 = ResampleDataTables[ds],
-      ds2 = ds];
-    hs = Map[1.0/ReadAttribute[#, NPoints] &, ds2];
-    MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
-
-ConvergenceRate[ds:{DataTable[__]..}, hs_List] :=
-  Module[{dts,ds2},
-    dts = Map[Spacing, ds];
-    ranges = Map[DataTableRange, ds];
-    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
-      ds2 = ResampleDataTables[ds],
-      ds2 = ds];
-    MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
-
-RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
-  Module[{},
-    Return[RichardExtrapolationExpression /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, 
-      CRh[1] -> h1, CRh[2] -> h2}//N];
-  ];
-
-RichardsonExtrapolate[{F1_, F2_}, {h1_, h2_}, p_] :=
-  Module[{},
-    Return[RichardExtrapolationExpression /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, 
-      CRh[1] -> h1, CRh[2] -> h2}//N];
-  ];
-
-
-RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
-  Module[{ns, hs, dts, ranges},
-    dts = Map[Spacing, ds];
-    ranges = Map[DataTableRange, ds];
-    If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
-      ds2 = ResampleDataTables[ds],
-      ds2 = ds];
-
-    ns = Map[ReadAttribute[#, NPoints] &, ds2];
-    hs = Map[1/#&, ns];
-    Return[MapThreadData[RichardsonExtrapolate[#1,#2, hs[[1]], hs[[2]], p] &, ds2]]];
-
-RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
-  RichardsonExtrapolate[{d2,d3},p];
-
-RichardsonExtrapolate[{F1_, F2_, F3_}, {h1_, h2_, h3_}, p_] :=
-  RichardsonExtrapolate[F2, F3, h2, h3, p];
-
-RichardsonExtrapolate3[F1_, F2_, F3_, h1_, h2_, h3_, p_] :=
-  Module[{},
-    Return[RichardExtrapolationExpression3 /. {CRp -> p, CRF[1] -> F1, CRF[2] -> F2, CRF[3] -> F3,
-      CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3}//N];
-  ];
-
-RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
-  Module[{ns, hs},
-    ns = Map[ReadAttribute[#, NPoints] &, ds];
-    hs = Map[1/#&, ns];
-    Return[MapThreadData[RichardsonExtrapolate3[#1,#2,#3, hs[[1]], hs[[2]], hs[[3]], p] &, {d1,d2,d3}]]];
-
-RichardsonExtrapolationError[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
-    RichardsonExtrapolate[Drop[ds,1], p] - RichardsonExtrapolate3[ds, p];
 
 (*--------------------------------------------------------------------
   Extrapolation
@@ -984,87 +538,7 @@ LocateMaximum[d_DataTable] :=
   tMax2 = 
    t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
        tMax}][[2]];
-  Return[tMax2]]
-
-(* Parameter file parsing *)
-
-unbreakBrokenStrings[lines2_List] :=
-  Module[{oddQuotes, positions, pairs, lines},
-    oddQuotes[s_String] := OddQ[Length[StringCases[s, "\""]]];
-    lines = lines2;
-    positions = First/@Position[lines, _?oddQuotes, {1}];
-    pairs = Partition[positions, 2];
-
-    Scan[Function[pair,
-      lines[[pair[[1]] ;; pair[[2]]]] =
-        StringJoin[Riffle[lines[[pair[[1]] ;; pair[[2]]]], " "]];
-      lines = Drop[lines, {pair[[1]]+1, pair[[2]]}]],
-
-      Reverse[pairs]];
-    Return[lines]];
-
-DefineMemoFunction[ParseParameterFile[from_String],
- Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName, fileNames},
-  (* Is "from" a full parameter file name? *)
-  If[StringMatchQ[from, __ ~~ ".par"],
-    fileNames = {from},
-(*    fileNames = FindRunFile[from, from <> ".par"];*)
-    (* Is "from" a run name? *)
-    fileNames = FindRunFilesFromPattern[from, "*.par"];
-    If[Length[fileNames] == 0,
-      fileNames = FindRunFile[from, from <> "-1.par"];
-      If[Length[fileNames] == 0,
-        Throw["Cannot find parameter file " <> ToString[from]]],
-      fileNames = FindRunFile[from, fileNames[[1]]]]];
-  fileName = First[fileNames];
-  lines = ReadList[fileName, String];
-  removeWhiteSpace[t_] := 
-   StringReplace[
-    t, (StartOfString ~~ Whitespace) | (Whitespace ~~ EndOfString) :> 
-     ""];
-
-  lines = unbreakBrokenStrings[lines];
-
-  parseLine[s_] :=
-   If[StringMatchQ[s, RegularExpression["[ \t]*#.*"]],
-    Comment[s],
-    If[StringMatchQ[
-      s, (Whitespace | StartOfString) ~~ 
-       "ActiveThorns" ~~ (Whitespace | "=") ~~ __, IgnoreCase -> True],
-     ActiveThorns[
-      StringSplit[
-       StringCases[s, "\"" ~~ thorns__ ~~ "\"" -> thorns][[1]]]],
-     If[StringMatchQ[s, RegularExpression[".*::.*=.*"]],
-      ParameterSetting[
-       ToLowerCase[
-        removeWhiteSpace[
-         StringCases[s, param__ ~~ "=" ~~ val__ -> param][[1]]]], 
-       removeWhiteSpace[
-        StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
-      Throw["Unrecognized line in parameter file: " <> s]]]];
-  Map[parseLine, lines]
-  ]];
-
-LookupParameter[parFile_List, name_, default_:None] :=
- Module[{l},
-  l = Cases[parFile, ParameterSetting[ToLowerCase[name], x_] -> x];
-  If[l === {} && default =!= None, Return[default]];
-  If[Length[l] == 0, Throw["Parameter " <> name <> " not found"]];
-  First[l]];
-
-LookupParameter[from_String, name_, default_:None] :=
-  Module[{},
-    (* Assume the parameter file is named after the run *)
-    LookupParameter[ParseParameterFile[from], name, default]
-  ];
-
-FindParameters[parFile_String, pattern_] :=
-  FindParameters[ParseParameterFile[parFile], pattern];
-
-FindParameters[parFile_List, pattern_] :=
-  Module[{parameters},
-    parameters = Cases[parFile, ParameterSetting[name_,value_] -> name];
-    Select[parameters, StringMatchQ[#, pattern, IgnoreCase->True] &]];
+  Return[tMax2]];
 
 GridSpacingOnLevel[runName_, l_] :=
   Module[{h0},
@@ -1131,112 +605,6 @@ RunCost[length_, speed_, nProcs_] :=
  {CPUHours -> nProcs length/speed // N,
   WallTimeDays -> length/speed/24 // N};
 
-ReadIHSpin[runName_, hn_] :=
- MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
-
-ReadIHSpin[runName_, hn_, dir_] :=
- MakeDataTable[Map[{#[[1]], #[[dir+1]]} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
-
-ReadIHSpinX[runName_, hn_] :=
- MakeDataTable[Map[{#[[1]], #[[2]]} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
-
-ReadIHSpinY[runName_, hn_] :=
- MakeDataTable[Map[{#[[1]], #[[3]]} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
-
-ReadIHSpinPhase[runName_, hn_] :=
- Module[{spin, sx, sy},
-  spin = ReadIHSpin[runName, hn];
-  sx = MakeDataTable[Map[{#[[1]], #[[2]][[1]]} &, ToList[spin]]];
-  sy = MakeDataTable[Map[{#[[1]], #[[2]][[2]]} &, ToList[spin]]];
-  Phase[sx + I sy]];
-
-coordString[dir_] := {"x", "y", "z"}[[dir]];
-
-ReadIsolatedHorizonSpin[runName_, hn_, dir_] :=
-  Module[{},
-    If[FindRunFile[runName,"isolatedhorizon::ih_scalars..asc"] =!= {},
-       MakeDataTable@ReadColumnFile[runName, "isolatedhorizon::ih_scalars..asc", 
-         {"time", "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]"}],
-       MakeDataTable@ReadColumnFile[runName, 
-         "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]..asc", {9, 13}]]];
-
-ReadIsolatedHorizonSpin[runName_, hn_] :=
-  Module[{spins},
-    spins = Table[ReadIsolatedHorizonSpin[runName, hn, dir], {dir, 1, 3}];
-    MapThreadData[{#1,#2,#3} &, spins]];
-
-ReadAHMass[runName_, hn_] :=
- Module[{},
-  MakeDataTable[
-   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 27}]]];
-
-DefineMemoFunction[ReadAHRadius[runName_, hn_],
- Module[{},
-  MakeDataTable[
-   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 8}]]]];
-
-DefineMemoFunction[ReadAHMaxRadius[runName_, hn_],
- Module[{},
-  MakeDataTable[
-   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 7}]]]];
-
-DefineMemoFunction[ReadAHMinRadius[runName_, hn_],
- Module[{},
-  MakeDataTable[
-   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, 6}]]]];
-
-DefineMemoFunction[ReadAHColumn[runName_, hn_, col_],
- Module[{},
-  MakeDataTable[
-   ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, col}]]]];
-
-DefineMemoFunction[ReadAHColumns[runName_, hn_, cols_List],
- Module[{},
-   list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", Prepend[cols,2]];
-   list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-   Return[MakeDataTable[list2, {RunName -> runName}]]]];
-
-ReadAHQuadrupoleXX[runName_, hn_] :=
-  ReadAHColumn[runName, hn, 9];
-
-ReadAHQuadrupoleXY[runName_, hn_] :=
-  ReadAHColumn[runName, hn, 10];
-
-ReadAHQuadrupoleXZ[runName_, hn_] :=
-  ReadAHColumn[runName, hn, 11];
-
-ReadAHQuadrupoleYY[runName_, hn_] :=
-  ReadAHColumn[runName, hn, 12];
-
-ReadAHQuadrupoleYZ[runName_, hn_] :=
-  ReadAHColumn[runName, hn, 13];
-
-ReadAHQuadrupoleZZ[runName_, hn_] :=
-  ReadAHColumn[runName, hn, 14];
-
-DefineMemoFunction[ReadAHCentroid[runName_, hn_],
- Module[{},
-   list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
-   list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-   Return[MakeDataTable[list2, {RunName -> runName}]]]];
-
-ReadAHSeparation[runName_String] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadAHCentroid[runName, 1];
-    x1 = ReadAHCentroid[runName, 2];
-    l = Min[Length[x0],Length[x1]];
-    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
-    Return[rad];
-  ];
-
-DefineMemoFunction[ReadAHCentroidCoord[runName_, hn_, dir_],
- Module[{},
-   list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,2+dir}];
-   Return[MakeDataTable[list, {RunName -> runName}]]]];
 
 AbsOfPhase[d_DataTable, {t1_, t2_}] :=
   FunctionOfPhase[Abs[d], Phase[d], {t1,t2}];
@@ -1319,29 +687,6 @@ ExportGridStructure[run_String, dir_String] :=
   If[FileType[dir] =!= Directory, CreateDirectory[dir]];
   Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
 
-PresentationCostAnalysis[prefix_String, T_, tMerger_:None, mergerFactor_:2] :=
-  Module[{table},
-    table = CostAnalysis[prefix,T,tMerger,mergerFactor];
-    Grid@Prepend[Drop[table, 1], Style[#, Bold] & /@ table[[1]]]]
-
-CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
- Module[{runs, costElems, header, tMerger},
-  tMerger = If[tMergerp === None, T, tMergerp];
-  runs = Last /@ 
-    FileNameSplit /@ FileNames[prefix <> "_*", RunDirectory];
-  costElems[run_] :=
-   Module[{speed, cores, days, cpuHours},
-    speed = Catch[Last@DepVar@ReadRunSpeed[run]];
-    If[! NumberQ[speed], Return[None]];
-    cores = ReadCores[run];
-    days = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) /24.0;
-    cpuHours = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) * cores;
-    {cores, speed, days, cpuHours}];
-  data = Sort[
-    Select[Map[costElems, runs], # =!= None &], #1[[1]] < #2[[1]] &];
-  header = {"Cores", "Speed", "Days", "CPU Hours"};
-  Prepend[data, header]];
-
 PercentageDifference[ap_,bp_] :=
   Module[{a,b},
     {a,b} = Sort[{ap,bp}];
@@ -1357,13 +702,6 @@ AlignMaxima[ds_List] :=
   Module[{maxima},
    maxima = Map[LocateMaximum, ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
-
-ChristodoulouMass[run_, ahn_, ihn_] :=
- Module[{mIrr, S},
-  mIrr = ReadAHMass[run, ahn];
-  S = MapData[Norm, ReadIsolatedHorizonSpin[run, ihn]];
-  {mIrr, S} = ResampleDataTables[{mIrr, S}];
-  Sqrt[mIrr^2 + S^2/(4 mIrr^2)]];
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},

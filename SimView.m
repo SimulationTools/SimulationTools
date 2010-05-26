@@ -1,5 +1,5 @@
 
-BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "Statistics`"}];
 
 SimView;
 
@@ -47,6 +47,16 @@ SimView[runNames_List] :=
     r = If[rads === {}, 0, First[rads]];
     SimView[runNames, r]];
 
+memoryPlot[runNames_List, size_] :=
+  Module[{swaps, mems},
+   swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns]];
+   If[StringQ[swaps], swaps = {{0,0}}];
+   mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns]];
+   If[StringQ[mems], mems = {{0,0}}];
+
+   Show[ListLinePlot[mems], ListLinePlot[swaps, PlotStyle->Dashed],
+     PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory", ImageSize -> size]];
+
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
     freqPsi4, segments, cost, costTable, phases, lastPhase, phaseDiffs},
@@ -55,9 +65,7 @@ SimView[runNames_List, r_] :=
   speed = Catch[
    ListLinePlot[Map[ReadRunSpeed, runNames], 
     PlotRange -> {0, All}, PlotLabel -> "Speed", ImageSize -> size]];
-  Catch[memory = 
-   ListLinePlot[Map[ReadMemory, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Memory", ImageSize -> size]];
+  memory = memoryPlot[runNames, size];
   trajectories = Catch[
    ListLinePlot[
     Flatten[Map[

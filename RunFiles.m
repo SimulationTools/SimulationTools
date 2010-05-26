@@ -172,26 +172,31 @@ stripWhitespace[s_String] :=
 
 CarpetASCIIColumns[fileName_String] :=
  Module[{lines, descLine, colDescs, descLine1, descLine2},
+  If[FileType[fileName] === None,
+    Throw["CarpetASCIIColumns: File " <> fileName <> " not found"]];
   lines = ReadList[fileName, String, 20];
-  descLine1 = 
-   First[Select[lines, 
-     StringMatchQ[#, StartOfLine ~~ "# column format" ~~ __] &]];
-  descLine2 = 
-   First[Select[lines, 
-     StringMatchQ[#, StartOfLine ~~ "# data columns" ~~ __] &]];
-  descLine = descLine2 <> " " <> descLine1;
+  colLines = Select[lines,
+     StringMatchQ[#, StartOfLine ~~ "#" ~~ Whitespace ~~ (NumberString | "data columns" | "column format") ~~ ":" ~~ __] &];
+  descLine = StringJoin[Riffle[colLines, " "]];
   colDescs = 
    StringCases[descLine, 
     col : (DigitCharacter ..) ~~ ":" ~~ 
-      id : Shortest[__ ~~ (Whitespace|EndOfString)] :> (stripWhitespace[id] -> ToExpression@col)]]
+      id : Shortest[__ ~~ (Whitespace|EndOfString)] :> (stripWhitespace[id] -> ToExpression@col)];
+   colDescs];
 
 CarpetASCIIColumns[run_String, fileName_String] :=
- CarpetASCIIColumns[First@FindRunFile[run, fileName]];
+  Module[{files = FindRunFile[run, fileName]},
+    If[files === {},
+      Throw["Cannot find file " <> fileName <> " in run " <> run]];
+    CarpetASCIIColumns[First@files]];
 
 ColumnNumbers[run_String, fileName_String, colIDs_] :=
- Module[{colMap},
+ Module[{colMap, result},
   colMap = CarpetASCIIColumns[run, fileName];
-  colIDs /. colMap];
+  result = colIDs /. colMap;
+  If[Or@@(StringQ /@ result),
+    Throw["ColumnNumbers: Unknown columns: " <> ToString[result], UnknownColumns]];
+  result];
 
 End[];
 
