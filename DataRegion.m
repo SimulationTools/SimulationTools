@@ -133,6 +133,10 @@ DataRegion/:Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1,
 
 DataRegion/:Times[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1*data2]
 
+DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data1, pattern, opts];
+
+DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, positions];
+
 replaceRule[list_List, key_ -> newValue_] :=
   list /. (key -> _) :> (key -> newValue);  
 
