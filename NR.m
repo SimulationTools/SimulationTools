@@ -2,7 +2,7 @@
 (* A package for dealing with numerical relativity data *)
 
 BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`", 
-  "Horizons`", "Parameters`", "Statistics`", "BHCoordinates`",
+  "Horizons`", "Parameters`", "SystemStatistics`", "BHCoordinates`",
   "Convergence`"}];
 
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";

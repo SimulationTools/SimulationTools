@@ -1,5 +1,5 @@
 
-BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "Statistics`"}];
+BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`"}];
 
 SimView;
 

@@ -1,5 +1,5 @@
 
-BeginPackage["Statistics`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`"}];
 
 ReadRunSpeed;
 RunCost::usage = "RunCost[length, speed, nprocs] returns information about the cost of a run.";

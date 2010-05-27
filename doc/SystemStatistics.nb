@@ -10,21 +10,22 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[     31531,        679]
-NotebookOptionsPosition[     29642,        606]
-NotebookOutlinePosition[     29981,        621]
-CellTagsIndexPosition[     29938,        618]
+NotebookDataLength[     31698,        681]
+NotebookOptionsPosition[     29808,        608]
+NotebookOutlinePosition[     30147,        623]
+CellTagsIndexPosition[     30104,        620]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Statistics package", "Title",
+Cell["SystemStatistics package", "Title",
  CellChangeTimes->{{3.459169172333535*^9, 3.4591691768425713`*^9}, {
   3.459226336613926*^9, 3.459226338129665*^9}, {3.4802379257884417`*^9, 
   3.480237925916031*^9}, {3.48318237922112*^9, 3.483182380650158*^9}, {
-  3.4831838311607313`*^9, 3.483183832484976*^9}}],
+  3.4831838311607313`*^9, 3.483183832484976*^9}, {3.483936673947528*^9, 
+  3.4839366748094397`*^9}}],
 
 Cell["by Ian Hinder", "Subtitle",
  CellChangeTimes->{{3.459169180066674*^9, 3.45916918146587*^9}}],
@@ -35,12 +36,12 @@ Cell["Initialisation", "Section",
  CellChangeTimes->{{3.4591623020595293`*^9, 3.459162304256665*^9}}],
 
 Cell[BoxData[
- RowBox[{"<<", "\"\<Statistics.m\>\""}]], "Input",
+ RowBox[{"<<", "\"\<SystemStatistics.m\>\""}]], "Input",
  CellChangeTimes->{{3.4591583443806057`*^9, 3.459158346652014*^9}, {
    3.459226343330822*^9, 3.459226345346394*^9}, 3.476103481704718*^9, 
    3.476512875936967*^9, {3.480237955803461*^9, 3.480237956672117*^9}, {
    3.4831823830277452`*^9, 3.4831823859311037`*^9}, {3.483183869383099*^9, 
-   3.483183870814784*^9}}]
+   3.483183870814784*^9}, {3.483936676666975*^9, 3.483936678241653*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -49,7 +50,7 @@ Cell["Documentation", "Section",
  CellChangeTimes->{{3.459166350518454*^9, 3.459166352004354*^9}}],
 
 Cell["\<\
-The Statistics package contains functions for analysing performance and \
+The SystemStatistics package contains functions for analysing performance and \
 system statistics for simulations.\
 \>", "Text",
  CellChangeTimes->{{3.4591663565326357`*^9, 3.45916646538999*^9}, {
@@ -59,7 +60,8 @@ system statistics for simulations.\
   3.460186366749649*^9}, {3.4761026094896393`*^9, 3.4761026544869223`*^9}, {
   3.480237960715526*^9, 3.4802380548596582`*^9}, {3.4831823913958673`*^9, 
   3.48318240391289*^9}, {3.483182645044752*^9, 3.48318264840099*^9}, {
-  3.4831838838712683`*^9, 3.48318389786043*^9}}]
+  3.4831838838712683`*^9, 3.48318389786043*^9}, {3.483936680418375*^9, 
+  3.4839366823933496`*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -621,62 +623,62 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[567, 22, 299, 4, 76, "Title"],
-Cell[869, 28, 98, 1, 46, "Subtitle"],
+Cell[567, 22, 356, 5, 76, "Title"],
+Cell[926, 29, 98, 1, 46, "Subtitle"],
 Cell[CellGroupData[{
-Cell[992, 33, 101, 1, 67, "Section"],
-Cell[1096, 36, 380, 6, 27, "Input"]
+Cell[1049, 34, 101, 1, 67, "Section"],
+Cell[1153, 37, 432, 6, 27, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1513, 47, 98, 1, 67, "Section"],
-Cell[1614, 50, 688, 11, 26, "Text"]
+Cell[1622, 48, 98, 1, 67, "Section"],
+Cell[1723, 51, 745, 12, 41, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2339, 66, 289, 4, 67, "Section"],
-Cell[2631, 72, 149, 3, 27, "Input"],
+Cell[2505, 68, 289, 4, 67, "Section"],
+Cell[2797, 74, 149, 3, 27, "Input"],
 Cell[CellGroupData[{
-Cell[2805, 79, 121, 1, 34, "Subsection"],
+Cell[2971, 81, 121, 1, 34, "Subsection"],
 Cell[CellGroupData[{
-Cell[2951, 84, 162, 3, 27, "Input"],
-Cell[3116, 89, 173, 3, 27, "Output"]
+Cell[3117, 86, 162, 3, 27, "Input"],
+Cell[3282, 91, 173, 3, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3326, 97, 251, 6, 27, "Input"],
-Cell[3580, 105, 17091, 286, 248, "Output"]
+Cell[3492, 99, 251, 6, 27, "Input"],
+Cell[3746, 107, 17091, 286, 248, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[20720, 397, 136, 1, 34, "Subsection"],
+Cell[20886, 399, 136, 1, 34, "Subsection"],
 Cell[CellGroupData[{
-Cell[20881, 402, 133, 2, 27, "Input"],
-Cell[21017, 406, 111, 1, 27, "Output"]
+Cell[21047, 404, 133, 2, 27, "Input"],
+Cell[21183, 408, 111, 1, 27, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[21177, 413, 108, 1, 34, "Subsection"],
+Cell[21343, 415, 108, 1, 34, "Subsection"],
 Cell[CellGroupData[{
-Cell[21310, 418, 134, 2, 27, "Input"],
-Cell[21447, 422, 93, 1, 27, "Output"]
+Cell[21476, 420, 134, 2, 27, "Input"],
+Cell[21613, 424, 93, 1, 27, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[21589, 429, 131, 1, 34, "Subsection"],
+Cell[21755, 431, 131, 1, 34, "Subsection"],
 Cell[CellGroupData[{
-Cell[21745, 434, 359, 9, 27, "Input"],
-Cell[22107, 445, 5629, 98, 242, "Output"]
+Cell[21911, 436, 359, 9, 27, "Input"],
+Cell[22273, 447, 5629, 98, 242, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[27773, 548, 308, 8, 27, "Input"],
-Cell[28084, 558, 675, 12, 58, "Message"],
-Cell[28762, 572, 226, 6, 58, "Output"]
+Cell[27939, 550, 308, 8, 27, "Input"],
+Cell[28250, 560, 675, 12, 58, "Message"],
+Cell[28928, 574, 226, 6, 58, "Output"]
 }, Open  ]],
-Cell[29003, 581, 186, 4, 26, "Text"]
+Cell[29169, 583, 186, 4, 26, "Text"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[29226, 590, 111, 1, 34, "Subsection"],
+Cell[29392, 592, 111, 1, 34, "Subsection"],
 Cell[CellGroupData[{
-Cell[29362, 595, 135, 2, 27, "Input"],
-Cell[29500, 599, 90, 1, 27, "Output"]
+Cell[29528, 597, 135, 2, 27, "Input"],
+Cell[29666, 601, 90, 1, 27, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
