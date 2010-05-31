@@ -6,7 +6,7 @@ ListLinePlotWithLegend;
 ListLogLinearPlotWithLegend;
 PlotLegend;
 LegendPosition;
-DynamicListPlot;
+DynamicListLinePlot;
 PresentationListLinePlot;
 PresentationPlotStyles;
 PresentationPlotColors;
@@ -136,7 +136,7 @@ coordsToRanges[{p1x_, p1y_}, {p2x_, p2y_}] :=
  {{Min[p1x, p2x], 
    Max[p1x, p2x]}, {Min[p1y, p2y], Max[p1y, p2y]}};
 
-DynamicListPlot[data_, opts___] := 
+DynamicListLinePlot[data_, opts___] :=
  DynamicModule[{dragging, p1, p2, plotRange, history, inDouble, 
    doubleStart, logScale, joined, controls, delta, mp, 
    doubleTime = 0.5},
