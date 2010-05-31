@@ -48,7 +48,7 @@ ReadPsi4Modes;
 ExportWaveform;
 ExportBHCoords;
 ExportBHRelativeCoords;
-ExportRun;
+ExportRun::usage = "ExportRun[run, dir] exports run to dir";
 ExportGridStructure;
 FunctionOfPhase;
 AbsOfPhase;
