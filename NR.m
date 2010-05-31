@@ -6,6 +6,7 @@ BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`",
   "Convergence`"}];
 
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
+ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
 ReadMultipolePsi4::usage = "ReadMultipolePsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run using the output of the Multipole thorn.";
 ExtrapolateScalarFull;
 ExtrapolateScalar;
@@ -93,6 +94,22 @@ DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ
   If[HaveYlmDecompPsi4[runName],
     ReadYlmDecompPsi4[runName, l, m, rad],
     ReadMultipolePsi4[runName, l, m, rad]]];
+
+ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
+ Module[{psi4, rAmp, rAmpTb, t2, phase, rads},
+
+  (* Two problems with this function: (1) The default radius is not
+     determined from the available radii.  This is because in my runs,
+     I commonly have a useless one at r = 30 which I don't care about.
+     (2) The threshold is not adjusted for the mode number.  Probably
+     this is not possible to fix in a general way.  *)
+
+  psi4 = ReadPsi4[run, l, l, r];
+  rAmp = r Abs[psi4];
+  rAmpTb = ToList[rAmp];
+  t2 = Last[Select[rAmpTb, #[[2]] > threshold &]][[1]];
+  phase =
+   DataTableInterval[Phase[psi4], {rAmpTb[[1, 1]] - 100.0, t2}]];
 
 ReadYlmDecompPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
   Module[{fileName, threeCols, psi4},
