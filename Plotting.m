@@ -66,8 +66,9 @@ ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
     pos = OptionValue[LegendPosition];
     {posx, posy} = pos;
     f = 0.05;
-    offset = 10 {If[posx === Right, -1, 1], If[posy === Top, -1, 1]};
-    scale = {If[posx === Right, 1-f, f], If[posy === Bottom, f, 1-f]};
+    offset = 10 {Switch[posx, Right, -1, Left, 1, Center, 0, _, Throw["Unknown position"]], If[posy === Top, -1, 1]};
+    scale = {Switch[posx, Right, 1-f, Left, f, Center, 1, _, Throw["Unknown position"]], If[posy === Bottom, f, 1-f]};
+
     labelStyle = OptionValue[LabelStyle];
     ListLinePlot[args, PlotStyle -> style,
       FilterRules[{opts}, Options[ListLinePlot]],
