@@ -9,6 +9,10 @@ FindRunFilesFromPattern;
 StandardOutputOfRun;
 CarpetASCIIColumns;
 MergeFiles;
+SegmentStartDate;
+SegmentEndDate;
+SegmentDuration;
+RunDutyCycle;
 
 Begin["`Private`"];
 
@@ -197,6 +201,24 @@ ColumnNumbers[run_String, fileName_String, colIDs_] :=
   If[Or@@(StringQ /@ result),
     Throw["ColumnNumbers: Unknown columns: " <> ToString[result], UnknownColumns]];
   result];
+
+SegmentStartDate[dir_] :=
+  FileDate[FileNameJoin[{dir, "/carpet::timing..asc"}]];
+
+SegmentEndDate[dir_] :=
+  Module[{parFile},
+    parFile = First[FileNames["*.par", dir]];
+    FileDate[parFile]];
+
+SegmentDuration[dir_] :=
+  DateDifference[SegmentEndDate[dir], SegmentStartDate[dir], "Second"][[1]];
+
+RunDutyCycle[run_] :=
+  Module[{segs = FindRunSegments[run], totalRunTime, totalElapsedTime},
+    totalRunTime = Plus@@(SegmentDuration /@ segs);
+    totalElapsedTime = DateDifference[SegmentStartDate[First[segs]],
+                                      SegmentEndDate[Last[segs]], "Second"][[1]];
+    totalRunTime / totalElapsedTime //N];
 
 End[];
 
