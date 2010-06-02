@@ -3,7 +3,7 @@
 
 BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`", 
   "Horizons`", "Parameters`", "SystemStatistics`", "BHCoordinates`",
-  "Convergence`", "Plotting`"}];
+  "Convergence`", "Plotting`", "DataRegion`"}];
 
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
