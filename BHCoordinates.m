@@ -23,6 +23,7 @@ ReadBHRadius;
 ReadBHPhaseOfFrequency;
 ReadBHInclination;
 ReadBHSpeed;
+BHCoordinateMergerTime::usage = "BHCoordinateMergerTime[run,eps] returns the time at which the BHs in run reach a separation of eps (eps defaults to 0.01 if omitted).";
 
 Begin["`Private`"];
 
@@ -201,6 +202,11 @@ ReadPunctureTrackerPhase[runName_String] :=
     xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
     Return[Phase[xyTrans]];
   ];
+
+BHCoordinateMergerTime[run_, eps_:0.01] :=
+ Module[{sep},
+  sep = ReadBHSeparation[run];
+  Select[ToList@sep, #[[2]] > eps &][[-1, 1]]]
 
 End[];
 
