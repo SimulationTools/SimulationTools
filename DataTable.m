@@ -170,6 +170,14 @@ RedefineAsDataTable[Re[d:DataTable[___]],
 RedefineAsDataTable[Im[d:DataTable[___]],
   MapData[Im, d]];
 
+RedefineAsDataTable[FourierDCT[d_DataTable,args___],
+  Module[{df, fs},
+   (* I think these frequencies are right *)
+   df = 2 Pi/-Subtract @@ DataTableRange[d];
+   fs = Table[i df, {i, 0, Length[d] - 1}];
+   MakeDataTable@MapThread[List, {fs, Abs@FourierDCT[DepVar@d,args]}]/
+    N[Sqrt[Length[d]]]]];
+
 InterpolateWhereFunction[d_DataTable, f_] :=
   Module[{dInterpolater},
   dInterpolater=Interpolation@MakeDataTable@DeleteCases[ToList[d],_?f];
