@@ -396,6 +396,14 @@ Monotonise[{{x1_, y1_}, {x2_, y2_}, rest___}] :=
 Monotonise[d_DataTable] :=
  MakeDataTable[Monotonise[ToList[d]]];
 
+FourierDT[d_DataTable] :=
+  Module[{amp, freq},
+   amp = Fourier[DepVar[d]];
+   freq = (#/(Spacing[d]*Length[ToList[d]])) & /@ 
+   	Range[0, Length[ToList[d]] - 1];
+   Return[MakeDataTable[Transpose[{freq, amp}]]];
+   ];
+
 End[];
 
 EndPackage[];
