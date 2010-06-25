@@ -13,7 +13,7 @@ AsciiTimeOfIndex::usage = "AsciiTimeOfIndex[data,i] returns the time,
 t, of the ith element of data where data is in the form {{t, {{x,
 f}...}}...}";
 
-ReadCarpetASCII1D::usage = "ReadCarpetASCII1D[filename, level, dir] reads a 1D CarpetIOASCII output file.  It selects the given refinement level and assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times.  If the 1D data is not contiguous, for example if there is a gap in this refinement level, the behaviour of the resulting DataTable objects with other DataTable functions is undefined.";
+ReadCarpetASCII1D::usage = "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times.";
 
 Begin["`Private`"];
 
