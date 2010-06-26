@@ -55,6 +55,8 @@ AbsOfPhase;
 ReadPunctureADMMasses;
 ReadPunctureADMMasses2;
 PercentageDifference;
+NumCycles::usage = "NumCycles[run,start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.
+NumCycles[psi4,start] operates on the DataTable psi4 instead of run."
 
 ReadHamiltonianConstraintNorm;
 
@@ -708,6 +710,21 @@ PercentageDifference[ap_,bp_] :=
   Module[{a,b},
     {a,b} = Sort[{ap,bp}];
     100 Abs[a-b]/a];
+
+NumCycles[sim_String, start_] := Module[{psi4, rads, r},
+  rads = ReadPsi4Radii[sim];
+  r = If[rads === {}, 0, First[rads]];
+  psi4 = ReadPsi4[sim, 2, 2, r];
+  NumCycles[psi4, start]
+  ]
+
+NumCycles[psi4_DataTable, start_] :=
+ Module[{mergertime, phasei, cycles},
+  mergertime = LocateMaximum[Abs[psi4]];
+  phasei = Interpolation[Phase[psi4]];
+  cycles = (phasei[start] - phasei[mergertime])/(2 \[Pi] );
+  cycles
+  ]
 
 ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
