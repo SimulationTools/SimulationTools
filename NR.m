@@ -62,6 +62,7 @@ ReadHamiltonianConstraintNorm;
 
 ReadWaveformFile;
 AlignMaxima;
+AlignMaximaOfAbs;
 ReadFineTimeStep;
 ReadTimeRange;
 ShiftPhase;
@@ -735,6 +736,11 @@ ReadWaveformFile[file_] :=
 AlignMaxima[ds_List] :=
   Module[{maxima},
    maxima = Map[LocateMaximum, ds];
+   MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
+
+AlignMaximaOfAbs[ds_List] :=
+  Module[{maxima},
+   maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
 ReadPunctureADMMassesFromFiles[files_List] :=
