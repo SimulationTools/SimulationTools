@@ -66,6 +66,7 @@ AlignMaximaOfAbs;
 ReadFineTimeStep;
 ReadTimeRange;
 ShiftPhase;
+PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
 
 ReturnValue;
 FittedFunction;
@@ -639,6 +640,16 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
   dOfphiTb = 
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
   AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
+
+PhaseOfFrequency[psi4_] :=
+ Module[{phase1, freq1, phaseOfFreq1},
+  phase1 = -Phase[psi4];
+  freq1 = NDerivative[phase1];
+  phaseOfFreq1 = 
+   MakeDataTable@
+    MapThread[List, 
+     Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
+  ];
 
 ShiftPhase[d_DataTable, dp_] :=
   MapData[Exp[I dph] # &, d];
