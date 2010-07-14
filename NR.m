@@ -73,6 +73,7 @@ FittedFunction;
 Eccentricity;
 FitEcc;
 FitParameters;
+Continuous;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -243,7 +244,10 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, opts___] :=
 ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}, opts___] :=
   ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &], opts];
 
-AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
+
+Options[AlignPhases] = {Continuous -> False};
+
+AlignPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
   Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted,
           ranges, min, max, constTb},
     If[Length[phaseTbs] < 2, Return[phaseTbs]];
@@ -255,7 +259,11 @@ AlignPhases[phaseTbs:{DataTable[__] ...}, t_] :=
 
     phaseFns = Map[Interpolation, phaseTbs];
     refPhases = Map[#[t]&, phaseFns];
-    adjustments = Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases];
+    adjustments =
+      If[!OptionValue[Continuous],
+        Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases],
+        refPhases];
+
     constTb[a_, d_DataTable] := 
       MapData[a&,d];
 
