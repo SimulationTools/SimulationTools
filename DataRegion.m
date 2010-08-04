@@ -258,7 +258,7 @@ DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims
 
  dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
 
- plotFunction[GetData[v], args,
+ plotFunction[If[plotFunction===ArrayPlot, Reverse, Identity]@GetData[v], args,
   DataRange -> dataRange]
 ];
 
