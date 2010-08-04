@@ -8,6 +8,16 @@ ChartTimersFromRun;
 TimersFile;
 IndependentTimersFromRun;
 ParseTimersFileFromRun;
+CTGammaTimerCollections =
+{"CTGamma RHS" -> {"CTGEvolution: CTGEvolution_CalcRHS_detg",
+    "CTGGauge: ShiftGammaDriver", "CTGGauge: LapseBonaMasso"},
+  "CTGamma SYNC" -> {"CTGEvolution: CTGEvolution_SelectBoundaries",
+    "CTGConstraints: CTGConstraints_SelectBoundaries",
+    "CTGGauge: CTGGauge_SelectBoundaries_GammaDriver",
+    "CTGGauge: CTGGauge_SelectBoundaries_Lapse"} ,
+  "CTGamma radiative bc" -> {"CTGEvolution: \
+CTGEvolution_ApplyRadiativeBC",
+    "CTGGauge: CTGGauge_ApplyRadiativeBC_GammaDriver"}};
 
 Begin["`Private`"];
 
