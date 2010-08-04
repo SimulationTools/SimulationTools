@@ -53,6 +53,7 @@ MapDataRegion;
 FilterNaNs;
 NaNQ;
 DataRegionContourPlot;
+MapThreadDataRegion;
 
 Begin["`Private`"];
 
@@ -603,6 +604,14 @@ FilterNaNs[d_DataRegion] :=
 
 NaNQ[x_] :=
  Round[x] == -2147483648;
+
+MapThreadDataRegion[f_, drs_] :=
+  Module[{attrs, datas, newData},
+    attrs = GetAttributes[First[drs]];
+    datas = GetData /@ drs;
+    newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
+    DataRegion[attrs, newData]];
+
 End[];
 
 EndPackage[];
