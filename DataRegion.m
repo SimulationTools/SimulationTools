@@ -55,6 +55,8 @@ NaNQ;
 DataRegionContourPlot;
 MapThreadDataRegion;
 
+ScaledColorFunction;
+
 Begin["`Private`"];
 
 (* DataRegion object low-level implementation; this is where we define
@@ -620,3 +622,6 @@ MapThreadDataRegion[f_, drs_] :=
 End[];
 
 EndPackage[];
+
+ScaledColorFunction[name_, {min_, max_}] :=
+  (ColorData[name][(# - min)/(max - min)] &);
