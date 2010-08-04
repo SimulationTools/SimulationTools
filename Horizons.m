@@ -22,6 +22,7 @@ ReadAHQuadrupoleYZ;
 ReadAHQuadrupoleZZ;
 ChristodoulouMass;
 ReadAHSeparation;
+ReadAHPhase;
 
 Begin["`Private`"];
 
@@ -138,6 +139,16 @@ ChristodoulouMass[run_, ahn_, ihn_] :=
   S = MapData[Norm, ReadIsolatedHorizonSpin[run, ihn]];
   {mIrr, S} = ResampleDataTables[{mIrr, S}];
   Sqrt[mIrr^2 + S^2/(4 mIrr^2)]];
+
+ReadAHPhase[runName_String] :=
+  Module[{x0, x1, rad,l},
+    x0 = ReadAHCentroid[runName, 1];
+    x1 = ReadAHCentroid[runName, 2];
+    l = Min[Length[x0],Length[x1]];
+    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
+    Return[Phase[xyTrans]];
+  ];
+
 
 End[];
 
