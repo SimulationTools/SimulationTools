@@ -72,6 +72,8 @@ ChartTimersFromRun[runName_String] :=
 (*   Module[{timers}, *)
 (*     timers = IndependentTimers[ParseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]]; *)
 (*     Return[chartTimers[largestTimers[evolutionTimers[timers],n]]]]; *)
+ChartTimersFromRun[runName_String, core_:0, segment_Integer:1] :=
+  ChartTimers[TimersFile[runName, core, segment]];
 
 IndependentTimersFromRun[runName_String] :=
   Module[{},
