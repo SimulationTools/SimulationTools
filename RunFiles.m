@@ -13,6 +13,8 @@ SegmentStartDate;
 SegmentEndDate;
 SegmentDuration;
 RunDutyCycle;
+SegmentCoordinateTimeInterval;
+SegmentStartTimes;
 
 Begin["`Private`"];
 
@@ -219,6 +221,16 @@ RunDutyCycle[run_] :=
     totalElapsedTime = DateDifference[SegmentStartDate[First[segs]],
                                       SegmentEndDate[Last[segs]], "Second"][[1]];
     totalRunTime / totalElapsedTime //N];
+
+SegmentCoordinateTimeInterval[dir_] :=
+ Module[{times =
+    Catch[First /@ ReadColumnFile[dir, "carpet::timing..asc", {9}]]},
+  If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]];
+
+SegmentStartTimes[run_] :=
+ Module[{segs = FindRunSegments[run]},
+  First /@
+   Select[SegmentCoordinateTimeInterval /@ segs, # =!= None &]];
 
 End[];
 
