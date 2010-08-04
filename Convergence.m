@@ -6,7 +6,7 @@ LoadConvergenceSeries;
 RescaledErrors;
 ConvergenceRate;
 ResolutionCode;
-RichardsonExtrapolate;
+RichardsonExtrapolate::usage = "RichardsonExtrapolate[{d1, d2}, {h1, h2}, p] gives the order p Richardson extrapolant of data tables d1 and d2 assuming the grid spacing used to compute each was h1 and h2.";
 RichardsonExtrapolate3;
 RichardsonExtrapolationError;
 ResName;
@@ -151,6 +151,15 @@ RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
 
     ns = Map[ReadAttribute[#, NPoints] &, ds2];
     hs = Map[1/#&, ns];
+    Return[MapThreadData[RichardsonExtrapolate[#1,#2, hs[[1]], hs[[2]], p] &, ds2]]];
+
+RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, hs:{h1_, h2_}, p_] :=
+  Module[{ns, dts, ranges},
+    dts = Map[Spacing, ds];
+    ranges = Map[DataTableRange, ds];
+    If[!Apply[Equal, dts] || !Apply[Equal,ranges],
+      ds2 = ResampleDataTables[ds],
+      ds2 = ds];
     Return[MapThreadData[RichardsonExtrapolate[#1,#2, hs[[1]], hs[[2]], p] &, ds2]]];
 
 RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
