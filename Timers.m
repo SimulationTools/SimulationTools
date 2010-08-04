@@ -8,6 +8,7 @@ ChartTimersFromRun;
 TimersFile;
 IndependentTimersFromRun;
 ParseTimersFileFromRun;
+ChartEvolutionTimersFromRun;
 CollectTimers;
 
 CTGammaTimerCollections =
@@ -76,6 +77,12 @@ IndependentTimersFromRun[runName_String] :=
   Module[{},
     Return[IndependentTimers[ParseTimersFileFromRun[runName]]];
   ];
+
+ChartEvolutionTimersFromRun[runName_, nTimers_:20 (* ,core_:0,segment_:1 *)] :=
+ Module[{},
+  ChartTimers[
+   LargestTimers[EvolutionTimers[IndependentTimersFromRun[runName]],
+    nTimers]]]
 
 collectTimers1[timers_, collectionName_ -> (members_List)] :=
  Module[{cts, ctsDel, tSum, tRep},
