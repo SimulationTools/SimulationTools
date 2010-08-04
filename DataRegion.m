@@ -48,6 +48,7 @@ CarpetHDF5TimeLevels;
 CarpetHDF5Variables;
 CarpetHDF5FileInfo;
 CarpetManipulatePlotFunction;
+GetCoordinate;
 DataRegionContourPlot;
 
 Begin["`Private`"];
@@ -567,6 +568,25 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
   MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]];
 
+(* Fiendishly clever code *)
+GetCoordinate[d_DataRegion, dim_] :=
+  Module[{origin, spacing, dims, max, ca, dm, dp, res},
+    origin = GetOrigin[d];
+    spacing = GetSpacing[d];
+    dims = GetDimensions[d];
+    max = origin + spacing * (dims - 1);
+
+    ca[x_, {}] := x;
+    ca[x_, l_] := ConstantArray[x, l];
+
+    dm = Reverse@Table[dims[[i]], {i, 1, dim - 1}];
+    dp = Reverse@Table[dims[[i]], {i, dim + 1, Length[dims]}];
+
+    res = ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp];
+
+    If[Reverse@Dimensions[res] =!= dims, Throw["GetCoordinateError"]];
+    DataRegion[GetAttributes[d], res]
+  ];
 End[];
 
 EndPackage[];
