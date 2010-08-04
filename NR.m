@@ -72,6 +72,7 @@ ReturnValue;
 FittedFunction;
 Eccentricity;
 FitEcc;
+FitEccOm;
 FitParameters;
 Continuous;
 
@@ -814,6 +815,24 @@ FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
   eccData = DataTableInterval[sep, int];
   eccFit = 
    FindFit[ToList@eccData, eccModel, eccPars, t, 
+    MaxIterations -> 1000];
+  eccSepFitted = eccModel /. eccFit;
+  Switch[OptionValue[ReturnValue],
+   Eccentricity, e /. eccFit,
+   FittedFunction, Function[tp,Evaluate[eccSepFitted/.t->tp]],
+   FitParameters, eccFit,
+   _, Throw["Unknown option given to FitEcc"]]
+  ];
+
+Options[FitEccOm] = {ReturnValue -> FittedFunction};
+
+FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
+ Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t},
+  eccModel = a (1 + 2 e Cos[n t + phi] + 5/2 e^2 Cos[2 n t + phi]) + b t;
+  eccPars = {{a, 0.015, 0.022}, {b, 6*10^-6,6.2*10^-6}, {e, -0.01, 0.01}, {n, 0.02, 0.021}, {phi, 0, Pi}};
+  eccData = DataTableInterval[om, int];
+  eccFit =
+   FindFit[ToList@eccData, eccModel, eccPars, t,
     MaxIterations -> 1000];
   eccSepFitted = eccModel /. eccFit;
   Switch[OptionValue[ReturnValue],
