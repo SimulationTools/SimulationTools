@@ -31,6 +31,19 @@ TimersFilesInRun[runName_] :=
     files = FindRunFilesFromPattern[runName, "AllTimers.*.txt"]
   ];
 
+padInteger[i_, n_] :=
+  Module[{str},
+   str = ToString[i];
+   StringJoin[Table["0", {a, n - StringLength[str]}]] <> str];
+
+TimersFile[runName_, i_, segment_:1] :=
+  Module[{segments, fileName},
+    fileName = "AllTimers."<> padInteger[i, 6] <> ".txt";
+    segments = FindRunFile[runName, fileName];
+    If[Length[segments] === 0, Throw["Cannot find timers file " <> fileName <> " in run " <> runName]];
+    If[segment > Length[segments], Throw["Cannot find " <> ToString[segment] <> " segments in run " <> runName]];
+    segments[[segment]]];
+
 ReadTimerFromRun[runName_String, timerName_String] :=
   Module[{},
   ReadTimer[ParseTimersFileFromRun[runName], timerName]];
