@@ -34,6 +34,7 @@ Sub::usage = "Sub[d1, d2] returns a DataTable corresponding to d1 - d2, where th
 Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
 InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 Monotonise;
+DataTableListLinePlot;
 
 Begin["`Private`"];
 
@@ -254,6 +255,9 @@ Redefine[ListPlot[d:DataTable[___], args___],
 
 Redefine[ListPlot[ds:List[DataTable[___]..], args___],
    ListPlot[Map[ToList,ds], args]];
+
+DataTableListLinePlot[d:DataTable[___], args___] :=
+  ListLinePlot[ToList[d], args];
 
 Redefine[ListLinePlot[d:DataTable[___], args___],
    ListLinePlot[ToList[d], args]];
