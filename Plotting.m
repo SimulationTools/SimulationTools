@@ -10,6 +10,7 @@ DynamicListLinePlot;
 PresentationListLinePlot;
 PresentationPlotStyles;
 PresentationPlotColors;
+PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
 
 Begin["`Private`"];
 
@@ -197,7 +198,13 @@ DynamicListLinePlot[data_, opts___] :=
     
     }]];
 
-
+PlotFit[data_, model_, pars_, var_, args___] :=
+ Module[{fit, fittedModel},
+  fit = FindFit[data, model, pars, var, MaxIterations -> 10000];
+  fittedModel = model /. fit;
+  {Show[ListPlot[data, PlotRange -> All],
+    Plot[fittedModel, {h, 0, Max[First /@ data]}, PlotRange -> {{0,0.6},{-50,-40}}],
+    PlotLabel -> First[pars] /. fit, args, ImageSize -> 400,PlotRange->{{0,0.6},{-50,-40}}], fit}];
 
 End[];
 
