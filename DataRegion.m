@@ -22,6 +22,7 @@ GetAttributes;
 GetVariableName;
 DataRegionDensityPlot;
 DataRegionArrayPlot;
+DataRegionMatrixPlot;
 DataRegionPlot3D;
 DataRegionPlot;
 CarpetHDF5Manipulate;
@@ -47,6 +48,7 @@ CarpetHDF5TimeLevels;
 CarpetHDF5Variables;
 CarpetHDF5FileInfo;
 CarpetManipulatePlotFunction;
+DataRegionContourPlot;
 
 Begin["`Private`"];
 
@@ -261,7 +263,10 @@ DataRegion2DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFun
 DataRegionPlot[v_DataRegion, args___]        := DataRegion1DPlot[ListPlot, v, args]; 
 DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot, v, args];
 DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
+DataRegionMatrixPlot[v_DataRegion, args___]   := DataRegion2DPlot[MatrixPlot, v, args];
 DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
+
+DataRegionContourPlot[v_, args___]      := DataRegion2DPlot[ListContourPlot, v, args]; 
 
 Options[CarpetHDF5Manipulate] = {CarpetManipulatePlotFunction -> DataRegionDensityPlot};
 CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:= Module[{data, axesOrigin, numDims, plotType},
