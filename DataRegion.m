@@ -473,7 +473,12 @@ CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 
-Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
+Datasets[file_]:= Datasets[file] =
+  Module[{result = Import[file, "Datasets"]},
+    If[ListQ[result],
+      result,
+      Throw["Could not open HDF5 file " <> file]]];
+
 Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
 Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
 HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = Import[file, {"Datasets", dataset}];
