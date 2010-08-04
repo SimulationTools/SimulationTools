@@ -50,6 +50,8 @@ CarpetHDF5FileInfo;
 CarpetManipulatePlotFunction;
 GetCoordinate;
 MapDataRegion;
+FilterNaNs;
+NaNQ;
 DataRegionContourPlot;
 
 Begin["`Private`"];
@@ -595,6 +597,12 @@ MapDataRegion[f_, d_DataRegion] :=
   header = GetAttributes[d];
   data = Map[f, GetData[d], {dim}];
   DataRegion[header, data]];
+
+FilterNaNs[d_DataRegion] :=
+ MapDataRegion[If[NaNQ[#], Missing[], #] &, d];
+
+NaNQ[x_] :=
+ Round[x] == -2147483648;
 End[];
 
 EndPackage[];
