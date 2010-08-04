@@ -8,6 +8,8 @@ ChartTimersFromRun;
 TimersFile;
 IndependentTimersFromRun;
 ParseTimersFileFromRun;
+ParseTimersFileFromRunCore;
+FindTimersFromRun;
 ChartEvolutionTimersFromRun;
 CollectTimers;
 
@@ -49,8 +51,20 @@ ReadTimerFromRun[runName_String, timerName_String] :=
   Module[{},
   ReadTimer[ParseTimersFileFromRun[runName], timerName]];
 
-DefineMemoFunction[ParseTimersFileFromRun[runName_String],
-  ParseTimersFile[TimersFile[runName]]];
+FindTimersFromRun[runName_String, pattern_] :=
+  Module[{},
+  FindTimers[ParseTimersFileFromRun[runName], pattern]];
+
+
+ReadTimerFromRun[runName_String, timerName_String, i_] :=
+  Module[{},
+  ReadTimer[ParseTimersFileFromRunCore[runName, i], timerName]];
+
+DefineMemoFunction[ParseTimersFileFromRunCore[runName_String, i_],
+  ParseTimersFile[TimersFile[runName,i]]];
+
+DefineMemoFunction[ParseTimersFileFromRun[runName_String, core_Integer : 0, segment_Integer : 1],
+  ParseTimersFile[TimersFile[runName,core,segment]]];
 
 ChartTimersFromRun[runName_String] :=
   ChartTimers[TimersFile[runName]];
