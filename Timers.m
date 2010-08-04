@@ -55,23 +55,6 @@ DefineMemoFunction[ParseTimersFileFromRun[runName_String],
 ChartTimersFromRun[runName_String] :=
   ChartTimers[TimersFile[runName]];
 
-(* TimerScaling[run1_String, run2_String, n1_Integer, n2_Integer, tName_String] := *)
-(*   Module[{ts1, ts2, t1, t2, s}, *)
-(*     ts1 = IndependentTimers[run1]; *)
-(*     ts2 = IndependentTimers[run2]; *)
-(*     t1 = readTimer[ts1, tName]; *)
-(*     t2 = readTimer[ts2, tName]; *)
-(*     s = t2 * n2 / (n1 * t1); *)
-(*     Return[s]; *)
-(*   ]; *)
-
-(* TimerPieChart[runName_] := *)
-(*   TimerPieChart[runName, 20]; *)
-
-(* TimerPieChart[runName_String, n_Integer] := *)
-(*   Module[{timers}, *)
-(*     timers = IndependentTimers[ParseTimersFile[FileInRun[runName, "AllTimers.0000.txt"]]]; *)
-(*     Return[chartTimers[largestTimers[evolutionTimers[timers],n]]]]; *)
 ChartTimersFromRun[runName_String, core_:0, segment_Integer:1] :=
   ChartTimers[TimersFile[runName, core, segment]];
 
