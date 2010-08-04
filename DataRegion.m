@@ -35,7 +35,7 @@ MergeDataRegions;
 ReadCarpetHDF5;
 ClearCarpetHDF5Cache;
 CarpetHDF5DatasetName;
-ReadCarpetHDF5Variable;
+ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] reads a variable from a Carpet HDF5 file";
 ReadCarpetHDF5Components;
 StripGhostZones;
 VerboseRead;
@@ -55,6 +55,9 @@ NaNQ;
 DataRegionContourPlot;
 MapThreadDataRegion;
 
+Iteration;
+Variable;
+RefinementLevel;
 ScaledColorFunction;
 
 Begin["`Private`"];
@@ -578,6 +581,16 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 
 ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
   MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]];
+
+Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None};
+
+ReadCarpetHDF5Variable[file_, opts:OptionsPattern[]]:=
+  Module[{it, rl, var, map},
+    var = If[OptionValue[Variable] =!= None, OptionValue[Variable], First[CarpetHDF5Variables[file]]];
+    it = If[OptionValue[Iteration] =!= None, OptionValue[Iteration], First[CarpetHDF5Iterations[file]]];
+    rl = If[OptionValue[RefinementLevel] =!= None, OptionValue[RefinementLevel], First[CarpetHDF5RefinementLevels[file]]];
+    map = If[OptionValue[Map] =!= None, OptionValue[Map], First[CarpetHDF5Maps[file]]];
+    ReadCarpetHDF5Variable[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5]]]];
 
 (* Fiendishly clever code *)
 GetCoordinate[d_DataRegion, dim_] :=
