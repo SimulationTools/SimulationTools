@@ -8,6 +8,8 @@ ChartTimersFromRun;
 TimersFile;
 IndependentTimersFromRun;
 ParseTimersFileFromRun;
+CollectTimers;
+
 CTGammaTimerCollections =
 {"CTGamma RHS" -> {"CTGEvolution: CTGEvolution_CalcRHS_detg",
     "CTGGauge: ShiftGammaDriver", "CTGGauge: LapseBonaMasso"},
@@ -56,6 +58,19 @@ IndependentTimersFromRun[runName_String] :=
   Module[{},
     Return[IndependentTimers[ParseTimersFileFromRun[runName]]];
   ];
+
+collectTimers1[timers_, collectionName_ -> (members_List)] :=
+ Module[{cts, ctsDel, tSum, tRep},
+  cts = Select[timers, MemberQ[members, #[[1]]] &];
+  ctsDel = Complement[timers, cts];
+  tSum = Apply[Plus, Map[Last, cts]];
+  tRep = ctsDel~Join~{{collectionName, tSum}};
+  Return[tRep]
+  ]
+
+CollectTimers[timers_, cols_List] :=
+ If[Length[cols] === 0, timers,
+  CollectTimers[collectTimers1[timers, First[cols]], Drop[cols, 1]]]
 
 End[];
 
