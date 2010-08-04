@@ -26,6 +26,11 @@ Begin["`Private`"];
 TimersFile[runName_] :=
  FindRunFile[runName, "AllTimers.000000.txt"][[1]];
 
+TimersFilesInRun[runName_] :=
+  Module[{},
+    files = FindRunFilesFromPattern[runName, "AllTimers.*.txt"]
+  ];
+
 ReadTimerFromRun[runName_String, timerName_String] :=
   Module[{},
   ReadTimer[ParseTimersFileFromRun[runName], timerName]];
