@@ -10,6 +10,8 @@ DynamicListLinePlot;
 PresentationListLinePlot;
 PresentationPlotStyles;
 PresentationPlotColors;
+LegendOrientation;
+LegendLineSize;
 PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
 
 Begin["`Private`"];
@@ -31,27 +33,33 @@ withStyle[elem_, style_List] :=
 withStyle[elem_, style_] :=
   {style, elem};
 
-MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic] :=
-  Module[{l = Line[{{-1, 0}, {1, 0}}], style},
+Options[MakePlotLegend] = {LegendOrientation -> Vertical, LegendLineSize -> 40};
+
+MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic,
+               opts:OptionsPattern[]] :=
+  Module[{l = Line[{{-1, 0}, {1, 0}}], style,
+      hor = OptionValue[LegendOrientation] === Horizontal},
     If[labels === {}, Return[Grid[{}]]];
-    style = 
+    style =
       If[Length[style1] >= Length[labels],
          style1,
          PadLeft[style1, Length[labels], style1]];
       Grid[
-        MapThread[Function[{lab,sty},
+        If[hor,List,Identity][Flatten[MapThread[Function[{lab,sty},
                    {Graphics[{
-                              withStyle[l, sty]}, 
-                          ImageSize -> 50, AspectRatio -> 1/3],
-                 Style[Text[lab], If[labelStyle === Automatic, {},labelStyle]]}], 
-                {labels, Take[style, Length[labels]]}], 
-      Alignment -> {Left,Center}]];
+                              withStyle[l, sty]},
+                          ImageSize -> OptionValue[LegendLineSize], AspectRatio -> 1/3],
+                 Style[Text[lab], If[labelStyle === Automatic, {},labelStyle]]}],
+                {labels, Take[style, Length[labels]]}],If[hor,1,0]]],
+      Alignment -> {Left,Center},
+      Spacings-> {{0,Automatic}~Join~Flatten[Table[{1,Automatic},{i,Length[labels]}],1]}]];
 
 styleInListLinePlot[lp_] :=
   Module[{styles},
     Cases[lp, {styles___, _Line} :> {styles}, Infinity]];
 
-Options[ListLinePlotWithLegend] = Join[Options[ListLinePlot], {PlotLegend -> {}, LegendPosition -> {Left, Top}}];
+Options[ListLinePlotWithLegend] =
+  Join[Options[ListLinePlot], {PlotLegend -> {}, LegendPosition -> {Left, Top}}, Options[MakePlotLegend]];
 
 ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
   Module[{style,pos,posx,posy,offset,scale,labelStyle,f, single},
@@ -75,7 +83,8 @@ ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
       FilterRules[{opts}, Options[ListLinePlot]],
       Epilog -> 
         Inset[
-          MakePlotLegend[OptionValue[PlotLegend], If[single, {style}, style],labelStyle],
+          MakePlotLegend[OptionValue[PlotLegend], If[single, {style}, style],labelStyle,
+          FilterRules[{opts}, Options[MakePlotLegend]]],
           Scaled[scale], pos]]];
 
 PresentationListLinePlot[args___, opts:OptionsPattern[]] :=
