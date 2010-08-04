@@ -126,10 +126,24 @@ DataRegion/:Max[DataRegion[_,data_]]:=Max[data];
 DataRegion/:Times[a_, DataRegion[h_,data_]] :=
   DataRegion[h, a data];
 
+DataRegion/:Abs[DataRegion[h_,data_]] :=
+  DataRegion[h, Abs[data]];
+
+DataRegion/:Re[DataRegion[h_,data_]] :=
+  DataRegion[h, Re[data]];
+
+DataRegion/:Im[DataRegion[h_,data_]] :=
+  DataRegion[h, Im[data]];
+
+DataRegion/:Log10[DataRegion[h_,data_]] :=
+  DataRegion[h, Log10[data]];
+
 DataRegion/:Power[DataRegion[h_,data_], a_] :=
   DataRegion[h, data^a];
 
 DataRegion/:Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1+data2]
+
+DataRegion/:Plus[DataRegion[h1_,data1_], a_]:=DataRegion[h1, data1+a]
 
 DataRegion/:Times[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1*data2]
 
