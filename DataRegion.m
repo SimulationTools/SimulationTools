@@ -49,6 +49,7 @@ CarpetHDF5Variables;
 CarpetHDF5FileInfo;
 CarpetManipulatePlotFunction;
 GetCoordinate;
+MapDataRegion;
 DataRegionContourPlot;
 
 Begin["`Private`"];
@@ -587,6 +588,13 @@ GetCoordinate[d_DataRegion, dim_] :=
     If[Reverse@Dimensions[res] =!= dims, Throw["GetCoordinateError"]];
     DataRegion[GetAttributes[d], res]
   ];
+
+MapDataRegion[f_, d_DataRegion] :=
+ Module[{dim, header, data},
+  dim = GetNumDimensions[d];
+  header = GetAttributes[d];
+  data = Map[f, GetData[d], {dim}];
+  DataRegion[header, data]];
 End[];
 
 EndPackage[];
