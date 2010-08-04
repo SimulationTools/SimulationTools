@@ -87,7 +87,6 @@ ReadCarpetASCII1D[fileName_, dir_:1] :=
  Module[{lines, lines2, lines3, lines4, lines5, lines6, 
    levels, splitIterations, levels2, levelsPresent, data, data2, 
    rls, processLevel, prls},
-  Print[fileName];
 (*  lines = ReadList[fileName, String, NullRecords -> True];*)
   If[FileType[fileName] === None, Throw["ReadCarpetASCII1D: File "<>fileName<>" not found"]];
   Profile["ReadCarpetASCII1D: " <> fileName,
