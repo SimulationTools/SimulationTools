@@ -571,7 +571,8 @@ LocateMaximum[d_DataTable] :=
 
 GridSpacingOnLevel[runName_, l_] :=
   Module[{h0},
-    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx"]];
+    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
+      LookupParameter[runName, "Coordinates::h_cartesian"]]];
     h0 / 2^l
   ];
 
