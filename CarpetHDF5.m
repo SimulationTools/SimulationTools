@@ -99,13 +99,13 @@ CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 
-Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
-Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
-Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
-HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = Import[file, {"Datasets", dataset}];
+Datasets[file_]:= Datasets[file] = ImportHDF5[file, "Datasets"];
+Annotations[file_]:= Annotations[file] = ImportHDF5[file, "Annotations"];
+Dims[file_]:= Dims[file] = ImportHDF5[file, "Dimensions"];
+HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = ImportHDF5[file, {"Datasets", dataset}];
 
 PreloadCarpetHDF5Data[file_]:= Module[{allData, data},
-  allData = Import[file, "Rules"];
+  allData = ImportHDF5[file, "Rules"];
   data = "Data"/. allData;
 
   Datasets[file] = "Datasets" /. allData;
@@ -149,7 +149,6 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
   If[ghosts=="cctk_nghostzones", ghosts=0];
 
   time = "time" /. annots;
-
   reg = MakeDataRegion[data, name, dims, origin, spacing, time];
   If[strip, Strip[reg, ghosts], reg]
 ];
@@ -157,10 +156,10 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
 ClearCarpetHDF5Cache[] :=
   Module[{},
     ClearAll[Datasets, Annotations, Dims, HDF5Data];
-    Datasets[file_]:= Datasets[file] = Import[file, "Datasets"];
-    Annotations[file_]:= Annotations[file] = Import[file, "Annotations"];
-    Dims[file_]:= Dims[file] = Import[file, "Dimensions"];
-    HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = Import[file, {"Datasets", dataset}]];
+    Datasets[file_]:= Datasets[file] = ImportHDF5[file, "Datasets"];
+    Annotations[file_]:= Annotations[file] = ImportHDF5[file, "Annotations"];
+    Dims[file_]:= Dims[file] = ImportHDF5[file, "Dimensions"];
+    HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = ImportHDF5[file, {"Datasets", dataset}]];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 
