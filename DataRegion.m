@@ -40,7 +40,6 @@ MapThreadDataRegion;
 Iteration;
 Variable;
 RefinementLevel;
-ScaledColorFunction;
 
 Begin["`Private`"];
 
@@ -360,6 +359,3 @@ MapThreadDataRegion[f_, drs_] :=
 End[];
 
 EndPackage[];
-
-ScaledColorFunction[name_, {min_, max_}] :=
-  (ColorData[name][(# - min)/(max - min)] &);
