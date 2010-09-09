@@ -9,7 +9,7 @@ BeginPackage["CarpetHDF5`",{"h5mma`", "DataRegion`"}];
 ReadCarpetHDF5;
 ClearCarpetHDF5Cache;
 CarpetHDF5DatasetName;
-ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] reads a variable from a Carpet HDF5 file";;
+ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] reads a variable from a Carpet HDF5 file";
 ReadCarpetHDF5Components;
 StripGhostZones;
 VerboseRead;
