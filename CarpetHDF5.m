@@ -2,7 +2,7 @@
 
 (* This package was originally written by Ian Hinder and modified to support arbitrary dimensional data by Barry Wardell *)
 
-BeginPackage["CarpetHDF5`",{"h5mma`", "DataRegion`"}];
+BeginPackage["CarpetHDF5`",{"DataRegion`"}];
 
 (* Exported symbols *)
 
@@ -24,7 +24,13 @@ CarpetHDF5FileInfo;
 
 CarpetHDF5Manipulate;
 CarpetManipulatePlotFunction;
+
 Begin["`Private`"];
+
+(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
+$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
+
+import[x__] := If[$h5mma, ImportHDF5[x], Import[x]];
 
 (* Carpet HDF5 functions *)
 
@@ -99,13 +105,13 @@ CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 
-Datasets[file_]:= Datasets[file] = ImportHDF5[file, "Datasets"];
-Annotations[file_]:= Annotations[file] = ImportHDF5[file, "Annotations"];
-Dims[file_]:= Dims[file] = ImportHDF5[file, "Dimensions"];
-HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = ImportHDF5[file, {"Datasets", dataset}];
+Datasets[file_]:= Datasets[file] = import[file, "Datasets"];
+Annotations[file_]:= Annotations[file] = import[file, "Annotations"];
+Dims[file_]:= Dims[file] = import[file, "Dimensions"];
+HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = import[file, {"Datasets", dataset}];
 
 PreloadCarpetHDF5Data[file_]:= Module[{allData, data},
-  allData = ImportHDF5[file, "Rules"];
+  allData = import[file, "Rules"];
   data = "Data"/. allData;
 
   Datasets[file] = "Datasets" /. allData;
@@ -156,10 +162,10 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
 ClearCarpetHDF5Cache[] :=
   Module[{},
     ClearAll[Datasets, Annotations, Dims, HDF5Data];
-    Datasets[file_]:= Datasets[file] = ImportHDF5[file, "Datasets"];
-    Annotations[file_]:= Annotations[file] = ImportHDF5[file, "Annotations"];
-    Dims[file_]:= Dims[file] = ImportHDF5[file, "Dimensions"];
-    HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = ImportHDF5[file, {"Datasets", dataset}]];
+    Datasets[file_]:= Datasets[file] = import[file, "Datasets"];
+    Annotations[file_]:= Annotations[file] = import[file, "Annotations"];
+    Dims[file_]:= Dims[file] = import[file, "Dimensions"];
+    HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = import[file, {"Datasets", dataset}]];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 
