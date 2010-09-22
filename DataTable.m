@@ -24,6 +24,7 @@ ResampleDataTable::usage = "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy
 ResampleDataTables::usage = "ResampleDataTables[{d, ...}] returns the DataTables d after resampling to have a common range and spacing, which corresponds to the minimum spacing of the input set.";
 Spacing::usage = "Spacing[d] returns the spacing of the independent variable in DataTable d.  This is a constant for the DataTable.";
 DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
+DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
 NDerivative::usage = "NDerivative[d] returns the first derivative of the DataTable d.  This is first order accurate and the result omits the first and last points of d.";
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
@@ -322,6 +323,9 @@ ResampleDataTables[ds:{DataTable[__]...}] :=
 
 DataTableInterval[d_DataTable, {t1_, t2_}] :=
   d /. DataTable[l_, x___] :> DataTable[Select[l,#[[1]] >= t1 && #[[1]] < t2 &], x];
+
+DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
+  d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
 
 IntersectDataTables[d1_DataTable, d2_DataTable] :=
   Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
