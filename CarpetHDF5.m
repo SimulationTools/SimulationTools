@@ -34,7 +34,7 @@ import[x__] := If[$h5mma, ImportHDF5[x], Import[x]];
 
 (* Gather various information about the datasets in a file *)
 datasetAttributes[file_] := datasetAttributes[file] =
-  Module[{attributeRules},
+  Module[{attributeRules, dsattrs},
     (* Convert dataset name strings into rules *)
     attributeRules = StringCases[
       Datasets[file], {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
@@ -45,31 +45,37 @@ datasetAttributes[file_] := datasetAttributes[file] =
       StartOfString ~~ "/" ~~ Shortest[x : __] ~~ " it=" :> ("var" -> x)},
       Overlaps -> True];
 
-      attributeRules
+      dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules;
+
+      (* If an attribute isn't found for a dataset, set it to Null *)
+      dsattrs = dsattrs /. {"var" -> Null, "it" -> Null, "tl" -> Null,
+                            "rl" -> Null, "c" -> Null, "m" -> Null};
+
+      dsattrs
 ];
 
 datasetsWith[datasets_List, attr_Rule] := 
-  Select[datasets, (attr[[1]] /. #) == attr[[2]] &];
+  Select[datasets, #[[attr[[1]]]] == attr[[2]] &];
 datasetsWith[file_String, attr_Rule] := 
   datasetsWith[datasetAttributes[file], attr];
 datasetsWith[file_String, attr_List] := Fold[datasetsWith, file, attr];
 
-datasetAttribute[datasets_List, attr_String] := Select[DeleteDuplicates[attr /. datasets], (#!=attr)&];
-datasetAttribute[file_String, attr_String] := datasetAttribute[datasetAttributes[file], attr];
+datasetAttribute[datasets_List, attr_] := Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]];
+datasetAttribute[file_String, attr_] := datasetAttribute[datasetAttributes[file], attr];
 
-CarpetHDF5Iterations[file_] := datasetAttribute[file, "it"];
+CarpetHDF5Iterations[file_] := datasetAttribute[file, 2];
 
-CarpetHDF5Iterations[file_, rl_:0] := datasetAttribute[datasetsWith[file, "rl" -> rl], "it"];
+CarpetHDF5Iterations[file_, rl_:0] := datasetAttribute[datasetsWith[file, 4 -> rl], 2];
 
-CarpetHDF5Components[file_] := datasetAttribute[file, "c"];
+CarpetHDF5Components[file_] := datasetAttribute[file, 5];
 
 CarpetHDF5Components[file_, it_, rl_] := 
-  datasetAttribute[datasetsWith[file, {"it" -> it, "rl" -> rl}], "c"];
+  datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl}], 5];
 
-CarpetHDF5Maps[file_]             := datasetAttribute[file, "m"];
-CarpetHDF5RefinementLevels[file_] := datasetAttribute[file, "rl"];
-CarpetHDF5TimeLevels[file_]       := datasetAttribute[file, "tl"];
-CarpetHDF5Variables[file_]        := datasetAttribute[file, "var"];
+CarpetHDF5Maps[file_]             := datasetAttribute[file, 6];
+CarpetHDF5RefinementLevels[file_] := datasetAttribute[file, 4];
+CarpetHDF5TimeLevels[file_]       := datasetAttribute[file, 3];
+CarpetHDF5Variables[file_]        := datasetAttribute[file, 1];
 
 CarpetHDF5FileInfo[file_]:=
   Module[{iterations, components, maps, refLevels, timeLevels, vars},
