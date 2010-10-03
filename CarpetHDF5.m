@@ -171,31 +171,32 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
   Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
- 
-    (* TODO: Add support for 2D. *)	
-    Filetype1D = RegularExpression["\\.[dxyz]\\.h5"];
-    Filetype2D = RegularExpression["\\.[xyz]{2}\\.h5"];
-    MultiFile = RegularExpression["file_\\d+\\.h5"];
-    If[StringCount[file, Filetype1D]>0 || StringCount[file, Filetype2D]>0,
-		components = CarpetHDF5Components[file, it, rl];
-		If[Length[components]==0,
-			datasets = {ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
-		,
-			datasets = Table[ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,components}];
-		];
-    , If[StringCount[file, MultiFile]>0,
-		filePrefix = StringReplace[file, ".file_0.h5" -> ""];
-		pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
-		fileNames = FileNames[FileNameTake[pattern], DirectoryName[pattern]];
-		components = Flatten[DeleteDuplicates[StringCases[fileNames,"file_"~~x:DigitCharacter..:>ToExpression[x]]]];
-		datasets = Table[ReadCarpetHDF5[filePrefix<>".file_"<>ToString[c]<>".h5",
-			CarpetHDF5DatasetName[var, it, map, rl, c], opts], {c,components}];
-      , datasets={ReadCarpetHDF5[file,
-			CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
-      ]
+
+    Filetype1D = RegularExpression[".*\\.[dxyz]\\.h5"];
+    Filetype2D = RegularExpression[".*\\.[xyz]{2}\\.h5"];
+    MultiFile = RegularExpression[".*\\.file_\\d+\\.h5"];
+
+    Which[
+    StringMatchQ[file, Filetype1D] || StringMatchQ[file, Filetype2D],
+      components = CarpetHDF5Components[file, it, rl];
+		  If[Length[components]==0,
+			  datasets = {ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
+			,
+			  datasets = Map[ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, #], opts] &, components];
+		  ];,
+
+		StringMatchQ[file, MultiFile],
+      filePrefix = StringReplace[file, ".file_0.h5" -> ""];
+      pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
+      fileNames = FileNames[FileNameTake[pattern], DirectoryName[pattern]];
+      components = Flatten[DeleteDuplicates[StringCases[fileNames,"file_"~~x:DigitCharacter..:>ToExpression[x]]]];
+      datasets = Map[ReadCarpetHDF5[filePrefix<>".file_"<>ToString[#]<>".h5",
+                       CarpetHDF5DatasetName[var, it, map, rl, #], opts] &, components];,
+    True,
+      datasets={ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
     ];
 
-	Return[datasets]
+    datasets
 ];
 
 ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
