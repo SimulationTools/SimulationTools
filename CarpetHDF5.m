@@ -2,12 +2,11 @@
 
 (* This package was originally written by Ian Hinder and modified to support arbitrary dimensional data by Barry Wardell *)
 
-BeginPackage["CarpetHDF5`",{"DataRegion`"}];
+BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`"}];
 
 (* Exported symbols *)
 
 ReadCarpetHDF5;
-ClearCarpetHDF5Cache;
 CarpetHDF5DatasetName;
 ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] reads a variable from a Carpet HDF5 file";
 ReadCarpetHDF5Components;
@@ -33,7 +32,7 @@ $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
 import[x__] := If[$h5mma, ImportHDF5[x], Import[x]];
 
 (* Gather various information about the datasets in a file *)
-datasetAttributes[file_] := datasetAttributes[file] =
+DefineMemoFunction[datasetAttributes[file_],
   Module[{attributeRules, dsattrs},
     (* Convert dataset name strings into rules *)
     attributeRules = StringCases[
@@ -45,13 +44,14 @@ datasetAttributes[file_] := datasetAttributes[file] =
       StartOfString ~~ "/" ~~ Shortest[x : __] ~~ " it=" :> ("var" -> x)},
       Overlaps -> True];
 
-      dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules;
+    dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules;
 
-      (* If an attribute isn't found for a dataset, set it to Null *)
-      dsattrs = dsattrs /. {"var" -> Null, "it" -> Null, "tl" -> Null,
-                            "rl" -> Null, "c" -> Null, "m" -> Null};
+    (* If an attribute isn't found for a dataset, set it to Null *)
+    dsattrs = dsattrs /. {"var" -> Null, "it" -> Null, "tl" -> Null,
+                          "rl" -> Null, "c" -> Null, "m" -> Null};
 
-      dsattrs
+    dsattrs
+  ]
 ];
 
 datasetsWith[datasets_List, attr_Rule] := 
@@ -101,30 +101,27 @@ CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 
-Datasets[file_]:= Datasets[file] = import[file, "Datasets"];
+DefineMemoFunction[Datasets[file_],
+  import[file, "Datasets"]
+];
 
-Annotations[file_]:= Annotations[file] = import[file, "Annotations"];
-Annotations[file_, ds_]:= Annotations[file, ds] = import[file, {"Annotations", ds}];
-Annotations[file_, ds_List]:= Map[Annotations[file, #]&, ds];
+DefineMemoFunction[Annotations[file_, ds_],
+  import[file, {"Annotations", ds}]
+];
 
-Dims[file_]:= Dims[file] = import[file, "Dimensions"];
-Dims[file_, ds_]:= Dims[file, ds] = import[file, {"Dimensions", ds}];
-Dims[file_, ds_List]:= Map[Dims[file, #]&, ds];
+DefineMemoFunction[Dims[file_, ds_],
+  import[file, {"Dimensions", ds}]
+];
 
-HDF5Data[file_, dataset:(_String|_Integer)]:= HDF5Data[file, dataset] = import[file, {"Datasets", dataset}];
-HDF5Data[file_, ds_List]:= Map[HDF5Data[file, #]&, ds];
+DefineMemoFunction[HDF5Data[file_, dataset_String],
+  import[file, {"Datasets", dataset}]
+];
 
 PreloadCarpetHDF5Data[file_]:= Module[{allData, data, annots, dims, ds},
-  allData = import[file, "Rules"];
-  data = "Data"/. allData;
-
-  Datasets[file] = "Datasets" /. allData;
-  annots = "Annotations" /. allData;
-  dims = "Dimensions" /. allData;
-  ds = Thread[{Datasets[file],Range[Length[Datasets[file]]]}];
-  (Annotations[file, #1] = annots[[#2]])& /@ ds;
-  (Dims[file, #1] = dims[[#2]])& /@ ds;
-  (HDF5Data[file, #1] = data[[#2]])& /@ ds;
+  ds = Datasets[file];
+  Annotations[file, #] & /@ ds;
+  Dimensions[file,  #] & /@ ds;
+  HDF5Data[file,  #] & /@ ds;
 ];
 
 ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
@@ -142,7 +139,7 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
   If[verbose, Print["Reading Data"]];
   data = HDF5Data[file, dsName];
 
-  If[verbose, Print["Reading Annotations"]];   
+  If[verbose, Print["Reading Annotations"]];
   annots = Annotations[file, dsName];
 
   If[verbose, Print["Reading Dimensions"]];
