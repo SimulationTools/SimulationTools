@@ -32,54 +32,44 @@ $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
 
 import[x__] := If[$h5mma, ImportHDF5[x], Import[x]];
 
-(* Carpet HDF5 functions *)
+(* Gather various information about the datasets in a file *)
+datasetAttributes[file_] := datasetAttributes[file] =
+  Module[{attributeRules},
+    (* Convert dataset name strings into rules *)
+    attributeRules = StringCases[
+      Datasets[file], {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
+      "tl=" ~~ x : NumberString :> ("tl" -> ToExpression[x]),
+      "rl=" ~~ x : NumberString :> ("rl" -> ToExpression[x]),
+      "c=" ~~ x : NumberString :> ("c" -> ToExpression[x]),
+      "m=" ~~ x : NumberString :> ("m" -> ToExpression[x]),
+      StartOfString ~~ "/" ~~ Shortest[x : __] ~~ " it=" :> ("var" -> x)},
+      Overlaps -> True];
 
-(* Gather various information about a file *)
-carpetHDF5List[file_, item_]        := Sort[First /@ Select[DeleteDuplicates[StringCases[Datasets[file],item]], Length[#] > 0 &]];
-carpetHDF5ListN[file_, item_String] := carpetHDF5List[file, item<>"="~~x:DigitCharacter..:>ToExpression[x]];
+      attributeRules
+];
 
-datasetNamesWith[file_, items_List] :=
-  Module[{patterns, datasetsMatching, allMatches, matchAll},
-    patterns = ((___ ~~ (# <> " ") ~~ ___) &) /@ items;
-    datasetsMatching[p_] :=
-      Select[Datasets[file], StringMatchQ[#, p] &];
-    allMatches = datasetsMatching /@ patterns;
-    matchAll = Intersection @@ allMatches];
+datasetsWith[datasets_List, attr_Rule] := 
+  Select[datasets, (attr[[1]] /. #) == attr[[2]] &];
+datasetsWith[file_String, attr_Rule] := 
+  datasetsWith[datasetAttributes[file], attr];
+datasetsWith[file_String, attr_List] := Fold[datasetsWith, file, attr];
 
-compOf[ds_] :=
-  StringCases[ds, "c="~~x:DigitCharacter..:>ToExpression[x]][[1]];
+datasetAttribute[datasets_List, attr_String] := Select[DeleteDuplicates[attr /. datasets], (#!=attr)&];
+datasetAttribute[file_String, attr_String] := datasetAttribute[datasetAttributes[file], attr];
 
-itOf[ds_] :=
-  StringCases[ds, "it="~~x:DigitCharacter..:>ToExpression[x]][[1]];
+CarpetHDF5Iterations[file_] := datasetAttribute[file, "it"];
 
-componentsWith[file_, items_List] :=
-  Sort[compOf /@ datasetNamesWith[file,items]];
+CarpetHDF5Iterations[file_, rl_:0] := datasetAttribute[datasetsWith[file, "rl" -> rl], "it"];
 
-(*componentsWith[file_, items_List] :=
-  Module[{patterns, datasetsMatching, allMatches, matchAll},
-(*    patterns = (#<>"="~~DigitCharacter..) & /@ items;*)
-    patterns = ((___ ~~ (# <> " ") ~~ ___) &) /@ items;
-    datasetsMatching[p_] :=
-      Select[Datasets[file], StringMatchQ[#, p] &];
-    allMatches = datasetsMatching /@ patterns;
-    matchAll = Intersection @@ allMatches;
-    compOf[ds_]:=StringCases[ds, "c="~~x:DigitCharacter..:>ToExpression[x]][[1]];
-    Sort[compOf /@ matchAll]];*)
-
-CarpetHDF5Iterations[file_] := carpetHDF5ListN[file, "it"];
-
-CarpetHDF5Iterations[file_, rl_:0] := 
-  Union[itOf/@datasetNamesWith[file, {"rl="<>ToString@rl}]];
-
-CarpetHDF5Components[file_] := carpetHDF5ListN[file, "c"];
+CarpetHDF5Components[file_] := datasetAttribute[file, "c"];
 
 CarpetHDF5Components[file_, it_, rl_] := 
-  componentsWith[file, {"it=" <> ToString[it], "rl=" <> ToString[rl]}];
+  datasetAttribute[datasetsWith[file, {"it" -> it, "rl" -> rl}], "c"];
 
-CarpetHDF5Maps[file_]             := carpetHDF5ListN[file, "m"];
-CarpetHDF5RefinementLevels[file_] := carpetHDF5ListN[file, "rl"];
-CarpetHDF5TimeLevels[file_]       := carpetHDF5ListN[file, "tl"];
-CarpetHDF5Variables[file_]        := carpetHDF5List [file, RegularExpression["^/([^ ]+) it="]:>"$1"];
+CarpetHDF5Maps[file_]             := datasetAttribute[file, "m"];
+CarpetHDF5RefinementLevels[file_] := datasetAttribute[file, "rl"];
+CarpetHDF5TimeLevels[file_]       := datasetAttribute[file, "tl"];
+CarpetHDF5Variables[file_]        := datasetAttribute[file, "var"];
 
 CarpetHDF5FileInfo[file_]:=
   Module[{iterations, components, maps, refLevels, timeLevels, vars},
