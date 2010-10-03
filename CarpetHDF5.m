@@ -60,7 +60,7 @@ datasetsWith[file_String, attr_Rule] :=
   datasetsWith[datasetAttributes[file], attr];
 datasetsWith[file_String, attr_List] := Fold[datasetsWith, file, attr];
 
-datasetAttribute[datasets_List, attr_] := Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]];
+datasetAttribute[datasets_List, attr_] := Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]]];
 datasetAttribute[file_String, attr_] := datasetAttribute[datasetAttributes[file], attr];
 
 CarpetHDF5Iterations[file_] := datasetAttribute[file, 2];
