@@ -207,12 +207,14 @@ ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
 
 Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None};
 
+firstOrNone[l_] := If[Length[l]==0, None, First[l]];
+
 ReadCarpetHDF5Variable[file_, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
-    var = If[OptionValue[Variable] =!= None, OptionValue[Variable], First[CarpetHDF5Variables[file]]];
-    it = If[OptionValue[Iteration] =!= None, OptionValue[Iteration], First[CarpetHDF5Iterations[file]]];
-    rl = If[OptionValue[RefinementLevel] =!= None, OptionValue[RefinementLevel], First[CarpetHDF5RefinementLevels[file]]];
-    map = If[OptionValue[Map] =!= None, OptionValue[Map], First[CarpetHDF5Maps[file]]];
+    var = If[OptionValue[Variable] =!= None, OptionValue[Variable], firstOrNone[CarpetHDF5Variables[file]]];
+    it = If[OptionValue[Iteration] =!= None, OptionValue[Iteration], firstOrNone[CarpetHDF5Iterations[file]]];
+    rl = If[OptionValue[RefinementLevel] =!= None, OptionValue[RefinementLevel], firstOrNone[CarpetHDF5RefinementLevels[file]]];
+    map = If[OptionValue[Map] =!= None, OptionValue[Map], firstOrNone[CarpetHDF5Maps[file]]];
     ReadCarpetHDF5Variable[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5]]]];
 
 Options[CarpetHDF5Manipulate] = {CarpetHDF5ManipulatePlotFunction -> DataRegionDensityPlot};
