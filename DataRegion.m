@@ -203,8 +203,7 @@ DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims
 
  dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
 
- plotFunction[If[plotFunction===ArrayPlot, Reverse, Identity]@GetData[v], args,
-  DataRange -> dataRange]
+ plotFunction[GetData[v], args, DataRange -> dataRange, Sequence@@If[plotFunction === ArrayPlot, {DataReversed -> True}, {}]]
 ];
 
 DataRegion1DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 1, v, args];
