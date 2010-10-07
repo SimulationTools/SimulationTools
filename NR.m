@@ -43,6 +43,10 @@ LevelExistsEvery;
 RadialPoints;
 RunName;
 ReadCoarseGridSpacing;
+ReadAngularPoints;
+ReadInnerBoundary;
+ReadOuterBoundary;
+CountRefinementLevels;
 
 ReadPsi4Modes;
 ExportWaveform;
@@ -582,6 +586,21 @@ ReadCoarseGridSpacing[runName_] :=
     h0 = ToExpression[LookupParameter[runName, "Coordinates::h_cartesian"]]
   ];
 
+ReadAngularPoints[runName_] :=
+  Module[{},
+    ToExpression[LookupParameter[runName, "Coordinates::n_angular"]]
+  ];
+
+ReadInnerBoundary[runName_] :=
+  Module[{},
+    ToExpression[LookupParameter[runName, "Coordinates::sphere_inner_radius"]]
+  ];
+
+ReadOuterBoundary[runName_] :=
+  Module[{},
+    ToExpression[LookupParameter[runName, "Coordinates::sphere_outer_radius"]]
+  ];
+
 FinestGridSpacing[runName_] :=
   GridSpacingOnLevel[runName, Max[RefinementLevels[runName]]];
 
@@ -589,11 +608,19 @@ BoxRadiiOnLevel[runName_, l_] :=
   Module[{h0},
     If[l == 0, Return[{ToExpression[LookupParameter[runName, "CoordBase::xmax"]]}]];
     params = FindParameters[runName, "regridboxes::centre_*_radius" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"];
+
+    If[params === {},
+      params = FindParameters[runName, "carpetregrid2::radius_*" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"]];
+
     Map[ToExpression[LookupParameter[runName, #]] &, params]
   ];
 
 CountRefinementLevels[runName_String] :=
   ToExpression[LookupParameter[runName, "Carpet::max_refinement_levels"]];
+
+CountRefinementLevels[runName_String, i_] :=
+  ToExpression[LookupParameter[runName,
+                               "CarpetRegrid2::num_levels_"<>ToString[i]]];
 
 RefinementLevels[runName_String] :=
   Table[l, {l, 0, CountRefinementLevels[runName]-1}];
