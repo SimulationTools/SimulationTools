@@ -94,10 +94,11 @@ CarpetHDF5FileInfo[file_]:=
   {Iterations->iterations, Components->components, Maps->maps, RefinemeneLevels->refLevels, TimeLevels->timeLevels, Vars->vars}
 ];
 
-CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl_Integer, c:(_Integer|None)] :=Module[{map="", component=""},
+CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|None), c:(_Integer|None)] :=Module[{map="", component="", reflevel=""},
   If[m =!= None, map=" m="<>ToString[m]];
   If[c =!= None, component=" c="<>ToString[c]];
-  "/" <> var <> " it=" <> ToString[it] <> " tl=0"<>map<>" rl=" <> ToString[rl] <> component];
+  If[rl =!= None, reflevel=" rl="<>ToString[rl]];
+  "/" <> var <> " it=" <> ToString[it] <> " tl=0"<>map<> reflevel <> component];
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 
@@ -193,6 +194,9 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 
 ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
   MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]];
+
+firstOrNone[l_List] :=
+  If[l === {}, None, First[l]];
 
 Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None};
 
