@@ -15,6 +15,8 @@ SegmentDuration;
 RunDutyCycle;
 SegmentCoordinateTimeInterval;
 SegmentStartTimes;
+FullFilenames;
+LeafNamesOnly;
 
 Begin["`Private`"];
 
@@ -76,13 +78,16 @@ FindRunFile[runName_String, fileName_String] :=
     Return[files2];
   ];
 
-Options[FindRunFilesFromPattern] = {FullFilenames -> False};
+Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
 FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]] :=
   Module[{segments, files1, files2, nToDrop},
     segments = FindRunSegments[runName];
     If[segments === {}, Return[{}]];
     nToDrop = If[OptionValue[FullFilenames], 0, Length[FileNameSplit[segments[[1]]]]];
-    names = Union[Map[FileNameDrop[#, nToDrop] &, Flatten[Map[FileNames[filePattern, #, Infinity] &, segments], 1]]]
+    names = Union[Map[FileNameDrop[#, nToDrop] &, Flatten[Map[FileNames[filePattern, #, Infinity] &, segments], 1]]];
+    If[OptionValue[LeafNamesOnly],
+      names = Map[FileNameTake[#,-1]&, names]];
+    names
   ];
 
 StandardOutputOfRun[runName_String] :=
