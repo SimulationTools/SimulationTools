@@ -350,14 +350,10 @@ DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data
 
 DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, positions];
 
-Unprotect[Interpolation];
-
-Interpolation[v_DataRegion, opts___] :=
+DataRegion /: Interpolation[v_DataRegion, opts___] :=
   Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
 ];
-
-Protect[Interpolation];
 
 End[];
 
