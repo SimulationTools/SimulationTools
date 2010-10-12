@@ -59,7 +59,7 @@ DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, d
   {{xmin, xmax}} = GetDataRange[v];
   {spacing} = GetSpacing[v];
   data = GetData[v];
-  MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}]]
+  MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}], GetAttributes[v]/.((a_->b_):>(SymbolName[a]->b))]
 ];
 
 
