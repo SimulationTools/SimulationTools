@@ -355,6 +355,20 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
 ];
 
+(* We cannot use upvalues here, as the DataRegion appears too deep in
+the expression *)
+
+Unprotect[ListLinePlot];
+
+ListLinePlot[ds:List[DataRegion[___]..], opts___] :=
+  ListLinePlot[ToList /@ ToDataTable /@ ds, opts];
+
+ListLinePlot[d:DataRegion[___], opts___] :=
+   ListLinePlot[{d}, opts];
+
+Protect[ListLinePlot];
+
+
 End[];
 
 EndPackage[];
