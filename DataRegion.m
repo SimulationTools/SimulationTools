@@ -112,38 +112,6 @@ GetDataRange[v_DataRegion] :=
     max = origin + spacing * (dimensions - 1);
     MapThread[List, {min, max}]];
 
-DataRegion/:Min[DataRegion[_,data_]]:=Min[data];
-
-DataRegion/:Max[DataRegion[_,data_]]:=Max[data];
-
-DataRegion/:Times[a_, DataRegion[h_,data_]] :=
-  DataRegion[h, a data];
-
-DataRegion/:Abs[DataRegion[h_,data_]] :=
-  DataRegion[h, Abs[data]];
-
-DataRegion/:Re[DataRegion[h_,data_]] :=
-  DataRegion[h, Re[data]];
-
-DataRegion/:Im[DataRegion[h_,data_]] :=
-  DataRegion[h, Im[data]];
-
-DataRegion/:Log10[DataRegion[h_,data_]] :=
-  DataRegion[h, Log10[data]];
-
-DataRegion/:Power[DataRegion[h_,data_], a_] :=
-  DataRegion[h, data^a];
-
-DataRegion/:Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1+data2]
-
-DataRegion/:Plus[DataRegion[h1_,data1_], a_]:=DataRegion[h1, data1+a]
-
-DataRegion/:Times[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1*data2]
-
-DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data1, pattern, opts];
-
-DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, positions];
-
 replaceRule[list_List, key_ -> newValue_] :=
   list /. (key -> _) :> (key -> newValue);  
 
@@ -183,15 +151,6 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
 
 SliceData[v_DataRegion, dims_List, coords_:0] := 
   Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
-
-Unprotect[Interpolation];
-
-Interpolation[v_DataRegion, opts___] :=
-  Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
-    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
-];
-
-Protect[Interpolation];
 
 (* Plotting wrappers *)
 DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange},
@@ -354,6 +313,51 @@ MapThreadDataRegion[f_, drs_] :=
     datas = GetData /@ drs;
     newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
     DataRegion[attrs, newData]];
+
+(*******************************************************************************************)
+(* Redefine various built-in Mathematica functions to work on DataRegions                  *)
+(*******************************************************************************************)
+
+DataRegion/:Min[DataRegion[_,data_]]:=Min[data];
+
+DataRegion/:Max[DataRegion[_,data_]]:=Max[data];
+
+DataRegion/:Times[a_, DataRegion[h_,data_]] :=
+  DataRegion[h, a data];
+
+DataRegion/:Abs[DataRegion[h_,data_]] :=
+  DataRegion[h, Abs[data]];
+
+DataRegion/:Re[DataRegion[h_,data_]] :=
+  DataRegion[h, Re[data]];
+
+DataRegion/:Im[DataRegion[h_,data_]] :=
+  DataRegion[h, Im[data]];
+
+DataRegion/:Log10[DataRegion[h_,data_]] :=
+  DataRegion[h, Log10[data]];
+
+DataRegion/:Power[DataRegion[h_,data_], a_] :=
+  DataRegion[h, data^a];
+
+DataRegion/:Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1+data2]
+
+DataRegion/:Plus[DataRegion[h1_,data1_], a_]:=DataRegion[h1, data1+a]
+
+DataRegion/:Times[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1*data2]
+
+DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data1, pattern, opts];
+
+DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, positions];
+
+Unprotect[Interpolation];
+
+Interpolation[v_DataRegion, opts___] :=
+  Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
+    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
+];
+
+Protect[Interpolation];
 
 End[];
 
