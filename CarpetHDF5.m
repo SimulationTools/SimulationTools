@@ -200,8 +200,6 @@ firstOrNone[l_List] :=
 
 Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None};
 
-firstOrNone[l_] := If[Length[l]==0, None, First[l]];
-
 ReadCarpetHDF5Variable[file_, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
     var = If[OptionValue[Variable] =!= None, OptionValue[Variable], firstOrNone[CarpetHDF5Variables[file]]];
