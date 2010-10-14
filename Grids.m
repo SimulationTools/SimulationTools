@@ -1,5 +1,5 @@
 
-BeginPackage["Grids`", {"RunFiles`", "NR`"}];
+BeginPackage["Grids`", {"RunFiles`", "NR`", "Horizons`"}];
 
 AnimateGrids::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run";
 LoadGrids;
@@ -8,6 +8,8 @@ PlotGrid;
 GridsBoxes;
 ReadCarpetGrids;
 PlotCarpetGrids2D;
+PlotGridsAndAH2D::usage = "PlotGridsAndAH2D[run] generates a 2D plot of the grid structure and apparent horizons in which the timestep can be interactively changed.";
+RescaleGrids::usage = "RescaleGrids[grids, coordinatesize] rescales 'grids' such that the coarsest grid has spacing 'coordinatesize'.";
 
 Begin["`Private`"];
 
@@ -123,6 +125,18 @@ mergeFiles[files_List] :=
     Return[Join[truncated, rest]];
   ];
 
+RescaleGrids[grids_, spacing_] :=
+ Module[{iter, range, rescaledgrids},
+  If[Depth[grids]==6,
+    rescaledgrids = Map[RescaleGrids[#, spacing]&, grids];
+  ,
+    range = Max[grids[[2]]] - Min[grids[[2]]];
+    rescaledgrids = MapAt[spacing (#-range/2)&, grids, 2];
+  ];
+
+  rescaledgrids
+];
+
 ReadCarpetGrids[run_, fileName_:"carpet-grid.asc"] :=
  Module[{fileNames, files},
   fileNames = FindRunFile[run, fileName];
@@ -147,6 +161,37 @@ PlotCarpetGrids2D[run_String] :=
   dt = ReadFineTimeStep[run];
   tRange = ReadTimeRange[run];
   Manipulate[Graphics[PlotCarpetGrids2D[grids, dt, t]], {{t, tRange[[1]], "t"}, tRange[[1]], tRange[[2]]}]];
+
+PlotGridsAndAH2D[sim_String, plotopts___] :=
+  Module[{radius1, xpos1, ypos1, radius2, xpos2, ypos2, grids, dt, tRange},
+
+  (* Get horizon position and radius for both black holes *)
+  radius1 = Interpolation[ReadAHRadius[sim, 1]];
+  xpos1 = Interpolation[ReadAHCentroidCoord[sim, 1, 1]];
+  ypos1 = Interpolation[ReadAHCentroidCoord[sim, 1, 2]];
+  radius2 = Interpolation[ReadAHRadius[sim, 2]];
+  xpos2 = Interpolation[ReadAHCentroidCoord[sim, 2, 1]];
+  ypos2 = Interpolation[ReadAHCentroidCoord[sim, 2, 2]];
+
+  (* Get grid information *)
+  grids = ReadCarpetGrids[sim];
+  grids = RescaleGrids[grids, ReadCoarseGridSpacing[sim]];
+
+  (* We need the timestep to relate iteration number to time *)
+  dt = ReadFineTimeStep[sim];
+
+  tRange = ReadTimeRange[sim];
+
+  (* Use Manipulate to show the grids and horizons as a function of time *)
+  Manipulate[
+   Show[Graphics[PlotCarpetGrids2D[grids, dt, t]],
+    Graphics[Disk[{xpos1[t], ypos1[t]}, radius1[t]]],
+    Graphics[Disk[{xpos2[t], ypos2[t]}, radius2[t]]],
+    PlotLabel -> "t=" <> ToString[t],
+    plotopts],
+   {{t, tRange[[1]], "Time"}, Sequence @@ tRange},
+   ControlType -> Slider, SaveDefinitions -> True]
+];
 
 PlotCarpetGrids2D[run_String, t_?NumberQ] :=
   Module[{grids, dt, tRange},
