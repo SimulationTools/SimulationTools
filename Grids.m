@@ -189,9 +189,10 @@ PlotGridsAndAH2D[sim_String, plotopts___] :=
     Graphics[Disk[{xpos1[t], ypos1[t]}, radius1[t]]],
     Graphics[Disk[{xpos2[t], ypos2[t]}, radius2[t]]],
     PlotLabel -> "t=" <> ToString[t],
+    PlotRange -> pr,
     plotopts],
-   {{t, tRange[[1]], "Time"}, Sequence @@ tRange},
-   ControlType -> Slider, SaveDefinitions -> True]
+   {{t, tRange[[1]], "Time"}, Sequence @@ tRange}, {{pr, All, "PlotRange"}},
+   ControlType -> {Slider, InputField}, SaveDefinitions -> True]
 ];
 
 PlotCarpetGrids2D[run_String, t_?NumberQ] :=
