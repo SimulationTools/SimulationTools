@@ -146,8 +146,7 @@ DefineMemoFunction[ReadCarpetGrids[run_, fileName_:"carpet-grid.asc"],
 ];
 
 plotBox2D[{v1_, v2_}] :=
- {Opacity[0], 
-  EdgeForm[Thin], {Rectangle[Take[v1, 2], Take[v2, 2]]}}
+ {Blue,EdgeForm[Thin],Opacity[0.1], {Rectangle[Take[v1, 2], Take[v2, 2]]}}
 
 plotIteration2D[{it_, boxes_}] :=
  {Map[plotBox2D, boxes]}
