@@ -1,5 +1,5 @@
 
-BeginPackage["Grids`", {"RunFiles`", "NR`", "Horizons`"}];
+BeginPackage["Grids`", {"Horizons`", "Memo`", "NR`", "RunFiles`"}];
 
 AnimateGrids::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run";
 LoadGrids;
@@ -137,12 +137,13 @@ RescaleGrids[grids_, spacing_] :=
   rescaledgrids
 ];
 
-ReadCarpetGrids[run_, fileName_:"carpet-grid.asc"] :=
+DefineMemoFunction[ReadCarpetGrids[run_, fileName_:"carpet-grid.asc"],
  Module[{fileNames, files},
   fileNames = FindRunFile[run, fileName];
   If[files === {}, Throw["No file " <> fileName <> " found in simulation " <> run]];
   files = Map[ReadCarpetGridsFromFile, fileNames];
-  mergeFiles[files]];
+  mergeFiles[files]]
+];
 
 plotBox2D[{v1_, v2_}] :=
  {Opacity[0], 
