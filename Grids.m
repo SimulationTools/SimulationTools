@@ -1,5 +1,6 @@
+(* ::Package:: *)
 
-BeginPackage["Grids`", {"Horizons`", "Memo`", "NR`", "RunFiles`"}];
+BeginPackage["Grids`", {"BHCoordinates`", "Horizons`", "Memo`", "NR`", "RunFiles`"}];
 
 AnimateGrids::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run";
 LoadGrids;
@@ -162,16 +163,16 @@ PlotCarpetGrids2D[run_String] :=
   tRange = ReadTimeRange[run];
   Manipulate[Graphics[PlotCarpetGrids2D[grids, dt, t]], {{t, tRange[[1]], "t"}, tRange[[1]], tRange[[2]]}]];
 
-PlotGridsAndAH2D[sim_String, plotopts___] :=
-  Module[{radius1, xpos1, ypos1, radius2, xpos2, ypos2, grids, dt, tRange},
+DefineMemoFunction[PlotGridsAndAH2D[sim_String],
+  Module[{radius1, xpos1, ypos1, radius2, xpos2, ypos2, grids, dt},
 
   (* Get horizon position and radius for both black holes *)
   radius1 = Interpolation[ReadAHRadius[sim, 1]];
-  xpos1 = Interpolation[ReadAHCentroidCoord[sim, 1, 1]];
-  ypos1 = Interpolation[ReadAHCentroidCoord[sim, 1, 2]];
+  xpos1 = Interpolation[ReadBHCoordinate[sim, 0, 1]];
+  ypos1 = Interpolation[ReadBHCoordinate[sim, 0, 2]];
   radius2 = Interpolation[ReadAHRadius[sim, 2]];
-  xpos2 = Interpolation[ReadAHCentroidCoord[sim, 2, 1]];
-  ypos2 = Interpolation[ReadAHCentroidCoord[sim, 2, 2]];
+  xpos2 = Interpolation[ReadBHCoordinate[sim, 1, 1]];
+  ypos2 = Interpolation[ReadBHCoordinate[sim, 1, 2]];
 
   (* Get grid information *)
   grids = ReadCarpetGrids[sim];
@@ -180,18 +181,12 @@ PlotGridsAndAH2D[sim_String, plotopts___] :=
   (* We need the timestep to relate iteration number to time *)
   dt = ReadFineTimeStep[sim];
 
-  tRange = ReadTimeRange[sim];
+  Show[Graphics[PlotCarpetGrids2D[grids, dt, #]],
+    Graphics[Disk[{xpos1[#], ypos1[#]}, radius1[#]]],
+    Graphics[Disk[{xpos2[#], ypos2[#]}, radius2[#]]],
+    PlotLabel -> "t=" <> ToString[#]] &
 
-  (* Use Manipulate to show the grids and horizons as a function of time *)
-  Manipulate[
-   Show[Graphics[PlotCarpetGrids2D[grids, dt, t]],
-    Graphics[Disk[{xpos1[t], ypos1[t]}, radius1[t]]],
-    Graphics[Disk[{xpos2[t], ypos2[t]}, radius2[t]]],
-    PlotLabel -> "t=" <> ToString[t],
-    PlotRange -> pr,
-    plotopts],
-   {{t, tRange[[1]], "Time"}, Sequence @@ tRange}, {{pr, All, "PlotRange"}},
-   ControlType -> {Slider, InputField}, SaveDefinitions -> True]
+  ]
 ];
 
 PlotCarpetGrids2D[run_String, t_?NumberQ] :=
