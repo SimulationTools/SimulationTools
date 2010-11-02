@@ -39,7 +39,7 @@ segmentSummary[runName_] :=
   Return[Grid[tab, Spacings -> 2, Alignment -> Left]];
   ]
 
-SimView[runName_String] := SimView[{runName}];
+SimView[runName_String, opts___] := SimView[{runName}, opts];
 
 SimView[runNames_List] :=
   Module[{r, rads},
