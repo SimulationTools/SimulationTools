@@ -40,6 +40,9 @@ MapThreadDataRegion;
 Iteration;
 Variable;
 RefinementLevel;
+ResampleDataRegion;
+ResampleDataRegions;
+Global`Sub;
 
 Begin["`Private`"];
 
@@ -313,6 +316,46 @@ MapThreadDataRegion[f_, drs_] :=
     datas = GetData /@ drs;
     newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
     DataRegion[attrs, newData]];
+
+ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
+  Module[{dFn, newData},
+    dFn = Interpolation[d, InterpolationOrder->p];
+    If[GetNumDimensions[d] === 2,
+      newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
+                                {y, x1[[2]], x2[[2]], dx[[2]]}];
+      MakeDataRegion[newData, GetVariableName[d], Dimensions[newData], 
+        x1, dx, GetTime[d]],
+
+      Throw["Cannot resample DataRegions of dimension other than 2"]]
+  ];
+
+intersectBoxes[boxes_] :=
+  (* A "box" is a list of the form {x1, x2} where x1 and x2 are vectors
+     for the lower and upper coordinates of the box. *)
+  Module[{x1s, x2s, x1, x2},
+    x1s = Map[First, boxes];
+    x2s = Map[Last, boxes];
+    x1 = Map[Max, Transpose[x1s]];
+    x2 = Map[Min, Transpose[x2s]];
+
+    (* Could return a special value here if needed.  Alternatively,
+       could generically return a list of boxes, which would be empty
+       if the boxes don't intersect. *)
+    If[Negative[x2 - x1], Throw["Intersection of boxes is empty"]];
+    {x1, x2}];
+
+ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
+  Module[{dxs,ranges,x1,x2,dx},
+    If[Length[ds] === 0, Return[{}]];
+    dxs = Map[GetSpacing, ds];
+    ranges = Map[Transpose[GetDataRange[#]] &, ds];
+    {x1, x2} = intersectBoxes[ranges];
+    dx = Map[Min, Transpose[dxs]];
+    Map[ResampleDataRegion[#, {x1, x2, dx}, p] &, ds]];
+
+DataRegion/:
+Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
+  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
 
 (*******************************************************************************************)
 (* Redefine various built-in Mathematica functions to work on DataRegions                  *)
