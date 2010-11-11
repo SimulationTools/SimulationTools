@@ -2,7 +2,7 @@
 
 (* This package was originally written by Ian Hinder and modified to support arbitrary dimensional data by Barry Wardell *)
 
-BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`"}];
+BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 
 (* Exported symbols *)
 
