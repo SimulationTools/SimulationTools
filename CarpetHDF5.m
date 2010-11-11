@@ -20,6 +20,9 @@ CarpetHDF5RefinementLevels;
 CarpetHDF5TimeLevels;
 CarpetHDF5Variables;
 CarpetHDF5FileInfo;
+CarpetHDF5Attribute;
+CarpetHDF5Attributes;
+CarpetHDF5Time;
 
 CarpetHDF5Manipulate;
 CarpetManipulatePlotFunction;
@@ -106,6 +109,30 @@ CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|No
   If[c =!= None, component=" c="<>ToString[c]];
   If[rl =!= None, reflevel=" rl="<>ToString[rl]];
   "/" <> var <> " it=" <> ToString[it] <> " tl=0"<>map<> reflevel <> component];
+
+CarpetHDF5Attributes[file_String, var_String, map:(None | _Integer), rl_Integer, it_Integer] :=
+ Module[{dsList, c, dsName, ds},
+  dsList =
+   Profile["datasetsWith", datasetsWith[
+     file, {1 -> var , 2 -> it, 4 -> rl,
+      6 -> (map /. None -> Null) }]];
+  If[dsList === {}, Throw["Cannot find dataset in file"]];
+  ds = First[dsList];
+  c = ds[[5]];
+  dsName = CarpetHDF5DatasetName[var, it, map, rl, c];
+  Annotations[file, dsName]];
+
+CarpetHDF5Attribute[file_String, var_String, map_, rl_Integer, it_Integer, attr_String] :=
+  Module[{attrs = CarpetHDF5Attributes[file, var, map, rl, it], value},
+    value = attr /. attrs;
+    If[value === attr,
+      Throw["Attribute " <> attr <> " not found in file " <> file <>
+            " dataset " <> ToString[{var,map,rl,it}]]];
+    Return[value]];
+
+CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
+  Profile["CarpetHDF5Time",
+    ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]]];
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 
