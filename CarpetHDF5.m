@@ -65,7 +65,8 @@ datasetAttribute[file_String, attr_] := datasetAttribute[datasetAttributes[file]
 
 CarpetHDF5Iterations[file_] := datasetAttribute[file, 2];
 
-CarpetHDF5Iterations[file_, rl_:0] := datasetAttribute[datasetsWith[file, 4 -> rl], 2];
+CarpetHDF5Iterations[file_String, rl_Integer:0] :=
+  datasetAttribute[datasetsWith[file, 4 -> rl], 2];
 
 CarpetHDF5Components[file_] := datasetAttribute[file, 5];
 
