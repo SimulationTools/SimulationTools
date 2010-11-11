@@ -58,7 +58,12 @@ datasetsWith[datasets_List, attr_Rule] :=
   Select[datasets, #[[attr[[1]]]] == attr[[2]] &];
 datasetsWith[file_String, attr_Rule] := 
   datasetsWith[datasetAttributes[file], attr];
-datasetsWith[file_String, attr_List] := Fold[datasetsWith, file, attr];
+
+datasetsWith[file_String, attr_List] :=
+  Module[{attr2, pattern, w},
+    attr2 = attr /. ((x_->y_) :> (w[x] -> y));
+    pattern = Table[w[i], {i, 1, 6}] /. attr2 /. w[_] -> _;
+    Cases[datasetAttributes[file], pattern]];
 
 datasetAttribute[datasets_List, attr_] := Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]]];
 datasetAttribute[file_String, attr_] := datasetAttribute[datasetAttributes[file], attr];
