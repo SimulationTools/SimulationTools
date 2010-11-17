@@ -37,6 +37,7 @@ NaNQ;
 DataRegionContourPlot;
 MapThreadDataRegion;
 NDerivative::usage = "NDerivative[d, dir] returns the first derivative of the DataRegion d along the direction dir.  This is uses second order accurate centered differencing and the result omits the first and last points of d.";
+TimeDerivative::usage = "TimeDerivative[d1, d2] returns numerical time derivative computed from DataRegions d1 and d2.";
 
 
 Iteration;
@@ -430,6 +431,54 @@ NDerivative[d:DataRegion[h_,_], dir_Integer] :=
   newh = replaceRules[h, {Dimensions -> dims, Origin -> origin}];
   
   DataRegion[newh, deriv]
+]
+
+TimeDerivative[d1_DataRegion, d2_DataRegion] :=
+ Module[{t1, t2, o1, o2, s1, s2, dim1, dim2, nd1, nd2, v1, v2},
+  nd1 = GetNumDimensions[d1];
+  nd2 = GetNumDimensions[d2];
+
+  If[nd1 != nd2,
+    Throw["Error, can't compute time derivative from DataRegions with a different number of dimensions."];
+    Return[$Failed];
+  ];
+
+  dim1 = GetDimensions[d1];
+  dim2 = GetDimensions[d2];
+
+  If[dim1 != dim2,
+    Throw["Error, can't compute time derivative from DataRegions with different dimensions."];
+    Return[$Failed];
+  ];
+
+  s1 = GetSpacing[d1];
+  s2 = GetSpacing[d2];
+
+  If[s1 != s2,
+    Throw["Error, can't compute time derivative from DataRegions with different spacings."];
+    Return[$Failed];
+  ];
+
+  o1 = GetOrigin[d1];
+  o2 = GetOrigin[d2];
+
+  If[o1 != o2,
+    Throw["Error, can't compute time derivative from DataRegions with different origins."];
+    Return[$Failed];
+  ];
+
+  v1 = GetVariableName[d1];
+  v2 = GetVariableName[d2];
+
+  If[v1 != v2,
+    Throw["Error, can't compute time derivative from DataRegions with different variables."];
+    Return[$Failed];
+  ];
+
+  t1 = GetTime[d1];
+  t2 = GetTime[d2];
+
+  (d2-d1)/(t2-t1)
 ]
 
 (* We cannot use upvalues here, as the DataRegion appears too deep in
