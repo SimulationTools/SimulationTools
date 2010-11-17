@@ -36,6 +36,8 @@ FilterNaNs;
 NaNQ;
 DataRegionContourPlot;
 MapThreadDataRegion;
+NDerivative::usage = "NDerivative[d, dir] returns the first derivative of the DataRegion d along the direction dir.  This is uses second order accurate centered differencing and the result omits the first and last points of d.";
+
 
 Iteration;
 Variable;
@@ -397,6 +399,38 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
   Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
 ];
+
+NDerivative[d_DataRegion] :=
+ Module[{ndims, result},
+  ndims = GetNumDimensions[d];
+
+  If[ndims == 1,
+   result = NDerivative[d, 1];,
+   Throw["Must specify a direction when applying NDerivative to a DataRegion of dimension greater than 1."];
+   result = $Failed;
+  ];
+
+  result
+];
+
+NDerivative[d:DataRegion[h_,_], dir_Integer] :=
+ Module[{spacing, origin, dims, ndims, dr1, dr2, deriv},
+  spacing = GetSpacing[d][[dir]];
+  origin  = GetOrigin[d];
+  dims    = GetDimensions[d];
+  ndims   = GetNumDimensions[d];
+
+  dr1 = Map[Drop[#,1]&, GetData[d], {ndims-dir}];
+  dr2 = Map[Drop[#,-1]&, GetData[d], {ndims-dir}];
+  deriv = (dr2-dr1)/( spacing);
+
+  origin[[dir]] += spacing;
+  dims[[dir]]   -= 2; 
+
+  newh = replaceRules[h, {Dimensions -> dims, Origin -> origin}];
+  
+  DataRegion[newh, deriv]
+]
 
 (* We cannot use upvalues here, as the DataRegion appears too deep in
 the expression *)
