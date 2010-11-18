@@ -418,21 +418,28 @@ UFDWeights[m_, n_, s_, h_] :=
  CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
 
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
- Module[{spacing, origin, dims, ndims, dr1, dr2, deriv},
+ Module[{spacing, ndims, data, dr1, dr2, newh, deriv, lowerdims, upperdims, leftpart, rightpart},
   spacing = GetSpacing[d][[dir]];
-  origin  = GetOrigin[d];
-  dims    = GetDimensions[d];
   ndims   = GetNumDimensions[d];
 
-  dr1 = Map[Drop[#,1]&, GetData[d], {ndims-dir}];
-  dr2 = Map[Drop[#,-1]&, GetData[d], {ndims-dir}];
-  deriv = (dr2-dr1)/( spacing);
+  data = GetData[d];
+  dr1 = Map[RotateLeft, data, {ndims-dir}];
+  dr2 = Map[RotateRight, data, {ndims-dir}];
+  deriv = (dr2-dr1)/(2 spacing);
 
-  origin[[dir]] += spacing;
-  dims[[dir]]   -= 2; 
 
-  newh = replaceRules[h, {Dimensions -> dims, Origin -> origin}];
-  
+  (* Build up sequences for use in Part corresponding to the boundaries *)
+  If[ndims-dir == 0, lowerdims = Sequence[], lowerdims = Sequence @@ ConstantArray[All, ndims-dir]];
+  If[dir == 1, upperdims = Sequence[], upperdims = Sequence @@ ConstantArray[All, dir-1]];
+  leftpart = Sequence[lowerdims, 1, upperdims];
+  rightpart = Sequence[lowerdims, -1, upperdims];
+
+  (* Deal with boundary points using asymmetric stencil *)
+  deriv[[leftpart]] = (dr1[[leftpart]]-data[[leftpart]])/spacing;
+  deriv[[rightpart]] = (data[[rightpart]]-dr2[[rightpart]])/spacing;
+
+  newh = replaceRules[h, {VariableName -> "dx"<>ToString[dir]<>"_"<>GetVariableName[d]}];
+
   DataRegion[newh, deriv]
 ]
 
