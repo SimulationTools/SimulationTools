@@ -291,7 +291,7 @@ ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
   ];
 
 ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
-   ResampleDataTable[d, {t1, t2, dt}, 3];
+   ResampleDataTable[d, {t1, t2, dt}, 8];
 
 ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
   Module[{f, dt1, dt2, l, l2},
@@ -309,7 +309,7 @@ Spacing[d:DataTable[__]] :=
     ts = IndVar[d];
     Min[Drop[ts,1] - Drop[RotateRight[ts],1]]]
 
-ResampleDataTables[ds:{DataTable[__]...}] :=
+ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
     If[Length[ds] === 0, Return[{}]];
     dts = Map[Spacing, ds];
@@ -319,7 +319,7 @@ ResampleDataTables[ds:{DataTable[__]...}] :=
     t2s = Map[Last, ranges];
     t1 = Apply[Max, t1s];
     t2 = Apply[Min, t2s];
-    Map[ResampleDataTable[#, {t1, t2, dt}] &, ds]];
+    Map[ResampleDataTable[#, {t1, t2, dt}, p] &, ds]];
 
 DataTableInterval[d_DataTable, {t1_, t2_}] :=
   d /. DataTable[l_, x___] :> DataTable[Select[l,#[[1]] >= t1 && #[[1]] < t2 &], x];
