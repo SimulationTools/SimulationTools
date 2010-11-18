@@ -80,6 +80,9 @@ FitEccOm;
 FitParameters;
 Continuous;
 
+LRange;
+RadiusRange;
+
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
    UseTortoiseCoordinate -> True,
@@ -754,9 +757,11 @@ ExportWaveforms[run_String, dir_String, lRange_: All, rRange_: All] :=
   Table[ExportWaveform[run, dir, l, m, r], {l, ls}, {m, -l, l}, {r, 
     rs}]];
 
-ExportRun[run_String, dir_String] :=
- Module[{},
-  ExportWaveforms[run, dir];
+Options[ExportRun] = {LRange -> All, RadiusRange -> All};
+
+ExportRun[run_String, dir_String, opts:OptionsPattern[]] :=
+ Module[{lRange = OptionValue[LRange], rRange = OptionValue[RadiusRange]},
+  ExportWaveforms[run, dir, lRange, rRange];
   ExportBHCoords[run, dir];
   ExportBHRelativeCoords[run, dir];
   ExportGridStructure[run, dir]];
