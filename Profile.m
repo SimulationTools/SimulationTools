@@ -4,8 +4,14 @@ BeginPackage["Profile`"];
 Profile;
 ProfileTime;
 ProfileCount;
+ClearProfile;
 
 Begin["`Private`"];
+
+ClearProfile[] :=
+  Module[{},
+    Clear[ProfileTime];
+    Clear[ProfileCount]];
 
 SetAttributes[Profile, HoldAll];
 
