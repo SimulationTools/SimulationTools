@@ -307,7 +307,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
 Spacing[d:DataTable[__]] :=
   Module[{ts},
     ts = IndVar[d];
-    ts[[2]] - ts[[1]]];
+    Min[Drop[ts,1] - Drop[RotateRight[ts],1]]]
 
 ResampleDataTables[ds:{DataTable[__]...}] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
