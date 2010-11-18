@@ -9,6 +9,7 @@ BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 ReadCarpetHDF5;
 CarpetHDF5DatasetName;
 ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] reads a variable from a Carpet HDF5 file";
+ReadCarpetHDF5VariableFromRun;
 ReadCarpetHDF5Components;
 StripGhostZones;
 VerboseRead;
@@ -273,6 +274,9 @@ CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
 
   CarpetHDF5Manipulate[file, var, rl, map, opts]
 ];
+ReadCarpetHDF5VariableFromRun[run_String, var_String, opts:OptionsPattern[]] :=
+  Module[{},
+    ReadCarpetHDF5Variable[Module[{files = FindRunFile[run, var]}, If[files==={},Throw["File "<>var<>" not found in run "<>run]]; files[[1]]], opts]];
 
 End[];
 
