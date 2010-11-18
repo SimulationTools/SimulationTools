@@ -52,6 +52,16 @@ ReadSwap[runName_] :=
     runName, "systemstatistics::process_memory_mb.maximum.asc",
     {"time", "swap_used_mb"}]];
 
+DefineMemoFunction[ReadIniFile[file_],
+  Flatten[StringCases[
+    ReadList[file, String],
+    key__ ~~ "=" ~~ value___ :> {StringTrim@key -> StringTrim@value}]]];
+
+IniVariable[file_, key_] :=
+  Module[{map = ReadIniFile[file]},
+    If[!MemberQ[First/@map, key], Throw["Key not found"],
+    Return[key /. map]]];
+
 (* These files should be accessed using RunFiles, not directly using
    RunDirectory *)
 ReadCores[runName_] :=
