@@ -1,5 +1,5 @@
 
-BeginPackage["Plotting`"];
+BeginPackage["Plotting`", {"DataRegion`"}];
 
 MakePlotLegend;
 ListLinePlotWithLegend;
@@ -8,6 +8,8 @@ PlotLegend;
 LegendPosition;
 DynamicListLinePlot;
 PresentationListLinePlot;
+PresentationArrayPlot;
+ColorRange;
 PresentationPlotStyles;
 PresentationPlotColors;
 LegendOrientation;
@@ -214,6 +216,29 @@ PlotFit[data_, model_, pars_, var_, args___] :=
   {Show[ListPlot[data, PlotRange -> All],
     Plot[fittedModel, {h, 0, Max[First /@ data]}, PlotRange -> {{0,0.6},{-50,-40}}],
     PlotLabel -> First[pars] /. fit, args, ImageSize -> 400,PlotRange->{{0,0.6},{-50,-40}}], fit}];
+
+
+key[mapName_String, {min_, max_}, opts___] :=
+  ArrayPlot[Table[{c, c}, {c, max, min, -(max - min)/100}],
+   opts,
+   ColorFunctionScaling -> False,
+   ColorFunction ->
+    ScaledColorFunction[mapName, 1 {min, max}],
+   DataRange -> {{0, 1}, {min, max}}, AspectRatio -> 8,
+   FrameTicks -> {Table[
+      If[Abs[c] < 10^-15, 0, c], {c, min, max, (max - min)/10}],
+     False, False, False}];
+
+Options[PresentationArrayPlot] =
+{ColorRange -> Automatic, ColorFunctionName -> "TemperatureMap", Key -> True} ~Join~ Options[ArrayPlot];
+
+PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
+  Module[{range},
+    range = OptionValue[ColorRange];
+    If[range === Automatic, range = {Min[data], Max[data]}];
+    DataRegionArrayPlot[data, opts, ColorFunctionScaling -> False,
+      ColorFunction -> ScaledColorFunction[OptionValue[ColorFunctionName], range],
+      FrameTicks -> True, LabelStyle -> Medium]];
 
 End[];
 
