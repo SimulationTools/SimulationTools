@@ -419,13 +419,13 @@ UFDWeights[m_, n_, s_, h_] :=
 
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
  Module[{spacing, ndims, data, dr1, dr2, newh, deriv, lowerdims, upperdims, leftpart, rightpart},
-  spacing = GetSpacing[d][[dir]];
   ndims   = GetNumDimensions[d];
+  spacing = GetSpacing[d][[ndims-dir+1]];
 
   data = GetData[d];
   dr1 = Map[RotateLeft, data, {ndims-dir}];
   dr2 = Map[RotateRight, data, {ndims-dir}];
-  deriv = (dr2-dr1)/(2 spacing);
+  deriv = (dr1-dr2)/(2 spacing);
 
 
   (* Build up sequences for use in Part corresponding to the boundaries *)
