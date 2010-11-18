@@ -240,6 +240,7 @@ Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, Refineme
 
 ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
+    If[FileType[file] === None, Throw["ReadCarpetHDF5Variable: File " <> file <> " not found"]];
     var = If[OptionValue[Variable] =!= None, OptionValue[Variable], firstOrNone[CarpetHDF5Variables[file]]];
     it = If[OptionValue[Iteration] =!= None, OptionValue[Iteration], firstOrNone[CarpetHDF5Iterations[file]]];
     rl = If[OptionValue[RefinementLevel] =!= None, OptionValue[RefinementLevel], firstOrNone[CarpetHDF5RefinementLevels[file]]];
