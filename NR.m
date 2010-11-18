@@ -717,14 +717,14 @@ ExportBHCoords[run_String, dir_String, tracker_Integer] :=
   If[FileType[dir] =!= Directory, CreateDirectory[dir]];
   Export[dir <> "/bh_coords_cart_" <> ToString[tracker] <> ".asc", 
    Map[{#[[1]], #[[2, 1]], #[[2, 2]], #[[2, 3]]} &, 
-    ToList[ReadMinTrackerCoordinates[run, tracker]]], "TSV"]];
+    ToList[ReadBHCoordinates[run, tracker]]], "TSV"]];
 
 ExportBHRelativeCoords[run_String, dir_String] :=
  Module[{},
   If[FileType[dir] =!= Directory, CreateDirectory[dir]];
   Export[dir <> "/bh_coords_polar.asc", 
    MapThread[{#[[1]], #1[[2]], #2[[2]]} &, {ToList[
-      ReadMinTrackerRadius[run]], ToList[ReadMinTrackerRadius[run]]}],
+      ReadBHSeparation[run]], ToList[ReadBHPhase[run]]}],
     "TSV"]];
 
 ExportBHCoords[run_String, dir_String] :=
