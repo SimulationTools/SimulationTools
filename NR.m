@@ -702,6 +702,17 @@ ReadPsi4Modes[runName_] :=
          ".asc" -> x]]];
    radii = Union[Map[modeFromFileName, names]]];
 
+ReadPsi4Modes[runName_] :=
+  Module[{names, modeFromFileName, radii}, 
+   names = FindRunFilesFromPattern[runName, 
+     "mp_psi4_l*_m*_r*.asc"];
+   modeFromFileName[name_] := 
+    Round[ToExpression[
+      StringReplace[name, 
+       "mp_psi4_l" ~~ x__ ~~ "_m" ~~ __ ~~ "r" ~~ __ ~~ 
+         ".asc" -> x]]];
+   radii = Union[Map[modeFromFileName, names]]];
+
 ExportWaveform[run_String, dir_String, l_Integer, m_Integer, 
   r_?NumberQ] :=
  Module[{},
