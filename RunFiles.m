@@ -39,6 +39,10 @@ FileNameTake[s_] :=
   File reading
   --------------------------------------------------------------------*)
 
+(* This only finds data subdirectories which contain a parameter file
+- this doesn't work with some testsuite parameter files.  Need to find
+a better way. *)
+
 addDataSubDir[output_String] :=
   Module[{},
     parFiles = FileNames["*/*.par", {output}, 2];
