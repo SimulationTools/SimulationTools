@@ -169,6 +169,9 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
 
   If[verbose, Print["Reading File: "<>file]];
 
+  If[FileType[file] === None,
+    Throw["File " <> file <> " not found"]];
+
   If[IntegerQ[ds], dsName = DataSets[file][[idx]], dsName = ds];
 
   If[verbose, Print["Reading Data"]];
