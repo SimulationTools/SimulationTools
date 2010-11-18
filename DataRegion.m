@@ -37,7 +37,7 @@ NaNQ;
 DataRegionContourPlot;
 MapThreadDataRegion;
 NDerivative::usage = "NDerivative[d, dir] returns the first derivative of the DataRegion d along the direction dir.  This is uses second order accurate centered differencing and the result omits the first and last points of d.";
-TimeDerivative::usage = "TimeDerivative[d1, d2] returns numerical time derivative computed from DataRegions d1 and d2.";
+TimeDerivative::usage = "TimeDerivative[{d1, d2,...}, center] returns a numerical time derivative computed from DataRegions d1, d2, ... . The derivative is computed using finite differencing, the order of which is determined by the number of DataRegions given. The optional center argument specifies the number of timesteps from the first DataRegion at which to compute derivatives (using lop-sided differencing, if necessary), with the default value being half-way between the first and last times.";
 
 
 Iteration;
@@ -414,6 +414,9 @@ NDerivative[d_DataRegion] :=
   result
 ];
 
+UFDWeights[m_, n_, s_, h_] := 
+ CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
+
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
  Module[{spacing, origin, dims, ndims, dr1, dr2, deriv},
   spacing = GetSpacing[d][[dir]];
@@ -433,53 +436,66 @@ NDerivative[d:DataRegion[h_,_], dir_Integer] :=
   DataRegion[newh, deriv]
 ]
 
-TimeDerivative[d1_DataRegion, d2_DataRegion] :=
- Module[{t1, t2, o1, o2, s1, s2, dim1, dim2, nd1, nd2, v1, v2},
-  nd1 = GetNumDimensions[d1];
-  nd2 = GetNumDimensions[d2];
-
-  If[nd1 != nd2,
-    Throw["Error, can't compute time derivative from DataRegions with a different number of dimensions."];
-    Return[$Failed];
+TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
+ Module[{nd, dims, spacing, origin, variable, sorted, times, dt, stencil, offset, deriv, attr, newTime},
+  nd = GetNumDimensions/@dr;
+  If[Not[Equal@@nd],
+   Throw["Error, can't compute time derivative from DataRegions with a different number of dimensions."];
+   Return[$Failed];
   ];
 
-  dim1 = GetDimensions[d1];
-  dim2 = GetDimensions[d2];
-
-  If[dim1 != dim2,
-    Throw["Error, can't compute time derivative from DataRegions with different dimensions."];
-    Return[$Failed];
+  dims = GetDimensions/@dr;
+  If[Not[Equal@@dims],
+   Throw["Error, can't compute time derivative from DataRegions with different dimensions."];
+   Return[$Failed];
   ];
 
-  s1 = GetSpacing[d1];
-  s2 = GetSpacing[d2];
-
-  If[s1 != s2,
+  spacing = GetSpacing/@dr;
+  If[Not[Equal@@spacing],
     Throw["Error, can't compute time derivative from DataRegions with different spacings."];
     Return[$Failed];
   ];
 
-  o1 = GetOrigin[d1];
-  o2 = GetOrigin[d2];
-
-  If[o1 != o2,
+  origin = GetSpacing/@dr;
+  If[Not[Equal@@origin],
     Throw["Error, can't compute time derivative from DataRegions with different origins."];
     Return[$Failed];
   ];
 
-  v1 = GetVariableName[d1];
-  v2 = GetVariableName[d2];
-
-  If[v1 != v2,
+  variable = GetVariableName/@dr;
+  If[Not[Equal@@variable],
     Throw["Error, can't compute time derivative from DataRegions with different variables."];
     Return[$Failed];
   ];
 
-  t1 = GetTime[d1];
-  t2 = GetTime[d2];
+  (* Sort DataRegions by time *)
+  sorted = SortBy[dr, GetTime];
 
-  (d2-d1)/(t2-t1)
-]
+  (* Check spacing is uniform *)
+  times = GetTime/@sorted;
+  If[Apply[Or, Map[# > 10^-10 &, Abs[1 - Differences[times]/Differences[times][[1]]]]],
+    Throw["Error, can't compute time derivative from DataRegions with non-uniform spacing in time."];
+    Return[$Failed];
+  ];
+
+  (* Get finite differencing stencil *)
+  If[centering === Automatic, offset = (Length[dr]-1)/2, offset = centering];
+  dt = times[[2]] - times[[1]];
+  stencil = UFDWeights[1, Length[dr]-1, offset, dt];
+  
+  (* Compute derivative using finite differences *)
+  If[Length[stencil]!=Length[sorted],
+    Throw["Error, can't compute time derivative from inconsistent stencil and DataRegions."];
+    Return[$Failed];
+  ];
+  deriv = stencil.sorted;
+
+  (* Correct time and variable name attributes *)
+  newTime = times[[1]]+offset*dt;
+  attr=replaceRules[GetAttributes[deriv], {Time-> newTime, VariableName -> "dt_"<>variable[[1]]}];
+
+  DataRegion[ attr, GetData[deriv]]
+];
 
 (* We cannot use upvalues here, as the DataRegion appears too deep in
 the expression *)
