@@ -64,7 +64,7 @@ Carpet1DPlotter[run_, opts:OptionsPattern[]] :=
          "Max"], Labeled[Checkbox[Dynamic[auto]], "Automatic"]}],
       Framed[
        Dynamic@plotVar[run, var, rl, it, 
-         PlotOptions -> {PlotRange -> 
+         PlotOptions -> {Sequence@@OptionValue[PlotOptions],PlotRange ->
             If[auto, Automatic, {min, max}]}], Background -> White, 
        ImageSize -> {350, 260}]}]];
 
