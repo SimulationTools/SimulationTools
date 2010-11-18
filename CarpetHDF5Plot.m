@@ -32,7 +32,7 @@ rlsInRunVar[run_String, var_String] :=
 
 getIts[run_String, var_String, rl_Integer] :=
  Module[{its},
-  its = CarpetHDF5Iterations[fileOfRunVar[run, var]];
+  its = CarpetHDF5Iterations[fileOfRunVar[run, var], rl];
   {First[its], Last[its], its[[2]] - its[[1]]}];
 
 Options[plotVar] = {PlotOptions -> {}};
