@@ -17,6 +17,7 @@ SegmentCoordinateTimeInterval;
 SegmentStartTimes;
 FullFilenames;
 LeafNamesOnly;
+FindFirstRunFile;
 
 Begin["`Private`"];
 
@@ -81,6 +82,12 @@ FindRunFile[runName_String, fileName_String] :=
 
     Return[files2];
   ];
+
+FindFirstRunFile[runName_String, fileName_String] :=
+  Module[{},
+    files = FindRunFile[runName, fileName];
+    If[files === {}, Throw["File " <> fileName <> " not found in run " <> runName]];
+    files[[1]]];
 
 Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
 FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]] :=
