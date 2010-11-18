@@ -49,7 +49,8 @@ plotVar[run_String, var_String, rl_Integer, it_Integer,
      " on rl " <> ToString[rl] <> " in run " <> run, 
    ImageSize -> Full, Sequence @@ OptionValue[PlotOptions]]];
 
-Carpet1DPlotter[run_] :=
+Options[Carpet1DPlotter] = Options[plotVar];
+Carpet1DPlotter[run_, opts:OptionsPattern[]] :=
   DynamicModule[{var, rl, it, min = 0, max = 1, auto = True},
    Panel@Column[
      {Dynamic@InputField[Dynamic@run, String],
