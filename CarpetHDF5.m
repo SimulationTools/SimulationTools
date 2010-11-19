@@ -33,6 +33,10 @@ Begin["`Private`"];
 (* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
 $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
 
+(***************************************************************************************)
+(* Private functions *)
+(***************************************************************************************)
+
 import[x__] := If[$h5mma, ImportHDF5[x], Import[x]];
 
 (* Gather various information about the datasets in a file *)
@@ -60,6 +64,7 @@ DefineMemoFunction[datasetAttributes[file_],
 
 datasetsWith[datasets_List, attr_Rule] := 
   Select[datasets, #[[attr[[1]]]] == attr[[2]] &];
+
 datasetsWith[file_String, attr_Rule] := 
   datasetsWith[datasetAttributes[file], attr];
 
@@ -69,8 +74,36 @@ datasetsWith[file_String, attr_List] :=
     pattern = Table[w[i], {i, 1, 6}] /. attr2 /. w[_] -> _;
     Cases[datasetAttributes[file], pattern]];
 
-datasetAttribute[datasets_List, attr_] := Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]]];
-datasetAttribute[file_String, attr_] := datasetAttribute[datasetAttributes[file], attr];
+datasetAttribute[datasets_List, attr_] :=
+  Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]]];
+
+datasetAttribute[file_String, attr_] :=
+  datasetAttribute[datasetAttributes[file], attr];
+
+DefineMemoFunction[Datasets[file_],
+  import[file, "Datasets"]
+];
+
+DefineMemoFunction[Annotations[file_, ds_],
+  import[file, {"Annotations", ds}]
+];
+
+DefineMemoFunction[Dims[file_, ds_],
+  import[file, {"Dimensions", ds}]
+];
+
+DefineMemoFunction[HDF5Data[file_, dataset_String],
+  import[file, {"Datasets", dataset}]
+];
+
+firstOrNone[l_List] :=
+  If[l === {}, None, First[l]];
+
+(***************************************************************************************)
+(* Public functions *)
+(***************************************************************************************)
+
+(* Metadata *)
 
 CarpetHDF5Iterations[run_String, var_String, args___] :=
   CarpetHDF5Iterations[FindRunFile[run, var][[1]], args];
@@ -84,25 +117,22 @@ CarpetHDF5Components[file_, it_, rl_] :=
   datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl}], 5];
 
 CarpetHDF5Maps[file_]             := datasetAttribute[file, 6];
+
 CarpetHDF5RefinementLevels[file_] := datasetAttribute[file, 4];
+
 CarpetHDF5TimeLevels[file_]       := datasetAttribute[file, 3];
+
 CarpetHDF5Variables[file_]        := datasetAttribute[file, 1];
 
 CarpetHDF5FileInfo[file_]:=
   Module[{iterations, components, maps, refLevels, timeLevels, vars},
   iterations = CarpetHDF5Iterations[file];
-
   components = CarpetHDF5Components[file];
-
   maps = CarpetHDF5Maps[file];
-
   refLevels = CarpetHDF5RefinementLevels[file];
-
   timeLevels = CarpetHDF5TimeLevels[file];
-
   vars = CarpetHDF5Variables[file];
-
-  {Iterations->iterations, Components->components, Maps->maps, RefinemeneLevels->refLevels, TimeLevels->timeLevels, Vars->vars}
+  {Iterations->iterations, Components->components, Maps->maps, RefinementLevels->refLevels, TimeLevels->timeLevels, Vars->vars}
 ];
 
 CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|None), c:(_Integer|None)] :=Module[{map="", component="", reflevel=""},
@@ -135,24 +165,6 @@ CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
   Profile["CarpetHDF5Time",
     ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]]];
 
-Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
-
-DefineMemoFunction[Datasets[file_],
-  import[file, "Datasets"]
-];
-
-DefineMemoFunction[Annotations[file_, ds_],
-  import[file, {"Annotations", ds}]
-];
-
-DefineMemoFunction[Dims[file_, ds_],
-  import[file, {"Dimensions", ds}]
-];
-
-DefineMemoFunction[HDF5Data[file_, dataset_String],
-  import[file, {"Datasets", dataset}]
-];
-
 PreloadCarpetHDF5Data[file_]:= Module[{allData, data, annots, dims, ds},
   ds = Datasets[file];
   Annotations[file, #] & /@ ds;
@@ -160,7 +172,11 @@ PreloadCarpetHDF5Data[file_]:= Module[{allData, data, annots, dims, ds},
   HDF5Data[file,  #] & /@ ds;
 ];
 
+(* Data *)
+
+Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
 ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
+(* This should be renamed ReadCarpetHDF5Dataset and should be internal *)
  Module[{dsName, data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds, time},
   strip = OptionValue[StripGhostZones];
   verbose = OptionValue[VerboseRead];
@@ -197,7 +213,6 @@ ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
 ];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
-
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
   Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components},
     If[FileType[file] === None,
@@ -233,11 +248,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
   MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]];
 
-firstOrNone[l_List] :=
-  If[l === {}, None, First[l]];
-
 Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None};
-
 ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
     If[FileType[file] === None, Throw["ReadCarpetHDF5Variable: File " <> file <> " not found"]];
@@ -247,8 +258,17 @@ ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
     map = If[OptionValue[Map] =!= None, OptionValue[Map], firstOrNone[CarpetHDF5Maps[file]]];
     ReadCarpetHDF5Variable[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5]]]];
 
+ReadCarpetHDF5VariableFromRun[run_String, var_String, opts:OptionsPattern[]] :=
+  Module[{},
+    ReadCarpetHDF5Variable[Module[{files = FindRunFile[run, var]}, 
+      If[files==={},Throw["File "<>var<>" not found in run "<>run]]; files[[1]]], opts]];
+
+(* Data manipulation *)
+
 Options[CarpetHDF5Manipulate] = {CarpetHDF5ManipulatePlotFunction -> DataRegionDensityPlot};
-CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:= Module[{data, axesOrigin, numDims, plotType},
+CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:=
+(* Candidate for deletion? *)
+  Module[{data, axesOrigin, numDims, plotType},
   data = Table[ReadCarpetHDF5Variable[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]], {it, CarpetHDF5Iterations[file]}];
   numDims = GetNumDimensions[data[[1]]];
 
@@ -268,6 +288,7 @@ CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:=
 ];
 
 CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
+(* Candidate for deletion? *)
   var  = First[Vars /. CarpetHDF5FileInfo[file]];
   rl   = 0;
   maps = Maps /. CarpetHDF5FileInfo[file];
@@ -275,9 +296,6 @@ CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
 
   CarpetHDF5Manipulate[file, var, rl, map, opts]
 ];
-ReadCarpetHDF5VariableFromRun[run_String, var_String, opts:OptionsPattern[]] :=
-  Module[{},
-    ReadCarpetHDF5Variable[Module[{files = FindRunFile[run, var]}, If[files==={},Throw["File "<>var<>" not found in run "<>run]]; files[[1]]], opts]];
 
 End[];
 
