@@ -4,6 +4,16 @@
 
 BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 
+(* New CarpetHDF5 API *)
+
+ReadGridFunction::usage = "ReadGridFunction[run, var, it, rl] reads a grid function from the CarpetHDF5 file named var in the directory run and returns it as a DataRegion object.  The iteration is given by it, and the refinement level by rl (rl defaults to the first level in the file if it is omitted).  Optional arguments: Variable -> Automatic | varname specifies the variable to read from files containing more than one variable, Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned, VerboseRead -> True|False determines whether extra information about the data being read is output during the read operation.";
+ReadIterations::usage = "ReadIterations[run, var, rl] reads the iterations present in the CarpetHDF5 file named var in the directory run.  Only those iterations present on refinement level rl are returned.  rl defaults to All if it is omitted.";
+ReadMaps::usage = "ReadMaps[run, var] reads the multipatch maps present in the CarpetHDF5 file named var in the directory run.";
+ReadRefinementLevels::usage = "ReadRefinementLevels[run, var] reads the refinement levels present in the CarpetHDF5 file named var in the directory run.";
+ReadTimeLevels::usage = "ReadTimeLevels[run, var] reads the timelevels present in the CarpetHDF5 file named var in the directory run.";
+ReadVariables::usage = "ReadVariables[run, var] reads the variable names present in the CarpetHDF5 file named var in the directory run.";
+ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the iteration it on refinement level rl of the CarpetHDF5 file named var in the directory run.";
+
 (* Exported symbols *)
 
 ReadCarpetHDF5::usage = "ReadCarpetHDF5[file, ds] reads the dataset with name ds from file and returns it as a DataRegion.";
@@ -307,6 +317,63 @@ CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
 
   CarpetHDF5Manipulate[file, var, rl, map, opts]
 ];
+
+getRL[run_, var_, rl_] :=
+  If[rl === Automatic,
+    First[ReadRefinementLevels[run, var]],
+    rl];
+
+getMap[run_,var_,map_] :=
+  Module[{m},
+    If[map === Automatic,
+        m = ReadMaps[run, var];
+        If[m === {}, None, First[m]],
+      map]];
+
+getVar[run_, var_, variable_] :=
+  If[variable === Automatic,
+    First[ReadVariables[run, var]],
+    variable];
+
+(***************************************************************************************)
+(* New API *)
+(***************************************************************************************)
+
+Options[ReadGridFunction] = {Variable -> Automatic,
+  Map -> Automatic, StripGhostZones -> True,
+  VerboseRead -> False};
+ReadGridFunction[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
+  ReadCarpetHDF5VariableFromRun[run, var, Iteration -> it,
+    RefinementLevel -> getRL[run,var,rl], opts];
+
+Options[ReadIterations] = {};
+ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
+  CarpetHDF5Iterations[FindFirstRunFile[run, var],
+    getRL[run, var, rl]];
+
+Options[ReadMaps] = {};
+ReadMaps[run_, var_, opts:OptionsPattern[]] :=
+  CarpetHDF5Maps[FindFirstRunFile[run, var]];
+
+Options[ReadRefinementLevels] = {};
+ReadRefinementLevels[run_, var_, opts:OptionsPattern[]] :=
+  CarpetHDF5RefinementLevels[FindFirstRunFile[run, var]];
+
+Options[ReadTimeLevels] = {};
+ReadTimeLevels[run_, var_, opts:OptionsPattern[]] :=
+  CarpetHDF5TimeLevels[FindFirstRunFile[run, var]];
+
+Options[ReadVariables] = {};
+ReadVariables[run_, var_, opts:OptionsPattern[]] :=
+  CarpetHDF5Variables[FindFirstRunFile[run, var]];
+
+Options[ReadTime] = {Variable -> Automatic, Map -> Automatic};
+ReadTime[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
+  CarpetHDF5Time[FindFirstRunFile[run, var],
+    getVar[run, var, OptionValue[Variable]],
+    getMap[run, var, OptionValue[Map]],
+    getRL[run, var, rl],
+    it];
 
 End[];
 
