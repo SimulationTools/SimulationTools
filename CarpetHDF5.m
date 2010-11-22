@@ -37,7 +37,12 @@ $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
 (* Private functions *)
 (***************************************************************************************)
 
-import[x__] := If[$h5mma, ImportHDF5[x], Import[x]];
+import[x__] :=
+  Module[{},
+    result = If[$h5mma, ImportHDF5[x], Import[x]];
+    If[result == $Failed,
+      Throw["Error importing " <> ToString[{x}]]];
+    result];
 
 (* Gather various information about the datasets in a file *)
 DefineMemoFunction[datasetAttributes[file_],
