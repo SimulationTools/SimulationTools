@@ -159,7 +159,7 @@ SliceData[v_DataRegion, dims_List, coords_:0] :=
   Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
 
 (* Plotting wrappers *)
-DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange},
+DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data},
  ndims = GetNumDimensions[v];
  If[ndims!=plotDims,
    Throw[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
@@ -168,7 +168,10 @@ DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims
 
  dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
 
- plotFunction[GetData[v], args, DataRange -> dataRange, Sequence@@If[plotFunction === ArrayPlot, {DataReversed -> True}, {}]]
+ data = GetData[v];
+ If[plotFunction === ArrayPlot, data = Reverse[data]];
+
+ plotFunction[data, args, DataRange -> dataRange]
 ];
 
 DataRegion1DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 1, v, args];
