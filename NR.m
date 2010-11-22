@@ -79,6 +79,7 @@ FitEcc;
 FitEccOm;
 FitParameters;
 Continuous;
+ToFixedWidth;
 
 LRange;
 RadiusRange;
@@ -884,6 +885,9 @@ FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
    FitParameters, eccFit,
    _, Throw["Unknown option given to FitEcc"]]
   ];
+
+ToFixedWidth[n_Integer, width_Integer] :=
+  StringJoin[PadLeft[Characters[ToString[n]], width, "0"]];
 
 End[];
 
