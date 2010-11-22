@@ -265,7 +265,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
     datasets
 ];
 
-ReadCarpetHDF5Variable[file_, var_, it_, rl_, map_:None, opts___]:=
+ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl_Integer, map_:None, opts___]:=
   Profile["ReadCarpetHDF5Variable",
     MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, opts]]];
 
@@ -342,9 +342,10 @@ getVar[run_, var_, variable_] :=
 Options[ReadGridFunction] = {Variable -> Automatic,
   Map -> Automatic, StripGhostZones -> True,
   VerboseRead -> False};
-ReadGridFunction[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
-  ReadCarpetHDF5VariableFromRun[run, var, Iteration -> it,
-    RefinementLevel -> getRL[run,var,rl], opts];
+ReadGridFunction[run_, var_, it_, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
+  ReadCarpetHDF5Variable[FindFirstRunFile[run, var], getVar[run, var, OptionValue[Variable]],
+    it, getRL[run, var, rl], getMap[run, var, OptionValue[Map]],
+    FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]];
 
 Options[ReadIterations] = {};
 ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
