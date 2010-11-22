@@ -1,0 +1,40 @@
+
+Tasks for NRMMA package
+=======================
+
+HIGH PRIORITY:
+
+* Stop CarpetHDF5 from caching all data by default.  This causes
+  memory exhaustion if there is too much data.
+
+* Modify Makefile so that h5mma can be built in either Mac OS or Linux.
+
+* Ensure that any cached data is consistent if an abort happens
+  part-way through a computation.
+
+
+LOW PRIORITY:
+
+* Think about deleting old items from the Memo cache if the amount of
+  memory used by the cache goes above a certain amount.
+
+* Associate entries in the Memo cache with file names.  If the file is
+  modified, the entry gets deleted from the cache because it is
+  assumed to be invalid.
+
+* Use PackedArrays in CarpetHDF5.  This should be faster and take up
+  significantly less memory.  The down-side is that NaNs and None
+  cannot be represented in these.
+
+* Implement functions for doing surface and line integrals on
+  DataRegions.
+
+* Make 2D plotting functions easier to use.  This is not DataRegion
+  specific.  For example, give a nice colour map by default.  Give an
+  option to show a key for the colour map.
+
+* Make it easy to generate the frames of a movie and then make the
+  movie itself.  Would need to have a suitable program installed.
+  Could support both ffmpeg and mencoder.
+
+* Add contour and vector plots to DataRegion.
