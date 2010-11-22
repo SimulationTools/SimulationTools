@@ -372,14 +372,16 @@ NDerivative[d_DataTable] :=
   Return[MakeDataTable[deriv]];
   ]
 
-IntegrateDataTable[d_DataTable, {tbc_, fbc_}] :=
+  Options[IntegrateDataTable] = {InterpolationOrder->3};
+
+IntegrateDataTable[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
  Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
   {tMin, tMax} = DataTableRange[d];
   If[tbc < tMin || tbc > tMax,
    Throw["integrateDataTable: boundary condition is not within range of \
 DataTable"]];
   dt = Spacing[d];
-  dFn = Interpolation[d];
+	dFn = Interpolation[d,InterpolationOrder->OptionValue[InterpolationOrder]];
   gFn = g /. 
     NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
      1]];
