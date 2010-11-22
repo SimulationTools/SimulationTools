@@ -233,6 +233,16 @@ Strip[d_DataRegion, n_List] :=
        Dimensions -> (GetDimensions[d] - 2n)}];
     d2 = DataRegion[attrs2, data2]];
 
+Strip[d_DataRegion, n_List, m_List] :=
+  Module[{data, data2, attrs, attrs2, d2},
+    data = GetData[d];
+	 data2 = Take[data, Apply[Sequence, MapThread[{#1+1,-(#2+1)}&, {Reverse[n], Reverse[m]}]]];
+    attrs = GetAttributes[d];
+    attrs2 = replaceRules[attrs,
+      {Origin -> (GetOrigin[d] + n * GetSpacing[d]),
+       Dimensions -> (GetDimensions[d] - n - m)}];
+    d2 = DataRegion[attrs2, data2]];
+
 Attributes[insertArray] = {HoldFirst};
 
 (* Insert a1 into a2, offsetting the indices by s *)
