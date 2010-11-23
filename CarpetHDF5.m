@@ -100,18 +100,9 @@ DefineMemoFunction[Datasets[file_],
   import[file, "Datasets"]
 ];
 
-DefineMemoFunction[Annotations[file_, ds_],
-  import[file, {"Annotations", ds}]
-];
-
-DefineMemoFunction[Dims[file_, ds_],
-  import[file, {"Dimensions", ds}]
-];
-
-DefineMemoFunction[HDF5Data[file_, dataset_String],
-  Profile["HDF5Data",
-    import[file, {"Datasets", dataset}]]
-];
+Annotations[file_, ds_]:= import[file, {"Annotations", ds}];
+Dims[file_, ds_]:= import[file, {"Dimensions", ds}];
+HDF5Data[file_, ds_] := import[file, {"Datasets", ds}];
 
 firstOrNone[l_List] :=
   If[l === {}, None, First[l]];
@@ -183,54 +174,44 @@ CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
   Profile["CarpetHDF5Time",
     ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]]];
 
-Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
-
-PreloadCarpetHDF5Data[file_]:= Module[{allData, data, annots, dims, ds},
-  ds = Datasets[file];
-  Annotations[file, #] & /@ ds;
-  Dimensions[file,  #] & /@ ds;
-  HDF5Data[file,  #] & /@ ds;
-];
-
 (* Data *)
 
 Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
-ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] :=
+ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 (* This should be renamed ReadCarpetHDF5Dataset and should be internal *)
- Module[{dsName, data, annots, dims, origin, spacing, name, idx, strip, verbose, reg, ghosts, posns, allds, time},
+ Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, dr, ghosts, posns, allds, time},
   strip = OptionValue[StripGhostZones];
   verbose = OptionValue[VerboseRead];
 
-  If[!StringQ[ds] && !IntegerQ[ds],
-    Throw["ReadCarpetHDF5: expected a string or integer dataset specification, but instead got " <>ToString[ds]]];
+  If[Apply[Or,Map[(!StringQ[#])&, ds]],
+    Throw["ReadCarpetHDF5: expected a string dataset name, but instead got " <>ToString[ds]]];
 
   If[verbose, Print["Reading File: "<>file]];
 
   If[FileType[file] === None,
     Throw["File " <> file <> " not found"]];
 
-  If[IntegerQ[ds], dsName = DataSets[file][[idx]], dsName = ds];
-
   If[verbose, Print["Reading Data"]];
-  data = HDF5Data[file, dsName];
+  data = HDF5Data[file, ds];
 
   If[verbose, Print["Reading Annotations"]];
-  annots = Annotations[file, dsName];
+  annots = Annotations[file, ds];
 
   If[verbose, Print["Reading Dimensions"]];
-  dims = Reverse[Dims[file, dsName]];
+  dims = Reverse /@ Dims[file, ds];
 
   origin = "origin" /. annots;
   spacing = "delta" /. annots;
   name = "name" /. annots;
 
-  ghosts = "cctk_nghostzones" /. annots;
-  If[ghosts=="cctk_nghostzones", ghosts=0];
+  ghosts = ("cctk_nghostzones" /. annots) /. "cctk_nghostzones" -> 0;
 
   time = "time" /. annots;
-  reg = MakeDataRegion[data, name, dims, origin, spacing, time];
-  If[strip, Strip[reg, ghosts], reg]
+  dr = MapThread[MakeDataRegion, {data, name, dims, origin, spacing, time}];
+  If[strip, MapThread[Strip, {dr, ghosts}], dr]
 ];
+
+ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] := First[ReadCarpetHDF5[file, {ds}, OptionsPattern[]]];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
@@ -248,7 +229,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 		  If[Length[components]==0,
 			  datasets = {ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
 			,
-			  datasets = Map[ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, #], opts] &, components];
+			  datasets = ReadCarpetHDF5[file, Map[CarpetHDF5DatasetName[var, it, map, rl, #] &, components], opts];
 		  ];,
 
 		StringMatchQ[file, MultiFile],
