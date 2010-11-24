@@ -134,9 +134,10 @@ firstOrNone[l_List] :=
 CarpetHDF5Iterations[run_String, var_String, args___] :=
   CarpetHDF5Iterations[FindRunFile[run, var][[1]], args];
 
-CarpetHDF5Iterations[file_String, rl_Integer:0] :=
-  Profile["CarpetHDF5Iterations",
-    datasetAttribute[datasetsWith[file, 4 -> rl], 2]];
+CarpetHDF5Iterations[file_String] := datasetAttribute[file, 2];
+
+CarpetHDF5Iterations[file_String, rl_Integer] :=
+  datasetAttribute[datasetsWith[file, 4 -> rl], 2];
 
 CarpetHDF5Components[file_] := datasetAttribute[file, 5];
 
@@ -312,9 +313,10 @@ CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
 ];
 
 getRL[run_, var_, rl_] :=
-  If[rl === Automatic,
-    First[ReadRefinementLevels[run, var]],
-    rl];
+  Switch[rl,
+    Automatic, First[ReadRefinementLevels[run, var]],
+    All, Unevaluated[Sequence[]],
+    _, rl];
 
 getMap[run_,var_,map_] :=
   Module[{m},
