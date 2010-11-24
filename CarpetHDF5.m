@@ -6,7 +6,7 @@ BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 
 (* New CarpetHDF5 API *)
 
-ReadGridFunction::usage = "ReadGridFunction[run, var, it, rl] reads a grid function from the CarpetHDF5 file named var in the directory run and returns it as a DataRegion object.  The iteration is given by it, and the refinement level by rl (rl defaults to the first level in the file if it is omitted).  Optional arguments: Variable -> Automatic | varname specifies the variable to read from files containing more than one variable, Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned, VerboseRead -> True|False determines whether extra information about the data being read is output during the read operation.";
+ReadGridFunction::usage = "ReadGridFunction[run, var, it, rl] reads a grid function from the CarpetHDF5 file named var in the directory run and returns it as a DataRegion object.  The iteration is given by it, and the refinement level by rl (rl defaults to the first level in the file if it is omitted).  Optional arguments: Variable -> Automatic | varname specifies the variable to read from files containing more than one variable, Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
 ReadIterations::usage = "ReadIterations[run, var, rl] reads the iterations present in the CarpetHDF5 file named var in the directory run.  Only those iterations present on refinement level rl are returned.  rl defaults to All if it is omitted.";
 ReadMaps::usage = "ReadMaps[run, var] reads the multipatch maps present in the CarpetHDF5 file named var in the directory run.";
 ReadRefinementLevels::usage = "ReadRefinementLevels[run, var] reads the refinement levels present in the CarpetHDF5 file named var in the directory run.";
@@ -24,7 +24,6 @@ ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] 
 ReadCarpetHDF5VariableFromRun::usage = "ReadCarpetHDF5VariableFromRun[run, var] reads a variable from a Carpet HDF5 file and returns it as a DataRegion.  Use optional arguments to specify the RefinementLevel, Iteration and Map.";
 ReadCarpetHDF5Components::usage = "ReadCarpetHDF5Components[file, var, it, rl, map] reads a component from file and returns it as a DataRegion.";
 StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed";
-VerboseRead;
 PreloadCarpetHDF5Data;
 CarpetHDF5Iterations;
 CarpetHDF5Components;
@@ -195,28 +194,22 @@ CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
 
 (* Data *)
 
-Options[ReadCarpetHDF5] = {StripGhostZones -> True, VerboseRead -> False};
+Options[ReadCarpetHDF5] = {StripGhostZones -> True};
 ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 (* This should be renamed ReadCarpetHDF5Dataset and should be internal *)
- Module[{data, annots, dims, origin, spacing, name, idx, strip, verbose, dr, ghosts, posns, allds, time},
+ Module[{data, annots, dims, origin, spacing, name, idx, strip, dr, ghosts, posns, allds, time},
   strip = OptionValue[StripGhostZones];
-  verbose = OptionValue[VerboseRead];
 
   If[Apply[Or,Map[(!StringQ[#])&, ds]],
     Throw["ReadCarpetHDF5: expected a string dataset name, but instead got " <>ToString[ds]]];
 
-  If[verbose, Print["Reading File: "<>file]];
-
   If[FileType[file] === None,
     Throw["File " <> file <> " not found"]];
 
-  If[verbose, Print["Reading Data"]];
   data = HDF5Data[file, ds];
 
-  If[verbose, Print["Reading Annotations"]];
   annots = Annotations[file, ds];
 
-  If[verbose, Print["Reading Dimensions"]];
   dims = Reverse /@ Dims[file, ds];
 
   origin = "origin" /. annots;
@@ -340,8 +333,7 @@ getVar[run_, var_, variable_] :=
 (***************************************************************************************)
 
 Options[ReadGridFunction] = {Variable -> Automatic,
-  Map -> Automatic, StripGhostZones -> True,
-  VerboseRead -> False};
+  Map -> Automatic, StripGhostZones -> True};
 ReadGridFunction[run_, var_, it_, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
   ReadCarpetHDF5Variable[FindFirstRunFile[run, var], getVar[run, var, OptionValue[Variable]],
     it, getRL[run, var, rl], getMap[run, var, OptionValue[Map]],
