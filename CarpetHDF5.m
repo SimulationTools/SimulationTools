@@ -14,6 +14,8 @@ ReadTimeLevels::usage = "ReadTimeLevels[run, var] reads the timelevels present i
 ReadVariables::usage = "ReadVariables[run, var] reads the variable names present in the CarpetHDF5 file named var in the directory run.";
 ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the iteration it on refinement level rl of the CarpetHDF5 file named var in the directory run.";
 
+ShowHDF5Progress::usage = "ShowHDF5Progress is a boolean variable indicating whether the progress of HDF5 operations should be shown in a progress indicator."
+
 (* Exported symbols *)
 
 ReadCarpetHDF5::usage = "ReadCarpetHDF5[file, ds] reads the dataset with name ds from file and returns it as a DataRegion.";
@@ -40,6 +42,8 @@ CarpetManipulatePlotFunction;
 
 Begin["`Private`"];
 
+ShowHDF5Progress = True;
+
 (* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
 $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
 
@@ -56,23 +60,38 @@ import[x__] :=
 
 (* Gather various information about the datasets in a file *)
 DefineMemoFunction[datasetAttributes[file_],
-  Module[{attributeRules, dsattrs},
+  Module[{attributeRules, datasets, dsattrs, tempCell},
     Profile["datasetAttributes[file]",
+
+    If[ShowHDF5Progress === True,
+      h5mma`ReadDatasetsProgress = 0;
+      tempCell = PrintTemporary[Dynamic[Column[{"Scanning " <> Last@FileNameSplit[file],
+                                            ProgressIndicator[h5mma`ReadDatasetsProgress]}]]]];
+
     (* Convert dataset name strings into rules *)
-    attributeRules = StringCases[
-      Profile["Datasets", Datasets[file]], {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
+
+    datasets = Profile["Datasets", Datasets[file]];
+
+    Profile["datasetAttributes/StringCases",
+     attributeRules = StringCases[datasets,
+     {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
       "tl=" ~~ x : NumberString :> ("tl" -> ToExpression[x]),
       "rl=" ~~ x : NumberString :> ("rl" -> ToExpression[x]),
       "c=" ~~ x : NumberString :> ("c" -> ToExpression[x]),
       "m=" ~~ x : NumberString :> ("m" -> ToExpression[x]),
       StartOfString ~~ "/" ~~ Shortest[x : __] ~~ " it=" :> ("var" -> x)},
-      Overlaps -> True];
+      Overlaps -> True]];
 
-    dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules;
+    Profile["datasetAttributes/Replace1",
+    dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules];
 
     (* If an attribute isn't found for a dataset, set it to Null *)
+    Profile["datasetAttributes/Replace2",
     dsattrs = dsattrs /. {"var" -> Null, "it" -> Null, "tl" -> Null,
-                          "rl" -> Null, "c" -> Null, "m" -> Null};
+                          "rl" -> Null, "c" -> Null, "m" -> Null}];
+
+    If[ShowHDF5Progress === True,
+      NotebookDelete[tempCell]];
 
     dsattrs]
   ]
