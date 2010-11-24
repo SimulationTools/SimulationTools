@@ -1,0 +1,560 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     20761,        551]
+NotebookOptionsPosition[     17993,        450]
+NotebookOutlinePosition[     18355,        466]
+CellTagsIndexPosition[     18312,        463]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["CarpetHDF5 package", "Title",
+ CellChangeTimes->{{3.459169172333535*^9, 3.4591691768425713`*^9}, {
+  3.459226336613926*^9, 3.459226338129665*^9}, {3.499106837391576*^9, 
+  3.499106839186523*^9}, {3.499606473476309*^9, 3.4996064746819763`*^9}}],
+
+Cell["by Ian Hinder and Barry Wardell", "Subtitle",
+ CellChangeTimes->{{3.459169180066674*^9, 3.45916918146587*^9}, {
+  3.499106841122445*^9, 3.499106843650227*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Documentation", "Section",
+ CellChangeTimes->{{3.459166350518454*^9, 3.459166352004354*^9}}],
+
+Cell[TextData[{
+ "The \"CarpetHDF5\" ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package provides a simple interface to Carpet HDF5 data from numerical \
+simulations.  It reads HDF5 files produced by Carpet and returns variables as \
+DataRegion objects."
+}], "Text",
+ CellChangeTimes->{{3.4591663565326357`*^9, 3.45916646538999*^9}, {
+  3.4591691557265778`*^9, 3.459169157715364*^9}, {3.459169640148758*^9, 
+  3.459169695879444*^9}, {3.459226642284112*^9, 3.459226644425263*^9}, {
+  3.459226699296678*^9, 3.459226700685444*^9}, {3.46018633516635*^9, 
+  3.460186366749649*^9}, {3.4761026094896393`*^9, 3.4761026544869223`*^9}, {
+  3.499106872186987*^9, 3.499106967550877*^9}, {3.499606478314514*^9, 
+  3.499606505388026*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Common arguments", "Subsection",
+ CellChangeTimes->{{3.4991070107843113`*^9, 3.499107017526222*^9}}],
+
+Cell[TextData[{
+ "Most of the functions in this package take at least two arguments: ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.499107024933978*^9, 3.49910721667152*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["run: The name of the run directory containing HDF5 files.", "Item",
+ CellChangeTimes->{{3.4991072056156797`*^9, 3.499107213290215*^9}, {
+  3.499108098534628*^9, 3.4991081193413143`*^9}, {3.49960652688*^9, 
+  3.4996065277834167`*^9}}],
+
+Cell["\<\
+var: The name of the file containing grid function data, for example \
+gxx.xy.h5.  If there is only one variable in the file, this is sufficient to \
+identify the variable. If there is more than one variable, an additional \
+Variable argument must be supplied to identify the variable to read.  For \
+multi-file data, the .file_X.h5 suffix can be ommitted.\
+\>", "Item",
+ CellChangeTimes->{{3.499107213935302*^9, 3.499107269013647*^9}, {
+  3.499108122726406*^9, 3.499108128981629*^9}, {3.499109655305409*^9, 
+  3.499109708257783*^9}}]
+}, Open  ]],
+
+Cell["The following options can be given:", "Text",
+ CellChangeTimes->{{3.499107491607873*^9, 3.499107499013721*^9}}],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "\nMap\t\t\tLowest in file\t\tThe map to read (use None for unimap data)\n\
+Variable\t\tFirst in file\t\tThe variable to read (for files with more than \
+one variable)"
+}], "Text",
+ CellChangeTimes->{{3.499107696481138*^9, 3.49910780879251*^9}, {
+  3.499107903124168*^9, 3.499107911987774*^9}, {3.499108079610465*^9, 
+  3.499108083807473*^9}, {3.49960829662497*^9, 3.499608298984087*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadGridFunction[run, varfile, it, rl:Automatic]", "Subsection",
+ CellChangeTimes->{{3.45974862993289*^9, 3.4597486403965473`*^9}, {
+  3.476102680981883*^9, 3.4761026895815496`*^9}, {3.499107279525422*^9, 
+  3.499107307356555*^9}, {3.4996065899180183`*^9, 3.499606611657934*^9}, {
+  3.499608341018834*^9, 3.499608351669498*^9}, {3.4996084941897707`*^9, 
+  3.49960849608225*^9}}],
+
+Cell["Common options : Map, Variable", "Text",
+ CellChangeTimes->{
+  3.499111672792008*^9, {3.4991128663839827`*^9, 3.499112880452833*^9}, 
+   3.4996082211982117`*^9}],
+
+Cell[TextData[{
+ "Read a grid function from the file ",
+ StyleBox["varfile",
+  FontSlant->"Italic"],
+ " in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " on refinement level ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ " and return it as a DataRegion. If ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " is not given, then it defaults to the coarsest refinement level."
+}], "Text",
+ CellChangeTimes->{
+  3.4991085389021873`*^9, {3.4996083664942703`*^9, 3.499608392102297*^9}, {
+   3.499608500201325*^9, 3.499608535538827*^9}}],
+
+Cell[TextData[{
+ "This function reads a variable from a Carpet HDF5 file and returns it as a \
+single DataRegion object. \n1D, 2D and 3D variables are currently supported.  \
+If the file is part of a multi-file set, all the files will be used to read \
+the variable. \n\nIf there is more than one component, the components will \
+all be read and joined together into a single rectangular DataRegion.  If the \
+union of the components is not rectangular, the smallest rectangular region \
+surrounding all components will be used, and points not in any component will \
+take the value None.\n\nIf the file appears in more than one segment, the \
+correct segment for the given iteration will be located automatically.\n\nIn \
+addition to the common options listed under ",
+ StyleBox["Common Arguments",
+  FontSlant->"Italic"],
+ ", the following options can be given:"
+}], "Text",
+ CellChangeTimes->{{3.499107300804617*^9, 3.499107344571196*^9}, {
+  3.499108160339478*^9, 3.499108277840341*^9}, {3.4991083270225267`*^9, 
+  3.499108532332892*^9}, {3.499108576022408*^9, 3.4991086435234737`*^9}, {
+  3.499108739060298*^9, 3.499108739610817*^9}, {3.499108773233502*^9, 
+  3.4991088293735743`*^9}, {3.499606989177124*^9, 3.4996069896101933`*^9}}],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription\n",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "StripGhostZones\tTrue\t\t\tRemove the ghost zones from the data"
+}], "Text",
+ CellChangeTimes->{{3.499107696481138*^9, 3.49910780879251*^9}, {
+   3.499107903124168*^9, 3.499107911987774*^9}, {3.499108079610465*^9, 
+   3.499108083807473*^9}, {3.499108655206847*^9, 3.4991087753853407`*^9}, {
+   3.499108837736837*^9, 3.4991088383014183`*^9}, {3.499111643681727*^9, 
+   3.4991116445912724`*^9}, {3.499606972662891*^9, 3.499606973043333*^9}, 
+   3.4996083255975847`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadIterations[run, var, rl:All]", "Subsection",
+ CellChangeTimes->{{3.4991089762107153`*^9, 3.499108982440639*^9}, {
+  3.499608184477798*^9, 3.4996081934354353`*^9}}],
+
+Cell[TextData[{
+ "Read the iteration numbers present in the file.  The optional ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " argument specifies the refinement level and defaults to all refinement \
+levels. If the options Variable or Map are specified, then only iterations \
+corresponding to those will be included."
+}], "Text",
+ CellChangeTimes->{{3.499108986024704*^9, 3.499109051014471*^9}, {
+  3.499608204601987*^9, 3.499608209680767*^9}, {3.499608406996591*^9, 
+  3.4996084472837143`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadMaps[run, var]", "Subsection",
+ CellChangeTimes->{{3.499109055758225*^9, 3.499109063182144*^9}}],
+
+Cell["Read the maps present in the file.", "Text",
+ CellChangeTimes->{{3.499109064774063*^9, 3.4991090702379293`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadRefinementLevels[run, var]", "Subsection",
+ CellChangeTimes->{{3.49910907294989*^9, 3.499109077653674*^9}}],
+
+Cell["Read the refinement levels present in the file.", "Text",
+ CellChangeTimes->{{3.499109079333454*^9, 3.499109088693239*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadTimeLevels[run, var]", "Subsection",
+ CellChangeTimes->{{3.499109093389098*^9, 3.4991090977730007`*^9}}],
+
+Cell["Read the timelevels present in the file.", "Text",
+ CellChangeTimes->{{3.4991090991728153`*^9, 3.499109104652755*^9}, 
+   3.499109137379822*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadVariables[run, var]", "Subsection",
+ CellChangeTimes->{{3.499109107772709*^9, 3.499109124436202*^9}}],
+
+Cell["Read the names of the variables present in the file.", "Text",
+ CellChangeTimes->{{3.499109126804002*^9, 3.4991091340198097`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadTime[run, var, it]", "Subsection",
+ CellChangeTimes->{{3.499109530975375*^9, 3.49910953423109*^9}, {
+  3.4996085588480177`*^9, 3.4996085593419523`*^9}}],
+
+Cell["Common options : Map, Variable", "Text",
+ CellChangeTimes->{3.499608167858469*^9}],
+
+Cell[TextData[{
+ "Read the coordinate time associated with this grid function at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.499109536486927*^9, 3.499109545406723*^9}, {
+  3.499608565964815*^9, 3.499608569508347*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Notes", "Section",
+ CellChangeTimes->{{3.459169054485798*^9, 3.4591690562173986`*^9}, {
+  3.459169092773025*^9, 3.4591690934040537`*^9}}],
+
+Cell["Reading files from multi-segment runs is not yet supported", "Item",
+ CellChangeTimes->{{3.459226952306826*^9, 3.459226983641799*^9}, {
+  3.499108905444812*^9, 3.499108918410676*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Section",
+ CellChangeTimes->{{3.459169555544169*^9, 3.459169558382086*^9}, {
+  3.45922701103588*^9, 3.459227012032732*^9}, {3.4592279484789467`*^9, 
+  3.459227978313953*^9}, {3.499108924050786*^9, 3.499108924749528*^9}}],
+
+Cell[BoxData[
+ RowBox[{"<<", "CarpetHDF5`"}]], "Input",
+ CellChangeTimes->{{3.4905881640668993`*^9, 3.490588166870332*^9}, {
+  3.4991068516058207`*^9, 3.499106854411313*^9}, {3.499607902516077*^9, 
+  3.499607904219701*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.499112441671276*^9, 3.4991124673178*^9}, 
+   3.4996079315780573`*^9, {3.4996081471867332`*^9, 3.499608149469654*^9}, {
+   3.499608766139131*^9, 3.49960878375714*^9}, {3.499608833119035*^9, 
+   3.499608854423648*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"file", "=", "\"\<betax.xy.h5\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.499609035338401*^9, 3.499609044539912*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridFunction", "[", 
+  RowBox[{"run", ",", "file", ",", "64"}], "]"}]], "Input",
+ CellChangeTimes->{{3.4991127365844*^9, 3.499112746142736*^9}, {
+  3.49960794680591*^9, 3.4996079758937197`*^9}, {3.499608842956872*^9, 
+  3.4996088441861553`*^9}, {3.499608956021413*^9, 3.499608956876234*^9}, {
+  3.499609112041297*^9, 3.499609113422393*^9}}],
+
+Cell[BoxData["\<\"DataRegion[ADMBASE::betax, {101, 101}, \
+\\!\\({\\(\\({\\(\\(-200.`\\)\\), 200.`}\\)\\), \\(\\({\\(\\(-200.`\\)\\), \
+200.`}\\)\\)}\\)]\"\>"], "Output",
+ CellChangeTimes->{
+  3.4991127467871037`*^9, {3.4996079519119987`*^9, 3.499607978350931*^9}, 
+   3.499608789104933*^9, 3.499608845149048*^9, 3.4996088808648577`*^9, 
+   3.49960895733458*^9, 3.499609115919271*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadVariables", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellChangeTimes->{{3.4996089318484917`*^9, 3.499608960362576*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "\<\"ADMBASE::betax\"\>", "}"}]], "Output",
+ CellChangeTimes->{{3.499608939694085*^9, 3.499608960704741*^9}, 
+   3.499609126927946*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadIterations", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellChangeTimes->{{3.4996089318484917`*^9, 3.499608966154355*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "64", ",", "128", ",", "192", ",", "256", ",", "320", ",", "384", 
+   ",", "448", ",", "512", ",", "576", ",", "640", ",", "704", ",", "768", 
+   ",", "832", ",", "896", ",", "960", ",", "1024", ",", "1088", ",", "1152", 
+   ",", "1216", ",", "1280", ",", "1344", ",", "1408", ",", "1472", ",", 
+   "1536", ",", "1600", ",", "1664", ",", "1728", ",", "1792", ",", "1856", 
+   ",", "1920", ",", "1984", ",", "2048", ",", "2112", ",", "2176", ",", 
+   "2240", ",", "2304", ",", "2368", ",", "2432", ",", "2496", ",", "2560", 
+   ",", "2624", ",", "2688", ",", "2752", ",", "2816", ",", "2880", ",", 
+   "2944", ",", "3008", ",", "3072", ",", "3136", ",", "3200", ",", "3264", 
+   ",", "3328", ",", "3392", ",", "3456", ",", "3520", ",", "3584", ",", 
+   "3648", ",", "3712", ",", "3776", ",", "3840", ",", "3904", ",", "3968", 
+   ",", "4032", ",", "4096", ",", "4160", ",", "4224", ",", "4288", ",", 
+   "4352", ",", "4416", ",", "4480", ",", "4544", ",", "4608", ",", "4672", 
+   ",", "4736", ",", "4800", ",", "4864", ",", "4928", ",", "4992", ",", 
+   "5056", ",", "5120", ",", "5184", ",", "5248", ",", "5312", ",", "5376", 
+   ",", "5440", ",", "5504", ",", "5568", ",", "5632", ",", "5696", ",", 
+   "5760", ",", "5824", ",", "5888", ",", "5952", ",", "6016", ",", "6080", 
+   ",", "6144", ",", "6208", ",", "6272", ",", "6336", ",", "6400", ",", 
+   "6464", ",", "6528", ",", "6592", ",", "6656", ",", "6720", ",", "6784", 
+   ",", "6848", ",", "6912", ",", "6976", ",", "7040", ",", "7104", ",", 
+   "7168", ",", "7232", ",", "7296", ",", "7360", ",", "7424", ",", "7488", 
+   ",", "7552", ",", "7616", ",", "7680", ",", "7744", ",", "7808", ",", 
+   "7872", ",", "7936", ",", "8000", ",", "8064", ",", "8128", ",", "8192", 
+   ",", "8256", ",", "8320", ",", "8384", ",", "8448", ",", "8512", ",", 
+   "8576", ",", "8640", ",", "8704", ",", "8768", ",", "8832", ",", "8896", 
+   ",", "8960", ",", "9024", ",", "9088", ",", "9152", ",", "9216", ",", 
+   "9280", ",", "9344", ",", "9408", ",", "9472", ",", "9536", ",", "9600", 
+   ",", "9664", ",", "9728", ",", "9792", ",", "9856", ",", "9920", ",", 
+   "9984", ",", "10048", ",", "10112", ",", "10176", ",", "10240", ",", 
+   "10304", ",", "10368", ",", "10432", ",", "10496", ",", "10560", ",", 
+   "10624", ",", "10688", ",", "10752", ",", "10816", ",", "10880", ",", 
+   "10944", ",", "11008", ",", "11072", ",", "11136", ",", "11200", ",", 
+   "11264", ",", "11328", ",", "11392", ",", "11456", ",", "11520", ",", 
+   "11584", ",", "11648", ",", "11712", ",", "11776", ",", "11840", ",", 
+   "11904", ",", "11968", ",", "12032", ",", "12096", ",", "12160", ",", 
+   "12224", ",", "12288", ",", "12352", ",", "12416", ",", "12480", ",", 
+   "12544", ",", "12608", ",", "12672", ",", "12736", ",", "12800", ",", 
+   "12864", ",", "12928", ",", "12992", ",", "13056", ",", "13120", ",", 
+   "13184", ",", "13248", ",", "13312", ",", "13376", ",", "13440", ",", 
+   "13504", ",", "13568", ",", "13632", ",", "13696", ",", "13760", ",", 
+   "13824", ",", "13888", ",", "13952", ",", "14016", ",", "14080", ",", 
+   "14144", ",", "14208", ",", "14272", ",", "14336", ",", "14400", ",", 
+   "14464", ",", "14528", ",", "14592", ",", "14656", ",", "14720", ",", 
+   "14784", ",", "14848", ",", "14912", ",", "14976", ",", "15040", ",", 
+   "15104", ",", "15168", ",", "15232", ",", "15296", ",", "15360", ",", 
+   "15424", ",", "15488", ",", "15552", ",", "15616", ",", "15680", ",", 
+   "15744", ",", "15808", ",", "15872", ",", "15936", ",", "16000", ",", 
+   "16064", ",", "16128", ",", "16192", ",", "16256", ",", "16320", ",", 
+   "16384", ",", "16448", ",", "16512", ",", "16576", ",", "16640", ",", 
+   "16704", ",", "16768", ",", "16832", ",", "16896", ",", "16960", ",", 
+   "17024", ",", "17088", ",", "17152", ",", "17216", ",", "17280", ",", 
+   "17344", ",", "17408", ",", "17472", ",", "17536", ",", "17600", ",", 
+   "17664", ",", "17728", ",", "17792", ",", "17856", ",", "17920", ",", 
+   "17984", ",", "18048", ",", "18112", ",", "18176", ",", "18240", ",", 
+   "18304", ",", "18368", ",", "18432", ",", "18496", ",", "18560", ",", 
+   "18624", ",", "18688", ",", "18752", ",", "18816", ",", "18880", ",", 
+   "18944", ",", "19008", ",", "19072", ",", "19136", ",", "19200", ",", 
+   "19264", ",", "19328", ",", "19392", ",", "19456", ",", "19520", ",", 
+   "19584", ",", "19648", ",", "19712", ",", "19776", ",", "19840", ",", 
+   "19904", ",", "19968"}], "}"}]], "Output",
+ CellChangeTimes->{3.499608966629962*^9, 3.499609078529932*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadRefinementLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellChangeTimes->{{3.4996089318484917`*^9, 3.499608981567222*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", 
+   ",", "8"}], "}"}]], "Output",
+ CellChangeTimes->{3.499608982651956*^9, 3.499609085354939*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadMaps", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellChangeTimes->{{3.4996089318484917`*^9, 3.4996089885732737`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{
+  3.4996089892767773`*^9, 3.499609086823986*^9, {3.499609193614862*^9, 
+   3.499609218616747*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTime", "[", 
+  RowBox[{"run", ",", "file", ",", "64"}], "]"}]], "Input",
+ CellChangeTimes->{{3.499608999823535*^9, 3.499609003427555*^9}, {
+  3.4996090976339693`*^9, 3.4996091019870367`*^9}, {3.49960915980816*^9, 
+  3.499609164907889*^9}}],
+
+Cell[BoxData["0.5`"], "Output",
+ CellChangeTimes->{
+  3.4996090039293737`*^9, {3.4996090944454823`*^9, 3.499609102544355*^9}, {
+   3.499609161566555*^9, 3.499609165588703*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellChangeTimes->{{3.499608999823535*^9, 3.499609032716834*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "0", "}"}]], "Output",
+ CellChangeTimes->{3.499609033202469*^9, 3.499609105848608*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{974, 795},
+WindowMargins->{{46, Automatic}, {Automatic, 105}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 249, 3, 76, "Title"],
+Cell[819, 27, 165, 2, 46, "Subtitle"],
+Cell[CellGroupData[{
+Cell[1009, 33, 98, 1, 67, "Section"],
+Cell[1110, 36, 735, 14, 41, "Text"],
+Cell[CellGroupData[{
+Cell[1870, 54, 106, 1, 34, "Subsection"],
+Cell[1979, 57, 262, 9, 26, "Text"],
+Cell[CellGroupData[{
+Cell[2266, 70, 239, 3, 20, "Item"],
+Cell[2508, 75, 544, 9, 59, "Item"]
+}, Open  ]],
+Cell[3067, 87, 117, 1, 26, "Text"],
+Cell[3187, 90, 501, 10, 56, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3725, 105, 384, 5, 34, "Subsection"],
+Cell[4112, 112, 167, 3, 26, "Text"],
+Cell[4282, 117, 581, 20, 41, "Text"],
+Cell[4866, 139, 1238, 19, 191, "Text"],
+Cell[6107, 160, 583, 11, 41, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6727, 176, 173, 2, 34, "Subsection"],
+Cell[6903, 180, 495, 10, 56, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7435, 195, 106, 1, 34, "Subsection"],
+Cell[7544, 198, 118, 1, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7699, 204, 117, 1, 34, "Subsection"],
+Cell[7819, 207, 129, 1, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7985, 213, 114, 1, 34, "Subsection"],
+Cell[8102, 216, 150, 2, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8289, 223, 111, 1, 34, "Subsection"],
+Cell[8403, 226, 136, 1, 26, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8576, 232, 162, 2, 34, "Subsection"],
+Cell[8741, 236, 88, 1, 26, "Text"],
+Cell[8832, 239, 265, 7, 26, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9146, 252, 143, 2, 67, "Section"],
+Cell[9292, 256, 189, 2, 20, "Item"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9518, 263, 237, 3, 67, "Section"],
+Cell[9758, 268, 223, 4, 27, "Input"],
+Cell[9984, 274, 318, 6, 27, "Input"],
+Cell[10305, 282, 154, 3, 27, "Input"],
+Cell[CellGroupData[{
+Cell[10484, 289, 368, 6, 27, "Input"],
+Cell[10855, 297, 384, 6, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11276, 308, 162, 3, 27, "Input"],
+Cell[11441, 313, 163, 3, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11641, 321, 163, 3, 27, "Input"],
+Cell[11807, 326, 4562, 63, 283, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16406, 394, 169, 3, 27, "Input"],
+Cell[16578, 399, 214, 5, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16829, 409, 159, 3, 27, "Input"],
+Cell[16991, 414, 164, 4, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17192, 423, 267, 5, 27, "Input"],
+Cell[17462, 430, 176, 3, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17675, 438, 161, 3, 27, "Input"],
+Cell[17839, 443, 114, 2, 27, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
