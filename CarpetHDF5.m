@@ -43,12 +43,14 @@ Begin["`Private`"];
 
 ShowHDF5Progress = True;
 
-(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
-$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
-
 (***************************************************************************************)
 (* Private functions *)
 (***************************************************************************************)
+(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
+$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
+
+(* Use turbo mode if we have h5mma *)
+If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 import[x__] :=
   Module[{},
