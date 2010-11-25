@@ -24,7 +24,6 @@ ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] 
 ReadCarpetHDF5VariableFromRun::usage = "ReadCarpetHDF5VariableFromRun[run, var] reads a variable from a Carpet HDF5 file and returns it as a DataRegion.  Use optional arguments to specify the RefinementLevel, Iteration and Map.";
 ReadCarpetHDF5Components::usage = "ReadCarpetHDF5Components[file, var, it, rl, map] reads a component from file and returns it as a DataRegion.";
 StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed";
-PreloadCarpetHDF5Data;
 CarpetHDF5Iterations;
 CarpetHDF5Components;
 CarpetHDF5Maps;
