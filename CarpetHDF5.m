@@ -2,6 +2,9 @@
 
 (* This package was originally written by Ian Hinder and modified to support arbitrary dimensional data by Barry Wardell *)
 
+(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
+$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
+
 BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 
 (* New CarpetHDF5 API *)
@@ -46,8 +49,6 @@ ShowHDF5Progress = True;
 (***************************************************************************************)
 (* Private functions *)
 (***************************************************************************************)
-(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
-$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
 
 (* Use turbo mode if we have h5mma *)
 If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
