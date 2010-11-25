@@ -338,7 +338,7 @@ getVar[run_, var_, variable_] :=
 
 Options[ReadGridFunction] = {Variable -> Automatic,
   Map -> Automatic, StripGhostZones -> True};
-ReadGridFunction[run_, var_, it_, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
+ReadGridFunction[run_String, var_String, it_Integer, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
   ReadCarpetHDF5Variable[FindFirstRunFile[run, var], getVar[run, var, OptionValue[Variable]],
     it, getRL[run, var, rl], getMap[run, var, OptionValue[Map]],
     FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]];
