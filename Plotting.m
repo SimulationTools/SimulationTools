@@ -15,6 +15,7 @@ PresentationPlotColors;
 LegendOrientation;
 LegendLineSize;
 PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
+PlotKey;
 
 Begin["`Private`"];
 
@@ -224,21 +225,28 @@ key[mapName_String, {min_, max_}, opts___] :=
    ColorFunctionScaling -> False,
    ColorFunction ->
     ScaledColorFunction[mapName, 1 {min, max}],
-   DataRange -> {{0, 1}, {min, max}}, AspectRatio -> 8,
+   DataRange -> {{0, 1}, {min, max}}, AspectRatio -> 8, ImageSize->{Automatic,400},
    FrameTicks -> {Table[
-      If[Abs[c] < 10^-15, 0, c], {c, min, max, (max - min)/10}],
+      If[Abs[c] < 10^-15, 0, N@c], {c, min, max, (max - min)/10}],
      False, False, False}];
 
 Options[PresentationArrayPlot] =
-{ColorRange -> Automatic, ColorFunctionName -> "TemperatureMap", Key -> True} ~Join~ Options[ArrayPlot];
+{ColorRange -> Automatic, ColorMap -> "TemperatureMap", PlotKey -> True} ~Join~ Options[ArrayPlot];
 
 PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
   Module[{range},
     range = OptionValue[ColorRange];
     If[range === Automatic, range = {Min[data], Max[data]}];
-    DataRegionArrayPlot[data, opts, ColorFunctionScaling -> False,
-      ColorFunction -> ScaledColorFunction[OptionValue[ColorFunctionName], range],
-      FrameTicks -> True, LabelStyle -> Medium]];
+
+    keyPlot = key[OptionValue[ColorMap],range];
+
+    plot = DataRegionArrayPlot[data, Sequence@@FilterRules[{opts},Options[ArrayPlot]],
+             ImageSize->{400,400}, ColorFunctionScaling -> False,
+             ColorFunction -> ScaledColorFunction[OptionValue[ColorMap], range],
+             FrameTicks -> True, LabelStyle -> Medium];
+    If[OptionValue[PlotKey],
+      Row[{plot,keyPlot}],
+      plot]];
 
 End[];
 
