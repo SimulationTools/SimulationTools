@@ -169,9 +169,13 @@ DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims
  dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
 
  data = GetData[v];
- If[plotFunction === ArrayPlot, data = Reverse[data]];
+ opts = {args};
 
- plotFunction[data, args, DataRange -> dataRange]
+ If[plotFunction === ArrayPlot, 
+    data = Reverse[data];
+    opts = opts /. (FrameLabel -> {x_,y_}) :> (FrameLabel -> {y,x})];
+
+ plotFunction[data, Sequence@@opts, DataRange -> dataRange]
 ];
 
 DataRegion1DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 1, v, args];
