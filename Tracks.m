@@ -1,3 +1,4 @@
+(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["Tracks`", {"RunFiles`", "NR`", "DataTable`"}];
 

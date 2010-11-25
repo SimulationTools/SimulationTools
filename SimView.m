@@ -1,3 +1,4 @@
+(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`"}];
 

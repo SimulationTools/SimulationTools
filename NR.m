@@ -1,3 +1,4 @@
+(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 (* A package for dealing with numerical relativity data *)
 

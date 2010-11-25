@@ -1,6 +1,4 @@
-(* ::Package:: *)
-
-(* This package was originally written by Ian Hinder and modified to support arbitrary dimensional data by Barry Wardell *)
+(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 (* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
 $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];

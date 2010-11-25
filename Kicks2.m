@@ -1,4 +1,4 @@
-(* ::Package:: *)
+(* Copyright (C) 2010 Ian Hinder, Barry Wardell and Aaryn Tonita *)
 
 BeginPackage["Kicks2`", {"NR`", "DataTable`", "Memo`", "Profile`"}];
 
