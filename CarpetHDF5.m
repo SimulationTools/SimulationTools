@@ -16,14 +16,15 @@ ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the
 
 ShowHDF5Progress::usage = "ShowHDF5Progress is a boolean variable indicating whether the progress of HDF5 operations should be shown in a progress indicator."
 
+StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed";
+
 (* Exported symbols *)
 
-ReadCarpetHDF5::usage = "ReadCarpetHDF5[file, ds] reads the dataset with name ds from file and returns it as a DataRegion.";
-CarpetHDF5DatasetName::usage = "CarpetHDF5DatasetName[variable, iteration, map, reflevel, component] returns the name Carpet gives to a dataset with the given attributes.";
-ReadCarpetHDF5Variable::usage = "ReadCarpetHDF5Variable[file, var, it, rl, map] reads a variable from a Carpet HDF5 file and returns it as a DataRegion.  Multi-component variables are merged into a single DataRegion.\nReadCarpetHDF5Variable[file] is a shorthand for ReadCarpetHDF5Variable where the variable, iteration, refinement level and map are determined automatically.  The defaults can be overridden with optional arguments.";
-ReadCarpetHDF5VariableFromRun::usage = "ReadCarpetHDF5VariableFromRun[run, var] reads a variable from a Carpet HDF5 file and returns it as a DataRegion.  Use optional arguments to specify the RefinementLevel, Iteration and Map.";
-ReadCarpetHDF5Components::usage = "ReadCarpetHDF5Components[file, var, it, rl, map] reads a component from file and returns it as a DataRegion.";
-StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed";
+ReadCarpetHDF5;
+CarpetHDF5DatasetName;
+ReadCarpetHDF5Variable;
+ReadCarpetHDF5VariableFromRun;
+ReadCarpetHDF5Components;
 CarpetHDF5Iterations;
 CarpetHDF5Components;
 CarpetHDF5Maps;
