@@ -1,9 +1,5 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
-$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
-If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
-
 BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 
 (* New CarpetHDF5 API *)
@@ -48,6 +44,9 @@ ShowHDF5Progress = True;
 (***************************************************************************************)
 (* Private functions *)
 (***************************************************************************************)
+(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
+$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
+If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 import[x__] :=
   Module[{},
@@ -372,3 +371,7 @@ ReadTime[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
 End[];
 
 EndPackage[];
+
+If[CarpetHDF5`Private`$h5mma,
+  If[!MemberQ[$ContextPath, "h5mma`"], AppendTo[$ContextPath, "h5mma`"]];
+];
