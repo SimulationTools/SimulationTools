@@ -2,6 +2,7 @@
 
 (* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
 $h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
+If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
 
@@ -47,9 +48,6 @@ ShowHDF5Progress = True;
 (***************************************************************************************)
 (* Private functions *)
 (***************************************************************************************)
-
-(* Use turbo mode if we have h5mma *)
-If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 import[x__] :=
   Module[{},
