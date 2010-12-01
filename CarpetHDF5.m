@@ -222,7 +222,7 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   If[strip, MapThread[Strip, {dr, ghosts}], dr]
 ];
 
-ReadCarpetHDF5[file_String, ds_, OptionsPattern[]] := First[ReadCarpetHDF5[file, {ds}, OptionsPattern[]]];
+ReadCarpetHDF5[file_String, ds_String, opts:OptionsPattern[]] := First[ReadCarpetHDF5[file, {ds}, opts]];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
