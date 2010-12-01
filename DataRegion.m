@@ -268,6 +268,8 @@ MergeDataRegions[regions_List] :=
     X1, X2s, X2, n, dat, header, attrs, attrs2, dat2},
   If[Length[regions] === 0, Return[{}]];
 
+  If[!And@@Map[MatchQ[#, _DataRegion] &, regions],
+    Throw["MergeDataRegions: Expected a list of DataRegion objects but got instead " <> ToString[regions]]];
   origins = Map[GetOrigin, regions];
   dims = Map[GetDimensions, regions];
   ndims = GetNumDimensions[regions[[1]]];
