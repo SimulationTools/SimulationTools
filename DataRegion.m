@@ -5,7 +5,7 @@ BeginPackage["DataRegion`","DataTable`"];
 (* Exported symbols *)
 
 MakeDataRegion;
-SliceData;
+SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 0.";
 DataRegion;
 ToDataTable;
 GetDataRange;
