@@ -37,3 +37,6 @@ Module[{packages =
   "SystemStatistics",
   "Tracks"}},
 Scan[Get[# <> "`"] &, packages]]
+
+(* Load tools which require Mathematica 8 or newer *)
+If[$VersionNumber >= 8, Get["nrmma8`"]];
