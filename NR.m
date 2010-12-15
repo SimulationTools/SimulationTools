@@ -315,7 +315,7 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
       fTbsRes];
 
     resWithr = MapThread[List, {rads, fTbsRes2}];
-    ExtrapolateDataTables[OptionValue[ExtrapolationOrder], resWithr, range]];
+    ExtrapolateDataTables[OptionValue[ExtrapolationOrder], resWithr]];
 
 ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
   Module[{allRads, rads, fs, rdTb, rMin, rMax, mADM},
