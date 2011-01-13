@@ -29,12 +29,12 @@ ResolutionCode[n_Integer] :=
 ResName[s_String, n_] := s <> ResolutionCode[n];
 
 ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
-  Module[{eq, eqs, f, f0, f1},
+  Module[{eq, eqs, f, f0, f1, h, c},
     eq = f[h] == f0 + f1 h^p;
     eqs = {eq /. h -> h1, eq /. h -> h2, eq /. h -> h3};
-    Return[C /. Solve[
-     f[h1] - f[h2] == C (f[h2] - f[h3]) 
-       /. (eqs /. Equal -> Rule), C][[1]] // N]];
+    Return[c /. Solve[
+     f[h1] - f[h2] == c (f[h2] - f[h3]) 
+       /. (eqs /. Equal -> Rule), c][[1]] // N]];
 
 Options[LoadConvergenceSeries] = {Downsample -> False, Interpolate -> False};
 
