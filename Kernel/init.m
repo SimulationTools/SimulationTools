@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Mathematica Init File *)
 
 (* Load NRMMA packages when << nrmma` is run *)
@@ -23,6 +25,7 @@ Module[{packages =
   "BHCoordinates",
   "CarpetHDF5",
   "Convergence",
+  "DataAnalysis",
   "DataRegion",
   "DataTable",
   "Grids",
