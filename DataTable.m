@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder, Barry Wardell and Aaryn Tonita *)
 
 BeginPackage["DataTable`", {"Profile`"}];
@@ -157,8 +159,20 @@ RedefineAsDataTable[Log[b_, d:DataTable[__]],
 RedefineAsDataTable[Log10[d:DataTable[__]],
   MapData[Log10, d]];
 
+RedefineAsDataTable[Exp[d:DataTable[__]],
+  MapData[Exp, d]];
+
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
+
+DataTable /: Total[d_DataTable] := Total[DepVar[d]];
+
+DataTable /: Max[d_DataTable] := Max[DepVar[d]];
+
+DataTable /: PadRight[d_DataTable, n_] :=
+  MakeDataTable[Transpose[{
+    First[DataTableRange[d]] + Range[n] Spacing[d],
+    PadRight[DepVar[d], n]}]];
 
 RedefineAsDataTable[Take[d:DataTable[___], args__],
   d /. DataTable[l_, x___] :> DataTable[Take[l,args],x]];
@@ -179,6 +193,26 @@ RedefineAsDataTable[FourierDCT[d_DataTable,args___],
    fs = Table[i df, {i, 0, Length[d] - 1}];
    MakeDataTable@MapThread[List, {fs, Abs@FourierDCT[DepVar@d,args]}]/
     N[Sqrt[Length[d]]]]];
+
+RedefineAsDataTable[Fourier[d_DataTable,args___],
+  Module[{amp, freq},
+   amp = Fourier[DepVar[d],args];
+   freq = Range[0, Length[d] - 1]/(Spacing[d]*Length[d]);
+   Return[MakeDataTable[Transpose[{freq, amp}]]];
+  ]
+];
+
+RedefineAsDataTable[InverseFourier[d_DataTable,args___],
+  Module[{amp, freq},
+   amp = InverseFourier[DepVar[d],args];
+   freq = Range[0, Length[d] - 1]/(Spacing[d]*Length[d]);
+   Return[MakeDataTable[Transpose[{freq, amp}]]];
+  ]
+];
+
+RedefineAsDataTable[Length[d_DataTable],
+	Length[ToList[d]]
+];
 
 InterpolateWhereFunction[d_DataTable, f_] :=
   Module[{dInterpolater},
@@ -271,6 +305,12 @@ Redefine[ListLogPlot[d:DataTable[___], args___],
 
 Redefine[ListLogPlot[ds:List[DataTable[___]..], args___],
    ListLogPlot[Map[ToList,ds], args]];
+
+Redefine[ListLogLogPlot[d:DataTable[___], args___],
+   ListLogLogPlot[ToList[d], args]];
+
+Redefine[ListLogLogPlot[ds:List[DataTable[___]..], args___],
+   ListLogLogPlot[Map[ToList,ds], args]];
 
 Redefine[Interpolation[d:DataTable[___], args___],
    Interpolation[ToList[d], args]];
@@ -405,14 +445,6 @@ Monotonise[{{x1_, y1_}, {x2_, y2_}, rest___}] :=
 
 Monotonise[d_DataTable] :=
  MakeDataTable[Monotonise[ToList[d]]];
-
-FourierDT[d_DataTable] :=
-  Module[{amp, freq},
-   amp = Fourier[DepVar[d]];
-   freq = (#/(Spacing[d]*Length[ToList[d]])) & /@ 
-   	Range[0, Length[ToList[d]] - 1];
-   Return[MakeDataTable[Transpose[{freq, amp}]]];
-   ];
 
 End[];
 
