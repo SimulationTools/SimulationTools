@@ -5,13 +5,16 @@
 BeginPackage["DataAnalysis`", {"DataTable`", "PhysicalConstants`", "Units`"}];
 
 ComputeOverlap::usage = "ComputeOverlap[wf1, wf2, s, f1, f2, M, pad] computes the (maximized over phase and time shift) overlap of the DataTables wf1 and wf2 (assumed to contain the value of  \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)) over the frequency range [f1,f2] with the noise function s. The mass of the system is given by M in units of the solar mass. The optional argument pad may be given to pad out the waveform so that a more accurate time shift may be obtained."
+SolarMassInSeconds::usage = "SolarMassInSeconds gives the value of GM/\!\(\*SuperscriptBox[\(c\), \(3\)]\) in seconds."
 
 Begin["`Private`"];
+
+SolarMassInSeconds = Convert[(SolarMass GravitationalConstant)/SpeedOfLight^3,Second]/Second;
 
 ComputeOverlap[wf1_, wf2_, s_, f1_, f2_, M_, pad_:None] := 
   Module[{wf1r, wf2r, h1, h2, sn, norm1, norm2, integrand, msun},
     (* Our basic unit it the solar mass in units of seconds *)
-    msun = Convert[(SolarMass GravitationalConstant)/SpeedOfLight^3,Second]/Second;
+    msun = SolarMassInSeconds;
 
     (* DataTables need to be the same size to compute an overlap. *)
     {wf1r,wf2r} = ResampleDataTables[{wf1,wf2}];
