@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["DataRegion`","DataTable`"];
@@ -6,6 +8,7 @@ BeginPackage["DataRegion`","DataTable`"];
 
 MakeDataRegion;
 SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 0.";
+DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 DataRegion;
 ToDataTable;
 GetDataRange;
@@ -155,6 +158,37 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
 
 SliceData[v_DataRegion, dims_List, coords_:0] := 
   Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
+
+DataRegion /: Part[d_DataRegion, s__] := DataRegionPart[d, {s}];
+
+DataRegionPart[d:DataRegion[h_, data_], s_]:=
+ Module[{ndims, spacing, origin, newS, indexrange, newOrigin, h2, newData},
+  ndims = GetNumDimensions[d];
+  spacing = GetSpacing[d];
+  origin = GetOrigin[d];
+
+  If[Length[s] != ndims,
+    Throw["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
+  ];
+
+  (* Convert all to a range *)
+  newS = MapThread[#1/.#2&, {s, Thread[All -> GetDataRange[d]]}];
+
+  (* Convert coordinate range to index range *)
+  indexrange = Round[(Apply[List,newS,1]-GetOrigin[d])/spacing]+1;
+
+  (* Get the relevant part of the data *)
+  newData = Part[data, Sequence@@Reverse[Apply[Span,indexrange,1]]];
+
+  (* Get new origin *)
+  newOrigin = origin + spacing (indexrange[[All,1]]-1);
+
+  h2 = replaceRules[h, {Dimensions -> Reverse[Dimensions[newData]], Origin -> newOrigin}];
+
+  DataRegion[h2, newData]
+];
+
+DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
 
 (* Plotting wrappers *)
 DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data},
