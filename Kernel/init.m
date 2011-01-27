@@ -24,6 +24,7 @@ Module[{packages =
  {"Ascii1D",
   "BHCoordinates",
   "CarpetHDF5",
+  "CoordinateTransformations",
   "Convergence",
   "DataAnalysis",
   "DataRegion",
