@@ -449,7 +449,7 @@ DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, po
 
 DataRegion /: Interpolation[v_DataRegion, opts___] :=
   Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
-    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], Reverse[GetDataRange[v]], opts]
+    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
 ];
 
 NDerivative[d_DataRegion] :=
