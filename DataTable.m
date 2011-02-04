@@ -171,7 +171,7 @@ DataTable /: Max[d_DataTable] := Max[DepVar[d]];
 
 DataTable /: PadRight[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
-    First[DataTableRange[d]] + Range[n] Spacing[d],
+    First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
     PadRight[DepVar[d], n]}]];
 
 RedefineAsDataTable[Take[d:DataTable[___], args__],
