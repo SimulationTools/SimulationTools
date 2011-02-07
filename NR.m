@@ -9,6 +9,7 @@ BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`",
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
 ReadMultipolePsi4::usage = "ReadMultipolePsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run using the output of the Multipole thorn.";
+ReadMultipoleHDF5;
 ExtrapolateScalarFull;
 ExtrapolateScalar;
 ExtrapolatedValue;
@@ -142,6 +143,16 @@ ReadMultipolePsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
              ToString[rad] <> ".00.asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
+    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
+
+ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ] :=
+  Module[{fileName, datasetName, files, data, psi4},
+    fileName = "mp_"<>var<>".h5";
+    datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <>
+             ToString[rad] <> ".00";
+    files = Map[Import[#,{"Datasets", datasetName}] &, FindRunFile[runName, fileName]];
+    data = MergeFiles[files];
+    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
 
 ReadADMMass[runName_String] :=
