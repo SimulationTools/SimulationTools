@@ -174,6 +174,11 @@ DataTable /: PadRight[d_DataTable, n_] :=
     First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
     PadRight[DepVar[d], n]}]];
 
+DataTable /: PadLeft[d_DataTable, n_] :=
+  MakeDataTable[Transpose[{
+    First[DataTableRange[d]] - Spacing[d] (n-Length[d]+1) + Range[n] Spacing[d],
+    PadLeft[DepVar[d], n]}]];
+
 RedefineAsDataTable[Take[d:DataTable[___], args__],
   d /. DataTable[l_, x___] :> DataTable[Take[l,args],x]];
 
