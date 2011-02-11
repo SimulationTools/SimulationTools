@@ -1,6 +1,8 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "RunFiles`", "Profile`"}];
+BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "Profile`", "RunFiles`", "ReadHDF5`"}];
 
 (* New CarpetHDF5 API *)
 
@@ -11,8 +13,6 @@ ReadRefinementLevels::usage = "ReadRefinementLevels[run, var] reads the refineme
 ReadTimeLevels::usage = "ReadTimeLevels[run, var] reads the timelevels present in the CarpetHDF5 file named var in the directory run.";
 ReadVariables::usage = "ReadVariables[run, var] reads the variable names present in the CarpetHDF5 file named var in the directory run.";
 ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the iteration it on refinement level rl of the CarpetHDF5 file named var in the directory run.";
-
-ShowHDF5Progress::usage = "ShowHDF5Progress is a boolean variable indicating whether the progress of HDF5 operations should be shown in a progress indicator."
 
 StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed";
 
@@ -39,35 +39,18 @@ CarpetManipulatePlotFunction;
 
 Begin["`Private`"];
 
-ShowHDF5Progress = True;
-
 (***************************************************************************************)
 (* Private functions *)
 (***************************************************************************************)
-(* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
-$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
-If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
-
-import[x__] :=
-  Module[{},
-    result = If[$h5mma, ImportHDF5[x], Import[x]];
-    If[result == $Failed,
-      Throw["Error importing " <> ToString[{x}]]];
-    result];
 
 (* Gather various information about the datasets in a file *)
 DefineMemoFunction[datasetAttributes[file_],
   Module[{attributeRules, datasets, dsattrs, tempCell},
     Profile["datasetAttributes[file]",
 
-    If[ShowHDF5Progress === True,
-      h5mma`ReadDatasetsProgress = 0;
-      tempCell = PrintTemporary[Dynamic[Column[{"Scanning " <> Last@FileNameSplit[file],
-                                            ProgressIndicator[h5mma`ReadDatasetsProgress]}]]]];
-
     (* Convert dataset name strings into rules *)
-
-    datasets = Profile["Datasets", Datasets[file]];
+    Block[{ShowHDF5Progress=True},
+      datasets = Profile["Datasets", Datasets[file]]];
 
     Profile["datasetAttributes/StringCases",
      attributeRules = StringCases[datasets,
@@ -86,9 +69,6 @@ DefineMemoFunction[datasetAttributes[file_],
     Profile["datasetAttributes/Replace2",
     dsattrs = dsattrs /. {"var" -> Null, "it" -> Null, "tl" -> Null,
                           "rl" -> Null, "c" -> Null, "m" -> Null}];
-
-    If[ShowHDF5Progress === True,
-      NotebookDelete[tempCell]];
 
     dsattrs]
   ]
@@ -113,12 +93,12 @@ datasetAttribute[file_String, attr_] :=
   datasetAttribute[datasetAttributes[file], attr];
 
 DefineMemoFunction[Datasets[file_],
-  import[file, "Datasets"]
+  ReadHDF5[file, "Datasets"]
 ];
 
-Annotations[file_, ds_]:= import[file, {"Annotations", ds}];
-Dims[file_, ds_]:= import[file, {"Dimensions", ds}];
-HDF5Data[file_, ds_] := import[file, {"Datasets", ds}];
+Annotations[file_, ds_]:= ReadHDF5[file, {"Annotations", ds}];
+Dims[file_, ds_]:= ReadHDF5[file, {"Dimensions", ds}];
+HDF5Data[file_, ds_] := ReadHDF5[file, {"Datasets", ds}];
 
 firstOrNone[l_List] :=
   If[l === {}, None, First[l]];
@@ -372,6 +352,3 @@ End[];
 
 EndPackage[];
 
-If[CarpetHDF5`Private`$h5mma,
-  If[!MemberQ[$ContextPath, "h5mma`"], AppendTo[$ContextPath, "h5mma`"]];
-];

@@ -36,6 +36,7 @@ Module[{packages =
   "Parameters",
   "Plotting",
   "Profile",
+  "ReadHDF5",
   "RunFiles",
   "SimView",
   "SystemStatistics",
