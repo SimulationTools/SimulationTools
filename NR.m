@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 (* A package for dealing with numerical relativity data *)
@@ -808,7 +810,7 @@ ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
 
 ReadWaveformFile[file_] :=
-  MakeDataTable[Select[Map[{#[[1]],#[[2]]+I#[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]];
+  MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]];
 
 AlignMaxima[ds_List] :=
   Module[{maxima},
