@@ -11,7 +11,7 @@ BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`",
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
 ReadMultipolePsi4::usage = "ReadMultipolePsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run using the output of the Multipole thorn.";
-ReadMultipoleHDF5;
+ReadMultipoleHDF5::usage = "ReadMultipoleHDF5[run, var, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run using the HDF5 output of the Multipole thorn.";
 ExtrapolateScalarFull;
 ExtrapolateScalar;
 ExtrapolatedValue;
