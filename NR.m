@@ -4,9 +4,9 @@
 
 (* A package for dealing with numerical relativity data *)
 
-BeginPackage["NR`", {"DataTable`", "Memo`", "RunFiles`", "Timers`", 
-  "Horizons`", "Parameters`", "SystemStatistics`", "BHCoordinates`",
-  "Convergence`", "Plotting`", "DataRegion`"}];
+BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable`",
+  "Horizons`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
+  "SystemStatistics`", "Timers`"}];
 
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
@@ -152,7 +152,7 @@ ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_?Numbe
     fileName = "mp_"<>var<>".h5";
     datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <>
              ToString[rad] <> ".00";
-    files = Map[Import[#,{"Datasets", datasetName}] &, FindRunFile[runName, fileName]];
+    files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, FindRunFile[runName, fileName]];
     data = MergeFiles[files];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
