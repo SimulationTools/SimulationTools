@@ -15,7 +15,7 @@ ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTab
 ReadPsi4Radii::usage = "ReadPsi4Radii[run] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
 ReadPsi4Modes::usage = "ReadPsi4Modes[run] returns a list of the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) that are available in run.";
 
-Options[ReadPsi4] = {ReadPsi4From -> Automatic};
+(* Options[ReadPsi4] = {ReadPsi4From -> Automatic}; *)
 
 
 ExtrapolateScalarFull;
@@ -114,9 +114,9 @@ RunDirectory = Global`RunDirectory;
   Reading Subscript[\[Psi], 4]
   --------------------------------------------------------------------*)
 
-DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ, OptionsPattern[]],
+DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ (*, OptionsPattern[] *) ],
   Module[{psi4},
-  If[OptionValue[ReadPsi4From] === Automatic,
+  (* If[OptionValue[ReadPsi4From] === Automatic, *)
     Which[
       HaveMultipoleHDF5Psi4[runName],
         psi4 = ReadMultipoleHDF5[runName, "psi4", l, m, rad];,
@@ -127,27 +127,27 @@ DefineMemoFunction[ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ
       True,
         Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
     ];
-  ,
-    Switch[OptionValue[ReadPsi4From],
-      "MultipoleHDF5",
-      If[HaveMultipoleHDF5Psi4[runName],
-        psi4 = ReadMultipoleHDF5[runName, "psi4", l, m, rad];,
-        Throw["Multipole HDF5 data not available for run "<>runName];
-      ];,
-      "MultipoleASCII",
-      If[HaveMultipoleASCIIPsi4[runName],
-        psi4 = ReadMultipolePsi4[runName, "psi4", l, m, rad];,
-        Throw["Multipole ASCII data not available for run "<>runName];
-      ];,
-      "YlmDecompPsi4",
-      If[HaveYlmDecompPsi4[runName],
-        psi4 = ReadYlmDecompPsi4[runName, "psi4", l, m, rad];,
-        Throw["YlmDecompPsi4 data not available for run "<>runName];
-      ];,
-      Default,
-      Throw["Invalid value for ReadPsi4From option."];
-    ];
-  ];
+  (* , *)
+  (*   Switch[OptionValue[ReadPsi4From], *)
+  (*     "MultipoleHDF5", *)
+  (*     If[HaveMultipoleHDF5Psi4[runName], *)
+  (*       psi4 = ReadMultipoleHDF5[runName, "psi4", l, m, rad];, *)
+  (*       Throw["Multipole HDF5 data not available for run "<>runName]; *)
+  (*     ];, *)
+  (*     "MultipoleASCII", *)
+  (*     If[HaveMultipoleASCIIPsi4[runName], *)
+  (*       psi4 = ReadMultipolePsi4[runName, "psi4", l, m, rad];, *)
+  (*       Throw["Multipole ASCII data not available for run "<>runName]; *)
+  (*     ];, *)
+  (*     "YlmDecompPsi4", *)
+  (*     If[HaveYlmDecompPsi4[runName], *)
+  (*       psi4 = ReadYlmDecompPsi4[runName, "psi4", l, m, rad];, *)
+  (*       Throw["YlmDecompPsi4 data not available for run "<>runName]; *)
+  (*     ];, *)
+  (*     Default, *)
+  (*     Throw["Invalid value for ReadPsi4From option."]; *)
+  (*   ]; *)
+  (* ]; *)
 
   psi4
 ]];
