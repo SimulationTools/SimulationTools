@@ -177,6 +177,9 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
   (* Convert coordinate range to index range *)
   indexrange = Round[(Apply[List,newS,1]-GetOrigin[d])/spacing]+1;
 
+  (* Clip the range to the lower bound *)
+  indexrange = Map[{If[#[[1]]<=0, 0, #[[1]]], #[[2]]} &, indexrange];
+
   (* Get the relevant part of the data *)
   newData = Part[data, Sequence@@Reverse[Apply[Span,indexrange,1]]];
 
