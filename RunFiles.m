@@ -84,11 +84,12 @@ FindRunFile[runName_String, fileName_String] :=
     Return[files2];
   ];
 
-FindFirstRunFile[runName_String, fileName_String] :=
+DefineMemoFunction[FindFirstRunFile[runName_String, fileName_String],
+  Profile["FindFirstRunFile",
   Module[{},
     files = FindRunFile[runName, fileName];
     If[files === {}, Throw["File " <> fileName <> " not found in run " <> runName]];
-    files[[1]]];
+    files[[1]]]]];
 
 Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
 FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]] :=
