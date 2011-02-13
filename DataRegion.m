@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRegion`","DataTable`"];
+BeginPackage["DataRegion`","DataTable`", "Profile`"];
 
 (* Exported symbols *)
 
@@ -298,6 +298,7 @@ chunkOffset[d_DataRegion, origin_, spacing_] :=
   Round[(GetOrigin[d] - origin)/spacing]];
 
 MergeDataRegions[regions_List] :=
+ Profile["MergeDataRegions",
  Module[{headers, ndims, origins, dims, spacings, spacing, spacingDiffs,
     X1, X2s, X2, n, dat, header, attrs, attrs2, dat2},
   If[Length[regions] === 0, Return[{}]];
@@ -329,7 +330,7 @@ MergeDataRegions[regions_List] :=
    regions];
   attrs = GetAttributes[regions[[1]]];
   attrs2 = replaceRules[attrs, {Dimensions -> n, Origin -> X1}];
-  Return[DataRegion[attrs2, dat]]];
+  Return[DataRegion[attrs2, dat]]]];
 
 (* Fiendishly clever code *)
 GetCoordinate[d_DataRegion, dim_] :=
