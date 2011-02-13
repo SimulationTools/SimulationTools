@@ -101,7 +101,7 @@ ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] :=
   rateEq = 
    ConvergenceRatePEquation /. {CRF[1] -> F1, CRF[2] -> F2, 
       CRF[3] -> F3, CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3} // N;
-  rate = Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, FindRoot::lstol];
+  rate = Quiet[Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, {FindRoot::"cvmit", FindRoot::"lstol"}], {FindRoot::"cvmit", FindRoot::"lstol"}];
   If[rate < 0.1 || rate > 14.9, Return[None], Return[rate]]];
 
 ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
