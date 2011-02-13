@@ -96,9 +96,9 @@ DefineMemoFunction[Datasets[file_],
   ReadHDF5[file, "Datasets"]
 ];
 
-Annotations[file_, ds_]:= ReadHDF5[file, {"Annotations", ds}];
+Annotations[file_, ds_]:= Profile["Annotations", ReadHDF5[file, {"Annotations", ds}]];
 Dims[file_, ds_]:= ReadHDF5[file, {"Dimensions", ds}];
-HDF5Data[file_, ds_] := ReadHDF5[file, {"Datasets", ds}];
+HDF5Data[file_, ds_] := Profile["HDF5Data", ReadHDF5[file, {"Datasets", ds}]];
 
 firstOrNone[l_List] :=
   If[l === {}, None, First[l]];
@@ -120,15 +120,16 @@ CarpetHDF5Iterations[file_String, rl_Integer] :=
 CarpetHDF5Components[file_] := datasetAttribute[file, 5];
 
 CarpetHDF5Components[file_, it_, rl_] := 
-  datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl}], 5];
+  Profile["CarpetHDF5Components",
+  datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl}], 5]];
 
-CarpetHDF5Maps[file_]             := datasetAttribute[file, 6];
+DefineMemoFunction[CarpetHDF5Maps[file_], Profile["CarpetHDF5Maps",datasetAttribute[file, 6]]];
 
-CarpetHDF5RefinementLevels[file_] := datasetAttribute[file, 4];
+DefineMemoFunction[CarpetHDF5RefinementLevels[file_], Profile["CarpetHDF5RefinementLevels", datasetAttribute[file, 4]]];
 
 CarpetHDF5TimeLevels[file_]       := datasetAttribute[file, 3];
 
-CarpetHDF5Variables[file_]        := Profile["CarpetHDF5Variables", datasetAttribute[file, 1]];
+DefineMemoFunction[CarpetHDF5Variables[file_], Profile["CarpetHDF5Variables", datasetAttribute[file, 1]]];
 
 CarpetHDF5FileInfo[file_]:=
   Module[{iterations, components, maps, refLevels, timeLevels, vars},
@@ -149,6 +150,7 @@ CarpetHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|No
 
 CarpetHDF5Attributes[file_String, var_String, map:(None | _Integer), rl_Integer, it_Integer] :=
  Module[{dsList, c, dsName, ds},
+  Profile["CarpetHDF5Attributes",
   dsList =
    Profile["datasetsWith", datasetsWith[
      file, {1 -> var , 2 -> it, 4 -> rl,
@@ -157,7 +159,7 @@ CarpetHDF5Attributes[file_String, var_String, map:(None | _Integer), rl_Integer,
   ds = First[dsList];
   c = ds[[5]];
   dsName = CarpetHDF5DatasetName[var, it, map, rl, c];
-  Annotations[file, dsName]];
+  Annotations[file, dsName]]];
 
 CarpetHDF5Attribute[file_String, var_String, map_, rl_Integer, it_Integer, attr_String] :=
   Module[{attrs = CarpetHDF5Attributes[file, var, map, rl, it], value},
@@ -176,6 +178,7 @@ CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
 Options[ReadCarpetHDF5] = {StripGhostZones -> True};
 ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 (* This should be renamed ReadCarpetHDF5Dataset and should be internal *)
+ Profile["ReadCarpetHDF5",
  Module[{data, annots, dims, origin, spacing, name, idx, strip, dr, ghosts, posns, allds, time},
   strip = OptionValue[StripGhostZones];
 
@@ -200,12 +203,13 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   time = "time" /. annots;
   dr = MapThread[MakeDataRegion, {data, name, dims, origin, spacing, time}];
   If[strip, MapThread[Strip, {dr, ghosts}], dr]
-];
+]];
 
 ReadCarpetHDF5[file_String, ds_String, opts:OptionsPattern[]] := First[ReadCarpetHDF5[file, {ds}, opts]];
 
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
+  Profile["ReadCarpetHDF5Components",
   Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
@@ -226,7 +230,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 		StringMatchQ[file, MultiFile],
       filePrefix = StringReplace[file, ".file_0.h5" -> ""];
       pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
-      fileNames = FileNames[FileNameTake[pattern], DirectoryName[pattern]];
+      fileNames = Profile["FileNames", FileNames[FileNameTake[pattern], DirectoryName[pattern]]];
       components = Flatten[DeleteDuplicates[StringCases[fileNames,"file_"~~x:DigitCharacter..:>ToExpression[x]]]];
       datasets = Map[ReadCarpetHDF5[filePrefix<>".file_"<>ToString[#]<>".h5",
                        CarpetHDF5DatasetName[var, it, map, rl, #], opts] &, components];,
@@ -235,7 +239,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
     ];
 
     datasets
-];
+]];
 
 ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl_Integer, map_:None, opts___]:=
   Profile["ReadCarpetHDF5Variable",
@@ -315,9 +319,10 @@ getVar[run_, var_, variable_] :=
 Options[ReadGridFunction] = {Variable -> Automatic,
   Map -> Automatic, StripGhostZones -> True};
 ReadGridFunction[run_String, var_String, it_Integer, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
+  Profile["ReadGridFunction",
   ReadCarpetHDF5Variable[FindFirstRunFile[run, var], getVar[run, var, OptionValue[Variable]],
     it, getRL[run, var, rl], getMap[run, var, OptionValue[Map]],
-    FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]];
+    FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]]];
 
 Options[ReadIterations] = {};
 ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
@@ -342,11 +347,12 @@ ReadVariables[run_, var_, opts:OptionsPattern[]] :=
 
 Options[ReadTime] = {Variable -> Automatic, Map -> Automatic};
 ReadTime[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
-  CarpetHDF5Time[FindFirstRunFile[run, var],
+  Profile["ReadTime",
+    CarpetHDF5Time[FindFirstRunFile[run, var],
     getVar[run, var, OptionValue[Variable]],
     getMap[run, var, OptionValue[Map]],
     getRL[run, var, rl],
-    it];
+    it]];
 
 End[];
 
