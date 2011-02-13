@@ -169,9 +169,19 @@ CarpetHDF5Attribute[file_String, var_String, map_, rl_Integer, it_Integer, attr_
             " dataset " <> ToString[{var,map,rl,it}]]];
     Return[value]];
 
+DefineMemoFunction[CarpetHDF5TimeAccel[file_String, var_String, map_, rl_Integer],
+  Module[{its, ts},
+    its = Take[CarpetHDF5Iterations[file, rl],2];
+    ts = ToExpression[CarpetHDF5Attribute[file, var, map, rl, #, "time"]] & /@ its;
+    If[Length[its] < 2, Return[None]];
+    Function[i, ts[[1]] + (i - its[[1]]) * (ts[[2]]-ts[[1]])/(its[[2]]-its[[1]])]]];
+
 CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
   Profile["CarpetHDF5Time",
-    ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]]];
+    f = CarpetHDF5TimeAccel[file, var, map, rl];
+    If[f === None,
+      ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]],
+      f[it]]];
 
 (* Data *)
 
