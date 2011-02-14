@@ -237,7 +237,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 			  datasets = ReadCarpetHDF5[file, Map[CarpetHDF5DatasetName[var, it, map, rl, #] &, components], opts];
 		  ];,
 
-		StringMatchQ[file, MultiFile],
+    StringMatchQ[file, MultiFile],
       filePrefix = StringReplace[file, ".file_0.h5" -> ""];
       pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
       fileNames = Profile["FileNames", FileNames[FileNameTake[pattern], DirectoryName[pattern]]];
