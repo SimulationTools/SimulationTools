@@ -322,6 +322,15 @@ getVar[run_, var_, variable_] :=
     First[ReadVariables[run, var]],
     variable];
 
+DefineMemoFunction[getFileIts[file_],
+  CarpetHDF5Iterations[file]];
+
+getFileOfIt[run_, var_, it_] :=
+  Module[{files, itss},
+    files = FindRunFile[run, var];
+    itss = Map[{#, getFileIts[#]} &, files];
+    First[Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &]][[1]]];
+
 (***************************************************************************************)
 (* New API *)
 (***************************************************************************************)
@@ -330,14 +339,13 @@ Options[ReadGridFunction] = {Variable -> Automatic,
   Map -> Automatic, StripGhostZones -> True};
 ReadGridFunction[run_String, var_String, it_Integer, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
   Profile["ReadGridFunction",
-  ReadCarpetHDF5Variable[FindFirstRunFile[run, var], getVar[run, var, OptionValue[Variable]],
+  ReadCarpetHDF5Variable[getFileOfIt[run, var, it], getVar[run, var, OptionValue[Variable]],
     it, getRL[run, var, rl], getMap[run, var, OptionValue[Map]],
     FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]]];
 
 Options[ReadIterations] = {};
 ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
-  CarpetHDF5Iterations[FindFirstRunFile[run, var],
-    getRL[run, var, rl]];
+  Union@@Map[CarpetHDF5Iterations[#,getRL[run, var, rl]] &, FindRunFile[run, var]];
 
 Options[ReadMaps] = {};
 ReadMaps[run_, var_, opts:OptionsPattern[]] :=
@@ -358,7 +366,7 @@ ReadVariables[run_, var_, opts:OptionsPattern[]] :=
 Options[ReadTime] = {Variable -> Automatic, Map -> Automatic};
 ReadTime[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
   Profile["ReadTime",
-    CarpetHDF5Time[FindFirstRunFile[run, var],
+    CarpetHDF5Time[getFileOfIt[run, var, it],
     getVar[run, var, OptionValue[Variable]],
     getMap[run, var, OptionValue[Map]],
     getRL[run, var, rl],
