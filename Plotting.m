@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["Plotting`", {"DataRegion`"}];
@@ -27,7 +29,7 @@ plotStyles =
    Darker[Red], Darker[Yellow]};
 
 PresentationPlotColors = {Black, Blue, Darker[Magenta], Darker[Green], Orange, Gray, 
-   Darker[Red], Darker[Yellow]};
+   Darker[Red], Darker[Yellow], Darker[Blue], Darker[Gray]};
 
 PresentationPlotStyles = Map[Directive[#,AbsoluteThickness[1]]&,PresentationPlotColors];
 
