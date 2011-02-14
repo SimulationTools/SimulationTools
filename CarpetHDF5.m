@@ -157,7 +157,7 @@ CarpetHDF5Attributes[file_String, var_String, map:(None | _Integer), rl_Integer,
       6 -> (map /. None -> Null) }]];
   If[dsList === {}, Throw["Cannot find dataset in file"]];
   ds = First[dsList];
-  c = ds[[5]];
+  c = ds[[5]] /. Null -> None;
   dsName = CarpetHDF5DatasetName[var, it, map, rl, c];
   Annotations[file, dsName]]];
 
