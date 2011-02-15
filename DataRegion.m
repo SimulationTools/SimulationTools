@@ -175,11 +175,11 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
   (* Convert all to a range *)
   newS = MapThread[#1/.#2&, {s, Thread[All -> dataRange]}];
 
-  (* Convert coordinate range to index range *)
-  indexrange = Round[(Apply[List,newS,1]-GetOrigin[d])/spacing]+1;
   (* Clip the rang to the lower and upper bound *)
   newS = MapThread[{Max[#1[[1]],#2[[1]]], Min[#1[[2]],#2[[2]]]}&, {dataRange, newS}];
 
+  (* Convert coordinate range to index range *)
+  indexrange = Round[(Apply[List,newS,1]-origin)/spacing]+1;
 
   (* Get the relevant part of the data *)
   newData = Part[data, Sequence@@Reverse[Apply[Span,indexrange,1]]];
