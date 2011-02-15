@@ -47,6 +47,7 @@ RefinementLevel;
 ResampleDataRegion;
 ResampleDataRegions;
 Global`Sub;
+TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
 
 Begin["`Private`"];
 
@@ -573,6 +574,32 @@ ListLinePlot[d:DataRegion[___], opts___] :=
 
 Protect[ListLinePlot];
 
+(* Take a list of elements of the form {x,y,..., f} and convert it to
+   a DataRegion. It is assumed (and not checked) that the data grid is
+   regular.  *)
+
+TableToDataRegion[t_List] :=
+ Module[{d, sorted, split, spacing, origin, subregions, s, subdims,
+   suborigin, subspacing},
+  d = Length[t[[1]]] - 1; (* Number of dimensions in the data *)
+
+  sorted = Sort[t, #1[[d]] < #2[[d]] &];
+  split = SplitBy[sorted, #[[d]] &];
+  spacing = split[[2, 1, d]] - split[[1, 1, d]];
+  origin = split[[1, 1, d]];
+  If[d == 1,
+   MakeDataRegion[Map[Last, sorted],
+    "table", {Length[sorted]}, {origin}, {spacing}, 0],
+   (* else *)
+   subregions =
+     Map[TableToDataRegion, Map[Drop[#, {d}] &, split, {2}]];
+   s = First[subregions];
+   subdims = GetDimensions[s];
+   suborigin = GetOrigin[s];
+   subspacing = GetSpacing[s];
+   MakeDataRegion[Map[GetData, subregions], "table",
+    Append[subdims, Length[subregions]], Append[suborigin, origin],
+    Append[subspacing, spacing], 0]]];
 
 End[];
 
