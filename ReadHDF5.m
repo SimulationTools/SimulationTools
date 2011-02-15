@@ -28,7 +28,7 @@ Module[{tempCell, result},
   result = Import[file, opts];
   ];
 
-  If[result == $Failed, Throw["Error importing " <> ToString[{x}]]];
+  If[result == $Failed, Throw["Error importing with " <> ToString[{opts}]]];
 
   result
 ];
