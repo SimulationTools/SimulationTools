@@ -116,6 +116,8 @@ Options[ExtrapolateRadiatedQuantity] =
 Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
+ReadTwoPuncturesData::usage = "ReadTwoPuncturesData[file, col] reads a data file output by the standalone TwoPunctures code by Marcus Ansorg and returns a DataRegion containing the data in column col. col can be 1, 2 or 3 for the coordinates or >= 4 for the data.";
+
 Begin["`Private`"];
 
 RunDirectory = Global`RunDirectory;
@@ -1002,6 +1004,14 @@ FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
 
 ToFixedWidth[n_Integer, width_Integer] :=
   StringJoin[PadLeft[Characters[ToString[n]], width, "0"]];
+
+(* Read data output by the standalone TwoPunctures code by Marcus Ansorg *)
+ReadTwoPuncturesData[file_String, col_] :=
+ Module[{lines, lines2, table},
+  lines = Import[file, "Table"];
+  lines2 = Drop[Select[lines, Length[#] != 0 && First[#] != "#" &], 0];
+  table = Map[Append[Take[#, 3], #[[col]]] &, lines2];
+  TableToDataRegion[table]];
 
 End[];
 
