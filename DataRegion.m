@@ -162,23 +162,24 @@ SliceData[v_DataRegion, dims_List, coords_:0] :=
 DataRegion /: Part[d_DataRegion, s__] := DataRegionPart[d, {s}];
 
 DataRegionPart[d:DataRegion[h_, data_], s_]:=
- Module[{ndims, spacing, origin, newS, indexrange, newOrigin, h2, newData},
+ Module[{ndims, spacing, origin, dataRange, newS, indexrange, newOrigin, h2, newData},
   ndims = GetNumDimensions[d];
   spacing = GetSpacing[d];
   origin = GetOrigin[d];
+  dataRange = GetDataRange[d];
 
   If[Length[s] != ndims,
     Throw["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
   ];
 
   (* Convert all to a range *)
-  newS = MapThread[#1/.#2&, {s, Thread[All -> GetDataRange[d]]}];
+  newS = MapThread[#1/.#2&, {s, Thread[All -> dataRange]}];
 
   (* Convert coordinate range to index range *)
   indexrange = Round[(Apply[List,newS,1]-GetOrigin[d])/spacing]+1;
+  (* Clip the rang to the lower and upper bound *)
+  newS = MapThread[{Max[#1[[1]],#2[[1]]], Min[#1[[2]],#2[[2]]]}&, {dataRange, newS}];
 
-  (* Clip the range to the lower bound *)
-  indexrange = Map[{If[#[[1]]<=0, 0, #[[1]]], #[[2]]} &, indexrange];
 
   (* Get the relevant part of the data *)
   newData = Part[data, Sequence@@Reverse[Apply[Span,indexrange,1]]];
