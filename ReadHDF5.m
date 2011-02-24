@@ -34,7 +34,7 @@ Module[{tempCell, result, dsIndices},
     ];
   ];
 
-  If[result == $Failed, Throw["Error importing with " <> ToString[{opts}]]];
+  If[result == $Failed, Throw["Error importing " <> ToString[opts]<>" from "<>file]];
 
   result
 ];
