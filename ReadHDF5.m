@@ -13,8 +13,8 @@ If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 ShowHDF5Progress = False;
 
-ReadHDF5[file_String, opts___] :=
-Module[{tempCell, result},	
+ReadHDF5[file_String, opts_:"Datasets"] :=
+Module[{tempCell, result, dsIndices},
   If[$h5mma,
     If[ShowHDF5Progress === True,
       h5mma`ReadDatasetsProgress = 0;
@@ -25,12 +25,26 @@ Module[{tempCell, result},
 
     If[ShowHDF5Progress === True, NotebookDelete[tempCell]];
   ,
-  result = Import[file, opts];
+  (* Deal with the fact that Mathematica requires a dataset index rather than name for Annotations and Dimensions *)
+    If[MatchQ[opts, {"Annotations"|"Dimensions",_}],
+      dsIndices = dsNamesToIndices[file, opts[[2]]];
+      result = Import[file, {opts[[1]], dsIndices}];
+    ,
+      result = Import[file, opts];
+    ];
   ];
 
   If[result == $Failed, Throw["Error importing with " <> ToString[{opts}]]];
 
   result
+];
+
+dsNamesToIndices[file_, dsNames_] := Module[{dsList, datasets, indices},
+  dsList = If[!ListQ[dsNames], {dsNames}, dsNames];
+  datasets = ReadHDF5[file];
+
+  indices = Map[Position[Import["psi4_re.0.x.h5"],#,1,1][[1,1]]&, dsList];
+  indices
 ];
 
 End[];
