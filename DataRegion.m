@@ -443,6 +443,12 @@ DataRegion/:Log10[DataRegion[h_,data_]] :=
 DataRegion/:Power[DataRegion[h_,data_], a_] :=
   DataRegion[h, data^a];
 
+DataRegion/:Power[a_, DataRegion[h_,data_]] :=
+  DataRegion[h, a^data];
+
+DataRegion/:Power[DataRegion[h1_,data1_], DataRegion[h2_,data2_]] :=
+  DataRegion[h1, data1^data2];
+
 DataRegion/:Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1+data2]
 
 DataRegion/:Plus[DataRegion[h1_,data1_], a_]:=DataRegion[h1, data1+a]
