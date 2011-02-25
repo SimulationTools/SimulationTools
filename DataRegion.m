@@ -441,6 +441,12 @@ DataRegion/:Im[DataRegion[h_,data_]] :=
 DataRegion/:Log10[DataRegion[h_,data_]] :=
   DataRegion[h, Log10[data]];
 
+DataRegion/:Cos[DataRegion[h_,data_]] :=
+  DataRegion[h, Cos[data]];
+
+DataRegion/:Sin[DataRegion[h_,data_]] :=
+  DataRegion[h, Sin[data]];
+
 DataRegion/:Power[DataRegion[h_,data_], a_] :=
   DataRegion[h, data^a];
 
