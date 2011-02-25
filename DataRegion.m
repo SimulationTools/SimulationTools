@@ -56,7 +56,7 @@ Begin["`Private`"];
    the internal format of a DataRegion object. *)
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
-  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims], Time -> time}, data];
+  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims], Time -> time}, Developer`ToPackedArray[data]];
 
 DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
   ndims = GetNumDimensions[v];
@@ -336,7 +336,7 @@ MergeDataRegions[regions_List] :=
    regions];
   attrs = GetAttributes[regions[[1]]];
   attrs2 = replaceRules[attrs, {Dimensions -> n, Origin -> X1}];
-  Return[DataRegion[attrs2, dat]]]];
+  Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]];
 
 (* Fiendishly clever code *)
 GetCoordinate[d_DataRegion, dim_] :=

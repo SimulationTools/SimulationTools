@@ -60,10 +60,10 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     Protect[f]];
 
 MakeDataTable[l_List] :=
-  DataTable[l];
+  DataTable[Developer`ToPackedArray[l]];
 
 MakeDataTable[l_List, attrRules:{(_ -> _) ...}] :=
-  DataTable[l, Apply[Sequence,attrRules]];
+  DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
 
 MakeDataTable[f_InterpolatingFunction, dt_] :=
   Module[{tMin,tMax},
