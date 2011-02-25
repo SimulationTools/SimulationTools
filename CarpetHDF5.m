@@ -49,8 +49,7 @@ DefineMemoFunction[datasetAttributes[file_],
     Profile["datasetAttributes[file]",
 
     (* Convert dataset name strings into rules *)
-    Block[{ShowHDF5Progress=True},
-      datasets = Profile["Datasets", Datasets[file]]];
+    datasets = Profile["Datasets", Datasets[file]];
 
     Profile["datasetAttributes/StringCases",
      attributeRules = StringCases[datasets,
