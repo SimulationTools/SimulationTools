@@ -288,6 +288,22 @@ Strip[d_DataRegion, n_List, m_List] :=
        Dimensions -> (GetDimensions[d] - n - m)}];
     d2 = DataRegion[attrs2, data2]];
 
+Downsample[d_DataRegion, n_Integer] :=
+  Module[{ndims},
+    ndims = GetNumDimensions[d];
+    Downsample[d, ConstantArray[n,ndims]]];
+
+Downsample[d_DataRegion, n_List] :=
+ Module[{data, data2, attrs, attrs2, d2},
+  data = GetData[d];
+  data2 = Take[data, Apply[Sequence, Map[{1, -1, #} &, Reverse[n]]]];
+  attrs = GetAttributes[d];
+  attrs2 =
+   replaceRules[
+    attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n,
+     Dimensions -> (Floor[GetDimensions[d]/2])}];
+  d2 = DataRegion[attrs2, data2]];
+
 Attributes[insertArray] = {HoldFirst};
 
 (* Insert a1 into a2, offsetting the indices by s *)
