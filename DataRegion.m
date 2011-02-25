@@ -48,6 +48,7 @@ ResampleDataRegion;
 ResampleDataRegions;
 Global`Sub;
 TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
+NormL2;
 
 Begin["`Private`"];
 
@@ -463,6 +464,9 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
   Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
 ];
+
+NormL2[d_DataRegion] :=
+ Sqrt[Plus @@ Flatten[GetData[d^2]]];
 
 NDerivative[d_DataRegion] :=
  Module[{ndims, result},
