@@ -43,7 +43,7 @@ dsNamesToIndices[file_, dsNames_] := Module[{dsList, datasets, indices},
   dsList = If[!ListQ[dsNames], {dsNames}, dsNames];
   datasets = ReadHDF5[file];
 
-  indices = Map[Position[Import["psi4_re.0.x.h5"],#,1,1][[1,1]]&, dsList];
+  indices = Map[Position[Import[file],#,1,1][[1,1]]&, dsList];
   indices
 ];
 
