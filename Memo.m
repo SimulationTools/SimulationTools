@@ -18,6 +18,7 @@ Memo[f_] :=
 
 DefineMemoFunction[name_[args___], body_] :=
   Module[{f},
+    Options[f] = Options[name];
     SetDelayed[f[args], body];
     name = Memo[f]];
 
