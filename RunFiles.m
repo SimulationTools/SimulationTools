@@ -65,10 +65,12 @@ FindRunSegments[runName_] :=
           Throw["Cannot find run directory for run " <> runName]],
         dirName1];
 
-    If[FileType[FileNameJoin[{dirName2, "SIMULATION_ID"}]] =!= None,
+    If[FileType[FileNameJoin[{dirName2, "SIMULATION_ID"}]] =!= None ||
+       FileType[FileNameJoin[{dirName2, "SIMFACTORY"}]] =!= None,
       restarts = Select[FileNames["output-*", dirName2], ! StringMatchQ[#, "*/output-*-*"] &];
       segments = Select[Map[addDataSubDir, restarts], (# =!= None) &];
       Return[segments],
+      (* else *)
       Return[{dirName2}]];
   ];
 
