@@ -1,162 +1,214 @@
-(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
+(* Copyright (C) 2010 Ian Hinder, Barry Wardell and Aaryn Tonita *)
 
-BeginPackage["Kicks`", {"RunFiles`", "NR`", "DataTable`", "Memo`"}];
+BeginPackage["Kicks2`", {"NR`", "DataTable`", "Memo`", "Profile`"}];
 
-KickZ;
-IntegratePsi4;
-LinearMomentumFluxZModeMode;
-SpeedOfLight = 299792458.;
-IntegrateDataTableZeroStart;
+Kick::usage = "Kick[run, dir, r, lMax] computes the kick component in km/s from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax";
+KickVector::usage = "Kick[run, r, lMax] computes the vector kick in km/s from the multipolar decomposition of Psi4 on a sphere at radius r using modes up to l = lMax"
+LinearMomentumRadiated::usage = "LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum radiated as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is an integral of the result of LinearMomentumFlux with an initial boundary condition of zero.";
+LinearMomentumFlux::usage = "LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is the derivative of the result of LinearMomentumRadiated.";
+AngularMomentumFlux::usage = "WARNING: THIS FUNCTION IS IN DEVELOPMENT AND HAS NOT BEEN TESTED. AngularMomentumFlux[run, dir, r, lMax] computes the angular momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.";
 
 Begin["`Private`"];
 
-SpinWeightedSphericalHarmonic[s_, l_, m_, th_, 
-   ph_] = (Factorial[l + m] Factorial[
+(************************************************************************************)
+(* Utility functions *)
+(************************************************************************************)
+
+(* Compute the spin-weighted spherical harmonic sYlm(th,ph).  This is
+   taken from Goldberg et al. and as such does not include the
+   Cordon-Shortley phase.  This is the opposite convention to
+   Mathematica's SphericalHarmonicY, which does include the phase. *)
+spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] = 
+  (Factorial[l + m] Factorial[
        l - m] (2 l + 1) Factorial[l + s]^(-1) Factorial[
         l - s]^(-1) (4 Pi)^(-1))^(1/2) (Sin[th/2])^(2 l) Sum[
     Binomial[l - s, r] Binomial[l + s, r + s - m] (-1)^(l - r - s) Exp[
       I m ph] Cot[th/2]^(2 r + s - m), {r, Max[m - s, 0], Min[l - s, l + m]}];
 
-overlap[l_, m_, lp_, mp_] := 
- Integrate[Cos[th] SpinWeightedSphericalHarmonic[-2, l, m, th, ph] Conjugate[
-    SpinWeightedSphericalHarmonic[-2, lp, mp, th, ph] ] Sin[th], {th, 0, 
-   Pi}, {ph, 0, 2 Pi}];
+SpeedOfLight = 299792458.;
 
-overlaps = << "/Users/ian/Projects/kicks/overlaps8.m";
+integratePsi4[run_, l_, m_, r_] :=
+  integratePsi4[Function[{l,m,rp}, ReadPsi4[run, l, m, rp]], l, m, r];
 
-cachedOverlap[l_, m_, lp_, mp_] :=
- Module[{result},
-  result = overlapCache[{l, m, lp, mp}];
-  If[Head[result] === overlapCache,
-   Throw["Overlap cache does not include " <> ToString[{l, m, lp, mp}]]];
-  result];
+integratePsi4[psi4Reader_, l_, m_, r_] :=
+ Profile["integratePsi4", IntegrateDataTableZeroEnd[Profile["ReadPsi4", psi4Reader[l, m, r]]]];
 
-cachedOverlap[1, _, _, _] := 0;
+integratePsi4Twice[psi4Reader_,l_,m_,r_] :=
+ IntegrateDataTableZeroEnd[integratePsi4[psi4Reader,l,m,r]];
 
-cachedOverlap[_, _, 1, _] := 0;
+unitVectorComponent[1, th_, ph_] =
+  Sin[th] Cos[ph];
 
-defineOverlap[ov_] :=
- Module[{comb, val},
-  {comb, val} = Apply[List, ov];
-  overlapCache[Evaluate[comb]] = val];
+unitVectorComponent[2, th_, ph_] =
+  Sin[th] Sin[ph];
 
-Scan[defineOverlap, overlaps];
+unitVectorComponent[3, th_, ph_] =
+  Cos[th];
 
-IntegrateDataTableZeroStart = integrateDataTableZeroStart;
+(* Given a function f, return a list of the form {{{l,m,l',m'},
+   f[{l,m,l',m'}]}, ...} for all valid combinations of the mode
+   indices from l = 2 to l = lMax. *)
+tabulateModePairs[f_, lMax_] :=
+  Module[{l,m,lp,mp},
+    Flatten[Table[{{l,m,lp,mp}, f[{l,m,lp,mp}]},
+                  {l,2,lMax}, {m,-l,l}, {lp,2,lMax}, {mp,-lp,lp}], 3]];
 
-integrateDataTableZeroStart[d_DataTable] := 
-  integrateDataTable[d, {DataTableRange[d][[1]], 0}];
+(* Given a function f, return a list of the form {{{l,m},f[{l,m}]},
+   ...}  for all valid combinations of the mode indices from l = 2 to
+   l = lMax. *)
+tabulateModes[f_, lMax_] :=
+  Module[{l,m},
+    Flatten[Table[{{l,m}, f[{l,m}]},
+                  {l,2,lMax}, {m,-l,l}], 1]];
 
-integrateDataTableZeroEnd[d_DataTable] := 
-  integrateDataTable[d, {DataTableRange[d][[2]], 0}];
+(* This is a direct computation of the integrals of spin-weighted
+   spherical harmonics needed when computing the linear momentum
+   flux. This should produce identical results to harmonicOverlap, but
+   it is much slower.  Used in code checking. *)
+harmonicOverlapDirect[{l_, m_, lp_, mp_}, dir_] := 
+ Profile["harmonicOverlapDirect",
+ Integrate[unitVectorComponent[dir, th, ph] *
+           spinWeightedSphericalHarmonic[-2, l, m, th, ph] *
+           Conjugate[spinWeightedSphericalHarmonic[-2, lp, mp, th, ph] ] *
+           Sin[th],
+           {th, 0, Pi}, {ph, 0, 2 Pi}]];
 
-integrateDataTable[d_DataTable, {tbc_, fbc_}] :=
- Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
-  {tMin, tMax} = DataTableRange[d];
-  If[tbc < tMin || tbc > tMax,
-   Throw["integrateDataTable: boundary condition is not within range of \
-DataTable"]];
-  dt = Spacing[d];
-  dFn = Interpolation[d];
-  gFn = g /. 
-    NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}][[
-     1]];
-  gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], 
-    ListAttributes[d]]];
+(* The integral of three spin-weighted spherical harmonics can be
+  expressed in terms of Wigner 3-J symbols, which are known to
+  Mathematica.  This is taken from
+  http://en.wikipedia.org/wiki/Wigner_3-j_symbols (02-Mar-2011).
+  http://en.wikipedia.org/w/index.php?title=Wigner_3-j_symbols&oldid=411796339 *)
+harmonicOverlapThree[{l1_,m1_,s1_},{l2_,m2_,s2_},{l3_,m3_,s3_}] :=
+  Sqrt[(2l1+1)(2l2+1)(2l3+1)/(4Pi)] * 
+  Quiet[ThreeJSymbol[{l1,m1},{l2,m2},{l3,m3}] * 
+        ThreeJSymbol[{l1,-s1},{l2,-s2},{l3,-s3}],
+    {ClebschGordan::phy,ClebschGordan::tri}];
 
-DefineMemoFunction[IntegratePsi4[runName_, n_, l_, m_, r_],
- integrateDataTableZeroEnd[ReadPsi4[ResName[runName, n], l, m, r]]];
+(* Rather than computing the harmonic overlaps by integration in
+   Mathematica, which is very slow for large numbers of overlaps, we
+   instead reduce the problem to the evaluation of Wigner 3J symbols
+   which are known to Mathematica and are very fast.  We require the
+   integral of two spin-weighted spherical harmonics (one
+   complex-conjugated) with the x, y and z components of the unit
+   vector, n^i.  Each of these components can be expressed simply in
+   terms of spherical harmonics, which allows us to use the formula
+   for the integral of three spherical harmonics in terms of Wigner 3J
+   symbols.  In order to express Y* in terms of *, we use the relation
+   which flips the sign of m and the spin-weight when
+   complex-conjugating the harmonic, and introduces a sign factor.
+   Note that equation 2.6 in Goldberg et al. is incorrect (the Ylm on
+   the RHS should be Yl-m).  *)
 
-LinearMomentumFluxZModeMode = linearMomentumFluxZModeMode
+(* Compute \int{ _{-2}Y_{lm} _{-2} Y_{l'm'}^* nx dOm}
+   with nx = Sin[th] Cos[ph] = -(_0Y_{1-1} - _0Y_{11}) Sqrt[2Pi/3] *)
+harmonicOverlap[{l_, m_, lp_, mp_}, 1] := 
+ Profile["harmonicOverlap",
+    - (-1)^(mp-2) Sqrt[2Pi/3] (harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,-1,0}] - 
+                             harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,+1,0}])];
 
-DefineMemoFunction[linearMomentumFluxZModeMode[runName_, n_, l_, m_, lp_, mp_, r_],
- Module[{hDot, hDotp, o, result, x},
-  o = N[cachedOverlap[l, m, lp, mp]];
-  If[o == 0,
-   (* Don't bother reading every mode and integrating it if the contribution \
-isn't going to be counted *)
-   Return[MapData[0 &, ReadPsi4[ResName[runName, n], 2, 2, r]]]];
-  
-  {hDot, hDotp} = 
-   List[IntegratePsi4[runName, n, l, m, r], 
-    IntegratePsi4[runName, n, lp, mp, r]];
-  
-  (* These are all real anyway, because the os only couple m with m, 
-  and the only complex part factor in the Ylms is  *)
-  result =
-   r^2/(16. Pi) Re[hDot Conjugate[hDotp]] o;
-  Return[result]
-  ]];
+(* Compute \int{ _{-2}Y_{lm} _{-2} Y_{l'm'}^* ny dOm}
+   with ny = Sin[th] Sin[ph] = -I (_0Y_{1-1} - _0Y_{11}) Sqrt[2Pi/3] *)
+harmonicOverlap[{l_, m_, lp_, mp_}, 2] := 
+ Profile["harmonicOverlap",
+    -I (-1)^(mp-2) Sqrt[2Pi/3] (harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,-1,0}] + 
+                               harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,+1,0}])];
 
-(* This is how I originally did it
-linearMomentumFluxZ[runName_, n_, l_, m_, r_] :=
- Module[{},
-  Re[linearMomentumFluxZ[runName, n, l, m, l, m, r]] + 
-   2 Re[linearMomentumFluxZ[runName, n, l, m, l + 1, m, r]]] *)
+(* Compute \int{ _{-2}Y_{lm} _{-2} Y_{l'm'}^* nz dOm}
+   with nz = \cos(th) = 2 Sqrt[Pi/3] _0Y_{10} *)
+harmonicOverlap[{l_, m_, lp_, mp_}, 3] := 
+ Profile["harmonicOverlap",
+    (-1)^(mp-2) 2 Sqrt[Pi/3] harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,0,0} ]];
 
-(* This is how Nils does it *)
-linearMomentumFluxZ[runName_, n_, l_, m_, r_] :=
- Module[{},
-  linearMomentumFluxZModeMode[runName, n, l, m, l - 1, m, r] +
-   linearMomentumFluxZModeMode[runName, n, l, m, l, m, r] + 
-   linearMomentumFluxZModeMode[runName, n, l, m, l + 1, m, r]];
+(************************************************************************************)
+(* Linear momentum *)
+(************************************************************************************)
 
-linearMomentumFluxZ[runName_, n_, lMax_, r_] :=
- Module[{},
-  AddAttribute[
-   Apply[Plus, 
-    Flatten[Table[
-      linearMomentumFluxZ[runName, n, l, m, r], {l, 2, lMax}, {m, -l, l}]]], 
-   NPoints -> n]];
+Kick[run_String, dir_Integer, r_, lMax_Integer] :=
+   SpeedOfLight/1000*
+     Last@DepVar@LinearMomentumRadiated[run,dir,r,lMax];
 
-(* This is my new way, which should give the same answer as Nils' way *)
+DefineMemoFunction[KickMemo[run_String, dir_Integer, r_, lMax_Integer],
+  Kick[run,dir,r,lMax]];
 
-linearMomentumFluxZ[runName_, n_, lMax_, r_] :=
- Module[{flux},
-  flux = Sum[If[l>2,Sum[linearMomentumFluxZModeMode[runName,n,l,m,l-1,m,r], 
-                        {m,-(l-1),l-1}],0] + 
-             Sum[linearMomentumFluxZModeMode[runName,n,l,m,l,m,r] +
-                 linearMomentumFluxZModeMode[runName,n,l,m,l+1,m,r], {m,-l,l}],
-             {l, 2, lMax}];
-  AddAttribute[flux, NPoints -> n]];
+KickVector[run_String, r_, lMax_Integer] :=
+  Table[Kick[run, dir, r, lMax], {dir, 1, 3}];
 
-KickZ[runName_, n_, lMax_, r_] :=
- SpeedOfLight/1000*
-  Last[DepVar[
-    integrateDataTableZeroStart[linearMomentumFluxZ[runName, n, lMax, r]]]];
+KickVectorMemo[run_String, r_, lMax_Integer] :=
+  Table[KickMemo[run, dir, r, lMax], {dir, 1, 3}];
 
-KickZ[run_, n_, l_] :=
- Module[{},
-  ExtrapolatedValue /. 
-   ExtrapolateScalarFull[1, 
-    Table[{r, KickZ[run, n, l, r]}, {r, 30, 70, 10}]]];
+LinearMomentumRadiated[run_, dir_, r_, lMax_] :=
+  IntegrateDataTableZeroStart[LinearMomentumFlux[run,dir,r,lMax]];
 
-kickZWithRadiusExtrapolationError[run_, n_, l_] :=
- Module[{v1, v2},
-  v1 = ExtrapolatedValue /. 
-    ExtrapolateScalarFull[1, 
-     Table[{r, KickZ[run, n, l, r]}, {r, 30, 70, 10}]];
-  v2 = ExtrapolatedValue /. 
-    ExtrapolateScalarFull[2, 
-     Table[{r, KickZ[run, n, l, r]}, {r, 30, 70, 10}]];
-  Return[{v1, v2 - v1}];
-  ];
+(* Call the "reader" version of LinearMomentumFlux with Psi4 from a run *)
+LinearMomentumFlux[run_String, dir_, r_, lMax_] :=
+  LinearMomentumFlux[
+    Function[{l,m,rp}, ReadPsi4[run, l, m, rp]], 
+    dir, r, lMax];
 
-kickZWithResolutionAndRadiusError[run_, l_, ns_] :=
- Module[{kicksAndRadErrs, kicks, radErrs, p, kickRich, kick},
-  kicksAndRadErrs = 
-   Table[kickZWithRadiusExtrapolationError[run, n, l], {n, ns}];
-  kicks = Map[First, kicksAndRadErrs];
-  radErrs = Map[Last, kicksAndRadErrs];
-  p = ConvergenceRate[kicks, 1/ns];
-  kickRich = RichardsonExtrapolate[Drop[kicks, 1], Drop[1/ns, 1], 4];
-  kick = Last[kicks];
-  Return[{kick, kickRich - kick, Last[radErrs], p}];
-  ];
+(* Compute the linear momentum flux from Psi4.  This code has been
+   heavily optimised. TODO: include equations and references. *)
+LinearMomentumFlux[psi4Reader_, dir_, r_, lMax_] :=
+  Module[{l,m,lp,mp,fluxTerm,intPsi4Cache1,intPsi4Cache,allOverlaps,nonZeroOverlaps,terms,
+          sum, nElems, tmp, nList, pDot},
+    mon = {run, dir, r, "Computing overlaps"};
 
-kickZExtData[run_, n_, l_, p_] := {Data, ExtrapolatedCurve} /. 
-  ExtrapolateScalarFull[p, 
-   Table[{r, KickZ[run, n, l, r]}, {r, 30, 70, 10}]];
+    (* Compute all the required overlaps of the harmonics with the
+       unit vector in the direction "dir" between the mode indices l,
+       m, l', m' *)
+    allOverlaps = tabulateModePairs[harmonicOverlap[#, dir] &, lMax];
+
+    nonZeroOverlaps = Select[allOverlaps, (#[[2]] =!= 0) &];
+    nElems = 10^100;
+    nList = {};
+
+    (* Compute all the modes up to lMax *)
+    tabulateModes[
+      (mon = {run, dir, r, "Integrating",#};
+       tmp = integratePsi4[psi4Reader,Apply[Sequence,#],r];
+       intPsi4Cache1[#] = DepVar[tmp];
+       nElems = Min[nElems,Length[intPsi4Cache1[#]]];
+       nList = Append[nList, {#, nElems}]) &, 
+      lMax];
+
+    tabulateModes[
+      (mon = {run, dir, r, "Resetting ranges",#};
+       intPsi4Cache[#] = Take[intPsi4Cache1[#], nElems]) &, 
+      lMax];
+
+    fluxTerm[{{l_, m_, lp_, mp_},o_}] :=
+      Profile["fluxComp", 
+        (mon={run, dir, r, "Computing flux", l,m,lp,mp};
+         intPsi4Cache[{l,m}] * Conjugate[intPsi4Cache[{lp,mp}]] * N[o])];
+
+    terms = Map[fluxTerm, nonZeroOverlaps];
+    mon = {run, dir, r, "Adding terms..."};
+    sum = Profile["addTerms",
+            MakeDataTable[MapThread[List, {Take[IndVar[integratePsi4[psi4Reader,2,2,r]],nElems],
+                                           Apply[Plus, terms]}]]];
+    mon = {run, dir, r, "Real part..."};
+    pDot = N[r^2/(16 Pi)] Re[sum];
+    mon = "";
+    Return[pDot]];
+
+
+(************************************************************************************)
+(* Angular momentum *)
+(************************************************************************************)
+
+(* Only the z component of the angular momentum flux is implemented at
+   the moment.  UNTESTED. TODO: give reference. *)
+AngularMomentumFlux[run_String, dir_, r_, lMax_] :=
+  AngularMomentumFlux[
+    Function[{l,m,rp}, ReadPsi4[run, l, m, rp]], 
+    dir, r, lMax];
+
+(* Only the z component of the angular momentum flux is implemented at
+   the moment. UNTESTED. *)
+AngularMomentumFlux[psi4Reader_, 3, r_, lMax_] :=
+  Module[{l,m},
+    r^2/(4.0 Pi) Sum[m *
+      Im[Conjugate[integratePsi4Twice[psi4Reader,l,m,r]] * 
+                   integratePsi4[psi4Reader,l,m,r]], {l,2,lMax}, {m,-l,l}]];
 
 End[];
 
