@@ -232,7 +232,7 @@ DefineMemoFunction[ReadYlmDecompRadii[runName_, var_],
     radiusFromFileName[name_] :=
       Round[ToExpression[
         StringReplace[name,
-          "Ylm_WEYLSCAL4:"<>var<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+          "Ylm_WEYLSCAL4::"<>var<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
           ~~ x__ ~~ ".asc" -> x]]];
     radii = Union[Map[radiusFromFileName, names]]]
 ];
