@@ -31,6 +31,7 @@ Module[{packages =
   "DataTable",
   "Grids",
   "Horizons",
+  "Kicks",
   "Memo",
   "NR",
   "Parameters",
