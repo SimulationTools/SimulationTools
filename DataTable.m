@@ -453,6 +453,14 @@ Monotonise[{{x1_, y1_}, {x2_, y2_}, rest___}] :=
 Monotonise[d_DataTable] :=
  MakeDataTable[Monotonise[ToList[d]]];
 
+singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
+
+DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
+  resampled = ResampleDataTables[{ds}];
+  joineddata=MapThread[Join, DepVar/@singleToList/@resampled];
+  MakeDataTable[Thread[{IndVar[resampled[[1]]] ,joineddata}]]
+];
+
 End[];
 
 EndPackage[];
