@@ -104,6 +104,19 @@ ToFixedWidth;
 LRange;
 RadiusRange;
 
+TotalMass;
+InitialSpinAngularMomentum;
+InitialLinearMomentum;
+InitialOrbitalAngularMomentum;
+InitialAngularMomentum;
+InitialSpin;
+SpinAngle;
+InitialSpinAngle;
+InitialDimensionlessSpin;
+MassRatio;
+SymmetricMassRatio;
+InitialSeparation;
+
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
    UseTortoiseCoordinate -> True,
@@ -313,8 +326,15 @@ DefineMemoFunction[ReadMultipoleHDF5Modes[runName_, var_],
 ];
 
 ReadADMMass[runName_String] :=
-  ReadList[FileInRun[runName, "ADM_mass_tot.asc"], Real][[1]];
-
+  Module[{massMDFiles},
+    massMDFiles = FindRunFile[runName, "ADM_mass_tot.asc"];
+    If[massMDFiles =!= {},
+      Return[ReadList[massMDFiles[[1]], Real][[1]]],
+      (* Else *)
+      ToExpression@
+        Last@StringSplit[
+          Select[ReadList[StandardOutputOfRun[runName][[1]], String], 
+            StringMatchQ[#, __ ~~ "ADM mass" ~~ __] &, 1][[1]]]]];
 
 (*--------------------------------------------------------------------
   Extrapolation
@@ -1012,6 +1032,100 @@ ReadTwoPuncturesData[file_String, col_] :=
   lines2 = Drop[Select[lines, Length[#] != 0 && First[#] != "#" &], 0];
   table = Map[Append[Take[#, 3], #[[col]]] &, lines2];
   TableToDataRegion[table]];
+
+(* Initial data *)
+
+TotalMass[run_] :=
+ Plus @@ ReadPunctureADMMasses2[run];
+
+DefineMemoFunction[InitialSpinAngularMomentum[run_],
+ Module[{sp, sm, m},
+  m = Plus @@ ReadPunctureADMMasses2[run];
+  sp = Table[
+     ToExpression@
+      LookupParameter[run, 
+       "TwoPunctures::par_s_plus[" <> ToString[i] <> "]", "0"], {i, 0,
+       2}]/m^2;
+  sm = Table[
+     ToExpression@
+      LookupParameter[run, 
+       "TwoPunctures::par_s_minus[" <> ToString[i] <> "]", "0"], {i, 
+      0, 2}]/m^2;
+  sp + sm]];
+
+InitialLinearMomentum[run_, idx_] :=
+  Module[{suffix},
+    suffix = If[idx == 0, "plus", "minus"];
+    Table[
+      ToExpression@
+        LookupParameter[run, "TwoPunctures::par_P_"<>suffix<>"["<>ToString@d<>"]", 0],
+      {d,0,2}]];
+
+InitialOrbitalAngularMomentum[run_] :=
+ Module[{xp, xm, pyp, pym, initialL, sp, J0, m},
+  m = Plus @@ ReadPunctureADMMasses2[run];
+  xp = (ToExpression@LookupParameter[run, "TwoPunctures::par_b"] + 
+      ToExpression@
+       LookupParameter[run, "TwoPunctures::center_offset[0]"])/m;
+  xm = (-ToExpression@LookupParameter[run, "TwoPunctures::par_b"] + 
+      ToExpression@
+       LookupParameter[run, "TwoPunctures::center_offset[0]"])/m;
+  pyp = (ToExpression@
+      LookupParameter[run, "TwoPunctures::par_P_plus[1]"])/m;
+  pym = (ToExpression@
+      LookupParameter[run, "TwoPunctures::par_P_minus[1]"])/m;
+  initialL = {0, 0, xp*pyp + xm*pym}
+  ];
+
+InitialAngularMomentum[run_] :=
+  InitialOrbitalAngularMomentum[run] + InitialSpinAngularMomentum[run];
+
+InitialSpin[run_, i_] :=
+ First@DepVar@SpinAngle[run, i];
+
+SpinAngle[run_, idx_] :=
+  MapData[AnglesOfVector[#][[2]] &, ReadIHSpin[run, idx]];
+
+InitialSpinAngle[run_, i_] :=
+ First@DepVar@SpinAngle[run, i];
+
+InitialSpinAngle[run_] :=
+ Module[{S0, S1},
+  S0 = First@DepVar@ReadIHSpin[run, 0];
+  S1 = First@DepVar@ReadIHSpin[run, 1];
+  If[Norm@S0 > Norm@S1,
+   AnglesOfVector[S0][[2]],
+   AnglesOfVector[S1][[2]]]];
+
+InitialSpin[run_] :=
+ Module[{S0, S1},
+  S0 = First@DepVar@ReadIHSpin[run, 0];
+  S1 = First@DepVar@ReadIHSpin[run, 1];
+  If[Norm@S0 > Norm@S1,
+   S0,
+   S1]];
+
+DefineMemoFunction[InitialDimensionlessSpin[run_],
+ Module[{S0, S1, mp, mm},
+  S0 = First@DepVar@ReadIHSpin[run, 0];
+  S1 = First@DepVar@ReadIHSpin[run, 1];
+  {mp, mm} = ReadPunctureADMMasses2[run];
+  If[Norm@S0 > Norm@S1,
+   S0/mp^2,
+   S1/mm^2]]];
+
+MassRatio[run_] :=
+ Module[{mp, mm},
+  {mp, mm} = ReadPunctureADMMasses2[run];
+  Return[If[mp < mm, mp/mm, mm/mp]]];
+
+SymmetricMassRatio[run_] :=
+ Module[{q = MassRatio[run]},
+  q/(1 + q)^2];
+
+DefineMemoFunction[InitialSeparation[run_],
+  First@DepVar@ReadBHSeparation[run]];
+
 
 End[];
 
