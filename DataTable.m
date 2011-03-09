@@ -344,9 +344,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
     If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
       Throw["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
             " for DataTable with range " <> ToString[{dt1,dt2}]]];
-    l = ToList[d];
-    l2 = Select[l, Abs[#[[2]]] < 10^20 &];
-    f = Interpolation[l2, InterpolationOrder -> p];
+    f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
 
 Spacing[d:DataTable[__]] :=
