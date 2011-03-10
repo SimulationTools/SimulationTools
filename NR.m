@@ -326,15 +326,19 @@ DefineMemoFunction[ReadMultipoleHDF5Modes[runName_, var_],
 ];
 
 ReadADMMass[runName_String] :=
-  Module[{massMDFiles},
+  Module[{massMDFiles, output, lines},
     massMDFiles = FindRunFile[runName, "ADM_mass_tot.asc"];
     If[massMDFiles =!= {},
       Return[ReadList[massMDFiles[[1]], Real][[1]]],
       (* Else *)
-      ToExpression@
-        Last@StringSplit[
-          Select[ReadList[StandardOutputOfRun[runName][[1]], String], 
-            StringMatchQ[#, __ ~~ "ADM mass" ~~ __] &, 1][[1]]]]];
+      output = StandardOutputOfRun[runName];
+      If[Length[output] < 1,
+        Throw["Cannot find standard output for run "<>runName]];
+
+      lines = Select[ReadList[output[[1]], String], StringMatchQ[#, __ ~~ "ADM mass is" ~~ __] &, 1];
+      If[Length[lines] < 1,
+        Throw["Cannot find ADM mass in standard output of run "<>runName]];
+      ToExpression@Last@StringSplit[lines[[1]]]]];
 
 (*--------------------------------------------------------------------
   Extrapolation
