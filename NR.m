@@ -458,6 +458,8 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     fTbs = Map[Last, rdTb2];
 
     If[OptionValue[UseTortoiseCoordinate],
+      If[OptionValue[MassADM] === None,
+        Throw["No mass given for tortoise coordinate.  Specify MassADM -> m in ExtrapolateRadiatedQuantity"]];
       fTbs = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, OptionValue[MassADM]],#2]&, 
                                 {rads, fTbs}],
       fTbs = MapThread[ShiftDataTable[-#1, #2] &, 
