@@ -34,6 +34,7 @@ Module[{packages =
   "Kicks",
   "Memo",
   "NR",
+  "NRExport",
   "Parameters",
   "Plotting",
   "Profile",

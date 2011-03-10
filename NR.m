@@ -69,12 +69,6 @@ ReadInnerBoundary;
 ReadOuterBoundary;
 CountRefinementLevels;
 
-ExportWaveform;
-ExportBHCoords;
-ExportBHRelativeCoords;
-ExportRun::usage = "ExportRun[run, dir] exports run to dir";
-ExportGridStructure;
-FunctionOfPhase;
 AbsOfPhase;
 ReadPunctureADMMasses;
 ReadPunctureADMMasses2;
@@ -858,61 +852,6 @@ PhaseOfFrequency[psi4_] :=
 
 ShiftPhase[d_DataTable, dp_] :=
   MapData[Exp[I dph] # &, d];
-
-ExportWaveform[run_String, dir_String, l_Integer, m_Integer, 
-  r_?NumberQ] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Monitor`status = {"Exporting waveform", run, l, m, r};
-  Export[dir <> "/psi4_l" <> ToString[l] <> "_m" <> ToString[m] <> 
-    "_r" <> ToString[r] <> ".asc", 
-   Map[{#[[1]], Re[#[[2]]], Im[#[[2]]]} &, 
-    ToList[ReadPsi4[run, l, m, r]]], "TSV"]]
-
-ExportBHCoords[run_String, dir_String, tracker_Integer] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Export[dir <> "/bh_coords_cart_" <> ToString[tracker] <> ".asc", 
-   Map[{#[[1]], #[[2, 1]], #[[2, 2]], #[[2, 3]]} &, 
-    ToList[ReadBHCoordinates[run, tracker]]], "TSV"]];
-
-ExportBHRelativeCoords[run_String, dir_String] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Export[dir <> "/bh_coords_polar.asc", 
-   MapThread[{#[[1]], #1[[2]], #2[[2]]} &, {ToList[
-      ReadBHSeparation[run]], ToList[ReadBHPhase[run]]}],
-    "TSV"]];
-
-ExportBHCoords[run_String, dir_String] :=
- Module[{},
-  Table[ExportBHCoords[run, dir, t], {t, 0, 1}]];
-
-selectInRange[xs_, range_] :=
- If[range === All,
-  xs,
-  Select[xs, (# >= range[[1]] && # <= range[[2]]) &]];
-
-ExportWaveforms[run_String, dir_String, lRange_: All, rRange_: All] :=
-  Module[{rs, ls},
-  rs = selectInRange[ReadPsi4Radii[run], rRange];
-  ls = selectInRange[ReadPsi4Modes[run], lRange];
-  Table[ExportWaveform[run, dir, l, m, r], {l, ls}, {m, -l, l}, {r, 
-    rs}]];
-
-Options[ExportRun] = {LRange -> All, RadiusRange -> All};
-
-ExportRun[run_String, dir_String, opts:OptionsPattern[]] :=
- Module[{lRange = OptionValue[LRange], rRange = OptionValue[RadiusRange]},
-  ExportWaveforms[run, dir, lRange, rRange];
-  ExportBHCoords[run, dir];
-  ExportBHRelativeCoords[run, dir];
-  ExportGridStructure[run, dir]];
-
-ExportGridStructure[run_String, dir_String] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
 
 PercentageDifference[ap_,bp_] :=
   Module[{a,b},
