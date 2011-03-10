@@ -108,7 +108,7 @@ FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[
 StandardOutputOfRun[runName_String] :=
   Module[{segments, files1, files2},
     segments = FindRunSegments[runName];
-    files1 = Map[FileNameJoin[{#, "../"<>runName<>".out"}] &, segments];
+    files1 = Map[FileNameJoin[{#, "../"<>Last@FileNameSplit@runName<>".out"}] &, segments];
     files2 = Select[files1, FileType[#] =!= None &]];
 
 stringToReal[s_String] :=
