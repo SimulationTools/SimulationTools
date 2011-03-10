@@ -54,27 +54,42 @@ addDataSubDir[output_String] :=
     If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
     FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
 
-FindRunSegments[runName_] :=
-  Module[{dirName1, dirName2, restarts, segments},
-    dirName1 = 
-      If[FileNameDepth[runName] == 1,
-        FileNameJoin[{RunDirectory, runName}],
-        runName];
-    dirName2 = 
-      If[FileType[dirName1] === None,
-        If[FileType[dirName1 <> "-all"] =!= None,
-          dirName1 <> "-all",
-          Throw["Cannot find run directory for run " <> runName]],
-        dirName1];
+runDirType[dir_String] :=
+  If[FileType[dir] =!= Directory,
+    None,
+    If[FileType[FileNameJoin[{dir, "SIMULATION_ID"}]] =!= None ||
+       FileType[FileNameJoin[{dir, "SIMFACTORY"}]] =!= None,
+       SimFactory,
+       If[FileNames["*.par", dir] =!= {},
+          Standard,
+          None]]];
 
-    If[FileType[FileNameJoin[{dirName2, "SIMULATION_ID"}]] =!= None ||
-       FileType[FileNameJoin[{dirName2, "SIMFACTORY"}]] =!= None,
-      restarts = Select[FileNames["output-*", dirName2], ! StringMatchQ[#, "*/output-*-*"] &];
-      segments = Select[Map[addDataSubDir, restarts], (# =!= None) &];
-      Return[segments],
-      (* else *)
-      Return[{dirName2}]];
-  ];
+(* Given the name of a run directory, return a path to it *)
+FindRunDir[runName_] :=
+ Module[{possibles},
+  If[runDirType[runName] =!= None,
+    (* The run is given by a name which can be found directly *)
+    runName,
+    (* Cannot find directly, so look under RunDirectory *)
+    If[runDirType[FileNameJoin[{RunDirectory, runName}]] =!= None,
+      FileNameJoin[{RunDirectory, runName}],
+      possibles = Select[FileNames[runName, {RunDirectory}, 2], runDirType =!= None &];
+      If[possibles === {},
+        None,
+        First[possibles]]]]
+ ];
+
+FindRunSegments[runName_] :=
+  Module[{dir, restarts, segments},
+    dir = FindRunDir[runName];
+    If[dir === None,
+      dir = FindRunDir[runName<>"-all"];
+      If[dir === None,
+        Throw["Cannot find run directory for run " <> runName]]];
+    If[runDirType[dir] === SimFactory,
+      restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
+      segments = Select[Map[addDataSubDir, restarts], (# =!= None) &],
+      {dir}]];
 
 FindRunFile[runName_String, fileName_String] :=
   Module[{segments, files1, files2},
