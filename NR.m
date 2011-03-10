@@ -288,33 +288,26 @@ ReadPsi4Modes[runName_] :=
 ];
 
 DefineMemoFunction[ReadYlmDecompModes[runName_, var_],
-  Module[{names, modeFromFileName, radii},
+  Module[{names, modes},
    names = FindRunFilesFromPattern[runName,
      "Ylm_WEYLSCAL4::"<>var<>"r_l*_m*_r*.asc"];
-   modeFromFileName[name_] :=
-    Round[ToExpression[
-      StringReplace[name,
-       "Ylm_WEYLSCAL4::"<>var<>"r_l" ~~ x__ ~~ "_m" ~~ __ ~~ "r" ~~ __ ~~
-         ".asc" -> x]]];
-   radii = Union[Map[modeFromFileName, names]]]
+   modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
+   modes
+  ]
 ];
 
 DefineMemoFunction[ReadMultipoleASCIIModes[runName_, var_],
-  Module[{names, modeFromFileName, radii},
-   names = FindRunFilesFromPattern[runName,
-     "mp_"<>var<>"_l*_m*_r*.asc"];
-   modeFromFileName[name_] :=
-    Round[ToExpression[
-      StringReplace[name,
-       "mp_"<>var<>"_l" ~~ x__ ~~ "_m" ~~ __ ~~ "r" ~~ __ ~~
-         ".asc" -> x]]];
-   radii = Union[Map[modeFromFileName, names]]]
+  Module[{names, modes},
+   names = FindRunFilesFromPattern[runName, "mp_"<>var<>"_l*_m*_r*.asc"];
+   modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
+   modes
+  ]
 ];
 
 DefineMemoFunction[ReadMultipoleHDF5Modes[runName_, var_],
   Module[{datasets, modes},
     datasets = Union@@Map[ReadHDF5[#] &, FindRunFile[runName, "mp_"<>var<>".h5"]];
-    modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[datasets, "l" ~~ x : NumberString :> x])];
+    modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[datasets, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
     modes
   ]
 ];
