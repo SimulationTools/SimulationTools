@@ -6,11 +6,11 @@ BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Horizons`", "NR`"}];
 
 
 ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, dir, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to a file in dir.";
-ExportAllExtrapolatedWaveform::usage = "ExportAllExtrapolatedWaveforms[run, dir, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to a file in dir.";
+ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, dir, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to a file in dir.";
 JunkTime::usage "JunkTime is an option for ExportExtrapolatedWaveform and ExportAllExtrapolatedWaveforms which specifies how much to cut off from the start of a waveform to eliminate junk radiation.";
 
 ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, dir, l, m] exports the (l,m) mode of the waveform in run to a file in dir.";
-ExportAllExtractedWaveform::usage = "ExportAllExtractedWaveforms[run, dir] extrapolats all modes of the waveform in run to a file in dir.";
+ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, dir] extrapolats all modes of the waveform in run to a file in dir.";
 
 ExportAllWaveforms::usage = "ExportAllWaveforms[run, dir] exports all extracted waveforms along with the extrapolated waveform for run to dir."
 
