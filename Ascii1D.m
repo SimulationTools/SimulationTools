@@ -115,11 +115,6 @@ ReadCarpetASCII1D[fileName_, dir_:1] :=
   prls = processLevel /@ levels;
   Return[prls]]];
 
-ReadCarpetASCII1DFromRun[run_String, fileName_String, dir_] :=
-  Module[{},
-    files = FindRunFile[run, fileName];
-  ];
-
 MGraph[data__] :=
   Manipulate[
    ListLinePlot[data[[i, 2]], 
