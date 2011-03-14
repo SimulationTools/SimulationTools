@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["RunFiles`", {"Profile`", "Memo`"}];
@@ -127,7 +129,7 @@ ReadColumnFile[fileName_String] :=
   ReadColumnFileWithFileName[fileName];
 
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
-  Module[{list, list2, isComment, file2},
+  Module[{list, list2, isComment, file2, data},
   Profile["ReadColumnFile[" <> fileName <> "]",
     If[FileType[fileName] === None, Throw["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
     list = ReadList[fileName, String]; (* Blank lines omitted *)
@@ -135,7 +137,15 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
     list2 = Select[list, !isComment[#] &];
     file2 = StringJoin[Riffle[list2, "\n"]];
-    Return[Profile["ReadColumnFile:ImportString", ImportString[file2,"Table"]]]]]];
+    data = Profile["ReadColumnFile:ImportString", ImportString[file2,"Table"]];
+    If[!ArrayQ[data],
+      Throw["File "<>fileName<>" missing data."];
+    ,
+      Return[data];
+    ];
+  ]
+  ]
+];
 
 ReadColumnFile[fileName_String, cols_List] :=
   extractColumns[ReadColumnFile[fileName], cols];
