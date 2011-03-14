@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["CarpetVTK`","DataRegion`"];
+BeginPackage["CarpetVTK`", {"DataRegion`"}];
 
 (* Exported symbols *)
 

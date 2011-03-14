@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRegion`","DataTable`", "Profile`"];
+BeginPackage["DataRegion`", {"DataTable`", "Profile`"}];
 
 (* Exported symbols *)
 
