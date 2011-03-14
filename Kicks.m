@@ -28,7 +28,7 @@ spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] =
 SpeedOfLight = 299792458.;
 
 integratePsi4[run_, l_, m_, r_] :=
-  integratePsi4[Function[{l,m,rp}, ReadPsi4[run, l, m, rp]], l, m, r];
+  integratePsi4[Function[{lp,mp,rp}, ReadPsi4[run, lp, mp, rp]], l, m, r];
 
 integratePsi4[psi4Reader_, l_, m_, r_] :=
  Profile["integratePsi4", IntegrateDataTableZeroEnd[Profile["ReadPsi4", psi4Reader[l, m, r]]]];
@@ -148,7 +148,7 @@ LinearMomentumFlux[run_String, dir_, r_, lMax_] :=
 (* Compute the linear momentum flux from Psi4.  This code has been
    heavily optimised. TODO: include equations and references. *)
 LinearMomentumFlux[psi4Reader_, dir_, r_, lMax_] :=
-  Module[{l,m,lp,mp,fluxTerm,intPsi4Cache1,intPsi4Cache,allOverlaps,nonZeroOverlaps,terms,
+  Module[{fluxTerm, intPsi4Cache1, intPsi4Cache, allOverlaps, nonZeroOverlaps, terms,
           sum, nElems, tmp, nList, pDot},
     mon = {run, dir, r, "Computing overlaps"};
 

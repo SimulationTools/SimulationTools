@@ -24,7 +24,7 @@ unbreakBrokenStrings[lines2_List] :=
     Return[lines]];
 
 DefineMemoFunction[ParseParameterFile[from_String],
- Module[{lines, parseLine, thorns, param, val, removeWhiteSpace, fileName, fileNames},
+ Module[{lines, parseLine, removeWhiteSpace, fileName, fileNames},
   (* Is "from" a full parameter file name? *)
   If[StringMatchQ[from, __ ~~ ".par"],
     fileNames = {from},

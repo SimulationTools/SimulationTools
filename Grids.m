@@ -67,7 +67,7 @@ AnimateGrids[runName_String, R_?NumberQ, dt_?NumberQ, fps_?NumberQ] :=
    AnimationRunning -> False, AnimationRepetitions -> 1]];
 
 ReadCarpetGridsFromFile[fileName_] :=
- Module[{lines, gridLines, gridLines1, iterations, readIteration, its,
+ Module[{lines, readIteration, its,
     itNos, itVals, itPairs, itPairs1, itPairs2, trToVec},
 
   trToVec[str_] :=
@@ -127,7 +127,7 @@ mergeFiles[files_List] :=
   ];
 
 RescaleGrids[grids_, spacing_] :=
- Module[{iter, range, rescaledgrids},
+ Module[{range, rescaledgrids},
   If[Depth[grids]==6,
     rescaledgrids = Map[RescaleGrids[#, spacing]&, grids];
   ,

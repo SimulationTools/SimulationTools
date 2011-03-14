@@ -41,7 +41,7 @@ Options[LoadConvergenceSeries] = {Downsample -> False, Interpolate -> False};
 LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
   Module[{downsample = Downsample /. {opts} /. Options[LoadConvergenceSeries],
           interpolate = Interpolate /. {opts} /. Options[LoadConvergenceSeries],
-          fs,len,tables},
+          fs, len, tables, dts, gcd, dsFacs, dt, tsWithAttrs},
     
     fs = Map[reader, Map[runBase <> namer[#] &, ns]];
     dts = Map[Spacing, fs];
@@ -69,7 +69,7 @@ LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
   ];
 
 RescaledErrors[p_, ds:List[DataTable[__]..]] :=
-  Module[{d1, d2, d3, ns, hs, d12, d23, cm, ds2, dts},
+  Module[{d1, d2, d3, ns, hs, d12, d23, cm, ds2, dts, ranges},
     dts = Map[Spacing, ds];
     ranges = Map[DataTableRange, ds];
     If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
@@ -112,7 +112,7 @@ ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
     p /. FindRoot[el, {p, 1, 10}]];
 
 ConvergenceRate[ds:{DataTable[__]..}] :=
-  Module[{hs,dts,ds2},
+  Module[{hs, dts, ds2, ranges},
     dts = Map[Spacing, ds];
     ranges = Map[DataTableRange, ds];
     If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
@@ -122,7 +122,7 @@ ConvergenceRate[ds:{DataTable[__]..}] :=
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
 
 ConvergenceRate[ds:{DataTable[__]..}, hs_List] :=
-  Module[{dts,ds2},
+  Module[{dts, ds2, ranges},
     dts = Map[Spacing, ds];
     ranges = Map[DataTableRange, ds];
     If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
@@ -143,7 +143,7 @@ RichardsonExtrapolate[{F1_, F2_}, {h1_, h2_}, p_] :=
   ];
 
 RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
-  Module[{ns, hs, dts, ranges},
+  Module[{ns, hs, dts, ranges, ds2},
     dts = Map[Spacing, ds];
     ranges = Map[DataTableRange, ds];
     If[!Apply[Equal, dts] || !Apply[Equal,ranges], 
@@ -155,7 +155,7 @@ RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, p_] :=
     Return[MapThreadData[RichardsonExtrapolate[#1,#2, hs[[1]], hs[[2]], p] &, ds2]]];
 
 RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable}, hs:{h1_, h2_}, p_] :=
-  Module[{ns, dts, ranges},
+  Module[{dts, ranges, ds2},
     dts = Map[Spacing, ds];
     ranges = Map[DataTableRange, ds];
     If[!Apply[Equal, dts] || !Apply[Equal,ranges],

@@ -45,7 +45,7 @@ Begin["`Private`"];
 
 (* Gather various information about the datasets in a file *)
 DefineMemoFunction[datasetAttributes[file_],
-  Module[{attributeRules, datasets, dsattrs, tempCell},
+  Module[{attributeRules, datasets, dsattrs},
     Profile["datasetAttributes[file]",
 
     (* Convert dataset name strings into rules *)
@@ -176,11 +176,13 @@ DefineMemoFunction[CarpetHDF5TimeAccel[file_String, var_String, map_, rl_Integer
     Function[i, ts[[1]] + (i - its[[1]]) * (ts[[2]]-ts[[1]])/(its[[2]]-its[[1]])]]];
 
 CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
-  Profile["CarpetHDF5Time",
+  Module[{f},
+   Profile["CarpetHDF5Time",
     f = CarpetHDF5TimeAccel[file, var, map, rl];
     If[f === None,
       ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]],
       f[it]]];
+  ];
 
 (* Data *)
 
@@ -188,7 +190,7 @@ Options[ReadCarpetHDF5] = {StripGhostZones -> True};
 ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 (* This should be renamed ReadCarpetHDF5Dataset and should be internal *)
  Profile["ReadCarpetHDF5",
- Module[{data, annots, dims, origin, spacing, name, idx, strip, dr, ghosts, posns, allds, time},
+ Module[{data, annots, dims, origin, spacing, name, strip, dr, ghosts, time},
   strip = OptionValue[StripGhostZones];
 
   If[Apply[Or,Map[(!StringQ[#])&, ds]],

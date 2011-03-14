@@ -24,7 +24,7 @@ PreviewMovie[fileNamebase_String, expr_, {var_, v1_, v2_, dv_:1}] :=
 SetAttributes[MakeMovie, HoldAll];
 
 MakeMovie[fileNameBase_String, expr_, {var_, v1_, v2_, dv_:1}] :=
-  Module[{name},
+  Module[{name, i1, i2, command},
     i1 = 0;
     i2 = (v2 - v1) / dv;
     Do[

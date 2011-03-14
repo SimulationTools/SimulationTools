@@ -31,7 +31,7 @@ TimersFile[runName_] :=
  FindRunFile[runName, "AllTimers.000000.txt"][[1]];
 
 TimersFilesInRun[runName_] :=
-  Module[{},
+  Module[{files},
     files = FindRunFilesFromPattern[runName, "AllTimers.*.txt"]
   ];
 

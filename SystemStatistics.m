@@ -91,7 +91,7 @@ PresentationCostAnalysis[prefix_String, T_, tMerger_:None, mergerFactor_:2] :=
     Grid@Prepend[Drop[table, 1], Style[#, Bold] & /@ table[[1]]]]
 
 CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
- Module[{runs, costElems, header, tMerger},
+ Module[{runs, costElems, header, tMerger, data},
   tMerger = If[tMergerp === None, T, tMergerp];
   runs = Last /@ 
     FileNameSplit /@ FileNames[prefix <> "_*", RunDirectory];

@@ -119,14 +119,14 @@ ReadBHSeparation[runName_String] :=
   ];
 
 ReadBHRadius[runName_String, i_] :=
-  Module[{x0, x1, rad, l},
+  Module[{x0, rad},
     x0 = ReadBHCoordinates[runName, i];
     rad = MapData[Norm[#] &, x0];
     Return[rad];
   ];
 
 ReadBHPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
+  Module[{x0, x1, l, xyTrans},
     x0 = ReadBHCoordinates[runName, 0];
     x1 = ReadBHCoordinates[runName, 1];
     l = Min[Length[x0],Length[x1]];
@@ -178,7 +178,7 @@ ReadMinTrackerRadius[runName_String] :=
   ];
 
 ReadMinTrackerPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
+  Module[{x0, x1, xyTrans, l},
     x0 = ReadMinTrackerCoordinates[runName, 0];
     x1 = ReadMinTrackerCoordinates[runName, 1];
     l = Min[Length[x0],Length[x1]];
@@ -196,7 +196,7 @@ ReadPunctureTrackerRadius[runName_String] :=
   ];
 
 ReadPunctureTrackerPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
+  Module[{x0, x1, xyTrans, l},
     x0 = ReadPunctureTrackerCoordinates[runName, 0];
     x1 = ReadPunctureTrackerCoordinates[runName, 1];
     l = Min[Length[x0],Length[x1]];

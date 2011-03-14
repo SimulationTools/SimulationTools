@@ -48,14 +48,14 @@ FileNameTake[s_] :=
 a better way. *)
 
 addDataSubDir[output_String] :=
-  Module[{},
+  Module[{parFiles},
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
     If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
     FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
 
 FindRunSegments[runName_] :=
-  Module[{dirName1, dirName2, restarts, files1, files2},
+  Module[{dirName1, dirName2, restarts, segments},
     dirName1 = 
       If[FileNameDepth[runName] == 1,
         FileNameJoin[{RunDirectory, runName}],
@@ -90,14 +90,14 @@ FindRunFile[runName_String, fileName_String] :=
 
 DefineMemoFunction[FindFirstRunFile[runName_String, fileName_String],
   Profile["FindFirstRunFile",
-  Module[{},
+  Module[{files},
     files = FindRunFile[runName, fileName];
     If[files === {}, Throw["File " <> fileName <> " not found in run " <> runName]];
     files[[1]]]]];
 
 Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
 FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]] :=
-  Module[{segments, files1, files2, nToDrop},
+  Module[{segments, nToDrop, names},
     segments = FindRunSegments[runName];
     If[segments === {}, Return[{}]];
     nToDrop = If[OptionValue[FullFilenames], 0, Length[FileNameSplit[segments[[1]]]]];
@@ -207,7 +207,7 @@ stripWhitespace[s_String] :=
   StringReplace[StringReplace[s, StartOfString ~~ Whitespace -> ""], Whitespace ~~ EndOfString -> ""];
 
 CarpetASCIIColumns[fileName_String] :=
- Module[{lines, descLine, colDescs, descLine1, descLine2},
+ Module[{lines, descLine, colDescs, colLines},
   If[FileType[fileName] === None,
     Throw["CarpetASCIIColumns: File " <> fileName <> " not found"]];
   lines = ReadList[fileName, String, 20];

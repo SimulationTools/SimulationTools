@@ -59,7 +59,7 @@ ReadVTKFile[fileName_String] :=
     result];
 
 ReadVTKFile[s_InputStream] :=
- Module[{header, header2, readInfo, dims, origin, spacing, data, 
+ Module[{header, header2, readInfo, dims, origin, spacing, data, nPoints,
    dataRange, max, nx, ny, nz, data2, newHeader, zSlices, varName},
   header = ReadList[s, String, 10];
   If[Length[header] == 0,
@@ -68,7 +68,7 @@ ReadVTKFile[s_InputStream] :=
     Throw["Did not read complete header from VTK stream"]];
   header2 = Map[StringSplit, header];
   readInfo[h_List, key_String] :=
-   Module[{result, vals},
+   Module[{result},
     result = ToExpression /@ Cases[h, {key, vals__} -> {vals}];
     If[Length[result] == 0, 
      Throw["Cannot find key " <> key <> " in header: " <> 
@@ -124,7 +124,7 @@ replaceRules[list_List, replacements_List] :=
   If[Length[replacements] == 0, list, replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
 
 SliceData[v:VTKFile[h_, data_], dim_:3, coord_:0] :=
- Module[{index, newOrigin, newDims, h2},
+ Module[{origin, spacing, dims, index, newOrigin, newDims, h2},
   If[dim != 3, Throw["Can only slice in the z direction"]];
   origin = GetOrigin[v];
   spacing = GetSpacing[v];

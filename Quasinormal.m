@@ -9,6 +9,7 @@ FitQuasinormalModes;
 
 Begin["`Private`"];
 
+(* TODO: this won't work because of the absolute path and missing QNM data *)
 ReadMOm[l_, m_, n_] :=
  Import["~/Projects/nrmma/QNM-DATA/n" <> ToString[n + 1] <> "l" <> 
    ToString[l] <> 
@@ -54,7 +55,7 @@ QuasinormalModeSum[j_, M_, alpha_, phi_, modes_, t_] :=
   modelSum = Apply[Plus, Map[model, modes]]];
 
 FitQuasinormalMode[psi4_DataTable, {alpha_, phi_, M_, j_}] :=
- Module[{data, model1, model0, fit0, res0, resNorm0, t},
+ Module[{model0, fit0, t},
   model0 = 
    QuasinormalMode[j, M, alpha, phi, 2, 2, 0, t];
   fit0 = 
@@ -67,7 +68,7 @@ FindFit2[data_DataTable, expr_, pars_, {x_}] :=
   FindFit2[data, {expr, {}}, pars, {x}];
 
 FindFit2[data_DataTable, {expr_,constraints_List}, pars_, {x_}] :=
- Module[{ts, fs, residual, i},
+ Module[{ts, fs, i},
 (*  ts = Map[Last,data];
   fs = Map[First,data]; *)
   ts = IndVar[data];
@@ -145,7 +146,7 @@ ReadPsi4File[name_String] :=
     ReadList[name, Real, RecordLists->True]]];
 
 MassSpinFromPsi4[name_, tMaxEst_] :=
-  Module[{psi4Tb, psi4AbsFn, tMax, t},
+  Module[{psi4Tb, psi4AbsFn, tMax, t, fit},
     psi4Tb = ReadPsi4File[name];
     psi4AbsFn = Interpolation[Abs[psi4Tb]];
     tMax = t /. FindMaximum[psi4AbsFn[t], {t, tMaxEst}][[2]];

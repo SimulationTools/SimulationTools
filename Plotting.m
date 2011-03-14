@@ -61,14 +61,14 @@ MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic,
       Spacings-> {{0,Automatic}~Join~Flatten[Table[{1,Automatic},{i,Length[labels]}],1]}]];
 
 styleInListLinePlot[lp_] :=
-  Module[{styles},
+  Module[{},
     Cases[lp, {styles___, _Line} :> {styles}, Infinity]];
 
 Options[ListLinePlotWithLegend] =
   Join[Options[ListLinePlot], {PlotLegend -> {}, LegendPosition -> {Left, Top}}, Options[MakePlotLegend]];
 
 ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
-  Module[{style,pos,posx,posy,offset,scale,labelStyle,f, single},
+  Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single},
     dims = Dimensions@First[{args}];
     single = (Length[dims] == 2 || (Length[dims] === 3 && dims[[1]] === 1));
 (*    style = styleInListLinePlot[
@@ -237,7 +237,7 @@ Options[PresentationArrayPlot] =
 {ColorRange -> Automatic, ColorMap -> "TemperatureMap", PlotKey -> True} ~Join~ Options[ArrayPlot];
 
 PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
-  Module[{range},
+  Module[{range, keyPlot, plot},
     range = OptionValue[ColorRange];
     If[range === Automatic, range = {Min[data], Max[data]}];
 

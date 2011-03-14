@@ -197,7 +197,7 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
 DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
 
 (* Plotting wrappers *)
-DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data},
+DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data, opts},
  ndims = GetNumDimensions[v];
  If[ndims!=plotDims,
    Throw[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
@@ -321,8 +321,8 @@ chunkOffset[d_DataRegion, origin_, spacing_] :=
 
 MergeDataRegions[regions_List] :=
  Profile["MergeDataRegions",
- Module[{headers, ndims, origins, dims, spacings, spacing, spacingDiffs,
-    X1, X2s, X2, n, dat, header, attrs, attrs2, dat2},
+ Module[{ndims, origins, dims, spacings, spacing, spacingDiffs,
+    X1, X2s, X2, n, dat, attrs, attrs2},
   If[Length[regions] === 0, Return[{}]];
 
   If[!And@@Map[MatchQ[#, _DataRegion] &, regions],
@@ -483,7 +483,7 @@ DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data
 DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, positions];
 
 DataRegion /: Interpolation[v_DataRegion, opts___] :=
-  Module[{data = GetData[v], fn, ndims = GetNumDimensions[v]},
+  Module[{data = GetData[v], ndims = GetNumDimensions[v]},
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
 ];
 

@@ -339,7 +339,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
    ResampleDataTable[d, {t1, t2, dt}, 8];
 
 ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
-  Module[{f, dt1, dt2, l, l2},
+  Module[{f, dt1, dt2},
     {dt1,dt2} = DataTableRange[d];
     If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
       Throw["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>

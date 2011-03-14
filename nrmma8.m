@@ -12,7 +12,7 @@ Begin["`Private`"];
 
 Options[FilterWavelet] = {WaveletType->DaubechiesWavelet[4], WaveletRefinementLevels->6, WaveletThreshold->{"SURELevel"}};
 
-FilterWavelet[dt_DataTable, opts___] := Module[{data, times, dwt, filtereddata},
+FilterWavelet[dt_DataTable, opts___] := Module[{data, times, filtereddata},
   times = First /@ ToList[dt];
   data = Last /@ ToList[dt];
   filtereddata = FilterWavelet[data, opts];

@@ -91,7 +91,7 @@ DefineMemoFunction[ReadAHColumn[runName_, hn_, col_],
    ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, col}]]]];
 
 DefineMemoFunction[ReadAHColumns[runName_, hn_, cols_List],
- Module[{},
+ Module[{list, list2},
    list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", Prepend[cols,2]];
    list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
    Return[MakeDataTable[list2, {RunName -> runName}]]]];
@@ -130,7 +130,7 @@ ReadAHSeparation[runName_String] :=
   ];
 
 DefineMemoFunction[ReadAHCentroidCoord[runName_, hn_, dir_],
- Module[{},
+ Module[{list},
    list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,2+dir}];
    Return[MakeDataTable[list, {RunName -> runName}]]]];
 
@@ -142,7 +142,7 @@ ChristodoulouMass[run_, ahn_, ihn_] :=
   Sqrt[mIrr^2 + S^2/(4 mIrr^2)]];
 
 ReadAHPhase[runName_String] :=
-  Module[{x0, x1, rad,l},
+  Module[{x0, x1, xyTrans, l},
     x0 = ReadAHCentroid[runName, 1];
     x1 = ReadAHCentroid[runName, 2];
     l = Min[Length[x0],Length[x1]];

@@ -62,7 +62,7 @@ NonScheduleTimers[timers_] :=
     Select[timers, !isScheduleTimer[#[[1]]] &]];
 
 virtualTimers[ts_]:=
-  Module[{readTimer,timerExists,tInitial,tRestrict,tRegrid,virtualTimers,regridTimer},
+  Module[{readTimer,timerExists,tInitial,tRestrict,tRegrid,virtualTimers},
 
     timerExists[n_]:=
       Module[{tNames},tNames=Map[First,ts];
@@ -118,9 +118,9 @@ EvolutionTimers[timers_]:=
 
 (* This function needs to be tidied up *)
 ParseTimersFile2[fileName_]:=
-  Module[{timers,column,parseLine,lines, ts, col, return, isColumnDesc, columnDescs, tList, maxCol = 0, timerVals},
+  Module[{column, parseLine, lines, isColumnDesc, columnDescs, tList, maxCol = 0, timerVals},
     parseLine[l_]:=
-      Module[{stream,words,return},
+      Module[{words, colNo},
         words = StringSplit[l];
 
 (*        stream=StringToStream[l]; *)
@@ -214,7 +214,7 @@ LargestTimers[ts_,n_]:=
     Return[Append[topN,{"Rest",restTime}]]];
 
 TotalTime[ts_List] :=
-  Module[{},
+  Module[{timerNames},
     timerNames = Map[First, ts];
     If[MemberQ[timerNames, "CCTK total time"],
       Throw["The TotalTime function adds together all the timers given to it.  It does not make sense to give it a list of timers which includes CCTK total time."]];
@@ -256,7 +256,7 @@ TimerScaling[ts1_List,ts2_List,nFac_,tName_String]:=
     Return[s]];
 
 TimerScaling[tss:{_List...}, nFacs_List, tName_String] :=
-  Module[{t1,t2,s},
+  Module[{t1, n1},
     If[Sort[nFacs] =!= nFacs,
       Throw["TimerScaling: nFacs should be ascending"]];
 
@@ -266,7 +266,7 @@ TimerScaling[tss:{_List...}, nFacs_List, tName_String] :=
     Return[MapThread[{#1, #1 ReadTimer[#2,tName] / (t1 n1)} &, {nFacs, tss}]]];
 
 TimerScalingX[tss:{_List...}, nFacs_List, tName_String] :=
-  Module[{t1,t2,s},
+  Module[{t1, n1},
     If[Sort[nFacs] =!= nFacs,
       Throw["TimerScaling: nFacs should be ascending"]];
 

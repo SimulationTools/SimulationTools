@@ -7,7 +7,7 @@ SimView;
 Begin["`Private`"];
 
 segmentInfo[dirName_] :=
- Module[{mtFile, mtTimes, mtt1, mtt2, idNo, id, date, col},
+ Module[{mtFile, mtTimes, mtt1, mtt2, idNo, date, col},
   mtFile = FileNameJoin[{dirName, "/runstats.asc"}];
   col=2;
   If[FileType[mtFile] === None,
@@ -60,7 +60,7 @@ memoryPlot[runNames_List, size_] :=
 
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
-    freqPsi4, segments, cost, costTable, phases, lastPhase, phaseDiffs},
+    freqPsi4, segments, cost, costTable, ampPsi4, grid},
   size = {350, 100};
   size = 250;
   speed = Catch[

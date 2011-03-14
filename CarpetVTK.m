@@ -18,7 +18,7 @@ ReadVTKFile[fileName_String] :=
 
 ReadVTKFile[s_InputStream] :=
  Module[{header, header2, readInfo, dims, origin, spacing, data, 
-   dataRange, max, nx, ny, nz, nPoints, data2, newHeader, zSlices, varName},
+   dataRange, max, nx, ny, nz, nPoints, data2, zSlices, varName},
   header = ReadList[s, String, 10];
   If[Length[header] == 0,
     Return[EndOfFile]];
@@ -26,7 +26,7 @@ ReadVTKFile[s_InputStream] :=
     Throw["Did not read complete header from VTK stream"]];
   header2 = Map[StringSplit, header];
   readInfo[h_List, key_String] :=
-   Module[{result, vals},
+   Module[{result},
     result = ToExpression /@ Cases[h, {key, vals__} -> {vals}];
     If[Length[result] == 0, 
      Throw["Cannot find key " <> key <> " in header: " <> 

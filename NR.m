@@ -203,7 +203,7 @@ DefineMemoFunction[ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?
 ];
 
 ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
- Module[{psi4, rAmp, rAmpTb, t2, phase, rads},
+ Module[{psi4, rAmp, rAmpTb, t2, phase},
 
   (* Two problems with this function: (1) The default radius is not
      determined from the available radii.  This is because in my runs,
@@ -406,7 +406,7 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
 Options[AlignPhases] = {Continuous -> False};
 
 AlignPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
-  Module[{dts, dt, phaseFns, refPhases, adjustments, adjusted,
+  Module[{phaseFns, refPhases, adjustments, adjusted,
           ranges, min, max, constTb},
     If[Length[phaseTbs] < 2, Return[phaseTbs]];
 
@@ -504,7 +504,7 @@ DefineMemoFunction[ExtrapolatePsi4[runName_String, l_, m_, opts:OptionsPattern[]
     psi4]];
 
 ExtrapolationError[f_, args__, opts:OptionsPattern[]] :=
-  Module[{p, newOpts},
+  Module[{p, newOpts, fpp1, fp},
     p = OptionValue[ExtrapolationOrder];
     newOpts = DeleteCases[{opts}, ExtrapolationOrder -> _];
 
@@ -542,7 +542,7 @@ StrainFromPsi4[psi4_DataTable, range_:All] :=
 
 StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
   Module[{tStart, tStep, tEnd, psi4Fn, ints, dataRealTb, modelReal, 
-          fitReal, dataImagTb, modelImag, fitImag, hTb},
+          fitReal, dataImagTb, modelImag, fitImag, hTb, ar, br, ai, bi},
     {tStart, tEnd} = DataTableRange[psi4];
     tStep = Spacing[psi4];
     psi4Fn = Interpolation[psi4, InterpolationOrder->4];
@@ -656,7 +656,7 @@ FitFunction[d_, f_, paramSpecs_] :=
    function f over a given interval tMin to tMax. *)
 
 FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
-  Module[{squareDiff,lastFitMessageTime, it, pList, fit, fit2},
+  Module[{squareDiff,lastFitMessageTime, it, pList, pList2, p2, p3, paramSpecs2, fit, fit2},
     squareDiff[params__?NumberQ] :=
       Module[{fSoln, diffs, sqDiff, interval},
 (*        FitFunctionParamPath = Append[FitFunctionParamPath, {it, params}];*)
@@ -706,7 +706,7 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
   ];
 
 LocateMaximumPoint[d_DataTable] :=
- Module[{tMax, fMax, l, maxFind, fn, max, t1, t2, t, tMax2},
+ Module[{tMax, fMax, l, maxFind, t1, t2},
   l = ToList[d];
   {t1, t2} = DataTableRange[d];
   fMax = -Infinity;
@@ -716,12 +716,12 @@ LocateMaximumPoint[d_DataTable] :=
   Return[tMax]];
 
 LocateMaximum[d_DataTable] :=
- Module[{tMax, fMax, l, maxFind, fn, max, t1, t2, t, tMax2},
+ Module[{tMax, fMax, l, maxFind, fn, t1, t2, t, tMax2},
   l = ToList[d];
   {t1, t2} = DataTableRange[d];
   fMax = -Infinity;
-  maxFind[{t_, f_}] :=
-   If[f > fMax, fMax = f; tMax = t];
+  maxFind[{time_, f_}] :=
+   If[f > fMax, fMax = f; tMax = time];
   Scan[maxFind, l];
   fn = Interpolation[d];
   tMax2 = 
@@ -760,7 +760,7 @@ FinestGridSpacing[runName_] :=
   GridSpacingOnLevel[runName, Max[RefinementLevels[runName]]];
 
 BoxRadiiOnLevel[runName_, l_] :=
-  Module[{h0},
+  Module[{params},
     If[l == 0, Return[{ToExpression[LookupParameter[runName, "CoordBase::xmax"]]}]];
     params = FindParameters[runName, "regridboxes::centre_*_radius" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"];
 
@@ -803,7 +803,7 @@ TimeRefinementFactor[runName_String, level_] :=
   TimeRefinementFactors[runName][[level+1]];
 
 CourantFactorOnLevel[runName_String, level_] :=
-  Module[{},
+  Module[{dtfac, trf, srf},
     dtfac = ToExpression[LookupParameter[runName, "Time::dtfac"]];
     trf = TimeRefinementFactor[runName, level];
     srf = 2^level;
@@ -843,7 +843,7 @@ PhaseOfFrequency[psi4_] :=
      Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
   ];
 
-ShiftPhase[d_DataTable, dp_] :=
+ShiftPhase[d_DataTable, dph_] :=
   MapData[Exp[I dph] # &, d];
 
 PercentageDifference[ap_,bp_] :=
@@ -927,7 +927,7 @@ ReadTimeRange[run_] :=
 Options[FitEcc] = {ReturnValue -> FittedFunction};
 
 FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
- Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t},
+ Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t, a, e, phi, b, n},
   eccModel = a (1 - e Cos[n t + phi]) + 1/2 e^2 (1 - Cos[2 n t]) + b t;
   eccPars = {{a, 10,11}, {b, -0.001, 0}, {e, -0.01, 0.01}, {n, 0.01, 0.1}, {phi, 0, Pi}};
   eccData = DataTableInterval[sep, int];
@@ -945,7 +945,7 @@ FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
 Options[FitEccOm] = {ReturnValue -> FittedFunction};
 
 FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
- Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t},
+ Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t, a, e, n, phi, b},
   eccModel = a (1 + 2 e Cos[n t + phi] + 5/2 e^2 Cos[2 n t + phi]) + b t;
   eccPars = {{a, 0.015, 0.022}, {b, 6*10^-6,6.2*10^-6}, {e, -0.01, 0.01}, {n, 0.02, 0.021}, {phi, 0, Pi}};
   eccData = DataTableInterval[om, int];
@@ -1000,7 +1000,7 @@ InitialLinearMomentum[run_, idx_] :=
       {d,0,2}]];
 
 InitialOrbitalAngularMomentum[run_] :=
- Module[{xp, xm, pyp, pym, initialL, sp, J0, m},
+ Module[{xp, xm, pyp, pym, initialL, m},
   m = Plus @@ ReadPunctureADMMasses2[run];
   xp = (ToExpression@LookupParameter[run, "TwoPunctures::par_b"] + 
       ToExpression@

@@ -40,7 +40,7 @@ Profile[name_, code_] :=
 *)
 
 treeView[t : Timer[n_, v_, c_]] :=
- Module[{node},
+ Module[{},
   If[c === {},
    Row[{"  ", v, " ", n}],
    OpenerView[{Row[{v, " ", n}],
