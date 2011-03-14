@@ -5,16 +5,16 @@
 BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Horizons`", "NR`"}];
 
 
-ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, dir, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to a file in dir.";
-ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, dir, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to a file in dir.";
-JunkTime::usage "JunkTime is an option for ExportExtrapolatedWaveform and ExportAllExtrapolatedWaveforms which specifies how much to cut off from the start of a waveform to eliminate junk radiation.";
+ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
+ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
+JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform and ExportAllExtrapolatedWaveforms which specifies how much to cut off from the start of a waveform to eliminate junk radiation.";
 
-ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, dir, l, m] exports the (l,m) mode of the waveform in run to a file in dir.";
-ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, dir] extrapolats all modes of the waveform in run to a file in dir.";
+ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
+ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] extrapolats all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 
-ExportAllWaveforms::usage = "ExportAllWaveforms[run, dir] exports all extracted waveforms along with the extrapolated waveform for run to dir."
+ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 
-ExportTrajectories::usage = "ExportTrajectories[run, dir] exports trajectory and spin information for run to a file in dir.";
+ExportTrajectories::usage = "ExportTrajectories[run, file] exports trajectory and spin information for run to file.";
 
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export."
 
@@ -25,83 +25,128 @@ ExportRun::usage = "ExportRun[run, dir] exports run to dir";
 ExportGridStructure;
 FunctionOfPhase;
 
-
 Begin["`Private`"];
-
 
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
 Options[ExportExtrapolatedWaveform] = {JunkTime -> 50};
 
-ExportExtrapolatedWaveform[run_String, dir_String, mass_, l_Integer, m_Integer, OptionsPattern[]] :=
- Module[{extrap, junkTime, afterjunk, final, file, dataset},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  ExportStatus = "Exporting extrapolated waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>") to "<>dir;
+ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer, OptionsPattern[]] :=
+ Module[{dir, extrap, junkTime, afterjunk, final, dataset},
+  dir = DirectoryName[file];
+  If[dir=!="" && FileType[dir]=!=Directory,
+    CreateDirectory[dir];
+  ];
 
-  (* Extrapolate in r *)
-  extrap = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
+  ExportStatus = "Exporting extrapolated waveform for"<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file;
 
-  (* Drop the first part of the waveform where the junk is *)
-  junkTime = OptionValue[JunkTime];
+  extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
+  junkTime  = OptionValue[JunkTime];
   afterjunk = ShiftDataTable[-junkTime, DataTableInterval[extrap, {junkTime, All}]];
+  final     = Join[Re[afterjunk], Im[afterjunk]];
 
-  final = Join[Re[afterjunk], Im[afterjunk]];
-
-  file = dir<>"/mp_psi4.h5";
-  dataset =  "l"<>ToString[l]<>"_m"<>ToString[m]<>"_rinf";
-  Export[file, final, {"Datasets", dataset}, "Append" -> True];
+  Switch[FileExtension[file],
+  "h5",
+    dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_rinf";
+    Export[file, final, {"Datasets", dataset}, "Append"->True];,
+  "asc",
+    Export[file, final, "TABLE"];,
+  _,
+    Throw["Unsupported file format"];
+  ];
 ];
 
-ExportAllExtrapolatedWaveforms[run_String, dir_String, mass_] :=
- Module[{modes},
+ExportAllExtrapolatedWaveforms[run_String, file_String, mass_] :=
+ Module[{dir, modes, files},
+  dir = DirectoryName[file];
   modes = ReadPsi4Modes[run];
-  Map[ExportExtrapolatedWaveform[run, dir, mass, Sequence@@#]&, modes];
+
+  Switch[FileExtension[file],
+  "asc",
+    files=(dir<>FileBaseName[file]<>"_l"<>ToString[#[[1]]]<>"_m"<>ToString[#[[2]]]<>"_rinf.asc" &) /@ modes;
+    MapThread[ExportExtrapolatedWaveform[run, #1, mass, Sequence@@#2]&, {files, modes}];,
+  "h5",
+    (ExportExtrapolatedWaveform[run, file, mass, Sequence@@#]&) /@ modes;,
+  _,
+    Throw["Unsupported file format"];
+  ];
 ];
 
-ExportExtractedWaveform[run_String, dir_String, l_Integer, m_Integer, rad_] :=
- Module[{psi4, final, file, dataset},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  ExportStatus = "Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>ToString[rad]<>") to "<>dir;
+ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, rad_] :=
+ Module[{dir, psi4, final, dataset},
+  dir = DirectoryName[file];
+  If[dir=!="" && FileType[dir]=!=Directory,
+    CreateDirectory[dir];
+  ];
 
-  psi4    = ReadPsi4[run, l, m, Round[rad]];
-  final   = Join[Re[psi4], Im[psi4]];
-  file    = dir<>"/mp_psi4.h5";
-  dataset =  "l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad];
-  Export[file, final, {"Datasets", dataset}, "Append" -> True];
+  ExportStatus = "Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>ToString[rad]<>") to "<>file;
+
+  psi4  = ReadPsi4[run, l, m, Round[rad]];
+  final = Join[Re[psi4], Im[psi4]];
+
+  Switch[FileExtension[file],
+  "h5",
+    dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad];
+    Export[file, final, {"Datasets", dataset}, "Append"->True];,
+  "asc",
+    Export[file, final, "TABLE"];,
+  _,
+    Throw["Unsupported file format"];
+  ];
 ];
 
-ExportAllExtractedWaveforms[run_String, dir_String] :=
- Module[{radii, modes, allwaveforms},
+ExportAllExtractedWaveforms[run_String, file_String] :=
+ Module[{dir, radii, modes, allwaveforms, files},
+  dir = DirectoryName[file];
   radii = ReadPsi4Radii[run];
   modes = ReadPsi4Modes[run];
+  allwaveforms = Flatten[Outer[Join, modes, List/@radii, 1], 1];
 
-  (* Produce a list of waveforms available of the form (l, m, rad) *)
-  allwaveforms = Flatten[Outer[Join, modes, List /@ radii, 1], 1];
-
-  Map[ExportExtractedWaveform[run, dir, Sequence@@#]&, allwaveforms];
+  Switch[FileExtension[file],
+  "asc",
+    files = (dir<>FileBaseName[file]<>"_l"<>ToString[#1[[1]]]<>"_m"<>ToString[#1[[2]]]<>"_r"<>ToString[#1[[3]]]<>".asc"&) /@ allwaveforms;
+   MapThread[ExportExtractedWaveform[run, #1, Sequence@@#2]&, {files, allwaveforms}];,
+  "h5",
+    ExportExtractedWaveform[run, file, Sequence@@#1]& /@ allwaveforms;,
+  _,
+    Throw["Unsupported file format"];
+  ];
 ];
 
-ExportAllWaveforms[run_String, dir_String, mass_] := Module[{},
-  ExportAllExtractedWaveforms[run, dir];
-  ExportAllExtrapolatedWaveforms[run, dir, mass];
-]
+ExportAllWaveforms[run_String, file_String, mass_] := Module[{},
+  ExportAllExtractedWaveforms[run, file];
+  ExportAllExtrapolatedWaveforms[run, file, mass];
+];
 
-ExportTrajectories[run_String, dir_String] :=
- Module[{punc0, punc1, p, spin0, spin1, combined, file},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  ExportStatus = "Exporting trajectory data for "<>run<>" to "<>dir;
+ExportTrajectories[run_String, file_String] :=
+ Module[{dir, punc0, punc1, p, spin0, spin1, combined},
+  dir = DirectoryName[file];
+  If[dir=!="" && FileType[dir]=!=Directory,
+    CreateDirectory[dir];
+  ];
 
-  {punc0, punc1} = ReadBHCoordinates[run, #]& /@ {0, 1};
-  spin0 = ReadIsolatedHorizonSpin[run, 0];
-  spin1 = ReadIsolatedHorizonSpin[run, 1];
+  ExportStatus = "Exporting trajectory data for "<>run<>" to "<>file;
+
+  {punc0, punc1} = ReadBHCoordinates[run, #]& /@ {0,1};
+  {spin0, spin1} = ReadIsolatedHorizonSpin[run, #]& /@ {0,1};
 
   (* We don't know how to get the momenta - set them to 0 *)
-  p = MakeDataTable[{#, {0,0,0,0,0,0}}& /@ IndVar[punc0]];
+  p = MakeDataTable[({#, {0,0,0}}&) /@ IndVar[punc0]];
 
-  combined = Join[punc0, punc1, p, spin0, spin1];
-  file = dir<>"/traj.h5";
-  Export[file, combined, {"Datasets", "traj"}];
+  Switch[FileExtension[file],
+  "asc",
+    combined = Join[punc0, punc1, p, p, spin0, spin1];
+    Export[file, combined, "TABLE"];,
+  "h5",
+    Export[file, punc0, {"Datasets", "Trajectory0"}, "Append"->True];
+    Export[file, punc1, {"Datasets", "Trajectory1"}, "Append"->True];
+    Export[file, p, {"Datasets", "Momentum0"}, "Append"->True];
+    Export[file, p, {"Datasets", "Momentum1"}, "Append"->True];
+    Export[file, spin0, {"Datasets", "Spin0"}, "Append"->True];
+    Export[file, spin1, {"Datasets", "Spin1"}, "Append"->True];,
+  _,
+    Throw["Unsupported file format"];
+  ];
 ];
-
 
 (******** DEPRECATED ********)
 ExportWaveform[run_String, dir_String, l_Integer, m_Integer, 
