@@ -151,7 +151,7 @@ ParseTimersFile2[fileName_]:=
     profile["ParseTimersFile:stringToReal2", timerVals=ImportString[Last[lines]]];*)
 
     If[Length[timerVals] != maxCol,
-      rofile["ParseTimersFile:stringToReal", timerVals=Map[stringToReal,StringSplit[lines[[-2]]]]];
+      profile["ParseTimersFile:stringToReal", timerVals=Map[stringToReal,StringSplit[lines[[-2]]]]];
         If[Length[timerVals] != maxCol,
           Throw["Timers file " <> fileName <> " might be corrupt; there are not enough columns in the output"]]];
 
