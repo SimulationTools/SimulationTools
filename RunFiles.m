@@ -24,7 +24,7 @@ FindFirstRunFile;
 
 Begin["`Private`"];
 
-RunDirectory = Global`RunDirectory;
+RunDirectory := Global`RunDirectory;
 
 If[FileNameJoin[{"a","b"}] =!= "a/b",
 

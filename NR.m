@@ -127,7 +127,7 @@ ReadTwoPuncturesData::usage = "ReadTwoPuncturesData[file, col] reads a data file
 
 Begin["`Private`"];
 
-RunDirectory = Global`RunDirectory;
+RunDirectory := Global`RunDirectory;
 
 (*--------------------------------------------------------------------
   Reading Subscript[\[Psi], 4]

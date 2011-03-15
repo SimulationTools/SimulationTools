@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`"}];
@@ -18,7 +20,7 @@ ReadCarpetSpeed;
 
 Begin["`Private`"];
 
-RunDirectory = Global`RunDirectory;
+RunDirectory := Global`RunDirectory;
 
 ReadRunSpeed[runName_] := 
   If[FindRunFile[runName, "runstats.asc"] =!= {},
