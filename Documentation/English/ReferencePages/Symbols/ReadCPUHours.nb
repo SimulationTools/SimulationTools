@@ -1,0 +1,372 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10960,        362]
+NotebookOptionsPosition[      8377,        278]
+NotebookOutlinePosition[      9919,        323]
+CellTagsIndexPosition[      9835,        318]
+WindowTitle->ReadCPUHours - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"ReadCores\"\>":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadCores"], "\<\"ReadMemory\"\>":>
+       Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadMemory"], "\<\"ReadRunSpeed\"\>":>
+       Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadRunSpeed"], "\<\"ReadSwap\"\>":>
+       Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadSwap"], "\<\"ReadWalltime\"\>":>
+       Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadWalltime"], "\<\"SimView\"\>":>
+       Documentation`HelpLookup["paclet:nrmma/ref/SimView"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"NRMMA Package\"\>":>
+       Documentation`HelpLookup["paclet:nrmma/guide/NRMMA"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"nrmma/ref/ReadCPUHours\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["nrmma/ref/ReadCPUHours"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/nrmma/ref/\
+ReadCPUHours.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "nrmma/ref/ReadCPUHours", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["ReadCPUHours", "ObjectName",
+ CellID->1224892054],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ReadCPUHours", "[", 
+       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
+     " \[LineSeparator]returns the total number of CPU hours used by ",
+     StyleBox["run", "TI"],
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}}},
+ CellID->982511436]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->2111296091],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection",
+ CellID->1681102056],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->475329062],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<q1D8\>\""}], ";"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->216378194],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadCPUHours", "[", "run", "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->978492187],
+
+Cell[BoxData["12527.267680056362`"], "Output",
+ ImageSize->{57, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->1403626256]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection",
+ CellID->1255426704],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadCores",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ReadCores"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadMemory",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ReadMemory"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadRunSpeed",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ReadRunSpeed"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadSwap",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ReadSwap"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadWalltime",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ReadWalltime"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["SimView",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/SimView"],
+   FontFamily->"Verdana"]], "InlineFormula"]
+}], "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection",
+ CellID->38303248],
+
+Cell[TextData[ButtonBox["NRMMA Package",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/guide/NRMMA"]], "MoreAbout",
+ CellID->1987395260]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadCPUHours - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2011, 3, 15, 1, 20, 30.652072}", "context" -> "nrmma`", 
+    "keywords" -> {}, "index" -> True, "label" -> "nrmma Paclet Symbol", 
+    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
+    "ReadCPUHours[run] returns the total number of CPU hours used by run.", 
+    "synonyms" -> {}, "title" -> "ReadCPUHours", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadCPUHours"}, "LinkTrails" -> "", "SearchTextTranslated" -> 
+  ""},
+CellContext->"Global`",
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[4419, 125, 462, 13, 45, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection",
+   CellID->2111296091]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 9691, 311}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[605, 21, 76, 1, 2, "SymbolColorBar"],
+Cell[684, 24, 176, 5, 19, "LinkTrail"],
+Cell[863, 31, 2988, 68, 47, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3876, 103, 55, 1, 51, "ObjectName",
+ CellID->1224892054],
+Cell[3934, 106, 448, 14, 84, "Usage",
+ CellID->982511436]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4419, 125, 462, 13, 45, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->2111296091],
+Cell[CellGroupData[{
+Cell[4906, 142, 149, 5, 32, "ExampleSection",
+ CellID->1681102056],
+Cell[5058, 149, 93, 3, 24, "Input",
+ CellID->475329062],
+Cell[5154, 154, 123, 4, 24, "Input",
+ CellID->216378194],
+Cell[CellGroupData[{
+Cell[5302, 162, 110, 3, 24, "Input",
+ CellID->978492187],
+Cell[5415, 167, 177, 5, 33, "Output",
+ CellID->1403626256]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5653, 179, 417, 12, 45, "SeeAlsoSection",
+ CellID->1255426704],
+Cell[6073, 193, 1666, 58, 19, "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7776, 256, 419, 12, 45, "MoreAboutSection",
+ CellID->38303248],
+Cell[8198, 270, 137, 3, 16, "MoreAbout",
+ CellID->1987395260]
+}, Open  ]],
+Cell[8350, 276, 23, 0, 40, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

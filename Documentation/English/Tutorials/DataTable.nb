@@ -1,0 +1,591 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     17244,        581]
+NotebookOptionsPosition[     12988,        440]
+NotebookOutlinePosition[     14732,        487]
+CellTagsIndexPosition[     14689,        484]
+WindowTitle->DataTable - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"DataRegion\"\>":>Documentation`HelpLookup[
+       "paclet:nrmma/tutorial/DataRegion"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"nrmma/tutorial/DataTable\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["nrmma/tutorial/DataTable"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/nrmma/tutorial/\
+DataTable.html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]},
+             Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "nrmma/tutorial/DataTable", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["DataTable", "Title",
+ CellID->509267359],
+
+Cell["\<\
+DataTable provides a representation of 1D data along with convenient \
+manipulation functions.\
+\>", "Text",
+ CellID->1534169418],
+
+Cell[BoxData[GridBox[{
+   {"AddAttribute", Cell["ListAttributes", "TableText"]},
+   {"AddAttributes", Cell["MakeDataTable", "TableText"]},
+   {"ApplyToList", Cell["MakeInterpolatingDataTable", "TableText"]},
+   {"DataTable", Cell["MapData", "TableText"]},
+   {"DataTableInterval", Cell["MapIndVar", "TableText"]},
+   {"DataTableRange", Cell["MapThreadData", "TableText"]},
+   {"DepVar", Cell["NDerivative", "TableText"]},
+   {"Div", Cell["Phase", "TableText"]},
+   {"Downsample", Cell["ReadAttribute", "TableText"]},
+   {"Frequency", Cell["ResampleDataTable", "TableText"]},
+   {"IndVar", Cell["ResampleDataTables", "TableText"]},
+   {"IntegrateDataTable", Cell["ShiftDataTable", "TableText"]},
+   {"IntegrateDataTableZeroEnd", Cell["Spacing", "TableText"]},
+   {"IntegrateDataTableZeroStart", Cell["Sub", "TableText"]},
+   {"IntersectDataTables", Cell["ToList", "TableText"]}
+  }]], "DefinitionBox",
+ CellID->2043440811],
+
+Cell["Full DataTable API.", "Caption",
+ CellID->1551227653],
+
+Cell[CellGroupData[{
+
+Cell["Constructing", "Section",
+ CellID->596475328],
+
+Cell["\<\
+You can construct a DataTable object from a list of {x, f} pairs:\
+\>", "MathCaption",
+ CellID->1772700904],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"l", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}]}]], "Input",\
+
+ CellID->702419557],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0.`", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", "0.5877852522924731`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.2`", ",", "0.9510565162951535`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.30000000000000004`", ",", "0.9510565162951535`"}], "}"}], ",", 
+   
+   RowBox[{"{", 
+    RowBox[{"0.4`", ",", "0.5877852522924732`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5`", ",", "1.2246467991473532`*^-16"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.6000000000000001`", ",", 
+     RowBox[{"-", "0.5877852522924734`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.7000000000000001`", ",", 
+     RowBox[{"-", "0.9510565162951535`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.8`", ",", 
+     RowBox[{"-", "0.9510565162951536`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.9`", ",", 
+     RowBox[{"-", "0.5877852522924732`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.`", ",", 
+     RowBox[{"-", "2.4492935982947064`*^-16"}]}], "}"}]}], "}"}]], "Output",
+ ImageSize->{522, 54},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->847886940]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"MakeDataTable", "[", "l", "]"}]}]], "Input",
+ CellID->1881802735],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ ImageSize->{105, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1466897776]
+}, Open  ]],
+
+Cell["\<\
+x is the independent variable and f is the dependent variable.\
+\>", "Text",
+ CellID->1038653672],
+
+Cell["\<\
+The independent variable x should be monotonically increasing with a constant \
+spacing.  The \"range\" of a DataTable is {x1, x2}, where x1 is the first and \
+x2 is the last value of the independent variable.\
+\>", "Text",
+ CellID->1905182488],
+
+Cell["\<\
+DataTable objects print as \"DataTable[...]\" to avoid cluttering up a \
+notebook display with all the data that you would see if you used lists \
+directly.\
+\>", "Text",
+ CellID->1420899046]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Using", "Section",
+ CellID->1032111482],
+
+Cell["A DataTable can be converted back to a list:", "MathCaption",
+ CellID->814109636],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ToList", "[", "d", "]"}]], "Input",
+ CellID->986651351],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0.`", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", "0.5877852522924731`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.2`", ",", "0.9510565162951535`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.30000000000000004`", ",", "0.9510565162951535`"}], "}"}], ",", 
+   
+   RowBox[{"{", 
+    RowBox[{"0.4`", ",", "0.5877852522924732`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5`", ",", "1.2246467991473532`*^-16"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.6000000000000001`", ",", 
+     RowBox[{"-", "0.5877852522924734`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.7000000000000001`", ",", 
+     RowBox[{"-", "0.9510565162951535`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.8`", ",", 
+     RowBox[{"-", "0.9510565162951536`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.9`", ",", 
+     RowBox[{"-", "0.5877852522924732`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.`", ",", 
+     RowBox[{"-", "2.4492935982947064`*^-16"}]}], "}"}]}], "}"}]], "Output",
+ ImageSize->{522, 54},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1928017770]
+}, Open  ]],
+
+Cell[TextData[{
+ "Several ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " plotting routines have been extended to support DataTables:"
+}], "MathCaption",
+ CellID->1122337215],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "d", "]"}]], "Input",
+ CellID->2075585506],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{0., 0.}, {0.1, 0.5877852522924731}, {0.2, 0.9510565162951535}, {
+     0.30000000000000004`, 0.9510565162951535}, {0.4, 0.5877852522924732}, {
+     0.5, 1.2246467991473532`*^-16}, {
+     0.6000000000000001, -0.5877852522924734}, {
+     0.7000000000000001, -0.9510565162951535}, {0.8, -0.9510565162951536}, {
+     0.9, -0.5877852522924732}, {1., -2.4492935982947064`*^-16}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 1.}, {-0.9510565162951536, 0.9510565162951535}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ ImageSize->{184, 98},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->641237474]
+}, Open  ]],
+
+Cell["", "Text",
+ CellID->1205284872],
+
+Cell["\<\
+You can perform arithmetic operations on DataTables with the same spacing and \
+range:\
+\>", "MathCaption",
+ CellID->1743458697],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"d1", "=", 
+  RowBox[{"MakeDataTable", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
+   "]"}]}]], "Input",
+ CellID->9601553],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ ImageSize->{105, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->312027746]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"d2", "=", 
+  RowBox[{"MakeDataTable", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
+   "]"}]}]], "Input",
+ CellID->95261048],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ ImageSize->{105, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1177116721]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"d3", "=", 
+  RowBox[{
+   RowBox[{"d1", "^", "2"}], "+", 
+   RowBox[{"d2", "^", "2"}]}]}]], "Input",
+ CellID->1181373683],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ ImageSize->{105, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1861173666]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"d3", ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "2"}], "}"}]}]}], "]"}]], "Input",
+ CellID->499002260],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{0., 1.}, {0.1, 1.}, {0.2, 0.9999999999999999}, {
+     0.30000000000000004`, 1.}, {0.4, 1.}, {0.5, 1.}, {0.6000000000000001, 
+     1.}, {0.7000000000000001, 1.}, {0.8, 1.}, {0.9, 1.}, {1., 1.}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 1.}, {0, 2}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ ImageSize->{184, 121},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->807342285]
+}, Open  ]],
+
+Cell[TextData[{
+ "The full list of standard ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " functions which have been extended to work with DataTables is:"
+}], "Text",
+ CellID->1200102249],
+
+Cell["\<\
+Arithmetic: Plus, Times, Dot, Power, Abs, Sqrt, Log
+Complex:  Conjugate, Re, Im, 
+List: Length,  First, Last, Take, Drop
+Plotting: ListPlot, ListLinePlot, ListLogPlot
+Vector: Norm
+Misc: Interpolation\
+\>", "Text",
+ CellID->952086319]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RELATED TUTORIALS", "RelatedTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["DataRegion",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "RelatedTutorials",
+ CellID->1364780705]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"DataTable - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2011, 3, 15, 1, 21, 6.546850}", "context" -> "nrmma`", 
+    "keywords" -> {}, "index" -> True, "label" -> "nrmma Tutorial", 
+    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
+    "DataTable provides a representation of 1D data along with convenient \
+manipulation functions. Full DataTable API. You can construct a DataTable \
+object from a list of {x, f} pairs:", "synonyms" -> {}, "title" -> 
+    "DataTable", "type" -> "Tutorial", "uri" -> "nrmma/tutorial/DataTable"}, 
+  "LinkTrails" -> "", "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[602, 21, 78, 1, 2, "TutorialColorBar"],
+Cell[683, 24, 176, 5, 19, "LinkTrail"],
+Cell[862, 31, 2308, 53, 47, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3195, 88, 46, 1, 50, "Title",
+ CellID->509267359],
+Cell[3244, 91, 139, 4, 31, "Text",
+ CellID->1534169418],
+Cell[3386, 97, 921, 17, 323, "DefinitionBox",
+ CellID->2043440811],
+Cell[4310, 116, 59, 1, 30, "Caption",
+ CellID->1551227653],
+Cell[CellGroupData[{
+Cell[4394, 121, 51, 1, 52, "Section",
+ CellID->596475328],
+Cell[4448, 124, 117, 3, 30, "MathCaption",
+ CellID->1772700904],
+Cell[CellGroupData[{
+Cell[4590, 131, 319, 11, 24, "Input",
+ CellID->702419557],
+Cell[4912, 144, 1188, 34, 75, "Output",
+ CellID->847886940]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6137, 183, 110, 3, 24, "Input",
+ CellID->1881802735],
+Cell[6250, 188, 190, 5, 33, "Output",
+ CellID->1466897776]
+}, Open  ]],
+Cell[6455, 196, 107, 3, 31, "Text",
+ CellID->1038653672],
+Cell[6565, 201, 254, 5, 73, "Text",
+ CellID->1905182488],
+Cell[6822, 208, 201, 5, 52, "Text",
+ CellID->1420899046]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7060, 218, 45, 1, 52, "Section",
+ CellID->1032111482],
+Cell[7108, 221, 87, 1, 30, "MathCaption",
+ CellID->814109636],
+Cell[CellGroupData[{
+Cell[7220, 226, 79, 2, 24, "Input",
+ CellID->986651351],
+Cell[7302, 230, 1189, 34, 75, "Output",
+ CellID->1928017770]
+}, Open  ]],
+Cell[8506, 267, 181, 6, 30, "MathCaption",
+ CellID->1122337215],
+Cell[CellGroupData[{
+Cell[8712, 277, 86, 2, 24, "Input",
+ CellID->2075585506],
+Cell[8801, 281, 824, 20, 119, "Output",
+ CellID->641237474]
+}, Open  ]],
+Cell[9640, 304, 37, 1, 31, "Text",
+ CellID->1205284872],
+Cell[9680, 307, 138, 4, 30, "MathCaption",
+ CellID->1743458697],
+Cell[CellGroupData[{
+Cell[9843, 315, 368, 12, 24, "Input",
+ CellID->9601553],
+Cell[10214, 329, 189, 5, 33, "Output",
+ CellID->312027746]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10440, 339, 369, 12, 24, "Input",
+ CellID->95261048],
+Cell[10812, 353, 190, 5, 33, "Output",
+ CellID->1177116721]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11039, 363, 144, 5, 24, "Input",
+ CellID->1181373683],
+Cell[11186, 370, 190, 5, 33, "Output",
+ CellID->1861173666]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11413, 380, 198, 6, 24, "Input",
+ CellID->499002260],
+Cell[11614, 388, 603, 16, 142, "Output",
+ CellID->807342285]
+}, Open  ]],
+Cell[12232, 407, 195, 6, 52, "Text",
+ CellID->1200102249],
+Cell[12430, 415, 243, 8, 196, "Text",
+ CellID->952086319]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12710, 428, 72, 1, 45, "RelatedTutorialsSection",
+ CellID->415694126],
+Cell[12785, 431, 149, 3, 16, "RelatedTutorials",
+ CellID->1364780705]
+}, Open  ]]
+}, Open  ]],
+Cell[12961, 438, 23, 0, 40, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

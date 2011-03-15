@@ -1,0 +1,533 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     15139,        523]
+NotebookOptionsPosition[     11434,        398]
+NotebookOutlinePosition[     12989,        443]
+CellTagsIndexPosition[     12904,        438]
+WindowTitle->LookupParameter - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"NRMMA Package\"\>":>
+       Documentation`HelpLookup["paclet:nrmma/guide/NRMMA"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"nrmma/ref/LookupParameter\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["nrmma/ref/LookupParameter"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/nrmma/ref/\
+LookupParameter.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "nrmma/ref/LookupParameter", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["LookupParameter", "ObjectName",
+ CellID->1224892054],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"LookupParameter", "[", 
+       StyleBox[
+        RowBox[{"run", ",", " ", "param"}], "TI"], "]"}]], "InlineFormula"],
+     " \[LineSeparator]read the value of the parameter ",
+     StyleBox["param", "TI"],
+     " from ",
+     StyleBox["run", "TI"],
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}}},
+ CellID->982511436]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->416975723],
+
+Cell["Parameters are always returned as strings.", "Notes",
+ CellID->1067943069]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->871836300],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection",
+ CellID->671770619],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->84227474],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<q1D8\>\""}], ";"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->399947555],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"hCart", "=", 
+  RowBox[{"LookupParameter", "[", 
+   RowBox[{"run", ",", "\"\<Coordinates::h_cartesian\>\""}], "]"}]}]], "Input",\
+
+ CellLabel->"In[3]:=",
+ CellID->294741775],
+
+Cell[BoxData["\<\"0.96\"\>"], "Output",
+ ImageSize->{33, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->1674455776]
+}, Open  ]],
+
+Cell["Parameters are always returned as strings", "ExampleText",
+ CellID->874892209],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FullForm", "[", "hCart", "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->1853731484],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox["\"\<0.96\>\"",
+   ShowSpecialCharacters->False,
+   ShowStringCharacters->True,
+   NumberMarks->True],
+  FullForm]], "Output",
+ ImageSize->{47, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]//FullForm=",
+ CellID->1952516944]
+}, Open  ]],
+
+Cell[TextData[{
+ "To convert to numbers use ",
+ ButtonBox["ToExpression",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/ToExpression"]
+}], "ExampleText",
+ CellID->443758733],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"hCart2", "=", 
+  RowBox[{"ToExpression", "[", "hCart", "]"}]}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->495847707],
+
+Cell[BoxData["0.96`"], "Output",
+ ImageSize->{33, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[5]=",
+ CellID->254668001]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[Cell[TextData[{
+   "Neat Examples",
+   "\[NonBreakingSpace]\[NonBreakingSpace]",
+   Cell["(1)", "ExampleCount"]
+  }], "ExampleSection"],
+  $Line = 0; Null]], "ExampleSection",
+ CellID->589267740],
+
+Cell["Lookup all parameters for the Carpet thorn:", "ExampleText",
+ CellID->769124672],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"carpetParams", "=", 
+  RowBox[{"FindParameters", "[", 
+   RowBox[{"run", ",", "\"\<Carpet::*\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->270184336],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"carpet::domain_from_multipatch\"\>", 
+   ",", "\<\"carpet::time_refinement_factors\"\>", 
+   ",", "\<\"carpet::max_refinement_levels\"\>", 
+   ",", "\<\"carpet::use_buffer_zones\"\>", 
+   ",", "\<\"carpet::prolongation_order_space\"\>", 
+   ",", "\<\"carpet::prolongation_order_time\"\>", 
+   ",", "\<\"carpet::grid_coordinates_filename\"\>", 
+   ",", "\<\"carpet::init_fill_timelevels\"\>", 
+   ",", "\<\"carpet::poison_new_timelevels\"\>", 
+   ",", "\<\"carpet::poison_value\"\>", 
+   ",", "\<\"carpet::check_for_poison\"\>"}], "}"}]], "Output",
+ ImageSize->{565, 65},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[1]=",
+ CellID->751725681]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#", "->", 
+      RowBox[{"LookupParameter", "[", 
+       RowBox[{"run", ",", "#"}], "]"}]}], "&"}], ",", "carpetParams"}], 
+   "]"}], "//", "TableForm"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->2036609161],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{"\<\"carpet::domain_from_multipatch\"\>", 
+       "\[Rule]", "\<\"yes\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::time_refinement_factors\"\>", 
+       "\[Rule]", "\<\"\\\"[1,1,2,4,8,16,32,64,128,256]\\\"\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::max_refinement_levels\"\>", 
+       "\[Rule]", "\<\"9\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::use_buffer_zones\"\>", 
+       "\[Rule]", "\<\"yes\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::prolongation_order_space\"\>", 
+       "\[Rule]", "\<\"5\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::prolongation_order_time\"\>", 
+       "\[Rule]", "\<\"2\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::grid_coordinates_filename\"\>", 
+       "\[Rule]", "\<\"\\\"carpet-grid.asc\\\"\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::init_fill_timelevels\"\>", 
+       "\[Rule]", "\<\"yes\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::poison_new_timelevels\"\>", 
+       "\[Rule]", "\<\"yes\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::poison_value\"\>", "\[Rule]", "\<\"100\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::check_for_poison\"\>", "\[Rule]", "\<\"no\"\>"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ ImageSize->{456, 174},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]//TableForm=",
+ CellID->607225266]
+}, Open  ]]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection",
+ CellID->38303248],
+
+Cell[TextData[ButtonBox["NRMMA Package",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/guide/NRMMA"]], "MoreAbout",
+ CellID->1127261254]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED LINKS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedLinksSection",
+ CellID->1584193535],
+
+Cell["FindParameters", "RelatedLinks",
+ CellID->1038487239]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"LookupParameter - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2011, 3, 15, 1, 20, 16.627469}", "context" -> "nrmma`", 
+    "keywords" -> {}, "index" -> True, "label" -> "nrmma Paclet Symbol", 
+    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
+    "LookupParameter[run, param] read the value of the parameter param from \
+run.", "synonyms" -> {}, "title" -> "LookupParameter", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/LookupParameter"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+CellContext->"Global`",
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[4516, 138, 461, 13, 45, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection",
+   CellID->871836300]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 12761, 431}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[608, 21, 76, 1, 2, "SymbolColorBar"],
+Cell[687, 24, 176, 5, 19, "LinkTrail"],
+Cell[866, 31, 2307, 53, 47, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3198, 88, 58, 1, 51, "ObjectName",
+ CellID->1224892054],
+Cell[3259, 91, 520, 17, 84, "Usage",
+ CellID->982511436]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3816, 113, 580, 17, 38, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->416975723],
+Cell[4399, 132, 80, 1, 70, "Notes",
+ CellID->1067943069]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4516, 138, 461, 13, 45, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->871836300],
+Cell[CellGroupData[{
+Cell[5002, 155, 148, 5, 32, "ExampleSection",
+ CellID->671770619],
+Cell[5153, 162, 92, 3, 24, "Input",
+ CellID->84227474],
+Cell[5248, 167, 123, 4, 24, "Input",
+ CellID->399947555],
+Cell[CellGroupData[{
+Cell[5396, 175, 197, 6, 24, "Input",
+ CellID->294741775],
+Cell[5596, 183, 170, 5, 33, "Output",
+ CellID->1674455776]
+}, Open  ]],
+Cell[5781, 191, 84, 1, 32, "ExampleText",
+ CellID->874892209],
+Cell[CellGroupData[{
+Cell[5890, 196, 109, 3, 24, "Input",
+ CellID->1853731484],
+Cell[6002, 201, 301, 11, 46, "Output",
+ CellID->1952516944]
+}, Open  ]],
+Cell[6318, 215, 174, 6, 32, "ExampleText",
+ CellID->443758733],
+Cell[CellGroupData[{
+Cell[6517, 225, 140, 4, 24, "Input",
+ CellID->495847707],
+Cell[6660, 231, 162, 5, 33, "Output",
+ CellID->254668001]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6871, 242, 228, 7, 33, "ExampleSection",
+ CellID->589267740],
+Cell[7102, 251, 86, 1, 70, "ExampleText",
+ CellID->769124672],
+Cell[CellGroupData[{
+Cell[7213, 256, 186, 5, 70, "Input",
+ CellID->270184336],
+Cell[7402, 263, 722, 17, 86, "Output",
+ CellID->751725681]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8161, 285, 294, 10, 70, "Input",
+ CellID->2036609161],
+Cell[8458, 297, 1788, 52, 208, "Output",
+ CellID->607225266]
+}, Open  ]]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10307, 356, 419, 12, 45, "MoreAboutSection",
+ CellID->38303248],
+Cell[10729, 370, 137, 3, 16, "MoreAbout",
+ CellID->1127261254]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10903, 378, 427, 12, 80, "RelatedLinksSection",
+ CellID->1584193535],
+Cell[11333, 392, 59, 1, 42, "RelatedLinks",
+ CellID->1038487239]
+}, Open  ]],
+Cell[11407, 396, 23, 0, 40, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

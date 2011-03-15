@@ -1,0 +1,465 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     14583,        455]
+NotebookOptionsPosition[     11700,        362]
+NotebookOutlinePosition[     13301,        408]
+CellTagsIndexPosition[     13216,        403]
+WindowTitle->ConvergenceRate - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"ConvergenceMultiplier\"\>":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ConvergenceMultiplier"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"NRMMA Package\"\>":>
+       Documentation`HelpLookup["paclet:nrmma/guide/NRMMA"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"nrmma/ref/ConvergenceRate\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["nrmma/ref/ConvergenceRate"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/nrmma/ref/\
+ConvergenceRate.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "nrmma/ref/ConvergenceRate", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["ConvergenceRate", "ObjectName",
+ CellID->1224892054],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ConvergenceRate", "[", 
+       StyleBox[
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"d1", ",", " ", "d2", ",", " ", "d2"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"h1", ",", " ", "h2", ",", " ", "h3"}], "}"}]}], "TI"], 
+       "]"}]], "InlineFormula"],
+     " \[LineSeparator]compute the convergence rate as a function of time, \
+given as a ",
+     ButtonBox["DataTable",
+      BaseStyle->"Link",
+      ButtonData->"paclet:nrmma/ref/DataTable"],
+     "."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}}},
+ CellID->982511436]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->554900575],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection",
+ CellID->1839968751],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->559898643],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"exact", "=", 
+   RowBox[{"MakeDataTable", "@", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{"1", "+", 
+         RowBox[{"0.1", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", "Pi", " ", "x"}], "]"}]}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1", ",", "0.01"}], "}"}]}], "]"}]}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->2090635394],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"addErr", "[", 
+   RowBox[{"tb_DataTable", ",", "h_", ",", "p_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"MakeDataTable", "@", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"#", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "+", 
+         RowBox[{"0.03", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"2", "Pi", " ", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "]"}], 
+          RowBox[{"h", "^", "p"}]}], "+", 
+         RowBox[{"0.03", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", "Pi", " ", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "]"}], 
+          RowBox[{"h", "^", 
+           RowBox[{"(", 
+            RowBox[{"p", "+", "1"}], ")"}]}]}]}]}], "}"}], "&"}], ",", 
+     RowBox[{"ToList", "[", "tb", "]"}]}], "]"}]}]}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->1160880021],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"h1", ",", "h2", ",", "h3"}], "}"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"0.96", ",", "0.80", ",", "0.64"}], "}"}]}], ";"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->1021579952],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"order", "=", "4"}], ";"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->562495499],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f", "[", "h1", "]"}], ",", 
+     RowBox[{"f", "[", "h2", "]"}], ",", 
+     RowBox[{"f", "[", "h3", "]"}]}], "}"}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"addErr", "[", 
+      RowBox[{"exact", ",", "#", ",", "order"}], "]"}], "&"}], "/@", 
+    RowBox[{"{", 
+     RowBox[{"h1", ",", "h2", ",", "h3"}], "}"}]}]}], ";"}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->638837599],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"ConvergenceRate", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"f", "[", "h1", "]"}], ",", 
+       RowBox[{"f", "[", "h2", "]"}], ",", 
+       RowBox[{"f", "[", "h3", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"h1", ",", "h2", ",", "h3"}], "}"}]}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "10"}], "}"}]}]}], "]"}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->1962780529],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxTTMoPSmViYGBQBWIQDQOH/v0HAn6HapF17g+rWuxDc4s5ztoIQPlT7M8n
+C1fpFAs47JBrfR24Y579IeO14aVLYPJL7M/FMDCsuyjgMGsmCKy07z39f/fi
+3zD16+zrbttt+KUk6PAmECSy0b7td/BXCw9BqP4t9jK7+NrOZQs6cF1fXGDL
+td3+xs1sIek+Qah5O+3Nz/5PK1ov6KAZ03/oq8Ye+3U/uu/JXxCEmr/P/sif
+Xv3MD4IOS4C6ry8+YP/mQ+LFCQJCUPsO2ufw2qrfMBByMAaDw/Y329RnNAYK
+Qe0/Yv+p6uqOS0VCDoe/agBtOGr/bn3SOrGpQlD3HLfPeP7y+4IdQg5BYAtP
+2F935L514a4Q1H0n7YutwveKsgo7PKwCGXjK/qX8589f9ISh7j1jn/n882TB
+GGGHQpDzCs7aV5UsLTTvFYa6/5z9pQtej7IOCztAYuOCvSuYFoH654L9Fql/
+fPtcRBw8wBZctD+W72wsPkUE6r+L9u82Tpzf/FHEAWRbTP8l+xwXyyeySaJQ
+/162/1eb77LvragD2DvXL9v/trWQVlwoBvX/Ffs7+sLs5ZPEHeRBzpG7ar/m
+d1GK9xsJaHhctV+9V2piII+0Q3oaCFyz52443nn3i5zDM9VP07/9uGYPcbeK
+AwA6GA17
+     "]], LineBox[CompressedData["
+1:eJwtkmtIU2Ecxk9BKlPnuWwqjmZKoEKoYNCs9P+nJEfLD7PID+1Ly4wS70g4
+lxTlImJe0qICK9G+1ZRIMkQrJaLLQosyL1vbnLsqaNNaTrKds/eBw/vp/M77
+PL+Tpq0pPbudoqic8MOf9+/xmYGc194VRVMACkXTfbUFs+AJJvVEvdqGdp3E
+VGyfBZ+bSc9iorDVrx6Wt86BUfn2pcEcg1ma9vH1zHlYDuWeZIdEaP7EZx44
+/dDXGXkc1hXwQAu4bIpfiYp4lIZpOokVRltA/yRFjGFYmGiFpQNdomvfxSjg
+ND+hJlb1PNCYgJQQG4Bw0lgqvGCD6qqGGPNBGvtr+Q/YoPcMp9vTQOPvTJ5g
+g4S9T8sa+2lURgrAiVMUZZqiMdLXDsEPWyN9IRqX+Dp+O1BzhYMb6QxG+jvg
+euj4ukLJoHCddgdEj4gNnysZsocDOmcqWVkbg3lCFkBv3qqoH2DIPgtwOXjT
+mjrJIE8TTS9A/qYx5/wKQ/ZywvvV01MdNIvNPE7nhJ74gowfuSzZzwklhoy7
+V9QspgrARSjWfRv+Us+SPRfhzoDWlHibxQn+euOL8MDt/fNomCX7uuDSodjZ
+SQuL5yr4uMC+v2xUuoMje7tAuSsQWMvmUKgrckOZO9DFaDiyvxvoxsd1+4wc
+CjiTG0qmjjouTHDEhwecW3w44sMD+bJ/4rEiCfHhgTfVh/OSuiXEhweSn3U+
+vLoqIT68UH4k37lTKyU+vFDVUlM0tiwlPrywCQpZWm8i8eGDY9lc9MVbSdgh
++PBB20Z9uWopmfjwQdOLlE51nIz48EN3y7sbljU5fmT/qpr1/sjvQ+3G/0f0
+Waw=
+     "]], 
+    LineBox[{{0.9, 1.217095318858807}, {0.91, 2.2182743332798216`}, {0.92, 
+     2.7583792363847532`}, {0.93, 3.100354625065906}, {0.9400000000000001, 
+     3.338413880701214}, {0.9500000000000001, 3.5150639095073393`}, {0.96, 
+     3.6523875163657564`}, {0.97, 3.7630243021851686`}, {0.98, 
+     3.8547440363101813`}, {0.99, 3.932593735256546}, {1., 
+     3.999999999999859}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 1.}, {0, 10}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ ImageSize->{184, 123},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[7]=",
+ CellID->28309759]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection",
+ CellID->1255426704],
+
+Cell[TextData[Cell[BoxData[
+ StyleBox[
+  ButtonBox["ConvergenceMultiplier",
+   BaseStyle->"Link",
+   ButtonData->"paclet:nrmma/ref/ConvergenceMultiplier"],
+  FontFamily->"Verdana"]], "InlineFormula"]], "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection",
+ CellID->38303248],
+
+Cell[TextData[ButtonBox["NRMMA Package",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/guide/NRMMA"]], "MoreAbout",
+ CellID->590281257]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ConvergenceRate - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2011, 3, 15, 1, 20, 4.460877}", "context" -> "nrmma`", 
+    "keywords" -> {}, "index" -> True, "label" -> "nrmma Paclet Symbol", 
+    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
+    "ConvergenceRate[{d1, d2, d2}, {h1, h2, h3}] compute the convergence rate \
+as a function of time, given as a DataTable.", "synonyms" -> {}, "title" -> 
+    "ConvergenceRate", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ConvergenceRate"}, "LinkTrails" -> "", "SearchTextTranslated" -> 
+  ""},
+CellContext->"Global`",
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[4295, 125, 461, 13, 45, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection",
+   CellID->554900575]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 13073, 396}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[608, 21, 76, 1, 2, "SymbolColorBar"],
+Cell[687, 24, 176, 5, 19, "LinkTrail"],
+Cell[866, 31, 2559, 59, 47, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3450, 94, 58, 1, 51, "ObjectName",
+ CellID->1224892054],
+Cell[3511, 97, 747, 23, 82, "Usage",
+ CellID->982511436]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4295, 125, 461, 13, 45, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->554900575],
+Cell[CellGroupData[{
+Cell[4781, 142, 149, 5, 32, "ExampleSection",
+ CellID->1839968751],
+Cell[4933, 149, 93, 3, 24, "Input",
+ CellID->559898643],
+Cell[5029, 154, 479, 16, 24, "Input",
+ CellID->2090635394],
+Cell[5511, 172, 1062, 32, 64, "Input",
+ CellID->1160880021],
+Cell[6576, 206, 241, 8, 24, "Input",
+ CellID->1021579952],
+Cell[6820, 216, 114, 4, 24, "Input",
+ CellID->562495499],
+Cell[6937, 222, 455, 15, 24, "Input",
+ CellID->638837599],
+Cell[CellGroupData[{
+Cell[7417, 241, 521, 16, 38, "Input",
+ CellID->1962780529],
+Cell[7941, 259, 2409, 49, 144, "Output",
+ CellID->28309759]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10411, 315, 417, 12, 45, "SeeAlsoSection",
+ CellID->1255426704],
+Cell[10831, 329, 232, 6, 19, "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11100, 340, 419, 12, 45, "MoreAboutSection",
+ CellID->38303248],
+Cell[11522, 354, 136, 3, 16, "MoreAbout",
+ CellID->590281257]
+}, Open  ]],
+Cell[11673, 360, 23, 0, 40, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

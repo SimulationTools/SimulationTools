@@ -1,0 +1,678 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     21251,        668]
+NotebookOptionsPosition[     15805,        483]
+NotebookOutlinePosition[     17714,        532]
+CellTagsIndexPosition[     17671,        529]
+WindowTitle->Carpet HDF5 - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ StyleBox[ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:guide/Mathematica"],
+  FontSlant->"Italic"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"DataRegion\"\>":>Documentation`HelpLookup[
+       "paclet:nrmma/tutorial/DataRegion"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"nrmma/tutorial/Carpet HDF5\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["nrmma/tutorial/Carpet HDF5"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/nrmma/tutorial/\
+Carpet HDF5.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "nrmma/tutorial/Carpet HDF5", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["Carpet HDF5", "Title",
+ CellID->509267359],
+
+Cell[TextData[{
+ "The CarpetHDF5 ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package provides a simple interface to Carpet HDF5 data from numerical \
+simulations.  It reads HDF5 files produced by Carpet and returns variables as \
+",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects."
+}], "Text",
+ CellID->1534169418],
+
+Cell[CellGroupData[{
+
+Cell["Common Arguments", "Section",
+ CellID->1485527425],
+
+Cell[TextData[{
+ "Most of the functions in this package take at least two arguments: ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". "
+}], "Text",
+ CellID->614551953],
+
+Cell["run: The name of the run directory containing HDF5 files.", "Text",
+ CellID->528416828],
+
+Cell["\<\
+var: The name of the file containing grid function data, for example \
+gxx.xy.h5.  If there is only one variable in the file, this is sufficient to \
+identify the variable. If there is more than one variable, an additional \
+Variable argument must be supplied to identify the variable to read.  For \
+multi-file data, the .file_X.h5 suffix can be ommitted.\
+\>", "Text",
+ CellID->1256747851],
+
+Cell["The following options can be given:", "Text",
+ CellID->970988847],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "\nMap\t\t\tLowest in file\t\tThe map to read (use None for unimap data)\n\
+Variable\t\tFirst in file\t\tThe variable to read (for files with more than \
+one variable)"
+}], "Text",
+ CellID->681317976]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "Section",
+ CellID->1659463512],
+
+Cell["Functions provided by CarpetHDF5.", "Caption",
+ CellID->1891092685],
+
+Cell[CellGroupData[{
+
+Cell["ReadGridFunction", "Subsection",
+ CellID->1233122595],
+
+Cell["Common options : Map, Variable", "Text",
+ CellID->1874260615],
+
+Cell[TextData[{
+ "Read a grid function from the file ",
+ StyleBox["varfile",
+  FontSlant->"Italic"],
+ " in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " on refinement level ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ " and return it as a DataRegion. If ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " is not given, then it defaults to the coarsest refinement level."
+}], "Text",
+ CellID->1408022109],
+
+Cell[TextData[{
+ "This function reads a variable from a Carpet HDF5 file and returns it as a \
+single DataRegion object. \n1D, 2D and 3D variables are currently supported.  \
+If the file is part of a multi-file set, all the files will be used to read \
+the variable. \nIf there is more than one component, the components will all \
+be read and joined together into a single rectangular DataRegion.  If the \
+union of the components is not rectangular, the smallest rectangular region \
+surrounding all components will be used, and points not in any component will \
+take the value None.\nIf the file appears in more than one segment, the \
+correct segment for the given iteration will be located automatically.\nIn \
+addition to the common options listed under ",
+ StyleBox["Common Arguments",
+  FontSlant->"Italic"],
+ ", the following options can be given:"
+}], "Text",
+ CellID->1505279670],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription\n",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "StripGhostZones\tTrue\t\t\tRemove the ghost zones from the data"
+}], "Text",
+ CellID->1878052030]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadIterations", "Subsection",
+ CellID->705824604],
+
+Cell[TextData[{
+ "Read the iteration numbers present in the file.  The optional ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " argument specifies the refinement level and defaults to all refinement \
+levels. If the options Variable or Map are specified, then only iterations \
+corresponding to those will be included."
+}], "Text",
+ CellID->94453400]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadMaps", "Subsection",
+ CellID->487878667],
+
+Cell["Read the maps present in the file.", "Text",
+ CellID->684192023]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadRefinementLevels", "Subsection",
+ CellID->1587884523],
+
+Cell["Read the refinement levels present in the file.", "Text",
+ CellID->795896792]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadTimeLevels", "Subsection",
+ CellID->2109229628],
+
+Cell["Read the timelevels present in the file.", "Text",
+ CellID->1309796767]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadVariables", "Subsection",
+ CellID->2046881219],
+
+Cell["Read the names of the variables present in the file.", "Text",
+ CellID->1392106440]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadTimes", "Subsection",
+ CellID->298603015],
+
+Cell["Common options : Map, Variable", "Text",
+ CellID->2099073713],
+
+Cell[TextData[{
+ "Read the coordinate time associated with this grid function at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellID->270541475]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Section",
+ CellID->767689626],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellID->477793006],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input",
+ CellID->825695709],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"file", "=", "\"\<betax.xy.h5\>\""}], ";"}]], "Input",
+ CellID->428454249],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridFunction", "[", 
+  RowBox[{"run", ",", "file", ",", "64"}], "]"}]], "Input",
+ CellID->517894552],
+
+Cell[BoxData["\<\"DataRegion[ADMBASE::betax, {101, 101}, \
+\\!\\({\\(\\({\\(\\(-200.`\\)\\), 200.`}\\)\\), \\(\\({\\(\\(-200.`\\)\\), \
+200.`}\\)\\)}\\)]\"\>"], "Output",
+ ImageSize->{497, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->502514173]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadVariables", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellID->1850005607],
+
+Cell[BoxData[
+ RowBox[{"{", "\<\"ADMBASE::betax\"\>", "}"}]], "Output",
+ ImageSize->{118, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1775995583]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadIterations", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellID->1282553828],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "64", ",", "128", ",", "192", ",", "256", ",", "320", ",", "384", 
+   ",", "448", ",", "512", ",", "576", ",", "640", ",", "704", ",", "768", 
+   ",", "832", ",", "896", ",", "960", ",", "1024", ",", "1088", ",", "1152", 
+   ",", "1216", ",", "1280", ",", "1344", ",", "1408", ",", "1472", ",", 
+   "1536", ",", "1600", ",", "1664", ",", "1728", ",", "1792", ",", "1856", 
+   ",", "1920", ",", "1984", ",", "2048", ",", "2112", ",", "2176", ",", 
+   "2240", ",", "2304", ",", "2368", ",", "2432", ",", "2496", ",", "2560", 
+   ",", "2624", ",", "2688", ",", "2752", ",", "2816", ",", "2880", ",", 
+   "2944", ",", "3008", ",", "3072", ",", "3136", ",", "3200", ",", "3264", 
+   ",", "3328", ",", "3392", ",", "3456", ",", "3520", ",", "3584", ",", 
+   "3648", ",", "3712", ",", "3776", ",", "3840", ",", "3904", ",", "3968", 
+   ",", "4032", ",", "4096", ",", "4160", ",", "4224", ",", "4288", ",", 
+   "4352", ",", "4416", ",", "4480", ",", "4544", ",", "4608", ",", "4672", 
+   ",", "4736", ",", "4800", ",", "4864", ",", "4928", ",", "4992", ",", 
+   "5056", ",", "5120", ",", "5184", ",", "5248", ",", "5312", ",", "5376", 
+   ",", "5440", ",", "5504", ",", "5568", ",", "5632", ",", "5696", ",", 
+   "5760", ",", "5824", ",", "5888", ",", "5952", ",", "6016", ",", "6080", 
+   ",", "6144", ",", "6208", ",", "6272", ",", "6336", ",", "6400", ",", 
+   "6464", ",", "6528", ",", "6592", ",", "6656", ",", "6720", ",", "6784", 
+   ",", "6848", ",", "6912", ",", "6976", ",", "7040", ",", "7104", ",", 
+   "7168", ",", "7232", ",", "7296", ",", "7360", ",", "7424", ",", "7488", 
+   ",", "7552", ",", "7616", ",", "7680", ",", "7744", ",", "7808", ",", 
+   "7872", ",", "7936", ",", "8000", ",", "8064", ",", "8128", ",", "8192", 
+   ",", "8256", ",", "8320", ",", "8384", ",", "8448", ",", "8512", ",", 
+   "8576", ",", "8640", ",", "8704", ",", "8768", ",", "8832", ",", "8896", 
+   ",", "8960", ",", "9024", ",", "9088", ",", "9152", ",", "9216", ",", 
+   "9280", ",", "9344", ",", "9408", ",", "9472", ",", "9536", ",", "9600", 
+   ",", "9664", ",", "9728", ",", "9792", ",", "9856", ",", "9920", ",", 
+   "9984", ",", "10048", ",", "10112", ",", "10176", ",", "10240", ",", 
+   "10304", ",", "10368", ",", "10432", ",", "10496", ",", "10560", ",", 
+   "10624", ",", "10688", ",", "10752", ",", "10816", ",", "10880", ",", 
+   "10944", ",", "11008", ",", "11072", ",", "11136", ",", "11200", ",", 
+   "11264", ",", "11328", ",", "11392", ",", "11456", ",", "11520", ",", 
+   "11584", ",", "11648", ",", "11712", ",", "11776", ",", "11840", ",", 
+   "11904", ",", "11968", ",", "12032", ",", "12096", ",", "12160", ",", 
+   "12224", ",", "12288", ",", "12352", ",", "12416", ",", "12480", ",", 
+   "12544", ",", "12608", ",", "12672", ",", "12736", ",", "12800", ",", 
+   "12864", ",", "12928", ",", "12992", ",", "13056", ",", "13120", ",", 
+   "13184", ",", "13248", ",", "13312", ",", "13376", ",", "13440", ",", 
+   "13504", ",", "13568", ",", "13632", ",", "13696", ",", "13760", ",", 
+   "13824", ",", "13888", ",", "13952", ",", "14016", ",", "14080", ",", 
+   "14144", ",", "14208", ",", "14272", ",", "14336", ",", "14400", ",", 
+   "14464", ",", "14528", ",", "14592", ",", "14656", ",", "14720", ",", 
+   "14784", ",", "14848", ",", "14912", ",", "14976", ",", "15040", ",", 
+   "15104", ",", "15168", ",", "15232", ",", "15296", ",", "15360", ",", 
+   "15424", ",", "15488", ",", "15552", ",", "15616", ",", "15680", ",", 
+   "15744", ",", "15808", ",", "15872", ",", "15936", ",", "16000", ",", 
+   "16064", ",", "16128", ",", "16192", ",", "16256", ",", "16320", ",", 
+   "16384", ",", "16448", ",", "16512", ",", "16576", ",", "16640", ",", 
+   "16704", ",", "16768", ",", "16832", ",", "16896", ",", "16960", ",", 
+   "17024", ",", "17088", ",", "17152", ",", "17216", ",", "17280", ",", 
+   "17344", ",", "17408", ",", "17472", ",", "17536", ",", "17600", ",", 
+   "17664", ",", "17728", ",", "17792", ",", "17856", ",", "17920", ",", 
+   "17984", ",", "18048", ",", "18112", ",", "18176", ",", "18240", ",", 
+   "18304", ",", "18368", ",", "18432", ",", "18496", ",", "18560", ",", 
+   "18624", ",", "18688", ",", "18752", ",", "18816", ",", "18880", ",", 
+   "18944", ",", "19008", ",", "19072", ",", "19136", ",", "19200", ",", 
+   "19264", ",", "19328", ",", "19392", ",", "19456", ",", "19520", ",", 
+   "19584", ",", "19648", ",", "19712", ",", "19776", ",", "19840", ",", 
+   "19904", ",", "19968"}], "}"}]], "Output",
+ ImageSize->{552, 338},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1588822257]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadRefinementLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellID->1524006601],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", 
+   ",", "8"}], "}"}]], "Output",
+ ImageSize->{169, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->941485238]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadMaps", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellID->882883970],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ ImageSize->{18, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1666366667]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTime", "[", 
+  RowBox[{"run", ",", "file", ",", "64"}], "]"}]], "Input",
+ CellID->1290331742],
+
+Cell[BoxData["0.5`"], "Output",
+ ImageSize->{26, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1315720388]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellID->673447957],
+
+Cell[BoxData[
+ RowBox[{"{", "0", "}"}]], "Output",
+ ImageSize->{25, 12},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellID->1400993609]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RELATED TUTORIALS", "RelatedTutorialsSection",
+ CellID->415694126],
+
+Cell[TextData[ButtonBox["DataRegion",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "RelatedTutorials",
+ CellID->1165890779]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Carpet HDF5 - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2011, 3, 15, 1, 20, 56.608265}", "context" -> "nrmma`", 
+    "keywords" -> {}, "index" -> True, "label" -> "nrmma Tutorial", 
+    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
+    "The CarpetHDF5 Mathematica package provides a simple interface to Carpet \
+HDF5 data from numerical simulations. It reads HDF5 files produced by Carpet \
+and returns variables as DataRegion objects. Most of the functions in this \
+package take at least two arguments: run and var. run: The name of the run \
+directory containing HDF5 files.", "synonyms" -> {}, "title" -> "Carpet HDF5",
+     "type" -> "Tutorial", "uri" -> "nrmma/tutorial/Carpet HDF5"}, 
+  "LinkTrails" -> "", "SearchTextTranslated" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[604, 21, 78, 1, 2, "TutorialColorBar"],
+Cell[685, 24, 209, 6, 19, "LinkTrail"],
+Cell[897, 32, 2318, 53, 47, "AnchorBarGrid",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[3240, 89, 48, 1, 50, "Title",
+ CellID->509267359],
+Cell[3291, 92, 381, 12, 73, "Text",
+ CellID->1534169418],
+Cell[CellGroupData[{
+Cell[3697, 108, 56, 1, 52, "Section",
+ CellID->1485527425],
+Cell[3756, 111, 217, 9, 31, "Text",
+ CellID->614551953],
+Cell[3976, 122, 93, 1, 31, "Text",
+ CellID->528416828],
+Cell[4072, 125, 401, 7, 94, "Text",
+ CellID->1256747851],
+Cell[4476, 134, 71, 1, 31, "Text",
+ CellID->970988847],
+Cell[4550, 137, 313, 8, 118, "Text",
+ CellID->681317976]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4900, 150, 49, 1, 52, "Section",
+ CellID->1659463512],
+Cell[4952, 153, 73, 1, 30, "Caption",
+ CellID->1891092685],
+Cell[CellGroupData[{
+Cell[5050, 158, 59, 1, 52, "Subsection",
+ CellID->1233122595],
+Cell[5112, 161, 67, 1, 31, "Text",
+ CellID->1874260615],
+Cell[5182, 164, 457, 18, 52, "Text",
+ CellID->1408022109],
+Cell[5642, 184, 891, 15, 310, "Text",
+ CellID->1505279670],
+Cell[6536, 201, 213, 6, 64, "Text",
+ CellID->1878052030]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6786, 212, 56, 1, 52, "Subsection",
+ CellID->705824604],
+Cell[6845, 215, 348, 8, 73, "Text",
+ CellID->94453400]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7230, 228, 50, 1, 52, "Subsection",
+ CellID->487878667],
+Cell[7283, 231, 70, 1, 31, "Text",
+ CellID->684192023]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7390, 237, 63, 1, 52, "Subsection",
+ CellID->1587884523],
+Cell[7456, 240, 83, 1, 31, "Text",
+ CellID->795896792]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7576, 246, 57, 1, 52, "Subsection",
+ CellID->2109229628],
+Cell[7636, 249, 77, 1, 31, "Text",
+ CellID->1309796767]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7750, 255, 56, 1, 52, "Subsection",
+ CellID->2046881219],
+Cell[7809, 258, 89, 1, 31, "Text",
+ CellID->1392106440]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7935, 264, 51, 1, 52, "Subsection",
+ CellID->298603015],
+Cell[7989, 267, 67, 1, 31, "Text",
+ CellID->2099073713],
+Cell[8059, 270, 170, 6, 31, "Text",
+ CellID->270541475]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8278, 282, 46, 1, 52, "Section",
+ CellID->767689626],
+Cell[8327, 285, 70, 2, 24, "Input",
+ CellID->477793006],
+Cell[8400, 289, 99, 3, 24, "Input",
+ CellID->825695709],
+Cell[8502, 294, 108, 3, 24, "Input",
+ CellID->428454249],
+Cell[CellGroupData[{
+Cell[8635, 301, 128, 3, 24, "Input",
+ CellID->517894552],
+Cell[8766, 306, 278, 6, 33, "Output",
+ CellID->502514173]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9081, 317, 115, 3, 24, "Input",
+ CellID->1850005607],
+Cell[9199, 322, 180, 5, 33, "Output",
+ CellID->1775995583]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9416, 332, 116, 3, 24, "Input",
+ CellID->1282553828],
+Cell[9535, 337, 4608, 66, 359, "Output",
+ CellID->1588822257]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14180, 408, 122, 3, 24, "Input",
+ CellID->1524006601],
+Cell[14305, 413, 258, 8, 33, "Output",
+ CellID->941485238]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14600, 426, 109, 3, 24, "Input",
+ CellID->882883970],
+Cell[14712, 431, 153, 5, 33, "Output",
+ CellID->1666366667]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14902, 441, 121, 3, 24, "Input",
+ CellID->1290331742],
+Cell[15026, 446, 139, 4, 33, "Output",
+ CellID->1315720388]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15202, 455, 115, 3, 24, "Input",
+ CellID->673447957],
+Cell[15320, 460, 158, 5, 33, "Output",
+ CellID->1400993609]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15527, 471, 72, 1, 45, "RelatedTutorialsSection",
+ CellID->415694126],
+Cell[15602, 474, 149, 3, 16, "RelatedTutorials",
+ CellID->1165890779]
+}, Open  ]]
+}, Open  ]],
+Cell[15778, 481, 23, 0, 40, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
