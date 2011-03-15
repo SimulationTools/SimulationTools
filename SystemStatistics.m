@@ -73,12 +73,9 @@ ReadCores[runName_] :=
     read[file_, args__] :=
       If[FileType[file] =!= None, ReadList[file, args][[1]], Throw[file, FileNotFound]];
 
-    sf1a = FileNameJoin[{RunDirectory, runName, "output-0000",
-                             "SIMFACTORY", "PROCS"}];
-    sf1b = FileNameJoin[{RunDirectory, runName, "output-0000",
-                           "PROCS"}];
-    sf2 = FileNameJoin[{RunDirectory, runName, "output-0001", "SIMFACTORY",
-                           "properties.ini"}];
+    sf1a = Catch@FindFirstRunFile[runName, "../SIMFACTORY/PROCS"];
+    sf1b = Catch@FindFirstRunFile[runName, "../PROCS"];
+    sf2 =  Catch@FindFirstRunFile[runName, "../SIMFACTORY/properties.ini"];
     If[FileType[sf1a] =!= None, Return[read[sf1a, Number]]];
     If[FileType[sf1b] =!= None, Return[read[sf1b, Number]]];
     If[FileType[sf2] =!= None, Return[ToExpression@IniVariable[sf2, "procs"]]];
