@@ -6,7 +6,7 @@ BeginPackage["CoordinateTransformations`"];
 
 (* Exported symbols *)
 RadialToTortoise::usage = "RadialToTortoise[r, M] gives the value of the Schwarzschild tortoise coordinate corresponding to the radial coordinate, r.";
-TortoiseToRadial::usage = "TortoiseToRadial[rstar_] gives the value of the radial coordinate corresponding to the Schwarzschild tortoise coordinate, rstar.";
+TortoiseToRadial::usage = "TortoiseToRadial[rstar_, M] gives the value of the radial coordinate corresponding to the Schwarzschild tortoise coordinate, rstar.";
 
 ThornburgToCartesian::usage = "ThornburgToCartesian[{\[Theta], \[Phi], r}, patch] gives the cartesian coordinates in terms of Thornburg 04 coordinates on the specified patch.";
 CartesianToThornburg::usage = "CartesianToThornburg[{x, y, z}, patch] gives the Thornburg 04 coordinates on the specified patch in terms of cartesian coordinates.";
