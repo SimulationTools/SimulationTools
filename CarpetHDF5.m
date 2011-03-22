@@ -181,7 +181,7 @@ CarpetHDF5Time[file_String, var_String, map_, rl_Integer, it_Integer] :=
     f = CarpetHDF5TimeAccel[file, var, map, rl];
     If[f === None,
       ToExpression[CarpetHDF5Attribute[file, var, map, rl, it, "time"]],
-      f[it]]];
+      f[it]]]
   ];
 
 (* Data *)
