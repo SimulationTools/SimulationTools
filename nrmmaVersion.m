@@ -26,14 +26,14 @@ nrmmaVersion[] :=
  Module[{path, buildid, gitrev},
   path = FileNameDrop[FindFile["nrmma`"], -2];
 
-  buildid = Catch@ReadList[FileNameJoin[{path, "BUILD_ID"}], "String"];
+  buildid = Quiet@ReadList[FileNameJoin[{path, "BUILD_ID"}], "String"];
   If[SameQ[buildid, $Failed],
     buildid = "git";
   ,
     buildid = First[buildid];
   ];
 
-  gitrev = Catch@ReadList[FileNameJoin[{path, "GIT_REVISION"}],"String"];
+  gitrev = Quiet@ReadList[FileNameJoin[{path, "GIT_REVISION"}],"String"];
   If[SameQ[gitrev, $Failed],
     gitrev = First@ReadList["!git --git-dir "<>FileNameJoin[{path, ".git"}]<>" rev-parse HEAD", String];
   ,
