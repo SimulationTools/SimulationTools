@@ -35,6 +35,7 @@ Module[{packages =
   "Memo",
   "NR",
   "NRExport",
+  "nrmmaVersion",
   "Parameters",
   "Plotting",
   "Profile",
