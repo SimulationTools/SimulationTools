@@ -6,7 +6,7 @@
 
 (* Work around a bug in ImportString in Mathematica 8. Without this,
    DataRegion's definition of GetData will cause problems. *)
-If[$VersionNumber == 8., ImportString["", "Table"]];
+If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
 
 (* Work around a bug in Mathematica 8 where Unprotect doesn't work with
    ListLogPlot unless we call ListLogPlot once first. *)
