@@ -327,10 +327,12 @@ DefineMemoFunction[getFileIts[file_],
   CarpetHDF5Iterations[file]];
 
 getFileOfIt[run_, var_, it_] :=
-  Module[{files, itss},
+  Module[{files, itss, haveIts},
     files = FindRunFile[run, var];
     itss = Map[{#, getFileIts[#]} &, files];
-    First[Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &]][[1]]];
+    haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
+    If[Length[haveIts] === 0, Throw["Iteration " <> ToString[it] <> " not found in " <> var <> " in run " <> run]];
+    haveIts[[1,1]]];
 
 (***************************************************************************************)
 (* New API *)
