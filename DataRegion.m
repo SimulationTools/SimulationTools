@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRegion`", {"DataTable`", "Profile`"}];
+BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Plotting`"}];
 
 (* Exported symbols *)
 
@@ -22,6 +22,7 @@ GetAttributes;
 GetVariableName;
 DataRegionDensityPlot;
 DataRegionArrayPlot;
+DynamicDataRegionArrayPlot;
 DataRegionMatrixPlot;
 DataRegionPlot3D;
 DataRegionPlot;
@@ -222,6 +223,7 @@ DataRegion2DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFun
 DataRegionPlot[v_DataRegion, args___]        := DataRegion1DPlot[ListPlot, v, args]; 
 DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot, v, args];
 DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
+DynamicDataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[DynamicArrayPlot, v, args];
 DataRegionMatrixPlot[v_DataRegion, args___]   := DataRegion2DPlot[MatrixPlot, v, args];
 DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
 
