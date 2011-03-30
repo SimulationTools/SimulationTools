@@ -60,9 +60,9 @@ runDirType[dir_String] :=
     If[FileType[FileNameJoin[{dir, "SIMULATION_ID"}]] =!= None ||
        FileType[FileNameJoin[{dir, "SIMFACTORY"}]] =!= None,
        SimFactory,
-       If[FileNames["*.par", dir] =!= {},
-          Standard,
-          None]]];
+       Standard
+    ]
+  ];
 
 (* Given the name of a run directory, return a path to it *)
 FindRunDir[runName_] :=
