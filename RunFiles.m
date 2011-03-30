@@ -70,6 +70,13 @@ FindRunDir[runName_] :=
   If[runDirType[runName] =!= None,
     (* The run is given by a name which can be found directly *)
     runName,
+
+    (* If we give anything containing a slash, and it doesn't exist, then give up
+       rather than trying to look in RunDirectory. *)
+    If[FileNameDepth[runName]>1, Return[None]];
+
+    If[!StringQ[RunDirectory], Return[None]];
+
     (* Cannot find directly, so look under RunDirectory *)
     If[runDirType[FileNameJoin[{RunDirectory, runName}]] =!= None,
       FileNameJoin[{RunDirectory, runName}],
