@@ -19,6 +19,7 @@ LegendOrientation;
 LegendLineSize;
 PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
 PlotKey;
+DynamicArrayPlot;
 
 Begin["`Private`"];
 
@@ -212,6 +213,66 @@ DynamicListLinePlot[data_, opts___] :=
          ")"], ""], ""]]
     
     }]];
+
+(* Should make this code in common with the above *)
+DynamicArrayPlot[data_, opts___] :=
+ DynamicModule[{dragging, p1, p2, plotRange, history, inDouble,
+   doubleStart, logScale, controls, delta, mp,
+   doubleTime = 0.5},
+  dragging = False;
+  p1 = Null;
+  p2 = Null;
+  plotRange =
+   If[(PlotRange /. {opts}) === PlotRange, Automatic,
+    PlotRange /. {opts}];
+  history = {};
+  inDouble = False;
+  doubleStart = AbsoluteTime[];
+  logScale = False;
+  controls = False;
+  Column[{
+    Dynamic[If[controls,
+      Row[{Button["All", plotRange = All, ImageSize -> 100],
+        Button["Automatic", plotRange = Automatic, ImageSize -> 100],
+        Labeled[Checkbox[Dynamic[logScale]], Text["Log scale"], Right,
+          Alignment -> Center]}], ""]],
+    EventHandler[
+     Dynamic[Show[
+       ArrayPlot[If[logScale, Log10, Identity][data],
+        PlotRange -> plotRange, opts],
+       If[dragging, Graphics[{Opacity[0.1], Rectangle[p1, p2]}], {}],
+       ImageSize -> {350, Automatic}]],
+     {{"MouseDown", 2} :> (controls = ! controls),
+      "MouseClicked" :>
+       (delta = AbsoluteTime[] - doubleStart;
+        If[! inDouble || delta > doubleTime,
+         inDouble = True; doubleStart = AbsoluteTime[],
+         inDouble = False;
+         If[delta < doubleTime,
+          If[Length[history] >= 1,
+           plotRange = Last[history];
+           history = Drop[history, -1]]]]),
+      "MouseDragged" :>
+       (If[! dragging,
+         dragging = True;
+         p1 = MousePosition["Graphics"]];
+        p2 = MousePosition["Graphics"]),
+      "MouseUp" :>
+       (If[dragging,
+         dragging = False;
+         history = Append[history, plotRange];
+         plotRange = coordsToRanges[p1, p2]])},
+     PassEventsDown -> False],
+
+    Dynamic[
+     If[controls, mp = MousePosition["Graphics"];
+      If[mp =!= None,
+       Text["(" <> ToString[mp[[1]]] <> ", " <> ToString[mp[[2]]] <>
+         ")"], ""], ""]]
+
+    }]];
+
+
 
 PlotFit[data_, model_, pars_, var_, args___] :=
  Module[{fit, fittedModel},
