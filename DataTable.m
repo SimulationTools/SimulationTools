@@ -34,6 +34,7 @@ IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first int
 IntegrateDataTableZeroStart::usage = "IntegrateDataTableZeroStart[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x1] = 0, where x1 is the lowest value of the independent variable in d.";
 IntegrateDataTableZeroEnd::usage = "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x2] = 0, where x2 is the highest value of the independent variable in d.";
 Global`Sub::usage = "Sub[d1, d2] returns a DataTable corresponding to d1 - d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Sub~ d2.";
+Add::usage = "Add[d1, d2] returns a DataTable corresponding to d1 + d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Add~ d2.";
 Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
 InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 Monotonise;
@@ -226,6 +227,9 @@ InterpolateWhereFunction[d_DataTable, f_] :=
 
 Global`Sub[d1_DataTable, d2_DataTable, p_:8] :=
   Apply[Subtract, ResampleDataTables[{d1, d2}, p]];
+
+Add[ds:(_DataTable..), p_Integer:8] :=
+  Apply[Plus, ResampleDataTables[{ds}, p]];
 
 Div[d1_DataTable, d2_DataTable] :=
   Apply[Divide, ResampleDataTables[{d1, d2}]];
