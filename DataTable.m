@@ -140,6 +140,9 @@ RedefineAsDataTable[Dot[d1:DataTable[__], d2:DataTable[__]],
 RedefineAsDataTable[Power[d:DataTable[__], n_Integer],
   MapData[Power[#,n] &, d]];
 
+RedefineAsDataTable[Power[a_, d:DataTable[__]],
+  MapData[Power[a,#] &, d]];
+
 RedefineAsDataTable[Abs[d:DataTable[__]],
   MapData[Abs, d]];
 
