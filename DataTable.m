@@ -40,6 +40,7 @@ InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new D
 Monotonise;
 DataTableListLinePlot;
 
+InvertDataTable;
 Begin["`Private`"];
 
 Format[DataTable[l_, attrs___]] := "DataTable"["..."];
@@ -466,6 +467,9 @@ DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
 ];
 
 DataTable /: Export[file_String, dt_DataTable, type___] := Export[file, Flatten/@ToList[dt], type];
+
+InvertDataTable[d_DataTable] :=
+  MakeDataTable[MapThread[List,{DepVar[d],IndVar[d]}]];
 
 End[];
 
