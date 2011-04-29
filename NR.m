@@ -738,7 +738,8 @@ GridSpacingOnLevel[runName_, l_] :=
 
 ReadCoarseGridSpacing[runName_] :=
   Module[{h0},
-    h0 = ToExpression[LookupParameter[runName, "Coordinates::h_cartesian"]]
+    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
+      LookupParameter[runName, "Coordinates::h_cartesian", $Failed]]]
   ];
 
 ReadAngularPoints[runName_] :=
