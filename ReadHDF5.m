@@ -8,7 +8,7 @@ ShowHDF5Progress::usage = "ShowHDF5Progress is a boolean variable indicating whe
 Begin["`Private`"];
 
 (* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
-$h5mma = If[Quiet[Get["h5mma`"]]===$Failed, False, True];
+$h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
 If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 ShowHDF5Progress = False;
