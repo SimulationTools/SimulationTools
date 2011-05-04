@@ -17,13 +17,28 @@ Begin["`Private`"];
 (* Compute the spin-weighted spherical harmonic sYlm(th,ph).  This is
    taken from Goldberg et al. and as such does not include the
    Cordon-Shortley phase.  This is the opposite convention to
-   Mathematica's SphericalHarmonicY, which does include the phase. *)
-spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] = 
+   Mathematica's SphericalHarmonicY, which does include the phase.
+
+   When putting the below into Mathematica, it simplifies the expression
+   to something it can handle more easily. We use this simplified expression
+   in the actual definition.
+
+spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
   (Factorial[l + m] Factorial[
        l - m] (2 l + 1) Factorial[l + s]^(-1) Factorial[
         l - s]^(-1) (4 Pi)^(-1))^(1/2) (Sin[th/2])^(2 l) Sum[
     Binomial[l - s, r] Binomial[l + s, r + s - m] (-1)^(l - r - s) Exp[
       I m ph] Cot[th/2]^(2 r + s - m), {r, Max[m - s, 0], Min[l - s, l + m]}];
+*)
+
+spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
+  (Sqrt[((1 + 2*l)*(l - m)!*(l + m)!)/((l - s)!*(l + s)!)]*
+  Piecewise[
+    {{(-1)^(l - s)*E^(I*m*ph)*Binomial[l + s, -m + s]*
+        Cot[th/2]^(-m + s)*HypergeometricPFQ[{-l - m, -l + s}, {1 - m + s}, -Cot[th/2]^2], m <= s}},
+      (-1)^(l - m)*E^(I*m*ph)*Binomial[l - s, m - s]*
+        Cot[th/2]^(m - s)*HypergeometricPFQ[{-l + m, -l - s}, {1 + m - s}, -Cot[th/2]^2]
+  ]*Sin[th/2]^(2*l))/(2*Sqrt[Pi]);
 
 SpeedOfLight = 299792458.;
 
