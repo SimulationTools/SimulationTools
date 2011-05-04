@@ -119,7 +119,7 @@ RedefineAsDataTable[Plus[d1_DataTable, d2_DataTable],
   Profile["dtPlus",
     MapThreadData[Plus[##] &, {d1, d2}]]];
 
-RedefineAsDataTable[Plus[a_Real|a_Integer|a_Complex, d:DataTable[__]],
+RedefineAsDataTable[Plus[a_?NumericQ, d:DataTable[__]],
   MapData[(a + #) &, d]];
 
 RedefineAsDataTable[First[DataTable[l_,___]],
@@ -128,7 +128,7 @@ RedefineAsDataTable[First[DataTable[l_,___]],
 RedefineAsDataTable[Last[DataTable[l_,___]],
   l[[-1]]];
 
-RedefineAsDataTable[Times[a_Real|a_Integer|a_Complex, d:DataTable[__]],
+RedefineAsDataTable[Times[a_?NumericQ, d:DataTable[__]],
   Profile["dtScalarTimes", MapData[a * # &, d]]];
 
 RedefineAsDataTable[Times[d1:DataTable[__], d2:DataTable[__]],
@@ -137,7 +137,7 @@ RedefineAsDataTable[Times[d1:DataTable[__], d2:DataTable[__]],
 RedefineAsDataTable[Dot[d1:DataTable[__], d2:DataTable[__]],
   MapThreadData[Dot, {d1, d2}]];
 
-RedefineAsDataTable[Power[d:DataTable[__], n_Integer],
+RedefineAsDataTable[Power[d:DataTable[__], n_?NumericQ],
   MapData[Power[#,n] &, d]];
 
 RedefineAsDataTable[Power[a_, d:DataTable[__]],
