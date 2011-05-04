@@ -44,7 +44,18 @@ Module[{packages =
   "SimView",
   "SystemStatistics",
   "Tracks"}},
-Scan[Get[# <> "`"] &, packages]]
+
+  packages = Map[#<>"`"&, packages];
+  Unprotect[$Packages];
+  $Packages = Complement[$Packages, packages];
+  Protect[$Packages];
+  Scan[Needs, packages];
+]
 
 (* Load tools which require Mathematica 8 or newer *)
-If[$VersionNumber >= 8, Get["nrmma8`"]];
+If[$VersionNumber >= 8,
+  Unprotect[$Packages];
+  $Packages = Complement[$Packages, {"nrmma8`"}];
+  Protect[$Packages];
+  Needs["nrmma8`"];
+];
