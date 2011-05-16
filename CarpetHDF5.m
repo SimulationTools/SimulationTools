@@ -216,15 +216,14 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   If[strip, MapThread[Strip, {dr, ghosts}], dr]
 ]];
 
-readDatasetFromFile[file_String, var_, it_, map_, rl_, opts___] :=
-  Profile["readDatasetFromFile",
-  Module[{ds,c,name},
+readDatasetsFromFile[file_String, var_, it_, map_, rl_, opts___] :=
+  Profile["readDatasetsFromFile",
+  Module[{ds,cs,names},
     ds=datasetsWith[file, {2->it,4->rl,6->map,1->var}];
     If[Length[ds] === 0, Return[False]];
-    c = ds[[1,5]];
-    name = CarpetHDF5DatasetName[var, it, map, rl, c];
-    Print[name];
-    ReadCarpetHDF5[file, name, opts]]];
+    cs = ds[[All,5]];
+    names = Map[CarpetHDF5DatasetName[var, it, map, rl, #] &, cs];
+    Map[ReadCarpetHDF5[file, #, opts]&, names]]];
 
 ReadCarpetHDF5[file_String, ds_String, opts:OptionsPattern[]] := First[ReadCarpetHDF5[file, {ds}, opts]];
 
@@ -253,7 +252,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
       pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
       fileNames = Profile["FileNames", FileNames[FileNameTake[pattern], DirectoryName[pattern]]];
       components = Flatten[DeleteDuplicates[StringCases[fileNames,"file_"~~x:DigitCharacter..:>ToExpression[x]]]];
-      datasets = Select[Map[readDatasetFromFile[#,var,it,map,rl,opts] &, fileNames], # =!= False&],
+      datasets = Select[Flatten[Map[readDatasetsFromFile[#,var,it,map,rl,opts] &, fileNames]], # =!= False&],
     True,
       datasets={ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
     ];
