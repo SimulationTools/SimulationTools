@@ -28,7 +28,7 @@ FunctionOfPhase;
 Begin["`Private`"];
 
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
-Options[ExportExtrapolatedWaveform] = {JunkTime -> 50};
+Options[ExportExtrapolatedWaveform] = {JunkTime -> None};
 
 ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer, OptionsPattern[]] :=
  Module[{dir, extrap, junkTime, afterjunk, final, dataset},
@@ -41,7 +41,10 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
 
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   junkTime  = OptionValue[JunkTime];
-  afterjunk = ShiftDataTable[-junkTime, DataTableInterval[extrap, {junkTime, All}]];
+  If[!SameQ[junkTime, None],
+    afterjunk = ShiftDataTable[-junkTime, DataTableInterval[extrap, {junkTime, All}]];,
+    afterjunk = extrap;
+  ];
   final     = Join[Re[afterjunk], Im[afterjunk]];
 
   Switch[FileExtension[file],
