@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Ascii1D`", {"DataTable`", "Profile`", "Memo`"}];
+BeginPackage["Ascii1D`", {"DataTable`", "Profile`", "Memo`", "RunFiles`"}];
 
 (* AsciiData1D::usage = "AsciiData1D[fileName] loads the 1D data in
 fileName (which should be in ygraph format) and returns it as a list
@@ -14,7 +14,9 @@ AsciiTimeOfIndex::usage = "AsciiTimeOfIndex[data,i] returns the time,
 t, of the ith element of data where data is in the form {{t, {{x,
 f}...}}...}";
 
-ReadCarpetASCII1D::usage = "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times.";
+ReadCarpetASCII1D::usage = "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of lists of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times, and the outermost list is over refinement levels.";
+
+ReadCarpetASCII1DFromRun::usage = "UNTESTED!! ReadCarpetASCII1DFromRun[run, filename, rl, dir] reads a 1D CarpetIOASCII output file from filename in run.  The function returns a single refinement level rl from the file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times.";
 
 Begin["`Private`"];
 
@@ -112,6 +114,10 @@ ReadCarpetASCII1D[fileName_, dir_:1] :=
 (*  prls = MapThread[List, {rls, processLevel /@ levels}];*)
   prls = processLevel /@ levels;
   Return[prls]]];
+
+(* This function is untested *)
+ReadCarpetASCII1DFromRun[run_, fileName_, rl_:0, dir_:1] :=
+  Flatten[Map[ReadCarpetASCII1D[#, dir][[rl+1]] &, FindRunFile[run, fileName]], 1];
 
 MGraph[data__] :=
   Manipulate[
