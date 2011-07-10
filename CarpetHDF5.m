@@ -230,7 +230,7 @@ ReadCarpetHDF5[file_String, ds_String, opts:OptionsPattern[]] := First[ReadCarpe
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
   Profile["ReadCarpetHDF5Components",
-  Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components},
+  Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components, directory, leaf, leafPrefix},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
 
@@ -248,10 +248,11 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
 		  ];,
 
     StringMatchQ[file, MultiFile],
-      filePrefix = StringReplace[file, ".file_0.h5" -> ""];
-      pattern = StringReplace[file, ".file_0.h5" -> ".file_*.h5"];
-      fileNames = Profile["FileNames", FileNames[FileNameTake[pattern], DirectoryName[pattern]]];
-      components = Flatten[DeleteDuplicates[StringCases[fileNames,"file_"~~x:DigitCharacter..:>ToExpression[x]]]];
+      directory = DirectoryName[file];
+      leaf = FileNameTake[file];
+      leafPrefix = StringReplace[leaf, ".file_0.h5" -> ""];
+      pattern = leafPrefix ~~ ".file_" ~~ DigitCharacter.. ~~ ".h5";
+      fileNames = Profile["FileNames", FileNames[pattern, {directory}]];
       datasets = Select[Flatten[Map[readDatasetsFromFile[#,var,it,map,rl,opts] &, fileNames]], # =!= False&],
     True,
       datasets={ReadCarpetHDF5[file, CarpetHDF5DatasetName[var, it, map, rl, None], opts]};
