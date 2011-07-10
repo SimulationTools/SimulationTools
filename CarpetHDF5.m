@@ -219,7 +219,7 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 readDatasetsFromFile[file_String, var_, it_, map_, rl_, opts___] :=
   Profile["readDatasetsFromFile",
   Module[{ds,cs,names},
-    ds=datasetsWith[file, {2->it,4->rl,6->map,1->var}];
+    ds=datasetsWith[file, {2->it,4->rl,6->(map/.None->Null),1->var}];
     If[Length[ds] === 0, Return[False]];
     cs = ds[[All,5]];
     names = Map[CarpetHDF5DatasetName[var, it, map, rl, #] &, cs];
