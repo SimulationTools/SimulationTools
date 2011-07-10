@@ -64,10 +64,10 @@ DefineMemoFunction[datasetAttributes[file_],
     Profile["datasetAttributes/Replace1",
     dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules];
 
-    (* If an attribute isn't found for a dataset, set it to Null *)
+    (* If an attribute isn't found for a dataset, set it to None *)
     Profile["datasetAttributes/Replace2",
-    dsattrs = dsattrs /. {"var" -> Null, "it" -> Null, "tl" -> Null,
-                          "rl" -> Null, "c" -> Null, "m" -> Null}];
+    dsattrs = dsattrs /. {"var" -> None, "it" -> None, "tl" -> None,
+                          "rl" -> None, "c" -> None, "m" -> None}];
 
     dsattrs]
   ]
@@ -86,7 +86,7 @@ datasetsWith[file_String, attr_List] :=
     Cases[datasetAttributes[file], pattern]];
 
 datasetAttribute[datasets_List, attr_] :=
-  Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[Null]]];
+  Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[None]]];
 
 datasetAttribute[file_String, attr_] :=
   datasetAttribute[datasetAttributes[file], attr];
@@ -153,10 +153,10 @@ CarpetHDF5Attributes[file_String, var_String, map:(None | _Integer), rl_Integer,
   dsList =
    Profile["datasetsWith", datasetsWith[
      file, {1 -> var , 2 -> it, 4 -> rl,
-      6 -> (map /. None -> Null) }]];
+      6 -> map}]];
   If[dsList === {}, Throw["Cannot find dataset in file"]];
   ds = First[dsList];
-  c = ds[[5]] /. Null -> None;
+  c = ds[[5]];
   dsName = CarpetHDF5DatasetName[var, it, map, rl, c];
   Annotations[file, dsName]]];
 
@@ -219,7 +219,7 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 readDatasetsFromFile[file_String, var_, it_, map_, rl_, opts___] :=
   Profile["readDatasetsFromFile",
   Module[{ds,cs,names},
-    ds=datasetsWith[file, {2->it,4->rl,6->(map/.None->Null),1->var}];
+    ds=datasetsWith[file, {2->it,4->rl,6->map,1->var}];
     If[Length[ds] === 0, Return[False]];
     cs = ds[[All,5]];
     names = Map[CarpetHDF5DatasetName[var, it, map, rl, #] &, cs];
