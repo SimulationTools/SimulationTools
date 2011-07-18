@@ -55,6 +55,7 @@ Begin["`Private`"];
 
 (* DataRegion object low-level implementation; this is where we define
    the internal format of a DataRegion object. *)
+SetAttributes[DataRegion, NHoldFirst];
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
   DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims], Time -> time}, Developer`ToPackedArray[data]];
