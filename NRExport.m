@@ -30,6 +30,21 @@ Begin["`Private`"];
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
 Options[ExportExtrapolatedWaveform] = {JunkTime -> None};
 
+fileExtension[file_] :=
+  Module[{ext},
+  ext = FileExtension[file];
+  If[ext == "gz",
+    ext = FileExtension[FileBaseName[file]]<>".gz"];
+  ext];
+
+fileBaseName[file_] :=
+  Module[{ext, base},
+  ext = FileExtension[file];
+  base = FileBaseName[file];
+  If[ext == "gz",
+    base = FileBaseName[FileBaseName[file]]];
+  base];
+
 ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer, OptionsPattern[]] :=
  Module[{dir, extrap, junkTime, afterjunk, final, dataset},
   dir = DirectoryName[file];
@@ -47,14 +62,14 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
   ];
   final     = Join[Re[afterjunk], Im[afterjunk]];
 
-  Switch[FileExtension[file],
+  Switch[fileExtension[file],
   "h5",
     dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_rinf";
     Export[file, final, {"Datasets", dataset}, "Append"->True];,
   "asc",
     Export[file, final, "TABLE"];,
   _,
-    Throw["Unsupported file format"];
+    Throw["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -63,19 +78,19 @@ ExportAllExtrapolatedWaveforms[run_String, file_String, mass_] :=
   dir = DirectoryName[file];
   modes = ReadPsi4Modes[run];
 
-  Switch[FileExtension[file],
-  "asc",
-    files=(dir<>FileBaseName[file]<>"_l"<>ToString[#[[1]]]<>"_m"<>ToString[#[[2]]]<>"_rinf.asc" &) /@ modes;
+  Switch[fileExtension[file],
+  "asc"|"asc.gz",
+    files=(dir<>fileBaseName[file]<>"_l"<>ToString[#[[1]]]<>"_m"<>ToString[#[[2]]]<>"_rinf."<>fileExtension[file] &) /@ modes;
     MapThread[ExportExtrapolatedWaveform[run, #1, mass, Sequence@@#2]&, {files, modes}];,
   "h5",
     (ExportExtrapolatedWaveform[run, file, mass, Sequence@@#]&) /@ modes;,
   _,
-    Throw["Unsupported file format"];
+    Throw["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
 ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, rad_] :=
- Module[{dir, psi4, final, dataset},
+ Module[{dir, psi4, final, dataset, ext},
   dir = DirectoryName[file];
   If[dir=!="" && FileType[dir]=!=Directory,
     CreateDirectory[dir];
@@ -86,14 +101,16 @@ ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, rad_] :=
   psi4  = ReadPsi4[run, l, m, Round[rad]];
   final = Join[Re[psi4], Im[psi4]];
 
-  Switch[FileExtension[file],
+  Switch[fileExtension[file],
   "h5",
     dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad];
     Export[file, final, {"Datasets", dataset}, "Append"->True];,
   "asc",
     Export[file, final, "TABLE"];,
+  "asc.gz",
+    Export[file, final, {"GZIP", "TABLE"}];,
   _,
-    Throw["Unsupported file format"];
+    Throw["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -104,14 +121,16 @@ ExportAllExtractedWaveforms[run_String, file_String] :=
   modes = ReadPsi4Modes[run];
   allwaveforms = Flatten[Outer[Join, modes, List/@radii, 1], 1];
 
-  Switch[FileExtension[file],
-  "asc",
-    files = (dir<>FileBaseName[file]<>"_l"<>ToString[#1[[1]]]<>"_m"<>ToString[#1[[2]]]<>"_r"<>ToString[#1[[3]]]<>".asc"&) /@ allwaveforms;
+
+
+  Switch[fileExtension[file],
+  "asc"|"asc.gz",
+    files = (dir<>fileBaseName[file]<>"_l"<>ToString[#1[[1]]]<>"_m"<>ToString[#1[[2]]]<>"_r"<>ToString[#1[[3]]]<>"."<>fileExtension[file]&) /@ allwaveforms;
    MapThread[ExportExtractedWaveform[run, #1, Sequence@@#2]&, {files, allwaveforms}];,
   "h5",
     ExportExtractedWaveform[run, file, Sequence@@#1]& /@ allwaveforms;,
   _,
-    Throw["Unsupported file format"];
+    Throw["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -135,10 +154,12 @@ ExportTrajectories[run_String, file_String] :=
   (* We don't know how to get the momenta - set them to 0 *)
   p = MakeDataTable[({#, {0,0,0}}&) /@ IndVar[punc0]];
 
-  Switch[FileExtension[file],
+  combined = Join[punc0, punc1, p, p, spin0, spin1];
+  Switch[fileExtension[file],
   "asc",
-    combined = Join[punc0, punc1, p, p, spin0, spin1];
     Export[file, combined, "TABLE"];,
+  "asc.gz",
+    Export[file, combined, {"GZIP", "TABLE"}];,
   "h5",
     Export[file, punc0, {"Datasets", "Trajectory0"}, "Append"->True];
     Export[file, punc1, {"Datasets", "Trajectory1"}, "Append"->True];
@@ -147,7 +168,7 @@ ExportTrajectories[run_String, file_String] :=
     Export[file, spin0, {"Datasets", "Spin0"}, "Append"->True];
     Export[file, spin1, {"Datasets", "Spin1"}, "Append"->True];,
   _,
-    Throw["Unsupported file format"];
+    Throw["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
