@@ -133,16 +133,37 @@ RunDirectory := Global`RunDirectory;
   Reading Subscript[\[Psi], 4]
   --------------------------------------------------------------------*)
 
-ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ, OptionsPattern[]] :=
-  Module[{psi4},
+ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic, OptionsPattern[]] :=
+  Module[{psi4, radii, radString},
+
+  (* Get a list of radii available in the form expr -> "exprstring" *)
+  radii = Thread[ReadPsi4Radii[runName] -> ReadPsi4RadiiStrings[runName]];
+
+  If[radii == Null,
+    Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
+  ];
+
+  (* Which radius to read: Automatic=first available, Infinity, or a number *)
+  Which[
+    rad === Automatic,
+      radString = radii[[1,2]],
+    (rad === Infinity) && ((Infinity /. radii) === "inf"),
+      radString = "inf",
+    NumberQ[rad] && (Select[radii[[All,1]], NumberQ] =!= {}),
+      radString = First[Nearest[radii, rad]],
+    True,
+      Throw["Radius "<>ToString[rad]<>" not found."];
+  ];
+
+  (* Read the actual data *)
   If[OptionValue[ReadPsi4From] === Automatic,
     Which[
       HaveMultipoleHDF5[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleHDF5[runName, MultipolePsi4Variable, l, m, rad];,
+        psi4 = ReadMultipoleHDF5[runName, MultipolePsi4Variable, l, m, radString];,
       HaveYlmDecomp[runName, YlmDecompPsi4Variable],
-        psi4 = ReadYlmDecomp[runName, YlmDecompPsi4Variable, l, m, rad];,
+        psi4 = ReadYlmDecomp[runName, YlmDecompPsi4Variable, l, m, radString];,
       HaveMultipoleASCII[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleASCII[runName, MultipolePsi4Variable, l, m, rad];,
+        psi4 = ReadMultipoleASCII[runName, MultipolePsi4Variable, l, m, radString];,
       True,
         Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
     ];
@@ -150,17 +171,17 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ, OptionsPattern[]]
     Switch[OptionValue[ReadPsi4From],
       "MultipoleHDF5",
       If[HaveMultipoleHDF5[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleHDF5[runName, MultipolePsi4Variable, l, m, rad];,
+        psi4 = ReadMultipoleHDF5[runName, MultipolePsi4Variable, l, m, radString];,
         Throw["Multipole HDF5 data not available for run "<>runName];
       ];,
       "MultipoleASCII",
       If[HaveMultipoleASCII[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleASCII[runName, MultipolePsi4Variable, l, m, rad];,
+        psi4 = ReadMultipoleASCII[runName, MultipolePsi4Variable, l, m, radString];,
         Throw["Multipole ASCII data not available for run "<>runName];
       ];,
       "YlmDecomp",
       If[HaveYlmDecomp[runName, YlmDecompPsi4Variable],
-        psi4 = ReadYlmDecomp[runName, YlmDecompPsi4Variable, l, m, rad];,
+        psi4 = ReadYlmDecomp[runName, YlmDecompPsi4Variable, l, m, radString];,
         Throw["YlmDecomp data not available for run "<>runName];
       ];,
       _,
@@ -171,32 +192,29 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ, OptionsPattern[]]
   psi4
 ];
 
-DefineMemoFunction[ReadYlmDecomp[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
+DefineMemoFunction[ReadYlmDecomp[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
   Module[{fileName, threeCols, psi4},
     fileName = "Ylm_WEYLSCAL4::"<>var<>"r_l" <>
-             ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
-             ToString[rad] <> ".00.asc";
+             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
 ];
 
-DefineMemoFunction[ReadMultipoleASCII[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
+DefineMemoFunction[ReadMultipoleASCII[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
   Module[{fileName, threeCols, psi4},
     fileName = "mp_"<>var<>"_l" <>
-             ToString[l] <> "_m" <> ToString[m] <> "_r" <> 
-             ToString[rad] <> ".00.asc";
+             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
 ];
 
-DefineMemoFunction[ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_?NumberQ],
-  Module[{fileName, datasetName, files, data, psi4},
-    fileName = "mp_"<>var<>".h5";
-    datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <>
-             ToString[rad] <> ".00";
-    files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, FindRunFile[runName, fileName]];
+DefineMemoFunction[ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
+  Module[{fileName, datasetName, runFiles, files, data, psi4},
+    runFiles = MultipoleHDF5Files[runName, var];
+    datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
+    files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, runFiles];
     data = MergeFiles[files];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
@@ -218,7 +236,10 @@ ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
   phase =
    DataTableInterval[Phase[psi4], {rAmpTb[[1, 1]] - 100.0, t2}]];
 
-ReadPsi4Radii[runName_] :=
+(* Return a list of radii available *)
+ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
+
+ReadPsi4RadiiStrings[runName_] :=
   Module[{mpl},
   Which[
     Length[mpl = ReadMultipoleHDF5Radii[runName, MultipolePsi4Variable]] != 0,
@@ -234,36 +255,33 @@ ReadPsi4Radii[runName_] :=
 
 DefineMemoFunction[ReadYlmDecompRadii[runName_, var_],
   Module[{names, radiusFromFileName, radii},
-    names = FindRunFilesFromPattern[runName, 
-      "Ylm_WEYLSCAL4::"<>var<>"r_l*_m*_r*.asc"];
+    names = YlmDecompFiles[runName, var];
     radiusFromFileName[name_] :=
-      Round[ToExpression[
-        StringReplace[name,
-          "Ylm_WEYLSCAL4::"<>var<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
-          ~~ x__ ~~ ".asc" -> x]]];
-    radii = Union[Map[radiusFromFileName, names]]]
+      StringReplace[name,
+        "Ylm_WEYLSCAL4::"<>var<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+        ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
+    radii = Sort[Union[Map[radiusFromFileName, names]]]]
 ];
 
 DefineMemoFunction[ReadMultipoleASCIIRadii[runName_, var_],
   Module[{names, radiusFromFileName, radii},
-    names = FindRunFilesFromPattern[runName, 
-      "mp_"<>var<>"_l*_m*_r*.asc"];
+    names = MultipoleASCIIFiles[runName, var];
     radiusFromFileName[name_] :=
-      Round[ToExpression[
-        StringReplace[name,
-          "mp_"<>var<>"_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
-          ~~ x__ ~~ ".asc" -> x]]];
-    radii = Union[Map[radiusFromFileName, names]]]
+      StringReplace[name,
+        "mp_"<>var<>"_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+        ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
+    radii = Sort[Union[Map[radiusFromFileName, names]]]]
 ];
 
 DefineMemoFunction[ReadMultipoleHDF5Radii[runName_, var_],
   Module[{datasets, radii},
-    datasets = Union@@Map[ReadHDF5[#] &, FindRunFile[runName, "mp_"<>var<>".h5"]];
-    radii = Sort[Round /@ ToExpression /@ (Union@@StringCases[datasets, "r" ~~ x : NumberString :> x])];
+    datasets = Union@@Map[ReadHDF5[#] &, MultipoleHDF5Files[runName, var]];
+    radii = Sort[(Union@@StringCases[datasets, "r" ~~ x : (NumberString|"inf") :> x])];
     radii
   ]
 ];
 
+(* Check if modes are available as Multipole HDF5, Multipole ASCII or YlmDecomp *)
 HaveYlmDecomp[runName_, var_] :=
   ReadYlmDecompRadii[runName, var] =!= {};
 
@@ -273,6 +291,7 @@ HaveMultipoleASCII[runName_, var_] :=
 HaveMultipoleHDF5[runName_, var_] :=
   ReadMultipoleHDF5Radii[runName, var] =!= {};
 
+(* Return a list of (l, m) modes available *)
 ReadPsi4Modes[runName_] :=
   Module[{mpl},
   Which[
@@ -289,16 +308,16 @@ ReadPsi4Modes[runName_] :=
 
 DefineMemoFunction[ReadYlmDecompModes[runName_, var_],
   Module[{names, modes},
-   names = FindRunFilesFromPattern[runName,
-     "Ylm_WEYLSCAL4::"<>var<>"r_l*_m*_r*.asc"];
-   modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
-   modes
+    names = YlmDecompFiles[runName, var];
+    modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names,
+      "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
+    modes
   ]
 ];
 
 DefineMemoFunction[ReadMultipoleASCIIModes[runName_, var_],
   Module[{names, modes},
-   names = FindRunFilesFromPattern[runName, "mp_"<>var<>"_l*_m*_r*.asc"];
+   names = MultipoleASCIIFiles[runName, var];
    modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
    modes
   ]
@@ -306,11 +325,43 @@ DefineMemoFunction[ReadMultipoleASCIIModes[runName_, var_],
 
 DefineMemoFunction[ReadMultipoleHDF5Modes[runName_, var_],
   Module[{datasets, modes},
-    datasets = Union@@Map[ReadHDF5[#] &, FindRunFile[runName, "mp_"<>var<>".h5"]];
+    datasets = Union@@Map[ReadHDF5, MultipoleHDF5Files[runName, var]];
     modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[datasets, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
     modes
   ]
 ];
+
+(* Return a list of files for the variable 'var' in 'runName'. 'runName' may
+ * be a SimFactory run, a directory or a single file *)
+YlmDecompFiles[runName_, var_, l_:"*", m_:"*", r_:"*"] := Module[{runFiles},
+  If[FileType[runName]===File,
+      runFiles = {runName},
+      runFiles = FindRunFilesFromPattern[runName,
+        "Ylm_WEYLSCAL4::"<>var<>"r_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"];
+  ];
+
+  runFiles
+];
+
+MultipoleASCIIFiles[runName_, var_, l_:"*", m_:"*", r_:"*"] := Module[{runFiles},
+  If[FileType[runName]===File,
+      runFiles = {runName},
+      runFiles = FindRunFilesFromPattern[runName,
+        "mp_"<>var<>"_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"];
+  ];
+
+  runFiles
+];
+
+MultipoleHDF5Files[runName_, var_] := Module[{runFiles},
+  If[FileType[runName]===File,
+      runFiles = {runName},
+      runFiles = FindRunFile[runName, "mp_"<>var<>".h5"];
+  ];
+
+  runFiles
+];
+
 
 ReadADMMass[runName_String] :=
   Module[{massMDFiles, output, lines},
