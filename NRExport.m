@@ -16,6 +16,8 @@ ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all ext
 
 ExportTrajectories::usage = "ExportTrajectories[run, file] exports trajectory and spin information for run to file.";
 
+ExportLocalQuantity;
+
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export."
 
 ExportWaveform;
@@ -24,6 +26,8 @@ ExportBHRelativeCoords;
 ExportRun::usage = "ExportRun[run, dir] exports run to dir";
 ExportGridStructure;
 FunctionOfPhase;
+Coordinates;
+Spin;
 
 Begin["`Private`"];
 
@@ -171,6 +175,38 @@ ExportTrajectories[run_String, file_String] :=
     Throw["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
+
+ExportLocalQuantity[run_String, what_, i_, file_String] :=
+ Module[{dir, punc0, punc1, p, spin0, spin1, combined, f},
+  dir = DirectoryName[file];
+  If[dir=!="" && FileType[dir]=!=Directory,
+    CreateDirectory[dir];
+  ];
+
+  ExportStatus = "Exporting " <> ToString[what] <> " data for "<>run<>" to "<>file;
+
+  f = Switch[what, Coordinates, ReadBHCoordinates[run, i-1], Spin, ReadIsolatedHorizonSpin[run, i-1]];
+
+  Switch[fileExtension[file],
+  "asc",
+    Export[file, f, "TABLE"];,
+  "asc.gz",
+    Export[file, f, {"GZIP", "TABLE"}];,
+  "h5",
+  Throw["Unsupported"],
+(*     Export[file, f0, {"Datasets", "Trajectory0"}, "Append"->True]; *)
+(*     Export[file, f1, {"Datasets", "Trajectory1"}, "Append"->True]; *)
+(*     Export[file, p, {"Datasets", "Momentum0"}, "Append"->True]; *)
+(*     Export[file, p, {"Datasets", "Momentum1"}, "Append"->True]; *)
+(*     Export[file, spin0, {"Datasets", "Spin0"}, "Append"->True]; *)
+(*     Export[file, spin1, {"Datasets", "Spin1"}, "Append"->True];, *)
+  _,
+    Throw["Unsupported file format: "<>fileExtension[file]];
+  ];
+];
+
+
+
 
 (******** DEPRECATED ********)
 ExportWaveform[run_String, dir_String, l_Integer, m_Integer, 
