@@ -15,7 +15,7 @@ ReadMultipoleHDF5::usage = "ReadMultipoleHDF5[run, var, l, m, r] returns a DataT
 ReadMultipoleASCII::usage = "ReadMultipoleASCII[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the ASCII output of the Multipole thorn.";
 ReadYlmDecomp::usage = "ReadYlmDecomp[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the YlmDecomp output from the WeylScal4 thorn.";
 
-ReadPsi4RadiiStrings::usage =  = "ReadPsi4RadiiStrings[run] returns a list of the radii (in original string form) at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
+ReadPsi4RadiiStrings::usage = "ReadPsi4RadiiStrings[run] returns a list of the radii (in original string form) at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
 ReadPsi4Radii::usage = "ReadPsi4Radii[run] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
 ReadMultipoleHDF5Radii::usage = "ReadMultipoleHDF5Radii[run, var] returns a list of the radii at which the modes of var are available in run.";
 ReadMultipoleASCIIRadii::usage = "ReadMultipoleASCIIRadii[run, var] returns a list of the radii at which the modes of var are available in run.";
