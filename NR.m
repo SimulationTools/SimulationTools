@@ -195,7 +195,7 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic, OptionsPattern[
 DefineMemoFunction[ReadYlmDecomp[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
   Module[{fileName, threeCols, psi4},
     fileName = "Ylm_WEYLSCAL4::"<>var<>"r_l" <>
-             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
+             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
@@ -204,7 +204,7 @@ DefineMemoFunction[ReadYlmDecomp[runName_String, var_String, l_?NumberQ, m_?Numb
 DefineMemoFunction[ReadMultipoleASCII[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
   Module[{fileName, threeCols, psi4},
     fileName = "mp_"<>var<>"_l" <>
-             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
+             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
