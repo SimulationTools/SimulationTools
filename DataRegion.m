@@ -609,6 +609,18 @@ ListLinePlot[d:DataRegion[___], opts___] :=
 
 Protect[ListLinePlot];
 
+Unprotect[ListPlot];
+
+ListPlot[ds:List[DataRegion[___]..], opts___] :=
+  ListPlot[ToList /@ ToDataTable /@ ds, opts];
+
+ListPlot[d:DataRegion[___], opts___] :=
+   ListPlot[{d}, opts];
+
+Protect[ListPlot];
+
+
+
 (* Take a list of elements of the form {x,y,..., f} and convert it to
    a DataRegion. It is assumed (and not checked) that the data grid is
    regular.  *)
