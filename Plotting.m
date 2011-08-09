@@ -20,6 +20,7 @@ LegendLineSize;
 PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
 PlotKey;
 DynamicArrayPlot;
+FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with paramters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
 
 Begin["`Private`"];
 
@@ -282,6 +283,26 @@ PlotFit[data_, model_, pars_, var_, args___] :=
     Plot[fittedModel, {h, 0, Max[First /@ data]}, PlotRange -> {{0,0.6},{-50,-40}}],
     PlotLabel -> First[pars] /. fit, args, ImageSize -> 400,PlotRange->{{0,0.6},{-50,-40}}], fit}];
 
+FitPlot[data_DataTable, model_, pars_, {t_, t1p_, t2p_}, opts___] :=
+ DynamicModule[
+  {tMax = DataTableRange[data][[2]],
+   dMin = Min[DepVar[data]],
+   dMax = Max[DepVar[data]]},
+  Manipulate[
+   Module[
+    {fit = Quiet[Check[
+        FindFit[ToList@DataTableInterval[data, {t1, t2}], model,
+         pars, t],
+        Map[If[ListQ[#], #[[1]], #] -> 0 &, pars], {FindFit::cvmit, 
+         FindFit::sszero}], {FindFit::cvmit, FindFit::sszero}]},
+    Show[
+     DataTableListLinePlot[data, opts],
+     Plot[Evaluate[model /. fit], {t, 0, tMax}, PlotStyle -> Red],
+     Graphics[{{Dashed, Line[{{t1, dMin}, {t1, dMax}}], 
+        Line[{{t2, dMin}, {t2, dMax}}]}}],
+     PlotLabel -> Column[fit]]],
+   {{t1, t1p}, 0, tMax}, {{t2, t2p}, 0, tMax},
+   SaveDefinitions -> True]];
 
 key[mapName_String, {min_, max_}, opts___] :=
   ArrayPlot[Table[{c, c}, {c, max, min, -(max - min)/100}],
