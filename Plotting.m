@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Plotting`", {"DataRegion`"}];
+BeginPackage["Plotting`", {"DataRegion`", "DataTable`"}];
 
 MakePlotLegend;
 ListLinePlotWithLegend;
@@ -21,6 +21,7 @@ PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as Fi
 PlotKey;
 DynamicArrayPlot;
 FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with paramters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
+FilterPlot::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out.";
 
 Begin["`Private`"];
 
@@ -332,6 +333,30 @@ PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
     If[OptionValue[PlotKey],
       Row[{plot,keyPlot}],
       plot]];
+
+SetAttributes[FilterPlot, HoldAll];
+
+FilterPlot[data_, data2p_, omCutOff0_, {t10_, t20_}, opts___] :=
+ DynamicModule[{tMin, tMax, omMax, data2},
+  {tMin, tMax} = DataTableRange[data];
+  omMax = Length[data]*2 Pi/(tMax - tMin)/4;
+  (* The very high frequencies are never useful, so we go to omMax/4 *)
+  data2p = {};
+  Manipulate[
+   Module[{nModes, T, om0, maxModes, om1},
+    T = t2 - t1 + 100;
+    om0 = 2 Pi/T;
+    nModes = Floor[omCutOff/om0];
+    data2 = FilterDCT[data, nModes, {t1 - 50, t2 + 50}, {t1, t2}];
+    If[data2p === {}, data2p = data2];
+    Show[DataTableListLinePlot[{data, data2}, 
+      PlotStyle -> {LightGray, Darker[Blue]}, opts], 
+     Graphics[{{Dashed, Line[{{t1, -1000}, {t1, 1000}}], 
+        Line[{{t2, -1000}, {t2, 1000}}]}}]]], {{omCutOff, omCutOff0}, 
+    0, omMax}, {{t1, t10}, 0, tMax}, {{t2, t20}, 0, tMax},
+   Button["Update " <> ToString[Unevaluated[data2p]], 
+    data2p = data2],
+   SaveDefinitions -> True, ContinuousAction -> False]];
 
 End[];
 
