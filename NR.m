@@ -56,6 +56,7 @@ LocateMaximum;
 LocateMaximumPoint;
 GridSpacingOnLevel;
 BoxRadiiOnLevel;
+BoxRadiiForCentre;
 RefinementLevels;
 GridStructure;
 FinestGridSpacing;
@@ -821,6 +822,15 @@ BoxRadiiOnLevel[runName_, l_] :=
       params = FindParameters[runName, "carpetregrid2::radius_*" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"]];
 
     Map[ToExpression[LookupParameter[runName, #]] &, params]
+  ];
+
+BoxRadiiForCentre[runName_, c_] :=
+  Module[{params},
+    (* If[l == 0, Return[{ToExpression[LookupParameter[runName, "CoordBase::xmax"]]}]]; *)
+    params = FindParameters[runName, "carpetregrid2::radius_"<>ToString[c] ~~ (Whitespace | "") ~~ "[*]"];
+
+    Prepend[Map[{ToExpression@StringReplace[#, __ ~~ "[" ~~ n__ ~~ "]" -> n],
+         ToExpression[LookupParameter[runName, #]]} &, params], {0, ReadOuterBoundary[runName]}]
   ];
 
 CountRefinementLevels[runName_String] :=
