@@ -13,6 +13,8 @@ ParseTimersFileFromRunCore;
 FindTimersFromRun;
 ChartEvolutionTimersFromRun;
 CollectTimers;
+ReadAllTimers;
+ReadAllTimerIterations;
 
 CTGammaTimerCollections =
 {"CTGamma RHS" -> {"CTGEvolution: CTGEvolution_CalcRHS_detg",
@@ -96,6 +98,32 @@ collectTimers1[timers_, collectionName_ -> (members_List)] :=
 CollectTimers[timers_, cols_List] :=
  If[Length[cols] === 0, timers,
   CollectTimers[collectTimers1[timers, First[cols]], Drop[cols, 1]]]
+
+(* New AllTimers output - incompatible with the above functions *)
+
+DefineMemoFunction[ReadAllTimers[run_, it_: Automatic],
+ Module[{timerTable, columnHeadings, lastData, lastTimers, collect},
+  timerTable = Import[FindRunFile[run, "AllTimers.tsv"][[1]]];
+  columnHeadings = Last@Select[timerTable, First[#] === "iteration" &];
+  lastData = 
+   If[it === Automatic, Last[timerTable], 
+    Last@Select[timerTable, #[[1]] === it &]];
+  lastTimers = 
+   Thread[{columnHeadings, 
+      Take[lastData, Length[columnHeadings]]}][[3 ;; All]];
+  collect[
+    ts_] :=
+   {StringReplace[ts[[1, 1]], 
+     x__ ~~ " (average)" ~~ EndOfString :> x], Map[Last, ts]};
+  Map[collect, Partition[lastTimers, 3]]]];
+
+DefineMemoFunction[ReadAllTimerIterations[run_, it_: Automatic],
+ Module[{timerTable, data},
+  timerTable = Import[FindRunFile[run, "AllTimers.tsv"][[1]]];
+  data = Select[timerTable, NumberQ[First[#]] &];
+  Map[First, data]]];
+
+
 
 End[];
 
