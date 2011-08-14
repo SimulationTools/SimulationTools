@@ -177,6 +177,10 @@ DataTable /: Total[d_DataTable] := Total[DepVar[d]];
 
 DataTable /: Max[d_DataTable] := Max[DepVar[d]];
 
+DataTable /: Min[d_DataTable] := Min[DepVar[d]];
+
+DataTable /: Mean[d_DataTable] := Mean[DepVar[d]];
+
 DataTable /: PadRight[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
     First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
