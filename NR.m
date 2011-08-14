@@ -30,6 +30,9 @@ Options[ReadPsi4] = {ReadPsi4From -> Automatic};
 MultipolePsi4Variable = "psi4";
 YlmDecompPsi4Variable = "Psi4";
 
+StrainFromPsi4::usage = "StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] converts a DataTable containing \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)[t] into strain and its time derivative, {h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\).
+StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), {\!\(\*SubscriptBox[\(t\), \(start\)]\), \!\(\*SubscriptBox[\(t\), \(end\)]\)}] converts using time domain integration.";
+
 
 ExtrapolateScalarFull;
 ExtrapolateScalar;
@@ -50,7 +53,6 @@ ApplyToPhases;
 ExtrapolationError;
 ExtrapolatePsi4Amplitude;
 ExtrapolatePsi4;
-StrainFromPsi4;
 FitFunction;
 LocateMaximum;
 LocateMaximumPoint;
@@ -585,7 +587,25 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
     psi4];
 *)
 
-StrainFromPsi4[psi4_DataTable, range_:All] :=
+ffi[{f_, d_}, f0_] :=
+ Module[{div},
+  If[f > f0,
+    div = 2 Pi I f;,
+    div = 2 Pi I f0;
+  ];
+  {f, d/div}
+];
+
+StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
+ Module[{psi4f, dhf, hf, dh, h},
+  psi4f = Fourier[psi4];
+  dhf = Map[ffi[#, f0 / (2 Pi)] &, psi4f];
+  hf  = Map[ffi[#, f0 / (2 Pi)] &, dhf];
+  {h, dh} = InverseFourier /@ {hf, dhf};
+  {h, dh}
+]
+
+StrainFromPsi4[psi4_DataTable, range:(_List | All)] :=
   Module[{range2},
     range2 = If[range === All,
      DataTableRange[psi4],
