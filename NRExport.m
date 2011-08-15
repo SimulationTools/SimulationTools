@@ -7,7 +7,7 @@ BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Horizons`", "NR`"}];
 
 ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
 ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform and ExportAllExtrapolatedWaveforms which specifies how much to cut off from the start of a waveform to eliminate junk radiation.";
+JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts.";
 
 ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
 ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] extrapolats all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
@@ -18,7 +18,11 @@ ExportTrajectories::usage = "ExportTrajectories[run, file] exports trajectory an
 
 ExportLocalQuantity;
 
-ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export."
+ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
+
+ExportMetadata::usage = "ExportMetadataFile[file, run, mass, ecc] exports the metadata for run to file.";
+ExportSim::usage = "ExportSim[run, niceName, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
+ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 
 ExportWaveform;
 ExportBHCoords;
@@ -266,6 +270,119 @@ ExportGridStructure[run_String, dir_String] :=
   If[FileType[dir] =!= Directory, CreateDirectory[dir]];
   Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
 
+
+(* Run metadata *)
+coord[d_] :=
+ {"x", "y", "z"}[[d]];
+
+runMetadata[run_, mass_, ecc_, tJunk_] :=
+ Module[{M = TotalMass[run]},
+  {"comments" -> "",
+   "documentation" -> "",
+   "publication" -> "",
+   "authors-tag" -> "aei",
+   "submitter-email" -> "ian.hinder@aei.mpg.de",
+   "code" -> "Llama/CTGamma",
+   "code-version"->"",
+   "code-bibtex-keys" -> "",
+   "evolution-system" -> "BSSN",
+   "evolution-gauge" ->
+    "1+log/Gamma-driver(eta=" <> LookupParameter[run, "CTGGauge::eta"] <> ")",
+   "resolution" -> Round[0.6/(ReadCoarseGridSpacing[run]/2^5)],
+   "resolution-expected-order" -> 8,
+   "extraction-radius" -> "finite-radii" (*<>" extrapolated"*),
+   "extraction-radii" -> StringTake[ToString[ReadPsi4RadiiStrings[run]], 2 ;; -2](*<>", inf"*),
+   "extrapolation-techniques" -> ""(*"3rd,tortoise"*),
+   "ht-generation-technique" -> "",
+   "initial-ADM-energy" -> mass/M,
+   "initial-ADM-angular-momentum" ->
+    Norm@InitialAngularMomentum[run]/M^2,
+   "initial-separation" -> InitialSeparation[run]/M,
+   "initial-data-type" -> "Bowen-York quasicircular",
+   "initial-data-bibtex-keys" -> "",
+   "quasicircular-bibtex-keys" -> "",
+   "initial-eccentricity" -> ecc,
+   "eccentricity-error-range" -> "",
+   "method-measure-eccentricity" -> "newtonian-fit-in-om-gw",
+   "initial-freq-22" -> -Interpolation[
+       Frequency@ReadPsi4[run, 2, 2, 100]][100 + tJunk],
+   "number-of-cycles-22" -> NumCycles[run, 100 + tJunk],
+   "number-of-cycles-22-error-relative" -> "",
+   "amplitude-error-relative" -> "",
+   "after-junkradiation-time" -> tJunk,
+   Sequence @@ Table["mass" <> ToString[i] ->
+      Interpolation[ChristodoulouMass[run, i, i-1]][tJunk]/M, {i, 1, 2}],
+   "initial-separation-angle" -> 0,
+   Sequence @@ Flatten@Table[
+      "initial-bh-momentum" <> ToString[i] <> coord[d] ->
+       InitialLinearMomentum[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
+   Sequence @@ Flatten@Table[
+      "initial-bh-momentum" <> ToString[i] <> coord[d] ->
+       "", {i, 0, 1}, {d, 1, 3}],
+   Sequence @@ Flatten@Table[
+      "after-junkradiation-spin" <> ToString[i] <> coord[d] ->
+       Interpolation[ReadIsolatedHorizonSpin[run, i, d]][tJunk]/
+        M^2, {i, 0, 1}, {d, 1, 3}]
+   }
+  ];
+
+runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
+ modes = ReadPsi4Modes[run];
+ radii = ReadPsi4RadiiStrings[run];
+ waveform[l_, m_, rad_] := ToString[l]<>","<>ToString[m] -> "mp_psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
+ {"metadata" -> runMetadata[run, mass, ecc, tJunk],
+  "body-data" ->
+   {Sequence @@ Table["spin" <> ToString[i] ->
+      "spin"<>ToString[i]<>".asc.gz", {i, 1, 2}],
+   Sequence @@ Table["trajectory" <> ToString[i] ->
+      "trajectory"<>ToString[i]<>".asc.gz", {i, 1, 2}],
+   Sequence @@ Table["horizon-mass" <> ToString[i] ->
+      "horizon_mass"<>ToString[i]<>".asc.gz", {i, 1, 2}]},
+  "Psi4t-data" -> (waveform[#[[1,1]], #[[1,2]], #[[2]]]& /@ Flatten[Outer[List, modes, radii,1], 1])}
+];
+
+makeMetadataFile[md_List] :=
+ Flatten@Riffle[Map[makeSection, md], ""];
+
+makeSection[sec_ -> entries_] :=
+ Prepend[Map[makeEntry, entries], "[" <> sec <> "]"];
+
+makeEntry[key_ -> val_] :=
+ key <> " = " <> makeEntry[val];
+
+makeEntry[val_] :=
+ If[StringQ[val], val, ToString[val, CForm]];
+
+Options[ExportMetadata] = {JunkTime -> None};
+ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
+ Module[{tJunk},
+  tJunk  = OptionValue[JunkTime];
+  If[SameQ[tJunk, None], tJunk = 0;];
+
+  Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk]], "Text"];
+];
+
+(* Full run *)
+ExportConfig[name_ -> {Madm_, sims_, ecc_}] :=
+  Scan[ExportSim[#, name, Madm, ecc] &, sims];
+
+ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_] :=
+  Module[{dir, h, n},
+
+    h = ReadCoarseGridSpacing[run];
+    n = Round[0.6/(h/2^5)];
+    dir = FileNameJoin[{outputDirectory, niceName, niceName<>"_"<>ToString[n]}];
+
+    Print[run <> " -> " <> dir];
+
+    ExportAllExtractedWaveforms[run, dir <> "/psi4.asc.gz"];
+    ExportAllExtrapolatedWaveforms[run, dir <> "/psi4.asc.gz", mass];
+    ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1.asc.gz"];
+    ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2.asc.gz"];
+    ExportLocalQuantity[run, Spin, 1, dir <> "/spin1.asc.gz"];
+    ExportLocalQuantity[run, Spin, 2, dir <> "/spin2.asc.gz"];
+    ExportMetadataFile[dir<>"/"<>niceName<>".bbh", run, mass, ecc];
+  ];
 
 End[];
 
