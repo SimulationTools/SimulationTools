@@ -226,13 +226,13 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
  Module[{M = TotalMass[run], code, evolution, eta},
   evolution = LookupParameter[run, "ADMBase::evolution_method"];
   Which[
-    StringMatchQ[evolution, "ctgamma",IgnoreCase -> True];,
+    StringMatchQ[evolution, "ctgamma", IgnoreCase -> True];,
     code = "CTGamma";
     eta  = LookupParameter[run, "CTGGauge::eta"];,
     StringMatchQ[evolution, RegularExpression["ML_BSSN.*"], IgnoreCase -> True];,
     code = "McLachlan";
     eta  = LookupParameter[run, evolution<>"::BetaDriver"];,
-    _,
+    True,
     Throw["Unknow evolution code used"];
   ];
 
