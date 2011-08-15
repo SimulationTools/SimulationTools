@@ -31,6 +31,8 @@ Spin;
 
 Begin["`Private`"];
 
+ExportStatus = "";
+
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
 Options[ExportExtrapolatedWaveform] = {JunkTime -> None};
 
