@@ -178,7 +178,7 @@ ExportTrajectories[run_String, file_String] :=
 ];
 
 ExportLocalQuantity[run_String, what_, i_, file_String] :=
- Module[{dir, punc0, punc1, p, spin0, spin1, combined, f},
+ Module[{dir, punc0, punc1, p, spin0, spin1, combined, f, dsName},
   dir = DirectoryName[file];
   If[dir=!="" && FileType[dir]=!=Directory,
     CreateDirectory[dir];
@@ -194,13 +194,8 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
   "asc.gz",
     Export[file, f, {"GZIP", "TABLE"}];,
   "h5",
-  Throw["Unsupported"],
-(*     Export[file, f0, {"Datasets", "Trajectory0"}, "Append"->True]; *)
-(*     Export[file, f1, {"Datasets", "Trajectory1"}, "Append"->True]; *)
-(*     Export[file, p, {"Datasets", "Momentum0"}, "Append"->True]; *)
-(*     Export[file, p, {"Datasets", "Momentum1"}, "Append"->True]; *)
-(*     Export[file, spin0, {"Datasets", "Spin0"}, "Append"->True]; *)
-(*     Export[file, spin1, {"Datasets", "Spin1"}, "Append"->True];, *)
+    dsName = (what /. {Coordinates -> "trajectory", Spin -> "spin"}) <> ToString[i-1];
+    Export[file, f, {"Datasets", dsName}, "Append"->True];,
   _,
     Throw["Unsupported file format: "<>fileExtension[file]];
   ];
