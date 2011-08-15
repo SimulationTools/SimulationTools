@@ -12,11 +12,29 @@ Begin["`Private`"];
 
 Options[FilterWavelet] = {WaveletType->DaubechiesWavelet[4], WaveletRefinementLevels->6, WaveletThreshold->{"SURELevel"}};
 
-FilterWavelet[dt_DataTable, opts___] := Module[{data, times, filtereddata},
-  times = First /@ ToList[dt];
-  data = Last /@ ToList[dt];
+tableRange[t_List, {tStart_?NumberQ, tEnd_?NumberQ}] :=
+  Select[t, 
+   (#[[1]] >= tStart && #[[1]] < tEnd) &];
+
+partitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
+ Module[{before, middle, after},
+  before = tableRange[t, {First[t][[1]], tMin}];
+  middle = tableRange[t, {tMin, tMax}];
+  after = tableRange[t, {tMax, Last[t][[1]] + 1}];
+  Return[{before, middle, after}]
+  ];
+
+FilterWavelet[dt_DataTable, range_:All, opts___] :=
+Module[{data, times, filtereddata, before, inrange, after},
+  If[range === All,
+    {before,inrange,after} = {{}, ToList[dt], {}},
+    {before,inrange,after} = partitionTable[ToList[dt], range]];
+
+  times = First /@ inrange;
+  data = Last /@ inrange;
+
   filtereddata = FilterWavelet[data, opts];
-  MakeDataTable[Thread[{times, filtereddata}]]
+  MakeDataTable[Join[before, Thread[{times,filtereddata}], after]]
 ]
 
 FilterWavelet[DataRegion[h_, data_], opts___] := DataRegion[h, FilterWavelet[data, opts]];
