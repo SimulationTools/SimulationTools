@@ -340,7 +340,7 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
     If[OptionValue[ExportSimFormat]==="ASCII", ext = ".asc.gz", ext = ".h5"];
 
     ExportAllExtractedWaveforms[run, dir <> "/psi4"<>ext];
-    ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext];
+    ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext, mass];
     ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1"<>ext];
     ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext];
     ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
