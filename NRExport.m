@@ -4,38 +4,30 @@
 
 BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Horizons`", "NR`"}];
 
+JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts.";
 
 ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
 ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts.";
-
 ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
 ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] extrapolats all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-
 ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 
 ExportTrajectories::usage = "ExportTrajectories[run, file] exports trajectory and spin information for run to file.";
-
-ExportLocalQuantity;
-
-ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
+ExportLocalQuantity::usage = "ExportLocalQuantity[run, quantity, bh, file] exports a local quantity for black hole bh to file. Possible choices of quantity are Coordinates or Spin.";
+Coordinates;
+Spin;
 
 ExportMetadata::usage = "ExportMetadataFile[file, run, mass, ecc] exports the metadata for run to file.";
 ExportSim::usage = "ExportSim[run, niceName, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
 ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 
-ExportWaveform;
-ExportBHCoords;
-ExportBHRelativeCoords;
-ExportRun::usage = "ExportRun[run, dir] exports run to dir";
-ExportGridStructure;
-FunctionOfPhase;
-Coordinates;
-Spin;
+ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
 
 Begin["`Private`"];
 
 ExportStatus = "";
+
+(* Waveforms *)
 
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
 Options[ExportExtrapolatedWaveform] = {JunkTime -> None};
@@ -149,6 +141,9 @@ ExportAllWaveforms[run_String, file_String, mass_] := Module[{},
   ExportAllExtrapolatedWaveforms[run, file, mass];
 ];
 
+
+(* Local quantities *)
+
 ExportTrajectories[run_String, file_String] :=
  Module[{dir, punc0, punc1, p, spin0, spin1, combined},
   dir = DirectoryName[file];
@@ -212,66 +207,8 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
 ];
 
 
-
-
-(******** DEPRECATED ********)
-ExportWaveform[run_String, dir_String, l_Integer, m_Integer, 
-  r_?NumberQ] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Monitor`status = {"Exporting waveform", run, l, m, r};
-  Export[dir <> "/psi4_l" <> ToString[l] <> "_m" <> ToString[m] <> 
-    "_r" <> ToString[r] <> ".asc", 
-   Map[{#[[1]], Re[#[[2]]], Im[#[[2]]]} &, 
-    ToList[ReadPsi4[run, l, m, r]]], "TSV"]]
-
-ExportBHCoords[run_String, dir_String, tracker_Integer] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Export[dir <> "/bh_coords_cart_" <> ToString[tracker] <> ".asc", 
-   Map[{#[[1]], #[[2, 1]], #[[2, 2]], #[[2, 3]]} &, 
-    ToList[ReadBHCoordinates[run, tracker]]], "TSV"]];
-
-ExportBHRelativeCoords[run_String, dir_String] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Export[dir <> "/bh_coords_polar.asc", 
-   MapThread[{#[[1]], #1[[2]], #2[[2]]} &, {ToList[
-      ReadBHSeparation[run]], ToList[ReadBHPhase[run]]}],
-    "TSV"]];
-
-ExportBHCoords[run_String, dir_String] :=
- Module[{},
-  Table[ExportBHCoords[run, dir, t], {t, 0, 1}]];
-
-selectInRange[xs_, range_] :=
- If[range === All,
-  xs,
-  Select[xs, (# >= range[[1]] && # <= range[[2]]) &]];
-
-ExportWaveforms[run_String, dir_String, lRange_: All, rRange_: All] :=
-  Module[{rs, ls},
-  rs = selectInRange[ReadPsi4Radii[run], rRange];
-  ls = selectInRange[ReadPsi4Modes[run], lRange];
-  Table[ExportWaveform[run, dir, l, m, r], {l, ls}, {m, -l, l}, {r, 
-    rs}]];
-
-Options[ExportRun] = {LRange -> All, RadiusRange -> All};
-
-ExportRun[run_String, dir_String, opts:OptionsPattern[]] :=
- Module[{lRange = OptionValue[LRange], rRange = OptionValue[RadiusRange]},
-  ExportWaveforms[run, dir, lRange, rRange];
-  ExportBHCoords[run, dir];
-  ExportBHRelativeCoords[run, dir];
-  ExportGridStructure[run, dir]];
-
-ExportGridStructure[run_String, dir_String] :=
- Module[{},
-  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
-  Export[dir <> "/grid_structure.asc", GridStructure[run], "TSV"]];
-
-
 (* Run metadata *)
+
 coord[d_] :=
  {"x", "y", "z"}[[d]];
 
@@ -362,7 +299,9 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
   Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk]], "Text"];
 ];
 
+
 (* Full run *)
+
 ExportConfig[name_ -> {Madm_, sims_, ecc_}] :=
   Scan[ExportSim[#, name, Madm, ecc] &, sims];
 
