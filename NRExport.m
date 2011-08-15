@@ -18,7 +18,7 @@ ExportLocalQuantity::usage = "ExportLocalQuantity[run, quantity, bh, file] expor
 Coordinates;
 Spin;
 
-ExportMetadata::usage = "ExportMetadataFile[file, run, mass, ecc] exports the metadata for run to file.";
+ExportMetadata::usage = "ExportMetadata[file, run, mass, ecc] exports the metadata for run to file.";
 ExportSim::usage = "ExportSim[run, niceName, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
 ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
@@ -333,7 +333,7 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
     ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext];
     ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
     ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext];
-    ExportMetadataFile[dir<>"/"<>niceName<>".bbh", run, mass, ecc];
+    ExportMetadata[dir<>"/"<>niceName<>".bbh", run, mass, ecc];
   ];
 
 End[];
