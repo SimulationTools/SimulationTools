@@ -6,11 +6,13 @@ BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Horizons`", "NR`"}];
 
 JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts.";
 
-ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
-ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'.";
-ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] extrapolats all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
+ExportExtrapolatedStrain::usage = "ExportExtrapolatedStrain[run, file, mass, l, m, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
+ExportAllExtrapolatedStrain::usage = "ExportAllExtrapolatedStrain[run, file, mass, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolats all modes of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
+ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
+ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolats all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
+ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
+ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] extrapolats all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
+ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 
 ExportLocalQuantity::usage = "ExportLocalQuantity[run, quantity, bh, file] exports a local quantity for black hole bh to file. Possible choices of quantity are Coordinates or Spin.";
 Coordinates;
@@ -87,6 +89,53 @@ ExportAllExtrapolatedWaveforms[run_String, file_String, mass_] :=
     MapThread[ExportExtrapolatedWaveform[run, #1, mass, Sequence@@#2]&, {files, modes}];,
   "h5",
     (ExportExtrapolatedWaveform[run, file, mass, Sequence@@#]&) /@ modes;,
+  _,
+    Throw["Unsupported file format: "<>fileExtension[file]];
+  ];
+];
+
+ExportExtrapolatedStrain[run_String, file_String, mass_, l_Integer, m_Integer, om_, OptionsPattern[]] :=
+ Module[{dir, extrap, strain, junkTime, afterjunk, final, dataset},
+  dir = DirectoryName[file];
+  If[dir=!="" && FileType[dir]=!=Directory,
+    CreateDirectory[dir];
+  ];
+
+  ExportStatus = "Exporting extrapolated strain waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file;
+
+  extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
+  strain    = StrainFromPsi4[extrap, om];
+  junkTime  = OptionValue[JunkTime];
+  If[!SameQ[junkTime, None],
+    afterjunk = DataTableInterval[strain, {junkTime + First[DataTableRange[strain]], All}];,
+    afterjunk = strain;
+  ];
+  final     = Join[Re[afterjunk], Im[afterjunk]];
+
+  Switch[fileExtension[file],
+  "h5",
+    dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_rinf";
+    Export[file, final, {"Datasets", dataset}, "Append"->True];,
+  "asc",
+    Export[file, final, "TABLE"];,
+  "asc.gz",
+    Export[file, final, {"GZIP", "TABLE"}];,
+  _,
+    Throw["Unsupported file format: "<>fileExtension[file]];
+  ];
+];
+
+ExportAllExtrapolatedStrain[run_String, file_String, mass_, om_] :=
+ Module[{dir, modes, files},
+  dir = DirectoryName[file];
+  modes = ReadPsi4Modes[run];
+
+  Switch[fileExtension[file],
+  "asc"|"asc.gz",
+    files=(dir<>fileBaseName[file]<>"_l"<>ToString[#[[1]]]<>"_m"<>ToString[#[[2]]]<>"_rinf."<>fileExtension[file] &) /@ modes;
+    MapThread[ExportExtrapolatedStrain[run, #1, mass, Sequence@@#2, om #2[[2]]/2]&, {files, modes}];,
+  "h5",
+    (ExportExtrapolatedStrain[run, file, mass, Sequence@@#, om #[[2]]/2]&) /@ modes;,
   _,
     Throw["Unsupported file format: "<>fileExtension[file]];
   ];
