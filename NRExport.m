@@ -223,18 +223,30 @@ coord[d_] :=
  {"x", "y", "z"}[[d]];
 
 runMetadata[run_, mass_, ecc_, tJunk_] :=
- Module[{M = TotalMass[run]},
+ Module[{M = TotalMass[run], code, evolution, eta},
+  evolution = LookupParameter["ADMBase::evolution_method"];
+  Which[
+    StringMatchQ[evolution, "ctgamma",IgnoreCase -> True];,
+    code = "CTGamma";
+    eta  = LookupParameter[run, "CTGGauge::eta"];,
+    StringMatchQ[evolution, RegularExpression["ML_BSSN.*"], IgnoreCase -> True];,
+    code = "McLachlan";
+    eta  = LookupParameter[run, evolution<>"::BetaDriver"];,
+    _,
+    Throw["Unknow evolution code used"];
+  ];
+
   {"comments" -> "",
    "documentation" -> "",
    "publication" -> "",
    "authors-tag" -> "aei",
    "submitter-email" -> "ian.hinder@aei.mpg.de",
-   "code" -> "Llama/CTGamma",
+   "code" -> "Llama/" <> code,
    "code-version"->"",
    "code-bibtex-keys" -> "",
    "evolution-system" -> "BSSN",
    "evolution-gauge" ->
-    "1+log/Gamma-driver(eta=" <> LookupParameter[run, "CTGGauge::eta"] <> ")",
+    "1+log/Gamma-driver(eta=" <> eta <> ")",
    "resolution" -> Round[0.6/(ReadCoarseGridSpacing[run]/2^5)],
    "resolution-expected-order" -> 8,
    "extraction-radius" -> "finite-radii" (*<>" extrapolated"*),
