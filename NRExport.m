@@ -58,7 +58,7 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   junkTime  = OptionValue[JunkTime];
   If[!SameQ[junkTime, None],
-    afterjunk = ShiftDataTable[-junkTime, DataTableInterval[extrap, {junkTime, All}]];,
+    afterjunk = DataTableInterval[extrap, {junkTime + First[DataTableRange[extrap]], All}];,
     afterjunk = extrap;
   ];
   final     = Join[Re[afterjunk], Im[afterjunk]];
