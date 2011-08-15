@@ -602,7 +602,7 @@ StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
   dhf = Map[ffi[#, f0 / (2 Pi)] &, psi4f];
   hf  = Map[ffi[#, f0 / (2 Pi)] &, dhf];
   {h, dh} = InverseFourier /@ {hf, dhf};
-  {h, dh}
+  h
 ]
 
 StrainFromPsi4[psi4_DataTable, range:(_List | All)] :=
@@ -637,7 +637,7 @@ StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
     hDotTb = Table[{t, (psi4I/.ints)[t]   - 
       (br /. fitReal) - I (bi /. fitImag)  }, 
       {t, tStart, tEnd, tStep}];
-    Return[{MakeDataTable[hTb], MakeDataTable[hDotTb]}];
+    Return[MakeDataTable[hTb]];
 ];
 
 zeroAfter[l_, n_] :=
