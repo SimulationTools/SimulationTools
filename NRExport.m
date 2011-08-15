@@ -32,6 +32,7 @@ ExportStatus = "";
 
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
 Options[ExportExtrapolatedWaveform] = {JunkTime -> None};
+Options[ExportExtrapolatedStrain] = {JunkTime -> None};
 
 fileExtension[file_] :=
   Module[{ext},
