@@ -19,8 +19,8 @@ Coordinates;
 Spin;
 
 ExportMetadata::usage = "ExportMetadata[file, run, mass, ecc] exports the metadata for run to file.";
-ExportSim::usage = "ExportSim[run, niceName, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
-ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
+ExportSim::usage = "ExportSim[run, niceName, mass, ecc, outputDirectory] exports a full simulation, including waveforms, local quantities and metadata.";
+ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
 
@@ -324,8 +324,8 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 
 (* Full run *)
 
-ExportConfig[name_ -> {Madm_, sims_, ecc_}] :=
-  Scan[ExportSim[#, name, Madm, ecc] &, sims];
+ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_] :=
+  Scan[ExportSim[#, name, Madm, ecc, outputDirectory] &, sims];
 
 Options[ExportSim] = {ExportSimFormat -> "ASCII"};
 ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
