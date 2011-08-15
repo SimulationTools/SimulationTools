@@ -97,21 +97,21 @@ ExportAllExtrapolatedWaveforms[run_String, file_String, mass_] :=
   ];
 ];
 
-ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, rad_] :=
- Module[{dir, psi4, final, dataset, ext},
+ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, r_] :=
+ Module[{dir, psi4, final, dataset, ext, rad = ToString[r]},
   dir = DirectoryName[file];
   If[dir=!="" && FileType[dir]=!=Directory,
     CreateDirectory[dir];
   ];
 
-  ExportStatus = "Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>ToString[rad]<>") to "<>file;
+  ExportStatus = "Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>rad<>") to "<>file;
 
-  psi4  = ReadPsi4[run, l, m, Round[rad]];
+  psi4  = ReadPsi4[run, l, m, Round[ToExpression[rad]]];
   final = Join[Re[psi4], Im[psi4]];
 
   Switch[fileExtension[file],
   "h5",
-    dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad];
+    dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>rad;
     Export[file, final, {"Datasets", dataset}, "Append"->True];,
   "asc",
     Export[file, final, "TABLE"];,
@@ -125,11 +125,9 @@ ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, rad_] :=
 ExportAllExtractedWaveforms[run_String, file_String] :=
  Module[{dir, radii, modes, allwaveforms, files},
   dir = DirectoryName[file];
-  radii = ReadPsi4Radii[run];
+  radii = ReadPsi4RadiiStrings[run];
   modes = ReadPsi4Modes[run];
   allwaveforms = Flatten[Outer[Join, modes, List/@radii, 1], 1];
-
-
 
   Switch[fileExtension[file],
   "asc"|"asc.gz",
