@@ -7,6 +7,8 @@ ReadIHSpinX;
 ReadIHSpinY;
 ReadIHSpinPhase;
 ReadIsolatedHorizonSpin;
+ReadIsolatedHorizonDimensionlessSpin;
+ReadIsolatedHorizonSpinPhase;
 ReadAHMass;
 ReadAHRadius;
 ReadAHMinRadius;
@@ -64,6 +66,12 @@ ReadIsolatedHorizonSpin[runName_, hn_] :=
   Module[{spins},
     spins = Table[ReadIsolatedHorizonSpin[runName, hn, dir], {dir, 1, 3}];
     MapThreadData[{#1,#2,#3} &, spins]];
+
+ReadIsolatedHorizonDimensionlessSpin[runName_, hn_] :=
+  ReadIsolatedHorizonSpin[runName, hn] / ChristodoulouMass[runName, hn+1, hn]^2; 
+
+ReadIsolatedHorizonSpinPhase[runName_, hn_] :=
+  MakeDataTable@Phase@ToList@MapData[Drop[#,-1]&, ReadIsolatedHorizonSpin[runName, hn]];
 
 ReadAHMass[runName_, hn_] :=
  Module[{},
