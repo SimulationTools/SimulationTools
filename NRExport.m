@@ -74,6 +74,8 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
     Export[file, final, {"Datasets", dataset}, "Append"->True];,
   "asc",
     Export[file, final, "TABLE"];,
+  "asc.gz",
+    Export[file, final, {"GZIP", "TABLE"}];,
   _,
     Throw["Unsupported file format: "<>fileExtension[file]];
   ];
