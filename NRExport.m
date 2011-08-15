@@ -12,7 +12,6 @@ ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] 
 ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] extrapolats all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 
-ExportTrajectories::usage = "ExportTrajectories[run, file] exports trajectory and spin information for run to file.";
 ExportLocalQuantity::usage = "ExportLocalQuantity[run, quantity, bh, file] exports a local quantity for black hole bh to file. Possible choices of quantity are Coordinates or Spin.";
 Coordinates;
 Spin;
@@ -143,40 +142,6 @@ ExportAllWaveforms[run_String, file_String, mass_] := Module[{},
 
 
 (* Local quantities *)
-
-ExportTrajectories[run_String, file_String] :=
- Module[{dir, punc0, punc1, p, spin0, spin1, combined},
-  dir = DirectoryName[file];
-  If[dir=!="" && FileType[dir]=!=Directory,
-    CreateDirectory[dir];
-  ];
-
-  ExportStatus = "Exporting trajectory data for "<>run<>" to "<>file;
-
-  {punc0, punc1} = ReadBHCoordinates[run, #]& /@ {0,1};
-  {spin0, spin1} = ReadIsolatedHorizonSpin[run, #]& /@ {0,1};
-
-  (* We don't know how to get the momenta - set them to 0 *)
-  p = MakeDataTable[({#, {0,0,0}}&) /@ IndVar[punc0]];
-
-  combined = Join[punc0, punc1, p, p, spin0, spin1];
-  Switch[fileExtension[file],
-  "asc",
-    Export[file, combined, "TABLE"];,
-  "asc.gz",
-    Export[file, combined, {"GZIP", "TABLE"}];,
-  "h5",
-    Export[file, punc0, {"Datasets", "Trajectory0"}, "Append"->True];
-    Export[file, punc1, {"Datasets", "Trajectory1"}, "Append"->True];
-    Export[file, p, {"Datasets", "Momentum0"}, "Append"->True];
-    Export[file, p, {"Datasets", "Momentum1"}, "Append"->True];
-    Export[file, spin0, {"Datasets", "Spin0"}, "Append"->True];
-    Export[file, spin1, {"Datasets", "Spin1"}, "Append"->True];,
-  _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
-  ];
-];
-
 ExportLocalQuantity[run_String, what_, i_, file_String] :=
  Module[{dir, punc0, punc1, p, spin0, spin1, combined, f, dsName},
   dir = DirectoryName[file];
