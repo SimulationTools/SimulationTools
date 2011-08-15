@@ -62,7 +62,7 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
     CreateDirectory[dir];
   ];
 
-  ExportStatus = "Exporting extrapolated waveform for"<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file;
+  ExportStatus = "Exporting extrapolated waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file;
 
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   junkTime  = OptionValue[JunkTime];
