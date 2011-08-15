@@ -224,7 +224,7 @@ coord[d_] :=
 
 runMetadata[run_, mass_, ecc_, tJunk_] :=
  Module[{M = TotalMass[run], code, evolution, eta},
-  evolution = LookupParameter["ADMBase::evolution_method"];
+  evolution = LookupParameter[run, "ADMBase::evolution_method"];
   Which[
     StringMatchQ[evolution, "ctgamma",IgnoreCase -> True];,
     code = "CTGamma";
