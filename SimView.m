@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`"}];
+BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`"}];
 
 SimView;
 
@@ -97,6 +97,18 @@ SimView[runNames_List, r_] :=
     PlotRange -> Automatic, PlotLabel -> "Freq Psi422, R = "<>ToString[r], 
     ImageSize -> size]];
 
+  spinNorms = Catch[
+   ListLinePlot[
+     Flatten@Table[
+       Norm@ReadIsolatedHorizonDimensionlessSpin[run, hn],{run,runNames},{hn,0,1}],
+    PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2", ImageSize -> size]];
+
+  spinPhases = Catch[
+   ListLinePlot[
+     Flatten@Table[
+       ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}],
+    PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg", ImageSize -> size]];
+
   segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
@@ -116,7 +128,8 @@ SimView[runNames_List, r_] :=
        {speed, memory}, 
        {trajectories, radius},
        {rePsi4, ampPsi4},
-       {freqPsi4,costTable}}~Join~
+       {freqPsi4,costTable},
+       {spinNorms, spinPhases}}~Join~
        segments, 
        Spacings -> {0, 1}];
   Return[grid]
