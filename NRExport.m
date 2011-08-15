@@ -19,7 +19,7 @@ Spin;
 ExportMetadata::usage = "ExportMetadataFile[file, run, mass, ecc] exports the metadata for run to file.";
 ExportSim::usage = "ExportSim[run, niceName, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
 ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
-
+ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
 
 Begin["`Private`"];
@@ -265,8 +265,9 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 ExportConfig[name_ -> {Madm_, sims_, ecc_}] :=
   Scan[ExportSim[#, name, Madm, ecc] &, sims];
 
-ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_] :=
-  Module[{dir, h, n},
+Options[ExportSim] = {ExportSimFormat -> "ASCII"};
+ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
+  Module[{dir, h, n, format, ext},
 
     h = ReadCoarseGridSpacing[run];
     n = Round[0.6/(h/2^5)];
@@ -274,12 +275,14 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_] :=
 
     Print[run <> " -> " <> dir];
 
-    ExportAllExtractedWaveforms[run, dir <> "/psi4.asc.gz"];
-    ExportAllExtrapolatedWaveforms[run, dir <> "/psi4.asc.gz", mass];
-    ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1.asc.gz"];
-    ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2.asc.gz"];
-    ExportLocalQuantity[run, Spin, 1, dir <> "/spin1.asc.gz"];
-    ExportLocalQuantity[run, Spin, 2, dir <> "/spin2.asc.gz"];
+    If[OptionValue[ExportSimFormat]==="ASCII", ext = ".asc.gz", ext = ".h5"];
+
+    ExportAllExtractedWaveforms[run, dir <> "/psi4"<>ext];
+    ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext];
+    ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1"<>ext];
+    ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext];
+    ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
+    ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext];
     ExportMetadataFile[dir<>"/"<>niceName<>".bbh", run, mass, ecc];
   ];
 
