@@ -24,46 +24,44 @@ unbreakBrokenStrings[lines2_List] :=
     Return[lines]];
 
 DefineMemoFunction[ParseParameterFile[from_String],
- Module[{lines, parseLine, removeWhiteSpace, fileName, fileNames},
-  (* Is "from" a full parameter file name? *)
+ Module[{lines, parseLine, strip, fileName, fileNames},
   If[StringMatchQ[from, __ ~~ ".par"],
+    (* Is "from" a full parameter file name? *)
     fileNames = {from},
-(*    fileNames = FindRunFile[from, from <> ".par"];*)
     (* Is "from" a run name? *)
     fileNames = FindRunFilesFromPattern[from, "*.par"];
     If[Length[fileNames] == 0,
       fileNames = FindRunFile[from, from <> "-1.par"];
       If[Length[fileNames] == 0,
         Throw["Cannot find parameter file " <> ToString[from]]],
-      fileNames = FindRunFile[from, fileNames[[1]]]]];
+      fileNames = FindRunFile[from, fileNames[[1]]]]
+  ];
+
   fileName = First[fileNames];
   lines = ReadList[fileName, String];
-  removeWhiteSpace[t_] := 
-   StringReplace[
-    t, (StartOfString ~~ Whitespace) | (Whitespace ~~ EndOfString) :> 
-     ""];
-
   lines = unbreakBrokenStrings[lines];
 
+  strip[t_] :=
+   StringTrim[t, RegularExpression["[\t\" ]*"]];
+
   parseLine[s_] :=
-   If[StringMatchQ[s, RegularExpression["[ \t]*#.*"]],
+   Which[
+   StringMatchQ[s, RegularExpression["[ \t]*#.*"]],
     Comment[s],
-    If[StringMatchQ[
-      s, (Whitespace | StartOfString) ~~ 
+   StringMatchQ[s, (Whitespace | StartOfString) ~~
        "ActiveThorns" ~~ (Whitespace | "=") ~~ __, IgnoreCase -> True],
-     ActiveThorns[
-      StringSplit[
-       StringCases[s, "\"" ~~ thorns__ ~~ "\"" -> thorns][[1]]]],
-     If[StringMatchQ[s, RegularExpression[".*::.*=.*"]],
-      ParameterSetting[
-       ToLowerCase[
-        removeWhiteSpace[
-         StringCases[s, param__ ~~ "=" ~~ val__ -> param][[1]]]], 
-       removeWhiteSpace[
-        StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
-      Throw["Unrecognized line in parameter file: " <> s]]]];
+    ActiveThorns[StringSplit[StringCases[s, "\"" ~~ thorns__ ~~ "\"" -> thorns][[1]]]],
+   StringMatchQ[s, RegularExpression[".*::.*=.*"]],
+    ParameterSetting[
+        ToLowerCase[strip[StringCases[s, param__ ~~ "=" ~~ val__ -> param][[1]]]],
+        strip[StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
+   True,
+    Throw["Unrecognized line in parameter file: " <> s]
+   ];
+
   Map[parseLine, lines]
-  ]];
+ ]
+];
 
 LookupParameter[parFile_List, name_, default_:None] :=
  Module[{l},
