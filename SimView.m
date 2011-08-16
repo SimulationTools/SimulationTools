@@ -2,7 +2,7 @@
 
 BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`"}];
 
-SimView;
+SimView::usage = "SimView[run, r] displays a graphical overview of a simulation.  r is the extraction radius at which to display any waveforms.  r defaults to the first available extraction radius if not given.  run can be either the name of a run or a list of names of runs, in which case data from all the runs will be displayed on the same plots.";
 
 Begin["`Private`"];
 
