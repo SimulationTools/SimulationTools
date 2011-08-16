@@ -164,6 +164,9 @@ RedefineAsDataTable[Log[d:DataTable[__]],
 RedefineAsDataTable[Log[b_, d:DataTable[__]],
   MapData[Log[b,#] &, d]];
 
+RedefineAsDataTable[Log2[d:DataTable[__]],
+  MapData[Log2, d]];
+
 RedefineAsDataTable[Log10[d:DataTable[__]],
   MapData[Log10, d]];
 
@@ -172,6 +175,41 @@ RedefineAsDataTable[Exp[d:DataTable[__]],
 
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
+
+DataTable /: Sin[d_DataTable] := MapData[Sin, d];
+DataTable /: Cos[d_DataTable] := MapData[Cos, d];
+DataTable /: Tan[d_DataTable] := MapData[Tan, d];
+DataTable /: Csc[d_DataTable] := MapData[Csc, d];
+DataTable /: Sec[d_DataTable] := MapData[Sec, d];
+DataTable /: Cot[d_DataTable] := MapData[Cot, d];
+
+DataTable /: ArcSin[d_DataTable] := MapData[ArcSin, d];
+DataTable /: ArcCos[d_DataTable] := MapData[ArcCos, d];
+DataTable /: ArcTan[d_DataTable] := MapData[ArcTan, d];
+DataTable /: ArcCsc[d_DataTable] := MapData[ArcCsc, d];
+DataTable /: ArcSec[d_DataTable] := MapData[ArcSec, d];
+DataTable /: ArcCot[d_DataTable] := MapData[ArcCot, d];
+DataTable /: ArcTan[x_DataTable, y_DataTable] := MapThreadData[ArcTan, {x, y}];
+
+DataTable /: Sinh[d_DataTable] := MapData[Sinh, d];
+DataTable /: Cosh[d_DataTable] := MapData[Cosh, d];
+DataTable /: Tanh[d_DataTable] := MapData[Tanh, d];
+DataTable /: Csch[d_DataTable] := MapData[Csch, d];
+DataTable /: Sech[d_DataTable] := MapData[Sech, d];
+DataTable /: Coth[d_DataTable] := MapData[Coth, d];
+
+DataTable /: ArcSinh[d_DataTable] := MapData[ArcSinh, d];
+DataTable /: ArcCosh[d_DataTable] := MapData[ArcCosh, d];
+DataTable /: ArcTanh[d_DataTable] := MapData[ArcTanh, d];
+DataTable /: ArcCsch[d_DataTable] := MapData[ArcCsch, d];
+DataTable /: ArcSech[d_DataTable] := MapData[ArcSech, d];
+DataTable /: ArcCoth[d_DataTable] := MapData[ArcCoth, d];
+
+DataTable /: Sinc[d_DataTable] := MapData[Sinc, d];
+DataTable /: Haversine[d_DataTable] := MapData[Haversine, d];
+DataTable /: InverseHaversine[d_DataTable] := MapData[InverseHaversine, d];
+DataTable /: Gudermannian[d_DataTable] := MapData[Gudermannian, d];
+DataTable /: InverseGudermannian[d_DataTable] := MapData[InverseGudermannian, d];
 
 DataTable /: Total[d_DataTable] := Total[DepVar[d]];
 
