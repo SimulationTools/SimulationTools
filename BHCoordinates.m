@@ -2,18 +2,6 @@
 
 BeginPackage["BHCoordinates`", {"RunFiles`", "DataTable`", "Memo`"}];
 
-ReadMinTrackerCoordinates;
-ReadMinTrackerCoordinate;
-ReadMinTrackerRadius;
-ReadMinTrackerPhase;
-ReadPunctureTrackerPhase;
-ReadPunctureTrackerRadius;
-ReadMinTrackerTrajectory;
-ReadMinTrackerTrajectories;
-ReadMinTrackerSpeed;
-ReadMinTrackerVelocity;
-HaveMinTracker;
-ReadPunctureTrackerCoordinates;
 ReadBHCoordinates::usage = "ReadBHCoordinates[run, i] returns a DataTable containing the coordinates of the black hole labeled i, where i is typically 0 or 1";
 ReadBHCoordinate::usage = "ReadBHCoordinate[run, i, d] returns a DataTable containing the d'th coordinate of the black hole labeled i, where i is typically 0 or 1.  d can be 1, 2 or 3 for the x, y and z directions.";
 ReadBHTrajectory::usage = "ReadBHTrajectory[run] returns a list of the x, y coordinates of the relative trajectory of the first two black holes.  \nReadBHTrajectory[run, i] returns a list of the x, y coordinates of the trajectory of the black hole numbered i (i is typically 0 or 1).";
@@ -27,6 +15,19 @@ ReadBHSpeed::usage = "ReadBHSpeed[run, i] returns a DataTable of the coordinate 
 BHCoordinateMergerTime::usage = "BHCoordinateMergerTime[run,eps] returns the time at which the BHs in run reach a separation of eps (eps defaults to 0.01 if omitted).";
 
 Begin["`Private`"];
+
+ReadMinTrackerCoordinates;
+ReadMinTrackerCoordinate;
+ReadMinTrackerRadius;
+ReadMinTrackerPhase;
+ReadPunctureTrackerPhase;
+ReadPunctureTrackerRadius;
+ReadMinTrackerTrajectory;
+ReadMinTrackerTrajectories;
+ReadMinTrackerSpeed;
+ReadMinTrackerVelocity;
+HaveMinTracker;
+ReadPunctureTrackerCoordinates;
 
 (* MinTracker *)
 
