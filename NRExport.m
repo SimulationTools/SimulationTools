@@ -250,7 +250,6 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "resolution" -> Round[0.6/(ReadCoarseGridSpacing[run]/2^5)],
    "resolution-expected-order" -> 8,
    "extraction-radius" -> "finite-radii" (*<>" extrapolated"*),
-   "extraction-radii" -> StringTake[ToString[ReadPsi4RadiiStrings[run]], 2 ;; -2](*<>", inf"*),
    "extrapolation-techniques" -> ""(*"3rd,tortoise"*),
    "ht-generation-technique" -> "",
    "initial-ADM-energy" -> mass/M,
