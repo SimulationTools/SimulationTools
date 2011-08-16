@@ -301,11 +301,16 @@ runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
 makeMetadataFile[md_List] :=
  Flatten@Riffle[Map[makeSection, md], ""];
 
-makeSection[sec_ -> entries_] :=
- Prepend[Map[makeEntry, entries], "[" <> sec <> "]"];
+stringPad[s_, n_] :=
+ s <> StringJoin@ConstantArray[" ", n - StringLength[s]];
 
-makeEntry[key_ -> val_] :=
- key <> " = " <> makeEntry[val];
+makeSection[sec_ -> entries_] :=
+  Module[{pad},
+    pad = Max[Map[StringLength[First[#]] &, entries]];
+    Prepend[Map[makeEntry[#,pad] &, entries], "[" <> sec <> "]"]];
+
+makeEntry[key_ -> val_, pad_:0] :=
+ stringPad[key,pad] <> " = " <> makeEntry[val];
 
 makeEntry[val_] :=
  If[StringQ[val], val, ToString[val, CForm]];
