@@ -336,6 +336,7 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
     dir = FileNameJoin[{outputDirectory, niceName, niceName<>"_"<>ToString[n]}];
 
     Print[run <> " -> " <> dir];
+    If[FileType[dir] === None, CreateDirectory[dir]];
 
     If[OptionValue[ExportSimFormat]==="ASCII", ext = ".asc.gz", ext = ".h5"];
 
@@ -345,7 +346,7 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
     ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext];
     ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
     ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext];
-    ExportMetadata[dir<>"/"<>niceName<>".bbh", run, mass, ecc];
+    ExportMetadata[dir<>"/"<>niceName<>"_"<>ToString[n]<>".bbh", run, mass, ecc];
   ];
 
 End[];
