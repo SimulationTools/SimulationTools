@@ -288,7 +288,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
 runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
  modes = ReadPsi4Modes[run];
  radii = ReadPsi4RadiiStrings[run];
- waveform[l_, m_, rad_] := ToString[l]<>","<>ToString[m] -> "mp_psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
+ waveform[{l_, m_}, rad_] := ToString[l]<>","<>ToString[m] -> "mp_psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
  {"metadata" -> runMetadata[run, mass, ecc, tJunk],
   "body-data" ->
    {Sequence @@ Table["spin" <> ToString[i] ->
@@ -297,7 +297,7 @@ runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
       "trajectory"<>ToString[i]<>".asc.gz", {i, 1, 2}],
    Sequence @@ Table["horizon-mass" <> ToString[i] ->
       "horizon_mass"<>ToString[i]<>".asc.gz", {i, 1, 2}]},
-  "Psi4t-data" -> (waveform[#[[1,1]], #[[1,2]], #[[2]]]& /@ Flatten[Outer[List, modes, radii,1], 1])}
+   Sequence @@ Table["Psi4t-data" -> Prepend[Map[waveform[#, rad] &, modes], "extraction-radius" -> rad], {rad, radii}]}
 ];
 
 makeMetadataFile[md_List] :=
