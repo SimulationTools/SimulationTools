@@ -223,50 +223,52 @@ coord[d_] :=
  {"x", "y", "z"}[[d]];
 
 runMetadata[run_, mass_, ecc_, tJunk_] :=
- Module[{M = TotalMass[run], code, evolution, eta},
+ Module[{M = TotalMass[run], code, evolution, eta, bibtex},
   evolution = LookupParameter[run, "ADMBase::evolution_method"];
   Which[
     StringMatchQ[evolution, "ctgamma", IgnoreCase -> True],
     code = "CTGamma";
-    eta  = LookupParameter[run, "CTGGauge::eta"];,
+    eta  = LookupParameter[run, "CTGGauge::eta"];
+    bibtex = "Pollney:2009yz";,
     StringMatchQ[evolution, RegularExpression["ML_BSSN.*"], IgnoreCase -> True],
     code = "McLachlan";
-    eta  = LookupParameter[run, evolution<>"::BetaDriver"];,
+    eta  = LookupParameter[run, evolution<>"::BetaDriver"];
+    bibtex = "Brown:2008sb";,
     True,
     Throw["Unknow evolution code used"];
   ];
 
-  {"comments" -> "",
-   "documentation" -> "",
-   "publication" -> "",
+  {(* "comments" -> "", *)
+   (* "documentation" -> "", *)
+   (* "publication" -> "", *)
    "authors-tag" -> "aei",
    "submitter-email" -> "ian.hinder@aei.mpg.de",
    "code" -> "Llama/" <> code,
-   "code-version"->"",
-   "code-bibtex-keys" -> "",
+   (* "code-version"->"", *)
+   "code-bibtex-keys" -> bibtex,
    "evolution-system" -> "BSSN",
    "evolution-gauge" ->
     "1+log/Gamma-driver(eta=" <> eta <> ")",
    "resolution" -> Round[0.6/(ReadCoarseGridSpacing[run]/2^5)],
    "resolution-expected-order" -> 8,
-   "extraction-radius" -> "finite-radii" (*<>" extrapolated"*),
-   "extrapolation-techniques" -> ""(*"3rd,tortoise"*),
-   "ht-generation-technique" -> "",
+   "extraction-radius" -> "finite-radii" (* <>" extrapolated" *),
+   (* "extrapolation-techniques" -> "3rd,tortoise", *)
+   "ht-generation-technique" -> "ReisswigPollney",
    "initial-ADM-energy" -> mass/M,
    "initial-ADM-angular-momentum" ->
     Norm@InitialAngularMomentum[run]/M^2,
    "initial-separation" -> InitialSeparation[run]/M,
    "initial-data-type" -> "Bowen-York quasicircular",
-   "initial-data-bibtex-keys" -> "",
-   "quasicircular-bibtex-keys" -> "",
+   "initial-data-bibtex-keys" -> "Bowen:1980yu, Brandt:1997tf, Ansorg:2004ds",
+   "quasicircular-bibtex-keys" -> "Husa:2007rh",
    "initial-eccentricity" -> ecc,
-   "eccentricity-error-range" -> "",
+   (* "eccentricity-error-range" -> "", *)
    "method-measure-eccentricity" -> "newtonian-fit-in-om-gw",
    "initial-freq-22" -> -Interpolation[
        Frequency@ReadPsi4[run, 2, 2, 100]][100 + tJunk],
    "number-of-cycles-22" -> NumCycles[run, 100 + tJunk],
-   "number-of-cycles-22-error-relative" -> "",
-   "amplitude-error-relative" -> "",
+   (* "number-of-cycles-22-error-relative" -> "", *)
+   (* "amplitude-error-relative" -> "", *)
    "after-junkradiation-time" -> tJunk,
    Sequence @@ Table["mass" <> ToString[i] ->
       Interpolation[ChristodoulouMass[run, i, i-1]][tJunk]/M, {i, 1, 2}],
