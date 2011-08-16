@@ -50,6 +50,10 @@ Module[{packages =
   $Packages = Complement[$Packages, packages];
   Protect[$Packages];
   Scan[Needs, packages];
+
+  NRMMADoc[] :=
+    Scan[Information[(# ~~ (Except["`"] ..)),
+       LongForm -> False] &, packages];
 ]
 
 (* Load tools which require Mathematica 8 or newer *)
