@@ -92,6 +92,10 @@ ReadBHCoordinates[runName_, i_] :=
 
 ReadBHCoordinate[runName_String, tracker_Integer, coord_Integer] :=
   Module[{coords},
+    If[tracker < 0,
+      Throw["ReadBHCoordinate: BH number must be non-negative"]];
+    If[coord < 1 || coord > 3,
+      Throw["ReadBHCoordinate: Coordinate direction must be 1, 2 or 3"]];
     coords = ReadBHCoordinates[runName, tracker];
     MapData[#[[coord]]&, coords]];
 
