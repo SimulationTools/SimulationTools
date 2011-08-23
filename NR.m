@@ -5,9 +5,10 @@
 (* A package for dealing with numerical relativity data *)
 
 BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable`",
-  "Horizons`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
+  "Horizons`", "Kicks`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
   "SystemStatistics`", "Timers`"}];
 
+ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4From::usage = "ReadPsi4From is an option for ReadPsi4 which specifies which mode decomposition to read from. Possible options are \"MultipoleHDF5\", \"MultipoleASCII\" and \"YlmDecomp\".";
 ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
@@ -136,6 +137,14 @@ RunDirectory := Global`RunDirectory;
 (*--------------------------------------------------------------------
   Reading Subscript[\[Psi], 4]
   --------------------------------------------------------------------*)
+
+ReconstructPsi4[sim_, t_, rad_: Automatic] :=
+ Module[{modes, psi4modes, harmonics},
+  modes = ReadPsi4Modes[sim];
+  psi4modes = Interpolation[ReadPsi4[sim, #[[1]], #[[2]], rad]][t] & /@ modes;
+  harmonics[th_, ph_] := SpinWeightedSphericalHarmonic[-2, #[[1]], #[[2]], th, ph] & /@ modes;
+  Compile[{th, ph}, Evaluate[Plus @@ (psi4modes.harmonics[th, ph])]]
+];
 
 ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic, OptionsPattern[]] :=
   Module[{psi4, radii, radString},
