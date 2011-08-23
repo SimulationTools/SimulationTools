@@ -7,6 +7,7 @@ KickVector::usage = "Kick[run, r, lMax] computes the vector kick in km/s from th
 LinearMomentumRadiated::usage = "LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum radiated as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is an integral of the result of LinearMomentumFlux with an initial boundary condition of zero.";
 LinearMomentumFlux::usage = "LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is the derivative of the result of LinearMomentumRadiated.";
 AngularMomentumFlux::usage = "WARNING: THIS FUNCTION IS IN DEVELOPMENT AND HAS NOT BEEN TESTED. AngularMomentumFlux[run, dir, r, lMax] computes the angular momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.";
+SpinWeightedSphericalHarmonic::usage = "SpinWeightedSphericalHarmonic[s, l, m, \[Theta], \[Phi]] gives the spin weighted spherical harmonic.";
 
 Begin["`Private`"];
 
@@ -23,7 +24,7 @@ Begin["`Private`"];
    to something it can handle more easily. We use this simplified expression
    in the actual definition.
 
-spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
+SpinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
   (Factorial[l + m] Factorial[
        l - m] (2 l + 1) Factorial[l + s]^(-1) Factorial[
         l - s]^(-1) (4 Pi)^(-1))^(1/2) (Sin[th/2])^(2 l) Sum[
@@ -31,7 +32,7 @@ spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
       I m ph] Cot[th/2]^(2 r + s - m), {r, Max[m - s, 0], Min[l - s, l + m]}];
 *)
 
-spinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
+SpinWeightedSphericalHarmonic[s_, l_, m_, th_, ph_] :=
   (Sqrt[((1 + 2*l)*(l - m)!*(l + m)!)/((l - s)!*(l + s)!)]*
   Piecewise[
     {{(-1)^(l - s)*E^(I*m*ph)*Binomial[l + s, -m + s]*
