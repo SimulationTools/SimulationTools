@@ -115,6 +115,7 @@ InitialDimensionlessSpin;
 MassRatio;
 SymmetricMassRatio;
 InitialSeparation;
+InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing the initial coordinate position of BH numbered bh";
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -1153,6 +1154,8 @@ SymmetricMassRatio[run_] :=
 DefineMemoFunction[InitialSeparation[run_],
   First@DepVar@ReadBHSeparation[run]];
 
+DefineMemoFunction[InitialPosition[run_, bh_],
+  First@DepVar@ReadBHCoordinates[run, bh]];
 
 End[];
 
