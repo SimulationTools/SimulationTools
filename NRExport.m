@@ -240,7 +240,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
 
   {(* "comments" -> "", *)
    (* "documentation" -> "", *)
-   (* "publication" -> "", *)
+   (* "simulation-bibtex-keys" -> "", *)
    "submitter-email" -> "ian.hinder@aei.mpg.de",
    "code" -> "Llama/" <> code,
    (* "code-version"->"", *)
