@@ -140,11 +140,13 @@ RunDirectory := Global`RunDirectory;
   --------------------------------------------------------------------*)
 
 ReconstructPsi4[sim_, t_, rad_: Automatic] :=
- Module[{modes, psi4modes, harmonics},
+ Module[{modes, psi4modes, harmonics, cf, psi4},
   modes = ReadPsi4Modes[sim];
   psi4modes = Interpolation[ReadPsi4[sim, #[[1]], #[[2]], rad]][t] & /@ modes;
   harmonics[th_, ph_] := SpinWeightedSphericalHarmonic[-2, #[[1]], #[[2]], th, ph] & /@ modes;
-  Compile[{th, ph}, Evaluate[Plus @@ (psi4modes.harmonics[th, ph])]]
+  cf=Compile[{{th, _Real}, {ph, _Real}}, Evaluate[Plus @@ (psi4modes.harmonics[th, ph])]];
+  psi4[th_?NumericQ, ph_?NumericQ] := cf[th, ph];
+  psi4
 ];
 
 ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic, OptionsPattern[]] :=
