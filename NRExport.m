@@ -258,7 +258,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
     Norm@InitialAngularMomentum[run]/M^2,
    "initial-separation" -> InitialSeparation[run]/M,
    "initial-data-type" -> "Bowen-York quasicircular",
-   "initial-data-bibtex-keys" -> "Bowen:1980yu, Brandt:1997tf, Ansorg:2004ds",
+   "initial-data-bibtex-keys" -> "Bowen:1980yu Brandt:1997tf Ansorg:2004ds",
    "quasicircular-bibtex-keys" -> "Husa:2007rh",
    "initial-eccentricity" -> ecc,
    (* "eccentricity-error-range" -> "", *)
