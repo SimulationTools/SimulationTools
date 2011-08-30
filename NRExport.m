@@ -285,7 +285,8 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    Sequence @@ Flatten@Table[
       "initial-bh-spin" <> ToString[i+1] <> coord[d] ->
        First@DepVar@ReadIsolatedHorizonSpin[run, i, d]/
-        M^2, {i, 0, 1}, {d, 1, 3}]
+        M^2, {i, 0, 1}, {d, 1, 3}],
+   "data-type" -> "NR"
    }
   ];
 
