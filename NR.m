@@ -8,6 +8,8 @@ BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable
   "Horizons`", "Kicks`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
   "SystemStatistics`", "Timers`"}];
 
+SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized.";
+
 ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4From::usage = "ReadPsi4From is an option for ReadPsi4 which specifies which mode decomposition to read from. Possible options are \"MultipoleHDF5\", \"MultipoleASCII\" and \"YlmDecomp\".";
@@ -147,6 +149,22 @@ ReconstructPsi4[sim_, t_, rad_: Automatic] :=
   cf=Compile[{{th, _Real}, {ph, _Real}}, Evaluate[Plus @@ (psi4modes.harmonics[th, ph])]];
   psi4[th_?NumericQ, ph_?NumericQ] := cf[th, ph];
   psi4
+];
+
+SchmidtAngle[run_, t_, rad_: Automatic] := 
+ Module[{psi4, psi4l2m2, psi4l2mm2, th1},
+  psi4 = ReconstructPsi4[run, t, rad];
+  psi4l2m2[th1_?NumericQ, ph1_?NumericQ] := 
+   Abs[NIntegrate[rad Sin[th] psi4[th - th1, ph - ph1] 
+     Conjugate[SpinWeightedSphericalHarmonic[-2, 2, 2, th, ph]],
+     {th, 0, Pi}, {ph, 0, 2 Pi}]];
+  psi4l2mm2[th1_?NumericQ, ph1_?NumericQ] := 
+   Abs[NIntegrate[rad Sin[th] psi4[th - th1, ph - ph1]
+     Conjugate[SpinWeightedSphericalHarmonic[-2, 2, -2, th, ph]],
+     {th, 0, Pi}, {ph, 0, 2 Pi}]];
+  
+  th1 /. {FindMaximum[psi4l2m2[th1, 0], {th1, 0}, Method -> "PrincipalAxis"][[2]], 
+          FindMaximum[psi4l2mm2[th1, 0], {th1, 0}, Method -> "PrincipalAxis"][[2]]}
 ];
 
 ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic, OptionsPattern[]] :=
