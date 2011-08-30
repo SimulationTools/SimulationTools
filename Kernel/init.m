@@ -43,6 +43,7 @@ Module[{packages =
   "ReadHDF5",
   "RunFiles",
   "SimView",
+  "SimViewRRMHD",
   "SystemStatistics",
   "Tracks"}},
 
