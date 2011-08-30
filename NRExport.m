@@ -284,7 +284,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
         M^2, {i, 0, 1}, {d, 1, 3}],
    Sequence @@ Flatten@Table[
       "initial-bh-spin" <> ToString[i+1] <> coord[d] ->
-       First@DepVar@ReadIsolatedHorizonSpin[run, i, d]/
+       DepVar[ReadIsolatedHorizonSpin[run, i, d]][[2]]/ (* Poison in the first entry of q1D11.8S0.3s0b *)
         M^2, {i, 0, 1}, {d, 1, 3}],
    "data-type" -> "NR"
    }
