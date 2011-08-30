@@ -281,6 +281,10 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    Sequence @@ Flatten@Table[
       "after-junkradiation-spin" <> ToString[i] <> coord[d] ->
        Interpolation[ReadIsolatedHorizonSpin[run, i, d]][tJunk]/
+        M^2, {i, 0, 1}, {d, 1, 3}],
+   Sequence @@ Flatten@Table[
+      "initial-bh-spin" <> ToString[i] <> coord[d] ->
+       First@DepVar@ReadIsolatedHorizonSpin[run, i, d]/
         M^2, {i, 0, 1}, {d, 1, 3}]
    }
   ];
