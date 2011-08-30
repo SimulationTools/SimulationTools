@@ -261,7 +261,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "initial-data-bibtex-keys" -> "Bowen:1980yu Brandt:1997tf Ansorg:2004ds",
    "quasicircular-bibtex-keys" -> "Husa:2007rh",
    "eccentricity" -> ecc,
-   "method-measure-eccentricity" -> "newtonian-fit-in-om-gw",
+   "eccentricity-measurement-method" -> "newtonian-fit-in-om-gw",
    "initial-freq-22" -> -Interpolation[
        Frequency@ReadPsi4[run, 2, 2, 100]][100 + tJunk],
    "number-of-cycles-22" -> NumCycles[run, 100 + tJunk],
