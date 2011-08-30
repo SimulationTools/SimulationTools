@@ -270,7 +270,11 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "after-junkradiation-time" -> tJunk,
    Sequence @@ Table["mass" <> ToString[i] ->
       Interpolation[ChristodoulouMass[run, i, i-1]][tJunk]/M, {i, 1, 2}],
-   "initial-separation-angle" -> 0,
+
+   Sequence @@ Flatten@Table[
+      "initial-bh-position" <> ToString[i] <> coord[d] ->
+       InitialPosition[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
+
    Sequence @@ Flatten@Table[
       "initial-bh-momentum" <> ToString[i] <> coord[d] ->
        InitialLinearMomentum[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
