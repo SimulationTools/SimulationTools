@@ -242,6 +242,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    (* "documentation" -> "", *)
    (* "simulation-bibtex-keys" -> "", *)
    "submitter-email" -> "ian.hinder@aei.mpg.de",
+   "authors-emails" -> "Daniela Alic <daniela.alic@aei.mpg.de>, Ian Hinder <ian.hinder@aei.mpg.de>, Philipp Moesta <philipp.moesta@aei.mpg.de>, Luciano Rezzolla <luciano.rezzolla@aei.mpg.de>, Barry Wardell <barry.wardell@aei.mpg.de>",
    "code" -> "Llama/" <> code,
    (* "code-version"->"", *)
    "code-bibtex-keys" -> bibtex,
