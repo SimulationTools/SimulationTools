@@ -272,18 +272,18 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
       Interpolation[ChristodoulouMass[run, i, i-1]][tJunk]/M, {i, 1, 2}],
 
    Sequence @@ Flatten@Table[
-      "initial-bh-position" <> ToString[i] <> coord[d] ->
+      "initial-bh-position" <> ToString[i+1] <> coord[d] ->
        InitialPosition[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
 
    Sequence @@ Flatten@Table[
-      "initial-bh-momentum" <> ToString[i] <> coord[d] ->
+      "initial-bh-momentum" <> ToString[i+1] <> coord[d] ->
        InitialLinearMomentum[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
    Sequence @@ Flatten@Table[
-      "after-junkradiation-spin" <> ToString[i] <> coord[d] ->
+      "after-junkradiation-spin" <> ToString[i+1] <> coord[d] ->
        Interpolation[ReadIsolatedHorizonSpin[run, i, d]][tJunk]/
         M^2, {i, 0, 1}, {d, 1, 3}],
    Sequence @@ Flatten@Table[
-      "initial-bh-spin" <> ToString[i] <> coord[d] ->
+      "initial-bh-spin" <> ToString[i+1] <> coord[d] ->
        First@DepVar@ReadIsolatedHorizonSpin[run, i, d]/
         M^2, {i, 0, 1}, {d, 1, 3}]
    }
