@@ -22,6 +22,7 @@ $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
 
 Module[{packages =
  {"Ascii1D",
+  "Ascii",
   "BHCoordinates",
   "CarpetHDF5",
   "CoordinateTransformations",
