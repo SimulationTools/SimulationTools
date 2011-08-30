@@ -265,7 +265,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "initial-freq-22" -> -Interpolation[
        Frequency@ReadPsi4[run, 2, 2, 100]][100 + tJunk],
    "number-of-cycles-22" -> NumCycles[run, 100 + tJunk],
-   (* "number-of-cycles-22-error-relative" -> "", *)
+   (* "phase-error" -> "", *)
    (* "amplitude-error-relative" -> "", *)
    "after-junkradiation-time" -> tJunk,
    Sequence @@ Table["mass" <> ToString[i] ->
