@@ -338,12 +338,13 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 
 (* Full run *)
 
-ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_] :=
-  Scan[ExportSim[#, name, Madm, ecc, outputDirectory] &, sims];
+Options[ExportConfig] = Options[ExportSim];
+ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPattern[]] :=
+  Scan[ExportSim[#, name, outputDirectory, Madm, ecc, opts] &, sims];
 
-Options[ExportSim] = {ExportSimFormat -> "ASCII"};
+Options[ExportSim] = {ExportSimFormat -> "ASCII", ExportOnly -> All};
 ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
-  Module[{dir, h, n, format, ext},
+  Module[{dir, h, n, format, ext, all, export},
 
     h = ReadCoarseGridSpacing[run];
     n = Round[0.6/(h/2^5)];
@@ -354,13 +355,22 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
 
     If[OptionValue[ExportSimFormat]==="ASCII", ext = ".asc.gz", ext = ".h5"];
 
-    ExportAllExtractedWaveforms[run, dir <> "/psi4"<>ext];
-    ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext, mass];
-    ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1"<>ext];
-    ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext];
-    ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
-    ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext];
-    ExportMetadata[dir<>"/"<>niceName<>"_"<>ToString[n]<>".bbh", run, mass, ecc];
+    all = {Coordinates, Spin, HorizonMass, FiniteRadiiWaves, ExtrapolatedWaves, Metadata};
+    export = If[OptionValue[ExportOnly] === All, all, OptionValue[ExportOnly]];
+
+    Do[
+    Switch[item,
+      "FiniteRadiiWaves",  ExportAllExtractedWaveforms[run, dir <> "/psi4"<>ext],
+      "ExtrapolatedWaves", ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext, mass],
+      "Coordinates",       ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1"<>ext];
+                           ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext],
+      "Spin",              ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
+                           ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext],
+      "HorizonMass",       ExportLocalQuantity[run, HorizonMass, 1, dir <> "/horizon_mass1"<>ext];
+                           ExportLocalQuantity[run, HorizonMass, 2, dir <> "/horizon_mass2"<>ext],
+      "Metadata",          ExportMetadata[dir<>"/"<>niceName<>"_"<>ToString[n]<>".bbh", run, mass,
+                                          ecc],
+      _, Throw["Error"]], {item, export}];
   ];
 
 End[];
