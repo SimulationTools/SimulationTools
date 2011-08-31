@@ -90,12 +90,6 @@ SimView[runNames_List, r_] :=
    ListLogPlot[
     Map[ToList[Abs[ReadPsi4[#, 2, 2, r]]]&, runNames], 
     PlotRange -> All, Joined->True, PlotLabel -> "|Psi422|, R = "<>ToString[r], ImageSize -> size]];
-  freqPsi4 = Catch[
-   ListLinePlot[
-    Map[NDerivative[
-      Phase[ReadPsi4[#, 2, 2, r]]]&,runNames], 
-    PlotRange -> Automatic, PlotLabel -> "Freq Psi422, R = "<>ToString[r], 
-    ImageSize -> size]];
 
   spinNorms = Catch[
    ListLinePlot[
@@ -128,7 +122,7 @@ SimView[runNames_List, r_] :=
        {speed, memory}, 
        {trajectories, radius},
        {rePsi4, ampPsi4},
-       {freqPsi4,costTable},
+       {costTable,SpanFromLeft},
        {spinNorms, spinPhases}}~Join~
        segments, 
        Spacings -> {0, 1}];
