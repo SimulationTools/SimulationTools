@@ -1,8 +1,10 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`"}];
+BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`", "Parameters`"}];
 
 SimView::usage = "SimView[run, r] displays a graphical overview of a simulation.  r is the extraction radius at which to display any waveforms.  r defaults to the first available extraction radius if not given.  run can be either the name of a run or a list of names of runs, in which case data from all the runs will be displayed on the same plots.";
+
+FinishTime::usage = "FinishTime[run] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."
 
 Begin["`Private`"];
 
@@ -58,6 +60,21 @@ memoryPlot[runNames_List, size_] :=
    Show[ListLinePlot[mems], ListLinePlot[swaps, PlotStyle->Dashed],
      PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory", ImageSize -> size]];
 
+FinishTime[run_] :=
+  Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
+    segs = FindRunSegments[run];
+    segInfos = segmentInfo/@segs;
+    segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
+    t = T2/.segInfo;
+
+    tFinal = ToExpression@LookupParameter[run, "Cactus::cctk_final_time"];
+    speed = Last@DepVar@ReadRunSpeed@run;
+    seconds = (tFinal-t)/speed*3600;
+
+    lastDate = DateList[LastDate/.segInfo];
+    finishDate = DatePlus[lastDate, {seconds,"Second"}]
+  ];
+
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
     freqPsi4, segments, cost, costTable, ampPsi4, grid},
@@ -107,16 +124,19 @@ SimView[runNames_List, r_] :=
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
   cost[run_] := 
-    {run, Catch@ReadCores[run],  Catch@ReadCPUHours[run],
-      Catch@ReadWalltimeHours[run]/24,  Catch@ReadCores[run]*24};
+    Item[#,Alignment->Right] & /@ {run, Catch@ReadCores[run],  Catch@ReadCPUHours[run],
+      Catch@ReadWalltimeHours[run]/24,  Catch@ReadCores[run]*24,
+      DateString[FinishTime[run]]
+      };
 
   costTable = Grid[{{Style["Simulation",Bold],
                      Style["Cores",Bold], 
-                     Style["CPU hours",Bold], 
+                     Style["CPU hrs.",Bold], 
                      Style["Days",Bold], 
-                     Style["CPU hours per day",Bold]}}
+                     Style["CPU hrs./day",Bold],
+                     Style["Estimated finish", Bold]}}
                     ~Join~
-                   Map[cost, runNames]];
+                   Map[cost, runNames], Spacings->{2,0.5}];
 
   grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft},
        {speed, memory}, 
