@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`", "Parameters`"}];
+BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`", "Parameters`", "Plotting`"}];
 
 SimView::usage = "SimView[run, r] displays a graphical overview of a simulation.  r is the extraction radius at which to display any waveforms.  r defaults to the first available extraction radius if not given.  run can be either the name of a run or a list of names of runs, in which case data from all the runs will be displayed on the same plots.";
 
@@ -57,8 +57,26 @@ memoryPlot[runNames_List, size_] :=
    mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns]];
    If[StringQ[mems], mems = {{0,0}}];
 
-   Show[ListLinePlot[mems], ListLinePlot[swaps, PlotStyle->Dashed],
-     PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory", ImageSize -> size]];
+   Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
+     PresentationListLinePlot[swaps, PlotStyle->Dashed],
+     PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n", ImageSize -> size]];
+
+LastOutputTime[run_] :=
+  Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
+    segs = FindRunSegments[run];
+    segInfos = segmentInfo/@segs;
+    segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
+    lastDate = DateList[LastDate/.segInfo]];
+
+LastOutputCoordinateTime[run_] :=
+  Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
+    segs = FindRunSegments[run];
+    segInfos = segmentInfo/@segs;
+    segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
+    T2/.segInfo];
+
+FinalCoordinateTime[run_] :=
+  ToExpression@LookupParameter[run, "Cactus::cctk_final_time"];
 
 FinishTime[run_] :=
   Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
@@ -67,7 +85,8 @@ FinishTime[run_] :=
     segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
     t = T2/.segInfo;
 
-    tFinal = ToExpression@LookupParameter[run, "Cactus::cctk_final_time"];
+    tFinal = FinalCoordinateTime[run];
+
     speed = Last@DepVar@ReadRunSpeed@run;
     seconds = (tFinal-t)/speed*3600;
 
@@ -75,50 +94,61 @@ FinishTime[run_] :=
     finishDate = DatePlus[lastDate, {seconds,"Second"}]
   ];
 
+FinishTimeString[run_] :=
+  Module[{},
+    If[Abs[LastOutputCoordinateTime[run] - FinalCoordinateTime[run]] < 1,
+      "Finished",
+      DateString[FinishTime[run]]]];
+
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
     freqPsi4, segments, cost, costTable, ampPsi4, grid},
   size = {350, 100};
   size = 250;
   speed = Catch[
-   ListLinePlot[Map[ReadRunSpeed, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Speed", ImageSize -> size]];
+   PresentationListLinePlot[Map[ReadRunSpeed, runNames], 
+    PlotRange -> {0, All}, PlotLabel -> "Speed\n", ImageSize -> size,
+    PlotLegend -> runNames, LegendPosition -> {Left, Bottom}]];
   memory = memoryPlot[runNames, size];
   trajectories = Catch[
-   ListLinePlot[
+   PresentationListLinePlot[
     Flatten[Map[
       ReadBHTrajectories, runNames], 1], 
-    AspectRatio -> Automatic, PlotLabel -> "Trajectories", 
+    AspectRatio -> Automatic, PlotLabel -> "Trajectories\n", 
     ImageSize -> size, PlotRange -> All]];
   radius = Catch[
-   ListLinePlot[
+   PresentationListLinePlot[
     Map[ReadBHSeparation, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Separation", ImageSize -> size]];
+    PlotRange -> {0, All}, PlotLabel -> "Separation\n", ImageSize -> size,
+    PlotLegend -> runNames, LegendPosition -> {Right, Top}]];
   frequency = Catch[
-   ListLinePlot[
+   PresentationListLinePlot[
     Map[NDerivative[ReadMinTrackerPhase[#]]&, runNames],
-    PlotRange -> {0, Automatic}, PlotLabel -> "Frequency", 
+    PlotRange -> {0, Automatic}, PlotLabel -> "Frequency\n", 
     ImageSize -> size]];
   rePsi4 = Catch[
-   ListLinePlot[
+   PresentationListLinePlot[
     Map[Re[ReadPsi4[#, 2, 2, r]]&, runNames], 
-    PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r], ImageSize -> size]];
+    PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r]<>"\n", ImageSize -> size,
+    PlotLegend -> runNames]];
   ampPsi4 = Catch[
-   ListLogPlot[
-    Map[ToList[Abs[ReadPsi4[#, 2, 2, r]]]&, runNames], 
-    PlotRange -> All, Joined->True, PlotLabel -> "|Psi422|, R = "<>ToString[r], ImageSize -> size]];
+   PresentationListLinePlot[
+    (Log10@Abs@ReadPsi4[#, 2, 2, r] &) /@ runNames, 
+    PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r]<>"\n", ImageSize -> size,
+    PlotLegend -> runNames,
+    FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]];
 
   spinNorms = Catch[
-   ListLinePlot[
+   PresentationListLinePlot[
      Flatten@Table[
        Norm@ReadIsolatedHorizonDimensionlessSpin[run, hn],{run,runNames},{hn,0,1}],
-    PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2", ImageSize -> size]];
+    PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2\n", ImageSize -> size]];
 
   spinPhases = Catch[
-   ListLinePlot[
+   PresentationListLinePlot[
      Flatten@Table[
        ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}],
-    PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg", ImageSize -> size]];
+    PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size]];
 
   segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
