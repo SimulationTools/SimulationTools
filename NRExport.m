@@ -300,7 +300,7 @@ runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
    {Sequence @@ Table["spin" <> ToString[i] ->
       "spin"<>ToString[i]<>".asc.gz", {i, 1, 2}],
    Sequence @@ Table["trajectory" <> ToString[i] ->
-      "trajectory"<>ToString[i]<>".asc.gz", {i, 1, 2}],
+      "traj"<>ToString[i]<>".asc.gz", {i, 1, 2}],
    Sequence @@ Table["horizon-mass" <> ToString[i] ->
       "horizon_mass"<>ToString[i]<>".asc.gz", {i, 1, 2}]},
    Sequence @@ Table["Psi4t-data" -> Prepend[Map[waveform[#, rad] &, modes], "extraction-radius" -> rad], {rad, radii}]}
