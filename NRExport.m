@@ -201,7 +201,10 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
 
   ExportStatus = "Exporting " <> ToString[what] <> " data for "<>run<>" to "<>file;
 
-  f = Switch[what, Coordinates, ReadBHCoordinates[run, i-1], Spin, ReadIsolatedHorizonSpin[run, i-1]];
+  f = Switch[what,
+    Coordinates, ReadBHCoordinates[run, i-1],
+    Spin, ReadIsolatedHorizonSpin[run, i-1],
+    HorizonMass, ReadAHMass[run,i]];
 
   Switch[fileExtension[file],
   "asc",
