@@ -1,5 +1,9 @@
 (* ::Package:: *)
 
+
+(* FIXME: if a run doesn't have a parameter file in it, nrmma cannot find ANY files! *)
+
+
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["RunFiles`", {"Profile`", "Memo`"}];
