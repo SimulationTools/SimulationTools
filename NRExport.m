@@ -19,7 +19,7 @@ Coordinates;
 Spin;
 
 ExportMetadata::usage = "ExportMetadata[file, run, mass, ecc] exports the metadata for run to file.";
-ExportSim::usage = "ExportSim[run, niceName, mass, ecc, outputDirectory] exports a full simulation, including waveforms, local quantities and metadata.";
+ExportSim::usage = "ExportSim[run, niceName, outputDirectory, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
 ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
