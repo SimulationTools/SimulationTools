@@ -23,6 +23,7 @@ ExportSim::usage = "ExportSim[run, niceName, outputDirectory, mass, ecc] exports
 ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
+ExportOnly;
 
 Begin["`Private`"];
 
