@@ -356,7 +356,7 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
 
     If[OptionValue[ExportSimFormat]==="ASCII", ext = ".asc.gz", ext = ".h5"];
 
-    all = {Coordinates, Spin, HorizonMass, FiniteRadiiWaves, ExtrapolatedWaves, Metadata};
+    all = {"Coordinates", "Spin", "HorizonMass", "FiniteRadiiWaves", "ExtrapolatedWaves", "Metadata"};
     export = If[OptionValue[ExportOnly] === All, all, OptionValue[ExportOnly]];
 
     Do[
