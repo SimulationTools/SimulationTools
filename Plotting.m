@@ -13,6 +13,7 @@ DynamicListLinePlot;
 PresentationListLinePlot;
 PresentationArrayPlot;
 ColorRange;
+ColorMap;
 PresentationPlotStyles;
 PresentationPlotColors;
 LegendOrientation;
@@ -22,6 +23,7 @@ PlotKey;
 DynamicArrayPlot;
 FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with paramters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
 FilterPlot::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out.";
+PlotKeySize;
 
 Begin["`Private`"];
 
@@ -305,26 +307,27 @@ FitPlot[data_DataTable, model_, pars_, {t_, t1p_, t2p_}, opts___] :=
    {{t1, t1p}, 0, tMax}, {{t2, t2p}, 0, tMax},
    SaveDefinitions -> True]];
 
-key[mapName_String, {min_, max_}, opts___] :=
+key[mapName_String, {min_, max_}, plotkeysize_,opts___] :=
   ArrayPlot[Table[{c, c}, {c, max, min, -(max - min)/100}],
    opts,
    ColorFunctionScaling -> False,
    ColorFunction ->
     ScaledColorFunction[mapName, 1 {min, max}],
-   DataRange -> {{0, 1}, {min, max}}, AspectRatio -> 8, ImageSize->{Automatic,400},
+   DataRange -> {{0, 1}, {min, max}}, AspectRatio -> 8, ImageSize-> plotkeysize,
    FrameTicks -> {Table[
       If[Abs[c] < 10^-15, 0, N@c], {c, min, max, (max - min)/10}],
      False, False, False}];
 
 Options[PresentationArrayPlot] =
-{ColorRange -> Automatic, ColorMap -> "TemperatureMap", PlotKey -> True} ~Join~ Options[ArrayPlot];
+{ColorRange -> Automatic, ColorMap -> "TemperatureMap", PlotKeySize -> {Automatic,400}, PlotKey -> True} ~Join~ Options[ArrayPlot];
 
 PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
-  Module[{range, keyPlot, plot},
+  Module[{range, keyPlot, plotkeysize, plot},
     range = OptionValue[ColorRange];
-    If[range === Automatic, range = {Min[data], Max[data]}];
+	plotkeysize = OptionValue[PlotKeySize];
 
-    keyPlot = key[OptionValue[ColorMap],range];
+    If[range === Automatic, range = {Min[data], Max[data]}];
+    keyPlot = key[OptionValue[ColorMap],range,plotkeysize];
 
     plot = DataRegionArrayPlot[data, Sequence@@FilterRules[{opts},Options[ArrayPlot]],
              ImageSize->{400,400}, ColorFunctionScaling -> False,
