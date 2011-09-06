@@ -472,7 +472,7 @@ Options[AlignPhases] = {Continuous -> False};
 
 AlignPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
   Module[{phaseFns, refPhases, adjustments, adjusted,
-          ranges, min, max, constTb},
+          ranges, min, max, constTb, phase1},
     If[Length[phaseTbs] < 2, Return[phaseTbs]];
 
     ranges = Map[DataTableRange, phaseTbs];
@@ -482,9 +482,10 @@ AlignPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
 
     phaseFns = Map[Interpolation, phaseTbs];
     refPhases = Map[#[t]&, phaseFns];
+    phase1 = refPhases[[1]];
     adjustments =
       If[!OptionValue[Continuous],
-        Map[Round[#/(2. Pi)] 2.0 Pi &, refPhases],
+        Map[Round[(#-phase1)/(2. Pi)] 2.0 Pi &, refPhases],
         refPhases];
 
     constTb[a_, d_DataTable] := 
