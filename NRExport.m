@@ -213,7 +213,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
   "asc.gz",
     Export[file, f, {"GZIP", "TABLE"}];,
   "h5",
-    dsName = (what /. {Coordinates -> "trajectory", Spin -> "spin"}) <> ToString[i-1];
+    dsName = (what /. {Coordinates -> "traj", Spin -> "spin", HorizonMass -> "horizon_mass"}) <> ToString[i-1];
     Export[file, f, {"Datasets", dsName}, "Append"->True];,
   _,
     Throw["Unsupported file format: "<>fileExtension[file]];
