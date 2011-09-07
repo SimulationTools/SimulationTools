@@ -56,9 +56,14 @@ coordString[dir_] := {"x", "y", "z"}[[dir]];
 
 ReadIsolatedHorizonSpin[runName_, hn_, dir_] :=
   Module[{},
-    If[FindRunFile[runName,"isolatedhorizon::ih_scalars..asc"] =!= {},
+    Which[
+    FindRunFile[runName,"isolatedhorizon::ih_scalars..asc"] =!= {},
        MakeDataTable@ReadColumnFile[runName, "isolatedhorizon::ih_scalars..asc", 
          {"time", "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]"}],
+    FindRunFile[runName,"quasilocalmeasures::qlm_scalars..asc"] =!= {},
+       MakeDataTable@ReadColumnFile[runName, "quasilocalmeasures::qlm_scalars..asc",
+         {"time", "qlm_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]"}],
+    True,
        MakeDataTable@ReadColumnFile[runName, 
          "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]..asc", {9, 13}]]];
 
