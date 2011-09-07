@@ -17,6 +17,7 @@ ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all ext
 ExportLocalQuantity::usage = "ExportLocalQuantity[run, quantity, bh, file] exports a local quantity for black hole bh to file. Possible choices of quantity are Coordinates or Spin.";
 Coordinates;
 Spin;
+HorizonMass;
 
 ExportMetadata::usage = "ExportMetadata[file, run, mass, ecc] exports the metadata for run to file.";
 ExportSim::usage = "ExportSim[run, niceName, outputDirectory, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
