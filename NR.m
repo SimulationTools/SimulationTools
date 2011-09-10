@@ -407,9 +407,11 @@ ReadADMMass[runName_String] :=
       If[Length[output] < 1,
         Throw["Cannot find standard output for run "<>runName]];
 
-      lines = Select[ReadList[output[[1]], String], StringMatchQ[#, __ ~~ "ADM mass is" ~~ __] &, 1];
+      lines = Select[ReadList[output[[1]], String], StringMatchQ[#, __ ~~ "total ADM mass is" ~~ __] &, 1];
       If[Length[lines] < 1,
-        Throw["Cannot find ADM mass in standard output of run "<>runName]];
+        lines = Select[ReadList[output[[1]], String], StringMatchQ[#, __ ~~ "ADM mass is" ~~ __] &, 1];
+        If[Length[lines] < 1,
+        Throw["Cannot find ADM mass in standard output of run "<>runName]]];
       ToExpression@Last@StringSplit[lines[[1]]]]];
 
 (*--------------------------------------------------------------------
