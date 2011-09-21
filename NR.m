@@ -13,7 +13,7 @@ SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-
 ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
 ReadPsi4From::usage = "ReadPsi4From is an option for ReadPsi4 which specifies which mode decomposition to read from. Possible options are \"MultipoleHDF5\", \"MultipoleASCII\" and \"YlmDecomp\".";
-ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."
+ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold.";
 ReadMultipoleHDF5::usage = "ReadMultipoleHDF5[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the HDF5 output of the Multipole thorn.";
 ReadMultipoleASCII::usage = "ReadMultipoleASCII[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the ASCII output of the Multipole thorn.";
 ReadYlmDecomp::usage = "ReadYlmDecomp[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the YlmDecomp output from the WeylScal4 thorn.";
@@ -36,8 +36,51 @@ YlmDecompPsi4Variable = "Psi4";
 StrainFromPsi4::usage = "StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] converts a DataTable containing \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)[t] into strain and its time derivative, {h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\).
 StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), {\!\(\*SubscriptBox[\(t\), \(start\)]\), \!\(\*SubscriptBox[\(t\), \(end\)]\)}] converts using time domain integration.";
 
+NumCycles::usage = "NumCycles[run, start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.
+NumCycles[psi4, start] operates on the DataTable psi4 instead of run.";
+
+AlignPhases::usage = "AlignPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. The independent variable is assumed to be a phase so that the resulting phases all start out within 2\[Pi] of each other.";
+
+ReadADMMass::usage = "ReadADMMass[run] reads the total ADM mass of the spacetime in run as computed by the TwoPunctures thorn.";
 ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn.";
 ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";
+InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing the initial coordinate position of BH numbered bh";
+
+FinestGridSpacing::usage = "FinestGridSpacing[run] computes the grid spacing on the finest refinement level in run.";
+ReadCoarseGridSpacing::usage = "ReadCoarseGridSpacing[run] reads the coarse grid spacing for run.";
+ReadCoarseTimeStep::usage = "ReadCoarseTimeStep[run] reads the coarse time step for run.";
+ReadAngularPoints::usage = "ReadAngularPoints[run] reads the number of angular points in the (Llama) spherical patches of run.";
+ReadInnerBoundary::usage = "ReadInnerBoundary[run] reads the position of the inner boundary of the (Llama) spherical patches of run.";
+ReadOuterBoundary::usage = "ReadOuterBoundary[run] reads the position of the outer boundary of the (Llama) spherical patches of run.";
+ReadFineTimeStep::usage = "ReadFineTimeStep[run] reads the finest possible time step for run corresponding to a single iteration.";
+ReadTimeRange::usage = "ReadTimeRange[run] reads the range of times at which data is available for run.";
+GridSpacingOnLevel::usage = "GridSpacingOnLevel[run, level] reads the grid spacing on a refinement level in run.";
+BoxRadiiOnLevel::usage = "BoxRadiiOnLevel[run, level] reads the radii of the refinement boxes on a refinement level in run.";
+BoxRadiiForCentre::usage = "BoxRadiiForCentre[run, centre] reads the radii of the refinement boxes around centre (as specified by CarpetRegrid2) in run.";
+CountRefinementLevels::usage = "CountRefinementLevels[run] reads the maximum possible number of refinement levels in run.
+CountRefinementLevels[run, centre] reads the number of active refinement levels for centre in run.";
+RefinementLevels::usage = "RefinementLevels[run] returns a list containing the refinement level numbers present in run.";
+TimeRefinementFactors::usage = "TimeRefinementFactors[run] reads the time refinement factors for run.";
+CourantFactorOnLevel::usage = "CourantFactorOnLevel[run, level] computes the Courant factor on level for run.";
+LevelExistsEvery::usage = "LevelExistsEvery[run, level] computes how often (in iterations) a refinement level exists in run.";
+RadialPoints::usage = "RadialPoints[run, level] computes the number of radial points on a refinement level in run.";
+GridStructure::usage = "GridStructure[run] computes the grid structure for run. For each refinement level it returns a list of the form {level, box radii, coarse spacing, number of points, courant factor, level exists every}.";
+
+RunName::usage = "RunName is a DataTable attribute added by ReadYlmDecomp, ReadMultipoleASCII and ReadMultipoleHDF5.";
+
+ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian constraint in run.";
+
+LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
+LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
+PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
+FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
+
+ExtrapolatePsi4::usage = "ExtrapolatePsi4[run, l, m] extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
+ExtrapolatePsi4Amplitude::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the amplitude of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
+ExtrapolatePsi4Phase::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the phase of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
+
+UseTortoiseCoordinate::usage = "UseTortoiseCoordinate is an option for radius extrapolation routines which specifies whether the radial coordinated should be converted to a tortoise coordinate. This may improve the accuracy of the extrapolation.";
+TortoiseCoordinate::usage = "TortoiseCoordinate[r, M] gives the tortoise coordinate corresponding to radius r assuming a Schwarzschild black hole of mass M. The constant of integration is chosen so that the tortoise and radial coordinate coincide at r=4M.";
 
 ExtrapolateScalarFull;
 ExtrapolateScalar;
@@ -46,52 +89,19 @@ ExtrapolateScalarWithRadii;
 Data;
 ExtrapolatedCurve;
 ExtrapolateDataTables;
-AlignPhases;
 RadiusTimeDataToTimeRadiusData;
 ExtrapolateRadiatedQuantity;
-ExtrapolatePsi4Phase;
-ReadADMMass;
-TortoiseCoordinate;
-UseTortoiseCoordinate;
-FilterDCT;
 ApplyToPhases;
 ExtrapolationError;
-ExtrapolatePsi4Amplitude;
-ExtrapolatePsi4;
 FitFunction;
-LocateMaximum;
-LocateMaximumPoint;
-GridSpacingOnLevel;
-BoxRadiiOnLevel;
-BoxRadiiForCentre;
-RefinementLevels;
-GridStructure;
-FinestGridSpacing;
-TimeRefinementFactors;
-CourantFactorOnLevel;
-LevelExistsEvery;
-RadialPoints;
-RunName;
-ReadCoarseGridSpacing;
-ReadAngularPoints;
-ReadInnerBoundary;
-ReadOuterBoundary;
-CountRefinementLevels;
 
 AbsOfPhase;
 PercentageDifference;
-NumCycles::usage = "NumCycles[run,start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.
-NumCycles[psi4,start] operates on the DataTable psi4 instead of run."
-
-ReadHamiltonianConstraintNorm;
 
 ReadWaveformFile;
 AlignMaxima;
 AlignMaximaOfAbs;
-ReadFineTimeStep;
-ReadTimeRange;
 ShiftPhase;
-PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
 
 ReturnValue;
 FittedFunction;
@@ -117,7 +127,6 @@ InitialDimensionlessSpin;
 MassRatio;
 SymmetricMassRatio;
 InitialSeparation;
-InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing the initial coordinate position of BH numbered bh";
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
