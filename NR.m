@@ -36,6 +36,8 @@ YlmDecompPsi4Variable = "Psi4";
 StrainFromPsi4::usage = "StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] converts a DataTable containing \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)[t] into strain and its time derivative, {h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\).
 StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), {\!\(\*SubscriptBox[\(t\), \(start\)]\), \!\(\*SubscriptBox[\(t\), \(end\)]\)}] converts using time domain integration.";
 
+ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn.";
+ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";
 
 ExtrapolateScalarFull;
 ExtrapolateScalar;
@@ -77,8 +79,6 @@ ReadOuterBoundary;
 CountRefinementLevels;
 
 AbsOfPhase;
-ReadPunctureADMMasses;
-ReadPunctureADMMasses2;
 PercentageDifference;
 NumCycles::usage = "NumCycles[run,start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.
 NumCycles[psi4,start] operates on the DataTable psi4 instead of run."
@@ -1028,7 +1028,7 @@ DefineMemoFunction[ReadPunctureADMMasses[run_String],
     stdoutFiles = StandardOutputOfRun[run];
     ReadPunctureADMMassesFromFiles[stdoutFiles]]];
 
-DefineMemoFunction[ReadPunctureADMMasses2[run_String],
+DefineMemoFunction[ReadPunctureADMMassParameters[run_String],
   ToExpression/@{LookupParameter[run, "TwoPunctures::target_M_plus"], 
    LookupParameter[run, "TwoPunctures::target_M_minus"]}];
 
