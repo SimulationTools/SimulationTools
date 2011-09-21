@@ -864,8 +864,13 @@ FinestGridSpacing[runName_] :=
   GridSpacingOnLevel[runName, Max[RefinementLevels[runName]]];
 
 BoxRadiiOnLevel[runName_, l_] :=
-  Module[{params},
-    If[l == 0, Return[{ToExpression[LookupParameter[runName, "CoordBase::xmax"]]}]];
+  Module[{params, coarseRadius},
+    If[l == 0,
+      coarseRadius = LookupParameter[runName, "CoordBase::xmax",
+            {ReadInnerBoundary[runName], ReadOuterBoundary[runName]}];
+      If[Head[coarseRadius != List], coarseRadius = {coarseRadius}];
+      Return[coarseRadius]
+    ];
     params = FindParameters[runName, "regridboxes::centre_*_radius" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"];
 
     If[params === {},
@@ -903,6 +908,11 @@ GridStructure[runName_String] :=
        CourantFactorOnLevel[runName, #],
        LevelExistsEvery[runName, #]} &, RefinementLevels[runName]];
 
+ReadCoarseTimeStep[runName_] :=
+  Module[{dt},
+    dt = ToExpression[LookupParameter[runName, "Time::timestep", $Failed]]
+  ];
+
 TimeRefinementFactors[runName_String] :=
   Module[{s1, s2, s3s, facs},
     s1 = LookupParameter[runName, "Carpet::time_refinement_factors"];
@@ -917,7 +927,8 @@ TimeRefinementFactor[runName_String, level_] :=
 
 CourantFactorOnLevel[runName_String, level_] :=
   Module[{dtfac, trf, srf},
-    dtfac = ToExpression[LookupParameter[runName, "Time::dtfac"]];
+    dtfac = ToExpression[LookupParameter[runName, "Time::dtfac",
+        ReadCoarseTimeStep[runName] / ReadCoarseGridSpacing[runName]]];
     trf = TimeRefinementFactor[runName, level];
     srf = 2^level;
     Return[dtfac * srf/trf];
