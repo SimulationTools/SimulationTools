@@ -299,7 +299,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
 runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
  modes = ReadPsi4Modes[run];
  radii = ReadPsi4RadiiStrings[run];
- waveform[{l_, m_}, rad_] := ToString[l]<>","<>ToString[m] -> "mp_psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
+ waveform[{l_, m_}, rad_] := ToString[l]<>","<>ToString[m] -> "psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
  {"metadata" -> runMetadata[run, mass, ecc, tJunk],
   "body-data" ->
    {Sequence @@ Table["spin" <> ToString[i] ->
