@@ -1110,18 +1110,17 @@ TotalMass[run_] :=
  Plus @@ ReadPunctureADMMassParameters[run];
 
 DefineMemoFunction[InitialSpinAngularMomentum[run_],
- Module[{sp, sm, m},
-  m = Plus @@ ReadPunctureADMMassParameters[run];
+ Module[{sp, sm},
   sp = Table[
      ToExpression@
       LookupParameter[run, 
        "TwoPunctures::par_s_plus[" <> ToString[i] <> "]", "0"], {i, 0,
-       2}]/m^2;
+       2}];
   sm = Table[
      ToExpression@
       LookupParameter[run, 
        "TwoPunctures::par_s_minus[" <> ToString[i] <> "]", "0"], {i, 
-      0, 2}]/m^2;
+      0, 2}];
   sp + sm]];
 
 InitialLinearMomentum[run_, idx_] :=
@@ -1133,18 +1132,17 @@ InitialLinearMomentum[run_, idx_] :=
       {d,0,2}]];
 
 InitialOrbitalAngularMomentum[run_] :=
- Module[{xp, xm, pyp, pym, initialL, m},
-  m = Plus @@ ReadPunctureADMMassParameters[run];
+ Module[{xp, xm, pyp, pym, initialL},
   xp = (ToExpression@LookupParameter[run, "TwoPunctures::par_b"] + 
       ToExpression@
-       LookupParameter[run, "TwoPunctures::center_offset[0]"])/m;
+       LookupParameter[run, "TwoPunctures::center_offset[0]"]);
   xm = (-ToExpression@LookupParameter[run, "TwoPunctures::par_b"] + 
       ToExpression@
-       LookupParameter[run, "TwoPunctures::center_offset[0]"])/m;
+       LookupParameter[run, "TwoPunctures::center_offset[0]"]);
   pyp = (ToExpression@
-      LookupParameter[run, "TwoPunctures::par_P_plus[1]"])/m;
+      LookupParameter[run, "TwoPunctures::par_P_plus[1]"]);
   pym = (ToExpression@
-      LookupParameter[run, "TwoPunctures::par_P_minus[1]"])/m;
+      LookupParameter[run, "TwoPunctures::par_P_minus[1]"]);
   initialL = {0, 0, xp*pyp + xm*pym}
   ];
 
