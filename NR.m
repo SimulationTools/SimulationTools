@@ -1111,7 +1111,7 @@ TotalMass[run_] :=
 
 DefineMemoFunction[InitialSpinAngularMomentum[run_],
  Module[{sp, sm, m},
-  m = Plus @@ ReadPunctureADMMasses2[run];
+  m = Plus @@ ReadPunctureADMMassParameters[run];
   sp = Table[
      ToExpression@
       LookupParameter[run, 
@@ -1134,7 +1134,7 @@ InitialLinearMomentum[run_, idx_] :=
 
 InitialOrbitalAngularMomentum[run_] :=
  Module[{xp, xm, pyp, pym, initialL, m},
-  m = Plus @@ ReadPunctureADMMasses2[run];
+  m = Plus @@ ReadPunctureADMMassParameters[run];
   xp = (ToExpression@LookupParameter[run, "TwoPunctures::par_b"] + 
       ToExpression@
        LookupParameter[run, "TwoPunctures::center_offset[0]"])/m;
@@ -1180,14 +1180,14 @@ DefineMemoFunction[InitialDimensionlessSpin[run_],
  Module[{S0, S1, mp, mm},
   S0 = First@DepVar@ReadIHSpin[run, 0];
   S1 = First@DepVar@ReadIHSpin[run, 1];
-  {mp, mm} = ReadPunctureADMMasses2[run];
+  {mp, mm} = ReadPunctureADMMassParameters[run];
   If[Norm@S0 > Norm@S1,
    S0/mp^2,
    S1/mm^2]]];
 
 MassRatio[run_] :=
  Module[{mp, mm},
-  {mp, mm} = ReadPunctureADMMasses2[run];
+  {mp, mm} = ReadPunctureADMMassParameters[run];
   Return[If[mp < mm, mp/mm, mm/mp]]];
 
 SymmetricMassRatio[run_] :=
