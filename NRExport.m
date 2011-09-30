@@ -214,7 +214,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
   "asc.gz",
     Export[file, f, {"GZIP", "TABLE"}];,
   "h5",
-    dsName = (what /. {Coordinates -> "traj", Spin -> "spin", HorizonMass -> "horizon_mass"}) <> ToString[i-1];
+    dsName = (what /. {Coordinates -> "traj", Spin -> "spin", HorizonMass -> "horizon_mass"}) <> ToString[i];
     Export[file, f, {"Datasets", dsName}, "Append"->True];,
   _,
     Throw["Unsupported file format: "<>fileExtension[file]];
@@ -296,19 +296,31 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    }
   ];
 
-runAllData[run_String, mass_, ecc_, tJunk_] := Module[{modes, radii},
+runAllData[run_String, mass_, ecc_, tJunk_, format_String] :=  Module[{modes, radii, ext},
+ ext = Switch[format, "HDF5", "h5", "ASCII", "asc.gz", _, Throw["Unrecognised format: "<>ToString@format]];
  modes = ReadPsi4Modes[run];
  radii = ReadPsi4RadiiStrings[run];
- waveform[{l_, m_}, rad_] := ToString[l]<>","<>ToString[m] -> "psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
+ waveform[{l_, m_}, rad_, "ASCII"] := ToString[l]<>","<>ToString[m] -> "psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
+ waveform[{l_, m_}, rad_, "HDF5"] := ToString[l]<>","<>ToString[m] -> "psi4.h5:l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad];
+
+ spinFileName[i_, "ASCII"] := "spin"<>ToString[i]<>"."<>ext;
+ spinFileName[i_, "HDF5"] := "spin"<>ToString[i]<>"."<>ext<>":spin"<>ToString[i];
+
+ trajFileName[i_, "ASCII"] := "traj"<>ToString[i]<>"."<>ext;
+ trajFileName[i_, "HDF5"] := "traj"<>ToString[i]<>"."<>ext<>":traj"<>ToString[i];
+
+ horMassFileName[i_, "ASCII"] := "horizon_mass"<>ToString[i]<>"."<>ext;
+ horMassFileName[i_, "HDF5"] := "horizon_mass"<>ToString[i]<>"."<>ext<>":horizon_mass"<>ToString[i];
+
  {"metadata" -> runMetadata[run, mass, ecc, tJunk],
   "body-data" ->
    {Sequence @@ Table["spin" <> ToString[i] ->
-      "spin"<>ToString[i]<>".asc.gz", {i, 1, 2}],
+      spinFileName[i,format], {i, 1, 2}],
    Sequence @@ Table["trajectory" <> ToString[i] ->
-      "traj"<>ToString[i]<>".asc.gz", {i, 1, 2}],
+      trajFileName[i,format], {i, 1, 2}],
    Sequence @@ Table["horizon-mass" <> ToString[i] ->
-      "horizon_mass"<>ToString[i]<>".asc.gz", {i, 1, 2}]},
-   Sequence @@ Table["Psi4t-data" -> Prepend[Map[waveform[#, rad] &, modes], "extraction-radius" -> rad], {rad, radii}]}
+      horMassFileName[i,format], {i, 1, 2}]},
+   Sequence @@ Table["Psi4t-data" -> Prepend[Map[waveform[#, rad, format] &, modes], "extraction-radius" -> rad], {rad, radii}]}
 ];
 
 makeMetadataFile[md_List] :=
@@ -328,13 +340,13 @@ makeEntry[key_ -> val_, pad_:0] :=
 makeEntry[val_] :=
  If[StringQ[val], val, ToString[val, CForm]];
 
-Options[ExportMetadata] = {JunkTime -> None};
+Options[ExportMetadata] = {JunkTime -> None, ExportSimFormat -> "ASCII"};
 ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
  Module[{tJunk},
   tJunk  = OptionValue[JunkTime];
   If[SameQ[tJunk, None], tJunk = 0;];
 
-  Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk]], "Text"];
+  Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk, OptionValue[ExportSimFormat]]], "Text"];
 ];
 
 
