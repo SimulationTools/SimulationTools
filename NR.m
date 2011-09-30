@@ -1107,7 +1107,7 @@ ReadTwoPuncturesData[file_String, col_] :=
 (* Initial data *)
 
 TotalMass[run_] :=
- Plus @@ ReadPunctureADMMasses2[run];
+ Plus @@ ReadPunctureADMMassParameters[run];
 
 DefineMemoFunction[InitialSpinAngularMomentum[run_],
  Module[{sp, sm, m},
