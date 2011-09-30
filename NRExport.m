@@ -228,7 +228,7 @@ coord[d_] :=
  {"x", "y", "z"}[[d]];
 
 runMetadata[run_, mass_, ecc_, tJunk_] :=
- Module[{M = TotalMass[run], code, evolution, eta, bibtex},
+ Module[{code, evolution, eta, bibtex},
   evolution = LookupParameter[run, "ADMBase::evolution_method"];
   Which[
     StringMatchQ[evolution, "ctgamma", IgnoreCase -> True],
@@ -259,10 +259,10 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "extraction-radius" -> "finite-radii" (* <>" extrapolated" *),
    (* "extrapolation-techniques" -> "3rd,tortoise", *)
    "ht-generation-technique" -> "ReisswigPollney",
-   "initial-ADM-energy" -> mass/M,
+   "initial-ADM-energy" -> mass,
    "initial-ADM-angular-momentum" ->
-    Norm@InitialAngularMomentum[run]/M^2,
-   "initial-separation" -> InitialSeparation[run]/M,
+    Norm@InitialAngularMomentum[run],
+   "initial-separation" -> InitialSeparation[run],
    "initial-data-type" -> "Bowen-York quasicircular",
    "initial-data-bibtex-keys" -> "Bowen:1980yu Brandt:1997tf Ansorg:2004ds",
    "quasicircular-bibtex-keys" -> "Husa:2007rh",
@@ -275,23 +275,23 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    (* "amplitude-error-relative" -> "", *)
    "after-junkradiation-time" -> tJunk,
    Sequence @@ Table["mass" <> ToString[i] ->
-      Interpolation[ChristodoulouMass[run, i, i-1]][tJunk]/M, {i, 1, 2}],
+      Interpolation[ChristodoulouMass[run, i, i-1]][tJunk], {i, 1, 2}],
 
    Sequence @@ Flatten@Table[
       "initial-bh-position" <> ToString[i+1] <> coord[d] ->
-       InitialPosition[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
+       InitialPosition[run, i][[d]], {i, 0, 1}, {d, 1, 3}],
 
    Sequence @@ Flatten@Table[
       "initial-bh-momentum" <> ToString[i+1] <> coord[d] ->
-       InitialLinearMomentum[run, i][[d]]/M, {i, 0, 1}, {d, 1, 3}],
+       InitialLinearMomentum[run, i][[d]], {i, 0, 1}, {d, 1, 3}],
    Sequence @@ Flatten@Table[
       "after-junkradiation-spin" <> ToString[i+1] <> coord[d] ->
-       Interpolation[ReadIsolatedHorizonSpin[run, i, d]][tJunk]/
-        M^2, {i, 0, 1}, {d, 1, 3}],
+       Interpolation[ReadIsolatedHorizonSpin[run, i, d]][tJunk],
+         {i, 0, 1}, {d, 1, 3}],
    Sequence @@ Flatten@Table[
       "initial-bh-spin" <> ToString[i+1] <> coord[d] ->
-       DepVar[ReadIsolatedHorizonSpin[run, i, d]][[2]]/ (* Poison in the first entry of q1D11.8S0.3s0b *)
-        M^2, {i, 0, 1}, {d, 1, 3}],
+       DepVar[ReadIsolatedHorizonSpin[run, i, d]][[2]], (* Poison in the first entry of q1D11.8S0.3s0b *)
+        {i, 0, 1}, {d, 1, 3}],
    "data-type" -> "NR"
    }
   ];
