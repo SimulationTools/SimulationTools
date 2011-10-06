@@ -345,8 +345,7 @@ ReadPsi4Modes[runName_] :=
     Length[mpl = ReadMultipoleASCIIModes[runName, MultipolePsi4Variable]] != 0,
     Null
   ];
-
-  mpl
+  Select[mpl, #[[1]] >= 2 &]
 ];
 
 DefineMemoFunction[ReadYlmDecompModes[runName_, var_],
