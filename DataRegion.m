@@ -494,7 +494,7 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
 ];
 
 NormL2[d_DataRegion] :=
- Sqrt[Plus @@ Flatten[GetData[d^2]]];
+ Sqrt[Times@@GetSpacing[d] * Plus @@ Flatten[GetData[d^2]]];
 
 NDerivative[d_DataRegion] :=
  Module[{ndims, result},
