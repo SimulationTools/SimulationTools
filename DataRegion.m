@@ -50,6 +50,7 @@ ResampleDataRegions;
 Global`Sub;
 TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
 NormL2;
+EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as d with data computed by evaluates expr assuming that (t,x,y,z) are the coordinates of d.";
 
 Begin["`Private`"];
 
@@ -650,6 +651,32 @@ TableToDataRegion[t_List] :=
    MakeDataRegion[Map[GetData, subregions], "table",
     Append[subdims, Length[subregions]], Append[suborigin, origin],
     Append[subspacing, spacing], 0]]];
+
+(* TODO: generalise this to arbitrary number of dimensions *)
+(* SetAttributes[EvaluateOnDataRegion, HoldFirst]; *)
+EvaluateOnDataRegion[exprp_, {t_, x_, y_, z_}, dp_DataRegion] :=
+  Module[
+    {xd, yd, zd, td, result, expr, d},
+    expr = ReleaseHold[exprp];
+    d = ReleaseHold[dp];
+    {xd, yd, zd} = Table[GetCoordinate[d, i], {i, 3}];
+    td = GetTime[d];
+    result = (0.*x + expr) /. {x :> xd, y :> yd, z :> zd, t :> td};
+    If[!NumberQ@Max@Flatten[GetData[result]],
+       Throw["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y,z}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
+    result];
+
+EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
+  Module[
+    {xd, yd, td, result, expr, d},
+    expr = ReleaseHold[exprp];
+    d = ReleaseHold[dp];
+    {xd, yd} = Table[GetCoordinate[d, i], {i, 2}];
+    td = GetTime[d];
+    result = (0.*x + expr) /. {x :> xd, y :> yd, t :> td};
+    If[!NumberQ@Max@Flatten[GetData[result]],
+       Throw["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
+    result];
 
 End[];
 
