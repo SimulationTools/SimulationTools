@@ -466,6 +466,9 @@ DataRegion/:Cos[DataRegion[h_,data_]] :=
 DataRegion/:Sin[DataRegion[h_,data_]] :=
   DataRegion[h, Sin[data]];
 
+DataRegion/:Sinh[DataRegion[h_,data_]] :=
+  DataRegion[h, Sinh[data]];
+
 DataRegion/:Power[DataRegion[h_,data_], a_] :=
   DataRegion[h, data^a];
 
