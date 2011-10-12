@@ -265,7 +265,7 @@ ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl_Integer, map_:Non
   Profile["ReadCarpetHDF5Variable",
     MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
 
-Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None};
+Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None, StripGhostZones -> True};
 ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
     If[FileType[file] === None, Throw["ReadCarpetHDF5Variable: File " <> file <> " not found"]];
