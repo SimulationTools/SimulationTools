@@ -94,8 +94,31 @@ ExtrapolateRadiatedQuantity;
 ApplyToPhases;
 ExtrapolationError;
 FitFunction;
+AbsOfPhase;
+LocateMaximum;
+LocateMaximumPoint;
+GridSpacingOnLevel;
+BoxRadiiOnLevel;
+BoxRadiiForCentre;
+RefinementLevels;
+GridStructure;
+FinestGridSpacing;
+TimeRefinementFactors;
+CourantFactorOnLevel;
+LevelExistsEvery;
+RadialPoints;
+RunName;
+ReadCoarseGridSpacing;
+ReadAngularPoints;
+ReadInnerBoundary;
+ReadOuterBoundary;
+CountRefinementLevels;
 
 AbsOfPhase;
+FunctionOfPhase;
+
+ReadPunctureADMMasses;
+ReadPunctureADMMasses2;
 PercentageDifference;
 
 ReadWaveformFile;
