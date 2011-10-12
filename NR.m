@@ -97,6 +97,7 @@ FitFunction;
 AbsOfPhase;
 LocateMaximum;
 LocateMaximumPoint;
+MaximumValue;
 GridSpacingOnLevel;
 BoxRadiiOnLevel;
 BoxRadiiForCentre;
@@ -862,6 +863,9 @@ LocateMaximum[d_DataTable] :=
    t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
        tMax}][[2]];
   Return[tMax2]];
+
+MaximumValue[d_DataTable] :=
+  Interpolation[d][LocateMaximum[d]];
 
 GridSpacingOnLevel[runName_, l_] :=
   Module[{h0},
