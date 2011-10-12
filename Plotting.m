@@ -21,7 +21,7 @@ LegendLineSize;
 PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
 PlotKey;
 DynamicArrayPlot;
-FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with paramters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
+FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with parameters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
 FilterPlot::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out.";
 PlotKeySize;
 
