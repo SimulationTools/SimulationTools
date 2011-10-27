@@ -1029,7 +1029,11 @@ ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
 
 ReadWaveformFile[file_] :=
-  MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]];
+  Module[
+    {},
+    If[FileType[file] ===None,
+       Throw["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
+    MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]]];
 
 AlignMaxima[ds_List] :=
   Module[{maxima},
