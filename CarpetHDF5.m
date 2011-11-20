@@ -261,7 +261,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
     datasets
 ]];
 
-ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl_Integer, map_:None, opts___]:=
+ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl:(_Integer|None), map_:None, opts___]:=
   Profile["ReadCarpetHDF5Variable",
     MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
 
@@ -316,7 +316,7 @@ CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
 
 getRL[run_, var_, rl_] :=
   Switch[rl,
-    Automatic, First[ReadRefinementLevels[run, var]],
+    Automatic, firstOrNone[ReadRefinementLevels[run, var]],
     All, Unevaluated[Sequence[]],
     _, rl];
 
