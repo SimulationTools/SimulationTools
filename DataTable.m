@@ -219,6 +219,8 @@ DataTable /: Min[d_DataTable] := Min[DepVar[d]];
 
 DataTable /: Mean[d_DataTable] := Mean[DepVar[d]];
 
+DataTable /: Mod[d_DataTable, n_] := MapData[Mod[#, n]&, d];
+
 DataTable /: PadRight[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
     First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
