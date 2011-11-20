@@ -323,9 +323,9 @@ getRL[run_, var_, rl_] :=
 getMap[run_,var_,map_] :=
   Module[{m},
     If[map === Automatic,
-        m = ReadMaps[run, var];
-        If[m === {}, None, First[m]],
-      map]];
+        firstOrNone[ReadMaps[run, var]],
+        map
+    ]];
 
 getVar[run_, var_, variable_] :=
   If[variable === Automatic,
