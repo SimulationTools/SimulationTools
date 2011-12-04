@@ -30,6 +30,7 @@ Module[{packages =
   "DataAnalysis",
   "DataRegion",
   "DataTable",
+  "FieldLines",
   "Grids",
   "Horizons",
   "Kicks",
