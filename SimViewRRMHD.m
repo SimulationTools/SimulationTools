@@ -43,7 +43,7 @@ segmentSummary[runName_] :=
   ]
 
 SimViewRRMHD[runNames_(*, r_*)] :=
- Module[{EMEnergy,netcharge,divBnorminf,rhomax,restmass,hamnorm2,grid,size,segments,segmentSummary},
+ Module[{EMEnergy,netcharge,divBnorm2,rhomax,alpminimum,restmass,hamnorm2,grid,size,segments,segmentSummary},
   size = {350, 100};
   size = 250;
   EMEnergy=Catch[DynamicListLinePlot[
@@ -61,14 +61,20 @@ SimViewRRMHD[runNames_(*, r_*)] :=
   netcharge=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIFromRun[#, 
        "total_charge..asc"]&,runNames],# != {}&], 
   PlotRange -> All, PlotLabel -> "Net Charge", ImageSize -> 250]];
-  divBnorminf=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIFromRun[#, 
-       "divB.norm_inf.asc"]&,runNames],# != {}&], 
-  PlotRange -> All, PlotLabel -> "Infinity norm of divB", ImageSize -> 250]];
+  divBnorm2=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIFromRun[#, 
+       "divB.norm2.asc"]&,runNames],# != {}&], 
+  PlotRange -> All, PlotLabel -> "Norm2 of divB", ImageSize -> 250]];
   rhomax = Catch[
    DynamicListLinePlot[
       Map[ReadCarpetASCIIFromRun[#,"rho.maximum.asc"] &, runNames], 
     PlotRange->All, PlotLabel -> "Rho Central", 
     ImageSize -> size]];
+  alpminimum = Catch[
+   DynamicListLinePlot[
+      Map[ReadCarpetASCIIFromRun[#,"alp.minimum.asc"] &, runNames], 
+    PlotRange->All, PlotLabel -> "alp minimum", 
+    ImageSize -> size]];
+
   restmass = Catch[
    DynamicListLinePlot[
       Map[If[FindRunFile[#,"total_rest_mass_normalised..asc"]!= {},ReadCarpetASCIIFromRun[#,"total_rest_mass_normalised..asc"],ReadCarpetASCIIFromRun[#,"total_rest_mass_normalised.maximum.asc"]]&, runNames], 
@@ -89,9 +95,9 @@ SimViewRRMHD[runNames_(*, r_*)] :=
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
   grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft},
-       {EMEnergy,divBnorminf},
+       {EMEnergy,divBnorm2},
 	   {netcharge,rhomax},
-       {restmass,hamnorm2}}~Join~
+       {restmass,hamnorm2},{alpminimum}}~Join~
        segments, 
        Spacings -> {0, 1}];
   Return[grid]
