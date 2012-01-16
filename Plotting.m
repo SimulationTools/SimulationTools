@@ -24,6 +24,7 @@ DynamicArrayPlot;
 FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with parameters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
 FilterPlot::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out.";
 PlotKeySize;
+DynamicShow;
 
 Begin["`Private`"];
 
@@ -277,6 +278,65 @@ DynamicArrayPlot[data_, opts___] :=
     }]];
 
 
+
+DynamicShow[graphics_, opts___] :=
+ DynamicModule[{dragging, p1, p2, plotRange, history, inDouble,
+   doubleStart, logScale, joined, controls, delta, mp,
+   doubleTime = 0.5},
+  dragging = False;
+  p1 = Null;
+  p2 = Null;
+  plotRange =
+   If[(PlotRange /. {opts}) === PlotRange, Automatic,
+    PlotRange /. {opts}];
+  history = {};
+  inDouble = False;
+  doubleStart = AbsoluteTime[];
+  logScale = False;
+  controls = False;
+  joined = If[(Joined /. {opts}) === Joined, True, Joined /. {opts}];
+  Column[{
+    Dynamic[If[controls,
+      Row[{Button["All", plotRange = All, ImageSize -> 100],
+        Button["Automatic", plotRange = Automatic, ImageSize -> 100],
+        Labeled[Checkbox[Dynamic[logScale]], Text["Log scale"], Right,
+          Alignment -> Center],
+        Labeled[Checkbox[Dynamic[joined]], Text["Joined"], Right,
+         Alignment -> Center]}], Row[{}]]],
+    EventHandler[
+     Dynamic[Show[
+       graphics,
+       Graphics[If[dragging,{Opacity[0.1], Rectangle[p1, p2]},{}]],
+       ImageSize -> {350, Automatic}, PlotRange -> plotRange, opts]],
+     {{"MouseDown", 2} :> (controls = ! controls),
+      "MouseClicked" :>
+       (delta = AbsoluteTime[] - doubleStart;
+        If[! inDouble || delta > doubleTime,
+         inDouble = True; doubleStart = AbsoluteTime[],
+         inDouble = False;
+         If[delta < doubleTime,
+          If[Length[history] >= 1,
+           plotRange = Last[history];
+           history = Drop[history, -1]]]]),
+      "MouseDragged" :>
+       (If[! dragging,
+         dragging = True;
+         p1 = MousePosition["Graphics"]];
+        p2 = MousePosition["Graphics"]),
+      "MouseUp" :>
+       (If[dragging,
+         dragging = False;
+         history = Append[history, plotRange];
+         plotRange = coordsToRanges[p1, p2]])},
+     PassEventsDown -> False],
+
+    Dynamic[
+     If[controls, mp = MousePosition["Graphics"];
+      If[mp =!= None,
+       Text["(" <> ToString[mp[[1]]] <> ", " <> ToString[mp[[2]]] <>
+         ")"], ""], ""]]
+
+    }]];
 
 PlotFit[data_, model_, pars_, var_, args___] :=
  Module[{fit, fittedModel},
