@@ -305,7 +305,7 @@ Downsample[d_DataRegion, n_List] :=
   attrs2 =
    replaceRules[
     attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n,
-     Dimensions -> (Floor[GetDimensions[d]/2])}];
+     Dimensions -> Reverse@Dimensions[data2]}];
   d2 = DataRegion[attrs2, data2]];
 
 Attributes[insertArray] = {HoldFirst};
