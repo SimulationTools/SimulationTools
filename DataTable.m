@@ -380,7 +380,7 @@ Redefine[ListLogLogPlot[ds:List[DataTable[___]..], args___],
 Redefine[Interpolation[d:DataTable[___], args___],
    Interpolation[ToList[d], args]];
 
-ShiftDataTable[dt_, d : DataTable[__]] :=
+ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
 
 DataTableRange[dt:DataTable[__]] :=
