@@ -41,6 +41,8 @@ Monotonise;
 DataTableListLinePlot;
 
 InvertDataTable;
+DataTableNormL2;
+
 Begin["`Private`"];
 
 Format[DataTable[l_, attrs___]] := "DataTable"["..."];
@@ -151,6 +153,9 @@ RedefineAsDataTable[Abs[d:DataTable[__]],
 
 RedefineAsDataTable[Norm[d:DataTable[__]],
   MapData[Norm, d]];
+
+DataTableNormL2[d_DataTable] :=
+ Sqrt[Times@@Spacing[d] * Plus @@ (DepVar[d]^2)];
 
 RedefineAsDataTable[Sqrt[d:DataTable[__]],
   MapData[Sqrt, d]];
