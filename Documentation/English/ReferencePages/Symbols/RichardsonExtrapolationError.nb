@@ -44,7 +44,7 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
         StripOnInput->
-         False], {"\<\"Go to nrmma/ref/RichardsonExtrapolate URL\"\>":>
+         False], {"\<\"Go to nrmma/ref/RichardsonExtrapolationError URL\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
            URL["your.website.goes.here/documentationIfAny"], None}]}], 
@@ -63,20 +63,23 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["RichardsonExtrapolate", "ObjectName"],
+Cell["RichardsonExtrapolationError", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["RichardsonExtrapolate",
+       ButtonBox["RichardsonExtrapolationError",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/RichardsonExtrapolate"], "[", 
+        ButtonData->"paclet:nrmma/ref/RichardsonExtrapolationError"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]RichardsonExtrapolate[{f1, f2}, {h1, h2}, p] gives the \
-order p Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = \
-O[h^p]. f1 and f2 can either be real numbers or DataTables, and the returned \
-value will be of the same type."
+     "\[LineSeparator]RichardsonExtrapolationError[{f1, f2, f3}, {h1, h2, \
+h3}, p] gives the difference between the order p Richardson extrapolant of \
+f1, f2 and f3 and of f2 and f3 at h = 0 assuming that f[h] = O[h^p]. This \
+gives an error estimate for the latter.  f1, f2 and f3 can either be real \
+numbers or DataTables, and the returned value will be of the same type.  \
+NOTE: currently this function is only implemented for DataTables and the hs \
+are computed from the NPoints attribute."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -93,7 +96,7 @@ Cell[BoxData[""]]
 Saveable->False,
 WindowSize->{740, 656},
 WindowMargins->Automatic,
-WindowTitle->"RichardsonExtrapolate - nrmma`Convergence.nb`",
+WindowTitle->"RichardsonExtrapolationError - nrmma`Convergence.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,17 +117,23 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"richardsonextrapolate", "RICHARDSONEXTRAPOLATE"}, "index" -> 
+    "keywords" -> {
+     "richardsonextrapolationerror", "RICHARDSONEXTRAPOLATIONERROR"}, "index" -> 
     True, "label" -> "nrmma`Convergence` Symbol", "language" -> "en", 
     "paclet" -> "nrmma Convergence.nb", "status" -> "", "summary" -> 
-    "RichardsonExtrapolate[{f1, f2}, {h1, h2}, p] gives the order p \
-Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = O[h^p]. f1 \
-and f2 can either be real numbers or DataTables, and the returned value will \
-be of the same type.", 
-    "synonyms" -> {"richardsonextrapolate", "RICHARDSONEXTRAPOLATE"}, "title" -> 
-    "RichardsonExtrapolate", "windowTitle" -> "RichardsonExtrapolate", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/RichardsonExtrapolate"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "RichardsonExtrapolationError[{f1, f2, f3}, {h1, h2, h3}, p] gives the \
+difference between the order p Richardson extrapolant of f1, f2 and f3 and of \
+f2 and f3 at h = 0 assuming that f[h] = O[h^p]. This gives an error estimate \
+for the latter.  f1, f2 and f3 can either be real numbers or DataTables, and \
+the returned value will be of the same type.  NOTE: currently this function \
+is only implemented for DataTables and the hs are computed from the NPoints \
+attribute.", 
+    "synonyms" -> {
+     "richardsonextrapolationerror", "RICHARDSONEXTRAPOLATIONERROR"}, "title" -> 
+    "RichardsonExtrapolationError", "windowTitle" -> 
+    "RichardsonExtrapolationError", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/RichardsonExtrapolationError"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
