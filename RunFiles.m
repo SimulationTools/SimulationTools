@@ -10,7 +10,7 @@ BeginPackage["RunFiles`", {"Profile`", "Memo`"}];
 
 ReadColumnFile;
 ReadColumnFile2;
-FindRunFile;
+FindRunFile::usage = "FindRunFile[run, filename] returns a list containing the full names of files named filename in the different segments of run.";
 FindRunSegments;
 FindRunFilesFromPattern;
 StandardOutputOfRun;
