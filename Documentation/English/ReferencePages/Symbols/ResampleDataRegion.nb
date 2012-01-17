@@ -43,7 +43,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/GetOrigin URL\"\>":>
+        StripOnInput->
+         False], {"\<\"Go to nrmma/ref/ResampleDataRegion URL\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
            URL["your.website.goes.here/documentationIfAny"], None}]}], 
@@ -62,19 +63,21 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["GetOrigin", "ObjectName"],
+Cell["ResampleDataRegion", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetOrigin",
+       ButtonBox["ResampleDataRegion",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetOrigin"], "[", 
+        ButtonData->"paclet:nrmma/ref/ResampleDataRegion"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]GetOrigin[d] returns a list of length N giving the \
-coordinates of the first point in each direction in the N-dimensional \
-DataRegion d."
+     "\[LineSeparator]ResampleDataRegion[d, {x1, x2, dx}, p] returns a new \
+DataRegion of the same dimensionality as the DataRegion d but with points in \
+the range x1 to x2 with spacing dx.  The data is interpolated at order p onto \
+the new grid.  x1, x2 and dx are lists of length equal to the dimensionality \
+of d.  NOTE: currently only 2-dimensional DataRegions are supported."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -91,7 +94,7 @@ Cell[BoxData[""]]
 Saveable->False,
 WindowSize->{740, 656},
 WindowMargins->Automatic,
-WindowTitle->"GetOrigin - nrmma`DataRegion.nb`",
+WindowTitle->"ResampleDataRegion - nrmma`DataRegion.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -111,15 +114,19 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"getorigin", "GETORIGIN"}, "index" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"resampledataregion", "RESAMPLEDATAREGION"}, "index" -> 
     True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
     "nrmma DataRegion.nb", "status" -> "", "summary" -> 
-    "GetOrigin[d] returns a list of length N giving the coordinates of the \
-first point in each direction in the N-dimensional DataRegion d.", 
-    "synonyms" -> {"getorigin", "GETORIGIN"}, "title" -> "GetOrigin", 
-    "windowTitle" -> "GetOrigin", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/GetOrigin"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "ResampleDataRegion[d, {x1, x2, dx}, p] returns a new DataRegion of the \
+same dimensionality as the DataRegion d but with points in the range x1 to x2 \
+with spacing dx.  The data is interpolated at order p onto the new grid.  x1, \
+x2 and dx are lists of length equal to the dimensionality of d.  NOTE: \
+currently only 2-dimensional DataRegions are supported.", 
+    "synonyms" -> {"resampledataregion", "RESAMPLEDATAREGION"}, "title" -> 
+    "ResampleDataRegion", "windowTitle" -> "ResampleDataRegion", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ResampleDataRegion"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -43,7 +43,7 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/GetOrigin URL\"\>":>
+        StripOnInput->False], {"\<\"Go to nrmma/ref/GetTime URL\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
            URL["your.website.goes.here/documentationIfAny"], None}]}], 
@@ -62,19 +62,18 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["GetOrigin", "ObjectName"],
+Cell["GetTime", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetOrigin",
+       ButtonBox["GetTime",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetOrigin"], "[", 
+        ButtonData->"paclet:nrmma/ref/GetTime"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]GetOrigin[d] returns a list of length N giving the \
-coordinates of the first point in each direction in the N-dimensional \
-DataRegion d."
+     "\[LineSeparator]GetTime[d] returns the time attribute of a DataRegion \
+d"
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -91,7 +90,7 @@ Cell[BoxData[""]]
 Saveable->False,
 WindowSize->{740, 656},
 WindowMargins->Automatic,
-WindowTitle->"GetOrigin - nrmma`DataRegion.nb`",
+WindowTitle->"GetTime - nrmma`DataRegion.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -111,15 +110,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"getorigin", "GETORIGIN"}, "index" -> 
+   "context" -> "nrmma`", "keywords" -> {"gettime", "GETTIME"}, "index" -> 
     True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
     "nrmma DataRegion.nb", "status" -> "", "summary" -> 
-    "GetOrigin[d] returns a list of length N giving the coordinates of the \
-first point in each direction in the N-dimensional DataRegion d.", 
-    "synonyms" -> {"getorigin", "GETORIGIN"}, "title" -> "GetOrigin", 
-    "windowTitle" -> "GetOrigin", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/GetOrigin"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "GetTime[d] returns the time attribute of a DataRegion d", 
+    "synonyms" -> {"gettime", "GETTIME"}, "title" -> "GetTime", "windowTitle" -> 
+    "GetTime", "type" -> "Symbol", "uri" -> "nrmma/ref/GetTime"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

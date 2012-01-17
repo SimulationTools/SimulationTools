@@ -43,7 +43,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/GetOrigin URL\"\>":>
+        StripOnInput->
+         False], {"\<\"Go to nrmma/ref/ResampleDataRegions URL\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
            URL["your.website.goes.here/documentationIfAny"], None}]}], 
@@ -62,19 +63,20 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["GetOrigin", "ObjectName"],
+Cell["ResampleDataRegions", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetOrigin",
+       ButtonBox["ResampleDataRegions",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetOrigin"], "[", 
+        ButtonData->"paclet:nrmma/ref/ResampleDataRegions"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]GetOrigin[d] returns a list of length N giving the \
-coordinates of the first point in each direction in the N-dimensional \
-DataRegion d."
+     "\[LineSeparator]ResampleDataRegions[{d1, d2, ...}, p] returns a list of \
+DataRegions {D1, D2, ...} which are resampled versions of the DataRegions \
+{d1, d2, ...} over the intersection of their bounding boxes using \
+interpolation of order p.  The new DataRegions contain the same points."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -91,7 +93,7 @@ Cell[BoxData[""]]
 Saveable->False,
 WindowSize->{740, 656},
 WindowMargins->Automatic,
-WindowTitle->"GetOrigin - nrmma`DataRegion.nb`",
+WindowTitle->"ResampleDataRegions - nrmma`DataRegion.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -111,15 +113,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"getorigin", "GETORIGIN"}, "index" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"resampledataregions", "RESAMPLEDATAREGIONS"}, "index" -> 
     True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
     "nrmma DataRegion.nb", "status" -> "", "summary" -> 
-    "GetOrigin[d] returns a list of length N giving the coordinates of the \
-first point in each direction in the N-dimensional DataRegion d.", 
-    "synonyms" -> {"getorigin", "GETORIGIN"}, "title" -> "GetOrigin", 
-    "windowTitle" -> "GetOrigin", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/GetOrigin"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "ResampleDataRegions[{d1, d2, ...}, p] returns a list of DataRegions {D1, \
+D2, ...} which are resampled versions of the DataRegions {d1, d2, ...} over \
+the intersection of their bounding boxes using interpolation of order p.  The \
+new DataRegions contain the same points.", 
+    "synonyms" -> {"resampledataregions", "RESAMPLEDATAREGIONS"}, "title" -> 
+    "ResampleDataRegions", "windowTitle" -> "ResampleDataRegions", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ResampleDataRegions"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
