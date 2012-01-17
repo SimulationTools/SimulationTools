@@ -1,0 +1,176 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5898,        167]
+NotebookOptionsPosition[      3923,        111]
+NotebookOutlinePosition[      5718,        160]
+CellTagsIndexPosition[      5675,        157]
+WindowTitle->ReadBHTrajectory - nrmma`BHCoordinates.nb`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "nrmma", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma/ref/ReadBHTrajectory URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["ReadBHTrajectory", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadBHTrajectory",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadBHTrajectory"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]ReadBHTrajectory[run] returns a list of the x, y \
+coordinates of the relative trajectory of the first two black holes.  \n\
+ReadBHTrajectory[run, i] returns a list of the x, y coordinates of the \
+trajectory of the black hole numbered i (i is typically 0 or 1)."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+WindowSize->{740, 867},
+WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowTitle->"ReadBHTrajectory - nrmma`BHCoordinates.nb`",
+Visible->True,
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "HelpViewerToolbar"],
+PageHeaders->{{None, None, None}, {None, None, 
+   Cell[
+    TextData[{
+      Cell[
+       TextData[{""}], "PageHeader"], 
+      Cell[
+       TextData[{
+         CounterBox["Page"]}], "PageNumber"]}], 
+    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {
+   Cell[
+    TextData[{""}], "PageFooter"], None, None}},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"readbhtrajectory", "READBHTRAJECTORY"}, "index" -> True, 
+    "label" -> "nrmma`BHCoordinates` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "ReadBHTrajectory[run] returns a list of the x, y coordinates of the \
+relative trajectory of the first two black holes.  \nReadBHTrajectory[run, i] \
+returns a list of the x, y coordinates of the trajectory of the black hole \
+numbered i (i is typically 0 or 1).", 
+    "synonyms" -> {"readbhtrajectory", "READBHTRAJECTORY"}, "title" -> 
+    "ReadBHTrajectory", "windowTitle" -> "ReadBHTrajectory", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadBHTrajectory"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[613, 21, 2494, 59, 47, "AnchorBarGrid"],
+Cell[CellGroupData[{
+Cell[3132, 84, 38, 0, 51, "ObjectName"],
+Cell[3173, 86, 576, 13, 132, "Usage"]
+}, Open  ]],
+Cell[3764, 102, 75, 0, 42, "History"],
+Cell[CellGroupData[{
+Cell[3864, 106, 23, 0, 24, "FooterCell"],
+Cell[3890, 108, 17, 0, 20, InheritFromParent]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

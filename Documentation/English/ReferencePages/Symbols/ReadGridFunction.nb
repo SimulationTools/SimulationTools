@@ -1,0 +1,185 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      6576,        176]
+NotebookOptionsPosition[      4266,        116]
+NotebookOutlinePosition[      6396,        169]
+CellTagsIndexPosition[      6353,        166]
+WindowTitle->ReadGridFunction - nrmma`CarpetHDF5.nb`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA`CARPETHDF5.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "nrmma", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma/ref/ReadGridFunction URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["ReadGridFunction", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadGridFunction",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadGridFunction"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]ReadGridFunction[run, var, it, rl] reads a grid \
+function from the CarpetHDF5 file named var in the directory run and returns \
+it as a DataRegion object.  The iteration is given by it, and the refinement \
+level by rl (rl defaults to the first level in the file if it is omitted).  \
+Optional arguments: Variable -> Automatic | varname specifies the variable to \
+read from files containing more than one variable, Map -> Automatic | mapnum \
+specifies the map for multipatch data files, StripGhostZones -> True|False \
+determines whether the ghost zones are removed from the variable before it is \
+returned."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+WindowSize->{740, 867},
+WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowTitle->"ReadGridFunction - nrmma`CarpetHDF5.nb`",
+Visible->True,
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "HelpViewerToolbar"],
+PageHeaders->{{None, None, None}, {None, None, 
+   Cell[
+    TextData[{
+      Cell[
+       TextData[{""}], "PageHeader"], 
+      Cell[
+       TextData[{
+         CounterBox["Page"]}], "PageNumber"]}], 
+    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {
+   Cell[
+    TextData[{""}], "PageFooter"], None, None}},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"readgridfunction", "READGRIDFUNCTION"}, "index" -> True, 
+    "label" -> "nrmma`CarpetHDF5` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma CarpetHDF5.nb", "status" -> "", "summary" -> 
+    "ReadGridFunction[run, var, it, rl] reads a grid function from the \
+CarpetHDF5 file named var in the directory run and returns it as a DataRegion \
+object.  The iteration is given by it, and the refinement level by rl (rl \
+defaults to the first level in the file if it is omitted).  Optional \
+arguments: Variable -> Automatic | varname specifies the variable to read \
+from files containing more than one variable, Map -> Automatic | mapnum \
+specifies the map for multipatch data files, StripGhostZones -> True|False \
+determines whether the ghost zones are removed from the variable before it is \
+returned.", "synonyms" -> {"readgridfunction", "READGRIDFUNCTION"}, "title" -> 
+    "ReadGridFunction", "windowTitle" -> "ReadGridFunction", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadGridFunction"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[610, 21, 2491, 59, 47, "AnchorBarGrid"],
+Cell[CellGroupData[{
+Cell[3126, 84, 38, 0, 51, "ObjectName"],
+Cell[3167, 86, 925, 18, 152, "Usage"]
+}, Open  ]],
+Cell[4107, 107, 75, 0, 42, "History"],
+Cell[CellGroupData[{
+Cell[4207, 111, 23, 0, 24, "FooterCell"],
+Cell[4233, 113, 17, 0, 20, InheritFromParent]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

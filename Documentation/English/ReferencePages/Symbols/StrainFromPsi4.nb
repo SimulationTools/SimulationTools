@@ -1,0 +1,183 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      6338,        174]
+NotebookOptionsPosition[      4154,        115]
+NotebookOutlinePosition[      6158,        167]
+CellTagsIndexPosition[      6115,        164]
+WindowTitle->StrainFromPsi4 - nrmma`NR.nb`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "nrmma", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma/ref/StrainFromPsi4 URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["StrainFromPsi4", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["StrainFromPsi4",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/StrainFromPsi4"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \
+\!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] converts a DataTable containing \!\
+\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)[t] into strain and its time derivative, \
+{h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off \
+frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\).\n\
+StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \
+{\!\(\*SubscriptBox[\(t\), \(start\)]\), \!\(\*SubscriptBox[\(t\), \
+\(end\)]\)}] converts using time domain integration."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+WindowSize->{740, 867},
+WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowTitle->"StrainFromPsi4 - nrmma`NR.nb`",
+Visible->True,
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "HelpViewerToolbar"],
+PageHeaders->{{None, None, None}, {None, None, 
+   Cell[
+    TextData[{
+      Cell[
+       TextData[{""}], "PageHeader"], 
+      Cell[
+       TextData[{
+         CounterBox["Page"]}], "PageNumber"]}], 
+    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {
+   Cell[
+    TextData[{""}], "PageFooter"], None, None}},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", "keywords" -> {"strainfrompsi4", "STRAINFROMPSI4"}, 
+    "index" -> True, "label" -> "nrmma`NR` Symbol", "language" -> "en", 
+    "paclet" -> "nrmma NR.nb", "status" -> "", "summary" -> 
+    "StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \
+\!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] converts a DataTable containing \!\
+\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)[t] into strain and its time derivative, \
+{h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off \
+frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\).\n\
+StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \
+{\!\(\*SubscriptBox[\(t\), \(start\)]\), \!\(\*SubscriptBox[\(t\), \
+\(end\)]\)}] converts using time domain integration.", 
+    "synonyms" -> {"strainfrompsi4", "STRAINFROMPSI4"}, "title" -> 
+    "StrainFromPsi4", "windowTitle" -> "StrainFromPsi4", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/StrainFromPsi4"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[600, 21, 2481, 59, 47, "AnchorBarGrid"],
+Cell[CellGroupData[{
+Cell[3106, 84, 36, 0, 51, "ObjectName"],
+Cell[3145, 86, 835, 17, 146, "Usage"]
+}, Open  ]],
+Cell[3995, 106, 75, 0, 42, "History"],
+Cell[CellGroupData[{
+Cell[4095, 110, 23, 0, 24, "FooterCell"],
+Cell[4121, 112, 17, 0, 20, InheritFromParent]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
