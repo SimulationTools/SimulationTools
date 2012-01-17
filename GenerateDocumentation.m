@@ -60,4 +60,6 @@ docPackage[package_ -> symbols_] :=
 
 Scan[docPackage, packageSymbols];
 
+OverviewGuide["nrmma", packageSymbols];
+
 BuildApplication["nrmma", CreatePacletInfo -> False];
