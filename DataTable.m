@@ -45,7 +45,7 @@ DataTableNormL2;
 
 Begin["`Private`"];
 
-Format[DataTable[l_, attrs___]] := "DataTable"["..."];
+Format[d:DataTable[l_, attrs___]] := "DataTable"[DataTableRange[d]];
 
 SetAttributes[Redefine, HoldAll];
 
