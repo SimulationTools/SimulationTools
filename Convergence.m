@@ -2,14 +2,14 @@
 
 BeginPackage["Convergence`", {"RunFiles`", "DataTable`", "Memo`"}];
 
-ConvergenceMultiplier;
+ConvergenceMultiplier::usage = "ConvergenceMultiplier[{h1,h2,h3},p] computes the expected ratio (f[h1]-f[h2])/(f[h2]-f[h3]) when f[h] has a Taylor expansion f[h] = O[h^p].";
 LoadConvergenceSeries;
 RescaledErrors;
-ConvergenceRate;
+ConvergenceRate::usage = "ConvergenceRate[{f1,f2,f3}, {h1,h2,h3}] computes the convergence rate, p, of f[h] assuming f[h] = O[h^p].  f1, f2 and f3 can either be real numbers or DataTables, and the returned value will be of the same type.";
 ResolutionCode;
-RichardsonExtrapolate::usage = "RichardsonExtrapolate[{d1, d2}, {h1, h2}, p] gives the order p Richardson extrapolant of data tables d1 and d2 assuming the grid spacing used to compute each was h1 and h2.";
-RichardsonExtrapolate3;
-RichardsonExtrapolationError;
+RichardsonExtrapolate::usage = "RichardsonExtrapolate[{f1, f2}, {h1, h2}, p] gives the order p Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = O[h^p]. f1 and f2 can either be real numbers or DataTables, and the returned value will be of the same type.";
+RichardsonExtrapolate3::usage = "RichardsonExtrapolate3[{f1, f2, f3}, {h1, h2, h3}, p] gives the order p Richardson extrapolant of f1, f2 and f3 at h = 0 assuming that f[h] = O[h^p]. f1, f2 and f3 can either be real numbers or DataTables, and the returned value will be of the same type.";
+RichardsonExtrapolationError::usage = "RichardsonExtrapolationError[{f1, f2, f3}, {h1, h2, h3}, p] gives the difference between the order p Richardson extrapolant of f1, f2 and f3 and of f2 and f3 at h = 0 assuming that f[h] = O[h^p]. This gives an error estimate for the latter.  f1, f2 and f3 can either be real numbers or DataTables, and the returned value will be of the same type.  NOTE: currently this function is only implemented for DataTables and the hs are computed from the NPoints attribute.";
 ResName;
 NPoints;
 
