@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5391,        161]
+NotebookDataLength[      5390,        161]
 NotebookOptionsPosition[      3694,        109]
-NotebookOutlinePosition[      5212,        154]
-CellTagsIndexPosition[      5169,        151]
+NotebookOutlinePosition[      5211,        154]
+CellTagsIndexPosition[      5168,        151]
 WindowTitle->RunName - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"RunName - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

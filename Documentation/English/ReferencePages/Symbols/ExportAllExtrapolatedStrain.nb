@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6575,        178]
+NotebookDataLength[      6574,        178]
 NotebookOptionsPosition[      4245,        116]
-NotebookOutlinePosition[      6395,        171]
-CellTagsIndexPosition[      6352,        168]
+NotebookOutlinePosition[      6394,        171]
+CellTagsIndexPosition[      6351,        168]
 WindowTitle->ExportAllExtrapolatedStrain - nrmma`NRExport.nb`
 WindowFrame->Normal*)
 
@@ -115,8 +115,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ExportAllExtrapolatedStrain - nrmma`NRExport.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

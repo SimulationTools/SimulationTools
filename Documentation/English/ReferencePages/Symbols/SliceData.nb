@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5734,        165]
+NotebookDataLength[      5733,        165]
 NotebookOptionsPosition[      3858,        111]
-NotebookOutlinePosition[      5554,        158]
-CellTagsIndexPosition[      5511,        155]
+NotebookOutlinePosition[      5553,        158]
+CellTagsIndexPosition[      5510,        155]
 WindowTitle->SliceData - nrmma`DataRegion.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"SliceData - nrmma`DataRegion.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

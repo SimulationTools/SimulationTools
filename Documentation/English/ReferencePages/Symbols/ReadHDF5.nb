@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5484,        161]
+NotebookDataLength[      5483,        161]
 NotebookOptionsPosition[      3735,        109]
-NotebookOutlinePosition[      5305,        154]
-CellTagsIndexPosition[      5262,        151]
+NotebookOutlinePosition[      5304,        154]
+CellTagsIndexPosition[      5261,        151]
 WindowTitle->ReadHDF5 - nrmma`ReadHDF5.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadHDF5 - nrmma`ReadHDF5.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

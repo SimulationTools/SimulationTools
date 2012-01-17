@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5631,        165]
+NotebookDataLength[      5630,        165]
 NotebookOptionsPosition[      3789,        110]
-NotebookOutlinePosition[      5452,        158]
-CellTagsIndexPosition[      5409,        155]
+NotebookOutlinePosition[      5451,        158]
+CellTagsIndexPosition[      5408,        155]
 WindowTitle->ReadMultipoleHDF5Radii - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadMultipoleHDF5Radii - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

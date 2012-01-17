@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5525,        163]
+NotebookDataLength[      5524,        163]
 NotebookOptionsPosition[      3741,        110]
-NotebookOutlinePosition[      5346,        156]
-CellTagsIndexPosition[      5303,        153]
+NotebookOutlinePosition[      5345,        156]
+CellTagsIndexPosition[      5302,        153]
 WindowTitle->ReadCoarseGridSpacing - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadCoarseGridSpacing - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

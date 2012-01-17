@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5695,        164]
+NotebookDataLength[      5694,        164]
 NotebookOptionsPosition[      3844,        111]
-NotebookOutlinePosition[      5515,        157]
-CellTagsIndexPosition[      5472,        154]
+NotebookOutlinePosition[      5514,        157]
+CellTagsIndexPosition[      5471,        154]
 WindowTitle->FitPlot - nrmma`Plotting.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"FitPlot - nrmma`Plotting.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

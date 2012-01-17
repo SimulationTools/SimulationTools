@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5814,        167]
+NotebookDataLength[      5813,        167]
 NotebookOptionsPosition[      3891,        112]
-NotebookOutlinePosition[      5634,        160]
-CellTagsIndexPosition[      5591,        157]
+NotebookOutlinePosition[      5633,        160]
+CellTagsIndexPosition[      5590,        157]
 WindowTitle->TortoiseCoordinate - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -111,8 +111,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"TortoiseCoordinate - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

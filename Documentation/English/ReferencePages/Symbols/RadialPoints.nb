@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5442,        161]
+NotebookDataLength[      5441,        161]
 NotebookOptionsPosition[      3712,        109]
-NotebookOutlinePosition[      5263,        154]
-CellTagsIndexPosition[      5220,        151]
+NotebookOutlinePosition[      5262,        154]
+CellTagsIndexPosition[      5219,        151]
 WindowTitle->RadialPoints - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"RadialPoints - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

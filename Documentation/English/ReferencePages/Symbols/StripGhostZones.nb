@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5585,        163]
+NotebookDataLength[      5584,        163]
 NotebookOptionsPosition[      3770,        109]
-NotebookOutlinePosition[      5406,        156]
-CellTagsIndexPosition[      5363,        153]
+NotebookOutlinePosition[      5405,        156]
+CellTagsIndexPosition[      5362,        153]
 WindowTitle->StripGhostZones - nrmma`CarpetHDF5.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"StripGhostZones - nrmma`CarpetHDF5.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

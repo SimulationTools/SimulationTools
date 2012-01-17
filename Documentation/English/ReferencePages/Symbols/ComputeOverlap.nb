@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6254,        171]
+NotebookDataLength[      6253,        171]
 NotebookOptionsPosition[      4108,        114]
-NotebookOutlinePosition[      6074,        164]
-CellTagsIndexPosition[      6031,        161]
+NotebookOutlinePosition[      6073,        164]
+CellTagsIndexPosition[      6030,        161]
 WindowTitle->ComputeOverlap - nrmma`DataAnalysis.nb`
 WindowFrame->Normal*)
 
@@ -113,8 +113,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ComputeOverlap - nrmma`DataAnalysis.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

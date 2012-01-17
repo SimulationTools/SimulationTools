@@ -1,0 +1,178 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      6024,        169]
+NotebookOptionsPosition[      3988,        112]
+NotebookOutlinePosition[      5844,        162]
+CellTagsIndexPosition[      5801,        159]
+WindowTitle->MergeDataRegions - nrmma`DataRegion.nb`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "nrmma", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma/ref/MergeDataRegions URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["MergeDataRegions", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["MergeDataRegions",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/MergeDataRegions"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]MergeDataRegions[regions] returns a DataRegion formed \
+from merging the content of the DataRegions in the list regions.  If the \
+regions do not cover a rectangular domain, any missing points will have value \
+None.  All the DataRegions must have the same spacing and their origins must \
+be separated by multiples of their spacing."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
+WindowTitle->"MergeDataRegions - nrmma`DataRegion.nb`",
+Visible->True,
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "HelpViewerToolbar"],
+PageHeaders->{{None, None, None}, {None, None, 
+   Cell[
+    TextData[{
+      Cell[
+       TextData[{""}], "PageHeader"], 
+      Cell[
+       TextData[{
+         CounterBox["Page"]}], "PageNumber"]}], 
+    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {
+   Cell[
+    TextData[{""}], "PageFooter"], None, None}},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"mergedataregions", "MERGEDATAREGIONS"}, "index" -> True, 
+    "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "MergeDataRegions[regions] returns a DataRegion formed from merging the \
+content of the DataRegions in the list regions.  If the regions do not cover \
+a rectangular domain, any missing points will have value None.  All the \
+DataRegions must have the same spacing and their origins must be separated by \
+multiples of their spacing.", 
+    "synonyms" -> {"mergedataregions", "MERGEDATAREGIONS"}, "title" -> 
+    "MergeDataRegions", "windowTitle" -> "MergeDataRegions", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/MergeDataRegions"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[610, 21, 2491, 59, 47, "AnchorBarGrid"],
+Cell[CellGroupData[{
+Cell[3126, 84, 38, 0, 51, "ObjectName"],
+Cell[3167, 86, 647, 14, 124, "Usage"]
+}, Open  ]],
+Cell[3829, 103, 75, 0, 42, "History"],
+Cell[CellGroupData[{
+Cell[3929, 107, 23, 0, 24, "FooterCell"],
+Cell[3955, 109, 17, 0, 20, InheritFromParent]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5462,        161]
+NotebookDataLength[      5461,        161]
 NotebookOptionsPosition[      3724,        109]
-NotebookOutlinePosition[      5283,        154]
-CellTagsIndexPosition[      5240,        151]
+NotebookOutlinePosition[      5282,        154]
+CellTagsIndexPosition[      5239,        151]
 WindowTitle->ReadMaps - nrmma`CarpetHDF5.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadMaps - nrmma`CarpetHDF5.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

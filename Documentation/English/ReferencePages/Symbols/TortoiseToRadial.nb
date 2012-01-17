@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5711,        166]
+NotebookDataLength[      5710,        166]
 NotebookOptionsPosition[      3825,        111]
-NotebookOutlinePosition[      5532,        159]
-CellTagsIndexPosition[      5489,        156]
+NotebookOutlinePosition[      5531,        159]
+CellTagsIndexPosition[      5488,        156]
 WindowTitle->TortoiseToRadial - nrmma`CoordinateTransformations.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"TortoiseToRadial - nrmma`CoordinateTransformations.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

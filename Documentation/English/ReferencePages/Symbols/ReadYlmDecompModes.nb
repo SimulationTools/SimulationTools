@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5538,        164]
+NotebookDataLength[      5537,        164]
 NotebookOptionsPosition[      3751,        110]
-NotebookOutlinePosition[      5359,        157]
-CellTagsIndexPosition[      5316,        154]
+NotebookOutlinePosition[      5358,        157]
+CellTagsIndexPosition[      5315,        154]
 WindowTitle->ReadYlmDecompModes - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadYlmDecompModes - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

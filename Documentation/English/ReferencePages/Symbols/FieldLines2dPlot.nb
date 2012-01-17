@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5625,        163]
+NotebookDataLength[      5624,        163]
 NotebookOptionsPosition[      3788,        109]
-NotebookOutlinePosition[      5445,        156]
-CellTagsIndexPosition[      5402,        153]
+NotebookOutlinePosition[      5444,        156]
+CellTagsIndexPosition[      5401,        153]
 WindowTitle->FieldLines2dPlot - nrmma`FieldLines.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"FieldLines2dPlot - nrmma`FieldLines.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

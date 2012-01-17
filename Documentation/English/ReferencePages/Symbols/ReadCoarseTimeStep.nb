@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5474,        163]
+NotebookDataLength[      5473,        163]
 NotebookOptionsPosition[      3720,        110]
-NotebookOutlinePosition[      5295,        156]
-CellTagsIndexPosition[      5252,        153]
+NotebookOutlinePosition[      5294,        156]
+CellTagsIndexPosition[      5251,        153]
 WindowTitle->ReadCoarseTimeStep - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadCoarseTimeStep - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

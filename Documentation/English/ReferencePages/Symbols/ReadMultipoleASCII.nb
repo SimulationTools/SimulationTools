@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5653,        165]
+NotebookDataLength[      5652,        165]
 NotebookOptionsPosition[      3811,        111]
-NotebookOutlinePosition[      5474,        158]
-CellTagsIndexPosition[      5431,        155]
+NotebookOutlinePosition[      5473,        158]
+CellTagsIndexPosition[      5430,        155]
 WindowTitle->ReadMultipoleASCII - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadMultipoleASCII - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

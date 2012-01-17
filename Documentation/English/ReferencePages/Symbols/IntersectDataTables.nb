@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5840,        167]
+NotebookDataLength[      5839,        167]
 NotebookOptionsPosition[      3898,        112]
-NotebookOutlinePosition[      5661,        160]
-CellTagsIndexPosition[      5618,        157]
+NotebookOutlinePosition[      5660,        160]
+CellTagsIndexPosition[      5617,        157]
 WindowTitle->IntersectDataTables - nrmma`DataTable.nb`
 WindowFrame->Normal*)
 
@@ -111,8 +111,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"IntersectDataTables - nrmma`DataTable.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

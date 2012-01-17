@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6297,        173]
+NotebookDataLength[      6296,        173]
 NotebookOptionsPosition[      4120,        114]
-NotebookOutlinePosition[      6117,        166]
-CellTagsIndexPosition[      6074,        163]
+NotebookOutlinePosition[      6116,        166]
+CellTagsIndexPosition[      6073,        163]
 WindowTitle->ReadCarpetASCIIFromRun - nrmma`Ascii.nb`
 WindowFrame->Normal*)
 
@@ -113,8 +113,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadCarpetASCIIFromRun - nrmma`Ascii.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

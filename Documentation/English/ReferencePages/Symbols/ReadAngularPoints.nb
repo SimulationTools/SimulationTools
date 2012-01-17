@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5541,        164]
+NotebookDataLength[      5540,        164]
 NotebookOptionsPosition[      3754,        110]
-NotebookOutlinePosition[      5362,        157]
-CellTagsIndexPosition[      5319,        154]
+NotebookOutlinePosition[      5361,        157]
+CellTagsIndexPosition[      5318,        154]
 WindowTitle->ReadAngularPoints - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadAngularPoints - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

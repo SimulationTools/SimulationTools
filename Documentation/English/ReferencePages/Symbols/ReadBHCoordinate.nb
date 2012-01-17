@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5755,        165]
+NotebookDataLength[      5754,        165]
 NotebookOptionsPosition[      3852,        110]
-NotebookOutlinePosition[      5576,        158]
-CellTagsIndexPosition[      5533,        155]
+NotebookOutlinePosition[      5575,        158]
+CellTagsIndexPosition[      5532,        155]
 WindowTitle->ReadBHCoordinate - nrmma`BHCoordinates.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadBHCoordinate - nrmma`BHCoordinates.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

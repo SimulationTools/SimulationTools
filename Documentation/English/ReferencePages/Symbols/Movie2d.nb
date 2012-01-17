@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5421,        160]
+NotebookDataLength[      5420,        160]
 NotebookOptionsPosition[      3706,        109]
-NotebookOutlinePosition[      5241,        153]
-CellTagsIndexPosition[      5198,        150]
+NotebookOutlinePosition[      5240,        153]
+CellTagsIndexPosition[      5197,        150]
 WindowTitle->Movie2d - nrmma`FieldLines.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"Movie2d - nrmma`FieldLines.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

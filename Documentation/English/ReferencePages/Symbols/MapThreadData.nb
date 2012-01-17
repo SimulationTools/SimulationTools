@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5567,        163]
+NotebookDataLength[      5566,        163]
 NotebookOptionsPosition[      3768,        110]
-NotebookOutlinePosition[      5388,        156]
-CellTagsIndexPosition[      5345,        153]
+NotebookOutlinePosition[      5387,        156]
+CellTagsIndexPosition[      5344,        153]
 WindowTitle->MapThreadData - nrmma`DataTable.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"MapThreadData - nrmma`DataTable.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5733,        167]
+NotebookDataLength[      5732,        167]
 NotebookOptionsPosition[      3822,        110]
-NotebookOutlinePosition[      5554,        160]
-CellTagsIndexPosition[      5511,        157]
+NotebookOutlinePosition[      5553,        160]
+CellTagsIndexPosition[      5510,        157]
 WindowTitle->SpinWeightedSphericalHarmonic - nrmma`Kicks.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"SpinWeightedSphericalHarmonic - nrmma`Kicks.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

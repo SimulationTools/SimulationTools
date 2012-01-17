@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5516,        163]
+NotebookDataLength[      5515,        163]
 NotebookOptionsPosition[      3738,        109]
-NotebookOutlinePosition[      5337,        156]
-CellTagsIndexPosition[      5294,        153]
+NotebookOutlinePosition[      5336,        156]
+CellTagsIndexPosition[      5293,        153]
 WindowTitle->LevelExistsEvery - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"LevelExistsEvery - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

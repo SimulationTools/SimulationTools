@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5603,        165]
+NotebookDataLength[      5602,        165]
 NotebookOptionsPosition[      3775,        110]
-NotebookOutlinePosition[      5424,        158]
-CellTagsIndexPosition[      5381,        155]
+NotebookOutlinePosition[      5423,        158]
+CellTagsIndexPosition[      5380,        155]
 WindowTitle->ReadMultipoleHDF5Modes - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadMultipoleHDF5Modes - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

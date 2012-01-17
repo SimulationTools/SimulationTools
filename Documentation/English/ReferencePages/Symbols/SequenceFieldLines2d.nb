@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5849,        167]
+NotebookDataLength[      5848,        167]
 NotebookOptionsPosition[      3900,        112]
-NotebookOutlinePosition[      5669,        160]
-CellTagsIndexPosition[      5626,        157]
+NotebookOutlinePosition[      5668,        160]
+CellTagsIndexPosition[      5625,        157]
 WindowTitle->SequenceFieldLines2d - nrmma`FieldLines.nb`
 WindowFrame->Normal*)
 
@@ -111,8 +111,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"SequenceFieldLines2d - nrmma`FieldLines.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5500,        162]
+NotebookDataLength[      5499,        162]
 NotebookOptionsPosition[      3737,        109]
-NotebookOutlinePosition[      5321,        155]
-CellTagsIndexPosition[      5278,        152]
+NotebookOutlinePosition[      5320,        155]
+CellTagsIndexPosition[      5277,        152]
 WindowTitle->RescaleGrids - nrmma`Grids.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"RescaleGrids - nrmma`Grids.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

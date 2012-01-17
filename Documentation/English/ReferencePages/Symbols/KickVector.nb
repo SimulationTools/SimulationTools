@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5541,        162]
+NotebookDataLength[      5540,        162]
 NotebookOptionsPosition[      3763,        110]
-NotebookOutlinePosition[      5362,        155]
-CellTagsIndexPosition[      5319,        152]
+NotebookOutlinePosition[      5361,        155]
+CellTagsIndexPosition[      5318,        152]
 WindowTitle->KickVector - nrmma`Kicks.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"KickVector - nrmma`Kicks.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

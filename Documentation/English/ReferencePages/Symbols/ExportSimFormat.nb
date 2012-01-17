@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5583,        163]
+NotebookDataLength[      5582,        163]
 NotebookOptionsPosition[      3770,        109]
-NotebookOutlinePosition[      5404,        156]
-CellTagsIndexPosition[      5361,        153]
+NotebookOutlinePosition[      5403,        156]
+CellTagsIndexPosition[      5360,        153]
 WindowTitle->ExportSimFormat - nrmma`NRExport.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ExportSimFormat - nrmma`NRExport.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

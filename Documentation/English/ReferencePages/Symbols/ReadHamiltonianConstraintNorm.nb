@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5692,        167]
+NotebookDataLength[      5691,        167]
 NotebookOptionsPosition[      3803,        110]
-NotebookOutlinePosition[      5513,        160]
-CellTagsIndexPosition[      5470,        157]
+NotebookOutlinePosition[      5512,        160]
+CellTagsIndexPosition[      5469,        157]
 WindowTitle->ReadHamiltonianConstraintNorm - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadHamiltonianConstraintNorm - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5700,        165]
+NotebookDataLength[      5699,        165]
 NotebookOptionsPosition[      3830,        111]
-NotebookOutlinePosition[      5521,        158]
-CellTagsIndexPosition[      5478,        155]
+NotebookOutlinePosition[      5520,        158]
+CellTagsIndexPosition[      5477,        155]
 WindowTitle->ExportLocalQuantity - nrmma`NRExport.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ExportLocalQuantity - nrmma`NRExport.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

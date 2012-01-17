@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5540,        164]
+NotebookDataLength[      5539,        164]
 NotebookOptionsPosition[      3749,        110]
-NotebookOutlinePosition[      5361,        157]
-CellTagsIndexPosition[      5318,        154]
+NotebookOutlinePosition[      5360,        157]
+CellTagsIndexPosition[      5317,        154]
 WindowTitle->CourantFactorOnLevel - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"CourantFactorOnLevel - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

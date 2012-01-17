@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5421,        161]
+NotebookDataLength[      5420,        161]
 NotebookOptionsPosition[      3700,        109]
-NotebookOutlinePosition[      5242,        154]
-CellTagsIndexPosition[      5199,        151]
+NotebookOutlinePosition[      5241,        154]
+CellTagsIndexPosition[      5198,        151]
 WindowTitle->AnimateGrids - nrmma`Grids.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"AnimateGrids - nrmma`Grids.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

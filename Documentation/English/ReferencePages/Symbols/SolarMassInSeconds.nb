@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5586,        164]
+NotebookDataLength[      5585,        164]
 NotebookOptionsPosition[      3770,        110]
-NotebookOutlinePosition[      5407,        157]
-CellTagsIndexPosition[      5364,        154]
+NotebookOutlinePosition[      5406,        157]
+CellTagsIndexPosition[      5363,        154]
 WindowTitle->SolarMassInSeconds - nrmma`DataAnalysis.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"SolarMassInSeconds - nrmma`DataAnalysis.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

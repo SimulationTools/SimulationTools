@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5645,        164]
+NotebookDataLength[      5644,        164]
 NotebookOptionsPosition[      3799,        110]
-NotebookOutlinePosition[      5465,        157]
-CellTagsIndexPosition[      5422,        154]
+NotebookOutlinePosition[      5464,        157]
+CellTagsIndexPosition[      5421,        154]
 WindowTitle->FieldLinesData3d - nrmma`FieldLines.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"FieldLinesData3d - nrmma`FieldLines.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

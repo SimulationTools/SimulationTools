@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5797,        167]
+NotebookDataLength[      5796,        167]
 NotebookOptionsPosition[      3867,        112]
-NotebookOutlinePosition[      5618,        160]
-CellTagsIndexPosition[      5575,        157]
+NotebookOutlinePosition[      5617,        160]
+CellTagsIndexPosition[      5574,        157]
 WindowTitle->ThornburgToCartesian - nrmma`CoordinateTransformations.nb`
 WindowFrame->Normal*)
 
@@ -111,8 +111,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ThornburgToCartesian - nrmma`CoordinateTransformations.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

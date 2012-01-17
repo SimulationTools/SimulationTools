@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6576,        176]
+NotebookDataLength[      6575,        176]
 NotebookOptionsPosition[      4266,        116]
-NotebookOutlinePosition[      6396,        169]
-CellTagsIndexPosition[      6353,        166]
+NotebookOutlinePosition[      6395,        169]
+CellTagsIndexPosition[      6352,        166]
 WindowTitle->ReadGridFunction - nrmma`CarpetHDF5.nb`
 WindowFrame->Normal*)
 
@@ -115,8 +115,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadGridFunction - nrmma`CarpetHDF5.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

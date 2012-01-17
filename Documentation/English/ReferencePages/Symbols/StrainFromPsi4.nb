@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6338,        174]
+NotebookDataLength[      6337,        174]
 NotebookOptionsPosition[      4154,        115]
-NotebookOutlinePosition[      6158,        167]
-CellTagsIndexPosition[      6115,        164]
+NotebookOutlinePosition[      6157,        167]
+CellTagsIndexPosition[      6114,        164]
 WindowTitle->StrainFromPsi4 - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -114,8 +114,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"StrainFromPsi4 - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

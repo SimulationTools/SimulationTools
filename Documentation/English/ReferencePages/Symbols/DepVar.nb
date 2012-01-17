@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5335,        160]
+NotebookDataLength[      5334,        160]
 NotebookOptionsPosition[      3665,        109]
-NotebookOutlinePosition[      5156,        153]
-CellTagsIndexPosition[      5113,        150]
+NotebookOutlinePosition[      5155,        153]
+CellTagsIndexPosition[      5112,        150]
 WindowTitle->DepVar - nrmma`DataTable.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"DepVar - nrmma`DataTable.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

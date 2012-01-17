@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6043,        170]
+NotebookDataLength[      6042,        170]
 NotebookOptionsPosition[      4000,        113]
-NotebookOutlinePosition[      5863,        163]
-CellTagsIndexPosition[      5820,        160]
+NotebookOutlinePosition[      5862,        163]
+CellTagsIndexPosition[      5819,        160]
 WindowTitle->AngularMomentumFlux - nrmma`Kicks.nb`
 WindowFrame->Normal*)
 
@@ -112,8 +112,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"AngularMomentumFlux - nrmma`Kicks.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

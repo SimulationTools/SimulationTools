@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5823,        166]
+NotebookDataLength[      5822,        166]
 NotebookOptionsPosition[      3894,        111]
-NotebookOutlinePosition[      5643,        159]
-CellTagsIndexPosition[      5600,        156]
+NotebookOutlinePosition[      5642,        159]
+CellTagsIndexPosition[      5599,        156]
 WindowTitle->ColorRanges3d - nrmma`FieldLines.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ColorRanges3d - nrmma`FieldLines.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

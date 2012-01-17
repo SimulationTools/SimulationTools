@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5553,        162]
+NotebookDataLength[      5552,        162]
 NotebookOptionsPosition[      3771,        110]
-NotebookOutlinePosition[      5374,        155]
-CellTagsIndexPosition[      5331,        152]
+NotebookOutlinePosition[      5373,        155]
+CellTagsIndexPosition[      5330,        152]
 WindowTitle->ReadTime - nrmma`CarpetHDF5.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadTime - nrmma`CarpetHDF5.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

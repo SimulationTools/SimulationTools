@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5564,        162]
+NotebookDataLength[      5563,        162]
 NotebookOptionsPosition[      3765,        109]
-NotebookOutlinePosition[      5385,        155]
-CellTagsIndexPosition[      5342,        152]
+NotebookOutlinePosition[      5384,        155]
+CellTagsIndexPosition[      5341,        152]
 WindowTitle->ReadBHRadius - nrmma`BHCoordinates.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadBHRadius - nrmma`BHCoordinates.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

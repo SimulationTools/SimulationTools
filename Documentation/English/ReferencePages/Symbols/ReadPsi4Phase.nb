@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5688,        164]
+NotebookDataLength[      5687,        164]
 NotebookOptionsPosition[      3831,        110]
-NotebookOutlinePosition[      5509,        157]
-CellTagsIndexPosition[      5466,        154]
+NotebookOutlinePosition[      5508,        157]
+CellTagsIndexPosition[      5465,        154]
 WindowTitle->ReadPsi4Phase - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadPsi4Phase - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

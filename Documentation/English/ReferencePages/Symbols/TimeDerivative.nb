@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6300,        172]
+NotebookDataLength[      6299,        172]
 NotebookOptionsPosition[      4131,        114]
-NotebookOutlinePosition[      6120,        165]
-CellTagsIndexPosition[      6077,        162]
+NotebookOutlinePosition[      6119,        165]
+CellTagsIndexPosition[      6076,        162]
 WindowTitle->TimeDerivative - nrmma`DataRegion.nb`
 WindowFrame->Normal*)
 
@@ -113,8 +113,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"TimeDerivative - nrmma`DataRegion.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

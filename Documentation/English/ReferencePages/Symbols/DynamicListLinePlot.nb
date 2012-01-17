@@ -1,0 +1,180 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      6151,        171]
+NotebookOptionsPosition[      4054,        114]
+NotebookOutlinePosition[      5971,        164]
+CellTagsIndexPosition[      5928,        161]
+WindowTitle->DynamicListLinePlot - nrmma`Plotting.nb`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["NRMMA`PLOTTING.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "nrmma", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->
+         False], {"\<\"Go to nrmma/ref/DynamicListLinePlot URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["DynamicListLinePlot", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["DynamicListLinePlot",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/DynamicListLinePlot"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]DynamicListLinePlot[args] is a wrapper around \
+ListLinePlot which adds the ability to zoom into a region of the plot by \
+dragging a box with the mouse.  Double-click to return to the previous zoom \
+level and right-click to show a button-bar with various options including \
+resetting the plot range to All or Automatic, joining the points in the plot, \
+or using a log scale."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
+WindowTitle->"DynamicListLinePlot - nrmma`Plotting.nb`",
+Visible->True,
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "HelpViewerToolbar"],
+PageHeaders->{{None, None, None}, {None, None, 
+   Cell[
+    TextData[{
+      Cell[
+       TextData[{""}], "PageHeader"], 
+      Cell[
+       TextData[{
+         CounterBox["Page"]}], "PageNumber"]}], 
+    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {
+   Cell[
+    TextData[{""}], "PageFooter"], None, None}},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"dynamiclistlineplot", "DYNAMICLISTLINEPLOT"}, "index" -> 
+    True, "label" -> "nrmma`Plotting` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Plotting.nb", "status" -> "", "summary" -> 
+    "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds \
+the ability to zoom into a region of the plot by dragging a box with the \
+mouse.  Double-click to return to the previous zoom level and right-click to \
+show a button-bar with various options including resetting the plot range to \
+All or Automatic, joining the points in the plot, or using a log scale.", 
+    "synonyms" -> {"dynamiclistlineplot", "DYNAMICLISTLINEPLOT"}, "title" -> 
+    "DynamicListLinePlot", "windowTitle" -> "DynamicListLinePlot", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/DynamicListLinePlot"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[611, 21, 2502, 60, 47, "AnchorBarGrid"],
+Cell[CellGroupData[{
+Cell[3138, 85, 41, 0, 51, "ObjectName"],
+Cell[3182, 87, 698, 15, 124, "Usage"]
+}, Open  ]],
+Cell[3895, 105, 75, 0, 42, "History"],
+Cell[CellGroupData[{
+Cell[3995, 109, 23, 0, 24, "FooterCell"],
+Cell[4021, 111, 17, 0, 20, InheritFromParent]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

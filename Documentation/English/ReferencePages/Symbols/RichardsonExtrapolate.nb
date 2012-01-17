@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5790,        166]
+NotebookDataLength[      5789,        166]
 NotebookOptionsPosition[      3868,        111]
-NotebookOutlinePosition[      5611,        159]
-CellTagsIndexPosition[      5568,        156]
+NotebookOutlinePosition[      5610,        159]
+CellTagsIndexPosition[      5567,        156]
 WindowTitle->RichardsonExtrapolate - nrmma`Convergence.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"RichardsonExtrapolate - nrmma`Convergence.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

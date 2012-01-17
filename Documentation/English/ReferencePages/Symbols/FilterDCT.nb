@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5690,        165]
+NotebookDataLength[      5689,        165]
 NotebookOptionsPosition[      3840,        111]
-NotebookOutlinePosition[      5510,        158]
-CellTagsIndexPosition[      5467,        155]
+NotebookOutlinePosition[      5509,        158]
+CellTagsIndexPosition[      5466,        155]
 WindowTitle->FilterDCT - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"FilterDCT - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

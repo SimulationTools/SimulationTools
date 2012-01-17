@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5857,        168]
+NotebookDataLength[      5856,        168]
 NotebookOptionsPosition[      3907,        112]
-NotebookOutlinePosition[      5677,        161]
-CellTagsIndexPosition[      5634,        158]
+NotebookOutlinePosition[      5676,        161]
+CellTagsIndexPosition[      5633,        158]
 WindowTitle->ReadTwoPuncturesData - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -111,8 +111,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadTwoPuncturesData - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

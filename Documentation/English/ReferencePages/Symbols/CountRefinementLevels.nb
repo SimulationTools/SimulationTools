@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5780,        166]
+NotebookDataLength[      5779,        166]
 NotebookOptionsPosition[      3867,        111]
-NotebookOutlinePosition[      5600,        159]
-CellTagsIndexPosition[      5557,        156]
+NotebookOutlinePosition[      5599,        159]
+CellTagsIndexPosition[      5556,        156]
 WindowTitle->CountRefinementLevels - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -110,8 +110,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"CountRefinementLevels - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5836,        167]
+NotebookDataLength[      5835,        167]
 NotebookOptionsPosition[      3913,        112]
-NotebookOutlinePosition[      5656,        160]
-CellTagsIndexPosition[      5613,        157]
+NotebookOutlinePosition[      5655,        160]
+CellTagsIndexPosition[      5612,        157]
 WindowTitle->NumCycles - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -111,8 +111,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"NumCycles - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

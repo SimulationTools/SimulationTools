@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5646,        165]
+NotebookDataLength[      5645,        165]
 NotebookOptionsPosition[      3795,        110]
-NotebookOutlinePosition[      5467,        158]
-CellTagsIndexPosition[      5424,        155]
+NotebookOutlinePosition[      5466,        158]
+CellTagsIndexPosition[      5423,        155]
 WindowTitle->ReadMultipoleASCIIRadii - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ReadMultipoleASCIIRadii - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

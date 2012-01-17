@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5527,        162]
+NotebookDataLength[      5526,        162]
 NotebookOptionsPosition[      3755,        110]
-NotebookOutlinePosition[      5348,        155]
-CellTagsIndexPosition[      5305,        152]
+NotebookOutlinePosition[      5347,        155]
+CellTagsIndexPosition[      5304,        152]
 WindowTitle->FinishTime - nrmma`SimView.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"FinishTime - nrmma`SimView.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5503,        163]
+NotebookDataLength[      5502,        163]
 NotebookOptionsPosition[      3733,        109]
-NotebookOutlinePosition[      5324,        156]
-CellTagsIndexPosition[      5281,        153]
+NotebookOutlinePosition[      5323,        156]
+CellTagsIndexPosition[      5280,        153]
 WindowTitle->BoxRadiiOnLevel - nrmma`NR.nb`
 WindowFrame->Normal*)
 
@@ -108,8 +108,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"BoxRadiiOnLevel - nrmma`NR.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

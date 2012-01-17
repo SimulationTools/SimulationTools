@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      5417,        161]
+NotebookDataLength[      5416,        161]
 NotebookOptionsPosition[      3704,        110]
-NotebookOutlinePosition[      5238,        154]
-CellTagsIndexPosition[      5195,        151]
+NotebookOutlinePosition[      5237,        154]
+CellTagsIndexPosition[      5194,        151]
 WindowTitle->RunCost - nrmma`SystemStatistics.nb`
 WindowFrame->Normal*)
 
@@ -109,8 +109,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"RunCost - nrmma`SystemStatistics.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[

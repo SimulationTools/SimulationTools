@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      6078,        172]
+NotebookDataLength[      6077,        172]
 NotebookOptionsPosition[      3998,        113]
-NotebookOutlinePosition[      5898,        165]
-CellTagsIndexPosition[      5855,        162]
+NotebookOutlinePosition[      5897,        165]
+CellTagsIndexPosition[      5854,        162]
 WindowTitle->ExportExtrapolatedWaveform - nrmma`NRExport.nb`
 WindowFrame->Normal*)
 
@@ -112,8 +112,8 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
-WindowMargins->{{552, Automatic}, {Automatic, 144}},
+WindowSize->{740, 656},
+WindowMargins->{{242, Automatic}, {Automatic, 50}},
 WindowTitle->"ExportExtrapolatedWaveform - nrmma`NRExport.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
