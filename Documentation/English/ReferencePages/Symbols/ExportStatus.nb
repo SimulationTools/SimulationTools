@@ -89,7 +89,7 @@ Cell[BoxData[""]]
 },
 Saveable->False,
 WindowSize->{740, 656},
-WindowMargins->{{241, Automatic}, {Automatic, 50}},
+WindowMargins->Automatic,
 WindowTitle->"ExportStatus - nrmma`NRExport.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
