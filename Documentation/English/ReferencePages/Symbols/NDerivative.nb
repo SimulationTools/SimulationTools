@@ -1,23 +1,3 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 8.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[      5698,        164]
-NotebookOptionsPosition[      3836,        110]
-NotebookOutlinePosition[      5519,        157]
-CellTagsIndexPosition[      5476,        154]
-WindowTitle->NDerivative - nrmma`DataTable.nb`
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[GridBox[{
    {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
@@ -110,7 +90,7 @@ Cell[BoxData[""]]
 },
 Saveable->False,
 WindowSize->{740, 656},
-WindowMargins->{{242, Automatic}, {Automatic, 50}},
+WindowMargins->{{241, Automatic}, {Automatic, 50}},
 WindowTitle->"NDerivative - nrmma`DataTable.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
@@ -127,6 +107,7 @@ PageHeaders->{{None, None, None}, {None, None,
 PageFooters->{{None, None, None}, {
    Cell[
     TextData[{""}], "PageFooter"], None, None}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
@@ -140,34 +121,9 @@ differencing and the result omits the first and last points of d.",
     "windowTitle" -> "NDerivative", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
   ""},
+TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[604, 21, 2485, 59, 47, "AnchorBarGrid"],
-Cell[CellGroupData[{
-Cell[3114, 84, 33, 0, 51, "ObjectName"],
-Cell[3150, 86, 512, 12, 94, "Usage"]
-}, Open  ]],
-Cell[3677, 101, 75, 0, 42, "History"],
-Cell[CellGroupData[{
-Cell[3777, 105, 23, 0, 24, "FooterCell"],
-Cell[3803, 107, 17, 0, 20, InheritFromParent]
-}, Open  ]]
-}
-]
-*)
-
-(* End of internal cache information *)

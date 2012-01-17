@@ -1,23 +1,3 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 8.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[      5946,        169]
-NotebookOptionsPosition[      3955,        113]
-NotebookOutlinePosition[      5766,        162]
-CellTagsIndexPosition[      5723,        159]
-WindowTitle->DefineMemoFunction - nrmma`Memo.nb`
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[GridBox[{
    {Cell["NRMMA`MEMO.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
@@ -113,7 +93,7 @@ Cell[BoxData[""]]
 },
 Saveable->False,
 WindowSize->{740, 656},
-WindowMargins->{{242, Automatic}, {Automatic, 50}},
+WindowMargins->{{241, Automatic}, {Automatic, 50}},
 WindowTitle->"DefineMemoFunction - nrmma`Memo.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
@@ -130,6 +110,7 @@ PageHeaders->{{None, None, None}, {None, None,
 PageFooters->{{None, None, None}, {
    Cell[
     TextData[{""}], "PageFooter"], None, None}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
@@ -145,34 +126,9 @@ read or compute.  See ClearAllMemos for flushing this cache.",
     "DefineMemoFunction", "windowTitle" -> "DefineMemoFunction", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/DefineMemoFunction"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[606, 21, 2497, 60, 47, "AnchorBarGrid"],
-Cell[CellGroupData[{
-Cell[3128, 85, 40, 0, 51, "ObjectName"],
-Cell[3171, 87, 610, 14, 108, "Usage"]
-}, Open  ]],
-Cell[3796, 104, 75, 0, 42, "History"],
-Cell[CellGroupData[{
-Cell[3896, 108, 23, 0, 24, "FooterCell"],
-Cell[3922, 110, 17, 0, 20, InheritFromParent]
-}, Open  ]]
-}
-]
-*)
-
-(* End of internal cache information *)

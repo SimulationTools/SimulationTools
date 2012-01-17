@@ -1,23 +1,3 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 8.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[      5772,        167]
-NotebookOptionsPosition[      3855,        112]
-NotebookOutlinePosition[      5593,        160]
-CellTagsIndexPosition[      5550,        157]
-WindowTitle->CartesianToThornburg - nrmma`CoordinateTransformations.nb`
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[GridBox[{
    {Cell["NRMMA`COORDINATETRANSFORMATIONS.NB` SYMBOL", "PacletNameCell"], 
@@ -112,7 +92,7 @@ Cell[BoxData[""]]
 },
 Saveable->False,
 WindowSize->{740, 656},
-WindowMargins->{{242, Automatic}, {Automatic, 50}},
+WindowMargins->{{241, Automatic}, {Automatic, 50}},
 WindowTitle->"CartesianToThornburg - nrmma`CoordinateTransformations.nb`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
@@ -129,6 +109,7 @@ PageHeaders->{{None, None, None}, {None, None,
 PageFooters->{{None, None, None}, {
    Cell[
     TextData[{""}], "PageFooter"], None, None}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
@@ -143,34 +124,9 @@ coordinates on the specified patch in terms of cartesian coordinates.",
     "CartesianToThornburg", "windowTitle" -> "CartesianToThornburg", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/CartesianToThornburg"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[629, 21, 2525, 61, 47, "AnchorBarGrid"],
-Cell[CellGroupData[{
-Cell[3179, 86, 42, 0, 51, "ObjectName"],
-Cell[3224, 88, 457, 12, 94, "Usage"]
-}, Open  ]],
-Cell[3696, 103, 75, 0, 42, "History"],
-Cell[CellGroupData[{
-Cell[3796, 107, 23, 0, 24, "FooterCell"],
-Cell[3822, 109, 17, 0, 20, InheritFromParent]
-}, Open  ]]
-}
-]
-*)
-
-(* End of internal cache information *)
