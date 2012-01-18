@@ -26,6 +26,9 @@ ReadAHQuadrupoleZZ;
 ChristodoulouMass;
 ReadAHSeparation::usage = "ReadAHSeparation[run, idx] returns the coordinate distance between the centroids of apparent horizons with indices 1 and 2 in run.  This requires output from the AHFinderDirect thorn.";
 ReadAHPhase;
+InitialSpin;
+SpinAngle;
+InitialSpinAngle;
 
 Begin["`Private`"];
 
@@ -163,6 +166,30 @@ ReadAHPhase[runName_String] :=
     Return[Phase[xyTrans]];
   ];
 
+InitialSpin[run_, i_] :=
+ First@DepVar@SpinAngle[run, i];
+
+SpinAngle[run_, idx_] :=
+  MapData[AnglesOfVector[#][[2]] &, ReadIHSpin[run, idx]];
+
+InitialSpinAngle[run_, i_] :=
+ First@DepVar@SpinAngle[run, i];
+
+InitialSpinAngle[run_] :=
+ Module[{S0, S1},
+  S0 = First@DepVar@ReadIHSpin[run, 0];
+  S1 = First@DepVar@ReadIHSpin[run, 1];
+  If[Norm@S0 > Norm@S1,
+   AnglesOfVector[S0][[2]],
+   AnglesOfVector[S1][[2]]]];
+
+InitialSpin[run_] :=
+ Module[{S0, S1},
+  S0 = First@DepVar@ReadIHSpin[run, 0];
+  S1 = First@DepVar@ReadIHSpin[run, 1];
+  If[Norm@S0 > Norm@S1,
+   S0,
+   S1]];
 
 End[];
 

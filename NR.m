@@ -25,9 +25,7 @@ FitParameters;
 ToFixedWidth;
 
 LRange;
-InitialSpin;
-SpinAngle;
-InitialSpinAngle;
+
 InitialDimensionlessSpin;
 
 Begin["`Private`"];
@@ -230,31 +228,6 @@ FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
 
 ToFixedWidth[n_Integer, width_Integer] :=
   StringJoin[PadLeft[Characters[ToString[n]], width, "0"]];
-
-InitialSpin[run_, i_] :=
- First@DepVar@SpinAngle[run, i];
-
-SpinAngle[run_, idx_] :=
-  MapData[AnglesOfVector[#][[2]] &, ReadIHSpin[run, idx]];
-
-InitialSpinAngle[run_, i_] :=
- First@DepVar@SpinAngle[run, i];
-
-InitialSpinAngle[run_] :=
- Module[{S0, S1},
-  S0 = First@DepVar@ReadIHSpin[run, 0];
-  S1 = First@DepVar@ReadIHSpin[run, 1];
-  If[Norm@S0 > Norm@S1,
-   AnglesOfVector[S0][[2]],
-   AnglesOfVector[S1][[2]]]];
-
-InitialSpin[run_] :=
- Module[{S0, S1},
-  S0 = First@DepVar@ReadIHSpin[run, 0];
-  S1 = First@DepVar@ReadIHSpin[run, 1];
-  If[Norm@S0 > Norm@S1,
-   S0,
-   S1]];
 
 DefineMemoFunction[InitialDimensionlessSpin[run_],
  Module[{S0, S1, mp, mm},
