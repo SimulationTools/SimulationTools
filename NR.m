@@ -12,9 +12,7 @@ ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads
 
 Data;
 FitFunction;
-
 PercentageDifference;
-
 ReturnValue;
 FittedFunction;
 Eccentricity;
@@ -22,17 +20,12 @@ FitEcc;
 FitEccOm;
 FitParameters;
 ToFixedWidth;
-
 LRange;
-
 InitialDimensionlessSpin;
 
 Begin["`Private`"];
 
 RunDirectory := Global`RunDirectory;
-
-
-
 
 (*--------------------------------------------------------------------
   Model fitting
@@ -95,11 +88,9 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
     Return[fit2];
   ];
 
-
 RunCost[length_, speed_, nProcs_] :=
  {CPUHours -> nProcs length/speed // N,
   WallTimeDays -> length/speed/24 // N};
-
 
 PercentageDifference[ap_,bp_] :=
   Module[{a,b},
@@ -108,8 +99,6 @@ PercentageDifference[ap_,bp_] :=
 
 ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
-
-
 
 Options[FitEcc] = {ReturnValue -> FittedFunction};
 
