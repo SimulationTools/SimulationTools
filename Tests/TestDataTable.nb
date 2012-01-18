@@ -1,0 +1,80 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Project: nrmma", "Title"],
+
+Cell[TextData[{
+ "Wolfram ",
+ StyleBox["Workbench",
+  FontSlant->"Italic"],
+ " 18-Jan-2012."
+}], "Text"],
+
+Cell["This notebook is created to test the project.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Loading nrmma\"\>"], "Print"],
+
+Cell[BoxData["\<\"Loading h5mma\"\>"], "Print"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh-git\>\""}], ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"data", "=", 
+  RowBox[{"Frequency", "@", 
+   RowBox[{"ReadPsi4", "[", 
+    RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", 
+  RowBox[{"{", 
+   RowBox[{"0.`", ",", "388.44`"}], "}"}], "]"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"FilterDCT", "[", 
+    RowBox[{"data", ",", "10", ",", 
+     RowBox[{"{", 
+      RowBox[{"160", ",", "190"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"170", ",", "180"}], "}"}]}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", 
+      RowBox[{"-", "0.000506009906179081`"}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.44`", ",", "1.9396782615100698`"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{717, 970},
+WindowMargins->{{Automatic, 221}, {Automatic, 90}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]

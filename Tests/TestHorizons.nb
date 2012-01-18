@@ -1,0 +1,840 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     27599,        831]
+NotebookOptionsPosition[     24558,        719]
+NotebookOutlinePosition[     24935,        736]
+CellTagsIndexPosition[     24892,        733]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Project: nrmma", "Title"],
+
+Cell[TextData[{
+ "Wolfram ",
+ StyleBox["Workbench",
+  FontSlant->"Italic"],
+ " 18-Jan-2012."
+}], "Text"],
+
+Cell["This notebook is created to test the project.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellChangeTimes->{{3.5358894839905367`*^9, 3.535889484923709*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Loading nrmma\"\>"], "Print",
+ CellChangeTimes->{
+  3.535889486211152*^9, 3.535889537869111*^9, {3.535890540257131*^9, 
+   3.5358905692377977`*^9}, 3.535890706146377*^9, 3.535891786823719*^9, 
+   3.535892369503647*^9}],
+
+Cell[BoxData["\<\"Loading h5mma\"\>"], "Print",
+ CellChangeTimes->{
+  3.535889486211152*^9, 3.535889537869111*^9, {3.535890540257131*^9, 
+   3.5358905692377977`*^9}, 3.535890706146377*^9, 3.535891786823719*^9, 
+   3.535892369579091*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh-git\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.5358896349282007`*^9, 3.535889637487133*^9}, {
+  3.535894027593493*^9, 3.535894028015232*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadIHSpin", "[", 
+  RowBox[{"run", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894571352249*^9, 3.535894580150837*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[\\\"Cannot find file \
+ihspin_hn_0.asc in run bbh-git\\\"]\\)\[NoBreak] returned to top level. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", \
+ButtonNote -> \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.53589458048948*^9}],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{
+  "Throw", "[", "\<\"Cannot find file ihspin_hn_0.asc in run bbh-git\"\>", 
+   "]"}], "]"}]], "Output",
+ CellChangeTimes->{{3.5358945766887693`*^9, 3.535894580492035*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadIHSpinX", "[", 
+  RowBox[{"run", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5358945843932457`*^9, 3.535894595934618*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[\\\"Cannot find file \
+ihspin_hn_0.asc in run bbh-git\\\"]\\)\[NoBreak] returned to top level. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", \
+ButtonNote -> \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.535894596306658*^9}],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{
+  "Throw", "[", "\<\"Cannot find file ihspin_hn_0.asc in run bbh-git\"\>", 
+   "]"}], "]"}]], "Output",
+ CellChangeTimes->{{3.535894588197701*^9, 3.535894596308906*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"ReadIsolatedHorizonSpin", "[", 
+   RowBox[{"run", ",", "0", ",", "1"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894625229439*^9, 3.5358946376216917`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxFlnk8lOsbxlWoUBJZStpE0mapkHld0okKZStCWbJvM2NN+SmlU05y2qSO
+NqRNWrTXO0T2iZmSLUmniLQ5pRwdnR/zPH3O+4/PfMbcz/3c3+u67neaT4Sj
+33ApKSnFYVJSQ39/Pvnfunv3udw1l2vI5nLkvlnUrlaqiVz+mCWfR2KD+imF
+5x9qWZuX8Sr51kp4L8xe87RwlIB8r4Y4U60Jf3xq4zwSDj2aaIZeXk9yM/3/
+afgeOClHtb6D1fNIK+6dpQ2PF10aB/v+pPV1MdrFizNi9QP2ncNtreRuPeQX
+pDROvXKXJfXmoN8mcebdsqecfOuhgvNhHv/l5NH8NlrfAJk5t/+2C3nOGfq1
+w21DDMhf6Wl1zeaQ84zhkX6vr+xQJOfY0aFnIZzNMl1v8rLo+YvxRO9Vh8eI
+XewWlaETTKBwzbzR5MlN2o8pukPOGUWZl7GSch5L8DbvWbVTZwPtzxw45qye
+EHqO5UgKMhh9+PWwwwOlLOnXAtbC36TNz9Szkp+nAZ12N18f3rqP9m+JTOew
+77bbnrKExlLo72zVrdY/zZL7LEWav9WWzleFLE9ygBWS+1rdCgU1dJ7LkLRq
+kmGbRSUrKfdyGXS/Cd712ley5L6/4JLWcq06mxrWUVJwOX491xuSKKym97dG
+y8DXa+ff1LElQ+0VW2OGTMah9NY6Og8bWD7qSXjmWcMaSZ4VaC+ut73gWE7n
+swKBx3PH7PYXsTncoQZXIrfjVNLx32vpvFZB7qNxsapNNSspp2KLqoFYwyK1
+ejo/W8wc5nlt/fI6dui2Wsl2mM1bGedX/ITO0x7PP64zLQkVs1+H2uu1x1bT
+S2PUzWrofFdDJj15jvjVY9rfGhzYUfZS2P2YznsNnqc80jhwp4b2uwbtPwz7
+2N47dP4O0Krf/mypXwbt3wHBUpljHd7tpzwc8Ve1k8LatnP0Po4wCKqy8neq
+pHwcobJtV4+sRQ29nxNuaafG8RVLKC8nODs9jFdddJT6wwmayZ0XE7TrqD6d
+UZh0a0pmTSOH3N8ZCi55xxLtGziEpzOGYUe3tsYAnYcLOi/e5KWebKV6dsHn
+LQklXQltHDIfF3jMe74npeEdh/BeC/klYep5zzqpf9aCzbQbdXD1ACkntw73
++4Xfk5XkGH/Jsw6aJbUfZNrlGKKHdbhScLXyrrwsM0XSoCsUHBI33TooyxB9
+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
+
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 388.8}, {-4.43162782288963*^-6, 5.09604677132597*^-6}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{{3.53589463425564*^9, 3.535894638098062*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{
+   RowBox[{"ToList", "@", 
+    RowBox[{"ReadIsolatedHorizonDimensionlessSpin", "[", 
+     RowBox[{"run", ",", "0"}], "]"}]}], ",", "10"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894645495863*^9, 3.5358946814126673`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "5.342474629091228`*^-31", ",", "1.0754357820228195`*^-33", ",", 
+        "5.665208519695886`*^-17"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.4399999999999977`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "1.7681145039616425`*^-20", ",", "1.44231492894682`*^-19", ",", 
+        "2.730974114307957`*^-10"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"2.8799999999999955`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "1.349616570017577`*^-20", ",", "7.490291546171418`*^-20", ",", 
+        "5.443658546404081`*^-10"}], "}"}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"385.9199999999994`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "8.464576202005696`*^-13", ",", "7.272314979983992`*^-13", ",", 
+        "0.42835349793254723`"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"387.3599999999994`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "1.35722992026579`*^-13", ",", "5.792817930032985`*^-14", ",", 
+        "0.42838150318219476`"}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.7999999999994`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "9.141014542181356`*^-12", ",", "2.684460604041389`*^-11", ",", 
+        "0.42835490018100825`"}], "}"}]}], "}"}]}], "}"}],
+  Short[#, 10]& ]], "Output",
+ CellChangeTimes->{{3.535894647466144*^9, 3.535894682230776*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{
+   RowBox[{"ToList", "@", 
+    RowBox[{"ReadIsolatedHorizonSpinPhase", "[", 
+     RowBox[{"run", ",", "0"}], "]"}]}], ",", "10"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894697654463*^9, 3.53589470113582*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0.044836308694910475`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "1.9075839526246423`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"2.88`", ",", "4.310960013600768`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"4.32`", ",", "3.227646769439265`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"5.76`", ",", "0.11465536912882911`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"7.2`", ",", "2.7724408276604904`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"8.64`", ",", "3.0149094981189903`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"10.08`", ",", "3.724307448689039`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"11.52`", ",", "3.436822870180706`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"12.96`", ",", "4.494818504456452`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"14.4`", ",", "7.265287730702475`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "250", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"375.84`", ",", "36.77804049872033`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"377.28`", ",", "38.77059537623568`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"378.72`", ",", "35.83352676881942`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"380.16`", ",", "38.80266711745977`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"381.6`", ",", "38.34801943038704`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"383.04`", ",", "38.70874124655288`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"384.48`", ",", "38.88308659070701`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"385.92`", ",", "38.44659258228948`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"387.36`", ",", "41.41940195063133`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "38.74168149151117`"}], "}"}]}], "}"}],
+  Short[#, 10]& ]], "Output",
+ CellChangeTimes->{3.535894702416587*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHMass", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5358947076953487`*^9, 3.535894718378203*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.4999992431`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "0.4999967919`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.8838969344`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.535894711785915*^9, 3.535894718786891*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHRadius", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894725893321*^9, 3.535894727299131*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.2270722534`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "0.3769543679`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.7362940081`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{3.5358947277178307`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHMinRadius", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894733325059*^9, 3.5358947380909157`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.2200534208`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "0.3596398957`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.677842087`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.535894733847682*^9, 3.5358947384376574`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHMaxRadius", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5358947411626263`*^9, 3.535894743071663*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.2343828226`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "0.393205379`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.7638345859`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{3.535894743473229*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHCentroid", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894747890437*^9, 3.535894749914159*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", 
+      RowBox[{"{", 
+       RowBox[{"2.999989`", ",", 
+        RowBox[{"-", "0.002378`"}], ",", "0.`"}], "}"}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "266", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "8.`*^-6"}], ",", 
+        RowBox[{"-", "0.000052`"}], ",", 
+        RowBox[{"-", "0.000013`"}]}], "}"}]}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{3.535894750878529*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHCentroidCoord", "[", 
+    RowBox[{"run", ",", "1", ",", "1"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894755292601*^9, 3.5358947651539793`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "2.999989`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "2.993989`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "264", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"387.36`", ",", 
+      RowBox[{"-", "8.`*^-6"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", 
+      RowBox[{"-", "8.`*^-6"}]}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.5358947591684437`*^9, 3.535894765555928*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "[", 
+   RowBox[{"ReadAHColumn", "[", 
+    RowBox[{"run", ",", "1", ",", "12"}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894755292601*^9, 3.535894779081636*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.01720665173`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "0.04722350353`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.1958121998`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.5358947591684437`*^9, 3.535894779483993*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadAHColumns", "[", 
+    RowBox[{"run", ",", "1", ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "6", ",", "7"}], "}"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.535894755292601*^9, 3.535894826887586*^9}, {
+  3.535894926880103*^9, 3.535894937916987*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", 
+      RowBox[{"{", 
+       RowBox[{"0.`", ",", "0.2200534208`", ",", "0.2343828226`"}], "}"}]}], 
+     "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "266", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "0.000013`"}], ",", 
+        RowBox[{"\[LeftSkeleton]", "12", "\[RightSkeleton]"}], ",", 
+        RowBox[{"\[LeftSkeleton]", "13", "\[RightSkeleton]"}]}], "}"}]}], 
+     "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.5358947591684437`*^9, 3.5358948273475227`*^9}, {
+  3.535894929621821*^9, 3.535894938332443*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadAHQuadrupoleXX", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.5358949449800863`*^9, 3.53589496233956*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.01718349019`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "0.04742352666`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.1959128703`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.535894957615294*^9, 3.535894962629959*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ChristodoulouMass", "[", 
+    RowBox[{"run", ",", "1", ",", "0"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.535894987280712*^9, 3.5358950031474237`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.49999924310000005`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "269", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.7999999999994`", ",", "0.9515107327335358`"}], "}"}]}], 
+   "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.535894999674642*^9, 3.535895003630275*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadAHSeparation", "[", "run", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.5358950093645153`*^9, 3.535895052440816*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "5.999979884967948`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1.44`", ",", "5.992028428504658`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "265", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{{3.535895017908331*^9, 3.53589505286901*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadAHPhase", "[", "run", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.535895060179929*^9, 3.535895062673504*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", 
+      RowBox[{"-", "0.0007926694071037805`"}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "266", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", 
+      RowBox[{"4", " ", "\[Pi]"}]}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellChangeTimes->{3.535895063028502*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InitialSpin", "[", 
+  RowBox[{"run", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535895067819263*^9, 3.535895075257122*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[\\\"Cannot find file \
+ihspin_hn_0.asc in run bbh-git\\\"]\\)\[NoBreak] returned to top level. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", \
+ButtonNote -> \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.535895071272217*^9, 3.535895075540452*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{
+  "Throw", "[", "\<\"Cannot find file ihspin_hn_0.asc in run bbh-git\"\>", 
+   "]"}], "]"}]], "Output",
+ CellChangeTimes->{{3.5358950712734547`*^9, 3.53589507554322*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SpinAngle", "[", 
+  RowBox[{"run", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535895067819263*^9, 3.535895075257122*^9}, {
+  3.535895112654005*^9, 3.535895115216097*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[\\\"Cannot find file \
+ihspin_hn_0.asc in run bbh-git\\\"]\\)\[NoBreak] returned to top level. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", \
+ButtonNote -> \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.535895071272217*^9, 3.535895075540452*^9}, 
+   3.535895115624949*^9}],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{
+  "Throw", "[", "\<\"Cannot find file ihspin_hn_0.asc in run bbh-git\"\>", 
+   "]"}], "]"}]], "Output",
+ CellChangeTimes->{{3.5358950712734547`*^9, 3.53589507554322*^9}, 
+   3.5358951156275167`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InitialSpinAngle", "[", 
+  RowBox[{"run", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.535895067819263*^9, 3.535895075257122*^9}, {
+  3.535895112654005*^9, 3.5358951224312763`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Throw", "::", "nocatch"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Uncaught \[NoBreak]\\!\\(Throw[\\\"Cannot find file \
+ihspin_hn_0.asc in run bbh-git\\\"]\\)\[NoBreak] returned to top level. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Throw/nocatch\\\", \
+ButtonNote -> \\\"Throw::nocatch\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.535895071272217*^9, 3.535895075540452*^9}, {
+  3.535895115624949*^9, 3.535895122779711*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{
+  "Throw", "[", "\<\"Cannot find file ihspin_hn_0.asc in run bbh-git\"\>", 
+   "]"}], "]"}]], "Output",
+ CellChangeTimes->{{3.5358950712734547`*^9, 3.53589507554322*^9}, {
+  3.5358951156275167`*^9, 3.5358951227824306`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{717, 970},
+WindowMargins->{{Automatic, 221}, {Automatic, 90}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 31, 0, 76, "Title"],
+Cell[613, 24, 104, 5, 26, "Text"],
+Cell[720, 31, 61, 0, 26, "Text"],
+Cell[CellGroupData[{
+Cell[806, 35, 118, 2, 27, "Input"],
+Cell[CellGroupData[{
+Cell[949, 41, 236, 4, 20, "Print"],
+Cell[1188, 47, 236, 4, 20, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[1451, 55, 200, 4, 27, "Input"],
+Cell[CellGroupData[{
+Cell[1676, 63, 154, 3, 27, "Input"],
+Cell[1833, 68, 507, 10, 23, "Message"],
+Cell[2343, 80, 219, 5, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2599, 90, 157, 3, 27, "Input"],
+Cell[2759, 95, 508, 10, 23, "Message"],
+Cell[3270, 107, 217, 5, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3524, 117, 219, 4, 27, "Input"],
+Cell[3746, 123, 4707, 83, 213, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8490, 211, 272, 6, 27, "Input"],
+Cell[8765, 219, 1549, 42, 133, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10351, 266, 261, 6, 27, "Input"],
+Cell[10615, 274, 1937, 48, 88, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12589, 327, 224, 5, 27, "Input"],
+Cell[12816, 334, 436, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13289, 351, 224, 5, 27, "Input"],
+Cell[13516, 358, 414, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13967, 375, 229, 5, 27, "Input"],
+Cell[14199, 382, 437, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14673, 399, 229, 5, 27, "Input"],
+Cell[14905, 406, 411, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15353, 423, 226, 5, 27, "Input"],
+Cell[15582, 430, 577, 18, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16196, 453, 243, 5, 27, "Input"],
+Cell[16442, 460, 541, 16, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17020, 481, 235, 5, 27, "Input"],
+Cell[17258, 488, 440, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17735, 505, 342, 8, 27, "Input"],
+Cell[18080, 515, 706, 20, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18823, 540, 221, 5, 27, "Input"],
+Cell[19047, 547, 438, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19522, 564, 231, 5, 27, "Input"],
+Cell[19756, 571, 388, 11, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20181, 587, 195, 4, 27, "Input"],
+Cell[20379, 593, 435, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20851, 610, 188, 4, 27, "Input"],
+Cell[21042, 616, 385, 12, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21464, 633, 155, 3, 27, "Input"],
+Cell[21622, 638, 532, 10, 23, "Message"],
+Cell[22157, 650, 218, 5, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22412, 660, 202, 4, 27, "Input"],
+Cell[22617, 666, 558, 11, 23, "Message"],
+Cell[23178, 679, 246, 6, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23461, 690, 211, 4, 27, "Input"],
+Cell[23675, 696, 581, 11, 23, "Message"],
+Cell[24259, 709, 271, 6, 27, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

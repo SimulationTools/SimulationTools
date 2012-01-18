@@ -1,0 +1,318 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Project: nrmma", "Title"],
+
+Cell[TextData[{
+ "Wolfram ",
+ StyleBox["Workbench",
+  FontSlant->"Italic"],
+ " 18-Jan-2012."
+}], "Text"],
+
+Cell["This notebook is created to test the project.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Loading nrmma\"\>"], "Print"],
+
+Cell[BoxData["\<\"Loading h5mma\"\>"], "Print"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh-git\>\""}], ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHCoordinates", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "3"}], ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1079", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", 
+      RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHCoordinate", "[", 
+    RowBox[{"run", ",", "1", ",", "2"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.36`", ",", 
+      RowBox[{"-", "0.00395848513418693`"}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", 
+      RowBox[{"-", "0.0000521420702845417`"}]}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ReadBHTrajectory", "[", "run", "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"6", ",", "0"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1079", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1.9193766584782446`*^-18"}], ",", 
+      RowBox[{"-", "9.012430558785756`*^-19"}]}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{"ReadBHTrajectories", "[", "run", "]"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"3", ",", "0"}], "}"}], ",", 
+      RowBox[{"\[LeftSkeleton]", "1079", "\[RightSkeleton]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "8.9041696569158`*^-6"}], ",", 
+        RowBox[{"-", "0.0000521420702845426`"}]}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHSeparation", "[", "run", "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "6"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.36`", ",", "5.999659116352461`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "4.754721904951303`*^-17"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHPhase", "[", "run", "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1079", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "72.69562316697437`"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHRadius", "[", 
+    RowBox[{"run", ",", "0"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "3"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.36`", ",", "2.9998295581764807`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.000054575886820909566`"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHRadius", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "3"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.36`", ",", "2.9998295581759806`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "0.0000545758868208967`"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHPhaseOfFrequency", "[", "run", "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.003665473326864293`", ",", "0"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1077", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "0.002411180429757157`"}], ",", "72.693594585273`"}], 
+     "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHInclination", "[", "run", "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0.`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.36`", ",", "0.`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.8`", ",", "1.5707963267948966`"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "@", 
+  RowBox[{"ToList", "@", 
+   RowBox[{"ReadBHSpeed", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0.011006294529412965`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1078", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"388.44`", ",", "2.349343701311746`*^-7"}], "}"}]}], "}"}],
+  Short]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"BHCoordinateMergerTime", "[", "run", "]"}]], "Input"],
+
+Cell[BoxData["124.56`"], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InitialSeparation", "[", "run", "]"}]], "Input"],
+
+Cell[BoxData["6"], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InitialPosition", "[", 
+  RowBox[{"run", ",", "0"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3", ",", "0", ",", "0"}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"InitialPosition", "[", 
+  RowBox[{"run", ",", "1"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "3"}], ",", "0", ",", "0"}], "}"}]], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{717, 970},
+WindowMargins->{{Automatic, 221}, {Automatic, 90}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
