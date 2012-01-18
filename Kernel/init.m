@@ -47,6 +47,7 @@ Module[{packages =
   "SimViewRRMHD",
   "SystemStatistics",
   "Tracks",
+  "TwoPunctures",
   "Waveforms"}},
 
   packages = Map[#<>"`"&, packages];
