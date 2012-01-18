@@ -13,46 +13,12 @@ ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses 
 ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";
 InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing the initial coordinate position of BH numbered bh";
 
-FinestGridSpacing::usage = "FinestGridSpacing[run] computes the grid spacing on the finest refinement level in run.";
-ReadCoarseGridSpacing::usage = "ReadCoarseGridSpacing[run] reads the coarse grid spacing for run.";
-ReadCoarseTimeStep::usage = "ReadCoarseTimeStep[run] reads the coarse time step for run.";
-ReadAngularPoints::usage = "ReadAngularPoints[run] reads the number of angular points in the (Llama) spherical patches of run.";
-ReadInnerBoundary::usage = "ReadInnerBoundary[run] reads the position of the inner boundary of the (Llama) spherical patches of run.";
-ReadOuterBoundary::usage = "ReadOuterBoundary[run] reads the position of the outer boundary of the (Llama) spherical patches of run.";
-ReadFineTimeStep::usage = "ReadFineTimeStep[run] reads the finest possible time step for run corresponding to a single iteration.";
-ReadTimeRange::usage = "ReadTimeRange[run] reads the range of times at which data is available for run.";
-GridSpacingOnLevel::usage = "GridSpacingOnLevel[run, level] reads the grid spacing on a refinement level in run.";
-BoxRadiiOnLevel::usage = "BoxRadiiOnLevel[run, level] reads the radii of the refinement boxes on a refinement level in run.";
-BoxRadiiForCentre::usage = "BoxRadiiForCentre[run, centre] reads the radii of the refinement boxes around centre (as specified by CarpetRegrid2) in run.";
-CountRefinementLevels::usage = "CountRefinementLevels[run] reads the maximum possible number of refinement levels in run.
-CountRefinementLevels[run, centre] reads the number of active refinement levels for centre in run.";
-RefinementLevels::usage = "RefinementLevels[run] returns a list containing the refinement level numbers present in run.";
-TimeRefinementFactors::usage = "TimeRefinementFactors[run] reads the time refinement factors for run.";
-CourantFactorOnLevel::usage = "CourantFactorOnLevel[run, level] computes the Courant factor on level for run.";
-LevelExistsEvery::usage = "LevelExistsEvery[run, level] computes how often (in iterations) a refinement level exists in run.";
-RadialPoints::usage = "RadialPoints[run, level] computes the number of radial points on a refinement level in run.";
-GridStructure::usage = "GridStructure[run] computes the grid structure for run. For each refinement level it returns a list of the form {level, box radii, coarse spacing, number of points, courant factor, level exists every}.";
 
 ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian constraint in run.";
 FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
 
 Data;
 FitFunction;
-GridSpacingOnLevel;
-BoxRadiiOnLevel;
-BoxRadiiForCentre;
-RefinementLevels;
-GridStructure;
-FinestGridSpacing;
-TimeRefinementFactors;
-CourantFactorOnLevel;
-LevelExistsEvery;
-RadialPoints;
-ReadCoarseGridSpacing;
-ReadAngularPoints;
-ReadInnerBoundary;
-ReadOuterBoundary;
-CountRefinementLevels;
 
 ReadPunctureADMMasses;
 ReadPunctureADMMasses2;
@@ -246,112 +212,6 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
   ];
 
 
-GridSpacingOnLevel[runName_, l_] :=
-  Module[{h0},
-    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
-      LookupParameter[runName, "Coordinates::h_cartesian"]]];
-    h0 / 2^l
-  ];
-
-ReadCoarseGridSpacing[runName_] :=
-  Module[{h0},
-    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
-      LookupParameter[runName, "Coordinates::h_cartesian", $Failed]]]
-  ];
-
-ReadAngularPoints[runName_] :=
-  Module[{},
-    ToExpression[LookupParameter[runName, "Coordinates::n_angular"]]
-  ];
-
-ReadInnerBoundary[runName_] :=
-  Module[{},
-    ToExpression[LookupParameter[runName, "Coordinates::sphere_inner_radius"]]
-  ];
-
-ReadOuterBoundary[runName_] :=
-  Module[{},
-    ToExpression[LookupParameter[runName, "Coordinates::sphere_outer_radius"]]
-  ];
-
-FinestGridSpacing[runName_] :=
-  GridSpacingOnLevel[runName, Max[RefinementLevels[runName]]];
-
-BoxRadiiOnLevel[runName_, l_] :=
-  Module[{params, coarseRadius},
-    If[l == 0,
-      coarseRadius = LookupParameter[runName, "CoordBase::xmax",
-            {ReadInnerBoundary[runName], ReadOuterBoundary[runName]}];
-      If[Head[coarseRadius != List], coarseRadius = {coarseRadius}];
-      Return[coarseRadius]
-    ];
-    params = FindParameters[runName, "regridboxes::centre_*_radius" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"];
-
-    If[params === {},
-      params = FindParameters[runName, "carpetregrid2::radius_*" ~~ (Whitespace | "") ~~ "["<>ToString[l]<>"]"]];
-
-    Map[ToExpression[LookupParameter[runName, #]] &, params]
-  ];
-
-BoxRadiiForCentre[runName_, c_] :=
-  Module[{params},
-    (* If[l == 0, Return[{ToExpression[LookupParameter[runName, "CoordBase::xmax"]]}]]; *)
-    params = FindParameters[runName, "carpetregrid2::radius_"<>ToString[c] ~~ (Whitespace | "") ~~ "[*]"];
-
-    Prepend[Map[{ToExpression@StringReplace[#, __ ~~ "[" ~~ n__ ~~ "]" -> n],
-         ToExpression[LookupParameter[runName, #]]} &, params], {0, ReadOuterBoundary[runName]}]
-  ];
-
-CountRefinementLevels[runName_String] :=
-  ToExpression[LookupParameter[runName, "Carpet::max_refinement_levels"]];
-
-CountRefinementLevels[runName_String, i_] :=
-  ToExpression[LookupParameter[runName,
-                               "CarpetRegrid2::num_levels_"<>ToString[i]]];
-
-RefinementLevels[runName_String] :=
-  Table[l, {l, 0, CountRefinementLevels[runName]-1}];
-
-RadialPoints[runName_String, level_Integer] :=
-   Round[BoxRadiiOnLevel[runName, level] / GridSpacingOnLevel[runName, level]];
-
-GridStructure[runName_String] :=
-  Map[{#, BoxRadiiOnLevel[runName, #],
-       GridSpacingOnLevel[runName, #], 
-       RadialPoints[runName, #],
-       CourantFactorOnLevel[runName, #],
-       LevelExistsEvery[runName, #]} &, RefinementLevels[runName]];
-
-ReadCoarseTimeStep[runName_] :=
-  Module[{dt},
-    dt = ToExpression[LookupParameter[runName, "Time::timestep", $Failed]]
-  ];
-
-TimeRefinementFactors[runName_String] :=
-  Module[{s1, s2, s3s, facs},
-    s1 = LookupParameter[runName, "Carpet::time_refinement_factors"];
-    s2 = StringCases[s1, ("[" ~~ facs__ ~~ "]") -> facs][[1]];
-    s3s = StringSplit[s2, ","];
-    facs = Map[ToExpression, s3s];
-    Return[facs];
-  ];
-
-TimeRefinementFactor[runName_String, level_] :=
-  TimeRefinementFactors[runName][[level+1]];
-
-CourantFactorOnLevel[runName_String, level_] :=
-  Module[{dtfac, trf, srf},
-    dtfac = ToExpression[LookupParameter[runName, "Time::dtfac",
-        ReadCoarseTimeStep[runName] / ReadCoarseGridSpacing[runName]]];
-    trf = TimeRefinementFactor[runName, level];
-    srf = 2^level;
-    Return[dtfac * srf/trf];
-  ];
-
-LevelExistsEvery[runName_String, level_Integer] :=
-  TimeRefinementFactor[runName, CountRefinementLevels[runName]-1] / 
-    TimeRefinementFactor[runName, level];
-
 RunCost[length_, speed_, nProcs_] :=
  {CPUHours -> nProcs length/speed // N,
   WallTimeDays -> length/speed/24 // N};
@@ -391,21 +251,6 @@ DefineMemoFunction[ReadPunctureADMMasses[run_String],
 DefineMemoFunction[ReadPunctureADMMassParameters[run_String],
   ToExpression/@{LookupParameter[run, "TwoPunctures::target_M_plus"], 
    LookupParameter[run, "TwoPunctures::target_M_minus"]}];
-
-ReadFineTimeStep[run_] :=
- Module[{pairs, it1, it2, t1, t2, dtFine},
-  pairs = 
-   Take[ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}], 
-    2];
-  {{it1, t1}, {it2, t2}} = pairs;
-  dtFine = (t2 - t1)/(it2 - it1)];
-
-ReadTimeRange[run_] :=
-  Module[{pairs, first, last},
-   pairs = ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}];
-   first = pairs[[1, 2]];
-   last = pairs[[-1, 2]];
-   {first, last}];
 
 
 Options[FitEcc] = {ReturnValue -> FittedFunction};
