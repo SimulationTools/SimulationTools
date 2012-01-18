@@ -9,7 +9,6 @@ BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable
   "SystemStatistics`", "Timers`"}];
 
 ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian constraint in run.";
-FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
 
 Data;
 FitFunction;
@@ -34,84 +33,6 @@ RunDirectory := Global`RunDirectory;
 
 
 
-
-
-zeroAfter[l_, n_] :=
- Module[{len},
-  len = Length[l];
-  Join[Take[l, n], Table[0, {i, n + 1, len}]]];
-
-(* FilterDCT[f_List, nModes_Integer] := *)
-(*  Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil}, *)
-(*   times = Map[First, f]; *)
-(*   data = Map[Last, f]; *)
-(*   dataDCT = FourierDCT[data, 2]; *)
-(*   dataFilDCT = zeroAfter[dataDCT, nModes]; *)
-(*   dataFil = FourierDCT[dataFilDCT, 3]; *)
-(*   fFil = MapThread[List, {times, dataFil}]; *)
-(*   Return[fFil]; *)
-(*   ]; *)
-
-(* PartitionTable[d_DataTable, {tMin_?NumberQ, tMax_?NumberQ}] := *)
-(*  Module[{before, middle, after, t1, t2}, *)
-(*   {t1,t2} = DataTableRange[d]; *)
-(*   before = DataTableInterval[d, t1, tMin]; *)
-(*   middle = DataTableInterval[d, tMin, tMax]; *)
-(*   after = DataTableInterval[d, tMax, t2]; *)
-(*   Return[{before, middle, after}] *)
-(*   ]; *)
-
-(* FilterDCT[f_List, nModes_Integer, *)
-(*    range1 : {tMin1_?NumberQ, tMax1_?NumberQ}, *)
-(*    range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] := *)
-(*   Module[{filtered, t1, t2, t3}, *)
-(*    filtered =  *)
-(*     DataTableInterval[FilterDCT[DataTableInterval[f, range1], nModes], range2]; *)
-(*    {t1, t2, t3} = PartitionTable[f, range2]; *)
-(*    Return[Join[t1, filtered, t3]]]; *)
-
-TableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
-  Select[t, 
-   (#[[1]] >= tStart && #[[1]] < tEnd) &];
-
-TableRange[t_List, range_List] :=
-  TableRange[t,range[[1]],range[[2]]];
-
-FilterDCT[f_List, nModes_Integer] :=
- Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil},
-  times = Map[First, f];
-  data = Map[Last, f];
-  dataDCT = FourierDCT[data, 2];
-  dataFilDCT = zeroAfter[dataDCT, nModes];
-  dataFil = FourierDCT[dataFilDCT, 3];
-  fFil = MapThread[List, {times, dataFil}];
-  Return[fFil];
-  ];
-
-
-PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
- Module[{before, middle, after},
-  before = TableRange[t, First[t][[1]], tMin];
-  middle = TableRange[t, tMin, tMax];
-  after = TableRange[t, tMax, Last[t][[1]] + 1];
-  Return[{before, middle, after}]
-  ];
-
-FilterDCT[f_DataTable,  nModes_Integer,
-   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
-   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
-  Module[{},
-    MakeDataTable[FilterDCT[ToList[f], nModes, range1, range2]]
-  ];
-
-FilterDCT[f_List, nModes_Integer,
-   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
-   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
-  Module[{filtered, t1, t2, t3},
-   filtered = 
-    TableRange[FilterDCT[TableRange[f, range1], nModes], range2];
-   {t1, t2, t3} = PartitionTable[f, range2];
-   Return[Join[t1, filtered, t3]]];
 
 (*--------------------------------------------------------------------
   Model fitting
