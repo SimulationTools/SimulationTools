@@ -28,7 +28,9 @@ packages =
   "SimView",
   "SimViewRRMHD",
   "SystemStatistics",
-  "Tracks"};
+  "Tracks",
+  "TwoPunctures",
+  "Waveforms"};
 
 documentedSymbols[package_String] :=
   Select[Names[package<>"`*"], StringQ[ToExpression[#<>"::usage"]] &];
