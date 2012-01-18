@@ -188,11 +188,11 @@ SchmidtAngle[run_, t_, rad_: Automatic] :=
  Module[{psi4, psi4l2m2, psi4l2mm2, th1},
   psi4 = ReconstructPsi4[run, t, rad];
   psi4l2m2[th1_?NumericQ, ph1_?NumericQ] := 
-   Abs[NIntegrate[rad Sin[th] psi4[th - th1, ph - ph1] 
+   Abs[NIntegrate[rad Sin[th] psi4[th - th1, ph - ph1] *
      Conjugate[SpinWeightedSphericalHarmonic[-2, 2, 2, th, ph]],
      {th, 0, Pi}, {ph, 0, 2 Pi}]];
   psi4l2mm2[th1_?NumericQ, ph1_?NumericQ] := 
-   Abs[NIntegrate[rad Sin[th] psi4[th - th1, ph - ph1]
+   Abs[NIntegrate[rad Sin[th] psi4[th - th1, ph - ph1] *
      Conjugate[SpinWeightedSphericalHarmonic[-2, 2, -2, th, ph]],
      {th, 0, Pi}, {ph, 0, 2 Pi}]];
   
