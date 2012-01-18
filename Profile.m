@@ -2,6 +2,8 @@
 
 BeginPackage["Profile`"];
 
+Unprotect[Profile];
+ClearAll[Profile];
 Profile::usage = "Profile[name, expression] evaluates expression and adds the elapsed time to ProfileTime[name] and adds one to ProfileCount[name].  See also ClearProfile.";
 ProfileTime;
 ProfileCount;
