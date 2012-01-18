@@ -8,9 +8,6 @@ BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable
   "Horizons`", "Kicks`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
   "SystemStatistics`", "Timers`"}];
 
-InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing the initial coordinate position of BH numbered bh";
-
-
 ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian constraint in run.";
 FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
 
@@ -32,7 +29,6 @@ InitialSpin;
 SpinAngle;
 InitialSpinAngle;
 InitialDimensionlessSpin;
-InitialSeparation;
 
 Begin["`Private`"];
 
@@ -268,13 +264,6 @@ DefineMemoFunction[InitialDimensionlessSpin[run_],
   If[Norm@S0 > Norm@S1,
    S0/mp^2,
    S1/mm^2]]];
-
-
-DefineMemoFunction[InitialSeparation[run_],
-  First@DepVar@ReadBHSeparation[run]];
-
-DefineMemoFunction[InitialPosition[run_, bh_],
-  First@DepVar@ReadBHCoordinates[run, bh]];
 
 End[];
 

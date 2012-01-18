@@ -13,6 +13,8 @@ ReadBHPhaseOfFrequency::usage = "ReadBHPhaseOfFrequency[run] returns a DataTable
 ReadBHInclination::usage = "ReadBHInclination[run] returns a DataTable of the angle in radians made by the relative orbit of black holes 0 and 1 in run with the origin of coordinates.";
 ReadBHSpeed::usage = "ReadBHSpeed[run, i] returns a DataTable of the coordinate speed of the black hole labeled i in run as a function of time.";
 BHCoordinateMergerTime::usage = "BHCoordinateMergerTime[run,eps] returns the time at which the BHs in run reach a separation of eps (eps defaults to 0.01 if omitted).";
+InitialSeparation;
+InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing the initial coordinate position of BH numbered bh";
 
 Begin["`Private`"];
 
@@ -213,6 +215,12 @@ BHCoordinateMergerTime[run_, eps_:0.01] :=
  Module[{sep},
   sep = ReadBHSeparation[run];
   Select[ToList@sep, #[[2]] > eps &][[-1, 1]]]
+
+DefineMemoFunction[InitialSeparation[run_],
+  First@DepVar@ReadBHSeparation[run]];
+
+DefineMemoFunction[InitialPosition[run_, bh_],
+  First@DepVar@ReadBHCoordinates[run, bh]];
 
 End[];
 
