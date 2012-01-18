@@ -274,7 +274,7 @@ Catch[Module[{(*colorrange1,*)planestr,iterations,imageSize},
 
 Options[Movie2d] = Options[ListDensityPlot];
 Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
-	Catch[Module[{colorrange,xmincolorrange,plane,data1,ndims,datarange,plotrange,imagesize,xmaxcolorrange,iterations,fancyplot,xmin,xmax},
+	Catch[Module[{colorrange,xmincolorrange,plane,data1,ndims,datarange,plotrange,imagesize,xmaxcolorrange,iterations,xmin,xmax},
 		colorrange=ColorRanges2d[run,var,rfl,function];
 		iterations=ReadIterationsFromRun[{run[[minits[run,var,rfl]]]},var,rfl];
 		plane = If[StringSplit[var,"."][[2]]==="xz","xz",If[StringSplit[var,"."][[2]]==="yz","yz","xy"]];
@@ -314,7 +314,7 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 
 Options[Sequence2d] = Options[ListDensityPlot];
 Sequence2d[path_,run_,var_,rfl_,function_,xmin_,xmax_,opts:OptionsPattern[]]:=
-	Catch[Module[{(*colorrange,*)plane,data1,ndims,datarange,plotrange,imagesize,iterations,fancyplot},
+	Catch[Module[{(*colorrange,*)plane,data1,ndims,datarange,plotrange,imagesize,iterations},
 (*		colorrange=ColorRanges[run,var,rfl,function];*)
 (*		Print["ColorRanges: ",colorrange];*)
 		iterations=ReadIterationsFromRun[{run[[minits[run,var,rfl]]]},var,rfl];

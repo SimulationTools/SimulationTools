@@ -278,7 +278,7 @@ DefineMemoFunction[ReadMultipoleASCII[runName_String, var_String, l_?NumberQ, m_
 ];
 
 DefineMemoFunction[ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
-  Module[{fileName, datasetName, runFiles, files, data, psi4},
+  Module[{datasetName, runFiles, files, data, psi4},
     runFiles = MultipoleHDF5Files[runName, var];
     datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
     files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, runFiles];

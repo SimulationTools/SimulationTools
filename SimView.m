@@ -62,14 +62,14 @@ memoryPlot[runNames_List, size_] :=
      PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n", ImageSize -> size]];
 
 LastOutputTime[run_] :=
-  Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
+  Module[{segs,segInfos,segInfo,lastDate},
     segs = FindRunSegments[run];
     segInfos = segmentInfo/@segs;
     segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
     lastDate = DateList[LastDate/.segInfo]];
 
 LastOutputCoordinateTime[run_] :=
-  Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
+  Module[{segs,segInfos,segInfo},
     segs = FindRunSegments[run];
     segInfos = segmentInfo/@segs;
     segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
@@ -102,7 +102,7 @@ FinishTimeString[run_] :=
 
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
-    freqPsi4, segments, cost, costTable, ampPsi4, grid},
+    segments, cost, costTable, ampPsi4, grid},
   size = {350, 100};
   size = 250;
   speed = Catch[

@@ -230,7 +230,7 @@ ReadCarpetHDF5[file_String, ds_String, opts:OptionsPattern[]] := First[ReadCarpe
 Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
 ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
   Profile["ReadCarpetHDF5Components",
-  Module[{filePrefix, fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components, directory, leaf, leafPrefix},
+  Module[{fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components, directory, leaf, leafPrefix},
     If[FileType[file] === None,
       Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
 
@@ -321,7 +321,7 @@ getRL[run_, var_, rl_] :=
     _, rl];
 
 getMap[run_,var_,map_] :=
-  Module[{m},
+  Module[{},
     If[map === Automatic,
         firstOrNone[ReadMaps[run, var]],
         map

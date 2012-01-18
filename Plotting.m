@@ -406,7 +406,7 @@ FilterPlot[data_, data2p_, omCutOff0_, {t10_, t20_}, opts___] :=
   (* The very high frequencies are never useful, so we go to omMax/4 *)
   data2p = {};
   Manipulate[
-   Module[{nModes, T, om0, maxModes, om1},
+   Module[{nModes, T, om0},
     T = t2 - t1 + 100;
     om0 = 2 Pi/T;
     nModes = Floor[omCutOff/om0];

@@ -145,7 +145,7 @@ ExportAllExtrapolatedStrain[run_String, file_String, mass_, om_] :=
 ];
 
 ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, r_] :=
- Module[{dir, psi4, final, dataset, ext, rad = ToString[r]},
+ Module[{dir, psi4, final, dataset, rad = ToString[r]},
   dir = DirectoryName[file];
   If[dir=!="" && FileType[dir]=!=Directory,
     CreateDirectory[dir];
@@ -195,7 +195,7 @@ ExportAllWaveforms[run_String, file_String, mass_] := Module[{},
 
 (* Local quantities *)
 ExportLocalQuantity[run_String, what_, i_, file_String] :=
- Module[{dir, punc0, punc1, p, spin0, spin1, combined, f, dsName},
+ Module[{dir, f, dsName},
   dir = DirectoryName[file];
   If[dir=!="" && FileType[dir]=!=Directory,
     CreateDirectory[dir];
@@ -358,7 +358,7 @@ ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPatte
 
 Options[ExportSim] = {ExportSimFormat -> "ASCII", ExportOnly -> All};
 ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
-  Module[{dir, h, n, format, ext, all, export},
+  Module[{dir, h, n, ext, all, export},
 
     h = ReadCoarseGridSpacing[run];
     n = Round[0.6/(h/2^5)];
