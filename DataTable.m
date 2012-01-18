@@ -42,6 +42,13 @@ DataTableListLinePlot;
 
 InvertDataTable;
 DataTableNormL2;
+LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
+LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
+PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
+MaximumValue;
+AbsOfPhase;
+FunctionOfPhase;
+ShiftPhase;
 
 Begin["`Private`"];
 
@@ -525,6 +532,62 @@ DataTable /: Export[file_String, dt_DataTable, type___] := Export[file, Flatten/
 
 InvertDataTable[d_DataTable] :=
   MakeDataTable[MapThread[List,{DepVar[d],IndVar[d]}]];
+
+LocateMaximumPoint[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, t1, t2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{t_, f_}] :=
+   If[f > fMax, fMax = f; tMax = t];
+  Scan[maxFind, l];
+  Return[tMax]];
+
+LocateMaximum[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, fn, t1, t2, t, tMax2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{time_, f_}] :=
+   If[f > fMax, fMax = f; tMax = time];
+  Scan[maxFind, l];
+  fn = Interpolation[d];
+  tMax2 = 
+   t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
+       tMax}][[2]];
+  Return[tMax2]];
+
+MaximumValue[d_DataTable] :=
+  Interpolation[d][LocateMaximum[d]];
+
+
+AbsOfPhase[d_DataTable, {t1_, t2_}] :=
+  FunctionOfPhase[Abs[d], Phase[d], {t1,t2}];
+
+FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
+ Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
+  phiOft = ToList[DataTableInterval[p,{t1,t2}]];
+  tOfphi = Map[Reverse, phiOft];
+  tOfphiFn = Interpolation[tOfphi];
+  {phiMin,phiMax} = Sort[{First[tOfphi][[1]], Last[tOfphi][[1]]}];
+  dOftFn = Interpolation[d];
+  dOfphiTb = 
+   Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
+  AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
+
+PhaseOfFrequency[psi4_] :=
+ Module[{phase1, freq1, phaseOfFreq1},
+  phase1 = -Phase[psi4];
+  freq1 = NDerivative[phase1];
+  phaseOfFreq1 = 
+   MakeDataTable@
+    MapThread[List, 
+     Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
+  ];
+
+ShiftPhase[d_DataTable, dph_] :=
+  MapData[Exp[I dph] # &, d];
+
 
 End[];
 

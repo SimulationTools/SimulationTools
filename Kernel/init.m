@@ -46,7 +46,8 @@ Module[{packages =
   "SimView",
   "SimViewRRMHD",
   "SystemStatistics",
-  "Tracks"}},
+  "Tracks",
+  "Waveforms"}},
 
   packages = Map[#<>"`"&, packages];
   Unprotect[$Packages];
