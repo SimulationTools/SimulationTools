@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"FilterDCT - nrmma`NR.nb`",
+WindowTitle->"FilterDCT - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,8 +113,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"filterdct", "FILTERDCT"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma DataTable", "status" -> "", "summary" -> 
     "FilterDCT[d, numModes, range1, range2] filters the data in d using a \
 discrete fourier transform, allowing a maximum of numModes modes. Only data \
 in range1 is used in filtering and only data in range2 is actually returned \

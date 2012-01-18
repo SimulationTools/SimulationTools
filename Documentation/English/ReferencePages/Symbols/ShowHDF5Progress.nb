@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`READHDF5.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`READHDF5` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ShowHDF5Progress - nrmma`ReadHDF5.nb`",
+WindowTitle->"ShowHDF5Progress - nrmma`ReadHDF5`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"showhdf5progress", "SHOWHDF5PROGRESS"}, "index" -> True, 
     "label" -> "nrmma`ReadHDF5` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma ReadHDF5.nb", "status" -> "", "summary" -> 
+    "nrmma ReadHDF5", "status" -> "", "summary" -> 
     "ShowHDF5Progress is a boolean variable indicating whether the progress \
 of HDF5 operations should be shown in a progress indicator. This feature \
 requires h5mma.", "synonyms" -> {"showhdf5progress", "SHOWHDF5PROGRESS"}, 

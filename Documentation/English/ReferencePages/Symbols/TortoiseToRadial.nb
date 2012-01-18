@@ -1,7 +1,7 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`COORDINATETRANSFORMATIONS.NB` SYMBOL", "PacletNameCell"], 
-    Cell[TextData[{
+   {Cell["NRMMA`COORDINATETRANSFORMATIONS` SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"TortoiseToRadial - nrmma`CoordinateTransformations.nb`",
+WindowTitle->"TortoiseToRadial - nrmma`CoordinateTransformations`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,8 +115,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"tortoisetoradial", "TORTOISETORADIAL"}, "index" -> True, 
     "label" -> "nrmma`CoordinateTransformations` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma CoordinateTransformations.nb", "status" -> "", 
-    "summary" -> 
+    "paclet" -> "nrmma CoordinateTransformations", "status" -> "", "summary" -> 
     "TortoiseToRadial[rstar_, M] gives the value of the radial coordinate \
 corresponding to the Schwarzschild tortoise coordinate, rstar.", 
     "synonyms" -> {"tortoisetoradial", "TORTOISETORADIAL"}, "title" -> 

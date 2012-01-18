@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ScaledColorFunction - nrmma`DataRegion.nb`",
+WindowTitle->"ScaledColorFunction - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"scaledcolorfunction", "SCALEDCOLORFUNCTION"}, "index" -> 
     True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "nrmma DataRegion", "status" -> "", "summary" -> 
     "ScaledColorFunction[colorscheme, {min, max}] returns a function on the \
 domain [min,max] giving a color in colorscheme.  colorscheme can be any \
 Mathematica named color scheme, for example \"ThermometerColors\", \

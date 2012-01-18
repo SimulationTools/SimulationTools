@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"JunkTime - nrmma`NRExport.nb`",
+WindowTitle->"JunkTime - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"junktime", "JUNKTIME"}, "index" -> 
     True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "nrmma NRExport", "status" -> "", "summary" -> 
     "JunkTime is an option for ExportExtrapolatedWaveform, \
 ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long \
 the junk radiation lasts.", "synonyms" -> {"junktime", "JUNKTIME"}, "title" -> 

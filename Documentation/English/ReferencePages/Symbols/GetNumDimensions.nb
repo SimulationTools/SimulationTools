@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"GetNumDimensions - nrmma`DataRegion.nb`",
+WindowTitle->"GetNumDimensions - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"getnumdimensions", "GETNUMDIMENSIONS"}, "index" -> True, 
     "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "nrmma DataRegion", "status" -> "", "summary" -> 
     "GetNumDimensions[d] returns the dimensionality of a DataRegion d.", 
     "synonyms" -> {"getnumdimensions", "GETNUMDIMENSIONS"}, "title" -> 
     "GetNumDimensions", "windowTitle" -> "GetNumDimensions", "type" -> 

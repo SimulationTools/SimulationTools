@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`ASCII.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`ASCII` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -93,9 +93,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadCarpetASCIIScalarFromRun - nrmma`Ascii.nb`",
+WindowTitle->"ReadCarpetASCIIScalarFromRun - nrmma`Ascii`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -119,7 +119,7 @@ TaggingRules->{
     "keywords" -> {
      "readcarpetasciiscalarfromrun", "READCARPETASCIISCALARFROMRUN"}, "index" -> 
     True, "label" -> "nrmma`Ascii` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Ascii.nb", "status" -> "", "summary" -> 
+    "nrmma Ascii", "status" -> "", "summary" -> 
     "UNTESTED!! ReadCarpetASCIIScalarFromRun[run, filename, rl, dir] reads a \
 1D CarpetIOASCII output file from filename in run.  The function returns a \
 single refinement level rl from the file.  It assumes that the output is in \

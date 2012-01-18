@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`KICKS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`KICKS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"SpinWeightedSphericalHarmonic - nrmma`Kicks.nb`",
+WindowTitle->"SpinWeightedSphericalHarmonic - nrmma`Kicks`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
     "keywords" -> {
      "spinweightedsphericalharmonic", "SPINWEIGHTEDSPHERICALHARMONIC"}, 
     "index" -> True, "label" -> "nrmma`Kicks` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Kicks.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma Kicks", "status" -> "", "summary" -> 
     "SpinWeightedSphericalHarmonic[s, l, m, \[Theta], \[Phi]] gives the spin \
 weighted spherical harmonic.", 
     "synonyms" -> {

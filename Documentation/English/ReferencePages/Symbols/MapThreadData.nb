@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"MapThreadData - nrmma`DataTable.nb`",
+WindowTitle->"MapThreadData - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"mapthreaddata", "MAPTHREADDATA"}, 
     "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
-     "paclet" -> "nrmma DataTable.nb", "status" -> "", "summary" -> 
+     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
     "MapThreadData[f, {d, ...}] threads f over the independent variables in \
 the DataTable objects d, much like MapThread for lists.", 
     "synonyms" -> {"mapthreaddata", "MAPTHREADDATA"}, "title" -> 

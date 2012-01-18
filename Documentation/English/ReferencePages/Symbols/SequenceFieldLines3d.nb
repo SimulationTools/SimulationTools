@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"SequenceFieldLines3d - nrmma`FieldLines.nb`",
+WindowTitle->"SequenceFieldLines3d - nrmma`FieldLines`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"sequencefieldlines3d", "SEQUENCEFIELDLINES3D"}, "index" -> 
     True, "label" -> "nrmma`FieldLines` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma FieldLines.nb", "status" -> "", "summary" -> 
+    "nrmma FieldLines", "status" -> "", "summary" -> 
     "SequenceFieldLines3d[path,runlist,field,rfl,plane,function,xmin1,xmax1,\
 opts] \n\tCreate a sequence of figures of a 3D variable with its field lines \
 with a fixed \n\tcolor range. Plane takes values from 0 to 2.", 

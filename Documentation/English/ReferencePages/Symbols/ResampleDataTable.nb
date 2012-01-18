@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ResampleDataTable - nrmma`DataTable.nb`",
+WindowTitle->"ResampleDataTable - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"resampledatatable", "RESAMPLEDATATABLE"}, "index" -> True,
      "label" -> "nrmma`DataTable` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataTable.nb", "status" -> "", "summary" -> 
+    "nrmma DataTable", "status" -> "", "summary" -> 
     "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy of DataTable d in \
 which the data has been interpolated with order p and runs from t1 to t2 with \
 spacing dx.  p defaults to 3 if not specified, as in Interpolation.", 

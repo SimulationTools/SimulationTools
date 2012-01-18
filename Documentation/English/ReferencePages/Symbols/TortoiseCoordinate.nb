@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"TortoiseCoordinate - nrmma`NR.nb`",
+WindowTitle->"TortoiseCoordinate - nrmma`Waveforms`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,8 +115,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"tortoisecoordinate", "TORTOISECOORDINATE"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Waveforms", "status" -> "", "summary" -> 
     "TortoiseCoordinate[r, M] gives the tortoise coordinate corresponding to \
 radius r assuming a Schwarzschild black hole of mass M. The constant of \
 integration is chosen so that the tortoise and radial coordinate coincide at \

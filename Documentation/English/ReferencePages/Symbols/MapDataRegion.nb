@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"MapDataRegion - nrmma`DataRegion.nb`",
+WindowTitle->"MapDataRegion - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"mapdataregion", "MAPDATAREGION"}, 
     "index" -> True, "label" -> "nrmma`DataRegion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma DataRegion", "status" -> "", "summary" -> 
     "MapDataRegion[f,d] returns a DataRegion of the same shape as the \
 DataRegion d whose data is f applied to the data in d.", 
     "synonyms" -> {"mapdataregion", "MAPDATAREGION"}, "title" -> 

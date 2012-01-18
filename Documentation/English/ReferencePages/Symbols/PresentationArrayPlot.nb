@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`PLOTTING.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`PLOTTING` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"PresentationArrayPlot - nrmma`Plotting.nb`",
+WindowTitle->"PresentationArrayPlot - nrmma`Plotting`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"presentationarrayplot", "PRESENTATIONARRAYPLOT"}, "index" -> 
     True, "label" -> "nrmma`Plotting` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Plotting.nb", "status" -> "", "summary" -> 
+    "nrmma Plotting", "status" -> "", "summary" -> 
     "PresentationArrayPlot[d] plots a 2-dimensional DataRegion using \
 ArrayPlot.  The data range of the plot is determined automatically from the \
 DataRegion.  The plot style is designed to be more attractive than the \

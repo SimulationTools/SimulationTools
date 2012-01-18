@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadMultipoleHDF5 - nrmma`NR.nb`",
+WindowTitle->"ReadMultipoleHDF5 - nrmma`Waveforms`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,8 +114,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"readmultipolehdf5", "READMULTIPOLEHDF5"}, "index" -> True,
-     "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+     "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Waveforms", "status" -> "", "summary" -> 
     "ReadMultipoleHDF5[run, var, l, m, r] returns a DataTable of the l,m mode \
 of var at radius r from run using the HDF5 output of the Multipole thorn.", 
     "synonyms" -> {"readmultipolehdf5", "READMULTIPOLEHDF5"}, "title" -> 

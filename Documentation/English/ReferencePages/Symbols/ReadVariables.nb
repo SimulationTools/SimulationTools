@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CARPETHDF5.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`CARPETHDF5` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadVariables - nrmma`CarpetHDF5.nb`",
+WindowTitle->"ReadVariables - nrmma`CarpetHDF5`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readvariables", "READVARIABLES"}, 
     "index" -> True, "label" -> "nrmma`CarpetHDF5` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma CarpetHDF5.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma CarpetHDF5", "status" -> "", "summary" -> 
     "ReadVariables[run, var] reads the variable names present in the \
 CarpetHDF5 file named var in the directory run.", 
     "synonyms" -> {"readvariables", "READVARIABLES"}, "title" -> 

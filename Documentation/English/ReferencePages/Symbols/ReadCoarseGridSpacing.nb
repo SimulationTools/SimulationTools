@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadCoarseGridSpacing - nrmma`NR.nb`",
+WindowTitle->"ReadCoarseGridSpacing - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,8 +113,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"readcoarsegridspacing", "READCOARSEGRIDSPACING"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`Grids` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Grids", "status" -> "", "summary" -> 
     "ReadCoarseGridSpacing[run] reads the coarse grid spacing for run.", 
     "synonyms" -> {"readcoarsegridspacing", "READCOARSEGRIDSPACING"}, "title" -> 
     "ReadCoarseGridSpacing", "windowTitle" -> "ReadCoarseGridSpacing", "type" -> 

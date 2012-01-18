@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"NormL2 - nrmma`DataRegion.nb`",
+WindowTitle->"NormL2 - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"norml2", "NORML2"}, "index" -> True,
      "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "nrmma DataRegion", "status" -> "", "summary" -> 
     "NormL2[d] returns the L2,dx norm of the points in the DataRegion d.  \
 This is the discrete approximation to the L2 norm.", 
     "synonyms" -> {"norml2", "NORML2"}, "title" -> "NormL2", "windowTitle" -> 

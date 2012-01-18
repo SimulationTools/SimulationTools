@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"Div - nrmma`DataTable.nb`",
+WindowTitle->"Div - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"div", "DIV"}, "index" -> True, 
     "label" -> "nrmma`DataTable` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataTable.nb", "status" -> "", "summary" -> 
+    "nrmma DataTable", "status" -> "", "summary" -> 
     "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the \
 dependent variables in d1 and d2 have been divided.  The DataTables are \
 resampled and intersected in order to give a useful result if the ranges or \

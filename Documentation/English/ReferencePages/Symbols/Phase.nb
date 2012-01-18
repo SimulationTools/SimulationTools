@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"Phase - nrmma`DataTable.nb`",
+WindowTitle->"Phase - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"phase", "PHASE"}, "index" -> True, 
     "label" -> "nrmma`DataTable` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataTable.nb", "status" -> "", "summary" -> 
+    "nrmma DataTable", "status" -> "", "summary" -> 
     "Phase[d] gives the phase of the complex variable in DataTable d.  The \
 resulting phase will be continuous for smooth enough input data.", 
     "synonyms" -> {"phase", "PHASE"}, "title" -> "Phase", "windowTitle" -> 

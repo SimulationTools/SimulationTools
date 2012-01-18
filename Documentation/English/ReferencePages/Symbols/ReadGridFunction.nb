@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CARPETHDF5.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`CARPETHDF5` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -95,9 +95,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadGridFunction - nrmma`CarpetHDF5.nb`",
+WindowTitle->"ReadGridFunction - nrmma`CarpetHDF5`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -120,7 +120,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readgridfunction", "READGRIDFUNCTION"}, "index" -> True, 
     "label" -> "nrmma`CarpetHDF5` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma CarpetHDF5.nb", "status" -> "", "summary" -> 
+    "nrmma CarpetHDF5", "status" -> "", "summary" -> 
     "ReadGridFunction[run, var, it, rl] reads a grid function from the \
 CarpetHDF5 file named var in the directory run and returns it as a DataRegion \
 object.  The iteration is given by it, and the refinement level by rl (rl \

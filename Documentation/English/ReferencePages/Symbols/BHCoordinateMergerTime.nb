@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"BHCoordinateMergerTime - nrmma`BHCoordinates.nb`",
+WindowTitle->"BHCoordinateMergerTime - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"bhcoordinatemergertime", "BHCOORDINATEMERGERTIME"}, 
     "index" -> True, "label" -> "nrmma`BHCoordinates` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "BHCoordinateMergerTime[run,eps] returns the time at which the BHs in run \
 reach a separation of eps (eps defaults to 0.01 if omitted).", 
     "synonyms" -> {"bhcoordinatemergertime", "BHCOORDINATEMERGERTIME"}, 

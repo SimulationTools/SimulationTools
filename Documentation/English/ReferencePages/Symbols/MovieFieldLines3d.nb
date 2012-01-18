@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"MovieFieldLines3d - nrmma`FieldLines.nb`",
+WindowTitle->"MovieFieldLines3d - nrmma`FieldLines`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"moviefieldlines3d", "MOVIEFIELDLINES3D"}, "index" -> True,
      "label" -> "nrmma`FieldLines` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma FieldLines.nb", "status" -> "", "summary" -> 
+    "nrmma FieldLines", "status" -> "", "summary" -> 
     "MovieFieldLines3d[runlist,field,rfl,plane,function,opts] \n\tCreate a \
 movie of the field lines of a 3D variable with fixed color range.\n\tPlane \
 takes values from 0 to 2.", 

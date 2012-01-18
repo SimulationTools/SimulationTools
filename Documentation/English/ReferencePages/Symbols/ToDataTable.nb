@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ToDataTable - nrmma`DataRegion.nb`",
+WindowTitle->"ToDataTable - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"todatatable", "TODATATABLE"}, 
     "index" -> True, "label" -> "nrmma`DataRegion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma DataRegion", "status" -> "", "summary" -> 
     "ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.", 
     "synonyms" -> {"todatatable", "TODATATABLE"}, "title" -> "ToDataTable", 
     "windowTitle" -> "ToDataTable", "type" -> "Symbol", "uri" -> 

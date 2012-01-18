@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadAttribute - nrmma`DataTable.nb`",
+WindowTitle->"ReadAttribute - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readattribute", "READATTRIBUTE"}, 
     "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
-     "paclet" -> "nrmma DataTable.nb", "status" -> "", "summary" -> 
+     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
     "ReadAttribute[d, attrname] returns the value of the named attribute from \
 the DataTable d.", "synonyms" -> {"readattribute", "READATTRIBUTE"}, "title" -> 
     "ReadAttribute", "windowTitle" -> "ReadAttribute", "type" -> "Symbol", 

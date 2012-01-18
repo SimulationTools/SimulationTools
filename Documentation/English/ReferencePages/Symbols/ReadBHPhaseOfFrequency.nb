@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -92,9 +92,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHPhaseOfFrequency - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHPhaseOfFrequency - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readbhphaseoffrequency", "READBHPHASEOFFREQUENCY"}, 
     "index" -> True, "label" -> "nrmma`BHCoordinates` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHPhaseOfFrequency[run] returns a DataTable of the phase in radians \
 of the relative orbit of black holes 0 and 1 projected into the xy plane as a \
 function of its time derivative.  NB: The independent variable in the \

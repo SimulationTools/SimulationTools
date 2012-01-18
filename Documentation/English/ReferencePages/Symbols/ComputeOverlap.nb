@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAANALYSIS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAANALYSIS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -93,9 +93,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ComputeOverlap - nrmma`DataAnalysis.nb`",
+WindowTitle->"ComputeOverlap - nrmma`DataAnalysis`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"computeoverlap", "COMPUTEOVERLAP"}, 
     "index" -> True, "label" -> "nrmma`DataAnalysis` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataAnalysis.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma DataAnalysis", "status" -> "", "summary" -> 
     "ComputeOverlap[wf1, wf2, s, f1, f2, M, pad] computes the (maximized over \
 phase and time shift) overlap of the DataTables wf1 and wf2 (assumed to \
 contain the value of  \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)) over the \

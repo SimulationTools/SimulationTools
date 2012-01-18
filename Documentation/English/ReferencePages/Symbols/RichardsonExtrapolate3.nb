@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CONVERGENCE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`CONVERGENCE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"RichardsonExtrapolate3 - nrmma`Convergence.nb`",
+WindowTitle->"RichardsonExtrapolate3 - nrmma`Convergence`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"richardsonextrapolate3", "RICHARDSONEXTRAPOLATE3"}, 
     "index" -> True, "label" -> "nrmma`Convergence` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma Convergence.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma Convergence", "status" -> "", "summary" -> 
     "RichardsonExtrapolate3[{f1, f2, f3}, {h1, h2, h3}, p] gives the order p \
 Richardson extrapolant of f1, f2 and f3 at h = 0 assuming that f[h] = O[h^p]. \
 f1, f2 and f3 can either be real numbers or DataTables, and the returned \

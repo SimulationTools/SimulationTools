@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"IndVar - nrmma`DataTable.nb`",
+WindowTitle->"IndVar - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"indvar", "INDVAR"}, "index" -> True,
      "label" -> "nrmma`DataTable` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataTable.nb", "status" -> "", "summary" -> 
+    "nrmma DataTable", "status" -> "", "summary" -> 
     "IndVar[d] returns the independent variable of the DataTable d.", 
     "synonyms" -> {"indvar", "INDVAR"}, "title" -> "IndVar", "windowTitle" -> 
     "IndVar", "type" -> "Symbol", "uri" -> "nrmma/ref/IndVar"}, 

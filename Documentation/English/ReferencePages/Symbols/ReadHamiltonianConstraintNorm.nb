@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NR` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadHamiltonianConstraintNorm - nrmma`NR.nb`",
+WindowTitle->"ReadHamiltonianConstraintNorm - nrmma`NR`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
     "keywords" -> {
      "readhamiltonianconstraintnorm", "READHAMILTONIANCONSTRAINTNORM"}, 
     "index" -> True, "label" -> "nrmma`NR` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NR.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma NR", "status" -> "", "summary" -> 
     "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian \
 constraint in run.", 
     "synonyms" -> {

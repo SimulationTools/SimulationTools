@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportSimFormat - nrmma`NRExport.nb`",
+WindowTitle->"ExportSimFormat - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"exportsimformat", "EXPORTSIMFORMAT"}, "index" -> True, 
     "label" -> "nrmma`NRExport` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportSimFormat is an option for ExportSim which specifies the format to \
 use. Possible choices are \"ASCII\" and \"HDF5\".", 
     "synonyms" -> {"exportsimformat", "EXPORTSIMFORMAT"}, "title" -> 

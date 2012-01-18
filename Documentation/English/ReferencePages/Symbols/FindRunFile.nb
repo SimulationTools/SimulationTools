@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`RUNFILES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`RUNFILES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"FindRunFile - nrmma`RunFiles.nb`",
+WindowTitle->"FindRunFile - nrmma`RunFiles`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"findrunfile", "FINDRUNFILE"}, 
     "index" -> True, "label" -> "nrmma`RunFiles` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma RunFiles.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma RunFiles", "status" -> "", "summary" -> 
     "FindRunFile[run, filename] returns a list containing the full names of \
 files named filename in the different segments of run.", 
     "synonyms" -> {"findrunfile", "FINDRUNFILE"}, "title" -> "FindRunFile", 

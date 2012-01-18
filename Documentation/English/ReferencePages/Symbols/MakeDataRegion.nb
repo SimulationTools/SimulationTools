@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -95,9 +95,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"MakeDataRegion - nrmma`DataRegion.nb`",
+WindowTitle->"MakeDataRegion - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -119,7 +119,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"makedataregion", "MAKEDATAREGION"}, 
     "index" -> True, "label" -> "nrmma`DataRegion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma DataRegion", "status" -> "", "summary" -> 
     "MakeDataRegion[data, name, dims, origin, spacing, time] creates a \
 DataRegion object from the passed data.  data is an N-dimensional array \
 (nested list) of numbers.  name is a name to give to the object for display \

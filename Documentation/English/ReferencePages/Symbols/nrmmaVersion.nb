@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NRMMAVERSION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NRMMAVERSION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"nrmmaVersion - nrmma`nrmmaVersion.nb`",
+WindowTitle->"nrmmaVersion - nrmma`nrmmaVersion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"nrmmaversion", "NRMMAVERSION"}, 
     "index" -> True, "label" -> "nrmma`nrmmaVersion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma nrmmaVersion.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma nrmmaVersion", "status" -> "", "summary" -> 
     "nrmmaVersion[] returns version information for the nrmma package.", 
     "synonyms" -> {"nrmmaversion", "NRMMAVERSION"}, "title" -> "nrmmaVersion",
      "windowTitle" -> "nrmmaVersion", "type" -> "Symbol", "uri" -> 

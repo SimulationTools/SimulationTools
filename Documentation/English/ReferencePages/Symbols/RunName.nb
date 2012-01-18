@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"RunName - nrmma`NR.nb`",
+WindowTitle->"RunName - nrmma`Waveforms`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -111,8 +111,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"runname", "RUNNAME"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Waveforms", "status" -> "", "summary" -> 
     "RunName is a DataTable attribute added by ReadYlmDecomp, \
 ReadMultipoleASCII and ReadMultipoleHDF5.", 
     "synonyms" -> {"runname", "RUNNAME"}, "title" -> "RunName", "windowTitle" -> 

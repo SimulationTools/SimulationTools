@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -94,9 +94,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportExtrapolatedStrain - nrmma`NRExport.nb`",
+WindowTitle->"ExportExtrapolatedStrain - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -119,7 +119,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"exportextrapolatedstrain", "EXPORTEXTRAPOLATEDSTRAIN"}, 
     "index" -> True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportExtrapolatedStrain[run, file, mass, l, m, \!\(\*SubscriptBox[\(\
 \[Omega]\), \(0\)]\)] extrapolates the (l,m) mode of the waveform in run \
 assuming mass is the ADM mass and then computes the strain using the \

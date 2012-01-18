@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -92,9 +92,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"EvaluateOnDataRegion - nrmma`DataRegion.nb`",
+WindowTitle->"EvaluateOnDataRegion - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"evaluateondataregion", "EVALUATEONDATAREGION"}, "index" -> 
     True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "nrmma DataRegion", "status" -> "", "summary" -> 
     "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the \
 same coordinates as the DataRegion d with data computed by evaluating expr \
 assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: \

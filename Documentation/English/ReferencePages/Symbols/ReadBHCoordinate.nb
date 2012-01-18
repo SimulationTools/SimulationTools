@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHCoordinate - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHCoordinate - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readbhcoordinate", "READBHCOORDINATE"}, "index" -> True, 
     "label" -> "nrmma`BHCoordinates` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHCoordinate[run, i, d] returns a DataTable containing the d'th \
 coordinate of the black hole labeled i, where i is typically 0 or 1.  d can \
 be 1, 2 or 3 for the x, y and z directions.", 

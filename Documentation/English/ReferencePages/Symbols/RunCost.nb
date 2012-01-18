@@ -1,7 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`SYSTEMSTATISTICS.NB` SYMBOL", "PacletNameCell"], Cell[
-    TextData[{
+   {Cell["NRMMA`SYSTEMSTATISTICS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"RunCost - nrmma`SystemStatistics.nb`",
+WindowTitle->"RunCost - nrmma`SystemStatistics`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"runcost", "RUNCOST"}, "index" -> 
     True, "label" -> "nrmma`SystemStatistics` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma SystemStatistics.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma SystemStatistics", "status" -> "", "summary" -> 
     "RunCost[length, speed, nprocs] returns information about the cost of a \
 run.", "synonyms" -> {"runcost", "RUNCOST"}, "title" -> "RunCost", 
     "windowTitle" -> "RunCost", "type" -> "Symbol", "uri" -> 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHRadius - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHRadius - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readbhradius", "READBHRADIUS"}, 
     "index" -> True, "label" -> "nrmma`BHCoordinates` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHRadius[run, i] returns a DataTable of the coordinate distance of \
 black hole i from the origin as a function of time.", 
     "synonyms" -> {"readbhradius", "READBHRADIUS"}, "title" -> "ReadBHRadius",

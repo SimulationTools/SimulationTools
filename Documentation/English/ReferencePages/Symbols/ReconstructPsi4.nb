@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReconstructPsi4 - nrmma`NR.nb`",
+WindowTitle->"ReconstructPsi4 - nrmma`Waveforms`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,8 +114,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"reconstructpsi4", "RECONSTRUCTPSI4"}, "index" -> True, 
-    "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Waveforms", "status" -> "", "summary" -> 
     "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real \
 arguments (\[Theta] and \[Phi]) which is computed by summing all the \
 spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t \

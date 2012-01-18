@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"GridSpacingOnLevel - nrmma`NR.nb`",
+WindowTitle->"GridSpacingOnLevel - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,8 +113,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"gridspacingonlevel", "GRIDSPACINGONLEVEL"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`Grids` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Grids", "status" -> "", "summary" -> 
     "GridSpacingOnLevel[run, level] reads the grid spacing on a refinement \
 level in run.", "synonyms" -> {"gridspacingonlevel", "GRIDSPACINGONLEVEL"}, 
     "title" -> "GridSpacingOnLevel", "windowTitle" -> "GridSpacingOnLevel", 

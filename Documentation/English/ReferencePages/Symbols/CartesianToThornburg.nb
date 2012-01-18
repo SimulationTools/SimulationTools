@@ -1,7 +1,7 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`COORDINATETRANSFORMATIONS.NB` SYMBOL", "PacletNameCell"], 
-    Cell[TextData[{
+   {Cell["NRMMA`COORDINATETRANSFORMATIONS` SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"CartesianToThornburg - nrmma`CoordinateTransformations.nb`",
+WindowTitle->"CartesianToThornburg - nrmma`CoordinateTransformations`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"cartesiantothornburg", "CARTESIANTOTHORNBURG"}, "index" -> 
     True, "label" -> "nrmma`CoordinateTransformations` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma CoordinateTransformations.nb", "status" -> "", 
+    "en", "paclet" -> "nrmma CoordinateTransformations", "status" -> "", 
     "summary" -> 
     "CartesianToThornburg[{x, y, z}, patch] gives the Thornburg 04 \
 coordinates on the specified patch in terms of cartesian coordinates.", 

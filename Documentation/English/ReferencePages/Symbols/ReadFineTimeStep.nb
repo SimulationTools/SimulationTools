@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadFineTimeStep - nrmma`NR.nb`",
+WindowTitle->"ReadFineTimeStep - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,8 +112,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"readfinetimestep", "READFINETIMESTEP"}, "index" -> True, 
-    "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    "label" -> "nrmma`Grids` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Grids", "status" -> "", "summary" -> 
     "ReadFineTimeStep[run] reads the finest possible time step for run \
 corresponding to a single iteration.", 
     "synonyms" -> {"readfinetimestep", "READFINETIMESTEP"}, "title" -> 

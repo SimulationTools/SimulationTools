@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadYlmDecompModes - nrmma`NR.nb`",
+WindowTitle->"ReadYlmDecompModes - nrmma`Waveforms`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,8 +113,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"readylmdecompmodes", "READYLMDECOMPMODES"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Waveforms", "status" -> "", "summary" -> 
     "ReadYlmDecompModes[run, var] returns a list of the modes of var that are \
 available in run.", 
     "synonyms" -> {"readylmdecompmodes", "READYLMDECOMPMODES"}, "title" -> 

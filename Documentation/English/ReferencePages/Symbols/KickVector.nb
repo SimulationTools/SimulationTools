@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`KICKS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`KICKS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"KickVector - nrmma`Kicks.nb`",
+WindowTitle->"KickVector - nrmma`Kicks`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"kickvector", "KICKVECTOR"}, "index" -> 
     True, "label" -> "nrmma`Kicks` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Kicks.nb", "status" -> "", "summary" -> 
+    "nrmma Kicks", "status" -> "", "summary" -> 
     "Kick[run, r, lMax] computes the vector kick in km/s from the multipolar \
 decomposition of Psi4 on a sphere at radius r using modes up to l = lMax", 
     "synonyms" -> {"kickvector", "KICKVECTOR"}, "title" -> "KickVector", 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`KICKS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`KICKS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -92,9 +92,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"AngularMomentumFlux - nrmma`Kicks.nb`",
+WindowTitle->"AngularMomentumFlux - nrmma`Kicks`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"angularmomentumflux", "ANGULARMOMENTUMFLUX"}, "index" -> 
     True, "label" -> "nrmma`Kicks` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Kicks.nb", "status" -> "", "summary" -> 
+    "nrmma Kicks", "status" -> "", "summary" -> 
     "WARNING: THIS FUNCTION IS IN DEVELOPMENT AND HAS NOT BEEN TESTED. \
 AngularMomentumFlux[run, dir, r, lMax] computes the angular momentum flux as \
 a function of time from the multipolar decomposition of Psi4 on a sphere at \

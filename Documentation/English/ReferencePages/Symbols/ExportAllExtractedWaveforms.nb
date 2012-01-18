@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportAllExtractedWaveforms - nrmma`NRExport.nb`",
+WindowTitle->"ExportAllExtractedWaveforms - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
     "keywords" -> {
      "exportallextractedwaveforms", "EXPORTALLEXTRACTEDWAVEFORMS"}, "index" -> 
     True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportAllExtractedWaveforms[run, file] exports all modes of the waveform \
 in run to file. The output format depends on the file extension which can be \
 either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are \

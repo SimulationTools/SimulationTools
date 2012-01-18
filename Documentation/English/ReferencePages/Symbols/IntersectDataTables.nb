@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"IntersectDataTables - nrmma`DataTable.nb`",
+WindowTitle->"IntersectDataTables - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"intersectdatatables", "INTERSECTDATATABLES"}, "index" -> 
     True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataTable.nb", "status" -> "", "summary" -> 
+    "nrmma DataTable", "status" -> "", "summary" -> 
     "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of \
 DataTables but restricted to having their independent variables within the \
 same range, which is the intersection of the ranges of the inputs.", 

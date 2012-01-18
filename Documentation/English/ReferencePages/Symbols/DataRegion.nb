@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"DataRegion - nrmma`DataRegion.nb`",
+WindowTitle->"DataRegion - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"dataregion", "DATAREGION"}, "index" -> 
     True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "nrmma DataRegion", "status" -> "", "summary" -> 
     "DataRegion[...] is a representation of an N-dimensional array of numbers \
 on a regular grid.", "synonyms" -> {"dataregion", "DATAREGION"}, "title" -> 
     "DataRegion", "windowTitle" -> "DataRegion", "type" -> "Symbol", "uri" -> 

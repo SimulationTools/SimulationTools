@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHInclination - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHInclination - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readbhinclination", "READBHINCLINATION"}, "index" -> True,
      "label" -> "nrmma`BHCoordinates` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHInclination[run] returns a DataTable of the angle in radians made \
 by the relative orbit of black holes 0 and 1 in run with the origin of \
 coordinates.", "synonyms" -> {"readbhinclination", "READBHINCLINATION"}, 

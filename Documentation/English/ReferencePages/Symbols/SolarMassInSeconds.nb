@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAANALYSIS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAANALYSIS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"SolarMassInSeconds - nrmma`DataAnalysis.nb`",
+WindowTitle->"SolarMassInSeconds - nrmma`DataAnalysis`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"solarmassinseconds", "SOLARMASSINSECONDS"}, "index" -> 
     True, "label" -> "nrmma`DataAnalysis` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma DataAnalysis.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma DataAnalysis", "status" -> "", "summary" -> 
     "SolarMassInSeconds gives the value of GM/\!\(\*SuperscriptBox[\(c\), \(3\
 \)]\) in seconds.", 
     "synonyms" -> {"solarmassinseconds", "SOLARMASSINSECONDS"}, "title" -> 

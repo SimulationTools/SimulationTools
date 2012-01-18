@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ColorRanges3d - nrmma`FieldLines.nb`",
+WindowTitle->"ColorRanges3d - nrmma`FieldLines`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"colorranges3d", "COLORRANGES3D"}, 
     "index" -> True, "label" -> "nrmma`FieldLines` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma FieldLines.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma FieldLines", "status" -> "", "summary" -> 
     "ColorRanges3d[runlist,var,plane,rfl,func] \n\tCalculate a list of the \
 universal Minimum and Maximum among 3D data of several \n\tsimulations. \
 ColorRange can be used in order to set a universal ColorBar in movies. \n\t\

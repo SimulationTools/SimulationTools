@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"InitialPosition - nrmma`NR.nb`",
+WindowTitle->"InitialPosition - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,8 +112,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"initialposition", "INITIALPOSITION"}, "index" -> True, 
-    "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    "label" -> "nrmma`BHCoordinates` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "InitialPosition[run, bh] returns a vector containing the initial \
 coordinate position of BH numbered bh", 
     "synonyms" -> {"initialposition", "INITIALPOSITION"}, "title" -> 

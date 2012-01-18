@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"GetCoordinate - nrmma`DataRegion.nb`",
+WindowTitle->"GetCoordinate - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"getcoordinate", "GETCOORDINATE"}, 
     "index" -> True, "label" -> "nrmma`DataRegion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma DataRegion", "status" -> "", "summary" -> 
     "GetCoordinate[d, i] returns a DataRegion of the same shape as the \
 DataRegion d whose data is the i coordinate of d.", 
     "synonyms" -> {"getcoordinate", "GETCOORDINATE"}, "title" -> 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHTrajectory - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHTrajectory - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,7 +115,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readbhtrajectory", "READBHTRAJECTORY"}, "index" -> True, 
     "label" -> "nrmma`BHCoordinates` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHTrajectory[run] returns a list of the x, y coordinates of the \
 relative trajectory of the first two black holes.  \nReadBHTrajectory[run, i] \
 returns a list of the x, y coordinates of the trajectory of the black hole \

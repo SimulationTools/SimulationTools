@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"FieldLinesData3d - nrmma`FieldLines.nb`",
+WindowTitle->"FieldLinesData3d - nrmma`FieldLines`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"fieldlinesdata3d", "FIELDLINESDATA3D"}, "index" -> True, 
     "label" -> "nrmma`FieldLines` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma FieldLines.nb", "status" -> "", "summary" -> 
+    "nrmma FieldLines", "status" -> "", "summary" -> 
     "FieldLinesData3d[run,field,it,rfl,plane] \n\tCalculates the fieldlines \
 of 3D data of a field B, E, v etc.\n\tPlane takes values from 0 to 2.", 
     "synonyms" -> {"fieldlinesdata3d", "FIELDLINESDATA3D"}, "title" -> 

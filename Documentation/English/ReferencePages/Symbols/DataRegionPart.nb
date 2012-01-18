@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"DataRegionPart - nrmma`DataRegion.nb`",
+WindowTitle->"DataRegionPart - nrmma`DataRegion`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"dataregionpart", "DATAREGIONPART"}, 
     "index" -> True, "label" -> "nrmma`DataRegion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataRegion.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma DataRegion", "status" -> "", "summary" -> 
     "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies \
 between the coordinates a;;b, c;;d, etc.", 
     "synonyms" -> {"dataregionpart", "DATAREGIONPART"}, "title" -> 

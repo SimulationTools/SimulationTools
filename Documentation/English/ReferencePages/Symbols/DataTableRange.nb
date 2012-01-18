@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"DataTableRange - nrmma`DataTable.nb`",
+WindowTitle->"DataTableRange - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"datatablerange", "DATATABLERANGE"}, 
     "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
-     "paclet" -> "nrmma DataTable.nb", "status" -> "", "summary" -> 
+     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
     "DataTableRange[d] returns the first and last independent variable in \
 DataTable d in the form {x1, x2}.", 
     "synonyms" -> {"datatablerange", "DATATABLERANGE"}, "title" -> 

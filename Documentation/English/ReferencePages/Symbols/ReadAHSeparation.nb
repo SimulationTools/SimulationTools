@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`HORIZONS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`HORIZONS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -72,9 +72,9 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadAHSeparation"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ReadAHSeparation[run, idx] returns the coordinate \
-distance between the centroids of apparent horizons with indices 1 and 2 in \
-run.  This requires output from the AHFinderDirect thorn."
+     "\[LineSeparator]ReadAHSeparation[run] returns the coordinate distance \
+between the centroids of apparent horizons with indices 1 and 2 in run.  This \
+requires output from the AHFinderDirect thorn."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadAHSeparation - nrmma`Horizons.nb`",
+WindowTitle->"ReadAHSeparation - nrmma`Horizons`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,8 +114,8 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readahseparation", "READAHSEPARATION"}, "index" -> True, 
     "label" -> "nrmma`Horizons` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Horizons.nb", "status" -> "", "summary" -> 
-    "ReadAHSeparation[run, idx] returns the coordinate distance between the \
+    "nrmma Horizons", "status" -> "", "summary" -> 
+    "ReadAHSeparation[run] returns the coordinate distance between the \
 centroids of apparent horizons with indices 1 and 2 in run.  This requires \
 output from the AHFinderDirect thorn.", 
     "synonyms" -> {"readahseparation", "READAHSEPARATION"}, "title" -> 

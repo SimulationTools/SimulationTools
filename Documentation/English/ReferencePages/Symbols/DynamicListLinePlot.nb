@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`PLOTTING.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`PLOTTING` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -93,9 +93,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"DynamicListLinePlot - nrmma`Plotting.nb`",
+WindowTitle->"DynamicListLinePlot - nrmma`Plotting`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -118,7 +118,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"dynamiclistlineplot", "DYNAMICLISTLINEPLOT"}, "index" -> 
     True, "label" -> "nrmma`Plotting` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Plotting.nb", "status" -> "", "summary" -> 
+    "nrmma Plotting", "status" -> "", "summary" -> 
     "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds \
 the ability to zoom into a region of the plot by dragging a box with the \
 mouse.  Double-click to return to the previous zoom level and right-click to \

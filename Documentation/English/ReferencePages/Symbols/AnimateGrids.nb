@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`GRIDS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"AnimateGrids - nrmma`Grids.nb`",
+WindowTitle->"AnimateGrids - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"animategrids", "ANIMATEGRIDS"}, 
     "index" -> True, "label" -> "nrmma`Grids` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Grids.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma Grids", "status" -> "", "summary" -> 
     "AnimateGrids[runname] creates an animation of the grid structure of a \
 run", "synonyms" -> {"animategrids", "ANIMATEGRIDS"}, "title" -> 
     "AnimateGrids", "windowTitle" -> "AnimateGrids", "type" -> "Symbol", 

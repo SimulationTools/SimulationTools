@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ApplyToList - nrmma`DataTable.nb`",
+WindowTitle->"ApplyToList - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"applytolist", "APPLYTOLIST"}, 
     "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
-     "paclet" -> "nrmma DataTable.nb", "status" -> "", "summary" -> 
+     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
     "ApplyToList[f, d] maps f over the elements of the underlying list in \
 DataTable d.", "synonyms" -> {"applytolist", "APPLYTOLIST"}, "title" -> 
     "ApplyToList", "windowTitle" -> "ApplyToList", "type" -> "Symbol", "uri" -> 

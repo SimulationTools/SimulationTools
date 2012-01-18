@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`ASCII1D.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`ASCII1D` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -93,9 +93,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadCarpetASCII1DFromRun - nrmma`Ascii1D.nb`",
+WindowTitle->"ReadCarpetASCII1DFromRun - nrmma`Ascii1D`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -118,7 +118,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readcarpetascii1dfromrun", "READCARPETASCII1DFROMRUN"}, 
     "index" -> True, "label" -> "nrmma`Ascii1D` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Ascii1D.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma Ascii1D", "status" -> "", "summary" -> 
     "UNTESTED!! ReadCarpetASCII1DFromRun[run, filename, rl, dir] reads a 1D \
 CarpetIOASCII output file from filename in run.  The function returns a \
 single refinement level rl from the file.  It assumes that the output is in \

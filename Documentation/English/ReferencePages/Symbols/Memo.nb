@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`MEMO.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`MEMO` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"Memo - nrmma`Memo.nb`",
+WindowTitle->"Memo - nrmma`Memo`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"memo", "MEMO"}, "index" -> True, 
     "label" -> "nrmma`Memo` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Memo.nb", "status" -> "", "summary" -> 
+    "nrmma Memo", "status" -> "", "summary" -> 
     "Memo is a symbol used by the Memo package.  It is not needed by \
 end-users.", "synonyms" -> {"memo", "MEMO"}, "title" -> "Memo", "windowTitle" -> 
     "Memo", "type" -> "Symbol", "uri" -> "nrmma/ref/Memo"}, 

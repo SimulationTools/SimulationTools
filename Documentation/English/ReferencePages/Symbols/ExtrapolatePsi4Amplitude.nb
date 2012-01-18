@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExtrapolatePsi4Amplitude - nrmma`NR.nb`",
+WindowTitle->"ExtrapolatePsi4Amplitude - nrmma`Waveforms`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,8 +114,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"extrapolatepsi4amplitude", "EXTRAPOLATEPSI4AMPLITUDE"}, 
-    "index" -> True, "label" -> "nrmma`NR` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NR.nb", "status" -> "", "summary" -> 
+    "index" -> True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en",
+     "paclet" -> "nrmma Waveforms", "status" -> "", "summary" -> 
     "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the amplitude of the \
 (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.", 
     "synonyms" -> {"extrapolatepsi4amplitude", "EXTRAPOLATEPSI4AMPLITUDE"}, 

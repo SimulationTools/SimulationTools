@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`MEMO.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`MEMO` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ClearAllMemos - nrmma`Memo.nb`",
+WindowTitle->"ClearAllMemos - nrmma`Memo`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"clearallmemos", "CLEARALLMEMOS"}, 
     "index" -> True, "label" -> "nrmma`Memo` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Memo.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma Memo", "status" -> "", "summary" -> 
     "ClearAllMemos[] wipes the cache of functions that have been memoised \
 using DefineMemoFunction.", "synonyms" -> {"clearallmemos", "CLEARALLMEMOS"}, 
     "title" -> "ClearAllMemos", "windowTitle" -> "ClearAllMemos", "type" -> 

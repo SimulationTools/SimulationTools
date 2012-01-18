@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadCoarseTimeStep - nrmma`NR.nb`",
+WindowTitle->"ReadCoarseTimeStep - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,8 +113,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"readcoarsetimestep", "READCOARSETIMESTEP"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`Grids` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Grids", "status" -> "", "summary" -> 
     "ReadCoarseTimeStep[run] reads the coarse time step for run.", 
     "synonyms" -> {"readcoarsetimestep", "READCOARSETIMESTEP"}, "title" -> 
     "ReadCoarseTimeStep", "windowTitle" -> "ReadCoarseTimeStep", "type" -> 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHSeparation - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHSeparation - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readbhseparation", "READBHSEPARATION"}, "index" -> True, 
     "label" -> "nrmma`BHCoordinates` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHSeparation[run] returns a DataTable of the coordinate separation \
 of black holes 0 and 1 as a function of time.", 
     "synonyms" -> {"readbhseparation", "READBHSEPARATION"}, "title" -> 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`HORIZONS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`HORIZONS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -92,9 +92,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadIsolatedHorizonSpin - nrmma`Horizons.nb`",
+WindowTitle->"ReadIsolatedHorizonSpin - nrmma`Horizons`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readisolatedhorizonspin", "READISOLATEDHORIZONSPIN"}, 
     "index" -> True, "label" -> "nrmma`Horizons` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Horizons.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma Horizons", "status" -> "", "summary" -> 
     "ReadIsolatedHorizonSpin[run, idx, dir] returns the spin of horizon with \
 index idx in run in the direction dir (counted from 1) as a DataTable.  This \
 requires output from the QuasiLocalMeasures or IsolatedHorizon thorn to be \

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`PROFILE.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`PROFILE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"Profile - nrmma`Profile.nb`",
+WindowTitle->"Profile - nrmma`Profile`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"profile", "PROFILE"}, "index" -> 
     True, "label" -> "nrmma`Profile` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Profile.nb", "status" -> "", "summary" -> 
+    "nrmma Profile", "status" -> "", "summary" -> 
     "Profile[name, expression] evaluates expression and adds the elapsed time \
 to ProfileTime[name] and adds one to ProfileCount[name].  See also \
 ClearProfile.", "synonyms" -> {"profile", "PROFILE"}, "title" -> "Profile", 

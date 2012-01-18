@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportSim - nrmma`NRExport.nb`",
+WindowTitle->"ExportSim - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"exportsim", "EXPORTSIM"}, "index" -> 
     True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportSim[run, niceName, outputDirectory, mass, ecc] exports a full \
 simulation, including waveforms, local quantities and metadata.", 
     "synonyms" -> {"exportsim", "EXPORTSIM"}, "title" -> "ExportSim", 

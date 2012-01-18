@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`HORIZONS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`HORIZONS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadAHRadius - nrmma`Horizons.nb`",
+WindowTitle->"ReadAHRadius - nrmma`Horizons`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readahradius", "READAHRADIUS"}, 
     "index" -> True, "label" -> "nrmma`Horizons` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Horizons.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma Horizons", "status" -> "", "summary" -> 
     "ReadAHRadius[run, idx] returns the coordinate radius of apparent horizon \
 with index idx in run.  This requires output from the AHFinderDirect thorn.", 
     "synonyms" -> {"readahradius", "READAHRADIUS"}, "title" -> "ReadAHRadius",

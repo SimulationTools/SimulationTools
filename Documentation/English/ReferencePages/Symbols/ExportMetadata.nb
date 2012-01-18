@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportMetadata - nrmma`NRExport.nb`",
+WindowTitle->"ExportMetadata - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"exportmetadata", "EXPORTMETADATA"}, 
     "index" -> True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportMetadata[file, run, mass, ecc] exports the metadata for run to \
 file.", "synonyms" -> {"exportmetadata", "EXPORTMETADATA"}, "title" -> 
     "ExportMetadata", "windowTitle" -> "ExportMetadata", "type" -> "Symbol", 

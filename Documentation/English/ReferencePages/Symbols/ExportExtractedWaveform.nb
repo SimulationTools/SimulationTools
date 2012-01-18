@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportExtractedWaveform - nrmma`NRExport.nb`",
+WindowTitle->"ExportExtractedWaveform - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -116,7 +116,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"exportextractedwaveform", "EXPORTEXTRACTEDWAVEFORM"}, 
     "index" -> True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of \
 the waveform extracted at radius rad in run to file. The output format \
 depends on the file extension which can be either '.asc', '.asc.gz' or \

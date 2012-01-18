@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`GRIDS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"PlotGridsAndAH2D - nrmma`Grids.nb`",
+WindowTitle->"PlotGridsAndAH2D - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"plotgridsandah2d", "PLOTGRIDSANDAH2D"}, "index" -> True, 
     "label" -> "nrmma`Grids` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Grids.nb", "status" -> "", "summary" -> 
+    "nrmma Grids", "status" -> "", "summary" -> 
     "PlotGridsAndAH2D[run] generates a 2D plot of the grid structure and \
 apparent horizons in which the timestep can be interactively changed.", 
     "synonyms" -> {"plotgridsandah2d", "PLOTGRIDSANDAH2D"}, "title" -> 

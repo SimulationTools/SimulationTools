@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"BoxRadiiForCentre - nrmma`NR.nb`",
+WindowTitle->"BoxRadiiForCentre - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,8 +113,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"boxradiiforcentre", "BOXRADIIFORCENTRE"}, "index" -> True,
-     "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+     "label" -> "nrmma`Grids` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma Grids", "status" -> "", "summary" -> 
     "BoxRadiiForCentre[run, centre] reads the radii of the refinement boxes \
 around centre (as specified by CarpetRegrid2) in run.", 
     "synonyms" -> {"boxradiiforcentre", "BOXRADIIFORCENTRE"}, "title" -> 

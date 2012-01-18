@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"FieldLines2dPlot - nrmma`FieldLines.nb`",
+WindowTitle->"FieldLines2dPlot - nrmma`FieldLines`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"fieldlines2dplot", "FIELDLINES2DPLOT"}, "index" -> True, 
     "label" -> "nrmma`FieldLines` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma FieldLines.nb", "status" -> "", "summary" -> 
+    "nrmma FieldLines", "status" -> "", "summary" -> 
     "FieldLines2dPlot[run,field,it,rfl,plane,function2,opts] \n\tPlots the \
 fieldlines and the density plot of 2D data of a field B, E, v", 
     "synonyms" -> {"fieldlines2dplot", "FIELDLINES2DPLOT"}, "title" -> 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CARPETHDF5.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`CARPETHDF5` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadIterations - nrmma`CarpetHDF5.nb`",
+WindowTitle->"ReadIterations - nrmma`CarpetHDF5`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readiterations", "READITERATIONS"}, 
     "index" -> True, "label" -> "nrmma`CarpetHDF5` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma CarpetHDF5.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma CarpetHDF5", "status" -> "", "summary" -> 
     "ReadIterations[run, var, rl] reads the iterations present in the \
 CarpetHDF5 file named var in the directory run.  Only those iterations \
 present on refinement level rl are returned.  rl defaults to All if it is \

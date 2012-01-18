@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`TWOPUNCTURES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadADMMass - nrmma`NR.nb`",
+WindowTitle->"ReadADMMass - nrmma`TwoPunctures`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -111,8 +111,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readadmmass", "READADMMASS"}, 
-    "index" -> True, "label" -> "nrmma`NR` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NR.nb", "status" -> "", "summary" -> 
+    "index" -> True, "label" -> "nrmma`TwoPunctures` Symbol", "language" -> 
+    "en", "paclet" -> "nrmma TwoPunctures", "status" -> "", "summary" -> 
     "ReadADMMass[run] reads the total ADM mass of the spacetime in run as \
 computed by the TwoPunctures thorn.", 
     "synonyms" -> {"readadmmass", "READADMMASS"}, "title" -> "ReadADMMass", 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`KICKS.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`KICKS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -92,9 +92,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"LinearMomentumFlux - nrmma`Kicks.nb`",
+WindowTitle->"LinearMomentumFlux - nrmma`Kicks`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -117,7 +117,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"linearmomentumflux", "LINEARMOMENTUMFLUX"}, "index" -> 
     True, "label" -> "nrmma`Kicks` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Kicks.nb", "status" -> "", "summary" -> 
+    "nrmma Kicks", "status" -> "", "summary" -> 
     "LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux \
 as a function of time from the multipolar decomposition of Psi4 on a sphere \
 at radius r in direction dir (an integer from 1 to 3) using modes up to l = \

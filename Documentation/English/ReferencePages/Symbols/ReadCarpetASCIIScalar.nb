@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`ASCII.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`ASCII` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -93,9 +93,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadCarpetASCIIScalar - nrmma`Ascii.nb`",
+WindowTitle->"ReadCarpetASCIIScalar - nrmma`Ascii`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -118,7 +118,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"readcarpetasciiscalar", "READCARPETASCIISCALAR"}, "index" -> 
     True, "label" -> "nrmma`Ascii` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Ascii.nb", "status" -> "", "summary" -> 
+    "nrmma Ascii", "status" -> "", "summary" -> 
     "ReadCarpetASCIIScalar[filename, dir] reads a 1D CarpetIOASCII output \
 file.  It assumes that the output is in direction dir, running from 1 to 3. \
 The data is returned as a list of lists of the form {{t1, d1}, {t2, d2}, ..., \

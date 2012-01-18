@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ExportStatus - nrmma`NRExport.nb`",
+WindowTitle->"ExportStatus - nrmma`NRExport`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"exportstatus", "EXPORTSTATUS"}, 
     "index" -> True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NRExport.nb", "status" -> "", "summary" -> 
+    "paclet" -> "nrmma NRExport", "status" -> "", "summary" -> 
     "ExportStatus is a variable which reports the current status of an \
 export.", "synonyms" -> {"exportstatus", "EXPORTSTATUS"}, "title" -> 
     "ExportStatus", "windowTitle" -> "ExportStatus", "type" -> "Symbol", 

@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`TWOPUNCTURES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -91,9 +91,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadTwoPuncturesData - nrmma`NR.nb`",
+WindowTitle->"ReadTwoPuncturesData - nrmma`TwoPunctures`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -115,8 +115,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"readtwopuncturesdata", "READTWOPUNCTURESDATA"}, "index" -> 
-    True, "label" -> "nrmma`NR` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma NR.nb", "status" -> "", "summary" -> 
+    True, "label" -> "nrmma`TwoPunctures` Symbol", "language" -> "en", 
+    "paclet" -> "nrmma TwoPunctures", "status" -> "", "summary" -> 
     "ReadTwoPuncturesData[file, col] reads a data file output by the \
 standalone TwoPunctures code by Marcus Ansorg and returns a DataRegion \
 containing the data in column col. col can be 1, 2 or 3 for the coordinates \

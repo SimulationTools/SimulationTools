@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CARPETHDF5.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`CARPETHDF5` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"StripGhostZones - nrmma`CarpetHDF5.nb`",
+WindowTitle->"StripGhostZones - nrmma`CarpetHDF5`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {"stripghostzones", "STRIPGHOSTZONES"}, "index" -> True, 
     "label" -> "nrmma`CarpetHDF5` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma CarpetHDF5.nb", "status" -> "", "summary" -> 
+    "nrmma CarpetHDF5", "status" -> "", "summary" -> 
     "StripGhostZones is a boolean option to various CarpetHDF5 functions \
 which indicates that ghost zones should be removed", 
     "synonyms" -> {"stripghostzones", "STRIPGHOSTZONES"}, "title" -> 

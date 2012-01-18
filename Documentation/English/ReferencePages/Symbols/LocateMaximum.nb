@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"LocateMaximum - nrmma`NR.nb`",
+WindowTitle->"LocateMaximum - nrmma`DataTable`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,8 +112,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"locatemaximum", "LOCATEMAXIMUM"}, 
-    "index" -> True, "label" -> "nrmma`NR` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NR.nb", "status" -> "", "summary" -> 
+    "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
+     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
     "LocateMaximum[d] finds the time at which a maximum occurs in the range \
 of the DataTable d. This time is interpolated and may not coincide with a \
 data point in the DataTable.", 

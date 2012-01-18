@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`PLOTTING.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`PLOTTING` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -90,9 +90,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"FitPlot - nrmma`Plotting.nb`",
+WindowTitle->"FitPlot - nrmma`Plotting`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -114,7 +114,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"fitplot", "FITPLOT"}, "index" -> 
     True, "label" -> "nrmma`Plotting` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Plotting.nb", "status" -> "", "summary" -> 
+    "nrmma Plotting", "status" -> "", "summary" -> 
     "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data \
 and a fit (using FindFit) to model with parameters pars for the variable t in \
 the range t1 to t2.  The parameters to FitPlot are analogous to those of \

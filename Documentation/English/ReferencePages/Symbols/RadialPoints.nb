@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NR.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`GRIDS` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"RadialPoints - nrmma`NR.nb`",
+WindowTitle->"RadialPoints - nrmma`Grids`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -111,8 +111,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"radialpoints", "RADIALPOINTS"}, 
-    "index" -> True, "label" -> "nrmma`NR` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NR.nb", "status" -> "", "summary" -> 
+    "index" -> True, "label" -> "nrmma`Grids` Symbol", "language" -> "en", 
+    "paclet" -> "nrmma Grids", "status" -> "", "summary" -> 
     "RadialPoints[run, level] computes the number of radial points on a \
 refinement level in run.", "synonyms" -> {"radialpoints", "RADIALPOINTS"}, 
     "title" -> "RadialPoints", "windowTitle" -> "RadialPoints", "type" -> 

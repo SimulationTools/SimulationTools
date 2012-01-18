@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`SIMVIEW.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`SIMVIEW` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -89,9 +89,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"FinishTime - nrmma`SimView.nb`",
+WindowTitle->"FinishTime - nrmma`SimView`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -113,7 +113,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"finishtime", "FINISHTIME"}, "index" -> 
     True, "label" -> "nrmma`SimView` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma SimView.nb", "status" -> "", "summary" -> 
+    "nrmma SimView", "status" -> "", "summary" -> 
     "FinishTime[run] returns a date list corresponding to the estimated time \
 at which the simulation will finish if it runs continuously.", 
     "synonyms" -> {"finishtime", "FINISHTIME"}, "title" -> "FinishTime", 

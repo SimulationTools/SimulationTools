@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadBHSpeed - nrmma`BHCoordinates.nb`",
+WindowTitle->"ReadBHSpeed - nrmma`BHCoordinates`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"readbhspeed", "READBHSPEED"}, 
     "index" -> True, "label" -> "nrmma`BHCoordinates` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma BHCoordinates.nb", "status" -> "", "summary" -> 
+    "en", "paclet" -> "nrmma BHCoordinates", "status" -> "", "summary" -> 
     "ReadBHSpeed[run, i] returns a DataTable of the coordinate speed of the \
 black hole labeled i in run as a function of time.", 
     "synonyms" -> {"readbhspeed", "READBHSPEED"}, "title" -> "ReadBHSpeed", 

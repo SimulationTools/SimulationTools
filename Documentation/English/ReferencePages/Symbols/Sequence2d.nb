@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES.NB` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -88,9 +88,9 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 656},
+WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"Sequence2d - nrmma`FieldLines.nb`",
+WindowTitle->"Sequence2d - nrmma`FieldLines`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,7 +112,7 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"sequence2d", "SEQUENCE2D"}, "index" -> 
     True, "label" -> "nrmma`FieldLines` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma FieldLines.nb", "status" -> "", "summary" -> 
+    "nrmma FieldLines", "status" -> "", "summary" -> 
     "Sequence2d[path,run,var,rfl,function,xmin,xmax,opts] \n\tCreate a \
 sequence of figures of a 2D variable with fixed color range.", 
     "synonyms" -> {"sequence2d", "SEQUENCE2D"}, "title" -> "Sequence2d", 
