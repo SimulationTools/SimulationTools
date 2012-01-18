@@ -1,5 +1,5 @@
 
-BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`"}];
 
 SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized.";
 
