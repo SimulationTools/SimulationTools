@@ -24,7 +24,7 @@ ReadAHQuadrupoleYY;
 ReadAHQuadrupoleYZ;
 ReadAHQuadrupoleZZ;
 ChristodoulouMass;
-ReadAHSeparation::usage = "ReadAHSeparation[run, idx] returns the coordinate distance between the centroids of apparent horizons with indices 1 and 2 in run.  This requires output from the AHFinderDirect thorn.";
+ReadAHSeparation::usage = "ReadAHSeparation[run] returns the coordinate distance between the centroids of apparent horizons with indices 1 and 2 in run.  This requires output from the AHFinderDirect thorn.";
 ReadAHPhase;
 InitialSpin;
 SpinAngle;
@@ -106,6 +106,7 @@ DefineMemoFunction[ReadAHColumn[runName_, hn_, col_],
   MakeDataTable[
    ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2, col}]]]];
 
+(* TODO: this assumes the length of cols is 3 *)
 DefineMemoFunction[ReadAHColumns[runName_, hn_, cols_List],
  Module[{list, list2},
    list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", Prepend[cols,2]];
