@@ -43,63 +43,63 @@ segmentSummary[runName_] :=
   ]
 
 SimViewRRMHD[runNames_(*, r_*)] :=
- Module[{EMEnergy,netcharge,divBnorm2,rhomax,alpminimum,restmass,hamnorm2,grid,size,segments,segmentSummary},
+ Module[{EMEnergy,netcharge,divBnorm2,rhomax,alpminimum,restmass,hamnorm2,plottable,grid,size,segments,segmentSummary},
   size = {350, 100};
   size = 250;
   EMEnergy=Catch[DynamicListLinePlot[
   Map[If[Length[FindParameters[#, "whisky::whisky_Rmhd_on"]] == 1, 
      If[StringCases[LookupParameter[#, "whisky::whisky_Rmhd_on"], 
         "yes"] == {"yes"}, 
-      ReadCarpetASCIIFromRun[#, 
+      ReadCarpetASCIIScalar[#, 
        "whisky_total_electromagnetic_energy..asc"]],
      If[Length[FindParameters[#, "whisky::whisky_mhd_on"]] == 1, 
       If[StringCases[LookupParameter[#, "whisky::whisky_mhd_on"], 
          "yes"] == {"yes"}, 
-       ReadCarpetASCIIFromRun[#, 
+       ReadCarpetASCIIScalar[#, 
         "whisky_total_magnetic_energy..asc"]]]] &, runNames], 
   PlotRange -> All, PlotLabel -> "EM Energy", ImageSize -> size]];
-  netcharge=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIFromRun[#, 
+  netcharge=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIScalar[#, 
        "total_charge..asc"]&,runNames],# != {}&], 
   PlotRange -> All, PlotLabel -> "Net Charge", ImageSize -> 250]];
-  divBnorm2=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIFromRun[#, 
+  divBnorm2=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIScalar[#, 
        "divB.norm2.asc"]&,runNames],# != {}&], 
   PlotRange -> All, PlotLabel -> "Norm2 of divB", ImageSize -> 250]];
   rhomax = Catch[
    DynamicListLinePlot[
-      Map[ReadCarpetASCIIFromRun[#,"rho.maximum.asc"] &, runNames], 
+      Map[ReadCarpetASCIIScalar[#,"rho.maximum.asc"] &, runNames], 
     PlotRange->All, PlotLabel -> "Rho Central", 
     ImageSize -> size]];
   alpminimum = Catch[
    DynamicListLinePlot[
-      Map[ReadCarpetASCIIFromRun[#,"alp.minimum.asc"] &, runNames], 
+      Map[ReadCarpetASCIIScalar[#,"alp.minimum.asc"] &, runNames], 
     PlotRange->All, PlotLabel -> "alp minimum", 
     ImageSize -> size]];
 
   restmass = Catch[
    DynamicListLinePlot[
-      Map[If[FindRunFile[#,"total_rest_mass_normalised..asc"]!= {},ReadCarpetASCIIFromRun[#,"total_rest_mass_normalised..asc"],ReadCarpetASCIIFromRun[#,"total_rest_mass_normalised.maximum.asc"]]&, runNames], 
+      Map[If[FindRunFile[#,"total_rest_mass_normalised..asc"]!= {},ReadCarpetASCIIScalar[#,"total_rest_mass_normalised..asc"],ReadCarpetASCIIScalar[#,"total_rest_mass_normalised.maximum.asc"]]&, runNames], 
     PlotRange->All, PlotLabel -> "Total Rest Mass", 
     ImageSize -> size]];
 (*  restmass = Catch[
    DynamicListLinePlot[
-      Map[ReadCarpetASCIIFromRun[#,"total_rest_mass..asc"] &, runNames], 
+      Map[ReadCarpetASCIIScalar[#,"total_rest_mass..asc"] &, runNames], 
     PlotRange->All, PlotLabel -> "Total Rest Mass", 
     ImageSize -> size]];*)
   hamnorm2 = Catch[
    DynamicListLinePlot[
-      Map[ReadCarpetASCIIFromRun[#,"ham.norm2.asc"] &, runNames], 
+      Map[ReadCarpetASCIIScalar[#,"ham.norm2.asc"] &, runNames], 
     PlotRange->All, PlotLabel -> "Norm2 of Hamiltonian constr.", 
     ImageSize -> size]];
 
   segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
-  grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft},
-       {EMEnergy,divBnorm2},
-	   {netcharge,rhomax},
-       {restmass,hamnorm2},{alpminimum}}~Join~
-       segments, 
-       Spacings -> {0, 1}];
+  plottable=Partition[{EMEnergy,divBnorm2,
+	   netcharge,rhomax,
+       restmass,hamnorm2,alpminimum},2];
+
+  grid = Grid[Prepend[plottable,{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft}]
+		~Join~segments,Spacings -> {0, 1}];
   Return[grid]
   ];
 
