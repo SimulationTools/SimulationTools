@@ -1,8 +1,6 @@
 
 BeginPackage["PunctureTracker`", {"RunFiles`", "DataTable`", "Memo`"}];
 
-Print["Loading PunctureTracker"];
-
 Begin["`Private`"];
 
 fileName =
