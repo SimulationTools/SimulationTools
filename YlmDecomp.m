@@ -26,7 +26,7 @@ YlmDecomp`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
+    Return[MakeDataTable[psi4]]];
 
 YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{names, radiusFromFileName, radii},

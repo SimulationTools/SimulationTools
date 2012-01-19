@@ -25,7 +25,7 @@ MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad
     files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, runFiles];
     data = MergeFiles[files];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]];
+    Return[MakeDataTable[psi4]]];
 
 MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{datasets, radii},

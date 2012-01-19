@@ -92,7 +92,7 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
       Throw["Radius "<>ToString[rad]<>" not found."];
   ];
 
-  ReadPsi4Data[runName, l, m, radString]];
+  AddAttribute[ReadPsi4Data[runName, l, m, radString],RunName -> runName]];
 
 (* Return a list of radii available *)
 ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
