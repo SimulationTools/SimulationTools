@@ -64,4 +64,10 @@ Scan[docPackage, packageSymbols];
 
 OverviewGuide["nrmma", packageSymbols];
 
+sourceGuides = FileNames["*.mg", "Source", Infinity];
+destGuides =
+  FileNameJoin[{Directory[], FileNameDrop[DirectoryName[#], 1],
+      FileBaseName[#] <> ".nb"}] & /@ sourceGuides;
+MapThread[BuildGuide, {sourceGuides, destGuides}];
+
 BuildApplication["nrmma", CreatePacletInfo -> False];
