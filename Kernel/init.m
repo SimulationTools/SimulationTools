@@ -42,6 +42,7 @@ Module[{packages =
   "Parameters",
   "Plotting",
   "Profile",
+  "Providers",
   "PunctureTracker",
   "ReadHDF5",
   "RunFiles",
