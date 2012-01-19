@@ -1,0 +1,9 @@
+Resources[
+    Version[1],
+    ExecutionBuildCommand["<<nrmma`"],
+    Paclet[
+        DocumentationFolder["Documentation"],
+        PacletFolder["."],
+        FunctionPaclet[False]
+    ]
+]
