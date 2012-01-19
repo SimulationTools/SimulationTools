@@ -62,8 +62,6 @@ docPackage[package_ -> symbols_] :=
 
 Scan[docPackage, packageSymbols];
 
-OverviewGuide["nrmma", packageSymbols];
-
 sourceGuides = FileNames["*.mg", "Source", Infinity];
 destGuides =
   FileNameJoin[{Directory[], FileNameDrop[DirectoryName[#], 1],
