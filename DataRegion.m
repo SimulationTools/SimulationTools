@@ -7,7 +7,7 @@ BeginPackage["DataRegion`", {"DataTable`", "Profile`"}];
 (* Exported symbols *)
 
 MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time] creates a DataRegion object from the passed data.  data is an N-dimensional array (nested list) of numbers.  name is a name to give to the object for display purposes.  dims is a list of length N consisting of the dimensions of data (dims = Reverse[Dimensions[data]]).  origin is a list of length N giving the coordinates of the first point in each direction.  spacing is a list of length N giving the spacing between points in each direction.  time is a number which will be stored with the DataRegion which can be useful for labeling simulation time.";
-SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 0.";
+SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataTable::usage = "ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
