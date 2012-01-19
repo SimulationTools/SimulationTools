@@ -10,7 +10,7 @@ ReadCarpetASCIIScalar::usage = "ReadCarpetASCIIScalar[run,filename]
 Begin["`Private`"];
 
 ReadCarpetASCIIScalar[run_,fileName_] :=
- Module[{levels, levelsPresent,coltime,coldata, data, data2, rls, processLevel, prls},
+ Module[{coltime, coldata, data},
 (*  lines = ReadList[fileName, String, NullRecords -> True];*)
   (*If[FileType[fileName] === None, Throw["ReadCarpetASCIIScalar: File "<>fileName<>" not found"]];*)
   Profile["ReadCarpetASCIIScalar: Check if we want to plot scalar output or 0D output. They have different formats.",

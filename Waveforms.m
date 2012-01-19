@@ -71,7 +71,7 @@ ReadPsi4Modes[runName_] :=
   --------------------------------------------------------------------*)
 
 ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
-  Module[{psi4, radii, radString},
+  Module[{radii, radString},
 
   (* Get a list of radii available in the form expr -> "exprstring" *)
   radii = Thread[ReadPsi4Radii[runName] -> ReadPsi4RadiiStrings[runName]];
