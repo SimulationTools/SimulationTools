@@ -95,7 +95,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"ExportAllExtrapolatedStrain - nrmma`NRExport`",
 Visible->True,

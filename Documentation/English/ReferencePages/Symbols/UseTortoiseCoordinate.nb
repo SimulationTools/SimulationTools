@@ -74,7 +74,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/UseTortoiseCoordinate"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]UseTortoiseCoordinate is an option for radius \
-extrapolation routines which specifies whether the radial coordinated should \
+extrapolation routines which specifies whether the radial coordinate should \
 be converted to a tortoise coordinate. This may improve the accuracy of the \
 extrapolation."
     }]]}
@@ -91,7 +91,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"UseTortoiseCoordinate - nrmma`Waveforms`",
 Visible->True,
@@ -118,7 +118,7 @@ TaggingRules->{
     True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
     "nrmma Waveforms", "status" -> "", "summary" -> 
     "UseTortoiseCoordinate is an option for radius extrapolation routines \
-which specifies whether the radial coordinated should be converted to a \
+which specifies whether the radial coordinate should be converted to a \
 tortoise coordinate. This may improve the accuracy of the extrapolation.", 
     "synonyms" -> {"usetortoisecoordinate", "USETORTOISECOORDINATE"}, "title" -> 
     "UseTortoiseCoordinate", "windowTitle" -> "UseTortoiseCoordinate", "type" -> 

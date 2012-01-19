@@ -73,12 +73,8 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadCarpetASCIIScalar"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ReadCarpetASCIIScalar[filename, dir] reads a 1D \
-CarpetIOASCII output file.  It assumes that the output is in direction dir, \
-running from 1 to 3. The data is returned as a list of lists of the form \
-{{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are \
-DataTables representing the 1D data at those times, and the outermost list is \
-over refinement levels."
+     "\[LineSeparator]ReadCarpetASCIIScalar[run,filename]\n\tReads Carpet \
+ASCII 0D and Scalar data."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -93,7 +89,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"ReadCarpetASCIIScalar - nrmma`Ascii`",
 Visible->True,
@@ -119,12 +115,8 @@ TaggingRules->{
     "keywords" -> {"readcarpetasciiscalar", "READCARPETASCIISCALAR"}, "index" -> 
     True, "label" -> "nrmma`Ascii` Symbol", "language" -> "en", "paclet" -> 
     "nrmma Ascii", "status" -> "", "summary" -> 
-    "ReadCarpetASCIIScalar[filename, dir] reads a 1D CarpetIOASCII output \
-file.  It assumes that the output is in direction dir, running from 1 to 3. \
-The data is returned as a list of lists of the form {{t1, d1}, {t2, d2}, ..., \
-{tn, dn}} where the ti are the times and the di are DataTables representing \
-the 1D data at those times, and the outermost list is over refinement \
-levels.", "synonyms" -> {"readcarpetasciiscalar", "READCARPETASCIISCALAR"}, 
+    "ReadCarpetASCIIScalar[run,filename]\n\tReads Carpet ASCII 0D and Scalar \
+data.", "synonyms" -> {"readcarpetasciiscalar", "READCARPETASCIISCALAR"}, 
     "title" -> "ReadCarpetASCIIScalar", "windowTitle" -> 
     "ReadCarpetASCIIScalar", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ReadCarpetASCIIScalar"}, "SearchTextTranslated" -> "", 

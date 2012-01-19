@@ -93,7 +93,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"DynamicDataRegionArrayPlot - nrmma`DataRegion`",
 Visible->True,

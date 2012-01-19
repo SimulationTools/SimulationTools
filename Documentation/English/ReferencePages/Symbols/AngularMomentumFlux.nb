@@ -92,7 +92,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"AngularMomentumFlux - nrmma`Kicks`",
 Visible->True,

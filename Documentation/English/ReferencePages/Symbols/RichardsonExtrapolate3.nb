@@ -91,7 +91,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"RichardsonExtrapolate3 - nrmma`Convergence`",
 Visible->True,

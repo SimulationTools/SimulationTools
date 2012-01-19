@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`RUNFILES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -43,8 +43,7 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/BHCoordinateMergerTime URL\"\>":>
+        StripOnInput->False], {"\<\"Go to nrmma/ref/FileIsInRun URL\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
            URL["your.website.goes.here/documentationIfAny"], None}]}], 
@@ -63,19 +62,18 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["BHCoordinateMergerTime", "ObjectName"],
+Cell["FileIsInRun", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["BHCoordinateMergerTime",
+       ButtonBox["FileIsInRun",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/BHCoordinateMergerTime"], "[", 
+        ButtonData->"paclet:nrmma/ref/FileIsInRun"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]BHCoordinateMergerTime[run,eps] returns the time at \
-which the BHs in run reach a separation of eps (eps defaults to 0.01 if \
-omitted)."
+     "\[LineSeparator]FileIsInRun[run, filename] returns True or False \
+depending on whether a file named filename can be found in run."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -92,7 +90,7 @@ Cell[BoxData[""]]
 Saveable->False,
 WindowSize->{740, 867},
 WindowMargins->Automatic,
-WindowTitle->"BHCoordinateMergerTime - nrmma`BHCoordinates`",
+WindowTitle->"FileIsInRun - nrmma`RunFiles`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -112,17 +110,15 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
-    "keywords" -> {"bhcoordinatemergertime", "BHCOORDINATEMERGERTIME"}, 
-    "index" -> True, "label" -> "nrmma`BHCoordinates` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma BHCoordinates", "status" -> "", "summary" -> 
-    "BHCoordinateMergerTime[run,eps] returns the time at which the BHs in run \
-reach a separation of eps (eps defaults to 0.01 if omitted).", 
-    "synonyms" -> {"bhcoordinatemergertime", "BHCOORDINATEMERGERTIME"}, 
-    "title" -> "BHCoordinateMergerTime", "windowTitle" -> 
-    "BHCoordinateMergerTime", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/BHCoordinateMergerTime"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+   "context" -> "nrmma`", "keywords" -> {"fileisinrun", "FILEISINRUN"}, 
+    "index" -> True, "label" -> "nrmma`RunFiles` Symbol", "language" -> "en", 
+    "paclet" -> "nrmma RunFiles", "status" -> "", "summary" -> 
+    "FileIsInRun[run, filename] returns True or False depending on whether a \
+file named filename can be found in run.", 
+    "synonyms" -> {"fileisinrun", "FILEISINRUN"}, "title" -> "FileIsInRun", 
+    "windowTitle" -> "FileIsInRun", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/FileIsInRun"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

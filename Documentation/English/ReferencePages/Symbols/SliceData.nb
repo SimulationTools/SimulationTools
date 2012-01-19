@@ -75,7 +75,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]SliceData[d, dim, coord] slices the DataRegion d \
 through the dimension dim at the coordinate location coord. The result is a \
 DataRegion with dimensionality 1 lower than that of d. If coord is not given, \
-it uses a default value of 0."
+it uses a default value of 1."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -90,7 +90,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"SliceData - nrmma`DataRegion`",
 Visible->True,
@@ -118,7 +118,7 @@ TaggingRules->{
     "SliceData[d, dim, coord] slices the DataRegion d through the dimension \
 dim at the coordinate location coord. The result is a DataRegion with \
 dimensionality 1 lower than that of d. If coord is not given, it uses a \
-default value of 0.", "synonyms" -> {"slicedata", "SLICEDATA"}, "title" -> 
+default value of 1.", "synonyms" -> {"slicedata", "SLICEDATA"}, "title" -> 
     "SliceData", "windowTitle" -> "SliceData", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/SliceData"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
   ""},

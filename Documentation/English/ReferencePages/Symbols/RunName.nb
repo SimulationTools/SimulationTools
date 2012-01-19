@@ -72,8 +72,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/RunName"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]RunName is a DataTable attribute added by \
-ReadYlmDecomp, ReadMultipoleASCII and ReadMultipoleHDF5."
+     "\[LineSeparator]RunName is a DataTable attribute added by ReadPsi4."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -88,7 +87,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"RunName - nrmma`Waveforms`",
 Visible->True,
@@ -113,8 +112,7 @@ TaggingRules->{
    "context" -> "nrmma`", "keywords" -> {"runname", "RUNNAME"}, "index" -> 
     True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
     "nrmma Waveforms", "status" -> "", "summary" -> 
-    "RunName is a DataTable attribute added by ReadYlmDecomp, \
-ReadMultipoleASCII and ReadMultipoleHDF5.", 
+    "RunName is a DataTable attribute added by ReadPsi4.", 
     "synonyms" -> {"runname", "RUNNAME"}, "title" -> "RunName", "windowTitle" -> 
     "RunName", "type" -> "Symbol", "uri" -> "nrmma/ref/RunName"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},

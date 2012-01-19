@@ -94,7 +94,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
+WindowSize->{740, 867},
 WindowMargins->Automatic,
 WindowTitle->"StrainFromPsi4 - nrmma`Waveforms`",
 Visible->True,
