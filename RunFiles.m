@@ -25,6 +25,7 @@ SegmentStartTimes;
 FullFilenames;
 LeafNamesOnly;
 FindFirstRunFile;
+FileIsInRun::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run.";
 
 Begin["`Private`"];
 
@@ -287,6 +288,9 @@ SegmentStartTimes[run_] :=
  Module[{segs = FindRunSegments[run]},
   First /@
    Select[SegmentCoordinateTimeInterval /@ segs, # =!= None &]];
+
+FileIsInRun[run_, file_] :=
+  FindRunFile[run, file] =!= {};
 
 End[];
 
