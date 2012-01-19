@@ -1,48 +1,25 @@
 
-BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`"}];
+BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`", "Providers`"}];
 
 SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized.";
-
 ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
-ReadPsi4From::usage = "ReadPsi4From is an option for ReadPsi4 which specifies which mode decomposition to read from. Possible options are \"MultipoleHDF5\", \"MultipoleASCII\" and \"YlmDecomp\".";
 ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold.";
-ReadMultipoleHDF5::usage = "ReadMultipoleHDF5[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the HDF5 output of the Multipole thorn.";
-ReadMultipoleASCII::usage = "ReadMultipoleASCII[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the ASCII output of the Multipole thorn.";
-ReadYlmDecomp::usage = "ReadYlmDecomp[run, var, l, m, r] returns a DataTable of the l,m mode of var at radius r from run using the YlmDecomp output from the WeylScal4 thorn.";
-
 ReadPsi4RadiiStrings::usage = "ReadPsi4RadiiStrings[run] returns a list of the radii (in original string form) at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
 ReadPsi4Radii::usage = "ReadPsi4Radii[run] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
-ReadMultipoleHDF5Radii::usage = "ReadMultipoleHDF5Radii[run, var] returns a list of the radii at which the modes of var are available in run.";
-ReadMultipoleASCIIRadii::usage = "ReadMultipoleASCIIRadii[run, var] returns a list of the radii at which the modes of var are available in run.";
-ReadYlmDecompRadii::usage = "ReadYlmDecompRadii[run, var] returns a list of the radii at which the modes of var are available in run.";
-
 ReadPsi4Modes::usage = "ReadPsi4Modes[run] returns a list of the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) that are available in run.";
-ReadMultipoleHDF5Modes::usage = "ReadMultipoleHDF5Modes[run, var] returns a list of the modes of var that are available in run.";
-ReadMultipoleASCIIModes::usage = "ReadMultipoleASCIIModes[run, var] returns a list of the modes of var that are available in run.";
-ReadYlmDecompModes::usage = "ReadYlmDecompModes[run, var] returns a list of the modes of var that are available in run.";
-
-Options[ReadPsi4] = {ReadPsi4From -> Automatic};
-MultipolePsi4Variable = "psi4";
-YlmDecompPsi4Variable = "Psi4";
-
-RunName::usage = "RunName is a DataTable attribute added by ReadYlmDecomp, ReadMultipoleASCII and ReadMultipoleHDF5.";
+RunName::usage = "RunName is a DataTable attribute added by ReadPsi4.";
 RadiusRange;
-
 StrainFromPsi4::usage = "StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] converts a DataTable containing \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)[t] into strain and its time derivative, {h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\).
 StrainFromPsi4[\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\), {\!\(\*SubscriptBox[\(t\), \(start\)]\), \!\(\*SubscriptBox[\(t\), \(end\)]\)}] converts using time domain integration.";
-
 NumCycles::usage = "NumCycles[run, start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.
 NumCycles[psi4, start] operates on the DataTable psi4 instead of run.";
-
 AlignPhases::usage = "AlignPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. The independent variable is assumed to be a phase so that the resulting phases all start out within 2\[Pi] of each other.";
 Continuous;
-
 ExtrapolatePsi4::usage = "ExtrapolatePsi4[run, l, m] extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
 ExtrapolatePsi4Amplitude::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the amplitude of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
 ExtrapolatePsi4Phase::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the phase of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
-
-UseTortoiseCoordinate::usage = "UseTortoiseCoordinate is an option for radius extrapolation routines which specifies whether the radial coordinated should be converted to a tortoise coordinate. This may improve the accuracy of the extrapolation.";
+UseTortoiseCoordinate::usage = "UseTortoiseCoordinate is an option for radius extrapolation routines which specifies whether the radial coordinate should be converted to a tortoise coordinate. This may improve the accuracy of the extrapolation.";
 TortoiseCoordinate::usage = "TortoiseCoordinate[r, M] gives the tortoise coordinate corresponding to radius r assuming a Schwarzschild black hole of mass M. The constant of integration is chosen so that the tortoise and radial coordinate coincide at r=4M.";
 
 ExtrapolateScalarFull;
@@ -76,10 +53,65 @@ Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
 
+(*--------------------------------------------------------------------
+  Reading Psi4 from an external provider
+  --------------------------------------------------------------------*)
+
+ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
+  CallProvidedFunction["Waveforms","ReadPsi4Data",{runName,l,m,rad}];
+
+ReadPsi4RadiiStrings[runName_] :=
+  CallProvidedFunction["Waveforms","ReadPsi4RadiiStrings",{runName}];
+
+ReadPsi4Modes[runName_] :=
+  Select[CallProvidedFunction["Waveforms","ReadPsi4Modes",{runName}], #[[1]] >= 2 &];
 
 (*--------------------------------------------------------------------
-  Reading Subscript[\[Psi], 4]
+  Operations on Psi4
   --------------------------------------------------------------------*)
+
+ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
+  Module[{psi4, radii, radString},
+
+  (* Get a list of radii available in the form expr -> "exprstring" *)
+  radii = Thread[ReadPsi4Radii[runName] -> ReadPsi4RadiiStrings[runName]];
+
+  If[radii == Null,
+    Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
+  ];
+
+  (* Which radius to read: Automatic=first available, Infinity, or a number *)
+  Which[
+    rad === Automatic,
+      radString = radii[[1,2]],
+    (rad === Infinity) && ((Infinity /. radii) === "inf"),
+      radString = "inf",
+    NumberQ[rad] && (Select[radii[[All,1]], NumberQ] =!= {}),
+      radString = First[Nearest[radii, rad]],
+    True,
+      Throw["Radius "<>ToString[rad]<>" not found."];
+  ];
+
+  ReadPsi4Data[runName, l, m, radString]];
+
+(* Return a list of radii available *)
+ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
+
+ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
+ Module[{psi4, rAmp, rAmpTb, t2, phase},
+
+  (* Two problems with this function: (1) The default radius is not
+     determined from the available radii.  This is because in my runs,
+     I commonly have a useless one at r = 30 which I don't care about.
+     (2) The threshold is not adjusted for the mode number.  Probably
+     this is not possible to fix in a general way.  *)
+
+  psi4 = ReadPsi4[run, l, l, r];
+  rAmp = r Abs[psi4];
+  rAmpTb = ToList[rAmp];
+  t2 = Last[Select[rAmpTb, #[[2]] > threshold &]][[1]];
+  phase =
+   DataTableInterval[Phase[psi4], {rAmpTb[[1, 1]] - 100.0, t2}]];
 
 ReconstructPsi4[sim_, t_, rad_: Automatic] :=
  Module[{modes, psi4modes, harmonics, cf, psi4},
@@ -105,234 +137,6 @@ SchmidtAngle[run_, t_, rad_: Automatic] :=
   
   th1 /. {FindMaximum[psi4l2m2[th1, 0], {th1, 0}, Method -> "PrincipalAxis"][[2]], 
           FindMaximum[psi4l2mm2[th1, 0], {th1, 0}, Method -> "PrincipalAxis"][[2]]}
-];
-
-ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic, OptionsPattern[]] :=
-  Module[{psi4, radii, radString},
-
-  (* Get a list of radii available in the form expr -> "exprstring" *)
-  radii = Thread[ReadPsi4Radii[runName] -> ReadPsi4RadiiStrings[runName]];
-
-  If[radii == Null,
-    Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
-  ];
-
-  (* Which radius to read: Automatic=first available, Infinity, or a number *)
-  Which[
-    rad === Automatic,
-      radString = radii[[1,2]],
-    (rad === Infinity) && ((Infinity /. radii) === "inf"),
-      radString = "inf",
-    NumberQ[rad] && (Select[radii[[All,1]], NumberQ] =!= {}),
-      radString = First[Nearest[radii, rad]],
-    True,
-      Throw["Radius "<>ToString[rad]<>" not found."];
-  ];
-
-  (* Read the actual data *)
-  If[OptionValue[ReadPsi4From] === Automatic,
-    Which[
-      HaveMultipoleHDF5[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleHDF5[runName, MultipolePsi4Variable, l, m, radString];,
-      HaveYlmDecomp[runName, YlmDecompPsi4Variable],
-        psi4 = ReadYlmDecomp[runName, YlmDecompPsi4Variable, l, m, radString];,
-      HaveMultipoleASCII[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleASCII[runName, MultipolePsi4Variable, l, m, radString];,
-      True,
-        Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
-    ];
-  ,
-    Switch[OptionValue[ReadPsi4From],
-      "MultipoleHDF5",
-      If[HaveMultipoleHDF5[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleHDF5[runName, MultipolePsi4Variable, l, m, radString];,
-        Throw["Multipole HDF5 data not available for run "<>runName];
-      ];,
-      "MultipoleASCII",
-      If[HaveMultipoleASCII[runName, MultipolePsi4Variable],
-        psi4 = ReadMultipoleASCII[runName, MultipolePsi4Variable, l, m, radString];,
-        Throw["Multipole ASCII data not available for run "<>runName];
-      ];,
-      "YlmDecomp",
-      If[HaveYlmDecomp[runName, YlmDecompPsi4Variable],
-        psi4 = ReadYlmDecomp[runName, YlmDecompPsi4Variable, l, m, radString];,
-        Throw["YlmDecomp data not available for run "<>runName];
-      ];,
-      _,
-      Throw["Invalid value for ReadPsi4From option."];
-    ];
-  ];
-
-  psi4
-];
-
-DefineMemoFunction[ReadYlmDecomp[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
-  Module[{fileName, threeCols, psi4},
-    fileName = "Ylm_WEYLSCAL4::"<>var<>"r_l" <>
-             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
-    threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
-    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
-];
-
-DefineMemoFunction[ReadMultipoleASCII[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
-  Module[{fileName, threeCols, psi4},
-    fileName = "mp_"<>var<>"_l" <>
-             ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
-    threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
-    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
-];
-
-DefineMemoFunction[ReadMultipoleHDF5[runName_String, var_String, l_?NumberQ, m_?NumberQ, rad_],
-  Module[{datasetName, runFiles, files, data, psi4},
-    runFiles = MultipoleHDF5Files[runName, var];
-    datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
-    files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, runFiles];
-    data = MergeFiles[files];
-    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
-    Return[AddAttribute[MakeDataTable[psi4], RunName -> runName]]]
-];
-
-ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
- Module[{psi4, rAmp, rAmpTb, t2, phase},
-
-  (* Two problems with this function: (1) The default radius is not
-     determined from the available radii.  This is because in my runs,
-     I commonly have a useless one at r = 30 which I don't care about.
-     (2) The threshold is not adjusted for the mode number.  Probably
-     this is not possible to fix in a general way.  *)
-
-  psi4 = ReadPsi4[run, l, l, r];
-  rAmp = r Abs[psi4];
-  rAmpTb = ToList[rAmp];
-  t2 = Last[Select[rAmpTb, #[[2]] > threshold &]][[1]];
-  phase =
-   DataTableInterval[Phase[psi4], {rAmpTb[[1, 1]] - 100.0, t2}]];
-
-(* Return a list of radii available *)
-ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
-
-ReadPsi4RadiiStrings[runName_] :=
-  Module[{mpl},
-  Which[
-    Length[mpl = ReadMultipoleHDF5Radii[runName, MultipolePsi4Variable]] != 0,
-    Null,
-    Length[mpl = ReadYlmDecompRadii[runName, YlmDecompPsi4Variable]] != 0,
-    Null,
-    Length[mpl = ReadMultipoleASCIIRadii[runName, MultipolePsi4Variable]] != 0,
-    Null
-  ];
-
-  mpl
-];
-
-DefineMemoFunction[ReadYlmDecompRadii[runName_, var_],
-  Module[{names, radiusFromFileName, radii},
-    names = YlmDecompFiles[runName, var];
-    radiusFromFileName[name_] :=
-      StringReplace[name,
-        "Ylm_WEYLSCAL4::"<>var<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
-        ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
-    radii = Sort[Union[Map[radiusFromFileName, names]]]]
-];
-
-DefineMemoFunction[ReadMultipoleASCIIRadii[runName_, var_],
-  Module[{names, radiusFromFileName, radii},
-    names = MultipoleASCIIFiles[runName, var];
-    radiusFromFileName[name_] :=
-      StringReplace[name,
-        "mp_"<>var<>"_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
-        ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
-    radii = Sort[Union[Map[radiusFromFileName, names]]]]
-];
-
-DefineMemoFunction[ReadMultipoleHDF5Radii[runName_, var_],
-  Module[{datasets, radii},
-    datasets = Union@@Map[ReadHDF5[#] &, MultipoleHDF5Files[runName, var]];
-    radii = Sort[(Union@@StringCases[datasets, "r" ~~ x : (NumberString|"inf") :> x])];
-    radii
-  ]
-];
-
-(* Check if modes are available as Multipole HDF5, Multipole ASCII or YlmDecomp *)
-HaveYlmDecomp[runName_, var_] :=
-  ReadYlmDecompRadii[runName, var] =!= {};
-
-HaveMultipoleASCII[runName_, var_] :=
-  ReadMultipoleASCIIRadii[runName, var] =!= {};
-
-HaveMultipoleHDF5[runName_, var_] :=
-  ReadMultipoleHDF5Radii[runName, var] =!= {};
-
-(* Return a list of (l, m) modes available *)
-ReadPsi4Modes[runName_] :=
-  Module[{mpl},
-  Which[
-    Length[mpl = ReadMultipoleHDF5Modes[runName, MultipolePsi4Variable]] != 0,
-    Null,
-    Length[mpl = ReadYlmDecompModes[runName, YlmDecompPsi4Variable]] != 0,
-    Null,
-    Length[mpl = ReadMultipoleASCIIModes[runName, MultipolePsi4Variable]] != 0,
-    Null
-  ];
-  Select[mpl, #[[1]] >= 2 &]
-];
-
-DefineMemoFunction[ReadYlmDecompModes[runName_, var_],
-  Module[{names, modes},
-    names = YlmDecompFiles[runName, var];
-    modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names,
-      "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
-    modes
-  ]
-];
-
-DefineMemoFunction[ReadMultipoleASCIIModes[runName_, var_],
-  Module[{names, modes},
-   names = MultipoleASCIIFiles[runName, var];
-   modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[names, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
-   modes
-  ]
-];
-
-DefineMemoFunction[ReadMultipoleHDF5Modes[runName_, var_],
-  Module[{datasets, modes},
-    datasets = Union@@Map[ReadHDF5, MultipoleHDF5Files[runName, var]];
-    modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[datasets, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];
-    modes
-  ]
-];
-
-(* Return a list of files for the variable 'var' in 'runName'. 'runName' may
- * be a SimFactory run, a directory or a single file *)
-YlmDecompFiles[runName_, var_, l_:"*", m_:"*", r_:"*"] := Module[{runFiles},
-  If[FileType[runName]===File,
-      runFiles = {runName},
-      runFiles = FindRunFilesFromPattern[runName,
-        "Ylm_WEYLSCAL4::"<>var<>"r_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"];
-  ];
-
-  runFiles
-];
-
-MultipoleASCIIFiles[runName_, var_, l_:"*", m_:"*", r_:"*"] := Module[{runFiles},
-  If[FileType[runName]===File,
-      runFiles = {runName},
-      runFiles = FindRunFilesFromPattern[runName,
-        "mp_"<>var<>"_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"];
-  ];
-
-  runFiles
-];
-
-MultipoleHDF5Files[runName_, var_] := Module[{runFiles},
-  If[FileType[runName]===File,
-      runFiles = {runName},
-      runFiles = FindRunFile[runName, "mp_"<>var<>".h5"];
-  ];
-
-  runFiles
 ];
 
 (*--------------------------------------------------------------------

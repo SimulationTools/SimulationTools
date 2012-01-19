@@ -36,6 +36,8 @@ Module[{packages =
   "Kicks",
   "Memo",
   "MinTracker",
+  "MultipoleASCII",
+  "MultipoleHDF5",
   "NR",
   "NRExport",
   "nrmmaVersion",
@@ -52,7 +54,8 @@ Module[{packages =
   "SystemStatistics",
   "Tracks",
   "TwoPunctures",
-  "Waveforms"}},
+  "Waveforms",
+  "YlmDecomp"}},
 
   packages = Map[#<>"`"&, packages];
   Unprotect[$Packages];
