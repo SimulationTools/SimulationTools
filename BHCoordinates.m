@@ -88,10 +88,35 @@ DefineMemoFunction[ReadPunctureTrackerCoordinates[runName_, i_],
 
 (* General BH coordinates *)
 
-ReadBHCoordinates[runName_, i_] :=
-  If[HaveMinTracker[runName, i],
-    ReadMinTrackerCoordinates[runName, i],
-    ReadPunctureTrackerCoordinates[runName, i]];
+Options[ReadBHCoordinates] = {Method -> Automatic};
+ReadBHCoordinates[run_, tracker_, opts:OptionsPattern[]] :=
+  Module[
+    {providerHaveFns, providers, provider, have, posns},
+
+    providerHaveFns = Names["*`BHCoordinates`HaveData"];
+    providers = Map[First[StringSplit[#,"`"]] &, providerHaveFns];
+
+    provider =
+    If[OptionValue[Method] === Automatic,
+       providers = ToExpression/@providerFns;
+       have = Map[ToExpression[#][run, tracker] &, providerHaveFns];
+       posns = Position[have, True];
+       If[Length[posns] > 1,
+          Throw["Multiple data sources for BHCoordinates ("<>
+                ToString[providers,InputForm]<>
+                "): Please select one using Method -> source, where source is one of " <>
+                ToString[providers]]];
+
+       If[Length[posns] == 0,
+          Throw["No data for BHCoordinates tracker "<>ToString[tracker]<>" in run "<>run]];
+
+       providers[[posns[[1]]]],
+       OptionValue[Method]];
+
+    If[!MemberQ[providers, provider],
+       Throw["BHCoordinates: Provider "<>ToString[provider,InputForm]<>" not found"]];
+
+    ToExpression[provider<>"`BHCoordinates`ReadBHCoordinates"][run, tracker]];
 
 ReadBHCoordinate[runName_String, tracker_Integer, coord_Integer] :=
   Module[{coords},
