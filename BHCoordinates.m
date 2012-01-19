@@ -18,74 +18,6 @@ InitialPosition::usage = "InitialPosition[run, bh] returns a vector containing t
 
 Begin["`Private`"];
 
-ReadMinTrackerCoordinates;
-ReadMinTrackerCoordinate;
-ReadMinTrackerRadius;
-ReadMinTrackerPhase;
-ReadPunctureTrackerPhase;
-ReadPunctureTrackerRadius;
-ReadMinTrackerTrajectory;
-ReadMinTrackerTrajectories;
-ReadMinTrackerSpeed;
-ReadMinTrackerVelocity;
-HaveMinTracker;
-ReadPunctureTrackerCoordinates;
-
-(* MinTracker *)
-
-HaveMinTracker[runName_, tracker_Integer] :=
-  FindRunFile[runName, "MinTracker"<>ToString[tracker]<>".asc"] =!= {};
-
-ReadMinTrackerCoordinates[runName_String, tracker_Integer] :=
-  Module[{list, list2},
-    list = ReadColumnFile[runName, "MinTracker"<>ToString[tracker]<>".asc", {2,3,4,5}];
-    list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-    Return[MakeDataTable[list2, {RunName -> runName}]]];
-
-ReadMinTrackerCoordinate[runName_String, tracker_Integer, coord_Integer] :=
-  Module[{coords},
-    coords = ReadMinTrackerCoordinates[runName, tracker];
-    MapData[#[[coord]]&, coords]];
-
-ReadMinTrackerTrajectory[runName_String, tracker_Integer] :=
-  Map[Take[Last[#], 2] &, 
-    ToList[ReadMinTrackerCoordinates[runName, tracker]]];
-
-ReadMinTrackerTrajectory[runName_String] :=
-  Module[{coords1,coords2,rel},
-    coords1 = ReadMinTrackerCoordinates[runName, 0];
-    coords2 = ReadMinTrackerCoordinates[runName, 1];
-    rel = coords1 - coords2;
-    Map[Take[Last[#], 2] &, ToList[rel]]];
-
-ReadMinTrackerTrajectories[runName_String] :=
-  {ReadMinTrackerTrajectory[runName, 0], ReadMinTrackerTrajectory[runName, 1]};
-
-ReadMinTrackerVelocity[runName_String, tracker_Integer] :=
-  Module[{x,v},
-    x = Table[ReadMinTrackerCoordinate[runName, tracker, dir], {dir, 1 3}];
-    v = Map[NDerivative, x];
-    MapThreadData[{#1,#2,#3}&, v]];
-
-ReadMinTrackerVelocity[runName_String] :=
-  ReadMinTrackerVelocity[runName, 0] - ReadMinTrackerVelocity[runName, 1];
-
-ReadMinTrackerSpeed[runName_String] :=
-  MapData[Norm, ReadMinTrackerVelocity[runName]];
-
-ReadMinTrackerSpeed[runName_String, tr_Integer] :=
-  MapData[Norm, ReadMinTrackerVelocity[runName, tr]];
-
-(* PunctureTracker *)
-
-DefineMemoFunction[ReadPunctureTrackerCoordinates[runName_, i_],
- Module[{nTrackers},
-  nTrackers = 10;
-  MakeDataTable[{#[[1]], {#[[2]], #[[3]], #[[4]]}} & /@ 
-    ReadColumnFile[runName, 
-     "puncturetracker::pt_loc..asc", {9, 13 + nTrackers*1 + i, 
-      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]]]];
-
 (* General BH coordinates *)
 
 Options[ReadBHCoordinates] = {Method -> Automatic};
@@ -195,46 +127,6 @@ ReadBHPhaseOfFrequency[run_] :=
 
 ReadBHSpeed[run_, bh_] :=
  Norm@NDerivative[ReadBHCoordinates[run, bh]];
-
-(*--------------------------------------------------------------------
-  Data conversion 
-  --------------------------------------------------------------------*)
-
-ReadMinTrackerRadius[runName_String] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadMinTrackerCoordinates[runName, 0];
-    x1 = ReadMinTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
-    Return[rad];
-  ];
-
-ReadMinTrackerPhase[runName_String] :=
-  Module[{x0, x1, xyTrans, l},
-    x0 = ReadMinTrackerCoordinates[runName, 0];
-    x1 = ReadMinTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
-    Return[Phase[xyTrans]];
-  ];
-
-ReadPunctureTrackerRadius[runName_String] :=
-  Module[{x0, x1, rad, l},
-    x0 = ReadPunctureTrackerCoordinates[runName, 0];
-    x1 = ReadPunctureTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    rad = MapThreadData[Norm[#1-#2] &, {Take[x0,l], Take[x1,l]}];
-    Return[rad];
-  ];
-
-ReadPunctureTrackerPhase[runName_String] :=
-  Module[{x0, x1, xyTrans, l},
-    x0 = ReadPunctureTrackerCoordinates[runName, 0];
-    x1 = ReadPunctureTrackerCoordinates[runName, 1];
-    l = Min[Length[x0],Length[x1]];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
-    Return[Phase[xyTrans]];
-  ];
 
 BHCoordinateMergerTime[run_, eps_:0.01] :=
  Module[{sep},
