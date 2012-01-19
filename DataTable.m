@@ -55,7 +55,7 @@ PartitionTable;
 
 Begin["`Private`"];
 
-Format[d:DataTable[l_, attrs___]] := "DataTable"[DataTableRange[d]];
+Format[DataTable[l_, attrs___]] := "DataTable"["..."];
 
 SetAttributes[Redefine, HoldAll];
 
