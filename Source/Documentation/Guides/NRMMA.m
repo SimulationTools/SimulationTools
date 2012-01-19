@@ -5,7 +5,7 @@
  "Summary" -> 
    "A package for analysing data in Numerical Relativity.",
  "Description" -> 
-   "NRMMA is a suite of Mathematica packages for analysing data in Numerical Relativity.  It has been designed for use with common output formats used by the Cactus code, with a focus on output from the PSU and AEI codes. ",
+   {"NRMMA is a suite of ", StyleBox["Mathematica", FontSlant->"Italic"], " packages for analysing data in Numerical Relativity.  It has been designed for use with common output formats used by the Cactus code, with a focus on output from the PSU and AEI codes."},
  "Keywords" -> {"nrmma", "NRMMA"},
  "Label" -> "NRMMA Label",
  "Synonyms" -> {"NRMMA", "nrmma"},
@@ -13,7 +13,7 @@
  "Paclets" -> {
    {"Title" -> "Numerical Relativity",
     "DetailedFunctions" -> {
-      {"ReadPsi4" , "read \[Psi]4 waveform"},
+      {"ReadPsi4" , {"read ", Cell[BoxData[SubscriptBox["\[Psi]", "4"]], "InlineFormula"], "waveform"}},
       {"ReadIsolatedHorizonSpin", "read spin computed by the IsolatedHorizon thorn"},
       {"ReadAHRadius", "read apparent horizon radius from AHFinderDirect thorn"},
       {"ReadBHCoordinate", "read coordinate location of puncture"},
