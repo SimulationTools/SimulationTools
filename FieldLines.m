@@ -142,7 +142,7 @@ Show[{plot1,plot2},BaseStyle-> basesize,FrameStyle->fontsize,
 				PlotLabel-> Style[If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[run, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
-															"I_"]<>If[Length[run]>20,StringTake[run,-20],run],
+															"I_"]<>If[StringLength[run]>20,StringTake[run,-20],run],
 				FontFamily->fontname,Bold,14]]]]
 
 
@@ -174,7 +174,7 @@ Show[{plot1,plot2},BaseStyle-> basesize,FrameStyle->fontsize,
 				PlotLabel-> Style[If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[run, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
-															"I_"]<>If[Length[run]>20,StringTake[run,-20],run],
+															"I_"]<>If[StringLength[run]>20,StringTake[run,-20],run],
 				FontFamily->fontname,Bold,14]]]]
 
 (*Options[newplotdensity] = Options[ArrayPlot];
@@ -285,13 +285,12 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 		datarange = If[ndims==1, GetDataRange[data1][[1]],GetDataRange[data1]];
 		plotrange = If[OptionValue[Movie2d,PlotRange]==={Full,Full,Automatic},datarange,OptionValue[Movie2d,PlotRange]];
 		imagesize = If[ToString[OptionValue[Movie2d,ImageSize]]==="Automatic",300,OptionValue[Movie2d,ImageSize]];
-		Manipulate[With[{keymag=key["TemperatureMap",{xmin,xmax}(*[[2]]}*),
+		Manipulate[With[{keymag=key["TemperatureMap",{xmin,xmax},
 							{Automatic,imagesize}],
-							magrange= (*{-9.66,*){xmin,xmax},
 							data=ReadGridFunction[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
 						Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
-							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,ReadGridFunction[#,var,it,rfl,StripGhostZones->True],
-											opts,PlotRange->Append[plotrange,All],ImageSize->300(*OptionValue[Movie2d,ImageSize]*),
+							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
+											PlotRange->Append[plotrange,All],ImageSize->imagesize,opts,
 											Frame->{{True,True},{True,True}}, 
 											Axes-> True,
 											FrameLabel->{{StringTake[plane,-1],""},{StringTake[plane,1],
@@ -299,12 +298,11 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 															If[StringCases[LookupParameter[#, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
 															"I_"]
-														<>If[Length[#]>20,StringTake[#,-20],#]}},
-											FrameTicks->True,ColorFunctionScaling->False,
+														<>If[StringLength[#]>20,StringTake[#,-20],#]}},
+											FrameTicks->True,ColorFunctionScaling->False,ColorFunction->ScaledColorFunction["TemperatureMap",{xmin,xmax}],
 											BaseStyle-> basesize,FrameStyle->fontsize,
 											ClippingStyle->{Blue,Red},MeshFunctions->{#3&},
-											Mesh->10,
-											ColorFunction-> ScaledColorFunction["TemperatureMap",magrange]]&,run],keymag],
+											Mesh->10]&,run],keymag],
 										"  ",ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]],
 					{it,iterations},
 					{xmin,xmincolorrange},
@@ -335,16 +333,16 @@ Sequence2d[path_,run_,var_,rfl_,function_,xmin_,xmax_,opts:OptionsPattern[]]:=
 							magrange= (*{-9.66,*){xmin,xmax},
 							data=ReadGridFunction[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
 						Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
-							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,ReadGridFunction[#,var,it,rfl,StripGhostZones->True],
-											opts,PlotRange->Append[plotrange,All],ImageSize->300(*OptionValue[Movie2d,ImageSize]*),
-											Frame->{{True,True},{True,True}}, 
+							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
+											PlotRange->Append[plotrange,All],ImageSize->imagesize,
+											opts,Frame->{{True,True},{True,True}}, 
 											Axes-> True,
 											FrameLabel->{{StringTake[plane,-1],""},{StringTake[plane,1],
 														If[Length[FindParameters[#, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[#, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
 															"I_"]
-														<>If[Length[run]>20,StringTake[#,-20],#]}},
+														<>If[StringLength[#]>20,StringTake[#,-20],#]}},
 											FrameTicks->True,ColorFunctionScaling->False,
 											BaseStyle-> basesize,FrameStyle->fontsize,
 											ClippingStyle->{Blue,Red},MeshFunctions->{#3&},
