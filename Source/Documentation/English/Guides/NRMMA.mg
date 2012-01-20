@@ -1,6 +1,6 @@
 {
+ "Application" -> "nrmma",
  "Package" -> "nrmma",
- "Paclet" -> "nrmma",
  "Title" -> "NRMMA Package",
  "Summary" -> 
    "A package for analysing data in Numerical Relativity.",
@@ -10,7 +10,7 @@
  "Label" -> "NRMMA Label",
  "Synonyms" -> {"NRMMA", "nrmma"},
  "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
- "Paclets" -> {
+ "Packages" -> {
    {"Title" -> "Numerical Relativity",
     "DetailedFunctions" -> {
       {"ReadPsi4" , {"read ", Cell[BoxData[SubscriptBox["\[Psi]", "4"]], "InlineFormula"], "waveform"}},

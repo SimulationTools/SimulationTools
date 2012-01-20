@@ -1,10 +1,10 @@
-Module[{paclets},
+Module[{packages},
 
-paclets = Table[{"Title" -> ToString[ps[[1]]], "Functions" -> ToString /@ ps[[2]]}, {ps, packageSymbols}];
+packages = Table[{"Title" -> ToString[ps[[1]]], "Functions" -> ToString /@ ps[[2]]}, {ps, packageSymbols}];
 
 {
- "Package" -> "nrmma",
- "Paclet" -> "Overview",
+ "Application" -> "nrmma",
+ "Package" -> "Overview",
  "Title" -> "NRMMA Overview",
  "Summary" -> 
    "Overview of all functions and symbols provided by nrmma",
@@ -13,6 +13,6 @@ paclets = Table[{"Title" -> ToString[ps[[1]]], "Functions" -> ToString /@ ps[[2]
  "Label" -> "NRMMA Overview",
  "Synonyms" -> {"NRMMAOverview", "nrmmaOverview"},
  "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
- "Paclets" -> paclets
+ "Packages" -> packages
 }
 ]
