@@ -36,9 +36,9 @@
     "DetailedFunctions" -> {
       {"ReadGridFunction", "read data for a grid function at a specific iteration"},
       {"ReadCarpetASCII1D", "read 1D ASCII data from a file"},
-      {"FindRunFiles", "find instances of a specific file across all restarts"},
-      {"ReadTimersFromRun", "read TimerReport output files"},
-      {"Grids", "read and plot Carpet grid structures"}},
+      {"FindRunFile", "find instances of a specific file across all restarts"},
+      {"ReadTimerFromRun", "read TimerReport output files"}(* ,
+      {"Grids", "read and plot Carpet grid structures"} *)},
     "Functions" -> {"ReadIterations", "ReadMaps", 
       "ReadRefinementLevels", "ReadTimeLevels", "ReadTime", 
       "ReadVariables"}
