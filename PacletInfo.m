@@ -7,6 +7,7 @@ Paclet[
   Version -> "0.0.1",
   MathematicaVersion -> "6+",
   Creator -> "Ian Hinder and Barry Wardell",
+  Description -> "NRMMA is a suite of Mathematica packages for analysing data in Numerical Relativity.",
   Extensions -> 
   {
     { "Kernel",
@@ -39,9 +40,11 @@ Paclet[
         "Tracks`"}
     },
 
-    {"Documentation", 
+    {"Documentation",
+     Language -> "English", 
+     MainPage -> "Guides/NRMMA",
      Resources -> 
-     {"Guides/NRMMA"},
-     Language -> "English"}
+     	{"Guides/NRMMA"}
+    }
   }
-      ]
+]
