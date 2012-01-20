@@ -6,13 +6,14 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["RunFiles`", {"Profile`", "Memo`"}];
+BeginPackage["RunFiles`", {"Profile`", "Memo`", "Providers`"}];
 
 ReadColumnFile;
 ReadColumnFile2;
 FindRunFile::usage = "FindRunFile[run, filename] returns a list containing the full names of files named filename in the different segments of run.";
-FindRunSegments;
-FindRunFilesFromPattern;
+FindRunSegments::usage = "FindRunSegments[run] returns a list of all the segment directories for a run which is split across multiple segments.";
+FindRunDir::usage = "FindRunDir[run] returns the directory which contains the output data for run.  You can give a full or relative pathname to the run directory, or a run name relative to the (Global) variable RunDirectory.";
+FindRunFilesFromPattern::usage = "FindRunFilesFromPattern[run, pattern] returns a list of leaf file names matching pattern which are found in any of the segments of run.  To find the paths within each segment, use FindRunFile on each result from this list.";
 StandardOutputOfRun;
 CarpetASCIIColumns;
 MergeFiles;
@@ -24,7 +25,7 @@ SegmentCoordinateTimeInterval;
 SegmentStartTimes;
 FullFilenames;
 LeafNamesOnly;
-FindFirstRunFile;
+FindFirstRunFile::usage = "FindFirstRunFile[run, file] returns the full pathname of file in the first segment of run.";
 FileIsInRun::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run.";
 
 Begin["`Private`"];
@@ -45,63 +46,72 @@ FileNameTake[s_] :=
 ]; 
 
 (*--------------------------------------------------------------------
-  File reading
+  Finding run directories
   --------------------------------------------------------------------*)
 
-(* This only finds data subdirectories which contain a parameter file
-- this doesn't work with some testsuite parameter files.  Need to find
-a better way. *)
-
-addDataSubDir[output_String] :=
-  Module[{parFiles},
-    parFiles = FileNames["*/*.par", {output}, 2];
-    If[Length[parFiles] === 0, Return[None]];
-    If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
-    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
-
-runDirType[dir_String] :=
-  If[FileType[dir] =!= Directory,
-    None,
-    If[FileType[FileNameJoin[{dir, "SIMULATION_ID"}]] =!= None ||
-       FileType[FileNameJoin[{dir, "SIMFACTORY"}]] =!= None,
-       SimFactory,
-       Standard
-    ]
-  ];
-
 (* Given the name of a run directory, return a path to it *)
-FindRunDir[runName_] :=
- Module[{possibles},
-  If[runDirType[runName] =!= None,
-    (* The run is given by a name which can be found directly *)
-    runName,
+FindRunDir[runName_String] :=
+  Module[
+    {d, dir, dirs, findRunDir},
 
-    (* If we give anything containing a slash, and it doesn't exist, then give up
-       rather than trying to look in RunDirectory. *)
-    If[FileNameDepth[runName]>1, Return[None]];
+    findRunDir[runNamep_String] :=
+    Module[
+      {dir, dirs},
 
-    If[!StringQ[RunDirectory], Return[None]];
+      dir = runNamep;
+      If[FileExistsQ[dir], Return[dir]];
 
-    (* Cannot find directly, so look under RunDirectory *)
-    If[runDirType[FileNameJoin[{RunDirectory, runName}]] =!= None,
-      FileNameJoin[{RunDirectory, runName}],
-      possibles = Select[FileNames[runName, {RunDirectory}, 2], runDirType =!= None &];
-      If[possibles === {},
-        None,
-        First[possibles]]]]
- ];
+      If[StringTake[runNamep,1] === "/", Return[None]];
+
+      If[StringQ[RunDirectory],
+         dir = FileNameJoin[Join[FileNameSplit[RunDirectory],FileNameSplit[runNamep]]];
+         If[FileExistsQ[dir], Return[dir]];
+
+         dirs = FileNames[runNamep, {RunDirectory}, 2];
+         If[Length[dirs] > 1,
+            Throw["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]]];
+
+         If[Length[dirs] === 1, Return[dirs[[1]]]]];
+      
+      None];
+
+    d = findRunDir[runName];
+    If[d =!= None, Return[d]];
+
+    (* Handle the case of the PSU merged run directory *)
+    d = findRunDir[runName<>"-all"];
+    If[d =!= None, Return[d]];
+
+    Throw["Cannot find run "<>runName];
+];
+
+
+(*--------------------------------------------------------------------
+  Finding segments in run directories
+  --------------------------------------------------------------------*)
 
 FindRunSegments[runName_] :=
-  Module[{dir, restarts, segments},
-    dir = FindRunDir[runName];
-    If[dir === None,
-      dir = FindRunDir[runName<>"-all"];
-      If[dir === None,
-        Throw["Cannot find run directory for run " <> runName]]];
-    If[runDirType[dir] === SimFactory,
-      restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
-      segments = Select[Map[addDataSubDir, restarts], (# =!= None) &],
-      {dir}]];
+  FindRunDirSegments[FindRunDir[runName]];
+
+FindRunDirSegments[runDir_] :=        
+  Module[
+    {segments},
+    segments = Catch[CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}]];
+    Print["segments = ", segments];
+    (* Check if an exception was thrown (string) *)
+    If[StringQ[segments],
+       If[StringMatchQ[segments, "No data for"~~__] && FileType[runDir] === Directory,
+          Print["Single dir"];
+          (* Assume we have pointed to a standard single-segment run directory *)
+          Return[{runDir}],
+          (* Some other error *)
+          Throw[segments]],
+       (* No exception (List), so return the result *)
+       segments]];
+
+(*--------------------------------------------------------------------
+  Finding files from runs
+  --------------------------------------------------------------------*)
 
 FindRunFile[runName_String, fileName_String] :=
   Module[{segments, files1, files2},
@@ -133,6 +143,11 @@ FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[
       names = Map[FileNameTake[#,-1]&, names]];
     names
   ];
+
+
+(*--------------------------------------------------------------------
+  High-level operations on files from runs
+  --------------------------------------------------------------------*)
 
 StandardOutputOfRun[runName_String] :=
   Module[{segments, files1, files2},

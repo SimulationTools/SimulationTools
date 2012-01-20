@@ -49,6 +49,7 @@ Module[{packages =
   "ReadHDF5",
   "RunFiles",
   "ShiftTracker",
+  "SimFactory",
   "SimView",
   "SimViewRRMHD",
   "SystemStatistics",
