@@ -18,12 +18,3 @@ Test[
 	,
 	TestID->"ToList"
 ]
-
-
-Test[
-	ToList[DataTable[{{1,10},{2,11},{3,12}}]]
-	,
-	{{1,11},{2,11},{3,12}}
-	,
-	TestID->"Failing Example"
-]
