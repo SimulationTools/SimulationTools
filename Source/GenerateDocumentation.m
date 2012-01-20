@@ -62,7 +62,7 @@ docPackage[package_ -> symbols_] :=
 
 Scan[docPackage, packageSymbols];
 
-sourceGuides = FileNames["*.mg", "Source", Infinity];
+sourceGuides = FileNames["*.md", "Source", Infinity];
 destGuides =
   FileNameJoin[{Directory[], FileNameDrop[DirectoryName[#], 1],
       FileBaseName[#] <> ".nb"}] & /@ sourceGuides;
