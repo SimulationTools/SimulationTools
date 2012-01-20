@@ -52,7 +52,7 @@ FileNameTake[s_] :=
 (* Given the name of a run directory, return a path to it *)
 FindRunDir[runName_String] :=
   Module[
-    {d, dir, dirs, findRunDir},
+    {d, findRunDir},
 
     findRunDir[runNamep_String] :=
     Module[
