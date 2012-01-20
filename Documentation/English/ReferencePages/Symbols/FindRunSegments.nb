@@ -1,6 +1,6 @@
 Notebook[{
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CARPETHDF5` SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["NRMMA`RUNFILES` SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
@@ -43,7 +43,7 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/ReadVariables URL\"\>":>
+        StripOnInput->False], {"\<\"Go to nrmma/ref/FindRunSegments URL\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
            URL["your.website.goes.here/documentationIfAny"], None}]}], 
@@ -62,18 +62,18 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["ReadVariables", "ObjectName"],
+Cell["FindRunSegments", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ReadVariables",
+       ButtonBox["FindRunSegments",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadVariables"], "[", 
+        ButtonData->"paclet:nrmma/ref/FindRunSegments"], "[", 
        StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ReadVariables[run, var] reads the variable names \
-present in the CarpetHDF5 file named var in the directory run."
+     "\[LineSeparator]FindRunSegments[run] returns a list of all the segment \
+directories for a run which is split across multiple segments."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -90,7 +90,7 @@ Cell[BoxData[""]]
 Saveable->False,
 WindowSize->Automatic,
 WindowMargins->Automatic,
-WindowTitle->"ReadVariables - nrmma`CarpetHDF5`",
+WindowTitle->"FindRunSegments - nrmma`RunFiles`",
 Visible->True,
 DockedCells->FEPrivate`FrontEndResource[
  "FEExpressions", "HelpViewerToolbar"],
@@ -110,14 +110,15 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"readvariables", "READVARIABLES"}, 
-    "index" -> True, "label" -> "nrmma`CarpetHDF5` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma CarpetHDF5", "status" -> "", "summary" -> 
-    "ReadVariables[run, var] reads the variable names present in the \
-CarpetHDF5 file named var in the directory run.", 
-    "synonyms" -> {"readvariables", "READVARIABLES"}, "title" -> 
-    "ReadVariables", "windowTitle" -> "ReadVariables", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ReadVariables"}, "SearchTextTranslated" -> "", 
+   "context" -> "nrmma`", 
+    "keywords" -> {"findrunsegments", "FINDRUNSEGMENTS"}, "index" -> True, 
+    "label" -> "nrmma`RunFiles` Symbol", "language" -> "en", "paclet" -> 
+    "nrmma RunFiles", "status" -> "", "summary" -> 
+    "FindRunSegments[run] returns a list of all the segment directories for a \
+run which is split across multiple segments.", 
+    "synonyms" -> {"findrunsegments", "FINDRUNSEGMENTS"}, "title" -> 
+    "FindRunSegments", "windowTitle" -> "FindRunSegments", "type" -> "Symbol",
+     "uri" -> "nrmma/ref/FindRunSegments"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

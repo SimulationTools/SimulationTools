@@ -91,7 +91,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
+WindowSize->Automatic,
 WindowMargins->Automatic,
 WindowTitle->"ResampleDataRegions - nrmma`DataRegion`",
 Visible->True,

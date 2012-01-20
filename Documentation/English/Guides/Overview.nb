@@ -1,7 +1,7 @@
 Notebook[{
 Cell[" ", "GuideColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}},
- CellID->1251219370],
+ CellID->1680108877],
 
 Cell[TextData[{
  ButtonBox["nrmma",
@@ -12,7 +12,7 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/Overview"]
 }], "LinkTrail",
- CellID->1084080166],
+ CellID->327421336],
 
 Cell[BoxData[GridBox[{
    {Cell["OVERVIEW GUIDE", "PacletNameCell"], Cell[TextData[Cell[BoxData[
@@ -31,25 +31,25 @@ Cell[BoxData[GridBox[{
       MenuAppearance->Automatic]],
      LineSpacing->{1.4, 0}]], "AnchorBar"]}
   }]], "AnchorBarGrid",
- CellID->884088814],
+ CellID->1117290538],
 
 Cell[CellGroupData[{
 
 Cell["NRMMA Overview", "GuideTitle",
- CellID->441343305],
+ CellID->705062798],
 
 Cell["\<\
 This page gives an overview of all the functions and symbols provided by \
 nrmma.\
 \>", "GuideAbstract",
- CellID->248410397],
+ CellID->175681840],
 
 Cell[CellGroupData[{
 
 Cell[TextData[ButtonBox["Ascii1D \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Ascii1D"]], "GuideFunctionsSubsection",
- CellID->325332611],
+ CellID->2042153902],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["AsciiDataOfIndex",
@@ -78,7 +78,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/ReadCarpetASCII1DFromRun"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->371827815]
+ CellID->1396984560]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -86,7 +86,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Ascii \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Ascii"]], "GuideFunctionsSubsection",
- CellID->132673935],
+ CellID->680787269],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadCarpetASCIIScalar",
@@ -98,7 +98,7 @@ Cell[TextData[{
   "InlineSeparator"],
  " "
 }], "InlineGuideFunctionListing",
- CellID->762799959]
+ CellID->198758867]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -107,7 +107,7 @@ Cell[TextData[ButtonBox["BHCoordinates \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/BHCoordinates"]], "GuideFunctionsSubsection",
  
- CellID->2049021970],
+ CellID->1203206584],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["BHCoordinateMergerTime",
@@ -193,7 +193,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ReadBHTrajectory"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->864486498]
+ CellID->1587037136]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -201,7 +201,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["CarpetHDF5 \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/CarpetHDF5"]], "GuideFunctionsSubsection",
- CellID->1697699931],
+ CellID->1586249012],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadGridFunction",
@@ -257,7 +257,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/StripGhostZones"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1775006275]
+ CellID->1225150826]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -266,7 +266,7 @@ Cell[TextData[ButtonBox["CoordinateTransformations \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
   "paclet:nrmma/guide/CoordinateTransformations"]], "GuideFunctionsSubsection",
- CellID->1835123448],
+ CellID->1036725146],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["CartesianToThornburg",
@@ -301,7 +301,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/TortoiseToRadial"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->759652322]
+ CellID->1704700711]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -309,7 +309,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Convergence \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Convergence"]], "GuideFunctionsSubsection",
- CellID->686294439],
+ CellID->1325515150],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ConvergenceMultiplier",
@@ -348,7 +348,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/RichardsonExtrapolationError"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->415968236]
+ CellID->2085255719]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -356,7 +356,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["DataAnalysis \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/DataAnalysis"]], "GuideFunctionsSubsection",
- CellID->1118871467],
+ CellID->2107233840],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ComputeOverlap",
@@ -370,7 +370,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1505932737]
+ CellID->2126326203]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -378,7 +378,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["DataRegion \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/DataRegion"]], "GuideFunctionsSubsection",
- CellID->2116730864],
+ CellID->889124094],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ColorMapLegend",
@@ -605,8 +605,8 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ResampleDataRegions",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ResampleDataRegions"]], 
-  "InlineFunctionSans"],
+  ButtonData->"paclet:nrmma/ref/ResampleDataRegions"]], "InlineFunctionSans"],
+ 
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
@@ -651,7 +651,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ToDataTable"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->681535046]
+ CellID->1317432032]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -659,7 +659,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["DataTable \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/DataTable"]], "GuideFunctionsSubsection",
- CellID->2029228671],
+ CellID->1523761254],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["Add",
@@ -917,7 +917,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ToList"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1058475490]
+ CellID->1112905503]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -925,7 +925,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["FieldLines \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/FieldLines"]], "GuideFunctionsSubsection",
- CellID->43028682],
+ CellID->20223551],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ColorRanges2d",
@@ -1018,7 +1018,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/SequenceFieldLines3d"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1628552982]
+ CellID->594805431]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1026,7 +1026,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Grids \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Grids"]], "GuideFunctionsSubsection",
- CellID->1410887459],
+ CellID->358502032],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["AnimateGrids",
@@ -1175,7 +1175,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/TimeRefinementFactors"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->271093239]
+ CellID->1652021989]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1183,7 +1183,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Horizons \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Horizons"]], "GuideFunctionsSubsection",
- CellID->1451252586],
+ CellID->717497060],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadAHCentroid",
@@ -1219,7 +1219,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/ReadIsolatedHorizonSpin"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->82950276]
+ CellID->852409515]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1227,7 +1227,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Kicks \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Kicks"]], "GuideFunctionsSubsection",
- CellID->428401829],
+ CellID->583309468],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["AngularMomentumFlux",
@@ -1272,7 +1272,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/SpinWeightedSphericalHarmonic"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1784355259]
+ CellID->419380121]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1280,7 +1280,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Memo \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Memo"]], "GuideFunctionsSubsection",
- CellID->49707658],
+ CellID->480364193],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ClearAllMemos",
@@ -1301,7 +1301,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/Memo"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->65469323]
+ CellID->1089962678]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1309,7 +1309,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["NR \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/NR"]], "GuideFunctionsSubsection",
- CellID->831284397],
+ CellID->967220236],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadHamiltonianConstraintNorm",
@@ -1321,7 +1321,7 @@ Cell[TextData[{
   "InlineSeparator"],
  " "
 }], "InlineGuideFunctionListing",
- CellID->2015736644]
+ CellID->1766782309]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1329,7 +1329,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["NRExport \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/NRExport"]], "GuideFunctionsSubsection",
- CellID->1931244283],
+ CellID->1053880294],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ExportAllExtractedWaveforms",
@@ -1434,7 +1434,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/JunkTime"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1354823623]
+ CellID->120980802]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1442,7 +1442,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["nrmmaVersion \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/nrmmaVersion"]], "GuideFunctionsSubsection",
- CellID->751522620],
+ CellID->1804809152],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["nrmmaVersion",
@@ -1453,7 +1453,7 @@ Cell[TextData[{
   "InlineSeparator"],
  " "
 }], "InlineGuideFunctionListing",
- CellID->1489346333]
+ CellID->220903789]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1461,10 +1461,10 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Parameters \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Parameters"]], "GuideFunctionsSubsection",
- CellID->374429299],
+ CellID->1878239707],
 
 Cell["", "InlineGuideFunctionListing",
- CellID->906142583]
+ CellID->1712628296]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1472,7 +1472,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Plotting \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Plotting"]], "GuideFunctionsSubsection",
- CellID->1731851604],
+ CellID->1420450131],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["DynamicListLinePlot",
@@ -1517,7 +1517,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/PresentationListLinePlot"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->236556990]
+ CellID->2077131665]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1525,7 +1525,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Profile \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Profile"]], "GuideFunctionsSubsection",
- CellID->821100333],
+ CellID->857728023],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ClearProfile",
@@ -1539,7 +1539,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/Profile"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->503381109]
+ CellID->1924643897]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1547,7 +1547,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["ReadHDF5 \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/ReadHDF5"]], "GuideFunctionsSubsection",
- CellID->1388213430],
+ CellID->2091285765],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadHDF5",
@@ -1561,7 +1561,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ShowHDF5Progress"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1440777002]
+ CellID->375001906]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1569,7 +1569,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["RunFiles \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/RunFiles"]], "GuideFunctionsSubsection",
- CellID->113469042],
+ CellID->1940013844],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["FileIsInRun",
@@ -1579,11 +1579,40 @@ Cell[TextData[{
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
+ Cell[TextData[ButtonBox["FindFirstRunFile",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/FindFirstRunFile"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["FindRunDir",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/FindRunDir"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
  Cell[TextData[ButtonBox["FindRunFile",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FindRunFile"]], "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/FindRunFile"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["FindRunFilesFromPattern",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/FindRunFilesFromPattern"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["FindRunSegments",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/FindRunSegments"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->108710358]
+ CellID->568463707]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1591,7 +1620,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["SimView \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/SimView"]], "GuideFunctionsSubsection",
- CellID->1733886956],
+ CellID->14778046],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["FinishTime",
@@ -1605,7 +1634,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/SimView"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->84979702]
+ CellID->1413999717]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1613,10 +1642,10 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["SimViewRRMHD \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/SimViewRRMHD"]], "GuideFunctionsSubsection",
- CellID->177226259],
+ CellID->1039205917],
 
 Cell["", "InlineGuideFunctionListing",
- CellID->81916624]
+ CellID->449345968]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1625,7 +1654,7 @@ Cell[TextData[ButtonBox["SystemStatistics \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
   "paclet:nrmma/guide/SystemStatistics"]], "GuideFunctionsSubsection",
- CellID->235681841],
+ CellID->1605181324],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["RunCost",
@@ -1636,7 +1665,7 @@ Cell[TextData[{
   "InlineSeparator"],
  " "
 }], "InlineGuideFunctionListing",
- CellID->1144856619]
+ CellID->1592938854]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1644,10 +1673,10 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Tracks \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Tracks"]], "GuideFunctionsSubsection",
- CellID->151718413],
+ CellID->1992175676],
 
 Cell["", "InlineGuideFunctionListing",
- CellID->868278302]
+ CellID->1079046155]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1655,7 +1684,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["TwoPunctures \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/TwoPunctures"]], "GuideFunctionsSubsection",
- CellID->1002040349],
+ CellID->29328170],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadADMMass",
@@ -1686,7 +1715,7 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/ReadTwoPuncturesData"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->725385869]
+ CellID->1144798027]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1694,7 +1723,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Waveforms \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Waveforms"]], "GuideFunctionsSubsection",
- CellID->295636264],
+ CellID->1314446316],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["AlignPhases",
@@ -1807,14 +1836,14 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/UseTortoiseCoordinate"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing",
- CellID->1629013537]
+ CellID->734956323]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[" ", "FooterCell",
- CellID->561500756],
+ CellID->84983117],
 
 Cell[BoxData[""]]
 }, Open  ]]

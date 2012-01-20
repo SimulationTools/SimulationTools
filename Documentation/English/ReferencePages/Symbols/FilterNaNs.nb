@@ -89,7 +89,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
+WindowSize->Automatic,
 WindowMargins->Automatic,
 WindowTitle->"FilterNaNs - nrmma`DataRegion`",
 Visible->True,

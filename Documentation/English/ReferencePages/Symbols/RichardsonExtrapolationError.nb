@@ -94,7 +94,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
+WindowSize->Automatic,
 WindowMargins->Automatic,
 WindowTitle->"RichardsonExtrapolationError - nrmma`Convergence`",
 Visible->True,

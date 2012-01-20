@@ -93,7 +93,7 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->{740, 867},
+WindowSize->Automatic,
 WindowMargins->Automatic,
 WindowTitle->"TimeDerivative - nrmma`DataRegion`",
 Visible->True,
