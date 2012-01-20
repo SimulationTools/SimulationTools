@@ -25,7 +25,6 @@ SimFactory`RunFiles`FindRunDirSegments[dir_] :=
   Module[
     {restarts, segments},
     restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
-    Print["restarts = ", restarts];
     segments = Select[Map[addDataSubDir, restarts], (# =!= None) &]];
 
 End[];

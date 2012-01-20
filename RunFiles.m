@@ -97,11 +97,9 @@ FindRunDirSegments[runDir_] :=
   Module[
     {segments},
     segments = Catch[CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}]];
-    Print["segments = ", segments];
     (* Check if an exception was thrown (string) *)
     If[StringQ[segments],
        If[StringMatchQ[segments, "No data for"~~__] && FileType[runDir] === Directory,
-          Print["Single dir"];
           (* Assume we have pointed to a standard single-segment run directory *)
           Return[{runDir}],
           (* Some other error *)
