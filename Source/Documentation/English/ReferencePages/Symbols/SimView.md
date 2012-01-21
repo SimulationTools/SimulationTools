@@ -24,6 +24,6 @@
     "SimView requires that the Multipole, PunctureTracker and SystemStatistics thorns to have been activated in the simulation."
     },
   "Basic Examples" -> {
-    "A basic example"
+    "SimView[\"bbh\"]"
   }
 }
