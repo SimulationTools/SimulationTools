@@ -46,15 +46,7 @@ workbenchSymbols =
    ListLinePlotWithLegend,
    LookupParameter,
    PresentationListLinePlot,
-   ReadCPUHours,
-   ReadCarpetASCII1D,
-   ReadCores,
-   ReadMemory,
-   ReadRunSpeed,
-   ReadSwap,
-   ReadWalltime,
-   RunDirectory,
-   SimView};
+   ReadCarpetASCII1D};
 
 docPackage[package_ -> symbols_] :=
   Map[BuildSymbolReference["nrmma", #, "Source"] &, Complement[Take[symbols,Min[Infinity,Length[symbols]]], workbenchSymbols]];

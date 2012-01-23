@@ -4,16 +4,16 @@
 
 BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`"}];
 
-ReadRunSpeed;
-RunCost::usage = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
+ReadRunSpeed::usage = "ReadRunSpeed[run] returns a DataTable with the speed of a run in M/hr as a function of time.";
+RunCost::usage      = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
+ReadMemory::usage   = "ReadMemory[run] returns a DataTable with the swap usage of run as a function of time.";
+ReadSwap::usage     = "ReadSwap[run] returns a DataTable with the swap usage of run as a function of time.";
+ReadWalltime::usage = "ReadWalltime[run] returns the total walltime used by sim.";
+ReadCores::usage    = "ReadCores[run] returns the number of cores used by sim.";
+ReadCPUHours::usage = "ReadCPUHours[run] returns the total number of CPU hours used by run.";
 CPUHours;
 WallTimeDays;
-ReadMemory;
-ReadSwap;
-ReadCPUHours;
-ReadWalltime;
 ReadWalltimeHours;
-ReadCores;
 CostAnalysis;
 PresentationCostAnalysis;
 ReadCarpetSpeed;
