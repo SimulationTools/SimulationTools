@@ -1,12 +1,5 @@
 {
- "Application" -> "nrmma",
- "Package" -> "SimView",
- "Symbol" -> "SimView",
- "Title" -> "SimView",
  "Summary" -> "produce a quick overview of a simulation",
- "Keywords" -> {"SimView"},
- "Label" -> "SimView",
- "Synonyms" -> {"simview"},
  "URL" -> "http://bitbucket.org/ianhinder/nrmma",
  "Tutorials" -> {"NumericalRelativity"},
  "See Also" -> {
