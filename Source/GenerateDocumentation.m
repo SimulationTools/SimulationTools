@@ -1,6 +1,6 @@
 << nrmma`;
 
-<< ApplicationMaker`;
+<< DocumentationBuilder`;
 
 packages =
  {"Ascii1D",
