@@ -2,7 +2,10 @@
 
 BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`", "Parameters`", "Plotting`"}];
 
-SimView::usage = "SimView[run, r] displays a graphical overview of a simulation.  r is the extraction radius at which to display any waveforms.  r defaults to the first available extraction radius if not given.  run can be either the name of a run or a list of names of runs, in which case data from all the runs will be displayed on the same plots.";
+SimView::usage = "SimView[sim] gives a quick overview of the simulation sim.
+SimView[sim, rad] gives a quick overview of the simulation sim with waveforms extracted at radius rad.
+SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....
+SimView[{sim1, sim2, ...}, rad] gives a quick overview of the simulations sim1, sim2, ... with waveforms extracted at radius rad.";
 
 FinishTime::usage = "FinishTime[run] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."
 
