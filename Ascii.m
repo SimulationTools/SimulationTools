@@ -4,8 +4,7 @@
 
 BeginPackage["Ascii`", {"Ascii1D`","DataTable`", "Profile`", "Memo`", "RunFiles`"}];
 
-ReadCarpetASCIIScalar::usage = "ReadCarpetASCIIScalar[run,filename]
-	Reads Carpet ASCII 0D and Scalar data.";
+ReadCarpetASCIIScalar::usage = "ReadCarpetASCIIScalar[run,filename] Reads Carpet ASCII 0D and Scalar data.";
 
 Begin["`Private`"];
 
