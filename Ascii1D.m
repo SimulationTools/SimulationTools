@@ -6,13 +6,9 @@ BeginPackage["Ascii1D`", {"DataTable`", "Profile`", "Memo`", "RunFiles`"}];
 fileName (which should be in ygraph format) and returns it as a list
 in the form {{t, {{x, f}...}}...}."; *)
 
-AsciiDataOfIndex::usage = "AsciiDataOfIndex[data,i] returns the data,
-f, of the ith element of data where data is in the form {{t, {{x,
-f}...}}...}";
+AsciiDataOfIndex::usage = "AsciiDataOfIndex[data,i] returns the data, f, of the ith element of data where data is in the form {{t, {{x, f}...}}...}";
 
-AsciiTimeOfIndex::usage = "AsciiTimeOfIndex[data,i] returns the time,
-t, of the ith element of data where data is in the form {{t, {{x,
-f}...}}...}";
+AsciiTimeOfIndex::usage = "AsciiTimeOfIndex[data,i] returns the time, t, of the ith element of data where data is in the form {{t, {{x, f}...}}...}";
 
 ReadCarpetASCII1D::usage = "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of lists of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times, and the outermost list is over refinement levels.";
 
