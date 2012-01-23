@@ -7,7 +7,7 @@
  "Description" -> 
    {"NRMMA is a suite of ", StyleBox["Mathematica", FontSlant->"Italic"], " packages for analysing data in Numerical Relativity.  It has been designed for use with common output formats used by the Cactus code, with a focus on output from the PSU and AEI codes."},
  "Keywords" -> {"nrmma", "NRMMA"},
- "Label" -> "NRMMA Label",
+ "Label" -> "NRMMA Application",
  "Synonyms" -> {"NRMMA", "nrmma"},
  "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
  "Packages" -> {
