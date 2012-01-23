@@ -62,4 +62,4 @@ destGuides =
 MapThread[BuildGuide, {sourceGuides, destGuides}];
 
 Print["Indexing Documentation"];
-BuildApplication["nrmma", CreatePacletInfo -> False];
+BuildIndex["nrmma"];
