@@ -1423,7 +1423,18 @@ Cell[TextData[ButtonBox["Parameters \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Parameters"]], "GuideFunctionsSubsection"],
 
-Cell["", "InlineGuideFunctionListing"]
+Cell[TextData[{
+ Cell[TextData[ButtonBox["FindParameters",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/FindParameters"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["LookupParameter",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/LookupParameter"]], "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
 }, Open  ]],
 
 Cell[CellGroupData[{

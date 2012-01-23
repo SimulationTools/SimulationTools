@@ -32,26 +32,14 @@ packages =
   "TwoPunctures",
   "Waveforms"};
 
-documentedSymbols[package_String] :=
-  Select[Names[package<>"`*"], StringQ[ToExpression[#<>"::usage"]] &];
+packageSymbols = Map[# -> DocumentedSymbols[#] &, packages];
 
-packageSymbols = Map[# -> documentedSymbols[#] &, packages];
-
-workbenchSymbols =
-  ToString/@{AsciiDataOfIndex,
-   AsciiTimeOfIndex,
-   ConvergenceMultiplier,
-   ConvergenceRate,
-   FindParameters,
-   ListLinePlotWithLegend,
-   LookupParameter,
-   PresentationListLinePlot,
-   ReadCarpetASCII1D};
-
-docPackage[package_ -> symbols_] :=
-  Map[BuildSymbolReference["nrmma", #, "Source"] &, Complement[Take[symbols,Min[Infinity,Length[symbols]]], workbenchSymbols]];
+undocumentedSymbols = Map[# -> UndocumentedSymbols[#] &, packages] /. (_ -> {}) -> Sequence[];
+Map[Print["Undocumented symbols for package "<>#[[1]]<>" skipped:\n", #[[2]]]&, undocumentedSymbols];
 
 Print["Building symbol reference pages"];
+docPackage[package_ -> symbols_] :=
+  Map[BuildSymbolReference["nrmma", #, "Source"] &, symbols];
 Scan[docPackage, packageSymbols];
 
 Print["Building guides"];

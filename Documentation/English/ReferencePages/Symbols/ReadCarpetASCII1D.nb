@@ -1,42 +1,28 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 8.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[     13149,        427]
-NotebookOptionsPosition[     10238,        333]
-NotebookOutlinePosition[     11843,        379]
-CellTagsIndexPosition[     11758,        374]
-WindowTitle->ReadCarpetASCII1D - Wolfram Mathematica
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["Mathematica",
+ ButtonBox["nrmma",
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
- StyleBox[" > ", "LinkTrailSeparator"]
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Ascii1D",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Ascii1D"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadCarpetASCII1D",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadCarpetASCII1D"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["ASCII1D PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"ASCIIDataOfIndex\"\>":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/ASCIIDataOfIndex"], "\<\"ASCIITimeOfIndex\"\>":>
+        StripOnInput->False], {"ASCIIDataOfIndex":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ASCIIDataOfIndex"], "ASCIITimeOfIndex":>
        Documentation`HelpLookup["paclet:nrmma/ref/ASCIITimeOfIndex"]},
        Appearance->None,
        MenuAppearance->Automatic]],
@@ -46,74 +32,36 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"NRMMA Package\"\>":>
-       Documentation`HelpLookup["paclet:nrmma/guide/NRMMA"]},
+        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
+       "paclet:nrmma/guide/nrmma"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
      "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"nrmma/ref/ReadCarpetASCII1D\"\>":>
-       None, "\<\"Copy Mathematica url\"\>":>
-       Module[{DocumentationSearch`Private`nb$}, 
-        DocumentationSearch`Private`nb$ = NotebookPut[
-           Notebook[{
-             Cell["nrmma/ref/ReadCarpetASCII1D"]}, Visible -> False]]; 
-        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
-        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
-        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
-       Delimiter, "\<\"Copy web url\"\>":>
-       Module[{DocumentationSearch`Private`nb$}, 
-        DocumentationSearch`Private`nb$ = NotebookPut[
-           Notebook[{
-             Cell[
-              BoxData[
-               MakeBoxes[
-                Hyperlink[
-                "http://reference.wolfram.com/mathematica/nrmma/ref/\
-ReadCarpetASCII1D.html"], StandardForm]], "Input", TextClipboardType -> 
-              "PlainText"]}, Visible -> False]]; 
-        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
-        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
-        NotebookClose[DocumentationSearch`Private`nb$]; 
-        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-            StringJoin[
-            "http://reference.wolfram.com/mathematica/", 
-             "nrmma/ref/ReadCarpetASCII1D", ".html"]], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
+\[ThickSpace]"
     }], "AnchorBar"]}
-  }]], "AnchorBarGrid",
- CellID->1],
+  }]], "AnchorBarGrid"],
 
 Cell[CellGroupData[{
 
-Cell["ReadCarpetASCII1D", "ObjectName",
- CellID->1224892054],
+Cell["ReadCarpetASCII1D", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
-      RowBox[{"ReadCarpetASCII1D", "[", 
+      RowBox[{
+       ButtonBox["ReadCarpetASCII1D",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadCarpetASCII1D"], "[", 
        StyleBox[
         RowBox[{"filename", ",", " ", "dir"}], "TI"], "]"}]], "InlineFormula"],
-     " \[LineSeparator]reads a 1D CarpetIOASCII output file assuming that the \
-output is in direction ",
-     StyleBox["dir", "TI"],
-     "."
+     "\[LineSeparator]reads a 1D CarpetIOASCII output file.  It assumes that \
+the output is in direction dir, running from 1 to 3. The data is returned as \
+a list of lists of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti \
+are the times and the di are DataTables representing the 1D data at those \
+times, and the outermost list is over refinement levels."
     }]]}
-  }]], "Usage",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}}},
- CellID->982511436]
+  }]], "Usage"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -134,31 +82,18 @@ Cell[TextData[Cell[BoxData[
       FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
   Evaluator->None,
   Method->"Preemptive"]]]], "NotesSection",
- CellGroupingRules->{"SectionGrouping", 50},
- CellID->22874802],
+ CellGroupingRules->{"SectionGrouping", 50}],
 
-Cell[TextData[{
- "The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, \
-dn}} where the ti are the times and the di are ",
- ButtonBox["DataTables",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataTables"],
- " representing the 1D data at those times."
-}], "Notes",
- CellID->1067943069],
+Cell["\<\
+The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, \
+dn}} where the ti are the times and the di are DataTables representing the 1D \
+data at those times.\
+\>", "Notes"],
 
-Cell[TextData[{
- "The functions ",
- ButtonBox["ASCIITimeOfIndex",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ASCIITimeOfIndex"],
- " and ",
- ButtonBox["ASCIIDataOfIndex",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ASCIIDataOfIndex"],
- " can be used for working with the output format."
-}], "Notes",
- CellID->13431417]
+Cell["\<\
+The functions ASCIITimeOfIndex and ASCIIDataOfIndex can be used for working \
+with the output format.\
+\>", "Notes"]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -175,54 +110,28 @@ Cell[TextData[ButtonBox["EXAMPLES",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "PrimaryExamplesSection",
- CellTags->"PrimaryExamplesSection",
- CellID->57224401],
+ CellTags->"PrimaryExamplesSection"],
 
 Cell[CellGroupData[{
 
 Cell[TextData[{
  "Basic Examples",
  "\[NonBreakingSpace]\[NonBreakingSpace]",
- Cell["(1)", "ExampleCount"]
-}], "ExampleSection",
- CellID->1845317398],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:=",
- CellID->1354731561],
+ Cell["(2)", "ExampleCount"]
+}], "ExampleSection"],
 
 Cell["\<\
 The resulting structure (simulated here for the purpose of documentation) is \
 of the form\
-\>", "ExampleText",
- CellID->405972353],
+\>", "ExampleText"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"data", "=", 
-  RowBox[{"Table", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"t", ",", 
-      RowBox[{"MakeDataTable", "[", 
-       RowBox[{"Table", "[", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"x", ",", 
-           RowBox[{"Sin", "[", 
-            RowBox[{"2", "Pi", " ", 
-             RowBox[{"(", 
-              RowBox[{"x", "-", "t"}], ")"}]}], "]"}]}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
-       "]"}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"t", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}]}]], "Input",\
-
- CellLabel->"In[2]:=",
- CellID->621790352],
+Cell["\<\
+data = Table[{t, MakeDataTable[Table[{x, Sin[2 Pi (x - t)]}, {x, 0, 1, \
+0.1}]]}, {t, 0, 1, 0.1}]\
+\>", "Input",
+ CellLabel->"In[1]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -261,11 +170,7 @@ Cell[BoxData[
     RowBox[{"1.`", ",", 
      RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]}], "}"}]}], 
   "}"}]], "Output",
- ImageSize->{485, 52},
- ImageMargins->{{0, 0}, {0, 0}},
- ImageRegion->{{0, 1}, {0, 1}},
- CellLabel->"Out[2]=",
- CellID->775019762]
+ CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -283,8 +188,7 @@ Cell[TextData[ButtonBox["SEE ALSO",
     FrontEndToken["OpenCloseGroup"], 
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "SeeAlsoSection",
- CellID->1255426704],
+     CellContents]}]& )]], "SeeAlsoSection"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -303,8 +207,7 @@ Cell[TextData[{
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/ASCIITimeOfIndex"],
    FontFamily->"Verdana"]], "InlineFormula"]
-}], "SeeAlso",
- CellID->929782353]
+}], "SeeAlso"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -320,118 +223,49 @@ Cell[TextData[ButtonBox["MORE ABOUT",
     FrontEndToken["OpenCloseGroup"], 
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "MoreAboutSection",
- CellID->38303248],
+     CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["NRMMA Package",
+Cell[TextData[ButtonBox["nrmma",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/NRMMA"]], "MoreAbout",
- CellID->290678212]
+ ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"]
 }, Open  ]],
 
-Cell[" ", "FooterCell"]
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
 },
 Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ReadCarpetASCII1D - Wolfram Mathematica",
+WindowTitle->"ReadCarpetASCII1D",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "built" -> "{2011, 3, 15, 1, 20, 23.660236}", "context" -> "nrmma`", 
-    "keywords" -> {}, "index" -> True, "label" -> "nrmma Paclet Symbol", 
-    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
-    "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file \
-assuming that the output is in direction dir.", "synonyms" -> {}, "title" -> 
-    "ReadCarpetASCII1D", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadCarpetASCII1D"}, "LinkTrails" -> "", 
-  "SearchTextTranslated" -> ""},
-CellContext->"Global`",
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
-StyleDefinitions->Notebook[{
-   Cell[
-    StyleData[
-    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
-   Cell[
-    StyleData["Input"], CellContext -> "Global`"], 
-   Cell[
-    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
-  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
-  StyleDefinitions -> "Default.nb"]
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadCarpetASCII1D", "READCARPETASCII1D", "readcarpetascii1d"}, "index" -> 
+    True, "label" -> "nrmma/Ascii1D Symbol", "language" -> "en", "paclet" -> 
+    "Ascii1D", "status" -> "None", "summary" -> 
+    "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file.  \
+It assumes that the output is in direction dir, running from 1 to 3. The data \
+is returned as a list of lists of the form {{t1, d1}, {t2, d2}, ..., {tn, \
+dn}} where the ti are the times and the di are DataTables representing the 1D \
+data at those times, and the outermost list is over refinement levels.", 
+    "synonyms" -> {
+     "ReadCarpetASCII1D", "READCARPETASCII1D", "readcarpetascii1d"}, "title" -> 
+    "ReadCarpetASCII1D", "windowTitle" -> "ReadCarpetASCII1D", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadCarpetASCII1D"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{
- "PrimaryExamplesSection"->{
-  Cell[5457, 165, 460, 13, 45, "PrimaryExamplesSection",
-   CellTags->"PrimaryExamplesSection",
-   CellID->57224401]}
- }
-*)
-(*CellTagsIndex
-CellTagsIndex->{
- {"PrimaryExamplesSection", 11616, 367}
- }
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[610, 21, 76, 1, 2, "SymbolColorBar"],
-Cell[689, 24, 176, 5, 19, "LinkTrail"],
-Cell[868, 31, 2664, 61, 47, "AnchorBarGrid",
- CellID->1],
-Cell[CellGroupData[{
-Cell[3557, 96, 60, 1, 51, "ObjectName",
- CellID->1224892054],
-Cell[3620, 99, 528, 16, 84, "Usage",
- CellID->982511436]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[4185, 120, 579, 17, 38, "NotesSection",
- CellGroupingRules->{"SectionGrouping", 50},
- CellID->22874802],
-Cell[4767, 139, 314, 8, 70, "Notes",
- CellID->1067943069],
-Cell[5084, 149, 336, 11, 70, "Notes",
- CellID->13431417]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[5457, 165, 460, 13, 45, "PrimaryExamplesSection",
- CellTags->"PrimaryExamplesSection",
- CellID->57224401],
-Cell[CellGroupData[{
-Cell[5942, 182, 149, 5, 32, "ExampleSection",
- CellID->1845317398],
-Cell[6094, 189, 94, 3, 24, "Input",
- CellID->1354731561],
-Cell[6191, 194, 141, 4, 32, "ExampleText",
- CellID->405972353],
-Cell[CellGroupData[{
-Cell[6357, 202, 686, 22, 38, "Input",
- CellID->621790352],
-Cell[7046, 226, 1540, 41, 73, "Output",
- CellID->775019762]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[8647, 274, 417, 12, 45, "SeeAlsoSection",
- CellID->1255426704],
-Cell[9067, 288, 534, 18, 19, "SeeAlso",
- CellID->929782353]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[9638, 311, 419, 12, 45, "MoreAboutSection",
- CellID->38303248],
-Cell[10060, 325, 136, 3, 16, "MoreAbout",
- CellID->290678212]
-}, Open  ]],
-Cell[10211, 331, 23, 0, 40, "FooterCell"]
-}
-]
-*)
-
-(* End of internal cache information *)
 

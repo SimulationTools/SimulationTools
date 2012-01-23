@@ -10,35 +10,22 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      2844,         88]
-NotebookOptionsPosition[      2287,         62]
-NotebookOutlinePosition[      2663,         79]
-CellTagsIndexPosition[      2620,         76]
+NotebookDataLength[     18651,        438]
+NotebookOptionsPosition[     17487,        398]
+NotebookOutlinePosition[     17863,        415]
+CellTagsIndexPosition[     17820,        412]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-
-Cell[CellGroupData[{
 Cell[BoxData[
- RowBox[{"SetDirectory", "[", 
-  RowBox[{"ParentDirectory", "[", 
-   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}]], "Input",
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"ParentDirectory", "[", 
+    RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ";"}]], "Input",
  CellChangeTimes->{{3.535782649608097*^9, 3.5357826581837387`*^9}, 
-   3.535785036649623*^9, {3.535981398289174*^9, 3.535981402655658*^9}}],
-
-Cell[BoxData["\<\"/Users/barry/Research/Code/nrmma\"\>"], "Output",
- CellChangeTimes->{3.5357962455831614`*^9, 3.53579654824341*^9, 
-  3.535797349253957*^9, 3.535797442357305*^9, 3.535797497919142*^9, 
-  3.535981419531694*^9, 3.5359829103284883`*^9, 3.53598464661945*^9, 
-  3.5359847358481827`*^9, 3.535984789367165*^9, 3.535986599527277*^9, 
-  3.5359880866327*^9, 3.535988609613216*^9, 3.535988780484507*^9, 
-  3.5359892626650963`*^9, 3.536312215314067*^9, 3.536313678368718*^9, 
-  3.536316415765307*^9, 3.5363168376948147`*^9, 3.53631780708263*^9, 
-  3.5363185931209*^9, 3.536324065699997*^9, 3.536324387958181*^9, 
-  3.536325201427408*^9, 3.536325598814683*^9, 3.536326689221879*^9, 
-  3.536327824112177*^9, 3.5363282444771013`*^9, 3.5363287629654922`*^9}]
-}, Open  ]],
+   3.535785036649623*^9, {3.535981398289174*^9, 3.535981402655658*^9}, 
+   3.536332655315823*^9}],
 
 Cell[CellGroupData[{
 
@@ -49,19 +36,368 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package BHCoordinates \
+skipped:\\n\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"InitialSeparation\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package BHCoordinates skipped:\n", {
+   "InitialSeparation"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.5363356865514793`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package CarpetHDF5 skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"CarpetHDF5Attribute\"\>", 
+     ",", "\<\"CarpetHDF5Attributes\"\>", ",", "\<\"CarpetHDF5Components\"\>",
+      ",", "\<\"CarpetHDF5DatasetName\"\>", ",", "\<\"CarpetHDF5FileInfo\"\>",
+      ",", "\<\"CarpetHDF5Iterations\"\>", 
+     ",", "\<\"CarpetHDF5Manipulate\"\>", ",", "\<\"CarpetHDF5Maps\"\>", 
+     ",", "\<\"CarpetHDF5RefinementLevels\"\>", ",", "\<\"CarpetHDF5Time\"\>",
+      ",", "\<\"CarpetHDF5TimeLevels\"\>", ",", "\<\"CarpetHDF5Variables\"\>",
+      ",", "\<\"CarpetManipulatePlotFunction\"\>", 
+     ",", "\<\"ReadCarpetHDF5\"\>", ",", "\<\"ReadCarpetHDF5Components\"\>", 
+     ",", "\<\"ReadCarpetHDF5Variable\"\>", 
+     ",", "\<\"ReadCarpetHDF5VariableFromRun\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package CarpetHDF5 skipped:\n", {
+   "CarpetHDF5Attribute", "CarpetHDF5Attributes", "CarpetHDF5Components", 
+    "CarpetHDF5DatasetName", "CarpetHDF5FileInfo", "CarpetHDF5Iterations", 
+    "CarpetHDF5Manipulate", "CarpetHDF5Maps", "CarpetHDF5RefinementLevels", 
+    "CarpetHDF5Time", "CarpetHDF5TimeLevels", "CarpetHDF5Variables", 
+    "CarpetManipulatePlotFunction", "ReadCarpetHDF5", 
+    "ReadCarpetHDF5Components", "ReadCarpetHDF5Variable", 
+    "ReadCarpetHDF5VariableFromRun"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686554893*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Convergence skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"LoadConvergenceSeries\"\>", ",", "\<\"NPoints\"\>", 
+     ",", "\<\"RescaledErrors\"\>", ",", "\<\"ResName\"\>", 
+     ",", "\<\"ResolutionCode\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Convergence skipped:\n", {
+   "LoadConvergenceSeries", "NPoints", "RescaledErrors", "ResName", 
+    "ResolutionCode"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686558076*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package DataTable skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"AbsOfPhase\"\>", ",", "\<\"DataTableListLinePlot\"\>", 
+     ",", "\<\"DataTableNormL2\"\>", ",", "\<\"FunctionOfPhase\"\>", 
+     ",", "\<\"InvertDataTable\"\>", ",", "\<\"MaximumValue\"\>", 
+     ",", "\<\"Monotonise\"\>", ",", "\<\"PartitionTable\"\>", 
+     ",", "\<\"ShiftPhase\"\>", ",", "\<\"TableRange\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package DataTable skipped:\n", {
+   "AbsOfPhase", "DataTableListLinePlot", "DataTableNormL2", 
+    "FunctionOfPhase", "InvertDataTable", "MaximumValue", "Monotonise", 
+    "PartitionTable", "ShiftPhase", "TableRange"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686559721*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Grids skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"GridsBoxes\"\>", ",", "\<\"LoadGrids\"\>", 
+     ",", "\<\"PlotCarpetGrids2D\"\>", ",", "\<\"PlotGrid\"\>", 
+     ",", "\<\"PlotGrids\"\>", ",", "\<\"ReadCarpetGrids\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Grids skipped:\n", {
+   "GridsBoxes", "LoadGrids", "PlotCarpetGrids2D", "PlotGrid", "PlotGrids", 
+    "ReadCarpetGrids"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686561592*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Horizons skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ChristodoulouMass\"\>", ",", "\<\"InitialSpin\"\>", 
+     ",", "\<\"InitialSpinAngle\"\>", ",", "\<\"ReadAHCentroidCoord\"\>", 
+     ",", "\<\"ReadAHColumn\"\>", ",", "\<\"ReadAHColumns\"\>", 
+     ",", "\<\"ReadAHMaxRadius\"\>", ",", "\<\"ReadAHMinRadius\"\>", 
+     ",", "\<\"ReadAHPhase\"\>", ",", "\<\"ReadAHQuadrupoleXX\"\>", 
+     ",", "\<\"ReadAHQuadrupoleXY\"\>", ",", "\<\"ReadAHQuadrupoleXZ\"\>", 
+     ",", "\<\"ReadAHQuadrupoleYY\"\>", ",", "\<\"ReadAHQuadrupoleYZ\"\>", 
+     ",", "\<\"ReadAHQuadrupoleZZ\"\>", ",", "\<\"ReadIHSpin\"\>", 
+     ",", "\<\"ReadIHSpinPhase\"\>", ",", "\<\"ReadIHSpinX\"\>", 
+     ",", "\<\"ReadIHSpinY\"\>", 
+     ",", "\<\"ReadIsolatedHorizonDimensionlessSpin\"\>", 
+     ",", "\<\"ReadIsolatedHorizonSpinPhase\"\>", ",", "\<\"SpinAngle\"\>"}], 
+    "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Horizons skipped:\n", {
+   "ChristodoulouMass", "InitialSpin", "InitialSpinAngle", 
+    "ReadAHCentroidCoord", "ReadAHColumn", "ReadAHColumns", "ReadAHMaxRadius",
+     "ReadAHMinRadius", "ReadAHPhase", "ReadAHQuadrupoleXX", 
+    "ReadAHQuadrupoleXY", "ReadAHQuadrupoleXZ", "ReadAHQuadrupoleYY", 
+    "ReadAHQuadrupoleYZ", "ReadAHQuadrupoleZZ", "ReadIHSpin", 
+    "ReadIHSpinPhase", "ReadIHSpinX", "ReadIHSpinY", 
+    "ReadIsolatedHorizonDimensionlessSpin", "ReadIsolatedHorizonSpinPhase", 
+    "SpinAngle"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686563252*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package NR skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Data\"\>", ",", "\<\"Eccentricity\"\>", 
+     ",", "\<\"FitEcc\"\>", ",", "\<\"FitEccOm\"\>", 
+     ",", "\<\"FitFunction\"\>", ",", "\<\"FitParameters\"\>", 
+     ",", "\<\"FittedFunction\"\>", ",", "\<\"InitialDimensionlessSpin\"\>", 
+     ",", "\<\"LRange\"\>", ",", "\<\"PercentageDifference\"\>", 
+     ",", "\<\"ReturnValue\"\>", ",", "\<\"ToFixedWidth\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package NR skipped:\n", {
+   "Data", "Eccentricity", "FitEcc", "FitEccOm", "FitFunction", 
+    "FitParameters", "FittedFunction", "InitialDimensionlessSpin", "LRange", 
+    "PercentageDifference", "ReturnValue", "ToFixedWidth"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.53633568656518*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package NRExport skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Coordinates\"\>", ",", "\<\"ExportOnly\"\>", 
+     ",", "\<\"HorizonMass\"\>", ",", "\<\"Spin\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package NRExport skipped:\n", {
+   "Coordinates", "ExportOnly", "HorizonMass", "Spin"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686566828*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Parameters skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"ParseParameterFile\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Parameters skipped:\n", {
+   "ParseParameterFile"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686568262*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Plotting skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ColorMap\"\>", ",", "\<\"ColorRange\"\>", 
+     ",", "\<\"DynamicArrayPlot\"\>", ",", "\<\"DynamicShow\"\>", 
+     ",", "\<\"LegendLineSize\"\>", ",", "\<\"LegendOrientation\"\>", 
+     ",", "\<\"LegendPosition\"\>", ",", "\<\"ListLinePlotWithLegend\"\>", 
+     ",", "\<\"ListLogLinearPlotWithLegend\"\>", 
+     ",", "\<\"MakePlotLegend\"\>", ",", "\<\"PlotKey\"\>", 
+     ",", "\<\"PlotKeySize\"\>", ",", "\<\"PlotLegend\"\>", 
+     ",", "\<\"PresentationPlotColors\"\>", 
+     ",", "\<\"PresentationPlotStyles\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Plotting skipped:\n", {
+   "ColorMap", "ColorRange", "DynamicArrayPlot", "DynamicShow", 
+    "LegendLineSize", "LegendOrientation", "LegendPosition", 
+    "ListLinePlotWithLegend", "ListLogLinearPlotWithLegend", "MakePlotLegend",
+     "PlotKey", "PlotKeySize", "PlotLegend", "PresentationPlotColors", 
+    "PresentationPlotStyles"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.5363356865697803`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Profile skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ProfileCount\"\>", ",", "\<\"ProfileTime\"\>", 
+     ",", "\<\"Timer\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Profile skipped:\n", {
+   "ProfileCount", "ProfileTime", "Timer"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686571527*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package RunFiles skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"CarpetASCIIColumns\"\>", ",", "\<\"FullFilenames\"\>", 
+     ",", "\<\"LeafNamesOnly\"\>", ",", "\<\"MergeFiles\"\>", 
+     ",", "\<\"ReadColumnFile\"\>", ",", "\<\"ReadColumnFile2\"\>", 
+     ",", "\<\"RunDutyCycle\"\>", 
+     ",", "\<\"SegmentCoordinateTimeInterval\"\>", 
+     ",", "\<\"SegmentDuration\"\>", ",", "\<\"SegmentEndDate\"\>", 
+     ",", "\<\"SegmentStartDate\"\>", ",", "\<\"SegmentStartTimes\"\>", 
+     ",", "\<\"StandardOutputOfRun\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package RunFiles skipped:\n", {
+   "CarpetASCIIColumns", "FullFilenames", "LeafNamesOnly", "MergeFiles", 
+    "ReadColumnFile", "ReadColumnFile2", "RunDutyCycle", 
+    "SegmentCoordinateTimeInterval", "SegmentDuration", "SegmentEndDate", 
+    "SegmentStartDate", "SegmentStartTimes", "StandardOutputOfRun"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686573003*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package SimViewRRMHD skipped:\\n\"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"SimViewRRMHD\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package SimViewRRMHD skipped:\n", {
+   "SimViewRRMHD"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686574642*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package SystemStatistics \
+skipped:\\n\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"CostAnalysis\"\>", ",", "\<\"CPUHours\"\>", 
+     ",", "\<\"PresentationCostAnalysis\"\>", ",", "\<\"ReadCarpetSpeed\"\>", 
+     ",", "\<\"ReadWalltimeHours\"\>", ",", "\<\"WallTimeDays\"\>"}], "}"}]}],
+  
+  SequenceForm[
+  "Undocumented symbols for package SystemStatistics skipped:\n", {
+   "CostAnalysis", "CPUHours", "PresentationCostAnalysis", "ReadCarpetSpeed", 
+    "ReadWalltimeHours", "WallTimeDays"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686576055*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Tracks skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"AnimateTracks\"\>", ",", "\<\"PlotTracks\"\>", 
+     ",", "\<\"ReadTracks\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Tracks skipped:\n", {
+   "AnimateTracks", "PlotTracks", "ReadTracks"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.5363356865775537`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package TwoPunctures skipped:\\n\"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"InitialAngularMomentum\"\>", 
+     ",", "\<\"InitialLinearMomentum\"\>", 
+     ",", "\<\"InitialOrbitalAngularMomentum\"\>", 
+     ",", "\<\"InitialSpinAngularMomentum\"\>", ",", "\<\"MassRatio\"\>", 
+     ",", "\<\"SymmetricMassRatio\"\>", ",", "\<\"TotalMass\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package TwoPunctures skipped:\n", {
+   "InitialAngularMomentum", "InitialLinearMomentum", 
+    "InitialOrbitalAngularMomentum", "InitialSpinAngularMomentum", 
+    "MassRatio", "SymmetricMassRatio", "TotalMass"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686579033*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Waveforms skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"AlignMaxima\"\>", ",", "\<\"AlignMaximaOfAbs\"\>", 
+     ",", "\<\"AlignPhaseAt\"\>", ",", "\<\"ApplyFunction\"\>", 
+     ",", "\<\"ApplyToPhases\"\>", ",", "\<\"Continuous\"\>", 
+     ",", "\<\"ExtrapolateDataTables\"\>", ",", "\<\"ExtrapolatedCurve\"\>", 
+     ",", "\<\"ExtrapolatedValue\"\>", 
+     ",", "\<\"ExtrapolateRadiatedQuantity\"\>", 
+     ",", "\<\"ExtrapolateScalar\"\>", ",", "\<\"ExtrapolateScalarFull\"\>", 
+     ",", "\<\"ExtrapolateScalarWithRadii\"\>", 
+     ",", "\<\"ExtrapolationError\"\>", 
+     ",", "\<\"ExtrapolationErrorRelative\"\>", 
+     ",", "\<\"ExtrapolationOrder\"\>", ",", "\<\"MassADM\"\>", 
+     ",", "\<\"RadiusRange\"\>", 
+     ",", "\<\"RadiusTimeDataToTimeRadiusData\"\>", 
+     ",", "\<\"ReadWaveformFile\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Waveforms skipped:\n", {
+   "AlignMaxima", "AlignMaximaOfAbs", "AlignPhaseAt", "ApplyFunction", 
+    "ApplyToPhases", "Continuous", "ExtrapolateDataTables", 
+    "ExtrapolatedCurve", "ExtrapolatedValue", "ExtrapolateRadiatedQuantity", 
+    "ExtrapolateScalar", "ExtrapolateScalarFull", 
+    "ExtrapolateScalarWithRadii", "ExtrapolationError", 
+    "ExtrapolationErrorRelative", "ExtrapolationOrder", "MassADM", 
+    "RadiusRange", "RadiusTimeDataToTimeRadiusData", "ReadWaveformFile"}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335686580698*^9}],
+
 Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print",
- CellChangeTimes->{3.536328246813128*^9, 3.5363287659158077`*^9}],
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.5363356865823812`*^9}],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print",
- CellChangeTimes->{3.536328246813128*^9, 3.536328923313943*^9}],
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.536335872295765*^9}],
 
 Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print",
- CellChangeTimes->{3.536328246813128*^9, 3.5363289251903467`*^9}]
+ CellChangeTimes->{3.536333975544532*^9, 3.536334299254513*^9, 
+  3.536334368247246*^9, 3.536334599120021*^9, 3.536335447762444*^9, 
+  3.5363358747714663`*^9}]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{740, 867},
-WindowMargins->{{614, Automatic}, {Automatic, 0}},
+WindowMargins->{{614, Automatic}, {Automatic, 1}},
 ShowSelection->True,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
@@ -78,16 +414,30 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[557, 20, 333, 7, 27, "Input"],
 Cell[CellGroupData[{
-Cell[579, 22, 287, 5, 27, "Input"],
-Cell[869, 29, 759, 10, 27, "Output"]
-}, Open  ]],
+Cell[915, 31, 197, 3, 27, "Input"],
 Cell[CellGroupData[{
-Cell[1665, 44, 197, 3, 27, "Input"],
-Cell[CellGroupData[{
-Cell[1887, 51, 131, 1, 20, "Print"],
-Cell[2021, 54, 113, 1, 20, "Print"],
-Cell[2137, 57, 122, 1, 20, "Print"]
+Cell[1137, 38, 488, 11, 36, "Print"],
+Cell[1628, 51, 1585, 28, 96, "Print"],
+Cell[3216, 81, 692, 15, 36, "Print"],
+Cell[3911, 98, 948, 18, 51, "Print"],
+Cell[4862, 118, 711, 15, 36, "Print"],
+Cell[5576, 135, 1720, 31, 111, "Print"],
+Cell[7299, 168, 999, 19, 51, "Print"],
+Cell[8301, 189, 600, 13, 36, "Print"],
+Cell[8904, 204, 484, 11, 36, "Print"],
+Cell[9391, 217, 1273, 24, 81, "Print"],
+Cell[10667, 243, 561, 13, 36, "Print"],
+Cell[11231, 258, 1178, 22, 66, "Print"],
+Cell[12412, 282, 476, 11, 36, "Print"],
+Cell[12891, 295, 774, 16, 51, "Print"],
+Cell[13668, 313, 571, 13, 36, "Print"],
+Cell[14242, 328, 895, 18, 51, "Print"],
+Cell[15140, 348, 1662, 31, 111, "Print"],
+Cell[16805, 381, 225, 3, 20, "Print"],
+Cell[17033, 386, 207, 3, 20, "Print"],
+Cell[17243, 391, 216, 3, 20, "Print"]
 }, Open  ]]
 }, Open  ]]
 }

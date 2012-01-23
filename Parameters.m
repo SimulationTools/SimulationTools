@@ -2,9 +2,9 @@
 
 BeginPackage["Parameters`", {"RunFiles`", "Memo`"}];
 
+FindParameters::usage  = "FindParameters[run, pattern] finds all parameters in the parameter file for run which match pattern.";
+LookupParameter::usage = "LookupParameter[run, param] reads the value of the parameter param from run.";
 ParseParameterFile;
-LookupParameter;
-FindParameters;
 
 Begin["`Private`"];
 

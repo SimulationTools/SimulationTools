@@ -1,202 +1,78 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 8.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[      6474,        192]
-NotebookOptionsPosition[      4663,        139]
-NotebookOutlinePosition[      6113,        178]
-CellTagsIndexPosition[      6070,        175]
-WindowTitle->PresentationListLinePlot - Wolfram Mathematica
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["Mathematica",
+ ButtonBox["nrmma",
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
- StyleBox[" > ", "LinkTrailSeparator"]
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Plotting",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Plotting"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["PresentationListLinePlot",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/PresentationListLinePlot"]
 }], "LinkTrail"],
-
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"NRMMA Package\"\>":>
-       Documentation`HelpLookup["paclet:nrmma/guide/NRMMA"]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"nrmma/ref/PresentationListLinePlot\"\>":>
-       None, "\<\"Copy Mathematica url\"\>":>
-       Module[{DocumentationSearch`Private`nb$}, 
-        DocumentationSearch`Private`nb$ = NotebookPut[
-           Notebook[{
-             Cell["nrmma/ref/PresentationListLinePlot"]}, Visible -> False]]; 
-        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
-        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
-        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
-       Delimiter, "\<\"Copy web url\"\>":>
-       Module[{DocumentationSearch`Private`nb$}, 
-        DocumentationSearch`Private`nb$ = NotebookPut[
-           Notebook[{
-             Cell[
-              BoxData[
-               MakeBoxes[
-                Hyperlink[
-                "http://reference.wolfram.com/mathematica/nrmma/ref/\
-PresentationListLinePlot.html"], StandardForm]], "Input", TextClipboardType -> 
-              "PlainText"]}, Visible -> False]]; 
-        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
-        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
-        NotebookClose[DocumentationSearch`Private`nb$]; 
-        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-            StringJoin[
-            "http://reference.wolfram.com/mathematica/", 
-             "nrmma/ref/PresentationListLinePlot", ".html"]], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid",
- GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
-     Scaled[0.65], {
-      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
-   "RowsIndexed" -> {}}},
- CellID->1],
 
 Cell[CellGroupData[{
 
-Cell["PresentationListLinePlot", "ObjectName",
- CellID->1224892054],
+Cell["PresentationListLinePlot", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
-      RowBox[{"PresentationListLinePlot", "[", 
-       StyleBox[
-        RowBox[{"data", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
-     " \[LineSeparator]is the same as ",
-     ButtonBox["ListLinePlotWithLegend",
-      BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/ListLinePlotWithLegend"],
-     " but the label style is set to ",
-     ButtonBox["Medium",
-      BaseStyle->"Link",
-      ButtonData->"paclet:ref/Medium"],
-     " and a frame is added."
+      RowBox[{
+       ButtonBox["PresentationListLinePlot",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/PresentationListLinePlot"], "[", 
+       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]is a wrapper around ListLinePlot which uses a plot \
+style designed to be more attractive than the default Mathematica plot style. \
+ A plot legend can be added by giving the option PlotLegend -> {set1, set2, \
+...} where seti are labels for each of the curves in the plot."
     }]]}
-  }]], "Usage",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}}},
- CellID->982511436]
+  }]], "Usage"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["MORE ABOUT",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "MoreAboutSection",
- CellID->38303248],
+Cell[" ", "FooterCell"],
 
-Cell[TextData[ButtonBox["NRMMA Package",
- BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/NRMMA"]], "MoreAbout",
- CellID->779162144]
-}, Open  ]],
-
-Cell[" ", "FooterCell"]
+Cell[BoxData[""]]
+}, Open  ]]
 },
 Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"PresentationListLinePlot - Wolfram Mathematica",
+WindowTitle->"PresentationListLinePlot",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "built" -> "{2011, 3, 15, 1, 20, 20.200232}", "context" -> "nrmma`", 
-    "keywords" -> {}, "index" -> True, "label" -> "nrmma Paclet Symbol", 
-    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
-    "PresentationListLinePlot[data, opts] is the same as \
-ListLinePlotWithLegend but the label style is set to Medium and a frame is \
-added.", "synonyms" -> {}, "title" -> "PresentationListLinePlot", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/PresentationListLinePlot"}, "LinkTrails" -> 
-  "", "SearchTextTranslated" -> ""},
-CellContext->"Global`",
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
-StyleDefinitions->Notebook[{
-   Cell[
-    StyleData[
-    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
-   Cell[
-    StyleData["Input"], CellContext -> "Global`"], 
-   Cell[
-    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
-  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
-  StyleDefinitions -> "Default.nb"]
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "PresentationListLinePlot", "PRESENTATIONLISTLINEPLOT", 
+      "presentationlistlineplot"}, "index" -> True, "label" -> 
+    "nrmma/Plotting Symbol", "language" -> "en", "paclet" -> "Plotting", 
+    "status" -> "None", "summary" -> 
+    "PresentationListLinePlot[args] is a wrapper around ListLinePlot which \
+uses a plot style designed to be more attractive than the default Mathematica \
+plot style.  A plot legend can be added by giving the option PlotLegend -> \
+{set1, set2, ...} where seti are labels for each of the curves in the plot.", 
+    "synonyms" -> {
+     "PresentationListLinePlot", "PRESENTATIONLISTLINEPLOT", 
+      "presentationlistlineplot"}, "title" -> "PresentationListLinePlot", 
+    "windowTitle" -> "PresentationListLinePlot", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/PresentationListLinePlot"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[617, 21, 76, 1, 70, "SymbolColorBar"],
-Cell[696, 24, 176, 5, 70, "LinkTrail"],
-Cell[875, 31, 2343, 53, 70, "AnchorBarGrid",
- CellID->1],
-Cell[CellGroupData[{
-Cell[3243, 88, 67, 1, 70, "ObjectName",
- CellID->1224892054],
-Cell[3313, 91, 713, 21, 70, "Usage",
- CellID->982511436]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[4063, 117, 419, 12, 70, "MoreAboutSection",
- CellID->38303248],
-Cell[4485, 131, 136, 3, 70, "MoreAbout",
- CellID->779162144]
-}, Open  ]],
-Cell[4636, 137, 23, 0, 70, "FooterCell"]
-}
-]
-*)
-
-(* End of internal cache information *)
 
