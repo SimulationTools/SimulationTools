@@ -1,65 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`NREXPORT` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/ExportAllExtrapolatedWaveforms \
-URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["NRExport",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/NRExport"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ExportAllExtrapolatedWaveforms",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ExportAllExtrapolatedWaveforms"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -72,17 +27,17 @@ Cell[BoxData[GridBox[{
        ButtonBox["ExportAllExtrapolatedWaveforms",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ExportAllExtrapolatedWaveforms"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ExportAllExtrapolatedWaveforms[run, file, mass] \
-extrapolates all modes of the waveform in run assuming mass is the ADM mass. \
-The extrapolated waveforms are then exported to file. The output format \
-depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. \
-For ASCII data, multiple files are created, one for each mode."
+       StyleBox[
+        RowBox[{"run", ",", " ", "file", ",", " ", "mass"}], "TI"], "]"}]], 
+      "InlineFormula"],
+     "\[LineSeparator]extrapolates all modes of the waveform in run assuming \
+mass is the ADM mass. The extrapolated waveforms are then exported to file. \
+The output format depends on the file extension which can be either '.asc', \
+'.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each \
+mode."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -92,41 +47,30 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"ExportAllExtrapolatedWaveforms - nrmma`NRExport`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ExportAllExtrapolatedWaveforms",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "exportallextrapolatedwaveforms", "EXPORTALLEXTRAPOLATEDWAVEFORMS"}, 
-    "index" -> True, "label" -> "nrmma`NRExport` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma NRExport", "status" -> "", "summary" -> 
+     "ExportAllExtrapolatedWaveforms", "EXPORTALLEXTRAPOLATEDWAVEFORMS", 
+      "exportallextrapolatedwaveforms"}, "index" -> True, "label" -> 
+    "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> "NRExport", 
+    "status" -> "None", "summary" -> 
     "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolates all modes \
 of the waveform in run assuming mass is the ADM mass. The extrapolated \
 waveforms are then exported to file. The output format depends on the file \
 extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, \
 multiple files are created, one for each mode.", 
     "synonyms" -> {
-     "exportallextrapolatedwaveforms", "EXPORTALLEXTRAPOLATEDWAVEFORMS"}, 
-    "title" -> "ExportAllExtrapolatedWaveforms", "windowTitle" -> 
+     "ExportAllExtrapolatedWaveforms", "EXPORTALLEXTRAPOLATEDWAVEFORMS", 
+      "exportallextrapolatedwaveforms"}, "title" -> 
+    "ExportAllExtrapolatedWaveforms", "windowTitle" -> 
     "ExportAllExtrapolatedWaveforms", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ExportAllExtrapolatedWaveforms"}, "SearchTextTranslated" -> "",
    "LinkTrails" -> ""},
@@ -136,3 +80,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

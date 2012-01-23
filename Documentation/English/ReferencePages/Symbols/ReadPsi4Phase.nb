@@ -1,64 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/ReadPsi4Phase URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Waveforms",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Waveforms"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadPsi4Phase",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadPsi4Phase"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -71,15 +27,16 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadPsi4Phase",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadPsi4Phase"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ReadPsi4Phase[run, l, m, r, threshold] returns a \
-DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  \
-The phase is cut off after the time that the amplitude goes below threshold."
+       StyleBox[
+        RowBox[{
+        "run", ",", " ", "l", ",", " ", "m", ",", " ", "r", ",", " ", 
+         "threshold"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a DataTable of the phase of the complex l,m \
+mode of Psi4 at radius r from run.  The phase is cut off after the time that \
+the amplitude goes below threshold."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -89,41 +46,30 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"ReadPsi4Phase - nrmma`Waveforms`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadPsi4Phase",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"readpsi4phase", "READPSI4PHASE"}, 
-    "index" -> True, "label" -> "nrmma`Waveforms` Symbol", "language" -> "en",
-     "paclet" -> "nrmma Waveforms", "status" -> "", "summary" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"ReadPsi4Phase", "READPSI4PHASE", "readpsi4phase"}, 
+    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
     "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase \
 of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off \
 after the time that the amplitude goes below threshold.", 
-    "synonyms" -> {"readpsi4phase", "READPSI4PHASE"}, "title" -> 
-    "ReadPsi4Phase", "windowTitle" -> "ReadPsi4Phase", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ReadPsi4Phase"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "synonyms" -> {"ReadPsi4Phase", "READPSI4PHASE", "readpsi4phase"}, 
+    "title" -> "ReadPsi4Phase", "windowTitle" -> "ReadPsi4Phase", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadPsi4Phase"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

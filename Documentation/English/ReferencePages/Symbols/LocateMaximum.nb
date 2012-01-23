@@ -1,64 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/LocateMaximum URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataTable",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataTable"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["LocateMaximum",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/LocateMaximum"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -71,15 +27,13 @@ Cell[BoxData[GridBox[{
        ButtonBox["LocateMaximum",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/LocateMaximum"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]LocateMaximum[d] finds the time at which a maximum \
-occurs in the range of the DataTable d. This time is interpolated and may not \
-coincide with a data point in the DataTable."
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]finds the time at which a maximum occurs in the range \
+of the DataTable d. This time is interpolated and may not coincide with a \
+data point in the DataTable."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -89,41 +43,30 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"LocateMaximum - nrmma`DataTable`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"LocateMaximum",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"locatemaximum", "LOCATEMAXIMUM"}, 
-    "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
-     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"LocateMaximum", "LOCATEMAXIMUM", "locatemaximum"}, 
+    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
+    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
     "LocateMaximum[d] finds the time at which a maximum occurs in the range \
 of the DataTable d. This time is interpolated and may not coincide with a \
 data point in the DataTable.", 
-    "synonyms" -> {"locatemaximum", "LOCATEMAXIMUM"}, "title" -> 
-    "LocateMaximum", "windowTitle" -> "LocateMaximum", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/LocateMaximum"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "synonyms" -> {"LocateMaximum", "LOCATEMAXIMUM", "locatemaximum"}, 
+    "title" -> "LocateMaximum", "windowTitle" -> "LocateMaximum", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/LocateMaximum"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

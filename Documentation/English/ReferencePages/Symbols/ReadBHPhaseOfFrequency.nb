@@ -1,65 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`BHCOORDINATES` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/ReadBHPhaseOfFrequency URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["BHCoordinates",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/BHCoordinates"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadBHPhaseOfFrequency",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadBHPhaseOfFrequency"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -72,17 +27,15 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadBHPhaseOfFrequency",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadBHPhaseOfFrequency"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ReadBHPhaseOfFrequency[run] returns a DataTable of the \
-phase in radians of the relative orbit of black holes 0 and 1 projected into \
-the xy plane as a function of its time derivative.  NB: The independent \
-variable in the returned DataTable might not be monotonically increasing, and \
-might cause problems if used with other NRMMA functions."
+       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a DataTable of the phase in radians of the \
+relative orbit of black holes 0 and 1 projected into the xy plane as a \
+function of its time derivative.  NB: The independent variable in the \
+returned DataTable might not be monotonically increasing, and might cause \
+problems if used with other NRMMA functions."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -92,40 +45,30 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"ReadBHPhaseOfFrequency - nrmma`BHCoordinates`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadBHPhaseOfFrequency",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"readbhphaseoffrequency", "READBHPHASEOFFREQUENCY"}, 
-    "index" -> True, "label" -> "nrmma`BHCoordinates` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma BHCoordinates", "status" -> "", "summary" -> 
+    "keywords" -> {
+     "ReadBHPhaseOfFrequency", "READBHPHASEOFFREQUENCY", 
+      "readbhphaseoffrequency"}, "index" -> True, "label" -> 
+    "nrmma/BHCoordinates Symbol", "language" -> "en", "paclet" -> 
+    "BHCoordinates", "status" -> "None", "summary" -> 
     "ReadBHPhaseOfFrequency[run] returns a DataTable of the phase in radians \
 of the relative orbit of black holes 0 and 1 projected into the xy plane as a \
 function of its time derivative.  NB: The independent variable in the \
 returned DataTable might not be monotonically increasing, and might cause \
 problems if used with other NRMMA functions.", 
-    "synonyms" -> {"readbhphaseoffrequency", "READBHPHASEOFFREQUENCY"}, 
-    "title" -> "ReadBHPhaseOfFrequency", "windowTitle" -> 
-    "ReadBHPhaseOfFrequency", "type" -> "Symbol", "uri" -> 
+    "synonyms" -> {
+     "ReadBHPhaseOfFrequency", "READBHPHASEOFFREQUENCY", 
+      "readbhphaseoffrequency"}, "title" -> "ReadBHPhaseOfFrequency", 
+    "windowTitle" -> "ReadBHPhaseOfFrequency", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ReadBHPhaseOfFrequency"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
@@ -134,3 +77,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

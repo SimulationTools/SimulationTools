@@ -1,64 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`FIELDLINES` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/Sequence2d URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["FieldLines",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/FieldLines"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Sequence2d",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/Sequence2d"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -71,14 +27,15 @@ Cell[BoxData[GridBox[{
        ButtonBox["Sequence2d",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/Sequence2d"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]Sequence2d[path,run,var,rfl,function,xmin,xmax,opts] \n\
-\tCreate a sequence of figures of a 2D variable with fixed color range."
+       StyleBox[
+        RowBox[{
+        "path", ",", "run", ",", "var", ",", "rfl", ",", "function", ",", 
+         "xmin", ",", "xmax", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]Create a sequence of figures of a 2D variable with \
+fixed color range."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -88,35 +45,23 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"Sequence2d - nrmma`FieldLines`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Sequence2d",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"sequence2d", "SEQUENCE2D"}, "index" -> 
-    True, "label" -> "nrmma`FieldLines` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma FieldLines", "status" -> "", "summary" -> 
-    "Sequence2d[path,run,var,rfl,function,xmin,xmax,opts] \n\tCreate a \
-sequence of figures of a 2D variable with fixed color range.", 
-    "synonyms" -> {"sequence2d", "SEQUENCE2D"}, "title" -> "Sequence2d", 
-    "windowTitle" -> "Sequence2d", "type" -> "Symbol", "uri" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"Sequence2d", "SEQUENCE2D", "sequence2d"}, "index" -> True,
+     "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
+    "FieldLines", "status" -> "None", "summary" -> 
+    "Sequence2d[path,run,var,rfl,function,xmin,xmax,opts] Create a sequence \
+of figures of a 2D variable with fixed color range.", 
+    "synonyms" -> {"Sequence2d", "SEQUENCE2D", "sequence2d"}, "title" -> 
+    "Sequence2d", "windowTitle" -> "Sequence2d", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/Sequence2d"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
@@ -124,3 +69,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

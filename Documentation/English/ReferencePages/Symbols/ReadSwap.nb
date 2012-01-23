@@ -1,49 +1,33 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 8.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[     19643,        516]
-NotebookOptionsPosition[     17017,        432]
-NotebookOutlinePosition[     18559,        477]
-CellTagsIndexPosition[     18474,        472]
-WindowTitle->ReadSwap - Wolfram Mathematica
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["Mathematica",
+ ButtonBox["nrmma",
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
- StyleBox[" > ", "LinkTrailSeparator"]
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SystemStatistics",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSwap",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSwap"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SYSTEMSTATISTICS PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"ReadCores\"\>":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadCores"], "\<\"ReadCPUHours\"\>":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadCPUHours"], "\<\"ReadMemory\"\>":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadMemory"], "\<\"ReadRunSpeed\"\>":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadRunSpeed"], "\<\"ReadWalltime\"\>":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadWalltime"], "\<\"SimView\"\>":>
+        StripOnInput->False], {"ReadCores":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadCores"], "ReadCPUHours":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ReadCPUHours"], 
+       "ReadMemory":>Documentation`HelpLookup["paclet:nrmma/ref/ReadMemory"], 
+       "ReadRunSpeed":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadRunSpeed"], "ReadWalltime":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ReadWalltime"], "SimView":>
        Documentation`HelpLookup["paclet:nrmma/ref/SimView"]},
        Appearance->None,
        MenuAppearance->Automatic]],
@@ -53,76 +37,32 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"NRMMA Package\"\>":>
-       Documentation`HelpLookup["paclet:nrmma/guide/NRMMA"]},
+        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
+       "paclet:nrmma/guide/nrmma"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
      "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"nrmma/ref/ReadSwap\"\>":>
-       None, "\<\"Copy Mathematica url\"\>":>
-       Module[{DocumentationSearch`Private`nb$}, 
-        DocumentationSearch`Private`nb$ = NotebookPut[
-           Notebook[{
-             Cell["nrmma/ref/ReadSwap"]}, Visible -> False]]; 
-        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
-        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
-        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
-       Delimiter, "\<\"Copy web url\"\>":>
-       Module[{DocumentationSearch`Private`nb$}, 
-        DocumentationSearch`Private`nb$ = NotebookPut[
-           Notebook[{
-             Cell[
-              BoxData[
-               MakeBoxes[
-                Hyperlink[
-                "http://reference.wolfram.com/mathematica/nrmma/ref/ReadSwap.\
-html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
-            False]]; SelectionMove[
-         DocumentationSearch`Private`nb$, All, Notebook]; 
-        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
-        NotebookClose[DocumentationSearch`Private`nb$]; 
-        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-            StringJoin[
-            "http://reference.wolfram.com/mathematica/", "nrmma/ref/ReadSwap",
-              ".html"]], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
+\[ThickSpace]"
     }], "AnchorBar"]}
-  }]], "AnchorBarGrid",
- CellID->1],
+  }]], "AnchorBarGrid"],
 
 Cell[CellGroupData[{
 
-Cell["ReadSwap", "ObjectName",
- CellID->1224892054],
+Cell["ReadSwap", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
-      RowBox[{"ReadSwap", "[", 
+      RowBox[{
+       ButtonBox["ReadSwap",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadSwap"], "[", 
        StyleBox["run", "TI"], "]"}]], "InlineFormula"],
-     " \[LineSeparator]returns a ",
-     ButtonBox["DataTable",
-      BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/DataTable"],
-     " with the swap usage of ",
-     StyleBox["run", "TI"],
-     " as a function of time."
+     "\[LineSeparator]returns a DataTable with the swap usage of run as a \
+function of time."
     }]]}
-  }]], "Usage",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}}},
- CellID->982511436]
+  }]], "Usage"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -139,8 +79,7 @@ Cell[TextData[ButtonBox["EXAMPLES",
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "PrimaryExamplesSection",
- CellTags->"PrimaryExamplesSection",
- CellID->203408301],
+ CellTags->"PrimaryExamplesSection"],
 
 Cell[CellGroupData[{
 
@@ -148,183 +87,102 @@ Cell[TextData[{
  "Basic Examples",
  "\[NonBreakingSpace]\[NonBreakingSpace]",
  Cell["(1)", "ExampleCount"]
-}], "ExampleSection",
- CellID->2036832530],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:=",
- CellID->475329062],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", "=", "\"\<q1D8\>\""}], ";"}]], "Input",
- CellLabel->"In[2]:=",
- CellID->216378194],
+}], "ExampleSection"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"ReadSwap", "[", "run", "]"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "All"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[3]:=",
- CellID->978492187],
+Cell["ListLinePlot[ReadSwap[\"bbh\"], PlotRange -> {0, All}]", "Input",
+ CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[
-  TagBox[RasterBox[CompressedData["
-1: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
-    "], {{0, 117}, {
-    180, 0}}, {0, 255},
-    ColorFunction->RGBColor],
-   BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
-   Selectable->False],
-  BaseStyle->"ImageGraphics",
-  ImageSize->Automatic,
-  ImageSizeRaw->{180, 117},
-  PlotRange->{{0, 180}, {0, 117}}]], "Output",
- ImageSize->{184, 117},
- ImageMargins->{{0, 0}, {0, 0}},
- ImageRegion->{{0, 1}, {0, 1}},
- CellLabel->"Out[3]=",
- CellID->1748587055,
- ImageCache->GraphicsData["CompressedBitmap", "\<\
-eJztWm+wE9UVX98DbK34rLYf7Cc+td8y038fWw0q+A+jUqczbaxQ2y0gnWZU
-7KRWwUWns9V+WGz1oZWAkI6asTYdNcIjWDMFVttUCbUZJNBHxwgGibL8WXSV
-03Pun83dzWZf8vI+9EMzk+zdc889v3POPXvuuXezaOldy37806V3Lb9t6byF
-dyzNLFt+253zFvzsDiSNnqNp2gv4XTVPm4VtwKby8wLgx798nl1GwXPa0HY9
-dncx+52FPx54nseuruuNCFbkhVbbZXdRtC9IGg5rt9r4q/AptDEJ7bngCOhR
-8eu028CkKWNVmsRQ1R6JoF2g4DqOw3AlxlR28LHahcIb1VwGdCsPlp6GfN29
-2OdpQ8lMI2MaCvYkU69dzUFKtyBv6ZDJ16NoXPgY2FaKZgUSfHZALzSIFzLJ
-DOTzJqQyBW50N02bK2Q4tXEcmwDDMsEwC9Bitrchp6fAzOdAT2Wh7kbShHXn
-Q9VKg1l1mKohS6NoEhq8BmRIfd0AI5uFYt3p1wPSvzwM5gA0i3iXgRbdOxX0
-SBaaAL6fXRuSCUtEwCRDLba4UQYaX2oeiKB5vqLgQF7XoTTpsnal+AoUdPR3
-ifFDJZuATOkQlLpoTa1jrAs8rhCgYkA6V0elddD0EnClDdAypSiakHEhuO1J
-qNdrUG/UIZ9Jgp6rQOtghOXR3vCnvM39zDyR0KHu9e0RoYrvd7Ikka1waW4V
-kshmOx2/OzakEiaOJyFl7Da5UuhEK6GBMfGnbprdvsB/PCbBoFhjfmuhEkko
-tzlY1UqAZpQiaDYPy7nQKmeZcpVsErIVgVGzUH0TXoygtVkwc1fXc0n2VJom
-TlUSH6+kDoXCvV3GTrwc6YAxoQLSwEqmwP5P38aHXVyzkpAwq2LGWmAmUlAJ
-u9hiLnaqJg60QE6vbSThl5vWdNEQxVewVYJUahxzHumeJN39EE3et6mbZtia
-TD9eqwrj2TRLPdnSW8wAmQaQGZ+4X8OvumhWwM/45IKV4erXMZ2ZVTfS4o1m
-pBc6keJBrZhFVXT4++t9eyHkasc2cTLLPaPZVaIZ3Z7UDH/yxmnydmzrpkmQ
-MVoFBbrLuvKTh9GMTvSS2ZoxEUGzhYYXgNPA6UoY9DSDjS7JljmYK0J4WwSt
-3XnyYbIIGasC9niaNIs0eEc50gl+IqsXsiDKARi3W4N4IhzaXiPP8lSTzSnl
-LJanLpLaYspsYt5PiPAGrw5pPyc1eX46tLeb5uepMSgZBtg0GHNcFvusWgvy
-KUrTDJSl7EzpQAStqSyRJSg1+NpRTDNLoJFP+2lapuwImj9xk0WDecyqtiPN
-PhTtCnWVTmWL0HRc8KblCr8UqcnFOJ3Cxdjxg9trQRm7tKRwNk1cTSy6Zmch
-DtFkLoBWhYGzyMB8wuxwRNlR4GWHE03rLJEYL+NYYiQp3+KDXGMDRNlRyLOy
-o+ZG0jQ14dJcmjY3ImRtFE3rJBEHcmlhA+Z+wurbBX4x7GIF6fAnXbtE0JAI
-bSdYaao0Wc3ySjNUVaJFbb5iR9IuFLReVa8XQ5OVsKrzSASN2zY7UMQI/TsV
-sWKPcMkLMRfGQjGvncMJFwk55H0I6azSRofg+//Y//2xnO9clQav/uUg3POL
-rZwBP7MjxsWE0SVD0L7UJ59U6c/Ff8FD5qvs7jxFpRHifkQwbX7qH/D4+te6
-mEIy1wnab9ftgmee3tMv+4Nrd8DLpX3xKqy680Wwdx+aSubt7Hce/ObhCnxn
-8RZYemsBbr3lWbjl+8+w9i3pZ2DJD55l7fT3nmbXHy7h7SWSN93hpXvWFuOX
-KONIjipX4R2hBgaFZJUsdL30W+vhnXeOa5+byopz4eqFG2DXzkNw4MAx9j14
-kF8PNI7hyogtnEZJ6+4bpTaj4xfjlGizOnycd1SwqsNHlOFEO3zYEQWwMjEr
-hd43L84TA7v76lQmjbJJOXLkhMrOTl9AnL5QzvaiTlCiaLPigG7aAu+FgNi6
-BfWSyUaYBZuv8X0eQYx22d4bg9ZmqvltJsyL2GpHb7+jMoy0aPGNm+G996LR
-2mzbVmHm9L3xjEW76YbN0GqdnAptgH0YQ2Ng/WA4ikXtvjcecRbdiGhHj3aj
-YTw1q6BrKaGx23fFHYuWegreP3qqC82FejmH/kn5/um37oxDu+F6RHs/gDZH
-dE1VkLGHKBDWEcLiHunUok1w7Fjf7NdftwmxT3exB1ToxRQj84MP+mZfdO1G
-ZHfjVYhg6rh0+nnpums2wocfBsQOeTQaFxfXXp2D48fDaMMcEHZnwV4Y9JnW
-gdiUFjnOGRWNT8H0DofioK65qgtqyHOR7hQYjTHMMUCcRVRQnDjxUXiqhtgM
-x6FdtWADnDwZRBsVTGzj2NmMDZyjrlrwJJw6FZAd98QPyL7wSmL/uIs9oMKC
-K56E06e7mXrIHJD9yst/L0OttwrEdOZMN1OMzBC7mBAPd8MIpkzI9DPcFfOf
-6EIZg9o4Zbg0WJYBVqHK9/TTrrwuTz4BH330SQjDc115VoD5KgW5+okZqbwi
-0Dj7+VDOJMCovN1vaotDmX/ZE/Dxx2Gb6NOqFiGbRgFaAor7Xh+i4pp/2eNY
-aH8agUGz2yjjuAydCM5MxRWNVi8WxCu6Say6EljjzUzFlbw00jZMbplkEv2D
-yS2d75XIeie3QNxd9u318MknQYxOSsN0NVhK62EJbRE//fSsihL3WE+D/ezZ
-bvaAocQkB/Ypsw/2FYJG8GKI9rWwClImmRRiGqYAW9FbrF9AYOGQSlqD7wp7
-QFGkUMQoUBiRzUYdavU61O08RqUOlca7g2WpgJco4inygxgp1CaNRYSR4e+7
-dOs5uHeI6mtFLFqrYoHJxNSY/9whCzAVjXJIEI3tp7NZKDcqoLPj/wGzFQOT
-GJRxKfOGMYC97zfYu1QsKYfcFcagyeBz6ZWKfHU0RPUloWjBooVLgRp8Syij
-jNZzWtcVYXHPN7FTsTEke0AFKoYGkEmlFpVcQ7IHVKCSkErDPmVSwUmFp8Iu
-FgvXcehlxVDlVhzKGBQxGLWEDqaRBbPIXwQNXm5Jw6mKp2o+iOGhFeIVDgY/
-lluN4cotaRHtUGinoqDJcqtmpiA7XLkVgyIfxVatwHbi+bd2TaPWkgC0raPt
-XdBpbr3AaxHK0OM2DFtrqWi0Nw6iUdLQUwbUKJBYaTwzeawHGuma0/lGEr85
-eiU6cK0lg47OFEIYXCV6d+EF9uG9Cq+454YOYegwRhEf9zDTURAdCQ3JHrCQ
-jqzo6KpPmXQgNgPsARXo4I4O8BQm+UZLeUMrPtNPUnScSMeKCox4g05vxo1c
-DjKpDNj0b74ZqLui0Sbp/w7iv0+OTf+DemWIuovOdumMN4hRSHf+P8T+0JJ4
-CO6ZgbqLzq3p/DqIRkk+hTnE9VowjpVK4uH8UHXXN9nveezlHb3zy295g123
-bH7Db/8h77dHqKF91mclNsnCr2/KNgYMtrAAUfsVsWFREi1CrMZ5Z8NTm6qM
-1oF7A/uQG2HkOPpS/4Yn/0bJ/uu+69ifX+iPYCYWyVYRWt50ishvMHmfgUd/
-t5utwY89asP68df8K700xfYINdA6YiMSZ9ktunfD+GOcHfvRAmzhSke8RKM+
-ta2OkxDYzyG+yJAFqi82qE1gWECsVEtRB/6594jW8Zr8C6xRkf+5GW45+bKg
-0Vqs/+g5WHl7ER2wfNnzOL0rVxRhmf48uyKd2thHHLPgJ/ofGY32cQcax5Yr
-GYV0aoCVToJu5qHaHHAF6qHgzr9OwndvzkOtdhjv6HcW7HnzXdhbO0x3sGfP
-4RHRiU1Gmvx3Wzy+/rLltpvQbMmcOsWyxbLNV0Rv6aV98OADO9jd3VwoT/1z
-mbrbtr4NExP7YWLbftiK7e3b97N7ahNNbSMv+hFbCBPi5eQ5Kqs6nHfP7pY6
-sV9IPDeIKkRQPD2ybqf2c1Xx85ni96/eDsaa7fCAUYY1qyfYdS1+V9/H29RH
-PNgeoQY+RGFW2TbuL0tWjfNe5PfTNTyOeNcqEGFeUuHuVS9RGaIqzqZlo2pJ
-MGJyU3Zp5/wXOp3P9g==\
-\>"]]
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxd2Xm8lmMex/GjvZxpU1q0p7RpUdqUHtG+OK2U0F5KJWJCiNFYo8kIMWSK
+MKEhpsZky4SmUhpTI8xpQjuikwqZzvc7ns/r+vXP/Xq/xpzzPPfnOfdzXb+r
+7uhpA8cVycnJOVI0J6fwmvzLn5HpueOGSi/02Nwl9Y6s9w9YWWvOvj3hfz+Y
+9cJHCv8VhP/+aNady2xdfFXn4+H/f1LmF0/Xf1A0k/684lmvKWg04v63S2bS
+n18668IXe0Ol3Ez6+8pm3Vr/ymfS318h6xM//MRvqBhezylZz9lX+AsrhddX
+OWv9+hdODa+3StaFr6bM1qrh9VfL2iFOC++nRtaN9QJrhvdXK+uBhT9uQO3w
+fuuk//1q7PdfN/3/b8a+H/WyHl/470vs+1M/6xsLX/Ax7Pt1etb6ceUahPuH
+lxTenvoNw/3Eenvtzwj3F29Yf+Jf30bhfmO93VGNw/3Hhwt/3LVNQo+mWet2
+343dp1nWtQvf8OPYvc5Me7yM3a952uNd7J4t0h6ftEh/XuuW6f2Z2TL9+aux
+7leRVunv64F1/+5tlf7+zVj3s8pZ6esZgfXjnsT+vGDd76ats/bnB+v+v4L9
+ecK6Ztpk7c8X1u1ch/15OzvtNRj784fV7zPsz2PbtOdE7M8nVo7vsD+v7dIe
+N2F/frF6lGyf9uiL1eN32J9vrB41OqQ9RmH1eBr784/Vo2XHtMe1WD3+inXN
+OSft0Q377wWrxwfYfz+d0h7DsP+esHrsxP776pz2mIr994bV4wj239+5aY/b
+sP8esXrkdkl7DMDq8RD23yvW/S2fSV9fa6z7PQT77xnr/i/E/vvGvmL/vZ+X
+9mmA/fePdTsmYT8PsPq9iP18wOp5CPt50TXt2wH7+YHV+2bs5wlW/zXYzxes
+z0Op87P28wbr89Ef+/mDleMB7OcRVo9t2M8nrB9X84K0Rwarx2js5xdWj6XY
+zzOsHvuxn2/d0h6tsJ93WD1+jf38w+rxN+znIfZyrXvaoz5Wj+7Yz0usHvdg
+Pz+xemzCfp5i9ajcI+3RHqvHcOznLdZ1EfbzF6vHF9jP455pjybYz2esHtOw
+n9dYPVZgP7+xehzFfp73Snuci/18x+rxG+znPVaP97Cf/1g9yvZOe7TE6jEI
++/sBq8fD2N8XWD0+xbrm9El71MP+PsHqMQH7+wWrxzLs7xusHgexv3/6pj3a
+YX8fYfWYhf39hNXjLezvK6weJfqlPRph9eiD/X2G1WMe9vcbVo+PsL/vsHpU
+75/26Ix1HYn9fYjV4yns70esH7cX+/vywrRHC+zvT6weM7C/T7F6rML+fsXq
+cRz7+zYv/X11sb9/89LffwH29zHW65mA/f2M9fruwv6+xnq9y7C/v7Fe/0bs
+K/Z2G/v7fUDW+rydgv19j/X5a4v9/Y/1ebwYez2A9fm8EXt9gPV5fRx7vYDV
+403s9QNWjp3Y6wmsHsUHpj2qYPVohL3ewOrRG3v9gdVjCvZ6BOs6D3t9gtXj
+Jez1ClaPj7DXL1g9vsdezwxKe1THXt9g9eiEvd7BeruXY69/sHrcir0ewuqx
+BHt9hNXjXez1ElaPPdjrJ6weuYPTHjWxejTHumawP87Y6y2sHtdgr7+weizA
+Xo9h9ViJvT7D6rEde72G1eM49vptSNqjDvZ6DqvH+djrO6we47DXe1g97sRe
+/2H1eA57PYjVYwP2+hDr+g32enFo2qMi9voRq8fZ2OtJrB4XYa8vsXrcgL3e
+xOrxGPb6E6vHG9jrUaweO7DXp1g9il2U9qiM1eMM7PUrVo9e2OtZrB5XYq9v
+sXrch3VdhNXjz9jrX6weW7DXw1g9DmOvjy9Oe1TFXi9j9TgHe/2M1eMy7PU0
+Vo/Z2OtrrB6LsdfbWD3+jr3+xuqxG3s9jtWjzLC0Rw2sHmdir9exrnnY63es
+Hldjr+exejyIvb7H6vEX7PU+Vo+Psdf/WD1+xN4PDE971MbeH2D1OA97v4DV
+Yyz2/gGrxx3Y+wmsHs9i7y+weqzH3m9g9fgK65pzSdqjAvZ+BKtHa+z9CVaP
+odj7FaweM7H3L1g9HsXez2D1eB17f4PVIx97v4PVo+iItEclrB4NsPdDWD16
+Yu+PsHpMwt4vYfWYi71/wroux95PYfX4EHt/hdWjAHu/dWnaowr2/gurR0fs
+/RhWjxHY+zOsHrdg79ewejyJvX/D6vEO9n4Oq8cu7P0dVo/Sl6U9qmO93WbY
++z+sHv2xriOxekzH3h9i9XgAe7+I1eNV7P0jVo9t2PtJrB4/YO8vL0971MLe
+b2L1yGDvP7F6jMHej2L1mPN/b/plf4r1457B3q9i9ViHvX/F6nEAez+LdS01
+Mmvvb7H6VMPe72L1aoK9/8Xqdw72fhirZz/s/TFW38uw98tYvadh75+x+s/G
+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
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 274.05}, {0, All}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -342,8 +200,7 @@ Cell[TextData[ButtonBox["SEE ALSO",
     FrontEndToken["OpenCloseGroup"], 
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "SeeAlsoSection",
- CellID->1255426704],
+     CellContents]}]& )]], "SeeAlsoSection"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -402,8 +259,7 @@ Cell[TextData[{
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/SimView"],
    FontFamily->"Verdana"]], "InlineFormula"]
-}], "SeeAlso",
- CellID->929782353]
+}], "SeeAlso"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -419,108 +275,42 @@ Cell[TextData[ButtonBox["MORE ABOUT",
     FrontEndToken["OpenCloseGroup"], 
     FrontEnd`SelectionMove[
      FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "MoreAboutSection",
- CellID->38303248],
+     CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["NRMMA Package",
+Cell[TextData[ButtonBox["nrmma",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/NRMMA"]], "MoreAbout",
- CellID->7514883]
+ ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"]
 }, Open  ]],
 
-Cell[" ", "FooterCell"]
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
 },
 Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ReadSwap - Wolfram Mathematica",
+WindowTitle->"ReadSwap",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "built" -> "{2011, 3, 15, 1, 20, 40.895352}", "context" -> "nrmma`", 
-    "keywords" -> {}, "index" -> True, "label" -> "nrmma Paclet Symbol", 
-    "language" -> "en", "paclet" -> "nrmma", "status" -> "None", "summary" -> 
+   "context" -> "nrmma`", "keywords" -> {"ReadSwap", "READSWAP", "readswap"}, 
+    "index" -> True, "label" -> "nrmma/SystemStatistics Symbol", "language" -> 
+    "en", "paclet" -> "SystemStatistics", "status" -> "None", "summary" -> 
     "ReadSwap[run] returns a DataTable with the swap usage of run as a \
-function of time.", "synonyms" -> {}, "title" -> "ReadSwap", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ReadSwap"}, "LinkTrails" -> "", 
-  "SearchTextTranslated" -> ""},
-CellContext->"Global`",
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit) (November 6, 2010)",
-StyleDefinitions->Notebook[{
-   Cell[
-    StyleData[
-    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
-   Cell[
-    StyleData["Input"], CellContext -> "Global`"], 
-   Cell[
-    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
-  FrontEndVersion -> "8.0 for Mac OS X x86 (32-bit) (November 6, 2010)", 
-  StyleDefinitions -> "Default.nb"]
+function of time.", "synonyms" -> {"ReadSwap", "READSWAP", "readswap"}, 
+    "title" -> "ReadSwap", "windowTitle" -> "ReadSwap", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/ReadSwap"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{
- "PrimaryExamplesSection"->{
-  Cell[4519, 129, 461, 13, 45, "PrimaryExamplesSection",
-   CellTags->"PrimaryExamplesSection",
-   CellID->203408301]}
- }
-*)
-(*CellTagsIndex
-CellTagsIndex->{
- {"PrimaryExamplesSection", 18331, 465}
- }
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[601, 21, 76, 1, 2, "SymbolColorBar"],
-Cell[680, 24, 176, 5, 19, "LinkTrail"],
-Cell[859, 31, 2979, 68, 47, "AnchorBarGrid",
- CellID->1],
-Cell[CellGroupData[{
-Cell[3863, 103, 51, 1, 51, "ObjectName",
- CellID->1224892054],
-Cell[3917, 106, 565, 18, 84, "Usage",
- CellID->982511436]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[4519, 129, 461, 13, 45, "PrimaryExamplesSection",
- CellTags->"PrimaryExamplesSection",
- CellID->203408301],
-Cell[CellGroupData[{
-Cell[5005, 146, 149, 5, 32, "ExampleSection",
- CellID->2036832530],
-Cell[5157, 153, 93, 3, 24, "Input",
- CellID->475329062],
-Cell[5253, 158, 123, 4, 24, "Input",
- CellID->216378194],
-Cell[CellGroupData[{
-Cell[5401, 166, 260, 8, 24, "Input",
- CellID->978492187],
-Cell[5664, 176, 8563, 150, 138, 4264, 75, "CachedBoxData", "BoxData", "Output",
- CellID->1748587055]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[14288, 333, 417, 12, 45, "SeeAlsoSection",
- CellID->1255426704],
-Cell[14708, 347, 1674, 58, 19, "SeeAlso",
- CellID->929782353]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[16419, 410, 419, 12, 45, "MoreAboutSection",
- CellID->38303248],
-Cell[16841, 424, 134, 3, 16, "MoreAbout",
- CellID->7514883]
-}, Open  ]],
-Cell[16990, 430, 23, 0, 40, "FooterCell"]
-}
-]
-*)
-
-(* End of internal cache information *)
 

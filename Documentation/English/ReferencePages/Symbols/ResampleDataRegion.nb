@@ -1,65 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/ResampleDataRegion URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataRegion"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ResampleDataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ResampleDataRegion"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -72,17 +27,19 @@ Cell[BoxData[GridBox[{
        ButtonBox["ResampleDataRegion",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ResampleDataRegion"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ResampleDataRegion[d, {x1, x2, dx}, p] returns a new \
-DataRegion of the same dimensionality as the DataRegion d but with points in \
-the range x1 to x2 with spacing dx.  The data is interpolated at order p onto \
-the new grid.  x1, x2 and dx are lists of length equal to the dimensionality \
-of d.  NOTE: currently only 2-dimensional DataRegions are supported."
+       StyleBox[
+        RowBox[{"d", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"x1", ",", " ", "x2", ",", " ", "dx"}], "}"}], ",", " ", 
+         "p"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a new DataRegion of the same dimensionality as \
+the DataRegion d but with points in the range x1 to x2 with spacing dx.  The \
+data is interpolated at order p onto the new grid.  x1, x2 and dx are lists \
+of length equal to the dimensionality of d.  NOTE: currently only \
+2-dimensional DataRegions are supported."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -92,40 +49,29 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"ResampleDataRegion - nrmma`DataRegion`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ResampleDataRegion",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"resampledataregion", "RESAMPLEDATAREGION"}, "index" -> 
-    True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion", "status" -> "", "summary" -> 
+    "keywords" -> {
+     "ResampleDataRegion", "RESAMPLEDATAREGION", "resampledataregion"}, 
+    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
+     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
     "ResampleDataRegion[d, {x1, x2, dx}, p] returns a new DataRegion of the \
 same dimensionality as the DataRegion d but with points in the range x1 to x2 \
 with spacing dx.  The data is interpolated at order p onto the new grid.  x1, \
 x2 and dx are lists of length equal to the dimensionality of d.  NOTE: \
 currently only 2-dimensional DataRegions are supported.", 
-    "synonyms" -> {"resampledataregion", "RESAMPLEDATAREGION"}, "title" -> 
-    "ResampleDataRegion", "windowTitle" -> "ResampleDataRegion", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ResampleDataRegion"}, 
+    "synonyms" -> {
+     "ResampleDataRegion", "RESAMPLEDATAREGION", "resampledataregion"}, 
+    "title" -> "ResampleDataRegion", "windowTitle" -> "ResampleDataRegion", 
+    "type" -> "Symbol", "uri" -> "nrmma/ref/ResampleDataRegion"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
@@ -133,3 +79,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

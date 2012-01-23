@@ -1,65 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`CONVERGENCE` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/RichardsonExtrapolate3 URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Convergence",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Convergence"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["RichardsonExtrapolate3",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolate3"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -72,16 +27,19 @@ Cell[BoxData[GridBox[{
        ButtonBox["RichardsonExtrapolate3",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/RichardsonExtrapolate3"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]RichardsonExtrapolate3[{f1, f2, f3}, {h1, h2, h3}, p] \
-gives the order p Richardson extrapolant of f1, f2 and f3 at h = 0 assuming \
-that f[h] = O[h^p]. f1, f2 and f3 can either be real numbers or DataTables, \
-and the returned value will be of the same type."
+       StyleBox[
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"f1", ",", " ", "f2", ",", " ", "f3"}], "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"h1", ",", " ", "h2", ",", " ", "h3"}], "}"}], ",", " ", 
+         "p"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the order p Richardson extrapolant of f1, f2 and \
+f3 at h = 0 assuming that f[h] = O[h^p]. f1, f2 and f3 can either be real \
+numbers or DataTables, and the returned value will be of the same type."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -91,39 +49,29 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"RichardsonExtrapolate3 - nrmma`Convergence`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"RichardsonExtrapolate3",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"richardsonextrapolate3", "RICHARDSONEXTRAPOLATE3"}, 
-    "index" -> True, "label" -> "nrmma`Convergence` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma Convergence", "status" -> "", "summary" -> 
+    "keywords" -> {
+     "RichardsonExtrapolate3", "RICHARDSONEXTRAPOLATE3", 
+      "richardsonextrapolate3"}, "index" -> True, "label" -> 
+    "nrmma/Convergence Symbol", "language" -> "en", "paclet" -> "Convergence",
+     "status" -> "None", "summary" -> 
     "RichardsonExtrapolate3[{f1, f2, f3}, {h1, h2, h3}, p] gives the order p \
 Richardson extrapolant of f1, f2 and f3 at h = 0 assuming that f[h] = O[h^p]. \
 f1, f2 and f3 can either be real numbers or DataTables, and the returned \
 value will be of the same type.", 
-    "synonyms" -> {"richardsonextrapolate3", "RICHARDSONEXTRAPOLATE3"}, 
-    "title" -> "RichardsonExtrapolate3", "windowTitle" -> 
-    "RichardsonExtrapolate3", "type" -> "Symbol", "uri" -> 
+    "synonyms" -> {
+     "RichardsonExtrapolate3", "RICHARDSONEXTRAPOLATE3", 
+      "richardsonextrapolate3"}, "title" -> "RichardsonExtrapolate3", 
+    "windowTitle" -> "RichardsonExtrapolate3", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/RichardsonExtrapolate3"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
@@ -132,3 +80,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

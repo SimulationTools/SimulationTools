@@ -1,64 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/MakeDataRegion URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataRegion"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["MakeDataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/MakeDataRegion"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -71,21 +27,21 @@ Cell[BoxData[GridBox[{
        ButtonBox["MakeDataRegion",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/MakeDataRegion"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]MakeDataRegion[data, name, dims, origin, spacing, time] \
-creates a DataRegion object from the passed data.  data is an N-dimensional \
-array (nested list) of numbers.  name is a name to give to the object for \
-display purposes.  dims is a list of length N consisting of the dimensions of \
-data (dims = Reverse[Dimensions[data]]).  origin is a list of length N giving \
-the coordinates of the first point in each direction.  spacing is a list of \
-length N giving the spacing between points in each direction.  time is a \
-number which will be stored with the DataRegion which can be useful for \
-labeling simulation time."
+       StyleBox[
+        RowBox[{
+        "data", ",", " ", "name", ",", " ", "dims", ",", " ", "origin", ",", 
+         " ", "spacing", ",", " ", "time"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]creates a DataRegion object from the passed data.  data \
+is an N-dimensional array (nested list) of numbers.  name is a name to give \
+to the object for display purposes.  dims is a list of length N consisting of \
+the dimensions of data (dims = Reverse[Dimensions[data]]).  origin is a list \
+of length N giving the coordinates of the first point in each direction.  \
+spacing is a list of length N giving the spacing between points in each \
+direction.  time is a number which will be stored with the DataRegion which \
+can be useful for labeling simulation time."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -95,31 +51,19 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"MakeDataRegion - nrmma`DataRegion`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"MakeDataRegion",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"makedataregion", "MAKEDATAREGION"}, 
-    "index" -> True, "label" -> "nrmma`DataRegion` Symbol", "language" -> 
-    "en", "paclet" -> "nrmma DataRegion", "status" -> "", "summary" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"MakeDataRegion", "MAKEDATAREGION", "makedataregion"}, 
+    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
+     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
     "MakeDataRegion[data, name, dims, origin, spacing, time] creates a \
 DataRegion object from the passed data.  data is an N-dimensional array \
 (nested list) of numbers.  name is a name to give to the object for display \
@@ -129,13 +73,14 @@ coordinates of the first point in each direction.  spacing is a list of \
 length N giving the spacing between points in each direction.  time is a \
 number which will be stored with the DataRegion which can be useful for \
 labeling simulation time.", 
-    "synonyms" -> {"makedataregion", "MAKEDATAREGION"}, "title" -> 
-    "MakeDataRegion", "windowTitle" -> "MakeDataRegion", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/MakeDataRegion"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "synonyms" -> {"MakeDataRegion", "MAKEDATAREGION", "makedataregion"}, 
+    "title" -> "MakeDataRegion", "windowTitle" -> "MakeDataRegion", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/MakeDataRegion"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

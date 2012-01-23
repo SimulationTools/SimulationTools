@@ -1,64 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`WAVEFORMS` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/ExtrapolatePsi4 URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Waveforms",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Waveforms"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ExtrapolatePsi4",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ExtrapolatePsi4"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -71,14 +27,14 @@ Cell[BoxData[GridBox[{
        ButtonBox["ExtrapolatePsi4",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ExtrapolatePsi4"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]ExtrapolatePsi4[run, l, m] extrapolates the (l, m) mode \
-of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius."
+       StyleBox[
+        RowBox[{"run", ",", " ", "l", ",", " ", "m"}], "TI"], "]"}]], 
+      "InlineFormula"],
+     "\[LineSeparator]extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\
+\[Psi]\), \(4\)]\) to infinite radius."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -88,41 +44,29 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"ExtrapolatePsi4 - nrmma`Waveforms`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ExtrapolatePsi4",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"extrapolatepsi4", "EXTRAPOLATEPSI4"}, "index" -> True, 
-    "label" -> "nrmma`Waveforms` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma Waveforms", "status" -> "", "summary" -> 
+    "keywords" -> {"ExtrapolatePsi4", "EXTRAPOLATEPSI4", "extrapolatepsi4"}, 
+    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
     "ExtrapolatePsi4[run, l, m] extrapolates the (l, m) mode of \
 \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.", 
-    "synonyms" -> {"extrapolatepsi4", "EXTRAPOLATEPSI4"}, "title" -> 
-    "ExtrapolatePsi4", "windowTitle" -> "ExtrapolatePsi4", "type" -> "Symbol",
-     "uri" -> "nrmma/ref/ExtrapolatePsi4"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "synonyms" -> {"ExtrapolatePsi4", "EXTRAPOLATEPSI4", "extrapolatepsi4"}, 
+    "title" -> "ExtrapolatePsi4", "windowTitle" -> "ExtrapolatePsi4", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ExtrapolatePsi4"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

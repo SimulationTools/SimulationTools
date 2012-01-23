@@ -1,64 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATATABLE` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma/ref/MakeDataTable URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataTable",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataTable"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["MakeDataTable",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/MakeDataTable"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -71,16 +27,20 @@ Cell[BoxData[GridBox[{
        ButtonBox["MakeDataTable",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/MakeDataTable"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]MakeDataTable[{{x,f},...}, attrs] constructs a \
-DataTable object out of the list and attributes passed.  attrs is of the form \
-{attr -> value, ...}.  The independent variable, x, should be monotonically \
-increasing and have a uniform spacing.  This is not currently checked."
+       StyleBox[
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", ",", "f"}], "}"}], ",", "..."}], "}"}], ",", " ", 
+         "attrs"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]constructs a DataTable object out of the list and \
+attributes passed.  attrs is of the form {attr -> value, ...}.  The \
+independent variable, x, should be monotonically increasing and have a \
+uniform spacing.  This is not currently checked."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -90,42 +50,31 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"MakeDataTable - nrmma`DataTable`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"MakeDataTable",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"makedatatable", "MAKEDATATABLE"}, 
-    "index" -> True, "label" -> "nrmma`DataTable` Symbol", "language" -> "en",
-     "paclet" -> "nrmma DataTable", "status" -> "", "summary" -> 
+   "context" -> "nrmma`", 
+    "keywords" -> {"MakeDataTable", "MAKEDATATABLE", "makedatatable"}, 
+    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
+    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
     "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of \
 the list and attributes passed.  attrs is of the form {attr -> value, ...}.  \
 The independent variable, x, should be monotonically increasing and have a \
 uniform spacing.  This is not currently checked.", 
-    "synonyms" -> {"makedatatable", "MAKEDATATABLE"}, "title" -> 
-    "MakeDataTable", "windowTitle" -> "MakeDataTable", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/MakeDataTable"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "synonyms" -> {"MakeDataTable", "MAKEDATATABLE", "makedatatable"}, 
+    "title" -> "MakeDataTable", "windowTitle" -> "MakeDataTable", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/MakeDataTable"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

@@ -1,65 +1,20 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`DATAREGION` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/DynamicDataRegionArrayPlot URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataRegion"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DynamicDataRegionArrayPlot",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/DynamicDataRegionArrayPlot"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
@@ -72,18 +27,17 @@ Cell[BoxData[GridBox[{
        ButtonBox["DynamicDataRegionArrayPlot",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/DynamicDataRegionArrayPlot"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]DynamicDataRegionArrayPlot[d,args] generates a zoomable \
-version of DataRegionArrayPlot[d,args] which adds the ability to zoom into a \
-region of the plot by dragging a box with the mouse.  Double-click to return \
-to the previous zoom level and right-click to show a button-bar with various \
-options including resetting the plot range to All or Automatic, joining the \
-points in the plot, or using a log scale."
+       StyleBox[
+        RowBox[{"d", ",", "args"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]generates a zoomable version of \
+DataRegionArrayPlot[d,args] which adds the ability to zoom into a region of \
+the plot by dragging a box with the mouse.  Double-click to return to the \
+previous zoom level and right-click to show a button-bar with various options \
+including resetting the plot range to All or Automatic, joining the points in \
+the plot, or using a log scale."
     }]]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -93,33 +47,21 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"DynamicDataRegionArrayPlot - nrmma`DataRegion`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"DynamicDataRegionArrayPlot",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "dynamicdataregionarrayplot", "DYNAMICDATAREGIONARRAYPLOT"}, "index" -> 
-    True, "label" -> "nrmma`DataRegion` Symbol", "language" -> "en", "paclet" -> 
-    "nrmma DataRegion", "status" -> "", "summary" -> 
+     "DynamicDataRegionArrayPlot", "DYNAMICDATAREGIONARRAYPLOT", 
+      "dynamicdataregionarrayplot"}, "index" -> True, "label" -> 
+    "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> "DataRegion", 
+    "status" -> "None", "summary" -> 
     "DynamicDataRegionArrayPlot[d,args] generates a zoomable version of \
 DataRegionArrayPlot[d,args] which adds the ability to zoom into a region of \
 the plot by dragging a box with the mouse.  Double-click to return to the \
@@ -127,9 +69,9 @@ previous zoom level and right-click to show a button-bar with various options \
 including resetting the plot range to All or Automatic, joining the points in \
 the plot, or using a log scale.", 
     "synonyms" -> {
-     "dynamicdataregionarrayplot", "DYNAMICDATAREGIONARRAYPLOT"}, "title" -> 
-    "DynamicDataRegionArrayPlot", "windowTitle" -> 
-    "DynamicDataRegionArrayPlot", "type" -> "Symbol", "uri" -> 
+     "DynamicDataRegionArrayPlot", "DYNAMICDATAREGIONARRAYPLOT", 
+      "dynamicdataregionarrayplot"}, "title" -> "DynamicDataRegionArrayPlot", 
+    "windowTitle" -> "DynamicDataRegionArrayPlot", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/DynamicDataRegionArrayPlot"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
@@ -138,3 +80,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

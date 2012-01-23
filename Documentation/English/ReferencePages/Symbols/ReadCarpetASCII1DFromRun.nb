@@ -1,89 +1,36 @@
 Notebook[{
-Cell[BoxData[GridBox[{
-   {Cell["NRMMA`ASCII1D` SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
-       Documentation`HelpLookup[
-        StringJoin[
-        "paclet:", "nrmma", 
-         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/tutorial/tutorialName2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/ref/Symbol2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
-       Documentation`HelpLookup[
-        StringJoin["paclet:", "nrmma", "/guide/Guide2"]]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->
-         False], {"\<\"Go to nrmma/ref/ReadCarpetASCII1DFromRun URL\"\>":>
-       FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here/documentationIfAny"], None}]}], 
-       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL[
-           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
-            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
-         NotebookLocate[{
-           URL["your.website.goes.here"], None}]}]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}]
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Ascii1D",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Ascii1D"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadCarpetASCII1DFromRun",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadCarpetASCII1DFromRun"]
+}], "LinkTrail"],
 
 Cell[CellGroupData[{
 
 Cell["ReadCarpetASCII1DFromRun", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["ReadCarpetASCII1DFromRun",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadCarpetASCII1DFromRun"], "[", 
-       StyleBox["args", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]UNTESTED!! ReadCarpetASCII1DFromRun[run, filename, rl, \
-dir] reads a 1D CarpetIOASCII output file from filename in run.  The function \
-returns a single refinement level rl from the file.  It assumes that the \
-output is in direction dir, running from 1 to 3. The data is returned as a \
-list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the \
-times and the di are DataTables representing the 1D data at those times."
-    }]]}
+   {"", Cell["\<\
+UNTESTED!! ReadCarpetASCII1DFromRun[run, filename, rl, dir] reads a 1D \
+CarpetIOASCII output file from filename in run.  The function returns a \
+single refinement level rl from the file.  It assumes that the output is in \
+direction dir, running from 1 to 3. The data is returned as a list of the \
+form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the \
+di are DataTables representing the 1D data at those times.\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
-
-Cell["Made for Mathematica 8  |  Last modified in January 2012", "History"],
 
 Cell[CellGroupData[{
 
@@ -93,41 +40,31 @@ Cell[BoxData[""]]
 }, Open  ]]
 },
 Saveable->False,
-WindowSize->Automatic,
-WindowMargins->Automatic,
-WindowTitle->"ReadCarpetASCII1DFromRun - nrmma`Ascii1D`",
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadCarpetASCII1DFromRun",
 Visible->True,
-DockedCells->FEPrivate`FrontEndResource[
- "FEExpressions", "HelpViewerToolbar"],
-PageHeaders->{{None, None, None}, {None, None, 
-   Cell[
-    TextData[{
-      Cell[
-       TextData[{""}], "PageHeader"], 
-      Cell[
-       TextData[{
-         CounterBox["Page"]}], "PageNumber"]}], 
-    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
-PageFooters->{{None, None, None}, {
-   Cell[
-    TextData[{""}], "PageFooter"], None, None}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"readcarpetascii1dfromrun", "READCARPETASCII1DFROMRUN"}, 
-    "index" -> True, "label" -> "nrmma`Ascii1D` Symbol", "language" -> "en", 
-    "paclet" -> "nrmma Ascii1D", "status" -> "", "summary" -> 
+    "keywords" -> {
+     "ReadCarpetASCII1DFromRun", "READCARPETASCII1DFROMRUN", 
+      "readcarpetascii1dfromrun"}, "index" -> True, "label" -> 
+    "nrmma/Ascii1D Symbol", "language" -> "en", "paclet" -> "Ascii1D", 
+    "status" -> "None", "summary" -> 
     "UNTESTED!! ReadCarpetASCII1DFromRun[run, filename, rl, dir] reads a 1D \
 CarpetIOASCII output file from filename in run.  The function returns a \
 single refinement level rl from the file.  It assumes that the output is in \
 direction dir, running from 1 to 3. The data is returned as a list of the \
 form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the \
 di are DataTables representing the 1D data at those times.", 
-    "synonyms" -> {"readcarpetascii1dfromrun", "READCARPETASCII1DFROMRUN"}, 
-    "title" -> "ReadCarpetASCII1DFromRun", "windowTitle" -> 
-    "ReadCarpetASCII1DFromRun", "type" -> "Symbol", "uri" -> 
+    "synonyms" -> {
+     "ReadCarpetASCII1DFromRun", "READCARPETASCII1DFROMRUN", 
+      "readcarpetascii1dfromrun"}, "title" -> "ReadCarpetASCII1DFromRun", 
+    "windowTitle" -> "ReadCarpetASCII1DFromRun", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ReadCarpetASCII1DFromRun"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
@@ -136,3 +73,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
+

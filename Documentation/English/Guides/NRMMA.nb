@@ -1,7 +1,6 @@
 Notebook[{
 Cell[" ", "GuideColorBar",
- CellMargins->{{Inherited, Inherited}, {-5, 0}},
- CellID->1281331271],
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
  ButtonBox["nrmma",
@@ -11,8 +10,7 @@ Cell[TextData[{
  ButtonBox["NRMMA Package",
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"]
-}], "LinkTrail",
- CellID->368659581],
+}], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
    {Cell["NRMMA GUIDE", "PacletNameCell"], Cell[TextData[{
@@ -48,13 +46,11 @@ Cell[BoxData[GridBox[{
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}]
     }], "AnchorBar"]}
-  }]], "AnchorBarGrid",
- CellID->571256272],
+  }]], "AnchorBarGrid"],
 
 Cell[CellGroupData[{
 
-Cell["NRMMA Package", "GuideTitle",
- CellID->1852261414],
+Cell["NRMMA Package", "GuideTitle"],
 
 Cell[TextData[{
  "NRMMA is a suite of ",
@@ -63,16 +59,14 @@ Cell[TextData[{
  " packages for analysing data in Numerical Relativity.  It has been designed \
 for use with common output formats used by the Cactus code, with a focus on \
 output from the PSU and AEI codes."
-}], "GuideAbstract",
- CellID->1034638186],
+}], "GuideAbstract"],
 
 Cell[CellGroupData[{
 
 Cell[TextData[ButtonBox["Numerical Relativity \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
-  "paclet:nrmma/guide/Numerical Relativity"]], "GuideFunctionsSubsection",
- CellID->988902343],
+  "paclet:nrmma/guide/Numerical Relativity"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadPsi4",
@@ -85,8 +79,7 @@ Cell[TextData[{
  Cell[BoxData[
   SubscriptBox["\[Psi]", "4"]], "InlineFormula"],
  "waveform"
-}], "GuideText",
- CellID->1105734668],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadIsolatedHorizonSpin",
@@ -97,8 +90,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read spin computed by the IsolatedHorizon thorn"
-}], "GuideText",
- CellID->1906567585],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadAHRadius",
@@ -108,8 +100,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read apparent horizon radius from AHFinderDirect thorn"
-}], "GuideText",
- CellID->1077904208],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadBHCoordinate",
@@ -119,8 +110,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read coordinate location of puncture"
-}], "GuideText",
- CellID->163977764],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["Kick",
@@ -130,19 +120,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "compute kick from waveform"
-}], "GuideText",
- CellID->752760447],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["QuasinormalMode",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/QuasinormalMode"]], "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "compute quasinormal mode"
-}], "GuideText",
- CellID->818668252],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadPsi4Modes",
@@ -218,8 +196,7 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["LinearMomentumFlux",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/LinearMomentumFlux"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing",
- CellID->429585035]
+}], "InlineGuideFunctionListing"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -227,8 +204,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Simulation Monitoring \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
-  "paclet:nrmma/guide/Simulation Monitoring"]], "GuideFunctionsSubsection",
- CellID->195662031],
+  "paclet:nrmma/guide/Simulation Monitoring"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["SimView",
@@ -238,8 +214,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "provide a quick graphical overview of a simulation"
-}], "GuideText",
- CellID->694291460],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["LookupParameter",
@@ -249,8 +224,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read the value of a specified parameter from a simulation"
-}], "GuideText",
- CellID->1677914069],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["FindParameters",
@@ -260,8 +234,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "search for available parameters"
-}], "GuideText",
- CellID->2093988926],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadRunSpeed",
@@ -302,16 +275,14 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["ReadCPUHours",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ReadCPUHours"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing",
- CellID->709872246]
+}], "InlineGuideFunctionListing"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[TextData[ButtonBox["Reading Data \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/Reading Data"]], "GuideFunctionsSubsection",
- CellID->1551179437],
+ ButtonData->"paclet:nrmma/guide/Reading Data"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadGridFunction",
@@ -321,8 +292,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read data for a grid function at a specific iteration"
-}], "GuideText",
- CellID->221323079],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadCarpetASCII1D",
@@ -332,8 +302,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read 1D ASCII data from a file"
-}], "GuideText",
- CellID->335312149],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["FindRunFile",
@@ -343,8 +312,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "find instances of a specific file across all restarts"
-}], "GuideText",
- CellID->594198515],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadTimerFromRun",
@@ -354,8 +322,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "read TimerReport output files"
-}], "GuideText",
- CellID->895483055],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadIterations",
@@ -396,8 +363,7 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["ReadVariables",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ReadVariables"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing",
- CellID->818307209]
+}], "InlineGuideFunctionListing"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -405,8 +371,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Data Manipulation \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
-  "paclet:nrmma/guide/Data Manipulation"]], "GuideFunctionsSubsection",
- CellID->803986275],
+  "paclet:nrmma/guide/Data Manipulation"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["DataTable",
@@ -416,8 +381,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "representation of 1D data"
-}], "GuideText",
- CellID->630217001],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["DataRegion",
@@ -427,8 +391,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "representation of arbitrary dimensional data on an evenly spaced grid"
-}], "GuideText",
- CellID->667788803],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["Frequency",
@@ -498,17 +461,14 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["ToList",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ToList"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing",
- CellID->776872799]
+}], "InlineGuideFunctionListing"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[TextData[ButtonBox["Data Analysis \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/Data Analysis"]], "GuideFunctionsSubsection",
- 
- CellID->200559033],
+ ButtonData->"paclet:nrmma/guide/Data Analysis"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ConvergenceMultiplier",
@@ -520,8 +480,7 @@ Cell[TextData[{
  " ",
  "compute a convergence multiplier given specified resolutions and \
 convergence order"
-}], "GuideText",
- CellID->1393825488],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ConvergenceRate",
@@ -531,8 +490,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "compute the convergence rate as a function of time"
-}], "GuideText",
- CellID->1273355340]
+}], "GuideText"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -540,8 +498,7 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Data Visualization \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
-  "paclet:nrmma/guide/Data Visualization"]], "GuideFunctionsSubsection",
- CellID->1608657025],
+  "paclet:nrmma/guide/Data Visualization"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["PresentationArrayPlot",
@@ -552,8 +509,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "create a 2D array plot with a legend"
-}], "GuideText",
- CellID->2026987092],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["PresentationListLinePlot",
@@ -564,8 +520,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "create a presentation-quality 1D plot"
-}], "GuideText",
- CellID->2038962883],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["DynamicListLinePlot",
@@ -577,8 +532,7 @@ Cell[TextData[{
  " ",
  "version of ListLinePlot which allows zooming by dragging a box with the \
 mouse"
-}], "GuideText",
- CellID->1452619402],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["MakeMovie",
@@ -588,16 +542,14 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "generating image files and movies using an external tool (e.g. ffmpeg)"
-}], "GuideText",
- CellID->1580190318]
+}], "GuideText"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[TextData[ButtonBox["Utilities \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/Utilities"]], "GuideFunctionsSubsection",
- CellID->328412177],
+ ButtonData->"paclet:nrmma/guide/Utilities"]], "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["Memo",
@@ -608,8 +560,7 @@ Cell[TextData[{
  " ",
  "memoisation of functions; i.e. in-memory caching of values so that they \
 don't have to be recomputed"
-}], "GuideText",
- CellID->590486049],
+}], "GuideText"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["Profile",
@@ -619,46 +570,38 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "add timing information to functions which can be queried later"
-}], "GuideText",
- CellID->777092756]
+}], "GuideText"]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["TUTORIALS", "GuideTutorialsSection",
- CellID->1749892685],
+Cell["TUTORIALS", "GuideTutorialsSection"],
 
 Cell[TextData[ButtonBox["CarpetHDF5",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/CarpetHDF5"]], "GuideTutorial",
- CellID->657811130],
+ ButtonData->"paclet:nrmma/tutorial/CarpetHDF5"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "GuideTutorial",
- CellID->585847154],
+ ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "GuideTutorial",
- CellID->120595783],
+ ButtonData->"paclet:nrmma/tutorial/DataTable"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["Kicks",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/Kicks"]], "GuideTutorial",
- CellID->1776245760],
+ ButtonData->"paclet:nrmma/tutorial/Kicks"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "GuideTutorial",
- CellID->1192311373]
+ ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "GuideTutorial"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[" ", "FooterCell",
- CellID->1007335854],
+Cell[" ", "FooterCell"],
 
 Cell[BoxData[""]]
 }, Open  ]]
@@ -674,7 +617,7 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"nrmma", "NRMMA"}, "index" -> True, 
-    "label" -> "NRMMA Label", "language" -> "en", "paclet" -> "nrmma", 
+    "label" -> "NRMMA Application", "language" -> "en", "paclet" -> "nrmma", 
     "status" -> "None", "summary" -> 
     "A package for analysing data in Numerical Relativity.", 
     "synonyms" -> {"NRMMA", "nrmma"}, "title" -> "NRMMA Package", 
