@@ -57,15 +57,17 @@ workbenchSymbols =
    SimView};
 
 docPackage[package_ -> symbols_] :=
-  Map[CreateReferencePages["nrmma", FileNameJoin[{$UserBaseDirectory, "Applications"}],
-                           package, #, ReferenceTemplate -> False] &, Complement[Take[symbols,Min[Infinity,Length[symbols]]], workbenchSymbols]];
+  Map[BuildSymbolReference["nrmma", #, "Source"] &, Complement[Take[symbols,Min[Infinity,Length[symbols]]], workbenchSymbols]];
 
+Print["Building symbol reference pages"];
 Scan[docPackage, packageSymbols];
 
-sourceGuides = FileNames["*.md", "Source", Infinity];
+Print["Building guides"];
+sourceGuides = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "English", "Guides"}], Infinity];
 destGuides =
   FileNameJoin[{Directory[], FileNameDrop[DirectoryName[#], 1],
       FileBaseName[#] <> ".nb"}] & /@ sourceGuides;
 MapThread[BuildGuide, {sourceGuides, destGuides}];
 
+Print["Indexing Documentation"];
 BuildApplication["nrmma", CreatePacletInfo -> False];
