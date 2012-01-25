@@ -32,6 +32,9 @@ Cell[CellGroupData[{
 
 Cell["Constructing", "Section"],
 
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
 Cell["\<\
 You can construct a DataTable object from a list of {x, f} pairs:\
 \>", "MathCaption"],
@@ -73,6 +76,26 @@ Cell[CellGroupData[{
 
 Cell["Using", "Section"],
 
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"l", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"d", "=", 
+   RowBox[{"MakeDataTable", "[", "l", "]"}]}], ";"}]}], "Input",
+ CellID->2128570596],
+
 Cell["A DataTable can be converted back to a list:", "MathCaption"],
 
 Cell[BoxData[
@@ -88,44 +111,45 @@ Cell[TextData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "d", "]"}]], "Input"],
 
-Cell["", "Text"],
-
 Cell["\<\
 You can perform arithmetic operations on DataTables with the same spacing and \
 range:\
 \>", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"d1", "=", 
-  RowBox[{"MakeDataTable", "[", 
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"x", ",", 
-       RowBox[{"Sin", "[", 
-        RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
-   "]"}]}]], "Input"],
+ RowBox[{
+  RowBox[{"d1", "=", 
+   RowBox[{"MakeDataTable", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], "]"}]}],
+   ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"d2", "=", 
-  RowBox[{"MakeDataTable", "[", 
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"x", ",", 
-       RowBox[{"Cos", "[", 
-        RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
-   "]"}]}]], "Input"],
+ RowBox[{
+  RowBox[{"d2", "=", 
+   RowBox[{"MakeDataTable", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"2", "Pi", " ", "x"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], "]"}]}],
+   ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"d3", "=", 
-  RowBox[{
-   RowBox[{"d1", "^", "2"}], "+", 
-   RowBox[{"d2", "^", "2"}]}]}]], "Input"],
+ RowBox[{
+  RowBox[{"d3", "=", 
+   RowBox[{
+    RowBox[{"d1", "^", "2"}], "+", 
+    RowBox[{"d2", "^", "2"}]}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 

@@ -512,82 +512,95 @@ Cell[CellGroupData[{
 Cell["Examples", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"<<", "nrmma`"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"gxx", "=", 
-  RowBox[{"ReadGridFunction", "[", 
-   RowBox[{
-   "\"\<sch_3c\>\"", ",", "\"\<admbase::metric.file_0.h5\>\"", ",", "0", ",", 
-    
-    RowBox[{"Variable", "->", "\"\<ADMBASE::gxx\>\""}]}], "]"}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"gxxSlice", "=", 
-  RowBox[{"SliceData", "[", 
-   RowBox[{"gxx", ",", "3"}], "]"}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"QuickSlicePlot", "[", 
-  RowBox[{"gxxSlice", ",", 
-   RowBox[{"{", 
+ RowBox[{"(*", 
+  RowBox[{"gxx", "=", 
+   RowBox[{"ReadGridFunction", "[", 
     RowBox[{
-     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]], "Input"],
+    "\"\<sch_3c\>\"", ",", "\"\<admbase::metric.file_0.h5\>\"", ",", "0", ",", 
+     RowBox[{"Variable", "->", "\"\<ADMBASE::gxx\>\""}]}], "]"}]}], 
+  "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"gxxSlice", "=", 
+   RowBox[{"SliceData", "[", 
+    RowBox[{"gxx", ",", "3"}], "]"}]}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"QuickSlicePlot", "[", 
+   RowBox[{"gxxSlice", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}], "*)"}]], "Input"],
 
 Cell["\<\
 (Note that the Cartesian components of g are not spherically symmetric.)\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"GetOrigin", "[", "gxx", "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"GetOrigin", "[", "gxx", "]"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"GetSpacing", "[", "gxx", "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"GetSpacing", "[", "gxx", "]"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"GetDimensions", "[", "gxx", "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"GetDimensions", "[", "gxx", "]"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"{", 
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xMin", ",", "xMax"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"yMin", ",", "yMax"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"zMin", ",", "zMax"}], "}"}]}], "}"}], "=", 
+   RowBox[{"GetDataRange", "[", "gxx", "]"}]}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"GetVariableName", "[", "gxx", "]"}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"gxxFn", "=", 
+   RowBox[{"Interpolation", "[", "gxx", "]"}]}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"gxxFn", "[", 
+   RowBox[{"1.0", ",", "1.5", ",", "2.0"}], "]"}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Plot", "[", 
    RowBox[{
+    RowBox[{"gxxFn", "[", 
+     RowBox[{"x", ",", "0", ",", "0"}], "]"}], ",", 
     RowBox[{"{", 
-     RowBox[{"xMin", ",", "xMax"}], "}"}], ",", 
+     RowBox[{"x", ",", "xMin", ",", "xMax"}], "}"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"DensityPlot", "[", 
+   RowBox[{
+    RowBox[{"gxxFn", "[", 
+     RowBox[{"x", ",", "y", ",", "0"}], "]"}], ",", 
     RowBox[{"{", 
-     RowBox[{"yMin", ",", "yMax"}], "}"}], ",", 
+     RowBox[{"x", ",", "xMin", ",", "xMax"}], "}"}], ",", 
     RowBox[{"{", 
-     RowBox[{"zMin", ",", "zMax"}], "}"}]}], "}"}], "=", 
-  RowBox[{"GetDataRange", "[", "gxx", "]"}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"GetVariableName", "[", "gxx", "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"gxxFn", "=", 
-  RowBox[{"Interpolation", "[", "gxx", "]"}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"gxxFn", "[", 
-  RowBox[{"1.0", ",", "1.5", ",", "2.0"}], "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"Plot", "[", 
-  RowBox[{
-   RowBox[{"gxxFn", "[", 
-    RowBox[{"x", ",", "0", ",", "0"}], "]"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"x", ",", "xMin", ",", "xMax"}], "}"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"DensityPlot", "[", 
-  RowBox[{
-   RowBox[{"gxxFn", "[", 
-    RowBox[{"x", ",", "y", ",", "0"}], "]"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"x", ",", "xMin", ",", "xMax"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"y", ",", "yMin", ",", "yMax"}], "}"}]}], "]"}]], "Input"]
+     RowBox[{"y", ",", "yMin", ",", "yMax"}], "}"}]}], "]"}], "*)"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 },

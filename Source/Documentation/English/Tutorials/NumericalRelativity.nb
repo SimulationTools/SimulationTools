@@ -28,7 +28,8 @@ to a standard uniform format.  \
 Cell["Load the package", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"<<", "nrmma`"}], "*)"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -67,9 +68,11 @@ Cell[TextData[{
 }], "MathCaption"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"RunDirectory", "=", 
-   RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}]], "Input"]
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"RunDirectory", "=", 
+    RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}], 
+  "*)"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -139,7 +142,8 @@ again when it changes on disk, but this has not been done yet."
 Cell["Clear data cache", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"ClearAllMemos", "[", "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"ClearAllMemos", "[", "]"}], "*)"}]], "Input"],
 
 Cell[TextData[{
  "There are many functions in the ",
@@ -154,11 +158,13 @@ Cell["In this tutorial we look at a binary black hole simulation", \
 "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"<<", "nrmma`"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<q1D8\>\""}], ";"}]], "Input"]
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"run", " ", "=", " ", "\"\<q1D8\>\""}], ";"}], "*)"}]], "Input"]
 }, Open  ]]
 }, Open  ]],
 
@@ -179,34 +185,39 @@ Read (2,2) mode of waveform extracted at r=100M from a simulation\
 \>", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"psi4", "=", 
-  RowBox[{"ReadPsi4", "[", 
-   RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"psi4", "=", 
+   RowBox[{"ReadPsi4", "[", 
+    RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}], 
+  "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"Re", "[", "psi4", "]"}], ",", 
-     RowBox[{"Im", "[", "psi4", "]"}], ",", 
-     RowBox[{"Abs", "[", "psi4", "]"}]}], "}"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"Phase", "[", "psi4", "]"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"Frequency", "[", "psi4", "]"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", 
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{
     RowBox[{"{", 
      RowBox[{
-      RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input"]
+      RowBox[{"Re", "[", "psi4", "]"}], ",", 
+      RowBox[{"Im", "[", "psi4", "]"}], ",", 
+      RowBox[{"Abs", "[", "psi4", "]"}]}], "}"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{
+    RowBox[{"Phase", "[", "psi4", "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{
+    RowBox[{"Frequency", "[", "psi4", "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}], "*)"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -228,53 +239,61 @@ Cell["Functions for dealing with coordinate trajectories.", "Caption"],
 Cell["Puncture 0 trajectory", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"traj0", "=", 
-   RowBox[{"ReadBHTrajectory", "[", 
-    RowBox[{"run", ",", "0"}], "]"}]}], ";"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"traj0", "=", 
+    RowBox[{"ReadBHTrajectory", "[", 
+     RowBox[{"run", ",", "0"}], "]"}]}], ";"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"Take", "[", 
-  RowBox[{"traj0", ",", "10"}], "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"Take", "[", 
+   RowBox[{"traj0", ",", "10"}], "]"}], "*)"}]], "Input"],
 
 Cell["Puncture 1 trajectory", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"traj1", "=", 
-   RowBox[{"ReadBHTrajectory", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}], ";"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"traj1", "=", 
+    RowBox[{"ReadBHTrajectory", "[", 
+     RowBox[{"run", ",", "1"}], "]"}]}], ";"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"traj0", ",", "traj1"}], "}"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
-   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"traj0", ",", "traj1"}], "}"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}], "*)"}]], "Input"],
 
 Cell["Separation of the BHs (radius of relative orbit)", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{"ReadBHSeparation", "[", "run", "]"}], "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{"ReadBHSeparation", "[", "run", "]"}], "]"}], "*)"}]], "Input"],
 
 Cell["Phase of orbit", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{"ReadBHPhase", "[", "run", "]"}], "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{"ReadBHPhase", "[", "run", "]"}], "]"}], "*)"}]], "Input"],
 
 Cell["Individual coordinates", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"bh0x", "=", 
-   RowBox[{"ReadBHCoordinate", "[", 
-    RowBox[{"run", ",", "0", ",", "1"}], "]"}]}], ";"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"bh0x", "=", 
+    RowBox[{"ReadBHCoordinate", "[", 
+     RowBox[{"run", ",", "0", ",", "1"}], "]"}]}], ";"}], "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", "bh0x", "]"}]], "Input"]
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", "bh0x", "]"}], "*)"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -288,20 +307,22 @@ Remember that AHFinderDirect numbers its horizons from 1, not 0\
 Cell["Apparent horizon radius", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{"ReadAHRadius", "[", 
-   RowBox[{"run", ",", "1"}], "]"}], "]"}]], "Input"],
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{"ReadAHRadius", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], "]"}], "*)"}]], "Input"],
 
 Cell["Apparent horizon mass", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"ReadAHMass", "[", 
-    RowBox[{"run", ",", "1"}], "]"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}]], "Input"]
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{
+    RowBox[{"ReadAHMass", "[", 
+     RowBox[{"run", ",", "1"}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}], "*)"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -312,23 +333,28 @@ Cell["IsolatedHorizon numbers horizons from 0", "Text"],
 
 Cell["Spin of the first black hole", "MathCaption"],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"spin", "=", 
-   RowBox[{"ReadIsolatedHorizonSpin", "[", 
-    RowBox[{"run", ",", "0"}], "]"}]}], ";"}], "\n", 
- RowBox[{"Take", "[", 
+Cell[BoxData[
+ RowBox[{"(*", 
   RowBox[{
-   RowBox[{"ToList", "[", "spin", "]"}], ",", "10"}], "]"}]}], "Input"],
+   RowBox[{
+    RowBox[{"spin", "=", 
+     RowBox[{"ReadIsolatedHorizonSpin", "[", 
+      RowBox[{"run", ",", "0"}], "]"}]}], ";"}], "\n", 
+   RowBox[{"Take", "[", 
+    RowBox[{
+     RowBox[{"ToList", "[", "spin", "]"}], ",", "10"}], "]"}]}], 
+  "*)"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"ListLinePlot", "[", 
-  RowBox[{
-   RowBox[{"Norm", "[", "spin", "]"}], ",", 
-   RowBox[{"PlotRange", "\[Rule]", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"-", "0.1"}], ",", "0.8"}], "}"}]}]}], "]"}]], "Input"]
+ RowBox[{"(*", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{
+    RowBox[{"Norm", "[", "spin", "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.1"}], ",", "0.8"}], "}"}]}]}], "]"}], 
+  "*)"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 },
