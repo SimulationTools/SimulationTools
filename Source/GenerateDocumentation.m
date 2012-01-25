@@ -49,5 +49,9 @@ destGuides =
       FileBaseName[#] <> ".nb"}] & /@ sourceGuides;
 MapThread[BuildGuide, {sourceGuides, destGuides}];
 
+Print["Building tutorials"];
+tutorialSources = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "English", "Tutorials"}], Infinity];
+Map[BuildTutorial[FileNameJoin[{Directory[], #}]]&, tutorialSources];
+
 Print["Indexing Documentation"];
 BuildIndex["nrmma"];
