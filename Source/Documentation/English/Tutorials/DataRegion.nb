@@ -1,0 +1,603 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DataRegion", "Title"],
+
+Cell[TextData[{
+ "The ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package provides a simple representation of a n-D block of numbers on a \
+uniform Cartesian coordinate grid. The package uses an abstract type called \
+",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " to represent each block.\nA ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " object is printed in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " as DataRegion[varName, dims, dataRange] to avoid printing large quantities \
+of data.  To see the full structure, including all the data, use ",
+ ButtonBox["FullForm",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/FullForm"],
+ "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Working with DataRegions", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Creating DataRegions", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"ReadGridFunction", Cell["ReadVTKFile", "TableText"]},
+   {"MakeDataRegion", "MergeDataRegions"}
+  }]], "DefinitionBox"],
+
+Cell["Functions for creating DataRegions.", "Caption"],
+
+Cell[TextData[{
+ "Using ",
+ ButtonBox["MakeDataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/MakeDataRegion"],
+ " we can manually create a ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " object from the list ",
+ StyleBox["data.",
+  FontSlant->"Italic"],
+ " This data is assumed to be in column-major order, eg. ",
+ StyleBox["data",
+  FontSlant->"Italic"],
+ "[[",
+ StyleBox["iz",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["iy",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["ix",
+  FontSlant->"Italic"],
+ "]] for the case of 3D data. The DataRegion will name the variable ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ", and assumes it has dimensions given by the list ",
+ StyleBox["dims, ",
+  FontSlant->"Italic"],
+ "with origing given by the list ",
+ StyleBox["origin",
+  FontSlant->"Italic"],
+ " and spacing between points given by the list ",
+ StyleBox["spacing.",
+  FontSlant->"Italic"]
+}], "Text"],
+
+Cell[TextData[{
+ "Multiple ",
+ ButtonBox["DataRegions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegions"],
+ " can be merged into a single enclosing one using ",
+ ButtonBox["MergeDataRegions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/MergeDataRegions"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "Data can be imported from set of Carpet HDF5. ",
+ ButtonBox["ReadGridFunction",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadGridFunction"],
+ " loads a variable ",
+ StyleBox["var,",
+  FontSlant->"Italic"],
+ " iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ ", refinement level ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ ", coordinate map ",
+ StyleBox["map ",
+  FontSlant->"Italic"],
+ "(if specified and using multipatch data), from the file set and returns it \
+as a single DataRegion object.  It is currently assumed that the filename \
+given, ",
+ StyleBox["file",
+  FontSlant->"Italic"],
+ ", ends in either the suffix \".file_0.h5\" (with a corresponding set of \
+files \".file_<c>.h5\"), or in \".x.<m>.h5\", \".y.<m>.h5\", \".z.<m>.h5\", \
+\".d.<m>.h5\".  This set of files is opened, and component c is read from map \
+m of each one.  The outermost cctk_nghostzones points are stripped from each \
+component, and the components are then merged into a single ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " object.  If the components are disconnected, a single enclosing cuboid \
+grid is created, and points which are not on any of the components are \
+initialised to ",
+ ButtonBox["None",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/None"],
+ ".  In future, we could detect disconnected components and return a list of ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects for each one. To improve performance, ",
+ ButtonBox["ReadGridFunction",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadGridFunction"],
+ " caches some information (attributes, dataset names, dimensions) from the \
+HDF5 file. Normally, this won't be a problem unless the contents of the HDF5 \
+file change. If the file does change, use ",
+ ButtonBox["ClearAllMemos",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ClearAllMemos"],
+ " to clear the cached data so that it will be read in again the next time ",
+ ButtonBox["ReadGridFunction",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadGridFunction"],
+ " is called."
+}], "Text"],
+
+Cell[TextData[{
+ "Data can be imported from a VTK file, ",
+ StyleBox["file,",
+  FontSlant->"Italic"],
+ " as a DataRegion object. ",
+ StyleBox["file",
+  FontSlant->"Italic"],
+ " can either be a string, for a filename, or a stream object.  Currently \
+there is very little error-checking, and strong assumptions are made about \
+the format of the data.  It must be single-precision and in binary, not \
+ASCII, format."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Getting Information about a DataRegion", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"GetData", "GetOrigin", Cell["GetSpacing", "TableText"]},
+   {"GetDimensions", "GetNumDimensions", Cell["GetDataRange", "TableText"]},
+   {"GetAttributes", "GetVariableName", Cell["SliceData", "TableText"]},
+   {"ToDataTable", "Interpolation", "\[Placeholder]"}
+  }]], "DefinitionBox3Col"],
+
+Cell["Functions for working with DataRegions.", "Caption"],
+
+Cell[TextData[{
+ "A 1D DataRegion can be converted to a DataTable object using ",
+ ButtonBox["ToDataTable",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ToDataTable"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetData",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetData"],
+ " returns a nested list, of depth equal to the dimensionality of the data \
+containing the values from the DataRegion object v.  The data is ordered in \
+column-major order (the same as Carpet), so when accessing points from the \
+list, the array ordering is eg. ",
+ StyleBox["data",
+  FontSlant->"Italic"],
+ "[[",
+ StyleBox["iz",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["iy",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["ix",
+  FontSlant->"Italic"],
+ "]] for the case of 3D data.  This means that, for example, extracting a \
+slice of constant z-coordinate from 3D data is simple: ",
+ StyleBox["data",
+  FontSlant->"Italic"],
+ "[[",
+ StyleBox["iz",
+  FontSlant->"Italic"],
+ "]]."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetOrigin",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetOrigin"],
+ " returns a list {",
+ StyleBox["o1",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["o2",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["o3, ...",
+  FontSlant->"Italic"],
+ "} containing the minimum ",
+ StyleBox["x1",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["x2, x3,...",
+  FontSlant->"Italic"],
+ " coordinates of the block."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetSpacing",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetSpacing"],
+ " returns a list {",
+ StyleBox["dx1",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dx2",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dx3, ...",
+  FontSlant->"Italic"],
+ "} containing the spacing between points in the ",
+ StyleBox["x1",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["x2, x3, ...",
+  FontSlant->"Italic"],
+ " directions."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetDimensions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetDimensions"],
+ " returns a list {",
+ StyleBox["nx1",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["nx2",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["nx3, ...",
+  FontSlant->"Italic"],
+ "} containing the number of points in the ",
+ StyleBox["x1",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["x2, x3, ...",
+  FontSlant->"Italic"],
+ " directions."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetNumDimensions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetNumDimensions"],
+ " returns an integer corresponding to the dimensionality of the data."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetDataRange",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetDataRange"],
+ " returns a list of the form {{",
+ StyleBox["x1min",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["x1max",
+  FontSlant->"Italic"],
+ "}, {x2",
+ StyleBox["min",
+  FontSlant->"Italic"],
+ ", x2",
+ StyleBox["max",
+  FontSlant->"Italic"],
+ "}, {x3",
+ StyleBox["min",
+  FontSlant->"Italic"],
+ ", x3",
+ StyleBox["max",
+  FontSlant->"Italic"],
+ "}, ...} describing the minimum and maximum coordinates of the block.  This \
+list can be used in the DataRange option of various ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " plotting functions."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetAttributes",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetAttributes"],
+ " returns the list of attributes (variable name, dimensions, origin, \
+spacing, dimensionality) of the DataRegion."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["GetVariableName",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetVariableName"],
+ " returns a string containing the variable name of the DataRegion ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ " as recorded in the original file."
+}], "Text"],
+
+Cell[TextData[{
+ "The ",
+ ButtonBox["Interpolation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Interpolation"],
+ " function has been overloaded to work on ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects.  Internally, it uses ",
+ ButtonBox["ListInterpolation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/ListInterpolation"],
+ " with the data and data ranges.  You can supply additional options for ",
+ ButtonBox["ListInterpolation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/ListInterpolation"],
+ " to this function.  The resulting function will generically be a function \
+of ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " variables, where ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " is the dimensionality of the data.  ",
+ ButtonBox["Interpolation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Interpolation"],
+ " might not work if the ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " contains data with value ",
+ ButtonBox["None",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/None"],
+ ", as will happen with Carpet data with disconnected components."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["SliceData",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/SliceData"],
+ " returns a ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " object which is a slice through the data in a plane perpendicular to \
+dimension ",
+ StyleBox["dim",
+  FontSlant->"Italic"],
+ ".  ",
+ StyleBox["coord",
+  FontSlant->"Italic"],
+ " is the coordinate value at which to take the slice.  The resulting ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " object will have a dimensionality of 1 less than that of the original \
+data.  To obtain the numerical data, use ",
+ ButtonBox["GetData",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/GetData"],
+ " on the resulting object.  For convenience, the coord argument can be \
+omitted, defaulting to 0.0."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plotting functions", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"DataRegionDensityPlot", Cell["DataRegionArrayPlot", "TableText"]},
+   {"DataRegionPlot3D", Cell["DataRegionPlot", "TableText"]},
+   {"QuickSlicePlot", Cell["Outline", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["Plotting functions.", "Caption"],
+
+Cell[TextData[{
+ ButtonBox["DataRegionDensityPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegionDensityPlot"],
+ ", ",
+ ButtonBox["DataRegionArrayPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegionArrayPlot"],
+ " and ",
+ ButtonBox["DataRegionPlot3D",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegionPlot3D"],
+ " are wrappers for the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " 2D data plotting functions.  They operate on 2D DataRegion objects, \
+automatically converting the object to a list and setting the data ranges \
+appropriately.  You can use any plot arguments which are available in the \
+corresponding regular ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " plotting function."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["DataRegionPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegionPlot"],
+ " is a wrapper for ",
+ ButtonBox["ListLinePlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/ListLinePlot"],
+ ".  It operates on 1D ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects, automatically converting the object to a list and setting the \
+data ranges appropriately.  You can use any plot arguments which are \
+available in ",
+ ButtonBox["ListLinePlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/ListLinePlot"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["QuickSlicePlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/QuickSlicePlot"],
+ " provides a quick way to plot a 2D ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ ".  It displays coordinates as well as a colormap key.  The min and max \
+arguments correspond to the minimum and maximum values in the data to assign \
+to 0 and 1 in the color map. The colorMap argument defaults to \
+\"TemperatureMap\"; use ColorData[\"Gradients\"] to get the list of possible \
+color maps."
+}], "Text"],
+
+Cell[TextData[{
+ ButtonBox["Outline",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/Outline"],
+ " produces a ",
+ ButtonBox["Graphics",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Graphics"],
+ " object (",
+ ButtonBox["Line",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Line"],
+ ", ",
+ ButtonBox["Rectangle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Rectangle"],
+ " or ",
+ ButtonBox["Cuboid",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Cuboid"],
+ ") with shape corresponding to that of the ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ "."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"gxx", "=", 
+  RowBox[{"ReadGridFunction", "[", 
+   RowBox[{
+   "\"\<sch_3c\>\"", ",", "\"\<admbase::metric.file_0.h5\>\"", ",", "0", ",", 
+    
+    RowBox[{"Variable", "->", "\"\<ADMBASE::gxx\>\""}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"gxxSlice", "=", 
+  RowBox[{"SliceData", "[", 
+   RowBox[{"gxx", ",", "3"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"QuickSlicePlot", "[", 
+  RowBox[{"gxxSlice", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "]"}]], "Input"],
+
+Cell["\<\
+(Note that the Cartesian components of g are not spherically symmetric.)\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"GetOrigin", "[", "gxx", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"GetSpacing", "[", "gxx", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"GetDimensions", "[", "gxx", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"xMin", ",", "xMax"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"yMin", ",", "yMax"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"zMin", ",", "zMax"}], "}"}]}], "}"}], "=", 
+  RowBox[{"GetDataRange", "[", "gxx", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"GetVariableName", "[", "gxx", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"gxxFn", "=", 
+  RowBox[{"Interpolation", "[", "gxx", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"gxxFn", "[", 
+  RowBox[{"1.0", ",", "1.5", ",", "2.0"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"gxxFn", "[", 
+    RowBox[{"x", ",", "0", ",", "0"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "xMin", ",", "xMax"}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"DensityPlot", "[", 
+  RowBox[{
+   RowBox[{"gxxFn", "[", 
+    RowBox[{"x", ",", "y", ",", "0"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "xMin", ",", "xMax"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", "yMin", ",", "yMax"}], "}"}]}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+

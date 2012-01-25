@@ -1,0 +1,222 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Carpet HDF5", "Title"],
+
+Cell[TextData[{
+ "The CarpetHDF5 ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package provides a simple interface to Carpet HDF5 data from numerical \
+simulations.  It reads HDF5 files produced by Carpet and returns variables as \
+",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Common Arguments", "Section"],
+
+Cell[TextData[{
+ "Most of the functions in this package take at least two arguments: ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". "
+}], "Text"],
+
+Cell["run: The name of the run directory containing HDF5 files.", "Text"],
+
+Cell["\<\
+var: The name of the file containing grid function data, for example \
+gxx.xy.h5.  If there is only one variable in the file, this is sufficient to \
+identify the variable. If there is more than one variable, an additional \
+Variable argument must be supplied to identify the variable to read.  For \
+multi-file data, the .file_X.h5 suffix can be ommitted.\
+\>", "Text"],
+
+Cell["The following options can be given:", "Text"],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "\nMap\t\t\tLowest in file\t\tThe map to read (use None for unimap data)\n\
+Variable\t\tFirst in file\t\tThe variable to read (for files with more than \
+one variable)"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "Section"],
+
+Cell["Functions provided by CarpetHDF5.", "Caption"],
+
+Cell[CellGroupData[{
+
+Cell["ReadGridFunction", "Subsection"],
+
+Cell["Common options : Map, Variable", "Text"],
+
+Cell[TextData[{
+ "Read a grid function from the file ",
+ StyleBox["varfile",
+  FontSlant->"Italic"],
+ " in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " on refinement level ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ " and return it as a DataRegion. If ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " is not given, then it defaults to the coarsest refinement level."
+}], "Text"],
+
+Cell[TextData[{
+ "This function reads a variable from a Carpet HDF5 file and returns it as a \
+single DataRegion object. \n1D, 2D and 3D variables are currently supported.  \
+If the file is part of a multi-file set, all the files will be used to read \
+the variable. \nIf there is more than one component, the components will all \
+be read and joined together into a single rectangular DataRegion.  If the \
+union of the components is not rectangular, the smallest rectangular region \
+surrounding all components will be used, and points not in any component will \
+take the value None.\nIf the file appears in more than one segment, the \
+correct segment for the given iteration will be located automatically.\nIn \
+addition to the common options listed under ",
+ StyleBox["Common Arguments",
+  FontSlant->"Italic"],
+ ", the following options can be given:"
+}], "Text"],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription\n",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "StripGhostZones\tTrue\t\t\tRemove the ghost zones from the data"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadIterations", "Subsection"],
+
+Cell[TextData[{
+ "Read the iteration numbers present in the file.  The optional ",
+ StyleBox["rl",
+  FontSlant->"Italic"],
+ " argument specifies the refinement level and defaults to all refinement \
+levels. If the options Variable or Map are specified, then only iterations \
+corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadMaps", "Subsection"],
+
+Cell["Read the maps present in the file.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadRefinementLevels", "Subsection"],
+
+Cell["Read the refinement levels present in the file.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadTimeLevels", "Subsection"],
+
+Cell["Read the timelevels present in the file.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadVariables", "Subsection"],
+
+Cell["Read the names of the variables present in the file.", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReadTimes", "Subsection"],
+
+Cell["Common options : Map, Variable", "Text"],
+
+Cell[TextData[{
+ "Read the coordinate time associated with this grid function at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"file", "=", "\"\<Psi4r.x.h5\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadVariables", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ReadIterations", "[", 
+   RowBox[{"run", ",", "file"}], "]"}], "//", "Short"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadRefinementLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadMaps", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadTime", "[", 
+  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadTimeLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadGridFunction", "[", 
+  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
