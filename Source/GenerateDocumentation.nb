@@ -308,6 +308,8 @@ Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
 
+Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
+
 Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]]
