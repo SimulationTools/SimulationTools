@@ -32,7 +32,6 @@ Module[{packages =
   "DataRegion",
   "DataTable",
   "FieldLines",
-  "FourierAnalysis",
   "Grids",
   "Horizons",
   "InitialData",
