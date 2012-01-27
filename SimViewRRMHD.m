@@ -58,12 +58,12 @@ SimViewRRMHD[runNames_(*, r_*)] :=
        ReadCarpetASCIIScalar[#, 
         "whisky_total_magnetic_energy..asc"]]]] &, runNames], 
   PlotRange -> All, PlotLabel -> "EM Energy", ImageSize -> size]];
-  netcharge=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIScalar[#, 
-       "total_charge..asc"]&,runNames],# != {}&], 
-  PlotRange -> All, PlotLabel -> "Net Charge", ImageSize -> 250]];
-  divBnorm2=Catch[DynamicListLinePlot[ Select[Map[ ReadCarpetASCIIScalar[#, 
-       "divB.norm2.asc"]&,runNames],# != {}&], 
-  PlotRange -> All, PlotLabel -> "Norm2 of divB", ImageSize -> 250]];
+  netcharge=Catch[DynamicListLinePlot[Select[Map[ToList[ReadCarpetASCIIScalar[#, 
+       "total_charge..asc"]]&,runNames],# != {}&], 
+  PlotRange -> All, PlotLabel -> "Net Charge", ImageSize -> size]];
+  divBnorm2=Catch[DynamicListLinePlot[Select[Map[ToList[ReadCarpetASCIIScalar[#, 
+       "divB.norm2.asc"]]&,runNames],# != {}&], 
+  PlotRange -> All, PlotLabel -> "Norm2 of divB", ImageSize -> size]];
   rhomax = Catch[
    DynamicListLinePlot[
       Map[ReadCarpetASCIIScalar[#,"rho.maximum.asc"] &, runNames], 

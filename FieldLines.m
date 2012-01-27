@@ -1,21 +1,45 @@
 (* ::Package:: *)
 
 (* Copyright (C) 2010 Kyriaki Dionysopoulou *)
-BeginPackage["FieldLines`", {"CarpetHDF5`","Plotting`", "Parameters`","RunFiles`","DataTable`","DataRegion`", "Profile`"}];
+BeginPackage["FieldLines`", {"CarpetHDF5`","Plotting`", "Parameters`","RunFiles`","DataTable`","DataRegion`", "DataAnalysis`","Profile`"}];
 
-FieldLinesData2d::usage = "FieldLinesData2d[run,field,it,rfl,plane] Calculates the fieldlines of 2D data of a field B, E, v etc. Plane takes values from 0 to 2.";
-FieldLinesData3d::usage = "FieldLinesData3d[run,field,it,rfl,plane] Calculates the fieldlines of 3D data of a field B, E, v etc. Plane takes values from 0 to 2.";
-FieldLines2dPlot::usage = "FieldLines2dPlot[run,field,it,rfl,plane,function2,opts] Plots the fieldlines and the density plot of 2D data of a field B, E, v";
-FieldLines3dPlot::usage = "FieldLines3dPlot[run,field,it,rfl,plane,function2,opts] Plots the fieldlines and the density plot of 3D data of a field B, E, v. Plane takes values from 0 to 2.";
-MovieFieldLines2d::usage = "MovieFieldLines2d[runlist,field,rfl,plane,function,opts] Create a movie of the field lines of a 2D variable with fixed color range. Plane takes values from 0 to 2.";
-MovieFieldLines3d::usage = "MovieFieldLines3d[runlist,field,rfl,plane,function,opts] Create a movie of the field lines of a 3D variable with fixed color range. Plane takes values from 0 to 2.";
-SequenceFieldLines2d::usage = "SequenceFieldLines2d[path,runlist,field,rfl,plane,function,xmin1,xmax1,opts] Create a sequence of figures of a 2D variable with its field lines with a fixed color range. Plane takes values from 0 to 2.";
-SequenceFieldLines3d::usage = "SequenceFieldLines3d[path,runlist,field,rfl,plane,function,xmin1,xmax1,opts] Create a sequence of figures of a 3D variable with its field lines with a fixed color range. Plane takes values from 0 to 2.";
-Movie2d::usage = "Movie2d[run,var,rfl,function,opts] Create a movie of a 2D variable with fixed color range.";
-Sequence2d::usage = "Sequence2d[path,run,var,rfl,function,xmin,xmax,opts] Create a sequence of figures of a 2D variable with fixed color range.";
-ColorRanges2d::usage = "ColorRanges2d[runlist,var,rfl,func] Calculate a list of the universal Minimum and Maximum among 2D data of several simulations. ColorRange can be used in order to set a universal ColorBar in movies.";
-ColorRanges3d::usage = "ColorRanges3d[runlist,var,plane,rfl,func] Calculate a list of the universal Minimum and Maximum among 3D data of several simulations. ColorRange can be used in order to set a universal ColorBar in movies. Plane takes values from 0 to 2.";
-ReadIterationsFromRun::usage = "ReadIterationsFromRun[runlist,var,rfl] Read Iteration List from a list of simulations";
+FieldLinesData2d::usage = "FieldLinesData2d[run,field,it,rfl,plane] 
+	Calculates the fieldlines of 2D data of a field B, E, v etc.
+	Plane takes values from 0 to 2.";
+FieldLinesData3d::usage = "FieldLinesData3d[run,field,it,rfl,plane] 
+	Calculates the fieldlines of 3D data of a field B, E, v etc.
+	Plane takes values from 0 to 2.";
+FieldLines2dPlot::usage = "FieldLines2dPlot[run,field,it,rfl,plane,function2,opts] 
+	Plots the fieldlines and the density plot of 2D data of a field B, E, v";
+FieldLines3dPlot::usage = "FieldLines3dPlot[run,field,it,rfl,plane,function2,opts] 
+	Plots the fieldlines and the density plot of 3D data of a field B, E, v.
+	Plane takes values from 0 to 2.";
+MovieFieldLines2d::usage = "MovieFieldLines2d[runlist,field,rfl,plane,function,opts] 
+	Create a movie of the field lines of a 2D variable with fixed color range.
+	Plane takes values from 0 to 2.";
+MovieFieldLines3d::usage = "MovieFieldLines3d[runlist,field,rfl,plane,function,opts] 
+	Create a movie of the field lines of a 3D variable with fixed color range.
+	Plane takes values from 0 to 2.";
+SequenceFieldLines2d::usage = "SequenceFieldLines2d[path,runlist,field,rfl,plane,function,opts] 
+	Create a sequence of figures of a 2D variable with its field lines with a fixed 
+	color range. Plane takes values from 0 to 2.";
+SequenceFieldLines3d::usage = "SequenceFieldLines3d[path,runlist,field,rfl,plane,function,xmin1,xmax1,opts] 
+	Create a sequence of figures of a 3D variable with its field lines with a fixed 
+	color range. Plane takes values from 0 to 2.";
+Movie2d::usage = "Movie2d[runlist,var,rfl,function,opts] 
+	Create a movie of a 2D variable with fixed color range.";
+Sequence2d::usage = "Sequence2d[path,runlist,var,rfl,function,xmin,xmax,opts] 
+	Create a sequence of figures of a 2D variable with fixed color range.";
+ColorRanges2d::usage = "ColorRanges2d[runlist,var,rfl,func] 
+	Calculate a list of the universal Minimum and Maximum among 2D data of several
+	simulations. ColorRange can be used in order to set a universal ColorBar in movies.";
+ColorRanges3d::usage = "ColorRanges3d[runlist,var,plane,rfl,func] 
+	Calculate a list of the universal Minimum and Maximum among 3D data of several 
+	simulations. ColorRange can be used in order to set a universal ColorBar in movies. 
+	Plane takes values from 0 to 2.";
+ColorRanges;
+ReadIterationsFromRun::usage = "ReadIterationsFromRun[runlist,var,rfl] 
+	Read Iteration List from a list of simulations";
 
 Begin["`Private`"];
 
@@ -25,6 +49,8 @@ fontname="Lucida";
 fontsize=Directive[Thick,FontFamily-> fontname,14];
 basesize=Directive[FontFamily-> fontname,14];
 keyfontsize=Directive[FontFamily-> fontname,12];
+
+MsolarInms=SolarMassInSeconds 1000;
 
 data[it_,var_,run_,rfl_]:=Map[ReadGridFunction[#,var,it,rfl]&,run]
 minits[run_,var_,rfl_]:=Flatten[Position[Map[Max[ReadIterations[#,var,rfl]]&,run],Min[Map[Max[ReadIterations[#,var,rfl]]&,run]]]][[1]];
@@ -92,7 +118,7 @@ key[mapName_String, {min_, max_}, plotkeysize_,opts___] :=
       If[Abs[c] < 10^-15, 0, N@c], {c, min, max, (max - min)/10}],
      False, False, False}]
 
-Options[FieldLines2dPlot] = Options[ArrayPlot]~Join~Options[ListStreamPlot];
+Options[FieldLines2dPlot] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{ColorRanges->Automatic};
 (*SetOptions[newplot,ImageSize->300];*)
  FieldLines2dPlot[run_,field_,it_,rfl_,plane_,function_,opts:OptionsPattern[]]:=
 Catch[Module[{planestr,(*runstr,*)data,ndims,dataRange,plot1,plot2,plotRange,imageSize},
@@ -116,10 +142,10 @@ plot2=ListStreamPlot[FieldLinesData2d[run,field,it,rfl,plane],
 					FrameLabel-> {{StringTake[planestr,1],""},{StringTake[planestr,-1],""}},
 					FrameStyle->fontsize];
 Show[{plot1,plot2},BaseStyle-> basesize,FrameStyle->fontsize,
-				PlotLabel-> Style[If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, 
+				PlotLabel-> Style[(*If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[run, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
-															"I_"]<>If[StringLength[run]>20,StringTake[run,-20],run],
+															"I_"]<>*)If[StringLength[run]>20,StringTake[run,-20],run],
 				FontFamily->fontname,Bold,14]]]]
 
 
@@ -148,10 +174,10 @@ plot2 = ListStreamPlot[FieldLinesData3d[run,field,it,rfl,plane],
 					FrameLabel-> {{StringTake[planestr,1],""},{StringTake[planestr,-1],""}},
 					FrameStyle->fontsize];
 Show[{plot1,plot2},BaseStyle-> basesize,FrameStyle->fontsize,
-				PlotLabel-> Style[If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, 
+				PlotLabel-> Style[(*If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[run, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
-															"I_"]<>If[StringLength[run]>20,StringTake[run,-20],run],
+															"I_"]<>*)If[StringLength[run]>20,StringTake[run,-20],run],
 				FontFamily->fontname,Bold,14]]]]
 
 (*Options[newplotdensity] = Options[ArrayPlot];
@@ -166,19 +192,21 @@ plot1=ArrayPlot[func@data,Frame-> {{True,True},{True,True}},Axes->True,FrameTick
       (* "RMHD code","Ideal-MHD code"],"Ideal-MHD code"],FontFamily->fontname,Bold,14],opts]]]*)
 "R_"<>run,"I_"<>run],"I_"<>run],FontFamily->fontname,Bold,14],opts]]]
 *)
-Options[MovieFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot];
+Options[MovieFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{ColorRanges->Automatic};
 
 MovieFieldLines2d[run_,field_,rfl_,plane_,function2_,opts:OptionsPattern[]]:=
 Catch[Module[{planestr,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,imageSize,xmin1,xmax1},
 	planestr=If[plane===0,"yz",If[plane===1,"xz","xy"]];
-	colorrange1=ColorRanges2d[run,field<>"_norm."<>planestr<>".h5",rfl,function2];
+	colorrange1=If[ToString[OptionValue[MovieFieldLines2d,ColorRanges]]==="Automatic", 
+							ColorRanges2d[run,field<>"_norm."<>planestr<>".h5",rfl,function2],
+							OptionValue[MovieFieldLines2d,ColorRanges]];
 	xmincolorrange1= Range[colorrange1[[1]],colorrange1[[2]],(colorrange1[[2]]-colorrange1[[1]])/100];
 	xmaxcolorrange1 = Reverse[xmincolorrange1];
 	imageSize=If[ToString[OptionValue[MovieFieldLines2d,ImageSize]]==="Automatic",300,OptionValue[MovieFieldLines2d,ImageSize]];
 	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]]},field<>"_norm."<>planestr<>".h5",rfl];
-	Manipulate[With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
+	Manipulate[With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize},AspectRatio->10],
 		data=ReadGridFunction[run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]],field<>"_norm."<>planestr<>".h5",it,rfl,StripGhostZones->True]},
-		Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
+		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 			Row[Append[Map[FieldLines2dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
@@ -198,7 +226,7 @@ Catch[Module[{planestr,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,im
 	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]]},field<>"_norm."<>"file_0"<>".h5",rfl];
 	Manipulate[With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
 		data=SliceData[ReadGridFunction[run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]],field<>"_norm."<>"file_0"<>".h5",it,rfl,StripGhostZones->True],plane]},
-		Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
+		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 			Row[Append[Map[FieldLines3dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
@@ -221,7 +249,7 @@ Catch[Module[{planestr,(*colorrange1,*)iterations,imageSize},
 	Print[iterations];
 	Do[Export[path<>"/"<>field<>"/"<>planestr<>"/"<>ToString[1000000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
 		data=ReadGridFunction[run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]],field<>"_norm."<>planestr<>".h5",it,rfl,StripGhostZones->True]},
-		Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
+		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 			Row[Append[Map[FieldLines2dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
@@ -242,20 +270,22 @@ Catch[Module[{(*colorrange1,*)planestr,iterations,imageSize},
 	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]]},field<>"_norm."<>"file_0"<>".h5",rfl];
 	Do[Export[path<>"/"<>field<>"/"<>planestr<>"/"<>ToString[1000000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
 		data=SliceData[ReadGridFunction[run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]],field<>"_norm."<>"file_0"<>".h5",it,rfl,StripGhostZones->True],plane]},
-		Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
+		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 			Row[Append[Map[FieldLines3dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
 				ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]]],
 		{it,iterations}]]];
 
-Options[Movie2d] = Options[ListDensityPlot];
+Options[Movie2d] = Options[ListDensityPlot]~Join~{ColorRanges->Automatic};
 Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 	Catch[Module[{colorrange,xmincolorrange,plane,data1,ndims,datarange,plotrange,imagesize,xmaxcolorrange,iterations,xmin,xmax},
-		colorrange=ColorRanges2d[run,var,rfl,function];
+		colorrange=If[ToString[OptionValue[Movie2d,ColorRanges]]==="Automatic", 
+							ColorRanges2d[run,var,rfl,function],
+							OptionValue[Movie2d,ColorRanges]];
 		iterations=ReadIterationsFromRun[{run[[minits[run,var,rfl]]]},var,rfl];
 		plane = If[StringSplit[var,"."][[2]]==="xz","xz",If[StringSplit[var,"."][[2]]==="yz","yz","xy"]];
-		xmincolorrange = Sort[Append[Range[colorrange[[1]],colorrange[[2]],(colorrange[[2]]-colorrange[[1]])/100],0]];
+		xmincolorrange = Sort[Append[Range[colorrange[[1]],colorrange[[2]],N[(colorrange[[2]]-colorrange[[1]])/100]],0]];
 		xmaxcolorrange = Reverse[xmincolorrange];
 		data1 = ReadGridFunction[run[[1]],var,iterations[[1]],rfl,StripGhostZones->True];
 		ndims = GetNumDimensions[data1];
@@ -265,17 +295,17 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 		Manipulate[With[{keymag=key["TemperatureMap",{xmin,xmax},
 							{Automatic,imagesize}],
 							data=ReadGridFunction[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
-						Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
+						Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
-											PlotRange->Append[plotrange,All],ImageSize->imagesize,opts,
+											PlotRange->Append[plotrange,All],ImageSize->imagesize,FilterRules[{opts},Options[ListDensityPlot]],
 											Frame->{{True,True},{True,True}}, 
 											Axes-> True,
 											FrameLabel->{{StringTake[plane,-1],""},{StringTake[plane,1],
-														If[Length[FindParameters[#, "whisky::whisky_Rmhd_on"]] == 1, 
+														(*If[Length[FindParameters[#, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[#, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
 															"I_"]
-														<>If[StringLength[#]>20,StringTake[#,-20],#]}},
+														<>*)If[StringLength[#]>20,StringTake[#,-20],#]}},
 											FrameTicks->True,ColorFunctionScaling->False,ColorFunction->ScaledColorFunction["TemperatureMap",{xmin,xmax}],
 											BaseStyle-> basesize,FrameStyle->fontsize,
 											ClippingStyle->{Blue,Red},MeshFunctions->{#3&},
@@ -287,9 +317,9 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 					ControlType->{Slider,PopupMenu,PopupMenu},
 					SynchronousUpdating->False]]];
 
-Options[Sequence2d] = Options[ListDensityPlot];
-Sequence2d[path_,run_,var_,rfl_,function_,xmin_,xmax_,opts:OptionsPattern[]]:=
-	Catch[Module[{(*colorrange,*)plane,data1,ndims,datarange,plotrange,imagesize,iterations},
+Options[Sequence2d] = Options[ListDensityPlot]~Join~{ColorRanges->Automatic};
+Sequence2d[path_,run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
+	Catch[Module[{(*colorrange,*)plane,data1,ndims,datarange,plotrange,imagesize,iterations,xmin,xmax},
 (*		colorrange=ColorRanges[run,var,rfl,function];*)
 (*		Print["ColorRanges: ",colorrange];*)
 		iterations=ReadIterationsFromRun[{run[[minits[run,var,rfl]]]},var,rfl];
@@ -304,22 +334,25 @@ Sequence2d[path_,run_,var_,rfl_,function_,xmin_,xmax_,opts:OptionsPattern[]]:=
 		datarange = If[ndims==1, GetDataRange[data1][[1]],GetDataRange[data1]];
 		plotrange = If[OptionValue[Sequence2d,PlotRange]==={Full,Full,Automatic},datarange,OptionValue[Sequence2d,PlotRange]];
 		imagesize = If[ToString[OptionValue[Sequence2d,ImageSize]]==="Automatic",300,OptionValue[Sequence2d,ImageSize]];
+		{xmin,xmax}= (*{-9.66,*)If[ToString[OptionValue[Sequence2d,ColorRanges]]==="Automatic", 
+							ColorRanges2d[run,var,rfl,function],
+							OptionValue[Sequence2d,ColorRanges]];
 		(*If[CreateDirectory["/home/kdionyso/Desktop/movies/"<>path]]*)
-		Do[Export[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane<>"/"<>ToString[100000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin,xmax}(*[[2]]}*),
+		Do[Export[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane<>"/"<>ToString[1000000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin,xmax}(*[[2]]}*),
 							{Automatic,imagesize}],
-							magrange= (*{-9.66,*){xmin,xmax},
+							magrange={xmin,xmax},
 							data=ReadGridFunction[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
-						Column[{Style["t = " <> ToString[GetTime[data]/203.0325]<>" ms",FontFamily->fontname,Bold,20],
+						Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
 											PlotRange->Append[plotrange,All],ImageSize->imagesize,
-											opts,Frame->{{True,True},{True,True}}, 
+											FilterRules[{opts},Options[ListDensityPlot]],Frame->{{True,True},{True,True}}, 
 											Axes-> True,
 											FrameLabel->{{StringTake[plane,-1],""},{StringTake[plane,1],
-														If[Length[FindParameters[#, "whisky::whisky_Rmhd_on"]] == 1, 
+														(*If[Length[FindParameters[#, "whisky::whisky_Rmhd_on"]] == 1, 
 															If[StringCases[LookupParameter[#, "whisky::whisky_Rmhd_on"],"yes"] == {"yes"},
 																"R_","I_"],
 															"I_"]
-														<>If[StringLength[#]>20,StringTake[#,-20],#]}},
+														<>*)If[StringLength[#]>20,StringTake[#,-20],#]}},
 											FrameTicks->True,ColorFunctionScaling->False,
 											BaseStyle-> basesize,FrameStyle->fontsize,
 											ClippingStyle->{Blue,Red},MeshFunctions->{#3&},
