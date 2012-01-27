@@ -410,12 +410,12 @@ FilterPlot[data_, data2p_, omCutOff0_, {t10_, t20_}, opts___] :=
     T = t2 - t1 + 100;
     om0 = 2 Pi/T;
     nModes = Floor[omCutOff/om0];
-    Print[data2 = FilterDCT[data, nModes, {t1 - 50, t2 + 50}, {t1, t2}]];
+    data2 = FilterDCT[data, nModes, {t1 - 50, t2 + 50}, {t1, t2}];
     If[data2p === {}, data2p = data2];
-    Show[ListLinePlot[{data, data2}, 
-      PlotStyle -> {LightGray, Darker[Blue]}, opts](*, 
+    Show[DataTableListLinePlot[{data, data2}, 
+      PlotStyle -> {LightGray, Darker[Blue]}, opts], 
      Graphics[{{Dashed, Line[{{t1, -1000}, {t1, 1000}}], 
-        Line[{{t2, -1000}, {t2, 1000}}]}}]*)]], {{omCutOff, omCutOff0}, 
+        Line[{{t2, -1000}, {t2, 1000}}]}}]]], {{omCutOff, omCutOff0}, 
     0, omMax}, {{t1, t10}, 0, tMax}, {{t2, t20}, 0, tMax},
    Button["Update " <> ToString[Unevaluated[data2p]], 
     data2p = data2],
