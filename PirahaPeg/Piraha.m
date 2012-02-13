@@ -1,28 +1,15 @@
 
 (*  Copyright 2012 Ian Hinder
-
-    This file is part of Kranc.
-
-    Kranc is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Kranc is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Kranc; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *)
 
-BeginPackage["Piraha`", {"Errors`", "Helpers`", "JLink`", "Kranc`"}];
+BeginPackage["Piraha`", {"JLink`"}];
 
 Parse::usage = "Parse[grammarfile, pattern, inputfile] parses a file named inputfile using a grammar stored in a file named grammarfile using pattern as the root pattern.  The parse tree is returned as Symbolic XML.";
+CleanParseTree;
 
 Begin["`Private`"];
+
+Print["Loading Piraha"];
 
 InstallJava[];
 
@@ -33,10 +20,11 @@ InstallJava[];
 absPath[s_String] :=
   If[StringTake[s,1] === $PathnameSeparator, s, FileNameJoin[{Directory[],s}]];
 
-fullKrancDir = absPath[KrancDirectory];
+nrmmaDir = FileNameDrop[FindFile["nrmma`"],-2];
+
 
 AddToClassPath[
- FileNameJoin[{fullKrancDir, "Tools","PirahaPEG","piraha.jar"}]];
+ FileNameJoin[{nrmmaDir,"PirahaPeg","piraha.jar"}]];
 
 DefFn[
   Parse[grammarFileName_String, pattern_String, inputFileName_String] :=
@@ -45,9 +33,9 @@ DefFn[
 
     If[FileExistsQ[grammarFileName],
        gf = grammarFileName,
-       If[FileExistsQ[FileNameJoin[{fullKrancDir, "Auxiliary", "Grammars", grammarFileName}]],
-          gf=FileNameJoin[{fullKrancDir, "Auxiliary", "Grammars", grammarFileName}],
-          ThrowError[StringForm["Cannot find grammar '`1`'", grammarFileName]]]];
+       If[FileExistsQ[FileNameJoin[{nrmmaDir, "Grammars", grammarFileName}]],
+          gf=FileNameJoin[{nrmmaDir, "Grammars", grammarFileName}],
+          Throw[StringForm["Cannot find grammar '`1`'", grammarFileName]]]];
 
     g = JavaNew["edu.lsu.cct.piraha.Grammar"];
     g@compileFile[JavaNew["java.io.File", gf]];
@@ -56,7 +44,7 @@ DefFn[
 
     m = g@matcher[pattern, c];
 
-    If[!m@match[0], ThrowError["Failed to parse input file: ",inputFileName,m@near[]@toString[]]];
+    If[!m@match[0], Throw["Failed to parse input file: "<>inputFileName<>" " <> m@near[]@toString[]]];
 
     sw = JavaNew["java.io.StringWriter"];
     dout = JavaNew["edu.lsu.cct.piraha.DebugOutput", JavaNew["java.io.PrintWriter", sw]];
@@ -64,7 +52,32 @@ DefFn[
     dout@flush[];
     xmlString = sw@toString[];
     xml = ImportString[xmlString, "XML"];
+    Scan[ReleaseJavaObject, {g, m, sw, dout}];
     xml]];
+
+(* Structure functions *)
+
+DefFn[
+  StructGet[expr_, path_List] :=
+  Module[
+    {results, pat,x},
+    pat = Fold[#2[___, #1, ___] &, x:Last[path], Reverse@Drop[path,-1]];
+    results = Cases[{expr}, pat :> x];
+
+    If[Length[results] === 0, 
+       Throw[ToString@StringForm["Cannot find `1` in expression `2`", path, expr]]];
+
+    results[[1]]]];
+
+DefFn[
+  StructMatchQ[expr_, path_List] :=
+  Module[{result},
+         result=MatchQ[expr, Fold[#2[___, #1, ___] &, Last[path], Reverse@Drop[path,-1]]];
+         result]];
+
+CleanParseTree[t_] :=
+  ((t //. {("startIndex" -> _) :> Sequence[], ("endIndex" -> _) :> Sequence[]} )//.
+   {(XMLObject["Document"][_,data_,___]) :> data,  XMLElement[s_,_,c_] :> s@@c});
 
 End[];
 
