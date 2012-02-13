@@ -19,6 +19,7 @@ If[$VersionNumber == 8., ListLogPlot[{1}]];
    this. *)
 
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
+$Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]<>"/PirahaPeg"];
 
 Module[{packages =
  {"Ascii1D",
@@ -43,6 +44,7 @@ Module[{packages =
   "NRExport",
   "nrmmaVersion",
   "Parameters",
+  "Piraha",
   "Plotting",
   "Profile",
   "Providers",
