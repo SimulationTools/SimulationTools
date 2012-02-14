@@ -16,7 +16,7 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
 ];
 
 MultipoleASCII`Waveforms`HaveData[runName_, args___] :=
-  MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+  !StringMatchQ[Catch[FindRunDir[runName]], "Cannot*"] && MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
 
 MultipoleASCII`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{fileName, threeCols, psi4},
