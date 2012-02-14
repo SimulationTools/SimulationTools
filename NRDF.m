@@ -47,7 +47,7 @@ NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {findRunDir[dir]};
 
 DefineMemoFunction[ParseMetadataFile[run_String],
-  CleanParseTree[Parse["nrdfmd.peg","file",FileNameJoin[{findRunDir[run], FileNameTake[run,-1]<>".bbh"}]]]];
+  CleanParseTree[Parse["nrdfmd.peg","file",findMetadataFile[run]]]];
 
 processMetadata[md_] :=
   md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
@@ -90,6 +90,9 @@ findRunDir[run_String] :=
 
 haveMetadataFile[dir_String] :=
   FileNames["*.bbh", dir] =!= {};
+
+findMetadataFile[run_String] :=
+  FileNames["*.bbh", findRunDir[run]][[1]];
 
 haveRunDir[run_String] :=
   If[haveMetadataFile[run],
