@@ -26,6 +26,9 @@ NRDF`RunFiles`HaveData[runDir_] :=
 NRDF`Waveforms`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
 
+NRDF`InitialData`HaveData[runDir_,___] :=
+  NRDF`RunFiles`HaveData[runDir];
+
 addDataSubDir[output_String] :=
   Module[
     {parFiles,runName},
@@ -106,6 +109,25 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
 
     MakeDataTable[
       Map[{#[[1]], #[[2]] + I #[[3]]} &, data]]];
+
+
+NRDF`InitialData`ReadADMMass[run_] :=
+  Module[
+    {md, filenames, filename, tmp},
+    md = ParseMetadataFile[run];
+    Put[md, "~/metadata.m"];
+    adms = Cases[md,
+                 "section"[___, 
+                           "section_name"["keyword"["metadata"]],
+                           ___,
+                           "elements"[___,
+                                      "element"["key"["initial-ADM-energy"], "value"["number"[e_]]], 
+                                      ___]] :> e,
+                 Infinity];
+
+    If[Length[adms] === 0, Throw["NRDF`InitialData`ReadADMMass: Cannot find ADM mass in "<>run]];
+    If[Length[adms] > 1, Throw["Found multiple ADM masses in "<>run]];
+    ImportString[adms[[1]], "Table"][[1,1]]];
 
 End[];
 
