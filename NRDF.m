@@ -65,6 +65,9 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
                             "elements"[___, 
                                        "element"["key"["extraction-radius"], val_], ___], ___] :> 
                   val, Infinity];
+
+    radii = Select[radii, (!MatchQ[#, "value"["keyword"["extrapolated"|"infinite"]]]) &];
+
     Map[If[!MatchQ[#,"value"["number"[n_]]],
            Throw["Unrecognised radius "<>ToString[#,InputForm]]] &, radii];
     radStrs = radii/."value"["number"[n_]] -> n;
