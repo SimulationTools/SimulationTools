@@ -53,8 +53,11 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
     {md, radii, radStrs},
     md = ParseMetadataFile[runName];
+    md = md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
+                "key"[k_String] :> "key"[ToLowerCase[k]]};
+
     radii = Cases[md, 
-                  "section"[___, "section_name"["keyword"["Psi4t-data"]], ___, 
+                  "section"[___, "section_name"["keyword"["psi4t-data"]], ___, 
                             "elements"[___, 
                                        "element"["key"["extraction-radius"], val_], ___], ___] :> 
                   val, Infinity];
