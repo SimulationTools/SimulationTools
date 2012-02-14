@@ -41,6 +41,7 @@ Module[{packages =
   "MultipoleASCII",
   "MultipoleHDF5",
   "NR",
+  "NRDF",
   "NRExport",
   "nrmmaVersion",
   "Parameters",
