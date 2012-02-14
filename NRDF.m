@@ -1,5 +1,5 @@
 
-BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`"}];
+BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`", "Waveforms`"}];
 
 ParseMetadataFile;
 
@@ -78,7 +78,9 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   ];
 
 readPsi4HDF5Data[file_String, dataset_String] :=
-  ReadHDF5[file, {"Datasets", dataset}];
+  MakeDataTable[
+    Map[{#[[1]], #[[2]] + I #[[3]]} &,
+        ReadHDF5[file, {"Datasets", dataset}]]];
 
 findRunDir[run_String] :=
   If[FileExistsQ[run], run,
@@ -137,11 +139,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
     If[Length[tmp] === 0,
        ensureLocalFile[runName, filenames[[1]]];
        ReadWaveformFile[filename],
-       readPsi4HDF5Data[tmp[[1,1]], tmp[[1,2]]]];
-
-    MakeDataTable[
-      Map[{#[[1]], #[[2]] + I #[[3]]} &, data]]];
-
+       readPsi4HDF5Data[tmp[[1,1]], tmp[[1,2]]]]];
 
 NRDF`InitialData`ReadADMMass[run_] :=
   Module[
