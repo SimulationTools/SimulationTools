@@ -9,8 +9,6 @@ CleanParseTree;
 
 Begin["`Private`"];
 
-Print["Loading Piraha"];
-
 InstallJava[];
 
 (* The JRE does not share a current directory with the Mathematica
