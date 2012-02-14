@@ -93,6 +93,23 @@ haveRunDir[run_String] :=
         True,
         False]];
 
+DefFn[
+  ensureLocalFile[run_String, file_String] :=
+  Module[
+    {src,dst},
+    src = FileNameJoin[{"io1:/scratch/ianhin/nrar/data",run,file}];
+    dst = FileNameJoin[{findRunDir[run],file}];
+    syncFile[src,dst]]];
+
+DefFn[
+  syncFile[src_String, dst_String] :=
+  If[FileType[dst] === None,
+     Print[StringForm["Syncing file `1` to `2`", src, dst]];
+     output = ReadList["! rsync -avz "<>src<>" "<>dst<>" >>rsync.log 2>&1 </dev/null", String];
+     log[StringJoin[Riffle[output,"\n"]]];
+     If[FileType[dst] === None,
+        Throw["File " <> src <> " could not be downloaded"]]]];
+
 NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[
     {md, filenames, filename, tmp},
@@ -118,6 +135,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
     tmp = StringCases[filename, base__~~".h5:"~~ds__ :> {base<>".h5",ds}];
     data =
     If[Length[tmp] === 0,
+       ensureLocalFile[runName, filenames[[1]]];
        ReadWaveformFile[filename],
        readPsi4HDF5Data[tmp[[1,1]], tmp[[1,2]]]];
 
