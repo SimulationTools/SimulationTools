@@ -1,7 +1,6 @@
 
 BeginPackage["TwoPunctures`", {"RunFiles`", "DataTable`", "Memo`", "Parameters`"}];
 
-ReadADMMass::usage = "ReadADMMass[run] reads the total ADM mass of the spacetime in run as computed by the TwoPunctures thorn.";
 ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn.";
 ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";
 TotalMass;
@@ -16,7 +15,12 @@ ReadTwoPuncturesData::usage = "ReadTwoPuncturesData[file, col] reads a data file
 
 Begin["`Private`"];
 
-ReadADMMass[runName_String] :=
+TwoPunctures`InitialData`HaveData[run_String, ___] :=
+  !StringMatchQ[Catch[FindRunDir[run]], "Cannot*"] &&
+  !StringMatchQ[Catch[FindRunFile[run, "ADM_mass_tot.asc"]], "Cannot*"] &&
+  StandardOutputOfRun[run] =!= {};
+
+TwoPunctures`InitialData`ReadADMMass[runName_String] :=
   Module[{massMDFiles, output, lines},
     massMDFiles = FindRunFile[runName, "ADM_mass_tot.asc"];
     If[massMDFiles =!= {},

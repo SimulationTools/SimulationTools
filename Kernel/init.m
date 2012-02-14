@@ -35,6 +35,7 @@ Module[{packages =
   "FourierAnalysis",
   "Grids",
   "Horizons",
+  "InitialData",
   "Kicks",
   "Memo",
   "MinTracker",
