@@ -9,6 +9,8 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
   Module[
     {providerHaveFns, providers, provider, have, posns, f},
 
+    (* Print["CallProvidedFunction["<>StringJoin[Riffle[ToString[#,InputForm]& /@ {base, fn, args, method},","]]<>"]"]; *)
+
     providerHaveFns = Names["*`"<>base<>"`HaveData"];
     providers = Map[First[StringSplit[#,"`"]] &, providerHaveFns];
 
@@ -16,6 +18,9 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
     If[method === Automatic,
        (* providers = ToExpression/@providerFns; *)
        have = Map[ToExpression[#]@@args &, providerHaveFns];
+       Scan[If[# =!= True && # =!= False, Throw["CallProvidedFunction: Unknown result for HaveData in "<>ToString[have,InputForm]]] &, have];
+       (* Print["providers = ", providers]; *)
+       (* Print["have = ", have]; *)
        posns = Position[have, True];
        If[Length[posns] > 1,
           Throw["Multiple data sources for "<>base<>" ("<>
@@ -29,10 +34,16 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
        providers[[posns[[1,1]]]],
        method];
 
+    (* Print["provider = ", provider]; *)
+
     If[!MemberQ[providers, provider],
        Throw[base<>": Provider "<>ToString[provider,InputForm]<>" not found"]];
 
+    If[Names[provider<>"`"<>base<>"`"<>fn] === {},
+       Throw["Function "<>provider<>"`"<>base<>"`"<>fn<>" not found"]];
+
     f = ToExpression[provider<>"`"<>base<>"`"<>fn];
+    (* Print["calling ", f, " with ", {args}]; *)
     f@@args];
 
 End[];
