@@ -88,10 +88,13 @@ findRunDir[run_String] :=
         FileNameJoin[{nrdfDir,run}],
         None]];
 
+haveMetadataFile[dir_String] :=
+  FileNames["*.bbh", dir] =!= {};
+
 haveRunDir[run_String] :=
-  If[FileExistsQ[FileNameJoin[{run,FileNameTake[run,-1]<>".bbh"}]],
+  If[haveMetadataFile[run],
      True,
-     If[FileExistsQ[FileNameJoin[{nrdfDir, run,FileNameTake[run,-1]<>".bbh"}]],
+     If[haveMetadataFile[FileNameJoin[{nrdfDir, run}]],
         True,
         False]];
 
