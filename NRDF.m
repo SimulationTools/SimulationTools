@@ -49,12 +49,16 @@ NRDF`RunFiles`FindRunDirSegments[dir_] :=
 DefineMemoFunction[ParseMetadataFile[run_String],
   CleanParseTree[Parse["nrdfmd.peg","file",FileNameJoin[{findRunDir[run], FileNameTake[run,-1]<>".bbh"}]]]];
 
+processMetadata[md_] :=
+  md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
+         "key"[k_String] :> "key"[ToLowerCase[k]]};
+
 NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
     {md, radii, radStrs},
     md = ParseMetadataFile[runName];
-    md = md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
-                "key"[k_String] :> "key"[ToLowerCase[k]]};
+
+    md = processMetadata[md];
 
     radii = Cases[md, 
                   "section"[___, "section_name"["keyword"["psi4t-data"]], ___, 
@@ -87,8 +91,9 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[
     {md, filenames, filename, tmp},
     md = ParseMetadataFile[runName];
+    md = processMetadata[md];
     filenames = Cases[md,
-                      "section"[___, "section_name"["keyword"["Psi4t-data"]], ___,
+                      "section"[___, "section_name"["keyword"["psi4t-data"]], ___,
                                 "elements"[___,
                                            "element"["key"["extraction-radius"], "value"["number"[rad]]], ___,
                                            "element"["key"["2,2"],"string"[f_]],___],
