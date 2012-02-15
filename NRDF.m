@@ -4,6 +4,7 @@ BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`
 ParseMetadataFile;
 StartingFrequency;
 UsefulWaveformTime;
+HaveInfiniteRadiusWaveforms;
 
 Begin["`Private`"];
 
@@ -204,6 +205,10 @@ DefFn[
 DefFn[
   UsefulWaveformTime[run_] :=
   ReadMetadataKey[run, "after-junkradiation-time"]];
+
+DefFn[
+  HaveInfiniteRadiusWaveforms[run_] :=
+  StringMatchQ[ReadMetadataKey[run, "extraction-radius"], "*infinite*"]];
 
 End[];
 
