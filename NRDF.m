@@ -2,6 +2,7 @@
 BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`", "Waveforms`"}];
 
 ParseMetadataFile;
+StartingFrequency;
 
 Begin["`Private`"];
 
@@ -183,6 +184,24 @@ NRDF`InitialData`ReadADMMass[run_] :=
     If[Length[adms] === 0, Throw["NRDF`InitialData`ReadADMMass: Cannot find ADM mass in "<>run]];
     If[Length[adms] > 1, Throw["Found multiple ADM masses in "<>run]];
     ImportString[adms[[1]], "Table"][[1,1]]];
+
+DefFn[StartingFrequency[run_] :=
+  Module[
+    {md, filenames, filename, tmp, results},
+    md = ParseMetadataFile[run];
+    Put[md, "~/metadata.m"];
+    results = Cases[md,
+                 "section"[___, 
+                           "section_name"["keyword"["metadata"]],
+                           ___,
+                           "elements"[___,
+                                      "element"["key"["initial-freq-22"|"freq-start-22"], "value"["number"[e_]]], 
+                                      ___]] :> e,
+                 Infinity];
+
+    If[Length[results] =!= 1, Throw["Did not find exactly one metadata key for initial-freq-22 in "<>run]];
+    ImportString[results[[1]], "Table"][[1,1]]]];
+
 
 End[];
 
