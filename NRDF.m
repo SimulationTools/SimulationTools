@@ -3,6 +3,7 @@ BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`
 
 ParseMetadataFile;
 StartingFrequency;
+UsefulWaveformTime;
 
 Begin["`Private`"];
 
@@ -196,6 +197,23 @@ DefFn[StartingFrequency[run_] :=
                            ___,
                            "elements"[___,
                                       "element"["key"["initial-freq-22"|"freq-start-22"], "value"["number"[e_]]], 
+                                      ___]] :> e,
+                 Infinity];
+
+    If[Length[results] =!= 1, Throw["Did not find exactly one metadata key for initial-freq-22 in "<>run]];
+    ImportString[results[[1]], "Table"][[1,1]]]];
+
+DefFn[UsefulWaveformTime[run_] :=
+  Module[
+    {md, filenames, filename, tmp, results},
+    md = ParseMetadataFile[run];
+    Put[md, "~/metadata.m"];
+    results = Cases[md,
+                 "section"[___, 
+                           "section_name"["keyword"["metadata"]],
+                           ___,
+                           "elements"[___,
+                                      "element"["key"["after-junkradiation-time"], "value"["number"[e_]]], 
                                       ___]] :> e,
                  Infinity];
 
