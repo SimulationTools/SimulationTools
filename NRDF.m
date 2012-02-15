@@ -71,15 +71,15 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
                                        "element"["key"["extraction-radius"], val_], ___], ___] :> 
                   val, Infinity];
 
-    radii = Select[radii, (!MatchQ[#, "value"["keyword"["extrapolated"|"infinite"]]]) &];
+    radii = Select[radii, (!MatchQ[#, "value"["keyword"["extrapolated"]]]) &];
 
     If[Length[radii] === 0,
        Print["No Psi4 radii found in metadata file of "<>runName];
        {}];
 
-    Map[If[!MatchQ[#,"value"["number"[n_]]],
+    Map[If[!MatchQ[#,"value"["number"[n_]|"keyword"["infinite"]]],
            Throw["Unrecognised radius "<>ToString[#,InputForm]]] &, radii];
-    radStrs = radii/."value"["number"[n_]] -> n;
+    radStrs = radii/.{"value"["number"[n_]] -> n, "value"["keyword"["infinite"]] -> "inf"};
     radStrs
   ];
 
@@ -132,15 +132,16 @@ DefFn[
      If[FileType[dst] === None,
         Throw["File " <> src <> " could not be downloaded"]]]];
 
-NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
+NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[
-    {md, filenames, filename, tmp,data},
+    {md, filenames, filename, tmp,data, radPattern},
     md = ParseMetadataFile[runName];
     md = processMetadata[md];
+    radPattern = If[rad==="inf", "keyword"["infinite"], "number"[rad]];
     filenames = Cases[md,
                       "section"[___, "section_name"["keyword"["psi4t-data"]], ___,
                                 "elements"[___,
-                                           "element"["key"["extraction-radius"], "value"["number"[rad]]], ___,
+                                           "element"["key"["extraction-radius"], "value"[radPattern]], ___,
                                            "element"["key"["2,2"|"2,+2"],"string"[f_]],___],
                                 ___] :> f,
                       Infinity];
