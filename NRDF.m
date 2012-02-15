@@ -168,58 +168,42 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
 
     data];
 
-NRDF`InitialData`ReadADMMass[run_] :=
-  Module[
-    {md, filenames, filename, tmp},
-    md = ParseMetadataFile[run];
-    Put[md, "~/metadata.m"];
-    adms = Cases[md,
-                 "section"[___, 
-                           "section_name"["keyword"["metadata"]],
-                           ___,
-                           "elements"[___,
-                                      "element"["key"["initial-ADM-energy"], "value"["number"[e_]]], 
-                                      ___]] :> e,
-                 Infinity];
-
-    If[Length[adms] === 0, Throw["NRDF`InitialData`ReadADMMass: Cannot find ADM mass in "<>run]];
-    If[Length[adms] > 1, Throw["Found multiple ADM masses in "<>run]];
-    ImportString[adms[[1]], "Table"][[1,1]]];
-
-DefFn[StartingFrequency[run_] :=
+DefFn[
+  ReadMetadataKey[run_String, keyPattern_] :=
   Module[
     {md, filenames, filename, tmp, results},
     md = ParseMetadataFile[run];
-    Put[md, "~/metadata.m"];
     results = Cases[md,
                  "section"[___, 
                            "section_name"["keyword"["metadata"]],
                            ___,
                            "elements"[___,
-                                      "element"["key"["initial-freq-22"|"freq-start-22"], "value"["number"[e_]]], 
-                                      ___]] :> e,
+                                      "element"["key"[keyPattern], v_], 
+                                      ___]] :> v,
                  Infinity];
 
-    If[Length[results] =!= 1, Throw["Did not find exactly one metadata key for initial-freq-22 in "<>run]];
-    ImportString[results[[1]], "Table"][[1,1]]]];
+    If[Length[results] =!= 1, Throw["Did not find exactly one metadata key for "<>ToString[keyPattern,InputForm]<>" in "<>run]];
 
-DefFn[UsefulWaveformTime[run_] :=
-  Module[
-    {md, filenames, filename, tmp, results},
-    md = ParseMetadataFile[run];
-    Put[md, "~/metadata.m"];
-    results = Cases[md,
-                 "section"[___, 
-                           "section_name"["keyword"["metadata"]],
-                           ___,
-                           "elements"[___,
-                                      "element"["key"["after-junkradiation-time"], "value"["number"[e_]]], 
-                                      ___]] :> e,
-                 Infinity];
+    Which[
+      MatchQ[results[[1]], "value"["number"[_]]],
+      ImportString[results[[1,1,1]], "Table"][[1,1]],
 
-    If[Length[results] =!= 1, Throw["Did not find exactly one metadata key for initial-freq-22 in "<>run]];
-    ImportString[results[[1]], "Table"][[1,1]]]];
+      MatchQ[results[[1]], "value"["keyword"[_]]],
+      results[[1,1,1]],
 
+      True,
+      Throw["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]]];
+
+DefFn[NRDF`InitialData`ReadADMMass[run_String] :=
+  ReadMetadataKey[run, "initial-ADM-energy"]];
+
+DefFn[
+  StartingFrequency[run_] :=
+  ReadMetadataKey[run, "initial-freq-22"|"freq-start-22"]];
+
+DefFn[
+  UsefulWaveformTime[run_] :=
+  ReadMetadataKey[run, "after-junkradiation-time"]];
 
 End[];
 
