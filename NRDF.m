@@ -66,10 +66,11 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
                                        "element"["key"["extraction-radius"], val_], ___], ___] :> 
                   val, Infinity];
 
-    If[Length[radii] === 0,
-       Throw["No Psi4 radii found in metadata file of "<>runName]];
-
     radii = Select[radii, (!MatchQ[#, "value"["keyword"["extrapolated"|"infinite"]]]) &];
+
+    If[Length[radii] === 0,
+       Print["No Psi4 radii found in metadata file of "<>runName];
+       {}];
 
     Map[If[!MatchQ[#,"value"["number"[n_]]],
            Throw["Unrecognised radius "<>ToString[#,InputForm]]] &, radii];
