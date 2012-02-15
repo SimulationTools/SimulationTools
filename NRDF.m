@@ -5,7 +5,8 @@ ParseMetadataFile;
 
 Begin["`Private`"];
 
-nrdfDir = "/Users/ian/Projects/nrar/nrardata";
+RunDirectory = Global`RunDirectory;
+BackingDirectory = Global`BackingDirectory;
 
 ErrorDefinition[x_] := 
   x[args___] := 
@@ -21,7 +22,7 @@ FPrint[x_] := (Print[x//InputForm]; x);
 
 NRDF`RunFiles`HaveData[runDir_] :=
   haveRunDir[runDir];
-  (* FileExistsQ[FileNameJoin[{nrdfDir,runDir,FileNameTake[runDir,-1]<>".bbh"}]]; *)
+  (* FileExistsQ[FileNameJoin[{RunDirectory,runDir,FileNameTake[runDir,-1]<>".bbh"}]]; *)
 
 NRDF`Waveforms`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
@@ -29,7 +30,7 @@ NRDF`Waveforms`HaveData[runDir_,___] :=
 NRDF`InitialData`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
 
-addDataSubDir[output_String] :=
+DefFn[addDataSubDir[output_String] :=
   Module[
     {parFiles,runName},
 
@@ -41,7 +42,7 @@ addDataSubDir[output_String] :=
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
     If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
-    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
+    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]]];
 
 NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {findRunDir[dir]};
@@ -49,14 +50,15 @@ NRDF`RunFiles`FindRunDirSegments[dir_] :=
 DefineMemoFunction[ParseMetadataFile[run_String],
   CleanParseTree[Parse["nrdfmd.peg","file",findMetadataFile[run]]]];
 
-processMetadata[md_] :=
+DefFn[processMetadata[md_] :=
   md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
-         "key"[k_String] :> "key"[ToLowerCase[k]]};
+         "key"[k_String] :> "key"[ToLowerCase[k]]}];
 
 NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
     {md, radii, radStrs},
     md = ParseMetadataFile[runName];
+    Put[md, "~/metadata.m"];
 
     md = processMetadata[md];
 
@@ -78,36 +80,44 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     radStrs
   ];
 
-readPsi4HDF5Data[file_String, dataset_String] :=
+DefFn[readPsi4HDF5Data[file_String, dataset_String] :=
   MakeDataTable[
     Map[{#[[1]], #[[2]] + I #[[3]]} &,
-        ReadHDF5[file, {"Datasets", dataset}]]];
+        ReadHDF5[file, {"Datasets", dataset}]]]];
 
-findRunDir[run_String] :=
+DefFn[findRunDir[run_String] :=
   If[FileExistsQ[run], run,
-     If[FileExistsQ[FileNameJoin[{nrdfDir,run}]],
-        FileNameJoin[{nrdfDir,run}],
-        None]];
+     If[FileExistsQ[FileNameJoin[{RunDirectory,run}]],
+        FileNameJoin[{RunDirectory,run}],
+        None]]];
 
-haveMetadataFile[dir_String] :=
-  FileNames["*.bbh", dir] =!= {};
+DefFn[haveMetadataFile[dir_String] :=
+  FileNames["*.bbh", dir] =!= {}];
 
-findMetadataFile[run_String] :=
-  FileNames["*.bbh", findRunDir[run]][[1]];
+DefFn[findMetadataFile[run_String] :=
+      Module[{files},
+             files = FileNames["*.bbh", findRunDir[run]];
+             If[Length[files] =!= 1, Throw["Failed to find exactly one metadata file in run "<>
+                                           run<>" in directory "<>findRunDir[run]]];
+             files[[1]]]];
 
-haveRunDir[run_String] :=
+DefFn[haveRunDir[run_String] :=
   If[haveMetadataFile[run],
      True,
-     If[haveMetadataFile[FileNameJoin[{nrdfDir, run}]],
+     If[haveMetadataFile[FileNameJoin[{RunDirectory, run}]],
         True,
-        False]];
+        False]]];
 
 DefFn[
   ensureLocalFile[run_String, file_String] :=
   Module[
     {src,dst},
-    src = FileNameJoin[{"io1:/scratch/ianhin/nrar/data",run,file}];
+    (* Print["ensureLocalFile: run = ", run]; *)
+    (* Print["ensureLocalFile: file = ", file]; *)
+    src = FileNameJoin[{BackingDirectory,run,file}];
     dst = FileNameJoin[{findRunDir[run],file}];
+    (* Print["ensureLocalFile: src = ", src]; *)
+    (* Print["ensureLocalFile: dst = ", dst]; *)
     syncFile[src,dst]]];
 
 DefFn[
@@ -121,32 +131,40 @@ DefFn[
 
 NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[
-    {md, filenames, filename, tmp},
+    {md, filenames, filename, tmp,data},
     md = ParseMetadataFile[runName];
     md = processMetadata[md];
     filenames = Cases[md,
                       "section"[___, "section_name"["keyword"["psi4t-data"]], ___,
                                 "elements"[___,
                                            "element"["key"["extraction-radius"], "value"["number"[rad]]], ___,
-                                           "element"["key"["2,2"],"string"[f_]],___],
+                                           "element"["key"["2,2"|"2,+2"],"string"[f_]],___],
                                 ___] :> f,
                       Infinity];
 
-    If[Length[filenames] === 0, Throw["Cannot find file for 2,2 mode in "<>runName]];
-    If[Length[filenames] > 1, Throw["Found multiple files for 2,2 mode in "<>runName]];
+    If[Length[filenames] === 0, Throw["Cannot find filename in metadata file for 2,2 mode in "<>runName]];
+    If[Length[filenames] > 1, Throw["Found multiple files in metadata file for 2,2 mode in "<>runName]];
 
     (* Print["run dir = ", findRunDir[runName]]; *)
 
-    filename = FileNameJoin[{findRunDir[runName],filenames[[1]]}];
+    filename = filenames[[1]];
 
     (* Print["filename = ", filename]; *)
+
+    (* Print["NRDF`Waveforms`ReadPsi4Data: runName = ", runName]; *)
 
     tmp = StringCases[filename, base__~~".h5:"~~ds__ :> {base<>".h5",ds}];
     data =
     If[Length[tmp] === 0,
        ensureLocalFile[runName, filenames[[1]]];
-       ReadWaveformFile[filename],
-       readPsi4HDF5Data[tmp[[1,1]], tmp[[1,2]]]]];
+       ReadWaveformFile[FileNameJoin[{findRunDir[runName], filename}]],
+       (* else *)
+       ensureLocalFile[runName, tmp[[1,1]]];
+       readPsi4HDF5Data[FileNameJoin[{findRunDir[runName], tmp[[1,1]]}], tmp[[1,2]]]];
+
+    (* Print["data = ", data]; *)
+
+    data];
 
 NRDF`InitialData`ReadADMMass[run_] :=
   Module[
