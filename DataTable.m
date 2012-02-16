@@ -53,6 +53,8 @@ FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d
 TableRange;
 PartitionTable;
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
+MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spacing from a DataTable with a nonuniform grid spacing.  This is accomplished via interpolation through ResampleDataTable.";
+UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
 Begin["`Private`"];
 
@@ -679,6 +681,18 @@ FilterDCT[f_List, nModes_Integer,
 MonotonicQ[d_DataTable, tol_:0.] :=
   Module[{positive = (# > tol &)},
   Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
+
+UniformGridQ[d_DataTable] :=
+  Module[
+    {ts, dts, dt1, tol = 10.^-5},
+    ts = IndVar[d];
+    dts = Drop[ts,1] - Drop[RotateRight[ts],1];
+    dt1 = dts[[1]];
+    Max[Abs[dts - dt1]] < tol];
+
+MakeUniform[d_DataTable] :=
+  ResampleDataTable[d, Spacing[d], 8];
+
 End[];
 
 EndPackage[];
