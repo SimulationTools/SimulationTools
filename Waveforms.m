@@ -360,13 +360,14 @@ ffi[{f_, d_}, f0_] :=
 ];
 
 StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
- Module[{psi4f, dhf, hf, dh, h},
-  psi4f = Fourier[psi4];
+ Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
+         uniform = UniformGridQ[psi4]},
+  psi4Uniform = If[uniform, psi4, MakeUniform[psi4]];
+  psi4f = Fourier[psi4Uniform];
   dhf = Map[ffi[#, f0 / (2 Pi)] &, psi4f];
   hf  = Map[ffi[#, f0 / (2 Pi)] &, dhf];
   {h, dh} = InverseFourier /@ {hf, dhf};
-  h
-]
+  If[uniform, h, ResampleDataTable[h,psi4]]];
 
 StrainFromPsi4[psi4_DataTable, range:(_List | All)] :=
   Module[{range2},
