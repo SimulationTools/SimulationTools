@@ -52,6 +52,7 @@ ShiftPhase;
 FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
 TableRange;
 PartitionTable;
+MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 
 Begin["`Private`"];
 
@@ -667,6 +668,9 @@ FilterDCT[f_List, nModes_Integer,
    {t1, t2, t3} = PartitionTable[f, range2];
    Return[Join[t1, filtered, t3]]];
 
+MonotonicQ[d_DataTable, tol_:0.] :=
+  Module[{positive = (# > tol &)},
+  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
 End[];
 
 EndPackage[];
