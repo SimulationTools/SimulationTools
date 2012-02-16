@@ -275,7 +275,6 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
             Module[
               {highRes},
               highRes = fTbs[[Ordering[Spacing /@ fTbs][[1]]]];
-              Print["NonUniformGrid"];
               IntersectDataTables[ResampleDataTable[#, highRes] & /@ fTbs]],
             (* else *)
             ResampleDataTables[fTbs]];
