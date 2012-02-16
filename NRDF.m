@@ -168,6 +168,20 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
 
     (* Print["data = ", data]; *)
 
+    Check[Interpolation[data], Print["Warning: Duplicate points in "<>runName<>"/"<>tmp], Interpolation::inddp];
+
+    Module[
+      {tol = 10.^-5},
+      If[!MonotonicQ[data, tol],
+         Module[
+           {posns = Position[Prepend[Drop[Drop[RotateLeft[IndVar[data]] - IndVar[data],1],-1],1.0], 
+                             _?(Abs[#]<tol &)],
+            pos},
+           pos = posns[[1,1]];
+           data = MakeDataTable[Delete[ToList@data, posns]];
+           Print["Warning: Data in "<>runName<>"/"<>ToString[tmp,InputForm]<>" is not monotonic (tolerance "<>
+                 ToString[tol,InputForm]<>", index "<>ToString[pos+1]<>", t = "<>ToString[IndVar[data][[pos+1]]]<>")"]]]];
+
     data];
 
 DefFn[
