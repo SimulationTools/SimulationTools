@@ -46,7 +46,8 @@ Options[ExtrapolateRadiatedQuantity] =
    ApplyFunction -> None, 
    AlignPhaseAt -> None,
    RadiusRange -> All,
-   ExtrapolationErrorRelative -> False};
+   ExtrapolationErrorRelative -> False,
+   NonUniformGrid -> False};
 
 Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
@@ -268,9 +269,16 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     alignPhaseAt = OptionValue[AlignPhaseAt];
     If[!(alignPhaseAt === None),
       fTbs = AlignPhases[fTbs, alignPhaseAt]];
-                                
-    fTbsRes = ResampleDataTables[fTbs];
 
+    fTbsRes = 
+         If[OptionValue[NonUniformGrid],
+            Module[
+              {highRes},
+              highRes = fTbs[[Ordering[Spacing /@ fTbs][[1]]]];
+              Print["NonUniformGrid"];
+              IntersectDataTables[ResampleDataTable[#, highRes] & /@ fTbs]],
+            (* else *)
+            ResampleDataTables[fTbs]];
     applyFunction = OptionValue[ApplyFunction];
 
     fTbsRes2 = If[!(applyFunction === None),
