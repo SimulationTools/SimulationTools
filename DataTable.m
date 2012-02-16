@@ -445,12 +445,26 @@ ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[ResampleDataTable[#, {t1, t2, dt}, p] &, ds]];
 
-DataTableInterval[d_DataTable, {t1_, t2_}] := Module[{range, tMin, tMax},
-  range = DataTableRange[d];
-  tMin = If[SameQ[t1, All], range[[1]], t1];
-  tMax = If[SameQ[t2, All], range[[2]], t2];
-  d /. DataTable[l_, x___] :> DataTable[Select[l,#[[1]] >= tMin && #[[1]] < tMax &], x]
-];
+Options[DataTableInterval] = {Interval -> {Closed, Open}};
+DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
+  Module[
+    {range, tMin, tMax, lower, upper, eps=10.^-6},
+    range = DataTableRange[d];
+    tMin = If[SameQ[t1, All], range[[1]], t1];
+    tMax = If[SameQ[t2, All], range[[2]], t2];
+    lower = Switch[OptionValue[Interval][[1]],
+                   Closed, GreaterEqual,
+                   Open, Greater,
+                   _, Throw["Unrecognised option Interval -> "
+                            <>ToString[OptionValue[Interval], InputForm]]];
+    upper = Switch[OptionValue[Interval][[2]],
+                   Closed, LessEqual,
+                   Open, Less,
+                   _, Throw["Unrecognised option Interval -> "
+                            <>ToString[OptionValue[Interval], InputForm]]];
+
+    d /. DataTable[l_, x___] :>
+    DataTable[Select[l,lower[#[[1]],tMin-eps] && upper[#[[1]], tMax+eps] &], x]];
 
 DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
   d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
