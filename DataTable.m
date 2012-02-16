@@ -418,6 +418,14 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
 
+ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
+  Module[
+    {d2, template2},
+    {d2, template2} = IntersectDataTables[d,template];
+    f = Interpolation[d, InterpolationOrder -> p];
+    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
+                  ListAttributes[d]]];
+
 Spacing[d:DataTable[__]] :=
   Module[{ts},
     ts = IndVar[d];
