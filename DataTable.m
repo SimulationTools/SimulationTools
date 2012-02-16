@@ -477,8 +477,8 @@ IntersectDataTables[d1_DataTable, d2_DataTable] :=
     dMin = Max[d1Min, d2Min];
     dMax = Min[d1Max, d2Max];
 
-    Return[{DataTableInterval[d1,{dMin, dMax}], 
-            DataTableInterval[d2,{dMin, dMax}]}]];
+    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}], 
+            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
 
 IntersectDataTables[{d1_DataTable, d2_DataTable}] :=
   Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
@@ -488,8 +488,8 @@ IntersectDataTables[{d1_DataTable, d2_DataTable}] :=
     dMin = Max[d1Min, d2Min];
     dMax = Min[d1Max, d2Max];
 
-    Return[{DataTableInterval[d1,{dMin, dMax}], 
-            DataTableInterval[d2,{dMin, dMax}]}]];
+    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}], 
+            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
 
 IntersectDataTables[ds:{(_DataTable)...}] :=
   Module[{ranges, mins, maxs, min, max, ds2},
@@ -500,7 +500,7 @@ IntersectDataTables[ds:{(_DataTable)...}] :=
     min = Max[mins];
     max = Min[maxs];
 
-    ds2 = Map[DataTableInterval[#,{min, max}] &, ds];
+    ds2 = Map[DataTableInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
     ds2];
 
 
