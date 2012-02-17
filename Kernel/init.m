@@ -60,13 +60,39 @@ Module[{packages =
   "Tracks",
   "TwoPunctures",
   "Waveforms",
-  "YlmDecomp"}},
+  "YlmDecomp"},
+  ErrorDefinition, DefFn, withCustomSetDelayed, NRMMAQ},
 
   packages = Map[#<>"`"&, packages];
   Unprotect[$Packages];
   $Packages = Complement[$Packages, packages];
   Protect[$Packages];
-  Scan[Needs, packages];
+
+  ErrorDefinition[x_] :=
+    x[args___] :=
+     Throw["Invalid arguments in " <> ToString[x] <> "[" <>
+       StringJoin[Riffle[ToString[#, InputForm] & /@ {args}, ", "]] <>
+       "]", InvalidArguments];
+
+  SetAttributes[DefFn, HoldAll];
+  DefFn[fn_[args___], body_] :=
+   Module[{},
+    ErrorDefinition[fn];
+    fn[args] := body;
+   ];
+
+  NRMMAQ[_] = False;
+
+  SetAttributes[withCustomSetDelayed, HoldAll];
+  withCustomSetDelayed[code_] :=
+   Internal`InheritedBlock[{SetDelayed},
+     Unprotect[SetDelayed];
+     SetDelayed[fn_[args___], rhs_] /; ((!NRMMAQ[fn]) && MemberQ[packages, Context[fn]]) :=
+       (NRMMAQ[fn] = True; DefFn[fn[args], rhs];);
+     Protect[SetDelayed];
+     code
+   ];
+  withCustomSetDelayed[Scan[Needs, packages]];
 
   NRMMADoc[] :=
     Scan[Information[(# ~~ (Except["`"] ..)),
