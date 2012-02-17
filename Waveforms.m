@@ -157,6 +157,12 @@ ExtrapolateScalarFull[order_, rfTb_] :=
      Data -> rfCompact,
      ExtrapolatedCurve -> curve}]];
 
+(* As a special case, 0th order extrapolation is defined to use the highest radius *)
+ExtrapolateScalarFull[0, rfTb_] :=
+  {ExtrapolatedValue -> rfTb[[Ordering[First/@rfTb][[-1]]]][[2]],
+   Data -> Null,
+   ExtrapolatedCurve -> Null};
+
 (*
  ExtrapolateScalarFull[order_, rfTb_] :=
   Module[{radModel, rfCompact, a, x, fit, curve, rMin},
