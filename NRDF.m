@@ -207,6 +207,9 @@ DefFn[
       MatchQ[results[[1]], "value"["keyword"[_]]],
       results[[1,1,1]],
 
+      MatchQ[results[[1]], "string"[_]],
+      results[[1,1]],
+
       True,
       Throw["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]]];
 
