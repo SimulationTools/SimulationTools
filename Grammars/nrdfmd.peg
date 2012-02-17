@@ -13,7 +13,7 @@ name_email = {pname}[ \t]+<{email}>
 name_email_list = {name_email}((([ \t]*,[ \t]*)|([ \t]+)){name_email})*
 email_list = {email}((([ \t]*,[ \t]*)|([ \t]+)){email})*
 
-string = [a-zA-Z0-9/:+\-()=. _,*{}]+
+string = [a-zA-Z0-9/:+\-()=. _,*{};]+
 
 #filename = [a-zA-Z0-9/+\-()=. _]+
 #datasetname = [a-zA-Z0-9/+\-()=. _]+
