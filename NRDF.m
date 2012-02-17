@@ -142,7 +142,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
                       "section"[___, "section_name"["keyword"["psi4t-data"]], ___,
                                 "elements"[___,
                                            "element"["key"["extraction-radius"], "value"[radPattern]], ___,
-                                           "element"["key"["2,2"|"2,+2"],"string"[f_]],___],
+                                           "element"["key"["2,2"|"2,+2"|"2, 2"],"string"[f_]],___],
                                 ___] :> f,
                       Infinity];
 
