@@ -21,7 +21,7 @@ string = [a-zA-Z0-9/:+\-()=. _,*{};]+
 #hdf5dataset = {filename}.h5:{datasetname}
 
 value = {email_list}|{email}|{name_email_list}|{keyword}|{number}
-key = [A-Za-z0-9][A-Za-z0-9\-,+]*
+key = [A-Za-z0-9][A-Za-z0-9\-,+ ]*
 element = {key}[ \t]*\=[ \t]*({value}{-end}|{string}{-end}|{-end})
 
 elements = {element}?( {element})*
