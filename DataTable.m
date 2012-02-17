@@ -445,6 +445,8 @@ ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[ResampleDataTable[#, {t1, t2, dt}, p] &, ds]];
 
+DataTableInterval[x___] := Throw["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
+
 Options[DataTableInterval] = {Interval -> {Closed, Open}};
 DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
   Module[
