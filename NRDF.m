@@ -8,9 +8,6 @@ HaveInfiniteRadiusWaveforms;
 
 Begin["`Private`"];
 
-RunDirectory = Global`RunDirectory;
-BackingDirectory = Global`BackingDirectory;
-
 ErrorDefinition[x_] := 
   x[args___] := 
    Throw["Invalid arguments in " <> ToString[x] <> "[" <> 
@@ -90,9 +87,9 @@ DefFn[readPsi4HDF5Data[file_String, dataset_String] :=
 
 DefFn[findRunDir[run_String] :=
   If[FileExistsQ[run], run,
-     If[FileExistsQ[FileNameJoin[{RunDirectory,run}]],
-        FileNameJoin[{RunDirectory,run}],
-        None]]];
+     If[FileExistsQ[FileNameJoin[{Global`RunDirectory,run}]],
+        FileNameJoin[{Global`RunDirectory,run}],
+        Throw["Cannot find run "<>ToString[run]]]]];
 
 DefFn[haveMetadataFile[dir_String] :=
   FileNames["*.bbh", dir] =!= {}];
@@ -107,7 +104,7 @@ DefFn[findMetadataFile[run_String] :=
 DefFn[haveRunDir[run_String] :=
   If[haveMetadataFile[run],
      True,
-     If[haveMetadataFile[FileNameJoin[{RunDirectory, run}]],
+     If[haveMetadataFile[FileNameJoin[{Global`RunDirectory, run}]],
         True,
         False]]];
 
@@ -117,8 +114,11 @@ DefFn[
     {src,dst},
     (* Print["ensureLocalFile: run = ", run]; *)
     (* Print["ensureLocalFile: file = ", file]; *)
-    src = FileNameJoin[{BackingDirectory,run,file}];
     dst = FileNameJoin[{findRunDir[run],file}];
+    If[FileExistsQ[dst], Return[Null]];
+    If[!ValueQ[Global`BackingDirectory],
+       Throw["Cannot find file "<>file<>" in run "<>run<>" and BackingDirectory has not been set"]];
+    src = FileNameJoin[{Global`BackingDirectory,run,file}];
     (* Print["ensureLocalFile: src = ", src]; *)
     (* Print["ensureLocalFile: dst = ", dst]; *)
     syncFile[src,dst]]];
