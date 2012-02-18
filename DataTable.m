@@ -270,18 +270,25 @@ RedefineAsDataTable[FourierDCT[d_DataTable,args___],
     N[Sqrt[Length[d]]]]];
 
 RedefineAsDataTable[Fourier[d_DataTable,args___],
-  Module[{amp, freq},
+  Module[{amp, l, n, T, freq},
    amp = Fourier[DepVar[d],args];
-   freq = Range[0, Length[d] - 1]/(Spacing[d]*Length[d]);
+   l = Length[d];
+   n = Floor[l/2];
+   amp = RotateRight[amp, n];
+   T = Spacing[d]*l;
+   freq = Range[-n, l - 1 - n]/T;
    Return[MakeDataTable[Transpose[{freq, amp}]]];
   ]
 ];
 
-RedefineAsDataTable[InverseFourier[d_DataTable,args___],
-  Module[{amp, freq},
-   amp = InverseFourier[DepVar[d],args];
-   freq = Range[0, Length[d] - 1]/(Spacing[d]*Length[d]);
-   Return[MakeDataTable[Transpose[{freq, amp}]]];
+RedefineAsDataTable[InverseFourier[d_DataTable, t0_:0.0, opts:OptionsPattern[]],
+  Module[{amp, time, df, l, n},
+   l = Length[d];
+   n = Floor[l/2];
+   amp = InverseFourier[RotateLeft[DepVar[d], n],opts];
+   df = Spacing[d];
+   time = t0 + Range[0, l - 1]/(df*l);
+   Return[MakeDataTable[Transpose[{time, amp}]]];
   ]
 ];
 
