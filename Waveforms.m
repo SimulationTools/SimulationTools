@@ -360,7 +360,7 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
 
 ffi[{f_, d_}, f0_] :=
  Module[{div},
-  div = 2 Pi I Max[f, f0, $MachineEpsilon];
+  div = 2 Pi I If[f>0, Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
   {f, d/div}
 ];
 
