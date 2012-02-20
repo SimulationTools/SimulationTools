@@ -179,7 +179,12 @@ RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
   Module[{ns, hs},
     ns = Map[ReadAttribute[#, NPoints] &, ds];
     hs = Map[1/#&, ns];
-    Return[MapThreadData[RichardsonExtrapolate3[#1,#2,#3, hs[[1]], hs[[2]], hs[[3]], p] &, {d1,d2,d3}]]];
+    RichardsonExtrapolate3[ds,hs]];
+
+RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, hs:{h1_,h2_,h3_}, p_] :=
+  Module[{},
+    Return[MapThreadData[RichardsonExtrapolate3[#1,#2,#3, hs[[1]], hs[[2]], hs[[3]], p] &,
+                         ResampleDataTables[{d1,d2,d3}]]]];
 
 RichardsonExtrapolationError[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
     RichardsonExtrapolate[Drop[ds,1], p] - RichardsonExtrapolate3[ds, p];
