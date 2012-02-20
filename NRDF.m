@@ -5,6 +5,7 @@ ParseMetadataFile;
 StartingFrequency;
 UsefulWaveformTime;
 HaveInfiniteRadiusWaveforms;
+ReadMetadataKey;
 ReadRuns;
 
 Begin["`Private`"];
