@@ -25,6 +25,7 @@ FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePl
 FilterPlot::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out.";
 PlotKeySize;
 DynamicShow;
+LegendBackground;
 
 Begin["`Private`"];
 
@@ -45,7 +46,8 @@ withStyle[elem_, style_List] :=
 withStyle[elem_, style_] :=
   {style, elem};
 
-Options[MakePlotLegend] = {LegendOrientation -> Vertical, LegendLineSize -> 40};
+Options[MakePlotLegend] = {LegendOrientation -> Vertical, LegendLineSize -> 40,
+                           LegendBackground -> None};
 
 MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic,
                opts:OptionsPattern[]] :=
@@ -64,14 +66,16 @@ MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic,
                  Style[Text[lab], If[labelStyle === Automatic, {},labelStyle]]}],
                 {labels, Take[style, Length[labels]]}],If[hor,1,0]]],
       Alignment -> {Left,Center},
-      Spacings-> {{0,Automatic}~Join~Flatten[Table[{1,Automatic},{i,Length[labels]}],1]}]];
+      Spacings-> {{0,Automatic}~Join~Flatten[Table[{1,Automatic},{i,Length[labels]}],1]},
+        Background->OptionValue[LegendBackground]]];
 
 styleInListLinePlot[lp_] :=
   Module[{},
     Cases[lp, {styles___, _Line} :> {styles}, Infinity]];
 
 Options[ListLinePlotWithLegend] =
-  Join[Options[ListLinePlot], {PlotLegend -> {}, LegendPosition -> {Left, Top}}, Options[MakePlotLegend]];
+  Join[Options[ListLinePlot], {PlotLegend -> {}, LegendPosition -> {Left, Top},
+                               LegendBackground -> None}, Options[MakePlotLegend]];
 
 ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
   Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single},
