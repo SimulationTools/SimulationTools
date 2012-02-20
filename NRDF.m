@@ -5,6 +5,7 @@ ParseMetadataFile;
 StartingFrequency;
 UsefulWaveformTime;
 HaveInfiniteRadiusWaveforms;
+ReadRuns;
 
 Begin["`Private`"];
 
@@ -227,6 +228,10 @@ DefFn[
 DefFn[
   HaveInfiniteRadiusWaveforms[run_] :=
   StringMatchQ[ReadMetadataKey[run, "extraction-radius"], "*infinite*"]];
+
+DefFn[
+  ReadRuns[dir_:Global`RunDirectory] :=
+  Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]];
 
 End[];
 
