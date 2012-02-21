@@ -68,6 +68,7 @@ Module[{packages =
   $Packages = Complement[$Packages, packages];
   Protect[$Packages];
 
+  (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
     x[args___] :=
      Throw["Invalid arguments in " <> ToString[x] <> "[" <>
