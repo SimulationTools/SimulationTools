@@ -40,7 +40,7 @@ InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new D
 Monotonise;
 DataTableListLinePlot;
 
-InvertDataTable;
+InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 DataTableNormL2;
 LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
