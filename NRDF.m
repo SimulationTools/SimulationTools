@@ -89,7 +89,7 @@ DefFn[readPsi4HDF5Data[file_String, dataset_String] :=
 
 DefFn[findRunDir[run_String] :=
   If[FileExistsQ[run], run,
-     If[FileExistsQ[FileNameJoin[{Global`RunDirectory,run}]],
+     If[ValueQ[Global`RunDirectory] && FileExistsQ[FileNameJoin[{Global`RunDirectory,run}]],
         FileNameJoin[{Global`RunDirectory,run}],
         Throw["Cannot find run "<>ToString[run]]]]];
 
@@ -106,7 +106,7 @@ DefFn[findMetadataFile[run_String] :=
 DefFn[haveRunDir[run_String] :=
   If[haveMetadataFile[run],
      True,
-     If[haveMetadataFile[FileNameJoin[{Global`RunDirectory, run}]],
+     If[ValueQ[Global`RunDirectory] && haveMetadataFile[FileNameJoin[{Global`RunDirectory, run}]],
         True,
         False]]];
 
@@ -231,8 +231,12 @@ DefFn[
   StringMatchQ[ReadMetadataKey[run, "extraction-radius"], "*infinite*"]];
 
 DefFn[
-  ReadRuns[dir_:Global`RunDirectory] :=
-  Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]];
+  ReadRuns[dirp_:Automatic] :=
+  Module[{dir},
+    dir = If[dirp === Automatic,
+             If[ValueQ[Global`RunDirectory], Global`RunDirectory, "."],
+             dirp];
+    Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]]];
 
 End[];
 
