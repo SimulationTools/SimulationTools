@@ -25,7 +25,7 @@ ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] 
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
 ExportOnly;
-ExcludeModes;
+ExcludeModes::usage = "ExcludeModes is an option for ExportSim.";
 
 Begin["`Private`"];
 
