@@ -18,7 +18,7 @@ PadIndex[i_, n_] :=
 
 SetAttributes[PreviewMovie, HoldAll];
 
-PreviewMovie[fileNamebase_String, expr_, {var_, v1_, v2_, dv_:1}] :=
+PreviewMovie[fileNamebase_, expr_, {var_, v1_, v2_, dv_:1}] :=
   Manipulate[expr, {var, v1, v2, dv}];
 
 SetAttributes[MakeMovie, HoldAll];
