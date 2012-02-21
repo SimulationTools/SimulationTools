@@ -25,6 +25,7 @@ ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] 
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
 ExportOnly;
+ExcludeModes;
 
 Begin["`Private`"];
 
@@ -81,10 +82,13 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
   ];
 ];
 
-ExportAllExtrapolatedWaveforms[run_String, file_String, mass_] :=
- Module[{dir, modes, files},
+ExportAllExtrapolatedWaveforms[run_String, file_String, mass_, excludeModes_:None] :=
+ Module[{dir, modes, files, excludeRun, excludePattern},
   dir = DirectoryName[file];
   modes = ReadPsi4Modes[run];
+  {excludeRun, excludePattern} = excludeModes;
+  If[run === excludeRun,
+     modes = Select[modes, (!MatchQ[#,excludePattern]) &]];
 
   Switch[fileExtension[file],
   "asc"|"asc.gz",
@@ -356,7 +360,7 @@ Options[ExportConfig] = Options[ExportSim];
 ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPattern[]] :=
   Scan[ExportSim[#, name, outputDirectory, Madm, ecc, opts] &, sims];
 
-Options[ExportSim] = {ExportSimFormat -> "ASCII", ExportOnly -> All};
+Options[ExportSim] = {ExportSimFormat -> "ASCII", ExportOnly -> All, ExcludeModes -> None};
 ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
   Module[{dir, h, n, ext, all, export},
 
@@ -375,7 +379,8 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
     Do[
     Switch[item,
       "FiniteRadiiWaves",  ExportAllExtractedWaveforms[run, dir <> "/psi4"<>ext],
-      "ExtrapolatedWaves", ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext, mass],
+      "ExtrapolatedWaves", ExportAllExtrapolatedWaveforms[run, dir <> "/psi4"<>ext, mass,
+                                                          OptionValue[ExcludeModes]],
       "Coordinates",       ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1"<>ext];
                            ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext],
       "Spin",              ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
