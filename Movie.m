@@ -32,7 +32,7 @@ MakeMovie[fileNameBase_, expr_, {var_, v1_, v2_, dv_:1}] :=
       Export[name, Block[{var=v1 + i dv}, expr]];
       , {i, i1, i2}];
 
-    command = "! /Users/ian/Software/bin/ffmpeg -y -i " <> Evaluate[fileNameBase] <> ".%5d.png -b 100000 " <> fileNameBase <> ".mp4 2>&1";
+    command = "! ffmpeg -y -r 1 -i " <> Evaluate[fileNameBase] <> ".%5d.png -b 100000 " <> fileNameBase <> ".mp4 2>&1";
     Print[command];
     ReadList[command, String, NullRecords->True]
   ];
