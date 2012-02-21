@@ -45,7 +45,7 @@ DataTableNormL2;
 LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
 PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
-MaximumValue;
+MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
 AbsOfPhase;
 FunctionOfPhase;
 ShiftPhase;
