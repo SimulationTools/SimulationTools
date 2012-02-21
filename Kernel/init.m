@@ -61,7 +61,7 @@ Module[{packages =
   "TwoPunctures",
   "Waveforms",
   "YlmDecomp"},
-  ErrorDefinition, DefFn, withCustomSetDelayed, NRMMAQ},
+  ErrorDefinition, DefFn, DefFnQ, withCustomSetDelayed},
 
   packages = Map[#<>"`"&, packages];
   Unprotect[$Packages];
@@ -81,14 +81,14 @@ Module[{packages =
     fn[args] := body;
    ];
 
-  NRMMAQ[_] = False;
+  DefFnQ[_] = False;
 
   SetAttributes[withCustomSetDelayed, HoldAll];
   withCustomSetDelayed[code_] :=
    Internal`InheritedBlock[{SetDelayed},
      Unprotect[SetDelayed];
-     SetDelayed[fn_[args___], rhs_] /; ((!NRMMAQ[fn]) && MemberQ[packages, Context[fn]]) :=
-       (NRMMAQ[fn] = True; DefFn[fn[args], rhs];);
+     SetDelayed[fn_[args___], rhs_] /; ((!DefFnQ[fn]) && MemberQ[packages, Context[fn]]) :=
+       (DefFnQ[fn] = True; DefFn[fn[args], rhs];);
      Protect[SetDelayed];
      code
    ];
