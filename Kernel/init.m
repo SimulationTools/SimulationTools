@@ -153,11 +153,13 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
 
   DefFnQ[_] = False;
 
+  StandardDefinition;
+
   SetAttributes[withCustomSetDelayed, HoldAll];
   withCustomSetDelayed[code_] :=
    Internal`InheritedBlock[{SetDelayed},
      Unprotect[SetDelayed];
-     SetDelayed[fn_[args___], rhs_] /; ((!DefFnQ[fn]) && MemberQ[packages, Context[fn]]) :=
+     SetDelayed[fn_[args___], rhs_] /; ((!DefFnQ[fn]) && MemberQ[packages, Context[fn]] && StandardDefinition[fn] =!= True) :=
        (DefFnQ[fn] = True; DefFn[fn[args], rhs];);
      Protect[SetDelayed];
 
