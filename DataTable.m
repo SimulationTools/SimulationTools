@@ -40,14 +40,14 @@ InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new D
 Monotonise;
 DataTableListLinePlot;
 
-InvertDataTable;
+InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 DataTableNormL2;
 LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
 PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
-MaximumValue;
-AbsOfPhase;
-FunctionOfPhase;
+MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
+AbsOfPhase::usage = "AbsOfPhase[d] uses FunctionOfPhase to construct a DataTable from d consisting of its Abs as a function of its Phase.";
+FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
 ShiftPhase;
 FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
 TableRange;

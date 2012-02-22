@@ -30,8 +30,6 @@ FileIsInRun::usage = "FileIsInRun[run, filename] returns True or False depending
 
 Begin["`Private`"];
 
-RunDirectory := Global`RunDirectory;
-
 If[FileNameJoin[{"a","b"}] =!= "a/b",
 
 FileNameJoin[elems_] :=
@@ -63,11 +61,11 @@ FindRunDir[runName_String] :=
 
       If[StringTake[runNamep,1] === "/", Return[None]];
 
-      If[StringQ[RunDirectory],
-         dir = FileNameJoin[Join[FileNameSplit[RunDirectory],FileNameSplit[runNamep]]];
+      If[StringQ[Global`RunDirectory],
+         dir = FileNameJoin[Join[FileNameSplit[Global`RunDirectory],FileNameSplit[runNamep]]];
          If[FileExistsQ[dir], Return[dir]];
 
-         dirs = FileNames[runNamep, {RunDirectory}, 2];
+         dirs = FileNames[runNamep, {Global`RunDirectory}, 2];
          If[Length[dirs] > 1,
             Throw["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]]];
 

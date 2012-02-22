@@ -7,9 +7,19 @@ BeginPackage["Piraha`", {"JLink`"}];
 Parse::usage = "Parse[grammarfile, pattern, inputfile] parses a file named inputfile using a grammar stored in a file named grammarfile using pattern as the root pattern.  The parse tree is returned as Symbolic XML.";
 CleanParseTree;
 
+EnsureJava;
+
 Begin["`Private`"];
 
-InstallJava[];
+javaInstalled = False;
+
+EnsureJava[] :=
+  If[javaInstalled,
+     Null,
+     (* else *)
+     InstallJava[];
+     AddToClassPath[FileNameJoin[{nrmmaDir,"PirahaPeg","piraha.jar"}]];
+     javaInstalled = True];
 
 (* The JRE does not share a current directory with the Mathematica
    kernel, so relative paths have to be converted to absolute paths.
@@ -20,14 +30,12 @@ absPath[s_String] :=
 
 nrmmaDir = FileNameDrop[FindFile["nrmma`"],-2];
 
-
-AddToClassPath[
- FileNameJoin[{nrmmaDir,"PirahaPeg","piraha.jar"}]];
-
 DefFn[
   Parse[grammarFileName_String, pattern_String, inputFileName_String] :=
   Module[
     {gf,g,m,c,sw,dout,xmlString,xml},
+
+    EnsureJava[];
 
     If[FileExistsQ[grammarFileName],
        gf = grammarFileName,
