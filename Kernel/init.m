@@ -75,7 +75,7 @@ Module[{packages =
   (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
     x[args___] :=
-     If[NRMMADebug===True, Error`CatchError, Identity][Error`Error["Invalid arguments in `1`", ToString[x] <> "[" <>
+     If[$NRMMADebug===True, Error`CatchError, Identity][Error`Error["Invalid arguments in `1`", ToString[x] <> "[" <>
        StringJoin[Riffle[ToString[#] & /@ {args}, ", "]] <>
        "]"]];
 
@@ -144,7 +144,7 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
     CheckAssignments[Evaluate[ToString[fn]],Map[Hold,argSyms],Module[{},body]];
 
          (* [ *)
-    If[NRMMADebug === True,
+    If[$NRMMADebug === True,
        fn[args] := 
          If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][Stack`WithStackFrame[Hold[fn], body]],
        (*else*)
@@ -178,14 +178,14 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
   (*    code *)
   (*  ]; *)
 
-  If[NRMMADebug === True,
+  If[$NRMMADebug === True,
     (* We do this temporarily until all occurrences of Throw[_String]
       have been replaced with calls to Error *)
     Unprotect[Throw];
     Throw[s_String] := Error`Error[StringReplace[s,"`"->"`.`"]];
     Protect[Throw]];
 
-  If[NRMMADebug === True, withCustomSetDelayed, Identity][Scan[Needs, packages]];
+  If[$NRMMADebug === True, withCustomSetDelayed, Identity][Scan[Needs, packages]];
 
   NRMMADoc[] :=
     Scan[Information[(# ~~ (Except["`"] ..)),
