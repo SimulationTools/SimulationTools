@@ -61,19 +61,23 @@ Module[{packages =
   "TwoPunctures",
   "Waveforms",
   "YlmDecomp"},
-  ErrorDefinition, DefFn, DefFnQ, withCustomSetDelayed},
+  ErrorDefinition, DefFn, DefFnQ, withCustomSetDelayed, extraPackages},
+
+  extraPackages = {"Stack`", "Error`"};
 
   packages = Map[#<>"`"&, packages];
   Unprotect[$Packages];
-  $Packages = Complement[$Packages, packages];
+  $Packages = Complement[$Packages, Join[packages, extraPackages]];
   Protect[$Packages];
+
+  Scan[Needs, extraPackages];
 
   (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
     x[args___] :=
-     Throw["Invalid arguments in " <> ToString[x] <> "[" <>
+     If[NRMMADebug===True, Error`CatchError, Identity][Error`Error["Invalid arguments in `1`", ToString[x] <> "[" <>
        StringJoin[Riffle[ToString[#, InputForm] & /@ {args}, ", "]] <>
-       "]", InvalidArguments];
+       "]"]];
 
 SetAttributes[CheckAssignments, HoldAll];
 CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]] :=
@@ -137,7 +141,13 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
     ErrorDefinition[fn];
     argSyms = Cases[{args}, x_Pattern :> x[[1]], Infinity, Heads->True]; (* What if the pattern name symbol has meaning in this scope? *)
     CheckAssignments[Evaluate[ToString[fn]],Map[Hold,argSyms],Module[{},body]];
-    fn[args] := body;
+
+         (* [ *)
+    If[NRMMADebug === True,
+       fn[args] := 
+         If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][Stack`WithStackFrame[Hold[fn], body]],
+       (*else*)
+       fn[args] := body];
    ];
 
   DefFnQ[_] = False;
@@ -149,8 +159,27 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
      SetDelayed[fn_[args___], rhs_] /; ((!DefFnQ[fn]) && MemberQ[packages, Context[fn]]) :=
        (DefFnQ[fn] = True; DefFn[fn[args], rhs];);
      Protect[SetDelayed];
+
      code
    ];
+
+  (* SetAttributes[withCustomThrow, HoldAll]; *)
+  (* withCustomThrow[code_] := *)
+  (*  Internal`InheritedBlock[{Throw}, *)
+  (*    Unprotect[Throw]; *)
+  (*    Throw[s_String] := Error`Error[s]; *)
+  (*    Protect[Throw]; *)
+
+  (*    code *)
+  (*  ]; *)
+
+  If[NRMMADebug === True,
+    (* We do this temporarily until all occurrences of Throw[_String]
+      have been replaced with calls to Error *)
+    Unprotect[Throw];
+    Throw[s_String] := Error`Error[StringReplace[s,"`"->"`.`"]];
+    Protect[Throw]];
+
   If[NRMMADebug === True, withCustomSetDelayed, Identity][Scan[Needs, packages]];
 
   NRMMADoc[] :=
