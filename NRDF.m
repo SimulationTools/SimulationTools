@@ -10,16 +10,6 @@ ReadRuns;
 
 Begin["`Private`"];
 
-ErrorDefinition[x_] := 
-  x[args___] := 
-   Throw["Invalid arguments in " <> ToString[x] <> "[" <> 
-     StringJoin[Riffle[ToString[#, InputForm] & /@ {args}, ", "]] <> "]", 
-    InvalidArguments];
-
-SetAttributes[DefFn, HoldAll];
-DefFn[def : (fn_[args___] := body_)] := Module[{}, ErrorDefinition[fn];
-   fn[args] :=(*Profile[fn,*)body(*]*)];
-
 FPrint[x_] := (Print[x//InputForm]; x);
 
 NRDF`RunFiles`HaveData[runDir_] :=
@@ -32,7 +22,7 @@ NRDF`Waveforms`HaveData[runDir_,___] :=
 NRDF`InitialData`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
 
-DefFn[addDataSubDir[output_String] :=
+addDataSubDir[output_String] :=
   Module[
     {parFiles,runName},
 
@@ -44,7 +34,7 @@ DefFn[addDataSubDir[output_String] :=
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
     If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
-    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]]];
+    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
 
 NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {findRunDir[dir]};
@@ -52,9 +42,9 @@ NRDF`RunFiles`FindRunDirSegments[dir_] :=
 DefineMemoFunction[ParseMetadataFile[run_String],
   CleanParseTree[Parse["nrdfmd.peg","file",findMetadataFile[run]]]];
 
-DefFn[processMetadata[md_] :=
+processMetadata[md_] :=
   md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
-         "key"[k_String] :> "key"[ToLowerCase[k]]}];
+         "key"[k_String] :> "key"[ToLowerCase[k]]};
 
 NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
@@ -82,36 +72,36 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     radStrs
   ];
 
-DefFn[readPsi4HDF5Data[file_String, dataset_String] :=
+readPsi4HDF5Data[file_String, dataset_String] :=
   MakeDataTable[
     Map[{#[[1]], #[[2]] + I #[[3]]} &,
-        ReadHDF5[file, {"Datasets", dataset}]]]];
+        ReadHDF5[file, {"Datasets", dataset}]]];
 
-DefFn[findRunDir[run_String] :=
+findRunDir[run_String] :=
   If[FileExistsQ[run], run,
      If[ValueQ[Global`RunDirectory] && FileExistsQ[FileNameJoin[{Global`RunDirectory,run}]],
         FileNameJoin[{Global`RunDirectory,run}],
-        Throw["Cannot find run "<>ToString[run]]]]];
+        Throw["Cannot find run "<>ToString[run]]]];
 
-DefFn[haveMetadataFile[dir_String] :=
-  FileNames["*.bbh", dir] =!= {}];
+haveMetadataFile[dir_String] :=
+  FileNames["*.bbh", dir] =!= {};
 
-DefFn[findMetadataFile[run_String] :=
+findMetadataFile[run_String] :=
       Module[{files},
              files = FileNames["*.bbh", findRunDir[run]];
              If[Length[files] =!= 1, Throw["Failed to find exactly one metadata file in run "<>
                                            run<>" in directory "<>findRunDir[run]]];
-             files[[1]]]];
+             files[[1]]];
 
-DefFn[haveRunDir[run_String] :=
+haveRunDir[run_String] :=
   If[haveMetadataFile[run],
      True,
      If[ValueQ[Global`RunDirectory] && haveMetadataFile[FileNameJoin[{Global`RunDirectory, run}]],
         True,
-        False]]];
+        False]];
 
-DefFn[
-  ensureLocalFile[run_String, file_String] :=
+
+ensureLocalFile[run_String, file_String] :=
   Module[
     {src,dst},
     (* Print["ensureLocalFile: run = ", run]; *)
@@ -123,16 +113,16 @@ DefFn[
     src = FileNameJoin[{Global`BackingDirectory,run,file}];
     (* Print["ensureLocalFile: src = ", src]; *)
     (* Print["ensureLocalFile: dst = ", dst]; *)
-    syncFile[src,dst]]];
+    syncFile[src,dst]];
 
-DefFn[
-  syncFile[src_String, dst_String] :=
+
+syncFile[src_String, dst_String] :=
   If[FileType[dst] === None,
      Print[StringForm["Syncing file `1` to `2`", src, dst]];
      output = ReadList["! rsync -avz "<>src<>" "<>dst<>" >>rsync.log 2>&1 </dev/null", String];
      log[StringJoin[Riffle[output,"\n"]]];
      If[FileType[dst] === None,
-        Throw["File " <> src <> " could not be downloaded"]]]];
+        Throw["File " <> src <> " could not be downloaded"]]];
 
 NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[
@@ -186,8 +176,8 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
 
     data];
 
-DefFn[
-  ReadMetadataKey[run_String, keyPattern_] :=
+
+ReadMetadataKey[run_String, keyPattern_] :=
   Module[
     {md, filenames, filename, tmp, results},
     md = ParseMetadataFile[run];
@@ -213,30 +203,26 @@ DefFn[
       results[[1,1]],
 
       True,
-      Throw["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]]];
+      Throw["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
 
-DefFn[NRDF`InitialData`ReadADMMass[run_String] :=
-  ReadMetadataKey[run, "initial-ADM-energy"]];
+NRDF`InitialData`ReadADMMass[run_String] :=
+  ReadMetadataKey[run, "initial-ADM-energy"];
 
-DefFn[
-  StartingFrequency[run_] :=
-  ReadMetadataKey[run, "initial-freq-22"|"freq-start-22"]];
+StartingFrequency[run_] :=
+  ReadMetadataKey[run, "initial-freq-22"|"freq-start-22"];
 
-DefFn[
-  UsefulWaveformTime[run_] :=
-  ReadMetadataKey[run, "after-junkradiation-time"]];
+UsefulWaveformTime[run_] :=
+  ReadMetadataKey[run, "after-junkradiation-time"];
 
-DefFn[
-  HaveInfiniteRadiusWaveforms[run_] :=
-  StringMatchQ[ReadMetadataKey[run, "extraction-radius"], "*infinite*"]];
+HaveInfiniteRadiusWaveforms[run_] :=
+  StringMatchQ[ReadMetadataKey[run, "extraction-radius"], "*infinite*"];
 
-DefFn[
-  ReadRuns[dirp_:Automatic] :=
+ReadRuns[dirp_:Automatic] :=
   Module[{dir},
     dir = If[dirp === Automatic,
              If[ValueQ[Global`RunDirectory], Global`RunDirectory, "."],
              dirp];
-    Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]]];
+    Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]];
 
 End[];
 
