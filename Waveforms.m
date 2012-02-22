@@ -144,6 +144,8 @@ SchmidtAngle[run_, t_, rad_: Automatic] :=
   Extrapolation
   --------------------------------------------------------------------*)
 
+Global`StandardDefinition[ExtrapolateScalarFull] = True;
+
 ExtrapolateScalarFull[order_, rfTb_] :=
   Module[{radModel, rfCompact, a, x, fit, curve, rMin},
    radModel = Sum[a[i] x^i, {i, 0, order}];
@@ -184,9 +186,11 @@ ExtrapolateScalarFull[0, rfTb_] :=
      ExtrapolatedCurve -> curve}]]; 
 *)
 
+Global`StandardDefinition[ExtrapolateScalar] = True;
 ExtrapolateScalar[args__] :=
  ExtrapolatedValue /. ExtrapolateScalarFull[args];
 
+Global`StandardDefinition[ExtrapolateScalarWithRadii] = True;
 ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
   ExtrapolatedValue /. ExtrapolateScalarFull[order, MapThread[List, {rads, Map[f, rads]}]];
 
