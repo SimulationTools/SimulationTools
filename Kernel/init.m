@@ -131,6 +131,7 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
   (* Print["assignedSymbols = ", assignedSymbols]; *)
   warnSymbols = Complement[noValueAssignedSymbols, validSymbols];
   If[Length[warnSymbols] > 0,
+     (* Using a Message here leads to weird Java errors *)
      Print[StringForm["Warning: `1`: assignment to undeclared symbols(s): `2`", ToString[fn],
             StringJoin[Riffle[ToString /@ (warnSymbols /. Hold -> HoldForm), ", "]]]]];
   Null];
@@ -162,6 +163,8 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
 
      code
    ];
+
+  (* This does not seem to work *)
 
   (* SetAttributes[withCustomThrow, HoldAll]; *)
   (* withCustomThrow[code_] := *)
