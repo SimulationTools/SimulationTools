@@ -151,7 +151,7 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
      Protect[SetDelayed];
      code
    ];
-  withCustomSetDelayed[Scan[Needs, packages]];
+  If[NRMMADebug === True, withCustomSetDelayed, Identity][Scan[Needs, packages]];
 
   NRMMADoc[] :=
     Scan[Information[(# ~~ (Except["`"] ..)),
