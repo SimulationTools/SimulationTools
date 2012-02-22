@@ -76,7 +76,7 @@ Module[{packages =
   ErrorDefinition[x_] :=
     x[args___] :=
      If[NRMMADebug===True, Error`CatchError, Identity][Error`Error["Invalid arguments in `1`", ToString[x] <> "[" <>
-       StringJoin[Riffle[ToString[#, InputForm] & /@ {args}, ", "]] <>
+       StringJoin[Riffle[ToString[#] & /@ {args}, ", "]] <>
        "]"]];
 
 SetAttributes[CheckAssignments, HoldAll];
