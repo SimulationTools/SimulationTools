@@ -169,6 +169,18 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
      code
    ];
 
+  SetAttributes[WithErrorChecking, HoldAll];
+  WithErrorChecking[contexts_List, code_] :=
+   Internal`InheritedBlock[{SetDelayed},
+     Unprotect[SetDelayed];
+     SetDelayed[fn_[args___], rhs_] /; ((!DefFnQ[fn]) && MemberQ[contexts, StringSplit[Context[fn],"`"][[1]]<>"`"] && StandardDefinition[fn] =!= True) :=
+       (DefFnQ[fn] = True; DefFn[fn[args], rhs];);
+     Protect[SetDelayed];
+
+     code];
+    
+
+
   (* This does not seem to work *)
 
   (* SetAttributes[withCustomThrow, HoldAll]; *)
