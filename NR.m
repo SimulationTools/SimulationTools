@@ -6,7 +6,7 @@
 
 BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable`",
   "Horizons`", "Kicks`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
-  "SystemStatistics`", "Timers`"}];
+  "SystemStatistics`", "Timers`", "Error`"}];
 
 ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian constraint in run.";
 

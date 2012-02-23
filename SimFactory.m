@@ -1,5 +1,5 @@
 
-BeginPackage["SimFactory`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["SimFactory`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 Begin["`Private`"];
 
@@ -18,7 +18,7 @@ addDataSubDir[output_String] :=
 
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
-    If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
+    If[Length[parFiles] =!= 1, Error["Found more than one */*.par in " <> output]];
     FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
 
 SimFactory`RunFiles`FindRunDirSegments[dir_] :=

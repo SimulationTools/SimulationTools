@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Plotting`", {"DataRegion`", "DataTable`"}];
+BeginPackage["Plotting`", {"DataRegion`", "DataTable`", "Error`"}];
 
 MakePlotLegend;
 ListLinePlotWithLegend;

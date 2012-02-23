@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "Profile`", "RunFiles`", "ReadHDF5`"}];
+BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "Profile`", "RunFiles`", "ReadHDF5`", "Error`"}];
 
 (* New CarpetHDF5 API *)
 

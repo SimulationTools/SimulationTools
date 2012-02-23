@@ -1,5 +1,5 @@
 
-BeginPackage["MultipoleASCII`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["MultipoleASCII`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 Begin["`Private`"];
 

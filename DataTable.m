@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder, Barry Wardell and Aaryn Tonita *)
 
-BeginPackage["DataTable`", {"Profile`"}];
+BeginPackage["DataTable`", {"Profile`", "Error`"}];
 
 DataTable::usage = "DataTable[{{x,f},...}, attrs] is a one-dimensional table of data with attributes attrs.  attrs is of the form {attr -> value, ...}.  DataTable objects print as DataTable[] to avoid printing the content.";
 MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";

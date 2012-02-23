@@ -1,5 +1,5 @@
 
-BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`", "Waveforms`"}];
+BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`", "Waveforms`", "Error`"}];
 
 ParseMetadataFile;
 StartingFrequency;

@@ -1,5 +1,5 @@
 
-BeginPackage["InitialData`", {"RunFiles`", "DataTable`", "Memo`", "Providers`"}];
+BeginPackage["InitialData`", {"RunFiles`", "DataTable`", "Memo`", "Providers`", "Error`"}];
 
 ReadADMMass::usage = "ReadADMMass[run] reads the ADM mass of the spacetime from the initial data slice";
 

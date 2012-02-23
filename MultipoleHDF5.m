@@ -1,5 +1,5 @@
 
-BeginPackage["MultipoleHDF5`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`"}];
+BeginPackage["MultipoleHDF5`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`", "Error`"}];
 
 Begin["`Private`"];
 

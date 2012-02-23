@@ -1,7 +1,7 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 BeginPackage["CarpetHDF5Plot`", {"RunFiles`", "DataRegion`", "DataTable`",
-  "CarpetHDF5`", "Plotting`"}];
+  "CarpetHDF5`", "Plotting`", "Error`"}];
 
 Carpet1DPlotter::usage = "Carpet1DPlotter[run] generates an interactive plot of the 1D HDF5 variables in run";
 

@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Convergence`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["Convergence`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 ConvergenceMultiplier::usage = "ConvergenceMultiplier[{h1,h2,h3},p] computes the expected ratio (f[h1]-f[h2])/(f[h2]-f[h3]) when f[h] has a Taylor expansion f[h] = O[h^p].";
 LoadConvergenceSeries;

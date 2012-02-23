@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 ReadRunSpeed::usage = "ReadRunSpeed[run] returns a DataTable with the speed of a run in M/hr as a function of time.";
 RunCost::usage      = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
@@ -43,7 +43,7 @@ ReadWalltime[runName_] :=
 ReadWalltimeHours[runName_] := 
   If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
     ReadWalltime[runName]/3600,
-  Throw["ReadWalltimeHours: No walltime information in run " <> runName]];
+  Error["ReadWalltimeHours: No walltime information in run " <> runName]];
 
 ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
@@ -62,7 +62,7 @@ DefineMemoFunction[ReadIniFile[file_],
 
 IniVariable[file_, key_] :=
   Module[{map = ReadIniFile[file]},
-    If[!MemberQ[First/@map, key], Throw["Key not found"],
+    If[!MemberQ[First/@map, key], Error["Key not found"],
     Return[key /. map]]];
 
 (* These files should be accessed using RunFiles, not directly using
@@ -79,7 +79,7 @@ ReadCores[runName_] :=
     If[FileType[sf1a] =!= None, Return[read[sf1a, Number]]];
     If[FileType[sf1b] =!= None, Return[read[sf1b, Number]]];
     If[FileType[sf2] =!= None, Return[ToExpression@IniVariable[sf2, "procs"]]];
-    Throw["Cannot find number of cores in run " <> runName]];
+    Error["Cannot find number of cores in run " <> runName]];
 
 CPUHoursPerDay[runName_] :=
   ReadCores[runName] * 24;

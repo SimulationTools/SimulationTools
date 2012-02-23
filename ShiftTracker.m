@@ -1,5 +1,5 @@
 
-BeginPackage["ShiftTracker`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["ShiftTracker`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 Begin["`Private`"];
 

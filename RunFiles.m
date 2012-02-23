@@ -72,7 +72,7 @@ FindRunDir[runName_String] :=
 
          dirs = FileNames[runNamep, {Global`RunDirectory}, 2];
          If[Length[dirs] > 1,
-            Throw["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]]];
+            Error["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]]];
 
          If[Length[dirs] === 1, Return[dirs[[1]]]]];
       
@@ -128,7 +128,7 @@ DefineMemoFunction[FindFirstRunFile[runName_String, fileName_String],
   Profile["FindFirstRunFile",
   Module[{files},
     files = FindRunFile[runName, fileName];
-    If[files === {}, Throw["File " <> fileName <> " not found in run " <> runName]];
+    If[files === {}, Error["File " <> fileName <> " not found in run " <> runName]];
     files[[1]]]]];
 
 Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
@@ -172,7 +172,7 @@ ReadColumnFile[fileName_String] :=
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
   Module[{list, list2, isComment, file2, data},
   Profile["ReadColumnFile[" <> fileName <> "]",
-    If[FileType[fileName] === None, Throw["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
+    If[FileType[fileName] === None, Error["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
     list = ReadList[fileName, String]; (* Blank lines omitted *)
     isComment[x_] :=
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
@@ -180,7 +180,7 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
     file2 = StringJoin[Riffle[list2, "\n"]];
     data = Profile["ReadColumnFile:ImportString", ImportString[file2,"Table"]];
     If[!ArrayQ[data],
-      Throw["File "<>fileName<>" missing data."];
+      Error["File "<>fileName<>" missing data."];
     ,
       Return[data];
     ];
@@ -230,7 +230,7 @@ ReadColumnFile[fileNames_List, cols_List] :=
 
 ReadColumnFile[runName_String, fileName_String] :=
   Module[{files = FindRunFile[runName, fileName]},
-    If[files === {}, Throw["Cannot find file " <> fileName <> " in run " <> runName]];
+    If[files === {}, Error["Cannot find file " <> fileName <> " in run " <> runName]];
   ReadColumnFile[files]];
 
 ReadColumnFile[runName_String, fileName_String, cols_List] :=
@@ -250,7 +250,7 @@ stripWhitespace[s_String] :=
 CarpetASCIIColumns[fileName_String] :=
  Module[{lines, descLine, colDescs, colLines},
   If[FileType[fileName] === None,
-    Throw["CarpetASCIIColumns: File " <> fileName <> " not found"]];
+    Error["CarpetASCIIColumns: File " <> fileName <> " not found"]];
   lines = ReadList[fileName, String, 20];
   colLines = Select[lines,
      StringMatchQ[#, StartOfLine ~~ "#" ~~ Whitespace ~~ (NumberString | "data columns" | "column format") ~~ ":" ~~ __] &];
@@ -264,7 +264,7 @@ CarpetASCIIColumns[fileName_String] :=
 CarpetASCIIColumns[run_String, fileName_String] :=
   Module[{files = FindRunFile[run, fileName]},
     If[files === {},
-      Throw["Cannot find file " <> fileName <> " in run " <> run]];
+      Error["Cannot find file " <> fileName <> " in run " <> run]];
     CarpetASCIIColumns[First@files]];
 
 ColumnNumbers[run_String, fileName_String, colIDs_] :=

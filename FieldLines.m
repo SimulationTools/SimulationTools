@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* Copyright (C) 2010 Kyriaki Dionysopoulou *)
-BeginPackage["FieldLines`", {"CarpetHDF5`","Plotting`", "Parameters`","RunFiles`","DataTable`","DataRegion`", "DataAnalysis`","Profile`"}];
+BeginPackage["FieldLines`", {"CarpetHDF5`","Plotting`", "Parameters`","RunFiles`","DataTable`","DataRegion`", "DataAnalysis`","Profile`", "Error`"}];
 
 FieldLinesData2d::usage = "FieldLinesData2d[run,field,it,rfl,plane] "<>
 	"Calculates the fieldlines of 2D data of a field B, E, v etc. "<>

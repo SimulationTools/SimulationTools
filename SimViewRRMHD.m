@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimViewRRMHD`", {"NR`","Ascii1D`","Ascii`","RunFiles`", "Plotting`","DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`","Parameters`"}];
+BeginPackage["SimViewRRMHD`", {"NR`","Ascii1D`","Ascii`","RunFiles`", "Plotting`","DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`","Parameters`", "Error`"}];
 
 SimViewRRMHD;
 

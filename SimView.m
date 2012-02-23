@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`", "Parameters`", "Plotting`"}];
+BeginPackage["SimView`", {"NR`", "RunFiles`", "DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`", "Horizons`", "Parameters`", "Plotting`", "Error`"}];
 
 SimView::usage = "SimView[sim] gives a quick overview of the simulation sim.
 SimView[sim, rad] gives a quick overview of the simulation sim with waveforms extracted at radius rad.

@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Horizons`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["Horizons`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 ReadIHSpin;
 ReadIHSpinX;

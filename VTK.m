@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["VTK`"];
+BeginPackage["VTK`", {"Error`"}];
 
 ReadVTKFile;
 SliceData;
@@ -24,7 +24,7 @@ Begin["`Private`"];
 (*  Module[{s, header, header2, readInfo, dims, origin, spacing, data,  *)
 (*    dataRange, max, nx, ny, nz, data2, newHeader}, *)
 (*   If[FileType[fileName] === None, *)
-(*     Throw["File "<>ToString[fileName]<>" not found"]]; *)
+(*     Error["File "<>ToString[fileName]<>" not found"]]; *)
 (*   s = OpenRead[fileName, BinaryFormat -> True]; *)
 (*   header = ReadList[s, String, 10]; *)
 (*   header2 = Map[StringSplit, header]; *)
@@ -32,7 +32,7 @@ Begin["`Private`"];
 (*    Module[{result, vals}, *)
 (*     result = ToExpression /@ Cases[h, {key, vals__} -> {vals}]; *)
 (*     If[Length[result] == 0,  *)
-(*      Throw["Cannot find key " <> key <> " in header: " <>  *)
+(*      Error["Cannot find key " <> key <> " in header: " <>  *)
 (*        ToString[h]]]; *)
 (*     result[[1]]]; *)
 (*   dims = readInfo[header2, "DIMENSIONS"]; *)
@@ -65,13 +65,13 @@ ReadVTKFile[s_InputStream] :=
   If[Length[header] == 0,
     Return[EndOfFile]];
   If[Length[header] != 10,
-    Throw["Did not read complete header from VTK stream"]];
+    Error["Did not read complete header from VTK stream"]];
   header2 = Map[StringSplit, header];
   readInfo[h_List, key_String] :=
    Module[{result},
     result = ToExpression /@ Cases[h, {key, vals__} -> {vals}];
     If[Length[result] == 0, 
-     Throw["Cannot find key " <> key <> " in header: " <> 
+     Error["Cannot find key " <> key <> " in header: " <> 
        ToString[h]]];
     result[[1]]];
   dims = readInfo[header2, "DIMENSIONS"];
@@ -125,7 +125,7 @@ replaceRules[list_List, replacements_List] :=
 
 SliceData[v:VTKFile[h_, data_], dim_:3, coord_:0] :=
  Module[{origin, spacing, dims, index, newOrigin, newDims, h2},
-  If[dim != 3, Throw["Can only slice in the z direction"]];
+  If[dim != 3, Error["Can only slice in the z direction"]];
   origin = GetOrigin[v];
   spacing = GetSpacing[v];
   dims = GetDimensions[v];

@@ -1,5 +1,5 @@
 
-BeginPackage["YlmDecomp`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["YlmDecomp`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 Begin["`Private`"];
 

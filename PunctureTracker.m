@@ -1,5 +1,5 @@
 
-BeginPackage["PunctureTracker`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["PunctureTracker`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 Begin["`Private`"];
 

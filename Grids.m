@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Grids`", {"BHCoordinates`", "Horizons`", "Memo`", "NR`", "RunFiles`", "Parameters`"}];
+BeginPackage["Grids`", {"BHCoordinates`", "Horizons`", "Memo`", "NR`", "RunFiles`", "Parameters`", "Error`"}];
 
 AnimateGrids::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run";
 LoadGrids;

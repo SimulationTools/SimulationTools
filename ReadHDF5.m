@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["ReadHDF5`"];
+BeginPackage["ReadHDF5`", {"Error`"}];
 
 ReadHDF5::usage = "ReadHDF5[file] provides a wrapper around ImportHDF5 if h5mma is available and falls back to the built-in Import otherwise." 
 ShowHDF5Progress::usage = "ShowHDF5Progress is a boolean variable indicating whether the progress of HDF5 operations should be shown in a progress indicator. This feature requires h5mma."
@@ -34,7 +34,7 @@ Module[{tempCell, result, dsIndices},
     ];
   ];
 
-  If[result == $Failed, Throw["Error importing " <> ToString[opts]<>" from "<>file]];
+  If[result == $Failed, Error["Error importing " <> ToString[opts]<>" from "<>file]];
 
   result
 ];

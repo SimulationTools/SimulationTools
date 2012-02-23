@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Ascii`", {"Ascii1D`","DataTable`", "Profile`", "Memo`", "RunFiles`"}];
+BeginPackage["Ascii`", {"Ascii1D`","DataTable`", "Profile`", "Memo`", "RunFiles`", "Error`"}];
 
 ReadCarpetASCIIScalar::usage = "ReadCarpetASCIIScalar[run,filename] Reads Carpet ASCII 0D and Scalar data.";
 

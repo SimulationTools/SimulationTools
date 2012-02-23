@@ -1,6 +1,6 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Quasinormal`", {"DataTable`"}];
+BeginPackage["Quasinormal`", {"DataTable`", "Error`"}];
 
 QuasinormalMode;
 QuasinormalModeSum;
@@ -80,10 +80,10 @@ FindFit2[data_DataTable, {expr_,constraints_List}, pars_, {x_}] :=
     modelFn = expr /. parRules;
     modelData = Map[modelFn /. x -> # &, ts];
     If[!Apply[And, Map[NumberQ, modelData]],
-      Throw[{"modelData not numerical: ", modelData, modelFn, parRules}]]; 
+      Error[{"modelData not numerical: ", modelData, modelFn, parRules}]]; 
     diff = fs - modelData;
     res = Sqrt[diff.Conjugate[diff]];
-    If[!NumberQ[res], Throw["Not a number: ", res]];
+    If[!NumberQ[res], Error["Not a number: ", res]];
     res];*)
 
   residual2Vec = Map[expr /. x -> # &, ts] - fs;
@@ -141,7 +141,7 @@ TableShift[t_List, tShift_?NumberQ] :=
 
 ReadPsi4File[name_String] :=
   Module[{},
-    If[FileType[name] === None, Throw["File " <> name <> " not found"]];
+    If[FileType[name] === None, Error["File " <> name <> " not found"]];
     Map[{#[[1]],#[[2]]+I#[[3]]} &, 
     ReadList[name, Real, RecordLists->True]]];
 

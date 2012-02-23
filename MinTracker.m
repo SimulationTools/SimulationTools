@@ -1,5 +1,5 @@
 
-BeginPackage["MinTracker`", {"RunFiles`", "DataTable`", "Memo`"}];
+BeginPackage["MinTracker`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
 
 Begin["`Private`"];
 

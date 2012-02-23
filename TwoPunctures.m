@@ -1,5 +1,5 @@
 
-BeginPackage["TwoPunctures`", {"RunFiles`", "DataTable`", "Memo`", "Parameters`"}];
+BeginPackage["TwoPunctures`", {"RunFiles`", "DataTable`", "Memo`", "Parameters`", "Error`"}];
 
 ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn.";
 ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";
@@ -28,19 +28,19 @@ TwoPunctures`InitialData`ReadADMMass[runName_String] :=
       (* Else *)
       output = StandardOutputOfRun[runName];
       If[Length[output] < 1,
-        Throw["Cannot find standard output for run "<>runName]];
+        Error["Cannot find standard output for run "<>runName]];
 
       lines = Select[ReadList[output[[1]], String], StringMatchQ[#, __ ~~ "total ADM mass is" ~~ __] &, 1];
       If[Length[lines] < 1,
         lines = Select[ReadList[output[[1]], String], StringMatchQ[#, __ ~~ "ADM mass is" ~~ __] &, 1];
         If[Length[lines] < 1,
-        Throw["Cannot find ADM mass in standard output of run "<>runName]]];
+        Error["Cannot find ADM mass in standard output of run "<>runName]]];
       ToExpression@Last@StringSplit[lines[[1]]]]];
 
 
 ReadPunctureADMMassesFromFiles[files_List] :=
   Module[{lines, massLines, file, plusLine, minusLine, mPlus, mMinus},
-    If[files === {}, Throw["Cannot find puncture ADM masses"]];
+    If[files === {}, Error["Cannot find puncture ADM masses"]];
     file = files[[1]];
     lines = ReadList[file, String];
     massLines = Select[lines, StringMatchQ[#, "INFO (TwoPunctures):   M_adm_" ~~ _ ~~ " = " ~~ __] &];
