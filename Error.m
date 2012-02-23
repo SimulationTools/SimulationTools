@@ -5,15 +5,34 @@ BeginPackage["Error`", {"Stack`"}];
 (* InternalError::usage = "InternalError[message, arg1, arg2, ...] reports an error which is caused by a bug in NRMMA." *)
 Error::usage = "Error[message, arg1, arg2, ...] reports an error to the user.";
 CatchError::usage = "CatchError[expr] evaluates expr, and returns its result unless an error was generated, in which case the error message is displayed.";
+ErrorTag;
+ErrorString;
 
 Begin["`Private`"];
 
-Error[message_String, args___] :=
-  Throw[{message,{args}, CurrentStack[]}, Error];
+Error::badargs = "Bad arguments to Error: `1`"
+Error[args___] := (Message[Error::badargs, ToString[{args}, InputForm]]; Abort[];)
+
+SetAttributes[Error, HoldFirst];
+SetAttributes[ErrorTag, HoldFirst];
+
+Error[tag_MessageName, args___] :=
+  Throw[{{args}, CurrentStack[]}, ErrorTag[tag]];
+
+Error[s_String, args___] :=
+  Throw[{{args}, CurrentStack[]}, ErrorString[s]];
 
 SetAttributes[CatchError, HoldAll];
 CatchError[expr_] :=
-  Catch[expr, Error, Function[{value,tag}, Print[StringForm[value[[1]], Sequence@@value[[2]]]]; ShowStack[]; ClearStack[]; Null]];
+  Catch[expr, _ErrorTag|_ErrorString, 
+        Function[{value,tag}, 
+                 Print["value = ", value];
+                 Print["tag = ", tag];
+                 If[Head[tag]===ErrorTag,
+                    message[tag,Sequence@@value[[1]]] /. {message -> Message, ErrorTag[y_] :> y},
+                    Print[Style[StringForm[tag[[1]], Sequence@@value[[1]]],Darker[Red]]]]
+                 (* ShowStack[value[[2]]]; *)
+                 Abort[]]];
 
 End[];
 
