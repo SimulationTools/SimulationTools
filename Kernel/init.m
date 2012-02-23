@@ -170,6 +170,8 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
    ];
 
   SetAttributes[WithErrorChecking, HoldAll];
+
+  If[$NRMMADebug === True,
   WithErrorChecking[contexts_List, code_] :=
    Internal`InheritedBlock[{SetDelayed},
      Unprotect[SetDelayed];
@@ -177,9 +179,8 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
        (DefFnQ[fn] = True; DefFn[fn[args], rhs];);
      Protect[SetDelayed];
 
-     code];
-    
-
+     code],
+  WithErrorChecking[contexts_List, code] := code];
 
   (* This does not seem to work *)
 
