@@ -16,7 +16,7 @@ getFiles[runName_] :=
 ];
 
 MultipoleHDF5`Waveforms`HaveData[runName_, args___] :=
-  !StringMatchQ[Catch[FindRunDir[runName]], "Cannot*"] && MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+  HaveRunDir[runName] && MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
 
 MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4},
