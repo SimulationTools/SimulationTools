@@ -56,7 +56,7 @@ ReadPunctureADMMassesFromFiles[files_List] :=
     ];
 
 DefineMemoFunction[ReadPunctureADMMasses[run_String],
-  Module[{},
+  Module[{stdoutFiles},
     stdoutFiles = StandardOutputOfRun[run];
     ReadPunctureADMMassesFromFiles[stdoutFiles]]];
 

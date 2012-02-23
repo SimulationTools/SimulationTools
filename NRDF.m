@@ -24,7 +24,7 @@ NRDF`InitialData`HaveData[runDir_,___] :=
 
 addDataSubDir[output_String] :=
   Module[
-    {parFiles,runName},
+    {parFiles,runName,dir},
 
     runName = FileNameSplit[output][[-2]];
     dir = FileNameJoin[{output,runName}];
@@ -117,12 +117,13 @@ ensureLocalFile[run_String, file_String] :=
 
 
 syncFile[src_String, dst_String] :=
+  Module[{output},
   If[FileType[dst] === None,
      Print[StringForm["Syncing file `1` to `2`", src, dst]];
      output = ReadList["! rsync -avz "<>src<>" "<>dst<>" >>rsync.log 2>&1 </dev/null", String];
      log[StringJoin[Riffle[output,"\n"]]];
      If[FileType[dst] === None,
-        Throw["File " <> src <> " could not be downloaded"]]];
+        Throw["File " <> src <> " could not be downloaded"]]]];
 
 NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[

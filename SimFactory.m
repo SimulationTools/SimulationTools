@@ -9,7 +9,7 @@ SimFactory`RunFiles`HaveData[runDir_] :=
 
 addDataSubDir[output_String] :=
   Module[
-    {parFiles,runName},
+    {parFiles,runName,dir},
 
     runName = FileNameSplit[output][[-2]];
     dir = FileNameJoin[{output,runName}];
