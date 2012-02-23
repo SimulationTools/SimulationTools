@@ -26,8 +26,6 @@ SetAttributes[CatchError, HoldAll];
 CatchError[expr_] :=
   Catch[expr, _ErrorTag|_ErrorString, 
         Function[{value,tag}, 
-                 Print["value = ", value];
-                 Print["tag = ", tag];
                  If[Head[tag]===ErrorTag,
                     message[tag,Sequence@@value[[1]]] /. {message -> Message, ErrorTag[y_] :> y},
                     Print[Style[StringForm[tag[[1]], Sequence@@value[[1]]],Darker[Red]]]]
