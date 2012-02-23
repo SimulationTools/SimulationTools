@@ -27,6 +27,7 @@ FullFilenames;
 LeafNamesOnly;
 FindFirstRunFile::usage = "FindFirstRunFile[run, file] returns the full pathname of file in the first segment of run.";
 FileIsInRun::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run.";
+HaveRunDir;
 
 Begin["`Private`"];
 
@@ -46,6 +47,10 @@ FileNameTake[s_] :=
 (*--------------------------------------------------------------------
   Finding run directories
   --------------------------------------------------------------------*)
+
+HaveRunDir[runName_String] :=
+  Catch[FindRunDir[runName];True,ErrorTag[FindRunDir::nofind],False &];
+  (* Probably don't really need to use exceptions for this *)
 
 (* Given the name of a run directory, return a path to it *)
 FindRunDir[runName_String] :=
