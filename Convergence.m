@@ -96,6 +96,8 @@ ConvergenceRateEquations3 = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp + CRf2 CRh[i]
 RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations3, {CRf1, CRf2}];
 RichardExtrapolationExpression3 = CRf0 /. Solve[RichardsonExtrapolationEquation3, CRf0][[1]];
 
+Global`StandardDefinition[ConvergenceRate] = True;
+
 ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] := 
  Module[{rateEq, rate}, 
   rateEq = 
@@ -103,6 +105,8 @@ ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] :=
       CRF[3] -> F3, CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3} // N;
   rate = Quiet[Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, {FindRoot::"cvmit", FindRoot::"lstol"}], {FindRoot::"cvmit", FindRoot::"lstol"}];
   If[rate < 0.1 || rate > 14.9, Return[None], Return[rate]]];
+
+Global`StandardDefinition[ConvergenceRateSlow] = True;
 
 ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
   Module[{eq, eqs, el, a0, a1},
@@ -129,6 +133,8 @@ ConvergenceRate[ds:{DataTable[__]..}, hs_List] :=
       ds2 = ResampleDataTables[ds],
       ds2 = ds];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
+
+Global`StandardDefinition[RichardsonExtrapolate] = True;
 
 RichardsonExtrapolate[F1_, F2_, h1_, h2_, p_] :=
   Module[{},
@@ -168,6 +174,8 @@ RichardsonExtrapolate[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
 
 RichardsonExtrapolate[{F1_, F2_, F3_}, {h1_, h2_, h3_}, p_] :=
   RichardsonExtrapolate[F2, F3, h2, h3, p];
+
+Global`StandardDefinition[RichardsonExtrapolate3] = True;
 
 RichardsonExtrapolate3[F1_, F2_, F3_, h1_, h2_, h3_, p_] :=
   Module[{},
