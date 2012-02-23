@@ -17,7 +17,7 @@ SetAttributes[WithStackFrame, HoldAll];
 WithStackFrame[sf_, expr_] := 
   Module[{r},
    AppendTo[stack, sf];
-   Catch[r = expr, _, Function[{tag,value}, stack = Drop[stack,-1]; Throw[value,tag]]];
+   Catch[r = expr, _, Function[{value,tag}, stack = Drop[stack,-1]; Throw[value,tag]]];
    stack = Drop[stack,-1];
    r];
 
