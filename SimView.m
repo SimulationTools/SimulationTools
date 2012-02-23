@@ -55,9 +55,9 @@ SimView[runNames_List] :=
 
 memoryPlot[runNames_List, size_] :=
   Module[{swaps, mems},
-   swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns]];
+   swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns],_];
    If[StringQ[swaps], swaps = {{0,0}}];
-   mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns]];
+   mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns],_];
    If[StringQ[mems], mems = {{0,0}}];
 
    Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
@@ -111,54 +111,54 @@ SimView[runNames_List, r_] :=
   speed = Catch[
    PresentationListLinePlot[Map[ReadRunSpeed, runNames], 
     PlotRange -> {0, All}, PlotLabel -> "Speed\n", ImageSize -> size,
-    PlotLegend -> runNames, LegendPosition -> {Left, Bottom}]];
+    PlotLegend -> runNames, LegendPosition -> {Left, Bottom}], _];
   memory = memoryPlot[runNames, size];
   trajectories = Catch[
    PresentationListLinePlot[
     Flatten[Map[
       ReadBHTrajectories, runNames], 1], 
     AspectRatio -> Automatic, PlotLabel -> "Trajectories\n", 
-    ImageSize -> size, PlotRange -> All]];
+    ImageSize -> size, PlotRange -> All],_];
   radius = Catch[
    PresentationListLinePlot[
     Map[ReadBHSeparation, runNames], 
     PlotRange -> {0, All}, PlotLabel -> "Separation\n", ImageSize -> size,
-    PlotLegend -> runNames, LegendPosition -> {Right, Top}]];
+    PlotLegend -> runNames, LegendPosition -> {Right, Top}],_];
   frequency = Catch[
    PresentationListLinePlot[
     Map[NDerivative[ReadMinTrackerPhase[#]]&, runNames],
     PlotRange -> {0, Automatic}, PlotLabel -> "Frequency\n", 
-    ImageSize -> size]];
+    ImageSize -> size],_];
   rePsi4 = Catch[
    PresentationListLinePlot[
     Map[Re[ReadPsi4[#, 2, 2, r]]&, runNames], 
     PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r]<>"\n", ImageSize -> size,
-    PlotLegend -> runNames]];
+    PlotLegend -> runNames],_];
   ampPsi4 = Catch[
    PresentationListLinePlot[
     (Log10@Abs@ReadPsi4[#, 2, 2, r] &) /@ runNames, 
     PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r]<>"\n", ImageSize -> size,
     PlotLegend -> runNames,
-    FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]];
+    FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}],_];
 
   spinNorms = Catch[
    PresentationListLinePlot[
      Flatten@Table[
        Norm@ReadIsolatedHorizonDimensionlessSpin[run, hn],{run,runNames},{hn,0,1}],
-    PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2\n", ImageSize -> size]];
+    PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2\n", ImageSize -> size],_];
 
   spinPhases = Catch[
    PresentationListLinePlot[
      Flatten@Table[
        ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}],
-    PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size]];
+    PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_];
 
   segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
   cost[run_] := 
-    Item[#,Alignment->Right] & /@ {run, Catch@ReadCores[run],  Catch@ReadCPUHours[run],
-      Catch@ReadWalltimeHours[run]/24,  Catch@ReadCores[run]*24,
+    Item[#,Alignment->Right] & /@ {run, Catch[ReadCores[run],_],  Catch[ReadCPUHours[run],_],
+      Catch[ReadWalltimeHours[run]/24,_],  Catch[ReadCores[run]*24,_],
       DateString[FinishTime[run]]
       };
 
