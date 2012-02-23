@@ -29,8 +29,9 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
                 ToString[providers]]];
 
        If[Length[posns] == 0,
-          Throw["No data for "<>base<>"`"<>fn<>"["<>
-                StringJoin[Riffle[ToString[#,InputForm]&/@args,","]]<>"]"]];
+          CallProvidedFunction::nodata = "No data for `1`";
+          ErrorMessage[CallProvidedFunction::nodata, base<>"`"<>fn<>"["<>
+                       StringJoin[Riffle[ToString[#,InputForm]&/@args,","]]<>"]"]];
        providers[[posns[[1,1]]]],
        method];
 
