@@ -85,7 +85,8 @@ FindRunDir[runName_String] :=
     d = findRunDir[runName<>"-all"];
     If[d =!= None, Return[d]];
 
-    Throw["Cannot find run "<>runName];
+    FindRunDir::nofind = "Cannot find run `1`";
+    ErrorMessage[FindRunDir::nofind,runName];
 ];
 
 
@@ -99,16 +100,13 @@ FindRunSegments[runName_] :=
 FindRunDirSegments[runDir_] :=        
   Module[
     {segments},
-    segments = Catch[CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}]];
-    (* Check if an exception was thrown (string) *)
-    If[StringQ[segments],
-       If[StringMatchQ[segments, "No data for"~~__] && FileType[runDir] === Directory,
-          (* Assume we have pointed to a standard single-segment run directory *)
-          Return[{runDir}],
-          (* Some other error *)
-          Throw[segments]],
-       (* No exception (List), so return the result *)
-       segments]];
+    segments = Catch[CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}],
+                     ErrorTag[CallProvidedFunction::nodata],
+                     If[FileType[runDir] === Directory,
+                        (* Assume we have pointed to a standard single-segment run directory *)
+                        Return[{runDir}],
+                        Throw[#1,#2]] &];
+    segments];
 
 (*--------------------------------------------------------------------
   Finding files from runs
