@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2011 Ian Hinder and Barry Wardell *)
 
-BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Horizons`", "NR`", "Parameters`"}];
+BeginPackage["NRExport`", {"BHCoordinates`", "DataTable`", "Grids`", "Horizons`", "NR`", "Parameters`"}];
 
 JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts.";
 
