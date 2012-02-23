@@ -384,9 +384,11 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
       "Coordinates",       ExportLocalQuantity[run, Coordinates, 1, dir <> "/traj1"<>ext];
                            ExportLocalQuantity[run, Coordinates, 2, dir <> "/traj2"<>ext],
       "Spin",              ExportLocalQuantity[run, Spin, 1, dir <> "/spin1"<>ext];
-                           ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext],
+                           ExportLocalQuantity[run, Spin, 2, dir <> "/spin2"<>ext];
+                           ExportLocalQuantity[run, Spin, 3, dir <> "/spin3"<>ext],
       "HorizonMass",       ExportLocalQuantity[run, HorizonMass, 1, dir <> "/horizon_mass1"<>ext];
-                           ExportLocalQuantity[run, HorizonMass, 2, dir <> "/horizon_mass2"<>ext],
+                           ExportLocalQuantity[run, HorizonMass, 2, dir <> "/horizon_mass2"<>ext];
+                           ExportLocalQuantity[run, HorizonMass, 3, dir <> "/horizon_mass3"<>ext],
       "Metadata",          ExportMetadata[dir<>"/"<>niceName<>"_"<>ToString[n]<>".bbh", run, mass,
                                           ecc],
       _, Throw["Error"]], {item, export}];
