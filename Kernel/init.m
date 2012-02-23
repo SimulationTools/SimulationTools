@@ -72,10 +72,12 @@ Module[{packages =
 
   Scan[Needs, extraPackages];
 
+  General::invargs = "Invalid arguments in `1`";
+
   (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
     x[args___] :=
-     If[$NRMMADebug===True, Error`CatchError, Identity][Error`Error["Invalid arguments in `1`", ToString[x] <> "[" <>
+     If[$NRMMADebug===True, Error`CatchError, Identity][Error`Error[General::invargs, ToString[x] <> "[" <>
        StringJoin[Riffle[ToString[#] & /@ {args}, ", "]] <>
        "]"]];
 
