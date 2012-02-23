@@ -194,13 +194,6 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
   (*    code *)
   (*  ]; *)
 
-  If[$NRMMADebug === True,
-    (* We do this temporarily until all occurrences of Throw[_String]
-      have been replaced with calls to Error *)
-    Unprotect[Throw];
-    Throw[s_String] := Error`Error[StringReplace[s,"`"->"`.`"]];
-    Protect[Throw]];
-
   If[$NRMMADebug === True, withCustomSetDelayed, Identity][Scan[Needs, packages]];
 
   NRMMADoc[] :=
