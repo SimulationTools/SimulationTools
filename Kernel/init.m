@@ -77,7 +77,7 @@ Module[{packages =
   (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
     x[args___] :=
-     If[$NRMMADebug===True, Error`CatchError, Identity][Error`Error[General::invargs, ToString[x] <> "[" <>
+     If[$NRMMADebug===True, Error`CatchError, Identity][Error`ErrorMessage[General::invargs, ToString[x] <> "[" <>
        StringJoin[Riffle[ToString[#] & /@ {args}, ", "]] <>
        "]"]];
 
