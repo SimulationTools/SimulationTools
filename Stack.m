@@ -17,7 +17,9 @@ SetAttributes[WithStackFrame, HoldAll];
 WithStackFrame[sf_, expr_] := 
   Module[{r},
    AppendTo[stack, sf];
-   Catch[r = expr, _, Function[{value,tag}, stack = Drop[stack,-1]; Throw[value,tag]]];
+   CheckAbort[Catch[r = expr, _, 
+                    Function[{value,tag}, stack = Drop[stack,-1]; Throw[value,tag]]],
+              stack = Drop[stack,-1];Abort[]];
    stack = Drop[stack,-1];
    r];
 
@@ -25,7 +27,7 @@ WithStackFrame[sf_, expr_] :=
 ShowStack[s_:Automatic] :=
   Module[
     {},
-    Print[StringJoin[Riffle[Map["in "<>ToString[#] &, Reverse@If[s===Automatic, stack, s]/.Hold->HoldForm],"\n"]]];
+    Print[StringJoin[Riffle[Map["in "<>ToString[#[[1]]] &, Reverse@If[s===Automatic, stack, s]/.Hold->HoldForm],"\n"]]];
         ];
 
 CurrentStack[] :=
