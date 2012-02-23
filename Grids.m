@@ -161,7 +161,7 @@ RescaleGrids[grids_, spacing_] :=
 DefineMemoFunction[ReadCarpetGrids[run_, fileName_:"carpet-grid.asc"],
  Module[{fileNames, files},
   fileNames = FindRunFile[run, fileName];
-  If[files === {}, Throw["No file " <> fileName <> " found in simulation " <> run]];
+  If[files === {}, Error["No file " <> fileName <> " found in simulation " <> run]];
   files = Map[ReadCarpetGridsFromFile, fileNames];
   mergeFiles[files]]
 ];

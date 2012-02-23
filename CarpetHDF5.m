@@ -154,7 +154,7 @@ CarpetHDF5Attributes[file_String, var_String, map:(None | _Integer), rl_Integer,
    Profile["datasetsWith", datasetsWith[
      file, {1 -> var , 2 -> it, 4 -> rl,
       6 -> map}]];
-  If[dsList === {}, Throw["Cannot find dataset in file"]];
+  If[dsList === {}, Error["Cannot find dataset in file"]];
   ds = First[dsList];
   c = ds[[5]];
   dsName = CarpetHDF5DatasetName[var, it, map, rl, c];
@@ -164,7 +164,7 @@ CarpetHDF5Attribute[file_String, var_String, map_, rl_Integer, it_Integer, attr_
   Module[{attrs = CarpetHDF5Attributes[file, var, map, rl, it], value},
     value = attr /. attrs;
     If[value === attr,
-      Throw["Attribute " <> attr <> " not found in file " <> file <>
+      Error["Attribute " <> attr <> " not found in file " <> file <>
             " dataset " <> ToString[{var,map,rl,it}]]];
     Return[value]];
 
@@ -194,10 +194,10 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   strip = OptionValue[StripGhostZones];
 
   If[Apply[Or,Map[(!StringQ[#])&, ds]],
-    Throw["ReadCarpetHDF5: expected a string dataset name, but instead got " <>ToString[ds]]];
+    Error["ReadCarpetHDF5: expected a string dataset name, but instead got " <>ToString[ds]]];
 
   If[FileType[file] === None,
-    Throw["File " <> file <> " not found"]];
+    Error["File " <> file <> " not found"]];
 
   data = HDF5Data[file, ds];
 
@@ -232,7 +232,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
   Profile["ReadCarpetHDF5Components",
   Module[{fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components, directory, leaf, leafPrefix},
     If[FileType[file] === None,
-      Throw["File " <> file <> " not found in ReadCarpetHDF5Components"]];
+      Error["File " <> file <> " not found in ReadCarpetHDF5Components"]];
 
     Filetype1D = RegularExpression[".*\\.[dxyz]\\.h5"];
     Filetype2D = RegularExpression[".*\\.[xyz]{2}\\.h5"];
@@ -268,7 +268,7 @@ ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl:(_Integer|None), 
 Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None, StripGhostZones -> True};
 ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
-    If[FileType[file] === None, Throw["ReadCarpetHDF5Variable: File " <> file <> " not found"]];
+    If[FileType[file] === None, Error["ReadCarpetHDF5Variable: File " <> file <> " not found"]];
     var = If[OptionValue[Variable] =!= None, OptionValue[Variable], firstOrNone[CarpetHDF5Variables[file]]];
     it = If[OptionValue[Iteration] =!= None, OptionValue[Iteration], firstOrNone[CarpetHDF5Iterations[file]]];
     rl = If[OptionValue[RefinementLevel] =!= None, OptionValue[RefinementLevel], firstOrNone[CarpetHDF5RefinementLevels[file]]];
@@ -278,7 +278,7 @@ ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
 ReadCarpetHDF5VariableFromRun[run_String, var_String, opts:OptionsPattern[]] :=
   Module[{},
     ReadCarpetHDF5Variable[Module[{files = FindRunFile[run, var]}, 
-      If[files==={},Throw["File "<>var<>" not found in run "<>run]]; files[[1]]], opts]];
+      If[files==={},Error["File "<>var<>" not found in run "<>run]]; files[[1]]], opts]];
 
 (* Data manipulation *)
 
@@ -296,7 +296,7 @@ CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:=
     plotType = DataRegionPlot;
   , If[numDims == 2,
     plotType = OptionValue[CarpetManipulatePlotFunction];
-  , Throw["CarpetHDF5Manipulate does not support HDF5 data with dimension "<>ToString[numDims]<>"."];
+  , Error["CarpetHDF5Manipulate does not support HDF5 data with dimension "<>ToString[numDims]<>"."];
   ]];
 
   Manipulate[plotType[data[[i]], PlotLabel->"t="<>ToString[GetTime[data[[i]]]] (* ,
@@ -340,7 +340,7 @@ getFileOfIt[run_, var_, it_] :=
     files = FindRunFile[run, var];
     itss = Map[{#, getFileIts[#]} &, files];
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
-    If[Length[haveIts] === 0, Throw["Iteration " <> ToString[it] <> " not found in " <> var <> " in run " <> run]];
+    If[Length[haveIts] === 0, Error["Iteration " <> ToString[it] <> " not found in " <> var <> " in run " <> run]];
     haveIts[[1,1]]];
 
 (***************************************************************************************)

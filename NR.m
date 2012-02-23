@@ -77,10 +77,10 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
     ];
 
     If[Head[fit] === FindMinimum,
-      Throw["FindMinimum failed"]];
+      Error["FindMinimum failed"]];
 
     If[Head[fit] === NMinimize,
-      Throw["NMinimize failed"]];
+      Error["NMinimize failed"]];
 
     fit2 = fit /. MapThread[(#1 -> #2) &, {pList2, pList}];
 
@@ -115,7 +115,7 @@ FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
    Eccentricity, e /. eccFit,
    FittedFunction, Function[tp,Evaluate[eccSepFitted/.t->tp]],
    FitParameters, eccFit,
-   _, Throw["Unknown option given to FitEcc"]]
+   _, Error["Unknown option given to FitEcc"]]
   ];
 
 Options[FitEccOm] = {ReturnValue -> FittedFunction};
@@ -133,7 +133,7 @@ FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
    Eccentricity, e /. eccFit,
    FittedFunction, Function[tp,Evaluate[eccSepFitted/.t->tp]],
    FitParameters, eccFit,
-   _, Throw["Unknown option given to FitEcc"]]
+   _, Error["Unknown option given to FitEcc"]]
   ];
 
 ToFixedWidth[n_Integer, width_Integer] :=

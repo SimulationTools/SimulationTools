@@ -87,7 +87,7 @@ DefineMemoFunction[tableImport[fn_],
 ReadCarpetASCII1D[fileName_, dir_:1] :=
  Module[{levels, levelsPresent, data, data2, rls, processLevel, prls},
 (*  lines = ReadList[fileName, String, NullRecords -> True];*)
-  If[FileType[fileName] === None, Throw["ReadCarpetASCII1D: File "<>fileName<>" not found"]];
+  If[FileType[fileName] === None, Error["ReadCarpetASCII1D: File "<>fileName<>" not found"]];
   Profile["ReadCarpetASCII1D: " <> fileName,
   Profile["ReadCarpetASCII1D: Reading file", 
     data = tableImport[fileName]];

@@ -102,7 +102,7 @@ timerExists[ts_,n_]:=
 ReadTimer[ts_List,n_String]:=
   Module[{},
     If[!timerExists[n],
-      Throw["Timer "<>n<>" not found"]];
+      Error["Timer "<>n<>" not found"]];
     Select[ts,(#[[1]]===n)&][[1]][[2]]];
 
 isInitialTimer[{n_,v_}]:=
@@ -135,7 +135,7 @@ ParseTimersFile2[fileName_]:=
         ];
 
     If[FileType[fileName] === None,
-      Throw["File " <> fileName <> " not found"]];
+      Error["File " <> fileName <> " not found"]];
 
     profile["ParseTimersFile:ReadList", lines=ReadList[fileName,String]];
 
@@ -153,7 +153,7 @@ ParseTimersFile2[fileName_]:=
     If[Length[timerVals] != maxCol,
       profile["ParseTimersFile:stringToReal", timerVals=Map[stringToReal,StringSplit[lines[[-2]]]]];
         If[Length[timerVals] != maxCol,
-          Throw["Timers file " <> fileName <> " might be corrupt; there are not enough columns in the output"]]];
+          Error["Timers file " <> fileName <> " might be corrupt; there are not enough columns in the output"]]];
 
     tList = Table[{column[c],timerVals[[c]]},{c,3,Length[timerVals]}];
 
@@ -183,7 +183,7 @@ ParseTimersFile[fileName_] := profile["ParseTimersFile", ParseTimersFile2[fileNa
 (*       maxCol = Max[colNo + 2, maxCol]]; *)
 (*      Close[stream];]; *)
 (*    If[FileType[fileName] === None,  *)
-(*     Throw["File " <> fileName <> " not found"]]; *)
+(*     Error["File " <> fileName <> " not found"]]; *)
 (*    lines = ReadList[fileName, String]; *)
 (*    isColumnDesc[l_] := StringMatchQ[l, "# Column *"]; *)
 (*    columnDescs = Select[lines, isColumnDesc]; *)
@@ -192,7 +192,7 @@ ParseTimersFile[fileName_] := profile["ParseTimersFile", ParseTimersFile2[fileNa
 (*    If[Length[timerVals] != maxCol,  *)
 (*     timerVals = Map[stringToReal, StringSplit[lines[[-2]]]]; *)
 (*     If[Length[timerVals] != maxCol,  *)
-(*      Throw["Timers file " <> fileName <>  *)
+(*      Error["Timers file " <> fileName <>  *)
 (*        " might be corrupt; there are not enough columns in the \ *)
 (* output"]]]; *)
 (*    tList = Table[{column[c], *)
@@ -217,7 +217,7 @@ TotalTime[ts_List] :=
   Module[{timerNames},
     timerNames = Map[First, ts];
     If[MemberQ[timerNames, "CCTK total time"],
-      Throw["The TotalTime function adds together all the timers given to it.  It does not make sense to give it a list of timers which includes CCTK total time."]];
+      Error["The TotalTime function adds together all the timers given to it.  It does not make sense to give it a list of timers which includes CCTK total time."]];
     Apply[Plus, Map[Last, ts]]];
 
 IndependentTimers[timersFile_String]:=
@@ -258,7 +258,7 @@ TimerScaling[ts1_List,ts2_List,nFac_,tName_String]:=
 TimerScaling[tss:{_List...}, nFacs_List, tName_String] :=
   Module[{t1, n1},
     If[Sort[nFacs] =!= nFacs,
-      Throw["TimerScaling: nFacs should be ascending"]];
+      Error["TimerScaling: nFacs should be ascending"]];
 
     t1 = ReadTimer[tss[[1]], tName];
     n1 = nFacs[[1]];
@@ -268,7 +268,7 @@ TimerScaling[tss:{_List...}, nFacs_List, tName_String] :=
 TimerScalingX[tss:{_List...}, nFacs_List, tName_String] :=
   Module[{t1, n1},
     If[Sort[nFacs] =!= nFacs,
-      Throw["TimerScaling: nFacs should be ascending"]];
+      Error["TimerScaling: nFacs should be ascending"]];
 
     t1 = ReadTimer[tss[[1]], tName];
     n1 = nFacs[[1]];

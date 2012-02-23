@@ -124,7 +124,7 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     lengths = Map[Length, lists];
 
     If[!Apply[Equal,lengths],
-      Throw["MapThreadData: DataTables are not all of the same length"]];
+      Error["MapThreadData: DataTables are not all of the same length"]];
 
     vals = Map[DepVar, ds];
     xs = IndVar[First[ds]];
@@ -320,7 +320,7 @@ ReadAttribute[d:DataTable[l_, attrs___], name_] :=
   Module[{val},
     val = name /. {attrs};
     If[val === name,
-      Throw["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
+      Error["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
     Return[val]];
 
 ListAttributes[d:DataTable[l_, attrs___]] :=
@@ -422,7 +422,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
   Module[{f, dt1, dt2},
     {dt1,dt2} = DataTableRange[d];
     If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
-      Throw["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
+      Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
             " for DataTable with range " <> ToString[{dt1,dt2}]]];
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
@@ -452,7 +452,7 @@ ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[ResampleDataTable[#, {t1, t2, dt}, p] &, ds]];
 
-DataTableInterval[x___] := Throw["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
+DataTableInterval[x___] := Error["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
 
 Options[DataTableInterval] = {Interval -> {Closed, Open}};
 DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
@@ -464,12 +464,12 @@ DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
     lower = Switch[OptionValue[Interval][[1]],
                    Closed, GreaterEqual,
                    Open, Greater,
-                   _, Throw["Unrecognised option Interval -> "
+                   _, Error["Unrecognised option Interval -> "
                             <>ToString[OptionValue[Interval], InputForm]]];
     upper = Switch[OptionValue[Interval][[2]],
                    Closed, LessEqual,
                    Open, Less,
-                   _, Throw["Unrecognised option Interval -> "
+                   _, Error["Unrecognised option Interval -> "
                             <>ToString[OptionValue[Interval], InputForm]]];
 
     d /. DataTable[l_, x___] :>
@@ -529,7 +529,7 @@ IntegrateDataTable[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
  Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
   {tMin, tMax} = DataTableRange[d];
   If[tbc < tMin || tbc > tMax,
-   Throw["integrateDataTable: boundary condition is not within range of \
+   Error["integrateDataTable: boundary condition is not within range of \
 DataTable"]];
   dt = Spacing[d];
 	dFn = Interpolation[d,InterpolationOrder->OptionValue[InterpolationOrder]];

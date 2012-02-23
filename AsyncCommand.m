@@ -51,7 +51,7 @@ CommandError[asc:AsyncCommand[cmd_, dat_]] :=
 CommandReturnCode[asc:AsyncCommand[cmd_, dat_]] :=
   If[CommandReadyQ[asc],
     ReadList[RetDoneFile /. dat, Number][[1]],
-    Throw["Command is not ready"]];
+    Error["Command is not ready"]];
 
 CommandClose[AsyncCommand[cmd_, dat_]] :=
  Module[{},

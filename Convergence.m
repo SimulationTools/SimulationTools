@@ -21,9 +21,9 @@ Begin["`Private`"];
 ResolutionCode[n_Integer] := 
  Module[{}, 
   If[! (Mod[n, 4] === 0), 
-   Throw["Number of points must be a multiple of 4"]];
-  If[n < 16, Throw["Number of points must be at least 16"]];
-  If[n > 116, Throw["Number of points must be less than 116"]];
+   Error["Number of points must be a multiple of 4"]];
+  If[n < 16, Error["Number of points must be at least 16"]];
+  If[n > 116, Error["Number of points must be less than 116"]];
   Return[FromCharacterCode[n/4 - 4 + 97]]];
 
 ResName[s_String, n_] := s <> ResolutionCode[n];

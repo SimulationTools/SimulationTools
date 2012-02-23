@@ -79,7 +79,7 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
   radii = Thread[ReadPsi4Radii[runName] -> ReadPsi4RadiiStrings[runName]];
 
   If[radii == Null,
-    Throw["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
+    Error["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
   ];
 
   (* Which radius to read: Automatic=first available, Infinity, or a number *)
@@ -91,7 +91,7 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
     NumberQ[rad] && (Select[radii[[All,1]], NumberQ] =!= {}),
       radString = First[Nearest[radii, rad]],
     True,
-      Throw["Radius "<>ToString[rad]<>" not found."];
+      Error["Radius "<>ToString[rad]<>" not found."];
   ];
 
   AddAttribute[ReadPsi4Data[runName, l, m, radString],RunName -> runName]];
@@ -203,7 +203,7 @@ RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
   lists = Map[ToList, dts];
   lengths = Map[Length, lists];
   If[! (Length[Union[lengths]] === 1), 
-  Throw["ExtrapolateDataTables: Input DataTable objects do not have \
+  Error["ExtrapolateDataTables: Input DataTable objects do not have \
   the same number of points: ", lengths]];
   ts = Map[First, First[lists]];
   tbToVec[tb_] := Map[Last, tb];
@@ -237,7 +237,7 @@ AlignPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
     ranges = Map[DataTableRange, phaseTbs];
     min = Apply[Max, Map[First, ranges]];
     max = Apply[Min, Map[Last, ranges]];
-    If[t < min || t > max, Throw["Cannot align phases at " <> ToString[t] <> " because not all the inputs exist there"]];
+    If[t < min || t > max, Error["Cannot align phases at " <> ToString[t] <> " because not all the inputs exist there"]];
 
     phaseFns = Map[Interpolation, phaseTbs];
     refPhases = Map[#[t]&, phaseFns];
@@ -271,7 +271,7 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
 
     If[OptionValue[UseTortoiseCoordinate],
       If[OptionValue[MassADM] === None,
-        Throw["No mass given for tortoise coordinate.  Specify MassADM -> m in ExtrapolateRadiatedQuantity"]];
+        Error["No mass given for tortoise coordinate.  Specify MassADM -> m in ExtrapolateRadiatedQuantity"]];
       fTbs = MapThread[ShiftDataTable[-TortoiseCoordinate[#1, OptionValue[MassADM]],#2]&, 
                                 {rads, fTbs}],
       fTbs = MapThread[ShiftDataTable[-#1, #2] &, 
@@ -459,7 +459,7 @@ ReadWaveformFile[file_] :=
   Module[
     {},
     If[FileType[file] ===None,
-       Throw["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
+       Error["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
     MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]]];
 
 End[];

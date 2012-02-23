@@ -60,7 +60,7 @@ MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, tim
 DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
   ndims = GetNumDimensions[v];
   If[ ndims != 1,
-	Throw["Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
+	Error["Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
           <> SymbolName[x] <> "' is greater than 1."]
   ];
 
@@ -136,14 +136,14 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
   ndims = GetNumDimensions[v];
 
   If[dim > ndims,
-    Throw["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
+    Error["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
       ToString[ndims]<>" of the DataRegion."]
   ];
 
   range = GetDataRange[v][[dim]];
 
   If[(coord < range[[1]]) || (coord >range[[2]]),
-    Throw["Slice coordinate "<>ToString[coord]<>" is outside the range "<>
+    Error["Slice coordinate "<>ToString[coord]<>" is outside the range "<>
       ToString[range, StandardForm]<>" of the DataRegion."]
   ];
 
@@ -170,7 +170,7 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
   dataRange = GetDataRange[d];
 
   If[Length[s] != ndims,
-    Throw["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
+    Error["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
   ];
 
   (* Convert all to a range *)
@@ -199,7 +199,7 @@ DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
 DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data, opts},
  ndims = GetNumDimensions[v];
  If[ndims!=plotDims,
-   Throw[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
+   Error[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
      ". The provided data has dimensionality "<>ToString[ndims]<>"."];
  ];
 
@@ -258,7 +258,7 @@ Outline[d_DataRegion] := Module[{coords, ndims, shapes},
   shapes = {Line, Rectangle, Cuboid};
 
   If[ndims > 3,
-    Throw["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
+    Error["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
   ];
 
   shapes[[ndims]]@@coords
@@ -326,7 +326,7 @@ MergeDataRegions[regions_List] :=
   If[Length[regions] === 0, Return[{}]];
 
   If[!And@@Map[MatchQ[#, _DataRegion] &, regions],
-    Throw["MergeDataRegions: Expected a list of DataRegion objects but got instead " <> ToString[regions]]];
+    Error["MergeDataRegions: Expected a list of DataRegion objects but got instead " <> ToString[regions]]];
   origins = Map[GetOrigin, regions];
   dims = Map[GetDimensions, regions];
   ndims = GetNumDimensions[regions[[1]]];
@@ -338,7 +338,7 @@ MergeDataRegions[regions_List] :=
   spacingDiffs = (# - spacings[[1]]) & /@ spacings;
 
   If[ Max[Norm/@spacingDiffs] > 10^-8,
-    Throw["MergeDataRegions: Attempt to merge DataRegions with different spacings: " <> ToString[spacings] <> ", " <> ToString[spacingDiffs]]];
+    Error["MergeDataRegions: Attempt to merge DataRegions with different spacings: " <> ToString[spacings] <> ", " <> ToString[spacingDiffs]]];
   spacing = First[spacings];
   
   (* Find the upper coordinate of the bounding box *)
@@ -370,7 +370,7 @@ GetCoordinate[d_DataRegion, dim_] :=
 
     res = ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp];
 
-    If[Reverse@Dimensions[res] =!= dims, Throw["GetCoordinateError"]];
+    If[Reverse@Dimensions[res] =!= dims, Error["GetCoordinateError"]];
     DataRegion[GetAttributes[d], res]
   ];
 
@@ -403,7 +403,7 @@ ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
       MakeDataRegion[newData, GetVariableName[d], Dimensions[newData], 
         x1, dx, GetTime[d]],
 
-      Throw["Cannot resample DataRegions of dimension other than 2"]]
+      Error["Cannot resample DataRegions of dimension other than 2"]]
   ];
 
 intersectBoxes[boxes_] :=
@@ -418,7 +418,7 @@ intersectBoxes[boxes_] :=
     (* Could return a special value here if needed.  Alternatively,
        could generically return a list of boxes, which would be empty
        if the boxes don't intersect. *)
-    If[Negative[x2 - x1], Throw["Intersection of boxes is empty"]];
+    If[Negative[x2 - x1], Error["Intersection of boxes is empty"]];
     {x1, x2}];
 
 ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
@@ -499,7 +499,7 @@ NDerivative[d_DataRegion] :=
 
   If[ndims == 1,
    result = NDerivative[d, 1];,
-   Throw["Must specify a direction when applying NDerivative to a DataRegion of dimension greater than 1."];
+   Error["Must specify a direction when applying NDerivative to a DataRegion of dimension greater than 1."];
    result = $Failed;
   ];
 
@@ -539,31 +539,31 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
  Module[{nd, dims, spacing, origin, variable, sorted, times, dt, stencil, offset, deriv, attr, newTime},
   nd = GetNumDimensions/@dr;
   If[Not[Equal@@nd],
-   Throw["Error, can't compute time derivative from DataRegions with a different number of dimensions."];
+   Error["Error, can't compute time derivative from DataRegions with a different number of dimensions."];
    Return[$Failed];
   ];
 
   dims = GetDimensions/@dr;
   If[Not[Equal@@dims],
-   Throw["Error, can't compute time derivative from DataRegions with different dimensions."];
+   Error["Error, can't compute time derivative from DataRegions with different dimensions."];
    Return[$Failed];
   ];
 
   spacing = GetSpacing/@dr;
   If[Not[Equal@@spacing],
-    Throw["Error, can't compute time derivative from DataRegions with different spacings."];
+    Error["Error, can't compute time derivative from DataRegions with different spacings."];
     Return[$Failed];
   ];
 
   origin = GetSpacing/@dr;
   If[Not[Equal@@origin],
-    Throw["Error, can't compute time derivative from DataRegions with different origins."];
+    Error["Error, can't compute time derivative from DataRegions with different origins."];
     Return[$Failed];
   ];
 
   variable = GetVariableName/@dr;
   If[Not[Equal@@variable],
-    Throw["Error, can't compute time derivative from DataRegions with different variables."];
+    Error["Error, can't compute time derivative from DataRegions with different variables."];
     Return[$Failed];
   ];
 
@@ -573,7 +573,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
   (* Check spacing is uniform *)
   times = GetTime/@sorted;
   If[Apply[Or, Map[# > 10^-10 &, Abs[1 - Differences[times]/Differences[times][[1]]]]],
-    Throw["Error, can't compute time derivative from DataRegions with non-uniform spacing in time."];
+    Error["Error, can't compute time derivative from DataRegions with non-uniform spacing in time."];
     Return[$Failed];
   ];
 
@@ -584,7 +584,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
   
   (* Compute derivative using finite differences *)
   If[Length[stencil]!=Length[sorted],
-    Throw["Error, can't compute time derivative from inconsistent stencil and DataRegions."];
+    Error["Error, can't compute time derivative from inconsistent stencil and DataRegions."];
     Return[$Failed];
   ];
   deriv = stencil.sorted;
@@ -659,7 +659,7 @@ EvaluateOnDataRegion[exprp_, {t_, x_, y_, z_}, dp_DataRegion] :=
     td = GetTime[d];
     result = (0.*x + expr) /. {x :> xd, y :> yd, z :> zd, t :> td};
     If[!NumberQ@Max@Flatten[GetData[result]],
-       Throw["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y,z}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
+       Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y,z}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
     result];
 
 EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
@@ -671,7 +671,7 @@ EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
     td = GetTime[d];
     result = (0.*x + expr) /. {x :> xd, y :> yd, t :> td};
     If[!NumberQ@Max@Flatten[GetData[result]],
-       Throw["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
+       Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
     result];
 
 End[];

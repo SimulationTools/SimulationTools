@@ -33,7 +33,7 @@ DefineMemoFunction[ParseParameterFile[from_String],
     If[Length[fileNames] == 0,
       fileNames = FindRunFile[from, from <> "-1.par"];
       If[Length[fileNames] == 0,
-        Throw["Cannot find parameter file " <> ToString[from]]],
+        Error["Cannot find parameter file " <> ToString[from]]],
       fileNames = FindRunFile[from, fileNames[[1]]]]
   ];
 
@@ -56,7 +56,7 @@ DefineMemoFunction[ParseParameterFile[from_String],
         ToLowerCase[strip[StringCases[s, param__ ~~ "=" ~~ val__ -> param][[1]]]],
         strip[StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
    True,
-    Throw["Unrecognized line in parameter file: " <> s]
+    Error["Unrecognized line in parameter file: " <> s]
    ];
 
   Map[parseLine, lines]
@@ -67,7 +67,7 @@ LookupParameter[parFile_List, name_, default_:None] :=
  Module[{l},
   l = Cases[parFile, ParameterSetting[ToLowerCase[name], x_] -> x];
   If[l === {} && default =!= None, Return[default]];
-  If[Length[l] == 0, Throw["Parameter " <> name <> " not found"]];
+  If[Length[l] == 0, Error["Parameter " <> name <> " not found"]];
   First[l]];
 
 LookupParameter[from_String, name_, default_:None] :=

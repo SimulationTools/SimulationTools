@@ -23,13 +23,13 @@ ReadVTKFile[s_InputStream] :=
   If[Length[header] == 0,
     Return[EndOfFile]];
   If[Length[header] != 10,
-    Throw["Did not read complete header from VTK stream"]];
+    Error["Did not read complete header from VTK stream"]];
   header2 = Map[StringSplit, header];
   readInfo[h_List, key_String] :=
    Module[{result},
     result = ToExpression /@ Cases[h, {key, vals__} -> {vals}];
     If[Length[result] == 0, 
-     Throw["Cannot find key " <> key <> " in header: " <> 
+     Error["Cannot find key " <> key <> " in header: " <> 
        ToString[h]]];
     result[[1]]];
   dims = readInfo[header2, "DIMENSIONS"];

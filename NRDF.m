@@ -33,7 +33,7 @@ addDataSubDir[output_String] :=
 
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
-    If[Length[parFiles] =!= 1, Throw["Found more than one */*.par in " <> output]];
+    If[Length[parFiles] =!= 1, Error["Found more than one */*.par in " <> output]];
     FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
 
 NRDF`RunFiles`FindRunDirSegments[dir_] :=
@@ -67,7 +67,7 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
        {}];
 
     Map[If[!MatchQ[#,"value"["number"[n_]|"keyword"["infinite"]]],
-           Throw["Unrecognised radius "<>ToString[#,InputForm]]] &, radii];
+           Error["Unrecognised radius "<>ToString[#,InputForm]]] &, radii];
     radStrs = radii/.{"value"["number"[n_]] -> n, "value"["keyword"["infinite"]] -> "inf"};
     radStrs
   ];
@@ -81,7 +81,7 @@ findRunDir[run_String] :=
   If[FileExistsQ[run], run,
      If[ValueQ[Global`RunDirectory] && FileExistsQ[FileNameJoin[{Global`RunDirectory,run}]],
         FileNameJoin[{Global`RunDirectory,run}],
-        Throw["Cannot find run "<>ToString[run]]]];
+        Error["Cannot find run "<>ToString[run]]]];
 
 haveMetadataFile[dir_String] :=
   FileNames["*.bbh", dir] =!= {};
@@ -89,7 +89,7 @@ haveMetadataFile[dir_String] :=
 findMetadataFile[run_String] :=
       Module[{files},
              files = FileNames["*.bbh", findRunDir[run]];
-             If[Length[files] =!= 1, Throw["Failed to find exactly one metadata file in run "<>
+             If[Length[files] =!= 1, Error["Failed to find exactly one metadata file in run "<>
                                            run<>" in directory "<>findRunDir[run]]];
              files[[1]]];
 
@@ -109,7 +109,7 @@ ensureLocalFile[run_String, file_String] :=
     dst = FileNameJoin[{findRunDir[run],file}];
     If[FileExistsQ[dst], Return[Null]];
     If[!ValueQ[Global`BackingDirectory],
-       Throw["Cannot find file "<>file<>" in run "<>run<>" and BackingDirectory has not been set"]];
+       Error["Cannot find file "<>file<>" in run "<>run<>" and BackingDirectory has not been set"]];
     src = FileNameJoin[{Global`BackingDirectory,run,file}];
     (* Print["ensureLocalFile: src = ", src]; *)
     (* Print["ensureLocalFile: dst = ", dst]; *)
@@ -123,7 +123,7 @@ syncFile[src_String, dst_String] :=
      output = ReadList["! rsync -avz "<>src<>" "<>dst<>" >>rsync.log 2>&1 </dev/null", String];
      log[StringJoin[Riffle[output,"\n"]]];
      If[FileType[dst] === None,
-        Throw["File " <> src <> " could not be downloaded"]]]];
+        Error["File " <> src <> " could not be downloaded"]]]];
 
 NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[
@@ -139,8 +139,8 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
                                 ___] :> f,
                       Infinity];
 
-    If[Length[filenames] === 0, Throw["Cannot find filename in metadata file for 2,2 mode in "<>runName]];
-    If[Length[filenames] > 1, Throw["Found multiple files in metadata file for 2,2 mode in "<>runName]];
+    If[Length[filenames] === 0, Error["Cannot find filename in metadata file for 2,2 mode in "<>runName]];
+    If[Length[filenames] > 1, Error["Found multiple files in metadata file for 2,2 mode in "<>runName]];
 
     (* Print["run dir = ", findRunDir[runName]]; *)
 
@@ -191,7 +191,7 @@ ReadMetadataKey[run_String, keyPattern_] :=
                                       ___]] :> v,
                  Infinity];
 
-    If[Length[results] =!= 1, Throw["Did not find exactly one metadata key for "<>ToString[keyPattern,InputForm]<>" in "<>run]];
+    If[Length[results] =!= 1, Error["Did not find exactly one metadata key for "<>ToString[keyPattern,InputForm]<>" in "<>run]];
 
     Which[
       MatchQ[results[[1]], "value"["number"[_]]],
@@ -204,7 +204,7 @@ ReadMetadataKey[run_String, keyPattern_] :=
       results[[1,1]],
 
       True,
-      Throw["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
+      Error["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
 
 NRDF`InitialData`ReadADMMass[run_String] :=
   ReadMetadataKey[run, "initial-ADM-energy"];

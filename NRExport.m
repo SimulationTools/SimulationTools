@@ -78,7 +78,7 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
   "asc.gz",
     Export[file, final, {"GZIP", "TABLE"}];,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -97,7 +97,7 @@ ExportAllExtrapolatedWaveforms[run_String, file_String, mass_, excludeModes_:Non
   "h5",
     (ExportExtrapolatedWaveform[run, file, mass, Sequence@@#]&) /@ modes;,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -128,7 +128,7 @@ ExportExtrapolatedStrain[run_String, file_String, mass_, l_Integer, m_Integer, o
   "asc.gz",
     Export[file, final, {"GZIP", "TABLE"}];,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -144,7 +144,7 @@ ExportAllExtrapolatedStrain[run_String, file_String, mass_, om_] :=
   "h5",
     (ExportExtrapolatedStrain[run, file, mass, Sequence@@#, om #[[2]]/2]&) /@ modes;,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -169,7 +169,7 @@ ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, r_] :=
   "asc.gz",
     Export[file, final, {"GZIP", "TABLE"}];,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -187,7 +187,7 @@ ExportAllExtractedWaveforms[run_String, file_String] :=
   "h5",
     ExportExtractedWaveform[run, file, Sequence@@#1]& /@ allwaveforms;,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -221,7 +221,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
     dsName = (what /. {Coordinates -> "traj", Spin -> "spin", HorizonMass -> "horizon_mass"}) <> ToString[i];
     Export[file, f, {"Datasets", dsName}, "Append"->True];,
   _,
-    Throw["Unsupported file format: "<>fileExtension[file]];
+    Error["Unsupported file format: "<>fileExtension[file]];
   ];
 ];
 
@@ -244,7 +244,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
     eta  = LookupParameter[run, evolution<>"::BetaDriver"];
     bibtex = "Brown:2008sb";,
     True,
-    Throw["Unknow evolution code used"];
+    Error["Unknow evolution code used"];
   ];
 
   {(* "comments" -> "", *)
@@ -301,7 +301,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
   ];
 
 runAllData[run_String, mass_, ecc_, tJunk_, format_String] :=  Module[{modes, radii, ext},
- ext = Switch[format, "HDF5", "h5", "ASCII", "asc.gz", _, Throw["Unrecognised format: "<>ToString@format]];
+ ext = Switch[format, "HDF5", "h5", "ASCII", "asc.gz", _, Error["Unrecognised format: "<>ToString@format]];
  modes = ReadPsi4Modes[run];
  radii = ReadPsi4RadiiStrings[run];
  waveform[{l_, m_}, rad_, "ASCII"] := ToString[l]<>","<>ToString[m] -> "psi4_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[rad]<>".asc.gz";
@@ -391,7 +391,7 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
                            ExportLocalQuantity[run, HorizonMass, 3, dir <> "/horizon_mass3"<>ext],
       "Metadata",          ExportMetadata[dir<>"/"<>niceName<>"_"<>ToString[n]<>".bbh", run, mass,
                                           ecc],
-      _, Throw["Error"]], {item, export}];
+      _, Error["Error"]], {item, export}];
   ];
 
 End[];

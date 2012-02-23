@@ -82,7 +82,7 @@ Catch[If[plane===1,
          If[plane === 0,
              field1=ReadGridFunction[run,StringJoin[field,"y.yz.h5"],it,rfl,StripGhostZones->True];
                        field2=ReadGridFunction[run,StringJoin[field,"z.yz.h5"],it,rfl,StripGhostZones->True];,
-	    Throw["Unrecognized plane option " <>plane]]]];
+	    Error["Unrecognized plane option " <>plane]]]];
 fieldint1=Interpolation[field1];
   fieldint2=Interpolation[field2];
   {{x1Min,x1Max},{x2Min,x2Max}}=GetDataRange[field1];
@@ -100,7 +100,7 @@ Catch[If[plane===1,
          If[plane === 0,
              field1=SliceData[ReadGridFunction[run,field<>"y.file_0.h5",it,rfl,StripGhostZones->True],1];
                        field2=SliceData[ReadGridFunction[run,field<>"z.file_0.h5",it,rfl,StripGhostZones->True],1];,
-	    Throw["Unrecognized plane option " <>plane]]]];
+	    Error["Unrecognized plane option " <>plane]]]];
 fieldint1=Interpolation[field1];
   fieldint2=Interpolation[field2];
   {{x1Min,x1Max},{x2Min,x2Max}}=GetDataRange[field1];
