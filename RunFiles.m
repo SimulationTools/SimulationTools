@@ -6,7 +6,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["RunFiles`", {"Profile`", "Memo`", "Providers`"}];
+BeginPackage["RunFiles`", {"Profile`", "Memo`", "Providers`", "Error`"}];
 
 ReadColumnFile;
 ReadColumnFile2;
