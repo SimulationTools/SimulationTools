@@ -180,7 +180,7 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
      Protect[SetDelayed];
 
      code],
-  WithErrorChecking[contexts_List, code] := code];
+  WithErrorChecking[contexts_List, code_] := code];
 
   (* This does not seem to work *)
 
