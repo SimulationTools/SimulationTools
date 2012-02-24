@@ -378,6 +378,8 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
     psi4];
 *)
 
+Global`StandardDefinition[ffi] = True;
+
 ffi[{f_, d_}, f0_] :=
  Module[{div},
   div = 2 Pi I If[f>0, Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
