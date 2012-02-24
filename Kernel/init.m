@@ -149,7 +149,12 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
     Global`prof[fn] = 0;
     If[$NRMMADebug === True,
       fn[args] :=
-       (Global`prof[fn]+=1;If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][(*Stack`WithStackFrame[{Hold[fn],ReleaseHold@argValueExprs}, *)body(*]*)]),
+       (Global`prof[fn]+=1;
+        If[Length[Stack`CurrentStack[]] === 0,
+           Error`CatchError,
+           Identity][Stack`WithStackFrame[
+             {Hold[fn],ReleaseHold@argValueExprs},
+             body]]),
        (*else*)
        fn[args] := body];
    ];
