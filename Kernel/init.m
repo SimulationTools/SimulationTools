@@ -146,10 +146,10 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
     CheckAssignments[Evaluate[ToString[fn]],Map[Hold,argSyms],Module[{},body]];
 
     argValueExprs = Hold[{args}] /. x_Pattern :> x[[1]];
-
+    Global`prof[fn] = 0;
     If[$NRMMADebug === True,
       fn[args] :=
-       (If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][Stack`WithStackFrame[{Hold[fn],ReleaseHold@argValueExprs}, body]]),
+       (Global`prof[fn]+=1;If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][(*Stack`WithStackFrame[{Hold[fn],ReleaseHold@argValueExprs}, *)body(*]*)]),
        (*else*)
        fn[args] := body];
    ];
