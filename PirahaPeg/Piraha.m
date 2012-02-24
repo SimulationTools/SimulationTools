@@ -41,7 +41,7 @@ DefFn[
        gf = grammarFileName,
        If[FileExistsQ[FileNameJoin[{nrmmaDir, "Grammars", grammarFileName}]],
           gf=FileNameJoin[{nrmmaDir, "Grammars", grammarFileName}],
-          Throw[StringForm["Cannot find grammar '`1`'", grammarFileName]]]];
+          Error[StringForm["Cannot find grammar '`1`'", grammarFileName]]]];
 
     g = JavaNew["edu.lsu.cct.piraha.Grammar"];
     g@compileFile[JavaNew["java.io.File", gf]];
@@ -50,7 +50,7 @@ DefFn[
 
     m = g@matcher[pattern, c];
 
-    If[!m@match[0], Throw["Failed to parse input file: "<>inputFileName<>" " <> m@near[]@toString[]]];
+    If[!m@match[0], Error["Failed to parse input file: "<>inputFileName<>" " <> m@near[]@toString[]]];
 
     sw = JavaNew["java.io.StringWriter"];
     dout = JavaNew["edu.lsu.cct.piraha.DebugOutput", JavaNew["java.io.PrintWriter", sw]];
@@ -71,7 +71,7 @@ DefFn[
     results = Cases[{expr}, pat :> x];
 
     If[Length[results] === 0, 
-       Throw[ToString@StringForm["Cannot find `1` in expression `2`", path, expr]]];
+       Error[ToString@StringForm["Cannot find `1` in expression `2`", path, expr]]];
 
     results[[1]]]];
 
