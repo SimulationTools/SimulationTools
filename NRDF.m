@@ -7,6 +7,8 @@ UsefulWaveformTime;
 HaveInfiniteRadiusWaveforms;
 ReadMetadataKey;
 ReadRuns;
+ReadResolution;
+ExpectedConvergenceOrder;
 
 Begin["`Private`"];
 
@@ -224,6 +226,12 @@ ReadRuns[dirp_:Automatic] :=
              If[ValueQ[Global`RunDirectory], Global`RunDirectory, "."],
              dirp];
     Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]];
+
+ReadResolution[run_String] :=
+  ReadMetadataKey[run, "resolution"];
+
+ExpectedConvergenceOrder[run_String] :=
+  ReadMetadataKey[run, "resolution-expected-order"];
 
 End[];
 
