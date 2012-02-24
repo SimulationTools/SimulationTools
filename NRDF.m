@@ -177,6 +177,14 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
            Print["Warning: Data in "<>runName<>"/"<>ToString[tmp,InputForm]<>" is not monotonic (tolerance "<>
                  ToString[tol,InputForm]<>", index "<>ToString[pos+1]<>", t = "<>ToString[IndVar[data][[pos+1]]]<>")"]]]];
 
+    If[rad=!="inf",
+       Module[
+         {absMax,radNum},
+         radNum = ImportString[rad,"List"][[1]];
+         absMax = radNum MaximumValue[Abs[data]];
+         If[absMax > 1.0,
+            data = data / radNum]]];
+
     data];
 
 
