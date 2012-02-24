@@ -140,21 +140,17 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
 
   SetAttributes[DefFn, HoldAll];
   DefFn[fn_[args___], body_] :=
-   Module[{x,argSyms,argValueExprs},
+   Module[{x,argSyms,argValueExprs,lhs},
     ErrorDefinition[fn];
     argSyms = Cases[{args}, x_Pattern :> x[[1]], Infinity, Heads->True]; (* What if the pattern name symbol has meaning in this scope? *)
     CheckAssignments[Evaluate[ToString[fn]],Map[Hold,argSyms],Module[{},body]];
 
-    argValueExprs = Hold[{args}] /. x_Pattern :> x[[1]];
     Global`prof[fn] = 0;
     If[$NRMMADebug === True,
-      fn[args] :=
+      lhs : fn[args] :=
        (Global`prof[fn]+=1;
-        If[Length[Stack`CurrentStack[]] === 0,
-           Error`CatchError,
-           Identity][Stack`WithStackFrame[
-             {Hold[fn],ReleaseHold@argValueExprs},
-             body]]),
+        If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][
+          Stack`WithStackFrame[lhs,body]]),
        (*else*)
        fn[args] := body];
    ];
