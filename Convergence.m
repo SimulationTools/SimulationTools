@@ -12,6 +12,8 @@ RichardsonExtrapolate3::usage = "RichardsonExtrapolate3[{f1, f2, f3}, {h1, h2, h
 RichardsonExtrapolationError::usage = "RichardsonExtrapolationError[{f1, f2, f3}, {h1, h2, h3}, p] gives the difference between the order p Richardson extrapolant of f1, f2 and f3 and of f2 and f3 at h = 0 assuming that f[h] = O[h^p]. This gives an error estimate for the latter.  f1, f2 and f3 can either be real numbers or DataTables, and the returned value will be of the same type.  NOTE: currently this function is only implemented for DataTables and the hs are computed from the NPoints attribute.";
 ResName;
 NPoints;
+RichardsonError;
+RichardsonRelativeError;
 
 Begin["`Private`"];
 
@@ -196,6 +198,14 @@ RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, hs:{h1_,h2
 
 RichardsonExtrapolationError[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
     RichardsonExtrapolate[Drop[ds,1], p] - RichardsonExtrapolate3[ds, p];
+
+Global`Sub[a_?NumberQ,b_?NumberQ] := a-b;
+
+RichardsonError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
+  Global`Sub[f2,If[p==="exponential", f1, RichardsonExtrapolate[fs,hs,p]]];
+
+RichardsonRelativeError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
+  RichardsonError[fs,hs,p]/f2;
 
 End[];
 
