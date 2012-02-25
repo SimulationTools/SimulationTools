@@ -59,6 +59,9 @@ Begin["`Private`"];
   Reading Psi4 from an external provider
   --------------------------------------------------------------------*)
 
+If[ProviderPreferences["Waveforms"] === {},
+   ProviderPreferences["Waveforms"] = {"MultipoleHDF5", "MultipoleASCII"}];
+
 ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   CallProvidedFunction["Waveforms","ReadPsi4Data",{runName,l,m,rad}];
 
