@@ -126,7 +126,7 @@ SimView[runNames_List, r_] :=
     PlotLegend -> runNames, LegendPosition -> {Right, Top}],_];
   frequency = Catch[
    PresentationListLinePlot[
-    Map[NDerivative[ReadMinTrackerPhase[#]]&, runNames],
+    Map[NDerivative[ReadBHPhase[#]]&, runNames],
     PlotRange -> {0, Automatic}, PlotLabel -> "Frequency\n", 
     ImageSize -> size],_];
   rePsi4 = Catch[
