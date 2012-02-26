@@ -3,7 +3,7 @@ BeginPackage["SimFactory`", {"RunFiles`", "DataTable`", "Memo`", "Error`", "IniF
 
 Begin["`Private`"];
 
-SimFactory`RunFiles`HaveData[runDir_] :=
+SimFactory`RunFiles`HaveData[runDir_,___] :=
   FileType[FileNameJoin[{runDir, "SIMULATION_ID"}]] =!= None ||
   FileType[FileNameJoin[{runDir, "SIMFACTORY"}]] =!= None;
 

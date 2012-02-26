@@ -14,7 +14,7 @@ Begin["`Private`"];
 
 FPrint[x_] := (Print[x//InputForm]; x);
 
-NRDF`RunFiles`HaveData[runDir_String] :=
+NRDF`RunFiles`HaveData[runDir_String,___] :=
   haveRunDir[runDir];
   (* FileExistsQ[FileNameJoin[{RunDirectory,runDir,FileNameTake[runDir,-1]<>".bbh"}]]; *)
 
