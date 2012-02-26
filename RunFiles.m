@@ -28,6 +28,7 @@ LeafNamesOnly;
 FindFirstRunFile::usage = "FindFirstRunFile[run, file] returns the full pathname of file in the first segment of run.";
 FileIsInRun::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run.";
 HaveRunDir;
+ReadCores::usage    = "ReadCores[run] returns the number of cores used by sim.";
 
 Begin["`Private`"];
 
@@ -89,6 +90,8 @@ FindRunDir[runName_String] :=
     ErrorMessage[FindRunDir::nofind,runName];
 ];
 
+ReadCores[run_] :=
+  CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}];
 
 (*--------------------------------------------------------------------
   Finding segments in run directories

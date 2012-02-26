@@ -9,7 +9,6 @@ RunCost::usage      = "RunCost[length, speed, nprocs] returns information about 
 ReadMemory::usage   = "ReadMemory[run] returns a DataTable with the swap usage of run as a function of time.";
 ReadSwap::usage     = "ReadSwap[run] returns a DataTable with the swap usage of run as a function of time.";
 ReadWalltime::usage = "ReadWalltime[run] returns the total walltime used by sim.";
-ReadCores::usage    = "ReadCores[run] returns the number of cores used by sim.";
 ReadCPUHours::usage = "ReadCPUHours[run] returns the total number of CPU hours used by run.";
 CPUHours;
 WallTimeDays;
@@ -54,22 +53,6 @@ ReadSwap[runName_] :=
   MakeDataTable[ReadColumnFile[
     runName, "systemstatistics::process_memory_mb.maximum.asc",
     {"time", "swap_used_mb"}]];
-
-(* These files should be accessed using RunFiles, not directly using
-   RunDirectory *)
-ReadCores[runName_] :=
-  Module[{read, sf1a, sf1b, sf2},
-
-    read[file_, args__] :=
-      If[FileType[file] =!= None, ReadList[file, args][[1]], Throw[file, FileNotFound]];
-
-    sf1a = Catch@FindFirstRunFile[runName, "../SIMFACTORY/PROCS"];
-    sf1b = Catch@FindFirstRunFile[runName, "../PROCS"];
-    sf2 =  Catch@FindFirstRunFile[runName, "../SIMFACTORY/properties.ini"];
-    If[FileType[sf1a] =!= None, Return[read[sf1a, Number]]];
-    If[FileType[sf1b] =!= None, Return[read[sf1b, Number]]];
-    If[FileType[sf2] =!= None, Return[ToExpression@IniVariable[sf2, "procs"]]];
-    Error["Cannot find number of cores in run " <> runName]];
 
 CPUHoursPerDay[runName_] :=
   ReadCores[runName] * 24;
