@@ -61,7 +61,7 @@ memoryPlot[runNames_List, size_] :=
    If[StringQ[mems], mems = {{0,0}}];
 
    Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
-     PresentationListLinePlot[swaps, PlotStyle->Dashed],
+     PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
      PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n", ImageSize -> size]];
 
 LastOutputTime[run_] :=
