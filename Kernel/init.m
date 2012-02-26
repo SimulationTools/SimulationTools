@@ -34,6 +34,7 @@ Module[{packages =
   "FieldLines",
   "Grids",
   "Horizons",
+  "IniFile",
   "InitialData",
   "Kicks",
   "Memo",

@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`", "Error`", "IniFile`"}];
 
 ReadRunSpeed::usage = "ReadRunSpeed[run] returns a DataTable with the speed of a run in M/hr as a function of time.";
 RunCost::usage      = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
@@ -54,16 +54,6 @@ ReadSwap[runName_] :=
   MakeDataTable[ReadColumnFile[
     runName, "systemstatistics::process_memory_mb.maximum.asc",
     {"time", "swap_used_mb"}]];
-
-DefineMemoFunction[ReadIniFile[file_],
-  Flatten[StringCases[
-    ReadList[file, String],
-    key__ ~~ "=" ~~ value___ :> {StringTrim@key -> StringTrim@value}]]];
-
-IniVariable[file_, key_] :=
-  Module[{map = ReadIniFile[file]},
-    If[!MemberQ[First/@map, key], Error["Key not found"],
-    Return[key /. map]]];
 
 (* These files should be accessed using RunFiles, not directly using
    RunDirectory *)

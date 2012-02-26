@@ -1,5 +1,5 @@
 
-BeginPackage["SimFactory`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["SimFactory`", {"RunFiles`", "DataTable`", "Memo`", "Error`", "IniFile`"}];
 
 Begin["`Private`"];
 
