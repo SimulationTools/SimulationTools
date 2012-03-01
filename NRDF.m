@@ -181,7 +181,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
        Module[
          {absMax,radNum},
          radNum = ImportString[rad,"List"][[1]];
-         absMax = radNum MaximumValue[Abs[data]];
+         absMax = radNum Max[Abs[data]];
          If[absMax > 1.0,
             data = data / radNum]]];
 
