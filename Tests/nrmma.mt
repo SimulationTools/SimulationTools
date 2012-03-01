@@ -3,6 +3,7 @@
 TestSuite[
 	{
 		"DataTable.mt",
+		"Memo.mt",
 		"RunFiles.mt",
 		"Waveforms.mt"
 		}]
