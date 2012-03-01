@@ -471,6 +471,9 @@ ReadWaveformFile[file_] :=
        data = Import["!gunzip< "<>file,"Table"],
        data = Import[file,"Table"]];
 
+    If[data === $Failed,
+       Error["Failed to open file "<>file]];
+
     MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, data], NumberQ[#[[2]]]&]]];
 
 End[];
