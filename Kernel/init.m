@@ -146,15 +146,20 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
     argSyms = Cases[{args}, x_Pattern :> x[[1]], Infinity, Heads->True]; (* What if the pattern name symbol has meaning in this scope? *)
     CheckAssignments[Evaluate[ToString[fn]],Map[Hold,argSyms],Module[{},body]];
 
-    Global`prof[fn] = 0;
+    Global`profcount[fn] = 0;
+    Global`proftime[fn] = 0.;
     If[$NRMMADebug === True,
       lhs : fn[args] :=
-       (Global`prof[fn]+=1;
-        If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][
-          Stack`WithStackFrame[lhs,body]]),
+       Module[
+         {t,r},
+         Global`profcount[fn]+=1;
+         {t,r} = AbsoluteTiming[If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][
+           Stack`WithStackFrame[lhs,body]]];
+         Global`proftime[fn] += t;
+         r],
        (*else*)
        fn[args] := body];
-   ];
+      ];
 
   DefFnQ[_] = False;
 
