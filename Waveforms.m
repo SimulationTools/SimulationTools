@@ -460,12 +460,18 @@ AlignMaximaOfAbs[ds_List] :=
    maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
+
 ReadWaveformFile[file_] :=
   Module[
-    {},
+    {data},
     If[FileType[file] ===None,
        Error["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
-    MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, Import[file,"Table"]], NumberQ[#[[2]]]&]]];
+
+    If[FileExtension[file] === "gz",
+       data = Import["!gunzip< "<>file,"Table"],
+       data = Import[file,"Table"]];
+
+    MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, data], NumberQ[#[[2]]]&]]];
 
 End[];
 
