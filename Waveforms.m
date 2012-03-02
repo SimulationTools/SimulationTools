@@ -481,7 +481,7 @@ ReadWaveformFile[file_] :=
     lockFile = FileNameJoin[{$TemporaryDirectory, "GZIP.exe.lock"}];
     waitForLock[] :=
     (While[!Quiet[Check[CreateDirectory[lockFile]; True, False, CreateDirectory::filex],CreateDirectory::filex],
-           waited=True; Pause[0.1]]);
+           Pause[0.1]]);
 
     releaseLock[] :=
     DeleteDirectory[lockFile];
