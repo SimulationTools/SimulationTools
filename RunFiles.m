@@ -135,7 +135,7 @@ DefineMemoFunction[FindFirstRunFile[runName_String, fileName_String],
     files[[1]]]]];
 
 Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
-FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]] :=
+DefineMemoFunction[FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[]],
   Module[{segments, nToDrop, names},
     segments = FindRunSegments[runName];
     If[segments === {}, Return[{}]];
@@ -144,7 +144,7 @@ FindRunFilesFromPattern[runName_String, filePattern_String, opts:OptionsPattern[
     If[OptionValue[LeafNamesOnly],
       names = Map[FileNameTake[#,-1]&, names]];
     names
-  ];
+]];
 
 
 (*--------------------------------------------------------------------
