@@ -75,7 +75,8 @@ ReadPsi4Modes[runName_] :=
   Operations on Psi4
   --------------------------------------------------------------------*)
 
-ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
+DefineMemoFunction[
+  ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic],
   Module[{radii, radString},
 
   (* Get a list of radii available in the form expr -> "exprstring" *)
@@ -97,7 +98,7 @@ ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic] :=
       Error["Radius "<>ToString[rad]<>" not found."];
   ];
 
-  AddAttribute[ReadPsi4Data[runName, l, m, radString],RunName -> runName]];
+  AddAttribute[ReadPsi4Data[runName, l, m, radString],RunName -> runName]]];
 
 (* Return a list of radii available *)
 ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
