@@ -386,9 +386,12 @@ Global`StandardDefinition[ffi] = True;
 
 ffi[{f_, d_}, f0_] :=
  Module[{div},
-  div = 2 Pi I If[f>0, Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
+  div = 2. Pi I If[f>0., Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
   {f, d/div}
 ];
+
+ffiDataTable[d_DataTable, f0_] :=
+  Map[ffi[#, f0 / (2. Pi)] &, d];
 
 StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
@@ -396,8 +399,8 @@ StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
   psi4Uniform = If[uniform, psi4, MakeUniform[psi4]];
   t0 = DataTableRange[psi4Uniform][[1]];
   psi4f = Fourier[psi4Uniform];
-  dhf = Map[ffi[#, f0 / (2 Pi)] &, psi4f];
-  hf  = Map[ffi[#, f0 / (2 Pi)] &, dhf];
+  dhf = ffiDataTable[psi4f, f0];
+  hf = ffiDataTable[dhf, f0];
   {h, dh} = InverseFourier[#,t0] & /@ {hf, dhf};
   If[uniform, h, ResampleDataTable[h,psi4]]];
 
