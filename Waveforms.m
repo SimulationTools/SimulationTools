@@ -463,13 +463,32 @@ AlignMaximaOfAbs[ds_List] :=
 
 ReadWaveformFile[file_] :=
   Module[
-    {data},
+    {data, lockFile, waitForLock, releaseLock, waited=False},
     If[FileType[file] ===None,
        Error["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
 
-    If[FileExtension[file] === "gz",
-       data = Import["!gunzip< "<>file,"Table"],
-       data = Import[file,"Table"]];
+    (* If[FileExtension[file] === "gz", *)
+    (*    data = Import["!gunzip< "<>file,"Table"], *)
+    (*    data = Import[file,"Table"]]; *)
+
+    (* The Mathematica GZIP reader creates temporary files in /tmp.
+       If multiple kernels try to open gzipped files with the same
+       leaf name, this causes these temporary files to be corrupted,
+       as they are the same.  Hence we protect access to the Import
+       command using a lock file. *)
+
+    lockFile = FileNameJoin[{$TemporaryDirectory, "GZIP.exe.lock"}];
+    waitForLock[] :=
+    (While[!Quiet[Check[CreateDirectory[lockFile]; True, False, CreateDirectory::filex],CreateDirectory::filex],
+           waited=True; Print["Waiting for lock..."]; Pause[0.1]];
+     If[waited, Print["Lock claimed"]]);
+
+    releaseLock[] :=
+    DeleteDirectory[lockFile];
+
+    waitForLock[];
+    data = Import[file,"Table"];
+    releaseLock[];
 
     If[data === $Failed,
        Error["Failed to open file "<>file]];
