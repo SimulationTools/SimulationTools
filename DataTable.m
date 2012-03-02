@@ -302,7 +302,7 @@ InterpolateWhereFunction[d_DataTable, f_] :=
   MakeDataTable[ToList[d]/. {t_,x_}:>{t,dInterpolater[t]}/;f[{t,x}]]];
 
 Global`Sub[d1_DataTable, d2_DataTable, p_:8] :=
-  Apply[Subtract, ResampleDataTables[{d1, d2}, p]];
+  Apply[Subtract, IntersectDataTables[{ResampleDataTable[d1, d2, p],d2}]];
 
 Add[ds:(_DataTable..), p_Integer:8] :=
   Apply[Plus, ResampleDataTables[{ds}, p]];
