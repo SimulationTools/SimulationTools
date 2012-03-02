@@ -7,7 +7,7 @@ SimFactory`RunFiles`HaveData[runDir_,___] :=
   FileType[FileNameJoin[{runDir, "SIMULATION_ID"}]] =!= None ||
   FileType[FileNameJoin[{runDir, "SIMFACTORY"}]] =!= None;
 
-addDataSubDir[output_String] :=
+getDataSubDir[output_String] :=
   Module[
     {parFiles,runName,dir},
 
@@ -19,13 +19,17 @@ addDataSubDir[output_String] :=
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
     If[Length[parFiles] =!= 1, Error["Found more than one */*.par in " <> output]];
-    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
+    FileNameTake[parFiles[[1]], {-2}]
+];
 
 SimFactory`RunFiles`FindRunDirSegments[dir_] :=
   Module[
-    {restarts, segments},
+    {restarts, dataSubDir, dataDirs, segments},
     restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
-    segments = Select[Map[addDataSubDir, restarts], (# =!= None) &]];
+    dataSubDir = getDataSubDir[restarts[[1]]];
+    dataDirs = FileNameJoin[{#, dataSubDir}] & /@ restarts;
+    segments = Select[dataDirs, DirectoryQ]
+];
 
 SimFactory`RunFiles`ReadCores[dir_, runName_] :=
   Module[

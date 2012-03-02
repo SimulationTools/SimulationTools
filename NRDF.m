@@ -24,20 +24,6 @@ NRDF`Waveforms`HaveData[runDir_,___] :=
 NRDF`InitialData`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
 
-addDataSubDir[output_String] :=
-  Module[
-    {parFiles,runName,dir},
-
-    runName = FileNameSplit[output][[-2]];
-    dir = FileNameJoin[{output,runName}];
-    If[FileType[dir] === Directory,
-       Return[dir]];
-
-    parFiles = FileNames["*/*.par", {output}, 2];
-    If[Length[parFiles] === 0, Return[None]];
-    If[Length[parFiles] =!= 1, Error["Found more than one */*.par in " <> output]];
-    FileNameJoin[Drop[FileNameSplit[parFiles[[1]]],-1]]];
-
 NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {findRunDir[dir]};
 
