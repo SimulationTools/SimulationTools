@@ -463,7 +463,7 @@ AlignMaximaOfAbs[ds_List] :=
 
 ReadWaveformFile[file_] :=
   Module[
-    {data, lockFile, waitForLock, releaseLock, waited=False},
+    {data, lockFile, waitForLock, releaseLock},
     If[FileType[file] ===None,
        Error["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
 
@@ -480,8 +480,7 @@ ReadWaveformFile[file_] :=
     lockFile = FileNameJoin[{$TemporaryDirectory, "GZIP.exe.lock"}];
     waitForLock[] :=
     (While[!Quiet[Check[CreateDirectory[lockFile]; True, False, CreateDirectory::filex],CreateDirectory::filex],
-           waited=True; Print["Waiting for lock..."]; Pause[0.1]];
-     If[waited, Print["Lock claimed"]]);
+           waited=True; Pause[0.1]]);
 
     releaseLock[] :=
     DeleteDirectory[lockFile];
