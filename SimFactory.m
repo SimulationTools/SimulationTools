@@ -11,11 +11,13 @@ getDataSubDir[output_String] :=
   Module[
     {parFiles,runName,dir},
 
-    runName = FileNameSplit[output][[-2]];
+    (* First, check if there is a directory with the same name as the run name *)
+    runName = FileNameTake[output, {-2}];
     dir = FileNameJoin[{output,runName}];
     If[FileType[dir] === Directory,
-       Return[dir]];
+       Return[runName]];
 
+    (* If this fails, look for the directory containing the parfile *)
     parFiles = FileNames["*/*.par", {output}, 2];
     If[Length[parFiles] === 0, Return[None]];
     If[Length[parFiles] =!= 1, Error["Found more than one */*.par in " <> output]];
