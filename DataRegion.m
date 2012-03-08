@@ -62,7 +62,7 @@ NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False
 DataRegionContourPlot::usage = "DataRegionContourPlot[d, args] generates a ContourPlot of the data in a 2D DataRegion d. The arguments are the same as for ContourPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
 (* TODO: rename this as MapThread *)
 MapThreadDataRegion::usage = "MapThreadDataRegion[f, {d1, d2, ...}] returns a DataRegion of the same shape as the DataRegions {d1, d2, ...} whose data is f[v1, v2, ...] where {v1, v2, ...} are the data values from {d1, d2, ...}.";
-NDerivative::usage = "NDerivative[d, dir] returns the first derivative of the DataRegion d along the direction dir.  This uses second order accurate centered differencing and the result omits the first and last points of d.";
+NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form as in the first argument of Derivative.";
 TimeDerivative::usage = "TimeDerivative[{d1, d2,...}, center] returns a numerical time derivative computed from DataRegions d1, d2, ... . The derivative is computed using finite differencing, the order of which is determined by the number of DataRegions given. The optional center argument specifies the number of timesteps from the first DataRegion at which to compute derivatives (using lop-sided differencing, if necessary), with the default value being half-way between the first and last times.";
 (* TODO: rename this to Resample *)
 ResampleDataRegion::usage = "ResampleDataRegion[d, {x1, x2, dx}, p] returns a new DataRegion of the same dimensionality as the DataRegion d but with points in the range x1 to x2 with spacing dx.  The data is interpolated at order p onto the new grid.  x1, x2 and dx are lists of length equal to the dimensionality of d.  NOTE: currently only 2-dimensional DataRegions are supported.";
@@ -536,6 +536,12 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
 NormL2[d_DataRegion] :=
  Sqrt[Times@@GetSpacing[d] * Plus @@ Flatten[GetData[d^2]]];
 
+NDerivative[d:DataRegion[h_,_], dir_Integer] :=
+ Module[{spacing, ndims, data, dr1, dr2, newh, deriv, lowerdims, upperdims, leftpart, rightpart},
+   ndims   = GetNumDimensions[d];
+   (NDerivative@@UnitVector[ndims, dir])[d]
+];
+
 NDerivative[d_DataRegion] :=
  Module[{ndims, result},
   ndims = GetNumDimensions[d];
@@ -549,34 +555,25 @@ NDerivative[d_DataRegion] :=
   result
 ];
 
-UFDWeights[m_, n_, s_, h_] := 
- CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
+NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
+ Module[{origin, spacing, dimensions, grid, data, deriv, newh},
+  origin  = GetOrigin[d];
+  spacing = GetSpacing[d];
+  dimensions = GetDimensions[d];
 
-NDerivative[d:DataRegion[h_,_], dir_Integer] :=
- Module[{spacing, ndims, data, dr1, dr2, newh, deriv, lowerdims, upperdims, leftpart, rightpart},
-  ndims   = GetNumDimensions[d];
-  spacing = GetSpacing[d][[ndims-dir+1]];
-
+  (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
+  grid = origin + spacing (Range /@ dimensions-1);
   data = GetData[d];
-  dr1 = Map[RotateLeft, data, {ndims-dir}];
-  dr2 = Map[RotateRight, data, {ndims-dir}];
-  deriv = (dr1-dr2)/(2 spacing);
 
+  deriv = NDSolve`FiniteDifferenceDerivative[Reverse[Derivative[derivs]], grid, data, opts];
 
-  (* Build up sequences for use in Part corresponding to the boundaries *)
-  If[ndims-dir == 0, lowerdims = Sequence[], lowerdims = Sequence @@ ConstantArray[All, ndims-dir]];
-  If[dir == 1, upperdims = Sequence[], upperdims = Sequence @@ ConstantArray[All, dir-1]];
-  leftpart = Sequence[lowerdims, 1, upperdims];
-  rightpart = Sequence[lowerdims, -1, upperdims];
-
-  (* Deal with boundary points using asymmetric stencil *)
-  deriv[[leftpart]] = (dr1[[leftpart]]-data[[leftpart]])/spacing;
-  deriv[[rightpart]] = (data[[rightpart]]-dr2[[rightpart]])/spacing;
-
-  newh = replaceRules[h, {Name -> "dx"<>ToString[dir]<>"_"<>GetVariableName[d]}];
+  newh = replaceRules[h, {Name -> "dx"<>ToString[derivs]<>"_"<>GetVariableName[d]}];
 
   DataRegion[newh, deriv]
-]
+];
+
+UFDWeights[m_, n_, s_, h_] :=
+ CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
 
 TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
  Module[{nd, dims, spacing, origin, variable, sorted, times, dt, stencil, offset, deriv, attr, newTime},
