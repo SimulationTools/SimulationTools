@@ -4,7 +4,7 @@ BeginPackage["Movie`", {"Error`"}];
 
 PadIndex;
 PreviewMovie;
-MakeMovie::usage = "MakeMovie[filenamebase, expression, {var, v1, v2, dv}] evaluates expression (which should be a graphical object) for values of var from v1 to v2 in steps of dv and writes the result to a PNG file filenamebase with an index number appended.  The images are then combined into an MP4 file using FFMPEG.  Note: this function is not yet fully implemented.";
+MakeMovie::usage = "MakeMovie[filenamebase, expression, {var, v1, v2, dv}] evaluates expression (which should be a graphical object) for values of var from v1 to v2 in steps of dv and writes the result to a PNG file filenamebase with an index number appended.  The images are then combined into an MP4 file using FFMPEG.";
 
 Begin["`Private`"];
 
@@ -23,7 +23,10 @@ PreviewMovie[fileNamebase_, expr_, {var_, v1_, v2_, dv_:1}] :=
 
 SetAttributes[MakeMovie, HoldAll];
 
-MakeMovie[fileNameBase_, expr_, {var_, v1_, v2_, dv_:1}] :=
+Options[MakeMovie] = {"FFMPEG" -> "ffmpeg",
+                      "FrameRate" -> 1};
+
+MakeMovie[fileNameBase_, expr_, {var_, v1_, v2_, dv_:1}, opts:OptionsPattern[]] :=
   Module[{name, i1, i2, command},
     i1 = 0;
     i2 = (v2 - v1) / dv;
@@ -32,11 +35,10 @@ MakeMovie[fileNameBase_, expr_, {var_, v1_, v2_, dv_:1}] :=
       Export[name, Block[{var=v1 + i dv}, expr]];
       , {i, i1, i2}];
 
-    command = "! ffmpeg -y -r 1 -i " <> Evaluate[fileNameBase] <> ".%5d.png -b 100000 " <> fileNameBase <> ".mp4 2>&1";
+    command = "! "<>OptionValue["FFMPEG"]<>" -y -r "<>ToString[OptionValue["FrameRate"]//N,CForm]<>" -i " <> Evaluate[fileNameBase] <> ".%5d.png -b 100000 " <> Evaluate[fileNameBase] <> ".mp4 2>&1";
     Print[command];
     ReadList[command, String, NullRecords->True]
   ];
-
 
 End[];
 
