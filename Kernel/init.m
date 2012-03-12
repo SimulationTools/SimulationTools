@@ -39,6 +39,7 @@ Module[{packages =
   "Kicks",
   "Memo",
   "MinTracker",
+  "Movie",
   "MultipoleASCII",
   "MultipoleHDF5",
   "NR",
