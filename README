@@ -1,0 +1,14 @@
+
+NRMMA - Numerical Relativity in Mathematica
+-------------------------------------------
+
+by Ian Hinder and Barry Wardell
+
+NRMMA (Numerical Relativity in MatheMaticA) is a Mathematica package
+for the analysis of data in Numerical Relativity. It has mainly been
+used for the analysis of data from the Einstein Toolkit Cactus code,
+but it includes many components which are useful for general
+data. Adding support for other codes is possible.
+
+Please see https://bitbucket.org/ianhinder/nrmma/wiki/Home for
+installation instructions and an introduction.  
