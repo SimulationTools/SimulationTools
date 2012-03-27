@@ -16,9 +16,9 @@ ReadTwoPuncturesData::usage = "ReadTwoPuncturesData[file, col] reads a data file
 Begin["`Private`"];
 
 TwoPunctures`InitialData`HaveData[run_String, ___] :=
-  !StringMatchQ[Catch[FindRunDir[run]], "Cannot*"] &&
-  !StringMatchQ[Catch[FindRunFile[run, "ADM_mass_tot.asc"]], "Cannot*"] &&
-  StandardOutputOfRun[run] =!= {};
+  HaveRunDir[run] && (
+    FindRunFile[run, "ADM_mass_tot.asc"] =!= {} ||
+    StandardOutputOfRun[run] =!= {});
 
 TwoPunctures`InitialData`ReadADMMass[runName_String] :=
   Module[{massMDFiles, output, lines},
