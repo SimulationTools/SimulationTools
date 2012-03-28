@@ -104,7 +104,7 @@ GetAttributes[DataRegion[h_, data_]] :=
   h;
 
 GetVariableName[DataRegion[h_, data_]] := 
-  VariableName /. h;
+  Name /. h;
 
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
@@ -535,7 +535,7 @@ NDerivative[d:DataRegion[h_,_], dir_Integer] :=
   deriv[[leftpart]] = (dr1[[leftpart]]-data[[leftpart]])/spacing;
   deriv[[rightpart]] = (data[[rightpart]]-dr2[[rightpart]])/spacing;
 
-  newh = replaceRules[h, {VariableName -> "dx"<>ToString[dir]<>"_"<>GetVariableName[d]}];
+  newh = replaceRules[h, {Name -> "dx"<>ToString[dir]<>"_"<>GetVariableName[d]}];
 
   DataRegion[newh, deriv]
 ]
@@ -596,7 +596,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 
   (* Correct time and variable name attributes *)
   newTime = times[[1]]+offset*dt;
-  attr=replaceRules[GetAttributes[deriv], {Time-> newTime, VariableName -> "dt_"<>variable[[1]]}];
+  attr=replaceRules[GetAttributes[deriv], {Time-> newTime, Name -> "dt_"<>variable[[1]]}];
 
   DataRegion[ attr, GetData[deriv]]
 ];
@@ -684,7 +684,7 @@ EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
 (**********************************************************************************)
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
-  DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
+  DataRegion[{Name -> name, Origin -> origin, Spacing -> spacing, Time -> time},
              Developer`ToPackedArray[data]];
 
 End[];
