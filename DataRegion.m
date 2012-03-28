@@ -6,7 +6,7 @@ BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Error`"}];
 
 (* Exported symbols *)
 
-MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time] creates a DataRegion object from the passed data.  data is an N-dimensional array (nested list) of numbers.  name is a name to give to the object for display purposes.  dims is a list of length N consisting of the dimensions of data (dims = Reverse[Dimensions[data]]).  origin is a list of length N giving the coordinates of the first point in each direction.  spacing is a list of length N giving the spacing between points in each direction.  time is a number which will be stored with the DataRegion which can be useful for labeling simulation time.";
+ToDataRegion::usage = "ToDataRegion[data] creates a DataRegion object from the N-dimensional array (nested list) data.";
 SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
@@ -48,14 +48,26 @@ TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements eac
 NormL2::usage = "NormL2[d] returns the L2,dx norm of the points in the DataRegion d.  This is the discrete approximation to the L2 norm.";
 EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as the DataRegion d with data computed by evaluating expr assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: this function is only currently implemented for DataRegions of dimension 2 and 3.";
 
+(* DEPRECATED *)
+
+MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time] creates a DataRegion object from the passed data.  data is an N-dimensional array (nested list) of numbers.  name is a name to give to the object for display purposes.  dims is a list of length N consisting of the dimensions of data (dims = Reverse[Dimensions[data]]).  origin is a list of length N giving the coordinates of the first point in each direction.  spacing is a list of length N giving the spacing between points in each direction.  time is a number which will be stored with the DataRegion which can be useful for labeling simulation time. DEPRECATED";
+
 Begin["`Private`"];
 
 (* DataRegion object low-level implementation; this is where we define
    the internal format of a DataRegion object. *)
 SetAttributes[DataRegion, NHoldFirst];
 
-MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
-  DataRegion[{VariableName -> name, Dimensions -> dims, Origin -> origin, Spacing -> spacing, NumDimensions -> Length[dims], Time -> time}, Developer`ToPackedArray[data]];
+Options[ToDataRegion] := {
+  "Name" -> None,
+  "Time" -> None};
+
+ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
+  DataRegion[{Origin -> origin,
+              Spacing -> spacing,
+              Name -> OptionValue["Name"],
+              Time -> OptionValue["Time"]},
+             Developer`ToPackedArray[data]];
 
 DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
   ndims = GetNumDimensions[v];
@@ -70,7 +82,6 @@ DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, d
   MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}], GetAttributes[v]/.((a_->b_):>(SymbolName[a]->b))]
 ];
 
-
 GetData[DataRegion[h_, data_]] :=
   data;
 
@@ -81,10 +92,10 @@ GetSpacing[DataRegion[h_, data_]] :=
   Spacing /. h;
 
 GetDimensions[DataRegion[h_, data_]] :=
-  Dimensions /. h;
+  Reverse[Dimensions[data]];
 
 GetNumDimensions[DataRegion[h_, data_]] :=
-  NumDimensions /. h;
+  Length[Dimensions[data]];
 
 GetTime[DataRegion[h_, _]] :=
   Time /. h;
@@ -129,7 +140,7 @@ replaceRules[list_List, replacements_List] :=
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
 
 SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
- Module[{index, newOrigin, newSpacing, newDims, newNDims, h2, origin, spacing, dims, range, slice, ndims},
+ Module[{index, newOrigin, newSpacing, h2, origin, spacing, dims, range, slice, ndims},
   origin = GetOrigin[v];
   spacing = GetSpacing[v];
   dims = GetDimensions[v];
@@ -150,9 +161,7 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
   index = Round[(coord - origin[[dim]])/spacing[[dim]]+1];
   newOrigin = Drop[origin, {dim}];
   newSpacing = Drop[spacing, {dim}];
-  newDims = Drop[dims, {dim}];
-  newNDims = ndims-1;
-  h2 = replaceRules[h, {Dimensions -> newDims, Origin -> newOrigin, NumDimensions -> newNDims, Spacing-> newSpacing}];
+  h2 = replaceRules[h, {Origin -> newOrigin, Spacing-> newSpacing}];
   slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
   Return[DataRegion[h2, data[[slice]] ]]
 ];
@@ -188,7 +197,7 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
   (* Get new origin *)
   newOrigin = origin + spacing (indexrange[[All,1]]-1);
 
-  h2 = replaceRules[h, {Dimensions -> Reverse[Dimensions[newData]], Origin -> newOrigin}];
+  h2 = replaceRules[h, {Origin -> newOrigin}];
 
   DataRegion[h2, newData]
 ];
@@ -274,8 +283,7 @@ Strip[d_DataRegion, n_List] :=
     data2 = Take[data, Apply[Sequence, Map[{#+1,-(#+1)}&, Reverse[n]]]];
     attrs = GetAttributes[d];
     attrs2 = replaceRules[attrs, 
-      {Origin -> (GetOrigin[d] + n * GetSpacing[d]), 
-       Dimensions -> (GetDimensions[d] - 2n)}];
+      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
     d2 = DataRegion[attrs2, data2]];
 
 Strip[d_DataRegion, n_List, m_List] :=
@@ -284,8 +292,7 @@ Strip[d_DataRegion, n_List, m_List] :=
 	 data2 = Take[data, Apply[Sequence, MapThread[{#1+1,-(#2+1)}&, {Reverse[n], Reverse[m]}]]];
     attrs = GetAttributes[d];
     attrs2 = replaceRules[attrs,
-      {Origin -> (GetOrigin[d] + n * GetSpacing[d]),
-       Dimensions -> (GetDimensions[d] - n - m)}];
+      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
     d2 = DataRegion[attrs2, data2]];
 
 Downsample[d_DataRegion, n_Integer] :=
@@ -300,8 +307,7 @@ Downsample[d_DataRegion, n_List] :=
   attrs = GetAttributes[d];
   attrs2 =
    replaceRules[
-    attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n,
-     Dimensions -> Reverse@Dimensions[data2]}];
+    attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n}];
   d2 = DataRegion[attrs2, data2]];
 
 Attributes[insertArray] = {HoldFirst};
@@ -351,7 +357,7 @@ MergeDataRegions[regions_List] :=
   Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
    regions];
   attrs = GetAttributes[regions[[1]]];
-  attrs2 = replaceRules[attrs, {Dimensions -> n, Origin -> X1}];
+  attrs2 = replaceRules[attrs, {Origin -> X1}];
   Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]];
 
 (* Fiendishly clever code *)
@@ -673,6 +679,14 @@ EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
     If[!NumberQ@Max@Flatten[GetData[result]],
        Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
     result];
+
+(**********************************************************************************)
+(* Deprecated functions *)
+(**********************************************************************************)
+
+MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
+  DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
+             Developer`ToPackedArray[data]];
 
 End[];
 
