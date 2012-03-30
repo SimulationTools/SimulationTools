@@ -2,6 +2,7 @@
 
 TestSuite[
 	{
+		"CarpetHDF5.mt",
 		"DataTable.mt",
 		"Memo.mt",
 		"RunFiles.mt",
