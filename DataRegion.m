@@ -53,7 +53,8 @@ Strip[d,n,m] removes n points from each lower face and m points from each upper 
 MergeDataRegions::usage = "MergeDataRegions[regions] returns a DataRegion formed from merging the content of the DataRegions in the list regions.  If the regions do not cover a rectangular domain, any missing points will have value None.  All the DataRegions must have the same spacing and their origins must be separated by multiples of their spacing.";
 (* TODO: rename this as Coordinate *)
 GetCoordinate::usage = "GetCoordinate[d, i] returns a DataRegion of the same shape as the DataRegion d whose data is the i coordinate of d.";
-(* Rename this as Map *)
+(* TODO: Rename this as Map - might want to be MapData to make it clear you map over the data *)
+(* TODO: Add a MapCoordinates function which maps over the coordinates *)
 MapDataRegion::usage = "MapDataRegion[f,d] returns a DataRegion of the same shape as the DataRegion d whose data is f applied to the data in d.";
 FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
 (* TODO: move this to another package *)
@@ -73,6 +74,7 @@ Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtrac
 TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
 (* TODO: since this is the same functionality as System`Norm, we should use that.  But this means we can't have a usage message for it. *)
 NormL2::usage = "NormL2[d] returns the L2,dx norm of the points in the DataRegion d.  This is the discrete approximation to the L2 norm.";
+(* TODO: change this to ToDataRegion *)
 EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as the DataRegion d with data computed by evaluating expr assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: this function is only currently implemented for DataRegions of dimension 2 and 3.";
 
 (* DEPRECATED *)
@@ -199,6 +201,14 @@ SliceData[v_DataRegion, dims_List, coords_:0] :=
 
 DataRegion /: Part[d_DataRegion, s__] := DataRegionPart[d, {s}];
 
+(* TODO: extend this so it can slice the data when you specify a range
+   of just one number, and rename it to Slab. *)
+
+(* TODO: think about providing an option to be strict (within a
+   tolerance) about the ranges and slices rather than rounding to
+   nearest. *)
+
+(* TODO: why is this done with an extra list rather than additional arguments? *)
 DataRegionPart[d:DataRegion[h_, data_], s_]:=
  Module[{ndims, spacing, origin, dataRange, newS, indexrange, newOrigin, h2, newData},
   ndims = GetNumDimensions[d];
@@ -213,7 +223,7 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
   (* Convert all to a range *)
   newS = MapThread[#1/.#2&, {s, Thread[All -> dataRange]}];
 
-  (* Clip the rang to the lower and upper bound *)
+  (* Clip the range to the lower and upper bound *)
   newS = MapThread[{Max[#1[[1]],#2[[1]]], Min[#1[[2]],#2[[2]]]}&, {dataRange, newS}];
 
   (* Convert coordinate range to index range *)

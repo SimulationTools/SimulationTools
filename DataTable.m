@@ -5,8 +5,12 @@
 BeginPackage["DataTable`", {"Profile`", "Error`"}];
 
 DataTable::usage = "DataTable[{{x,f},...}, attrs] is a one-dimensional table of data with attributes attrs.  attrs is of the form {attr -> value, ...}.  DataTable objects print as DataTable[] to avoid printing the content.";
+
+(* TODO: change this to ToDataTable[{{x,f},...}] *)
 MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
+(* TODO: for DataTables, ToList returns the coordinates as well as the data, whereas for DataRegions *)
 ToList::usage = "ToList[d] returns the list content of the DataTable d";
+(* TODO: think of better names than IndVar and DepVar.  If these are timeseries, we could use Time and Data.   *)
 DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
 IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
 MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
