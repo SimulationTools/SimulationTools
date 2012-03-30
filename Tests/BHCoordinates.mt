@@ -49,3 +49,83 @@ Test[
     {-5.93161911032243*^-18, -2.88757513001964*^-17}}},
   TestID->"ReadBHTrajectories"
     ]
+
+Test[
+  ToList[ReadBHSeparation[$NRMMATestRun]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHSeparation.m"}]]
+  ,
+  TestID->"ReadBHSeparation"
+    ]
+
+Test[
+  ToList[ReadBHRadius[$NRMMATestRun,0]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHRadius.m"}]]
+  ,
+  TestID->"ReadBHRadius"
+    ]
+
+Test[
+  ToList[ReadBHPhase[$NRMMATestRun,0]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhase-0.m"}]]
+  ,
+  TestID->"ReadBHPhase-0"
+    ]
+
+Test[
+  ToList[ReadBHInclination[$NRMMATestRun]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHInclination.m"}]]
+  ,
+  TestID->"ReadBHInclination"
+    ]
+
+Test[
+  ToList[ReadBHPhase[$NRMMATestRun]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhase.m"}]]
+  ,
+  TestID->"ReadBHPhase"
+    ]
+
+Test[
+  ToList[ReadBHPhaseOfFrequency[$NRMMATestRun]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhaseOfFrequency.m"}]]
+  ,
+  TestID->"ReadBHPhaseOfFrequency"
+    ]
+
+Test[
+  ToList[ReadBHSpeed[$NRMMATestRun,0]][[{1,2,-1}]]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"ReadBHSpeed.m"}]]
+  ,
+  TestID->"ReadBHSpeed"
+    ]
+
+Test[
+  BHCoordinateMergerTime[$NRMMATestRun]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"BHCoordinateMergerTime.m"}]]
+  ,
+  TestID->"BHCoordinateMergerTime"
+    ]
+
+Test[
+  InitialSeparation[$NRMMATestRun]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"InitialSeparation.m"}]]
+  ,
+  TestID->"InitialSeparation"
+    ]
+
+Test[
+  InitialPosition[$NRMMATestRun,0]
+  ,
+  Get[FileNameJoin[{TestReferenceDirectory,"InitialPosition.m"}]]
+  ,
+  TestID->"InitialPosition"
+    ]
