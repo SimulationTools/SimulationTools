@@ -103,6 +103,7 @@ DefineMemoFunction[
 (* Return a list of radii available *)
 ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
 
+(* TODO: this function should be deprecated *)
 ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
  Module[{psi4, rAmp, rAmpTb, t2, phase},
 
@@ -119,6 +120,7 @@ ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
   phase =
    DataTableInterval[Phase[psi4], {rAmpTb[[1, 1]] - 100.0, t2}]];
 
+(* TODO: this does not work because SpinWeightedSphericalHarmonic is not found *)
 ReconstructPsi4[sim_, t_, rad_: Automatic] :=
  Module[{modes, psi4modes, harmonics, cf, psi4},
   modes = ReadPsi4Modes[sim];
@@ -129,6 +131,7 @@ ReconstructPsi4[sim_, t_, rad_: Automatic] :=
   psi4
 ];
 
+(* TODO: this does not work because SpinWeightedSphericalHarmonic is not found *)
 SchmidtAngle[run_, t_, rad_: Automatic] := 
  Module[{psi4, psi4l2m2, psi4l2mm2, th1},
   psi4 = ReconstructPsi4[run, t, rad];
@@ -195,10 +198,13 @@ Global`StandardDefinition[ExtrapolateScalar] = True;
 ExtrapolateScalar[args__] :=
  ExtrapolatedValue /. ExtrapolateScalarFull[args];
 
+(* TODO: what does this function do?  Why does it map f over the radii? *)
 Global`StandardDefinition[ExtrapolateScalarWithRadii] = True;
 ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
   ExtrapolatedValue /. ExtrapolateScalarFull[order, MapThread[List, {rads, Map[f, rads]}]];
 
+(* TODO: There must be a better way to do this in Mathematica, e.g. using Transpose *)
+(* TODO: This function should be internal *)
 RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
  Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads},
   rads = Map[First, rdTb];
