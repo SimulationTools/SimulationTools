@@ -16,7 +16,7 @@ stack = {};
 
 SetAttributes[WithStackFrame, HoldAll];
 WithStackFrame[sf_, expr_] := 
-  Module[{r,oldlen, head, oldStack, locFn},
+  Module[{r, head, oldStack, locFn},
    oldStack = stack;
    stack = Append[oldStack, Hold[sf]];
    head = Hold[sf][[1,0]];

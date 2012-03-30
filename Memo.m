@@ -11,9 +11,7 @@ If[!ValueQ[$cache], $cache = {}];
 
 SetAttributes[DefineMemoFunction, HoldAll];
 DefineMemoFunction[name_[args___], body_] :=
-  Module[
-    {pat},
-    pat : name[args] := (AppendTo[$cache, Hold[pat]]; pat = body)];
+    pat : name[args] := (AppendTo[$cache, Hold[pat]]; pat = body);
 
 ClearAllMemos[] :=
   ($cache /. Hold -> Unset; $cache = {};)

@@ -537,7 +537,7 @@ NormL2[d_DataRegion] :=
  Sqrt[Times@@GetSpacing[d] * Plus @@ Flatten[GetData[d^2]]];
 
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
- Module[{spacing, ndims, data, dr1, dr2, newh, deriv, lowerdims, upperdims, leftpart, rightpart},
+ Module[{ndims},
    ndims   = GetNumDimensions[d];
    (NDerivative@@UnitVector[ndims, dir])[d]
 ];

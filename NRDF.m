@@ -176,7 +176,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
 
 ReadMetadataKey[run_String, keyPattern_] :=
   Module[
-    {md, filenames, filename, tmp, results},
+    {md, results},
     md = ParseMetadataFile[run];
     results = Cases[md,
                  "section"[___, 

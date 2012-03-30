@@ -85,8 +85,8 @@ Module[{packages =
 
 SetAttributes[CheckAssignments, HoldAll];
 CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]] :=
- Module[{validSymbols, a, b, assignedSymbols, warnSymbols, noValueQ, 
-   moduleSymbols, expr, assignedExpresions, noValueAssignedSymbols},
+ Module[{validSymbols, assignedSymbols, warnSymbols, noValueQ, 
+   moduleSymbols, expr, noValueAssignedSymbols},
   moduleSymbols = 
    ReleaseHold@
     Replace[Hold[defs], {HoldPattern[a_ = b_] :> Hold[a], 
@@ -142,7 +142,7 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
 
   SetAttributes[DefFn, HoldAll];
   DefFn[fn_[args___], body_] :=
-   Module[{x,argSyms,argValueExprs,lhs},
+   Module[{argSyms},
     ErrorDefinition[fn];
     argSyms = Cases[{args}, x_Pattern :> x[[1]], Infinity, Heads->True]; (* What if the pattern name symbol has meaning in this scope? *)
     CheckAssignments[Evaluate[ToString[fn]],Map[Hold,argSyms],Module[{},body]];
