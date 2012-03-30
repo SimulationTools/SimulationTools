@@ -33,10 +33,10 @@ ApplyDefaults[opts, provider] :=
       Error["Default specified for non-existent option"],
 
       OptionValue[opt] != Automatic && !HaveOpt[opt],
-      Error["Unknown option specified"]
+      Error["Unknown option specified"],
 
       OptionValue[opt] == Automatic && !HaveOpt[opt] && !HaveDefault[opt],
-      Continue[],
+      Continue[]
     ], {opt, options}];
 
 Options[ReadGridFunction] = {
