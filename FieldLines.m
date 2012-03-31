@@ -31,7 +31,7 @@ Movie2d::usage = "Movie2d[runlist,var,rfl,function,opts] "<>
 Sequence2d::usage = "Sequence2d[path,runlist,var,rfl,function,xmin,xmax,opts] "<>
 	"Create a sequence of figures of a 2D variable with fixed color range.";
 ColorRanges2d::usage = "ColorRanges2d[runlist,var,rfl,func] "<>
-	"Calculate a list of the universal Minimum and Maximum among 2D data of several"<>
+	"Calculate a list of the universal Minimum and Maximum among 2D data of several "<>
 	"simulations. ColorRange can be used in order to set a universal ColorBar in movies.";
 ColorRanges3d::usage = "ColorRanges3d[runlist,var,plane,rfl,func] "<>
 	"Calculate a list of the universal Minimum and Maximum among 3D data of several "<>
