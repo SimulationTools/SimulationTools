@@ -7,29 +7,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["InitialData",
+ ButtonBox["NRExport",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/InitialData"],
+  ButtonData->"paclet:nrmma/guide/NRExport"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ReadADMMass",
+ ButtonBox["ExcludeModes",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadADMMass"]
+  ButtonData->"paclet:nrmma/ref/ExcludeModes"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ReadADMMass", "ObjectName"],
+Cell["ExcludeModes", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["ReadADMMass",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadADMMass"], "[", 
-       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]reads the ADM mass of the spacetime from the initial \
-data slice"
+     Cell[TextData[ButtonBox["ExcludeModes",
+      BaseStyle->"Link",
+      ButtonData->"paclet:nrmma/ref/ExcludeModes"]], "InlineFormula"],
+     "\[LineSeparator] is an option for ExportSim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +41,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ReadADMMass",
+WindowTitle->"ExcludeModes",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ReadADMMass", "READADMMASS", "readadmmass"}, "index" -> 
-    True, "label" -> "nrmma/InitialData Symbol", "language" -> "en", "paclet" -> 
-    "InitialData", "status" -> "None", "summary" -> 
-    "ReadADMMass[run] reads the ADM mass of the spacetime from the initial \
-data slice", "synonyms" -> {"ReadADMMass", "READADMMASS", "readadmmass"}, 
-    "title" -> "ReadADMMass", "windowTitle" -> "ReadADMMass", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ReadADMMass"}, "SearchTextTranslated" -> "",
-   "LinkTrails" -> ""},
+    "keywords" -> {"ExcludeModes", "EXCLUDEMODES", "excludemodes"}, "index" -> 
+    True, "label" -> "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> 
+    "NRExport", "status" -> "None", "summary" -> 
+    "ExcludeModes is an option for ExportSim.", 
+    "synonyms" -> {"ExcludeModes", "EXCLUDEMODES", "excludemodes"}, "title" -> 
+    "ExcludeModes", "windowTitle" -> "ExcludeModes", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/ExcludeModes"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

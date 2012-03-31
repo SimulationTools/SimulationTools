@@ -92,7 +92,7 @@ Cell[CellGroupData[{
 Cell["ReadCPUHours[\"bbh\"]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["40048.40971380472`"], "Output",
+Cell[BoxData["0.343991029397075`"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

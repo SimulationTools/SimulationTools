@@ -111,7 +111,7 @@ Cell[CellGroupData[{
 Cell["dx = LookupParameter[\"bbh\", \"CoordBase::dx\"]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["\<\"0.6\"\>"], "Output",
+Cell[BoxData["\<\"2.00\"\>"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -124,7 +124,7 @@ Cell["FullForm[dx]", "Input",
 
 Cell[BoxData[
  TagBox[
-  StyleBox["\"\<0.6\>\"",
+  StyleBox["\"\<2.00\>\"",
    ShowSpecialCharacters->False,
    ShowStringCharacters->True,
    NumberMarks->True],
@@ -139,7 +139,7 @@ Cell[CellGroupData[{
 Cell["ToExpression[dx]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["0.6`"], "Output",
+Cell[BoxData["2.`"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -153,17 +153,20 @@ Cell["carpetParams = FindParameters[\"bbh\", \"Carpet::*\"]", "Input",
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"carpet::domain_from_coordbase\"\>", 
-   ",", "\<\"carpet::time_refinement_factors\"\>", 
    ",", "\<\"carpet::max_refinement_levels\"\>", 
-   ",", "\<\"carpet::use_tapered_grids\"\>", 
    ",", "\<\"carpet::use_buffer_zones\"\>", 
    ",", "\<\"carpet::prolongation_order_space\"\>", 
    ",", "\<\"carpet::prolongation_order_time\"\>", 
    ",", "\<\"carpet::grid_coordinates_filename\"\>", 
+   ",", "\<\"carpet::time_refinement_factors\"\>", 
    ",", "\<\"carpet::init_fill_timelevels\"\>", 
    ",", "\<\"carpet::poison_new_timelevels\"\>", 
    ",", "\<\"carpet::poison_value\"\>", 
-   ",", "\<\"carpet::check_for_poison\"\>"}], "}"}]], "Output",
+   ",", "\<\"carpet::check_for_poison\"\>", ",", "\<\"carpet::verbose\"\>", 
+   ",", "\<\"carpet::veryverbose\"\>", 
+   ",", "\<\"carpet::schedule_barriers\"\>", 
+   ",", "\<\"carpet::storage_verbose\"\>", 
+   ",", "\<\"carpet::timers_verbose\"\>"}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -181,13 +184,8 @@ Cell[BoxData[
       RowBox[{"\<\"carpet::domain_from_coordbase\"\>", 
        "\[Rule]", "\<\"yes\"\>"}]},
      {
-      RowBox[{"\<\"carpet::time_refinement_factors\"\>", 
-       "\[Rule]", "\<\"[1,1,2,4,8,16,32,64,128,256]\"\>"}]},
-     {
       RowBox[{"\<\"carpet::max_refinement_levels\"\>", 
-       "\[Rule]", "\<\"9\"\>"}]},
-     {
-      RowBox[{"\<\"carpet::use_tapered_grids\"\>", "\[Rule]", "\<\"yes\"\>"}]},
+       "\[Rule]", "\<\"7\"\>"}]},
      {
       RowBox[{"\<\"carpet::use_buffer_zones\"\>", 
        "\[Rule]", "\<\"yes\"\>"}]},
@@ -201,6 +199,9 @@ Cell[BoxData[
       RowBox[{"\<\"carpet::grid_coordinates_filename\"\>", 
        "\[Rule]", "\<\"carpet-grid.asc\"\>"}]},
      {
+      RowBox[{"\<\"carpet::time_refinement_factors\"\>", 
+       "\[Rule]", "\<\"[1,1,2,4,8,16,32,64,128,256]\"\>"}]},
+     {
       RowBox[{"\<\"carpet::init_fill_timelevels\"\>", 
        "\[Rule]", "\<\"yes\"\>"}]},
      {
@@ -209,7 +210,18 @@ Cell[BoxData[
      {
       RowBox[{"\<\"carpet::poison_value\"\>", "\[Rule]", "\<\"100\"\>"}]},
      {
-      RowBox[{"\<\"carpet::check_for_poison\"\>", "\[Rule]", "\<\"no\"\>"}]}
+      RowBox[{"\<\"carpet::check_for_poison\"\>", "\[Rule]", "\<\"no\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::verbose\"\>", "\[Rule]", "\<\"no\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::veryverbose\"\>", "\[Rule]", "\<\"no\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::schedule_barriers\"\>", 
+       "\[Rule]", "\<\"no\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::storage_verbose\"\>", "\[Rule]", "\<\"no\"\>"}]},
+     {
+      RowBox[{"\<\"carpet::timers_verbose\"\>", "\[Rule]", "\<\"no\"\>"}]}
     },
     GridBoxAlignment->{
      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 

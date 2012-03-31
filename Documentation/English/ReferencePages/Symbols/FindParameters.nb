@@ -93,17 +93,20 @@ Cell["FindParameters[\"bbh\", \"Carpet::*\"]", "Input",
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"carpet::domain_from_coordbase\"\>", 
-   ",", "\<\"carpet::time_refinement_factors\"\>", 
    ",", "\<\"carpet::max_refinement_levels\"\>", 
-   ",", "\<\"carpet::use_tapered_grids\"\>", 
    ",", "\<\"carpet::use_buffer_zones\"\>", 
    ",", "\<\"carpet::prolongation_order_space\"\>", 
    ",", "\<\"carpet::prolongation_order_time\"\>", 
    ",", "\<\"carpet::grid_coordinates_filename\"\>", 
+   ",", "\<\"carpet::time_refinement_factors\"\>", 
    ",", "\<\"carpet::init_fill_timelevels\"\>", 
    ",", "\<\"carpet::poison_new_timelevels\"\>", 
    ",", "\<\"carpet::poison_value\"\>", 
-   ",", "\<\"carpet::check_for_poison\"\>"}], "}"}]], "Output",
+   ",", "\<\"carpet::check_for_poison\"\>", ",", "\<\"carpet::verbose\"\>", 
+   ",", "\<\"carpet::veryverbose\"\>", 
+   ",", "\<\"carpet::schedule_barriers\"\>", 
+   ",", "\<\"carpet::storage_verbose\"\>", 
+   ",", "\<\"carpet::timers_verbose\"\>"}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

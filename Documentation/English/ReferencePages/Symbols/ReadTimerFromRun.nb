@@ -1,0 +1,76 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Timers",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Timers"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadTimerFromRun",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadTimerFromRun"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadTimerFromRun", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadTimerFromRun",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadTimerFromRun"], "[", 
+       StyleBox[
+        RowBox[{"run", ",", " ", "timername", ",", " ", "proc"}], "TI"], 
+       "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns data for the timer called timername on process \
+proc from the AllTimers output of the TimerReport thorn.  proc is optional \
+and defaults to 0."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadTimerFromRun",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadTimerFromRun", "READTIMERFROMRUN", "readtimerfromrun"}, "index" -> 
+    True, "label" -> "nrmma/Timers Symbol", "language" -> "en", "paclet" -> 
+    "Timers", "status" -> "None", "summary" -> 
+    "ReadTimerFromRun[run, timername, proc] returns data for the timer called \
+timername on process proc from the AllTimers output of the TimerReport thorn. \
+ proc is optional and defaults to 0.", 
+    "synonyms" -> {
+     "ReadTimerFromRun", "READTIMERFROMRUN", "readtimerfromrun"}, "title" -> 
+    "ReadTimerFromRun", "windowTitle" -> "ReadTimerFromRun", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadTimerFromRun"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

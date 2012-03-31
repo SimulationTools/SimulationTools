@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SystemStatistics",
+ ButtonBox["RunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+  ButtonData->"paclet:nrmma/guide/RunFiles"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadCores",
   BaseStyle->{"Link", "LinkTrail"},
@@ -17,7 +17,7 @@ Cell[TextData[{
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["SYSTEMSTATISTICS PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["RUNFILES PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
@@ -119,7 +119,7 @@ Cell[CellGroupData[{
 Cell["ReadCores[\"bbh\"]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["876"], "Output",
+Cell[BoxData["12"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
@@ -239,8 +239,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"ReadCores", "READCORES", "readcores"}, "index" -> True, 
-    "label" -> "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
-    "SystemStatistics", "status" -> "None", "summary" -> 
+    "label" -> "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> 
+    "RunFiles", "status" -> "None", "summary" -> 
     "ReadCores[run] returns the number of cores used by sim.", 
     "synonyms" -> {"ReadCores", "READCORES", "readcores"}, "title" -> 
     "ReadCores", "windowTitle" -> "ReadCores", "type" -> "Symbol", "uri" -> 

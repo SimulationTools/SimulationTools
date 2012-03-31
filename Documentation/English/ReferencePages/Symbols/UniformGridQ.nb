@@ -11,23 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NDerivative",
+ ButtonBox["UniformGridQ",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/NDerivative"]
+  ButtonData->"paclet:nrmma/ref/UniformGridQ"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["NDerivative", "ObjectName"],
+Cell["UniformGridQ", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[TextData[ButtonBox["NDerivative",
-      BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/NDerivative"]], "InlineFormula"],
-     "\[LineSeparator][derivs][d] returns a numerical derivative of the \
-DataRegion d. The derivs argument should be of the same form as in the first \
-argument of Derivative."
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["UniformGridQ",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/UniformGridQ"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns True if the DataTable has a uniform grid \
+spacing and False if the grid spacing is variable.  The grid spacings are \
+considered uniform if they are equal up to a tolerance of 1e-5."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -43,22 +46,23 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"NDerivative",
+WindowTitle->"UniformGridQ",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, "index" -> 
+    "keywords" -> {"UniformGridQ", "UNIFORMGRIDQ", "uniformgridq"}, "index" -> 
     True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
     "DataTable", "status" -> "None", "summary" -> 
-    "NDerivative[derivs][d] returns a numerical derivative of the DataRegion \
-d. The derivs argument should be of the same form as in the first argument of \
-Derivative.", "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, 
-    "title" -> "NDerivative", "windowTitle" -> "NDerivative", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "",
-   "LinkTrails" -> ""},
+    "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing \
+and False if the grid spacing is variable.  The grid spacings are considered \
+uniform if they are equal up to a tolerance of 1e-5.", 
+    "synonyms" -> {"UniformGridQ", "UNIFORMGRIDQ", "uniformgridq"}, "title" -> 
+    "UniformGridQ", "windowTitle" -> "UniformGridQ", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/UniformGridQ"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

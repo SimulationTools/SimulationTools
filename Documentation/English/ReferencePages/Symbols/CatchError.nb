@@ -7,32 +7,29 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["FieldLines",
+ ButtonBox["Error",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/FieldLines"],
+  ButtonData->"paclet:nrmma/guide/Error"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Movie2d",
+ ButtonBox["CatchError",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Movie2d"]
+  ButtonData->"paclet:nrmma/ref/CatchError"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Movie2d", "ObjectName"],
+Cell["CatchError", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Movie2d",
+       ButtonBox["CatchError",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Movie2d"], "[", 
-       StyleBox[
-        RowBox[{
-        "runlist", ",", "var", ",", "rfl", ",", "function", ",", "opts"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]Create a movie of a 2D variable with fixed color \
-range."
+        ButtonData->"paclet:nrmma/ref/CatchError"], "[", 
+       StyleBox["expr", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]evaluates expr, and returns its result unless an error \
+was generated, in which case the error message is displayed."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -48,20 +45,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Movie2d",
+WindowTitle->"CatchError",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Movie2d", "MOVIE2D", "movie2d"}, 
-    "index" -> True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en",
-     "paclet" -> "FieldLines", "status" -> "None", "summary" -> 
-    "Movie2d[runlist,var,rfl,function,opts] Create a movie of a 2D variable \
-with fixed color range.", "synonyms" -> {"Movie2d", "MOVIE2D", "movie2d"}, 
-    "title" -> "Movie2d", "windowTitle" -> "Movie2d", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/Movie2d"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"CatchError", "CATCHERROR", "catcherror"}, "index" -> True,
+     "label" -> "nrmma/Error Symbol", "language" -> "en", "paclet" -> "Error",
+     "status" -> "None", "summary" -> 
+    "CatchError[expr] evaluates expr, and returns its result unless an error \
+was generated, in which case the error message is displayed.", 
+    "synonyms" -> {"CatchError", "CATCHERROR", "catcherror"}, "title" -> 
+    "CatchError", "windowTitle" -> "CatchError", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/CatchError"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -11,23 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NDerivative",
+ ButtonBox["MakeUniform",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/NDerivative"]
+  ButtonData->"paclet:nrmma/ref/MakeUniform"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["NDerivative", "ObjectName"],
+Cell["MakeUniform", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[TextData[ButtonBox["NDerivative",
-      BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/NDerivative"]], "InlineFormula"],
-     "\[LineSeparator][derivs][d] returns a numerical derivative of the \
-DataRegion d. The derivs argument should be of the same form as in the first \
-argument of Derivative."
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["MakeUniform",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/MakeUniform"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a DataTable with a uniform grid spacing from a \
+DataTable with a nonuniform grid spacing.  This is accomplished via \
+interpolation through ResampleDataTable."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -43,22 +46,23 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"NDerivative",
+WindowTitle->"MakeUniform",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, "index" -> 
+    "keywords" -> {"MakeUniform", "MAKEUNIFORM", "makeuniform"}, "index" -> 
     True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
     "DataTable", "status" -> "None", "summary" -> 
-    "NDerivative[derivs][d] returns a numerical derivative of the DataRegion \
-d. The derivs argument should be of the same form as in the first argument of \
-Derivative.", "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, 
-    "title" -> "NDerivative", "windowTitle" -> "NDerivative", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "",
-   "LinkTrails" -> ""},
+    "MakeUniform[d] returns a DataTable with a uniform grid spacing from a \
+DataTable with a nonuniform grid spacing.  This is accomplished via \
+interpolation through ResampleDataTable.", 
+    "synonyms" -> {"MakeUniform", "MAKEUNIFORM", "makeuniform"}, "title" -> 
+    "MakeUniform", "windowTitle" -> "MakeUniform", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/MakeUniform"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

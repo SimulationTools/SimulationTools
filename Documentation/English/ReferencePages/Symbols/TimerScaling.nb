@@ -1,0 +1,79 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["CactusTimers",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/CactusTimers"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["TimerScaling",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/TimerScaling"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["TimerScaling", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["TimerScaling",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/TimerScaling"], "[", 
+       StyleBox[
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"timers1", ",", " ", "timers2", ",", " ", "..."}], "}"}], 
+         ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"n1", ",", " ", "n2", ",", " ", "..."}], "}"}], ",", " ", 
+         "timername"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a table of {n, s} pairs where n is the number \
+of processors and s = (t n) / (n1 t1) where t is the time measured by timer \
+'timername'."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"TimerScaling",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"TimerScaling", "TIMERSCALING", "timerscaling"}, "index" -> 
+    True, "label" -> "nrmma/CactusTimers Symbol", "language" -> "en", 
+    "paclet" -> "CactusTimers", "status" -> "None", "summary" -> 
+    "TimerScaling[{timers1, timers2, ...}, {n1, n2, ...}, timername] returns \
+a table of {n, s} pairs where n is the number of processors and s = (t n) / \
+(n1 t1) where t is the time measured by timer 'timername'.", 
+    "synonyms" -> {"TimerScaling", "TIMERSCALING", "timerscaling"}, "title" -> 
+    "TimerScaling", "windowTitle" -> "TimerScaling", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/TimerScaling"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

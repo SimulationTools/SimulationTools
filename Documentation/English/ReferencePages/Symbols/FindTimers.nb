@@ -7,32 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["FieldLines",
+ ButtonBox["CactusTimers",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/FieldLines"],
+  ButtonData->"paclet:nrmma/guide/CactusTimers"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Sequence2d",
+ ButtonBox["FindTimers",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Sequence2d"]
+  ButtonData->"paclet:nrmma/ref/FindTimers"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Sequence2d", "ObjectName"],
+Cell["FindTimers", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Sequence2d",
+       ButtonBox["FindTimers",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Sequence2d"], "[", 
+        ButtonData->"paclet:nrmma/ref/FindTimers"], "[", 
        StyleBox[
-        RowBox[{
-        "path", ",", "runlist", ",", "var", ",", "rfl", ",", "function", ",", 
-         "xmin", ",", "xmax", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]Create a sequence of figures of a 2D variable with \
-fixed color range."
+        RowBox[{"timers", ",", " ", "pattern"}], "TI"], "]"}]], 
+      "InlineFormula"],
+     "\[LineSeparator]gives a list of the timer names which match pattern."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -48,21 +46,20 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Sequence2d",
+WindowTitle->"FindTimers",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"Sequence2d", "SEQUENCE2D", "sequence2d"}, "index" -> True,
-     "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
-    "FieldLines", "status" -> "None", "summary" -> 
-    "Sequence2d[path,runlist,var,rfl,function,xmin,xmax,opts] Create a \
-sequence of figures of a 2D variable with fixed color range.", 
-    "synonyms" -> {"Sequence2d", "SEQUENCE2D", "sequence2d"}, "title" -> 
-    "Sequence2d", "windowTitle" -> "Sequence2d", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Sequence2d"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "keywords" -> {"FindTimers", "FINDTIMERS", "findtimers"}, "index" -> True,
+     "label" -> "nrmma/CactusTimers Symbol", "language" -> "en", "paclet" -> 
+    "CactusTimers", "status" -> "None", "summary" -> 
+    "FindTimers[timers, pattern] gives a list of the timer names which match \
+pattern.", "synonyms" -> {"FindTimers", "FINDTIMERS", "findtimers"}, "title" -> 
+    "FindTimers", "windowTitle" -> "FindTimers", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/FindTimers"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

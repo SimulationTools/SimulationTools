@@ -14,12 +14,36 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Ascii1D skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"AsciiData1D\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Ascii1D skipped:\n", {"AsciiData1D"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
   RowBox[{"\<\"Undocumented symbols for package BHCoordinates \
 skipped:\\n\"\>", "\[InvisibleSpace]", 
    RowBox[{"{", "\<\"InitialSeparation\"\>", "}"}]}],
   SequenceForm[
   "Undocumented symbols for package BHCoordinates skipped:\n", {
    "InitialSeparation"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package CactusTimers skipped:\\n\"\>",
+    "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"EvolutionTimers\"\>", ",", "\<\"NonScheduleTimers\"\>", 
+     ",", "\<\"ParseTimersTogetherFile\"\>", ",", "\<\"ReadTimer\"\>", 
+     ",", "\<\"ScheduleTimerQ\"\>", ",", "\<\"ScheduleTimers\"\>", 
+     ",", "\<\"TimerScalingX\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package CactusTimers skipped:\n", {
+   "EvolutionTimers", "NonScheduleTimers", "ParseTimersTogetherFile", 
+    "ReadTimer", "ScheduleTimerQ", "ScheduleTimers", "TimerScalingX"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -56,11 +80,12 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\<\"LoadConvergenceSeries\"\>", ",", "\<\"NPoints\"\>", 
      ",", "\<\"RescaledErrors\"\>", ",", "\<\"ResName\"\>", 
-     ",", "\<\"ResolutionCode\"\>"}], "}"}]}],
+     ",", "\<\"ResolutionCode\"\>", ",", "\<\"RichardsonError\"\>", 
+     ",", "\<\"RichardsonRelativeError\"\>"}], "}"}]}],
   SequenceForm[
   "Undocumented symbols for package Convergence skipped:\n", {
    "LoadConvergenceSeries", "NPoints", "RescaledErrors", "ResName", 
-    "ResolutionCode"}],
+    "ResolutionCode", "RichardsonError", "RichardsonRelativeError"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -68,16 +93,33 @@ Cell[BoxData[
   RowBox[{"\<\"Undocumented symbols for package DataTable skipped:\\n\"\>", 
    "\[InvisibleSpace]", 
    RowBox[{"{", 
-    RowBox[{"\<\"AbsOfPhase\"\>", ",", "\<\"DataTableListLinePlot\"\>", 
-     ",", "\<\"DataTableNormL2\"\>", ",", "\<\"FunctionOfPhase\"\>", 
-     ",", "\<\"InvertDataTable\"\>", ",", "\<\"MaximumValue\"\>", 
+    RowBox[{"\<\"DataTableListLinePlot\"\>", ",", "\<\"DataTableNormL2\"\>", 
      ",", "\<\"Monotonise\"\>", ",", "\<\"PartitionTable\"\>", 
      ",", "\<\"ShiftPhase\"\>", ",", "\<\"TableRange\"\>"}], "}"}]}],
   SequenceForm[
   "Undocumented symbols for package DataTable skipped:\n", {
-   "AbsOfPhase", "DataTableListLinePlot", "DataTableNormL2", 
-    "FunctionOfPhase", "InvertDataTable", "MaximumValue", "Monotonise", 
-    "PartitionTable", "ShiftPhase", "TableRange"}],
+   "DataTableListLinePlot", "DataTableNormL2", "Monotonise", "PartitionTable",
+     "ShiftPhase", "TableRange"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Error skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ErrorString\"\>", ",", "\<\"ErrorTag\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Error skipped:\n", {
+   "ErrorString", "ErrorTag"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package FieldLines skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"ColorRanges\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package FieldLines skipped:\n", {"ColorRanges"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -126,6 +168,28 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package IniFile skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"IniVariable\"\>", ",", "\<\"ReadIniFile\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package IniFile skipped:\n", {
+   "IniVariable", "ReadIniFile"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Movie skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"PadIndex\"\>", ",", "\<\"PreviewMovie\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Movie skipped:\n", {
+   "PadIndex", "PreviewMovie"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
   RowBox[{"\<\"Undocumented symbols for package NR skipped:\\n\"\>", 
    "\[InvisibleSpace]", 
    RowBox[{"{", 
@@ -140,6 +204,24 @@ Cell[BoxData[
    "Data", "Eccentricity", "FitEcc", "FitEccOm", "FitFunction", 
     "FitParameters", "FittedFunction", "InitialDimensionlessSpin", "LRange", 
     "PercentageDifference", "ReturnValue", "ToFixedWidth"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package NRDF skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ExpectedConvergenceOrder\"\>", 
+     ",", "\<\"HaveInfiniteRadiusWaveforms\"\>", 
+     ",", "\<\"ParseMetadataFile\"\>", ",", "\<\"ReadMetadataKey\"\>", 
+     ",", "\<\"ReadResolution\"\>", ",", "\<\"ReadRuns\"\>", 
+     ",", "\<\"StartingFrequency\"\>", ",", "\<\"UsefulWaveformTime\"\>"}], 
+    "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package NRDF skipped:\n", {
+   "ExpectedConvergenceOrder", "HaveInfiniteRadiusWaveforms", 
+    "ParseMetadataFile", "ReadMetadataKey", "ReadResolution", "ReadRuns", 
+    "StartingFrequency", "UsefulWaveformTime"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -171,8 +253,9 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\<\"ColorMap\"\>", ",", "\<\"ColorRange\"\>", 
      ",", "\<\"DynamicArrayPlot\"\>", ",", "\<\"DynamicShow\"\>", 
-     ",", "\<\"LegendLineSize\"\>", ",", "\<\"LegendOrientation\"\>", 
-     ",", "\<\"LegendPosition\"\>", ",", "\<\"ListLinePlotWithLegend\"\>", 
+     ",", "\<\"LegendBackground\"\>", ",", "\<\"LegendLineSize\"\>", 
+     ",", "\<\"LegendOrientation\"\>", ",", "\<\"LegendPosition\"\>", 
+     ",", "\<\"ListLinePlotWithLegend\"\>", 
      ",", "\<\"ListLogLinearPlotWithLegend\"\>", 
      ",", "\<\"MakePlotLegend\"\>", ",", "\<\"PlotKey\"\>", 
      ",", "\<\"PlotKeySize\"\>", ",", "\<\"PlotLegend\"\>", 
@@ -181,10 +264,10 @@ Cell[BoxData[
   SequenceForm[
   "Undocumented symbols for package Plotting skipped:\n", {
    "ColorMap", "ColorRange", "DynamicArrayPlot", "DynamicShow", 
-    "LegendLineSize", "LegendOrientation", "LegendPosition", 
-    "ListLinePlotWithLegend", "ListLogLinearPlotWithLegend", "MakePlotLegend",
-     "PlotKey", "PlotKeySize", "PlotLegend", "PresentationPlotColors", 
-    "PresentationPlotStyles"}],
+    "LegendBackground", "LegendLineSize", "LegendOrientation", 
+    "LegendPosition", "ListLinePlotWithLegend", "ListLogLinearPlotWithLegend",
+     "MakePlotLegend", "PlotKey", "PlotKeySize", "PlotLegend", 
+    "PresentationPlotColors", "PresentationPlotStyles"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -201,21 +284,31 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Providers skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"CallProvidedFunction\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Providers skipped:\n", {
+   "CallProvidedFunction"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
   RowBox[{"\<\"Undocumented symbols for package RunFiles skipped:\\n\"\>", 
    "\[InvisibleSpace]", 
    RowBox[{"{", 
     RowBox[{"\<\"CarpetASCIIColumns\"\>", ",", "\<\"FullFilenames\"\>", 
-     ",", "\<\"LeafNamesOnly\"\>", ",", "\<\"MergeFiles\"\>", 
-     ",", "\<\"ReadColumnFile\"\>", ",", "\<\"ReadColumnFile2\"\>", 
-     ",", "\<\"RunDutyCycle\"\>", 
+     ",", "\<\"HaveRunDir\"\>", ",", "\<\"LeafNamesOnly\"\>", 
+     ",", "\<\"MergeFiles\"\>", ",", "\<\"ReadColumnFile\"\>", 
+     ",", "\<\"ReadColumnFile2\"\>", ",", "\<\"RunDutyCycle\"\>", 
      ",", "\<\"SegmentCoordinateTimeInterval\"\>", 
      ",", "\<\"SegmentDuration\"\>", ",", "\<\"SegmentEndDate\"\>", 
      ",", "\<\"SegmentStartDate\"\>", ",", "\<\"SegmentStartTimes\"\>", 
      ",", "\<\"StandardOutputOfRun\"\>"}], "}"}]}],
   SequenceForm[
   "Undocumented symbols for package RunFiles skipped:\n", {
-   "CarpetASCIIColumns", "FullFilenames", "LeafNamesOnly", "MergeFiles", 
-    "ReadColumnFile", "ReadColumnFile2", "RunDutyCycle", 
+   "CarpetASCIIColumns", "FullFilenames", "HaveRunDir", "LeafNamesOnly", 
+    "MergeFiles", "ReadColumnFile", "ReadColumnFile2", "RunDutyCycle", 
     "SegmentCoordinateTimeInterval", "SegmentDuration", "SegmentEndDate", 
     "SegmentStartDate", "SegmentStartTimes", "StandardOutputOfRun"}],
   Editable->False]], "Print"],
@@ -232,6 +325,16 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Stack skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"CurrentStackFrame\"\>", "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Stack skipped:\n", {"CurrentStackFrame"}],
+  
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
   RowBox[{"\<\"Undocumented symbols for package SystemStatistics \
 skipped:\\n\"\>", "\[InvisibleSpace]", 
    RowBox[{"{", 
@@ -243,6 +346,28 @@ skipped:\\n\"\>", "\[InvisibleSpace]",
   "Undocumented symbols for package SystemStatistics skipped:\n", {
    "CostAnalysis", "CPUHours", "PresentationCostAnalysis", "ReadCarpetSpeed", 
     "ReadWalltimeHours", "WallTimeDays"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Undocumented symbols for package Timers skipped:\\n\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ChartEvolutionTimersFromRun\"\>", 
+     ",", "\<\"ChartTimersFromRun\"\>", ",", "\<\"CollectTimers\"\>", 
+     ",", "\<\"CTGammaTimerCollections\"\>", ",", "\<\"FindTimersFromRun\"\>",
+      ",", "\<\"IndependentTimersFromRun\"\>", 
+     ",", "\<\"ParseTimersFileFromRun\"\>", 
+     ",", "\<\"ParseTimersFileFromRunCore\"\>", 
+     ",", "\<\"ReadAllTimerIterations\"\>", ",", "\<\"ReadAllTimers\"\>", 
+     ",", "\<\"TimersFile\"\>"}], "}"}]}],
+  SequenceForm[
+  "Undocumented symbols for package Timers skipped:\n", {
+   "ChartEvolutionTimersFromRun", "ChartTimersFromRun", "CollectTimers", 
+    "CTGammaTimerCollections", "FindTimersFromRun", 
+    "IndependentTimersFromRun", "ParseTimersFileFromRun", 
+    "ParseTimersFileFromRunCore", "ReadAllTimerIterations", "ReadAllTimers", 
+    "TimersFile"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -287,10 +412,10 @@ Cell[BoxData[
      ",", "\<\"ExtrapolateRadiatedQuantity\"\>", 
      ",", "\<\"ExtrapolateScalar\"\>", ",", "\<\"ExtrapolateScalarFull\"\>", 
      ",", "\<\"ExtrapolateScalarWithRadii\"\>", 
-     ",", "\<\"ExtrapolationError\"\>", 
+     ",", "\<\"ExtrapolateStrain\"\>", ",", "\<\"ExtrapolationError\"\>", 
      ",", "\<\"ExtrapolationErrorRelative\"\>", 
      ",", "\<\"ExtrapolationOrder\"\>", ",", "\<\"MassADM\"\>", 
-     ",", "\<\"RadiusRange\"\>", 
+     ",", "\<\"NonUniformGrid\"\>", ",", "\<\"RadiusRange\"\>", 
      ",", "\<\"RadiusTimeDataToTimeRadiusData\"\>", 
      ",", "\<\"ReadWaveformFile\"\>"}], "}"}]}],
   SequenceForm[
@@ -299,9 +424,10 @@ Cell[BoxData[
     "ApplyToPhases", "Continuous", "ExtrapolateDataTables", 
     "ExtrapolatedCurve", "ExtrapolatedValue", "ExtrapolateRadiatedQuantity", 
     "ExtrapolateScalar", "ExtrapolateScalarFull", 
-    "ExtrapolateScalarWithRadii", "ExtrapolationError", 
+    "ExtrapolateScalarWithRadii", "ExtrapolateStrain", "ExtrapolationError", 
     "ExtrapolationErrorRelative", "ExtrapolationOrder", "MassADM", 
-    "RadiusRange", "RadiusTimeDataToTimeRadiusData", "ReadWaveformFile"}],
+    "NonUniformGrid", "RadiusRange", "RadiusTimeDataToTimeRadiusData", 
+    "ReadWaveformFile"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print"],

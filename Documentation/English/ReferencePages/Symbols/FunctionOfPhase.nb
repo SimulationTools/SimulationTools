@@ -1,0 +1,80 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataTable",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataTable"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["FunctionOfPhase",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/FunctionOfPhase"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["FunctionOfPhase", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["FunctionOfPhase",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/FunctionOfPhase"], "[", 
+       StyleBox[
+        RowBox[{"d", ",", " ", "p", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"t1", ",", " ", "t2"}], "}"}], ",", " ", "dp"}], "TI"], 
+       "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a DataTable consisting of the data of the \
+DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the \
+coordinate ranges in p on which to evaluate d.  dp is the uniform grid \
+spacing of p to use.  This function should be renamed, as p does not have to \
+be a phase."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"FunctionOfPhase",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"FunctionOfPhase", "FUNCTIONOFPHASE", "functionofphase"}, 
+    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
+    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
+    "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of \
+the data of the DataTable d evaluated as a function of the DataTable p.  t1 \
+and t2 are the coordinate ranges in p on which to evaluate d.  dp is the \
+uniform grid spacing of p to use.  This function should be renamed, as p does \
+not have to be a phase.", 
+    "synonyms" -> {"FunctionOfPhase", "FUNCTIONOFPHASE", "functionofphase"}, 
+    "title" -> "FunctionOfPhase", "windowTitle" -> "FunctionOfPhase", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/FunctionOfPhase"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

@@ -1,0 +1,62 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Error",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Error"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ErrorMessage",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ErrorMessage"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ErrorMessage", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell["\<\
+Error[message, arg1, arg2, ...] reports an error to the user.\
+\>"]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ErrorMessage",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"ErrorMessage", "ERRORMESSAGE", "errormessage"}, "index" -> 
+    True, "label" -> "nrmma/Error Symbol", "language" -> "en", "paclet" -> 
+    "Error", "status" -> "None", "summary" -> 
+    "Error[message, arg1, arg2, ...] reports an error to the user.", 
+    "synonyms" -> {"ErrorMessage", "ERRORMESSAGE", "errormessage"}, "title" -> 
+    "ErrorMessage", "windowTitle" -> "ErrorMessage", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/ErrorMessage"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+
