@@ -1,0 +1,163 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Introduction to NRMMA", "Title"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["NRMMA",
+   BaseStyle->"Link",
+   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
+ " is a suite of ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " packages for analysing data from simulations.  It has been designed for \
+use with common output formats used by the Cactus code, with a focus on the \
+field of Numerical Relativity, but is general enough to be useful also in \
+other contexts."
+}], "Text"],
+
+Cell["\<\
+A large selection of NR-related functions are provided.  Includes interfaces \
+to: read data from simulation output directories including waveforms, BH \
+trajectories, apparent horizons, isolated horizons.  Extrapolation of \
+radiated quantities to r = \[Infinity].  Convergence testing.  Computation of \
+strain from Psi4.  Reading grid structure values.  Exporting simulation data \
+to a standard uniform format.  \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Essential Concepts", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Loading the package", "Subsection"],
+
+Cell["Load the package", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finding simulation directories", "Subsection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["NRMMA",
+   BaseStyle->"Link",
+   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
+ " has an interface for accessing \"simulations\" which are directories \
+containing simulation output.  The name of the simulation is the name of the \
+directory.  You can either specify a simulation by a full path, or by the \
+simulation name.  For the latter, NRMMA needs to know which directory to look \
+in.  You can set the variable ",
+ Cell[BoxData[
+  ButtonBox["RunDirectory",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Global/ref/RunDirectory"]], "InlineFormula"],
+ " to this directory and NRMMA will then know where to find your simulations. \
+For example, in your init.m file you can set if you have your simulations in \
+that directory."
+}], "Text"],
+
+Cell[TextData[{
+ "Set the ",
+ Cell[BoxData[
+  ButtonBox["RunDirectory",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Global/ref/RunDirectory"]], "InlineFormula"],
+ " variable to the directory containing your simulations"
+}], "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"RunDirectory", "=", 
+    RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}], 
+  "*)"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Chunking", "Subsection"],
+
+Cell[TextData[{
+ "Simulations usually take more than one job on a supercomputer, and the \
+output is spread across many different output directories (\"chunks\").  ",
+ Cell[BoxData[
+  ButtonBox["NRMMA",
+   BaseStyle->"Link",
+   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
+ " supports the SimFactory chunking mechanism and almost all the file reading \
+functions go through a layer which automatically merges the files in these \
+chunks together, taking care to eliminate any duplicate data.  As such, you \
+should never have to worry about merging chunks of data together, and in fact \
+you can probably forget about the fact that the simulation data is split into \
+chunks."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["DataTables and DataRegions", "Subsection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["NRMMA",
+   BaseStyle->"Link",
+   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
+ " uses the ",
+ Cell[BoxData[
+  ButtonBox["DataTable",
+   BaseStyle->"Link",
+   ButtonData->"paclet:DataTable/ref/DataTable"]], "InlineFormula"],
+ " and ",
+ Cell[BoxData[
+  ButtonBox["DataRegion",
+   BaseStyle->"Link",
+   ButtonData->"paclet:DataRegion/ref/DataRegion"]], "InlineFormula"],
+ " packages extensively to represent numerical simulation data, so you should \
+also look at the documentation for those package to familiarise yourself with \
+the concepts."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Memoisation", "Subsection"],
+
+Cell[TextData[{
+ "Some functions use \"memoisation\".  In other words, the first time a \
+particular quantity is accessed, for example a waveform, it is cached in \
+memory so that later calls to the function do not have to read the data off \
+the disk again.  When using very long simulations this can save a significant \
+amount of time.  However, beware that if the run data on the disk changes, \
+the copy in memory will not be.  To clear the cache, use the function ",
+ Cell[BoxData[
+  ButtonBox["ClearAllMemos",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Memo/ref/ClearAllMemos"]], "InlineFormula"],
+ "."
+}], "Text"],
+
+Cell["Clear data cache", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"ClearAllMemos", "[", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+

@@ -79,10 +79,11 @@
 
  },
  "Tutorials" -> {
-   "CarpetHDF5",
+   "NRMMAIntroduction",
    "DataRegion",
    "DataTable",
-   "Kicks",
-   "NumericalRelativity"
+   "NumericalRelativity",
+   "CarpetHDF5",
+   "Kicks"
  } 
 }

@@ -1,10 +1,10 @@
 {
  "Application" -> "nrmma",
- "Title" -> "Numerical Relativity with NRMMA",
+ "Title" -> "Introduction to NRMMA",
  "Related Tutorials" -> {"CarpetHDF5", "DataTable", "DataRegion", "Kicks"},
  "Keywords" -> {},
- "Label" -> "nrmma NR Tutorial",
+ "Label" -> "nrmma Tutorial",
  "Package" -> "nrmma",
- "Summary" -> "Numerical Relativity tutorial for the nrmma application.",
+ "Summary" -> "Tutorial for the nrmma application.",
  "Synonyms" -> {}
  }

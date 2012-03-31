@@ -1,62 +1,16 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["NRMMA - Numerical Relativity in Mathematica", "Title"],
-
-Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["NRMMA",
-   BaseStyle->"Link",
-   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
- " is a suite of ",
- StyleBox["Mathematica",
-  FontSlant->"Italic"],
- " packages for analysing data in Numerical Relativity.  It has been designed \
-for use with common output formats used by the Cactus code, with a focus on \
-output from the PSU and AEI codes."
-}], "Text"],
-
-Cell["\<\
-A large selection of NR-related functions are provided.  Includes interfaces \
-to: read data from simulation output directories including waveforms, BH \
-trajectories, apparent horizons, isolated horizons.  Extrapolation of \
-radiated quantities to r = \[Infinity].  Convergence testing.  Computation of \
-strain from Psi4.  Reading grid structure values.  Exporting simulation data \
-to a standard uniform format.  \
-\>", "Text"],
-
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"<<", "nrmma`"}], "*)"}]], "Input"],
+Cell["Numerical Relativity in NRMMA", "Title"],
 
 Cell[CellGroupData[{
 
 Cell["Getting Started", "Section"],
 
-Cell[CellGroupData[{
+Cell["Load the package", "MathCaption"],
 
-Cell["Finding simulation directories", "Subsection"],
-
-Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["NRMMA",
-   BaseStyle->"Link",
-   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
- " has an interface for accessing \"simulations\" which are directories \
-containing simulation output.  The name of the simulation is the name of the \
-directory.  You can either specify a simulation by a full path, or by the \
-simulation name.  For the latter, NRMMA needs to know which directory to look \
-in.  You can set the variable ",
- Cell[BoxData[
-  ButtonBox["RunDirectory",
-   BaseStyle->"Link",
-   ButtonData->"paclet:Global/ref/RunDirectory"]], "InlineFormula"],
- " to this directory and NRMMA will then know where to find your simulations. \
-For example, in your init.m file you can set if you have your simulations in \
-that directory."
-}], "Text"],
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
 
 Cell[TextData[{
  "Set the ",
@@ -72,78 +26,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"RunDirectory", "=", 
     RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}], 
-  "*)"}]], "Input"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Chunking", "Subsection"],
-
-Cell[TextData[{
- "Simulations usually take more than one job on a supercomputer, and the \
-output is spread across many different output directories (\"chunks\").  ",
- Cell[BoxData[
-  ButtonBox["NRMMA",
-   BaseStyle->"Link",
-   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
- " supports the SimFactory chunking mechanism and almost all the file reading \
-functions go through a layer which automatically merges the files in these \
-chunks together, taking care to eliminate any duplicate data.  As such, you \
-should never have to worry about merging chunks of data together, and in fact \
-you can probably forget about the fact that the simulation data is split into \
-chunks."
-}], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["DataTables and DataRegions", "Subsection"],
-
-Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["NRMMA",
-   BaseStyle->"Link",
-   ButtonData->"paclet:nrmma/ref/NRMMA"]], "InlineFormula"],
- " uses the ",
- Cell[BoxData[
-  ButtonBox["DataTable",
-   BaseStyle->"Link",
-   ButtonData->"paclet:DataTable/ref/DataTable"]], "InlineFormula"],
- " and ",
- Cell[BoxData[
-  ButtonBox["DataRegion",
-   BaseStyle->"Link",
-   ButtonData->"paclet:DataRegion/ref/DataRegion"]], "InlineFormula"],
- " packages extensively to represent numerical simulation data, so you should \
-also look at the documentation for those package to familiarise yourself with \
-the concepts."
-}], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Memoisation", "Subsection"],
-
-Cell[TextData[{
- "Some functions use \"memoisation\".  In other words, the first time a \
-particular quantity is accessed, for example a waveform, it is cached in \
-memory so that later calls to the function do not have to read the data off \
-the disk again.  When using very long simulations this can save a significant \
-amount of time.  However, beware that if the run data on the disk changes, \
-the copy in memory will not be.  To clear the cache, use the function ",
- Cell[BoxData[
-  ButtonBox["ClearAllMemos",
-   BaseStyle->"Link",
-   ButtonData->"paclet:Memo/ref/ClearAllMemos"]], "InlineFormula"],
- ". It would be possible to modify the caching algorithm to read the data \
-again when it changes on disk, but this has not been done yet."
-}], "Text"],
-
-Cell["Clear data cache", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ClearAllMemos", "[", "]"}], "*)"}]], "Input"],
+  "*)"}]], "Input"],
 
 Cell[TextData[{
  "There are many functions in the ",
@@ -154,18 +37,15 @@ Cell[TextData[{
 apparent horizons, run statistics, convergence testing and more. "
 }], "Text"],
 
-Cell["In this tutorial we look at a binary black hole simulation", \
-"MathCaption"],
+Cell["\<\
+In this tutorial we look at a binary black hole simulation called \
+\[OpenCurlyDoubleQuote]bbh\[CloseCurlyDoubleQuote] (this is the example \
+simulation which is distributed with NRMMA).\
+\>", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"<<", "nrmma`"}], "*)"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{
-   RowBox[{"run", " ", "=", " ", "\"\<q1D8\>\""}], ";"}], "*)"}]], "Input"]
-}, Open  ]]
+ RowBox[{
+  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -185,44 +65,55 @@ Read (2,2) mode of waveform extracted at r=100M from a simulation\
 \>", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"psi4", "=", 
-   RowBox[{"ReadPsi4", "[", 
-    RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}], 
-  "*)"}]], "Input"],
+ RowBox[{"<<", "nrmma`"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{
+ RowBox[{
+  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"psi4", "=", 
+  RowBox[{"ReadPsi4", "[", 
+   RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Re", "[", "psi4", "]"}], ",", 
+     RowBox[{"Im", "[", "psi4", "]"}], ",", 
+     RowBox[{"Abs", "[", "psi4", "]"}]}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"Phase", "[", "psi4", "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"Frequency", "[", "psi4", "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{
-      RowBox[{"Re", "[", "psi4", "]"}], ",", 
-      RowBox[{"Im", "[", "psi4", "]"}], ",", 
-      RowBox[{"Abs", "[", "psi4", "]"}]}], "}"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], "*)"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{
-    RowBox[{"Phase", "[", "psi4", "]"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], "*)"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{
-    RowBox[{"Frequency", "[", "psi4", "]"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}], "*)"}]], "Input"]
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Trajectories", "Section"],
+
+Cell["Load the package", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
 
 Cell["\<\
 These functions can be used with output from either PunctureTracker or \
@@ -239,66 +130,67 @@ Cell["Functions for dealing with coordinate trajectories.", "Caption"],
 Cell["Puncture 0 trajectory", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{
-   RowBox[{"traj0", "=", 
-    RowBox[{"ReadBHTrajectory", "[", 
-     RowBox[{"run", ",", "0"}], "]"}]}], ";"}], "*)"}]], "Input"],
+ RowBox[{
+  RowBox[{"traj0", "=", 
+   RowBox[{"ReadBHTrajectory", "[", 
+    RowBox[{"run", ",", "0"}], "]"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"Take", "[", 
-   RowBox[{"traj0", ",", "10"}], "]"}], "*)"}]], "Input"],
+ RowBox[{"Take", "[", 
+  RowBox[{"traj0", ",", "10"}], "]"}]], "Input"],
 
 Cell["Puncture 1 trajectory", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{
-   RowBox[{"traj1", "=", 
-    RowBox[{"ReadBHTrajectory", "[", 
-     RowBox[{"run", ",", "1"}], "]"}]}], ";"}], "*)"}]], "Input"],
+ RowBox[{
+  RowBox[{"traj1", "=", 
+   RowBox[{"ReadBHTrajectory", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"traj0", ",", "traj1"}], "}"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
-    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}], "*)"}]], "Input"],
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"traj0", ",", "traj1"}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input"],
 
 Cell["Separation of the BHs (radius of relative orbit)", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{"ReadBHSeparation", "[", "run", "]"}], "]"}], "*)"}]], "Input"],
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"ReadBHSeparation", "[", "run", "]"}], "]"}]], "Input"],
 
 Cell["Phase of orbit", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{"ReadBHPhase", "[", "run", "]"}], "]"}], "*)"}]], "Input"],
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"ReadBHPhase", "[", "run", "]"}], "]"}]], "Input"],
 
 Cell["Individual coordinates", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{
-   RowBox[{"bh0x", "=", 
-    RowBox[{"ReadBHCoordinate", "[", 
-     RowBox[{"run", ",", "0", ",", "1"}], "]"}]}], ";"}], "*)"}]], "Input"],
+ RowBox[{
+  RowBox[{"bh0x", "=", 
+   RowBox[{"ReadBHCoordinate", "[", 
+    RowBox[{"run", ",", "0", ",", "1"}], "]"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", "bh0x", "]"}], "*)"}]], "Input"]
+ RowBox[{"ListLinePlot", "[", "bh0x", "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Apparent Horizons", "Section"],
+
+Cell["Load the package", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
 
 Cell["\<\
 Remember that AHFinderDirect numbers its horizons from 1, not 0\
@@ -307,54 +199,56 @@ Remember that AHFinderDirect numbers its horizons from 1, not 0\
 Cell["Apparent horizon radius", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{"ReadAHRadius", "[", 
-    RowBox[{"run", ",", "1"}], "]"}], "]"}], "*)"}]], "Input"],
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"ReadAHRadius", "[", 
+   RowBox[{"run", ",", "1"}], "]"}], "]"}]], "Input"],
 
 Cell["Apparent horizon mass", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{
-    RowBox[{"ReadAHMass", "[", 
-     RowBox[{"run", ",", "1"}], "]"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}], "*)"}]], "Input"]
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"ReadAHMass", "[", 
+    RowBox[{"run", ",", "1"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Isolated Horizons", "Section"],
 
+Cell["Load the package", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
+
 Cell["IsolatedHorizon numbers horizons from 0", "Text"],
 
 Cell["Spin of the first black hole", "MathCaption"],
 
-Cell[BoxData[
- RowBox[{"(*", 
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"spin", "=", 
+   RowBox[{"ReadIsolatedHorizonSpin", "[", 
+    RowBox[{"run", ",", "0"}], "]"}]}], ";"}], "\n", 
+ RowBox[{"Take", "[", 
   RowBox[{
-   RowBox[{
-    RowBox[{"spin", "=", 
-     RowBox[{"ReadIsolatedHorizonSpin", "[", 
-      RowBox[{"run", ",", "0"}], "]"}]}], ";"}], "\n", 
-   RowBox[{"Take", "[", 
-    RowBox[{
-     RowBox[{"ToList", "[", "spin", "]"}], ",", "10"}], "]"}]}], 
-  "*)"}]], "Input"],
+   RowBox[{"ToList", "[", "spin", "]"}], ",", "10"}], "]"}]}], "Input"],
 
 Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{"ListLinePlot", "[", 
-   RowBox[{
-    RowBox[{"Norm", "[", "spin", "]"}], ",", 
-    RowBox[{"PlotRange", "\[Rule]", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"-", "0.1"}], ",", "0.8"}], "}"}]}]}], "]"}], 
-  "*)"}]], "Input"]
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"Norm", "[", "spin", "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "0.1"}], ",", "0.8"}], "}"}]}]}], "]"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 },
