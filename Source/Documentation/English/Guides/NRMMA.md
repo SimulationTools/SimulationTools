@@ -15,6 +15,7 @@
  "Packages" -> {
 
    {"Title" -> "Data Representations",
+    "Link" -> "paclet:nrmma/guide/Data Representations",
     "DetailedFunctions" -> {
       {"DataTable", "representation of 1D data"},
       {"DataRegion", "representation of arbitrary dimensional data on an evenly spaced grid"}
@@ -42,6 +43,7 @@
    },
 
    {"Title" -> "Numerical Relativity",
+    "Link" -> "paclet:nrmma/guide/Numerical Relativity",
     "DetailedFunctions" -> {
       {"ReadPsi4" , {"read ", Cell[BoxData[SubscriptBox["\[Psi]", "4"]], "InlineFormula"], "waveform"}},
       {"ReadIsolatedHorizonSpin", "read spin computed by the IsolatedHorizon thorn"},
