@@ -5,7 +5,9 @@
  "Summary" -> 
    "A package for analysing data in Numerical Relativity.",
  "Description" -> 
-   {"NRMMA is a suite of ", StyleBox["Mathematica", FontSlant->"Italic"], " packages for analysing data in Numerical Relativity.  It has been designed for use with common output formats used by the Cactus code, with a focus on output from the PSU and AEI codes."},
+   {"NRMMA is a suite of ", StyleBox["Mathematica", FontSlant->"Italic"], " packages for analysing data in Numerical Relativity.  It has been designed for use with common output formats used by the Cactus code, with a focus on output from the PSU and AEI codes. See ", Cell[TextData[ButtonBox["NRMMAIntroduction",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/NRMMAIntroduction"]]], " for an introductory tutorial."},
  "Keywords" -> {"nrmma", "NRMMA"},
  "Label" -> "NRMMA Application",
  "Synonyms" -> {"NRMMA", "nrmma"},
