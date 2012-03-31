@@ -1,0 +1,506 @@
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["GridFunctions",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/tutorial/GridFunctions"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["GRIDFUNCTIONS TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"DataRegion":>Documentation`HelpLookup[
+       "paclet:nrmma/tutorial/DataRegion"], "NumericalRelativity":>
+       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"]},
+       
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[None], None}]}], 
+       Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["GridFunctions", "Title"],
+
+Cell[TextData[{
+ "The GridFunctions ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package provides a simple interface to grid data from numerical \
+simulations.  It is currently capable of reading HDF5 and ASCII files \
+produced by Carpet and returns variables as ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Common Arguments", "Section"],
+
+Cell[TextData[{
+ "Most of the functions in this package take at least two arguments: ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ": The name of the run directory containing the simulation files."
+}], "Text"],
+
+Cell["var: The name of the grid variable to be read.", "Text"],
+
+Cell[TextData[{
+ StyleBox["dims:",
+  FontSlant->"Italic"],
+ " The dimensions to be read. These can be given either as coordinate names \
+\[CloseCurlyDoubleQuote] xyz \[CloseCurlyDoubleQuote] or as numbers {1,2,3}."
+}], "Text"],
+
+Cell["The following options can be given:", "Text"],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "\nIteration\t\t0\t\t\tThe iteration to read.\nMap\t\t\t0\t\t\tThe map to \
+read (use 0 for single map data)\nRefinementLevel\t0\t\t\tThe refinement \
+level to read.\nTimeLevel\t\t0\t\t\tThe time level to read.\nVariable\t\t\
+First in file\t\tThe variable to read"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "Section"],
+
+Cell["Functions provided by GridFunctions.", "Caption"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadGridFunction[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read a grid function for the variable ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ " of dimension ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ " in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and return it as a DataRegion."
+}], "Text"],
+
+Cell["\<\
+This function reads a variable from a simulation and returns it as a single \
+DataRegion object. 
+1D, 2D and 3D variables are currently supported.  If the file is part of a \
+multi-file set, all the files will be used to read the variable.\
+\>", "Text"],
+
+Cell["\<\
+If there is more than one component, the components will all be read and \
+joined together into a single rectangular DataRegion.  If the union of the \
+components is not rectangular, the smallest rectangular region surrounding \
+all components will be used, and points not in any component will take the \
+value None.\
+\>", "Text"],
+
+Cell["\<\
+If the file appears in more than one segment, the correct segment for the \
+given iteration will be located automatically.
+In addition to the common options listed above, the following options can be \
+given:\
+\>", "Text"],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription\n",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "StripGhostZones\tTrue\t\t\tRemove the ghost zones from the data"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadIterations[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the iteration numbers present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Map, RefinementLevel, TimeLevel or Variable are specified, \
+then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadMaps[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the maps present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, RefinementLevel, TimeLevel or Variable are \
+specified, then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadRefinementLevels[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the refinement levels present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, Map, TimeLevel or Variable are specified, then \
+only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadTimeLevels[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the timelevels present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, Map, RefinementLevel or Variable are specified, \
+then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadVariables[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the names of the variables present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, Map, RefinementLevel or TimeLevel are \
+specified, then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadTime[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the coordinate time associated with this grid function at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input",
+ CellLabel->"In[2]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"file", "=", "\"\<phi.x.h5\>\""}], ";"}]], "Input",
+ CellLabel->"In[3]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadVariables", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellLabel->"In[4]:="],
+
+Cell[BoxData[
+ RowBox[{"{", "\<\"ML_BSSN::phi\"\>", "}"}]], "Output",
+ CellLabel->"Out[4]=",
+ CellID->1172952525]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ReadIterations", "[", 
+   RowBox[{"run", ",", "file"}], "]"}], "//", "Short"}]], "Input",
+ CellLabel->"In[5]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+   "0", ",", "256", ",", "512", ",", "768", ",", "1024", ",", "1280", ",", 
+    "1536", ",", 
+    RowBox[{"\[LeftSkeleton]", "62", "\[RightSkeleton]"}], ",", "17664", ",", 
+    "17920", ",", "18176", ",", "18432", ",", "18688", ",", "18944", ",", 
+    "19200"}], "}"}],
+  Short]], "Output",
+ CellLabel->"Out[5]//Short=",
+ CellID->2060691862]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadRefinementLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellLabel->"In[6]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6"}], 
+  "}"}]], "Output",
+ CellLabel->"Out[6]=",
+ CellID->1579349465]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadMaps", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellLabel->"In[7]:="],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellLabel->"Out[7]=",
+ CellID->1228581335]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTime", "[", 
+  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input",
+ CellLabel->"In[8]:="],
+
+Cell[BoxData["64.`"], "Output",
+ CellLabel->"Out[8]=",
+ CellID->711231440]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input",
+ CellLabel->"In[9]:="],
+
+Cell[BoxData[
+ RowBox[{"{", "0", "}"}]], "Output",
+ CellLabel->"Out[9]=",
+ CellID->772832878]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridFunction", "[", 
+  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input",
+ CellLabel->"In[10]:="],
+
+Cell[BoxData["\<\"DataRegion[ML_BSSN::phi\.01, {60}, \\!\\({\\({0.`, \
+118.`}\\)}\\)]\"\>"], "Output",
+ CellLabel->"Out[10]=",
+ CellID->1021083490]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedTutorialsSection",
+ WholeCellGroupOpener->True],
+
+Cell[TextData[ButtonBox["DataRegion",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "RelatedTutorials"],
+
+Cell[TextData[ButtonBox["NumericalRelativity",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"GridFunctions",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
+    "nrmma Tutorial", "language" -> "en", "paclet" -> "GridFunctions", 
+    "status" -> "None", "summary" -> 
+    "Tutorial for the GridFunctions package.", "synonyms" -> {}, "title" -> 
+    "GridFunctions", "windowTitle" -> "GridFunctions", "type" -> "Tutorial", 
+    "uri" -> "nrmma/tutorial/GridFunctions"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

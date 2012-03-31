@@ -134,7 +134,7 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
  CellLabel->"Out[3]=",
- CellID->465423981]
+ CellID->1683852249]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -583,7 +583,7 @@ le3/AIQF1hQ=
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
  CellLabel->"Out[4]=",
- CellID->1245406293]
+ CellID->965248777]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -739,7 +739,7 @@ d54Ep0a+zk8yIxdKIC05LxzpQz4kQcUrld2SNHKFBJw3raVb8sjVEvxxa1Xz
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
  CellLabel->"Out[5]=",
- CellID->20459142]
+ CellID->844725601]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -903,7 +903,7 @@ S5z//wETwJl7
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
  CellLabel->"Out[6]=",
- CellID->259416074]
+ CellID->288785690]
 }, Open  ]]
 }, Open  ]],
 
@@ -975,7 +975,7 @@ Cell[BoxData[
     RowBox[{"2.945171234278`", ",", "0.57973163080433`"}], "}"}]}], 
   "}"}]], "Output",
  CellLabel->"Out[4]=",
- CellID->614152308]
+ CellID->308049610]
 }, Open  ]],
 
 Cell["Puncture 1 trajectory", "MathCaption"],
@@ -1432,7 +1432,7 @@ Q6stP1eTYJWy3azFqhHkdppisi0iwT79rMHfRsYwaMaDXTuDBP8H3yFe4g==
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
  CellLabel->"Out[6]=",
- CellID->1251433074]
+ CellID->1954206000]
 }, Open  ]],
 
 Cell["Separation of the BHs (radius of relative orbit)", "MathCaption"],
@@ -1592,7 +1592,7 @@ lvJVNax/S99557+Z2zOYOD0GX1/JRbySIc6JQc0J620+/YlFMdjnfu7JHnXi
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
  CellLabel->"Out[7]=",
- CellID->380836000]
+ CellID->725344782]
 }, Open  ]],
 
 Cell["Phase of orbit", "MathCaption"],
@@ -1746,7 +1746,7 @@ Xuf8fyvxe5c=
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
  CellLabel->"Out[8]=",
- CellID->1209383940]
+ CellID->1752570702]
 }, Open  ]],
 
 Cell["Individual coordinates", "MathCaption"],
@@ -1892,7 +1892,7 @@ baZH
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
  CellLabel->"Out[10]=",
- CellID->183160725]
+ CellID->570086262]
 }, Open  ]]
 }, Open  ]],
 
@@ -1971,7 +1971,7 @@ zu4XZn8DnEX9AA==
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
  CellLabel->"Out[3]=",
- CellID->1038238924]
+ CellID->1515256167]
 }, Open  ]],
 
 Cell["Apparent horizon mass", "MathCaption"],
@@ -2030,7 +2030,7 @@ dayILJch7XufoT5ytQwlmiKD5Ql0X4b7X4+XZ3zyf6o+w5Y=
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
  CellLabel->"Out[4]=",
- CellID->1376963793]
+ CellID->2049312643]
 }, Open  ]]
 }, Open  ]],
 
@@ -2130,7 +2130,7 @@ Cell[BoxData[
        RowBox[{"-", "3.80459315915694`*^-18"}], ",", 
        "0.0000747886520903558`"}], "}"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[4]=",
- CellID->1346688879]
+ CellID->1454860315]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2191,7 +2191,7 @@ PuMfrQDMRA==
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
  CellLabel->"Out[5]=",
- CellID->1469833620]
+ CellID->588509463]
 }, Open  ]]
 }, Open  ]],
 

@@ -93,9 +93,7 @@ data at those times.\
 Cell["\<\
 The functions ASCIITimeOfIndex and ASCIIDataOfIndex can be used for working \
 with the output format.\
-\>", "Notes"],
-
-Cell["DocumentationBuilder`Private`optionsCell$1546", "Input"]
+\>", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{

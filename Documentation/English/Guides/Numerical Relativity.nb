@@ -1,0 +1,680 @@
+Notebook[{
+Cell[" ", "GuideColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Numerical Relativity",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Numerical Relativity packages"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["NUMERICAL RELATIVITY PACKAGES GUIDE", "PacletNameCell"], Cell[
+    TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {
+       RowBox[{"Numerical", " ", "Relativity"}]:>Documentation`HelpLookup[
+       "paclet:nrmma/tutorial/Numerical Relativity"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["http://bitbucket.org/ianhinder/nrmma"], None}]}], 
+       Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["Numerical Relativity", "GuideTitle"],
+
+Cell["\<\
+NRMMA provides various functions for analysing Numerical Relativity data \
+\>", "GuideAbstract"],
+
+Cell[CellGroupData[{
+
+Cell["BHCoordinates", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadBHCoordinates",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHCoordinates"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the position of one of the black holes in a simulation as a function of \
+time"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadBHSeparation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHSeparation"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the separation between the first two black holes in a simulation as a \
+function of time"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadBHPhase",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHPhase"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the phase of the relative orbit of the first two black holes in a \
+simulation as a function of time"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadBHTrajectories",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHTrajectories"]],
+   "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the locus of the orbits of the first two black holes in a simulation as \
+a function of time"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["BHCoordinateMergerTime",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/BHCoordinateMergerTime"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["InitialPosition",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/InitialPosition"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadBHCoordinate",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadBHCoordinate"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadBHInclination",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadBHInclination"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadBHPhaseOfFrequency",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadBHPhaseOfFrequency"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadBHRadius",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadBHRadius"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadBHSpeed",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadBHSpeed"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadBHTrajectory",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadBHTrajectory"]], "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Waveforms", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadPsi4",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadPsi4"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read an (l,m) spherical harmonic mode of Psi4 from a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadPsi4Radii",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadPsi4Radii"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the radii at which Psi4 was decomposed"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadPsi4Modes",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadPsi4Modes"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the (l,m) modes of Psi4 which are available in a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["AlignPhases",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/AlignPhases"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Add multiples of 2 Pi to a set of phases such that they are close together \
+at a particular time.  This is necessary due to the 2 Pi ambiguity when \
+converting from real and imaginary to amplitude and phase."
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ExtrapolatePsi4",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ExtrapolatePsi4"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read an (l,m) mode of Psi4 extrapolated to infinite radius from a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["StrainFromPsi4",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/StrainFromPsi4"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Convert an (l,m) mode of Psi4 to the corresponding mode of the strain, h."
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["NumCycles",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/NumCycles"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the number of waveform cycles in the (2,2) mode of a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ExtrapolatePsi4Amplitude",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExtrapolatePsi4Amplitude"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExtrapolatePsi4Phase",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExtrapolatePsi4Phase"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadPsi4Phase",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadPsi4Phase"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadPsi4RadiiStrings",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadPsi4RadiiStrings"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReconstructPsi4",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReconstructPsi4"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["RunName",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/RunName"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["SchmidtAngle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/SchmidtAngle"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["TortoiseCoordinate",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/TortoiseCoordinate"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["UseTortoiseCoordinate",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/UseTortoiseCoordinate"]], "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Horizons", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadAHCentroid",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHCentroid"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the position of the centroid of an apparent horizon as a function of \
+time from a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadAHMass",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHMass"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the mass of an apparent horizon as a function of time from a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadAHRadius",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHRadius"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the radius of an apparent horizon as a function of time from a \
+simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadAHSeparation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHSeparation"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the distance between the centroids of the first two apparent horizons \
+as a function of time from a simulation"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadIsolatedHorizonSpin",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:Numerical Relativity packages/ref/ReadIsolatedHorizonSpin"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the spin angular momentum of an apparent horizon as a function of time \
+from a simulation"
+}], "GuideText"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Kicks", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["Kick",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/Kick"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Compute the kick in km/s as measured from the gravitational waves"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["SpinWeightedSphericalHarmonic",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:Numerical Relativity packages/ref/SpinWeightedSphericalHarmonic"]],
+   "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Compute a spin-weighted spherical harmonic"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["AngularMomentumFlux",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/AngularMomentumFlux"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["KickVector",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/KickVector"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["LinearMomentumFlux",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/LinearMomentumFlux"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["LinearMomentumRadiated",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/LinearMomentumRadiated"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["InitialData", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadADMMass",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadADMMass"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the ADM mass of the spacetime from a simulation, computed from the \
+initial data"
+}], "GuideText"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["CoordinateTransformations", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["CartesianToThornburg",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/CartesianToThornburg"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["KerrAxialTortoise",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/KerrAxialTortoise"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["RadialToTortoise",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/RadialToTortoise"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ThornburgToCartesian",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ThornburgToCartesian"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["TortoiseToRadial",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/TortoiseToRadial"]], "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["DataAnalysis", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ComputeOverlap",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ComputeOverlap"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Compute the phase- and time-maximised overlap of two DataTables"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["SolarMassInSeconds",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " "
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["NRExport", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ExportSim",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ExportSim"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Export various data from a simulation to a given directory"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ExportConfig",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ExportConfig"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Export a set of simulations run at different resolutions"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ExcludeModes",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExcludeModes"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportAllExtractedWaveforms",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportAllExtractedWaveforms"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportAllExtrapolatedStrain",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportAllExtrapolatedStrain"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportAllExtrapolatedWaveforms",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportAllExtrapolatedWaveforms"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportAllWaveforms",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportAllWaveforms"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportExtractedWaveform",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportExtractedWaveform"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportExtrapolatedStrain",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportExtrapolatedStrain"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportExtrapolatedWaveform",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportExtrapolatedWaveform"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportLocalQuantity",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportLocalQuantity"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportMetadata",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportMetadata"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportSimFormat",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportSimFormat"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportStatus",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportStatus"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["JunkTime",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/JunkTime"]], "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["TUTORIALS", "GuideTutorialsSection"],
+
+Cell[TextData[ButtonBox["Numerical Relativity",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/Numerical Relativity"]], "GuideTutorial"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Numerical Relativity",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", "keywords" -> {"nrmma", "NRMMA"}, "index" -> True, 
+    "label" -> "Numerical Relativity guide", "language" -> "en", "paclet" -> 
+    "Numerical Relativity packages", "status" -> "None", "summary" -> 
+    "Numerical Relativity functionality in NRMMA", "synonyms" -> {}, "title" -> 
+    "Numerical Relativity", "windowTitle" -> "Numerical Relativity", "type" -> 
+    "Guide", "uri" -> "nrmma/guide/Numerical Relativity packages"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

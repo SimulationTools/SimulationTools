@@ -23,9 +23,9 @@ Cell[BoxData[GridBox[{
        "DataTable":>Documentation`HelpLookup[
        "paclet:nrmma/tutorial/DataTable"], "NumericalRelativity":>
        Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"], 
-       "CarpetHDF5":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/CarpetHDF5"], "Kicks":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/Kicks"]},
+       "GridFunctions":>Documentation`HelpLookup[
+       "paclet:nrmma/tutorial/GridFunctions"], "Kicks":>
+       Documentation`HelpLookup["paclet:nrmma/tutorial/Kicks"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -164,10 +164,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["Reading Grid Variables \[RightGuillemet]",
- BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->
-  "paclet:nrmma/guide/Reading Grid Variables"]], "GuideFunctionsSubsection"],
+Cell["Reading Grid Variables", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadGridFunction",
@@ -223,10 +220,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["Simulation Information \[RightGuillemet]",
- BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->
-  "paclet:nrmma/guide/Simulation Information"]], "GuideFunctionsSubsection"],
+Cell["Simulation Information", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["SimView",
@@ -440,9 +434,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["Visualization \[RightGuillemet]",
- BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/Visualization"]], "GuideFunctionsSubsection"],
+Cell["Visualization", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["PresentationArrayPlot",
@@ -501,9 +493,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["Analysis \[RightGuillemet]",
- BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/Analysis"]], "GuideFunctionsSubsection"],
+Cell["Analysis", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ConvergenceMultiplier",
@@ -530,9 +520,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["Utilities \[RightGuillemet]",
- BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/Utilities"]], "GuideFunctionsSubsection"],
+Cell["Utilities", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ClearAllMemos",
@@ -577,9 +565,9 @@ Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
  ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "GuideTutorial"],
 
-Cell[TextData[ButtonBox["CarpetHDF5",
+Cell[TextData[ButtonBox["GridFunctions",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/CarpetHDF5"]], "GuideTutorial"],
+ ButtonData->"paclet:nrmma/tutorial/GridFunctions"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["Kicks",
  BaseStyle->"Link",

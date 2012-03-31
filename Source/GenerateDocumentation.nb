@@ -18,7 +18,7 @@ Cell[BoxData[
        RowBox[{"-", "2"}]}], "]"}], ",", "\"\<Documentation\>\""}], "}"}], 
    "]"}]}]], "Input"],
 
-Cell[BoxData["\<\"/Users/ian/Library/Mathematica/Applications/nrmma/\
+Cell[BoxData["\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
 Documentation\"\>"], "Output"]
 }, Open  ]],
 
@@ -40,19 +40,19 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   RowBox[{"{", 
-   RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/nrmma/\
+   RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
 Documentation/English/Guides/Data Representations.nb\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
-English/Guides/NRMMA.nb\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
-English/Guides/Numerical Relativity.nb\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "497", "\[RightSkeleton]"}], 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
-English/Tutorials/Kicks.nb\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
-English/Tutorials/NRMMAIntroduction.nb\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
-English/Tutorials/NumericalRelativity.nb\"\>"}], "}"}],
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Guides/NRMMA.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Guides/Numerical Relativity.nb\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "263", "\[RightSkeleton]"}], 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Tutorials/Kicks.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Tutorials/NRMMAIntroduction.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Tutorials/NumericalRelativity.nb\"\>"}], "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
 
@@ -484,7 +484,88 @@ Cell[BoxData[
     "ReadWaveformFile"}],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Building guides\"\>"], "Print"]
+Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ReadBHCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ReadGridFunction\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for ReadTime\
+\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ToDataRegion\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+DataTableInterval\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+IntegrateDataTable\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+FieldLines2dPlot\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+FieldLines3dPlot\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+Movie2d\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+MovieFieldLines2d\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+MovieFieldLines3d\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+Sequence2d\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+SequenceFieldLines2d\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+SequenceFieldLines3d\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+MakeMovie\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ExportConfig\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ExportExtrapolatedStrain\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ExportExtrapolatedWaveform\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ExportMetadata\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ExportSim\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+FilterWavelet\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+PresentationArrayPlot\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+FindRunFilesFromPattern\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+AlignPhases\"\>"], "Print"],
+
+Cell[BoxData["\<\"Documented options do not match actual options for \
+ExtrapolatePsi4Phase\"\>"], "Print"],
+
+Cell[BoxData["\<\"Building guides\"\>"], "Print"],
+
+Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
+
+Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]]
 },

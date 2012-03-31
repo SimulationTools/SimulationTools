@@ -84,9 +84,7 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
-Cell["ReadWalltime reports the walltime in seconds.", "Notes"],
-
-Cell["DocumentationBuilder`Private`optionsCell$5091", "Input"]
+Cell["ReadWalltime reports the walltime in seconds.", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{

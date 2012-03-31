@@ -132,7 +132,7 @@ Cell[BoxData[
     RowBox[{"1.`", ",", 
      RowBox[{"-", "2.4492935982947064`*^-16"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[2]=",
- CellID->1659225853]
+ CellID->1013993387]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -145,7 +145,7 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
  CellLabel->"Out[3]=",
- CellID->1533755076]
+ CellID->1904116364]
 }, Open  ]],
 
 Cell["\<\
@@ -231,7 +231,7 @@ Cell[BoxData[
     RowBox[{"1.`", ",", 
      RowBox[{"-", "2.4492935982947064`*^-16"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[4]=",
- CellID->1575347391]
+ CellID->682422154]
 }, Open  ]],
 
 Cell[TextData[{
@@ -265,7 +265,7 @@ Cell[BoxData[
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
  CellLabel->"Out[5]=",
- CellID->537716674]
+ CellID->1906467298]
 }, Open  ]],
 
 Cell["\<\
@@ -335,7 +335,7 @@ Cell[BoxData[
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
  CellLabel->"Out[9]=",
- CellID->792953342]
+ CellID->1539864246]
 }, Open  ]],
 
 Cell[TextData[{
