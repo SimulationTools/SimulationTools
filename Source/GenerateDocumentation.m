@@ -5,34 +5,61 @@
 RunDirectory = $NRMMATestRunDirectory;
 
 packages =
- {"Ascii1D",
+{ 
   "Ascii",
+  "Ascii1D",
+  "AsyncCommand",
   "BHCoordinates",
+  "CactusTimers",
+  "CarpetHDF5Plot",
   "CarpetHDF5",
-  "CoordinateTransformations",
+(*  "CarpetIOHDF5",*)
+  "CircularPN",
   "Convergence",
+  "CoordinateTransformations",
   "DataAnalysis",
   "DataRegion",
   "DataTable",
+  "Empty",
+  "Error",
   "FieldLines",
+(*  "GridFunctions",*)
   "Grids",
   "Horizons",
+  "IniFile",
+  "InitialData",
   "Kicks",
   "Memo",
+  "MinTracker",
+  "Movie",
+  "MultipoleASCII",
+  "MultipoleHDF5",
   "NR",
+  "NRDF",
   "NRExport",
+  "nrmma8",
   "nrmmaVersion",
   "Parameters",
   "Plotting",
   "Profile",
+  "Providers",
+  "PunctureTracker",
+  "Quasinormal",
   "ReadHDF5",
   "RunFiles",
+  "ShiftTracker",
+  "SimFactory",
   "SimView",
   "SimViewRRMHD",
+  "Stack",
   "SystemStatistics",
+  "Timers",
   "Tracks",
   "TwoPunctures",
-  "Waveforms"};
+  "VTK",
+  "Waveforms",
+  "YlmDecomp"
+};
 
 packageSymbols = Map[# -> DocumentedSymbols[#] &, packages];
 
