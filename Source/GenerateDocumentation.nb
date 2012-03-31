@@ -8,6 +8,60 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
+ RowBox[{"docDir", "=", 
+  RowBox[{"FileNameJoin", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"FileNameDrop", "[", 
+      RowBox[{
+       RowBox[{"FindFile", "[", "\"\<nrmma`\>\"", "]"}], ",", 
+       RowBox[{"-", "2"}]}], "]"}], ",", "\"\<Documentation\>\""}], "}"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData["\<\"/Users/ian/Library/Mathematica/Applications/nrmma/\
+Documentation\"\>"], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Short", "[", 
+  RowBox[{
+   RowBox[{"docFiles", "=", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"FileNames", "[", 
+       RowBox[{"\"\<*\>\"", ",", "docDir", ",", "Infinity"}], "]"}], ",", 
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"DirectoryQ", "[", "#", "]"}]}], "&"}]}], "]"}]}], ",", 
+   "10"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Guides/Data Representations.nb\"\>", 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
+English/Guides/NRMMA.nb\"\>", 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
+English/Guides/Numerical Relativity.nb\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "497", "\[RightSkeleton]"}], 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
+English/Tutorials/Kicks.nb\"\>", 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
+English/Tutorials/NRMMAIntroduction.nb\"\>", 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Documentation/\
+English/Tutorials/NumericalRelativity.nb\"\>"}], "}"}],
+  Short[#, 10]& ]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"DeleteFile", "[", "docFiles", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
  RowBox[{"<<", "\"\<Source/GenerateDocumentation.m\>\""}]], "Input"],
 
 Cell[CellGroupData[{
@@ -430,13 +484,7 @@ Cell[BoxData[
     "ReadWaveformFile"}],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print"],
-
-Cell[BoxData["\<\"Building guides\"\>"], "Print"],
-
-Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
-
-Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print"]
+Cell[BoxData["\<\"Building guides\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]]
 },
