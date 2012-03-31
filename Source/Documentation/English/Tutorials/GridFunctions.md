@@ -1,10 +1,10 @@
 {
  "Application" -> "nrmma",
- "Title" -> "CarpetHDF5",
+ "Title" -> "GridFunctions",
  "Related Tutorials" -> {"DataRegion", "NumericalRelativity"},
  "Keywords" -> {},
  "Label" -> "nrmma Tutorial",
- "Package" -> "CarpetHDF5",
- "Summary" -> "Tutorial for the CarpetHDF5 package.",
+ "Package" -> "GridFunctions",
+ "Summary" -> "Tutorial for the GridFunctions package.",
  "Synonyms" -> {}
  }

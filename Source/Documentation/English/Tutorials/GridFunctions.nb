@@ -1,0 +1,349 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["GridFunctions", "Title"],
+
+Cell[TextData[{
+ "The GridFunctions ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " package provides a simple interface to grid data from numerical \
+simulations.  It is currently capable of reading HDF5 and ASCII files \
+produced by Carpet and returns variables as ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/DataRegion"],
+ " objects."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Common Arguments", "Section"],
+
+Cell[TextData[{
+ "Most of the functions in this package take at least two arguments: ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ " and ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ": The name of the run directory containing the simulation files."
+}], "Text"],
+
+Cell["\<\
+var: The name of the grid variable to be read.\
+\>", "Text"],
+
+Cell[TextData[{
+ StyleBox["dims:",
+  FontSlant->"Italic"],
+ " The dimensions to be read. These can be given either as coordinate names \
+\[CloseCurlyDoubleQuote] xyz \[CloseCurlyDoubleQuote] or as numbers {1,2,3}."
+}], "Text"],
+
+Cell["The following options can be given:", "Text"],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "\nIteration\t\t0\t\t\tThe iteration to read.\nMap\t\t\t0\t\t\tThe map to \
+read (use 0 for single map data)\nRefinementLevel\t0\t\t\tThe refinement \
+level to read.\nTimeLevel\t\t0\t\t\tThe time level to read.\nVariable\t\t\
+First in file\t\tThe variable to read"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "Section"],
+
+Cell["\<\
+Functions provided by GridFunctions.\
+\>", "Caption"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadGridFunction[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read a grid function for the variable ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ " of dimension ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ " in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " and return it as a DataRegion."
+}], "Text"],
+
+Cell["\<\
+This function reads a variable from a simulation and returns it as a single \
+DataRegion object. 
+1D, 2D and 3D variables are currently supported.  If the file is part of a \
+multi-file set, all the files will be used to read the variable.\
+\>", "Text"],
+
+Cell["\<\
+If there is more than one component, the components will all be read and \
+joined together into a single rectangular DataRegion.  If the union of the \
+components is not rectangular, the smallest rectangular region surrounding \
+all components will be used, and points not in any component will take the \
+value None.\
+\>", "Text"],
+
+Cell["\<\
+If the file appears in more than one segment, the correct segment for the \
+given iteration will be located automatically.
+In addition to the common options listed above, the following options can be \
+given:\
+\>", "Text"],
+
+Cell[TextData[{
+ StyleBox["Option\t\t\tDefault\t\t\tDescription\n",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ "StripGhostZones\tTrue\t\t\tRemove the ghost zones from the data"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadIterations[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the iteration numbers present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Map, RefinementLevel, TimeLevel or Variable are specified, \
+then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadMaps[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the maps present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, RefinementLevel, TimeLevel or Variable are \
+specified, then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadRefinementLevels[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the refinement levels present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, Map, TimeLevel or Variable are specified, then \
+only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadTimeLevels[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the timelevels present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, Map, RefinementLevel or Variable are specified, \
+then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadVariables[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the names of the variables present in ",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ " for ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ". If the options Iteration, Map, RefinementLevel or TimeLevel are \
+specified, then only iterations corresponding to those will be included."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadTime[",
+ StyleBox["run",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["var",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["dims",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell[TextData[{
+ "Read the coordinate time associated with this grid function at iteration ",
+ StyleBox["it",
+  FontSlant->"Italic"],
+ "."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"file", "=", "\"\<phi.x.h5\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadVariables", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ReadIterations", "[", 
+   RowBox[{"run", ",", "file"}], "]"}], "//", "Short"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadRefinementLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadMaps", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadTime", "[", 
+  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadTimeLevels", "[", 
+  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ReadGridFunction", "[", 
+  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{725, 750},
+WindowMargins->{{Automatic, -13}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
