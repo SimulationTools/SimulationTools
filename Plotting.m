@@ -386,9 +386,7 @@ Options[PresentationArrayPlot] = {
   "ColorRange" -> Automatic,
   "ColorMap" -> "TemperatureMap",
   "PlotKeySize" -> {Automatic,400},
-  "PlotKey" -> True}
-  ~Join~
-  Options[ArrayPlot];
+  "PlotKey" -> True} ~Join~ Options[ArrayPlot];
 
 DocumentationBuilder`OptionDescriptions[PresentationArrayPlot] = {
   "ColorRange" -> "{a,b} to indicate the data values corresponding to the endpoints of the color range, or Automatic to determine this from the available data",
