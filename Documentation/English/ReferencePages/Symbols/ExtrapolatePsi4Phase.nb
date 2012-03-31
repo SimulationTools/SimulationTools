@@ -30,6 +30,58 @@ of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.\
 
 Cell[CellGroupData[{
 
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "AlignPhaseAt", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ApplyFunction", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ExtrapolationErrorRelative", "False", 
+    Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ExtrapolationOrder", "1", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "MassADM", "None", Cell["", "TableText"]},
+   
+   {Cell["      ", "TableRowIcon"], "NonUniformGrid", "False", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RadiusRange", "All", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "UseTortoiseCoordinate", "True", Cell[
+    "", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, None, None, {None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{
+  "Rows" -> {{True, True, True, True, True, True, True, True, True}}}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell[" ", "FooterCell"],
 
 Cell[BoxData[""]]

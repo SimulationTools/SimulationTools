@@ -54,16 +54,14 @@ Cell[CellGroupData[{
 Cell["NRMMA Package", "GuideTitle"],
 
 Cell[TextData[{
- "NRMMA is a suite of ",
+ "NRMMA is a ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
- " packages for analysing data in Numerical Relativity.  It has been designed \
-for use with common output formats used by the Cactus code, with a focus on \
-output from the PSU and AEI codes. See ",
+ " application for analysing data from numerical simulations.  See ",
  Cell[TextData[ButtonBox["NRMMAIntroduction",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/tutorial/NRMMAIntroduction"]]],
- " for an introductory tutorial."
+ " for an introduction."
 }], "GuideAbstract"],
 
 Cell[CellGroupData[{

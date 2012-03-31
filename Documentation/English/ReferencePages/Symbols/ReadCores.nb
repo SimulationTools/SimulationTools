@@ -87,8 +87,10 @@ Cell[TextData[Cell[BoxData[
 Cell["\<\
 ReadCores gives the number of cores a simulation was started with. If the \
 number of cores were changed during a simulation it will not recognize this.\
-\>", "Notes"]
-}, Closed]],
+\>", "Notes"],
+
+Cell["DocumentationBuilder`Private`optionsCell$2817", "Input"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 

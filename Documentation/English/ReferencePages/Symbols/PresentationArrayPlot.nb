@@ -38,6 +38,159 @@ plot style."
 
 Cell[CellGroupData[{
 
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "ColorMap", "TemperatureMap", Cell["\<\
+the named color scheme (used with ColorData) to use for the plot\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ColorRange", "Automatic", Cell["\<\
+{a,b} to indicate the data values corresponding to the endpoints of the color \
+range, or Automatic to determine this from the available data\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotKey", "True", Cell[
+    "whether to display a plot key", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotKeySize", 
+    RowBox[{"{", 
+     RowBox[{"Automatic", ",", " ", "400"}], "}"}], Cell[
+    "{w,h} to indicate the width and height of the plot key", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "AlignmentPoint", "Center", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "AspectRatio", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Axes", "False", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "AxesLabel", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "AxesOrigin", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "AxesStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Background", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "BaselinePosition", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "BaseStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ClippingStyle", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ColorFunction", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ColorFunctionScaling", "True", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ColorOutput", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ColorRules", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ContentSelectable", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "CoordinatesToolOptions", "Automatic", 
+    Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "DataRange", "All", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "DataReversed", "False", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "DisplayFunction", "Identity", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Epilog", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "FormatType", "TraditionalForm", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Frame", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "FrameLabel", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "FrameStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "FrameTicks", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "FrameTicksStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "GridLines", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "GridLinesStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ImageMargins", "0.", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ImagePadding", "All", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ImageSize", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ImageSizeRaw", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "LabelStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "MaxPlotPoints", "Infinity", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Mesh", "False", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "MeshStyle", 
+    RowBox[{"GrayLevel", "[", 
+     RowBox[{
+      RowBox[{"-", "1"}], " ", "+", " ", "GoldenRatio"}], "]"}], Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Method", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PixelConstrained", "False", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotLabel", "None", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotRange", "All", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotRangeClipping", "False", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotRangePadding", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PlotRegion", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PreserveImageOptions", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Prolog", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RotateLabel", "True", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Ticks", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "TicksStyle", 
+    RowBox[{"{", "}"}], Cell["", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {
+    None, None, None, None, None, None, None, None, None, None, None, None, 
+     None, None, None, None, None, None, None, None, None, None, None, None, 
+     None, None, None, None, None, None, None, None, None, None, None, None, 
+     None, None, None, None, None, None, None, None, None, None, None, None, 
+     None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{
+  "Rows" -> {{
+     True, True, True, True, True, True, True, True, True, True, True, True, 
+      True, True, True, True, True, True, True, True, True, True, True, True, 
+      True, True, True, True, True, True, True, True, True, True, True, True, 
+      True, True, True, True, True, True, True, True, True, True, True, True, 
+      True, True, True, True, True}}}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell[" ", "FooterCell"],
 
 Cell[BoxData[""]]

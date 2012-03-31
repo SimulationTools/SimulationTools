@@ -92,14 +92,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["AsyncCommand \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/AsyncCommand"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -255,15 +250,10 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["CarpetHDF5Plot \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
   "paclet:nrmma/guide/CarpetHDF5Plot"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -327,14 +317,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["CircularPN \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/CircularPN"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1043,14 +1028,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["Empty \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Empty"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1375,14 +1355,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["IniFile \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/IniFile"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1472,14 +1447,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["MinTracker \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/MinTracker"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1498,24 +1468,14 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["MultipoleASCII \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
   "paclet:nrmma/guide/MultipoleASCII"]], "GuideFunctionsSubsection"],
 
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["MultipoleHDF5 \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/MultipoleHDF5"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1535,14 +1495,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["NRDF \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/NRDF"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1816,24 +1771,14 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["PunctureTracker \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
   "paclet:nrmma/guide/PunctureTracker"]], "GuideFunctionsSubsection"],
 
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["Quasinormal \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Quasinormal"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1911,23 +1856,13 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["ShiftTracker \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/ShiftTracker"]], "GuideFunctionsSubsection"],
 
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["SimFactory \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/SimFactory"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1949,14 +1884,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["SimViewRRMHD \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/SimViewRRMHD"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2058,14 +1988,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["Tracks \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/Tracks"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2097,14 +2022,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["VTK \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->"paclet:nrmma/guide/VTK"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -2225,14 +2145,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell[TextData[ButtonBox["YlmDecomp \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
- ButtonData->"paclet:nrmma/guide/YlmDecomp"]], "GuideFunctionsSubsection"],
-
-Cell["", "InlineGuideFunctionListing"]
-}, Open  ]]
+ ButtonData->"paclet:nrmma/guide/YlmDecomp"]], "GuideFunctionsSubsection"]
 }, Open  ]],
 
 Cell[CellGroupData[{

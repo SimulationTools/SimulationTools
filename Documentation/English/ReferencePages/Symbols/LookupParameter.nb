@@ -79,8 +79,10 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
-Cell["Parameters are always returned as strings.", "Notes"]
-}, Closed]],
+Cell["Parameters are always returned as strings.", "Notes"],
+
+Cell["DocumentationBuilder`Private`optionsCell$2687", "Input"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
