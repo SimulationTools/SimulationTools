@@ -382,8 +382,19 @@ key[mapName_String, {min_, max_}, plotkeysize_,opts___] :=
       If[Abs[c] < 10^-15, 0, N@c], {c, min, max, (max - min)/10}],
      False, False, False}];
 
-Options[PresentationArrayPlot] =
-{ColorRange -> Automatic, ColorMap -> "TemperatureMap", PlotKeySize -> {Automatic,400}, PlotKey -> True} ~Join~ Options[ArrayPlot];
+Options[PresentationArrayPlot] = {
+  "ColorRange" -> Automatic,
+  "ColorMap" -> "TemperatureMap",
+  "PlotKeySize" -> {Automatic,400},
+  "PlotKey" -> True}
+  ~Join~
+  Options[ArrayPlot];
+
+DocumentationBuilder`OptionDescriptions[PresentationArrayPlot] = {
+  "ColorRange" -> "{a,b} to indicate the data values corresponding to the endpoints of the color range, or Automatic to determine this from the available data",
+  "ColorMap" -> "the named color scheme (used with ColorData) to use for the plot",
+  "PlotKeySize" -> "{w,h} to indicate the width and height of the plot key",
+  "PlotKey" -> "whether to display a plot key"};
 
 PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
   Module[{range, keyPlot, plotkeysize, plot},
