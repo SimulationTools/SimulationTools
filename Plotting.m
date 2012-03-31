@@ -388,7 +388,7 @@ Options[PresentationArrayPlot] = {
   "PlotKeySize" -> {Automatic,400},
   "PlotKey" -> True} ~Join~ Options[ArrayPlot];
 
-DocumentationBuilder`OptionDescriptions[PresentationArrayPlot] = {
+DocumentationBuilder`OptionDescriptions["PresentationArrayPlot"] = {
   "ColorRange" -> "{a,b} to indicate the data values corresponding to the endpoints of the color range, or Automatic to determine this from the available data",
   "ColorMap" -> "the named color scheme (used with ColorData) to use for the plot",
   "PlotKeySize" -> "{w,h} to indicate the width and height of the plot key",
