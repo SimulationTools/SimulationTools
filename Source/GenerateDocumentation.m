@@ -2,6 +2,8 @@
 
 << DocumentationBuilder`;
 
+RunDirectory = $NRMMATestRunDirectory;
+
 packages =
  {"Ascii1D",
   "Ascii",
