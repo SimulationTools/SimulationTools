@@ -356,10 +356,6 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 
 (* Full run *)
 
-Options[ExportConfig] = Options[ExportSim];
-ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPattern[]] :=
-  Scan[ExportSim[#, name, outputDirectory, Madm, ecc, opts] &, sims];
-
 Options[ExportSim] = {ExportSimFormat -> "ASCII", ExportOnly -> All, ExcludeModes -> None};
 ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
   Module[{dir, h, n, ext, all, export},
@@ -393,6 +389,10 @@ ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]
                                           ecc],
       _, Error["Error"]], {item, export}];
   ];
+
+Options[ExportConfig] = Options[ExportSim];
+ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPattern[]] :=
+  Scan[ExportSim[#, name, outputDirectory, Madm, ecc, opts] &, sims];
 
 End[];
 
