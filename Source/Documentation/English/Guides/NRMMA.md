@@ -87,7 +87,7 @@
    "DataRegion",
    "DataTable",
    "NumericalRelativity",
-   "CarpetHDF5",
+   "GridFunctions",
    "Kicks"
  } 
 }
