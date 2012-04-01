@@ -359,8 +359,7 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", "\<\"ML_BSSN::phi\"\>", "}"}]], "Output",
- CellLabel->"Out[4]=",
- CellID->1172952525]
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -381,8 +380,7 @@ Cell[BoxData[
     "17920", ",", "18176", ",", "18432", ",", "18688", ",", "18944", ",", 
     "19200"}], "}"}],
   Short]], "Output",
- CellLabel->"Out[5]//Short=",
- CellID->2060691862]
+ CellLabel->"Out[5]//Short="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -396,8 +394,7 @@ Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6"}], 
   "}"}]], "Output",
- CellLabel->"Out[6]=",
- CellID->1579349465]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -409,8 +406,7 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", "}"}]], "Output",
- CellLabel->"Out[7]=",
- CellID->1228581335]
+ CellLabel->"Out[7]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -421,8 +417,7 @@ Cell[BoxData[
  CellLabel->"In[8]:="],
 
 Cell[BoxData["64.`"], "Output",
- CellLabel->"Out[8]=",
- CellID->711231440]
+ CellLabel->"Out[8]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -434,8 +429,7 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", "0", "}"}]], "Output",
- CellLabel->"Out[9]=",
- CellID->772832878]
+ CellLabel->"Out[9]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -447,8 +441,7 @@ Cell[BoxData[
 
 Cell[BoxData["\<\"DataRegion[ML_BSSN::phi\.01, {60}, \\!\\({\\({0.`, \
 118.`}\\)}\\)]\"\>"], "Output",
- CellLabel->"Out[10]=",
- CellID->1021083490]
+ CellLabel->"Out[10]="]
 }, Open  ]]
 }, Open  ]],
 

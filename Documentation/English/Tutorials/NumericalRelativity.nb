@@ -114,27 +114,17 @@ Cell["\<\
 Read (2,2) mode of waveform extracted at r=100M from a simulation\
 \>", "MathCaption"],
 
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input",
- CellLabel->"In[2]:="],
-
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"psi4", "=", 
   RowBox[{"ReadPsi4", "[", 
    RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[4]:="],
 
 Cell[BoxData[
  RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
- CellLabel->"Out[3]=",
- CellID->1683852249]
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -148,7 +138,7 @@ Cell[BoxData[
      RowBox[{"Im", "[", "psi4", "]"}], ",", 
      RowBox[{"Abs", "[", "psi4", "]"}]}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -582,8 +572,7 @@ le3/AIQF1hQ=
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[4]=",
- CellID->965248777]
+ CellLabel->"Out[5]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -593,7 +582,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"Phase", "[", "psi4", "]"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -738,8 +727,7 @@ d54Ep0a+zk8yIxdKIC05LxzpQz4kQcUrld2SNHKFBJw3raVb8sjVEvxxa1Xz
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[5]=",
- CellID->844725601]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -752,7 +740,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{
       RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[7]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -902,25 +890,13 @@ S5z//wETwJl7
   PlotRangeClipping->True,
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
- CellLabel->"Out[6]=",
- CellID->288785690]
+ CellLabel->"Out[7]="]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Trajectories", "Section"],
-
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input",
- CellLabel->"In[2]:="],
 
 Cell["\<\
 These functions can be used with output from either PunctureTracker or \
@@ -941,14 +917,14 @@ Cell[BoxData[
   RowBox[{"traj0", "=", 
    RowBox[{"ReadBHTrajectory", "[", 
     RowBox[{"run", ",", "0"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[8]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Take", "[", 
   RowBox[{"traj0", ",", "10"}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[9]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -974,8 +950,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"2.945171234278`", ",", "0.57973163080433`"}], "}"}]}], 
   "}"}]], "Output",
- CellLabel->"Out[4]=",
- CellID->308049610]
+ CellLabel->"Out[9]="]
 }, Open  ]],
 
 Cell["Puncture 1 trajectory", "MathCaption"],
@@ -985,7 +960,7 @@ Cell[BoxData[
   RowBox[{"traj1", "=", 
    RowBox[{"ReadBHTrajectory", "[", 
     RowBox[{"run", ",", "1"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[10]:="],
 
 Cell[CellGroupData[{
 
@@ -996,7 +971,7 @@ Cell[BoxData[
     RowBox[{"traj0", ",", "traj1"}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[11]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1431,8 +1406,7 @@ Q6stP1eTYJWy3azFqhHkdppisi0iwT79rMHfRsYwaMaDXTuDBP8H3yFe4g==
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[6]=",
- CellID->1954206000]
+ CellLabel->"Out[11]="]
 }, Open  ]],
 
 Cell["Separation of the BHs (radius of relative orbit)", "MathCaption"],
@@ -1442,7 +1416,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadBHSeparation", "[", "run", "]"}], "]"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[12]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1591,8 +1565,7 @@ lvJVNax/S99557+Z2zOYOD0GX1/JRbySIc6JQc0J620+/YlFMdjnfu7JHnXi
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[7]=",
- CellID->725344782]
+ CellLabel->"Out[12]="]
 }, Open  ]],
 
 Cell["Phase of orbit", "MathCaption"],
@@ -1602,7 +1575,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadBHPhase", "[", "run", "]"}], "]"}]], "Input",
- CellLabel->"In[8]:="],
+ CellLabel->"In[13]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1745,8 +1718,7 @@ Xuf8fyvxe5c=
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[8]=",
- CellID->1752570702]
+ CellLabel->"Out[13]="]
 }, Open  ]],
 
 Cell["Individual coordinates", "MathCaption"],
@@ -1756,13 +1728,13 @@ Cell[BoxData[
   RowBox[{"bh0x", "=", 
    RowBox[{"ReadBHCoordinate", "[", 
     RowBox[{"run", ",", "0", ",", "1"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[9]:="],
+ CellLabel->"In[14]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "bh0x", "]"}]], "Input",
- CellLabel->"In[10]:="],
+ CellLabel->"In[15]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1891,25 +1863,13 @@ baZH
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[10]=",
- CellID->570086262]
+ CellLabel->"Out[15]="]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Apparent Horizons", "Section"],
-
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input",
- CellLabel->"In[2]:="],
 
 Cell["\<\
 Remember that AHFinderDirect numbers its horizons from 1, not 0\
@@ -1923,7 +1883,7 @@ Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadAHRadius", "[", 
    RowBox[{"run", ",", "1"}], "]"}], "]"}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[16]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1970,8 +1930,7 @@ zu4XZn8DnEX9AA==
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[3]=",
- CellID->1515256167]
+ CellLabel->"Out[16]="]
 }, Open  ]],
 
 Cell["Apparent horizon mass", "MathCaption"],
@@ -1986,7 +1945,7 @@ Cell[BoxData[
    RowBox[{"PlotRange", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[17]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -2029,25 +1988,13 @@ dayILJch7XufoT5ytQwlmiKD5Ql0X4b7X4+XZ3zyf6o+w5Y=
   PlotRangeClipping->True,
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
- CellLabel->"Out[4]=",
- CellID->2049312643]
+ CellLabel->"Out[17]="]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Isolated Horizons", "Section"],
-
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input",
- CellLabel->"In[2]:="],
 
 Cell["IsolatedHorizon numbers horizons from 0", "Text"],
 
@@ -2063,7 +2010,7 @@ Cell[BoxData[{
  RowBox[{"Take", "[", 
   RowBox[{
    RowBox[{"ToList", "[", "spin", "]"}], ",", "10"}], "]"}]}], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[18]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -2129,8 +2076,7 @@ Cell[BoxData[
       RowBox[{"9.16704467517086`*^-20", ",", 
        RowBox[{"-", "3.80459315915694`*^-18"}], ",", 
        "0.0000747886520903558`"}], "}"}]}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[4]=",
- CellID->1454860315]
+ CellLabel->"Out[19]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2143,7 +2089,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{
       RowBox[{"-", "0.1"}], ",", "0.8"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[20]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -2190,8 +2136,7 @@ PuMfrQDMRA==
   PlotRangeClipping->True,
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
- CellLabel->"Out[5]=",
- CellID->588509463]
+ CellLabel->"Out[20]="]
 }, Open  ]]
 }, Open  ]],
 

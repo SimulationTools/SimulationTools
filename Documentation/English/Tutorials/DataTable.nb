@@ -131,8 +131,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"1.`", ",", 
      RowBox[{"-", "2.4492935982947064`*^-16"}]}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[2]=",
- CellID->1013993387]
+ CellLabel->"Out[2]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -144,8 +143,7 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
- CellLabel->"Out[3]=",
- CellID->1904116364]
+ CellLabel->"Out[3]="]
 }, Open  ]],
 
 Cell["\<\
@@ -169,10 +167,6 @@ Cell[CellGroupData[{
 
 Cell["Using", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:="],
-
 Cell[BoxData[{
  RowBox[{
   RowBox[{"l", "=", 
@@ -188,7 +182,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"d", "=", 
    RowBox[{"MakeDataTable", "[", "l", "]"}]}], ";"}]}], "Input",
- CellLabel->"In[2]:=",
+ CellLabel->"In[4]:=",
  CellID->2128570596],
 
 Cell["A DataTable can be converted back to a list:", "MathCaption"],
@@ -197,7 +191,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ToList", "[", "d", "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -230,8 +224,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"1.`", ",", 
      RowBox[{"-", "2.4492935982947064`*^-16"}]}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[4]=",
- CellID->682422154]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -245,7 +238,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "d", "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[7]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -264,8 +257,7 @@ Cell[BoxData[
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[5]=",
- CellID->1906467298]
+ CellLabel->"Out[7]="]
 }, Open  ]],
 
 Cell["\<\
@@ -286,7 +278,7 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], "]"}]}],
    ";"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[8]:="],
 
 Cell[BoxData[
  RowBox[{
@@ -301,7 +293,7 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{"x", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], "]"}]}],
    ";"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[9]:="],
 
 Cell[BoxData[
  RowBox[{
@@ -309,7 +301,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"d1", "^", "2"}], "+", 
     RowBox[{"d2", "^", "2"}]}]}], ";"}]], "Input",
- CellLabel->"In[8]:="],
+ CellLabel->"In[10]:="],
 
 Cell[CellGroupData[{
 
@@ -319,7 +311,7 @@ Cell[BoxData[
    RowBox[{"PlotRange", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"0", ",", "2"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[9]:="],
+ CellLabel->"In[11]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -334,8 +326,7 @@ Cell[BoxData[
   PlotRangeClipping->True,
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
- CellLabel->"Out[9]=",
- CellID->1539864246]
+ CellLabel->"Out[11]="]
 }, Open  ]],
 
 Cell[TextData[{

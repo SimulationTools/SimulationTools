@@ -158,7 +158,15 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ToList",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToList"]], "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/ToList"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/guide/Data Representations"]], 
+  "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -428,7 +436,15 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["LinearMomentumFlux",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/LinearMomentumFlux"]], "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/LinearMomentumFlux"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["...",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/guide/Numerical Relativity"]], 
+  "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 

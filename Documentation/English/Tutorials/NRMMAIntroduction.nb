@@ -126,7 +126,7 @@ Cell[BoxData[
    RowBox[{"RunDirectory", "=", 
     RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}], 
   "*)"}]], "Input",
- CellLabel->"In[1]:="]
+ CellLabel->"In[2]:="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -194,17 +194,9 @@ the copy in memory will not be.  To clear the cache, use the function ",
 
 Cell["Clear data cache", "MathCaption"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"ClearAllMemos", "[", "]"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{"ClearAllMemos", "[", "]"}]], "Output",
- CellLabel->"Out[1]=",
- CellID->808393253]
-}, Open  ]]
+ CellLabel->"In[3]:="]
 }, Open  ]]
 }, Open  ]],
 

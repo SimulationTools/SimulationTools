@@ -237,7 +237,7 @@ Cell[BoxData[
           RowBox[{"rads", ",", 
            RowBox[{"-", "4"}]}], "]"}]}], "}"}]}], "]"}], ",", "r"}], "]"}]}],
    "*)"}]], "Input",
- CellLabel->"In[1]:="],
+ CellLabel->"In[11]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -246,13 +246,13 @@ Cell[BoxData[
     RowBox[{"Map", "[", 
      RowBox[{"Last", ",", "pDotOfr"}], "]"}], ",", 
     RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], "*)"}]], "Input",
- CellLabel->"In[2]:="],
+ CellLabel->"In[12]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
   RowBox[{"mADM", "=", 
    RowBox[{"ReadADMMass", "[", "run", "]"}]}], "*)"}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[13]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -260,7 +260,7 @@ Cell[BoxData[
    RowBox[{"ExtrapolateRadiatedQuantity", "[", 
     RowBox[{"pDotOfr", ",", 
      RowBox[{"MassADM", "\[Rule]", "mADM"}]}], "]"}]}], "*)"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[14]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -275,7 +275,7 @@ Cell[BoxData[
           RowBox[{"#1", ",", "mADM"}], "]"}]}], ",", "#2"}], "]"}], "&"}], 
      ",", 
      RowBox[{"Transpose", "@", "pDotOfr"}]}], "]"}]}], "*)"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[15]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -290,7 +290,7 @@ Cell[BoxData[
         RowBox[{"r", ",", 
          RowBox[{"First", "/@", "pDotOfr"}]}], "}"}]}], "]"}], ",", 
      "\"\<r = \[Infinity]\>\""}], "]"}]}], "*)"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[16]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -304,7 +304,7 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{"400", ",", "500"}], "}"}], ",", "All"}], "}"}]}], ",", 
     RowBox[{"PlotLegend", "\[Rule]", "labels"}]}], "]"}], "*)"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[17]:="],
 
 Cell[BoxData[
  RowBox[{"(*", 
@@ -321,7 +321,7 @@ Cell[BoxData[
         RowBox[{"0.00014", ",", "0.00017"}], "}"}]}], "}"}]}], ",", 
     "\[IndentingNewLine]", 
     RowBox[{"PlotLegend", "\[Rule]", "labels"}]}], "]"}], "*)"}]], "Input",
- CellLabel->"In[8]:="]
+ CellLabel->"In[18]:="]
 }, Open  ]],
 
 Cell[CellGroupData[{
