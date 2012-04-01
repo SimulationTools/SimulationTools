@@ -63,7 +63,7 @@ Strip[d,n,m] removes n points from each lower face and m points from each upper 
 MergeDataRegions::usage = "MergeDataRegions[regions] returns a DataRegion formed from merging the content of the DataRegions in the list regions.  If the regions do not cover a rectangular domain, any missing points will have value None.  All the DataRegions must have the same spacing and their origins must be separated by multiples of their spacing.";
 (* TODO: rename this as Coordinates *)
 GetCoordinate::usage = "GetCoordinate[d, i] returns a DataRegion of the same shape as the DataRegion d whose data is the i coordinate of d.";
-(* TODO: Rename this as MapVariable *)
+(* TODO: Rename this as MapData *)
 (* TODO: Add a MapCoordinates function which maps over the coordinates *)
 MapDataRegion::usage = "MapDataRegion[f,d] returns a DataRegion of the same shape as the DataRegion d whose data is f applied to the data in d.";
 (* TODO: Move away and undocument *)
@@ -71,7 +71,7 @@ FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the
 (* TODO: move this to another package *)
 NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
 DataRegionContourPlot::usage = "DataRegionContourPlot[d, args] generates a ContourPlot of the data in a 2D DataRegion d. The arguments are the same as for ContourPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-(* TODO: rename this as MapThreadVariable and add a MapThreadCoordinates *)
+(* TODO: rename this as MapThreadData and add a MapThreadCoordinates *)
 MapThreadDataRegion::usage = "MapThreadDataRegion[f, {d1, d2, ...}] returns a DataRegion of the same shape as the DataRegions {d1, d2, ...} whose data is f[v1, v2, ...] where {v1, v2, ...} are the data values from {d1, d2, ...}.";
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form a
 s in the first argument of Derivative.";
