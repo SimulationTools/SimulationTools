@@ -22,7 +22,8 @@
     },
     "Functions" -> {"Frequency", "Phase", "MakeDataRegion", 
       "MergeDataRegions", "ToDataTable", "GetData", "GetOrigin", 
-      "MakeDataTable", "IntersectDataTables", "ToList"}
+      "MakeDataTable", "IntersectDataTables", "ToList"},
+    "MoreFunctionsLink" -> "paclet:nrmma/guide/Data Representations"
    },
 
    {"Title" -> "Reading Grid Variables",
@@ -53,7 +54,8 @@
     "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadAHMass", 
       "ReadAHSeparation", "ReadAHCentroid", "ReadBHPhase", 
       "ReadBHSeparation", "ReadBHSpeed", "ReadBHTrajectories", 
-      "KickVector", "LinearMomentumFlux"}
+      "KickVector", "LinearMomentumFlux"},
+    "MoreFunctionsLink" -> "paclet:nrmma/guide/Numerical Relativity"
    },
 
    {"Title" -> "Visualization",
