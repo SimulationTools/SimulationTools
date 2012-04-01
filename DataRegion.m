@@ -6,76 +6,92 @@ BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Error`"}];
 
 (* Exported symbols *)
 
-ToDataRegion::usage = "ToDataRegion[data] creates a DataRegion object from the N-dimensional array (nested list) data.";
-(* TODO: Replace this with a new function Slice which has an easier-to-use interface *)
+ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
+(* TODO: Remove this *)
 SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
-(* Rename this to Slab *)
+(* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 (* TODO: this should be displayed as <<...>> *)
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
+(* TODO: add checks and move to DataTable *)
 ToDataTable::usage = "ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
-(* TODO: rename this as Domain *)
+(* TODO: rename this as CoordinateRanges *)
 GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  This is a list of {min,max} pairs, each corresponding to one dimension of d.";
-(* Rename this as Origin *)
+(* TODO: Rename this as MinCoordinates and add a MaxCoordinates *)
 GetOrigin::usage = "GetOrigin[d] returns a list of length N giving the coordinates of the first point in each direction in the N-dimensional DataRegion d.";
-(* TODO: rename this as Spacing and put in NRMMA context *)
+(* TODO: rename this as CoordinateSpacings and put in another context *)
 GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing of the data in each dimension of the N-dimensional DataRegion d.";
-(* TODO: rename this as an overloaded Dimensions and put in NRMMA context *)
+(* TODO: rename this as an overloaded Dimensions *)
 (* TODO: note that the data layout is NOT the same as Mathematica standard - we may want to change this. *)
 GetDimensions::usage = "GetDimensions[d] returns the number of points in each dimension of a DataRegion d.";
-(* TODO: consider renaming this to ArrayDepth, but think about what it means if the DataRegion has list-valued data *)
+(* TODO: renaming to ArrayDepth *)
 GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a DataRegion d.";
-(* TODO: Rename this as ToList - to by the same as DataTable, should we have this returning the coordinate as well? Then we need a separate function to get the data. *)
+(* TODO: Implement ToList.  This will return the coordinates as well as the data.  It will have an option Flatten which defaults to True.  When Flatten is false, you get the same structure as the internal data, but with the coordinates added. *)
+(* TODO: Rename as ToListOfData *)
 GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
-(* TODO: Rename this as Time *)
+(* TODO: Implement ToListOfCoordinates with the same Flatten option as ToList, which just returns the coordinates. *)
+(* TODO: Remove *)
 GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
-(* TODO: Rename this as Annotations *)
+(* TODO: Make this internal *)
 GetAttributes::usage = "GetAttributes[d] returns the list of key -> value attributes of DataRegion d.";
 (* TODO: Rename this as VariableName *)
 GetVariableName::usage = "GetVariableName[d] returns the variable name in DataRegion d.";
-
+(* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: rationalise plotting functions *)
 
+(* TODO: Use the built-in List function names.  Associate definitions with DataRegion. Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
 DataRegionDensityPlot::usage = "DataRegionDensityPlot[d, args] generates a DensityPlot of the data in a 2D DataRegion d. The arguments are the same as for DensityPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
 DataRegionArrayPlot::usage = "DataRegionArrayPlot[d, args] generates an ArrayPlot of the data in a 2D DataRegion d. The arguments are the same as for ArrayPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
+(* Remove all Dynamic* plotting functions, and replace with a generic Zoomable in Plotting *)
 DynamicDataRegionArrayPlot::usage = "DynamicDataRegionArrayPlot[d,args] generates a zoomable version of DataRegionArrayPlot[d,args] which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale.";
 DataRegionMatrixPlot::usage = "DataRegionMatrixPlot[d, args] generates a MatrixPlot of the data in a 2D DataRegion d. The arguments are the same as for MatrixPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
 DataRegionPlot3D::usage = "DataRegionPlot3D[d, args] generates a ListPlot3D of the data in a 2D DataRegion d. The arguments are the same as for ListPlot3D.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
 DataRegionPlot::usage = "DataRegionPlot[d, args] generates a ListPlot of the data in a 1D DataRegion d. The arguments are the same as for ListPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
+
+(* TODO: these should be moved into Plotting and probably changed or fixed or deleted *)
 ScaledColorFunction::usage = "ScaledColorFunction[colorscheme, {min, max}] returns a function on the domain [min,max] giving a color in colorscheme.  colorscheme can be any Mathematica named color scheme, for example \"ThermometerColors\", \"TemperatureMap\" etc.";
 ColorMapLegend::usage = "ColorMapLegend[colorfunction, {min, max, dx}] returns a graphical legend labeled from min to max in steps of dx (which defaults to Automatic) using the color function (e.g. from ScaledColorFunction) to determine the colors.";
-(* TODO: deprecate this function and make it as easy to use the other functions *)
+
+(* TODO: remove this function and make it as easy to use the other functions *)
 QuickSlicePlot::usage = "QuickSlicePlot[d, {min, max}, colorscheme, opts] generates an array plot of a DataRegion d using the color scheme colorscheme scaled to run between min and max.  The plot includes a legend for the colors.  opts (which is optional) is passed to DataRegionArrayPlot.";
+(* TODO: rename as CoordinateOutline *)
 Outline::usage = "Outline[d] generates a graphical representation of the outline of a DataRegion d";
+(* TODO: Rename as Stripped *)
 Strip::usage = "Strip[d,n] removes n points from each face of a DataRegion d.  n is either a list corresponding to the dimension of d or an integer, in which case the same number of points is removed in each direction.
 Strip[d,n,m] removes n points from each lower face and m points from each upper face of d.  Here, n and m must be lists.";
-(* TODO: rename this as Merge *)
+(* TODO: add this to ToDataRegion *)
 MergeDataRegions::usage = "MergeDataRegions[regions] returns a DataRegion formed from merging the content of the DataRegions in the list regions.  If the regions do not cover a rectangular domain, any missing points will have value None.  All the DataRegions must have the same spacing and their origins must be separated by multiples of their spacing.";
-(* TODO: rename this as Coordinate *)
+(* TODO: rename this as Coordinates *)
 GetCoordinate::usage = "GetCoordinate[d, i] returns a DataRegion of the same shape as the DataRegion d whose data is the i coordinate of d.";
-(* TODO: Rename this as Map - might want to be MapData to make it clear you map over the data *)
+(* TODO: Rename this as MapVariable *)
 (* TODO: Add a MapCoordinates function which maps over the coordinates *)
 MapDataRegion::usage = "MapDataRegion[f,d] returns a DataRegion of the same shape as the DataRegion d whose data is f applied to the data in d.";
+(* TODO: Move away and undocument *)
 FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
 (* TODO: move this to another package *)
 NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
 DataRegionContourPlot::usage = "DataRegionContourPlot[d, args] generates a ContourPlot of the data in a 2D DataRegion d. The arguments are the same as for ContourPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-(* TODO: rename this as MapThread *)
+(* TODO: rename this as MapThreadVariable and add a MapThreadCoordinates *)
 MapThreadDataRegion::usage = "MapThreadDataRegion[f, {d1, d2, ...}] returns a DataRegion of the same shape as the DataRegions {d1, d2, ...} whose data is f[v1, v2, ...] where {v1, v2, ...} are the data values from {d1, d2, ...}.";
-NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form as in the first argument of Derivative.";
+NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form a
+s in the first argument of Derivative.";
+(* TODO: don't support this - put it in NRMMA`Experimental *)
 TimeDerivative::usage = "TimeDerivative[{d1, d2,...}, center] returns a numerical time derivative computed from DataRegions d1, d2, ... . The derivative is computed using finite differencing, the order of which is determined by the number of DataRegions given. The optional center argument specifies the number of timesteps from the first DataRegion at which to compute derivatives (using lop-sided differencing, if necessary), with the default value being half-way between the first and last times.";
-(* TODO: rename this to Resample *)
+(* TODO: rename this to Resampled and merge with the next one *)
 ResampleDataRegion::usage = "ResampleDataRegion[d, {x1, x2, dx}, p] returns a new DataRegion of the same dimensionality as the DataRegion d but with points in the range x1 to x2 with spacing dx.  The data is interpolated at order p onto the new grid.  x1, x2 and dx are lists of length equal to the dimensionality of d.  NOTE: currently only 2-dimensional DataRegions are supported.";
-(* TODO: rename this to Resample - can overload on argument pattern *)
 ResampleDataRegions::usage = "ResampleDataRegions[{d1, d2, ...}, p] returns a list of DataRegions {D1, D2, ...} which are resampled versions of the DataRegions {d1, d2, ...} over the intersection of their bounding boxes using interpolation of order p.  The new DataRegions contain the same points.";
+(* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 (* TODO: move this to the NRMMA context.  Think about another way to do this *)
 Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
-(* TODO: consider renaming this as ToDataRegion if the argument pattern is sufficiently different from that of the existing version *)
+(* TODO: Add this to ToDataRegion *)
 TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
-(* TODO: since this is the same functionality as System`Norm, we should use that.  But this means we can't have a usage message for it. *)
+(* TODO: Rename this as GridNorm *)
 NormL2::usage = "NormL2[d] returns the L2,dx norm of the points in the DataRegion d.  This is the discrete approximation to the L2 norm.";
 (* TODO: change this to ToDataRegion *)
 EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as the DataRegion d with data computed by evaluating expr assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: this function is only currently implemented for DataRegions of dimension 2 and 3.";
+(* TODO: make ToDataRegion more flexible about creating DataRegions from expressions - make it like DataRegionTable *)
+(* TODO: sort out context of Downsample *)
+(* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
 
 (* DEPRECATED *)
 
