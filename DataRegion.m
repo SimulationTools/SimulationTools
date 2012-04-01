@@ -25,7 +25,7 @@ GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing
 GetDimensions::usage = "GetDimensions[d] returns the number of points in each dimension of a DataRegion d.";
 (* TODO: consider renaming this to ArrayDepth, but think about what it means if the DataRegion has list-valued data *)
 GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a DataRegion d.";
-(* TODO: Rename this as ToList *)
+(* TODO: Rename this as ToList - to by the same as DataTable, should we have this returning the coordinate as well? Then we need a separate function to get the data. *)
 GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
 (* TODO: Rename this as Time *)
 GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";

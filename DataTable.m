@@ -8,55 +8,91 @@ DataTable::usage = "DataTable[{{x,f},...}, attrs] is a one-dimensional table of 
 
 (* TODO: change this to ToDataTable[{{x,f},...}] *)
 MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
-(* TODO: for DataTables, ToList returns the coordinates as well as the data, whereas for DataRegions *)
 ToList::usage = "ToList[d] returns the list content of the DataTable d";
-(* TODO: think of better names than IndVar and DepVar.  If these are timeseries, we could use Time and Data.   *)
+(* TODO: think of better names than IndVar and DepVar.  Ideally we would have Variable[d] and Coordinates[d] *)
 DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
 IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
+(* TODO: this should be names consistently with the getter functions above; e.g. MapVariable *)
 MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
+(* TODO: rename as MapCoordinates? *)
 MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
+(* TODO: rename as MapList, as it maps f over the underlying list *)
 ApplyToList::usage = "ApplyToList[f, d] maps f over the elements of the underlying list in DataTable d."
+(* TODO: rename as MapThreadVariable, or just MapThread? *)
 MapThreadData::usage = "MapThreadData[f, {d, ...}] threads f over the independent variables in the DataTable objects d, much like MapThread for lists.";
+(* TODO: Rename as Downsampled? *)
 Downsample::usage = "Downsample[d, n] returns a version of DataTable d with only every nth element.";
+(* TODO: Deprecate this *)
 MakeInterpolatingDataTable::usage = "MakeInterpolatingDataTable[d, dt] returns a resampled version of DataTable d which has been interpolated to have a spacing dt.  Deprecated: use ResampleDataTable instead.";
+(* TODO: check the continuity algorithm and see if it can be improved *)
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for smooth enough input data.";
+(* TODO: should these be nouns, like WithAttribute, etc? *)
 AddAttribute::usage = "AddAttribute[d, attrname -> attrval] returns a copy of d with a new attribute added.";
 AddAttributes::usage = "AddAttributes[d, {attrname -> attrvalue, ...}] returns a copy of DataTable d with new attributes added.";
+(* This should just be Attribute[d], but that is too generic *)
 ReadAttribute::usage = "ReadAttribute[d, attrname] returns the value of the named attribute from the DataTable d.";
+(* TODO: Could this be AttributeNames? *)
 ListAttributes::usage = "ListAttributes[d] returns a list of the attributes in the DataTable d in the form {attrname -> attrvalue, ...}.";
+(* TODO: Rename as Shifted? *)
 ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
+(* TODO: Rename as Domain? It's quite general.  What about Endpoints, by analogy with mathematical terminology for real intervals? *)
 DataTableRange::usage = "DataTableRange[d] returns the first and last independent variable in DataTable d in the form {x1, x2}.";
+(* TODO: Rename all variants as Resampled *)
 ResampleDataTable::usage = "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy of DataTable d in which the data has been interpolated with order p and runs from t1 to t2 with spacing dx.  p defaults to 3 if not specified, as in Interpolation.";
 ResampleDataTables::usage = "ResampleDataTables[{d, ...}] returns the DataTables d after resampling to have a common range and spacing, which corresponds to the minimum spacing of the input set.";
+(* TODO: This should be completely eliminated, as there is no concept of spacing for a DataTable *)
 Spacing::usage = "Spacing[d] returns the spacing of the independent variable in DataTable d.  This is a constant for the DataTable.";
+(* TODO: Rename as Interval.  Relation to Slab in DataRegion? *)
 DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
+(* TODO: Maybe we should implement Select on DataTables instead?  Select[d, y1 < # < y2 &] *)
 DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
+(* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
 NDerivative::usage = "NDerivative[d] returns the first derivative of the DataTable d.  This is first order accurate and the result omits the first and last points of d.";
+(* TODO: Rename as Intersection.  Clarify what happens at the endpoints wrt roundoff error *)
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
+(* TODO: If this uses NDerivative, we should be able to specify the method and order of accuracy *)
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
+(* TODO: Should this be just Integrate, or does this cause problems with syntax highlighting? *)
 IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
+(* TODO: Is this useful enough to have these in DataTable, when it is easy to do something like Integrate[d, {First[Coordinates[d]], f}]? *)
 IntegrateDataTableZeroStart::usage = "IntegrateDataTableZeroStart[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x1] = 0, where x1 is the lowest value of the independent variable in d.";
 IntegrateDataTableZeroEnd::usage = "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x2] = 0, where x2 is the highest value of the independent variable in d.";
+(* TODO: Is there a better system?  Sub is an abbreviation.  In any case, we need a common context for DataTable and DataRegion for these. *)
 Global`Sub::usage = "Sub[d1, d2] returns a DataTable corresponding to d1 - d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Sub~ d2.";
 Add::usage = "Add[d1, d2] returns a DataTable corresponding to d1 + d2, where the dependent variables in d1 and d2 have been subtracted.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Add~ d2.";
 Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
+(* TODO: This is used for replacing "bad" values with interpolated values according to some test.  Maybe rename as InterpolatedIf or InterpolatedWhere *)
 InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
+(* TODO: Rename as Monotonic?  Might be too generic. *)
 Monotonise;
 DataTableListLinePlot;
-
+(* TODO: Rename as Reflection?  It's a bit like reflecting in the line y = x.  Probably it should be Inverse. *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
+(* TODO: Make this consistent with DataRegion.  This is the L2,dx norm of the DataTable treated as a vector, not the norm of each (vector) value *)
 DataTableNormL2;
+(* TODO: Rename as CoordinateAtMaximum *)
 LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
+(* TODO: Rename as CoordinateAtMaximumPoint *)
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
 PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
+(* TODO: Rename as VariableAtMaximum, and add VariableAtMaximumPoint (though this is just Max[d]) *)
 MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
+(* TODO: This is very specific, and could be easily implemented as Abs[FunctionOfPhase[...]].  What is added is automatic determination of arguments *)
 AbsOfPhase::usage = "AbsOfPhase[d] uses FunctionOfPhase to construct a DataTable from d consisting of its Abs as a function of its Phase.";
+(* TODO: Rename; this is the composition of d and p^-1.  We have Inverse already, maybe we should also have Composition? Then we wouldn't need this function as it would be easy: Composition[d, Inverse[p], {t1, t2, dp}].  Composition will likely need to interpolate. *)
 FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
+(* TODO: This is redundant, it's the same as Exp[I phi] d *)
 ShiftPhase;
+(* TODO: This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
 FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
+(* TODO: This is Interval, but implemented on Lists.  Maybe it should be internal? *)
 TableRange;
+(* TODO: This also only operates on lists.  It might be good to have this defined on DataTables as well.  The list version should be made internal, but the DataTable version could be public. *)
 PartitionTable;
+(* TODO: Decide if non-monotonic DataTables are allowed/checked *)
+(* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
+(* TODO: Rename, but to what? OnUniformGrid? WithUniformGrid? *)
 MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spacing from a DataTable with a nonuniform grid spacing.  This is accomplished via interpolation through ResampleDataTable.";
 UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
