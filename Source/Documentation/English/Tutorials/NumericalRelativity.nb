@@ -65,13 +65,6 @@ Read (2,2) mode of waveform extracted at r=100M from a simulation\
 \>", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
-
-Cell[BoxData[
  RowBox[{"psi4", "=", 
   RowBox[{"ReadPsi4", "[", 
    RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}]], "Input"],
@@ -105,15 +98,6 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["Trajectories", "Section"],
-
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
 
 Cell["\<\
 These functions can be used with output from either PunctureTracker or \
@@ -183,15 +167,6 @@ Cell[CellGroupData[{
 
 Cell["Apparent Horizons", "Section"],
 
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
-
 Cell["\<\
 Remember that AHFinderDirect numbers its horizons from 1, not 0\
 \>", "Text"],
@@ -218,15 +193,6 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell["Isolated Horizons", "Section"],
-
-Cell["Load the package", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", " ", "=", " ", "\"\<bbh\>\""}], ";"}]], "Input"],
 
 Cell["IsolatedHorizon numbers horizons from 0", "Text"],
 

@@ -76,9 +76,6 @@ Cell[CellGroupData[{
 
 Cell["Using", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
-
 Cell[BoxData[{
  RowBox[{
   RowBox[{"l", "=", 
