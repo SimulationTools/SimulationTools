@@ -11,8 +11,6 @@ ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f
 ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
 (* TODO: add a MapList which takes {t,f} to {t,f} *)
-(* TODO: rename as MapThread *)
-MapThreadData::usage = "MapThreadData[f, {d, ...}] threads f over the independent variables in the DataTable objects d, much like MapThread for lists.";
 (* TODO: Rename as Downsampled *)
 Downsample::usage = "Downsample[d, n] returns a version of DataTable d with only every nth element.";
 (* TODO: Deprecate this *)
@@ -101,6 +99,7 @@ IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d."
 MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
 MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
 ApplyToList::usage = "ApplyToList[f, d] applies f to the underlying list in DataTable d."
+MapThreadData::usage = "MapThreadData[f, {d, ...}] threads f over the independent variables in the DataTable objects d, much like MapThread for lists.";
 
 Begin["`Private`"];
 
@@ -166,7 +165,14 @@ commonAttributes[ds:List[DataTable[__]..]] :=
 (*    Print[attrs];*)
     Return[Apply[Intersection, attrs]]];
 
-MapThreadData[f_, ds:List[DataTable[__]..]] :=
+(****************************************************************)
+(* MapThread *)
+(****************************************************************)
+
+(* The DataTable appears too deep here to associate this definition as
+   an upvalue of DataTable *)
+Unprotect[MapThread];
+MapThread[f_, ds:List[DataTable[__]...]] :=
   Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
     lists = Map[ToList, ds];
     lengths = Map[Length, lists];
@@ -174,12 +180,15 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     If[!Apply[Equal,lengths],
       Error["MapThreadData: DataTables are not all of the same length"]];
 
+    (* TODO: Check that the DataTables are "compatible"; i.e. their coordinates are the same to within a tolerance *)
+
     vals = Map[DepVar, ds];
     xs = IndVar[First[ds]];
     fOfVals = MapThread[f, vals];
     tb = MapThread[List, {xs,fOfVals}];
     attrs = Apply[Intersection, Map[ListAttributes, ds]];
     MakeDataTable[tb,attrs]];
+Protect[MapThread];
 
 RedefineAsDataTable[Plus[d1_DataTable, d2_DataTable],
   Profile["dtPlus",
@@ -801,6 +810,21 @@ MapIndVar[f_, DataTable[l_, attrs___]] :=
 
 ApplyToList[f_, d_DataTable] :=
   d /. DataTable[l_, x___] :> DataTable[f[l], x];
+
+MapThreadData[f_, ds:List[DataTable[__]..]] :=
+  Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
+    lists = Map[ToList, ds];
+    lengths = Map[Length, lists];
+
+    If[!Apply[Equal,lengths],
+      Error["MapThreadData: DataTables are not all of the same length"]];
+
+    vals = Map[DepVar, ds];
+    xs = IndVar[First[ds]];
+    fOfVals = MapThread[f, vals];
+    tb = MapThread[List, {xs,fOfVals}];
+    attrs = Apply[Intersection, Map[ListAttributes, ds]];
+    MakeDataTable[tb,attrs]];
 
 End[];
 
