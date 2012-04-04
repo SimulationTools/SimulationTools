@@ -11,8 +11,6 @@ ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f
 ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
 (* TODO: remove *)
-MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
-(* TODO: remove *)
 ApplyToList::usage = "ApplyToList[f, d] maps f over the elements of the underlying list in DataTable d."
 (* TODO: add a MapList which takes {t,f} to {t,f} *)
 (* TODO: rename as MapThread *)
@@ -103,6 +101,7 @@ MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable
 DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
 IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
 MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
+MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
 
 Begin["`Private`"];
 
@@ -154,9 +153,6 @@ ToListOfData[DataTable[l_, ___]] :=
 
 ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
-
-MapIndVar[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[{#[[1]], f[#[[1]]]}&, l], attrs];
 
 (****************************************************************)
 (* Map *)
@@ -803,6 +799,9 @@ IndVar[DataTable[l_, ___]] :=
 
 MapData[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[{#[[1]], f[#[[2]]]}&, l], attrs];
+
+MapIndVar[f_, DataTable[l_, attrs___]] :=
+  DataTable[Map[{#[[1]], f[#[[1]]]}&, l], attrs];
 
 End[];
 
