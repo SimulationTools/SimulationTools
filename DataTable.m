@@ -4,7 +4,7 @@
 
 BeginPackage["DataTable`", {"Profile`", "Error`"}];
 
-DataTable::usage = "DataTable[{{x,f},...}, attrs] is a one-dimensional table of data with attributes attrs.  attrs is of the form {attr -> value, ...}.  DataTable objects print as DataTable[] to avoid printing the content.";
+DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of data (fi) with an associated coordinate (xi).  DataTable objects print as DataTable[...] to avoid printing the potentially large data content.  The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.";
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d";
