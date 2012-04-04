@@ -8,8 +8,7 @@ DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensiona
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f1},{x2,f2},...,{xn,fn}}.";
-(* TODO: Rename as ToListOfData *)
-DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
+ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
 (* TODO: Rename as ToListOfCoordinates *)
 IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
 (* TODO: rename as Map *)
@@ -104,6 +103,7 @@ UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a unifo
 (****************************************************************)
 
 MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
+DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
 
 Begin["`Private`"];
 
@@ -136,9 +136,17 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     DataTable /: f[args] := newDef;
     Protect[f]];
 
+(****************************************************************)
+(* ToList *)
+(****************************************************************)
+
 ToList[DataTable[l_, ___]] := l;
 
-DepVar[DataTable[l_, ___]] :=
+(****************************************************************)
+(* ToListOfData *)
+(****************************************************************)
+
+ToListOfData[DataTable[l_, ___]] :=
   Map[#[[2]]&, l];
 
 IndVar[DataTable[l_, ___]] :=
@@ -782,6 +790,9 @@ MakeDataTable[f_InterpolatingFunction, dt_] :=
 (* This should be deprecated *)
 MakeDataTable[xs_List, ys_List] :=
   MakeDataTable[MapThread[List, {xs,ys}]];
+
+DepVar[DataTable[l_, ___]] :=
+  Map[#[[2]]&, l];
 
 End[];
 
