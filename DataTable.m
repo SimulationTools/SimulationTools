@@ -10,8 +10,6 @@ ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f1},{x2,f2},...,{xn,fn}}.";
 ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
-(* TODO: rename as Map *)
-MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
 (* TODO: remove *)
 MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
 (* TODO: remove *)
@@ -104,6 +102,7 @@ UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a unifo
 MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
 DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
 IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
+MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
 
 Begin["`Private`"];
 
@@ -156,14 +155,15 @@ ToListOfData[DataTable[l_, ___]] :=
 ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
 
-MapData[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[{#[[1]], f[#[[2]]]}&, l], attrs];
-
 MapIndVar[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[{#[[1]], f[#[[1]]]}&, l], attrs];
 
+(****************************************************************)
+(* Map *)
+(****************************************************************)
+
 DataTable /: Map[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[f, l], attrs];
+  DataTable[Transpose[{l[[All,1]],Map[f,l[[All,2]]]}], attrs];
 
 ApplyToList[f_, d_DataTable] :=
   d /. DataTable[l_, x___] :> DataTable[f[l], x];
@@ -800,6 +800,9 @@ DepVar[DataTable[l_, ___]] :=
 
 IndVar[DataTable[l_, ___]] :=
   Map[#[[1]]&, l];
+
+MapData[f_, DataTable[l_, attrs___]] :=
+  DataTable[Map[{#[[1]], f[#[[2]]]}&, l], attrs];
 
 End[];
 
