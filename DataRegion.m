@@ -13,8 +13,7 @@ SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 (* TODO: this should be displayed as <<...>> *)
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
-(* TODO: add checks and move to DataTable *)
-ToDataTable::usage = "ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
+(* TODO: ToDataTable: add checks and move to DataTable *)
 (* TODO: rename this as CoordinateRanges *)
 GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  This is a list of {min,max} pairs, each corresponding to one dimension of d.";
 (* TODO: Rename this as MinCoordinates and add a MaxCoordinates *)

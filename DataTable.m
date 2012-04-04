@@ -5,9 +5,8 @@
 BeginPackage["DataTable`", {"Profile`", "Error`"}];
 
 DataTable::usage = "DataTable[{{x,f},...}, attrs] is a one-dimensional table of data with attributes attrs.  attrs is of the form {attr -> value, ...}.  DataTable objects print as DataTable[] to avoid printing the content.";
-
-(* TODO: change this to ToDataTable[{{x,f},...}] *)
-MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
+ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
+ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d";
 (* TODO: Rename as ToListOfData *)
 DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
@@ -100,9 +99,26 @@ MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spa
 (* TODO: Rename as UniformSpacingQ *)
 UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
+(****************************************************************)
+(* Deprecated *)
+(****************************************************************)
+
+MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
+
 Begin["`Private`"];
 
 Format[DataTable[l_, attrs___]] := "DataTable"["..."];
+
+(****************************************************************)
+(* ToDataTable *)
+(****************************************************************)
+
+ToDataTable[l_List] :=
+  DataTable[Developer`ToPackedArray[l]];
+
+ToDataTable[l_List, attrRules:{(_ -> _) ...}] :=
+  (* The attrRules are currently unsupported *)
+  DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
 
 SetAttributes[Redefine, HoldAll];
 
@@ -119,22 +135,6 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     Unprotect[f];
     DataTable /: f[args] := newDef;
     Protect[f]];
-
-MakeDataTable[l_List] :=
-  DataTable[Developer`ToPackedArray[l]];
-
-MakeDataTable[l_List, attrRules:{(_ -> _) ...}] :=
-  DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
-
-MakeDataTable[f_InterpolatingFunction, dt_] :=
-  Module[{tMin,tMax},
-    tMin = f[[1]][[1]][[1]];
-    tMax = f[[1]][[1]][[2]];
-    MakeDataTable[Table[{t,f[t]},{t,tMin,tMax,dt}]]];                  
-
-(* This should be deprecated *)
-MakeDataTable[xs_List, ys_List] :=
-  MakeDataTable[MapThread[List, {xs,ys}]];
 
 ToList[DataTable[l_, ___]] := l;
 
@@ -761,6 +761,27 @@ UniformGridQ[d_DataTable] :=
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
+
+(****************************************************************)
+(* Deprecated *)
+(****************************************************************)
+
+MakeDataTable[l_List] :=
+  DataTable[Developer`ToPackedArray[l]];
+
+MakeDataTable[l_List, attrRules:{(_ -> _) ...}] :=
+  DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
+
+(* This is never used, and should be removed *)
+MakeDataTable[f_InterpolatingFunction, dt_] :=
+  Module[{tMin,tMax},
+    tMin = f[[1]][[1]][[1]];
+    tMax = f[[1]][[1]][[2]];
+    MakeDataTable[Table[{t,f[t]},{t,tMin,tMax,dt}]]];                  
+
+(* This should be deprecated *)
+MakeDataTable[xs_List, ys_List] :=
+  MakeDataTable[MapThread[List, {xs,ys}]];
 
 End[];
 
