@@ -397,7 +397,7 @@ ffi[{f_, d_}, f0_] :=
 ];
 
 ffiDataTable[d_DataTable, f0_] :=
-  Map[ffi[#, f0 / (2. Pi)] &, d];
+  MapList[ffi[#, f0 / (2. Pi)] &, d];
 
 StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
