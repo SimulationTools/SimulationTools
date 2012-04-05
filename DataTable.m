@@ -10,7 +10,7 @@ ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f1},{x2,f2},...,{xn,fn}}.";
 ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
-(* TODO: add a MapList which takes {t,f} to {t,f} *)
+MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
 (* TODO: Rename as Downsampled *)
 Downsample::usage = "Downsample[d, n] returns a version of DataTable d with only every nth element.";
 (* TODO: Deprecate this *)
@@ -158,6 +158,13 @@ ToListOfCoordinates[DataTable[l_, ___]] :=
 
 DataTable /: Map[f_, DataTable[l_, attrs___]] :=
   DataTable[Transpose[{l[[All,1]],Map[f,l[[All,2]]]}], attrs];
+
+(****************************************************************)
+(* MapList *)
+(****************************************************************)
+
+MapList[f_, DataTable[l_, attrs___]] :=
+  DataTable[Map[f,l], attrs];
 
 commonAttributes[ds:List[DataTable[__]..]] :=
   Module[{attrs},
