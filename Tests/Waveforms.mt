@@ -114,7 +114,7 @@ Test[
     ]
 
 Test[
-  StrainFromPsi4[ReadPsi4[$NRMMATestRun,2,2,100],0.02]
+  ToList[StrainFromPsi4[ReadPsi4[$NRMMATestRun,2,2,100],0.02]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-2.m"}]]
   ,
