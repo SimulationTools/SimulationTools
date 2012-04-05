@@ -1,7 +1,7 @@
 (* Mathematica Test File *)
 
 RunDirectory = $NRMMATestRunDirectory;
-TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Tests/TestReference"}];
+TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
 
 var1D = "phi.x.h5";
 var2D = "phi.xy.h5";

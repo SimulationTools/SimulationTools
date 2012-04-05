@@ -2,7 +2,7 @@
 
 RunDirectory = $NRMMATestRunDirectory;
 
-TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Tests/TestReference"}];
+TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
 
 (* ReadBHCoordinates *)
 
