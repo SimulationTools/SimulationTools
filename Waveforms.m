@@ -338,7 +338,7 @@ DefineMemoFunction[ExtrapolatePsi4[runName_String, l_, m_, opts:OptionsPattern[]
     psi4 = MapThreadData[#1 Exp[I #2] &, {amp, phase}];
     psi4]];
 
-ExtrapolateStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]] :=
+DefineMemoFunction[ExtrapolateStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]],
   Module[
     {phaseReader,ampReader,phase,amp},
 
@@ -351,7 +351,7 @@ ExtrapolateStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]] :=
     phase = ExtrapolateRadiatedQuantity[runName, phaseReader, AlignPhaseAt->100, opts];
     amp = ExtrapolateRadiatedQuantity[runName, ampReader, opts];
 
-    MapThreadData[#1 Exp[I #2] &, {amp, phase}]];
+    MapThreadData[#1 Exp[I #2] &, {amp, phase}]]];
 
 ExtrapolationError[f_, args__, opts:OptionsPattern[]] :=
   Module[{p, newOpts, fpp1, fp},
