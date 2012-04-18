@@ -9,8 +9,6 @@ DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional arr
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
 
-(* TODO: Remove this *)
-SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 (* TODO: ToDataTable: add checks and move to DataTable *)
@@ -95,6 +93,8 @@ EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a 
 (* DEPRECATED *)
 
 MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time] creates a DataRegion object from the passed data.  data is an N-dimensional array (nested list) of numbers.  name is a name to give to the object for display purposes.  dims is a list of length N consisting of the dimensions of data (dims = Reverse[Dimensions[data]]).  origin is a list of length N giving the coordinates of the first point in each direction.  spacing is a list of length N giving the spacing between points in each direction.  time is a number which will be stored with the DataRegion which can be useful for labeling simulation time. DEPRECATED";
+
+SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 
 Begin["`Private`"];
 
@@ -181,36 +181,6 @@ replaceRules[list_List, replacements_List] :=
   If[Length[replacements] == 0, 
      list, 
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
-
-SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
- Module[{index, newOrigin, newSpacing, h2, origin, spacing, dims, range, slice, ndims},
-  origin = GetOrigin[v];
-  spacing = GetSpacing[v];
-  dims = GetDimensions[v];
-  ndims = GetNumDimensions[v];
-
-  If[dim > ndims,
-    Error["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
-      ToString[ndims]<>" of the DataRegion."]
-  ];
-
-  range = GetDataRange[v][[dim]];
-
-  If[(coord < range[[1]]) || (coord >range[[2]]),
-    Error["Slice coordinate "<>ToString[coord]<>" is outside the range "<>
-      ToString[range, StandardForm]<>" of the DataRegion."]
-  ];
-
-  index = Round[(coord - origin[[dim]])/spacing[[dim]]+1];
-  newOrigin = Drop[origin, {dim}];
-  newSpacing = Drop[spacing, {dim}];
-  h2 = replaceRules[h, {Origin -> newOrigin, Spacing-> newSpacing}];
-  slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
-  Return[DataRegion[h2, data[[slice]] ]]
-];
-
-SliceData[v_DataRegion, dims_List, coords_:0] := 
-  Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
 
 DataRegion /: Part[d_DataRegion, s__] := DataRegionPart[d, {s}];
 
@@ -754,6 +724,36 @@ EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
   DataRegion[{Name -> name, Origin -> origin, Spacing -> spacing, Time -> time},
              Developer`ToPackedArray[data]];
+
+SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
+ Module[{index, newOrigin, newSpacing, h2, origin, spacing, dims, range, slice, ndims},
+  origin = GetOrigin[v];
+  spacing = GetSpacing[v];
+  dims = GetDimensions[v];
+  ndims = GetNumDimensions[v];
+
+  If[dim > ndims,
+    Error["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
+      ToString[ndims]<>" of the DataRegion."]
+  ];
+
+  range = GetDataRange[v][[dim]];
+
+  If[(coord < range[[1]]) || (coord >range[[2]]),
+    Error["Slice coordinate "<>ToString[coord]<>" is outside the range "<>
+      ToString[range, StandardForm]<>" of the DataRegion."]
+  ];
+
+  index = Round[(coord - origin[[dim]])/spacing[[dim]]+1];
+  newOrigin = Drop[origin, {dim}];
+  newSpacing = Drop[spacing, {dim}];
+  h2 = replaceRules[h, {Origin -> newOrigin, Spacing-> newSpacing}];
+  slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
+  Return[DataRegion[h2, data[[slice]] ]]
+];
+
+SliceData[v_DataRegion, dims_List, coords_:0] := 
+  Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
 
 End[];
 
