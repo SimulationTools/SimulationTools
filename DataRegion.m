@@ -4,15 +4,15 @@
 
 BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Error`"}];
 
-(* Exported symbols *)
+DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
+
+
 (* TODO: Remove this *)
 SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
-(* TODO: this should be displayed as <<...>> *)
-DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 (* TODO: ToDataTable: add checks and move to DataTable *)
 (* TODO: rename this as CoordinateRanges *)
 GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  This is a list of {min,max} pairs, each corresponding to one dimension of d.";
@@ -108,9 +108,9 @@ Options[ToDataRegion] := {
   "Time" -> None};
 
 ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
-  DataRegion[{Origin -> origin,
+  DataRegion[{Name -> OptionValue["Name"],
+              Origin -> origin,
               Spacing -> spacing,
-              Name -> OptionValue["Name"],
               Time -> OptionValue["Time"]},
              Developer`ToPackedArray[data]];
 
@@ -155,9 +155,7 @@ GetVariableName[DataRegion[h_, data_]] :=
    about the structure of a DataRegion object here. All access should
    be by the preceding functions.*)
 
-(*Format[DataRegion[{}, data_List]] :=
-  "DataRegion"[name, dims, range]; *)
-
+(* TODO: this should be displayed as <<...>> *)
 Format[v_DataRegion, StandardForm] :=
   Module[{name,dims,range},
     name = GetVariableName[v];
