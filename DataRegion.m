@@ -8,6 +8,8 @@ DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional arr
 
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
+ToListOfData::usage = ToListOfData::usage<>"
+ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
 
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
@@ -24,8 +26,6 @@ GetDimensions::usage = "GetDimensions[d] returns the number of points in each di
 (* TODO: renaming to ArrayDepth *)
 GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a DataRegion d.";
 (* TODO: Implement ToList.  This will return the coordinates as well as the data.  It will have an option Flatten which defaults to True.  When Flatten is false, you get the same structure as the internal data, but with the coordinates added. *)
-(* TODO: Rename as ToListOfData *)
-GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
 (* TODO: Implement ToListOfCoordinates with the same Flatten option as ToList, which just returns the coordinates. *)
 (* TODO: Remove *)
 GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
@@ -96,6 +96,8 @@ MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time]
 
 SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 
+GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
+
 Begin["`Private`"];
 
 (* DataRegion object low-level implementation; this is where we define
@@ -114,6 +116,9 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
               Time -> OptionValue["Time"]},
              Developer`ToPackedArray[data]];
 
+ToListOfData[DataRegion[h_, data_]] :=
+  data;
+
 DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
   ndims = GetNumDimensions[v];
   If[ ndims != 1,
@@ -126,9 +131,6 @@ DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, d
   data = GetData[v];
   MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}], GetAttributes[v]/.((a_->b_):>(SymbolName[a]->b))]
 ];
-
-GetData[DataRegion[h_, data_]] :=
-  data;
 
 GetOrigin[DataRegion[h_, data_]] :=
   Origin /. h;
@@ -754,6 +756,9 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
 
 SliceData[v_DataRegion, dims_List, coords_:0] := 
   Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
+
+GetData[DataRegion[h_, data_]] :=
+  data;
 
 End[];
 
