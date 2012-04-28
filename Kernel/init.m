@@ -50,6 +50,7 @@ Module[{packages =
   "NRExport",
   "nrmmaVersion",
   "Parameters",
+  "Performance",
   "Piraha",
   "Plotting",
   "Profile",
