@@ -8,6 +8,7 @@ timer;
 TimerTreeString;
 ReadTimerTrees;
 CollectedTimers;
+CombinedTimerTrees;
 
 Begin["`Private`"];
 
@@ -241,7 +242,7 @@ CombinedTimerTrees[timers_List, f_: Automatic] :=
   fn = If[f === Automatic, Function[vs, {Mean[vs], Min[vs], Max[vs]}],
      f];
   timer[names[[1]], fn[vals], 
-   combinedTimerTrees[#, f] & /@ Transpose[childrens]]];
+   CombinedTimerTrees[#, f] & /@ Transpose[childrens]]];
 
 End[];
 
