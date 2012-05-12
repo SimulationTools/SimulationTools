@@ -108,6 +108,27 @@ SetAttributes[DataRegion, NHoldFirst];
 attributes[d_DataRegion] := d[[1]];
 data[d_DataRegion] := d[[2]];
 
+(**********************************************************)
+(* ToDataRegion                                           *)
+(**********************************************************)
+
+Options[ToDataRegion] := {
+  "Name" -> None,
+  "Time" -> None};
+
+SyntaxInformation[ToDataRegion] =
+ {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
+
+ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
+  DataRegion[{Name -> OptionValue["VariableName"],
+              Origin -> origin,
+              Spacing -> spacing,
+              Time -> OptionValue["Time"]},
+             Developer`ToPackedArray[data]];
+
+(**********************************************************)
+(* MakeBoxes                                              *)
+(**********************************************************)
 
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
@@ -137,9 +158,9 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 ];
 
 
-(******************************************************************************)
-(* Redefine built-in Mathematica functions to work on our new data types      *)
-(******************************************************************************)
+(**********************************************************)
+(* Functions with the NumericFunction attribute           *)
+(**********************************************************)
 
 DataRegion /: f_[x___, d_DataRegion, y___] :=
  DataRegion[attributes[d], f[x, ToListOfData[d], y]] /;
@@ -147,19 +168,6 @@ DataRegion /: f_[x___, d_DataRegion, y___] :=
 
 DataRegion /: f_[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
   MemberQ[Attributes[f], NumericFunction];
-
-
-Options[ToDataRegion] := {
-  (* TODO: rename this to VariableName *)
-  "Name" -> None,
-  "Time" -> None};
-
-ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
-  DataRegion[{Name -> OptionValue["Name"],
-              Origin -> origin,
-              Spacing -> spacing,
-              Time -> OptionValue["Time"]},
-             Developer`ToPackedArray[data]];
 
 ToListOfData[DataRegion[h_, data_]] :=
   data;
