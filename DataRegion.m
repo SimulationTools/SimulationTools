@@ -5,7 +5,6 @@
 BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Error`"}];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
-
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
@@ -151,11 +150,13 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
               Time -> OptionValue["Time"]},
              Developer`ToPackedArray[data]];
 
+
 (**********************************************************)
 (* Normal                                                 *)
 (**********************************************************)
 
 DataRegion /: Normal[d_DataRegion] := data[d];
+
 
 (**********************************************************)
 (* Functions with the NumericFunction attribute           *)
@@ -167,19 +168,6 @@ DataRegion /: f_[x___, d_DataRegion, y___] :=
 
 DataRegion /: f_[x___, d_DataRegion, y___] := f[x, Normal[d], y] /;
   MemberQ[Attributes[f], NumericFunction];
-
-DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
-  ndims = GetNumDimensions[v];
-  If[ ndims != 1,
-	Error["Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
-          <> SymbolName[x] <> "' is greater than 1."]
-  ];
-
-  {{xmin, xmax}} = GetDataRange[v];
-  {spacing} = GetSpacing[v];
-  data = GetData[v];
-  MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}], attributes[v]/.((a_->b_):>(SymbolName[a]->b))]
-];
 
 GetOrigin[DataRegion[h_, data_]] :=
   Origin /. h;
