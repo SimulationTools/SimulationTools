@@ -105,34 +105,6 @@ SetAttributes[DataRegion, NHoldFirst];
 attributes[d_DataRegion] := d[[1]];
 data[d_DataRegion] := d[[2]];
 
-(**********************************************************)
-(* ToDataRegion                                           *)
-(**********************************************************)
-
-Options[ToDataRegion] := {
-  "VariableName" -> None,
-  "Time" -> None};
-
-SyntaxInformation[ToDataRegion] =
- {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
-
-ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
-  DataRegion[{VariableName -> OptionValue["VariableName"],
-              Origin -> origin,
-              Spacing -> spacing,
-              Time -> OptionValue["Time"]},
-             Developer`ToPackedArray[data]];
-
-(**********************************************************)
-(* Normal                                                 *)
-(**********************************************************)
-
-DataRegion /: Normal[d_DataRegion] := data[d];
-
-(**********************************************************)
-(* MakeBoxes                                              *)
-(**********************************************************)
-
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
   name = GetVariableName[d];
@@ -160,6 +132,30 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
    Editable -> False]
 ];
 
+
+(**********************************************************)
+(* ToDataRegion                                           *)
+(**********************************************************)
+
+Options[ToDataRegion] := {
+  "VariableName" -> None,
+  "Time" -> None};
+
+SyntaxInformation[ToDataRegion] =
+ {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
+
+ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
+  DataRegion[{VariableName -> OptionValue["VariableName"],
+              Origin -> origin,
+              Spacing -> spacing,
+              Time -> OptionValue["Time"]},
+             Developer`ToPackedArray[data]];
+
+(**********************************************************)
+(* Normal                                                 *)
+(**********************************************************)
+
+DataRegion /: Normal[d_DataRegion] := data[d];
 
 (**********************************************************)
 (* Functions with the NumericFunction attribute           *)
