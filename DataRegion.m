@@ -135,6 +135,18 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 ];
 
 
+(******************************************************************************)
+(* Redefine built-in Mathematica functions to work on our new data types      *)
+(******************************************************************************)
+
+DataRegion /: f_[x___, d_DataRegion, y___] :=
+ DataRegion[GetAttributes[d], f[x, ToListOfData[d], y]] /;
+  MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable];
+
+DataRegion /: f_[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
+  MemberQ[Attributes[f], NumericFunction];
+
+
 Options[ToDataRegion] := {
   (* TODO: rename this to VariableName *)
   "Name" -> None,
