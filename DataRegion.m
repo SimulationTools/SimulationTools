@@ -6,6 +6,8 @@ BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Error`"}];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
+ToListOfData::usage = ToListOfData::usage<>"
+ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
 
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
@@ -152,10 +154,10 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
 
 
 (**********************************************************)
-(* Normal                                                 *)
+(* ToListOfData                                           *)
 (**********************************************************)
 
-DataRegion /: Normal[d_DataRegion] := data[d];
+DataRegion /: ToListOfData[d_DataRegion] := data[d];
 
 
 (**********************************************************)
@@ -163,10 +165,10 @@ DataRegion /: Normal[d_DataRegion] := data[d];
 (**********************************************************)
 
 DataRegion /: f_[x___, d_DataRegion, y___] :=
- DataRegion[attributes[d], f[x, Normal[d], y]] /;
+ DataRegion[attributes[d], f[x, ToListOfData[d], y]] /;
   MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable];
 
-DataRegion /: f_[x___, d_DataRegion, y___] := f[x, Normal[d], y] /;
+DataRegion /: f_[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
   MemberQ[Attributes[f], NumericFunction];
 
 GetOrigin[DataRegion[h_, data_]] :=
