@@ -8,9 +8,6 @@ DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional arr
 
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
-ToListOfData::usage = ToListOfData::usage<>"
-ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
-
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
 (* TODO: ToDataTable: add checks and move to DataTable *)
@@ -127,6 +124,12 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
              Developer`ToPackedArray[data]];
 
 (**********************************************************)
+(* Normal                                                 *)
+(**********************************************************)
+
+DataRegion /: Normal[d_DataRegion] := data[d];
+
+(**********************************************************)
 (* MakeBoxes                                              *)
 (**********************************************************)
 
@@ -163,14 +166,11 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 (**********************************************************)
 
 DataRegion /: f_[x___, d_DataRegion, y___] :=
- DataRegion[attributes[d], f[x, ToListOfData[d], y]] /;
+ DataRegion[attributes[d], f[x, Normal[d], y]] /;
   MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable];
 
-DataRegion /: f_[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
+DataRegion /: f_[x___, d_DataRegion, y___] := f[x, Normal[d], y] /;
   MemberQ[Attributes[f], NumericFunction];
-
-ToListOfData[DataRegion[h_, data_]] :=
-  data;
 
 DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, data},
   ndims = GetNumDimensions[v];
