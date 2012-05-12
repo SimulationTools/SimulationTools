@@ -100,9 +100,40 @@ GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegi
 
 Begin["`Private`"];
 
-(* DataRegion object low-level implementation; this is where we define
-   the internal format of a DataRegion object. *)
+(******************************************************************************)
+(* DataRegion object low-level implementation. This is where we define        *)
+(* the internal format of a DataRegion object.                                *)
+(******************************************************************************)
+
 SetAttributes[DataRegion, NHoldFirst];
+
+DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
+ Module[{name, dims, range},
+  name = GetVariableName[d];
+  dims = GetDimensions[d];
+  range = GetDataRange[d];
+
+  TagBox[
+   RowBox[
+    {"DataRegion",
+     "[",
+     RowBox[
+      {name,
+       ",",
+       "\"<\"",
+       "\[InvisibleSpace]",
+       Sequence@@Riffle[dims, ","],
+       "\[InvisibleSpace]",
+       "\">\"",
+       ",",
+       ToBoxes[range]
+      }],
+     "]"
+    }],
+   DataRegion,
+   Editable -> False]
+];
+
 
 Options[ToDataRegion] := {
   (* TODO: rename this to VariableName *)
@@ -156,16 +187,6 @@ GetVariableName[DataRegion[h_, data_]] :=
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
    be by the preceding functions.*)
-
-(* TODO: this should be displayed as <<...>> *)
-Format[v_DataRegion, StandardForm] :=
-  Module[{name,dims,range},
-    name = GetVariableName[v];
-    dims = GetDimensions[v];
-    range = GetDataRange[v];
-    "DataRegion[" <>If[StringQ[name], name, "<unknown name>"] <>", "
-                  <>If[ListQ[dims], ToString[dims], "<unknown dims>"]  <>", "
-                  <>If[ListQ[range], ToString[range, StandardForm], "<unknown range>"]<>"]"];
 
 GetDataRange[v_DataRegion] :=
   Module[{origin, spacing, dimensions, min, max},
