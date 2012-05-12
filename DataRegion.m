@@ -113,14 +113,14 @@ data[d_DataRegion] := d[[2]];
 (**********************************************************)
 
 Options[ToDataRegion] := {
-  "Name" -> None,
+  "VariableName" -> None,
   "Time" -> None};
 
 SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
 
 ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
-  DataRegion[{Name -> OptionValue["VariableName"],
+  DataRegion[{VariableName -> OptionValue["VariableName"],
               Origin -> origin,
               Spacing -> spacing,
               Time -> OptionValue["Time"]},
@@ -201,7 +201,7 @@ GetTime[DataRegion[h_, _]] :=
   Time /. h;
 
 GetVariableName[DataRegion[h_, data_]] := 
-  Name /. h;
+  VariableName /. h;
 
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
@@ -469,7 +469,7 @@ ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
     If[GetNumDimensions[d] === 2,
       newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
                                 {y, x1[[2]], x2[[2]], dx[[2]]}];
-      ToDataRegion[newData, x1, dx, Name -> GetVariableName[d], Time -> GetTime[d]],
+      ToDataRegion[newData, x1, dx, VariableName -> GetVariableName[d], Time -> GetTime[d]],
 
       Error["Cannot resample DataRegions of dimension other than 2"]]
   ];
@@ -612,7 +612,7 @@ NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
 
   deriv = NDSolve`FiniteDifferenceDerivative[Reverse[Derivative[derivs]], grid, data, opts];
 
-  newh = replaceRules[h, {Name -> "dx"<>ToString[derivs]<>"_"<>GetVariableName[d]}];
+  newh = replaceRules[h, {VariableName -> "dx"<>ToString[derivs]<>"_"<>GetVariableName[d]}];
 
   DataRegion[newh, deriv]
 ];
@@ -676,7 +676,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 
   (* Correct time and variable name attributes *)
   newTime = times[[1]]+offset*dt;
-  attr=replaceRules[attributes[deriv], {Time-> newTime, Name -> "dt_"<>variable[[1]]}];
+  attr=replaceRules[attributes[deriv], {Time-> newTime, VariableName -> "dt_"<>variable[[1]]}];
 
   DataRegion[ attr, GetData[deriv]]
 ];
@@ -764,7 +764,7 @@ EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
 (**********************************************************************************)
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
-  DataRegion[{Name -> name, Origin -> origin, Spacing -> spacing, Time -> time},
+  DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
              Developer`ToPackedArray[data]];
 
 SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
