@@ -560,6 +560,8 @@ NDerivative[d_DataRegion] :=
   result
 ];
 
+Global`StandardDefinition[NDerivative] = True;
+
 NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
  Module[{origin, spacing, dimensions, grid, data, deriv, newh},
   origin  = GetOrigin[d];

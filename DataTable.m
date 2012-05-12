@@ -583,6 +583,8 @@ IntersectDataTables[ds:{(_DataTable)...}] :=
     ds2];
 
 
+Global`StandardDefinition[NDerivative] = True;
+
 NDerivative[d_DataTable] :=
  Module[{diff, table1, table2, deriv},
   diff[{t1_, f1_}, {t2_, f2_}] :=
