@@ -29,8 +29,6 @@ GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a D
 (* TODO: Implement ToListOfCoordinates with the same Flatten option as ToList, which just returns the coordinates. *)
 (* TODO: Remove *)
 GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
-(* TODO: Make this internal *)
-GetAttributes::usage = "GetAttributes[d] returns the list of key -> value attributes of DataRegion d.";
 (* TODO: Rename this as VariableName *)
 GetVariableName::usage = "GetVariableName[d] returns the variable name in DataRegion d.";
 (* TODO: Add Metadata function and user-defined metadata *)
@@ -97,6 +95,7 @@ MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time]
 SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
 
 GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
+GetAttributes::usage = "GetAttributes[d] returns the list of key -> value attributes of DataRegion d.";
 
 Begin["`Private`"];
 
@@ -106,6 +105,9 @@ Begin["`Private`"];
 (******************************************************************************)
 
 SetAttributes[DataRegion, NHoldFirst];
+attributes[d_DataRegion] := d[[1]];
+data[d_DataRegion] := d[[2]];
+
 
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
@@ -140,7 +142,7 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 (******************************************************************************)
 
 DataRegion /: f_[x___, d_DataRegion, y___] :=
- DataRegion[GetAttributes[d], f[x, ToListOfData[d], y]] /;
+ DataRegion[attributes[d], f[x, ToListOfData[d], y]] /;
   MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable];
 
 DataRegion /: f_[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
@@ -172,7 +174,7 @@ DataRegion /: ToDataTable[v_DataRegion] := Module[{ndims, xmin, xmax, spacing, d
   {{xmin, xmax}} = GetDataRange[v];
   {spacing} = GetSpacing[v];
   data = GetData[v];
-  MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}], GetAttributes[v]/.((a_->b_):>(SymbolName[a]->b))]
+  MakeDataTable[Thread[{Range[xmin, xmax, spacing],data}], attributes[v]/.((a_->b_):>(SymbolName[a]->b))]
 ];
 
 GetOrigin[DataRegion[h_, data_]] :=
@@ -189,9 +191,6 @@ GetNumDimensions[DataRegion[h_, data_]] :=
 
 GetTime[DataRegion[h_, _]] :=
   Time /. h;
-
-GetAttributes[DataRegion[h_, data_]] := 
-  h;
 
 GetVariableName[DataRegion[h_, data_]] := 
   Name /. h;
@@ -337,7 +336,7 @@ Strip[d_DataRegion, n_List] :=
   Module[{data, data2, attrs, attrs2, d2},
     data = GetData[d];
     data2 = Take[data, Apply[Sequence, Map[{#+1,-(#+1)}&, Reverse[n]]]];
-    attrs = GetAttributes[d];
+    attrs = attributes[d];
     attrs2 = replaceRules[attrs, 
       {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
     d2 = DataRegion[attrs2, data2]];
@@ -346,7 +345,7 @@ Strip[d_DataRegion, n_List, m_List] :=
   Module[{data, data2, attrs, attrs2, d2},
     data = GetData[d];
 	 data2 = Take[data, Apply[Sequence, MapThread[{#1+1,-(#2+1)}&, {Reverse[n], Reverse[m]}]]];
-    attrs = GetAttributes[d];
+    attrs = attributes[d];
     attrs2 = replaceRules[attrs,
       {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
     d2 = DataRegion[attrs2, data2]];
@@ -360,7 +359,7 @@ Downsample[d_DataRegion, n_List] :=
  Module[{data, data2, attrs, attrs2, d2},
   data = GetData[d];
   data2 = Take[data, Apply[Sequence, Map[{1, -1, #} &, Reverse[n]]]];
-  attrs = GetAttributes[d];
+  attrs = attributes[d];
   attrs2 =
    replaceRules[
     attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n}];
@@ -412,7 +411,7 @@ MergeDataRegions[regions_List] :=
   dat = ConstantArray[None, Reverse[n]];
   Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
    regions];
-  attrs = GetAttributes[regions[[1]]];
+  attrs = attributes[regions[[1]]];
   attrs2 = replaceRules[attrs, {Origin -> X1}];
   Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]];
 
@@ -433,13 +432,13 @@ GetCoordinate[d_DataRegion, dim_] :=
     res = ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp];
 
     If[Reverse@Dimensions[res] =!= dims, Error["GetCoordinateError"]];
-    DataRegion[GetAttributes[d], res]
+    DataRegion[attributes[d], res]
   ];
 
 MapDataRegion[f_, d_DataRegion] :=
  Module[{dim, header, data},
   dim = GetNumDimensions[d];
-  header = GetAttributes[d];
+  header = attributes[d];
   data = Map[f, GetData[d], {dim}];
   DataRegion[header, data]];
 
@@ -451,7 +450,7 @@ NaNQ[x_] :=
 
 MapThreadDataRegion[f_, drs_] :=
   Module[{attrs, datas, newData},
-    attrs = GetAttributes[First[drs]];
+    attrs = attributes[First[drs]];
     datas = GetData /@ drs;
     newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
     DataRegion[attrs, newData]];
@@ -669,7 +668,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 
   (* Correct time and variable name attributes *)
   newTime = times[[1]]+offset*dt;
-  attr=replaceRules[GetAttributes[deriv], {Time-> newTime, Name -> "dt_"<>variable[[1]]}];
+  attr=replaceRules[attributes[deriv], {Time-> newTime, Name -> "dt_"<>variable[[1]]}];
 
   DataRegion[ attr, GetData[deriv]]
 ];
@@ -790,8 +789,8 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
 SliceData[v_DataRegion, dims_List, coords_:0] := 
   Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
 
-GetData[DataRegion[h_, data_]] :=
-  data;
+GetData[d_DataRegion] := data[d];
+GetAttributes[d_DataRegion] := attributes[d];
 
 End[];
 
