@@ -103,7 +103,7 @@ Begin["`Private`"];
 (* the internal format of a DataRegion object.                                *)
 (******************************************************************************)
 
-SetAttributes[DataRegion, NHoldFirst];
+SetAttributes[DataRegion, {NHoldFirst, ReadProtected}];
 attributes[DataRegion[attrs_, data_]] := attrs;
 data[DataRegion[attrs_, data_]] := data;
 
