@@ -70,7 +70,7 @@ Module[{packages =
   "YlmDecomp"},
   ErrorDefinition, DefFn, DefFnQ, withCustomSetDelayed, extraPackages},
 
-  extraPackages = {"Stack`", "Error`"};
+  extraPackages = {"Stack`", "Error`", "MessageCatcher`"};
 
   packages = Map[#<>"`"&, packages];
   Unprotect[$Packages];
@@ -157,10 +157,10 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
     If[$NRMMADebug === True,
       lhs : fn[args] :=
        Module[
-         {t,r},
+         {t,r,top = Length[Stack`CurrentStack[]] === 0},
          Global`profcount[fn]+=1;
-         {t,r} = AbsoluteTiming[If[Length[Stack`CurrentStack[]] === 0, Error`CatchError, Identity][
-           Stack`WithStackFrame[lhs,body]]];
+         {t,r} = AbsoluteTiming[If[top,Error`CatchError,Identity][
+           Stack`WithStackFrame[lhs,If[top, MessageCatcher`WithCaughtMessages,Identity][body]]]];
          Global`proftime[fn] += t;
          r],
        (*else*)
