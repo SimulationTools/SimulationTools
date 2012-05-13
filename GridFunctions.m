@@ -49,12 +49,24 @@ Options[ReadGridFunction] = {
 
 ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {leafName, fileName, explicitOpts},
+    {leafName, fileName, explicitOpts, providerOptions, options},
 
-    (* explicitOpts = defaultOpts[opts, provider]; *)
-    leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, opts}];
-    fileName = getFileOfIt[run, leafName, OptionValue[Iteration]];
-    CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, opts}]
+    providerOptions = {
+      "Iteration"       -> CallProvidedFunction["GridFunctions","DefaultIteration", {{}}],
+      "Map"             -> CallProvidedFunction["GridFunctions","DefaultMap", {{}}],
+      "RefinementLevel" -> CallProvidedFunction["GridFunctions","DefaultRefinementLevel", {run,var}],
+      "TimeLevel"       -> CallProvidedFunction["GridFunctions","DefaultTimeLevel", {run,var}]};
+
+    options = Map[(#[[1]] -> If[OptionValue[#[[1]]] === Automatic,
+                                #[[1]] /. providerOptions,
+                                OptionValue[#[[1]]]]) &,
+                  Options[ReadGridFunction]];
+
+    Print["options = ", options];
+
+    leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, FilterRules[options, Except["StripGhostZones"]]}];
+    fileName = getFileOfIt[run, leafName, OptionValue[ReadGridFunction, options, Iteration]];
+    CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, options}]
 ];
 
 Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iteration"]];
