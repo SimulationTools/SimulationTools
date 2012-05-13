@@ -103,7 +103,7 @@ ReadVariables[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :
 ];
 
 
-getFileOfIt[run_String, leafName_String, it_Integer, opts:OptionsPattern[]] :=
+getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
     files = FindRunFile[run, leafName];
     itss = Map[{#, getFileIts[#]} &, files];
