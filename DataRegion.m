@@ -6,8 +6,13 @@ BeginPackage["DataRegion`", {"DataTable`", "Profile`", "Error`"}];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
+
 ToListOfData::usage = ToListOfData::usage<>"
 ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
+ToListOfCoordinates::usage = ToListOfCoordinates::usage<>"
+ToListOfCoordinates[d] returns the N-dimensional array of coordinates of DataRegion d.";
+ToList::usage = ToList::usage<>"
+ToList[d] returns the N-dimensional array of coordinates and data in DataRegion d.";
 
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
@@ -160,8 +165,65 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
 (* ToListOfData                                           *)
 (**********************************************************)
 
-DataRegion /: ToListOfData[d_DataRegion] := data[d];
+Options[ToListOfData] = {"Flatten" -> True};
 
+SyntaxInformation[ToListOfData] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+DataRegion /: ToListOfData[d_DataRegion, OptionsPattern[]] :=
+  If[OptionValue[Flatten],
+    Flatten[data[d]],
+    data[d]
+  ];
+
+(**********************************************************)
+(* ToListOfCoordinates                                    *)
+(**********************************************************)
+
+Options[ToListOfCoordinates] = {"Flatten" -> True};
+
+SyntaxInformation[ToListOfCoordinates] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
+ Module[{dims, origin, spacing, coords, coordList},
+  dims    = GetNumDimensions[d];
+  origin  = GetOrigin[d];
+  spacing = GetSpacing[d];
+
+  coords = ToListOfData[#, Flatten -> False] & /@
+    (GetCoordinate[d, #] & /@ Range[dims]);
+  coordList = Transpose[coords, Reverse[Range[dims + 1]]];
+
+  If[OptionValue[Flatten],
+    Flatten[coordList, dims-1],
+    coordList
+  ]
+]
+
+
+(**********************************************************)
+(* ToList                                                 *)
+(**********************************************************)
+
+Options[ToList] = {"Flatten" -> True};
+
+SyntaxInformation[ToList] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
+ Module[{dims, coords, data, list},
+  dims   = GetNumDimensions[d];
+  coords = ToListOfCoordinates[d, Flatten -> False];
+  data   = ToListOfData[d, Flatten -> False];
+
+  list = Transpose[{coords, data}, RotateRight[Range[dims + 1]]];
+
+  If[OptionValue[Flatten],
+    Flatten[list, dims-1],
+    list
+  ]
+];
 
 (**********************************************************)
 (* Functions with the NumericFunction attribute           *)
