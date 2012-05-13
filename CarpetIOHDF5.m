@@ -5,6 +5,16 @@ Begin["`Private`"];
 
 (* TODO: Implement ReadTime or similar *)
 
+(****************************************************************)
+(* HaveData *)
+(****************************************************************)
+
+CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up in Providers *)
+
+(****************************************************************)
+(* ReadData *)
+(****************************************************************)
+
 Options[CarpetIOHDF5`GridFunctions`ReadData] = {
     "Iteration" 	  -> Undefined,
     "Map" 			  -> Undefined,
@@ -13,12 +23,6 @@ Options[CarpetIOHDF5`GridFunctions`ReadData] = {
     "Variable" 		  -> Undefined,
     "StripGhostZones" -> True
   };
-
-CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up in Providers *)
-
-(****************************************************************)
-(* ReadData *)
-(****************************************************************)
 
 CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
   MergeDataRegions[ReadCarpetIOHDF5Components[file,
@@ -64,12 +68,20 @@ CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:Options
       Return[RegularExpression[filename]],
       Return[filename]]];
 
+(****************************************************************)
+(* ReadIterations *)
+(****************************************************************)
+
 Options[CarpetIOHDF5`GridFunctions`ReadIterations] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Iteration"]];
 CarpetIOHDF5`GridFunctions`ReadIterations[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
     attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadIterations]]]
   ],2];
+
+(****************************************************************)
+(* ReadMaps *)
+(****************************************************************)
 
 Options[CarpetIOHDF5`GridFunctions`ReadMaps] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Map"]];
@@ -78,6 +90,10 @@ CarpetIOHDF5`GridFunctions`ReadMaps[file_String, opts:OptionsPattern[]] :=
     attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadMaps]]]
   ],6];
 
+(****************************************************************)
+(* ReadRefinementLevels *)
+(****************************************************************)
+
 Options[CarpetIOHDF5`GridFunctions`ReadRefinementLevels] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["RefinementLevel"]];
 CarpetIOHDF5`GridFunctions`ReadRefinementLevels[file_String, opts:OptionsPattern[]] :=
@@ -85,12 +101,20 @@ CarpetIOHDF5`GridFunctions`ReadRefinementLevels[file_String, opts:OptionsPattern
     attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadRefinementLevels]]]
   ],4];
 
+(****************************************************************)
+(* ReadTimeLevels *)
+(****************************************************************)
+
 Options[CarpetIOHDF5`GridFunctions`ReadTimeLevels] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["TimeLevel"]];
 CarpetIOHDF5`GridFunctions`ReadTimeLevels[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
     attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadTimeLevels]]]
   ],3];
+
+(****************************************************************)
+(* ReadVariables *)
+(****************************************************************)
 
 Options[CarpetIOHDF5`GridFunctions`ReadVariables] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Variable"]];
@@ -116,6 +140,10 @@ CarpetIOHDF5`GridFunctions`DefaultTimeLevel[run_, var_] := 0;
 (* Private functions                                                                   *)
 (***************************************************************************************)
 
+(****************************************************************)
+(* CarpetIOHDF5DatasetName *)
+(****************************************************************)
+
 (* Generate a dataset name string *)
 CarpetIOHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|None), tl:(_Integer|None), c:(_Integer|None)] :=
  Module[{map="", component="", reflevel="", timelevel=""},
@@ -124,6 +152,10 @@ CarpetIOHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|
   If[rl =!= None, reflevel=" rl="<>ToString[rl]];
   If[tl =!= None, timelevel=" tl="<>ToString[tl]];
   "/" <> var <> " it=" <> ToString[it] <> timelevel <> map <> reflevel <> component];
+
+(****************************************************************)
+(* ReadCarpetIOHDF5Datasets *)
+(****************************************************************)
 
 (* Read a list of datasets into DataRegions *)
 ReadCarpetIOHDF5Datasets[file_String, {}] := {};
@@ -157,6 +189,10 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List] :=
 
   dr
 ]];
+
+(****************************************************************)
+(* CarpetIOHDF5Components *)
+(****************************************************************)
 
 (* Get a list of all components in a file *)
 CarpetIOHDF5Components[file_, it_, rl_] := 
@@ -208,6 +244,10 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
 (***************************************************************************************)
 (* Low-level interface for determining what's available in a file *)
 (***************************************************************************************)
+
+(****************************************************************)
+(* datasetAttributes *)
+(****************************************************************)
 
 DefineMemoFunction[datasetAttributes[file_],
   Module[{attributeRules, datasets, dsattrs},
