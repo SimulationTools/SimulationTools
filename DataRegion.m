@@ -14,18 +14,15 @@ ToListOfCoordinates[d] returns the N-dimensional array of coordinates of DataReg
 ToList::usage = ToList::usage<>"
 ToList[d] returns the N-dimensional array of coordinates and data in DataRegion d.";
 
+CoordinateRanges::usage = "CoordinateRanges[d] returns the data range of a DataRegion. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
+CoordinateSpacings::usage = "CoordinateSpacings[d] returns a list giving the spacing of the data in each dimension of the DataRegion d.";
+MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in the DataRegion d.";
+MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in the DataRegion d.";
+VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
+
 (* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
 DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
-(* TODO: rename this as CoordinateRanges *)
-GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  This is a list of {min,max} pairs, each corresponding to one dimension of d.";
-(* TODO: Rename this as MinCoordinates and add a MaxCoordinates *)
-GetOrigin::usage = "GetOrigin[d] returns a list of length N giving the coordinates of the first point in each direction in the N-dimensional DataRegion d.";
-(* TODO: rename this as CoordinateSpacings and put in another context *)
-GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing of the data in each dimension of the N-dimensional DataRegion d.";
-(* TODO: Remove *)
-GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
-(* TODO: Rename this as VariableName *)
-GetVariableName::usage = "GetVariableName[d] returns the variable name in DataRegion d.";
+
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: rationalise plotting functions *)
 
@@ -93,6 +90,11 @@ GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegi
 GetAttributes::usage = "GetAttributes[d] returns the list of key -> value attributes of DataRegion d.";
 GetDimensions::usage = "GetDimensions[d] returns the number of points in each dimension of a DataRegion d.";
 GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a DataRegion d.";
+GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  This is a list of {min,max} pairs, each corresponding to one dimension of d.";
+GetOrigin::usage = "GetOrigin[d] returns a list of length N giving the coordinates of the first point in each direction in the N-dimensional DataRegion d.";
+GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing of the data in each dimension of the N-dimensional DataRegion d.";
+GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
+GetVariableName::usage = "GetVariableName[d] returns the variable name in DataRegion d.";
 
 Begin["`Private`"];
 
@@ -132,6 +134,18 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
    Editable -> False]
 ];
 
+
+CoordinateSpacings[d_DataRegion] := Spacing /. attributes[d];
+
+MinCoordinates[d_DataRegion] := Origin /. attributes[d];
+
+MaxCoordinates[d_DataRegion] :=
+ MinCoordinates[d] + CoordinateSpacings[d] * (Dimensions[d] - 1);
+
+CoordinateRanges[d_DataRegion] :=
+ MapThread[List, {MinCoordinates[d], MaxCoordinates[d]}];
+
+VariableName[d_DataRegion] := VariableName /. attributes[d];
 
 (**********************************************************)
 (* ToDataRegion                                           *)
@@ -233,36 +247,11 @@ DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  f[x, ToListOfData[d, Flatten -> False], y] /;
   MemberQ[$DataFunctions, f] || MemberQ[Attributes[f], NumericFunction]
-GetOrigin[DataRegion[h_, data_]] :=
-  Origin /. h;
-
-GetSpacing[DataRegion[h_, data_]] :=
-  Spacing /. h;
-
-GetDimensions[DataRegion[h_, data_]] :=
-  Reverse[Dimensions[data]];
-
-GetNumDimensions[DataRegion[h_, data_]] :=
-  Length[Dimensions[data]];
-
-GetTime[DataRegion[h_, _]] :=
-  Time /. h;
-
-GetVariableName[DataRegion[h_, data_]] := 
-  VariableName /. h;
 
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
    be by the preceding functions.*)
 
-GetDataRange[v_DataRegion] :=
-  Module[{origin, spacing, dimensions, min, max},
-    origin = GetOrigin[v];
-    spacing = GetSpacing[v];
-    dimensions = GetDimensions[v];
-    min = origin;
-    max = origin + spacing * (dimensions - 1);
-    MapThread[List, {min, max}]];
 
 replaceRule[list_List, key_ -> newValue_] :=
   list /. (key -> _) :> (key -> newValue);  
@@ -849,6 +838,18 @@ GetData[d_DataRegion] := data[d];
 GetAttributes[d_DataRegion] := attributes[d];
 GetDimensions[d_DataRegion] := Dimensions[d];
 GetNumDimensions[DataRegion[h_, data_]] := Length[Dimensions[data]];
+GetOrigin[DataRegion[h_, data_]] := Origin /. h;
+GetSpacing[DataRegion[h_, data_]] := Spacing /. h;
+GetTime[DataRegion[h_, _]] := Time /. h;
+GetVariableName[DataRegion[h_, data_]] := VariableName /. h;
+GetDataRange[v_DataRegion] :=
+  Module[{origin, spacing, dimensions, min, max},
+    origin = GetOrigin[v];
+    spacing = GetSpacing[v];
+    dimensions = GetDimensions[v];
+    min = origin;
+    max = origin + spacing * (dimensions - 1);
+    MapThread[List, {min, max}]];
 
 End[];
 
