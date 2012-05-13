@@ -14,6 +14,8 @@ Options[CarpetIOHDF5`GridFunctions`ReadData] = {
     "StripGhostZones" -> True
   };
 
+CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up in Providers *)
+
 CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
   MergeDataRegions[ReadCarpetIOHDF5Components[file,
     OptionValue[Variable],
