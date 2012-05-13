@@ -40,11 +40,10 @@ ApplyDefaults[opts, provider] :=
     ], {opt, options}];
 
 Options[ReadGridFunction] = {
-    "Iteration" 	  -> Automatic,
-    "Map" 			  -> Automatic,
+    "Iteration"       -> Automatic,
+    "Map"             -> Automatic,
     "RefinementLevel" -> Automatic,
-    "TimeLevel" 	  -> Automatic,
-    "Variable" 		  -> Automatic,
+    "TimeLevel"       -> Automatic,
     "StripGhostZones" -> True
   };
 

@@ -16,11 +16,11 @@ CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up 
 (****************************************************************)
 
 Options[CarpetIOHDF5`GridFunctions`ReadData] = {
-    "Iteration" 	  -> Undefined,
-    "Map" 			  -> Undefined,
+    "Iteration"       -> Undefined,
+    "Map"             -> Undefined,
     "RefinementLevel" -> Undefined,
-    "TimeLevel" 	  -> Undefined,
-    "Variable" 		  -> Undefined,
+    "TimeLevel"       -> Undefined,
+    "Variable"        -> Undefined,
     "StripGhostZones" -> True
   };
 
