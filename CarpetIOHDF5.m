@@ -16,6 +16,10 @@ Options[CarpetIOHDF5`GridFunctions`ReadData] = {
 
 CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up in Providers *)
 
+(****************************************************************)
+(* ReadData *)
+(****************************************************************)
+
 CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
   MergeDataRegions[ReadCarpetIOHDF5Components[file,
     OptionValue[Variable],
@@ -25,6 +29,10 @@ CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
     OptionValue[Map],
     Sequence@@FilterRules[{opts}, Options[ReadCarpetIOHDF5Components]]
   ]];
+
+(****************************************************************)
+(* ToFileName *)
+(****************************************************************)
 
 Options[CarpetIOHDF5`GridFunctions`ToFileName] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["StripGhostZones"]];
@@ -153,6 +161,10 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List] :=
 CarpetIOHDF5Components[file_, it_, rl_] := 
   Profile["CarpetIOHDF5Components",
   datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl}], 5]];
+
+(****************************************************************)
+(* ReadCarpetIOHDF5Components *)
+(****************************************************************)
 
 (* Read all datasets for a variable *)
 Options[ReadCarpetIOHDF5Components] = {"StripGhostZones" -> True};
