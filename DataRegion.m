@@ -135,15 +135,50 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 ];
 
 
+(**********************************************************)
+(* CoordinateSpacings                                     *)
+(**********************************************************)
+
+SyntaxInformation[CoordinateSpacings] =
+ {"ArgumentsPattern" -> {_}};
+
 CoordinateSpacings[d_DataRegion] := Spacing /. attributes[d];
 
+(**********************************************************)
+(* CoordinateRanges                                       *)
+(**********************************************************)
+
+SyntaxInformation[CoordinateRanges] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateRanges[d_DataRegion] :=
+ MapThread[List, {MinCoordinates[d], MaxCoordinates[d]}];
+
+(**********************************************************)
+(* MinCoordinates                                         *)
+(**********************************************************)
+
+SyntaxInformation[MinCoordinates] =
+ {"ArgumentsPattern" -> {_}};
+
 MinCoordinates[d_DataRegion] := Origin /. attributes[d];
+
+(**********************************************************)
+(* MaxCoordinates                                         *)
+(**********************************************************)
+
+SyntaxInformation[MaxCoordinates] =
+ {"ArgumentsPattern" -> {_}};
 
 MaxCoordinates[d_DataRegion] :=
  MinCoordinates[d] + CoordinateSpacings[d] * (Dimensions[d] - 1);
 
-CoordinateRanges[d_DataRegion] :=
- MapThread[List, {MinCoordinates[d], MaxCoordinates[d]}];
+(**********************************************************)
+(* VariableName                                           *)
+(**********************************************************)
+
+SyntaxInformation[VariableName] =
+ {"ArgumentsPattern" -> {_}};
 
 VariableName[d_DataRegion] := VariableName /. attributes[d];
 
