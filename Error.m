@@ -8,8 +8,11 @@ ErrorMessage::usage = "Error[message, arg1, arg2, ...] reports an error to the u
 CatchError::usage = "CatchError[expr] evaluates expr, and returns its result unless an error was generated, in which case the error message is displayed.";
 ErrorTag;
 ErrorString;
+ErrorStack;
 
 Begin["`Private`"];
+
+$errorStack;
 
 Error::badargs = "Bad arguments to Error: `1`"
 Error[args___] := (Message[Error::badargs, ToString[{args}, InputForm]]; Abort[];)
@@ -18,10 +21,10 @@ SetAttributes[ErrorMessage, HoldFirst];
 SetAttributes[ErrorTag, HoldFirst];
 
 ErrorMessage[tag_MessageName, args___] :=
-  Throw[{{args}, CurrentStack[]}, ErrorTag[tag]];
+  Throw[{{args}, $errorStack = CurrentStack[]}, ErrorTag[tag]];
 
 Error[s_String, args___] :=
-  Throw[{{args}, CurrentStack[]}, ErrorString[s]];
+  Throw[{{args}, $errorStack = CurrentStack[]}, ErrorString[s]];
 
 SetAttributes[CatchError, HoldAll];
 CatchError[expr_] :=
@@ -32,6 +35,8 @@ CatchError[expr_] :=
                     Print[Style[StringForm[tag[[1]], Sequence@@value[[1]]],Darker[Red]]]];
                  ShowStack[value[[2]]];
                  Abort[]]];
+
+ErrorStack[] := $errorStack /. Hold->HoldForm;
 
 End[];
 
