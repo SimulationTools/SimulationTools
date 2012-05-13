@@ -237,7 +237,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 (* Functions which should just see a regular data List    *)
 (**********************************************************)
 $DataFunctions =
-  {ArrayDepth, Dimensions};
+  {ArrayDepth, Dimensions, Part};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  DataRegion[attributes[d], f[x, ToListOfData[d, Flatten -> False], y]] /;
@@ -260,8 +260,6 @@ replaceRules[list_List, replacements_List] :=
   If[Length[replacements] == 0, 
      list, 
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
-
-DataRegion /: Part[d_DataRegion, s__] := DataRegionPart[d, {s}];
 
 (* TODO: extend this so it can slice the data when you specify a range
    of just one number, and rename it to Slab. *)
