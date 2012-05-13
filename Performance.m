@@ -189,7 +189,7 @@ compareTimes[v1_List, v2_List] := v1[[3]]<v2[[3]];
 
 RemoveSmallTimers[Timer[n_,v_,c_], threshold_?NumberQ] :=
   Module[
-    {c2, times, accTimes, nTopTimes},
+    {c2, times, accTimes, nTopTimes, nSmall},
     (* Sort into increasing order *)
     If[ListQ[v],
        c2 = Sort[c, (#1[[2,3]] < #2[[2,3]]) &];
