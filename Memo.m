@@ -9,6 +9,8 @@ Begin["`Private`"];
 
 If[!ValueQ[$cache], $cache = {}];
 
+Global`StandardDefinition[DefineMemoFunction] = True;
+
 SetAttributes[DefineMemoFunction, HoldAll];
 DefineMemoFunction[name_[args___], body_] :=
     pat : name[args] := (AppendTo[$cache, Hold[pat]]; pat = body);
