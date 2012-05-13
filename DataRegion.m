@@ -23,9 +23,6 @@ GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  
 GetOrigin::usage = "GetOrigin[d] returns a list of length N giving the coordinates of the first point in each direction in the N-dimensional DataRegion d.";
 (* TODO: rename this as CoordinateSpacings and put in another context *)
 GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing of the data in each dimension of the N-dimensional DataRegion d.";
-(* TODO: rename this as an overloaded Dimensions *)
-(* TODO: note that the data layout is NOT the same as Mathematica standard - we may want to change this. *)
-GetDimensions::usage = "GetDimensions[d] returns the number of points in each dimension of a DataRegion d.";
 (* TODO: renaming to ArrayDepth *)
 GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a DataRegion d.";
 (* TODO: Implement ToList.  This will return the coordinates as well as the data.  It will have an option Flatten which defaults to True.  When Flatten is false, you get the same structure as the internal data, but with the coordinates added. *)
@@ -99,6 +96,7 @@ SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the
 
 GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
 GetAttributes::usage = "GetAttributes[d] returns the list of key -> value attributes of DataRegion d.";
+GetDimensions::usage = "GetDimensions[d] returns the number of points in each dimension of a DataRegion d.";
 
 Begin["`Private`"];
 
@@ -226,16 +224,19 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 ];
 
 (**********************************************************)
-(* Functions with the NumericFunction attribute           *)
+(* Functions which should just see a regular data List    *)
 (**********************************************************)
+$DataFunctions =
+  {Dimensions};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
- DataRegion[attributes[d], f[x, ToListOfData[d], y]] /;
-  MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable];
+ DataRegion[attributes[d], f[x, ToListOfData[d, Flatten -> False], y]] /;
+  (MemberQ[$DataFunctions, f] || MemberQ[Attributes[f], NumericFunction]) &&
+  MemberQ[Attributes[f], Listable];
 
-DataRegion /: f_Symbol[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
-  MemberQ[Attributes[f], NumericFunction];
-
+DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
+ f[x, ToListOfData[d, Flatten -> False], y] /;
+  MemberQ[$DataFunctions, f] || MemberQ[Attributes[f], NumericFunction]
 GetOrigin[DataRegion[h_, data_]] :=
   Origin /. h;
 
@@ -850,6 +851,7 @@ SliceData[v_DataRegion, dims_List, coords_:0] :=
 
 GetData[d_DataRegion] := data[d];
 GetAttributes[d_DataRegion] := attributes[d];
+GetDimensions[d_DataRegion] := Dimensions[d];
 
 End[];
 
