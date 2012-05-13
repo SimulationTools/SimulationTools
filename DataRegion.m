@@ -113,7 +113,7 @@ data[DataRegion[attrs_, data_]] := data;
 
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
-  name = GetVariableName[d];
+  name = GetVariableName[d] /. Undefined -> "<<unnamed>>";
   dims = GetDimensions[d];
   range = GetDataRange[d];
 
@@ -144,8 +144,8 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 (**********************************************************)
 
 Options[ToDataRegion] := {
-  "VariableName" -> None,
-  "Time" -> None};
+  "VariableName" -> Undefined,
+  "Time" -> Undefined};
 
 SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
