@@ -52,11 +52,10 @@ ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]
   Module[
     {leafName, fileName, explicitOpts},
 
-    explicitOpts = defaultOpts[opts, provider];
-    leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, explicitOpts}];
-    fileName = getFileOfIt[run, leafName, it];
-    
-    CallProvidedFunction["GridFunctions", "ReadGridFunctionData", {fileName, explicitOpts}]
+    (* explicitOpts = defaultOpts[opts, provider]; *)
+    leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, opts}];
+    fileName = getFileOfIt[run, leafName, OptionValue[Iteration]];
+    CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, opts}]
 ];
 
 Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iteration"]];
