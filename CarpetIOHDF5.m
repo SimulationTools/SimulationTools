@@ -130,7 +130,7 @@ CarpetIOHDF5`GridFunctions`ReadVariables[file_String, opts:OptionsPattern[]] :=
 
 CarpetIOHDF5`GridFunctions`DefaultIteration[its_List] := 0;
 
-CarpetIOHDF5`GridFunctions`DefaultMap[maps_List] := 0;
+CarpetIOHDF5`GridFunctions`DefaultMap[maps_List] := None;
 
 CarpetIOHDF5`GridFunctions`DefaultRefinementLevel[run_, var_] := 0;
 
