@@ -167,11 +167,11 @@ DataRegion /: ToListOfData[d_DataRegion] := data[d];
 (* Functions with the NumericFunction attribute           *)
 (**********************************************************)
 
-DataRegion /: f_[x___, d_DataRegion, y___] :=
+DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  DataRegion[attributes[d], f[x, ToListOfData[d], y]] /;
   MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable];
 
-DataRegion /: f_[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
+DataRegion /: f_Symbol[x___, d_DataRegion, y___] := f[x, ToListOfData[d], y] /;
   MemberQ[Attributes[f], NumericFunction];
 
 GetOrigin[DataRegion[h_, data_]] :=
