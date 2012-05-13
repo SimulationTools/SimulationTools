@@ -48,7 +48,7 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
        Error[base<>": Provider "<>ToString[provider,InputForm]<>" not found"]];
 
     If[Names[provider<>"`"<>base<>"`"<>fn] === {},
-       Error["Function "<>provider<>"`"<>base<>"`"<>fn<>" not found"]];
+       Error["Function "<>provider<>"`.`"<>base<>"`.`"<>fn<>" not found"]];
 
     f = ToExpression[provider<>"`"<>base<>"`"<>fn];
     (* Print["calling ", f, " with ", {args}]; *)
