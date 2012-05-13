@@ -36,32 +36,33 @@ CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
 
 Options[CarpetIOHDF5`GridFunctions`ToFileName] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["StripGhostZones"]];
+
 CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:OptionsPattern[]] :=
   Module[
     {map, filename, dimspattern},
-	map = Switch[OptionValue[Map],
+    map = Switch[OptionValue[Map],
 		 _Integer, "."<>ToString[OptionValue[Map]],
 		 None, "",
 		 All, "(\\.\\d){0,1}",
-		 _, Error["Unrecognised map "<>ToString[map,InputForm]]];
+		 _, Error["Unrecognised map "<>ToString[OptionValue[Map],InputForm]]];
 
-    Which[
-    SameQ[dims, All],
-      dimspattern = "(file_0){0,1}";,
-    SameQ[StringJoin[dims], "xyz"],
-      dimspattern = "("<>StringJoin[dims]<>"|(file_0){0,1})";,
-    True,
-      dimspattern = StringJoin[dims];
-    ];
+    dimspattern = Which[
+      SameQ[dims,All],
+      "(file_0){0,1}",
+
+      And@@Map[StringQ,dims],
+      If[SameQ[StringJoin[dims], "xyz"],
+         "("<>StringJoin[dims]<>"|(file_0){0,1})",
+         StringJoin[dims]],
+
+      True,
+      Error["Unrecognised dimensions "<>ToString[dims,InputForm]]];
 
     filename = var <> map <> "." <> dimspattern <> ".h5";
 
-    If[map!="" || dims == All || dimspattern != StringJoin[dims],
-      Return[RegularExpression[filename]];
-    ,
-      Return[filename];
-    ];
-];
+    If[map =!= "" || dims === All || dimspattern =!= StringJoin[dims],
+      Return[RegularExpression[filename]],
+      Return[filename]]];
 
 Options[CarpetIOHDF5`GridFunctions`ReadIterations] =
   FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Iteration"]];
