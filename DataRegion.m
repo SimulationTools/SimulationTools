@@ -146,11 +146,14 @@ SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
 
 ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
-  DataRegion[{VariableName -> OptionValue["VariableName"],
-              Origin -> origin,
-              Spacing -> spacing,
-              Time -> OptionValue["Time"]},
-             Developer`ToPackedArray[data]];
+  DataRegion[
+    {VariableName -> OptionValue["VariableName"],
+     Origin -> origin,
+     Spacing -> spacing,
+     Time -> OptionValue["Time"]
+    },
+    Developer`ToPackedArray[data]
+  ];
 
 
 (**********************************************************)
