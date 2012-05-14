@@ -37,9 +37,6 @@ ColorMapLegend::usage = "ColorMapLegend[colorfunction, {min, max, dx}] returns a
 (* TODO: remove this function and make it as easy to use the other functions *)
 QuickSlicePlot::usage = "QuickSlicePlot[d, {min, max}, colorscheme, opts] generates an array plot of a DataRegion d using the color scheme colorscheme scaled to run between min and max.  The plot includes a legend for the colors.  opts (which is optional) is passed to DataRegionArrayPlot.";
 
-(* TODO: Rename as Stripped *)
-Strip::usage = "Strip[d,n] removes n points from each face of a DataRegion d.  n is either a list corresponding to the dimension of d or an integer, in which case the same number of points is removed in each direction.
-Strip[d,n,m] removes n points from each lower face and m points from each upper face of d.  Here, n and m must be lists.";
 (* TODO: add this to ToDataRegion *)
 MergeDataRegions::usage = "MergeDataRegions[regions] returns a DataRegion formed from merging the content of the DataRegions in the list regions.  If the regions do not cover a rectangular domain, any missing points will have value None.  All the DataRegions must have the same spacing and their origins must be separated by multiples of their spacing.";
 (* TODO: rename this as Coordinates *)
@@ -94,6 +91,7 @@ DataRegionPlot3D;
 DataRegionPlot;
 NormL2;
 Outline;
+Strip;
 
 Begin["`Private`"];
 
@@ -392,6 +390,50 @@ DataRegion /: Part[d_DataRegion, s__] :=
 ];
 
 (**********************************************************)
+(* Take                                                   *)
+(**********************************************************)
+
+DataRegion /: Take[d_DataRegion, s__] :=
+ Module[{partSpec},
+  (* TODO: remove this restriction *)
+  If[Count[{s}, None, Infinity] > 0,
+    Error["\"None\" part specifications are not currently supported by DataRegion."];
+  ];
+
+  partSpec = Map[# /.
+    {List[x_]  :> List[x],
+     List[x__] :> Span[x],
+     n_Integer :> If[n<0, Span[n, All], Span[1, n]]
+    } &, {s}];
+
+  Part[d, Sequence @@ partSpec]
+];
+
+(**********************************************************)
+(* Drop                                                   *)
+(**********************************************************)
+
+DataRegion /: Drop[d_DataRegion, s__] :=
+ Module[{partSpec},
+  (* TODO: remove this restriction *)
+  If[Count[{s}, All, Infinity] > 0,
+    Error["\"All\" part specifications are not currently supported by DataRegion."];
+  ];
+
+  (* TODO: relax this restriction *)
+  If[Count[{s}, List[__]] > 0,
+    Error["\"List\" part specifications are not currently supported by DataRegion."];
+  ];
+
+  partSpec = Map[# /.
+    {n_Integer :> If[n<0, Span[1, n-1], Span[n+1, All]],
+     None -> All
+    } &, {s}];
+
+  Part[d, Sequence @@ partSpec]
+];
+
+(**********************************************************)
 (* Plotting functions                                     *)
 (**********************************************************)
 
@@ -493,27 +535,6 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
 
 
 
-Strip[d_DataRegion, n_Integer] := Module[{ndims},
-  ndims = GetNumDimensions[d];
-  Strip[d, ConstantArray[n,ndims]]];
-
-Strip[d_DataRegion, n_List] :=
-  Module[{data, data2, attrs, attrs2, d2},
-    data = GetData[d];
-    data2 = Take[data, Apply[Sequence, Map[{#+1,-(#+1)}&, Reverse[n]]]];
-    attrs = attributes[d];
-    attrs2 = replaceRules[attrs, 
-      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
-    d2 = DataRegion[attrs2, data2]];
-
-Strip[d_DataRegion, n_List, m_List] :=
-  Module[{data, data2, attrs, attrs2, d2},
-    data = GetData[d];
-	 data2 = Take[data, Apply[Sequence, MapThread[{#1+1,-(#2+1)}&, {Reverse[n], Reverse[m]}]]];
-    attrs = attributes[d];
-    attrs2 = replaceRules[attrs,
-      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
-    d2 = DataRegion[attrs2, data2]];
 
 Downsample[d_DataRegion, n_Integer] :=
   Module[{ndims},
@@ -988,6 +1009,28 @@ Outline[d_DataRegion] := Module[{coords, ndims, shapes},
 
   shapes[[ndims]]@@coords
 ];
+
+Strip[d_DataRegion, n_Integer] := Module[{ndims},
+  ndims = GetNumDimensions[d];
+  Strip[d, ConstantArray[n,ndims]]];
+
+Strip[d_DataRegion, n_List] :=
+  Module[{data, data2, attrs, attrs2, d2},
+    data = GetData[d];
+    data2 = Take[data, Apply[Sequence, Map[{#+1,-(#+1)}&, Reverse[n]]]];
+    attrs = attributes[d];
+    attrs2 = replaceRules[attrs, 
+      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
+    d2 = DataRegion[attrs2, data2]];
+
+Strip[d_DataRegion, n_List, m_List] :=
+  Module[{data, data2, attrs, attrs2, d2},
+    data = GetData[d];
+	 data2 = Take[data, Apply[Sequence, MapThread[{#1+1,-(#2+1)}&, {Reverse[n], Reverse[m]}]]];
+    attrs = attributes[d];
+    attrs2 = replaceRules[attrs,
+      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
+    d2 = DataRegion[attrs2, data2]];
 
 End[];
 
