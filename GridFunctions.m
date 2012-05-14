@@ -110,7 +110,7 @@ ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] 
 
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
-    files = FindRunFile[run, leafName];
+    files = FindRunFiles[run, leafName];
     itss = Map[{#, getFileIts[#]} &, files];
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
     If[Length[haveIts] === 0,
