@@ -26,6 +26,7 @@ Downsampled::usage = "Downsampled[d, n] returns a version of d with only every n
 
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
+Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: Add MapCoordinates, MapThreadCoordinates, MapData, MapThreadData, Map, MapThread *)
@@ -37,9 +38,6 @@ ColorMapLegend::usage = "ColorMapLegend[colorfunction, {min, max, dx}] returns a
 (* TODO: remove this function and make it as easy to use the other functions *)
 QuickSlicePlot::usage = "QuickSlicePlot[d, {min, max}, colorscheme, opts] generates an array plot of a DataRegion d using the color scheme colorscheme scaled to run between min and max.  The plot includes a legend for the colors.  opts (which is optional) is passed to DataRegionArrayPlot.";
 
-(* TODO: rename this as Coordinates *)
-GetCoordinate::usage = "GetCoordinate[d, i] returns a DataRegion of the same shape as the DataRegion d whose data is the i coordinate of d.";
-(* TODO: Rename this as MapData *)
 (* TODO: Move away and undocument *)
 FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
 (* TODO: move this to another package *)
@@ -84,6 +82,7 @@ EvaluateOnDataRegion;
 MergeDataRegions;
 MapDataRegion;
 MapThreadDataRegion;
+GetCoordinate;
 
 Begin["`Private`"];
 
@@ -523,6 +522,42 @@ CoordinateOutline[d_DataRegion] :=
   shapes[[ndims]]@@coords
 ];
 
+(**********************************************************)
+(* Coordinate                                             *)
+(**********************************************************)
+
+SyntaxInformation[Coordinate] =
+ {"ArgumentsPattern" -> {_, _}};
+
+Coordinate[d_DataRegion, dim_] :=
+ Module[{origin, spacing, dims, max, ca, dm, dp, res},
+  dims    = Dimensions[d];
+  origin  = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
+  max     = MaxCoordinates[d];
+
+  ca[x_, {}] := x;
+  ca[x_, l_] := ConstantArray[x, l];
+
+  (* Fiendishly clever code *)
+  (* TODO: Simplify these Transpose/Reverse uses *)
+  dm = Reverse @ Table[dims[[i]], {i, 1, dim - 1}];
+  dp = Reverse @ Table[dims[[i]], {i, dim + 1, Length[dims]}];
+
+  res = Transpose[
+    ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp],
+    Reverse[Range[ArrayDepth[d]]]];
+
+  If[Dimensions[res] =!= dims, Error["GetCoordinateError"]];
+
+  ToDataRegion[res, origin, spacing, VariableName -> VariableName[d]]
+];
+
+
+
+
+
+
 
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
@@ -611,25 +646,7 @@ MergeDataRegions[regions_List] :=
   attrs2 = replaceRules[attrs, {Origin -> X1}];
   Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]];
 
-(* Fiendishly clever code *)
-GetCoordinate[d_DataRegion, dim_] :=
-  Module[{origin, spacing, dims, max, ca, dm, dp, res},
-    origin = GetOrigin[d];
-    spacing = GetSpacing[d];
-    dims = GetDimensions[d];
-    max = origin + spacing * (dims - 1);
 
-    ca[x_, {}] := x;
-    ca[x_, l_] := ConstantArray[x, l];
-
-    dm = Reverse@Table[dims[[i]], {i, 1, dim - 1}];
-    dp = Reverse@Table[dims[[i]], {i, dim + 1, Length[dims]}];
-
-    res = ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp];
-
-    If[Reverse@Dimensions[res] =!= dims, Error["GetCoordinateError"]];
-    DataRegion[attributes[d], res]
-  ];
 
 
 FilterNaNs[d_DataRegion] :=
@@ -1059,6 +1076,25 @@ TableToDataRegion[t_List] :=
     Append[subdims, Length[subregions]], Append[suborigin, origin],
     Append[subspacing, spacing], 0]]];
 
+(* Fiendishly clever code *)
+GetCoordinate[d_DataRegion, dim_] :=
+  Module[{origin, spacing, dims, max, ca, dm, dp, res},
+    origin = GetOrigin[d];
+    spacing = GetSpacing[d];
+    dims = GetDimensions[d];
+    max = origin + spacing * (dims - 1);
+
+    ca[x_, {}] := x;
+    ca[x_, l_] := ConstantArray[x, l];
+
+    dm = Reverse@Table[dims[[i]], {i, 1, dim - 1}];
+    dp = Reverse@Table[dims[[i]], {i, dim + 1, Length[dims]}];
+
+    res = ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp];
+
+    If[Reverse@Dimensions[res] =!= dims, Error["GetCoordinateError"]];
+    DataRegion[attributes[d], res]
+  ];
 
 End[];
 
