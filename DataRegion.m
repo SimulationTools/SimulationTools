@@ -272,11 +272,14 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 
 (**********************************************************)
 (* Functions which should just see a regular data List.   *)
-(* These fall into two categories: those which return a   *)
-(* DataRegion and those which don't. We assume all        *)
-(* functions which are Listable and NumericFunction fall  *)
-(* into the former category and all functions which are   *)
-(* NumericFunction fall into the latter category          *)
+(* These fall into two categories:                        *)
+(* 1. Those which take a single DataRegion and return a   *)
+(*    DataRegion. We assume all functions which are       *)
+(*    Listable and NumericFunction fall into this         *)
+(*    category.                                           *)
+(* 2. Those which take a single DataRegion and return     *)
+(*    something else. We assume all functions which are   *)
+(*    NumericFunction fall into this category.            *)
 (**********************************************************)
 
 $NonDataRegionFunctions =
