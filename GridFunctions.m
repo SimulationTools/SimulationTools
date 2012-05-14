@@ -75,8 +75,8 @@ Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iterati
 ReadIterations[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
     {options},
-    options = ApplyDefaults[run, var, {opts}];
-    Union@@Map[CallProvidedFunction["GridFunctions", "ReadIterations", {#, options}] &,
+    options = DeleteCases[ApplyDefaults[run, var, {opts}],"Iteration" -> _];
+    Union@@Map[CallProvidedFunction["GridFunctions", "ReadIterations", {#, "Variable" -> var, options}] &,
         FindRunFiles[run, getLeafName[var, dims, options]]]
 ];
 
