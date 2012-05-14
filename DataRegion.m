@@ -28,7 +28,7 @@ GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 
 (* TODO: Add Metadata function and user-defined metadata *)
-
+(* TODO: Add MapCoordinates, MapThreadCoordinates, MapData, MapThreadData, Map, MapThread *)
 
 (* TODO: these should be moved into Plotting and probably changed or fixed or deleted *)
 ScaledColorFunction::usage = "ScaledColorFunction[colorscheme, {min, max}] returns a function on the domain [min,max] giving a color in colorscheme.  colorscheme can be any Mathematica named color scheme, for example \"ThermometerColors\", \"TemperatureMap\" etc.";
@@ -37,20 +37,14 @@ ColorMapLegend::usage = "ColorMapLegend[colorfunction, {min, max, dx}] returns a
 (* TODO: remove this function and make it as easy to use the other functions *)
 QuickSlicePlot::usage = "QuickSlicePlot[d, {min, max}, colorscheme, opts] generates an array plot of a DataRegion d using the color scheme colorscheme scaled to run between min and max.  The plot includes a legend for the colors.  opts (which is optional) is passed to DataRegionArrayPlot.";
 
-(* TODO: add this to ToDataRegion *)
-MergeDataRegions::usage = "MergeDataRegions[regions] returns a DataRegion formed from merging the content of the DataRegions in the list regions.  If the regions do not cover a rectangular domain, any missing points will have value None.  All the DataRegions must have the same spacing and their origins must be separated by multiples of their spacing.";
 (* TODO: rename this as Coordinates *)
 GetCoordinate::usage = "GetCoordinate[d, i] returns a DataRegion of the same shape as the DataRegion d whose data is the i coordinate of d.";
 (* TODO: Rename this as MapData *)
-(* TODO: Add a MapCoordinates function which maps over the coordinates *)
-MapDataRegion::usage = "MapDataRegion[f,d] returns a DataRegion of the same shape as the DataRegion d whose data is f applied to the data in d.";
 (* TODO: Move away and undocument *)
 FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
 (* TODO: move this to another package *)
 NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
 DataRegionContourPlot::usage = "DataRegionContourPlot[d, args] generates a ContourPlot of the data in a 2D DataRegion d. The arguments are the same as for ContourPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-(* TODO: rename this as MapThreadData and add a MapThreadCoordinates *)
-MapThreadDataRegion::usage = "MapThreadDataRegion[f, {d1, d2, ...}] returns a DataRegion of the same shape as the DataRegions {d1, d2, ...} whose data is f[v1, v2, ...] where {v1, v2, ...} are the data values from {d1, d2, ...}.";
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form a
 s in the first argument of Derivative.";
 (* TODO: don't support this - put it in NRMMA`Experimental *)
@@ -61,10 +55,6 @@ ResampleDataRegions::usage = "ResampleDataRegions[{d1, d2, ...}, p] returns a li
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 (* TODO: move this to the NRMMA context.  Think about another way to do this *)
 Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
-(* TODO: Add this to ToDataRegion *)
-TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
-(* TODO: change this to ToDataRegion *)
-EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as the DataRegion d with data computed by evaluating expr assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: this function is only currently implemented for DataRegions of dimension 2 and 3.";
 (* TODO: make ToDataRegion more flexible about creating DataRegions from expressions - make it like DataRegionTable *)
 (* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
 
@@ -91,6 +81,11 @@ DataRegionPlot;
 NormL2;
 Outline;
 Strip;
+TableToDataRegion;
+EvaluateOnDataRegion;
+MergeDataRegions;
+MapDataRegion;
+MapThreadDataRegion;
 
 Begin["`Private`"];
 
@@ -181,6 +176,18 @@ VariableName[d_DataRegion] := VariableName /. attributes[d];
 (**********************************************************)
 (* ToDataRegion                                           *)
 (**********************************************************)
+
+(* TODO: Add something like TableToDataRegion which takes a list of elements 
+   each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed
+   (and not checked) that the data grid is regular.
+*)
+
+(* TODO: Add equivalent to MergeDataRegions returns a DataRegion formed from
+   merging the content of the DataRegions in the list regions.  If the regions
+   do not cover a rectangular domain, any missing points will have value None.
+   All the DataRegions must have the same spacing and their origins must be
+   separated by multiples of their spacing.
+*)
 
 Options[ToDataRegion] := {
   "VariableName" -> Undefined,
@@ -622,25 +629,12 @@ GetCoordinate[d_DataRegion, dim_] :=
     DataRegion[attributes[d], res]
   ];
 
-MapDataRegion[f_, d_DataRegion] :=
- Module[{dim, header, data},
-  dim = GetNumDimensions[d];
-  header = attributes[d];
-  data = Map[f, GetData[d], {dim}];
-  DataRegion[header, data]];
 
 FilterNaNs[d_DataRegion] :=
  MapDataRegion[If[NaNQ[#], Missing[], #] &, d];
 
 NaNQ[x_] :=
  Round[x] == -2147483648;
-
-MapThreadDataRegion[f_, drs_] :=
-  Module[{attrs, datas, newData},
-    attrs = attributes[First[drs]];
-    datas = GetData /@ drs;
-    newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
-    DataRegion[attrs, newData]];
 
 ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
   Module[{dFn, newData},
@@ -819,60 +813,6 @@ ListPlot[d:DataRegion[___], opts___] :=
 Protect[ListPlot];
 
 
-
-(* Take a list of elements of the form {x,y,..., f} and convert it to
-   a DataRegion. It is assumed (and not checked) that the data grid is
-   regular.  *)
-
-TableToDataRegion[t_List] :=
- Module[{d, sorted, split, spacing, origin, subregions, s, subdims,
-   suborigin, subspacing},
-  d = Length[t[[1]]] - 1; (* Number of dimensions in the data *)
-
-  sorted = Sort[t, #1[[d]] < #2[[d]] &];
-  split = SplitBy[sorted, #[[d]] &];
-  spacing = split[[2, 1, d]] - split[[1, 1, d]];
-  origin = split[[1, 1, d]];
-  If[d == 1,
-   ToDataRegion[Map[Last, sorted],
-    {origin}, {spacing}],
-   (* else *)
-   subregions =
-     Map[TableToDataRegion, Map[Drop[#, {d}] &, split, {2}]];
-   s = First[subregions];
-   subdims = GetDimensions[s];
-   suborigin = GetOrigin[s];
-   subspacing = GetSpacing[s];
-   MakeDataRegion[Map[GetData, subregions], "table",
-    Append[subdims, Length[subregions]], Append[suborigin, origin],
-    Append[subspacing, spacing], 0]]];
-
-(* TODO: generalise this to arbitrary number of dimensions *)
-(* SetAttributes[EvaluateOnDataRegion, HoldFirst]; *)
-EvaluateOnDataRegion[exprp_, {t_, x_, y_, z_}, dp_DataRegion] :=
-  Module[
-    {xd, yd, zd, td, result, expr, d},
-    expr = ReleaseHold[exprp];
-    d = ReleaseHold[dp];
-    {xd, yd, zd} = Table[GetCoordinate[d, i], {i, 3}];
-    td = GetTime[d];
-    result = (0.*x + expr) /. {x :> xd, y :> yd, z :> zd, t :> td};
-    If[!NumberQ@Max@Flatten[GetData[result]],
-       Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y,z}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
-    result];
-
-EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
-  Module[
-    {xd, yd, td, result, expr, d},
-    expr = ReleaseHold[exprp];
-    d = ReleaseHold[dp];
-    {xd, yd} = Table[GetCoordinate[d, i], {i, 2}];
-    td = GetTime[d];
-    result = (0.*x + expr) /. {x :> xd, y :> yd, t :> td};
-    If[!NumberQ@Max@Flatten[GetData[result]],
-       Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
-    result];
-
 (**********************************************************************************)
 (* Deprecated functions *)
 (**********************************************************************************)
@@ -1048,6 +988,75 @@ Downsample[d_DataRegion, n_List] :=
    replaceRules[
     attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n}];
   d2 = DataRegion[attrs2, data2]];
+
+MapDataRegion[f_, d_DataRegion] :=
+ Module[{dim, header, data},
+  dim = GetNumDimensions[d];
+  header = attributes[d];
+  data = Map[f, GetData[d], {dim}];
+  DataRegion[header, data]];
+
+MapThreadDataRegion[f_, drs_] :=
+  Module[{attrs, datas, newData},
+    attrs = attributes[First[drs]];
+    datas = GetData /@ drs;
+    newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
+    DataRegion[attrs, newData]];
+
+(* TODO: generalise this to arbitrary number of dimensions *)
+(* SetAttributes[EvaluateOnDataRegion, HoldFirst]; *)
+EvaluateOnDataRegion[exprp_, {t_, x_, y_, z_}, dp_DataRegion] :=
+  Module[
+    {xd, yd, zd, td, result, expr, d},
+    expr = ReleaseHold[exprp];
+    d = ReleaseHold[dp];
+    {xd, yd, zd} = Table[GetCoordinate[d, i], {i, 3}];
+    td = GetTime[d];
+    result = (0.*x + expr) /. {x :> xd, y :> yd, z :> zd, t :> td};
+    If[!NumberQ@Max@Flatten[GetData[result]],
+       Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y,z}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
+    result];
+
+EvaluateOnDataRegion[exprp_, {t_, x_, y_}, dp_DataRegion] :=
+  Module[
+    {xd, yd, td, result, expr, d},
+    expr = ReleaseHold[exprp];
+    d = ReleaseHold[dp];
+    {xd, yd} = Table[GetCoordinate[d, i], {i, 2}];
+    td = GetTime[d];
+    result = (0.*x + expr) /. {x :> xd, y :> yd, t :> td};
+    If[!NumberQ@Max@Flatten[GetData[result]],
+       Error["Expression " <> ToString[expr,InputForm]<> " did not evaluate to a numeric value in coordinates "<>ToString[{t,x,y}]<>" ("<>ToString[Max@Flatten[GetData[result]],InputForm]]];
+    result];
+
+
+(* Take a list of elements of the form {x,y,..., f} and convert it to
+   a DataRegion. It is assumed (and not checked) that the data grid is
+   regular.  *)
+
+TableToDataRegion[t_List] :=
+ Module[{d, sorted, split, spacing, origin, subregions, s, subdims,
+   suborigin, subspacing},
+  d = Length[t[[1]]] - 1; (* Number of dimensions in the data *)
+
+  sorted = Sort[t, #1[[d]] < #2[[d]] &];
+  split = SplitBy[sorted, #[[d]] &];
+  spacing = split[[2, 1, d]] - split[[1, 1, d]];
+  origin = split[[1, 1, d]];
+  If[d == 1,
+   ToDataRegion[Map[Last, sorted],
+    {origin}, {spacing}],
+   (* else *)
+   subregions =
+     Map[TableToDataRegion, Map[Drop[#, {d}] &, split, {2}]];
+   s = First[subregions];
+   subdims = GetDimensions[s];
+   suborigin = GetOrigin[s];
+   subspacing = GetSpacing[s];
+   MakeDataRegion[Map[GetData, subregions], "table",
+    Append[subdims, Length[subregions]], Append[suborigin, origin],
+    Append[subspacing, spacing], 0]]];
+
 
 End[];
 
