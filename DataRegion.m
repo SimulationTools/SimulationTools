@@ -82,20 +82,18 @@ EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a 
 
 (* DEPRECATED *)
 
-MakeDataRegion::usage = "MakeDataRegion[data, name, dims, origin, spacing, time] creates a DataRegion object from the passed data.  data is an N-dimensional array (nested list) of numbers.  name is a name to give to the object for display purposes.  dims is a list of length N consisting of the dimensions of data (dims = Reverse[Dimensions[data]]).  origin is a list of length N giving the coordinates of the first point in each direction.  spacing is a list of length N giving the spacing between points in each direction.  time is a number which will be stored with the DataRegion which can be useful for labeling simulation time. DEPRECATED";
-
-SliceData::usage = "SliceData[d, dim, coord] slices the DataRegion d through the dimension dim at the coordinate location coord. The result is a DataRegion with dimensionality 1 lower than that of d. If coord is not given, it uses a default value of 1.";
-
-GetData::usage = "GetData[d] returns the N-dimensional array of data in DataRegion d";
-GetAttributes::usage = "GetAttributes[d] returns the list of key -> value attributes of DataRegion d.";
-GetDimensions::usage = "GetDimensions[d] returns the number of points in each dimension of a DataRegion d.";
-GetNumDimensions::usage = "GetNumDimensions[d] returns the dimensionality of a DataRegion d.";
-GetDataRange::usage = "GetDataRange[d] returns the data range of a DataRegion.  This is a list of {min,max} pairs, each corresponding to one dimension of d.";
-GetOrigin::usage = "GetOrigin[d] returns a list of length N giving the coordinates of the first point in each direction in the N-dimensional DataRegion d.";
-GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing of the data in each dimension of the N-dimensional DataRegion d.";
-GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
-GetVariableName::usage = "GetVariableName[d] returns the variable name in DataRegion d.";
-DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
+MakeDataRegion;
+SliceData;
+GetData;
+GetAttributes;
+GetDimensions;
+GetNumDimensions;
+GetDataRange;
+GetOrigin;
+GetSpacing;
+GetTime;
+GetVariableName;
+DataRegionPart;
 
 
 Begin["`Private`"];
