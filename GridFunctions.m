@@ -6,8 +6,6 @@ ReadIterations::usage = "ReadIterations[run, var, dims] reads the iterations pre
 ReadMaps::usage = "ReadMaps[run, var, dims] reads the multipatch maps present  for the grid function var in the directory run.";
 ReadRefinementLevels::usage = "ReadRefinementLevels[run, var, dims] reads the refinement levels present for the grid function var in the directory run.";
 ReadTimeLevels::usage = "ReadTimeLevels[run, var, dims] reads the timelevels present for the grid function var in the directory run.";
-ReadVariables::usage = "ReadVariables[run, var, dims] reads the variable names present for the grid function var in the directory run.";
-
 
 ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the iteration it on refinement level rl of the CarpetHDF5 file named var in the directory run.";
 
@@ -109,16 +107,6 @@ ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] 
     Union@@Map[CallProvidedFunction["GridFunctions", "ReadTimeLevels", {#, opts}] &,
         FindRunFile[run, getLeafName[var, dims, options]]]
 ];
-
-Options[ReadVariables] = FilterRules[Options[ReadGridFunction], Except["Variable"]];
-ReadVariables[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  Module[
-    {leafName},
-    leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, opts}];
-    Union@@Map[CallProvidedFunction["GridFunctions", "ReadVariables", {#, opts}] &,
-        FindRunFilesFromPattern[run, leafName]]
-];
-
 
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
