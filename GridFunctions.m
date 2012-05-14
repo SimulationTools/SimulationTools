@@ -71,41 +71,34 @@ ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]
     CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, options}]
 ];
 
+Options[fileUnion] = Options[ReadGridFunction];
+fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
+  Module[
+    {files = FindRunFiles[run, getLeafName[var, dims, opts]]},
+    If[files === {},
+       Error["No data found for variable '"<>ToString[var]<>"' with dimensions '"<>
+             ToString[dims]<>"' in run '"<>run<>"'"]];
+    Union@@Map[CallProvidedFunction["GridFunctions", fn, {#, "Variable" -> var, opts}] &,
+               files]];
+
 Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iteration"]];
 ReadIterations[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  Module[
-    {options},
-    options = DeleteCases[ApplyDefaults[run, var, {opts}],"Iteration" -> _];
-    Union@@Map[CallProvidedFunction["GridFunctions", "ReadIterations", {#, "Variable" -> var, options}] &,
-        FindRunFiles[run, getLeafName[var, dims, options]]]
-];
+  fileUnion["ReadIterations", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],
+                                                          "Iteration" -> _]];
 
 Options[ReadMaps] = FilterRules[Options[ReadGridFunction], Except["Map"]];
 ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  Module[
-    {options},
-    options = ApplyDefaults[run, var, {opts}];
-    Union@@Map[CallProvidedFunction["GridFunctions", "ReadMaps", {#, options}] &,
-        FindRunFiles[run, getLeafName[var, dims, options]]]
-];
+  fileUnion["ReadMaps", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],"Map" -> _]];
 
 Options[ReadRefinementLevels] = FilterRules[Options[ReadGridFunction], Except["RefinementLevel"]];
 ReadRefinementLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  Module[
-    {options},
-    options = ApplyDefaults[run, var, {opts}];
-    Union@@Map[CallProvidedFunction["GridFunctions", "ReadRefinementLevels", {#, options}] &,
-        FindRunFiles[run, getLeafName[var, dims, options]]]
-];
+  fileUnion["ReadRefinementLevels", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],
+                                                                "RefinementLevel" -> _]];
 
 Options[ReadTimeLevels] = FilterRules[Options[ReadGridFunction], Except["TimeLevel"]];
 ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  Module[
-    {options},
-    options = ApplyDefaults[run, var, {opts}];
-    Union@@Map[CallProvidedFunction["GridFunctions", "ReadTimeLevels", {#, options}] &,
-        FindRunFiles[run, getLeafName[var, dims, options]]]
-];
+  fileUnion["ReadTimeLevels", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],
+                                                                "TimeLevel" -> _]];
 
 Options[ReadTime] = Options[ReadGridFunction];
 ReadTime[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
