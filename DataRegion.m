@@ -271,19 +271,28 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 ];
 
 (**********************************************************)
-(* Functions which should just see a regular data List    *)
+(* Functions which should just see a regular data List.   *)
+(* These fall into two categories: those which return a   *)
+(* DataRegion and those which don't. We assume all        *)
+(* functions which are Listable and NumericFunction fall  *)
+(* into the former category and all functions which are   *)
+(* NumericFunction fall into the latter category          *)
 (**********************************************************)
-$DataFunctions =
+
+$NonDataRegionFunctions =
   {ArrayDepth, Dimensions, Total, Mean};
+
+$DataRegionFunctions =
+  {Map};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  DataRegion[attributes[d], f[x, ToListOfData[d, Flatten -> False], y]] /;
-  (MemberQ[$DataFunctions, f] || MemberQ[Attributes[f], NumericFunction]) &&
-  MemberQ[Attributes[f], Listable];
+  MemberQ[$DataRegionFunctions, f] ||
+  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]);
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  f[x, ToListOfData[d, Flatten -> False], y] /;
-  MemberQ[$DataFunctions, f] || MemberQ[Attributes[f], NumericFunction]
+  MemberQ[$NonDataRegionFunctions, f] || MemberQ[Attributes[f], NumericFunction]
 
 (**********************************************************)
 (* Slab                                                   *)
