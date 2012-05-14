@@ -275,7 +275,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 (* Functions which should just see a regular data List    *)
 (**********************************************************)
 $DataFunctions =
-  {ArrayDepth, Dimensions};
+  {ArrayDepth, Dimensions, Total, Mean};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  DataRegion[attributes[d], f[x, ToListOfData[d, Flatten -> False], y]] /;
@@ -632,69 +632,6 @@ Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
 (*******************************************************************************************)
 (* Redefine various built-in Mathematica functions to work on DataRegions                  *)
 (*******************************************************************************************)
-
-DataRegion /: Abs[d_DataRegion] := MapDataRegion[Abs, d];
-DataRegion /: Sqrt[d_DataRegion] := MapDataRegion[Sqrt, d];
- 
-DataRegion /: Re[d_DataRegion] := MapDataRegion[Re, d];
-DataRegion /: Im[d_DataRegion] := MapDataRegion[Im, d];
-DataRegion /: Conjugate[d_DataRegion] := MapDataRegion[Conjugate, d];
-
-DataRegion /: Log[d_DataRegion] := MapDataRegion[Log, d];
-DataRegion /: Log[b_, d_DataRegion] := MapDataRegion[Log[b,#] &, d];
-DataRegion /: Log2[d_DataRegion] := MapDataRegion[Log2, d];
-DataRegion /: Log10[d_DataRegion] := MapDataRegion[Log10, d];
-DataRegion /: Exp[d_DataRegion] := MapDataRegion[Exp, d];
-
-DataRegion /: Sin[d_DataRegion] := MapDataRegion[Sin, d];
-DataRegion /: Cos[d_DataRegion] := MapDataRegion[Cos, d];
-DataRegion /: Tan[d_DataRegion] := MapDataRegion[Tan, d];
-DataRegion /: Csc[d_DataRegion] := MapDataRegion[Csc, d];
-DataRegion /: Sec[d_DataRegion] := MapDataRegion[Sec, d];
-DataRegion /: Cot[d_DataRegion] := MapDataRegion[Cot, d];
-
-DataRegion /: ArcSin[d_DataRegion] := MapDataRegion[ArcSin, d];
-DataRegion /: ArcCos[d_DataRegion] := MapDataRegion[ArcCos, d];
-DataRegion /: ArcTan[d_DataRegion] := MapDataRegion[ArcTan, d];
-DataRegion /: ArcCsc[d_DataRegion] := MapDataRegion[ArcCsc, d];
-DataRegion /: ArcSec[d_DataRegion] := MapDataRegion[ArcSec, d];
-DataRegion /: ArcCot[d_DataRegion] := MapDataRegion[ArcCot, d];
-DataRegion /: ArcTan[x_DataRegion, y_DataRegion] := MapThreadDataRegion[ArcTan, {x, y}];
-
-DataRegion /: Sinh[d_DataRegion] := MapDataRegion[Sinh, d];
-DataRegion /: Cosh[d_DataRegion] := MapDataRegion[Cosh, d];
-DataRegion /: Tanh[d_DataRegion] := MapDataRegion[Tanh, d];
-DataRegion /: Csch[d_DataRegion] := MapDataRegion[Csch, d];
-DataRegion /: Sech[d_DataRegion] := MapDataRegion[Sech, d];
-DataRegion /: Coth[d_DataRegion] := MapDataRegion[Coth, d];
-
-DataRegion /: ArcSinh[d_DataRegion] := MapDataRegion[ArcSinh, d];
-DataRegion /: ArcCosh[d_DataRegion] := MapDataRegion[ArcCosh, d];
-DataRegion /: ArcTanh[d_DataRegion] := MapDataRegion[ArcTanh, d];
-DataRegion /: ArcCsch[d_DataRegion] := MapDataRegion[ArcCsch, d];
-DataRegion /: ArcSech[d_DataRegion] := MapDataRegion[ArcSech, d];
-DataRegion /: ArcCoth[d_DataRegion] := MapDataRegion[ArcCoth, d];
-
-DataRegion /: Sinc[d_DataRegion] := MapDataRegion[Sinc, d];
-DataRegion /: Haversine[d_DataRegion] := MapDataRegion[Haversine, d];
-DataRegion /: InverseHaversine[d_DataRegion] := MapDataRegion[InverseHaversine, d];
-DataRegion /: Gudermannian[d_DataRegion] := MapDataRegion[Gudermannian, d];
-DataRegion /: InverseGudermannian[d_DataRegion] := MapDataRegion[InverseGudermannian, d];
-
-DataRegion /: Total[DataRegion[_,data_]]:=Total[data];
-DataRegion /: Max[DataRegion[_,data_]]:=Max[data];
-DataRegion /: Min[DataRegion[_,data_]]:=Min[data];
-DataRegion /: Mean[DataRegion[_,data_]]:=Mean[data];
-
-DataRegion /: Times[a_, DataRegion[h_,data_]] := DataRegion[h, a data];
-DataRegion /: Times[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1*data2]
-DataRegion /: Power[DataRegion[h_,data_], a_] := DataRegion[h, data^a];
-DataRegion /: Power[a_, DataRegion[h_,data_]] := DataRegion[h, a^data];
-DataRegion /: Power[DataRegion[h1_,data1_], DataRegion[h2_,data2_]] := DataRegion[h1, data1^data2];
-DataRegion /: Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:= DataRegion[h1, data1+data2]
-DataRegion /: Plus[DataRegion[h1_,data1_], a_] := DataRegion[h1, data1+a]
-DataRegion /: Mod[d_DataRegion, n_] := MapDataRegion[Mod[#, n]&, d];
-
 
 DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data1, pattern, opts];
 
