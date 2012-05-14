@@ -24,6 +24,8 @@ Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified b
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
+NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form a
+s in the first argument of Derivative.";
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
@@ -43,8 +45,6 @@ FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the
 (* TODO: move this to another package *)
 NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
 DataRegionContourPlot::usage = "DataRegionContourPlot[d, args] generates a ContourPlot of the data in a 2D DataRegion d. The arguments are the same as for ContourPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form a
-s in the first argument of Derivative.";
 (* TODO: don't support this - put it in NRMMA`Experimental *)
 TimeDerivative::usage = "TimeDerivative[{d1, d2,...}, center] returns a numerical time derivative computed from DataRegions d1, d2, ... . The derivative is computed using finite differencing, the order of which is determined by the number of DataRegions given. The optional center argument specifies the number of timesteps from the first DataRegion at which to compute derivatives (using lop-sided differencing, if necessary), with the default value being half-way between the first and last times.";
 (* TODO: rename this to Resampled and merge with the next one *)
@@ -554,6 +554,45 @@ Coordinate[d_DataRegion, dim_] :=
 ];
 
 
+(**********************************************************)
+(* NDerivative                                             *)
+(**********************************************************)
+
+SyntaxInformation[NDerivative] =
+ {"ArgumentsPattern" -> {_, ___}};
+
+NDerivative[d:DataRegion[h_,_], dir_Integer] :=
+ Module[{ndims},
+   ndims   = ArrayDepth[d];
+   (NDerivative@@UnitVector[ndims, dir])[d]
+];
+
+NDerivative[d_DataRegion] :=
+ Module[{ndims, result},
+  ndims = ArrayDepth[d];
+
+  If[ndims =!= 1,
+   Error["Must specify a direction when applying NDerivative to a DataRegion of dimension greater than 1."];
+  ];
+
+  NDerivative[d, 1];
+];
+
+NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
+ Module[{origin, spacing, dimensions, grid, data, deriv, newh},
+  origin  = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
+  dimensions = Dimensions[d];
+
+  (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
+  grid = origin + spacing (Range /@ dimensions-1);
+  data = ToListOfData[d, Flatten->False];
+
+  deriv = NDSolve`FiniteDifferenceDerivative[Derivative[derivs], grid, data, opts];
+
+  ToDataRegion[deriv, origin, spacing]
+];
+
 
 
 
@@ -708,41 +747,6 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
 ];
 
 
-NDerivative[d:DataRegion[h_,_], dir_Integer] :=
- Module[{ndims},
-   ndims   = GetNumDimensions[d];
-   (NDerivative@@UnitVector[ndims, dir])[d]
-];
-
-NDerivative[d_DataRegion] :=
- Module[{ndims, result},
-  ndims = GetNumDimensions[d];
-
-  If[ndims == 1,
-   result = NDerivative[d, 1];,
-   Error["Must specify a direction when applying NDerivative to a DataRegion of dimension greater than 1."];
-   result = $Failed;
-  ];
-
-  result
-];
-
-NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
- Module[{origin, spacing, dimensions, grid, data, deriv, newh},
-  origin  = GetOrigin[d];
-  spacing = GetSpacing[d];
-  dimensions = GetDimensions[d];
-
-  (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
-  grid = origin + spacing (Range /@ dimensions-1);
-  data = GetData[d];
-
-  deriv = NDSolve`FiniteDifferenceDerivative[Reverse[Derivative[derivs]], grid, data, opts];
-
-  newh = replaceRules[h, {VariableName -> "dx"<>ToString[derivs]<>"_"<>GetVariableName[d]}];
-
-  DataRegion[newh, deriv]
-];
 
 UFDWeights[m_, n_, s_, h_] :=
  CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
