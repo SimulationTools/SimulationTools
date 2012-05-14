@@ -88,7 +88,9 @@ ReadIterations[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] 
 
 Options[ReadMaps] = FilterRules[Options[ReadGridFunction], Except["Map"]];
 ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  fileUnion["ReadMaps", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],"Map" -> _]];
+  fileUnion["ReadMaps", run, var, dims, 
+            Append[DeleteCases[ApplyDefaults[run, var, {opts}],"Map" -> _, Infinity],
+                   "Map" -> All]];
 
 Options[ReadRefinementLevels] = FilterRules[Options[ReadGridFunction], Except["RefinementLevel"]];
 ReadRefinementLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
