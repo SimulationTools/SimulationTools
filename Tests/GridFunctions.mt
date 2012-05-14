@@ -134,7 +134,7 @@ Test[
 (* ReadTime *)
 
 Test[
-    ReadTime[$NRMMATestRun, var, {"x"}, 256, 5]
+    ReadTime[$NRMMATestRun, var, {"x"}, Iteration -> 256, RefinementLevel -> 5]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-1D.m"}]]
 ,
@@ -142,7 +142,7 @@ Test[
 ]
 
 Test[
-    ReadTime[$NRMMATestRun, var, {"x","y"}, 1024, 2]
+    ReadTime[$NRMMATestRun, var, {"x","y"}, Iteration -> 1024, RefinementLevel -> 2]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-2D.m"}]]
 ,
@@ -150,7 +150,7 @@ Test[
 ]
 
 Test[
-    ReadTime[$NRMMATestRun, var, {"x","y","z"}, 8192, 0]
+    ReadTime[$NRMMATestRun, var, {"x","y","z"}, Iteration -> 8192, RefinementLevel -> 0]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-3D.m"}]]
 ,
