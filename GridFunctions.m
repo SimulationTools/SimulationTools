@@ -67,7 +67,7 @@ ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]
   Module[
     {options, fileName},
     options = ApplyDefaults[run, var, {opts}];
-    fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration]];
+    fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration], options];
     CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, options}]
 ];
 
@@ -120,15 +120,16 @@ ReadTime[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
     files = FindRunFiles[run, leafName];
-    itss = Map[{#, getFileIts[#]} &, files];
+    If[Length[files] === 0, Error["Cannot find file matching "<>ToString[leafName]<>" in run "<>run]];
+    itss = Map[{#, getFileIts[#,opts]} &, files];
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
     If[Length[haveIts] === 0,
        Error["Iteration " <> ToString[it] <> " not found in file "<>leafName<>
              " in run " <> run]];
     haveIts[[1,1]]];
 
-getFileIts[fileName_] :=
-  CallProvidedFunction["GridFunctions","ReadIterations",{fileName}];
+getFileIts[fileName_, opts:OptionsPattern[]] :=
+  CallProvidedFunction["GridFunctions","ReadIterations",{fileName,opts}];
 
 getLeafName[var_String, dims:DimsPattern, options_List] :=
   CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, FilterRules[options, Except["StripGhostZones"]]}];
