@@ -20,8 +20,8 @@ MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of 
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in the DataRegion d.";
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
 
-(* Rename this to Slab[d, {All,3,{2.,4.},{5.}}] *)
-DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
+Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
+
 
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: rationalise plotting functions *)
@@ -95,6 +95,8 @@ GetOrigin::usage = "GetOrigin[d] returns a list of length N giving the coordinat
 GetSpacing::usage = "GetSpacing[d] returns a list of length N giving the spacing of the data in each dimension of the N-dimensional DataRegion d.";
 GetTime::usage = "GetTime[d] returns the time attribute of a DataRegion d";
 GetVariableName::usage = "GetVariableName[d] returns the variable name in DataRegion d.";
+DataRegionPart::usage = "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies between the coordinates a;;b, c;;d, etc.";
+
 
 Begin["`Private`"];
 
@@ -275,7 +277,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 (* Functions which should just see a regular data List    *)
 (**********************************************************)
 $DataFunctions =
-  {ArrayDepth, Dimensions, Part};
+  {ArrayDepth, Dimensions};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  DataRegion[attributes[d], f[x, ToListOfData[d, Flatten -> False], y]] /;
@@ -299,43 +301,98 @@ replaceRules[list_List, replacements_List] :=
      list, 
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
 
-(* TODO: extend this so it can slice the data when you specify a range
-   of just one number, and rename it to Slab. *)
+(**********************************************************)
+(* Slab                                                   *)
+(**********************************************************)
 
-(* TODO: think about providing an option to be strict (within a
-   tolerance) about the ranges and slices rather than rounding to
-   nearest. *)
+Options[Slab] = {
+  "Tolerance" -> 0.
+};
 
-(* TODO: why is this done with an extra list rather than additional arguments? *)
-DataRegionPart[d:DataRegion[h_, data_], s_]:=
- Module[{ndims, spacing, origin, dataRange, newS, indexrange, newOrigin, h2, newData},
-  ndims = GetNumDimensions[d];
-  spacing = GetSpacing[d];
-  origin = GetOrigin[d];
-  dataRange = GetDataRange[d];
+SyntaxInformation[Slab] =
+ {"ArgumentsPattern" -> {_, __, OptionsPattern[]}};
 
-  If[Length[s] != ndims,
-    Error["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
-  ];
+(* TODO: Implement Tolerance support *)
+Slab[d_DataRegion, s__, OptionsPattern[]]:=
+ Module[{slabSpec, spacing, origin, newOrigin, newData},
+  spacing = CoordinateSpacings[d];
+  origin  = MinCoordinates[d];
 
-  (* Convert all to a range *)
-  newS = MapThread[#1/.#2&, {s, Thread[All -> dataRange]}];
-
-  (* Clip the range to the lower and upper bound *)
-  newS = MapThread[{Max[#1[[1]],#2[[1]]], Min[#1[[2]],#2[[2]]]}&, {dataRange, newS}];
+  slabSpec = PadRight[{s}, ArrayDepth[d], All];
 
   (* Convert coordinate range to index range *)
-  indexrange = Round[(Apply[List,newS,1]-origin)/spacing]+1;
+  indexrange = Round[(slabSpec-origin)/spacing] + 1 //.
+    {Round[(All + a_) b_] + 1 -> All,
+     Round[(Span[x__] + a_) b_] +1 :> Span[Sequence @@ (Round[({x} + a) b] + 1)]
+    };
 
   (* Get the relevant part of the data *)
-  newData = Part[data, Sequence@@Reverse[Apply[Span,indexrange,1]]];
+  Part[d, Sequence@@indexrange]
+];
 
-  (* Get new origin *)
-  newOrigin = origin + spacing (indexrange[[All,1]]-1);
+(**********************************************************)
+(* Part                                                   *)
+(**********************************************************)
 
-  h2 = replaceRules[h, {Origin -> newOrigin}];
+DataRegion /: Part[d_DataRegion, s__] :=
+ Module[{partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing},
+  (* TODO: remove this restriction *)
+  If[Count[{s}, _?Negative, Infinity] > 0,
+    Error["Negative part specifications are not currently supported by DataRegion."];
+  ];
 
-  DataRegion[h2, newData]
+  (* Any dimensions not explicitly mentioned are assumed to be All *)
+  partSpec = PadRight[{s}, ArrayDepth[d], All];
+
+  (* Figure out which dimensions still exist in the new DataRegion *)
+  dimensionExists =
+   Map[(# /.
+    {All -> True,
+     Span[__] -> True,
+     List[__] -> True,
+     x : (_Real | _Integer) -> False}) &,
+    partSpec
+   ];
+
+  (* Work out a start index and stride from a part specification *)
+  makeExplicit[partSpec_] :=
+   Module[{start, stride},
+     Which[
+      partSpec === All,
+       start  = 1;
+       stride = 1;,
+      NumberQ[partSpec],
+       start  = partSpec;
+       stride = 0;,
+      MatchQ[partSpec, Span[_,_]],
+       start  = partSpec[[1]] /. All -> 1;
+       stride = 1;,
+      MatchQ[partSpec, Span[_,_,_]],
+       start  = partSpec[[1]] /. All -> 1;
+       stride = partSpec[[3]];,
+      MatchQ[partSpec, List[_]],
+       start  = partSpec[[1]];
+       stride = 0;,
+      MatchQ[partSpec, List[__]],
+       If[!(Equal @@ Differences[partSpec]),
+         Error["Part specification "<>ToString[partSpec]<>" would yield an irregularly spaced DataRegion."];
+       ];
+       start  = partSpec[[1]];
+       stride = partSpec[[2]] - partSpec[[1]];,
+      True,
+       Error["Part specification "<>ToString[partSpec]<>" not supported."];
+     ];
+     {start, stride}
+   ];
+
+  {start, stride} = Transpose[makeExplicit /@ partSpec];
+
+  (* Slab the data *)
+  data    = Part[ToListOfData[d, Flatten -> False], s];
+  origin  = Pick[MinCoordinates[d] + (start - 1) * CoordinateSpacings[d], dimensionExists];
+  spacing = Pick[stride * CoordinateSpacings[d], dimensionExists];
+
+  ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
 ];
 
 DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
@@ -887,6 +944,36 @@ GetDataRange[v_DataRegion] :=
     max = origin + spacing * (dimensions - 1);
     MapThread[List, {min, max}]];
 
+DataRegionPart[d:DataRegion[h_, data_], s_]:=
+ Module[{ndims, spacing, origin, dataRange, newS, indexrange, newOrigin, h2, newData},
+  ndims = GetNumDimensions[d];
+  spacing = GetSpacing[d];
+  origin = GetOrigin[d];
+  dataRange = GetDataRange[d];
+
+  If[Length[s] != ndims,
+    Error["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
+  ];
+
+  (* Convert all to a range *)
+  newS = MapThread[#1/.#2&, {s, Thread[All -> dataRange]}];
+
+  (* Clip the range to the lower and upper bound *)
+  newS = MapThread[{Max[#1[[1]],#2[[1]]], Min[#1[[2]],#2[[2]]]}&, {dataRange, newS}];
+
+  (* Convert coordinate range to index range *)
+  indexrange = Round[(Apply[List,newS,1]-origin)/spacing]+1;
+
+  (* Get the relevant part of the data *)
+  newData = Part[data, Sequence@@Reverse[Apply[Span,indexrange,1]]];
+
+  (* Get new origin *)
+  newOrigin = origin + spacing (indexrange[[All,1]]-1);
+
+  h2 = replaceRules[h, {Origin -> newOrigin}];
+
+  DataRegion[h2, newData]
+];
 End[];
 
 EndPackage[];
