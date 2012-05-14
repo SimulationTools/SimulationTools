@@ -55,8 +55,6 @@ ResampleDataRegions::usage = "ResampleDataRegions[{d1, d2, ...}, p] returns a li
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 (* TODO: move this to the NRMMA context.  Think about another way to do this *)
 Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
-(* TODO: make ToDataRegion more flexible about creating DataRegions from expressions - make it like DataRegionTable *)
-(* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
 
 (* DEPRECATED *)
 
@@ -188,6 +186,10 @@ VariableName[d_DataRegion] := VariableName /. attributes[d];
    All the DataRegions must have the same spacing and their origins must be
    separated by multiples of their spacing.
 *)
+
+(* TODO: make ToDataRegion more flexible about creating DataRegions from
+   expressions - make it like DataRegionTable *)
+(* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
 
 Options[ToDataRegion] := {
   "VariableName" -> Undefined,
