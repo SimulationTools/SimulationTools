@@ -18,26 +18,45 @@ Begin["`Private`"];
 
 DimsPattern = _List;
 
-ApplyDefaults[opts, provider] :=
-  Do[Which[
-      OptionValue[opt] == Automatic && HaveOpt[opt] && HaveDefault[opt],
-      OptionValue[opt] = Default[opt],
+(* ApplyDefaults[opts, provider] := *)
+(*   Do[Which[ *)
+(*       OptionValue[opt] == Automatic && HaveOpt[opt] && HaveDefault[opt], *)
+(*       OptionValue[opt] = Default[opt], *)
 
-      OptionValue[opt] != Automatic && HaveOpt[opt],
-      OptionValue[opt] = OptionValue[opt],
+(*       OptionValue[opt] != Automatic && HaveOpt[opt], *)
+(*       OptionValue[opt] = OptionValue[opt], *)
 
-      OptionValue[opt] == Automatic && HaveOpt[opt] && !HaveDefault[opt],
-      Error["Automatic selected, but no default available"],
+(*       OptionValue[opt] == Automatic && HaveOpt[opt] && !HaveDefault[opt], *)
+(*       Error["Automatic selected, but no default available"], *)
       
-      OptionValue[opt] == Automatic && !HaveOpt[opt] && HaveDefault[opt],
-      Error["Default specified for non-existent option"],
+(*       OptionValue[opt] == Automatic && !HaveOpt[opt] && HaveDefault[opt], *)
+(*       Error["Default specified for non-existent option"], *)
 
-      OptionValue[opt] != Automatic && !HaveOpt[opt],
-      Error["Unknown option specified"],
+(*       OptionValue[opt] != Automatic && !HaveOpt[opt], *)
+(*       Error["Unknown option specified"], *)
 
-      OptionValue[opt] == Automatic && !HaveOpt[opt] && !HaveDefault[opt],
-      Continue[]
-    ], {opt, options}];
+(*       OptionValue[opt] == Automatic && !HaveOpt[opt] && !HaveDefault[opt], *)
+(*       Continue[] *)
+(*     ], {opt, options}]; *)
+
+ApplyDefaults[run_String, var_String, opts_List] :=
+  Module[
+    {providerOptions, options},
+
+    providerOptions = {
+      "Iteration"       -> CallProvidedFunction["GridFunctions","DefaultIteration", {{}}],
+      "Map"             -> CallProvidedFunction["GridFunctions","DefaultMap", {{}}],
+      "RefinementLevel" -> CallProvidedFunction["GridFunctions","DefaultRefinementLevel", {run,var}],
+      "TimeLevel"       -> CallProvidedFunction["GridFunctions","DefaultTimeLevel", {run,var}]};
+
+    options = Map[(#[[1]] -> If[OptionValue[ReadGridFunction, opts, #[[1]]] === Automatic,
+                                #[[1]] /. providerOptions,
+                                OptionValue[ReadGridFunction, opts, #[[1]]]]) &,
+                  Options[ReadGridFunction]];
+
+    Print["options = ", options];
+    options];
+
 
 Options[ReadGridFunction] = {
     "Iteration"       -> Automatic,
@@ -49,21 +68,8 @@ Options[ReadGridFunction] = {
 
 ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {leafName, fileName, explicitOpts, providerOptions, options},
-
-    providerOptions = {
-      "Iteration"       -> CallProvidedFunction["GridFunctions","DefaultIteration", {{}}],
-      "Map"             -> CallProvidedFunction["GridFunctions","DefaultMap", {{}}],
-      "RefinementLevel" -> CallProvidedFunction["GridFunctions","DefaultRefinementLevel", {run,var}],
-      "TimeLevel"       -> CallProvidedFunction["GridFunctions","DefaultTimeLevel", {run,var}]};
-
-    options = Map[(#[[1]] -> If[OptionValue[#[[1]]] === Automatic,
-                                #[[1]] /. providerOptions,
-                                OptionValue[#[[1]]]]) &,
-                  Options[ReadGridFunction]];
-
-    Print["options = ", options];
-
+    {options, leafName, fileName},
+    options = ApplyDefaults[run, var, {opts}];
     leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, FilterRules[options, Except["StripGhostZones"]]}];
     fileName = getFileOfIt[run, leafName, OptionValue[ReadGridFunction, options, Iteration]];
     CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, options}]
