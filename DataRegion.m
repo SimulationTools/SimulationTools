@@ -21,6 +21,8 @@ MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of 
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
 
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
+Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
+  "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
@@ -66,7 +68,6 @@ TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements eac
 (* TODO: change this to ToDataRegion *)
 EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as the DataRegion d with data computed by evaluating expr assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: this function is only currently implemented for DataRegions of dimension 2 and 3.";
 (* TODO: make ToDataRegion more flexible about creating DataRegions from expressions - make it like DataRegionTable *)
-(* TODO: sort out context of Downsample *)
 (* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
 
 (* DEPRECATED *)
@@ -434,6 +435,23 @@ DataRegion /: Drop[d_DataRegion, s__] :=
 ];
 
 (**********************************************************)
+(* Downsampled                                            *)
+(**********************************************************)
+
+SyntaxInformation[DonwSampled] =
+ {"ArgumentsPattern" -> {_, _}};
+
+Downsampled[d_DataRegion, n_Integer] :=
+ Module[{ndims},
+  ndims = ArrayDepth[d];
+  Downsampled[d, ConstantArray[n,ndims]]
+];
+
+Downsampled[d_DataRegion, n_List] :=
+  Take[data, Apply[Sequence, Map[{1, -1, #} &, n]]];
+
+
+(**********************************************************)
 (* Plotting functions                                     *)
 (**********************************************************)
 
@@ -533,23 +551,6 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
 
 (* Operations on DataRegion objects *)
 
-
-
-
-Downsample[d_DataRegion, n_Integer] :=
-  Module[{ndims},
-    ndims = GetNumDimensions[d];
-    Downsample[d, ConstantArray[n,ndims]]];
-
-Downsample[d_DataRegion, n_List] :=
- Module[{data, data2, attrs, attrs2, d2},
-  data = GetData[d];
-  data2 = Take[data, Apply[Sequence, Map[{1, -1, #} &, Reverse[n]]]];
-  attrs = attributes[d];
-  attrs2 =
-   replaceRules[
-    attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n}];
-  d2 = DataRegion[attrs2, data2]];
 
 Attributes[insertArray] = {HoldFirst};
 
@@ -1031,6 +1032,22 @@ Strip[d_DataRegion, n_List, m_List] :=
     attrs2 = replaceRules[attrs,
       {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
     d2 = DataRegion[attrs2, data2]];
+
+
+Downsample[d_DataRegion, n_Integer] :=
+  Module[{ndims},
+    ndims = GetNumDimensions[d];
+    Downsample[d, ConstantArray[n,ndims]]];
+
+Downsample[d_DataRegion, n_List] :=
+ Module[{data, data2, attrs, attrs2, d2},
+  data = GetData[d];
+  data2 = Take[data, Apply[Sequence, Map[{1, -1, #} &, Reverse[n]]]];
+  attrs = attributes[d];
+  attrs2 =
+   replaceRules[
+    attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n}];
+  d2 = DataRegion[attrs2, data2]];
 
 End[];
 
