@@ -95,10 +95,10 @@ ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
 Options[ReadRefinementLevels] = FilterRules[Options[ReadGridFunction], Except["RefinementLevel"]];
 ReadRefinementLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {leafName},
-    leafName = CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, opts}];
+    {options},
+    options = ApplyDefaults[run, var, {opts}];
     Union@@Map[CallProvidedFunction["GridFunctions", "ReadRefinementLevels", {#, opts}] &,
-        FindRunFilesFromPattern[run, leafName]]
+        FindRunFile[run, getLeafName[var, dims, options]]]
 ];
 
 Options[ReadTimeLevels] = FilterRules[Options[ReadGridFunction], Except["TimeLevel"]];
