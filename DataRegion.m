@@ -194,14 +194,17 @@ SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
 
 ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
+ Module[{precision},
+  precision = Precision[{origin, spacing}];
   DataRegion[
     {VariableName -> OptionValue["VariableName"],
-     Origin -> origin,
-     Spacing -> spacing,
+     Origin -> SetPrecision[origin, precision],
+     Spacing -> SetPrecision[spacing, precision],
      Time -> OptionValue["Time"]
     },
     Developer`ToPackedArray[data]
-  ];
+  ]
+];
 
 
 (**********************************************************)
