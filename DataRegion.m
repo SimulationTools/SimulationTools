@@ -28,9 +28,7 @@ GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 
 (* TODO: Add Metadata function and user-defined metadata *)
-(* TODO: rationalise plotting functions *)
 
-(* TODO: Use the built-in List function names.  Associate definitions with DataRegion. Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
 
 (* TODO: these should be moved into Plotting and probably changed or fixed or deleted *)
 ScaledColorFunction::usage = "ScaledColorFunction[colorscheme, {min, max}] returns a function on the domain [min,max] giving a color in colorscheme.  colorscheme can be any Mathematica named color scheme, for example \"ThermometerColors\", \"TemperatureMap\" etc.";
@@ -454,6 +452,8 @@ Downsampled[d_DataRegion, n_List] :=
 (**********************************************************)
 (* Plotting functions                                     *)
 (**********************************************************)
+
+(* TODO: Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
 
 $1DPlotFunctions = {ListPlot, ListLinePlot};
 $2DPlotFunctions = {ListDensityPlot, ArrayPlot, ListPlot3D, ListContourPlot};
