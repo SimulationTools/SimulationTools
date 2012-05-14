@@ -288,19 +288,6 @@ DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
  f[x, ToListOfData[d, Flatten -> False], y] /;
   MemberQ[$DataFunctions, f] || MemberQ[Attributes[f], NumericFunction]
 
-(* DataRegion high-level interface; no assumptions should be made
-   about the structure of a DataRegion object here. All access should
-   be by the preceding functions.*)
-
-
-replaceRule[list_List, key_ -> newValue_] :=
-  list /. (key -> _) :> (key -> newValue);  
-
-replaceRules[list_List, replacements_List] :=
-  If[Length[replacements] == 0, 
-     list, 
-     replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
-
 (**********************************************************)
 (* Slab                                                   *)
 (**********************************************************)
@@ -395,7 +382,19 @@ DataRegion /: Part[d_DataRegion, s__] :=
   ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
 ];
 
-DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
+(* DataRegion high-level interface; no assumptions should be made
+   about the structure of a DataRegion object here. All access should
+   be by the preceding functions.*)
+
+
+replaceRule[list_List, key_ -> newValue_] :=
+  list /. (key -> _) :> (key -> newValue);  
+
+replaceRules[list_List, replacements_List] :=
+  If[Length[replacements] == 0, 
+     list, 
+     replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
+
 
 (* Plotting wrappers *)
 DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data, opts},
@@ -974,6 +973,9 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
 
   DataRegion[h2, newData]
 ];
+
+DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
+
 End[];
 
 EndPackage[];
