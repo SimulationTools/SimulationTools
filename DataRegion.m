@@ -23,6 +23,7 @@ VariableName::usage = "VariableName[d] returns the variable name in DataRegion d
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
+CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: rationalise plotting functions *)
@@ -35,8 +36,7 @@ ColorMapLegend::usage = "ColorMapLegend[colorfunction, {min, max, dx}] returns a
 
 (* TODO: remove this function and make it as easy to use the other functions *)
 QuickSlicePlot::usage = "QuickSlicePlot[d, {min, max}, colorscheme, opts] generates an array plot of a DataRegion d using the color scheme colorscheme scaled to run between min and max.  The plot includes a legend for the colors.  opts (which is optional) is passed to DataRegionArrayPlot.";
-(* TODO: rename as CoordinateOutline *)
-Outline::usage = "Outline[d] generates a graphical representation of the outline of a DataRegion d";
+
 (* TODO: Rename as Stripped *)
 Strip::usage = "Strip[d,n] removes n points from each face of a DataRegion d.  n is either a list corresponding to the dimension of d or an integer, in which case the same number of points is removed in each direction.
 Strip[d,n,m] removes n points from each lower face and m points from each upper face of d.  Here, n and m must be lists.";
@@ -93,6 +93,7 @@ DataRegionMatrixPlot;
 DataRegionPlot3D;
 DataRegionPlot;
 NormL2;
+Outline;
 
 Begin["`Private`"];
 
@@ -414,6 +415,33 @@ SyntaxInformation[GridNorm] =
 GridNorm[d_DataRegion] :=
  Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ ToListOfData[d^2, Flatten -> True]];
 
+(**********************************************************)
+(* CoordinateOutline                                      *)
+(**********************************************************)
+
+SyntaxInformation[CoordinateOutline] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateOutline[d_DataRegion] :=
+ Module[{coords, shapes},
+  ndims = ArrayDepth[d];
+
+  If[ndims > 3,
+    Error["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
+  ];
+
+  coords = CoordinateRanges[d];
+
+  If[ndims === 1,
+    coords = {Transpose[Join[{{0,0}}, coords]]},
+    coords = Transpose[coords]
+  ];
+
+  shapes = {Line, Rectangle, Cuboid};
+
+  shapes[[ndims]]@@coords
+];
+
 
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
@@ -451,19 +479,7 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
 
 (* Operations on DataRegion objects *)
 
-Outline[d_DataRegion] := Module[{coords, ndims, shapes},
-  ndims = GetNumDimensions[d];
-  coords = {GetOrigin[d], GetOrigin[d] + GetSpacing[d] * (GetDimensions[d] - 1)};
-  If[ndims == 1, coords = {Thread[{ {0,0}, coords[[All,1]] }]}];
 
-  shapes = {Line, Rectangle, Cuboid};
-
-  If[ndims > 3,
-    Error["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
-  ];
-
-  shapes[[ndims]]@@coords
-];
 
 Strip[d_DataRegion, n_Integer] := Module[{ndims},
   ndims = GetNumDimensions[d];
@@ -946,6 +962,20 @@ DataRegionContourPlot[v_, args___]      := DataRegion2DPlot[ListContourPlot, v, 
 
 NormL2[d_DataRegion] :=
  Sqrt[Times@@GetSpacing[d] * Plus @@ Flatten[GetData[d^2]]];
+
+Outline[d_DataRegion] := Module[{coords, ndims, shapes},
+  ndims = GetNumDimensions[d];
+  coords = {GetOrigin[d], GetOrigin[d] + GetSpacing[d] * (GetDimensions[d] - 1)};
+  If[ndims == 1, coords = {Thread[{ {0,0}, coords[[All,1]] }]}];
+
+  shapes = {Line, Rectangle, Cuboid};
+
+  If[ndims > 3,
+    Error["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
+  ];
+
+  shapes[[ndims]]@@coords
+];
 
 End[];
 
