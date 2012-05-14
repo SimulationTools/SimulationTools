@@ -108,6 +108,16 @@ ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] 
         FindRunFiles[run, getLeafName[var, dims, options]]]
 ];
 
+Options[ReadTime] = Options[ReadGridFunction];
+ReadTime[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
+  Module[
+    {options, fileName},
+    options = ApplyDefaults[run, var, {opts}];
+    fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration]];
+
+    CallProvidedFunction["GridFunctions", "ReadTime", {fileName, "Variable" -> var, options}]
+];
+
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
     files = FindRunFiles[run, leafName];

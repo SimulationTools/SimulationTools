@@ -123,6 +123,34 @@ CarpetIOHDF5`GridFunctions`ReadVariables[file_String, opts:OptionsPattern[]] :=
     attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadVariables]]]
   ],1];
 
+(****************************************************************)
+(* ReadTime *)
+(****************************************************************)
+
+Options[CarpetIOHDF5`GridFunctions`ReadTime] =
+  Options[CarpetIOHDF5`GridFunctions`ReadData];
+CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPattern[]] :=
+  Module[
+    {varNames, varName, dsName, annots},
+
+    (* TODO: This function should be accelerated assuming that the
+       relationship between time and iteration is linear.  We should
+       also think about what to do about the RefinementLevel argument
+       to this function. *)
+
+    varNames = datasetAttribute[
+      datasetsWith[file,
+                   attributeNamesToNumbers[
+                     FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadVariables]]]], 1];
+
+    If[Length[varNames] === 0, Error["Cannot find dataset with "<>ToString[{opts}]<>" in HDF5 file "<>file]];
+    varName = First[varNames];
+    dsName = CarpetIOHDF5DatasetName[varName, OptionValue[Iteration],
+                                     OptionValue[Map], OptionValue[RefinementLevel],
+                                     OptionValue[TimeLevel], 0];
+    annots = Annotations[file, dsName];
+    "time" /. annots];
+
 
 (***************************************************************************************)
 (* Defaults                                                                            *)
