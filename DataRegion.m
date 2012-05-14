@@ -27,13 +27,6 @@ Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified b
 (* TODO: rationalise plotting functions *)
 
 (* TODO: Use the built-in List function names.  Associate definitions with DataRegion. Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
-DataRegionDensityPlot::usage = "DataRegionDensityPlot[d, args] generates a DensityPlot of the data in a 2D DataRegion d. The arguments are the same as for DensityPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-DataRegionArrayPlot::usage = "DataRegionArrayPlot[d, args] generates an ArrayPlot of the data in a 2D DataRegion d. The arguments are the same as for ArrayPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-(* Remove all Dynamic* plotting functions, and replace with a generic Zoomable in Plotting *)
-DynamicDataRegionArrayPlot::usage = "DynamicDataRegionArrayPlot[d,args] generates a zoomable version of DataRegionArrayPlot[d,args] which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale.";
-DataRegionMatrixPlot::usage = "DataRegionMatrixPlot[d, args] generates a MatrixPlot of the data in a 2D DataRegion d. The arguments are the same as for MatrixPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-DataRegionPlot3D::usage = "DataRegionPlot3D[d, args] generates a ListPlot3D of the data in a 2D DataRegion d. The arguments are the same as for ListPlot3D.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
-DataRegionPlot::usage = "DataRegionPlot[d, args] generates a ListPlot of the data in a 1D DataRegion d. The arguments are the same as for ListPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
 
 (* TODO: these should be moved into Plotting and probably changed or fixed or deleted *)
 ScaledColorFunction::usage = "ScaledColorFunction[colorscheme, {min, max}] returns a function on the domain [min,max] giving a color in colorscheme.  colorscheme can be any Mathematica named color scheme, for example \"ThermometerColors\", \"TemperatureMap\" etc.";
@@ -94,7 +87,12 @@ GetSpacing;
 GetTime;
 GetVariableName;
 DataRegionPart;
-
+DataRegionDensityPlot;
+DataRegionArrayPlot;
+DynamicDataRegionArrayPlot;
+DataRegionMatrixPlot;
+DataRegionPlot3D;
+DataRegionPlot;
 
 Begin["`Private`"];
 
@@ -380,6 +378,33 @@ DataRegion /: Part[d_DataRegion, s__] :=
   ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
 ];
 
+(**********************************************************)
+(* Plotting functions                                     *)
+(**********************************************************)
+
+$1DPlotFunctions = {ListPlot, ListLinePlot};
+$2DPlotFunctions = {ListDensityPlot, ArrayPlot, ListPlot3D, ListContourPlot};
+
+DataRegion /: f_Symbol[d_DataRegion, args___] :=
+ plotWrapper[f, 1, d, args] /; MemberQ[$1DPlotFunctions, f];
+
+DataRegion /: f_Symbol[d_DataRegion, args___] :=
+ plotWrapper[f, 2, d, args] /; MemberQ[$2DPlotFunctions, f];
+
+plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
+ Module[{ndims, dataRange, data, opts},
+  ndims = ArrayDepth[d];
+  If[ndims!=plotDims,
+    Error[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
+      ". The provided data has dimensionality "<>ToString[ndims]<>"."];
+  ];
+
+  dataRange =  If[ndims==1, CoordinateRanges[d][[1]], CoordinateRanges[d]];
+  data = ToListOfData[d, Flatten -> False];
+  plotFunction[data, args, DataRange -> dataRange]
+];
+
+
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
    be by the preceding functions.*)
@@ -392,39 +417,6 @@ replaceRules[list_List, replacements_List] :=
   If[Length[replacements] == 0, 
      list, 
      replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
-
-
-(* Plotting wrappers *)
-DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data, opts},
- ndims = GetNumDimensions[v];
- If[ndims!=plotDims,
-   Error[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
-     ". The provided data has dimensionality "<>ToString[ndims]<>"."];
- ];
-
- dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
-
- data = GetData[v];
- opts = {args};
-
- If[plotFunction === ArrayPlot, 
-    data = Reverse[data];
-    opts = opts /. (FrameLabel -> {x_,y_}) :> (FrameLabel -> {y,x})];
-
- plotFunction[data, Sequence@@opts, DataRange -> dataRange]
-];
-
-DataRegion1DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 1, v, args];
-DataRegion2DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 2, v, args];
-
-DataRegionPlot[v_DataRegion, args___]        := DataRegion1DPlot[ListPlot, v, args]; 
-DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot, v, args];
-DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
-(*DynamicDataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[DynamicArrayPlot, v, args];*)
-DataRegionMatrixPlot[v_DataRegion, args___]   := DataRegion2DPlot[MatrixPlot, v, args];
-DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
-
-DataRegionContourPlot[v_, args___]      := DataRegion2DPlot[ListContourPlot, v, args]; 
 
 (* Convenient plotting functions *)
 ScaledColorFunction[name_, {min_, max_}] :=
@@ -910,6 +902,38 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
 ];
 
 DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
+
+(* Plotting wrappers *)
+DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data, opts},
+ ndims = GetNumDimensions[v];
+ If[ndims!=plotDims,
+   Error[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
+     ". The provided data has dimensionality "<>ToString[ndims]<>"."];
+ ];
+
+ dataRange =  If[ndims==1, GetDataRange[v][[1]], GetDataRange[v]];
+
+ data = GetData[v];
+ opts = {args};
+
+ If[plotFunction === ArrayPlot, 
+    data = Reverse[data];
+    opts = opts /. (FrameLabel -> {x_,y_}) :> (FrameLabel -> {y,x})];
+
+ plotFunction[data, Sequence@@opts, DataRange -> dataRange]
+];
+
+DataRegion1DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 1, v, args];
+DataRegion2DPlot[plotFunction_, v_DataRegion, args___] := DataRegionPlot[plotFunction, 2, v, args];
+
+DataRegionPlot[v_DataRegion, args___]        := DataRegion1DPlot[ListPlot, v, args]; 
+DataRegionDensityPlot[v_DataRegion, args___] := DataRegion2DPlot[ListDensityPlot, v, args];
+DataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[ArrayPlot, v, args];
+(*DynamicDataRegionArrayPlot[v_DataRegion, args___]   := DataRegion2DPlot[DynamicArrayPlot, v, args];*)
+DataRegionMatrixPlot[v_DataRegion, args___]   := DataRegion2DPlot[MatrixPlot, v, args];
+DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
+
+DataRegionContourPlot[v_, args___]      := DataRegion2DPlot[ListContourPlot, v, args]; 
 
 End[];
 
