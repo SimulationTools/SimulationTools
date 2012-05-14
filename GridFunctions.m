@@ -68,16 +68,29 @@ ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]
     {options, fileName},
     options = ApplyDefaults[run, var, {opts}];
     fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration], options];
+    If[fileName === None,
+       notFound[run,var,dims,options]];
     CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, options}]
 ];
+
+Options[notFound] = Options[ReadGridFunction];
+notFound[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
+  Error[StringJoin[ToString/@
+                   Flatten@{"Error: ",
+                            Riffle[
+                              Map[{#, " ", OptionValue[#]} &, 
+                                  Select[{"Iteration", "RefinementLevel", "Map"}, OptionValue[#] =!= Automatic &]],
+                              ", "],
+                            " of variable ", var,
+                            " with dimensions ", dims,
+                            " not found in run ", run}]];
 
 Options[fileUnion] = Options[ReadGridFunction];
 fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {files = FindRunFiles[run, getLeafName[var, dims, opts]]},
+    {files = FindRunFiles[run, getLeafName[var, dims, opts]], optStr},
     If[files === {},
-       Error["No data found for variable '"<>ToString[var]<>"' with dimensions '"<>
-             ToString[dims]<>"' in run '"<>run<>"'"]];
+       notFound[run,var,dims,opts]];
     Union@@Map[CallProvidedFunction["GridFunctions", fn, {#, "Variable" -> var, opts}] &,
                files]];
 
@@ -108,20 +121,20 @@ ReadTime[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
     {options, fileName},
     options = ApplyDefaults[run, var, {opts}];
     fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration]];
-
+    If[fileName === None,
+       notFound[run,var,dims,options]];
     CallProvidedFunction["GridFunctions", "ReadTime", {fileName, "Variable" -> var, options}]
 ];
 
+Options[getFileOfIt] = Options[ReadGridFunction];
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
     files = FindRunFiles[run, leafName];
-    If[Length[files] === 0, Error["Cannot find file matching "<>ToString[leafName]<>" in run "<>run]];
-    itss = Map[{#, getFileIts[#,opts]} &, files];
+    itss = Select[Map[{#, getFileIts[#,opts]} &, files], Length[#[[2]]] > 0 &];
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
     If[Length[haveIts] === 0,
-       Error["Iteration " <> ToString[it] <> " not found in file "<>leafName<>
-             " in run " <> run]];
-    haveIts[[1,1]]];
+       None,
+       haveIts[[1,1]]]];
 
 getFileIts[fileName_, opts:OptionsPattern[]] :=
   CallProvidedFunction["GridFunctions","ReadIterations",{fileName,opts}];
