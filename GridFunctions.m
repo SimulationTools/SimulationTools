@@ -52,7 +52,6 @@ ApplyDefaults[run_String, var_String, opts_List] :=
                                 OptionValue[ReadGridFunction, opts, #[[1]]]]) &,
                   Options[ReadGridFunction]];
 
-    Print["options = ", options];
     options];
 
 
