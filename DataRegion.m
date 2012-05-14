@@ -22,6 +22,7 @@ VariableName::usage = "VariableName[d] returns the variable name in DataRegion d
 
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 
+GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: rationalise plotting functions *)
@@ -65,8 +66,6 @@ ResampleDataRegions::usage = "ResampleDataRegions[{d1, d2, ...}, p] returns a li
 Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
 (* TODO: Add this to ToDataRegion *)
 TableToDataRegion::usage = "TableToDataRegion[list] takes a list of elements each of the form {x,y,..., f} and converts it to a DataRegion. It is assumed (and not checked) that the data grid is regular.";
-(* TODO: Rename this as GridNorm *)
-NormL2::usage = "NormL2[d] returns the L2,dx norm of the points in the DataRegion d.  This is the discrete approximation to the L2 norm.";
 (* TODO: change this to ToDataRegion *)
 EvaluateOnDataRegion::usage = "EvaluateOnDataRegion[expr,{t,x,y,z},d] creates a new DataRegion with the same coordinates as the DataRegion d with data computed by evaluating expr assuming that (x,y,z) are the coordinates of d and t is the time of d.  NOTE: this function is only currently implemented for DataRegions of dimension 2 and 3.";
 (* TODO: make ToDataRegion more flexible about creating DataRegions from expressions - make it like DataRegionTable *)
@@ -93,6 +92,7 @@ DynamicDataRegionArrayPlot;
 DataRegionMatrixPlot;
 DataRegionPlot3D;
 DataRegionPlot;
+NormL2;
 
 Begin["`Private`"];
 
@@ -404,6 +404,16 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
   plotFunction[data, args, DataRange -> dataRange]
 ];
 
+(**********************************************************)
+(* GridNorm                                               *)
+(**********************************************************)
+
+SyntaxInformation[GridNorm] =
+ {"ArgumentsPattern" -> {_}};
+
+GridNorm[d_DataRegion] :=
+ Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ ToListOfData[d^2, Flatten -> True]];
+
 
 (* DataRegion high-level interface; no assumptions should be made
    about the structure of a DataRegion object here. All access should
@@ -634,8 +644,6 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
 ];
 
-NormL2[d_DataRegion] :=
- Sqrt[Times@@GetSpacing[d] * Plus @@ Flatten[GetData[d^2]]];
 
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
  Module[{ndims},
@@ -934,6 +942,10 @@ DataRegionMatrixPlot[v_DataRegion, args___]   := DataRegion2DPlot[MatrixPlot, v,
 DataRegionPlot3D[v_DataRegion, args___]      := DataRegion2DPlot[ListPlot3D, v, args]; 
 
 DataRegionContourPlot[v_, args___]      := DataRegion2DPlot[ListContourPlot, v, args]; 
+
+
+NormL2[d_DataRegion] :=
+ Sqrt[Times@@GetSpacing[d] * Plus @@ Flatten[GetData[d^2]]];
 
 End[];
 
