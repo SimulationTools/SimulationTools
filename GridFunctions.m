@@ -60,7 +60,8 @@ Options[ReadGridFunction] = {
     "Map"             -> Automatic,
     "RefinementLevel" -> Automatic,
     "TimeLevel"       -> Automatic,
-    "StripGhostZones" -> True
+    "StripGhostZones" -> True,
+    "Variable"        -> Automatic (* Only used by old interface *)
   };
 
 ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
@@ -141,6 +142,59 @@ getFileIts[fileName_, opts:OptionsPattern[]] :=
 
 getLeafName[var_String, dims:DimsPattern, options_List] :=
   CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, FilterRules[options, Except["StripGhostZones"]]}];
+
+(***************************************************************************************)
+(* Backward compatibility *)
+(***************************************************************************************)
+
+(* toVarDimsMap[varFile_String] := *)
+(*   Module[{comps, var, mapDimsList, dims, map, isDims, isMap}, *)
+(*   (\* phi.file_0.h5 *)
+(*      phi.x.h5 *)
+(*      phi.xy.h5 *)
+(*      phi.h5 *)
+(*      phi.0.h5 *)
+(*      phi.0.xy.h5 *\) *)
+(*   comps = StringSplit[varFile,"."]; *)
+(*   If[Length[comps] === 1,  *)
+(*      Error["File name "<>varFile<>" does not have an extension"]]; *)
+
+(*   If[Length[comps] > 4,  *)
+(*      Error["File name "<>varFile<>" has too many \".\" characters"]]; *)
+
+(*   If[Last[comps] =!= "h5", *)
+(*      Error["File name "<>varFile<>" does not have the extension \"h5\""]]; *)
+
+(*   var = First[comps]; *)
+(*   mapDimsList = Drop[Drop[comps,-1],1]; *)
+
+(*   (\* xy *)
+(*      0 *)
+(*      0.xy *\) *)
+
+(*   isDims[s_String] :=  *)
+(*     Complement[Characters[s], {"x","y","z","d"}] === {}; *)
+
+(*   isMap[s_String] := *)
+(*     StringMatchQ[s, DigitCharacter]; *)
+
+(*   dims = All; *)
+(*   map = None; *)
+
+(*   (\* We don't enforce the ordering of the components as there is no ambiguity *\) *)
+(*   Scan[Which[isDims[#], dims = toDims[#], *)
+(*              isMap[#], map = ToExpression[#], *)
+(*              True, Error["Unrecognised dimensions or map in "<>varFile]] &, mapDimsList]; *)
+
+(*   {var,dims,map}]; *)
+
+(* ReadGridFunction[run_String, varFile_String, it_Integer, rl:(_Integer|Automatic):Automatic,  *)
+(*                  opts:OptionsPattern[]] := *)
+(*   Module[ *)
+(*     {var,dims,map}, *)
+(*     {var,dims,map} = toVarDimsMap[varFile]; *)
+(*     ReadGridFunction[run, var, dims, Iteration -> it, RefinementLevel -> rl, Map -> map, *)
+(*                     FilterOptions[{opts}, {StripGhostZones}]]]; *)
 
 End[];
 
