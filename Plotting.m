@@ -27,6 +27,12 @@ PlotKeySize;
 DynamicShow;
 LegendBackground;
 
+
+(* Deprecated functions *)
+ScaledColorFunction;
+ColorMapLegend;
+QuickSlicePlot;
+
 Begin["`Private`"];
 
 point = Graphics[Point[{0, 0}]];
@@ -433,6 +439,28 @@ FilterPlot[data_, data2p_, omCutOff0_, {t10_, t20_}, opts___] :=
    Button["Update " <> ToString[Unevaluated[data2p]], 
     data2p = data2],
    SaveDefinitions -> True, ContinuousAction -> False]];
+
+
+(* Deprecated functions *)
+
+ScaledColorFunction[name_, {min_, max_}] :=
+ (ColorData[name][(# - min)/(max - min)] &);
+
+ColorMapLegend[colorFn_, {min_, max_, dx_: Automatic}] :=
+ ArrayPlot[
+  Table[{c, c}, {c, min, max, 
+     (max - min)/100.}], 
+  DataRange -> {{0, 0.1}, {min, max}}, ColorFunction -> colorFn, 
+  FrameTicks -> {{None, 
+     Table[x, {x, min, max, If[dx === Automatic, (max - min)/10., dx]}]}, {None, None}}, ImageSize->{60,300}];
+
+QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___] :=
+ Module[{cf},
+  cf = ScaledColorFunction[colorMap, {min, max}];
+  GraphicsGrid[{{
+     DataRegionArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
+       ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]
+];
 
 End[];
 

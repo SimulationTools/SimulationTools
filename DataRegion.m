@@ -24,35 +24,29 @@ Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified b
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
-NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form a
-s in the first argument of Derivative.";
+(* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
+(* TODO: add these functions *)
+Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
+
+(* TODO: decide if this is a good name *)
+Intersection::usage = "Intersection[{d1, d2, ...}] returns a list of DataRegions {D1, D2, ...} which are resampled versions of the DataRegions {d1, d2, ...} over the intersection of their bounding boxes using interpolation of order p.  The new DataRegions contain the same points.";
+
+NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form as in the first argument of Derivative.";
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
+(* TODO: move this to the NRMMA context.  Think about another way to do this *)
+Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
+FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
+NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
+
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: Add MapCoordinates, MapThreadCoordinates, MapData, MapThreadData, Map, MapThread *)
 
-(* TODO: these should be moved into Plotting and probably changed or fixed or deleted *)
-ScaledColorFunction::usage = "ScaledColorFunction[colorscheme, {min, max}] returns a function on the domain [min,max] giving a color in colorscheme.  colorscheme can be any Mathematica named color scheme, for example \"ThermometerColors\", \"TemperatureMap\" etc.";
-ColorMapLegend::usage = "ColorMapLegend[colorfunction, {min, max, dx}] returns a graphical legend labeled from min to max in steps of dx (which defaults to Automatic) using the color function (e.g. from ScaledColorFunction) to determine the colors.";
 
-(* TODO: remove this function and make it as easy to use the other functions *)
-QuickSlicePlot::usage = "QuickSlicePlot[d, {min, max}, colorscheme, opts] generates an array plot of a DataRegion d using the color scheme colorscheme scaled to run between min and max.  The plot includes a legend for the colors.  opts (which is optional) is passed to DataRegionArrayPlot.";
-
-(* TODO: Move away and undocument *)
-FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
-(* TODO: move this to another package *)
-NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
-DataRegionContourPlot::usage = "DataRegionContourPlot[d, args] generates a ContourPlot of the data in a 2D DataRegion d. The arguments are the same as for ContourPlot.  The DataRange option is unnecessary as it is determined automatically from the DataRegion.";
 (* TODO: don't support this - put it in NRMMA`Experimental *)
 TimeDerivative::usage = "TimeDerivative[{d1, d2,...}, center] returns a numerical time derivative computed from DataRegions d1, d2, ... . The derivative is computed using finite differencing, the order of which is determined by the number of DataRegions given. The optional center argument specifies the number of timesteps from the first DataRegion at which to compute derivatives (using lop-sided differencing, if necessary), with the default value being half-way between the first and last times.";
-(* TODO: rename this to Resampled and merge with the next one *)
-ResampleDataRegion::usage = "ResampleDataRegion[d, {x1, x2, dx}, p] returns a new DataRegion of the same dimensionality as the DataRegion d but with points in the range x1 to x2 with spacing dx.  The data is interpolated at order p onto the new grid.  x1, x2 and dx are lists of length equal to the dimensionality of d.  NOTE: currently only 2-dimensional DataRegions are supported.";
-ResampleDataRegions::usage = "ResampleDataRegions[{d1, d2, ...}, p] returns a list of DataRegions {D1, D2, ...} which are resampled versions of the DataRegions {d1, d2, ...} over the intersection of their bounding boxes using interpolation of order p.  The new DataRegions contain the same points.";
-(* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
-(* TODO: move this to the NRMMA context.  Think about another way to do this *)
-Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
 
 (* DEPRECATED *)
 
@@ -74,6 +68,7 @@ DynamicDataRegionArrayPlot;
 DataRegionMatrixPlot;
 DataRegionPlot3D;
 DataRegionPlot;
+DataRegionContourPlot;
 NormL2;
 Outline;
 Strip;
@@ -83,6 +78,9 @@ MergeDataRegions;
 MapDataRegion;
 MapThreadDataRegion;
 GetCoordinate;
+ResampleDataRegion;
+ResampleDataRegions;
+
 
 Begin["`Private`"];
 
@@ -106,7 +104,7 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
     {"DataRegion",
      "[",
      RowBox[
-      {name,
+      {ToString[name],
        ",",
        "\"<\"",
        "\[InvisibleSpace]",
@@ -288,7 +286,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
 (**********************************************************)
 
 $NonDataRegionFunctions =
-  {ArrayDepth, Dimensions, Total, Mean};
+  {ArrayDepth, Dimensions, Total, Mean, Position, Extract};
 
 $DataRegionFunctions =
   {Map};
@@ -595,106 +593,23 @@ NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
   ToDataRegion[deriv, origin, spacing]
 ];
 
-
-
-
-
-
-(* DataRegion high-level interface; no assumptions should be made
-   about the structure of a DataRegion object here. All access should
-   be by the preceding functions.*)
-
-
-replaceRule[list_List, key_ -> newValue_] :=
-  list /. (key -> _) :> (key -> newValue);  
-
-replaceRules[list_List, replacements_List] :=
-  If[Length[replacements] == 0, 
-     list, 
-     replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
-
-(* Convenient plotting functions *)
-ScaledColorFunction[name_, {min_, max_}] :=
- (ColorData[name][(# - min)/(max - min)] &);
-
-ColorMapLegend[colorFn_, {min_, max_, dx_: Automatic}] :=
- ArrayPlot[
-  Table[{c, c}, {c, min, max, 
-     (max - min)/100.}], 
-  DataRange -> {{0, 0.1}, {min, max}}, ColorFunction -> colorFn, 
-  FrameTicks -> {{None, 
-     Table[x, {x, min, max, If[dx === Automatic, (max - min)/10., dx]}]}, {None, None}}, ImageSize->{60,300}];
-
-QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___] :=
- Module[{cf},
-  cf = ScaledColorFunction[colorMap, {min, max}];
-  GraphicsGrid[{{
-     DataRegionArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
-       ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]
-];
-
-
-(* Operations on DataRegion objects *)
-
-
-Attributes[insertArray] = {HoldFirst};
-
-(* Insert a1 into a2, offsetting the indices by s *)
-insertArray[a2_, a1_, s_] :=
- Module[{n1, n2, s2, position},
-  n1 = Dimensions[a1];
-  n2 = Dimensions[a2];
-  s2 = Reverse[s];
-  position = Table[s2[[n]]+1;;s2[[n]]+n1[[n]],{n,Length[s]}];
-  Part[a2, Sequence @@ position ] = a1];
-
-chunkOffset[d_DataRegion, origin_, spacing_] :=
- Module[{},
-  Round[(GetOrigin[d] - origin)/spacing]];
-
-MergeDataRegions[regions_List] :=
- Profile["MergeDataRegions",
- Module[{ndims, origins, dims, spacings, spacing, spacingDiffs,
-    X1, X2s, X2, n, dat, attrs, attrs2},
-  If[Length[regions] === 0, Return[{}]];
-
-  If[!And@@Map[MatchQ[#, _DataRegion] &, regions],
-    Error["MergeDataRegions: Expected a list of DataRegion objects but got instead " <> ToString[regions]]];
-  origins = Map[GetOrigin, regions];
-  dims = Map[GetDimensions, regions];
-  ndims = GetNumDimensions[regions[[1]]];
-
-  (* Find the lower coordinate of the bounding box *)
-  X1 = Min[origins[[All,#]]]&/@ Range[ndims];
-
-  spacings = Map[GetSpacing, regions];
-  spacingDiffs = (# - spacings[[1]]) & /@ spacings;
-
-  If[ Max[Norm/@spacingDiffs] > 10^-8,
-    Error["MergeDataRegions: Attempt to merge DataRegions with different spacings: " <> ToString[spacings] <> ", " <> ToString[spacingDiffs]]];
-  spacing = First[spacings];
-  
-  (* Find the upper coordinate of the bounding box *)
-  X2s = MapThread[#1 + spacing * (#2 - 1) &, {origins, 
-     dims}];
-  X2 = Max[X2s[[All,#]]]&/@ Range[ndims];
-
-  n = Round[(X2 - X1)/spacing] + 1;
-  dat = ConstantArray[None, Reverse[n]];
-  Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
-   regions];
-  attrs = attributes[regions[[1]]];
-  attrs2 = replaceRules[attrs, {Origin -> X1}];
-  Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]];
-
-
-
+(**********************************************************)
+(* FilterNaNs                                             *)
+(**********************************************************)
 
 FilterNaNs[d_DataRegion] :=
  MapDataRegion[If[NaNQ[#], Missing[], #] &, d];
 
+(**********************************************************)
+(* NaNQ                                                   *)
+(**********************************************************)
+
 NaNQ[x_] :=
  Round[x] == -2147483648;
+
+(**********************************************************)
+(* ResampleDataRegions                                    *)
+(**********************************************************)
 
 ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
   Module[{dFn, newData},
@@ -731,17 +646,13 @@ ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
     dx = Map[Min, Transpose[dxs]];
     Map[ResampleDataRegion[#, {x1, x2, dx}, p] &, ds]];
 
-DataRegion/:
-Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
-  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
-
 (*******************************************************************************************)
 (* Redefine various built-in Mathematica functions to work on DataRegions                  *)
 (*******************************************************************************************)
 
-DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data1, pattern, opts];
-
-DataRegion/:Extract[DataRegion[h1_,data1_], positions_List] := Extract[data1, positions];
+DataRegion/:
+Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
+  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
 
 DataRegion /: Interpolation[v_DataRegion, opts___] :=
   Module[{data = GetData[v], ndims = GetNumDimensions[v]},
@@ -1100,6 +1011,69 @@ GetCoordinate[d_DataRegion, dim_] :=
     If[Reverse@Dimensions[res] =!= dims, Error["GetCoordinateError"]];
     DataRegion[attributes[d], res]
   ];
+
+(**********************************************************)
+(* MergeDataRegions                                       *)
+(**********************************************************)
+
+replaceRule[list_List, key_ -> newValue_] :=
+  list /. (key -> _) :> (key -> newValue);  
+
+replaceRules[list_List, replacements_List] :=
+  If[Length[replacements] == 0, 
+     list, 
+     replaceRules[replaceRule[list, First[replacements]], Drop[replacements, 1]]];
+
+Attributes[insertArray] = {HoldFirst};
+
+(* Insert a1 into a2, offsetting the indices by s *)
+insertArray[a2_, a1_, s_] :=
+ Module[{n1, n2, s2, position},
+  n1 = Dimensions[a1];
+  n2 = Dimensions[a2];
+  s2 = Reverse[s];
+  position = Table[s2[[n]]+1;;s2[[n]]+n1[[n]],{n,Length[s]}];
+  Part[a2, Sequence @@ position ] = a1];
+
+chunkOffset[d_DataRegion, origin_, spacing_] :=
+ Module[{},
+  Round[(GetOrigin[d] - origin)/spacing]];
+
+MergeDataRegions[regions_List] :=
+ Profile["MergeDataRegions",
+ Module[{ndims, origins, dims, spacings, spacing, spacingDiffs,
+    X1, X2s, X2, n, dat, attrs, attrs2},
+  If[Length[regions] === 0, Return[{}]];
+
+  If[!And@@Map[MatchQ[#, _DataRegion] &, regions],
+    Error["MergeDataRegions: Expected a list of DataRegion objects but got instead " <> ToString[regions]]];
+  origins = Map[GetOrigin, regions];
+  dims = Map[GetDimensions, regions];
+  ndims = GetNumDimensions[regions[[1]]];
+
+  (* Find the lower coordinate of the bounding box *)
+  X1 = Min[origins[[All,#]]]&/@ Range[ndims];
+
+  spacings = Map[GetSpacing, regions];
+  spacingDiffs = (# - spacings[[1]]) & /@ spacings;
+
+  If[ Max[Norm/@spacingDiffs] > 10^-8,
+    Error["MergeDataRegions: Attempt to merge DataRegions with different spacings: " <> ToString[spacings] <> ", " <> ToString[spacingDiffs]]];
+  spacing = First[spacings];
+  
+  (* Find the upper coordinate of the bounding box *)
+  X2s = MapThread[#1 + spacing * (#2 - 1) &, {origins, 
+     dims}];
+  X2 = Max[X2s[[All,#]]]&/@ Range[ndims];
+
+  n = Round[(X2 - X1)/spacing] + 1;
+  dat = ConstantArray[None, Reverse[n]];
+  Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
+   regions];
+  attrs = attributes[regions[[1]]];
+  attrs2 = replaceRules[attrs, {Origin -> X1}];
+  Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]
+];
 
 End[];
 

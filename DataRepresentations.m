@@ -1,17 +1,19 @@
 (* ::Package:: *)
 
-(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
 BeginPackage["DataRepresentations`", {"DataTable`", "DataRegion"}];
 
-ToListOfData::usage = ToListOfData::usage<>"
-ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
+ToListOfData::usage = "ToListOfData[d] returns the N-dimensional array of the data contained in d.";
 
 Begin["`Private`"];
 
-(*******************************************************************************************)
-(* Redefine various built-in Mathematica functions to work on our new data types           *)
-(*******************************************************************************************)
+DataRegion /: f_[d_DataRegion[data_, attrs_]] := DataRegion[f[data], attrs] /; MemberQ[Attributes[f], Listable]
+DataRegion /: f_[d_DataRegion[data_, attrs_]] := f[data] /; ! MemberQ[Attributes[f], Listable]
+
+(******************************************************************************)
+(* Redefine built-in Mathematica functions to work on our new data types      *)
+(******************************************************************************)
 
 $DataTypes = {DataRegion, DataTable};
 $MappedFunctions =
@@ -25,24 +27,38 @@ $MappedFunctions =
    
 overload[func_, type_] := (type /: func[x : Blank[type]] := Map[func, x]);
 
-Table[overload[f, t], {f, $MappedFunctions}, {t, 
-DataRegion /: Log[b_, d_DataRegion] := MapDataRegion[Log[b,#] &, d];
-DataRegion /: ArcTan[x_DataRegion, y_DataRegion] := MapThreadDataRegion[ArcTan, {x, y}];
+Do[overload[f, t], {f, $MappedFunctions}, {t, $DataTypes}];
 
-DataRegion /: Total[DataRegion[_,data_]]:=Total[data];
-DataRegion /: Max[DataRegion[_,data_]]:=Max[data];
-DataRegion /: Min[DataRegion[_,data_]]:=Min[data];
-DataRegion /: Mean[DataRegion[_,data_]]:=Mean[data];
+(******************************************************************************)
+(* Multi-argument functions                                                   *)
+(******************************************************************************)
 
-DataRegion /: Times[a_, DataRegion[h_,data_]] := DataRegion[h, a data];
-DataRegion /: Times[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:=DataRegion[h1, data1*data2]
-DataRegion /: Power[DataRegion[h_,data_], a_] := DataRegion[h, data^a];
-DataRegion /: Power[a_, DataRegion[h_,data_]] := DataRegion[h, a^data];
-DataRegion /: Power[DataRegion[h1_,data1_], DataRegion[h2_,data2_]] := DataRegion[h1, data1^data2];
-DataRegion /: Plus[DataRegion[h1_,data1_], DataRegion[h2_,data2_]]:= DataRegion[h1, data1+data2]
-DataRegion /: Plus[DataRegion[h1_,data1_], a_] := DataRegion[h1, data1+a]
-DataRegion /: Mod[d_DataRegion, n_] := MapDataRegion[Mod[#, n]&, d];
+overload2[type_] :=
+ Module[{},
+  type /: Log[b_, d:Blank[type]] := Map[Log[b,#] &, d];
+  type /: ArcTan[x_type, y_type] := MapThread[ArcTan, {x, y}];
 
+  type /: Times[a_, d:Blank[type]] := Map[Times[a, #]&, data];
+  type /: Times[d1:Blank[type], d2:Blank[type]] := MapThread[Times, {d1, d2}];
+
+  type /: Power[d:Blank[type], a_] := Map[Power type[h, data^a];
+  type /: Power[a_, type[h_,data_]] := type[h, a^data];
+  type /: Power[type[h1_,data1_], type[h2_,data2_]] := type[h1, data1^data2];
+  type /: Plus[type[h1_,data1_], type[h2_,data2_]]:= type[h1, data1+data2]
+  type /: Plus[type[h1_,data1_], a_] := type[h1, data1+a]
+  type /: Mod[d_type, n_] := Maptype[Mod[#, n]&, d];
+];
+
+(******************************************************************************)
+(* Functions which return a different data type                               *)
+(******************************************************************************)
+overload3[type_]:=
+ Module[{},
+  type /: Total[d:Blank[type]] := Total[ToListOfData[data]];
+  type /: Max[d:Blank[type]]   := Max[ToListOfData[data]];
+  type /: Min[d:Blank[type]]   := Min[ToListOfData[data]];
+  type /: Mean[d:Blank[type]]  := Mean[ToListOfData[data]];
+];
 
 DataRegion/:Position[DataRegion[h1_,data1_], pattern_, opts___] := Position[data1, pattern, opts];
 
