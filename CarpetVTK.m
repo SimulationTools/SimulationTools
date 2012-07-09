@@ -45,7 +45,7 @@ ReadVTKFile[s_InputStream] :=
 
   zSlices = Partition[data, nx*ny];
   data2 = Map[Partition[#, nx] &, zSlices];
-  ToDataRegion[data2, origin, spacing, Name -> varName]
+  ToDataRegion[data2, origin, spacing, VariableName -> varName]
 ];
 
 End[];

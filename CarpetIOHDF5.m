@@ -211,7 +211,7 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
   ghosts = ("cctk_nghostzones" /. annots) /. "cctk_nghostzones" -> 0;
 
   time = "time" /. annots /. "time" -> Undefined;
-  dr = MapThread[ToDataRegion[#1,#2,#3,Name->#4,Time->#5] &,
+  dr = MapThread[ToDataRegion[#1,#2,#3,VariableName->#4,Time->#5] &,
                  {data, origin, spacing, name, time}];
 
   If[OptionValue[StripGhostZones]==True,

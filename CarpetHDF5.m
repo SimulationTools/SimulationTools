@@ -212,7 +212,7 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   ghosts = ("cctk_nghostzones" /. annots) /. "cctk_nghostzones" -> 0;
 
   time = "time" /. annots;
-  dr = MapThread[ToDataRegion[#1,#2,#3,Name->#4,Time->#5] &,
+  dr = MapThread[ToDataRegion[#1,#2,#3,VariableName->#4,Time->#5] &,
                  {data, origin, spacing, name, time}];
   If[strip, MapThread[Strip, {dr, ghosts}], dr]
 ]];
