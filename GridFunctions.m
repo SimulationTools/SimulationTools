@@ -14,7 +14,14 @@ StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetH
 
 Begin["`Private`"];
 
-DimsPattern = _List;
+DimsPattern = _List|_String;
+
+parseDims[s_String] :=
+  parseDims[Characters[s]];
+
+parseDims[dims:{(1|2|3)...}] := parseDims[dims /. {1->"x",2->"y",3->"z"}];
+
+parseDims[dims:{_String...}] := dims;
 
 (* ApplyDefaults[opts, provider] := *)
 (*   Do[Which[ *)
@@ -64,9 +71,9 @@ Options[ReadGridFunction] = {
     "Variable"        -> Automatic (* Only used by old interface *)
   };
 
-ReadGridFunction[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
+ReadGridFunction[run_String, var_String, dims1:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {options, fileName},
+    {options, fileName, dims = parseDims[dims1]},
     options = ApplyDefaults[run, var, {opts}];
     fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration], options];
     If[fileName === None,
@@ -97,29 +104,29 @@ fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPatte
 
 Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iteration"]];
 ReadIterations[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  fileUnion["ReadIterations", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],
+  fileUnion["ReadIterations", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                           "Iteration" -> _]];
 
 Options[ReadMaps] = FilterRules[Options[ReadGridFunction], Except["Map"]];
 ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  fileUnion["ReadMaps", run, var, dims, 
+  fileUnion["ReadMaps", run, var, parseDims[dims], 
             Append[DeleteCases[ApplyDefaults[run, var, {opts}],"Map" -> _, Infinity],
                    "Map" -> All]];
 
 Options[ReadRefinementLevels] = FilterRules[Options[ReadGridFunction], Except["RefinementLevel"]];
 ReadRefinementLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  fileUnion["ReadRefinementLevels", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],
+  fileUnion["ReadRefinementLevels", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                                 "RefinementLevel" -> _]];
 
 Options[ReadTimeLevels] = FilterRules[Options[ReadGridFunction], Except["TimeLevel"]];
 ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
-  fileUnion["ReadTimeLevels", run, var, dims, DeleteCases[ApplyDefaults[run, var, {opts}],
+  fileUnion["ReadTimeLevels", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                                 "TimeLevel" -> _]];
 
 Options[ReadTime] = Options[ReadGridFunction];
-ReadTime[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
+ReadTime[run_String, var_String, dims1:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {options, fileName},
+    {options, fileName, dims = parseDims[dims1]},
     options = ApplyDefaults[run, var, {opts}];
     fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration]];
     If[fileName === None,

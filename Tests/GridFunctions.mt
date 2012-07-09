@@ -78,6 +78,57 @@ Test[
     TestID->"ReadIterations-3D"
 ]
 
+(* Dimensions specifications *)
+
+Test[
+    ReadIterations[$NRMMATestRun, var, {1}]
+,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
+,
+    TestID->"ReadIterations-dims-1D"
+]
+
+Test[
+    ReadIterations[$NRMMATestRun, var, {1,2}]
+,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
+,
+    TestID->"ReadIterations-dims-2D"
+]
+
+Test[
+    ReadIterations[$NRMMATestRun, var, {1,2,3}]
+,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
+,
+    TestID->"ReadIterations-dims-3D"
+]
+
+Test[
+    ReadIterations[$NRMMATestRun, var, "x"]
+,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
+,
+    TestID->"ReadIterations-dimsstrings-1D"
+]
+
+Test[
+    ReadIterations[$NRMMATestRun, var, "xy"]
+,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
+,
+    TestID->"ReadIterations-dimsstrings-2D"
+]
+
+Test[
+    ReadIterations[$NRMMATestRun, var, "xyz"]
+,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
+,
+    TestID->"ReadIterations-dimsstrings-3D"
+]
+
+
 (* ReadMaps *)
 
 Test[
