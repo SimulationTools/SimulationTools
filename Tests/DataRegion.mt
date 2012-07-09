@@ -129,7 +129,7 @@ Test[
 Test[
     GetDataRange[dataregion]
     ,
-    {{10, 10.3}, {20, 20.4}, {30, 30.3}}
+    {{10., 10.3}, {20., 20.4}, {30., 30.3}}
     ,
     TestID->"GetDataRange"
 ]
