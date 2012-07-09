@@ -116,6 +116,20 @@ ToDataTable[l_List, attrRules:{(_ -> _) ...}] :=
   (* The attrRules are currently unsupported *)
   DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
 
+ToDataTable[d_DataRegion] :=
+ Module[{ndims, xmin, xmax, spacing, data},
+  ndims = GetNumDimensions[v];
+  If[ ndims != 1,
+	Error["Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
+          <> SymbolName[x] <> "' is greater than 1."]
+  ];
+
+  {{xmin, xmax}} = GetDataRange[v];
+  {spacing} = GetSpacing[v];
+  data = GetData[v];
+  ToDataTable[Transpose[{Range[xmin, xmax, spacing],data}]]
+];
+
 SetAttributes[Redefine, HoldAll];
 
 Redefine[f_[args___], newDef_] :=
