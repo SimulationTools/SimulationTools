@@ -313,7 +313,7 @@ SyntaxInformation[Slab] =
 
 (* TODO: Implement Tolerance support *)
 Slab[d_DataRegion, s__, OptionsPattern[]]:=
- Module[{slabSpec, spacing, origin, newOrigin, newData},
+ Module[{slabSpec, spacing, origin},
   spacing = CoordinateSpacings[d];
   origin  = MinCoordinates[d];
 
@@ -471,7 +471,7 @@ DataRegion /: f_Symbol[d_DataRegion, args___] :=
  plotWrapper[f, 2, d, args] /; MemberQ[$2DPlotFunctions, f];
 
 plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
- Module[{ndims, dataRange, data, opts},
+ Module[{ndims, dataRange, data},
   ndims = ArrayDepth[d];
   If[ndims!=plotDims,
     Error[SymbolName[plotFunction]<>" only supports data with dimensionality "<>ToString[plotDims]<>
@@ -568,7 +568,7 @@ NDerivative[d:DataRegion[h_,_], dir_Integer] :=
 ];
 
 NDerivative[d_DataRegion] :=
- Module[{ndims, result},
+ Module[{ndims},
   ndims = ArrayDepth[d];
 
   If[ndims =!= 1,
@@ -579,7 +579,7 @@ NDerivative[d_DataRegion] :=
 ];
 
 NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
- Module[{origin, spacing, dimensions, grid, data, deriv, newh},
+ Module[{origin, spacing, dimensions, grid, data, deriv},
   origin  = MinCoordinates[d];
   spacing = CoordinateSpacings[d];
   dimensions = Dimensions[d];

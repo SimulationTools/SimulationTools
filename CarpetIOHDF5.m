@@ -191,7 +191,7 @@ Options[ReadCarpetIOHDF5Datasets] = {StripGhostZones -> True};
 ReadCarpetIOHDF5Datasets[file_String, {}, opts:OptionsPattern[]] := {};
 ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
  Profile["ReadCarpetIOHDF5Datasets",
- Module[{data, annots, dims, origin, spacing, name, strip, dr, ghosts, time},
+ Module[{data, annots, dims, origin, spacing, name, dr, ghosts, time},
   If[Apply[Or,Map[(!StringQ[#])&, ds]],
     Error["ReadCarpetIOHDF5Datasets: expected a string dataset name, but instead got " <>ToString[ds]]];
 

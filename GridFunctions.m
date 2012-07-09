@@ -96,7 +96,7 @@ notFound[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
 Options[fileUnion] = Options[ReadGridFunction];
 fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {files = FindRunFiles[run, getLeafName[var, dims, opts]], optStr},
+    {files = FindRunFiles[run, getLeafName[var, dims, opts]]},
     If[files === {},
        notFound[run,var,dims,opts]];
     Union@@Map[CallProvidedFunction["GridFunctions", fn, {#, "Variable" -> var, opts}] &,
