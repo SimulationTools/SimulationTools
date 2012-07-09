@@ -39,15 +39,16 @@ Cell[TextData[{
  ": The name of the run directory containing the simulation files."
 }], "Text"],
 
-Cell["\<\
-var: The name of the grid variable to be read.\
-\>", "Text"],
+Cell["var: The name of the grid variable to be read.", "Text"],
 
 Cell[TextData[{
  StyleBox["dims:",
   FontSlant->"Italic"],
- " The dimensions to be read. These can be given either as coordinate names \
-\[CloseCurlyDoubleQuote] xyz \[CloseCurlyDoubleQuote] or as numbers {1,2,3}."
+ " The dimensions to be read. These can be given either as a list of numbers \
+of coordinate names ({1,2,3} or {\[OpenCurlyDoubleQuote]x\
+\[CloseCurlyDoubleQuote],\[CloseCurlyDoubleQuote]y\[CloseCurlyDoubleQuote],\
+\[CloseCurlyDoubleQuote]z\[CloseCurlyDoubleQuote]}) or asa combined string \
+\[OpenCurlyDoubleQuote]xyz\[CloseCurlyDoubleQuote]."
 }], "Text"],
 
 Cell["The following options can be given:", "Text"],
@@ -56,10 +57,10 @@ Cell[TextData[{
  StyleBox["Option\t\t\tDefault\t\t\tDescription",
   FontWeight->"Bold",
   FontSlant->"Italic"],
- "\nIteration\t\t0\t\t\tThe iteration to read.\nMap\t\t\t0\t\t\tThe map to \
-read (use 0 for single map data)\nRefinementLevel\t0\t\t\tThe refinement \
-level to read.\nTimeLevel\t\t0\t\t\tThe time level to read.\nVariable\t\t\
-First in file\t\tThe variable to read"
+ "\nIteration\t\t0\t\t\tThe iteration to read.\nMap\t\t\tNone\t\t\tThe map to \
+read (use None for single map data, or an integer for multi-map)\n\
+RefinementLevel\t0\t\t\tThe refinement level to read.\nTimeLevel\t\t0\t\t\t\
+The time level to read.\nVariable\t\tFirst in file\t\tThe variable to read"
 }], "Text"]
 }, Open  ]],
 
@@ -67,9 +68,7 @@ Cell[CellGroupData[{
 
 Cell["Functions", "Section"],
 
-Cell["\<\
-Functions provided by GridFunctions.\
-\>", "Caption"],
+Cell["Functions provided by GridFunctions.", "Caption"],
 
 Cell[CellGroupData[{
 
@@ -240,33 +239,6 @@ then only iterations corresponding to those will be included."
 Cell[CellGroupData[{
 
 Cell[TextData[{
- "ReadVariables[",
- StyleBox["run",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["var",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["dims",
-  FontSlant->"Italic"],
- "]"
-}], "Subsection"],
-
-Cell[TextData[{
- "Read the names of the variables present in ",
- StyleBox["run",
-  FontSlant->"Italic"],
- " for ",
- StyleBox["var",
-  FontSlant->"Italic"],
- ". If the options Iteration, Map, RefinementLevel or TimeLevel are \
-specified, then only iterations corresponding to those will be included."
-}], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
  "ReadTime[",
  StyleBox["run",
   FontSlant->"Italic"],
@@ -298,48 +270,57 @@ Cell["Example", "Section"],
 Cell[BoxData[
  RowBox[{"<<", "nrmma`"}]], "Input"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"file", "=", "\"\<phi.x.h5\>\""}], ";"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"ReadVariables", "[", 
-  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+Cell[TextData[{
+ "Examine the variable ",
+ StyleBox["phi",
+  FontSlant->"Italic"],
+ " from the simulation ",
+ StyleBox["bbh",
+  FontSlant->"Italic"],
+ " in the x-y plane."
+}], "Text"],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"ReadIterations", "[", 
-   RowBox[{"run", ",", "file"}], "]"}], "//", "Short"}]], "Input"],
+   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], "]"}], "//",
+   "Short"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadRefinementLevels", "[", 
-  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadMaps", "[", 
-  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadTime", "[", 
-  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input"],
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
+   RowBox[{"Iteration", "->", "4096"}]}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadTimeLevels", "[", 
-  RowBox[{"run", ",", "file"}], "]"}]], "Input"],
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  "]"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"ReadGridFunction", "[", 
-  RowBox[{"run", ",", "file", ",", "4096"}], "]"}]], "Input"]
+ RowBox[{"phi", "=", 
+  RowBox[{"ReadGridFunction", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
+    RowBox[{"Iteration", "->", "4096"}], ",", 
+    RowBox[{"RefinementLevel", "\[Rule]", "3"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PresentationArrayPlot", "[", "phi", "]"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 },
 Saveable->True,
 WindowSize->{725, 750},
-WindowMargins->{{Automatic, -13}, {Automatic, 0}},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
