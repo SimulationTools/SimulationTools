@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CarpetHDF5",
+ ButtonBox["GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CarpetHDF5"],
+  ButtonData->"paclet:nrmma/guide/GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadTime",
   BaseStyle->{"Link", "LinkTrail"},
@@ -59,18 +59,26 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
+    "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "CarpetHDF5`Private`Variable", 
-    "Automatic", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
     "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
  GridBoxOptions->{
  GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
-   "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True, True}}}}]
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -91,8 +99,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"ReadTime", "READTIME", "readtime"}, 
-    "index" -> True, "label" -> "nrmma/CarpetHDF5 Symbol", "language" -> "en",
-     "paclet" -> "CarpetHDF5", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
+    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
     "ReadTime[run, var, it, rl] reads the time associated with the iteration \
 it on refinement level rl of the CarpetHDF5 file named var in the directory \
 run.", "synonyms" -> {"ReadTime", "READTIME", "readtime"}, "title" -> 

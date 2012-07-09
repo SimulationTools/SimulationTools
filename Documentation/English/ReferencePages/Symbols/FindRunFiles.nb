@@ -7,29 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["RunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/RunFiles"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ApplyToList",
+ ButtonBox["FindRunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ApplyToList"]
+  ButtonData->"paclet:nrmma/ref/FindRunFiles"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ApplyToList", "ObjectName"],
+Cell["FindRunFiles", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ApplyToList",
+       ButtonBox["FindRunFiles",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ApplyToList"], "[", 
+        ButtonData->"paclet:nrmma/ref/FindRunFiles"], "[", 
        StyleBox[
-        RowBox[{"f", ",", " ", "d"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]applies f to the underlying list in DataTable d."
+        RowBox[{"run", ",", " ", "filename"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a list containing the full names of files named \
+filename in the different segments of run."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +46,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ApplyToList",
+WindowTitle->"FindRunFiles",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ApplyToList", "APPLYTOLIST", "applytolist"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "ApplyToList[f, d] applies f to the underlying list in DataTable d.", 
-    "synonyms" -> {"ApplyToList", "APPLYTOLIST", "applytolist"}, "title" -> 
-    "ApplyToList", "windowTitle" -> "ApplyToList", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ApplyToList"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "keywords" -> {"FindRunFiles", "FINDRUNFILES", "findrunfiles"}, "index" -> 
+    True, "label" -> "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> 
+    "RunFiles", "status" -> "None", "summary" -> 
+    "FindRunFiles[run, filename] returns a list containing the full names of \
+files named filename in the different segments of run.", 
+    "synonyms" -> {"FindRunFiles", "FINDRUNFILES", "findrunfiles"}, "title" -> 
+    "FindRunFiles", "windowTitle" -> "FindRunFiles", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/FindRunFiles"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

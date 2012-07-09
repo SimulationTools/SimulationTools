@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CarpetHDF5",
+ ButtonBox["GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CarpetHDF5"],
+  ButtonData->"paclet:nrmma/guide/GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["StripGhostZones",
   BaseStyle->{"Link", "LinkTrail"},
@@ -50,8 +50,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"StripGhostZones", "STRIPGHOSTZONES", "stripghostzones"}, 
-    "index" -> True, "label" -> "nrmma/CarpetHDF5 Symbol", "language" -> "en",
-     "paclet" -> "CarpetHDF5", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
+    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
     "StripGhostZones is a boolean option to various CarpetHDF5 functions \
 which indicates that ghost zones should be removed", 
     "synonyms" -> {"StripGhostZones", "STRIPGHOSTZONES", "stripghostzones"}, 

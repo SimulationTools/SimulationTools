@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CarpetHDF5",
+ ButtonBox["GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CarpetHDF5"],
+  ButtonData->"paclet:nrmma/guide/GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadIterations",
   BaseStyle->{"Link", "LinkTrail"},
@@ -28,13 +28,55 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadIterations"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "rl"}], "TI"], "]"}]], 
+        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
-     "\[LineSeparator]reads the iterations present in the CarpetHDF5 file \
-named var in the directory run.  Only those iterations present on refinement \
-level rl are returned.  rl defaults to All if it is omitted."
+     "\[LineSeparator]reads the iterations present for the grid function var \
+in the directory run."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
+    "", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -56,12 +98,10 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"ReadIterations", "READITERATIONS", "readiterations"}, 
-    "index" -> True, "label" -> "nrmma/CarpetHDF5 Symbol", "language" -> "en",
-     "paclet" -> "CarpetHDF5", "status" -> "None", "summary" -> 
-    "ReadIterations[run, var, rl] reads the iterations present in the \
-CarpetHDF5 file named var in the directory run.  Only those iterations \
-present on refinement level rl are returned.  rl defaults to All if it is \
-omitted.", 
+    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
+    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+    "ReadIterations[run, var, dims] reads the iterations present for the grid \
+function var in the directory run.", 
     "synonyms" -> {"ReadIterations", "READITERATIONS", "readiterations"}, 
     "title" -> "ReadIterations", "windowTitle" -> "ReadIterations", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadIterations"}, "SearchTextTranslated" -> 

@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CarpetHDF5",
+ ButtonBox["GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CarpetHDF5"],
+  ButtonData->"paclet:nrmma/guide/GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadGridFunction",
   BaseStyle->{"Link", "LinkTrail"},
@@ -28,16 +28,16 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadGridFunction"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "it", ",", " ", "rl"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]reads a grid function from the CarpetHDF5 file named \
-var in the directory run and returns it as a DataRegion object.  The \
-iteration is given by it, and the refinement level by rl (rl defaults to the \
-first level in the file if it is omitted).  Optional arguments: Variable -> \
-Automatic | varname specifies the variable to read from files containing more \
-than one variable, Map -> Automatic | mapnum specifies the map for multipatch \
-data files, StripGhostZones -> True|False determines whether the ghost zones \
-are removed from the variable before it is returned."
+        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+      "InlineFormula"],
+     "\[LineSeparator]reads variable var from run and returns it as a \
+DataRegion object.  dims is a list of the dimensions to read, and these \
+dimensions must correspond to available output.  Dimensions in dims can be \
+given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, \
+3).  The order of dims is not important.  Optional arguments: Map -> \
+Automatic | mapnum specifies the map for multipatch data files, \
+StripGhostZones -> True|False determines whether the ghost zones are removed \
+from the variable before it is returned."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -65,11 +65,17 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
+    "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
+    "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
     "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "CarpetHDF5`Private`Variable", 
-    "Automatic", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -77,8 +83,8 @@ Cell[BoxData[GridBox[{
  GridBoxOptions->{
  GridBoxBackground->{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
-   "Rows" -> {None, None, {None}}, "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True, True, True}}}}]
+   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -101,17 +107,16 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {
      "ReadGridFunction", "READGRIDFUNCTION", "readgridfunction"}, "index" -> 
-    True, "label" -> "nrmma/CarpetHDF5 Symbol", "language" -> "en", "paclet" -> 
-    "CarpetHDF5", "status" -> "None", "summary" -> 
-    "ReadGridFunction[run, var, it, rl] reads a grid function from the \
-CarpetHDF5 file named var in the directory run and returns it as a DataRegion \
-object.  The iteration is given by it, and the refinement level by rl (rl \
-defaults to the first level in the file if it is omitted).  Optional \
-arguments: Variable -> Automatic | varname specifies the variable to read \
-from files containing more than one variable, Map -> Automatic | mapnum \
-specifies the map for multipatch data files, StripGhostZones -> True|False \
-determines whether the ghost zones are removed from the variable before it is \
-returned.", 
+    True, "label" -> "nrmma/GridFunctions Symbol", "language" -> "en", 
+    "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+    "ReadGridFunction[run, var, dims] reads variable var from run and returns \
+it as a DataRegion object.  dims is a list of the dimensions to read, and \
+these dimensions must correspond to available output.  Dimensions in dims can \
+be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, \
+2, 3).  The order of dims is not important.  Optional arguments: Map -> \
+Automatic | mapnum specifies the map for multipatch data files, \
+StripGhostZones -> True|False determines whether the ghost zones are removed \
+from the variable before it is returned.", 
     "synonyms" -> {
      "ReadGridFunction", "READGRIDFUNCTION", "readgridfunction"}, "title" -> 
     "ReadGridFunction", "windowTitle" -> "ReadGridFunction", "type" -> 

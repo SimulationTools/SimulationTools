@@ -7,29 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["Ascii1D",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/Ascii1D"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ApplyToList",
+ ButtonBox["AsciiTimeOfIndex",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ApplyToList"]
+  ButtonData->"paclet:nrmma/ref/AsciiTimeOfIndex"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ApplyToList", "ObjectName"],
+Cell["AsciiTimeOfIndex", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ApplyToList",
+       ButtonBox["AsciiTimeOfIndex",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ApplyToList"], "[", 
+        ButtonData->"paclet:nrmma/ref/AsciiTimeOfIndex"], "[", 
        StyleBox[
-        RowBox[{"f", ",", " ", "d"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]applies f to the underlying list in DataTable d."
+        RowBox[{"data", ",", "i"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the time, t, of the ith element of data where \
+data is in the form {{t, {{x, f}...}}...}"
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +46,24 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ApplyToList",
+WindowTitle->"AsciiTimeOfIndex",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ApplyToList", "APPLYTOLIST", "applytolist"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "ApplyToList[f, d] applies f to the underlying list in DataTable d.", 
-    "synonyms" -> {"ApplyToList", "APPLYTOLIST", "applytolist"}, "title" -> 
-    "ApplyToList", "windowTitle" -> "ApplyToList", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ApplyToList"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "keywords" -> {
+     "AsciiTimeOfIndex", "ASCIITIMEOFINDEX", "asciitimeofindex"}, "index" -> 
+    True, "label" -> "nrmma/Ascii1D Symbol", "language" -> "en", "paclet" -> 
+    "Ascii1D", "status" -> "None", "summary" -> 
+    "AsciiTimeOfIndex[data,i] returns the time, t, of the ith element of data \
+where data is in the form {{t, {{x, f}...}}...}", 
+    "synonyms" -> {
+     "AsciiTimeOfIndex", "ASCIITIMEOFINDEX", "asciitimeofindex"}, "title" -> 
+    "AsciiTimeOfIndex", "windowTitle" -> "AsciiTimeOfIndex", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/AsciiTimeOfIndex"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

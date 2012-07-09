@@ -16,6 +16,102 @@ Cell[TextData[{
   ButtonData->"paclet:nrmma/ref/DataTable"]
 }], "LinkTrail"],
 
+Cell[BoxData[GridBox[{
+   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"AbsOfPhase":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/AbsOfPhase"], "Add":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/Add"], "AddAttribute":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/AddAttribute"], "AddAttributes":>
+       Documentation`HelpLookup["paclet:nrmma/ref/AddAttributes"], 
+       "ApplyToList":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ApplyToList"], "DataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataTable"], "DataTableDepVarInterval":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataTableDepVarInterval"], 
+       "DataTableInterval":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataTableInterval"], "DataTableListLinePlot":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataTableListLinePlot"], 
+       "DataTableNormL2":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataTableNormL2"], "DataTableRange":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataTableRange"], "DepVar":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DepVar"], "Div":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Div"], "Downsample":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Downsample"], "Downsampled":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Downsampled"], "FilterDCT":>
+       Documentation`HelpLookup["paclet:nrmma/ref/FilterDCT"], "Frequency":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Frequency"], 
+       "FunctionOfPhase":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/FunctionOfPhase"], "IndVar":>
+       Documentation`HelpLookup["paclet:nrmma/ref/IndVar"], 
+       "IntegrateDataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/IntegrateDataTable"], "IntegrateDataTableZeroEnd":>
+       Documentation`HelpLookup["paclet:nrmma/ref/IntegrateDataTableZeroEnd"],
+        "IntegrateDataTableZeroStart":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/IntegrateDataTableZeroStart"], 
+       "InterpolateWhereFunction":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/InterpolateWhereFunction"], "IntersectDataTables":>
+       Documentation`HelpLookup["paclet:nrmma/ref/IntersectDataTables"], 
+       "InvertDataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/InvertDataTable"], "ListAttributes":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ListAttributes"], 
+       "LocateMaximum":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/LocateMaximum"], "LocateMaximumPoint":>
+       Documentation`HelpLookup["paclet:nrmma/ref/LocateMaximumPoint"], 
+       "MakeDataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/MakeDataTable"], "MakeInterpolatingDataTable":>
+       Documentation`HelpLookup[
+       "paclet:nrmma/ref/MakeInterpolatingDataTable"], "MakeUniform":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MakeUniform"], "MapData":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MapData"], "MapIndVar":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MapIndVar"], "MapList":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MapList"], "MapThreadData":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MapThreadData"], 
+       "MaximumValue":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/MaximumValue"], "MonotonicQ":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MonotonicQ"], "NDerivative":>
+       Documentation`HelpLookup["paclet:nrmma/ref/NDerivative"], 
+       "PartitionTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/PartitionTable"], "Phase":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/Phase"], "PhaseOfFrequency":>
+       Documentation`HelpLookup["paclet:nrmma/ref/PhaseOfFrequency"], 
+       "ReadAttribute":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ReadAttribute"], "ResampleDataTable":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ResampleDataTable"], 
+       "ResampleDataTables":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ResampleDataTables"], "ShiftDataTable":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ShiftDataTable"], 
+       "ShiftPhase":>Documentation`HelpLookup["paclet:nrmma/ref/ShiftPhase"], 
+       "Spacing":>Documentation`HelpLookup["paclet:nrmma/ref/Spacing"], 
+       "TableRange":>Documentation`HelpLookup["paclet:nrmma/ref/TableRange"], 
+       "ToDataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ToDataTable"], "ToList":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ToList"], "ToListOfCoordinates":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ToListOfCoordinates"], 
+       "ToListOfData":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ToListOfData"], "UniformGridQ":>
+       Documentation`HelpLookup["paclet:nrmma/ref/UniformGridQ"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
+       "paclet:nrmma/guide/nrmma"], 
+       RowBox[{"Data", " ", "Representations"}]:>Documentation`HelpLookup[
+       "paclet:nrmma/guide/Data Representations"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]"
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
 Cell[CellGroupData[{
 
 Cell["DataTable", "ObjectName"],
@@ -28,17 +124,742 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/DataTable"], "[", 
        StyleBox[
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{"x", ",", "f"}], "}"}], ",", "..."}], "}"}], ",", " ", 
-         "attrs"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]is a one-dimensional table of data with attributes \
-attrs.  attrs is of the form {attr -> value, ...}.  DataTable objects print \
-as DataTable[] to avoid printing the content."
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x1", ",", "f1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x2", ",", "f2"}], "}"}], ",", "...", ",", 
+          RowBox[{"{", 
+           RowBox[{"xn", ",", "fn"}], "}"}]}], "}"}], "TI"], "]"}]], 
+      "InlineFormula"],
+     "\[LineSeparator]is a one-dimensional table of data (fi) with an \
+associated coordinate (xi).  DataTable objects print as DataTable[...] to \
+avoid printing the potentially large data content.  The independent \
+variables, xi, should be monotonically increasing real numbers and may have a \
+variable increment.  The dependent variables, fi, can be of any type for \
+which the basic mathematical operations (+, -, *, /) make sense."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["\<\
+Many standard Mathematica operations have been defined to operate naturally \
+on DataTables.\
+\>", "Notes"],
+
+Cell["\<\
+Map[f,d] produces a DataTable with f mapped over the data part of the \
+DataTable d.\
+\>", "Notes"],
+
+Cell["\<\
+MapThread[f,{d1,d2,...}] produces a DataTable with f mapped over the data \
+parts of the DataTables d1, d2, ... in the same way as for MapThread on lists.\
+\>", "Notes"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(6)", "ExampleCount"]
+}], "ExampleSection"],
+
+Cell[CellGroupData[{
+
+Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ToList[d]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", "0.6`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["d2 = Map[Sin,d]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ToList[d2]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0.479425538604203`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", "0.5646424733950354`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.3`", ",", "0.29552020666133955`"}], "}"}]}], "}"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["d3 = MapThread[f,{d,d2}]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ToList[d3]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"0.5`", ",", "0.479425538604203`"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"0.6`", ",", "0.5646424733950354`"}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.3`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"0.3`", ",", "0.29552020666133955`"}], "]"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["AbsOfPhase",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/AbsOfPhase"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Add",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Add"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["AddAttribute",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/AddAttribute"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["AddAttributes",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/AddAttributes"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ApplyToList",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ApplyToList"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTableDepVarInterval",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTableDepVarInterval"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTableInterval",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTableInterval"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTableListLinePlot",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTableListLinePlot"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTableNormL2",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTableNormL2"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTableRange",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTableRange"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DepVar",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DepVar"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Div",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Div"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Downsample",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Downsample"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Downsampled",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Downsampled"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["FilterDCT",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/FilterDCT"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Frequency",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Frequency"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["FunctionOfPhase",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/FunctionOfPhase"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["IndVar",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/IndVar"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["IntegrateDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/IntegrateDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["IntegrateDataTableZeroEnd",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/IntegrateDataTableZeroEnd"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["IntegrateDataTableZeroStart",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/IntegrateDataTableZeroStart"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["InterpolateWhereFunction",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/InterpolateWhereFunction"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["IntersectDataTables",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/IntersectDataTables"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["InvertDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/InvertDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ListAttributes",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ListAttributes"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["LocateMaximum",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/LocateMaximum"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["LocateMaximumPoint",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/LocateMaximumPoint"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MakeDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MakeDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MakeInterpolatingDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MakeInterpolatingDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MakeUniform",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MakeUniform"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MapData",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MapData"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MapIndVar",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MapIndVar"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MapList",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MapList"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MapThreadData",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MapThreadData"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MaximumValue",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MaximumValue"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["MonotonicQ",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MonotonicQ"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["NDerivative",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/NDerivative"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["PartitionTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/PartitionTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Phase",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Phase"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["PhaseOfFrequency",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/PhaseOfFrequency"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadAttribute",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ReadAttribute"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ResampleDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ResampleDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ResampleDataTables",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ResampleDataTables"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ShiftDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ShiftDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ShiftPhase",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ShiftPhase"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Spacing",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Spacing"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["TableRange",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/TableRange"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToList",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToList"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToListOfCoordinates",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToListOfData",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToListOfData"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["UniformGridQ",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/UniformGridQ"],
+   FontFamily->"Verdana"]], "InlineFormula"]
+}], "SeeAlso"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection"],
+
+Cell[TextData[ButtonBox["nrmma",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"],
+
+Cell[TextData[ButtonBox["Data Representations",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/guide/Data Representations"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -62,10 +883,13 @@ TaggingRules->{
     "keywords" -> {"DataTable", "DATATABLE", "datatable"}, "index" -> True, 
     "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
     "DataTable", "status" -> "None", "summary" -> 
-    "DataTable[{{x,f},...}, attrs] is a one-dimensional table of data with \
-attributes attrs.  attrs is of the form {attr -> value, ...}.  DataTable \
-objects print as DataTable[] to avoid printing the content.", 
-    "synonyms" -> {"DataTable", "DATATABLE", "datatable"}, "title" -> 
+    "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of \
+data (fi) with an associated coordinate (xi).  DataTable objects print as \
+DataTable[...] to avoid printing the potentially large data content.  The \
+independent variables, xi, should be monotonically increasing real numbers \
+and may have a variable increment.  The dependent variables, fi, can be of \
+any type for which the basic mathematical operations (+, -, *, /) make \
+sense.", "synonyms" -> {"DataTable", "DATATABLE", "datatable"}, "title" -> 
     "DataTable", "windowTitle" -> "DataTable", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/DataTable"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
   ""},

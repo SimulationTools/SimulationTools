@@ -7,23 +7,28 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ToDataRegion",
+ ButtonBox["ToListOfData",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ToDataRegion"]
+  ButtonData->"paclet:nrmma/ref/ToListOfData"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"ToList":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToList"], "DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegion"]},
+        StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataTable"], "DataRegion":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataRegion"], "ToDataTable":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ToDataTable"], 
+       "ToDataRegion":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ToDataRegion"], "ToListOfCoordinates":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ToListOfCoordinates"], 
+       "ToList":>Documentation`HelpLookup["paclet:nrmma/ref/ToList"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -46,58 +51,28 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["ToDataRegion", "ObjectName"],
+Cell["ToListOfData", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ToDataRegion",
+       ButtonBox["ToListOfData",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToDataRegion"], "[", 
-       StyleBox[
-        RowBox[{"data", ",", " ", "origin", ",", " ", "spacing"}], "TI"], 
-       "]"}]], "InlineFormula"],
-     "\[LineSeparator]creates a DataRegion object from the N-dimensional \
-array (nested list) data."
+        ButtonData->"paclet:nrmma/ref/ToListOfData"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a list of the data part of the DataTable d."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ToListOfData",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ToListOfData"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the N-dimensional array of data in DataRegion d."
     }]]}
   }]], "Usage"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[Cell[BoxData[
- ButtonBox[
-  FrameBox[
-   StyleBox[
-    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
-   StripOnInput->False],
-  Appearance->{Automatic, None},
-  BaseStyle->None,
-  ButtonFunction:>(FrontEndExecute[{
-     FrontEnd`SelectionMove[
-      FrontEnd`SelectedNotebook[], All, ButtonCell], 
-     FrontEndToken["OpenCloseGroup"], 
-     FrontEnd`SelectionMove[
-      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
-  Evaluator->None,
-  Method->"Preemptive"]]]], "NotesSection",
- CellGroupingRules->{"SectionGrouping", 50}],
-
-Cell["The following options can be given: ", "Notes"],
-
-Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Name", "None", Cell["", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "Time", "None", Cell["", "TableText"]}
-  },
-  GridBoxAlignment->{
-   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
-    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
-   "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -121,13 +96,34 @@ Cell[CellGroupData[{
 Cell[TextData[{
  "Basic Examples",
  "\[NonBreakingSpace]\[NonBreakingSpace]",
- Cell["(2)", "ExampleCount"]
+ Cell["(4)", "ExampleCount"]
 }], "ExampleSection"],
 
 Cell[CellGroupData[{
 
+Cell["dt = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ToListOfData[dt]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.5`", ",", "0.6`", ",", "0.3`"}], "}"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["\<\
-d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20, 30}, {0.1, 0.2, 0.3}]\
+dr = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20, 30}, {0.1, 0.2, 0.3}]\
 \>", "Input",
  CellLabel->"In[1]:="],
 
@@ -142,17 +138,16 @@ Cell[BoxData["\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \
 
 Cell[CellGroupData[{
 
-Cell["ToList[d]", "Input",
+Cell["ToListOfData[dr]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"ToList", 
-  "[", "\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \\(\\(10 + \
-\\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>", "]"}]], "Output",
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "5", ",", "6"}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
@@ -176,9 +171,9 @@ Cell[TextData[ButtonBox["SEE ALSO",
 Cell[TextData[{
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ToList",
+   ButtonBox["DataTable",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToList"],
+    ButtonData->"paclet:nrmma/ref/DataTable"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -189,6 +184,46 @@ Cell[TextData[{
    ButtonBox["DataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/DataRegion"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToDataTable"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToDataRegion",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToDataRegion"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToListOfCoordinates",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ToList",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/ToList"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -228,21 +263,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ToDataRegion",
+WindowTitle->"ToListOfData",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ToDataRegion", "TODATAREGION", "todataregion"}, "index" -> 
-    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
-    "ToDataRegion[data, origin, spacing] creates a DataRegion object from the \
-N-dimensional array (nested list) data.", 
-    "synonyms" -> {"ToDataRegion", "TODATAREGION", "todataregion"}, "title" -> 
-    "ToDataRegion", "windowTitle" -> "ToDataRegion", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ToDataRegion"}, "SearchTextTranslated" -> "", 
+    "keywords" -> {"ToListOfData", "TOLISTOFDATA", "tolistofdata"}, "index" -> 
+    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
+    "DataTable", "status" -> "None", "summary" -> 
+    "ToListOfData[d] returns a list of the data part of the DataTable d.\n\
+ToListOfData[d] returns the N-dimensional array of data in DataRegion d.", 
+    "synonyms" -> {"ToListOfData", "TOLISTOFDATA", "tolistofdata"}, "title" -> 
+    "ToListOfData", "windowTitle" -> "ToListOfData", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/ToListOfData"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

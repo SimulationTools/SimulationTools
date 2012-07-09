@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CarpetHDF5",
+ ButtonBox["GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CarpetHDF5"],
+  ButtonData->"paclet:nrmma/guide/GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadTimeLevels",
   BaseStyle->{"Link", "LinkTrail"},
@@ -28,11 +28,55 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadTimeLevels"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]reads the timelevels present in the CarpetHDF5 file \
-named var in the directory run."
+        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+      "InlineFormula"],
+     "\[LineSeparator]reads the timelevels present for the grid function var \
+in the directory run."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
+    "", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -54,10 +98,10 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"ReadTimeLevels", "READTIMELEVELS", "readtimelevels"}, 
-    "index" -> True, "label" -> "nrmma/CarpetHDF5 Symbol", "language" -> "en",
-     "paclet" -> "CarpetHDF5", "status" -> "None", "summary" -> 
-    "ReadTimeLevels[run, var] reads the timelevels present in the CarpetHDF5 \
-file named var in the directory run.", 
+    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
+    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+    "ReadTimeLevels[run, var, dims] reads the timelevels present for the grid \
+function var in the directory run.", 
     "synonyms" -> {"ReadTimeLevels", "READTIMELEVELS", "readtimelevels"}, 
     "title" -> "ReadTimeLevels", "windowTitle" -> "ReadTimeLevels", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadTimeLevels"}, "SearchTextTranslated" -> 
