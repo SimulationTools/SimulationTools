@@ -788,7 +788,7 @@ SliceData[v_DataRegion, dims_List, coords_:0] :=
 
 GetData[d_DataRegion] := data[d];
 GetAttributes[d_DataRegion] := attributes[d];
-GetDimensions[d_DataRegion] := Dimensions[d];
+GetDimensions[d_DataRegion] := Reverse[Dimensions[d]];
 GetNumDimensions[DataRegion[h_, data_]] := Length[Dimensions[data]];
 GetOrigin[DataRegion[h_, data_]] := Origin /. h;
 GetSpacing[DataRegion[h_, data_]] := Spacing /. h;
