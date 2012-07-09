@@ -23,7 +23,7 @@ packages =
   "Empty",
   "Error",
   "FieldLines",
-(*  "GridFunctions",*)
+  "GridFunctions",
   "Grids",
   "Horizons",
   "IniFile",
