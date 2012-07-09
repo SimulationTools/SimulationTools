@@ -291,7 +291,7 @@ Test[
 Test[
     Outline[dataregion]
     ,
-    Cuboid[{10., 20., 30.}, {10.3, 20.4, 30.9}]
+    Cuboid[{10., 20., 30.}, {10.3, 20.4, 30.3}]
     ,
     TestID->"Outline"
 ]
