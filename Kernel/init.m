@@ -22,7 +22,7 @@ $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]<>"/PirahaPeg"];
 
 $NRMMADirectory = FileNameDrop[FindFile["nrmma`"], -2];
-$NRMMATestRunDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data"}];
+$NRMMATestRunDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
 $NRMMATestRun = "bbh";
 
 Module[{packages =
