@@ -455,6 +455,23 @@ DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
 ];
 
 (**********************************************************)
+(* MapThread                                              *)
+(**********************************************************)
+
+Unprotect[MapThread];
+
+MapThread[f_, ds:List[DataRegion[___]..]] :=
+ Module[{},
+  If[Length[DeleteDuplicates[ds, SameGridQ]] =!= 1,
+  	Error["MapThread is only supported for DataRegions on the same grid."];
+  ];
+
+  DataRegion[attributes[ds[[1]]], MapThread[f, ToListOfData[#, Flatten -> False] & /@ ds]]
+];
+
+Protect[MapThread];
+
+(**********************************************************)
 (* Downsampled                                            *)
 (**********************************************************)
 
