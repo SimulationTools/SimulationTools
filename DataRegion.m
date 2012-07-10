@@ -27,7 +27,6 @@ Downsampled::usage = "Downsampled[d, n] returns a version of d with only every n
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
-(* TODO: add these functions *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 
 (* TODO: decide if this is a good name *)
@@ -509,6 +508,27 @@ Downsampled[d_DataRegion, n_Integer] :=
 
 Downsampled[d_DataRegion, n_List] :=
   Take[d, Apply[Sequence, Transpose[{ConstantArray[1, ArrayDepth[d]], Dimensions[d], n}]]];
+
+
+(**********************************************************)
+(* Resampled                                              *)
+(**********************************************************)
+
+SyntaxInformation[Resampled] =
+ {"ArgumentsPattern" -> {_, {__}}};
+
+Resampled[d_DataRegion, grid_List] :=
+ Module[{dims, interp, vars, tmp, iterators, data},
+  dims = Dimensions[grid];
+  If[dims =!= {ArrayDepth[d], 3},
+  	Error["Expected a list of triples for each dimension in the DataRegion."];
+  ];
+  Quiet[interp = Interpolation[d];, ListInterpolation::inhr];
+  vars = tmp /@ Range[ArrayDepth[d]];
+  iterators = MapThread[Join[{#1}, #2] &, {vars, grid}];
+  data = Table[interp @@ vars, Evaluate[Sequence @@ iterators]];
+  ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], VariableName -> VariableName[d]]
+];
 
 
 (**********************************************************)
