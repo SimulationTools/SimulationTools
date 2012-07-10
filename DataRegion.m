@@ -20,6 +20,8 @@ MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of 
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in the DataRegion d.";
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
 
+SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are DataRegions defined on the same grid (origin, spacing, size).";
+
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
@@ -436,6 +438,20 @@ DataRegion /: Drop[d_DataRegion, s__] :=
     } &, {s}];
 
   Part[d, Sequence @@ partSpec]
+];
+
+
+(**********************************************************)
+(* SameGridQ                                              *)
+(**********************************************************)
+
+DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
+ Module[{origin, spacing, dims},
+   origin  = MinCoordinates /@ {dr1, dr2};
+   spacing = CoordinateSpacings /@ {dr1, dr2};
+   dims    = Dimensions /@ {dr1, dr2};
+
+   (SameQ@@origin) && (SameQ@@spacing) && (SameQ@@dims)
 ];
 
 (**********************************************************)
