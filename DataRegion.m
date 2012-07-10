@@ -792,10 +792,14 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 (**********************************************************)
 (* ResampleDataRegion                                     *)
 (**********************************************************)
+interpolation[v_DataRegion, opts___] :=
+  Module[{data = GetData[v], ndims = GetNumDimensions[v]},
+    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
+];
 
 ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
   Module[{dFn, newData},
-    dFn = Interpolation[d, InterpolationOrder->p];
+    dFn = interpolation[d, InterpolationOrder->p];
     If[GetNumDimensions[d] === 2,
       newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
                                 {y, x1[[2]], x2[[2]], dx[[2]]}];
