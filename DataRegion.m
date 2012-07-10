@@ -522,6 +522,12 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
   plotFunction[data, args, DataRange -> dataRange]
 ];
 
+(* We cannot use upvalues in the following as the DataRegion appears too deep *)
+(* TODO: Make this use plotWrapper for consistency *)
+Unprotect /@ $1DPlotFunctions;
+Scan[(#[ds:List[DataRegion[___]..], opts___] := #[ToList/@ ds, opts])&, $1DPlotFunctions];
+Protect /@ $1DPlotFunctions;
+
 (**********************************************************)
 (* GridNorm                                               *)
 (**********************************************************)
@@ -762,29 +768,6 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 
   DataRegion[ attr, GetData[deriv]]
 ];
-
-(* We cannot use upvalues here, as the DataRegion appears too deep in
-the expression *)
-
-Unprotect[ListLinePlot];
-
-ListLinePlot[ds:List[DataRegion[___]..], opts___] :=
-  ListLinePlot[ToList /@ ToDataTable /@ ds, opts];
-
-ListLinePlot[d:DataRegion[___], opts___] :=
-   ListLinePlot[{d}, opts];
-
-Protect[ListLinePlot];
-
-Unprotect[ListPlot];
-
-ListPlot[ds:List[DataRegion[___]..], opts___] :=
-  ListPlot[ToList /@ ToDataTable /@ ds, opts];
-
-ListPlot[d:DataRegion[___], opts___] :=
-   ListPlot[{d}, opts];
-
-Protect[ListPlot];
 
 
 (**********************************************************************************)
