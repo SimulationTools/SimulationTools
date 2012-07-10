@@ -513,9 +513,9 @@ Downsampled[d_DataRegion, n_List] :=
 (**********************************************************)
 
 SyntaxInformation[Resampled] =
- {"ArgumentsPattern" -> {_, {__}}};
+ {"ArgumentsPattern" -> {_, ___}};
 
-Resampled[d_DataRegion, grid_List] :=
+DataRegion /: Resampled[d_DataRegion, grid_List] :=
  Module[{dims, interp, vars, tmp, iterators, data},
   dims = Dimensions[grid];
   If[dims =!= {ArrayDepth[d], 3},
@@ -526,6 +526,18 @@ Resampled[d_DataRegion, grid_List] :=
   iterators = MapThread[Join[{#1}, #2] &, {vars, grid}];
   data = Table[interp @@ vars, Evaluate[Sequence @@ iterators]];
   ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], VariableName -> VariableName[d]]
+];
+
+Resampled[ds:{DataRegion[__]...}] :=
+  Module[{x1, x2, dx, grid},
+    x1 = Max /@ Transpose[MinCoordinates /@ ds];
+    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
+    dx = Min /@ Transpose[CoordinateSpacings /@ ds];
+    grid = Transpose[{x1, x2, dx}];
+
+    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
+
+    Map[Resampled[#, grid] &, ds]
 ];
 
 
