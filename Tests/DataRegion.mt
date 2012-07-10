@@ -35,7 +35,7 @@ Test[
 (* ToListOfData *)
 (****************************************************************)
 Test[
-    ToListOfData[dataregion]
+    ToListOfData[dataregion, Flatten -> False]
     ,
     data
     ,
