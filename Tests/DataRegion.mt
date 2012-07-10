@@ -46,7 +46,9 @@ Test[
 (****************************************************************)
 (************************** DEPRECATED **************************)
 (****************************************************************)
-
+dataregion  = MakeDataRegion[data, "test region", Reverse[Dimensions[data]], {10, 20, 30}, {0.1, 0.2, 0.3}, 42];
+dataregion2 = MakeDataRegion[data2, "test region", Reverse[Dimensions[data]], {10, 20, 30}, {0.1, 0.2, 0.3}, 47];
+dataregion3 = MakeDataRegion[data2, "test region", Reverse[Dimensions[data]], {9.9, 20, 30}, {0.1, 0.2, 0.3}, 47];
 
 (****************************************************************)
 (* DataRegionPart *)
@@ -67,7 +69,7 @@ Test[
 Test[
     EvaluateOnDataRegion[x + y + z + t, {t, x, y, z}, dataregion]
     ,
-    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10, 20, 30}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
       {{{102., 102.1, 102.2, 102.3}, {102.2, 102.3, 102.4, 102.5}, {102.4, 102.5, 102.6, 102.7}}, {{102.3, 102.4, 102.5, 102.6}, {102.5, 102.6, 102.7, 102.8}, {102.7, 102.8, 102.9, 103.}}}]
     ,
     TestID->"EvaluateOnDataRegion"
@@ -92,7 +94,7 @@ Test[
 Test[
     GetAttributes[dataregion]
     ,
-    {VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}
+    {VariableName -> "test region", DataRegion`Private`Origin -> {10, 20, 30}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}
     ,
     TestID->"GetAttributes"
 ]
@@ -104,7 +106,7 @@ Test[
 Test[
     GetCoordinate[dataregion, 3]
     ,
-    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10, 20, 30}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
       {{{30., 30., 30., 30.}, {30., 30., 30., 30.}, {30., 30., 30., 30.}}, {{30.3, 30.3, 30.3, 30.3}, {30.3, 30.3, 30.3, 30.3}, {30.3, 30.3, 30.3, 30.3}}}]
     ,
     TestID->"GetCoordinate"
@@ -129,7 +131,7 @@ Test[
 Test[
     GetDataRange[dataregion]
     ,
-    {{10., 10.3}, {20., 20.4}, {30., 30.3}}
+    {{10, 10.3}, {20, 20.4}, {30, 30.3}}
     ,
     TestID->"GetDataRange"
 ]
@@ -165,7 +167,7 @@ Test[
 Test[
     GetOrigin[dataregion]
     ,
-    {10., 20., 30.}
+    {10, 20, 30}
     ,
     TestID->"GetOrigin"
 ]
@@ -228,7 +230,7 @@ Test[
 Test[
     MapDataRegion[2 # &, dataregion]
     ,
-    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10, 20, 30}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
       {{{222, 224, 226, 228}, {242, 244, 246, 248}, {262, 264, 266, 268}}, {{422, 424, 426, 428}, {442, 444, 446, 448}, {462, 464, 466, 468}}}]
     ,
     TestID->"MapDataRegion"
@@ -241,7 +243,7 @@ Test[
 Test[
     MapThreadDataRegion[2 #1 - #2 &, {dataregion, dataregion2}]
     ,
-    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10, 20, 30}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
       {{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}}]
     ,
     TestID->"MapThreadDataRegion"
@@ -254,7 +256,7 @@ Test[
 Test[
     MergeDataRegions[{dataregion, dataregion3}]
     ,
-    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {9.9, 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {9.9, 20, 30}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> 42}, 
       {{{222, 224, 226, 228, 114}, {242, 244, 246, 248, 124}, {262, 264, 266, 268, 134}}, {{422, 424, 426, 428, 214}, {442, 444, 446, 448, 224}, {462, 464, 466, 468, 234}}}]
     ,
     TestID->"MergeDataRegions"
@@ -291,7 +293,7 @@ Test[
 Test[
     Outline[dataregion]
     ,
-    Cuboid[{10., 20., 30.}, {10.3, 20.4, 30.3}]
+    Cuboid[{10, 20, 30}, {10.3, 20.4, 30.3}]
     ,
     TestID->"Outline"
 ]
@@ -338,7 +340,7 @@ Test[
     SliceData[dataregion, 1, 10.1]
     ,
     DataRegion[{VariableName -> "test region",
-    	DataRegion`Private`Origin -> {20., 30.}, Spacing -> {0.2, 0.3},
+    	DataRegion`Private`Origin -> {20, 30}, Spacing -> {0.2, 0.3},
     	 DataRegion`Private`Time -> 42},
     	 {{112, 122, 132}, {212, 222, 232}}]
     ,
@@ -369,7 +371,7 @@ Test[
     TimeDerivative[{dataregion, dataregion2}]
     ,
     DataRegion[{VariableName -> "dt_test region",
-      DataRegion`Private`Origin -> {10., 20., 30.},
+      DataRegion`Private`Origin -> {10, 20, 30},
       Spacing -> {0.1, 0.2, 0.3}, 
       DataRegion`Private`Time -> 89/2},
       {{{111/5, 112/5, 113/5, 114/5}, {121/5, 122/5, 123/5, 124/5}, {131/5, 132/5, 133/5, 134/5}}, 
