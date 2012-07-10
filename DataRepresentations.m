@@ -2,7 +2,7 @@
 
 (* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRepresentations`", {"DataTable`", "DataRegion"}];
+BeginPackage["DataRepresentations`", {"DataTable`", "DataRegion`"}];
 
 ToListOfData::usage = "ToListOfData[d] returns the N-dimensional array of the data contained in d.";
 
@@ -38,16 +38,22 @@ overload2[type_] :=
   type /: Log[b_, d:Blank[type]] := Map[Log[b,#] &, d];
   type /: ArcTan[x_type, y_type] := MapThread[ArcTan, {x, y}];
 
-  type /: Times[a_, d:Blank[type]] := Map[Times[a, #]&, data];
+  type /: Times[a_, d:Blank[type]] := Map[Times[a, #]&, d];
+  type /: Times[d:Blank[type], a_] := Map[Times[#, a]&, d];
   type /: Times[d1:Blank[type], d2:Blank[type]] := MapThread[Times, {d1, d2}];
 
-  type /: Power[d:Blank[type], a_] := Map[Power type[h, data^a];
-  type /: Power[a_, type[h_,data_]] := type[h, a^data];
-  type /: Power[type[h1_,data1_], type[h2_,data2_]] := type[h1, data1^data2];
-  type /: Plus[type[h1_,data1_], type[h2_,data2_]]:= type[h1, data1+data2]
-  type /: Plus[type[h1_,data1_], a_] := type[h1, data1+a]
-  type /: Mod[d_type, n_] := Maptype[Mod[#, n]&, d];
+  type /: Power[d:Blank[type], a_] := Map[Power[#, a]&, d];
+  type /: Power[a_, d:Blank[type]] := Map[Power[a, #]&, d];
+  type /: Power[d1:Blank[type], d2:Blank[type]] := MapThread[Power[#1, #2]&, {d1, d2}];
+
+  type /: Plus[d1:Blank[type], d2:Blank[type]] := MapThread[Plus[#1, #2]&, {d1, d2}];
+  type /: Plus[a_, d:Blank[type]] := Map[Plus[a, #]&, d];
+  type /: Plus[d:Blank[type], a_] := Map[Plus[#, a]&, d];
+  
+  type /: Mod[d:Blank[type], n_] := Map[Mod[#, n]&, d];
 ];
+
+Scan[overload2, $DataTypes];
 
 (******************************************************************************)
 (* Functions which return a different data type                               *)
