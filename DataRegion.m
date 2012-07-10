@@ -95,9 +95,9 @@ data[DataRegion[attrs_, data_]] := data;
 
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
-  name = GetVariableName[d] /. Undefined -> "<<unnamed>>";
-  dims = GetDimensions[d];
-  range = GetDataRange[d];
+  name = VariableName[d] /. Undefined -> "<<unnamed>>";
+  dims = Dimensions[d];
+  range = CoordinateRanges[d];
 
   TagBox[
    RowBox[
@@ -235,13 +235,13 @@ SyntaxInformation[ToListOfCoordinates] =
 
 DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
  Module[{dims, origin, spacing, coords, coordList},
-  dims    = GetNumDimensions[d];
-  origin  = GetOrigin[d];
-  spacing = GetSpacing[d];
+  dims    = ArrayDepth[d];
+  origin  = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
 
   coords = ToListOfData[#, Flatten -> False] & /@
-    (GetCoordinate[d, #] & /@ Range[dims]);
-  coordList = Transpose[coords, Reverse[Range[dims + 1]]];
+    (Coordinate[d, #] & /@ Range[dims]);
+  coordList = Transpose[coords, RotateRight[Range[dims + 1]]];
 
   If[OptionValue[Flatten],
     Flatten[coordList, dims-1],
