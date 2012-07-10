@@ -132,6 +132,7 @@ SyntaxInformation[CoordinateSpacings] =
 
 CoordinateSpacings[d_DataRegion] := Spacing /. attributes[d];
 
+
 (**********************************************************)
 (* CoordinateRanges                                       *)
 (**********************************************************)
@@ -142,6 +143,7 @@ SyntaxInformation[CoordinateRanges] =
 CoordinateRanges[d_DataRegion] :=
  MapThread[List, {MinCoordinates[d], MaxCoordinates[d]}];
 
+
 (**********************************************************)
 (* MinCoordinates                                         *)
 (**********************************************************)
@@ -150,6 +152,7 @@ SyntaxInformation[MinCoordinates] =
  {"ArgumentsPattern" -> {_}};
 
 MinCoordinates[d_DataRegion] := Origin /. attributes[d];
+
 
 (**********************************************************)
 (* MaxCoordinates                                         *)
@@ -161,6 +164,7 @@ SyntaxInformation[MaxCoordinates] =
 MaxCoordinates[d_DataRegion] :=
  MinCoordinates[d] + CoordinateSpacings[d] * (Dimensions[d] - 1);
 
+
 (**********************************************************)
 (* VariableName                                           *)
 (**********************************************************)
@@ -169,6 +173,7 @@ SyntaxInformation[VariableName] =
  {"ArgumentsPattern" -> {_}};
 
 VariableName[d_DataRegion] := VariableName /. attributes[d];
+
 
 (**********************************************************)
 (* ToDataRegion                                           *)
@@ -226,6 +231,7 @@ DataRegion /: ToListOfData[d_DataRegion, OptionsPattern[]] :=
     data[d]
   ];
 
+
 (**********************************************************)
 (* ToListOfCoordinates                                    *)
 (**********************************************************)
@@ -249,7 +255,7 @@ DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
     Flatten[coordList, dims-1],
     coordList
   ]
-]
+];
 
 
 (**********************************************************)
@@ -274,6 +280,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
     list
   ]
 ];
+
 
 (**********************************************************)
 (* Functions which should just see a regular data List.   *)
@@ -308,6 +315,7 @@ DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
   f[x, ToListOfData[d, Flatten -> False], y]
 ];
 
+
 (**********************************************************)
 (* Slab                                                   *)
 (**********************************************************)
@@ -336,6 +344,7 @@ Slab[d_DataRegion, s__, OptionsPattern[]]:=
   (* Get the relevant part of the data *)
   Part[d, Sequence@@indexrange]
 ];
+
 
 (**********************************************************)
 (* Part                                                   *)
@@ -402,6 +411,7 @@ DataRegion /: Part[d_DataRegion, s__] :=
   ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
 ];
 
+
 (**********************************************************)
 (* Take                                                   *)
 (**********************************************************)
@@ -421,6 +431,7 @@ DataRegion /: Take[d_DataRegion, s__] :=
 
   Part[d, Sequence @@ partSpec]
 ];
+
 
 (**********************************************************)
 (* Drop                                                   *)
@@ -451,6 +462,9 @@ DataRegion /: Drop[d_DataRegion, s__] :=
 (* SameGridQ                                              *)
 (**********************************************************)
 
+SyntaxInformation[SameGridQ] =
+ {"ArgumentsPattern" -> {_, _}};
+
 DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
  Module[{origin, spacing, dims},
    origin  = MinCoordinates /@ {dr1, dr2};
@@ -459,6 +473,7 @@ DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
 
    (SameQ@@origin) && (SameQ@@spacing) && (SameQ@@dims)
 ];
+
 
 (**********************************************************)
 (* MapThread                                              *)
@@ -476,6 +491,7 @@ MapThread[f_, ds:List[DataRegion[___]..]] :=
 ];
 
 Protect[MapThread];
+
 
 (**********************************************************)
 (* Downsampled                                            *)
@@ -528,6 +544,7 @@ Unprotect /@ $1DPlotFunctions;
 Scan[(#[ds:List[DataRegion[___]..], opts___] := #[ToList/@ ds, opts])&, $1DPlotFunctions];
 Protect /@ $1DPlotFunctions;
 
+
 (**********************************************************)
 (* GridNorm                                               *)
 (**********************************************************)
@@ -537,6 +554,7 @@ SyntaxInformation[GridNorm] =
 
 GridNorm[d_DataRegion] :=
  Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ ToListOfData[d^2, Flatten -> True]];
+
 
 (**********************************************************)
 (* CoordinateOutline                                      *)
@@ -564,6 +582,7 @@ CoordinateOutline[d_DataRegion] :=
 
   shapes[[ndims]]@@coords
 ];
+
 
 (**********************************************************)
 (* Coordinate                                             *)
@@ -638,23 +657,35 @@ NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
   ToDataRegion[deriv, origin, spacing]
 ];
 
+
 (**********************************************************)
 (* FilterNaNs                                             *)
 (**********************************************************)
 
+SyntaxInformation[FilterNaNs] =
+ {"ArgumentsPattern" -> {_}};
+
 FilterNaNs[d_DataRegion] :=
  MapDataRegion[If[NaNQ[#], Missing[], #] &, d];
+
 
 (**********************************************************)
 (* NaNQ                                                   *)
 (**********************************************************)
 
+SyntaxInformation[NaNQ] =
+ {"ArgumentsPattern" -> {_}};
+
 NaNQ[x_] :=
  Round[x] == -2147483648;
 
+
 (**********************************************************)
-(* ResampleDataRegions                                    *)
+(* ResampleDataRegion                                     *)
 (**********************************************************)
+
+SyntaxInformation[ResampleDataRegion] =
+ {"ArgumentsPattern" -> {_, _, _}};
 
 ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
   Module[{dFn, newData},
@@ -666,6 +697,11 @@ ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
 
       Error["Cannot resample DataRegions of dimension other than 2"]]
   ];
+
+
+(**********************************************************)
+(* ResampleDataRegions                                    *)
+(**********************************************************)
 
 intersectBoxes[boxes_] :=
   (* A "box" is a list of the form {x1, x2} where x1 and x2 are vectors
@@ -682,6 +718,9 @@ intersectBoxes[boxes_] :=
     If[Negative[x2 - x1], Error["Intersection of boxes is empty"]];
     {x1, x2}];
 
+SyntaxInformation[ResampleDataRegions] =
+ {"ArgumentsPattern" -> {_, ___}};
+
 ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
   Module[{dxs,ranges,x1,x2,dx},
     If[Length[ds] === 0, Return[{}]];
@@ -691,19 +730,32 @@ ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
     dx = Map[Min, Transpose[dxs]];
     Map[ResampleDataRegion[#, {x1, x2, dx}, p] &, ds]];
 
-(*******************************************************************************************)
-(* Redefine various built-in Mathematica functions to work on DataRegions                  *)
-(*******************************************************************************************)
 
-DataRegion/:
-Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
-  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
+(**********************************************************)
+(* Interpolation                                          *)
+(**********************************************************)
 
 DataRegion /: Interpolation[v_DataRegion, opts___] :=
   Module[{data = GetData[v], ndims = GetNumDimensions[v]},
     ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
 ];
 
+
+(*******************************************************************************************)
+(* Sub                                                                                     *)
+(*******************************************************************************************)
+
+DataRegion/:
+Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
+  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
+
+
+(**********************************************************)
+(* TimeDerivative                                         *)
+(**********************************************************)
+
+SyntaxInformation[TimeDerivative] =
+ {"ArgumentsPattern" -> {_, ___}};
 
 UFDWeights[m_, n_, s_, h_] :=
  CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
