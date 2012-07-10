@@ -736,8 +736,8 @@ ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
 (**********************************************************)
 
 DataRegion /: Interpolation[v_DataRegion, opts___] :=
-  Module[{data = GetData[v], ndims = GetNumDimensions[v]},
-    ListInterpolation[Transpose[data,Reverse[Range[ndims]]], GetDataRange[v], opts]
+  Module[{data = ToListOfData[v, Flatten -> False]},
+    ListInterpolation[data, CoordinateRanges[v], opts]
 ];
 
 
