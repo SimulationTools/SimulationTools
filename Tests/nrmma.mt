@@ -9,6 +9,7 @@ TestSuite[
 		"DataTable.mt",
 		"GridFunctions.mt",
 		"Memo.mt",
+		"NR.mt",
 		"RunFiles.mt",
 		"Waveforms.mt"
 		}]

@@ -8,6 +8,9 @@ BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable
   "Horizons`", "Kicks`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
   "SystemStatistics`", "Timers`", "Error`"}];
 
+FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
+NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
+
 ReadHamiltonianConstraintNorm::usage = "ReadHamiltonianConstraintNorm[run] reads the norm of the Hamiltonian constraint in run.";
 
 Data;
@@ -26,6 +29,30 @@ InitialDimensionlessSpin;
 Begin["`Private`"];
 
 RunDirectory := Global`RunDirectory;
+
+(**********************************************************)
+(* FilterNaNs                                             *)
+(**********************************************************)
+
+SyntaxInformation[FilterNaNs] =
+ {"ArgumentsPattern" -> {_}};
+
+SetAttributes[FilterNaNs, {Listable}];
+
+FilterNaNs[d_] :=
+ If[NaNQ[d], Missing[], d];
+
+
+(**********************************************************)
+(* NaNQ                                                   *)
+(**********************************************************)
+
+SyntaxInformation[NaNQ] =
+ {"ArgumentsPattern" -> {_}};
+
+NaNQ[x_] :=
+ Round[x] == -2147483648;
+
 
 (*--------------------------------------------------------------------
   Model fitting
