@@ -293,14 +293,20 @@ $NonDataRegionFunctions =
 $DataRegionFunctions =
   {Map};
 
-DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
- DataRegion[attributes[d], f[x, ToListOfData[d, Flatten -> False], y]] /;
-  MemberQ[$DataRegionFunctions, f] ||
-  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]);
+DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
+ MemberQ[$DataRegionFunctions, f] ||
+ (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
+ Module[{args},
+  (* TODO: Check DataRegions are on the same grid *)
+  args = {x, d, y} /. dr_DataRegion :> ToListOfData[dr, Flatten -> False];
+  DataRegion[attributes[d], f@@args]
+];
 
-DataRegion /: f_Symbol[x___, d_DataRegion, y___] :=
- f[x, ToListOfData[d, Flatten -> False], y] /;
-  MemberQ[$NonDataRegionFunctions, f] || MemberQ[Attributes[f], NumericFunction]
+DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
+ MemberQ[$NonDataRegionFunctions, f] || MemberQ[Attributes[f], NumericFunction] :=
+ Module[{},
+  f[x, ToListOfData[d, Flatten -> False], y]
+];
 
 (**********************************************************)
 (* Slab                                                   *)
