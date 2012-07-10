@@ -408,6 +408,7 @@ DataRegion /: Part[d_DataRegion, s__] :=
   origin  = Pick[MinCoordinates[d] + (start - 1) * CoordinateSpacings[d], dimensionExists];
   spacing = Pick[stride * CoordinateSpacings[d], dimensionExists];
 
+  (* TODO: Make sure other attributes get propagated *)
   ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
 ];
 
