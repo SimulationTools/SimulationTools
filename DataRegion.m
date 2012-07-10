@@ -458,7 +458,7 @@ DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
 (* Downsampled                                            *)
 (**********************************************************)
 
-SyntaxInformation[DonwSampled] =
+SyntaxInformation[DownSampled] =
  {"ArgumentsPattern" -> {_, _}};
 
 Downsampled[d_DataRegion, n_Integer] :=
