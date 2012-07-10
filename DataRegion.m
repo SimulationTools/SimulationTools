@@ -681,57 +681,6 @@ NaNQ[x_] :=
 
 
 (**********************************************************)
-(* ResampleDataRegion                                     *)
-(**********************************************************)
-
-SyntaxInformation[ResampleDataRegion] =
- {"ArgumentsPattern" -> {_, _, _}};
-
-ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
-  Module[{dFn, newData},
-    dFn = Interpolation[d, InterpolationOrder->p];
-    If[GetNumDimensions[d] === 2,
-      newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
-                                {y, x1[[2]], x2[[2]], dx[[2]]}];
-      ToDataRegion[newData, x1, dx, VariableName -> GetVariableName[d], Time -> GetTime[d]],
-
-      Error["Cannot resample DataRegions of dimension other than 2"]]
-  ];
-
-
-(**********************************************************)
-(* ResampleDataRegions                                    *)
-(**********************************************************)
-
-intersectBoxes[boxes_] :=
-  (* A "box" is a list of the form {x1, x2} where x1 and x2 are vectors
-     for the lower and upper coordinates of the box. *)
-  Module[{x1s, x2s, x1, x2},
-    x1s = Map[First, boxes];
-    x2s = Map[Last, boxes];
-    x1 = Map[Max, Transpose[x1s]];
-    x2 = Map[Min, Transpose[x2s]];
-
-    (* Could return a special value here if needed.  Alternatively,
-       could generically return a list of boxes, which would be empty
-       if the boxes don't intersect. *)
-    If[Negative[x2 - x1], Error["Intersection of boxes is empty"]];
-    {x1, x2}];
-
-SyntaxInformation[ResampleDataRegions] =
- {"ArgumentsPattern" -> {_, ___}};
-
-ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
-  Module[{dxs,ranges,x1,x2,dx},
-    If[Length[ds] === 0, Return[{}]];
-    dxs = Map[GetSpacing, ds];
-    ranges = Map[Transpose[GetDataRange[#]] &, ds];
-    {x1, x2} = intersectBoxes[ranges];
-    dx = Map[Min, Transpose[dxs]];
-    Map[ResampleDataRegion[#, {x1, x2, dx}, p] &, ds]];
-
-
-(**********************************************************)
 (* Interpolation                                          *)
 (**********************************************************)
 
@@ -825,6 +774,51 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 (**********************************************************************************)
 (* Deprecated functions *)
 (**********************************************************************************)
+
+(**********************************************************)
+(* ResampleDataRegion                                     *)
+(**********************************************************)
+
+ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
+  Module[{dFn, newData},
+    dFn = Interpolation[d, InterpolationOrder->p];
+    If[GetNumDimensions[d] === 2,
+      newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
+                                {y, x1[[2]], x2[[2]], dx[[2]]}];
+      ToDataRegion[newData, x1, dx, VariableName -> GetVariableName[d], Time -> GetTime[d]],
+
+      Error["Cannot resample DataRegions of dimension other than 2"]]
+  ];
+
+
+(**********************************************************)
+(* ResampleDataRegions                                    *)
+(**********************************************************)
+
+intersectBoxes[boxes_] :=
+  (* A "box" is a list of the form {x1, x2} where x1 and x2 are vectors
+     for the lower and upper coordinates of the box. *)
+  Module[{x1s, x2s, x1, x2},
+    x1s = Map[First, boxes];
+    x2s = Map[Last, boxes];
+    x1 = Map[Max, Transpose[x1s]];
+    x2 = Map[Min, Transpose[x2s]];
+
+    (* Could return a special value here if needed.  Alternatively,
+       could generically return a list of boxes, which would be empty
+       if the boxes don't intersect. *)
+    If[Negative[x2 - x1], Error["Intersection of boxes is empty"]];
+    {x1, x2}];
+
+ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
+  Module[{dxs,ranges,x1,x2,dx},
+    If[Length[ds] === 0, Return[{}]];
+    dxs = Map[GetSpacing, ds];
+    ranges = Map[Transpose[GetDataRange[#]] &, ds];
+    {x1, x2} = intersectBoxes[ranges];
+    dx = Map[Min, Transpose[dxs]];
+    Map[ResampleDataRegion[#, {x1, x2, dx}, p] &, ds]];
+
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
   DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
