@@ -267,7 +267,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
   coords = ToListOfCoordinates[d, Flatten -> False];
   data   = ToListOfData[d, Flatten -> False];
 
-  list = Transpose[{coords, data}, RotateRight[Range[dims + 1]]];
+  list = Map[Flatten, Transpose[{coords, data}, RotateRight[Range[dims + 1]]], {dims}];
 
   If[OptionValue[Flatten],
     Flatten[list, dims-1],
