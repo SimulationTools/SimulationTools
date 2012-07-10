@@ -507,7 +507,7 @@ Downsampled[d_DataRegion, n_Integer] :=
 ];
 
 Downsampled[d_DataRegion, n_List] :=
-  Take[data, Apply[Sequence, Map[{1, -1, #} &, n]]];
+  Take[d, Apply[Sequence, Transpose[{ConstantArray[1, ArrayDepth[d]], Dimensions[d], n}]]];
 
 
 (**********************************************************)
