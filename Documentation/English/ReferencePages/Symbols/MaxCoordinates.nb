@@ -11,25 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GetDimensions",
+ ButtonBox["MaxCoordinates",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/GetDimensions"]
+  ButtonData->"paclet:nrmma/ref/MaxCoordinates"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["GetDimensions", "ObjectName"],
+Cell["MaxCoordinates", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetDimensions",
+       ButtonBox["MaxCoordinates",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetDimensions"], "[", 
+        ButtonData->"paclet:nrmma/ref/MaxCoordinates"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the number of points in each dimension of a \
-DataRegion d."
+     "\[LineSeparator]returns a list of the coordinates of the last point in \
+each direction in the DataRegion d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +45,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"GetDimensions",
+WindowTitle->"MaxCoordinates",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"GetDimensions", "GETDIMENSIONS", "getdimensions"}, 
+    "keywords" -> {"MaxCoordinates", "MAXCOORDINATES", "maxcoordinates"}, 
     "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
      "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "GetDimensions[d] returns the number of points in each dimension of a \
-DataRegion d.", 
-    "synonyms" -> {"GetDimensions", "GETDIMENSIONS", "getdimensions"}, 
-    "title" -> "GetDimensions", "windowTitle" -> "GetDimensions", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/GetDimensions"}, "SearchTextTranslated" -> 
+    "MaxCoordinates[d] returns a list of the coordinates of the last point in \
+each direction in the DataRegion d.", 
+    "synonyms" -> {"MaxCoordinates", "MAXCOORDINATES", "maxcoordinates"}, 
+    "title" -> "MaxCoordinates", "windowTitle" -> "MaxCoordinates", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/MaxCoordinates"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

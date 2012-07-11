@@ -11,24 +11,24 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GetTime",
+ ButtonBox["CoordinateOutline",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/GetTime"]
+  ButtonData->"paclet:nrmma/ref/CoordinateOutline"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["GetTime", "ObjectName"],
+Cell["CoordinateOutline", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetTime",
+       ButtonBox["CoordinateOutline",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetTime"], "[", 
+        ButtonData->"paclet:nrmma/ref/CoordinateOutline"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the time attribute of a DataRegion d"
+     "\[LineSeparator]generates a graphical representation of the outline of d"
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -44,19 +44,23 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"GetTime",
+WindowTitle->"CoordinateOutline",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"GetTime", "GETTIME", "gettime"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "GetTime[d] returns the time attribute of a DataRegion d", 
-    "synonyms" -> {"GetTime", "GETTIME", "gettime"}, "title" -> "GetTime", 
-    "windowTitle" -> "GetTime", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/GetTime"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "CoordinateOutline", "COORDINATEOUTLINE", "coordinateoutline"}, "index" -> 
+    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
+    "DataRegion", "status" -> "None", "summary" -> 
+    "CoordinateOutline[d] generates a graphical representation of the outline \
+of d", "synonyms" -> {
+     "CoordinateOutline", "COORDINATEOUTLINE", "coordinateoutline"}, "title" -> 
+    "CoordinateOutline", "windowTitle" -> "CoordinateOutline", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/CoordinateOutline"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

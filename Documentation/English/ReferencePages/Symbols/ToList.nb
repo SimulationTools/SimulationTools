@@ -58,8 +58,53 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns the list content of the DataTable d as \
 {{x1,f1},{x2,f2},...,{xn,fn}}."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ToList",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ToList"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the N-dimensional array of coordinates and data \
+in DataRegion d."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Flatten", "True", Cell["", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -195,10 +240,11 @@ TaggingRules->{
     "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
     "paclet" -> "DataTable", "status" -> "None", "summary" -> 
     "ToList[d] returns the list content of the DataTable d as \
-{{x1,f1},{x2,f2},...,{xn,fn}}.", "synonyms" -> {"ToList", "TOLIST", "tolist"},
-     "title" -> "ToList", "windowTitle" -> "ToList", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ToList"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+{{x1,f1},{x2,f2},...,{xn,fn}}.\nToList[d] returns the N-dimensional array of \
+coordinates and data in DataRegion d.", 
+    "synonyms" -> {"ToList", "TOLIST", "tolist"}, "title" -> "ToList", 
+    "windowTitle" -> "ToList", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ToList"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

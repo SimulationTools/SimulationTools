@@ -11,25 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GetSpacing",
+ ButtonBox["MinCoordinates",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/GetSpacing"]
+  ButtonData->"paclet:nrmma/ref/MinCoordinates"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["GetSpacing", "ObjectName"],
+Cell["MinCoordinates", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetSpacing",
+       ButtonBox["MinCoordinates",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetSpacing"], "[", 
+        ButtonData->"paclet:nrmma/ref/MinCoordinates"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a list of length N giving the spacing of the \
-data in each dimension of the N-dimensional DataRegion d."
+     "\[LineSeparator]returns a list of the coordinates of the first point in \
+each direction in the DataRegion d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +45,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"GetSpacing",
+WindowTitle->"MinCoordinates",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"GetSpacing", "GETSPACING", "getspacing"}, "index" -> True,
-     "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
-    "GetSpacing[d] returns a list of length N giving the spacing of the data \
-in each dimension of the N-dimensional DataRegion d.", 
-    "synonyms" -> {"GetSpacing", "GETSPACING", "getspacing"}, "title" -> 
-    "GetSpacing", "windowTitle" -> "GetSpacing", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/GetSpacing"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "keywords" -> {"MinCoordinates", "MINCOORDINATES", "mincoordinates"}, 
+    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
+     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
+    "MinCoordinates[d] returns a list of the coordinates of the first point \
+in each direction in the DataRegion d.", 
+    "synonyms" -> {"MinCoordinates", "MINCOORDINATES", "mincoordinates"}, 
+    "title" -> "MinCoordinates", "windowTitle" -> "MinCoordinates", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/MinCoordinates"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

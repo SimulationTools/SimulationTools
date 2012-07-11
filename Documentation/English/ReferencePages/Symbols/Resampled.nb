@@ -11,28 +11,33 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SliceData",
+ ButtonBox["Resampled",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/SliceData"]
+  ButtonData->"paclet:nrmma/ref/Resampled"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["SliceData", "ObjectName"],
+Cell["Resampled", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["SliceData",
+       ButtonBox["Resampled",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SliceData"], "[", 
+        ButtonData->"paclet:nrmma/ref/Resampled"], "[", 
        StyleBox[
-        RowBox[{"d", ",", " ", "dim", ",", " ", "coord"}], "TI"], "]"}]], 
-      "InlineFormula"],
-     "\[LineSeparator]slices the DataRegion d through the dimension dim at \
-the coordinate location coord. The result is a DataRegion with dimensionality \
-1 lower than that of d. If coord is not given, it uses a default value of 1."
+        RowBox[{"d", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x0", ",", " ", "x1", ",", " ", "dx"}], "}"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"y0", ",", " ", "y1", ",", " ", "dy"}], "}"}], ",", " ", 
+           "..."}], "}"}]}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]resamples d to produce a DataRegion with coordinate \
+ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -48,23 +53,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"SliceData",
+WindowTitle->"Resampled",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"SliceData", "SLICEDATA", "slicedata"}, "index" -> True, 
+    "keywords" -> {"Resampled", "RESAMPLED", "resampled"}, "index" -> True, 
     "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
     "DataRegion", "status" -> "None", "summary" -> 
-    "SliceData[d, dim, coord] slices the DataRegion d through the dimension \
-dim at the coordinate location coord. The result is a DataRegion with \
-dimensionality 1 lower than that of d. If coord is not given, it uses a \
-default value of 1.", "synonyms" -> {"SliceData", "SLICEDATA", "slicedata"}, 
-    "title" -> "SliceData", "windowTitle" -> "SliceData", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/SliceData"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a \
+DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, \
+dy, ...}.", "synonyms" -> {"Resampled", "RESAMPLED", "resampled"}, "title" -> 
+    "Resampled", "windowTitle" -> "Resampled", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Resampled"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

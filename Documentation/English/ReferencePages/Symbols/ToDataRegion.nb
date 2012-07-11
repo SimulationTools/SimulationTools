@@ -87,8 +87,10 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Name", "None", Cell["", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "Time", "None", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Time", "Undefined", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "VariableName", "Undefined", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -126,17 +128,24 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["\<\
-d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20, 30}, {0.1, 0.2, 0.3}]\
-\>", "Input",
+Cell["d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20}, {0.1, 0.2}]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \
-\\(\\(10 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>"], "Output",
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataRegion", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
+     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
+  DataRegion`DataRegion,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -146,13 +155,20 @@ Cell["ToList[d]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"ToList", 
-  "[", "\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \\(\\(10 + \
-\\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>", "]"}]], "Output",
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.`", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.2`", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.4`", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.`", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.2`", ",", "5"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.4`", ",", "6"}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

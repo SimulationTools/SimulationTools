@@ -11,25 +11,24 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Outline",
+ ButtonBox["VariableName",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Outline"]
+  ButtonData->"paclet:nrmma/ref/VariableName"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Outline", "ObjectName"],
+Cell["VariableName", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Outline",
+       ButtonBox["VariableName",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Outline"], "[", 
+        ButtonData->"paclet:nrmma/ref/VariableName"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]generates a graphical representation of the outline of \
-a DataRegion d"
+     "\[LineSeparator]returns the variable name in DataRegion d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,19 +44,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Outline",
+WindowTitle->"VariableName",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Outline", "OUTLINE", "outline"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "Outline[d] generates a graphical representation of the outline of a \
-DataRegion d", "synonyms" -> {"Outline", "OUTLINE", "outline"}, "title" -> 
-    "Outline", "windowTitle" -> "Outline", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Outline"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"VariableName", "VARIABLENAME", "variablename"}, "index" -> 
+    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
+    "DataRegion", "status" -> "None", "summary" -> 
+    "VariableName[d] returns the variable name in DataRegion d.", 
+    "synonyms" -> {"VariableName", "VARIABLENAME", "variablename"}, "title" -> 
+    "VariableName", "windowTitle" -> "VariableName", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/VariableName"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

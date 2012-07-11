@@ -26,9 +26,9 @@ Cell[BoxData[GridBox[{
       BaseStyle->"Link",
       ButtonData->"paclet:nrmma/ref/NDerivative"]], "InlineFormula"],
      "\[LineSeparator][derivs][d] returns a numerical derivative of the \
-DataRegion d. The derivs argument should be of the same form a"
-    }]]},
-   {"", Cell["s in the first argument of Derivative."]}
+DataRegion d. The derivs argument should be of the same form as in the first \
+argument of Derivative."
+    }]]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -54,8 +54,8 @@ TaggingRules->{
     True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
     "DataTable", "status" -> "None", "summary" -> 
     "NDerivative[derivs][d] returns a numerical derivative of the DataRegion \
-d. The derivs argument should be of the same form a\ns in the first argument \
-of Derivative.", "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, 
+d. The derivs argument should be of the same form as in the first argument of \
+Derivative.", "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, 
     "title" -> "NDerivative", "windowTitle" -> "NDerivative", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "",
    "LinkTrails" -> ""},

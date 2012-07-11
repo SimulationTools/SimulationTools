@@ -21,9 +21,13 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"ColorMapLegend":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ColorMapLegend"], "DataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegion"], 
+        StripOnInput->False], {"Coordinate":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/Coordinate"], "CoordinateOutline":>
+       Documentation`HelpLookup["paclet:nrmma/ref/CoordinateOutline"], 
+       "CoordinateRanges":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/CoordinateRanges"], "CoordinateSpacings":>
+       Documentation`HelpLookup["paclet:nrmma/ref/CoordinateSpacings"], 
+       "DataRegion":>Documentation`HelpLookup["paclet:nrmma/ref/DataRegion"], 
        "DataRegionArrayPlot":>Documentation`HelpLookup[
        "paclet:nrmma/ref/DataRegionArrayPlot"], "DataRegionContourPlot":>
        Documentation`HelpLookup["paclet:nrmma/ref/DataRegionContourPlot"], 
@@ -38,7 +42,6 @@ Cell[BoxData[GridBox[{
        Documentation`HelpLookup[
        "paclet:nrmma/ref/DynamicDataRegionArrayPlot"], "EvaluateOnDataRegion":>
        Documentation`HelpLookup["paclet:nrmma/ref/EvaluateOnDataRegion"], 
-       "FilterNaNs":>Documentation`HelpLookup["paclet:nrmma/ref/FilterNaNs"], 
        "GetAttributes":>Documentation`HelpLookup[
        "paclet:nrmma/ref/GetAttributes"], "GetCoordinate":>
        Documentation`HelpLookup["paclet:nrmma/ref/GetCoordinate"], "GetData":>
@@ -51,29 +54,33 @@ Cell[BoxData[GridBox[{
        "GetSpacing":>Documentation`HelpLookup["paclet:nrmma/ref/GetSpacing"], 
        "GetTime":>Documentation`HelpLookup["paclet:nrmma/ref/GetTime"], 
        "GetVariableName":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/GetVariableName"], "MakeDataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MakeDataRegion"], 
-       "MapDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MapDataRegion"], "MapThreadDataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MapThreadDataRegion"], 
+       "paclet:nrmma/ref/GetVariableName"], "GridNorm":>
+       Documentation`HelpLookup["paclet:nrmma/ref/GridNorm"], 
+       "MakeDataRegion":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/MakeDataRegion"], "MapDataRegion":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MapDataRegion"], 
+       "MapThreadDataRegion":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/MapThreadDataRegion"], "MaxCoordinates":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MaxCoordinates"], 
        "MergeDataRegions":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MergeDataRegions"], "NaNQ":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/NaNQ"], "NormL2":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/NormL2"], "Outline":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/Outline"], "QuickSlicePlot":>
-       Documentation`HelpLookup["paclet:nrmma/ref/QuickSlicePlot"], 
+       "paclet:nrmma/ref/MergeDataRegions"], "MinCoordinates":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MinCoordinates"], "NormL2":>
+       Documentation`HelpLookup["paclet:nrmma/ref/NormL2"], "Outline":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Outline"], "Resampled":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Resampled"], 
        "ResampleDataRegion":>Documentation`HelpLookup[
        "paclet:nrmma/ref/ResampleDataRegion"], "ResampleDataRegions":>
        Documentation`HelpLookup["paclet:nrmma/ref/ResampleDataRegions"], 
-       "ScaledColorFunction":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ScaledColorFunction"], "SliceData":>
+       "SameGridQ":>Documentation`HelpLookup["paclet:nrmma/ref/SameGridQ"], 
+       "Slab":>Documentation`HelpLookup["paclet:nrmma/ref/Slab"], "SliceData":>
        Documentation`HelpLookup["paclet:nrmma/ref/SliceData"], "Strip":>
        Documentation`HelpLookup["paclet:nrmma/ref/Strip"], 
        "TableToDataRegion":>Documentation`HelpLookup[
        "paclet:nrmma/ref/TableToDataRegion"], "TimeDerivative":>
        Documentation`HelpLookup["paclet:nrmma/ref/TimeDerivative"], 
        "ToDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToDataRegion"]},
+       "paclet:nrmma/ref/ToDataRegion"], "VariableName":>
+       Documentation`HelpLookup["paclet:nrmma/ref/VariableName"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -175,17 +182,24 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["\<\
-d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20, 30}, {0.1, 0.2, 0.3}]\
-\>", "Input",
+Cell["d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20}, {0.1, 0.2}]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \
-\\(\\(10 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>"], "Output",
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataRegion", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
+     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
+  DataRegion`DataRegion,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -195,13 +209,20 @@ Cell["ToList[d]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"ToList", 
-  "[", "\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \\(\\(10 + \
-\\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>", "]"}]], "Output",
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.`", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.2`", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.4`", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.`", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.2`", ",", "5"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.4`", ",", "6"}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -210,8 +231,21 @@ Cell[CellGroupData[{
 Cell["d2 = Map[Sin,d]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["\<\"DataRegion[<unknown name>, {3, 2}, <unknown range>]\"\>"], \
-"Output",
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataRegion", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
+     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
+  DataRegion`DataRegion,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -221,9 +255,26 @@ Cell["ToList[d2]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"ToList", 
-  "[", "\<\"DataRegion[<unknown name>, {3, 2}, <unknown range>]\"\>", 
-  "]"}]], "Output",
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.`", ",", 
+     RowBox[{"Sin", "[", "1", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.2`", ",", 
+     RowBox[{"Sin", "[", "2", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.4`", ",", 
+     RowBox[{"Sin", "[", "3", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.`", ",", 
+     RowBox[{"Sin", "[", "4", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.2`", ",", 
+     RowBox[{"Sin", "[", "5", "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.4`", ",", 
+     RowBox[{"Sin", "[", "6", "]"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -233,17 +284,20 @@ Cell["d3 = MapThread[f,{d,d2}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"MapThread", "[", 
-  RowBox[{"f", ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \
-\\(\\(10 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>", 
-     ",", "\<\"DataRegion[<unknown name>, {3, 2}, <unknown range>]\"\>"}], 
-    "}"}]}], "]"}]], "Output",
+ TagBox[
+  RowBox[{"DataRegion", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
+     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
+  DataRegion`DataRegion,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -253,18 +307,38 @@ Cell["ToList[d3]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"ToList", "[", 
-  RowBox[{"MapThread", "[", 
-   RowBox[{"f", ",", 
-    RowBox[{"{", 
-     RowBox[{"\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \
-\\(\\(10 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>", 
-      ",", "\<\"DataRegion[<unknown name>, {3, 2}, <unknown range>]\"\>"}], 
-     "}"}]}], "]"}], "]"}]], "Output",
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"1", ",", 
+       RowBox[{"Sin", "[", "1", "]"}]}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.2`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"2", ",", 
+       RowBox[{"Sin", "[", "2", "]"}]}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.`", ",", "20.4`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"3", ",", 
+       RowBox[{"Sin", "[", "3", "]"}]}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"4", ",", 
+       RowBox[{"Sin", "[", "4", "]"}]}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.2`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"5", ",", 
+       RowBox[{"Sin", "[", "5", "]"}]}], "]"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"10.1`", ",", "20.4`", ",", 
+     RowBox[{"f", "[", 
+      RowBox[{"6", ",", 
+       RowBox[{"Sin", "[", "6", "]"}]}], "]"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
@@ -288,9 +362,39 @@ Cell[TextData[ButtonBox["SEE ALSO",
 Cell[TextData[{
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ColorMapLegend",
+   ButtonBox["Coordinate",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ColorMapLegend"],
+    ButtonData->"paclet:nrmma/ref/Coordinate"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["CoordinateOutline",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/CoordinateOutline"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["CoordinateRanges",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/CoordinateRanges"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["CoordinateSpacings",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/CoordinateSpacings"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -398,16 +502,6 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["FilterNaNs",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/FilterNaNs"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
    ButtonBox["GetAttributes",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/GetAttributes"],
@@ -508,6 +602,16 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
+   ButtonBox["GridNorm",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/GridNorm"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
    ButtonBox["MakeDataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/MakeDataRegion"],
@@ -538,6 +642,16 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
+   ButtonBox["MaxCoordinates",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/MaxCoordinates"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
    ButtonBox["MergeDataRegions",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/MergeDataRegions"],
@@ -548,9 +662,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["NaNQ",
+   ButtonBox["MinCoordinates",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/NaNQ"],
+    ButtonData->"paclet:nrmma/ref/MinCoordinates"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -578,9 +692,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["QuickSlicePlot",
+   ButtonBox["Resampled",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/QuickSlicePlot"],
+    ButtonData->"paclet:nrmma/ref/Resampled"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -608,9 +722,19 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ScaledColorFunction",
+   ButtonBox["SameGridQ",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ScaledColorFunction"],
+    ButtonData->"paclet:nrmma/ref/SameGridQ"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["Slab",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/Slab"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -661,6 +785,16 @@ Cell[TextData[{
    ButtonBox["ToDataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/ToDataRegion"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["VariableName",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/VariableName"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],

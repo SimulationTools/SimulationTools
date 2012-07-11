@@ -411,8 +411,21 @@ Cell[BoxData[
     RowBox[{"RefinementLevel", "\[Rule]", "3"}]}], "]"}]}]], "Input",
  CellLabel->"In[7]:="],
 
-Cell[BoxData["\<\"DataRegion[ML_BSSN::phi, {41, 81}, \\!\\({\\(\\({0.`, 10.`}\
-\\)\\), \\(\\({\\(\\(-10.`\\)\\), 10.`}\\)\\)}\\)]\"\>"], "Output",
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataRegion", "[", 
+   RowBox[{
+    RowBox[{"ML_BSSN", "::", "phi"}], ",", "\<\"<\"\>", "\[InvisibleSpace]", 
+    "81", ",", "41", "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0.`", ",", "20.`"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "10.`"}], ",", "0.`"}], "}"}]}], "}"}]}], "]"}],
+  DataRegion`DataRegion,
+  Editable->False]], "Output",
  CellLabel->"Out[7]="]
 }, Open  ]],
 

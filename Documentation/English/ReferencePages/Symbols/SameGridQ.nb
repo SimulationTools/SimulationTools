@@ -11,25 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GetData",
+ ButtonBox["SameGridQ",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/GetData"]
+  ButtonData->"paclet:nrmma/ref/SameGridQ"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["GetData", "ObjectName"],
+Cell["SameGridQ", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetData",
+       ButtonBox["SameGridQ",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetData"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the N-dimensional array of data in DataRegion \
-d"
+        ButtonData->"paclet:nrmma/ref/SameGridQ"], "[", 
+       StyleBox[
+        RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns True if d1 and d2 are DataRegions defined on \
+the same grid (origin, spacing, size)."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,19 +46,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"GetData",
+WindowTitle->"SameGridQ",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"GetData", "GETDATA", "getdata"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "GetData[d] returns the N-dimensional array of data in DataRegion d", 
-    "synonyms" -> {"GetData", "GETDATA", "getdata"}, "title" -> "GetData", 
-    "windowTitle" -> "GetData", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/GetData"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"SameGridQ", "SAMEGRIDQ", "samegridq"}, "index" -> True, 
+    "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
+    "DataRegion", "status" -> "None", "summary" -> 
+    "SameGridQ[d1, d2] returns True if d1 and d2 are DataRegions defined on \
+the same grid (origin, spacing, size).", 
+    "synonyms" -> {"SameGridQ", "SAMEGRIDQ", "samegridq"}, "title" -> 
+    "SameGridQ", "windowTitle" -> "SameGridQ", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/SameGridQ"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

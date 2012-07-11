@@ -11,25 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NormL2",
+ ButtonBox["Coordinate",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/NormL2"]
+  ButtonData->"paclet:nrmma/ref/Coordinate"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["NormL2", "ObjectName"],
+Cell["Coordinate", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["NormL2",
+       ButtonBox["Coordinate",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/NormL2"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the L2,dx norm of the points in the DataRegion \
-d.  This is the discrete approximation to the L2 norm."
+        ButtonData->"paclet:nrmma/ref/Coordinate"], "[", 
+       StyleBox[
+        RowBox[{"d", ",", " ", "i"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a DataRegion of the same shape as d whose data \
+is the i coordinate of d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,20 +46,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"NormL2",
+WindowTitle->"Coordinate",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"NormL2", "NORML2", "norml2"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "NormL2[d] returns the L2,dx norm of the points in the DataRegion d.  \
-This is the discrete approximation to the L2 norm.", 
-    "synonyms" -> {"NormL2", "NORML2", "norml2"}, "title" -> "NormL2", 
-    "windowTitle" -> "NormL2", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/NormL2"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"Coordinate", "COORDINATE", "coordinate"}, "index" -> True,
+     "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
+    "DataRegion", "status" -> "None", "summary" -> 
+    "Coordinate[d, i] returns a DataRegion of the same shape as d whose data \
+is the i coordinate of d.", 
+    "synonyms" -> {"Coordinate", "COORDINATE", "coordinate"}, "title" -> 
+    "Coordinate", "windowTitle" -> "Coordinate", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Coordinate"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

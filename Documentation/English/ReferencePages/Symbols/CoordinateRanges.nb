@@ -11,25 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GetAttributes",
+ ButtonBox["CoordinateRanges",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/GetAttributes"]
+  ButtonData->"paclet:nrmma/ref/CoordinateRanges"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["GetAttributes", "ObjectName"],
+Cell["CoordinateRanges", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["GetAttributes",
+       ButtonBox["CoordinateRanges",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/GetAttributes"], "[", 
+        ButtonData->"paclet:nrmma/ref/CoordinateRanges"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the list of key -> value attributes of \
-DataRegion d."
+     "\[LineSeparator]returns the data range of a DataRegion. This is a list \
+of {min,max} pairs, each corresponding to one dimension of d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +45,23 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"GetAttributes",
+WindowTitle->"CoordinateRanges",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"GetAttributes", "GETATTRIBUTES", "getattributes"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "GetAttributes[d] returns the list of key -> value attributes of \
-DataRegion d.", 
-    "synonyms" -> {"GetAttributes", "GETATTRIBUTES", "getattributes"}, 
-    "title" -> "GetAttributes", "windowTitle" -> "GetAttributes", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/GetAttributes"}, "SearchTextTranslated" -> 
+    "keywords" -> {
+     "CoordinateRanges", "COORDINATERANGES", "coordinateranges"}, "index" -> 
+    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
+    "DataRegion", "status" -> "None", "summary" -> 
+    "CoordinateRanges[d] returns the data range of a DataRegion. This is a \
+list of {min,max} pairs, each corresponding to one dimension of d.", 
+    "synonyms" -> {
+     "CoordinateRanges", "COORDINATERANGES", "coordinateranges"}, "title" -> 
+    "CoordinateRanges", "windowTitle" -> "CoordinateRanges", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/CoordinateRanges"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

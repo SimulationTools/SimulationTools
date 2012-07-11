@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["NR",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/NR"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["NaNQ",
   BaseStyle->{"Link", "LinkTrail"},
@@ -54,8 +54,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"NaNQ", "NANQ", "nanq"}, "index" -> 
-    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
+    True, "label" -> "nrmma/NR Symbol", "language" -> "en", "paclet" -> "NR", 
+    "status" -> "None", "summary" -> 
     "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it \
 is not.  Mathematica deals strangely with NaN values imported from other \
 programs.  This function was developed for use with the h5mma package for \

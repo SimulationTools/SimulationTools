@@ -77,6 +77,41 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Flatten", "True", Cell["", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell[TextData[ButtonBox["EXAMPLES",
  BaseStyle->None,
  Appearance->{Automatic, None},
@@ -122,17 +157,24 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["\<\
-dr = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20, 30}, {0.1, 0.2, 0.3}]\
-\>", "Input",
+Cell["dr = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20}, {0.1, 0.2}]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["\<\"DataRegion[<unknown name>, {3, 2}, \\!\\({\\(\\({10, \
-\\(\\(10 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({20, \\(\\(20 + \\(\\(\\(\\({2, \
-1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, 0.3`}\\)\\)\\)\\)\\)\\)}\\)\\), \\(\\({30, \
-\\(\\(30 + \\(\\(\\(\\({2, 1}\\)\\)\\\\ \\(\\({0.1`, 0.2`, \
-0.3`}\\)\\)\\)\\)\\)\\)}\\)\\)}\\)]\"\>"], "Output",
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataRegion", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
+     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
+  DataRegion`DataRegion,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -143,11 +185,8 @@ Cell["ToListOfData[dr]", "Input",
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"1", ",", "2", ",", "3"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"4", ",", "5", ",", "6"}], "}"}]}], "}"}]], "Output",
+  RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6"}], 
+  "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

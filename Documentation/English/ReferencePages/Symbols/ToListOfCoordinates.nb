@@ -59,8 +59,53 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]a list of the coordinates part of the DataTable d."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ToListOfCoordinates",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the N-dimensional array of coordinates of \
+DataRegion d."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "Flatten", "True", Cell["", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -212,7 +257,9 @@ TaggingRules->{
     "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
     "paclet" -> "DataTable", "status" -> "None", "summary" -> 
     "ToListOfCoordinates[d] a list of the coordinates part of the DataTable \
-d.", "synonyms" -> {
+d.\nToListOfCoordinates[d] returns the N-dimensional array of coordinates of \
+DataRegion d.", 
+    "synonyms" -> {
      "ToListOfCoordinates", "TOLISTOFCOORDINATES", "tolistofcoordinates"}, 
     "title" -> "ToListOfCoordinates", "windowTitle" -> "ToListOfCoordinates", 
     "type" -> "Symbol", "uri" -> "nrmma/ref/ToListOfCoordinates"}, 

@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["NR",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/NR"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["FilterNaNs",
   BaseStyle->{"Link", "LinkTrail"},
@@ -53,8 +53,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"FilterNaNs", "FILTERNANS", "filternans"}, "index" -> True,
-     "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
+     "label" -> "nrmma/NR Symbol", "language" -> "en", "paclet" -> "NR", 
+    "status" -> "None", "summary" -> 
     "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d \
 with Missing[], which is Mathematica's notation for missing data.", 
     "synonyms" -> {"FilterNaNs", "FILTERNANS", "filternans"}, "title" -> 

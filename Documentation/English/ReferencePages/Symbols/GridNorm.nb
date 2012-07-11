@@ -11,31 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegionPart",
+ ButtonBox["GridNorm",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/DataRegionPart"]
+  ButtonData->"paclet:nrmma/ref/GridNorm"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["DataRegionPart", "ObjectName"],
+Cell["GridNorm", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["DataRegionPart",
+       ButtonBox["GridNorm",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/DataRegionPart"], "[", 
-       StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"a", ";;", "b"}], ",", " ", 
-           RowBox[{"c", ";;", "d"}], ",", " ", "..."}], "}"}]}], "TI"], 
-       "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the part of d which lies between the coordinates \
-a;;b, c;;d, etc."
+        ButtonData->"paclet:nrmma/ref/GridNorm"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the L2,dx norm of d. This is the discrete \
+approximation to the L2 norm."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -51,22 +45,20 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"DataRegionPart",
+WindowTitle->"GridNorm",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
-    "keywords" -> {"DataRegionPart", "DATAREGIONPART", "dataregionpart"}, 
+   "context" -> "nrmma`", "keywords" -> {"GridNorm", "GRIDNORM", "gridnorm"}, 
     "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
      "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "DataRegionPart[d, {a;;b, c;;d, ...}] gives the part of d which lies \
-between the coordinates a;;b, c;;d, etc.", 
-    "synonyms" -> {"DataRegionPart", "DATAREGIONPART", "dataregionpart"}, 
-    "title" -> "DataRegionPart", "windowTitle" -> "DataRegionPart", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/DataRegionPart"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "GridNorm[d] returns the L2,dx norm of d. This is the discrete \
+approximation to the L2 norm.", 
+    "synonyms" -> {"GridNorm", "GRIDNORM", "gridnorm"}, "title" -> "GridNorm",
+     "windowTitle" -> "GridNorm", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/GridNorm"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
