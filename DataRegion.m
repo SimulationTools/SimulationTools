@@ -29,9 +29,6 @@ Downsampled::usage = "Downsampled[d, n] returns a version of d with only every n
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 
-(* TODO: decide if this is a good name *)
-Intersection::usage = "Intersection[{d1, d2, ...}] returns a list of DataRegions {D1, D2, ...} which are resampled versions of the DataRegions {d1, d2, ...} over the intersection of their bounding boxes using interpolation of order p.  The new DataRegions contain the same points.";
-
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form as in the first argument of Derivative.";
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
