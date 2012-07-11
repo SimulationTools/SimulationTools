@@ -202,6 +202,10 @@ SyntaxInformation[ToDataRegion] =
 ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
  Module[{precision},
   precision = Precision[{origin, spacing}];
+  If[ArrayDepth[data] =!= Length[origin],
+    Error["ToDataRegion: Data and origin have inconsistent dimensions"]];
+  If[ArrayDepth[data] =!= Length[spacing],
+    Error["ToDataRegion: Data and spacing have inconsistent dimensions"]];
   DataRegion[
     {VariableName -> OptionValue["VariableName"],
      Origin -> SetPrecision[origin, precision],
