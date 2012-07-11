@@ -299,7 +299,7 @@ $NonDataRegionFunctions =
   {ArrayDepth, Dimensions, Total, Mean, Position, Extract};
 
 $DataRegionFunctions =
-  {Map, FilterNaNs};
+  {FilterNaNs};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
  MemberQ[$DataRegionFunctions, f] ||
@@ -474,6 +474,20 @@ DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
    dims    = Dimensions /@ {dr1, dr2};
 
    (SameQ@@origin) && (SameQ@@spacing) && (SameQ@@dims)
+];
+
+
+(**********************************************************)
+(* Map                                                    *)
+(**********************************************************)
+
+DataRegion /: Map[f_, d_DataRegion, n_:Automatic] :=
+ Module[{depth},
+  depth = {ArrayDepth[d]};
+  If[n =!= Automatic && n =!= depth,
+  	Error["Map can only operate on the deepest level in a DataRegion."];
+  ];
+  DataRegion[attributes[d], Map[f, ToListOfData[d, Flatten -> False], depth]]
 ];
 
 
