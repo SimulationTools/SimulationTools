@@ -96,9 +96,13 @@ Test[
 (* Map *)
 (****************************************************************)
 Test[
-    Map[Sqrt[#/2] &, data]
+    Map[f, dr]
     ,
-    ToListOfData[Map[Sqrt[#/2] &, dr], Flatten -> False]
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.},
+    	Spacing -> {0.1, 0.2, 0.3},
+    	DataRegion`Private`Time -> 42},
+    	{{{f[111], f[112], f[113], f[114]}, {f[121], f[122], f[123], f[124]}, {f[131], f[132], f[133], f[134]}},
+         {{f[211], f[212], f[213], f[214]}, {f[221], f[222], f[223], f[224]}, {f[231], f[232], f[233], f[234]}}}]
     ,
     TestID->"Map"
 ]
