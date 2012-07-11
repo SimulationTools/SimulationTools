@@ -1046,7 +1046,6 @@ MapThreadDataRegion[f_, drs_] :=
     newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
     DataRegion[attrs, newData]];
 
-(* TODO: generalise this to arbitrary number of dimensions *)
 (* SetAttributes[EvaluateOnDataRegion, HoldFirst]; *)
 EvaluateOnDataRegion[exprp_, {t_, x_, y_, z_}, dp_DataRegion] :=
   Module[
