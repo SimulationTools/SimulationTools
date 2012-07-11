@@ -483,12 +483,15 @@ DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
 
 Unprotect[MapThread];
 
-MapThread[f_, ds:List[DataRegion[___]..]] :=
+MapThread[f_, ds:List[DataRegion[___]..], n_:Automatic] :=
  Module[{depth},
   If[Length[DeleteDuplicates[ds, SameGridQ]] =!= 1,
   	Error["MapThread is only supported for DataRegions on the same grid."];
   ];
   depth = ArrayDepth[ds[[1]]];
+  If[n =!= Automatic && n =!= depth,
+  	Error["MapThread can only operate on the deepest level in a DataRegion."];
+  ];
   DataRegion[attributes[ds[[1]]], MapThread[f, (ToListOfData[#, Flatten -> False] &) /@ ds, depth]]
 ];
 
