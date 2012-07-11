@@ -262,7 +262,7 @@ SyntaxInformation[ToList] =
 
 DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
  Module[{dims, coords, data, list},
-  dims   = GetNumDimensions[d];
+  dims   = ArrayDepth[d];
   coords = ToListOfCoordinates[d, Flatten -> False];
   data   = ToListOfData[d];
 
