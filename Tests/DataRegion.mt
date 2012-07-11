@@ -144,7 +144,7 @@ parts = {
 
 partTest[p_] :=
  Test[
-    ToListOfData[dr[[p]], Flatten -> False]
+    ToListOfData[dr[[p]]]
     ,
     data[[p]]
     ,
@@ -165,7 +165,7 @@ slabs = {
  
 slatTest[p_, s] :=
  Test[
-    ToListOfData[dr[[p]], Flatten -> False]
+    ToListOfData[dr[[p]]]
     ,
     data[[p]]
     ,
@@ -178,7 +178,7 @@ Scan[slabTest, Transpose[parts[[1;;5]], slabs]];
 (* Take *)
 (****************************************************************)
 Test[
-    ToListOfData[Take[dr, 2], Flatten -> False]
+    ToListOfData[Take[dr, 2]]
     ,
     Take[data, 2]
     ,
@@ -186,7 +186,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Take[dr, All, 3], Flatten -> False]
+    ToListOfData[Take[dr, All, 3]]
     ,
     Take[data, All, 3]
     ,
@@ -194,7 +194,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Take[dr, All, {3}], Flatten -> False]
+    ToListOfData[Take[dr, All, {3}]]
     ,
     Take[data, All, {3}]
     ,
@@ -202,7 +202,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Take[dr, All, {2, 3}], Flatten -> False]
+    ToListOfData[Take[dr, All, {2, 3}]]
     ,
     Take[data, All, {2, 3}]
     ,
@@ -210,7 +210,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Take[dr, All, {1, 3, 2}], Flatten -> False]
+    ToListOfData[Take[dr, All, {1, 3, 2}]]
     ,
     Take[data, All, {1, 3, 2}]
     ,
@@ -222,7 +222,7 @@ Test[
 (* Drop *)
 (****************************************************************)
 Test[
-    ToListOfData[Drop[dr, None, 2], Flatten -> False]
+    ToListOfData[Drop[dr, None, 2]]
     ,
     Drop[data, None, 2]
     ,
@@ -230,7 +230,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Drop[dr, None, 2], Flatten -> False]
+    ToListOfData[Drop[dr, None, 2]]
     ,
     Drop[data, None, 2]
     ,
@@ -250,7 +250,7 @@ Test[
 (* Coordinate *)
 (****************************************************************)
 Test[
-    ToListOfData[Coordinate[dr, 1], Flatten -> False][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
+    ToListOfData[Coordinate[dr, 1]][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
     ,
     {10.`, 10.1`, 10.`, 10.`, 10.1`, 10.1`, 10.`, 10.1`}
     ,
@@ -258,7 +258,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Coordinate[dr, 2], Flatten -> False][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
+    ToListOfData[Coordinate[dr, 2]][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
     ,
     {20.`, 20.`, 20.2`, 20.`, 20.2`, 20.`, 20.2`, 20.2`}
     ,
@@ -266,7 +266,7 @@ Test[
 ]
 
 Test[
-    ToListOfData[Coordinate[dr, 3], Flatten -> False][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
+    ToListOfData[Coordinate[dr, 3]][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
     ,
     {30.`, 30.`, 30.`, 30.3`, 30.`, 30.3`, 30.3`, 30.3`}
     ,
@@ -278,7 +278,7 @@ Test[
 (* NDerivative *)
 (****************************************************************)
 Test[
-    Quiet[DeleteDuplicates[ToListOfData[NDerivative[dr, 3]]], NDSolve`FiniteDifferenceDerivative::ordred]
+    Quiet[DeleteDuplicates[Flatten[ToListOfData[NDerivative[dr, 3]]]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
     {3.3333333333333854, 3.333333333333364, 3.3333333333333286, 3.3333333333333712, 3.333333333333428, 3.3333333333333997, 3.3333333333332575, 3.3333333333333144, 3.333333333333485, 3.333333333333286, 3.33333333333303}
     ,
@@ -286,7 +286,7 @@ Test[
 ]
 
 Test[
-    Quiet[DeleteDuplicates[ToListOfData[NDerivative[dr, 2]]], NDSolve`FiniteDifferenceDerivative::ordred]
+    Quiet[DeleteDuplicates[Flatten[ToListOfData[NDerivative[dr, 2]]]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
     {50.00000000000023, 50.00000000000017, 50.00000000000006, 50.000000000000114, 50., 50.000000000000455, 49.99999999999977}
     ,
@@ -294,7 +294,7 @@ Test[
 ]
 
 Test[
-    Quiet[DeleteDuplicates[ToListOfData[NDerivative[dr, 1]]], NDSolve`FiniteDifferenceDerivative::ordred]
+    Quiet[DeleteDuplicates[Flatten[ToListOfData[NDerivative[dr, 1]]]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
     {1000.0000000000034, 1000.0000000000036, 1000.0000000000039}
     ,
@@ -323,26 +323,6 @@ Test[
     Extract[data, {{1, 2, 3}}]
     ,
     TestID->"Extract"
-]
-
-
-(****************************************************************)
-(* ToListOfData *)
-(****************************************************************)
-Test[
-    ToListOfData[dr, Flatten -> False][[1, 2, 3]]
-    ,
-    123
-    ,
-    TestID->"ToListOfDataNoFlatten"
-]
-
-Test[
-    ToListOfData[dr, Flatten -> True][[7]]
-    ,
-    123
-    ,
-    TestID->"ToListOfDataFlatten"
 ]
 
 
@@ -477,7 +457,7 @@ test[f_] :=
  Test[
    {f[data], CoordinateRanges[f[dr]]}
    ,
-   {ToListOfData[f[dr], Flatten -> False], CoordinateRanges[dr]}
+   {ToListOfData[f[dr]], CoordinateRanges[dr]}
    ,
    TestID -> "Built-in function: "<>ToString[f]
  ]
@@ -584,7 +564,7 @@ Test[
 (* ToListOfData *)
 (****************************************************************)
 Test[
-    ToListOfData[dr, Flatten -> False]
+    ToListOfData[dr]
     ,
     data
     ,

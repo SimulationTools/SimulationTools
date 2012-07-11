@@ -218,23 +218,18 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
 (* ToListOfData                                           *)
 (**********************************************************)
 
-Options[ToListOfData] = {"Flatten" -> True};
-
 SyntaxInformation[ToListOfData] =
- {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+ {"ArgumentsPattern" -> {_}};
 
-DataRegion /: ToListOfData[d_DataRegion, OptionsPattern[]] :=
-  If[OptionValue[Flatten],
-    Flatten[data[d]],
-    data[d]
-  ];
+DataRegion /: ToListOfData[d_DataRegion] :=
+  data[d];
 
 
 (**********************************************************)
 (* ToListOfCoordinates                                    *)
 (**********************************************************)
 
-Options[ToListOfCoordinates] = {"Flatten" -> True};
+Options[ToListOfCoordinates] = {"Flatten" -> False};
 
 SyntaxInformation[ToListOfCoordinates] =
  {"ArgumentsPattern" -> {_, OptionsPattern[]}};
@@ -245,7 +240,7 @@ DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
   origin  = MinCoordinates[d];
   spacing = CoordinateSpacings[d];
 
-  coords = ToListOfData[#, Flatten -> False] & /@
+  coords = ToListOfData[#] & /@
     (Coordinate[d, #] & /@ Range[dims]);
   coordList = Transpose[coords, RotateRight[Range[dims + 1]]];
 
@@ -260,7 +255,7 @@ DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
 (* ToList                                                 *)
 (**********************************************************)
 
-Options[ToList] = {"Flatten" -> True};
+Options[ToList] = {"Flatten" -> False};
 
 SyntaxInformation[ToList] =
  {"ArgumentsPattern" -> {_, OptionsPattern[]}};
@@ -269,7 +264,7 @@ DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
  Module[{dims, coords, data, list},
   dims   = GetNumDimensions[d];
   coords = ToListOfCoordinates[d, Flatten -> False];
-  data   = ToListOfData[d, Flatten -> False];
+  data   = ToListOfData[d];
 
   list = Map[Flatten, Transpose[{coords, data}, RotateRight[Range[dims + 1]]], {dims}];
 
@@ -303,14 +298,14 @@ DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
  Module[{args},
   (* TODO: Check DataRegions are on the same grid *)
-  args = {x, d, y} /. dr_DataRegion :> ToListOfData[dr, Flatten -> False];
+  args = {x, d, y} /. dr_DataRegion :> ToListOfData[dr];
   DataRegion[attributes[d], f@@args]
 ];
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
  MemberQ[$NonDataRegionFunctions, f] || MemberQ[Attributes[f], NumericFunction] :=
  Module[{},
-  f[x, ToListOfData[d, Flatten -> False], y]
+  f[x, ToListOfData[d], y]
 ];
 
 
@@ -402,7 +397,7 @@ DataRegion /: Part[d_DataRegion, s__] :=
   {start, stride} = Transpose[makeExplicit /@ partSpec];
 
   (* Slab the data *)
-  data    = Part[ToListOfData[d, Flatten -> False], s];
+  data    = Part[ToListOfData[d], s];
   origin  = Pick[MinCoordinates[d] + (start - 1) * CoordinateSpacings[d], dimensionExists];
   spacing = Pick[stride * CoordinateSpacings[d], dimensionExists];
 
@@ -484,7 +479,7 @@ DataRegion /: Map[f_, d_DataRegion, n_:Automatic] :=
   If[n =!= Automatic && n =!= depth,
   	Error["Map can only operate on the deepest level in a DataRegion."];
   ];
-  DataRegion[attributes[d], Map[f, ToListOfData[d, Flatten -> False], depth]]
+  DataRegion[attributes[d], Map[f, ToListOfData[d], depth]]
 ];
 
 
@@ -503,7 +498,7 @@ MapThread[f_, ds:List[DataRegion[___]..], n_:Automatic] :=
   If[n =!= Automatic && n =!= depth,
   	Error["MapThread can only operate on the deepest level in a DataRegion."];
   ];
-  DataRegion[attributes[ds[[1]]], MapThread[f, (ToListOfData[#, Flatten -> False] &) /@ ds, depth]]
+  DataRegion[attributes[ds[[1]]], MapThread[f, ToListOfData /@ ds, depth]]
 ];
 
 Protect[MapThread];
@@ -583,7 +578,7 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
   ];
 
   dataRange =  If[ndims==1, CoordinateRanges[d][[1]], CoordinateRanges[d]];
-  data = ToListOfData[d, Flatten -> False];
+  data = ToListOfData[d];
   plotFunction[data, args, DataRange -> dataRange]
 ];
 
@@ -602,7 +597,7 @@ SyntaxInformation[GridNorm] =
  {"ArgumentsPattern" -> {_}};
 
 GridNorm[d_DataRegion] :=
- Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ ToListOfData[d^2, Flatten -> True]];
+ Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[d^2]]];
 
 
 (**********************************************************)
@@ -699,7 +694,7 @@ NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
 
   (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
   grid = origin + spacing (Range /@ dimensions-1);
-  data = ToListOfData[d, Flatten->False];
+  data = ToListOfData[d];
 
   deriv = NDSolve`FiniteDifferenceDerivative[Derivative[derivs], grid, data, opts];
 
@@ -712,7 +707,7 @@ NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
 (**********************************************************)
 
 DataRegion /: Interpolation[v_DataRegion, opts___] :=
-  Module[{data = ToListOfData[v, Flatten -> False]},
+  Module[{data = ToListOfData[v]},
     ListInterpolation[data, CoordinateRanges[v], opts]
 ];
 
