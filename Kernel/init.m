@@ -85,10 +85,15 @@ Module[{packages =
 
   (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
+    Module[{cleanArg,yy},
+
+    cleanArg[arg_] :=
+      arg /. ((y_Symbol)[xs___] /; MemberQ[Attributes[y], ReadProtected]) -> yy; (* Not ideal, but robust *)
+
     x[args___] :=
      If[$NRMMADebug===True, Error`CatchError, Identity][Error`ErrorMessage[General::invargs, ToString[x] <> "[" <>
-       StringJoin[Riffle[ToString[#] & /@ {args}, ", "]] <>
-       "]"]];
+       StringJoin[Riffle[ToString[Short[InputForm[cleanArg[#]]]] & /@ {args}, ", "]] <>
+       "]"]]];
 
 SetAttributes[CheckAssignments, HoldAll];
 CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]] :=
