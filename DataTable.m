@@ -9,7 +9,7 @@ ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a Da
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f1},{x2,f2},...,{xn,fn}}.";
 DataRegion`ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
-ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
+DataRegion`ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
 Downsampled::usage = "Downsampled[d, n] returns a version of DataTable d with only every nth element, starting from the first.";
 (* TODO: Deprecate this *)
@@ -163,7 +163,7 @@ DataRegion`ToListOfData[DataTable[l_, ___]] :=
 (* ToListOfCoordinates *)
 (****************************************************************)
 
-ToListOfCoordinates[DataTable[l_, ___]] :=
+DataRegion`ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
 
 (****************************************************************)
