@@ -85,10 +85,10 @@ Module[{packages =
 
   (* Report an error when a function is called with unrecognised arguments *)
   ErrorDefinition[x_] :=
-    Module[{cleanArg,yy},
+    Module[{cleanArg},
 
     cleanArg[arg_] :=
-      arg /. ((y_Symbol)[xs___] /; MemberQ[Attributes[y], ReadProtected]) -> yy; (* Not ideal, but robust *)
+      arg /. ((y_Symbol)[xs___] /; MemberQ[Attributes[y], ReadProtected]) -> y; (* Not ideal, but robust *)
 
     x[args___] :=
      If[$NRMMADebug===True, Error`CatchError, Identity][Error`ErrorMessage[General::invargs, ToString[x] <> "[" <>
