@@ -35,6 +35,7 @@ Module[{packages =
   "Convergence",
   "DataAnalysis",
   "DataRegion",
+  "DataRepresentations",
   "DataTable",
   "FieldLines",
   "GridFunctions",
