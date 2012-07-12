@@ -8,7 +8,7 @@ DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensiona
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 ToList::usage = "ToList[d] returns the list content of the DataTable d as {{x1,f1},{x2,f2},...,{xn,fn}}.";
-ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
+DataRegion`ToListOfData::usage = "ToListOfData[d] returns a list of the data part of the DataTable d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a list of the coordinates part of the DataTable d.";
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
 Downsampled::usage = "Downsampled[d, n] returns a version of DataTable d with only every nth element, starting from the first.";
@@ -156,7 +156,7 @@ ToList[DataTable[l_, ___]] := l;
 (* ToListOfData *)
 (****************************************************************)
 
-ToListOfData[DataTable[l_, ___]] :=
+DataRegion`ToListOfData[DataTable[l_, ___]] :=
   Map[#[[2]]&, l];
 
 (****************************************************************)
