@@ -763,31 +763,31 @@ UFDWeights[m_, n_, s_, h_] :=
 
 TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
  Module[{nd, dims, spacing, origin, variable, sorted, times, dt, stencil, offset, deriv, attr, newTime},
-  nd = GetNumDimensions/@dr;
+  nd = ArrayDepth/@dr;
   If[Not[Equal@@nd],
    Error["Error, can't compute time derivative from DataRegions with a different number of dimensions."];
    Return[$Failed];
   ];
 
-  dims = GetDimensions/@dr;
+  dims = Dimensions/@dr;
   If[Not[Equal@@dims],
    Error["Error, can't compute time derivative from DataRegions with different dimensions."];
    Return[$Failed];
   ];
 
-  spacing = GetSpacing/@dr;
+  spacing = CoordinateSpacings/@dr;
   If[Not[Equal@@spacing],
     Error["Error, can't compute time derivative from DataRegions with different spacings."];
     Return[$Failed];
   ];
 
-  origin = GetSpacing/@dr;
+  origin = MinCoordinates/@dr;
   If[Not[Equal@@origin],
     Error["Error, can't compute time derivative from DataRegions with different origins."];
     Return[$Failed];
   ];
 
-  variable = GetVariableName/@dr;
+  variable = VariableName/@dr;
   If[Not[Equal@@variable],
     Error["Error, can't compute time derivative from DataRegions with different variables."];
     Return[$Failed];
@@ -819,7 +819,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
   newTime = times[[1]]+offset*dt;
   attr=replaceRules[attributes[deriv], {Time-> newTime, VariableName -> "dt_"<>variable[[1]]}];
 
-  DataRegion[ attr, GetData[deriv]]
+  DataRegion[attr, ToListOfData[deriv]]
 ];
 
 
