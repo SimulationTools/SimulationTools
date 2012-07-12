@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRegion",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ToListOfCoordinates",
   BaseStyle->{"Link", "LinkTrail"},
@@ -17,7 +17,7 @@ Cell[TextData[{
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
@@ -96,7 +96,8 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Flatten", "True", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Flatten", "False", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -254,8 +255,8 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {
      "ToListOfCoordinates", "TOLISTOFCOORDINATES", "tolistofcoordinates"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
+     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
     "ToListOfCoordinates[d] a list of the coordinates part of the DataTable \
 d.\nToListOfCoordinates[d] returns the N-dimensional array of coordinates of \
 DataRegion d.", 

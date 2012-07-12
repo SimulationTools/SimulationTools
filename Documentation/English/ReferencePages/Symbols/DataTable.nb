@@ -87,11 +87,8 @@ Cell[BoxData[GridBox[{
        "TableRange":>Documentation`HelpLookup["paclet:nrmma/ref/TableRange"], 
        "ToDataTable":>Documentation`HelpLookup[
        "paclet:nrmma/ref/ToDataTable"], "ToList":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToList"], "ToListOfCoordinates":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ToListOfCoordinates"], 
-       "ToListOfData":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToListOfData"], "UniformGridQ":>
-       Documentation`HelpLookup["paclet:nrmma/ref/UniformGridQ"]},
+       "paclet:nrmma/ref/ToList"], "UniformGridQ":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/UniformGridQ"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -804,26 +801,6 @@ Cell[TextData[{
    ButtonBox["ToList",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/ToList"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ToListOfCoordinates",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ToListOfData",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToListOfData"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 

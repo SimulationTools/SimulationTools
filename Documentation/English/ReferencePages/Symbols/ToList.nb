@@ -95,7 +95,8 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Flatten", "True", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Flatten", "False", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

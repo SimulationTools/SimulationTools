@@ -113,14 +113,14 @@ Cell[BoxData[
        RowBox[{"-", "4.76982968622533`*^-10"}], "+", 
        RowBox[{"3.968952260113716`*^-8", " ", "\[ImaginaryI]"}]}]}], "}"}], 
     ",", 
-    RowBox[{"\[LeftSkeleton]", "599", "\[RightSkeleton]"}], ",", 
     RowBox[{"{", 
-     RowBox[{"300.`", ",", 
+     RowBox[{"0.5`", ",", 
       RowBox[{
        RowBox[{"-", 
         RowBox[{"\[LeftSkeleton]", "23", "\[RightSkeleton]"}]}], "+", 
-       RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}]}], "}"}]}], 
-   "}"}],
+       RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "598", "\[RightSkeleton]"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}], "}"}],
   Short]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
