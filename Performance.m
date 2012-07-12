@@ -162,7 +162,7 @@ TimerTreeString[t : Timer[n_, v_, c_], opts:OptionsPattern[]] :=
 
 timerTreeString[t:Timer[n_, v1_, c_], depth_, total_, digits_, multiplier_] :=
  Module[
-   {percent,indent,nf,v},
+   {percent,indent,nf,v, divs, values},
    nf[x_]:= If[x<10^(-(digits+Ceiling@Log10[multiplier]+1)),NumberForm[0,{1000,digits}],NumberForm[x,{1000,digits}]];
 
    v = multiplier*If[ListQ[v1],v1,{v1}];

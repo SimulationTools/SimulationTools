@@ -322,7 +322,7 @@ SyntaxInformation[Slab] =
 
 (* TODO: Implement Tolerance support *)
 Slab[d_DataRegion, s__, OptionsPattern[]]:=
- Module[{slabSpec, spacing, origin},
+ Module[{slabSpec, spacing, origin, indexrange},
   spacing = CoordinateSpacings[d];
   origin  = MinCoordinates[d];
 
@@ -608,7 +608,7 @@ SyntaxInformation[CoordinateOutline] =
  {"ArgumentsPattern" -> {_}};
 
 CoordinateOutline[d_DataRegion] :=
- Module[{coords, shapes},
+ Module[{ndims, coords, shapes},
   ndims = ArrayDepth[d];
 
   If[ndims > 3,
