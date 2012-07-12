@@ -31,7 +31,7 @@ CatchError[expr_] :=
   Catch[expr, _ErrorTag|_ErrorString, 
         Function[{value,tag}, 
                  If[Head[tag]===ErrorTag,
-                    message[tag,Sequence@@value[[1]]] /. {message -> Message, ErrorTag[y_] :> y},
+                    Print[Style[StringForm[tag[[1]],Sequence@@value[[1]]],Darker[Red]]],
                     Print[Style[StringForm[tag[[1]], Sequence@@value[[1]]],Darker[Red]]]];
                  ShowStack[value[[2]]];
                  Abort[]]];
