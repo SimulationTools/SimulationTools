@@ -87,7 +87,7 @@ Begin["`Private`"];
 
 SetAttributes[DataRegion, {NHoldFirst, ReadProtected}];
 attributes[DataRegion[attrs_, data_]] := attrs;
-data[DataRegion[attrs_, data_]] := data;
+data[DataRegion[attrs_, d_]] := d;
 
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
