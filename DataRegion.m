@@ -422,6 +422,9 @@ DataRegion /: Part[d_DataRegion, s__] :=
   origin  = Pick[MinCoordinates[d] + (start - 1) * CoordinateSpacings[d], dimensionExists];
   spacing = Pick[stride * CoordinateSpacings[d], dimensionExists];
 
+  (* TODO: What happens if the result is a 0d DataRegion?  Should you
+     just get the data value, or should you get a 0d DataRegion? *)
+
   (* TODO: Make sure other attributes get propagated *)
   ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
 ];
