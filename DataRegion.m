@@ -7,7 +7,7 @@ BeginPackage["DataRegion`", {"DataTable`", "Error`", "NR`", "Profile`"}];
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
-ToListOfData::usage = ToListOfData::usage<>"
+ToListOfData::usage = If[ValueQ[ToListOfData::usage],ToListOfData::usage,""]<>"
 ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
 ToListOfCoordinates::usage = ToListOfCoordinates::usage<>"
 ToListOfCoordinates[d] returns the N-dimensional array of coordinates of DataRegion d.";
