@@ -165,6 +165,12 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
       lhs : fn[args] :=
        Module[
          {t,r,top = Length[Stack`CurrentStack[]] === 0},
+         If[Head[fn] =!= Symbol,
+            Print["DefFn: Serious error: Not a symbol:"];
+            Print[fn];
+            Stack`ShowStack[];
+            Abort[]];
+
          Global`profcount[fn]+=1;
          {t,r} = AbsoluteTiming[If[top,Error`CatchError,Identity][
            Stack`WithStackFrame[lhs,If[top, MessageCatcher`WithCaughtMessages,Identity][body]]]];
