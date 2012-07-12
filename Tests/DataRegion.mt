@@ -559,6 +559,17 @@ Test[
     TestID->"ToDataRegion"
 ]
 
+Test[
+    ToDataRegion[{dr, dr3}]
+    ,
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {9.9, 20., 30.}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> Undefined},
+     {{{222, 224, 226, 228}, {242, 244, 246, 248}, {262, 264, 266, 268}},
+      {{422, 424, 426, 428}, {442, 444, 446, 448}, {462, 464, 466, 468}},
+      {{211, 212, 213, 214}, {221, 222, 223, 224}, {231, 232, 233, 234}}}]
+    ,
+    TestID->"ToDataRegion from List of DataRegions"
+]
+
 
 (****************************************************************)
 (* ToListOfData *)

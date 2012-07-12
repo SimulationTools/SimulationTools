@@ -178,13 +178,6 @@ VariableName[d_DataRegion] := VariableName /. attributes[d];
    (and not checked) that the data grid is regular.
 *)
 
-(* TODO: Add equivalent to MergeDataRegions returns a DataRegion formed from
-   merging the content of the DataRegions in the list regions.  If the regions
-   do not cover a rectangular domain, any missing points will have value None.
-   All the DataRegions must have the same spacing and their origins must be
-   separated by multiples of their spacing.
-*)
-
 (* TODO: make ToDataRegion more flexible about creating DataRegions from
    expressions - make it like DataRegionTable *)
 (* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
@@ -194,7 +187,7 @@ Options[ToDataRegion] := {
   "Time" -> Undefined};
 
 SyntaxInformation[ToDataRegion] =
- {"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}};
+ {"ArgumentsPattern" -> {_, ___, OptionsPattern[]}};
 
 ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
  Module[{precision},
@@ -211,6 +204,34 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
     },
     Developer`ToPackedArray[data]
   ]
+];
+
+ToDataRegion[ds:List[DataRegion[___]..]] :=
+ Module[{x1, x2, dx, n, data, offsets},
+  (* Find the shape of the bounding-box DataRegion *)
+  x1 = Min /@ Transpose[MinCoordinates /@ ds];
+  x2 = Max /@ Transpose[MaxCoordinates /@ ds];
+  dx = DeleteDuplicates[CoordinateSpacings /@ ds];
+
+  (* TODO: Check that all origins are separated by multiples of their spacing. *)
+  If[Length[dx] =!= 1,
+    Error["ToDataRegion only supportes merging DataRegions with the same grid spacing."];
+  ,
+    dx = First[dx];
+  ];
+
+  (* Create the data List for the new DataRegion and initially fill all entries with None *)
+  n = Round[(x2 - x1)/dx] + 1;
+  data = ConstantArray[None, n];
+
+  (* Find the offsets in the new DataRegion where the existing DataRegions should go *)
+  offsets = Map[Thread[Span[Round[(MinCoordinates[#] - x1)/dx] + 1, Round[(MinCoordinates[#] - x1)/dx] + Dimensions[#]]] &, ds];
+
+  (* Insert existing data *)
+  MapThread[(data[[Sequence@@#1]] = ToListOfData[#2])&, {offsets, ds}];
+
+  (* Create the new DataRegion *)
+  ToDataRegion[Developer`ToPackedArray[data], x1, dx, VariableName -> VariableName[ds[[1]]]]
 ];
 
 
