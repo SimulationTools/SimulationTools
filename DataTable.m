@@ -15,6 +15,7 @@ Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
 
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
+MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 
 
 
@@ -51,9 +52,10 @@ LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a max
 MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
 (* TODO: Rename; this is the composition of d and p^-1.  We have Inverse already, maybe we should also have Composition? Then we wouldn't need this function as it would be easy: Composition[d, Inverse[p], {t1, t2, dp}].  Composition will likely need to interpolate. *)
 FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
+
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
-MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
+
 (* TODO: Rename as ToUniformSpacing *)
 MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spacing from a DataTable with a nonuniform grid spacing.  This is accomplished via interpolation through ResampleDataTable.";
 
@@ -337,6 +339,9 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
 (* UniformSpacingQ                                        *)
 (**********************************************************)
 
+SyntaxInformation[UniformSpacingQ] =
+ {"ArgumentsPattern" -> {_}};
+
 UniformSpacingQ[d_DataTable] :=
   Module[
     {ts, dts, dt1, tol = 10.^-5},
@@ -344,6 +349,18 @@ UniformSpacingQ[d_DataTable] :=
     dts = Drop[ts,1] - Drop[RotateRight[ts],1];
     dt1 = dts[[1]];
     Max[Abs[dts - dt1]] < tol];
+
+
+(**********************************************************)
+(* MonotonicQ                                             *)
+(**********************************************************)
+
+SyntaxInformation[MonotonicQ] =
+ {"ArgumentsPattern" -> {_}};
+
+MonotonicQ[d_DataTable, tol_:0.] :=
+  Module[{positive = (# > tol &)},
+  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
 
 
 
@@ -893,11 +910,6 @@ PhaseOfFrequency[psi4_] :=
     MapThread[List, 
      Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
   ];
-
-MonotonicQ[d_DataTable, tol_:0.] :=
-  Module[{positive = (# > tol &)},
-  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
-
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
