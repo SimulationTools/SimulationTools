@@ -21,9 +21,6 @@ Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified b
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
-(* TODO: move this to the NRMMA context.  Think about another way to do this *)
-Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtraction of d1 and d2 after they have been resampled at order p onto the intersection of their bounding boxes.  p is optional and defaults to 3.  Mathematica's infix notation, where a binary function can be written as an infix operator, is useful with this function.  For example, d = d1 ~Sub~ d2.";
-
 (* TODO: Add Metadata function and user-defined metadata *)
 (* TODO: Add MapCoordinates, MapThreadCoordinates, MapData, MapThreadData, Map, MapThread *)
 
@@ -762,23 +759,6 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
   DataRegion[attr, ToListOfData[deriv]]
 ];
 
-
-
-
-
-
-
-(**********************************************************************************)
-(* Functions which don't belong here                                              *)
-(**********************************************************************************)
-
-(*******************************************************************************************)
-(* Sub                                                                                     *)
-(*******************************************************************************************)
-
-DataRegion/:
-Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
-  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
 
 
 

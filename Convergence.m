@@ -206,10 +206,8 @@ RichardsonExtrapolate3[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, hs:{h1_,h2
 RichardsonExtrapolationError[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
     RichardsonExtrapolate[Drop[ds,1], p] - RichardsonExtrapolate3[ds, p];
 
-Global`Sub[a_?NumberQ,b_?NumberQ] := a-b;
-
 RichardsonError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
-  Global`Sub[f2,If[p==="exponential", f1, RichardsonExtrapolate[fs,hs,p]]];
+  Sub[f2,If[p==="exponential", f1, RichardsonExtrapolate[fs,hs,p]]];
 
 RichardsonRelativeError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
   RichardsonError[fs,hs,p]/f2;

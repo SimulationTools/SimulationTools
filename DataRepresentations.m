@@ -20,6 +20,12 @@ Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d 
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
+(* TODO: Is there a better system?  These are abbreviations. *)
+Add::usage = "Add[d1, d2] adds d1 and d2 after they have been resampled onto the intersection of their bounding boxes.";
+Div::usage = "Div[d1, d2] divides d1 by d2 after they have been resampled onto the intersection of their bounding boxes.";
+Mul::usage = "Mul[d1, d2] multiplies d1 by d2 after they have been resampled onto the intersection of their bounding boxes.";
+Sub::usage = "Sub[d1, d2] subtracts d2 from d1 after they have been resampled onto the intersection of their bounding boxes.";
+
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d. The derivs argument should be of the same form as in the first argument of Derivative.\n";
@@ -40,6 +46,19 @@ Endpoints[d_?DataRepresentationQ] := First[CoordinateRanges[d]];
 
 
 (**********************************************************)
+(* Add                                                    *)
+(**********************************************************)
+
+SyntaxInformation[Add] =
+ {"ArgumentsPattern" -> {_, _, ___}};
+
+Add[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
+  Apply[Plus, Resampled[{d1, d2}, p]];
+
+Add[a_?NumberQ, b_?NumberQ] := a+b;
+
+
+(**********************************************************)
 (* CoordinateRanges                                       *)
 (**********************************************************)
 
@@ -53,6 +72,19 @@ SyntaxInformation[CoordinateRanges] =
 
 SyntaxInformation[CoordinateSpacings] =
  {"ArgumentsPattern" -> {_}};
+
+
+(**********************************************************)
+(* Div                                                    *)
+(**********************************************************)
+
+SyntaxInformation[Div] =
+ {"ArgumentsPattern" -> {_, _, ___}};
+
+Div[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
+  Apply[Divide, Resampled[{d1, d2}, p]];
+
+Div[a_?NumberQ, b_?NumberQ] := a/b;
 
 
 (**********************************************************)
@@ -91,6 +123,19 @@ SyntaxInformation[MaxCoordinates] =
 
 
 (**********************************************************)
+(* Mul                                                    *)
+(**********************************************************)
+
+SyntaxInformation[Mul] =
+ {"ArgumentsPattern" -> {_, _, ___}};
+
+Mul[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
+  Apply[Times, Resampled[{d1, d2}, p]];
+
+Mul[a_?NumberQ, b_?NumberQ] := a b;
+
+
+(**********************************************************)
 (* NDerivative                                             *)
 (**********************************************************)
 
@@ -107,6 +152,18 @@ Global`StandardDefinition[NDerivative] = True;
 SyntaxInformation[Resampled] =
  {"ArgumentsPattern" -> {_, ___}};
 
+
+(**********************************************************)
+(* Sub                                                    *)
+(**********************************************************)
+
+SyntaxInformation[Sub] =
+ {"ArgumentsPattern" -> {_, _, ___}};
+
+Sub[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
+  Apply[Subtract, Resampled[{d1, d2}, p]];
+
+Sub[a_?NumberQ, b_?NumberQ] := a-b;
 
 (**********************************************************)
 (* ToList                                                 *)
