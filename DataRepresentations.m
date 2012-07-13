@@ -24,5 +24,51 @@ SyntaxInformation[CoordinateSpacings] =
  {"ArgumentsPattern" -> {_}};
 
 
+(**********************************************************)
+(* Downsampled                                            *)
+(**********************************************************)
+
+SyntaxInformation[DownSampled] =
+ {"ArgumentsPattern" -> {_, _}};
+
+
+(**********************************************************)
+(* NDerivative                                             *)
+(**********************************************************)
+
+SyntaxInformation[NDerivative] =
+ {"ArgumentsPattern" -> {_, ___}};
+
+Global`StandardDefinition[NDerivative] = True;
+
+
+(**********************************************************)
+(* ToList                                                 *)
+(**********************************************************)
+
+Options[ToList] = {"Flatten" -> False};
+
+SyntaxInformation[ToList] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+
+(**********************************************************)
+(* ToListOfCoordinates                                    *)
+(**********************************************************)
+
+Options[ToListOfCoordinates] = {"Flatten" -> False};
+
+SyntaxInformation[ToListOfCoordinates] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+
+(**********************************************************)
+(* ToListOfData                                           *)
+(**********************************************************)
+
+SyntaxInformation[ToListOfData] =
+ {"ArgumentsPattern" -> {_}};
+
+
 End[];
 EndPackage[];

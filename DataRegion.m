@@ -115,9 +115,6 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 (* CoordinateSpacings                                     *)
 (**********************************************************)
 
-SyntaxInformation[CoordinateSpacings] =
- {"ArgumentsPattern" -> {_}};
-
 CoordinateSpacings[d_DataRegion] := Spacing /. attributes[d];
 
 
@@ -233,9 +230,6 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
 (* ToListOfData                                           *)
 (**********************************************************)
 
-SyntaxInformation[ToListOfData] =
- {"ArgumentsPattern" -> {_}};
-
 DataRegion /: ToListOfData[d_DataRegion] :=
   data[d];
 
@@ -243,11 +237,6 @@ DataRegion /: ToListOfData[d_DataRegion] :=
 (**********************************************************)
 (* ToListOfCoordinates                                    *)
 (**********************************************************)
-
-Options[ToListOfCoordinates] = {"Flatten" -> False};
-
-SyntaxInformation[ToListOfCoordinates] =
- {"ArgumentsPattern" -> {_, OptionsPattern[]}};
 
 DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
  Module[{dims, origin, spacing, coords, coordList},
@@ -269,11 +258,6 @@ DataRegion /: ToListOfCoordinates[d_DataRegion, OptionsPattern[]] :=
 (**********************************************************)
 (* ToList                                                 *)
 (**********************************************************)
-
-Options[ToList] = {"Flatten" -> False};
-
-SyntaxInformation[ToList] =
- {"ArgumentsPattern" -> {_, OptionsPattern[]}};
 
 DataRegion /: ToList[d_DataRegion, OptionsPattern[]] :=
  Module[{dims, coords, data, list},
@@ -526,9 +510,6 @@ Protect[MapThread];
 (* Downsampled                                            *)
 (**********************************************************)
 
-SyntaxInformation[DownSampled] =
- {"ArgumentsPattern" -> {_, _}};
-
 Downsampled[d_DataRegion, n_Integer] :=
  Module[{ndims},
   ndims = ArrayDepth[d];
@@ -681,11 +662,6 @@ Coordinate[d_DataRegion, dim_] :=
 (**********************************************************)
 (* NDerivative                                             *)
 (**********************************************************)
-
-SyntaxInformation[NDerivative] =
- {"ArgumentsPattern" -> {_, ___}};
-
-Global`StandardDefinition[NDerivative] = True;
 
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
  Module[{ndims},
