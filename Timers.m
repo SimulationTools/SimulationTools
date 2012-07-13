@@ -1,6 +1,12 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Timers`", {"CactusTimers`", "RunFiles`", "Memo`", "Error`"}];
+BeginPackage["Timers`",
+ {
+  "CactusTimers`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 (* Interface with CactusTimers package *)
 

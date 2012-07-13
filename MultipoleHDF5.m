@@ -1,5 +1,14 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["MultipoleHDF5`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`", "Error`"}];
+BeginPackage["MultipoleHDF5`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "ReadHDF5`",
+  "RunFiles`"
+ }];
 
 Begin["`Private`"];
 

@@ -1,5 +1,14 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["GridFunctions`", {"RunFiles`", "DataTable`", "Memo`", "Providers`", "Error`"}];
+BeginPackage["GridFunctions`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "Providers`",
+  "RunFiles`"
+ }];
 
 ReadGridFunction::usage = "ReadGridFunction[run, var, dims] reads variable var from run and returns it as a DataRegion object.  dims is a list of the dimensions to read, and these dimensions must correspond to available output.  Dimensions in dims can be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
 ReadIterations::usage = "ReadIterations[run, var, dims] reads the iterations present for the grid function var in the directory run.";

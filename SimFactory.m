@@ -1,5 +1,14 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimFactory`", {"RunFiles`", "DataTable`", "Memo`", "Error`", "IniFile`"}];
+BeginPackage["SimFactory`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "IniFile`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 Begin["`Private`"];
 

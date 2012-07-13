@@ -1,6 +1,9 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["AsyncCommand`", {"Error`"}];
+BeginPackage["AsyncCommand`",
+ {
+  "Error`"
+ }];
 
 ExecuteAsyncCommand;
 CommandReadyQ;

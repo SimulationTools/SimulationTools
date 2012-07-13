@@ -1,8 +1,15 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Ascii`", {"Ascii1D`","DataTable`", "Profile`", "Memo`", "RunFiles`", "Error`"}];
+BeginPackage["Ascii`",
+ {
+  "Ascii1D`",
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "Profile`",
+  "RunFiles`"
+ }];
 
 ReadCarpetASCIIScalar::usage = "ReadCarpetASCIIScalar[run,filename] Reads Carpet ASCII 0D and Scalar data.";
 

@@ -1,6 +1,11 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Quasinormal`", {"DataTable`", "Error`"}];
+BeginPackage["Quasinormal`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`"
+ }];
 
 QuasinormalMode;
 QuasinormalModeSum;

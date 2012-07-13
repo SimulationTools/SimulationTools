@@ -1,5 +1,13 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["IniFile`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["IniFile`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 ReadIniFile;
 IniVariable;

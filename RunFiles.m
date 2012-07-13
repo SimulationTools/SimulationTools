@@ -1,12 +1,15 @@
-(* ::Package:: *)
-
-
 (* FIXME: if a run doesn't have a parameter file in it, nrmma cannot find ANY files! *)
 
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["RunFiles`", {"Profile`", "Memo`", "Providers`", "Error`"}];
+BeginPackage["RunFiles`",
+ {
+  "Error`",
+  "Memo`",
+  "Profile`",
+  "Providers`"
+ }];
 
 FindRunFiles::usage = "FindRunFiles[run, filename] returns a list containing the full names of files named filename in the different segments of run.";
 

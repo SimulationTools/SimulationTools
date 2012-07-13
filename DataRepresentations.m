@@ -1,8 +1,6 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRepresentations`", {"DataTable`", "DataRegion`"}];
+BeginPackage["DataRepresentations`"];
 Begin["`Private`"];
 
 

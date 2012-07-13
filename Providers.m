@@ -1,5 +1,9 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Providers`", {"Error`"}];
+BeginPackage["Providers`",
+ {
+  "Error`"
+ }];
 
 CallProvidedFunction;
 ProviderPreferences::usage = "ProviderPreferences[f] gives a list of providers for feature f which determines the preference for data from these providers.  This can be reset by the user, either globally or within a Block.";

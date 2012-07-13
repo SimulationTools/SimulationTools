@@ -1,5 +1,9 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["MessageCatcher`", {"Error`"}];
+BeginPackage["MessageCatcher`",
+ {
+  "Error`"
+ }];
 
 WithCaughtMessages::usage = "WithCaughtMessages[expr] evaluates expr, converting any generated messages into exceptions";
 

@@ -1,5 +1,14 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
+
 BeginPackage["CarpetIOHDF5`",
-  {"DataRegion`", "ReadHDF5`", "Memo`", "Profile`", "Error`"}];
+ {
+  "DataRegion`",
+  "DataRepresentations`",
+  "Error`",
+  "Memo`",
+  "Profile`",
+  "ReadHDF5`"
+ }];
 
 Begin["`Private`"];
 

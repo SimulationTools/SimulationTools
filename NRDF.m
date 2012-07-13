@@ -1,5 +1,16 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["NRDF`", {"RunFiles`", "DataTable`", "Memo`", "Piraha`", "ReadHDF5`", "Waveforms`", "Error`"}];
+BeginPackage["NRDF`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "Piraha`",
+  "ReadHDF5`",
+  "RunFiles`",
+  "Waveforms`"
+ }];
 
 ParseMetadataFile;
 StartingFrequency;

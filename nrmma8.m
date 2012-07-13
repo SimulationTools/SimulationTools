@@ -1,7 +1,12 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 (* Functions which are only compatible with Mathematica 8 or later *)
 
-BeginPackage["nrmma8`", {"DataTable`", "DataRegion`"}];
+BeginPackage["nrmma8`",
+ {
+  "DataRegion`",
+  "DataRepresentations`",
+  "DataTable`"
+ }];
 
 FilterWavelet::usage = "FilterWavelet[data] filters 'data' using a discrete wavelet transform and making use of the SURELevel thresholding."
 WaveletType::usage = "WaveletType is an option for FilterWavelet which specifies the type of wavelet. The default is DaubechiesWavelet[4]."

@@ -1,12 +1,25 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
 (* A package for dealing with numerical relativity data *)
 
-BeginPackage["NR`", {"BHCoordinates`", "Convergence`", "DataRegion`", "DataTable`",
-  "Horizons`", "Kicks`", "Memo`", "Parameters`", "Plotting`", "ReadHDF5`", "RunFiles`",
-  "SystemStatistics`", "Timers`", "Error`"}];
+BeginPackage["NR`",
+ {
+  "BHCoordinates`",
+  "Convergence`",
+  "DataRepresentations`",
+  "DataRegion`",
+  "DataTable`",
+  "Error`",
+  "Horizons`",
+  "Kicks`",
+  "Memo`",
+  "Parameters`",
+  "Plotting`",
+  "ReadHDF5`",
+  "RunFiles`",
+  "SystemStatistics`",
+  "Timers`"
+ }];
 
 FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
 NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";

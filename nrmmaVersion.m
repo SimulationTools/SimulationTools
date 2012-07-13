@@ -1,5 +1,3 @@
-(* ::Package:: *)
-
 (* Copyright 2010-2011 Barry Wardell and Ian Hinder
 
    This program is free software; you can redistribute it and/or modify it under

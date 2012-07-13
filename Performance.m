@@ -1,5 +1,13 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Performance`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["Performance`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 ReadTimerTree;
 TimerTreeView;

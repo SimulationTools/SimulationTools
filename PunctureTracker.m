@@ -1,5 +1,13 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["PunctureTracker`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["PunctureTracker`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 Begin["`Private`"];
 

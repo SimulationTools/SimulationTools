@@ -1,5 +1,14 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["TwoPunctures`", {"RunFiles`", "DataTable`", "Memo`", "Parameters`", "Error`"}];
+BeginPackage["TwoPunctures`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "Parameters`",
+  "RunFiles`"
+ }];
 
 ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn.";
 ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";

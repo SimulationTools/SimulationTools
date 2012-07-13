@@ -1,5 +1,13 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["YlmDecomp`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["YlmDecomp`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 Begin["`Private`"];
 

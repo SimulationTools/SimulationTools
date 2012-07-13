@@ -1,6 +1,14 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Ascii1D`", {"DataTable`", "Profile`", "Memo`", "RunFiles`", "Error`"}];
+BeginPackage["Ascii1D`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "Profile`",
+  "RunFiles`"
+ }];
 
 (* AsciiData1D::usage = "AsciiData1D[fileName] loads the 1D data in
 fileName (which should be in ygraph format) and returns it as a list

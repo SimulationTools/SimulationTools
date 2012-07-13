@@ -1,6 +1,9 @@
-(* ::Package:: *)
+(* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["ReadHDF5`", {"Error`"}];
+BeginPackage["ReadHDF5`",
+ {
+  "Error`"
+ }];
 
 ReadHDF5::usage = "ReadHDF5[file] provides a wrapper around ImportHDF5 if h5mma is available and falls back to the built-in Import otherwise." 
 ShowHDF5Progress::usage = "ShowHDF5Progress is a boolean variable indicating whether the progress of HDF5 operations should be shown in a progress indicator. This feature requires h5mma."

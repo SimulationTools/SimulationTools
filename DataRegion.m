@@ -1,8 +1,13 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRegion`", {"DataTable`", "Error`", "NR`", "Profile`"}];
+BeginPackage["DataRegion`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "NR`",
+  "Profile`"
+ }];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";

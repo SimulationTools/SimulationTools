@@ -1,8 +1,14 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SystemStatistics`", {"RunFiles`", "DataTable`", "Memo`", "Error`", "IniFile`"}];
+BeginPackage["SystemStatistics`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "IniFile`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 ReadRunSpeed::usage = "ReadRunSpeed[run] returns a DataTable with the speed of a run in M/hr as a function of time.";
 RunCost::usage      = "RunCost[length, speed, nprocs] returns information about the cost of a run.";

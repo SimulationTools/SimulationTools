@@ -1,6 +1,13 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Horizons`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["Horizons`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 ReadIHSpin;
 ReadIHSpinX;

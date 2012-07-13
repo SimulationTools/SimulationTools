@@ -1,8 +1,13 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2011 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataAnalysis`", {"DataTable`", "PhysicalConstants`", "Units`", "Error`"}];
+BeginPackage["DataAnalysis`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "PhysicalConstants`",
+  "Units`"
+ }];
 
 ComputeOverlap::usage = "ComputeOverlap[wf1, wf2, s, f1, f2, M, pad] computes the (maximized over phase and time shift) overlap of the DataTables wf1 and wf2 (assumed to contain the value of  \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\)) over the frequency range [f1,f2] with the noise function s. The mass of the system is given by M in units of the solar mass. The optional argument pad may be given to pad out the waveform so that a more accurate time shift may be obtained."
 SolarMassInSeconds::usage = "SolarMassInSeconds gives the value of GM/\!\(\*SuperscriptBox[\(c\), \(3\)]\) in seconds."

@@ -1,6 +1,14 @@
 (* Copyright (C) 2010 Ian Hinder, Barry Wardell and Aaryn Tonita *)
 
-BeginPackage["Kicks`", {"NR`", "DataTable`", "Memo`", "Profile`", "Error`"}];
+BeginPackage["Kicks`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "NR`",
+  "Profile`"
+ }];
 
 Kick::usage = "Kick[run, dir, r, lMax] computes the kick component in km/s from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax";
 KickVector::usage = "KickVector[run, r, lMax] computes the vector kick in km/s from the multipolar decomposition of Psi4 on a sphere at radius r using modes up to l = lMax"

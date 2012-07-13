@@ -1,8 +1,20 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["SimViewRRMHD`", {"NR`","Ascii1D`","Ascii`","RunFiles`", "Plotting`","DataTable`", "Memo`", "BHCoordinates`", "SystemStatistics`","Parameters`", "Error`"}];
+BeginPackage["SimViewRRMHD`",
+ {
+  "Ascii1D`",
+  "Ascii`",
+  "BHCoordinates`",
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "NR`",
+  "Parameters`",
+  "Plotting`",
+  "RunFiles`",
+  "SystemStatistics`"
+ }];
 
 SimViewRRMHD;
 

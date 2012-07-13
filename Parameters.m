@@ -1,6 +1,11 @@
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["Parameters`", {"RunFiles`", "Memo`", "Error`"}];
+BeginPackage["Parameters`",
+ {
+  "Memo`",
+  "Error`",
+  "RunFiles`"
+ }];
 
 FindParameters::usage  = "FindParameters[run, pattern] finds all parameters in the parameter file for run which match pattern.";
 LookupParameter::usage = "LookupParameter[run, param] reads the value of the parameter param from run.";

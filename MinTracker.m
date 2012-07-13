@@ -1,5 +1,13 @@
+(* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["MinTracker`", {"RunFiles`", "DataTable`", "Memo`", "Error`"}];
+BeginPackage["MinTracker`",
+ {
+  "DataRepresentations`",
+  "DataTable`",
+  "Error`",
+  "Memo`",
+  "RunFiles`"
+ }];
 
 Begin["`Private`"];
 

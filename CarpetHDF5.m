@@ -1,8 +1,16 @@
-(* ::Package:: *)
-
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["CarpetHDF5`",{"DataRegion`", "Memo`", "Profile`", "RunFiles`", "ReadHDF5`", "Error`", "GridFunctions`"}];
+BeginPackage["CarpetHDF5`",
+ {
+  "DataRegion`",
+  "DataRepresentations`",
+  "Error`",
+  "GridFunctions`",
+  "Memo`",
+  "Profile`",
+  "ReadHDF5`",
+  "RunFiles`"
+ }];
 
 (* New CarpetHDF5 API *)
 
