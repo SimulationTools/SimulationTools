@@ -41,7 +41,6 @@ Add::usage = "Add[d1, d2] returns a DataTable corresponding to d1 + d2, where th
 Div::usage = "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2";
 (* TODO: This is used for replacing "bad" values with interpolated values according to some test.  Maybe rename as InterpolatedIf or InterpolatedWhere *)
 InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
-DataTableListLinePlot;
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 (* TODO: Rename as CoordinateAtInterpolatedMax *)
@@ -50,12 +49,8 @@ LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occur
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
 (* TODO: Rename as InterpolatedMax *)
 MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
-(* TODO: Remove.  This is very specific, and could be easily implemented as Abs[FunctionOfPhase[...]].  What is added is automatic determination of arguments *)
-AbsOfPhase::usage = "AbsOfPhase[d] uses FunctionOfPhase to construct a DataTable from d consisting of its Abs as a function of its Phase.";
 (* TODO: Rename; this is the composition of d and p^-1.  We have Inverse already, maybe we should also have Composition? Then we wouldn't need this function as it would be easy: Composition[d, Inverse[p], {t1, t2, dp}].  Composition will likely need to interpolate. *)
 FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
-(* TODO: Remove: This is redundant, it's the same as Exp[I phi] d *)
-ShiftPhase;
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
@@ -102,6 +97,9 @@ MakeInterpolatingDataTable;
 ResampleDataTable;
 ResampleDataTables;
 PhaseOfFrequency;
+DataTableListLinePlot;
+ShiftPhase;
+AbsOfPhase;
 
 Begin["`Private`"];
 
@@ -681,9 +679,6 @@ Redefine[ListPlot[d:DataTable[___], args___],
 Redefine[ListPlot[ds:List[DataTable[___]..], args___],
    ListPlot[Map[ToList,ds], args]];
 
-DataTableListLinePlot[d:DataTable[___], args___] :=
-  ListLinePlot[ToList[d], args];
-
 Redefine[ListLinePlot[d:DataTable[___], args___],
    ListLinePlot[ToList[d], args]];
 
@@ -859,9 +854,6 @@ MaximumValue[d_DataTable] :=
   Interpolation[d][LocateMaximum[d]];
 
 
-AbsOfPhase[d_DataTable, {t1_, t2_}] :=
-  FunctionOfPhase[Abs[d], Phase[d], {t1,t2}];
-
 FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
  Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
   phiOft = ToList[DataTableInterval[p,{t1,t2}]];
@@ -882,9 +874,6 @@ PhaseOfFrequency[psi4_] :=
     MapThread[List, 
      Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
   ];
-
-ShiftPhase[d_DataTable, dph_] :=
-  MapData[Exp[I dph] # &, d];
 
 MonotonicQ[d_DataTable, tol_:0.] :=
   Module[{positive = (# > tol &)},
@@ -1008,6 +997,15 @@ MakeInterpolatingDataTable[d:DataTable[__], dt_] :=
     f = Interpolation[l];
     l2 = Table[{t, f[t]}, {t, t1, t2, dt}];
     d /. DataTable[_, x___] -> DataTable[l2, x]];
+
+ShiftPhase[d_DataTable, dph_] :=
+  MapData[Exp[I dph] # &, d];
+
+AbsOfPhase[d_DataTable, {t1_, t2_}] :=
+  FunctionOfPhase[Abs[d], Phase[d], {t1,t2}];
+
+DataTableListLinePlot[d:DataTable[___], args___] :=
+  ListLinePlot[ToList[d], args];
 
 
 End[];
