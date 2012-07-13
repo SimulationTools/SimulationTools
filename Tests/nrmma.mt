@@ -7,6 +7,7 @@ TestSuite[
 		"DataRegion.mt",
 		"DataRegionDeprecated.mt",
 		"DataTable.mt",
+		"DataTableNew.mt",
 		"GridFunctions.mt",
 		"Memo.mt",
 		"NR.mt",
