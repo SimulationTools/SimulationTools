@@ -154,14 +154,14 @@ ToList[DataTable[l_, ___]] := l;
 (* ToListOfData *)
 (****************************************************************)
 
-DataRegion`ToListOfData[DataTable[l_, ___]] :=
+ToListOfData[DataTable[l_, ___]] :=
   Map[#[[2]]&, l];
 
 (****************************************************************)
 (* ToListOfCoordinates *)
 (****************************************************************)
 
-DataRegion`ToListOfCoordinates[DataTable[l_, ___]] :=
+ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
 
 (****************************************************************)
