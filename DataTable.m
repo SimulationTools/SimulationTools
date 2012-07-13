@@ -57,8 +57,6 @@ InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new D
 DataTableListLinePlot;
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
-(* TODO: Make this consistent with DataRegion.  This is the L2,dx norm of the DataTable treated as a vector, not the norm of each (vector) value *)
-DataTableNormL2;
 (* TODO: Rename as CoordinateAtInterpolatedMax *)
 LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
@@ -101,10 +99,12 @@ MapThreadData;
 Downsample;
 Spacing;
 DataTableRange;
+DataTableNormL2;
 
 Begin["`Private`"];
 
 Format[DataTable[l_, attrs___]] := "DataTable"["..."];
+DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
 (****************************************************************)
 (* ToDataTable *)
@@ -278,9 +278,6 @@ RedefineAsDataTable[Abs[d:DataTable[__]],
 
 RedefineAsDataTable[Norm[d:DataTable[__]],
   MapData[Norm, d]];
-
-DataTableNormL2[d_DataTable] :=
- Sqrt[Times@@Spacing[d] * Plus @@ (DepVar[d]^2)];
 
 RedefineAsDataTable[Sqrt[d:DataTable[__]],
   MapData[Sqrt, d]];
@@ -881,6 +878,7 @@ Downsample[d_DataTable, n_Integer] :=
 
 Spacing[d:DataTable[__]] := First[CoordinateSpacings[d]];
 DataTableRange[dt:DataTable[__]] := Endpoints[dt];
+DataTableNormL2[d_DataTable] := GridNorm[d];
 
 End[];
 

@@ -23,7 +23,6 @@ Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified b
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 
-GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
@@ -79,6 +78,7 @@ Begin["`Private`"];
 (******************************************************************************)
 
 SetAttributes[DataRegion, {NHoldFirst, ReadProtected}];
+DataRepresentationQ[DataRegion[attrs_, data_]] = True;
 attributes[DataRegion[attrs_, data_]] := attrs;
 data[DataRegion[attrs_, d_]] := d;
 
@@ -582,17 +582,6 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
 Unprotect /@ $1DPlotFunctions;
 Scan[(#[ds:List[DataRegion[___]..], opts___] := #[ToList/@ ds, opts])&, $1DPlotFunctions];
 Protect /@ $1DPlotFunctions;
-
-
-(**********************************************************)
-(* GridNorm                                               *)
-(**********************************************************)
-
-SyntaxInformation[GridNorm] =
- {"ArgumentsPattern" -> {_}};
-
-GridNorm[d_DataRegion] :=
- Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[d^2]]];
 
 
 (**********************************************************)
