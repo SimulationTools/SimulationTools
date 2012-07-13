@@ -14,6 +14,7 @@ ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
 
+UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
 
 
@@ -55,8 +56,6 @@ FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTabl
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 (* TODO: Rename as ToUniformSpacing *)
 MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spacing from a DataTable with a nonuniform grid spacing.  This is accomplished via interpolation through ResampleDataTable.";
-(* TODO: Rename as UniformSpacingQ *)
-UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
 
 (****************************************************************)
@@ -99,6 +98,7 @@ PhaseOfFrequency;
 DataTableListLinePlot;
 ShiftPhase;
 AbsOfPhase;
+UniformGridQ;
 
 Begin["`Private`"];
 
@@ -331,6 +331,21 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[Resampled[#, {t1, t2, dt}, p] &, ds];
 ];
+
+
+(**********************************************************)
+(* UniformSpacingQ                                        *)
+(**********************************************************)
+
+UniformSpacingQ[d_DataTable] :=
+  Module[
+    {ts, dts, dt1, tol = 10.^-5},
+    ts = IndVar[d];
+    dts = Drop[ts,1] - Drop[RotateRight[ts],1];
+    dt1 = dts[[1]];
+    Max[Abs[dts - dt1]] < tol];
+
+
 
 
 
@@ -883,13 +898,6 @@ MonotonicQ[d_DataTable, tol_:0.] :=
   Module[{positive = (# > tol &)},
   Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
 
-UniformGridQ[d_DataTable] :=
-  Module[
-    {ts, dts, dt1, tol = 10.^-5},
-    ts = IndVar[d];
-    dts = Drop[ts,1] - Drop[RotateRight[ts],1];
-    dt1 = dts[[1]];
-    Max[Abs[dts - dt1]] < tol];
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
@@ -1011,6 +1019,7 @@ AbsOfPhase[d_DataTable, {t1_, t2_}] :=
 DataTableListLinePlot[d:DataTable[___], args___] :=
   ListLinePlot[ToList[d], args];
 
+UniformGridQ[d_DataTable] := UniformSpacingQ[d];
 
 End[];
 
