@@ -12,6 +12,7 @@ ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a Da
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
+Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
 
 
 
@@ -36,8 +37,6 @@ DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a
 (* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
 (* TODO: Rename as RestrictedToCommonInterval. *)
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
-(* TODO: If this uses NDerivative, we should be able to specify the method and order of accuracy *)
-Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
 (* TODO: Rename as AntiDerivative *)
 IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
 (* TODO: Is this useful enough to have these in DataTable, when it is easy to do something like Integrate[d, {First[Coordinates[d]], f}]? *)
@@ -227,6 +226,18 @@ CoordinateSpacings[d_DataTable] :=
   (* TODO: Check all spacings are even *)
   {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
 ];
+
+
+(****************************************************************)
+(* Frequency                                                    *)
+(****************************************************************)
+
+SyntaxInformation[Frequency] =
+ {"ArgumentsPattern" -> {_}};
+
+(* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
+Frequency[d:DataTable[__]] :=
+  NDerivative[Phase[d]];
 
 
 (****************************************************************)
@@ -559,10 +570,6 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 Downsampled[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
 
-
-
-Frequency[d:DataTable[__]] :=
-  NDerivative[Phase[d]];
 
 (*    MakeDataTable[Phase[ToList[d]]];*)
 
