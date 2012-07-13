@@ -11,10 +11,13 @@ DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensiona
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
+Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
+
+
+
+
 
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
-(* TODO: check the continuity algorithm and see if it can be improved *)
-Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for smooth enough input data.";
 (* TODO: Make these like DataRegions, i.e. Metadata.  Make these Experimental` for now *)
 AddAttribute::usage = "AddAttribute[d, attrname -> attrval] returns a copy of d with a new attribute added.";
 AddAttributes::usage = "AddAttributes[d, {attrname -> attrvalue, ...}] returns a copy of DataTable d with new attributes added.";
@@ -206,6 +209,35 @@ CoordinateSpacings[d_DataTable] :=
 ];
 
 
+(****************************************************************)
+(* Phase                                                        *)
+(****************************************************************)
+
+(* TODO: check the continuity algorithm and see if it can be improved *)
+
+Phase[tb:List[{_, _}...]] :=
+  Phase[Map[{#[[1]],{Re[#[[2]]], Im[#[[2]]]}} &, tb]];
+
+Phase[tb:{{_, {_, _}}...}] :=
+  Module[{phaseTb,x,y,t,previousPhase, i, currentPhase = 0, cycles =
+          0, nPoints},
+  nPoints = Length[tb];
+  phaseTb = Table[i, {i, 1, nPoints}];
+  For[i = 1, i <= nPoints, i++,
+   t = tb[[i, 1]];
+   x = tb[[i, 2, 1]];
+   y = tb[[i, 2, 2]];
+   currentPhase = If[!(x==0 && y ==0), ArcTan[x, y], 0];
+   If[currentPhase - previousPhase > Pi, cycles--];
+   If[currentPhase - previousPhase < -Pi, cycles++];
+   previousPhase = currentPhase;
+   phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
+  Return[phaseTb]];
+
+Phase[d:DataTable[__]] :=
+  ApplyToList[Phase, d];
+
+
 (**********************************************************)
 (* Resampled                                              *)
 (**********************************************************)
@@ -243,6 +275,11 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[Resampled[#, {t1, t2, dt}, p] &, ds];
 ];
+
+
+
+
+
 
 
 (****************************************************************)
@@ -487,27 +524,7 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 Downsampled[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
 
-Phase[tb:List[{_, _}...]] :=
-  Phase[Map[{#[[1]],{Re[#[[2]]], Im[#[[2]]]}} &, tb]];
 
-Phase[tb:{{_, {_, _}}...}] :=
-  Module[{phaseTb,x,y,t,previousPhase, i, currentPhase = 0, cycles =
-          0, nPoints},
-  nPoints = Length[tb];
-  phaseTb = Table[i, {i, 1, nPoints}];
-  For[i = 1, i <= nPoints, i++,
-   t = tb[[i, 1]];
-   x = tb[[i, 2, 1]];
-   y = tb[[i, 2, 2]];
-   currentPhase = If[!(x==0 && y ==0), ArcTan[x, y], 0];
-   If[currentPhase - previousPhase > Pi, cycles--];
-   If[currentPhase - previousPhase < -Pi, cycles++];
-   previousPhase = currentPhase;
-   phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
-  Return[phaseTb]];
-
-Phase[d:DataTable[__]] :=
-  ApplyToList[Phase, d];
 
 Frequency[d:DataTable[__]] :=
   NDerivative[Phase[d]];
