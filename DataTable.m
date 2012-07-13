@@ -66,8 +66,6 @@ FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTabl
 ShiftPhase;
 (* TODO: Move to another package.  Leave in Experimental`.  This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
 FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
-(* TODO: Make this private *)
-TableRange;
 (* TODO: Make this Experimental`.  This also only operates on lists.  It might be good to have this defined on DataTables as well.  The list version should be made internal, but the DataTable version could be public. *)
 PartitionTable;
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
@@ -818,12 +816,12 @@ zeroAfter[l_, n_] :=
 (*    {t1, t2, t3} = PartitionTable[f, range2]; *)
 (*    Return[Join[t1, filtered, t3]]]; *)
 
-TableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
+tableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
   Select[t, 
    (#[[1]] >= tStart && #[[1]] < tEnd) &];
 
-TableRange[t_List, range_List] :=
-  TableRange[t,range[[1]],range[[2]]];
+tableRange[t_List, range_List] :=
+  tableRange[t,range[[1]],range[[2]]];
 
 FilterDCT[f_List, nModes_Integer] :=
  Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil},
@@ -838,9 +836,9 @@ FilterDCT[f_List, nModes_Integer] :=
 
 PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
  Module[{before, middle, after},
-  before = TableRange[t, First[t][[1]], tMin];
-  middle = TableRange[t, tMin, tMax];
-  after = TableRange[t, tMax, Last[t][[1]] + 1];
+  before = tableRange[t, First[t][[1]], tMin];
+  middle = tableRange[t, tMin, tMax];
+  after = tableRange[t, tMax, Last[t][[1]] + 1];
   Return[{before, middle, after}]
   ];
 
@@ -856,7 +854,7 @@ FilterDCT[f_List, nModes_Integer,
    range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
   Module[{filtered, t1, t2, t3},
    filtered = 
-    TableRange[FilterDCT[TableRange[f, range1], nModes], range2];
+    tableRange[FilterDCT[tableRange[f, range1], nModes], range2];
    {t1, t2, t3} = PartitionTable[f, range2];
    Return[Join[t1, filtered, t3]]];
 
