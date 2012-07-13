@@ -141,6 +141,107 @@ DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
 
+(**********************************************************)
+(* CoordinateRanges                                       *)
+(**********************************************************)
+
+CoordinateRanges[d_DataTable] :=
+  Module[{list = ToList[d], t1, t2},
+    t1 = First[list][[1]];
+    t2 = Last[list][[1]];
+    {{t1,t2}}];
+
+
+(**********************************************************)
+(* CoordinateSpacings                                     *)
+(**********************************************************)
+
+CoordinateSpacings[d_DataTable] :=
+ Module[{ts},
+  ts = ToListOfCoordinates[d];
+
+  (* TODO: use Differences here *)
+  (* TODO: Check all spacings are even *)
+  {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
+];
+
+
+(**********************************************************)
+(* MaxCoordinates                                         *)
+(**********************************************************)
+
+MaxCoordinates[d_DataTable] :=
+  Module[{list = ToList[d], t1},
+    t1 = First[list][[1]];
+    {t1}];
+
+
+(**********************************************************)
+(* MinCoordinates                                         *)
+(**********************************************************)
+
+MinCoordinates[d_DataTable] :=
+  Module[{list = ToList[d], t2},
+    t2 = Last[list][[1]];
+    {t2}];
+
+
+(****************************************************************)
+(* NDerivative                                                  *)
+(****************************************************************)
+
+(* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
+
+NDerivative[d_DataTable] :=
+ Module[{diff, table1, table2, deriv},
+  diff[{t1_, f1_}, {t2_, f2_}] :=
+   {t1, (f2 - f1)/(t2 - t1)};
+  table1 = Drop[ToList[d], 1];
+  table2 = Drop[ToList[d], -1];
+  deriv = MapThread[diff, {table2, table1}];
+  Return[MakeDataTable[deriv]];
+];
+
+
+(**********************************************************)
+(* Resampled                                              *)
+(**********************************************************)
+(* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
+
+Resampled[d_DataTable, dt_?NumberQ, p_Integer] :=
+ Module[{t1, t2},
+  {t1, t2} = DataTableRange[d];
+  Resampled[d, {t1, t2, dt}, p]
+];
+
+Resampled[d_DataTable, {t1_?NumberQ, t2_?NumberQ, dt_?NumberQ}, p_Integer:8] :=
+ Resampled[d, {{t1, t2, dt}}, p];
+
+DataTable /: Resampled[d_DataTable, {t1_, t2_, dt_}, p_:8] :=
+ Module[{f, dt1, dt2},
+  {dt1,dt2} = Endpoints[d];
+  If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
+    Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
+          " for DataTable with range " <> ToString[{dt1,dt2}]]];
+  f = Interpolation[d, InterpolationOrder -> p];
+  (* TODO: possibly remove/replace the Attributes functions here *)
+  AddAttributes[ToDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]
+];
+
+Resampled[ds:{DataTable[__]...}, p_:8] :=
+  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
+    If[Length[ds] === 0, Return[{}]];
+    dts = Map[First@CoordinateSpacings, ds];
+    dt = Apply[Min, dts];
+    ranges = Map[Endpoints, ds];
+    t1s = Map[First, ranges];
+    t2s = Map[Last, ranges];
+    t1 = Apply[Max, t1s];
+    t2 = Apply[Min, t2s];
+    Map[Resampled[#, {t1, t2, dt}, p] &, ds];
+];
+
+
 (****************************************************************)
 (* ToDataTable *)
 (****************************************************************)
@@ -190,50 +291,12 @@ ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
 
 
-(**********************************************************)
-(* MaxCoordinates                                         *)
-(**********************************************************)
 
-MaxCoordinates[d_DataTable] :=
-  Module[{list = ToList[d], t1},
-    t1 = First[list][[1]];
-    {t1}];
-
-
-(**********************************************************)
-(* MinCoordinates                                         *)
-(**********************************************************)
-
-MinCoordinates[d_DataTable] :=
-  Module[{list = ToList[d], t2},
-    t2 = Last[list][[1]];
-    {t2}];
-
-
-(**********************************************************)
-(* CoordinateRanges                                       *)
-(**********************************************************)
-
-CoordinateRanges[d_DataTable] :=
-  Module[{list = ToList[d], t1, t2},
-    t1 = First[list][[1]];
-    t2 = Last[list][[1]];
-    {{t1,t2}}];
-
-
-(**********************************************************)
-(* CoordinateSpacings                                     *)
-(**********************************************************)
-
-CoordinateSpacings[d_DataTable] :=
- Module[{ts},
-  ts = ToListOfCoordinates[d];
-
-  (* TODO: use Differences here *)
-  (* TODO: Check all spacings are even *)
-  {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
-];
-
+(****************************************************************)
+(****************************************************************)
+(* DataTable specific                                           *)
+(****************************************************************)
+(****************************************************************)
 
 (****************************************************************)
 (* Frequency                                                    *)
@@ -247,21 +310,16 @@ Frequency[d:DataTable[__]] :=
   NDerivative[Phase[d]];
 
 
-(****************************************************************)
-(* NDerivative                                                  *)
-(****************************************************************)
+(**********************************************************)
+(* MonotonicQ                                             *)
+(**********************************************************)
 
-(* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
+SyntaxInformation[MonotonicQ] =
+ {"ArgumentsPattern" -> {_}};
 
-NDerivative[d_DataTable] :=
- Module[{diff, table1, table2, deriv},
-  diff[{t1_, f1_}, {t2_, f2_}] :=
-   {t1, (f2 - f1)/(t2 - t1)};
-  table1 = Drop[ToList[d], 1];
-  table2 = Drop[ToList[d], -1];
-  deriv = MapThread[diff, {table2, table1}];
-  Return[MakeDataTable[deriv]];
-];
+MonotonicQ[d_DataTable, tol_:0.] :=
+  Module[{positive = (# > tol &)},
+  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
 
 
 (****************************************************************)
@@ -297,45 +355,6 @@ Phase[d:DataTable[__]] :=
 
 
 (**********************************************************)
-(* Resampled                                              *)
-(**********************************************************)
-(* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
-
-Resampled[d_DataTable, dt_?NumberQ, p_Integer] :=
- Module[{t1, t2},
-  {t1, t2} = DataTableRange[d];
-  Resampled[d, {t1, t2, dt}, p]
-];
-
-Resampled[d_DataTable, {t1_?NumberQ, t2_?NumberQ, dt_?NumberQ}, p_Integer:8] :=
- Resampled[d, {{t1, t2, dt}}, p];
-
-DataTable /: Resampled[d_DataTable, {t1_, t2_, dt_}, p_:8] :=
- Module[{f, dt1, dt2},
-  {dt1,dt2} = Endpoints[d];
-  If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
-    Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
-          " for DataTable with range " <> ToString[{dt1,dt2}]]];
-  f = Interpolation[d, InterpolationOrder -> p];
-  (* TODO: possibly remove/replace the Attributes functions here *)
-  AddAttributes[ToDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]
-];
-
-Resampled[ds:{DataTable[__]...}, p_:8] :=
-  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
-    If[Length[ds] === 0, Return[{}]];
-    dts = Map[First@CoordinateSpacings, ds];
-    dt = Apply[Min, dts];
-    ranges = Map[Endpoints, ds];
-    t1s = Map[First, ranges];
-    t2s = Map[Last, ranges];
-    t1 = Apply[Max, t1s];
-    t2 = Apply[Min, t2s];
-    Map[Resampled[#, {t1, t2, dt}, p] &, ds];
-];
-
-
-(**********************************************************)
 (* UniformSpacingQ                                        *)
 (**********************************************************)
 
@@ -351,16 +370,6 @@ UniformSpacingQ[d_DataTable] :=
     Max[Abs[dts - dt1]] < tol];
 
 
-(**********************************************************)
-(* MonotonicQ                                             *)
-(**********************************************************)
-
-SyntaxInformation[MonotonicQ] =
- {"ArgumentsPattern" -> {_}};
-
-MonotonicQ[d_DataTable, tol_:0.] :=
-  Module[{positive = (# > tol &)},
-  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
 
 
 
@@ -368,7 +377,9 @@ MonotonicQ[d_DataTable, tol_:0.] :=
 
 
 (****************************************************************)
+(****************************************************************)
 (* Experimental                                                 *)
+(****************************************************************)
 (****************************************************************)
 
 (****************************************************************)
@@ -467,9 +478,11 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 
 
 
-(**********************************************************************************)
-(* Functions which don't belong here or need to be updated                        *)
-(**********************************************************************************)
+(****************************************************************)
+(****************************************************************)
+(* Functions which don't belong here or need to be updated      *)
+(****************************************************************)
+(****************************************************************)
 
 SetAttributes[Redefine, HoldAll];
 
@@ -918,7 +931,9 @@ MakeUniform[d_DataTable] :=
 
 
 (****************************************************************)
-(* Deprecated *)
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
 (****************************************************************)
 
 MakeDataTable[l_List] :=
