@@ -11,6 +11,8 @@ ToListOfCoordinates::usage = "ToListOfCoordinates[d] a List of the coordinates p
 (* TODO: Maybe add CoordinateSpacing? *)
 CoordinateSpacings::usage = "CoordinateSpacings[d] gives a List of the spacing of the coordinates in each dimension of d.";
 CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edges of d. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
+MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
+MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
@@ -56,6 +58,22 @@ SyntaxInformation[GridNorm] =
 
 GridNorm[d_?DataRepresentationQ] :=
  Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[d^2]]];
+
+
+(**********************************************************)
+(* MinCoordinates                                         *)
+(**********************************************************)
+
+SyntaxInformation[MinCoordinates] =
+ {"ArgumentsPattern" -> {_}};
+
+
+(**********************************************************)
+(* MaxCoordinates                                         *)
+(**********************************************************)
+
+SyntaxInformation[MaxCoordinates] =
+ {"ArgumentsPattern" -> {_}};
 
 
 (**********************************************************)
