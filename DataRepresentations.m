@@ -13,6 +13,7 @@ CoordinateSpacings::usage = "CoordinateSpacings[d] gives a List of the spacing o
 CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edges of d. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
+Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
@@ -26,6 +27,17 @@ NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d
 Begin["`Private`"];
 
 DataRepresentationQ[_] = False;
+
+
+(**********************************************************)
+(* Endpoints                                              *)
+(**********************************************************)
+
+SyntaxInformation[Endpoints] =
+ {"ArgumentsPattern" -> {_}};
+
+Endpoints[d_?DataRepresentationQ] := First[CoordinateRanges[d]];
+
 
 (**********************************************************)
 (* CoordinateRanges                                       *)

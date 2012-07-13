@@ -11,9 +11,6 @@ DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensiona
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
-(* TODO: should this be in DataRepresentations? *)
-Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
-
 
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
 (* TODO: check the continuity algorithm and see if it can be improved *)
@@ -207,15 +204,6 @@ CoordinateSpacings[d_DataTable] :=
   (* TODO: Check all spacings are even *)
   {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
 ];
-
-(**********************************************************)
-(* Endpoints                                              *)
-(**********************************************************)
-
-SyntaxInformation[Endpoints] =
- {"ArgumentsPattern" -> {_}};
-
-Endpoints[d_DataTable] := First[CoordinateRanges[d]];
 
 
 (**********************************************************)
