@@ -510,12 +510,6 @@ DataTable /: Map[f_, DataTable[l_, attrs___]] :=
 MapList[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[f,l], attrs];
 
-commonAttributes[ds:List[DataTable[__]..]] :=
-  Module[{attrs},
-    attrs = Map[ListAttributes, ds];
-(*    Print[attrs];*)
-    Return[Apply[Intersection, attrs]]];
-
 (****************************************************************)
 (* MapThread *)
 (****************************************************************)
