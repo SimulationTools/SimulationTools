@@ -12,13 +12,6 @@ BeginPackage["DataRegion`",
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
-ToListOfData::usage = If[ValueQ[ToListOfData::usage],ToListOfData::usage,""]<>"
-ToListOfData[d] returns the N-dimensional array of data in DataRegion d.";
-ToListOfCoordinates::usage = ToListOfCoordinates::usage<>"
-ToListOfCoordinates[d] returns the N-dimensional array of coordinates of DataRegion d.";
-ToList::usage = ToList::usage<>"
-ToList[d] returns the N-dimensional array of coordinates and data in DataRegion d.";
-
 CoordinateRanges::usage = "CoordinateRanges[d] returns the data range of a DataRegion. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
 CoordinateSpacings::usage = "CoordinateSpacings[d] returns a list giving the spacing of the data in each dimension of the DataRegion d.";
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in the DataRegion d.";
@@ -28,13 +21,10 @@ VariableName::usage = "VariableName[d] returns the variable name in DataRegion d
 SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are DataRegions defined on the same grid (origin, spacing, size).";
 
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
-Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
-  "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 
-NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of the DataRegion d. The derivs argument should be of the same form as in the first argument of Derivative.";
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
