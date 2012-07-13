@@ -243,3 +243,236 @@ Test[
 	,
 	TestID->"Downsampled"
 ]
+
+(****************************************************************)
+(* DataTableInterval *)
+(****************************************************************)
+
+Test[
+	DataTableInterval[DataTable[{{1,10},{2,11},{3,12},{4,13}}],{2,3}]
+	,
+	DataTable[{{2,11},{3,12}}]
+	,
+	TestID->"DataTableInterval"
+]
+
+(****************************************************************)
+(* IntersectDataTables *)
+(****************************************************************)
+
+Test[
+        IntersectDataTables[{DataTable[{{1, 10}, {2, 11}, {3, 12}}], 
+                             DataTable[{{2, 2}, {3, 100}, {4, 13}}]}]
+	,
+	{DataTable[{{2,11},{3,12}}],DataTable[{{2, 2}, {3, 100}}]}
+	,
+	TestID->"IntersectDataTables"
+]
+
+(****************************************************************)
+(* LocateMaximumPoint *)
+(****************************************************************)
+
+Test[
+        LocateMaximumPoint[DataTable[{{1, 10}, {2, 11}, {3, 3}}]]
+	,
+        2
+	,
+	TestID->"LocateMaximumPoint"
+]
+
+(****************************************************************)
+(* LocateMaximum *)
+(****************************************************************)
+
+Test[
+        LocateMaximum[MakeDataTable[N@Table[{t, t^2 - t^3}, {t, 0, 1, 0.1}]]]
+        ,        
+        0.6666666689068567`
+	,
+	TestID->"LocateMaximum"
+]
+
+(****************************************************************)
+(* MaximumValue *)
+(****************************************************************)
+
+Test[
+        MaximumValue[MakeDataTable[N@Table[{t, t^2 - t^3}, {t, 0, 1, 0.1}]]]
+        ,        
+        0.14814814814814817`
+	,
+	TestID->"MaximumValue"
+]
+
+(****************************************************************)
+(* InvertDataTable *)
+(****************************************************************)
+
+Test[
+        InvertDataTable[DataTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}}]]
+        ,        
+        DataTable[{{10, 1}, {11, 2}, {12, 3}, {15, 4}}]
+	,
+	TestID->"InvertDataTable"
+]
+
+(****************************************************************)
+(* MonotonicQ *)
+(****************************************************************)
+
+Test[
+        MonotonicQ[DataTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}}]]
+        ,        
+        True
+	,
+	TestID->"MonotonicQ-1"
+]
+
+Test[
+        MonotonicQ[DataTable[{{1, 10}, {3, 11}, {2, 12}, {4, 15}}]]
+        ,        
+        False
+	,
+	TestID->"MonotonicQ-2"
+]
+
+(****************************************************************)
+(* PartitionTable *)
+(****************************************************************)
+
+Test[
+
+        PartitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
+                       {2.5, 4.5}]
+        ,
+        {{{1, 10}, {2, 11}}, {{3, 12}, {4, 15}}, {{5, 2}, {6, 3}}}
+	,
+	TestID->"PartitionTable-1"
+]
+
+Test[
+
+        PartitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
+                       {2, 4}]
+        ,
+        {{{1, 10}}, {{2, 11}, {3, 12}}, {{4, 15}, {5, 2}, {6, 3}}}
+	,
+	TestID->"PartitionTable-2"
+]
+
+(****************************************************************)
+(* ShiftDataTable *)
+(****************************************************************)
+
+Test[
+        ShiftDataTable[2, DataTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}}]]
+        ,
+        DataTable[{{3, 10}, {4, 11}, {5, 12}, {6, 15}}]
+	,
+	TestID->"ShiftDataTable"
+]
+
+(****************************************************************)
+(* Spacing *)
+(****************************************************************)
+
+Test[
+        Spacing[DataTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}}]]
+        ,
+        1
+	,
+	TestID->"Spacing"
+]
+
+(****************************************************************)
+(* DataTableRange *)
+(****************************************************************)
+
+Test[
+        DataTableRange[DataTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}}]]
+        ,
+        {1,4}
+	,
+	TestID->"DataTableRange"
+]
+
+(****************************************************************)
+(* Phase *)
+(****************************************************************)
+
+Module[{ph},
+Test[
+        ph = Phase@MakeDataTable[
+          Module[{om = 2}, 
+                 N@Table[{t, t^2 Exp[I om t]}, {t, 0, 2 Pi, 2 Pi/10}]]];
+        DepVar[ph] == 2 IndVar[ph]
+        ,
+        True
+	,
+	TestID->"Phase"
+]]
+
+(* Have tests *)
+
+ApplyToList
+DataTableInterval
+DataTableRange
+DepVar
+Downsample
+Downsampled
+IndVar
+IntersectDataTables
+InvertDataTable
+LocateMaximum
+LocateMaximumPoint
+MakeDataTable
+MakeUniform
+Map
+MapData
+MapIndVar
+MapList
+MapThread
+MapThreadData
+MaximumValue
+MonotonicQ
+PartitionTable
+Phase
+ResampleDataTable
+ShiftDataTable
+Spacing
+ToDataTable
+ToList
+ToListOfCoordinates
+ToListOfData
+UniformGridQ
+
+(* Need tests *)
+
+Add
+DataTableDepVarInterval
+DataTableListLinePlot
+DataTableNormL2
+Div
+FilterDCT
+Frequency
+IntegrateDataTable
+IntegrateDataTableZeroEnd
+IntegrateDataTableZeroStart
+InterpolateWhereFunction
+MakeInterpolatingDataTable
+NDerivative
+PhaseOfFrequency
+ResampleDataTables
+ShiftPhase
+Sub
+
+(* Won't test *)
+
+AbsOfPhase
+AddAttribute
+AddAttributes
+FunctionOfPhase
+ListAttributes
+ReadAttribute
+TableRange
