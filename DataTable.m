@@ -244,6 +244,9 @@ Frequency[d:DataTable[__]] :=
 (* Phase                                                        *)
 (****************************************************************)
 
+SyntaxInformation[Phase] =
+ {"ArgumentsPattern" -> {_}};
+
 (* TODO: check the continuity algorithm and see if it can be improved *)
 
 Phase[tb:List[{_, _}...]] :=
