@@ -10,6 +10,11 @@ BeginPackage["DataTable`",
 DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of data (fi) with an associated coordinate (xi).  DataTable objects print as DataTable[...] to avoid printing the potentially large data content.  The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.";
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
+
+(* TODO: should this be in DataRepresentations? *)
+Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
+
+
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
 (* TODO: Deprecate this *)
 MakeInterpolatingDataTable::usage = "MakeInterpolatingDataTable[d, dt] returns a resampled version of DataTable d which has been interpolated to have a spacing dt.  Deprecated: use ResampleDataTable instead.";
@@ -25,8 +30,6 @@ ListAttributes::usage = "ListAttributes[d] returns a list of the attributes in t
 (* TODO: Remove this *)
 ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
 (* TODO: Add Shifted[d,delta] which subtracts delta from the coordinate of d, shifting the data to increased values of the coordinate *)
-(* TODO: Rename as Endpoints, and add CoordinateRanges which gives a one-element list *)
-DataTableRange::usage = "DataTableRange[d] returns the first and last independent variable in DataTable d in the form {x1, x2}.";
 (* TODO: Rename all variants as Resampled *)
 ResampleDataTable::usage = "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy of DataTable d in which the data has been interpolated with order p and runs from t1 to t2 with spacing dx.  p defaults to 3 if not specified, as in Interpolation.";
 ResampleDataTables::usage = "ResampleDataTables[{d, ...}] returns the DataTables d after resampling to have a common range and spacing, which corresponds to the minimum spacing of the input set.";
@@ -97,6 +100,7 @@ ApplyToList;
 MapThreadData;
 Downsample;
 Spacing;
+DataTableRange;
 
 Begin["`Private`"];
 
@@ -121,7 +125,7 @@ ToDataTable[d_DataRegion`DataRegion] :=
           <> DataRegion`VariableName[d] <> "' is greater than 1."]
   ];
 
-  {{xmin, xmax}} = DataRegion`CoordinateRanges[d];
+  {{xmin, xmax}} = CoordinateRanges[d];
   {spacing} = CoordinateSpacings[d];
   data = ToListOfData[d];
   ToDataTable[Transpose[{Range[xmin, xmax, spacing],data}]]
@@ -163,6 +167,15 @@ ToListOfData[DataTable[l_, ___]] :=
 ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
 
+(**********************************************************)
+(* CoordinateRanges                                       *)
+(**********************************************************)
+
+CoordinateRanges[d_DataTable] :=
+  Module[{list = ToList[d], t1, t2},
+    t1 = First[list][[1]];
+    t2 = Last[list][[1]];
+    {{t1,t2}}];
 
 (**********************************************************)
 (* CoordinateSpacings                                     *)
@@ -176,6 +189,15 @@ CoordinateSpacings[d_DataTable] :=
   (* TODO: Check all spacings are even *)
   {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
 ];
+
+(**********************************************************)
+(* Endpoints                                              *)
+(**********************************************************)
+
+SyntaxInformation[Endpoints] =
+ {"ArgumentsPattern" -> {_}};
+
+Endpoints[d_DataTable] := First[CoordinateRanges[d]];
 
 
 (****************************************************************)
@@ -496,12 +518,6 @@ Redefine[Interpolation[d:DataTable[___], args___],
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
-
-DataTableRange[dt:DataTable[__]] :=
-  Module[{list = ToList[dt], t1, t2},
-    t1 = First[list][[1]];
-    t2 = Last[list][[1]];
-    {t1,t2}];
 
 ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
   Module[{t1, t2},
@@ -864,6 +880,7 @@ Downsample[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
 
 Spacing[d:DataTable[__]] := First[CoordinateSpacings[d]];
+DataTableRange[dt:DataTable[__]] := Endpoints[dt];
 
 End[];
 

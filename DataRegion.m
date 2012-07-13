@@ -12,7 +12,6 @@ BeginPackage["DataRegion`",
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
 
-CoordinateRanges::usage = "CoordinateRanges[d] returns the data range of a DataRegion. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in the DataRegion d.";
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in the DataRegion d.";
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
@@ -121,9 +120,6 @@ CoordinateSpacings[d_DataRegion] := Spacing /. attributes[d];
 (**********************************************************)
 (* CoordinateRanges                                       *)
 (**********************************************************)
-
-SyntaxInformation[CoordinateRanges] =
- {"ArgumentsPattern" -> {_}};
 
 CoordinateRanges[d_DataRegion] :=
  MapThread[List, {MinCoordinates[d], MaxCoordinates[d]}];
