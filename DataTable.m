@@ -124,7 +124,7 @@ ToDataTable[d_DataRegion`DataRegion] :=
 
   {{xmin, xmax}} = DataRegion`CoordinateRanges[d];
   {spacing} = DataRegion`CoordinateSpacings[d];
-  data = DataRegion`ToListOfData[d];
+  data = ToListOfData[d];
   ToDataTable[Transpose[{Range[xmin, xmax, spacing],data}]]
 ];
 
