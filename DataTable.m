@@ -137,6 +137,7 @@ DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
 
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
+
 (****************************************************************)
 (* ToDataTable *)
 (****************************************************************)
@@ -162,27 +163,13 @@ ToDataTable[d_DataRegion`DataRegion] :=
   ToDataTable[Transpose[{Range[xmin, xmax, spacing],data}]]
 ];
 
-SetAttributes[Redefine, HoldAll];
-
-Redefine[f_[args___], newDef_] :=
-  Module[{},
-    Unprotect[f];
-    f[args] := newDef;
-    Protect[f]];
-
-SetAttributes[RedefineAsDataTable, HoldAll];
-
-RedefineAsDataTable[f_[args___], newDef_] :=
-  Module[{},
-    Unprotect[f];
-    DataTable /: f[args] := newDef;
-    Protect[f]];
 
 (****************************************************************)
 (* ToList *)
 (****************************************************************)
 
 ToList[DataTable[l_, ___]] := l;
+
 
 (****************************************************************)
 (* ToListOfData *)
@@ -191,12 +178,14 @@ ToList[DataTable[l_, ___]] := l;
 ToListOfData[DataTable[l_, ___]] :=
   Map[#[[2]]&, l];
 
+
 (****************************************************************)
 (* ToListOfCoordinates *)
 (****************************************************************)
 
 ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
+
 
 (**********************************************************)
 (* MaxCoordinates                                         *)
@@ -227,6 +216,7 @@ CoordinateRanges[d_DataTable] :=
     t1 = First[list][[1]];
     t2 = Last[list][[1]];
     {{t1,t2}}];
+
 
 (**********************************************************)
 (* CoordinateSpacings                                     *)
@@ -314,6 +304,21 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
 
 
 
+SetAttributes[Redefine, HoldAll];
+
+Redefine[f_[args___], newDef_] :=
+  Module[{},
+    Unprotect[f];
+    f[args] := newDef;
+    Protect[f]];
+
+SetAttributes[RedefineAsDataTable, HoldAll];
+
+RedefineAsDataTable[f_[args___], newDef_] :=
+  Module[{},
+    Unprotect[f];
+    DataTable /: f[args] := newDef;
+    Protect[f]];
 
 (****************************************************************)
 (* Map *)
