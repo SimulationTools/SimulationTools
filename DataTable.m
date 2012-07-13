@@ -30,8 +30,6 @@ DataTableRange::usage = "DataTableRange[d] returns the first and last independen
 (* TODO: Rename all variants as Resampled *)
 ResampleDataTable::usage = "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy of DataTable d in which the data has been interpolated with order p and runs from t1 to t2 with spacing dx.  p defaults to 3 if not specified, as in Interpolation.";
 ResampleDataTables::usage = "ResampleDataTables[{d, ...}] returns the DataTables d after resampling to have a common range and spacing, which corresponds to the minimum spacing of the input set.";
-(* TODO: Rename as CoordinateSpacing.  This should generate an error if the grid is not uniform *)
-Spacing::usage = "Spacing[d] returns the spacing of the independent variable in DataTable d.  This is a constant for the DataTable.";
 (* TODO: Rename as Interval. *)
 DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
 (* TODO: Add Slab to be compatible with DataRegion (maybe) *)
@@ -98,6 +96,7 @@ MapIndVar;
 ApplyToList;
 MapThreadData;
 Downsample;
+Spacing;
 
 Begin["`Private`"];
 
@@ -123,7 +122,7 @@ ToDataTable[d_DataRegion`DataRegion] :=
   ];
 
   {{xmin, xmax}} = DataRegion`CoordinateRanges[d];
-  {spacing} = DataRegion`CoordinateSpacings[d];
+  {spacing} = CoordinateSpacings[d];
   data = ToListOfData[d];
   ToDataTable[Transpose[{Range[xmin, xmax, spacing],data}]]
 ];
@@ -163,6 +162,21 @@ ToListOfData[DataTable[l_, ___]] :=
 
 ToListOfCoordinates[DataTable[l_, ___]] :=
   l[[All,1]];
+
+
+(**********************************************************)
+(* CoordinateSpacings                                     *)
+(**********************************************************)
+
+CoordinateSpacings[d_DataTable] :=
+ Module[{ts},
+  ts = ToListOfCoordinates[d];
+
+  (* TODO: use Differences here *)
+  (* TODO: Check all spacings are even *)
+  {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
+];
+
 
 (****************************************************************)
 (* Map *)
@@ -515,11 +529,6 @@ ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
                   ListAttributes[d]]];
 
-Spacing[d:DataTable[__]] :=
-  Module[{ts},
-    ts = IndVar[d];
-    Min[Drop[ts,1] - Drop[RotateRight[ts],1]]]
-
 ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
     If[Length[ds] === 0, Return[{}]];
@@ -853,6 +862,8 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
 
 Downsample[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
+
+Spacing[d:DataTable[__]] := First[CoordinateSpacings[d]];
 
 End[];
 
