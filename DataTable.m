@@ -27,7 +27,6 @@ DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of t
 (* TODO: Add Slab to be compatible with DataRegion (maybe) *)
 (* TODO: Remove this, and implement Select on DataTables instead?  Select[d, y1 < #2 < y2 &] *)
 DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
-(* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
 (* TODO: Rename as RestrictedToCommonInterval. *)
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 (* TODO: Rename as AntiDerivative *)
@@ -244,6 +243,23 @@ SyntaxInformation[Frequency] =
 (* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
 Frequency[d:DataTable[__]] :=
   NDerivative[Phase[d]];
+
+
+(****************************************************************)
+(* NDerivative                                                  *)
+(****************************************************************)
+
+(* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
+
+NDerivative[d_DataTable] :=
+ Module[{diff, table1, table2, deriv},
+  diff[{t1_, f1_}, {t2_, f2_}] :=
+   {t1, (f2 - f1)/(t2 - t1)};
+  table1 = Drop[ToList[d], 1];
+  table2 = Drop[ToList[d], -1];
+  deriv = MapThread[diff, {table2, table1}];
+  Return[MakeDataTable[deriv]];
+];
 
 
 (****************************************************************)
@@ -766,18 +782,6 @@ IntersectDataTables[ds:{(_DataTable)...}] :=
     ds2 = Map[DataTableInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
     ds2];
 
-
-Global`StandardDefinition[NDerivative] = True;
-
-NDerivative[d_DataTable] :=
- Module[{diff, table1, table2, deriv},
-  diff[{t1_, f1_}, {t2_, f2_}] :=
-   {t1, (f2 - f1)/(t2 - t1)};
-  table1 = Drop[ToList[d], 1];
-  table2 = Drop[ToList[d], -1];
-  deriv = MapThread[diff, {table2, table1}];
-  Return[MakeDataTable[deriv]];
-  ]
 
   Options[IntegrateDataTable] = {InterpolationOrder->3};
 
