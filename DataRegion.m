@@ -28,10 +28,15 @@ Global`Sub::usage = "Sub[d1,d2,p] returns a DataRegion whose data is the subtrac
 (* TODO: Add MapCoordinates, MapThreadCoordinates, MapData, MapThreadData, Map, MapThread *)
 
 
-(* TODO: don't support this - put it in NRMMA`Experimental *)
-TimeDerivative::usage = "TimeDerivative[{d1, d2,...}, center] returns a numerical time derivative computed from DataRegions d1, d2, ... . The derivative is computed using finite differencing, the order of which is determined by the number of DataRegions given. The optional center argument specifies the number of timesteps from the first DataRegion at which to compute derivatives (using lop-sided differencing, if necessary), with the default value being half-way between the first and last times.";
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
 
-(* DEPRECATED *)
+TimeDerivative;
+
+(****************************************************************)
+(* Deprecated *)
+(****************************************************************)
 
 MakeDataRegion;
 SliceData;
@@ -682,18 +687,9 @@ DataRegion /: Interpolation[v_DataRegion, opts___] :=
 
 
 
-(**********************************************************************************)
-(* Functions which don't belong here                                              *)
-(**********************************************************************************)
-
-(*******************************************************************************************)
-(* Sub                                                                                     *)
-(*******************************************************************************************)
-
-DataRegion/:
-Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
-  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
-
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
 
 (**********************************************************)
 (* TimeDerivative                                         *)
@@ -766,6 +762,23 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
   DataRegion[attr, ToListOfData[deriv]]
 ];
 
+
+
+
+
+
+
+(**********************************************************************************)
+(* Functions which don't belong here                                              *)
+(**********************************************************************************)
+
+(*******************************************************************************************)
+(* Sub                                                                                     *)
+(*******************************************************************************************)
+
+DataRegion/:
+Global`Sub[d1_DataRegion, d2_DataRegion,p_:3] :=
+  Apply[Subtract, ResampleDataRegions[{d1, d2},p]];
 
 
 

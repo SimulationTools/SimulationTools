@@ -19,13 +19,6 @@ Frequency::usage = "Frequency[d] returns the first derivative of the complex pha
 
 
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
-(* TODO: Make these like DataRegions, i.e. Metadata.  Make these Experimental` for now *)
-AddAttribute::usage = "AddAttribute[d, attrname -> attrval] returns a copy of d with a new attribute added.";
-AddAttributes::usage = "AddAttributes[d, {attrname -> attrvalue, ...}] returns a copy of DataTable d with new attributes added.";
-(* This should just be Attribute[d], but that is too generic *)
-ReadAttribute::usage = "ReadAttribute[d, attrname] returns the value of the named attribute from the DataTable d.";
-(* TODO: Could this be AttributeNames? *)
-ListAttributes::usage = "ListAttributes[d] returns a list of the attributes in the DataTable d in the form {attrname -> attrvalue, ...}.";
 (* TODO: Remove this *)
 ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
 (* TODO: Add Shifted[d,delta] which subtracts delta from the coordinate of d, shifting the data to increased values of the coordinate *)
@@ -63,10 +56,6 @@ AbsOfPhase::usage = "AbsOfPhase[d] uses FunctionOfPhase to construct a DataTable
 FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
 (* TODO: Remove: This is redundant, it's the same as Exp[I phi] d *)
 ShiftPhase;
-(* TODO: Move to another package.  Leave in Experimental`.  This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
-FilterDCT::usage = "FilterDCT[d, numModes, range1, range2] filters the data in d using a discrete fourier transform, allowing a maximum of numModes modes. Only data in range1 is used in filtering and only data in range2 is actually returned filtered.";
-(* TODO: Make this Experimental`.  This also only operates on lists.  It might be good to have this defined on DataTables as well.  The list version should be made internal, but the DataTable version could be public. *)
-PartitionTable;
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
@@ -74,6 +63,25 @@ MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in t
 MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spacing from a DataTable with a nonuniform grid spacing.  This is accomplished via interpolation through ResampleDataTable.";
 (* TODO: Rename as UniformSpacingQ *)
 UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
+
+
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+(* TODO: Make these like DataRegions, i.e. Metadata. *)
+AddAttribute;
+AddAttributes;
+(* This should just be Attribute[d], but that is too generic *)
+ReadAttribute;
+(* TODO: Could this be AttributeNames? *)
+ListAttributes;
+
+(* TODO: This also only operates on lists.  It might be good to have this defined on DataTables as well.  The list version should be made internal, but the DataTable version could be public. *)
+PartitionTable;
+
+(* TODO: Move to another package. This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
+FilterDCT;
 
 (****************************************************************)
 (* Deprecated *)
@@ -313,7 +321,109 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
 
 
 
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
 
+(****************************************************************)
+(* FilterDCT                                                    *)
+(****************************************************************)
+
+zeroAfter[l_, n_] :=
+ Module[{len},
+  len = Length[l];
+  Join[Take[l, n], Table[0, {i, n + 1, len}]]];
+
+tableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
+  Select[t,
+   (#[[1]] >= tStart && #[[1]] < tEnd) &];
+
+tableRange[t_List, range_List] :=
+  tableRange[t,range[[1]],range[[2]]];
+
+FilterDCT[f_List, nModes_Integer] :=
+ Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil},
+  times = Map[First, f];
+  data = Map[Last, f];
+  dataDCT = FourierDCT[data, 2];
+  dataFilDCT = zeroAfter[dataDCT, nModes];
+  dataFil = FourierDCT[dataFilDCT, 3];
+  fFil = MapThread[List, {times, dataFil}];
+  Return[fFil];
+  ];
+
+FilterDCT[f_DataTable,  nModes_Integer,
+   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
+   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
+  Module[{},
+    MakeDataTable[FilterDCT[ToList[f], nModes, range1, range2]]
+  ];
+
+FilterDCT[f_List, nModes_Integer,
+   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
+   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
+  Module[{filtered, t1, t2, t3},
+   filtered =
+    tableRange[FilterDCT[tableRange[f, range1], nModes], range2];
+   {t1, t2, t3} = PartitionTable[f, range2];
+   Return[Join[t1, filtered, t3]]];
+
+
+(****************************************************************)
+(* PartitionTable                                               *)
+(****************************************************************)
+
+PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
+ Module[{before, middle, after},
+  before = tableRange[t, First[t][[1]], tMin];
+  middle = tableRange[t, tMin, tMax];
+  after = tableRange[t, tMax, Last[t][[1]] + 1];
+  Return[{before, middle, after}]
+  ];
+
+
+(****************************************************************)
+(* AddAttribute                                                 *)
+(****************************************************************)
+
+AddAttribute[d:DataTable[x__], name_ -> val_] :=
+  DataTable[x, name -> val];
+
+
+(****************************************************************)
+(* AddAttributes                                                *)
+(****************************************************************)
+
+AddAttributes[d:DataTable[x__], attrRules_List] :=
+  DataTable[x, Apply[Sequence, attrRules]];
+
+
+(****************************************************************)
+(* ReadAttribute                                                *)
+(****************************************************************)
+
+ReadAttribute[d:DataTable[l_, attrs___], name_] :=
+  Module[{val},
+    val = name /. {attrs};
+    If[val === name,
+      Error["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
+    Return[val]];
+
+
+(****************************************************************)
+(* ListAttributes                                               *)
+(****************************************************************)
+
+ListAttributes[d:DataTable[l_, attrs___]] :=
+  {attrs};
+
+
+
+
+
+(**********************************************************************************)
+(* Functions which don't belong here or need to be updated                        *)
+(**********************************************************************************)
 
 SetAttributes[Redefine, HoldAll];
 
@@ -550,22 +660,6 @@ Add[ds:(_DataTable..), p_Integer:8] :=
 Div[d1_DataTable, d2_DataTable] :=
   Apply[Divide, ResampleDataTables[{d1, d2}]];
 
-AddAttribute[d:DataTable[x__], name_ -> val_] :=
-  DataTable[x, name -> val];
-
-AddAttributes[d:DataTable[x__], attrRules_List] :=
-  DataTable[x, Apply[Sequence, attrRules]];
-
-ReadAttribute[d:DataTable[l_, attrs___], name_] :=
-  Module[{val},
-    val = name /. {attrs};
-    If[val === name,
-      Error["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
-    Return[val]];
-
-ListAttributes[d:DataTable[l_, attrs___]] :=
-  {attrs};
-
 (****************************************************************)
 (* Downsampled *)
 (****************************************************************)
@@ -792,82 +886,6 @@ PhaseOfFrequency[psi4_] :=
 ShiftPhase[d_DataTable, dph_] :=
   MapData[Exp[I dph] # &, d];
 
-zeroAfter[l_, n_] :=
- Module[{len},
-  len = Length[l];
-  Join[Take[l, n], Table[0, {i, n + 1, len}]]];
-
-(* FilterDCT[f_List, nModes_Integer] := *)
-(*  Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil}, *)
-(*   times = Map[First, f]; *)
-(*   data = Map[Last, f]; *)
-(*   dataDCT = FourierDCT[data, 2]; *)
-(*   dataFilDCT = zeroAfter[dataDCT, nModes]; *)
-(*   dataFil = FourierDCT[dataFilDCT, 3]; *)
-(*   fFil = MapThread[List, {times, dataFil}]; *)
-(*   Return[fFil]; *)
-(*   ]; *)
-
-(* PartitionTable[d_DataTable, {tMin_?NumberQ, tMax_?NumberQ}] := *)
-(*  Module[{before, middle, after, t1, t2}, *)
-(*   {t1,t2} = DataTableRange[d]; *)
-(*   before = DataTableInterval[d, t1, tMin]; *)
-(*   middle = DataTableInterval[d, tMin, tMax]; *)
-(*   after = DataTableInterval[d, tMax, t2]; *)
-(*   Return[{before, middle, after}] *)
-(*   ]; *)
-
-(* FilterDCT[f_List, nModes_Integer, *)
-(*    range1 : {tMin1_?NumberQ, tMax1_?NumberQ}, *)
-(*    range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] := *)
-(*   Module[{filtered, t1, t2, t3}, *)
-(*    filtered =  *)
-(*     DataTableInterval[FilterDCT[DataTableInterval[f, range1], nModes], range2]; *)
-(*    {t1, t2, t3} = PartitionTable[f, range2]; *)
-(*    Return[Join[t1, filtered, t3]]]; *)
-
-tableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
-  Select[t, 
-   (#[[1]] >= tStart && #[[1]] < tEnd) &];
-
-tableRange[t_List, range_List] :=
-  tableRange[t,range[[1]],range[[2]]];
-
-FilterDCT[f_List, nModes_Integer] :=
- Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil},
-  times = Map[First, f];
-  data = Map[Last, f];
-  dataDCT = FourierDCT[data, 2];
-  dataFilDCT = zeroAfter[dataDCT, nModes];
-  dataFil = FourierDCT[dataFilDCT, 3];
-  fFil = MapThread[List, {times, dataFil}];
-  Return[fFil];
-  ];
-
-PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
- Module[{before, middle, after},
-  before = tableRange[t, First[t][[1]], tMin];
-  middle = tableRange[t, tMin, tMax];
-  after = tableRange[t, tMax, Last[t][[1]] + 1];
-  Return[{before, middle, after}]
-  ];
-
-FilterDCT[f_DataTable,  nModes_Integer,
-   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
-   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
-  Module[{},
-    MakeDataTable[FilterDCT[ToList[f], nModes, range1, range2]]
-  ];
-
-FilterDCT[f_List, nModes_Integer,
-   range1 : {tMin1_?NumberQ, tMax1_?NumberQ},
-   range2 : {tMin2_?NumberQ, tMax2_?NumberQ}] :=
-  Module[{filtered, t1, t2, t3},
-   filtered = 
-    tableRange[FilterDCT[tableRange[f, range1], nModes], range2];
-   {t1, t2, t3} = PartitionTable[f, range2];
-   Return[Join[t1, filtered, t3]]];
-
 MonotonicQ[d_DataTable, tol_:0.] :=
   Module[{positive = (# > tol &)},
   Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
@@ -882,6 +900,9 @@ UniformGridQ[d_DataTable] :=
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
+
+
+
 
 (****************************************************************)
 (* Deprecated *)
