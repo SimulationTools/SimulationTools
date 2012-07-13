@@ -18,9 +18,6 @@ SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are DataRegions 
 
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 
-(* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
-Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
-
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
@@ -511,9 +508,6 @@ Downsampled[d_DataRegion, n_List] :=
 (**********************************************************)
 (* Resampled                                              *)
 (**********************************************************)
-
-SyntaxInformation[Resampled] =
- {"ArgumentsPattern" -> {_, ___}};
 
 DataRegion /: Resampled[d_DataRegion, grid_List] :=
  Module[{dims, interp, vars, tmp, iterators, data},

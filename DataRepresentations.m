@@ -14,6 +14,8 @@ CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edge
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 
+(* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
+Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 
@@ -84,6 +86,14 @@ SyntaxInformation[NDerivative] =
  {"ArgumentsPattern" -> {_, ___}};
 
 Global`StandardDefinition[NDerivative] = True;
+
+
+(**********************************************************)
+(* Resampled                                              *)
+(**********************************************************)
+
+SyntaxInformation[Resampled] =
+ {"ArgumentsPattern" -> {_, ___}};
 
 
 (**********************************************************)

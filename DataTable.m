@@ -16,8 +16,6 @@ Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last poi
 
 
 MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
-(* TODO: Deprecate this *)
-MakeInterpolatingDataTable::usage = "MakeInterpolatingDataTable[d, dt] returns a resampled version of DataTable d which has been interpolated to have a spacing dt.  Deprecated: use ResampleDataTable instead.";
 (* TODO: check the continuity algorithm and see if it can be improved *)
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for smooth enough input data.";
 (* TODO: Make these like DataRegions, i.e. Metadata.  Make these Experimental` for now *)
@@ -30,9 +28,6 @@ ListAttributes::usage = "ListAttributes[d] returns a list of the attributes in t
 (* TODO: Remove this *)
 ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
 (* TODO: Add Shifted[d,delta] which subtracts delta from the coordinate of d, shifting the data to increased values of the coordinate *)
-(* TODO: Rename all variants as Resampled *)
-ResampleDataTable::usage = "ResampleDataTable[d, {x1, x2, dx}, p] returns a copy of DataTable d in which the data has been interpolated with order p and runs from t1 to t2 with spacing dx.  p defaults to 3 if not specified, as in Interpolation.";
-ResampleDataTables::usage = "ResampleDataTables[{d, ...}] returns the DataTables d after resampling to have a common range and spacing, which corresponds to the minimum spacing of the input set.";
 (* TODO: Rename as Interval. *)
 DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
 (* TODO: Add Slab to be compatible with DataRegion (maybe) *)
@@ -100,6 +95,9 @@ Downsample;
 Spacing;
 DataTableRange;
 DataTableNormL2;
+MakeInterpolatingDataTable;
+ResampleDataTable;
+ResampleDataTables;
 
 Begin["`Private`"];
 
@@ -218,6 +216,45 @@ SyntaxInformation[Endpoints] =
  {"ArgumentsPattern" -> {_}};
 
 Endpoints[d_DataTable] := First[CoordinateRanges[d]];
+
+
+(**********************************************************)
+(* Resampled                                              *)
+(**********************************************************)
+(* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
+
+Resampled[d_DataTable, dt_?NumberQ, p_Integer] :=
+ Module[{t1, t2},
+  {t1, t2} = DataTableRange[d];
+  Resampled[d, {t1, t2, dt}, p]
+];
+
+Resampled[d_DataTable, {t1_?NumberQ, t2_?NumberQ, dt_?NumberQ}, p_Integer:8] :=
+ Resampled[d, {{t1, t2, dt}}, p];
+
+DataTable /: Resampled[d_DataTable, {t1_, t2_, dt_}, p_:8] :=
+ Module[{f, dt1, dt2},
+  {dt1,dt2} = Endpoints[d];
+  If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
+    Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
+          " for DataTable with range " <> ToString[{dt1,dt2}]]];
+  f = Interpolation[d, InterpolationOrder -> p];
+  (* TODO: possibly remove/replace the Attributes functions here *)
+  AddAttributes[ToDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]
+];
+
+Resampled[ds:{DataTable[__]...}, p_:8] :=
+  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
+    If[Length[ds] === 0, Return[{}]];
+    dts = Map[First@CoordinateSpacings, ds];
+    dt = Apply[Min, dts];
+    ranges = Map[Endpoints, ds];
+    t1s = Map[First, ranges];
+    t2s = Map[Last, ranges];
+    t1 = Apply[Max, t1s];
+    t2 = Apply[Min, t2s];
+    Map[Resampled[#, {t1, t2, dt}, p] &, ds];
+];
 
 
 (****************************************************************)
@@ -492,15 +529,6 @@ Frequency[d:DataTable[__]] :=
 downsample[l_List, n_Integer] :=
   Take[l, {1, Length[l], n}];
 
-MakeInterpolatingDataTable[d:DataTable[__], dt_] :=
-  Module[{l, t1, t2, f, l2},
-    l = ToList[d];
-    t1 = First[l][[1]];
-    t2 = Last[l][[1]];
-    f = Interpolation[l];
-    l2 = Table[{t, f[t]}, {t, t1, t2, dt}];
-    d /. DataTable[_, x___] -> DataTable[l2, x]];
-
 (* Plotting *)
 
 Redefine[ListPlot[d:DataTable[___], args___],
@@ -536,43 +564,6 @@ Redefine[Interpolation[d:DataTable[___], args___],
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
 
-ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
-  Module[{t1, t2},
-    {t1, t2} = DataTableRange[d];
-    ResampleDataTable[d, {t1, t2, dt}, p]
-  ];
-
-ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
-   ResampleDataTable[d, {t1, t2, dt}, 8];
-
-ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
-  Module[{f, dt1, dt2},
-    {dt1,dt2} = DataTableRange[d];
-    If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
-      Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
-            " for DataTable with range " <> ToString[{dt1,dt2}]]];
-    f = Interpolation[d, InterpolationOrder -> p];
-    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
-
-ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
-  Module[
-    {d2, template2},
-    {d2, template2} = IntersectDataTables[d,template];
-    f = Interpolation[d, InterpolationOrder -> p];
-    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
-                  ListAttributes[d]]];
-
-ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
-  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
-    If[Length[ds] === 0, Return[{}]];
-    dts = Map[Spacing, ds];
-    dt = Apply[Min, dts];
-    ranges = Map[DataTableRange, ds];
-    t1s = Map[First, ranges];
-    t2s = Map[Last, ranges];
-    t1 = Apply[Max, t1s];
-    t2 = Apply[Min, t2s];
-    Map[ResampleDataTable[#, {t1, t2, dt}, p] &, ds]];
 
 DataTableInterval[x___] := Error["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
 
@@ -899,6 +890,54 @@ Downsample[d_DataTable, n_Integer] :=
 Spacing[d:DataTable[__]] := First[CoordinateSpacings[d]];
 DataTableRange[dt:DataTable[__]] := Endpoints[dt];
 DataTableNormL2[d_DataTable] := GridNorm[d];
+
+ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
+  Module[{t1, t2},
+    {t1, t2} = DataTableRange[d];
+    ResampleDataTable[d, {t1, t2, dt}, p]
+  ];
+
+ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}] :=
+   ResampleDataTable[d, {t1, t2, dt}, 8];
+
+ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
+  Module[{f, dt1, dt2},
+    {dt1,dt2} = DataTableRange[d];
+    If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
+      Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
+            " for DataTable with range " <> ToString[{dt1,dt2}]]];
+    f = Interpolation[d, InterpolationOrder -> p];
+    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
+
+ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
+  Module[
+    {d2, template2},
+    {d2, template2} = IntersectDataTables[d,template];
+    f = Interpolation[d, InterpolationOrder -> p];
+    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
+                  ListAttributes[d]]];
+
+ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
+  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
+    If[Length[ds] === 0, Return[{}]];
+    dts = Map[Spacing, ds];
+    dt = Apply[Min, dts];
+    ranges = Map[DataTableRange, ds];
+    t1s = Map[First, ranges];
+    t2s = Map[Last, ranges];
+    t1 = Apply[Max, t1s];
+    t2 = Apply[Min, t2s];
+    Map[ResampleDataTable[#, {t1, t2, dt}, p] &, ds]];
+
+MakeInterpolatingDataTable[d:DataTable[__], dt_] :=
+  Module[{l, t1, t2, f, l2},
+    l = ToList[d];
+    t1 = First[l][[1]];
+    t2 = Last[l][[1]];
+    f = Interpolation[l];
+    l2 = Table[{t, f[t]}, {t, t1, t2, dt}];
+    d /. DataTable[_, x___] -> DataTable[l2, x]];
+
 
 End[];
 
