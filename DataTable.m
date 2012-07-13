@@ -101,7 +101,40 @@ ResampleDataTables;
 
 Begin["`Private`"];
 
-Format[DataTable[l_, attrs___]] := "DataTable"["..."];
+(****************************************************************)
+(* DataTable *)
+(****************************************************************)
+
+(* TODO: Remove this hack *)
+DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
+
+SetAttributes[DataTable, {ReadProtected}];
+
+DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
+ Module[{dims, range},
+  dims  = Dimensions[d];
+  range = CoordinateRanges[d];
+
+  TagBox[
+   RowBox[
+    {"DataTable",
+     "[",
+     RowBox[
+      {
+       "\"<\"",
+       "\[InvisibleSpace]",
+       Sequence@@Riffle[dims, ","],
+       "\[InvisibleSpace]",
+       "\">\"",
+       ",",
+       ToBoxes[range]
+      }],
+     "]"
+    }],
+   DataTable,
+   Editable -> False]
+];
+
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
 (****************************************************************)
