@@ -90,14 +90,14 @@ UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a unifo
 (* Deprecated *)
 (****************************************************************)
 
-MakeDataTable::usage = "MakeDataTable[{{x,f},...}, attrs] constructs a DataTable object out of the list and attributes passed.  attrs is of the form {attr -> value, ...}.  The independent variable, x, should be monotonically increasing and have a uniform spacing.  This is not currently checked.";
-DepVar::usage = "DepVar[d] returns the dependent variable of the DataTable d.";
-IndVar::usage = "IndVar[d] returns the independent variable of the DataTable d.";
-MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the DataTable d";
-MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
-ApplyToList::usage = "ApplyToList[f, d] applies f to the underlying list in DataTable d."
-MapThreadData::usage = "MapThreadData[f, {d, ...}] threads f over the independent variables in the DataTable objects d, much like MapThread for lists.";
-Downsample::usage = "Downsample[d, n] returns a version of DataTable d with only every nth element.";
+MakeDataTable;
+DepVar;
+IndVar;
+MapData;
+MapIndVar;
+ApplyToList;
+MapThreadData;
+Downsample;
 
 Begin["`Private`"];
 
