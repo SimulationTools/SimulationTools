@@ -56,8 +56,6 @@ InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the de
 LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
-(* TODO: Remove, as can be built up easily *)
-PhaseOfFrequency::usage = "PhaseOfFrequency[d] gives the phase of a complex data table d as a function of the frequency, where the frequency is defined as the derivative of the phase.";
 (* TODO: Rename as InterpolatedMax *)
 MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
 (* TODO: Remove.  This is very specific, and could be easily implemented as Abs[FunctionOfPhase[...]].  What is added is automatic determination of arguments *)
@@ -98,6 +96,7 @@ DataTableNormL2;
 MakeInterpolatingDataTable;
 ResampleDataTable;
 ResampleDataTables;
+PhaseOfFrequency;
 
 Begin["`Private`"];
 
