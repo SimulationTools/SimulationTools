@@ -587,9 +587,6 @@ RedefineAsDataTable[Norm[d:DataTable[__]],
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
 
-
-DataTable /: Mod[d_DataTable, n_] := MapData[Mod[#, n]&, d];
-
 DataTable /: PadRight[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
     First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
