@@ -161,6 +161,17 @@ CoordinateSpacings[d_DataTable] :=
 
 
 (**********************************************************)
+(* Downsampled                                            *)
+(**********************************************************)
+
+downsample[l_List, n_Integer] :=
+  Take[l, {1, Length[l], n}];
+
+Downsampled[d_DataTable, n_Integer] :=
+  ApplyToList[downsample[#, n] &, d];
+
+
+(**********************************************************)
 (* Functions which should just see a regular data List.   *)
 (* These fall into two categories:                        *)
 (* 1. Those which take a single DataRegion and return a   *)
@@ -741,20 +752,6 @@ RedefineAsDataTable[Drop[d:DataTable[___], args__],
 RedefineAsDataTable[Length[d_DataTable],
 	Length[ToList[d]]
 ];
-
-(****************************************************************)
-(* Downsampled *)
-(****************************************************************)
-
-Downsampled[d_DataTable, n_Integer] :=
-  ApplyToList[downsample[#, n] &, d];
-
-
-(*    MakeDataTable[Phase[ToList[d]]];*)
-
-downsample[l_List, n_Integer] :=
-  Take[l, {1, Length[l], n}];
-
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
