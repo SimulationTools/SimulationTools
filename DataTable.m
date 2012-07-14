@@ -17,6 +17,9 @@ Frequency::usage = "Frequency[d] returns the first derivative of the complex pha
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 
+CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
+InterpolatedMax::usage = "InterpolatedMax[d] returns the maximum value of the interpolant of a DataTable d";
+
 
 
 
@@ -37,12 +40,8 @@ IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first int
 InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
-(* TODO: Rename as CoordinateAtInterpolatedMax *)
-LocateMaximum::usage = "LocateMaximum[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
-(* TODO: Rename as InterpolatedMax *)
-MaximumValue::usage = "MaximumValue[d] returns the maximum value of the interpolant of a DataTable d";
 (* TODO: Rename; this is the composition of d and p^-1.  We have Inverse already, maybe we should also have Composition? Then we wouldn't need this function as it would be easy: Composition[d, Inverse[p], {t1, t2, dp}].  Composition will likely need to interpolate. *)
 FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
 
@@ -96,6 +95,8 @@ AbsOfPhase;
 UniformGridQ;
 IntegrateDataTableZeroStart;
 IntegrateDataTableZeroEnd;
+LocateMaximum;
+MaximumValue;
 
 Begin["`Private`"];
 
@@ -400,6 +401,39 @@ SyntaxInformation[Frequency] =
 (* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
 Frequency[d:DataTable[__]] :=
   NDerivative[Phase[d]];
+
+
+(****************************************************************)
+(* CoordinateAtInterpolatedMax                                  *)
+(****************************************************************)
+
+SyntaxInformation[CoordinateAtInterpolatedMax] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateAtInterpolatedMax[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, fn, t1, t2, t, tMax2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{time_, f_}] :=
+   If[f > fMax, fMax = f; tMax = time];
+  Scan[maxFind, l];
+  fn = Interpolation[d];
+  tMax2 = 
+   t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
+       tMax}][[2]];
+  Return[tMax2]];
+
+
+(****************************************************************)
+(* InterpolatedMax                                              *)
+(****************************************************************)
+
+SyntaxInformation[InterpolatedMax] =
+ {"ArgumentsPattern" -> {_}};
+
+InterpolatedMax[d_DataTable] :=
+  Interpolation[d][LocateMaximum[d]];
 
 
 (**********************************************************)
@@ -806,22 +840,6 @@ LocateMaximumPoint[d_DataTable] :=
   Scan[maxFind, l];
   Return[tMax]];
 
-LocateMaximum[d_DataTable] :=
- Module[{tMax, fMax, l, maxFind, fn, t1, t2, t, tMax2},
-  l = ToList[d];
-  {t1, t2} = DataTableRange[d];
-  fMax = -Infinity;
-  maxFind[{time_, f_}] :=
-   If[f > fMax, fMax = f; tMax = time];
-  Scan[maxFind, l];
-  fn = Interpolation[d];
-  tMax2 = 
-   t /. FindMaximum[{fn[t], {t > tMax - 50, t < tMax + 50}}, {t, 
-       tMax}][[2]];
-  Return[tMax2]];
-
-MaximumValue[d_DataTable] :=
-  Interpolation[d][LocateMaximum[d]];
 
 
 FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
