@@ -412,16 +412,15 @@ Options[AntiDerivative] = {InterpolationOrder->3};
 
 AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
  Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
-  {tMin, tMax} = DataTableRange[d];
+  {tMin, tMax} = Endpoints[d];
   If[tbc < tMin || tbc > tMax,
    Error["AntiDerivative: boundary condition is not within range of DataTable"]];
-  dt = Spacing[d];
+  dt = First[CoordinateSpacings[d]];
 	dFn = Interpolation[d, InterpolationOrder -> OptionValue[InterpolationOrder]];
   gFn = g /.
     NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
      1]];
-  gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}],
-    ListAttributes[d]]];
+  gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], ListAttributes[d]]];
 
 
 (****************************************************************)
