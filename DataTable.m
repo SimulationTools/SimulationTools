@@ -21,7 +21,7 @@ CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the t
 InterpolatedMax::usage = "InterpolatedMax[d] returns the maximum value of the interpolant of a DataTable d";
 
 InterpolatedWhere::usage = "InterpolatedWhere[d, f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
-
+AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
 
 
 
@@ -36,8 +36,6 @@ DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of t
 DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
 (* TODO: Rename as RestrictedToCommonInterval. *)
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
-(* TODO: Rename as AntiDerivative *)
-IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
@@ -96,6 +94,7 @@ LocateMaximum;
 MaximumValue;
 MakeUniform;
 InterpolateWhereFunction;
+IntegrateDataTable;
 
 Begin["`Private`"];
 
@@ -400,6 +399,29 @@ SyntaxInformation[Frequency] =
 (* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
 Frequency[d:DataTable[__]] :=
   NDerivative[Phase[d]];
+
+
+(****************************************************************)
+(* AntiDerivative                                               *)
+(****************************************************************)
+
+SyntaxInformation[AntiDerivative] =
+ {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
+
+Options[AntiDerivative] = {InterpolationOrder->3};
+
+AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
+ Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
+  {tMin, tMax} = DataTableRange[d];
+  If[tbc < tMin || tbc > tMax,
+   Error["AntiDerivative: boundary condition is not within range of DataTable"]];
+  dt = Spacing[d];
+	dFn = Interpolation[d, InterpolationOrder -> OptionValue[InterpolationOrder]];
+  gFn = g /.
+    NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
+     1]];
+  gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}],
+    ListAttributes[d]]];
 
 
 (****************************************************************)
@@ -797,22 +819,6 @@ IntersectDataTables[ds:{(_DataTable)...}] :=
     ds2];
 
 
-  Options[IntegrateDataTable] = {InterpolationOrder->3};
-
-IntegrateDataTable[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
- Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
-  {tMin, tMax} = DataTableRange[d];
-  If[tbc < tMin || tbc > tMax,
-   Error["integrateDataTable: boundary condition is not within range of \
-DataTable"]];
-  dt = Spacing[d];
-	dFn = Interpolation[d,InterpolationOrder->OptionValue[InterpolationOrder]];
-  gFn = g /. 
-    NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
-     1]];
-  gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], 
-    ListAttributes[d]]];
-
 Monotonise[{}] := {};
 
 Monotonise[{{a_, b_}}] := {{a, b}};
@@ -1002,6 +1008,7 @@ LocateMaximum = CoordinateAtInterpolatedMax;
 MaximumValue = InterpolatedMax;
 DataTableRange = Endpoints;
 DataTableNormL2 = GridNorm;
+IntegrateDataTable = AntiDerivative;
 
 End[];
 
