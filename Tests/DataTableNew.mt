@@ -33,3 +33,14 @@ test2[f_] :=
  ];
 
 Scan[test2, {Total, Max, Min, Mean}]
+
+test3[f_] :=
+ Test[
+   f[dt]
+   ,
+   f[data]
+   ,
+   TestID -> "Built-in function: "<>ToString[f]
+ ];
+
+Scan[test3, DataTable`Private`$1DPlotFunctions]

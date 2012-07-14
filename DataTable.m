@@ -237,6 +237,12 @@ NDerivative[d_DataTable] :=
 
 
 (**********************************************************)
+(* Plotting functions                                     *)
+(**********************************************************)
+
+(* TODO: Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
+
+$1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
 (* Resampled                                              *)
 (**********************************************************)
 (* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
