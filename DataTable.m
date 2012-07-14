@@ -920,8 +920,6 @@ Downsample[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
 
 Spacing[d:DataTable[__]] := First[CoordinateSpacings[d]];
-DataTableRange[dt:DataTable[__]] := Endpoints[dt];
-DataTableNormL2[d_DataTable] := GridNorm[d];
 
 ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
   Module[{t1, t2},
@@ -979,8 +977,6 @@ AbsOfPhase[d_DataTable, {t1_, t2_}] :=
 DataTableListLinePlot[d:DataTable[___], args___] :=
   ListLinePlot[ToList[d], args];
 
-UniformGridQ[d_DataTable] := UniformSpacingQ[d];
-
 PhaseOfFrequency[psi4_] :=
  Module[{phase1, freq1, phaseOfFreq1},
   phase1 = -Phase[psi4];
@@ -1000,8 +996,12 @@ IntegrateDataTableZeroEnd[d_DataTable] :=
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
 
-InterpolateWhereFunction[d_DataTable, f_] := InterpolatedWhere[d, f]
-
+UniformGridQ = UniformSpacingQ;
+InterpolateWhereFunction = InterpolatedWhere;
+LocateMaximum = CoordinateAtInterpolatedMax;
+MaximumValue = InterpolatedMax;
+DataTableRange = Endpoints;
+DataTableNormL2 = GridNorm;
 
 End[];
 
