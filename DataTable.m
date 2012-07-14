@@ -33,9 +33,6 @@ DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 (* TODO: Rename as AntiDerivative *)
 IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
-(* TODO: Is this useful enough to have these in DataTable, when it is easy to do something like Integrate[d, {First[Coordinates[d]], f}]? *)
-IntegrateDataTableZeroStart::usage = "IntegrateDataTableZeroStart[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x1] = 0, where x1 is the lowest value of the independent variable in d.";
-IntegrateDataTableZeroEnd::usage = "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x2] = 0, where x2 is the highest value of the independent variable in d.";
 (* TODO: This is used for replacing "bad" values with interpolated values according to some test.  Maybe rename as InterpolatedIf or InterpolatedWhere *)
 InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 (* TODO: Rename as FunctionInverse *)
@@ -97,6 +94,8 @@ DataTableListLinePlot;
 ShiftPhase;
 AbsOfPhase;
 UniformGridQ;
+IntegrateDataTableZeroStart;
+IntegrateDataTableZeroEnd;
 
 Begin["`Private`"];
 
@@ -772,12 +771,6 @@ DataTable"]];
   gTb = MakeDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], 
     ListAttributes[d]]];
 
-IntegrateDataTableZeroStart[d_DataTable] := 
-  IntegrateDataTable[d, {DataTableRange[d][[1]], 0}];
-
-IntegrateDataTableZeroEnd[d_DataTable] := 
-  IntegrateDataTable[d, {DataTableRange[d][[2]], 0}];
-
 Monotonise[{}] := {};
 
 Monotonise[{{a_, b_}}] := {{a, b}};
@@ -975,6 +968,13 @@ PhaseOfFrequency[psi4_] :=
     MapThread[List, 
      Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
   ];
+
+IntegrateDataTableZeroStart[d_DataTable] := 
+  IntegrateDataTable[d, {DataTableRange[d][[1]], 0}];
+
+IntegrateDataTableZeroEnd[d_DataTable] := 
+  IntegrateDataTable[d, {DataTableRange[d][[2]], 0}];
+
 
 End[];
 
