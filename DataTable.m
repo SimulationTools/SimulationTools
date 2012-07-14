@@ -572,13 +572,6 @@ MapThread[f_, ds:List[DataTable[__]...]] :=
     MakeDataTable[tb,attrs]];
 Protect[MapThread];
 
-RedefineAsDataTable[Plus[d1_DataTable, d2_DataTable],
-  Profile["dtPlus",
-    MapThreadData[Plus[##] &, {d1, d2}]]];
-
-RedefineAsDataTable[Plus[a_?NumericQ, d:DataTable[__]],
-  MapData[(a + #) &, d]];
-
 RedefineAsDataTable[First[DataTable[l_,___]],
   l[[1]]];
 
