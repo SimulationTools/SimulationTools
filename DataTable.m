@@ -198,6 +198,14 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
 
 
 (**********************************************************)
+(* Interpolation                                          *)
+(**********************************************************)
+
+DataTable /: Interpolation[d_DataTable, args___] :=
+   Interpolation[ToList[d], args];
+
+
+(**********************************************************)
 (* MaxCoordinates                                         *)
 (**********************************************************)
 
@@ -747,9 +755,6 @@ Downsampled[d_DataTable, n_Integer] :=
 downsample[l_List, n_Integer] :=
   Take[l, {1, Length[l], n}];
 
-
-Redefine[Interpolation[d:DataTable[___], args___],
-   Interpolation[ToList[d], args]];
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
