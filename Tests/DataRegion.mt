@@ -468,7 +468,7 @@ Scan[test, {Abs, Sqrt, Re, Im, Conjugate, Log, Log[3, #] &, Log2, Log10,
      ArcSinh, ArcCosh, ArcTanh, ArcCsch, ArcSech, ArcCoth, Sinc, 
      Haversine, InverseHaversine, Gudermannian, InverseGudermannian, Times[3, #] &,
      Times[#, #] &, Times[#, 3] &, Power[3, #] &, Power[#, 3] &, Power[#, #] &,
-     Plus[3, #] &, Plus[#, #] &, Plus[#, 3] &}]
+     Plus[3, #] &, Plus[#, #] &, Plus[#, 3] &, Mod[3, #] &, Mod[#, #] &, Mod[#, 3] &}]
 
 test2[f_] :=
  Test[
