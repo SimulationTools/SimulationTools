@@ -259,7 +259,7 @@ Protect /@ $1DPlotFunctions;
 (**********************************************************)
 (* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
 
-Resampled[d_DataTable, dt_?NumberQ, p_Integer] :=
+Resampled[d_DataTable, dt_?NumberQ, p_Integer:8] :=
  Module[{t1, t2},
   {t1, t2} = DataTableRange[d];
   Resampled[d, {t1, t2, dt}, p]
