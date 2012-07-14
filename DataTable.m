@@ -842,16 +842,6 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
   AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
 
-PhaseOfFrequency[psi4_] :=
- Module[{phase1, freq1, phaseOfFreq1},
-  phase1 = -Phase[psi4];
-  freq1 = NDerivative[phase1];
-  phaseOfFreq1 = 
-   MakeDataTable@
-    MapThread[List, 
-     Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
-  ];
-
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
 
@@ -975,6 +965,16 @@ DataTableListLinePlot[d:DataTable[___], args___] :=
   ListLinePlot[ToList[d], args];
 
 UniformGridQ[d_DataTable] := UniformSpacingQ[d];
+
+PhaseOfFrequency[psi4_] :=
+ Module[{phase1, freq1, phaseOfFreq1},
+  phase1 = -Phase[psi4];
+  freq1 = NDerivative[phase1];
+  phaseOfFreq1 = 
+   MakeDataTable@
+    MapThread[List, 
+     Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
+  ];
 
 End[];
 
