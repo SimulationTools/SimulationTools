@@ -243,6 +243,18 @@ NDerivative[d_DataTable] :=
 (* TODO: Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
 
 $1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
+
+DataTable /: f_Symbol[d_DataTable, args___] :=
+ f[Evaluate[ToList[d]], args] /; MemberQ[$1DPlotFunctions, f];
+
+(* We cannot use upvalues in the following as the DataTable appears too deep *)
+(* TODO: Make this use plotWrapper for consistency *)
+Unprotect /@ $1DPlotFunctions;
+Scan[(#[ds:List[DataTable[___]..], opts___] := #[ToList /@ ds, opts])&, $1DPlotFunctions];
+Protect /@ $1DPlotFunctions;
+
+
+(**********************************************************)
 (* Resampled                                              *)
 (**********************************************************)
 (* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
@@ -662,31 +674,6 @@ Downsampled[d_DataTable, n_Integer] :=
 downsample[l_List, n_Integer] :=
   Take[l, {1, Length[l], n}];
 
-(* Plotting *)
-
-Redefine[ListPlot[d:DataTable[___], args___],
-   ListPlot[ToList[d], args]];
-
-Redefine[ListPlot[ds:List[DataTable[___]..], args___],
-   ListPlot[Map[ToList,ds], args]];
-
-Redefine[ListLinePlot[d:DataTable[___], args___],
-   ListLinePlot[ToList[d], args]];
-
-Redefine[ListLinePlot[ds:List[DataTable[___]..], args___],
-   ListLinePlot[Map[ToList,ds], args]];
-
-Redefine[ListLogPlot[d:DataTable[___], args___],
-   ListLogPlot[ToList[d], args]];
-
-Redefine[ListLogPlot[ds:List[DataTable[___]..], args___],
-   ListLogPlot[Map[ToList,ds], args]];
-
-Redefine[ListLogLogPlot[d:DataTable[___], args___],
-   ListLogLogPlot[ToList[d], args]];
-
-Redefine[ListLogLogPlot[ds:List[DataTable[___]..], args___],
-   ListLogLogPlot[Map[ToList,ds], args]];
 
 Redefine[Interpolation[d:DataTable[___], args___],
    Interpolation[ToList[d], args]];
