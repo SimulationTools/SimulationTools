@@ -163,6 +163,43 @@ CoordinateSpacings[d_DataTable] :=
 
 
 (**********************************************************)
+(* Functions which should just see a regular data List.   *)
+(* These fall into two categories:                        *)
+(* 1. Those which take a single DataRegion and return a   *)
+(*    DataRegion. We assume all functions which are       *)
+(*    Listable and NumericFunction fall into this         *)
+(*    category.                                           *)
+(* 2. Those which take a single DataRegion and return     *)
+(*    something else. We assume all functions which are   *)
+(*    NumericFunction fall into this category.            *)
+(**********************************************************)
+
+$NonDataTableFunctions =
+  {ArrayDepth, Dimensions, Total, Mean, Position, Extract};
+
+$DataTableFunctions =
+  {FilterNaNs};
+
+(* TODO: maybe simplify this by splitting out into a version for OneIdentity functions and a version for others *)
+DataTable /: f_Symbol[x___, d_DataTable, y___] /;
+ MemberQ[$DataTableFunctions, f] ||
+ (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
+ Module[{args},
+  (* TODO: Check DataTables are on the same grid *)
+  args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
+  ds = Cases[{x, d, y}, _DataTable, Infinity];
+  attrs = Apply[Intersection, Map[ListAttributes, ds]];
+  ToDataTable[Transpose[{ToListOfCoordinates[d], f@@args}], ListAttributes[d]]
+];
+
+DataTable /: f_Symbol[x___, d_DataTable, y___] /;
+ MemberQ[$NonDataTableFunctions, f] || MemberQ[Attributes[f], NumericFunction] :=
+ Module[{},
+  f[x, ToListOfData[d], y]
+];
+
+
+(**********************************************************)
 (* MaxCoordinates                                         *)
 (**********************************************************)
 
@@ -548,93 +585,15 @@ RedefineAsDataTable[First[DataTable[l_,___]],
 RedefineAsDataTable[Last[DataTable[l_,___]],
   l[[-1]]];
 
-RedefineAsDataTable[Times[a_?NumericQ, d:DataTable[__]],
-  Profile["dtScalarTimes", MapData[a * # &, d]]];
-
-RedefineAsDataTable[Times[d1:DataTable[__], d2:DataTable[__]],
-  Profile["dtTimes",MapThreadData[Times, {d1, d2}]]];
-
 RedefineAsDataTable[Dot[d1:DataTable[__], d2:DataTable[__]],
   MapThreadData[Dot, {d1, d2}]];
-
-RedefineAsDataTable[Power[d:DataTable[__], n_?NumericQ],
-  MapData[Power[#,n] &, d]];
-
-RedefineAsDataTable[Power[a_, d:DataTable[__]],
-  MapData[Power[a,#] &, d]];
-
-RedefineAsDataTable[Abs[d:DataTable[__]],
-  MapData[Abs, d]];
 
 RedefineAsDataTable[Norm[d:DataTable[__]],
   MapData[Norm, d]];
 
-RedefineAsDataTable[Sqrt[d:DataTable[__]],
-  MapData[Sqrt, d]];
-
-RedefineAsDataTable[Conjugate[d:DataTable[__]],
-  Profile["dtConjugate", MapData[Conjugate, d]]];
-
-RedefineAsDataTable[Log[d:DataTable[__]],
-  MapData[Log, d]];
-
-RedefineAsDataTable[Log[b_, d:DataTable[__]],
-  MapData[Log[b,#] &, d]];
-
-RedefineAsDataTable[Log2[d:DataTable[__]],
-  MapData[Log2, d]];
-
-RedefineAsDataTable[Log10[d:DataTable[__]],
-  MapData[Log10, d]];
-
-RedefineAsDataTable[Exp[d:DataTable[__]],
-  MapData[Exp, d]];
-
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
 
-DataTable /: Sin[d_DataTable] := MapData[Sin, d];
-DataTable /: Cos[d_DataTable] := MapData[Cos, d];
-DataTable /: Tan[d_DataTable] := MapData[Tan, d];
-DataTable /: Csc[d_DataTable] := MapData[Csc, d];
-DataTable /: Sec[d_DataTable] := MapData[Sec, d];
-DataTable /: Cot[d_DataTable] := MapData[Cot, d];
-
-DataTable /: ArcSin[d_DataTable] := MapData[ArcSin, d];
-DataTable /: ArcCos[d_DataTable] := MapData[ArcCos, d];
-DataTable /: ArcTan[d_DataTable] := MapData[ArcTan, d];
-DataTable /: ArcCsc[d_DataTable] := MapData[ArcCsc, d];
-DataTable /: ArcSec[d_DataTable] := MapData[ArcSec, d];
-DataTable /: ArcCot[d_DataTable] := MapData[ArcCot, d];
-DataTable /: ArcTan[x_DataTable, y_DataTable] := MapThreadData[ArcTan, {x, y}];
-
-DataTable /: Sinh[d_DataTable] := MapData[Sinh, d];
-DataTable /: Cosh[d_DataTable] := MapData[Cosh, d];
-DataTable /: Tanh[d_DataTable] := MapData[Tanh, d];
-DataTable /: Csch[d_DataTable] := MapData[Csch, d];
-DataTable /: Sech[d_DataTable] := MapData[Sech, d];
-DataTable /: Coth[d_DataTable] := MapData[Coth, d];
-
-DataTable /: ArcSinh[d_DataTable] := MapData[ArcSinh, d];
-DataTable /: ArcCosh[d_DataTable] := MapData[ArcCosh, d];
-DataTable /: ArcTanh[d_DataTable] := MapData[ArcTanh, d];
-DataTable /: ArcCsch[d_DataTable] := MapData[ArcCsch, d];
-DataTable /: ArcSech[d_DataTable] := MapData[ArcSech, d];
-DataTable /: ArcCoth[d_DataTable] := MapData[ArcCoth, d];
-
-DataTable /: Sinc[d_DataTable] := MapData[Sinc, d];
-DataTable /: Haversine[d_DataTable] := MapData[Haversine, d];
-DataTable /: InverseHaversine[d_DataTable] := MapData[InverseHaversine, d];
-DataTable /: Gudermannian[d_DataTable] := MapData[Gudermannian, d];
-DataTable /: InverseGudermannian[d_DataTable] := MapData[InverseGudermannian, d];
-
-DataTable /: Total[d_DataTable] := Total[DepVar[d]];
-
-DataTable /: Max[d_DataTable] := Max[DepVar[d]];
-
-DataTable /: Min[d_DataTable] := Min[DepVar[d]];
-
-DataTable /: Mean[d_DataTable] := Mean[DepVar[d]];
 
 DataTable /: Mod[d_DataTable, n_] := MapData[Mod[#, n]&, d];
 
@@ -653,12 +612,6 @@ RedefineAsDataTable[Take[d:DataTable[___], args__],
 
 RedefineAsDataTable[Drop[d:DataTable[___], args__],
   d /. DataTable[l_, x___] :> DataTable[Drop[l,args],x]];
-
-RedefineAsDataTable[Re[d:DataTable[___]],
-  Profile["dtRe", MapData[Re, d]]];
-
-RedefineAsDataTable[Im[d:DataTable[___]],
-  MapData[Im, d]];
 
 RedefineAsDataTable[FourierDCT[d_DataTable,args___],
   Module[{df, fs},
