@@ -20,6 +20,8 @@ MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in t
 CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 InterpolatedMax::usage = "InterpolatedMax[d] returns the maximum value of the interpolant of a DataTable d";
 
+InterpolatedWhere::usage = "InterpolatedWhere[d, f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
+
 
 
 
@@ -36,8 +38,6 @@ DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a
 IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 (* TODO: Rename as AntiDerivative *)
 IntegrateDataTable::usage = "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
-(* TODO: This is used for replacing "bad" values with interpolated values according to some test.  Maybe rename as InterpolatedIf or InterpolatedWhere *)
-InterpolateWhereFunction::usage = "InterpolateWhereFunction[d,f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
@@ -95,6 +95,7 @@ IntegrateDataTableZeroEnd;
 LocateMaximum;
 MaximumValue;
 MakeUniform;
+InterpolateWhereFunction;
 
 Begin["`Private`"];
 
@@ -434,6 +435,20 @@ InterpolatedMax[d_DataTable] :=
   Interpolation[d][LocateMaximum[d]];
 
 
+(****************************************************************)
+(* InterpolatedWhere                                            *)
+(****************************************************************)
+
+SyntaxInformation[InterpolatedWhere] =
+ {"ArgumentsPattern" -> {_}};
+
+InterpolatedWhere[d_DataTable, f_] :=
+ Module[{dInterpolater},
+  dInterpolater=Interpolation@MakeDataTable@DeleteCases[ToList[d],_?f];
+  MakeDataTable[ToList[d]/. {t_,x_}:>{t,dInterpolater[t]}/;f[{t,x}]]
+];
+
+
 (**********************************************************)
 (* MonotonicQ                                             *)
 (**********************************************************)
@@ -697,11 +712,6 @@ RedefineAsDataTable[Drop[d:DataTable[___], args__],
 RedefineAsDataTable[Length[d_DataTable],
 	Length[ToList[d]]
 ];
-
-InterpolateWhereFunction[d_DataTable, f_] :=
-  Module[{dInterpolater},
-  dInterpolater=Interpolation@MakeDataTable@DeleteCases[ToList[d],_?f];
-  MakeDataTable[ToList[d]/. {t_,x_}:>{t,dInterpolater[t]}/;f[{t,x}]]];
 
 (****************************************************************)
 (* Downsampled *)
@@ -989,6 +999,9 @@ IntegrateDataTableZeroEnd[d_DataTable] :=
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
+
+InterpolateWhereFunction[d_DataTable, f_] := InterpolatedWhere[d, f]
+
 
 End[];
 
