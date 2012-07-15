@@ -566,6 +566,14 @@ InterpolatedWhere[d_DataTable, f_] :=
 
 
 (**********************************************************)
+(* Length                                                 *)
+(**********************************************************)
+
+DataTable /: Length[DataTable[d_,___]] :=
+  Length[d];
+
+
+(**********************************************************)
 (* MonotonicQ                                             *)
 (**********************************************************)
 
@@ -763,9 +771,6 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     DataTable /: f[args] := newDef;
     Protect[f]];
 
-RedefineAsDataTable[Length[DataTable[d_,___]],
-  Length[d]];
-
 DataTable /: PadRight[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
     First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
@@ -775,11 +780,6 @@ DataTable /: PadLeft[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
     First[DataTableRange[d]] - Spacing[d] (n-Length[d]+1) + Range[n] Spacing[d],
     PadLeft[DepVar[d], n]}]];
-
-
-RedefineAsDataTable[Length[d_DataTable],
-	Length[ToList[d]]
-];
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
