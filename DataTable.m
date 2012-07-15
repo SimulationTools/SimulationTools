@@ -819,19 +819,6 @@ IntersectDataTables[ds:{(_DataTable)...}] :=
     ds2 = Map[DataTableInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
     ds2];
 
-
-Monotonise[{}] := {};
-
-Monotonise[{{a_, b_}}] := {{a, b}};
-
-Monotonise[{{x1_, y1_}, {x2_, y2_}, rest___}] :=
- If[y1 < y2, {{x1, y1}, {x2, y2}}~Join~Monotonise[{rest}],
-  {{x1, y1}, {x2, y2 + y1}}~Join~
-   Monotonise[Map[{#[[1]], #[[2]] + y1} &, {rest}]]];
-
-Monotonise[d_DataTable] :=
- MakeDataTable[Monotonise[ToList[d]]];
-
 singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
 
 DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
