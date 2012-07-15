@@ -25,7 +25,6 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 
 
 
-MapList::usage = "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.";
 (* TODO: Remove this *)
 ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
 (* TODO: Add Shifted[d,delta] which subtracts delta from the coordinate of d, shifting the data to increased values of the coordinate *)
@@ -214,6 +213,14 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
 
 DataTable /: Interpolation[d_DataTable, args___] :=
    Interpolation[ToList[d], args];
+
+
+(****************************************************************)
+(* MapList *)
+(****************************************************************)
+
+MapList[f_, DataTable[l_, attrs___]] :=
+  DataTable[Map[f,l], attrs];
 
 
 (**********************************************************)
@@ -685,13 +692,6 @@ RedefineAsDataTable[f_[args___], newDef_] :=
 
 DataTable /: Map[f_, DataTable[l_, attrs___]] :=
   DataTable[Transpose[{l[[All,1]],Map[f,l[[All,2]]]}], attrs];
-
-(****************************************************************)
-(* MapList *)
-(****************************************************************)
-
-MapList[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[f,l], attrs];
 
 (****************************************************************)
 (* MapThread *)

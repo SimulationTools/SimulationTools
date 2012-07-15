@@ -8,6 +8,10 @@ ToList::usage = "ToList[d] returns the contents of d as a List.";
 ToListOfData::usage = "ToListOfData[d] returns a List of the data part of d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a List of the coordinates part of d.";
 
+(* TODO: Maybe add MapCoordinates, MapThreadCoordinates, MapThreadList *)
+(* TODO: Is MapList the right name? *)
+MapList::usage = "MapList[f, d] maps f over the coordinates and values in d.";
+
 (* TODO: Maybe add CoordinateSpacing? *)
 CoordinateSpacings::usage = "CoordinateSpacings[d] gives a List of the spacing of the coordinates in each dimension of d.";
 CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edges of d. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
@@ -104,6 +108,14 @@ SyntaxInformation[GridNorm] =
 
 GridNorm[d_?DataRepresentationQ] :=
  Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[d^2]]];
+
+
+(****************************************************************)
+(* MapList *)
+(****************************************************************)
+
+SyntaxInformation[MapList] =
+ {"ArgumentsPattern" -> {_, _}};
 
 
 (**********************************************************)

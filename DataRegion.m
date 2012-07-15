@@ -22,8 +22,6 @@ CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical represent
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
 (* TODO: Add Metadata function and user-defined metadata *)
-(* TODO: Add MapCoordinates, MapThreadCoordinates, MapData, MapThreadData, Map, MapThread *)
-
 
 (****************************************************************)
 (* Experimental                                                 *)
