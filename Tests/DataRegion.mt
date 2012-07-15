@@ -57,7 +57,7 @@ Test[
      DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10., 20., 30.3}, Spacing -> {0.1, 0.2, 0.3}, DataRegion`Private`Time -> Undefined}, {{{111., 112., 113.00000000000001}, {121., 122., 123.00000000000001}, {131., 132., 133.}}, {{211., 212., 213.}, {221., 222., 223.}, {231., 232., 233.}}}]
     }
     ,
-    TestID->"Resampled"
+    TestID->"Resampled list of DataRegions"
 ]
 
 (****************************************************************)
@@ -80,7 +80,7 @@ Test[
     ,
     False
     ,
-    TestID->"SameGridQFalse"
+    TestID->"SameGridQ False"
 ]
 
 Test[
@@ -88,7 +88,7 @@ Test[
     ,
     True
     ,
-    TestID->"SameGridQTrue"
+    TestID->"SameGridQ True"
 ]
 
 
