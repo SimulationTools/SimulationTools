@@ -26,8 +26,6 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 RestrictedToInterval::usage = "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
 
-(* TODO: Remove this, and implement Select on DataTables instead?  Select[d, y1 < #2 < y2 &] *)
-DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
@@ -90,6 +88,7 @@ IntegrateDataTable;
 ShiftDataTable;
 IntersectDataTables;
 DataTableInterval;
+DataTableDepVarInterval;
 
 Begin["`Private`"];
 
@@ -855,9 +854,6 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 (****************************************************************)
 (****************************************************************)
 
-DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
-  d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
-
 singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
 
 DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
@@ -880,8 +876,6 @@ LocateMaximumPoint[d_DataTable] :=
    If[f > fMax, fMax = f; tMax = t];
   Scan[maxFind, l];
   Return[tMax]];
-
-
 
 FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
  Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
@@ -1031,6 +1025,9 @@ MakeUniform[d_DataTable] :=
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  Shifted[d, dt];
+
+DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
+  d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
 
 UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;
