@@ -170,6 +170,14 @@ Downsampled[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
 
 
+(****************************************************************)
+(* Drop                                                         *)
+(****************************************************************)
+
+DataTable /: Drop[d:DataTable[l_, x___], args__] :=
+  DataTable[Drop[l, args], x];
+
+
 (**********************************************************)
 (* Functions which should just see a regular data List.   *)
 (* These fall into two categories:                        *)
@@ -360,6 +368,14 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[Resampled[#, {t1, t2, dt}, p] &, ds];
 ];
+
+
+(****************************************************************)
+(* Take                                                         *)
+(****************************************************************)
+
+DataTable /: Take[d:DataTable[l_, x___], args__] :=
+  DataTable[Take[l, args], x];
 
 
 (****************************************************************)
@@ -756,11 +772,6 @@ DataTable /: PadLeft[d_DataTable, n_] :=
     First[DataTableRange[d]] - Spacing[d] (n-Length[d]+1) + Range[n] Spacing[d],
     PadLeft[DepVar[d], n]}]];
 
-RedefineAsDataTable[Take[d:DataTable[___], args__],
-  d /. DataTable[l_, x___] :> DataTable[Take[l,args],x]];
-
-RedefineAsDataTable[Drop[d:DataTable[___], args__],
-  d /. DataTable[l_, x___] :> DataTable[Drop[l,args],x]];
 
 RedefineAsDataTable[Length[d_DataTable],
 	Length[ToList[d]]
