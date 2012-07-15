@@ -216,11 +216,48 @@ DataTable /: Interpolation[d_DataTable, args___] :=
 
 
 (****************************************************************)
+(* Map *)
+(****************************************************************)
+
+DataTable /: Map[f_, DataTable[l_, attrs___]] :=
+  DataTable[Transpose[{l[[All,1]],Map[f,l[[All,2]]]}], attrs];
+
+
+(****************************************************************)
 (* MapList *)
 (****************************************************************)
 
 MapList[f_, DataTable[l_, attrs___]] :=
   DataTable[Map[f,l], attrs];
+
+
+(****************************************************************)
+(* MapThread *)
+(****************************************************************)
+
+(* The DataTable appears too deep here to associate this definition as
+   an upvalue of DataTable *)
+Unprotect[MapThread];
+
+MapThread[f_, ds:List[DataTable[__]...]] :=
+ Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
+  lists = Map[ToList, ds];
+  lengths = Map[Length, lists];
+
+  If[!Apply[Equal,lengths],
+    Error["MapThreadData: DataTables are not all of the same length"]];
+
+  (* TODO: Check that the DataTables are "compatible"; i.e. their coordinates are the same to within a tolerance *)
+
+  vals = Map[DepVar, ds];
+  xs = IndVar[First[ds]];
+  fOfVals = MapThread[f, vals];
+  tb = MapThread[List, {xs,fOfVals}];
+  attrs = Apply[Intersection, Map[ListAttributes, ds]];
+  MakeDataTable[tb,attrs]
+];
+
+Protect[MapThread];
 
 
 (**********************************************************)
@@ -685,38 +722,6 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     Unprotect[f];
     DataTable /: f[args] := newDef;
     Protect[f]];
-
-(****************************************************************)
-(* Map *)
-(****************************************************************)
-
-DataTable /: Map[f_, DataTable[l_, attrs___]] :=
-  DataTable[Transpose[{l[[All,1]],Map[f,l[[All,2]]]}], attrs];
-
-(****************************************************************)
-(* MapThread *)
-(****************************************************************)
-
-(* The DataTable appears too deep here to associate this definition as
-   an upvalue of DataTable *)
-Unprotect[MapThread];
-MapThread[f_, ds:List[DataTable[__]...]] :=
-  Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
-    lists = Map[ToList, ds];
-    lengths = Map[Length, lists];
-
-    If[!Apply[Equal,lengths],
-      Error["MapThreadData: DataTables are not all of the same length"]];
-
-    (* TODO: Check that the DataTables are "compatible"; i.e. their coordinates are the same to within a tolerance *)
-
-    vals = Map[DepVar, ds];
-    xs = IndVar[First[ds]];
-    fOfVals = MapThread[f, vals];
-    tb = MapThread[List, {xs,fOfVals}];
-    attrs = Apply[Intersection, Map[ListAttributes, ds]];
-    MakeDataTable[tb,attrs]];
-Protect[MapThread];
 
 RedefineAsDataTable[First[DataTable[l_,___]],
   l[[1]]];
