@@ -17,6 +17,7 @@ Frequency::usage = "Frequency[d] returns the first derivative of the complex pha
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 
+CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in the DataTable d. This is guaranteed to coincide with a data point in the DataTable.";
 CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 InterpolatedMax::usage = "InterpolatedMax[d] returns the maximum value of the interpolant of a DataTable d";
 
@@ -25,9 +26,6 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 RestrictedToInterval::usage = "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
-
-(* TODO: Rename as CoordinateAtMax *)
-LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
 
 
 (****************************************************************)
@@ -91,6 +89,7 @@ DataTableInterval;
 DataTableDepVarInterval;
 InvertDataTable;
 FunctionOfPhase;
+LocateMaximumPoint;
 
 Begin["`Private`"];
 
@@ -526,6 +525,24 @@ DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
 
 
 (****************************************************************)
+(* CoordinateAtMax                                              *)
+(****************************************************************)
+
+SyntaxInformation[CoordinateAtMax] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateAtMax[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, t1, t2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{t_, f_}] :=
+   If[f > fMax, fMax = f; tMax = t];
+  Scan[maxFind, l];
+  Return[tMax]];
+
+
+(****************************************************************)
 (* CoordinateAtInterpolatedMax                                  *)
 (****************************************************************)
 
@@ -886,15 +903,6 @@ DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
 
 DataTable /: Export[file_String, dt_DataTable, type___] := Export[file, Flatten/@ToList[dt], type];
 
-LocateMaximumPoint[d_DataTable] :=
- Module[{tMax, fMax, l, maxFind, t1, t2},
-  l = ToList[d];
-  {t1, t2} = DataTableRange[d];
-  fMax = -Infinity;
-  maxFind[{t_, f_}] :=
-   If[f > fMax, fMax = f; tMax = t];
-  Scan[maxFind, l];
-  Return[tMax]];
 
 
 
@@ -1059,6 +1067,7 @@ IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;
 DataTableInterval = RestrictedToInterval;
 InvertDataTable = FunctionInverse;
+LocateMaximumPoint = CoordinateAtMax;
 
 End[];
 
