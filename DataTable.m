@@ -23,6 +23,7 @@ InterpolatedMax::usage = "InterpolatedMax[d] returns the maximum value of the in
 InterpolatedWhere::usage = "InterpolatedWhere[d, f] returns a new DataTable where the elements of d where the function returns true have been replaced by interpolated values."
 AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
 
+RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 
 
 (* TODO: Rename as Interval. *)
@@ -30,8 +31,6 @@ DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of t
 (* TODO: Add Slab to be compatible with DataRegion (maybe) *)
 (* TODO: Remove this, and implement Select on DataTables instead?  Select[d, y1 < #2 < y2 &] *)
 DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
-(* TODO: Rename as RestrictedToCommonInterval. *)
-IntersectDataTables::usage = "IntersectDataTables[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 (* TODO: Rename as FunctionInverse *)
 InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
@@ -92,6 +91,7 @@ MakeUniform;
 InterpolateWhereFunction;
 IntegrateDataTable;
 ShiftDataTable;
+IntersectDataTables;
 
 Begin["`Private`"];
 
@@ -654,6 +654,47 @@ Phase[d:DataTable[__]] :=
 
 
 (**********************************************************)
+(* RestrictedToCommonInterval                             *)
+(**********************************************************)
+
+RestrictedToCommonInterval[d1_DataTable, d2_DataTable] :=
+  Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
+    {d1Min, d1Max} = DataTableRange[d1];
+    {d2Min, d2Max} = DataTableRange[d2];
+
+    dMin = Max[d1Min, d2Min];
+    dMax = Min[d1Max, d2Max];
+
+    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
+            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
+
+RestrictedToCommonInterval[{d1_DataTable, d2_DataTable}] :=
+  Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
+    {d1Min, d1Max} = DataTableRange[d1];
+    {d2Min, d2Max} = DataTableRange[d2];
+
+    dMin = Max[d1Min, d2Min];
+    dMax = Min[d1Max, d2Max];
+
+    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
+            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
+
+RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
+  Module[{ranges, mins, maxs, min, max, ds2},
+    ranges = Map[DataTableRange, ds];
+    mins = Map[First, ranges];
+    maxs = Map[Last, ranges];
+
+    (* TODO: add a check that the grids are compatible; and an option to disable the check? *)
+
+    min = Max[mins];
+    max = Min[maxs];
+
+    ds2 = Map[DataTableInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
+    ds2];
+
+
+(**********************************************************)
 (* UniformSpacingQ                                        *)
 (**********************************************************)
 
@@ -808,42 +849,6 @@ DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
 
 DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
   d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
-
-IntersectDataTables[d1_DataTable, d2_DataTable] :=
-  Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
-    {d1Min, d1Max} = DataTableRange[d1];
-    {d2Min, d2Max} = DataTableRange[d2];
-
-    dMin = Max[d1Min, d2Min];
-    dMax = Min[d1Max, d2Max];
-
-    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}], 
-            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
-
-IntersectDataTables[{d1_DataTable, d2_DataTable}] :=
-  Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
-    {d1Min, d1Max} = DataTableRange[d1];
-    {d2Min, d2Max} = DataTableRange[d2];
-
-    dMin = Max[d1Min, d2Min];
-    dMax = Min[d1Max, d2Max];
-
-    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}], 
-            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
-
-IntersectDataTables[ds:{(_DataTable)...}] :=
-  Module[{ranges, mins, maxs, min, max, ds2},
-    ranges = Map[DataTableRange, ds];
-    mins = Map[First, ranges];
-    maxs = Map[Last, ranges];
-
-    (* TODO: add a check that the grids are compatible; and an option to disable the check? *)
-
-    min = Max[mins];
-    max = Min[maxs];
-
-    ds2 = Map[DataTableInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
-    ds2];
 
 singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
 
@@ -1026,6 +1031,7 @@ MaximumValue = InterpolatedMax;
 DataTableRange = Endpoints;
 DataTableNormL2 = GridNorm;
 IntegrateDataTable = AntiDerivative;
+IntersectDataTables = RestrictedToCommonInterval;
 
 End[];
 
