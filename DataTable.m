@@ -24,11 +24,8 @@ InterpolatedWhere::usage = "InterpolatedWhere[d, f] returns a new DataTable wher
 AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
 
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
+RestrictedToInterval::usage = "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
 
-
-(* TODO: Rename as Interval. *)
-DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
-(* TODO: Add Slab to be compatible with DataRegion (maybe) *)
 (* TODO: Remove this, and implement Select on DataTables instead?  Select[d, y1 < #2 < y2 &] *)
 DataTableDepVarInterval::usage = "DataTableDepVarInterval[d, {y1, y2}] returns a subset of the DataTable d in the range [y1, y2), where y is the dependent variable.";
 (* TODO: Rename as FunctionInverse *)
@@ -92,6 +89,7 @@ InterpolateWhereFunction;
 IntegrateDataTable;
 ShiftDataTable;
 IntersectDataTables;
+DataTableInterval;
 
 Begin["`Private`"];
 
@@ -665,8 +663,8 @@ RestrictedToCommonInterval[d1_DataTable, d2_DataTable] :=
     dMin = Max[d1Min, d2Min];
     dMax = Min[d1Max, d2Max];
 
-    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
-            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
+    Return[{RestrictedToInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
+            RestrictedToInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
 
 RestrictedToCommonInterval[{d1_DataTable, d2_DataTable}] :=
   Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
@@ -676,8 +674,8 @@ RestrictedToCommonInterval[{d1_DataTable, d2_DataTable}] :=
     dMin = Max[d1Min, d2Min];
     dMax = Min[d1Max, d2Max];
 
-    Return[{DataTableInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
-            DataTableInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
+    Return[{RestrictedToInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
+            RestrictedToInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
 
 RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
   Module[{ranges, mins, maxs, min, max, ds2},
@@ -690,8 +688,38 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
     min = Max[mins];
     max = Min[maxs];
 
-    ds2 = Map[DataTableInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
+    ds2 = Map[RestrictedToInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
     ds2];
+
+
+(**********************************************************)
+(* RestrictedToInterval                                   *)
+(**********************************************************)
+
+SyntaxInformation[RestrictedToInterval] =
+ {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
+
+Options[RestrictedToInterval] = {Interval -> {Closed, Open}};
+
+RestrictedToInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
+  Module[
+    {range, tMin, tMax, lower, upper, eps=10.^-6},
+    range = DataTableRange[d];
+    tMin = If[SameQ[t1, All], range[[1]], t1];
+    tMax = If[SameQ[t2, All], range[[2]], t2];
+    lower = Switch[OptionValue[Interval][[1]],
+                   Closed, GreaterEqual,
+                   Open, Greater,
+                   _, Error["Unrecognised option Interval -> "
+                            <>ToString[OptionValue[Interval], InputForm]]];
+    upper = Switch[OptionValue[Interval][[2]],
+                   Closed, LessEqual,
+                   Open, Less,
+                   _, Error["Unrecognised option Interval -> "
+                            <>ToString[OptionValue[Interval], InputForm]]];
+
+    d /. DataTable[l_, x___] :>
+    DataTable[Select[l,lower[#[[1]],tMin-eps] && upper[#[[1]], tMax+eps] &], x]];
 
 
 (**********************************************************)
@@ -824,29 +852,6 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 (****************************************************************)
 (****************************************************************)
 
-DataTableInterval[x___] := Error["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
-
-Options[DataTableInterval] = {Interval -> {Closed, Open}};
-DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
-  Module[
-    {range, tMin, tMax, lower, upper, eps=10.^-6},
-    range = DataTableRange[d];
-    tMin = If[SameQ[t1, All], range[[1]], t1];
-    tMax = If[SameQ[t2, All], range[[2]], t2];
-    lower = Switch[OptionValue[Interval][[1]],
-                   Closed, GreaterEqual,
-                   Open, Greater,
-                   _, Error["Unrecognised option Interval -> "
-                            <>ToString[OptionValue[Interval], InputForm]]];
-    upper = Switch[OptionValue[Interval][[2]],
-                   Closed, LessEqual,
-                   Open, Less,
-                   _, Error["Unrecognised option Interval -> "
-                            <>ToString[OptionValue[Interval], InputForm]]];
-
-    d /. DataTable[l_, x___] :>
-    DataTable[Select[l,lower[#[[1]],tMin-eps] && upper[#[[1]], tMax+eps] &], x]];
-
 DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
   d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
 
@@ -877,7 +882,7 @@ LocateMaximumPoint[d_DataTable] :=
 
 FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
  Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
-  phiOft = ToList[DataTableInterval[p,{t1,t2}]];
+  phiOft = ToList[RestrictedToInterval[p,{t1,t2}]];
   tOfphi = Map[Reverse, phiOft];
   tOfphiFn = Interpolation[tOfphi];
   {phiMin,phiMax} = Sort[{First[tOfphi][[1]], Last[tOfphi][[1]]}];
@@ -1032,6 +1037,7 @@ DataTableRange = Endpoints;
 DataTableNormL2 = GridNorm;
 IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;
+DataTableInterval = RestrictedToInterval;
 
 End[];
 
