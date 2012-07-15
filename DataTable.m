@@ -511,6 +511,14 @@ AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
 
 
 (****************************************************************)
+(* Dot                                                          *)
+(****************************************************************)
+
+DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
+  MapThread[Dot, {d1, d2}];
+
+
+(****************************************************************)
 (* CoordinateAtInterpolatedMax                                  *)
 (****************************************************************)
 
@@ -567,6 +575,14 @@ SyntaxInformation[MonotonicQ] =
 MonotonicQ[d_DataTable, tol_:0.] :=
   Module[{positive = (# > tol &)},
   Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
+
+
+(****************************************************************)
+(* Norm                                                         *)
+(****************************************************************)
+
+DataTable /: Norm[d:DataTable[__]] :=
+  Map[Norm, d];
 
 
 (****************************************************************)
@@ -746,12 +762,6 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     Unprotect[f];
     DataTable /: f[args] := newDef;
     Protect[f]];
-
-RedefineAsDataTable[Dot[d1:DataTable[__], d2:DataTable[__]],
-  MapThreadData[Dot, {d1, d2}]];
-
-RedefineAsDataTable[Norm[d:DataTable[__]],
-  MapData[Norm, d]];
 
 RedefineAsDataTable[Length[DataTable[d_,___]],
   Length[d]];
