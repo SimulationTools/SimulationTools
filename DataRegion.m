@@ -293,6 +293,20 @@ DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
 ];
 
 
+(****************************************************************)
+(* Shifted                                                      *)
+(****************************************************************)
+
+Shifted[d_DataRegion, delta_List] :=
+ Module[{data, origin, spacing},
+  data    = ToListOfData[d];
+  origin  = MinCoordinates[d] + delta;
+  spacing = CoordinateSpacings[d];
+
+  ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
+];
+
+
 (**********************************************************)
 (* Slab                                                   *)
 (**********************************************************)

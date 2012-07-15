@@ -25,9 +25,6 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 
 
 
-(* TODO: Remove this *)
-ShiftDataTable::usage = "ShiftDataTable[delta, d] returns a copy of DataTable d with the independent variable v replaced with v+delta.";
-(* TODO: Add Shifted[d,delta] which subtracts delta from the coordinate of d, shifting the data to increased values of the coordinate *)
 (* TODO: Rename as Interval. *)
 DataTableInterval::usage = "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
 (* TODO: Add Slab to be compatible with DataRegion (maybe) *)
@@ -94,6 +91,7 @@ MaximumValue;
 MakeUniform;
 InterpolateWhereFunction;
 IntegrateDataTable;
+ShiftDataTable;
 
 Begin["`Private`"];
 
@@ -368,6 +366,16 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
     t2 = Apply[Min, t2s];
     Map[Resampled[#, {t1, t2, dt}, p] &, ds];
 ];
+
+
+(****************************************************************)
+(* Shifted                                                      *)
+(****************************************************************)
+
+Shifted[d_DataTable, dt_?NumberQ] :=
+ AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
+
+Shifted[d_DataTable, {dt_?NumberQ}] := Shifted[d, dt];
 
 
 (****************************************************************)
@@ -775,10 +783,6 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 (****************************************************************)
 (****************************************************************)
 
-ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
- AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
-
-
 DataTableInterval[x___] := Error["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
 
 Options[DataTableInterval] = {Interval -> {Closed, Open}};
@@ -1011,6 +1015,9 @@ IntegrateDataTableZeroEnd[d_DataTable] :=
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
+
+ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
+ Shifted[d, dt];
 
 UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;
