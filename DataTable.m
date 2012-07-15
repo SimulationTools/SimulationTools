@@ -597,6 +597,19 @@ InterpolatedWhere[d_DataTable, f_] :=
 ];
 
 
+(****************************************************************)
+(* Join                                                         *)
+(****************************************************************)
+
+singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
+
+DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
+  resampled = ResampleDataTables[{ds}];
+  joineddata=MapThread[Join, DepVar/@singleToList/@resampled];
+  MakeDataTable[Thread[{IndVar[resampled[[1]]] ,joineddata}]]
+];
+
+
 (**********************************************************)
 (* Length                                                 *)
 (**********************************************************)
@@ -892,22 +905,6 @@ DataTable /: Composition[d_DataTable, p_DataTable] :=
   AddAttributes[ToDataTable[Transpose[{coords, data}]], ListAttributes[d]]
 ];
 
-
-
-
-(****************************************************************)
-(****************************************************************)
-(* Functions which don't belong here or need to be updated      *)
-(****************************************************************)
-(****************************************************************)
-
-singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
-
-DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
-  resampled = ResampleDataTables[{ds}];
-  joineddata=MapThread[Join, DepVar/@singleToList/@resampled];
-  MakeDataTable[Thread[{IndVar[resampled[[1]]] ,joineddata}]]
-];
 
 
 
