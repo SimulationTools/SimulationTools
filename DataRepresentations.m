@@ -100,6 +100,17 @@ SyntaxInformation[DownSampled] =
 
 
 (**********************************************************)
+(* First                                                  *)
+(**********************************************************)
+
+Unprotect[First];
+
+First[d_?DataRepresentationQ] := d[[1]];
+
+Protect[First];
+
+
+(**********************************************************)
 (* GridNorm                                               *)
 (**********************************************************)
 
@@ -108,6 +119,17 @@ SyntaxInformation[GridNorm] =
 
 GridNorm[d_?DataRepresentationQ] :=
  Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[d^2]]];
+
+
+(**********************************************************)
+(* Last                                                   *)
+(**********************************************************)
+
+Unprotect[Last];
+
+Last[d_?DataRepresentationQ] := d[[-1]];
+
+Protect[Last];
 
 
 (****************************************************************)

@@ -747,12 +747,6 @@ RedefineAsDataTable[f_[args___], newDef_] :=
     DataTable /: f[args] := newDef;
     Protect[f]];
 
-RedefineAsDataTable[First[DataTable[l_,___]],
-  l[[1]]];
-
-RedefineAsDataTable[Last[DataTable[l_,___]],
-  l[[-1]]];
-
 RedefineAsDataTable[Dot[d1:DataTable[__], d2:DataTable[__]],
   MapThreadData[Dot, {d1, d2}]];
 
