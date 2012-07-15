@@ -594,6 +594,26 @@ DataTable /: Norm[d:DataTable[__]] :=
 
 
 (****************************************************************)
+(* PadLeft                                                      *)
+(****************************************************************)
+
+DataTable /: PadLeft[d_DataTable, n_] :=
+  MakeDataTable[Transpose[{
+    First[DataTableRange[d]] - Spacing[d] (n-Length[d]+1) + Range[n] Spacing[d],
+    PadLeft[DepVar[d], n]}]];
+
+
+(****************************************************************)
+(* PadRight                                                      *)
+(****************************************************************)
+
+DataTable /: PadRight[d_DataTable, n_] :=
+  MakeDataTable[Transpose[{
+    First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
+    PadRight[DepVar[d], n]}]];
+
+
+(****************************************************************)
 (* Phase                                                        *)
 (****************************************************************)
 
@@ -754,16 +774,6 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 (* Functions which don't belong here or need to be updated      *)
 (****************************************************************)
 (****************************************************************)
-
-DataTable /: PadRight[d_DataTable, n_] :=
-  MakeDataTable[Transpose[{
-    First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
-    PadRight[DepVar[d], n]}]];
-
-DataTable /: PadLeft[d_DataTable, n_] :=
-  MakeDataTable[Transpose[{
-    First[DataTableRange[d]] - Spacing[d] (n-Length[d]+1) + Range[n] Spacing[d],
-    PadLeft[DepVar[d], n]}]];
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
