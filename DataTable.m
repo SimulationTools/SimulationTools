@@ -26,15 +26,10 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 RestrictedToInterval::usage = "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2).";
 
-(* TODO: Rename as FunctionInverse *)
-InvertDataTable::usage = "InvertDataTable[d] returns a DataTable in which the dependent and independent variable of the DataTable d are swapped.  Note that this might lead to a non-monotonic (and hence invalid) DataTable.";
 (* TODO: Rename as CoordinateAtMax *)
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
 (* TODO: Rename; this is the composition of d and p^-1.  We have Inverse already, maybe we should also have Composition? Then we wouldn't need this function as it would be easy: Composition[d, Inverse[p], {t1, t2, dp}].  Composition will likely need to interpolate. *)
 FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
-
-(* TODO: Decide if non-monotonic DataTables are allowed/checked *)
-(* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 
 
 (****************************************************************)
@@ -54,6 +49,12 @@ PartitionTable;
 
 (* TODO: Move to another package. This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
 FilterDCT;
+
+(* TODO: Rename as FunctionInverse *)
+(* TODO: Decide if non-monotonic DataTables are allowed/checked *)
+(* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
+FunctionInverse;
+
 
 (****************************************************************)
 (* Deprecated *)
@@ -89,6 +90,7 @@ ShiftDataTable;
 IntersectDataTables;
 DataTableInterval;
 DataTableDepVarInterval;
+InvertDataTable;
 
 Begin["`Private`"];
 
@@ -845,6 +847,13 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
   {attrs};
 
 
+(****************************************************************)
+(* FunctionInverse                                              *)
+(****************************************************************)
+
+FunctionInverse[d_DataTable] :=
+  MakeDataTable[MapThread[List,{DepVar[d],IndVar[d]}]];
+
 
 
 
@@ -863,9 +872,6 @@ DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
 ];
 
 DataTable /: Export[file_String, dt_DataTable, type___] := Export[file, Flatten/@ToList[dt], type];
-
-InvertDataTable[d_DataTable] :=
-  MakeDataTable[MapThread[List,{DepVar[d],IndVar[d]}]];
 
 LocateMaximumPoint[d_DataTable] :=
  Module[{tMax, fMax, l, maxFind, t1, t2},
@@ -1038,6 +1044,7 @@ DataTableNormL2 = GridNorm;
 IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;
 DataTableInterval = RestrictedToInterval;
+InvertDataTable = FunctionInverse;
 
 End[];
 
