@@ -28,8 +28,6 @@ RestrictedToInterval::usage = "RestrictedToCommonInterval[d, {x1, x2}] returns a
 
 (* TODO: Rename as CoordinateAtMax *)
 LocateMaximumPoint::usage = "LocateMaximumPoint[d] finds the time at which a maximum occurs in the DataTable d. This time is guaranteed coincide with a data point in the DataTable.";
-(* TODO: Rename; this is the composition of d and p^-1.  We have Inverse already, maybe we should also have Composition? Then we wouldn't need this function as it would be easy: Composition[d, Inverse[p], {t1, t2, dp}].  Composition will likely need to interpolate. *)
-FunctionOfPhase::usage = "FunctionOfPhase[d, p, {t1, t2}, dp] returns a DataTable consisting of the data of the DataTable d evaluated as a function of the DataTable p.  t1 and t2 are the coordinate ranges in p on which to evaluate d.  dp is the uniform grid spacing of p to use.  This function should be renamed, as p does not have to be a phase.";
 
 
 (****************************************************************)
@@ -54,6 +52,7 @@ FilterDCT;
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 FunctionInverse;
+Composition;
 
 
 (****************************************************************)
@@ -91,6 +90,7 @@ IntersectDataTables;
 DataTableInterval;
 DataTableDepVarInterval;
 InvertDataTable;
+FunctionOfPhase;
 
 Begin["`Private`"];
 
@@ -855,6 +855,19 @@ FunctionInverse[d_DataTable] :=
   MakeDataTable[MapThread[List,{DepVar[d],IndVar[d]}]];
 
 
+(****************************************************************)
+(* Composition                                                  *)
+(****************************************************************)
+
+DataTable /: Composition[d_DataTable, p_DataTable] :=
+ Module[{dInterp, data},
+  dInterp = Interpolation[d];
+  coords = ToListOfData[p];
+  data = dInterp[ToListOfData[p]];
+  AddAttributes[ToDataTable[Transpose[{coords, data}]], ListAttributes[d]]
+];
+
+
 
 
 (****************************************************************)
@@ -882,17 +895,6 @@ LocateMaximumPoint[d_DataTable] :=
    If[f > fMax, fMax = f; tMax = t];
   Scan[maxFind, l];
   Return[tMax]];
-
-FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
- Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
-  phiOft = ToList[RestrictedToInterval[p,{t1,t2}]];
-  tOfphi = Map[Reverse, phiOft];
-  tOfphiFn = Interpolation[tOfphi];
-  {phiMin,phiMax} = Sort[{First[tOfphi][[1]], Last[tOfphi][[1]]}];
-  dOftFn = Interpolation[d];
-  dOfphiTb = 
-   Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
-  AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
 
 
 
@@ -1034,6 +1036,18 @@ ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
 
 DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
   d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
+
+(* TODO: Could implement this in terms of Composition[d, FunctionInverse[p]], but it would not be an identical algorithm *)
+FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
+ Module[{phiOft, tOfphi, tOfphiFn, phiMin, phiMax, dOftFn, dOfphiTb},
+  phiOft = ToList[RestrictedToInterval[p,{t1,t2}]];
+  tOfphi = Map[Reverse, phiOft];
+  tOfphiFn = Interpolation[tOfphi];
+  {phiMin,phiMax} = Sort[{First[tOfphi][[1]], Last[tOfphi][[1]]}];
+  dOftFn = Interpolation[d];
+  dOfphiTb = 
+   Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
+  AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
 
 UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;
