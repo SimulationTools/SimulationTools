@@ -655,6 +655,9 @@ Phase[d:DataTable[__]] :=
 (* RestrictedToCommonInterval                             *)
 (**********************************************************)
 
+SyntaxInformation[RestrictedToCommonInterval] =
+ {"ArgumentsPattern" -> {__}};
+
 RestrictedToCommonInterval[d1_DataTable, d2_DataTable] :=
   Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
     {d1Min, d1Max} = DataTableRange[d1];
