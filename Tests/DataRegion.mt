@@ -133,10 +133,10 @@ parts = {
   2,
   All,
   1 ;; 2,
-  Sequence[1 ;; 2, All, {2}],
-  Sequence[1 ;; 2, 1 ;;, 2],
-  Sequence[1 ;; 2, ;; , 2],
-  Sequence[1 ;; 2, ;; 2, 2](*,
+  {1 ;; 2, All, {2}},
+  {1 ;; 2, 1 ;;, 2},
+  {1 ;; 2, ;; , 2},
+  {1 ;; 2, ;; 2, 2}(*,
   1 ;; -1 ;; 2 ,
   -1,
   {-1}*)
@@ -144,9 +144,9 @@ parts = {
 
 partTest[p_] :=
  Test[
-    ToListOfData[dr[[p]]]
+    ToListOfData[dr[[p /. List -> Sequence]]]
     ,
-    data[[p]]
+    data[[p /. List -> Sequence]]
     ,
     TestID->"Part "<>ToString[p]
  ];
@@ -157,22 +157,22 @@ slabs = {
   10.1,
   All,
   10.0 ;; 10.1,
-  Sequence[10.0 ;; 10.1, All, {30.3}],
-  Sequence[10.0 ;; 10.1, 20.0 ;;, 30.3](*,
+  {10.0 ;; 10.1, All, {30.3}},
+  {10.0 ;; 10.1, 20.0 ;;, 30.3}(*,
   Sequence[10.0 ;; 10.1, ;; , 30.3],
   Sequence[10.0 ;; 10.1, ;; 20.2, 30.3]*)
 };
  
-slatTest[p_, s] :=
+slabTest[p_, s] :=
  Test[
-    ToListOfData[dr[[p]]]
+    Slab[dr, s /. List -> Sequence]
     ,
-    data[[p]]
+    dr[[p /. List -> Sequence]]
     ,
-    TestID->"Part "<>ToString[p]
+    TestID->"Slab "<>ToString[s]
  ];
 
-Scan[slabTest, Transpose[parts[[1;;5]], slabs]];
+Scan[slabTest, Transpose[{parts[[1;;5]], slabs}]];
 
 (****************************************************************)
 (* Take *)
