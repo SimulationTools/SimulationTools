@@ -755,22 +755,6 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 (****************************************************************)
 (****************************************************************)
 
-SetAttributes[Redefine, HoldAll];
-
-Redefine[f_[args___], newDef_] :=
-  Module[{},
-    Unprotect[f];
-    f[args] := newDef;
-    Protect[f]];
-
-SetAttributes[RedefineAsDataTable, HoldAll];
-
-RedefineAsDataTable[f_[args___], newDef_] :=
-  Module[{},
-    Unprotect[f];
-    DataTable /: f[args] := newDef;
-    Protect[f]];
-
 DataTable /: PadRight[d_DataTable, n_] :=
   MakeDataTable[Transpose[{
     First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
