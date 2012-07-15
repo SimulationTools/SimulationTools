@@ -46,7 +46,6 @@ PartitionTable;
 (* TODO: Move to another package. This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
 FilterDCT;
 
-(* TODO: Rename as FunctionInverse *)
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 FunctionInverse;
