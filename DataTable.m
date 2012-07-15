@@ -525,6 +525,14 @@ DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
 
 
 (****************************************************************)
+(* Export                                                       *)
+(****************************************************************)
+
+DataTable /: Export[file_String, dt_DataTable, type___] :=
+  Export[file, Flatten/@ToList[dt], type];
+
+
+(****************************************************************)
 (* CoordinateAtMax                                              *)
 (****************************************************************)
 
@@ -900,9 +908,6 @@ DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
   joineddata=MapThread[Join, DepVar/@singleToList/@resampled];
   MakeDataTable[Thread[{IndVar[resampled[[1]]] ,joineddata}]]
 ];
-
-DataTable /: Export[file_String, dt_DataTable, type___] := Export[file, Flatten/@ToList[dt], type];
-
 
 
 
