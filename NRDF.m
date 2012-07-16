@@ -9,6 +9,9 @@ ReadMetadataKey;
 ReadRuns;
 ReadResolution;
 ExpectedConvergenceOrder;
+ReadMasses;
+ReadMassRatio;
+ReadTotalMass;
 
 Begin["`Private`"];
 
@@ -226,6 +229,16 @@ ReadResolution[run_String] :=
 
 ExpectedConvergenceOrder[run_String] :=
   ReadMetadataKey[run, "resolution-expected-order"];
+
+ReadMasses[run_String] :=
+  {ReadMetadataKey[run, "mass1"],ReadMetadataKey[run, "mass2"]};
+
+ReadMassRatio[run_String] :=
+  Divide@@ReadMasses[run];
+
+ReadTotalMass[run_String] :=
+  Plus@@ReadMasses[run];
+
 
 End[];
 
