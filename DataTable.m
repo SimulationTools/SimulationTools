@@ -558,22 +558,6 @@ AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
 
 
 (****************************************************************)
-(* Dot                                                          *)
-(****************************************************************)
-
-DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
-  MapThread[Dot, {d1, d2}];
-
-
-(****************************************************************)
-(* Export                                                       *)
-(****************************************************************)
-
-DataTable /: Export[file_String, dt_DataTable, type___] :=
-  Export[file, Flatten/@ToList[dt], type];
-
-
-(****************************************************************)
 (* CoordinateAtMax                                              *)
 (****************************************************************)
 
@@ -638,19 +622,6 @@ InterpolatedWhere[d_DataTable, f_] :=
 ];
 
 
-(****************************************************************)
-(* Join                                                         *)
-(****************************************************************)
-
-singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
-
-DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
-  resampled = ResampleDataTables[{ds}];
-  joineddata=MapThread[Join, DepVar/@singleToList/@resampled];
-  MakeDataTable[Thread[{IndVar[resampled[[1]]] ,joineddata}]]
-];
-
-
 (**********************************************************)
 (* Length                                                 *)
 (**********************************************************)
@@ -669,14 +640,6 @@ SyntaxInformation[MonotonicQ] =
 MonotonicQ[d_DataTable, tol_:0.] :=
   Module[{positive = (# > tol &)},
   Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
-
-
-(****************************************************************)
-(* Norm                                                         *)
-(****************************************************************)
-
-DataTable /: Norm[d:DataTable[__]] :=
-  Map[Norm, d];
 
 
 (****************************************************************)
@@ -941,6 +904,46 @@ DataTable /: Composition[d_DataTable, p_DataTable] :=
   data = dInterp[ToListOfData[p]];
   AddAttributes[ToDataTable[Transpose[{coords, data}]], ListAttributes[d]]
 ];
+
+
+(****************************************************************)
+(* Dot                                                          *)
+(****************************************************************)
+
+DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
+  MapThread[Dot, {d1, d2}];
+
+
+(****************************************************************)
+(* Export                                                       *)
+(****************************************************************)
+
+DataTable /: Export[file_String, dt_DataTable, type___] :=
+  Export[file, Flatten/@ToList[dt], type];
+
+
+(****************************************************************)
+(* Join                                                         *)
+(****************************************************************)
+
+singleToList[d_DataTable] := MapData[If[SameQ[Head[#], List], #, {#}]&, d]
+
+DataTable /: Join[ds:DataTable[__]...] := Module[{resampled, joineddata},
+  resampled = ResampleDataTables[{ds}];
+  joineddata=MapThread[Join, DepVar/@singleToList/@resampled];
+  MakeDataTable[Thread[{IndVar[resampled[[1]]] ,joineddata}]]
+];
+
+
+(****************************************************************)
+(* Norm                                                         *)
+(****************************************************************)
+
+DataTable /: Norm[d:DataTable[__]] :=
+  Map[Norm, d];
+
+
+
 
 
 
