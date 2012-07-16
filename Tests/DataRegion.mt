@@ -514,9 +514,13 @@ Scan[test3, DataRegion`Private`$1DPlotFunctions]
 
 test4[f_] :=
  Test[
-   f[data[[1]], DataRange -> CoordinateRanges[dr[[1]]]]
-   ,
    f[dr[[1]]]
+   ,
+   If[f===ArrayPlot,
+   	f[Reverse[Transpose[data[[1]]]], DataRange -> CoordinateRanges[dr[[1]]]]
+   ,
+   	f[Transpose[data[[1]]], DataRange -> CoordinateRanges[dr[[1]]]]
+   ]
    ,
    TestID -> "Built-in function: "<>ToString[f]
  ];
