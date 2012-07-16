@@ -856,12 +856,13 @@ MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, tim
   DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
              Developer`ToPackedArray[data]];
 
-SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
- Module[{index, newOrigin, newSpacing, h2, origin, spacing, dims, range, slice, ndims},
+SliceData[v:DataRegion[h_, __], dim_Integer, coord_:0] :=
+ Module[{index, newOrigin, newSpacing, origin, spacing, dims, range, slice, ndims, data},
   origin = GetOrigin[v];
   spacing = GetSpacing[v];
   dims = GetDimensions[v];
   ndims = GetNumDimensions[v];
+  data = GetData[v];
 
   If[dim > ndims,
     Error["Slicing direction "<>ToString[dim]<>" is greater than dimension "<>
@@ -878,9 +879,8 @@ SliceData[v:DataRegion[h_, data_], dim_Integer, coord_:0] :=
   index = Round[(coord - origin[[dim]])/spacing[[dim]]+1];
   newOrigin = Drop[origin, {dim}];
   newSpacing = Drop[spacing, {dim}];
-  h2 = replaceRules[h, {Origin -> newOrigin, Spacing-> newSpacing}];
   slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
-  Return[DataRegion[h2, data[[slice]] ]]
+  MakeDataRegion[data[[slice]], GetVariableName[v], Drop[dims, {dim}], newOrigin, newSpacing, GetTime[v]]
 ];
 
 SliceData[v_DataRegion, dims_List, coords_:0] := 
@@ -889,11 +889,11 @@ SliceData[v_DataRegion, dims_List, coords_:0] :=
 GetData[d_DataRegion] := data[d];
 GetAttributes[d_DataRegion] := attributes[d];
 GetDimensions[d_DataRegion] := Reverse[Dimensions[GetData[d]]];
-GetNumDimensions[DataRegion[h_, data_]] := Length[Dimensions[data]];
-GetOrigin[DataRegion[h_, data_]] := Origin /. h;
-GetSpacing[DataRegion[h_, data_]] := Spacing /. h;
+GetNumDimensions[DataRegion[h_, data_]] := ArrayDepth[data];
+GetOrigin[DataRegion[h_, __]] := Origin /. h;
+GetSpacing[DataRegion[h_, __]] := Spacing /. h;
 GetTime[DataRegion[h_, _]] := Time /. h;
-GetVariableName[DataRegion[h_, data_]] := VariableName /. h;
+GetVariableName[DataRegion[h_, __]] := VariableName /. h;
 GetDataRange[v_DataRegion] :=
   Module[{origin, spacing, dimensions, min, max},
     origin = GetOrigin[v];
@@ -903,12 +903,13 @@ GetDataRange[v_DataRegion] :=
     max = origin + spacing * (dimensions - 1);
     MapThread[List, {min, max}]];
 
-DataRegionPart[d:DataRegion[h_, data_], s_]:=
- Module[{ndims, spacing, origin, dataRange, newS, indexrange, newOrigin, h2, newData},
+DataRegionPart[d:DataRegion[h_, __], s_]:=
+ Module[{ndims, spacing, origin, dataRange, data, newS, indexrange, newOrigin, h2, newData},
   ndims = GetNumDimensions[d];
   spacing = GetSpacing[d];
   origin = GetOrigin[d];
   dataRange = GetDataRange[d];
+  data = GetData[d];
 
   If[Length[s] != ndims,
     Error["Range "<>ToString[s]<>" does not match the dimensionality of the DataRegion."]
@@ -934,7 +935,7 @@ DataRegionPart[d:DataRegion[h_, data_], s_]:=
   DataRegion[h2, newData]
 ];
 
-DataRegionPart[d:DataRegion[h_, data_], s_Span] := DataRegionPart[d, {s}];
+DataRegionPart[d_DataRegion, s_Span] := DataRegionPart[d, {s}];
 
 (* Plotting wrappers *)
 DataRegionPlot[plotFunction_, plotDims_, v_DataRegion, args___] := Module[{ndims, dataRange, data, opts},
