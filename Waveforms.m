@@ -224,6 +224,8 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, opts___] :=
   trd = RadiusTimeDataToTimeRadiusData[rdTb];
   rds = Map[Last,trd];
   ts = Map[First,trd];
+  If[p > Length[rdTb]-1,
+    Error["Insufficient radii (", Length[rdTb], ") for extrapolation at order ", p]];
   extraps = Map[ExtrapolateScalar[p, #] &, rds];
   MakeDataTable[MapThread[List, {ts, extraps}]]];
 
