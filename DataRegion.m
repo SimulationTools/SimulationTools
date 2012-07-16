@@ -932,7 +932,7 @@ DataRegionPart[d:DataRegion[h_, __], s_]:=
 
   h2 = replaceRules[h, {Origin -> newOrigin}];
 
-  DataRegion[h2, newData]
+  MakeDataRegion[newData, GetVariableName[d], Dimensions[newData], newOrigin, spacing, GetTime[d]]
 ];
 
 DataRegionPart[d_DataRegion, s_Span] := DataRegionPart[d, {s}];
