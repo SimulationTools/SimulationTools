@@ -177,7 +177,14 @@ Downsampled[d_DataTable, n_Integer] :=
 (****************************************************************)
 
 DataTable /: Drop[d:DataTable[l_, x___], args__] :=
-  DataTable[Drop[l, args], x];
+ Module[{data},
+  data = Drop[l, args];
+
+  If[Length[data] === 1,
+  	Error["Operations which would return a DataTable with a single element are not currently supported."];
+  ];
+  DataTable[data, x]
+];
 
 
 (**********************************************************)
@@ -326,7 +333,14 @@ NDerivative[d_DataTable] :=
 (****************************************************************)
 
 DataTable /: Part[d:DataTable[l_, x___], args__] :=
-  DataTable[Part[l, args], x];
+ Module[{data},
+  data = Part[l, args];
+
+  If[Length[data] === 1,
+  	Error["Operations which would return a DataTable with a single element are not currently supported."];
+  ];
+  DataTable[data, x]
+];
 
 
 (**********************************************************)
@@ -401,7 +415,14 @@ Shifted[d_DataTable, {dt_?NumberQ}] := Shifted[d, dt];
 (****************************************************************)
 
 DataTable /: Take[d:DataTable[l_, x___], args__] :=
-  DataTable[Take[l, args], x];
+ Module[{data},
+  data = Take[l, args];
+
+  If[Length[data] === 1,
+  	Error["Operations which would return a DataTable with a single element are not currently supported."];
+  ];
+  DataTable[data, x]
+];
 
 
 (****************************************************************)
