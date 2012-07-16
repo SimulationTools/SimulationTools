@@ -854,7 +854,7 @@ ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
   DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
-             Developer`ToPackedArray[data]];
+             Developer`ToPackedArray[Transpose[data, Reverse[Range[ArrayDepth[data]]]]]];
 
 SliceData[v:DataRegion[h_, __], dim_Integer, coord_:0] :=
  Module[{index, newOrigin, newSpacing, origin, spacing, dims, range, slice, ndims, data},
@@ -886,10 +886,10 @@ SliceData[v:DataRegion[h_, __], dim_Integer, coord_:0] :=
 SliceData[v_DataRegion, dims_List, coords_:0] := 
   Fold[SliceData[#, Sequence@@#2]&, v, Reverse[SortBy[Thread[{dims, coords}], First]]];
 
-GetData[d_DataRegion] := data[d];
+GetData[d_DataRegion] := Transpose[data[d], Reverse[Range[GetNumDimensions[d]]]];
 GetAttributes[d_DataRegion] := attributes[d];
 GetDimensions[d_DataRegion] := Reverse[Dimensions[GetData[d]]];
-GetNumDimensions[DataRegion[h_, data_]] := ArrayDepth[data];
+GetNumDimensions[d_DataRegion] := ArrayDepth[data[d]];
 GetOrigin[DataRegion[h_, __]] := Origin /. h;
 GetSpacing[DataRegion[h_, __]] := Spacing /. h;
 GetTime[DataRegion[h_, _]] := Time /. h;
