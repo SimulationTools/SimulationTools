@@ -302,7 +302,9 @@ InterpolateWhereFunction[d_DataTable, f_] :=
   MakeDataTable[ToList[d]/. {t_,x_}:>{t,dInterpolater[t]}/;f[{t,x}]]];
 
 Global`Sub[d1_DataTable, d2_DataTable, p_:8] :=
-  Apply[Subtract, IntersectDataTables[{ResampleDataTable[d1, d2, p],d2}]];
+  Module[{},
+    If[Length[d1] < 10 || Length[d2] < 10, Error["Sub: One of the DataTables is too short to resample"]];
+    Apply[Subtract, IntersectDataTables[{ResampleDataTable[d1, d2, p],d2}]]];
 
 Add[ds:(_DataTable..), p_Integer:8] :=
   Apply[Plus, ResampleDataTables[{ds}, p]];
@@ -405,6 +407,7 @@ ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
 
 DataTableRange[dt:DataTable[__]] :=
   Module[{list = ToList[dt], t1, t2},
+    If[Length[list] === 0, Error["Cannot compute the range of an empty DataTable"]];
     t1 = First[list][[1]];
     t2 = Last[list][[1]];
     {t1,t2}];
