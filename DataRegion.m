@@ -817,7 +817,7 @@ ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
     If[GetNumDimensions[d] === 2,
       newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
                                 {y, x1[[2]], x2[[2]], dx[[2]]}];
-      MakeDataRegion[newData, GetVariableName[d], Dimensions[newData], x1, dx, GetTime[d]],
+      MakeDataRegion[newData, GetVariableName[d], {}, x1, dx, GetTime[d]],
 
       Error["Cannot resample DataRegions of dimension other than 2"]]
   ];
@@ -880,7 +880,7 @@ SliceData[v:DataRegion[h_, __], dim_Integer, coord_:0] :=
   newOrigin = Drop[origin, {dim}];
   newSpacing = Drop[spacing, {dim}];
   slice = Sequence @@ Reverse[Join[ConstantArray[All,dim-1],{index},ConstantArray[All,ndims-dim]]];
-  MakeDataRegion[data[[slice]], GetVariableName[v], Drop[dims, {dim}], newOrigin, newSpacing, GetTime[v]]
+  MakeDataRegion[data[[slice]], GetVariableName[v], {}, newOrigin, newSpacing, GetTime[v]]
 ];
 
 SliceData[v_DataRegion, dims_List, coords_:0] := 
@@ -932,7 +932,7 @@ DataRegionPart[d:DataRegion[h_, __], s_]:=
 
   h2 = replaceRules[h, {Origin -> newOrigin}];
 
-  MakeDataRegion[newData, GetVariableName[d], Dimensions[newData], newOrigin, spacing, GetTime[d]]
+  MakeDataRegion[newData, GetVariableName[d], {}, newOrigin, spacing, GetTime[d]]
 ];
 
 DataRegionPart[d_DataRegion, s_Span] := DataRegionPart[d, {s}];
@@ -992,22 +992,20 @@ Strip[d_DataRegion, n_Integer] := Module[{ndims},
   Strip[d, ConstantArray[n,ndims]]];
 
 Strip[d_DataRegion, n_List] :=
-  Module[{data, data2, attrs, attrs2, d2},
+  Module[{data, data2, origin, spacing, d2},
     data = GetData[d];
     data2 = Take[data, Apply[Sequence, Map[{#+1,-(#+1)}&, Reverse[n]]]];
-    attrs = attributes[d];
-    attrs2 = replaceRules[attrs, 
-      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
-    d2 = DataRegion[attrs2, data2]];
+    origin = GetOrigin[d];
+    spacing = GetSpacing[d];
+    d2 = MakeDataRegion[data2, GetVariableName[d], {}, (origin + n * spacing), spacing, GetTime[d]]];
 
 Strip[d_DataRegion, n_List, m_List] :=
-  Module[{data, data2, attrs, attrs2, d2},
+  Module[{data, data2, origin, spacing, d2},
     data = GetData[d];
 	 data2 = Take[data, Apply[Sequence, MapThread[{#1+1,-(#2+1)}&, {Reverse[n], Reverse[m]}]]];
-    attrs = attributes[d];
-    attrs2 = replaceRules[attrs,
-      {Origin -> (GetOrigin[d] + n * GetSpacing[d])}];
-    d2 = DataRegion[attrs2, data2]];
+    origin = GetOrigin[d];
+    spacing = GetSpacing[d];
+    d2 = MakeDataRegion[data2, GetVariableName[d], {}, (origin + n * spacing), spacing, GetTime[d]]];
 
 
 Downsample[d_DataRegion, n_Integer] :=
@@ -1016,28 +1014,23 @@ Downsample[d_DataRegion, n_Integer] :=
     Downsample[d, ConstantArray[n,ndims]]];
 
 Downsample[d_DataRegion, n_List] :=
- Module[{data, data2, attrs, attrs2, d2},
+ Module[{data, data2, d2},
   data = GetData[d];
   data2 = Take[data, Apply[Sequence, Map[{1, -1, #} &, Reverse[n]]]];
-  attrs = attributes[d];
-  attrs2 =
-   replaceRules[
-    attrs, {Origin -> GetOrigin[d],  Spacing -> GetSpacing[d]*n}];
-  d2 = DataRegion[attrs2, data2]];
+  d2 = MakeDataRegion[data2, GetVariableName[d], {}, GetOrigin[d], GetSpacing[d]*n, GetTime[d]]];
 
 MapDataRegion[f_, d_DataRegion] :=
- Module[{dim, header, data},
+ Module[{dim, data},
   dim = GetNumDimensions[d];
-  header = attributes[d];
   data = Map[f, GetData[d], {dim}];
-  DataRegion[header, data]];
+  MakeDataRegion[data, GetVariableName[d], {}, GetOrigin[d], GetSpacing[d], GetTime[d]]];
 
 MapThreadDataRegion[f_, drs_] :=
-  Module[{attrs, datas, newData},
-    attrs = attributes[First[drs]];
+  Module[{datas, dr, newData},
     datas = GetData /@ drs;
+    dr = drs[[1]];
     newData = MapThread[f, datas, GetNumDimensions[First[drs]]];
-    DataRegion[attrs, newData]];
+    MakeDataRegion[newData, GetVariableName[dr], {}, GetOrigin[dr], GetSpacing[dr], GetTime[dr]]];
 
 (* SetAttributes[EvaluateOnDataRegion, HoldFirst]; *)
 EvaluateOnDataRegion[exprp_, {t_, x_, y_, z_}, dp_DataRegion] :=
@@ -1080,7 +1073,7 @@ TableToDataRegion[t_List] :=
   origin = split[[1, 1, d]];
   If[d == 1,
    MakeDataRegion[Map[Last, sorted],
-    "table", {Length[sorted]}, {origin}, {spacing}, 0],
+    "table", {}, {origin}, {spacing}, 0],
    (* else *)
    subregions =
      Map[TableToDataRegion, Map[Drop[#, {d}] &, split, {2}]];
@@ -1089,7 +1082,7 @@ TableToDataRegion[t_List] :=
    suborigin = GetOrigin[s];
    subspacing = GetSpacing[s];
    MakeDataRegion[Map[GetData, subregions], "table",
-    Append[subdims, Length[subregions]], Append[suborigin, origin],
+    {}, Append[suborigin, origin],
     Append[subspacing, spacing], 0]]];
 
 (* Fiendishly clever code *)
@@ -1109,7 +1102,7 @@ GetCoordinate[d_DataRegion, dim_] :=
     res = ca[Table[ca[x, dm], {x, origin[[dim]], max[[dim]], spacing[[dim]]}], dp];
 
     If[Reverse@Dimensions[res] =!= dims, Error["GetCoordinateError"]];
-    DataRegion[attributes[d], res]
+    MakeDataRegion[res, GetVariableName[d], {}, origin, spacing, GetTime[d]]
   ];
 
 (**********************************************************)
@@ -1142,7 +1135,7 @@ chunkOffset[d_DataRegion, origin_, spacing_] :=
 MergeDataRegions[regions_List] :=
  Profile["MergeDataRegions",
  Module[{ndims, origins, dims, spacings, spacing, spacingDiffs,
-    X1, X2s, X2, n, dat, attrs, attrs2},
+    X1, X2s, X2, n, dat},
   If[Length[regions] === 0, Return[{}]];
 
   If[!And@@Map[MatchQ[#, _DataRegion] &, regions],
@@ -1170,9 +1163,7 @@ MergeDataRegions[regions_List] :=
   dat = ConstantArray[None, Reverse[n]];
   Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
    regions];
-  attrs = attributes[regions[[1]]];
-  attrs2 = replaceRules[attrs, {Origin -> X1}];
-  Return[DataRegion[attrs2, Developer`ToPackedArray[dat]]]]
+  MakeDataRegion[Developer`ToPackedArray[dat], GetVariableName[regions[[1]]], {}, X1, GetSpacing[regions[[1]]], GetTime[regions[[1]]]]]
 ];
 
 End[];
