@@ -47,6 +47,7 @@ Options[ExtrapolateRadiatedQuantity] =
    ApplyFunction -> None, 
    AlignPhaseAt -> None,
    RadiusRange -> All,
+   "Radii" -> All,
    ExtrapolationErrorRelative -> False,
    NonUniformGrid -> False};
 
@@ -305,12 +306,26 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     ExtrapolateDataTables[OptionValue[ExtrapolationOrder], resWithr]];
 
 ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
-  Module[{allRads, rads, fs, rdTb, rMin, rMax, mADM},
+  Module[{allRads, rads, missingRadii, fs, rdTb, rMin, rMax, mADM},
+
     allRads = ReadPsi4Radii[runName];
-    rads = If[OptionValue[RadiusRange] === All,
-      allRads,
-      {rMin, rMax} = OptionValue[RadiusRange]; 
-      Select[allRads, # >= rMin && # <= rMax &]];
+    rads = If[OptionValue[Radii] === All,
+              rads = If[OptionValue[RadiusRange] === All,
+                        allRads,
+                        {rMin, rMax} = OptionValue[RadiusRange]; 
+                        Select[allRads, # >= rMin && # <= rMax &]],
+              (* else *)
+              OptionValue[Radii]];
+
+    Print["ExtrapolateRadiatedQuantity: rads = ", rads];
+    Print["ExtrapolateRadiatedQuantity: allRads = ", allRads];
+
+    missingRadii = Complement[rads, allRads];
+    If[missingRadii =!= {},
+       Error["ExtrapolateRadiatedQuantity: Radii "<>ToString[missingRadii]<>" are missing in run "<>runName]];
+
+    (* If[Union[rads] =!= Union[allRads], *)
+    (*    Error["ExtrapolateRadiatedQuantity: Radii "<>ToString[Complement[rads, allRads]]<>" not found in run "<>runName]]; *)
 
     fs = Map[reader[runName, #] &, rads];
     rdTb = MapThread[List, {rads, fs}];
