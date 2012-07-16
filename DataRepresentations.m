@@ -13,6 +13,7 @@ ToListOfCoordinates::usage = "ToListOfCoordinates[d] a List of the coordinates p
 MapList::usage = "MapList[f, d] maps f over the coordinates and values in d.";
 
 (* TODO: Maybe add CoordinateSpacing? *)
+CoordinateSpacing::usage = "CoordinateSpacings[d] gives the spacing of the coordinates in d.";
 CoordinateSpacings::usage = "CoordinateSpacings[d] gives a List of the spacing of the coordinates in each dimension of d.";
 CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edges of d. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
