@@ -15,7 +15,6 @@ Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
 
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
-MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 
 CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in the DataTable d. This is guaranteed to coincide with a data point in the DataTable.";
 CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
@@ -45,6 +44,7 @@ FilterDCT;
 
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
+MonotonicQ;
 FunctionInverse;
 Composition;
 
@@ -630,18 +630,6 @@ DataTable /: Length[DataTable[d_,___]] :=
   Length[d];
 
 
-(**********************************************************)
-(* MonotonicQ                                             *)
-(**********************************************************)
-
-SyntaxInformation[MonotonicQ] =
- {"ArgumentsPattern" -> {_}};
-
-MonotonicQ[d_DataTable, tol_:0.] :=
-  Module[{positive = (# > tol &)},
-  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
-
-
 (****************************************************************)
 (* PadLeft                                                      *)
 (****************************************************************)
@@ -904,6 +892,18 @@ DataTable /: Composition[d_DataTable, p_DataTable] :=
   data = dInterp[ToListOfData[p]];
   AddAttributes[ToDataTable[Transpose[{coords, data}]], ListAttributes[d]]
 ];
+
+
+(**********************************************************)
+(* MonotonicQ                                             *)
+(**********************************************************)
+
+SyntaxInformation[MonotonicQ] =
+ {"ArgumentsPattern" -> {_}};
+
+MonotonicQ[d_DataTable, tol_:0.] :=
+  Module[{positive = (# > tol &)},
+  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
 
 
 (****************************************************************)
