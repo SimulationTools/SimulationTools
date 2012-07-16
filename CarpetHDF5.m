@@ -198,7 +198,7 @@ Options[ReadCarpetHDF5] = {"StripGhostZones" -> True};
 ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
 (* This should be renamed ReadCarpetHDF5Dataset and should be internal *)
  Profile["ReadCarpetHDF5",
- Module[{data, annots, dims, origin, spacing, name, strip, dr, ghosts, time},
+ Module[{data, annots, dims, order, origin, spacing, name, strip, dr, ghosts, time},
   strip = OptionValue[StripGhostZones];
 
   If[Apply[Or,Map[(!StringQ[#])&, ds]],
@@ -212,6 +212,10 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   annots = Annotations[file, ds];
 
   dims = Reverse /@ Dims[file, ds];
+
+  (* Data from CarpetIOHDF5 is in Fortran column-major format. Transpose to get Mathematica row-major format *)
+  order  = Reverse /@ Range /@ ArrayDepth /@ data;
+  data = MapThread[Transpose, {data, order}];
 
   origin = "origin" /. annots;
   spacing = "delta" /. annots;
