@@ -35,9 +35,9 @@ nrmmaVersion[] :=
 
   gitrev = Quiet@ReadList[FileNameJoin[{path, "GIT_REVISION"}],"String"];
   If[SameQ[gitrev, $Failed],
-    gitrev = First@ReadList["!git --git-dir "<>FileNameJoin[{path, ".git"}]<>" rev-parse HEAD", String];
+    gitrev = StringJoin[Riffle[ReadList["!bash -l -c 'git --git-dir "<>FileNameJoin[{path, ".git"}]<>" rev-parse HEAD; git --git-dir "<>FileNameJoin[{path, ".git"}]<>" --work-tree "<> path <>" diff 2>&1'", String],"\n"]];
   ,
-    gitrev = First[gitrev];
+    gitrev = First[gitrev]
   ];
 
   Grid[{{"Installed in:", path},
@@ -48,4 +48,3 @@ nrmmaVersion[] :=
 
 End[];
 EndPackage[];
-
