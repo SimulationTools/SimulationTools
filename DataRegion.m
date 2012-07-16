@@ -572,8 +572,15 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
       ". The provided data has dimensionality "<>ToString[ndims]<>"."];
   ];
 
-  dataRange =  If[ndims==1, CoordinateRanges[d][[1]], CoordinateRanges[d]];
+  dataRange = If[ndims==1, CoordinateRanges[d][[1]], CoordinateRanges[d]];
   data = ToListOfData[d];
+
+  (* We need to Transpose 2D data *)
+  If[ndims == 2, data = Transpose[data]];
+
+  (* ArrayPlot is backwards! *)
+  If[plotFunction === ArrayPlot, data = Reverse[data]];
+
   plotFunction[data, args, DataRange -> dataRange]
 ];
 
