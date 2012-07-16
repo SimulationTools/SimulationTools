@@ -343,22 +343,22 @@ Test[
 
 Test[
 
-        PartitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
+        DataTable`Private`partitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
                        {2.5, 4.5}]
         ,
         {{{1, 10}, {2, 11}}, {{3, 12}, {4, 15}}, {{5, 2}, {6, 3}}}
 	,
-	TestID->"PartitionTable-1"
+	TestID->"partitionTable-1"
 ]
 
 Test[
 
-        PartitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
+        DataTable`Private`partitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
                        {2, 4}]
         ,
         {{{1, 10}}, {{2, 11}, {3, 12}}, {{4, 15}, {5, 2}, {6, 3}}}
 	,
-	TestID->"PartitionTable-2"
+	TestID->"partitionTable-2"
 ]
 
 (****************************************************************)

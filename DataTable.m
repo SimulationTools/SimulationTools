@@ -40,9 +40,6 @@ ReadAttribute;
 (* TODO: Could this be AttributeNames? *)
 ListAttributes;
 
-(* TODO: This also only operates on lists.  It might be good to have this defined on DataTables as well.  The list version should be made internal, but the DataTable version could be public. *)
-PartitionTable;
-
 (* TODO: Move to another package. This only works for uniform DataTables.  Should we have a separate Filtering package? Should it be Filtered? *)
 FilterDCT;
 
@@ -808,6 +805,14 @@ tableRange[t_List, tStart_?NumberQ, tEnd_?NumberQ] :=
 tableRange[t_List, range_List] :=
   tableRange[t,range[[1]],range[[2]]];
 
+partitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
+ Module[{before, middle, after},
+  before = tableRange[t, First[t][[1]], tMin];
+  middle = tableRange[t, tMin, tMax];
+  after = tableRange[t, tMax, Last[t][[1]] + 1];
+  Return[{before, middle, after}]
+  ];
+
 FilterDCT[f_List, nModes_Integer] :=
  Module[{times, data, dataDCT, dataFilDCT, dataFil, fFil},
   times = Map[First, f];
@@ -832,21 +837,8 @@ FilterDCT[f_List, nModes_Integer,
   Module[{filtered, t1, t2, t3},
    filtered =
     tableRange[FilterDCT[tableRange[f, range1], nModes], range2];
-   {t1, t2, t3} = PartitionTable[f, range2];
+   {t1, t2, t3} = partitionTable[f, range2];
    Return[Join[t1, filtered, t3]]];
-
-
-(****************************************************************)
-(* PartitionTable                                               *)
-(****************************************************************)
-
-PartitionTable[t_List, {tMin_?NumberQ, tMax_?NumberQ}] :=
- Module[{before, middle, after},
-  before = tableRange[t, First[t][[1]], tMin];
-  middle = tableRange[t, tMin, tMax];
-  after = tableRange[t, tMax, Last[t][[1]] + 1];
-  Return[{before, middle, after}]
-  ];
 
 
 (****************************************************************)
