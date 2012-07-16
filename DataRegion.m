@@ -471,6 +471,20 @@ DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
 
 
 (**********************************************************)
+(* MapList                                                *)
+(**********************************************************)
+
+MapList[f_, d_DataRegion, n_:Automatic] :=
+ Module[{depth},
+  depth = {ArrayDepth[d]};
+  If[n =!= Automatic && n =!= depth,
+  	Error["Map can only operate on the deepest level in a DataRegion."];
+  ];
+  DataRegion[attributes[d], Map[f, ToList[d], depth]]
+];
+
+
+(**********************************************************)
 (* Map                                                    *)
 (**********************************************************)
 
