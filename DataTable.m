@@ -143,10 +143,13 @@ CoordinateRanges[d_DataTable] :=
 
 CoordinateSpacings[d_DataTable] :=
  Module[{ts},
+  If[!UniformSpacingQ[d],
+  	Error["CoordinateSpacing undefined for non-uniform DataTables."];
+  ];
+
   ts = ToListOfCoordinates[d];
 
   (* TODO: use Differences here *)
-  (* TODO: Check all spacings are even *)
   {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
 ];
 
