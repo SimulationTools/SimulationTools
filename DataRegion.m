@@ -106,6 +106,20 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 
 
 (**********************************************************)
+(* CoordinateSpacing                                      *)
+(**********************************************************)
+
+CoordinateSpacing[d_DataRegion] :=
+ Module[{},
+  If[ArrayDepth[d] =!= 1,
+  	Error["CoordinateSpacing can only be used with 1-dimensional DataRegions."];
+  ];
+
+  First[CoordinateSpacings[d]]
+];
+
+
+(**********************************************************)
 (* CoordinateSpacings                                     *)
 (**********************************************************)
 
