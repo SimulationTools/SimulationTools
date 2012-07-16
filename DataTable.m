@@ -762,7 +762,7 @@ SyntaxInformation[RestrictedToInterval] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
 (* TODO: Change the default for this to {Closed, Closed} *)
-Options[RestrictedToInterval] = {Interval -> {Closed, Open}};
+Options[RestrictedToInterval] = {Interval -> {Closed, Closed}};
 
 RestrictedToInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
   Module[
@@ -1074,6 +1074,10 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
   AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
 
+Options[DataTableInterval] = {Interval -> {Closed, Open}};
+DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
+ RestrictedToInterval[d, {t1, t2}, Interval -> OptionValue[Interval]];
+
 UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;
 LocateMaximum = CoordinateAtInterpolatedMax;
@@ -1082,7 +1086,6 @@ DataTableRange = Endpoints;
 DataTableNormL2 = GridNorm;
 IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;
-DataTableInterval = RestrictedToInterval;
 InvertDataTable = FunctionInverse;
 LocateMaximumPoint = CoordinateAtMax;
 
