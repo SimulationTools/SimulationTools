@@ -80,7 +80,7 @@ Module[{packages =
   ErrorDefinition[x_] :=
     x[args___] :=
      If[$NRMMADebug===True, Error`CatchError, Identity][Error`ErrorMessage[General::invargs, ToString[x] <> "[" <>
-       StringJoin[Riffle[ToString[#] & /@ {args}, ", "]] <>
+       StringJoin[Riffle[ToString[Short[#]] & /@ {args}, ", "]] <>
        "]"]];
 
 SetAttributes[CheckAssignments, HoldAll];
