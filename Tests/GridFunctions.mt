@@ -24,10 +24,10 @@ Module[{data},
 
 Module[{data},
     Test[
-        data = Transpose[GetData[ReadGridFunction[$NRMMATestRun, var, {"x","y"}, Iteration -> 1024]]];
-        Map[Part[data, Sequence @@ #] &, 
-            {{39, 16}, {17, 4}, {58, 28}, {12, 96}, {38, 32},
-             {52, 96}, {47, 27}, {5, 114}, {34, 105}, {5, 14}}
+        data = GetData[ReadGridFunction[$NRMMATestRun, var, {"x","y"}, Iteration -> 1024]];
+        Map[Part[data, Sequence @@ #] &,
+            {{16, 39}, {4, 17}, {28, 58}, {96, 12}, {32, 38},
+             {96, 52}, {27, 47}, {114, 5}, {105, 34}, {14, 5}}
             ]
     ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-2D.m"}]]
@@ -38,11 +38,10 @@ Module[{data},
 
 Module[{data},
 	Test[
-        data = Transpose[GetData[
-        	ReadGridFunction[$NRMMATestRun, var, {"x","y","z"}]], {3, 2, 1}];
-        Map[Part[data, Sequence @@ #] &, 
-            {{4, 1, 49}, {41, 59, 1}, {52, 36, 15}, {38, 20, 14}, {2, 71, 41},
-            {35, 1, 18}, {53, 38, 8}, {37, 21, 25}, {44, 80, 51}, {37, 113, 44}}
+        data = GetData[ReadGridFunction[$NRMMATestRun, var, {"x","y","z"}]];
+        Map[Part[data, Sequence @@ #] &,
+            {{49, 1, 4}, {1, 59, 41}, {15, 36, 52}, {14, 20, 38}, {41, 71, 2},
+             {18, 1, 35}, {8, 38, 53}, {25, 21, 37}, {51, 80, 44}, {44, 113, 37}}
             ]
     ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-3D.m"}]]
