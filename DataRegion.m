@@ -645,9 +645,25 @@ Coordinate[d_DataRegion, dim_] :=
 
 
 (**********************************************************)
-(* NDerivative                                             *)
+(* NDerivative                                            *)
 (**********************************************************)
 
+NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
+ Module[{origin, spacing, dimensions, grid, data, deriv},
+  origin  = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
+  dimensions = Dimensions[d];
+
+  (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
+  grid = origin + spacing (Range /@ dimensions-1);
+  data = ToListOfData[d];
+
+  deriv = NDSolve`FiniteDifferenceDerivative[Derivative[derivs], grid, data, opts];
+
+  ToDataRegion[deriv, origin, spacing]
+];
+
+(* TODO: These forms are deprecated and differ from DataTable *)
 NDerivative[d:DataRegion[h_,_], dir_Integer] :=
  Module[{ndims},
    ndims   = ArrayDepth[d];
@@ -663,21 +679,6 @@ NDerivative[d_DataRegion] :=
   ];
 
   NDerivative[d, 1];
-];
-
-NDerivative[derivs__][d:DataRegion[h_,_], opts___] :=
- Module[{origin, spacing, dimensions, grid, data, deriv},
-  origin  = MinCoordinates[d];
-  spacing = CoordinateSpacings[d];
-  dimensions = Dimensions[d];
-
-  (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
-  grid = origin + spacing (Range /@ dimensions-1);
-  data = ToListOfData[d];
-
-  deriv = NDSolve`FiniteDifferenceDerivative[Derivative[derivs], grid, data, opts];
-
-  ToDataRegion[deriv, origin, spacing]
 ];
 
 

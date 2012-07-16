@@ -34,7 +34,7 @@ Sub::usage = "Sub[d1, d2] subtracts d2 from d1 after they have been resampled on
 
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 
-NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d. The derivs argument should be of the same form as in the first argument of Derivative.\n";
+NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d. The derivs argument should be of the same form as in the first argument of Derivative.";
 
 Begin["`Private`"];
 

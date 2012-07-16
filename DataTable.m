@@ -294,8 +294,22 @@ MinCoordinates[d_DataTable] :=
 (* NDerivative                                                  *)
 (****************************************************************)
 
-(* TODO: Extend NDerivative to work with arbitrary order derivatives and arbitrary order of accuracy, like in DataRegion.  Don't omit the endpoints *)
+NDerivative[derivs__][d_DataTable, opts___] :=
+ Module[{origin, spacing, dimensions, grid, data, deriv},
+  origin  = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
+  dimensions = Dimensions[d];
 
+  (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
+  grid = ToListOfCoordinates[d];
+  data = ToListOfData[d];
+
+  deriv = NDSolve`FiniteDifferenceDerivative[Derivative[derivs], grid, data, opts];
+
+  ToDataTable[Transpose[{grid, deriv}]]
+];
+
+(* TODO: This form is deprecated *)
 NDerivative[d_DataTable] :=
  Module[{diff, table1, table2, deriv},
   diff[{t1_, f1_}, {t2_, f2_}] :=
