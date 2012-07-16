@@ -244,7 +244,7 @@ Test[
 Test[
     Quiet[ResampleDataRegion[SliceData[dataregion, 2, 20], {{10.1, 30}, {10.3, 30.2}, {0.05, 0.15}}, 2], ListInterpolation::inhr]
     ,
-    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10.1, 30.}, Spacing -> {0.05, 0.15}, DataRegion`Private`Time -> 42}, 
+    DataRegion[{VariableName -> "test region", DataRegion`Private`Origin -> {10.1, 30}, Spacing -> {0.05, 0.15}, DataRegion`Private`Time -> 42}, 
       {{112.00000000000001, 161.9999999999994}, {112.50000000000001, 162.4999999999994}, {113., 162.99999999999937}, {113.5, 163.4999999999994}, {114., 163.99999999999937}}]
     ,
     TestID->"ResampleDataRegion"
@@ -258,12 +258,12 @@ Test[
     Quiet[ResampleDataRegions[{SliceData[dataregion, 2, 20], SliceData[dataregion3, 2, 20]}], ListInterpolation::inhr]
     ,
     {DataRegion[{VariableName -> "test region",
-       DataRegion`Private`Origin -> {10., 30.},
+       DataRegion`Private`Origin -> {10, 30},
        Spacing -> {0.1, 0.3},
        DataRegion`Private`Time -> 42}, 
        {{111.00000000000001, 211.}, {112.00000000000001, 212.}, {113., 212.99999999999997}}], 
      DataRegion[{VariableName -> "test region",
-       DataRegion`Private`Origin -> {10., 30.},
+       DataRegion`Private`Origin -> {10, 30},
        Spacing -> {0.1, 0.3},
        DataRegion`Private`Time -> 47}, 
        {{224.00000000000003, 424.}, {226., 425.99999999999994}, {228., 427.99999999999994}}]}

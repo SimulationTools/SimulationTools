@@ -817,7 +817,7 @@ ResampleDataRegion[d_DataRegion, {x1_List, x2_List, dx_List}, p_] :=
     If[GetNumDimensions[d] === 2,
       newData = Table[dFn[x,y], {x, x1[[1]], x2[[1]], dx[[1]]},
                                 {y, x1[[2]], x2[[2]], dx[[2]]}];
-      ToDataRegion[newData, x1, dx, VariableName -> GetVariableName[d], Time -> GetTime[d]],
+      MakeDataRegion[newData, GetVariableName[d], Dimensions[newData], x1, dx, GetTime[d]],
 
       Error["Cannot resample DataRegions of dimension other than 2"]]
   ];
