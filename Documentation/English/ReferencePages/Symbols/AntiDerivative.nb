@@ -11,29 +11,29 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTableInterval",
+ ButtonBox["AntiDerivative",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/DataTableInterval"]
+  ButtonData->"paclet:nrmma/ref/AntiDerivative"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["DataTableInterval", "ObjectName"],
+Cell["AntiDerivative", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["DataTableInterval",
+       ButtonBox["AntiDerivative",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/DataTableInterval"], "[", 
+        ButtonData->"paclet:nrmma/ref/AntiDerivative"], "[", 
        StyleBox[
         RowBox[{"d", ",", " ", 
          RowBox[{"{", 
-          RowBox[{"x1", ",", " ", "x2"}], "}"}]}], "TI"], "]"}]], 
+          RowBox[{"x", ",", " ", "f"}], "}"}]}], "TI"], "]"}]], 
       "InlineFormula"],
-     "\[LineSeparator]returns a subset of the DataTable d in the range [x1, \
-x2)."
+     "\[LineSeparator]returns the first integral, I, of the DataTable d, with \
+the integration constant chosen such that I[x] = f."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -61,9 +61,8 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Interval", 
-    RowBox[{"{", 
-     RowBox[{"Closed", ",", " ", "Open"}], "}"}], Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "InterpolationOrder", "3", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -86,23 +85,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"DataTableInterval",
+WindowTitle->"AntiDerivative",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {
-     "DataTableInterval", "DATATABLEINTERVAL", "datatableinterval"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "DataTableInterval[d, {x1, x2}] returns a subset of the DataTable d in \
-the range [x1, x2).", 
-    "synonyms" -> {
-     "DataTableInterval", "DATATABLEINTERVAL", "datatableinterval"}, "title" -> 
-    "DataTableInterval", "windowTitle" -> "DataTableInterval", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/DataTableInterval"}, "SearchTextTranslated" -> 
+    "keywords" -> {"AntiDerivative", "ANTIDERIVATIVE", "antiderivative"}, 
+    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
+    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
+    "AntiDerivative[d, {x, f}] returns the first integral, I, of the \
+DataTable d, with the integration constant chosen such that I[x] = f.", 
+    "synonyms" -> {"AntiDerivative", "ANTIDERIVATIVE", "antiderivative"}, 
+    "title" -> "AntiDerivative", "windowTitle" -> "AntiDerivative", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/AntiDerivative"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

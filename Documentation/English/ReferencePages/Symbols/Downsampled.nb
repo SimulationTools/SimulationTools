@@ -7,41 +7,14 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Downsampled",
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/ref/Downsampled"]
 }], "LinkTrail"],
-
-Cell[BoxData[GridBox[{
-   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataTable"]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"], 
-       RowBox[{"Data", " ", "Representations"}]:>Documentation`HelpLookup[
-       "paclet:nrmma/guide/Data Representations"]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]"
-    }], "AnchorBar"]}
-  }]], "AnchorBarGrid"],
 
 Cell[CellGroupData[{
 
@@ -77,120 +50,6 @@ element in the direction k."
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["EXAMPLES",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "PrimaryExamplesSection",
- CellTags->"PrimaryExamplesSection"],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Basic Examples",
- "\[NonBreakingSpace]\[NonBreakingSpace]",
- Cell["(3)", "ExampleCount"]
-}], "ExampleSection"],
-
-Cell[CellGroupData[{
-
-Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3},{0.4,0.2}}]", "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
- CellLabel->"Out[1]:= "]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["d2 = Downsampled[d,2]", "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
- CellLabel->"Out[1]:= "]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["ToList[d2]", "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[1]:= "]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[ButtonBox["SEE ALSO",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "SeeAlsoSection"],
-
-Cell[TextData[{
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataTable",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataTable"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "SeeAlso"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[ButtonBox["MORE ABOUT",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "MoreAboutSection"],
-
-Cell[TextData[ButtonBox["nrmma",
- BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"],
-
-Cell[TextData[ButtonBox["Data Representations",
- BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/Data Representations"]], "MoreAbout"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[" ", "FooterCell"],
 
 Cell[BoxData[""]]
@@ -208,8 +67,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"Downsampled", "DOWNSAMPLED", "downsampled"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
     "Downsampled[d, n] returns a version of d with only every nth element.\n\
 Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, \
 n2, ...}-th element in the direction k.", 

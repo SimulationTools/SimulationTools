@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/Phase"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the phase of the complex variable in DataTable d. \
- The resulting phase will be continuous for smooth enough input data."
+ The resulting phase will be continuous for sufficiently smooth input data."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -55,7 +55,7 @@ TaggingRules->{
     True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
     "DataTable", "status" -> "None", "summary" -> 
     "Phase[d] gives the phase of the complex variable in DataTable d.  The \
-resulting phase will be continuous for smooth enough input data.", 
+resulting phase will be continuous for sufficiently smooth input data.", 
     "synonyms" -> {"Phase", "PHASE", "phase"}, "title" -> "Phase", 
     "windowTitle" -> "Phase", "type" -> "Symbol", "uri" -> "nrmma/ref/Phase"},
    "SearchTextTranslated" -> "", "LinkTrails" -> ""},

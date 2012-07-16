@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["CoordinateRanges",
   BaseStyle->{"Link", "LinkTrail"},
@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/CoordinateRanges"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the data range of a DataRegion. This is a list \
+     "\[LineSeparator]gives the coordinates of the edges of d. This is a list \
 of {min,max} pairs, each corresponding to one dimension of d."
     }]]}
   }]], "Usage"]
@@ -54,9 +54,9 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {
      "CoordinateRanges", "COORDINATERANGES", "coordinateranges"}, "index" -> 
-    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
-    "CoordinateRanges[d] returns the data range of a DataRegion. This is a \
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "CoordinateRanges[d] gives the coordinates of the edges of d. This is a \
 list of {min,max} pairs, each corresponding to one dimension of d.", 
     "synonyms" -> {
      "CoordinateRanges", "COORDINATERANGES", "coordinateranges"}, "title" -> 

@@ -7,30 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["MapIndVar",
+ ButtonBox["Sub",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/MapIndVar"]
+  ButtonData->"paclet:nrmma/ref/Sub"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["MapIndVar", "ObjectName"],
+Cell["Sub", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["MapIndVar",
+       ButtonBox["Sub",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/MapIndVar"], "[", 
+        ButtonData->"paclet:nrmma/ref/Sub"], "[", 
        StyleBox[
-        RowBox[{"f", ",", " ", "d"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]maps f over the independent variable of the DataTable \
-d"
+        RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]subtracts d2 from d1 after they have been resampled \
+onto the intersection of their bounding boxes."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -46,21 +46,19 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"MapIndVar",
+WindowTitle->"Sub",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
-    "keywords" -> {"MapIndVar", "MAPINDVAR", "mapindvar"}, "index" -> True, 
-    "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "MapIndVar[f, d] maps f over the independent variable of the DataTable d",
-     "synonyms" -> {"MapIndVar", "MAPINDVAR", "mapindvar"}, "title" -> 
-    "MapIndVar", "windowTitle" -> "MapIndVar", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/MapIndVar"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+   "context" -> "nrmma`", "keywords" -> {"Sub", "SUB", "sub"}, "index" -> 
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "Sub[d1, d2] subtracts d2 from d1 after they have been resampled onto the \
+intersection of their bounding boxes.", "synonyms" -> {"Sub", "SUB", "sub"}, 
+    "title" -> "Sub", "windowTitle" -> "Sub", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Sub"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

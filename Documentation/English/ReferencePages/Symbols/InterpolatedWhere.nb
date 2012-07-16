@@ -11,29 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["FilterDCT",
+ ButtonBox["InterpolatedWhere",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/FilterDCT"]
+  ButtonData->"paclet:nrmma/ref/InterpolatedWhere"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["FilterDCT", "ObjectName"],
+Cell["InterpolatedWhere", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["FilterDCT",
+       ButtonBox["InterpolatedWhere",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/FilterDCT"], "[", 
+        ButtonData->"paclet:nrmma/ref/InterpolatedWhere"], "[", 
        StyleBox[
-        RowBox[{
-        "d", ",", " ", "numModes", ",", " ", "range1", ",", " ", "range2"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]filters the data in d using a discrete fourier \
-transform, allowing a maximum of numModes modes. Only data in range1 is used \
-in filtering and only data in range2 is actually returned filtered."
+        RowBox[{"d", ",", " ", "f"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a new DataTable where the elements of d where \
+the function returns true have been replaced by interpolated values."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -49,23 +46,24 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"FilterDCT",
+WindowTitle->"InterpolatedWhere",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"FilterDCT", "FILTERDCT", "filterdct"}, "index" -> True, 
-    "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
+    "keywords" -> {
+     "InterpolatedWhere", "INTERPOLATEDWHERE", "interpolatedwhere"}, "index" -> 
+    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
     "DataTable", "status" -> "None", "summary" -> 
-    "FilterDCT[d, numModes, range1, range2] filters the data in d using a \
-discrete fourier transform, allowing a maximum of numModes modes. Only data \
-in range1 is used in filtering and only data in range2 is actually returned \
-filtered.", "synonyms" -> {"FilterDCT", "FILTERDCT", "filterdct"}, "title" -> 
-    "FilterDCT", "windowTitle" -> "FilterDCT", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/FilterDCT"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "InterpolatedWhere[d, f] returns a new DataTable where the elements of d \
+where the function returns true have been replaced by interpolated values.", 
+    "synonyms" -> {
+     "InterpolatedWhere", "INTERPOLATEDWHERE", "interpolatedwhere"}, "title" -> 
+    "InterpolatedWhere", "windowTitle" -> "InterpolatedWhere", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/InterpolatedWhere"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

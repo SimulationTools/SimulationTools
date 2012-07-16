@@ -7,29 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["AbsOfPhase",
+ ButtonBox["Shifted",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/AbsOfPhase"]
+  ButtonData->"paclet:nrmma/ref/Shifted"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["AbsOfPhase", "ObjectName"],
+Cell["Shifted", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["AbsOfPhase",
+       ButtonBox["Shifted",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/AbsOfPhase"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]uses FunctionOfPhase to construct a DataTable from d \
-consisting of its Abs as a function of its Phase."
+        ButtonData->"paclet:nrmma/ref/Shifted"], "[", 
+       StyleBox[
+        RowBox[{"d", ",", " ", "delta"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a copy of d with the coordinates shifted by \
+delta."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +46,20 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"AbsOfPhase",
+WindowTitle->"Shifted",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
-    "keywords" -> {"AbsOfPhase", "ABSOFPHASE", "absofphase"}, "index" -> True,
-     "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "AbsOfPhase[d] uses FunctionOfPhase to construct a DataTable from d \
-consisting of its Abs as a function of its Phase.", 
-    "synonyms" -> {"AbsOfPhase", "ABSOFPHASE", "absofphase"}, "title" -> 
-    "AbsOfPhase", "windowTitle" -> "AbsOfPhase", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/AbsOfPhase"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", "keywords" -> {"Shifted", "SHIFTED", "shifted"}, 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
+    "Shifted[d, delta] returns a copy of d with the coordinates shifted by \
+delta.", "synonyms" -> {"Shifted", "SHIFTED", "shifted"}, "title" -> 
+    "Shifted", "windowTitle" -> "Shifted", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Shifted"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

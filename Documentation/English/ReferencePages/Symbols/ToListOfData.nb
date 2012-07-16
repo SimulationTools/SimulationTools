@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ToListOfData",
   BaseStyle->{"Link", "LinkTrail"},
@@ -17,7 +17,8 @@ Cell[TextData[{
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["DATAREPRESENTATIONS PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
@@ -61,16 +62,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ToListOfData"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a list of the data part of the DataTable d."
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["ToListOfData",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToListOfData"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the N-dimensional array of data in DataRegion d."
+     "\[LineSeparator]returns a List of the data part of d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -105,7 +97,15 @@ Cell["dt = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -278,10 +278,9 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"ToListOfData", "TOLISTOFDATA", "tolistofdata"}, "index" -> 
-    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
-    "ToListOfData[d] returns a list of the data part of the DataTable d.\n\
-ToListOfData[d] returns the N-dimensional array of data in DataRegion d.", 
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "ToListOfData[d] returns a List of the data part of d.", 
     "synonyms" -> {"ToListOfData", "TOLISTOFDATA", "tolistofdata"}, "title" -> 
     "ToListOfData", "windowTitle" -> "ToListOfData", "type" -> "Symbol", 
     "uri" -> "nrmma/ref/ToListOfData"}, "SearchTextTranslated" -> "", 

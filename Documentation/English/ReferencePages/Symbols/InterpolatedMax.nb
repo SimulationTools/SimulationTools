@@ -11,29 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["AddAttributes",
+ ButtonBox["InterpolatedMax",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/AddAttributes"]
+  ButtonData->"paclet:nrmma/ref/InterpolatedMax"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["AddAttributes", "ObjectName"],
+Cell["InterpolatedMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["AddAttributes",
+       ButtonBox["InterpolatedMax",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/AddAttributes"], "[", 
-       StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"attrname", " ", "->", " ", "attrvalue"}], ",", " ", 
-           "..."}], "}"}]}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a copy of DataTable d with new attributes added."
+        ButtonData->"paclet:nrmma/ref/InterpolatedMax"], "[", 
+       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the maximum value of the interpolant of a \
+DataTable d"
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -49,21 +45,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"AddAttributes",
+WindowTitle->"InterpolatedMax",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"AddAttributes", "ADDATTRIBUTES", "addattributes"}, 
+    "keywords" -> {"InterpolatedMax", "INTERPOLATEDMAX", "interpolatedmax"}, 
     "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
     "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "AddAttributes[d, {attrname -> attrvalue, ...}] returns a copy of \
-DataTable d with new attributes added.", 
-    "synonyms" -> {"AddAttributes", "ADDATTRIBUTES", "addattributes"}, 
-    "title" -> "AddAttributes", "windowTitle" -> "AddAttributes", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/AddAttributes"}, "SearchTextTranslated" -> 
+    "InterpolatedMax[d] returns the maximum value of the interpolant of a \
+DataTable d", 
+    "synonyms" -> {"InterpolatedMax", "INTERPOLATEDMAX", "interpolatedmax"}, 
+    "title" -> "InterpolatedMax", "windowTitle" -> "InterpolatedMax", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/InterpolatedMax"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

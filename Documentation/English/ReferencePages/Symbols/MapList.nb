@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["MapList",
   BaseStyle->{"Link", "LinkTrail"},
@@ -17,7 +17,8 @@ Cell[TextData[{
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["DATAREPRESENTATIONS PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
@@ -57,8 +58,8 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/MapList"], "[", 
        StyleBox[
-        RowBox[{"f", ",", "d"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]maps f over the {t,f} pairs in the DataTable d."
+        RowBox[{"f", ",", " ", "d"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]maps f over the coordinates and values in d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -93,7 +94,15 @@ Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -103,7 +112,19 @@ Cell["d2 = MapList[f,d]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -216,9 +237,10 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"MapList", "MAPLIST", "maplist"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "MapList[f,d] maps f over the {t,f} pairs in the DataTable d.", 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
+    "MapList[f, d] maps f over the coordinates and values in d.", 
     "synonyms" -> {"MapList", "MAPLIST", "maplist"}, "title" -> "MapList", 
     "windowTitle" -> "MapList", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/MapList"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},

@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["CoordinateSpacings",
   BaseStyle->{"Link", "LinkTrail"},
@@ -28,8 +28,8 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/CoordinateSpacings"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a list giving the spacing of the data in each \
-dimension of the DataRegion d."
+     "\[LineSeparator]gives a List of the spacing of the coordinates in each \
+dimension of d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -54,10 +54,11 @@ TaggingRules->{
    "context" -> "nrmma`", 
     "keywords" -> {
      "CoordinateSpacings", "COORDINATESPACINGS", "coordinatespacings"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
-    "CoordinateSpacings[d] returns a list giving the spacing of the data in \
-each dimension of the DataRegion d.", 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
+    "CoordinateSpacings[d] gives a List of the spacing of the coordinates in \
+each dimension of d.", 
     "synonyms" -> {
      "CoordinateSpacings", "COORDINATESPACINGS", "coordinatespacings"}, 
     "title" -> "CoordinateSpacings", "windowTitle" -> "CoordinateSpacings", 

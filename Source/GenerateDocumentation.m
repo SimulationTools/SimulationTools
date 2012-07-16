@@ -1,6 +1,6 @@
 << nrmma`;
 
-<< DocumentationBuilder`;
+<< ApplicationTools`;
 
 RunDirectory = $NRMMATestRunDirectory;
 
@@ -13,12 +13,13 @@ packages =
   "CactusTimers",
   "CarpetHDF5Plot",
   "CarpetHDF5",
-(*  "CarpetIOHDF5",*)
+  "CarpetIOHDF5",
   "CircularPN",
   "Convergence",
   "CoordinateTransformations",
   "DataAnalysis",
   "DataRegion",
+  "DataRepresentations",
   "DataTable",
   "Empty",
   "Error",

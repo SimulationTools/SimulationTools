@@ -11,30 +11,20 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["IntegrateDataTable",
+ ButtonBox["RestrictedToInterval",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/IntegrateDataTable"]
+  ButtonData->"paclet:nrmma/ref/RestrictedToInterval"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["IntegrateDataTable", "ObjectName"],
+Cell["RestrictedToInterval", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["IntegrateDataTable",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/IntegrateDataTable"], "[", 
-       StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"{", 
-          RowBox[{"x", ",", " ", "f"}], "}"}]}], "TI"], "]"}]], 
-      "InlineFormula"],
-     "\[LineSeparator]returns the first integral, I, of the DataTable d, with \
-the integration constant chosen such that I[x] = f."
-    }]]}
+   {"", Cell["\<\
+RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d \
+in the range [x1, x2).\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -61,8 +51,9 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "InterpolationOrder", "3", Cell[
-    "", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Interval", 
+    RowBox[{"{", 
+     RowBox[{"Closed", ",", " ", "Closed"}], "}"}], Cell["", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -85,7 +76,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"IntegrateDataTable",
+WindowTitle->"RestrictedToInterval",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -93,16 +84,17 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "IntegrateDataTable", "INTEGRATEDATATABLE", "integratedatatable"}, 
+     "RestrictedToInterval", "RESTRICTEDTOINTERVAL", "restrictedtointerval"}, 
     "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
     "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "IntegrateDataTable[d, {x, f}] returns the first integral, I, of the \
-DataTable d, with the integration constant chosen such that I[x] = f.", 
+    "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the \
+DataTable d in the range [x1, x2).", 
     "synonyms" -> {
-     "IntegrateDataTable", "INTEGRATEDATATABLE", "integratedatatable"}, 
-    "title" -> "IntegrateDataTable", "windowTitle" -> "IntegrateDataTable", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/IntegrateDataTable"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+     "RestrictedToInterval", "RESTRICTEDTOINTERVAL", "restrictedtointerval"}, 
+    "title" -> "RestrictedToInterval", "windowTitle" -> 
+    "RestrictedToInterval", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/RestrictedToInterval"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

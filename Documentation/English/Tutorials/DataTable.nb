@@ -142,7 +142,15 @@ Cell[BoxData[
  CellLabel->"In[3]:="],
 
 Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "11", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
  CellLabel->"Out[3]="]
 }, Open  ]],
 

@@ -7,29 +7,28 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ListAttributes",
+ ButtonBox["Endpoints",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ListAttributes"]
+  ButtonData->"paclet:nrmma/ref/Endpoints"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ListAttributes", "ObjectName"],
+Cell["Endpoints", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ListAttributes",
+       ButtonBox["Endpoints",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ListAttributes"], "[", 
+        ButtonData->"paclet:nrmma/ref/Endpoints"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a list of the attributes in the DataTable d in \
-the form {attrname -> attrvalue, ...}."
+     "\[LineSeparator]gives the coordinates of the first and last points of d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,22 +44,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ListAttributes",
+WindowTitle->"Endpoints",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ListAttributes", "LISTATTRIBUTES", "listattributes"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "ListAttributes[d] returns a list of the attributes in the DataTable d in \
-the form {attrname -> attrvalue, ...}.", 
-    "synonyms" -> {"ListAttributes", "LISTATTRIBUTES", "listattributes"}, 
-    "title" -> "ListAttributes", "windowTitle" -> "ListAttributes", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ListAttributes"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "keywords" -> {"Endpoints", "ENDPOINTS", "endpoints"}, "index" -> True, 
+    "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "Endpoints[d] gives the coordinates of the first and last points of d.", 
+    "synonyms" -> {"Endpoints", "ENDPOINTS", "endpoints"}, "title" -> 
+    "Endpoints", "windowTitle" -> "Endpoints", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Endpoints"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

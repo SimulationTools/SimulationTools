@@ -11,26 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["IntegrateDataTableZeroEnd",
+ ButtonBox["CoordinateAtInterpolatedMax",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/IntegrateDataTableZeroEnd"]
+  ButtonData->"paclet:nrmma/ref/CoordinateAtInterpolatedMax"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["IntegrateDataTableZeroEnd", "ObjectName"],
+Cell["CoordinateAtInterpolatedMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["IntegrateDataTableZeroEnd",
+       ButtonBox["CoordinateAtInterpolatedMax",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/IntegrateDataTableZeroEnd"], "[", 
+        ButtonData->"paclet:nrmma/ref/CoordinateAtInterpolatedMax"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the first integral, I, of the DataTable d, with \
-the integration constant chosen such that I[x2] = 0, where x2 is the highest \
-value of the independent variable in d."
+     "\[LineSeparator]finds the time at which a maximum occurs in the range \
+of the DataTable d. This time is interpolated and may not coincide with a \
+data point in the DataTable."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -46,7 +46,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"IntegrateDataTableZeroEnd",
+WindowTitle->"CoordinateAtInterpolatedMax",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -54,18 +54,19 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "IntegrateDataTableZeroEnd", "INTEGRATEDATATABLEZEROEND", 
-      "integratedatatablezeroend"}, "index" -> True, "label" -> 
+     "CoordinateAtInterpolatedMax", "COORDINATEATINTERPOLATEDMAX", 
+      "coordinateatinterpolatedmax"}, "index" -> True, "label" -> 
     "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> "DataTable", 
     "status" -> "None", "summary" -> 
-    "IntegrateDataTableZeroEnd[d] returns the first integral, I, of the \
-DataTable d, with the integration constant chosen such that I[x2] = 0, where \
-x2 is the highest value of the independent variable in d.", 
+    "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs \
+in the range of the DataTable d. This time is interpolated and may not \
+coincide with a data point in the DataTable.", 
     "synonyms" -> {
-     "IntegrateDataTableZeroEnd", "INTEGRATEDATATABLEZEROEND", 
-      "integratedatatablezeroend"}, "title" -> "IntegrateDataTableZeroEnd", 
-    "windowTitle" -> "IntegrateDataTableZeroEnd", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/IntegrateDataTableZeroEnd"}, "SearchTextTranslated" -> "", 
+     "CoordinateAtInterpolatedMax", "COORDINATEATINTERPOLATEDMAX", 
+      "coordinateatinterpolatedmax"}, "title" -> 
+    "CoordinateAtInterpolatedMax", "windowTitle" -> 
+    "CoordinateAtInterpolatedMax", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/CoordinateAtInterpolatedMax"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

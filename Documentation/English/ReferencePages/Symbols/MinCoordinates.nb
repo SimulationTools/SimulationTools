@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["MinCoordinates",
   BaseStyle->{"Link", "LinkTrail"},
@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/MinCoordinates"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns a list of the coordinates of the first point in \
-each direction in the DataRegion d."
+each direction in d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -53,10 +53,11 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"MinCoordinates", "MINCOORDINATES", "mincoordinates"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
     "MinCoordinates[d] returns a list of the coordinates of the first point \
-in each direction in the DataRegion d.", 
+in each direction in d.", 
     "synonyms" -> {"MinCoordinates", "MINCOORDINATES", "mincoordinates"}, 
     "title" -> "MinCoordinates", "windowTitle" -> "MinCoordinates", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/MinCoordinates"}, "SearchTextTranslated" -> 

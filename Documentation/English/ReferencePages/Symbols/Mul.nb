@@ -7,29 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Spacing",
+ ButtonBox["Mul",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Spacing"]
+  ButtonData->"paclet:nrmma/ref/Mul"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Spacing", "ObjectName"],
+Cell["Mul", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Spacing",
+       ButtonBox["Mul",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Spacing"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the spacing of the independent variable in \
-DataTable d.  This is a constant for the DataTable."
+        ButtonData->"paclet:nrmma/ref/Mul"], "[", 
+       StyleBox[
+        RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]multiplies d1 by d2 after they have been resampled onto \
+the intersection of their bounding boxes."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,20 +46,19 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Spacing",
+WindowTitle->"Mul",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Spacing", "SPACING", "spacing"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "Spacing[d] returns the spacing of the independent variable in DataTable \
-d.  This is a constant for the DataTable.", 
-    "synonyms" -> {"Spacing", "SPACING", "spacing"}, "title" -> "Spacing", 
-    "windowTitle" -> "Spacing", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Spacing"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", "keywords" -> {"Mul", "MUL", "mul"}, "index" -> 
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "Mul[d1, d2] multiplies d1 by d2 after they have been resampled onto the \
+intersection of their bounding boxes.", "synonyms" -> {"Mul", "MUL", "mul"}, 
+    "title" -> "Mul", "windowTitle" -> "Mul", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Mul"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

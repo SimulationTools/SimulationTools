@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ToList",
   BaseStyle->{"Link", "LinkTrail"},
@@ -17,7 +17,8 @@ Cell[TextData[{
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["DATAREPRESENTATIONS PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
@@ -56,18 +57,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ToList"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the list content of the DataTable d as \
-{{x1,f1},{x2,f2},...,{xn,fn}}."
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["ToList",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToList"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the N-dimensional array of coordinates and data \
-in DataRegion d."
+     "\[LineSeparator]returns the contents of d as a List."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -138,7 +128,15 @@ Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"\<\"DataTable\"\>", "[", "\<\"...\"\>", "]"}]], "Output",
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -238,11 +236,9 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"ToList", "TOLIST", "tolist"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "ToList[d] returns the list content of the DataTable d as \
-{{x1,f1},{x2,f2},...,{xn,fn}}.\nToList[d] returns the N-dimensional array of \
-coordinates and data in DataRegion d.", 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> "ToList[d] returns the contents of d as a List.", 
     "synonyms" -> {"ToList", "TOLIST", "tolist"}, "title" -> "ToList", 
     "windowTitle" -> "ToList", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ToList"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},

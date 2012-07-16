@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["GridNorm",
   BaseStyle->{"Link", "LinkTrail"},
@@ -52,8 +52,9 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"GridNorm", "GRIDNORM", "gridnorm"}, 
-    "index" -> True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en",
-     "paclet" -> "DataRegion", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
     "GridNorm[d] returns the L2,dx norm of d. This is the discrete \
 approximation to the L2 norm.", 
     "synonyms" -> {"GridNorm", "GRIDNORM", "gridnorm"}, "title" -> "GridNorm",

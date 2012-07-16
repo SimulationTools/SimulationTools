@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Div",
   BaseStyle->{"Link", "LinkTrail"},
@@ -29,10 +29,8 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/Div"], "[", 
        StyleBox[
         RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a DataTable corresponding to d1 / d2, where the \
-dependent variables in d1 and d2 have been divided.  The DataTables are \
-resampled and intersected in order to give a useful result if the ranges or \
-spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2"
+     "\[LineSeparator]divides d1 by d2 after they have been resampled onto \
+the intersection of their bounding boxes."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -55,15 +53,12 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"Div", "DIV", "div"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "Div[d1, d2] returns a DataTable corresponding to d1 / d2, where the \
-dependent variables in d1 and d2 have been divided.  The DataTables are \
-resampled and intersected in order to give a useful result if the ranges or \
-spacings do not match.  Useful as the infix form; i.e. d1 ~Div~ d2", 
-    "synonyms" -> {"Div", "DIV", "div"}, "title" -> "Div", "windowTitle" -> 
-    "Div", "type" -> "Symbol", "uri" -> "nrmma/ref/Div"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "Div[d1, d2] divides d1 by d2 after they have been resampled onto the \
+intersection of their bounding boxes.", "synonyms" -> {"Div", "DIV", "div"}, 
+    "title" -> "Div", "windowTitle" -> "Div", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/Div"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

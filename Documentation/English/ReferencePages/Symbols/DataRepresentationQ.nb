@@ -7,30 +7,28 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["MakeUniform",
+ ButtonBox["DataRepresentationQ",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/MakeUniform"]
+  ButtonData->"paclet:nrmma/ref/DataRepresentationQ"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["MakeUniform", "ObjectName"],
+Cell["DataRepresentationQ", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["MakeUniform",
+       ButtonBox["DataRepresentationQ",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/MakeUniform"], "[", 
+        ButtonData->"paclet:nrmma/ref/DataRepresentationQ"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a DataTable with a uniform grid spacing from a \
-DataTable with a nonuniform grid spacing.  This is accomplished via \
-interpolation through ResampleDataTable."
+     "\[LineSeparator]returns True if d is a DataRepresentation type."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -46,23 +44,24 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"MakeUniform",
+WindowTitle->"DataRepresentationQ",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"MakeUniform", "MAKEUNIFORM", "makeuniform"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "MakeUniform[d] returns a DataTable with a uniform grid spacing from a \
-DataTable with a nonuniform grid spacing.  This is accomplished via \
-interpolation through ResampleDataTable.", 
-    "synonyms" -> {"MakeUniform", "MAKEUNIFORM", "makeuniform"}, "title" -> 
-    "MakeUniform", "windowTitle" -> "MakeUniform", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/MakeUniform"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "keywords" -> {
+     "DataRepresentationQ", "DATAREPRESENTATIONQ", "datarepresentationq"}, 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
+    "DataRepresentationQ[d] returns True if d is a DataRepresentation type.", 
+    "synonyms" -> {
+     "DataRepresentationQ", "DATAREPRESENTATIONQ", "datarepresentationq"}, 
+    "title" -> "DataRepresentationQ", "windowTitle" -> "DataRepresentationQ", 
+    "type" -> "Symbol", "uri" -> "nrmma/ref/DataRepresentationQ"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

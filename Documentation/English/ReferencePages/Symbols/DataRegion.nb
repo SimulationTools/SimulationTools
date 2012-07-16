@@ -24,9 +24,6 @@ Cell[BoxData[GridBox[{
         StripOnInput->False], {"Coordinate":>Documentation`HelpLookup[
        "paclet:nrmma/ref/Coordinate"], "CoordinateOutline":>
        Documentation`HelpLookup["paclet:nrmma/ref/CoordinateOutline"], 
-       "CoordinateRanges":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/CoordinateRanges"], "CoordinateSpacings":>
-       Documentation`HelpLookup["paclet:nrmma/ref/CoordinateSpacings"], 
        "DataRegion":>Documentation`HelpLookup["paclet:nrmma/ref/DataRegion"], 
        "DataRegionArrayPlot":>Documentation`HelpLookup[
        "paclet:nrmma/ref/DataRegionArrayPlot"], "DataRegionContourPlot":>
@@ -54,20 +51,15 @@ Cell[BoxData[GridBox[{
        "GetSpacing":>Documentation`HelpLookup["paclet:nrmma/ref/GetSpacing"], 
        "GetTime":>Documentation`HelpLookup["paclet:nrmma/ref/GetTime"], 
        "GetVariableName":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/GetVariableName"], "GridNorm":>
-       Documentation`HelpLookup["paclet:nrmma/ref/GridNorm"], 
-       "MakeDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MakeDataRegion"], "MapDataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MapDataRegion"], 
-       "MapThreadDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MapThreadDataRegion"], "MaxCoordinates":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MaxCoordinates"], 
+       "paclet:nrmma/ref/GetVariableName"], "MakeDataRegion":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MakeDataRegion"], 
+       "MapDataRegion":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/MapDataRegion"], "MapThreadDataRegion":>
+       Documentation`HelpLookup["paclet:nrmma/ref/MapThreadDataRegion"], 
        "MergeDataRegions":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MergeDataRegions"], "MinCoordinates":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MinCoordinates"], "NormL2":>
+       "paclet:nrmma/ref/MergeDataRegions"], "NormL2":>
        Documentation`HelpLookup["paclet:nrmma/ref/NormL2"], "Outline":>
-       Documentation`HelpLookup["paclet:nrmma/ref/Outline"], "Resampled":>
-       Documentation`HelpLookup["paclet:nrmma/ref/Resampled"], 
+       Documentation`HelpLookup["paclet:nrmma/ref/Outline"], 
        "ResampleDataRegion":>Documentation`HelpLookup[
        "paclet:nrmma/ref/ResampleDataRegion"], "ResampleDataRegions":>
        Documentation`HelpLookup["paclet:nrmma/ref/ResampleDataRegions"], 
@@ -79,10 +71,7 @@ Cell[BoxData[GridBox[{
        "paclet:nrmma/ref/TableToDataRegion"], "TimeDerivative":>
        Documentation`HelpLookup["paclet:nrmma/ref/TimeDerivative"], 
        "ToDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToDataRegion"], "ToListOfCoordinates":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ToListOfCoordinates"], 
-       "ToListOfData":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToListOfData"], "VariableName":>
+       "paclet:nrmma/ref/ToDataRegion"], "VariableName":>
        Documentation`HelpLookup["paclet:nrmma/ref/VariableName"]},
        Appearance->None,
        MenuAppearance->Automatic]],
@@ -399,26 +388,6 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["CoordinateRanges",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/CoordinateRanges"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["CoordinateSpacings",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/CoordinateSpacings"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
    ButtonBox["DataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/DataRegion"],
@@ -619,16 +588,6 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["GridNorm",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GridNorm"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
    ButtonBox["MakeDataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/MakeDataRegion"],
@@ -659,29 +618,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["MaxCoordinates",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/MaxCoordinates"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
    ButtonBox["MergeDataRegions",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/MergeDataRegions"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["MinCoordinates",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/MinCoordinates"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -702,16 +641,6 @@ Cell[TextData[{
    ButtonBox["Outline",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/Outline"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["Resampled",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/Resampled"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -802,26 +731,6 @@ Cell[TextData[{
    ButtonBox["ToDataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/ToDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ToListOfCoordinates",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ToListOfData",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToListOfData"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 

@@ -11,26 +11,26 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["InvertDataTable",
+ ButtonBox["CoordinateAtMax",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/InvertDataTable"]
+  ButtonData->"paclet:nrmma/ref/CoordinateAtMax"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["InvertDataTable", "ObjectName"],
+Cell["CoordinateAtMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["InvertDataTable",
+       ButtonBox["CoordinateAtMax",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/InvertDataTable"], "[", 
+        ButtonData->"paclet:nrmma/ref/CoordinateAtMax"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns a DataTable in which the dependent and \
-independent variable of the DataTable d are swapped.  Note that this might \
-lead to a non-monotonic (and hence invalid) DataTable."
+     "\[LineSeparator]finds the coordinate at which a maximum occurs in the \
+DataTable d. This is guaranteed to coincide with a data point in the \
+DataTable."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -46,22 +46,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"InvertDataTable",
+WindowTitle->"CoordinateAtMax",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"InvertDataTable", "INVERTDATATABLE", "invertdatatable"}, 
+    "keywords" -> {"CoordinateAtMax", "COORDINATEATMAX", "coordinateatmax"}, 
     "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
     "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "InvertDataTable[d] returns a DataTable in which the dependent and \
-independent variable of the DataTable d are swapped.  Note that this might \
-lead to a non-monotonic (and hence invalid) DataTable.", 
-    "synonyms" -> {"InvertDataTable", "INVERTDATATABLE", "invertdatatable"}, 
-    "title" -> "InvertDataTable", "windowTitle" -> "InvertDataTable", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/InvertDataTable"}, "SearchTextTranslated" -> 
+    "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in the \
+DataTable d. This is guaranteed to coincide with a data point in the \
+DataTable.", 
+    "synonyms" -> {"CoordinateAtMax", "COORDINATEATMAX", "coordinateatmax"}, 
+    "title" -> "CoordinateAtMax", "windowTitle" -> "CoordinateAtMax", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/CoordinateAtMax"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

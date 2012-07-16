@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Resampled",
   BaseStyle->{"Link", "LinkTrail"},
@@ -61,8 +61,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"Resampled", "RESAMPLED", "resampled"}, "index" -> True, 
-    "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
+    "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
     "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a \
 DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, \
 dy, ...}.", "synonyms" -> {"Resampled", "RESAMPLED", "resampled"}, "title" -> 

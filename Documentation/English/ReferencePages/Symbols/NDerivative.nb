@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["NDerivative",
   BaseStyle->{"Link", "LinkTrail"},
@@ -25,9 +25,9 @@ Cell[BoxData[GridBox[{
      Cell[TextData[ButtonBox["NDerivative",
       BaseStyle->"Link",
       ButtonData->"paclet:nrmma/ref/NDerivative"]], "InlineFormula"],
-     "\[LineSeparator][derivs][d] returns a numerical derivative of the \
-DataRegion d. The derivs argument should be of the same form as in the first \
-argument of Derivative."
+     "\[LineSeparator][derivs][d] returns a numerical derivative of d. The \
+derivs argument should be of the same form as in the first argument of \
+Derivative."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -51,14 +51,14 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
-    "NDerivative[derivs][d] returns a numerical derivative of the DataRegion \
-d. The derivs argument should be of the same form as in the first argument of \
-Derivative.", "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, 
-    "title" -> "NDerivative", "windowTitle" -> "NDerivative", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "",
-   "LinkTrails" -> ""},
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "NDerivative[derivs][d] returns a numerical derivative of d. The derivs \
+argument should be of the same form as in the first argument of Derivative.", 
+    "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, "title" -> 
+    "NDerivative", "windowTitle" -> "NDerivative", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
