@@ -54,7 +54,7 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     radii = Select[radii, (!MatchQ[#, "value"["keyword"["extrapolated"]]]) &];
 
     If[Length[radii] === 0,
-       Print["No Psi4 radii found in metadata file of "<>runName];
+       (* Print["No Psi4 radii found in metadata file of "<>runName]; *)
        {}];
 
     Map[If[!MatchQ[#,"value"["number"[n_]|"keyword"["infinite"]]],
