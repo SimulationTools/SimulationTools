@@ -116,14 +116,17 @@ syncFile[src_String, dst_String] :=
      If[FileType[dst] === None,
         Error["File " <> src <> " could not be downloaded"]]]];
 
-NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
+Options[NRDF`Waveforms`ReadPsi4Data] = {"Section" -> "psi4t-data"};
+
+NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String,
+                            opts:OptionsPattern[]] :=
   Module[
     {md, filenames, filename, tmp,data, radPattern},
     md = ParseMetadataFile[runName];
     md = processMetadata[md];
     radPattern = If[rad==="inf", "keyword"["infinite"], "number"[rad]];
     filenames = Cases[md,
-                      "section"[___, "section_name"["keyword"["psi4t-data"]], ___,
+                      "section"[___, "section_name"["keyword"[OptionValue[Section]]], ___,
                                 "elements"[___,
                                            "element"["key"["extraction-radius"], "value"[radPattern]], ___,
                                            "element"["key"["2,2"|"2,+2"|"2, 2"],"string"[f_]],___],
