@@ -14,6 +14,7 @@ ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
 
+MinCoordinateSpacing::usage = "MinCoordinateSpacings[d] gives the smallest spacing of the coordinates in d.";
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
 CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in the DataTable d. This is guaranteed to coincide with a data point in the DataTable.";
@@ -158,6 +159,21 @@ CoordinateSpacings[d_DataTable] :=
 
   (* TODO: use Differences here *)
   {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
+];
+
+
+(**********************************************************)
+(* MinCoordinateSpacing                                   *)
+(**********************************************************)
+
+SyntaxInformation[MinCoordinateSpacing] =
+ {"ArgumentsPattern" -> {_}};
+
+MinCoordinateSpacing[d_DataTable] :=
+ Module[{ts},
+  ts = ToListOfCoordinates[d];
+
+  Min[Differences[ts]]
 ];
 
 
@@ -1003,7 +1019,7 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
 Downsample[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
 
-Spacing[d:DataTable[__]] := First[CoordinateSpacings[d]];
+Spacing[d:DataTable[__]] := MinCoordinateSpacing[d];
 
 ResampleDataTable[d:DataTable[__], dt_?NumberQ, p_Integer] :=
   Module[{t1, t2},
