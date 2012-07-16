@@ -583,7 +583,7 @@ Resampled[ds:{DataRegion[__]...}] :=
 
 (* TODO: Provide undocumented workaround functions for the SaveDefinitions/Protected issue? *)
 
-$1DPlotFunctions = {ListPlot, ListLinePlot};
+$1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
 $2DPlotFunctions = {ListDensityPlot, ArrayPlot, ListPlot3D, ListContourPlot};
 
 DataRegion /: f_Symbol[d_DataRegion, args___] :=
