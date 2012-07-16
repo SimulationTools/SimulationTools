@@ -200,7 +200,7 @@ Options[ReadCarpetIOHDF5Datasets] = {StripGhostZones -> True};
 ReadCarpetIOHDF5Datasets[file_String, {}, opts:OptionsPattern[]] := {};
 ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
  Profile["ReadCarpetIOHDF5Datasets",
- Module[{data, annots, dims, origin, spacing, name, dr, ghosts, time},
+ Module[{data, annots, dims, order, origin, spacing, name, dr, ghosts, time},
   If[Apply[Or,Map[(!StringQ[#])&, ds]],
     Error["ReadCarpetIOHDF5Datasets: expected a string dataset name, but instead got " <>ToString[ds]]];
 
@@ -212,6 +212,10 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
   annots = Annotations[file, ds];
 
   dims = Reverse /@ Dims[file, ds];
+
+  (* Data from CarpetIOHDF5 is in Fortran column-major format. Transpose to get Mathematica row-major format *)
+  order  = Reverse /@ Range /@ ArrayDepth /@ data;
+  data = MapThread[Transpose, {data, order}];
 
   origin = "origin" /. annots /. "origin" -> Undefined;
   spacing = "delta" /. annots /. "delta" -> Undefined;
