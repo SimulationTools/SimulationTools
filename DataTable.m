@@ -337,7 +337,7 @@ Resampled[d_DataTable, dt_?NumberQ, p_Integer:8] :=
 Resampled[d_DataTable, {t1_?NumberQ, t2_?NumberQ, dt_?NumberQ}, p_Integer:8] :=
  Resampled[d, {{t1, t2, dt}}, p];
 
-DataTable /: Resampled[d_DataTable, {t1_, t2_, dt_}, p_:8] :=
+DataTable /: Resampled[d_DataTable, {{t1_, t2_, dt_}}, p_:8] :=
  Module[{f, dt1, dt2},
   {dt1,dt2} = Endpoints[d];
   If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
