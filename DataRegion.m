@@ -1079,8 +1079,8 @@ TableToDataRegion[t_List] :=
   spacing = split[[2, 1, d]] - split[[1, 1, d]];
   origin = split[[1, 1, d]];
   If[d == 1,
-   ToDataRegion[Map[Last, sorted],
-    {origin}, {spacing}],
+   MakeDataRegion[Map[Last, sorted],
+    "table", {Length[sorted]}, {origin}, {spacing}, 0],
    (* else *)
    subregions =
      Map[TableToDataRegion, Map[Drop[#, {d}] &, split, {2}]];
