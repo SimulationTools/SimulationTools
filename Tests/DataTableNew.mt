@@ -3,6 +3,9 @@
 data = Table[{i, 10 + i}, {i, 10}];
 dt   = ToDataTable[data];
 
+data2 = Table[{i^2, 10 + i}, {i, 10}];
+dt2   = ToDataTable[data2];
+
 (****************************************************************)
 (* Built-in functions *)
 (****************************************************************)
@@ -59,6 +62,41 @@ Test[
       {10, 149.50000001043242}}]
     ,
     TestID->"AntiDerivative"
+]
+
+
+(****************************************************************)
+(* CoordinateSpacing                                            *)
+(****************************************************************)
+
+Test[
+    CoordinateSpacing[dt]
+    ,
+    1
+    ,
+    TestID->"CoordinateSpacing"
+]
+
+Test[
+    Catch[CoordinateSpacing[dt2],
+      ErrorString["CoordinateSpacing undefined for non-uniform DataTables."], f]
+    ,
+    f[{{}, {}}, ErrorString["CoordinateSpacing undefined for non-uniform DataTables."]]
+    ,
+    TestID->"CoordinateSpacing"
+]
+
+
+(****************************************************************)
+(* CoordinateSpacings                                           *)
+(****************************************************************)
+
+Test[
+    CoordinateSpacings[dt]
+    ,
+    {1}
+    ,
+    TestID->"CoordinateSpacings"
 ]
 
 
@@ -132,4 +170,18 @@ Test[
     ,
     TestID->"InverseFourier"
 ]
+
+
+(****************************************************************)
+(* MinCoordinateSpacing                                         *)
+(****************************************************************)
+
+Test[
+    MinCoordinateSpacing[dt2]
+    ,
+    3
+    ,
+    TestID->"MinCoordinateSpacing"
+]
+
 
