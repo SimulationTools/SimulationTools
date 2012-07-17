@@ -298,9 +298,9 @@ Protect[MapThread];
 (**********************************************************)
 
 MaxCoordinates[d_DataTable] :=
-  Module[{list = ToList[d], t1},
-    t1 = First[list][[1]];
-    {t1}];
+  Module[{list = ToList[d], t2},
+    t2 = Last[list][[1]];
+    {t2}];
 
 
 (**********************************************************)
@@ -308,9 +308,9 @@ MaxCoordinates[d_DataTable] :=
 (**********************************************************)
 
 MinCoordinates[d_DataTable] :=
-  Module[{list = ToList[d], t2},
-    t2 = Last[list][[1]];
-    {t2}];
+  Module[{list = ToList[d], t1},
+    t1 = First[list][[1]];
+    {t1}];
 
 
 (****************************************************************)
