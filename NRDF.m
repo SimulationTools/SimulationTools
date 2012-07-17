@@ -13,6 +13,7 @@ ExpectedConvergenceOrder;
 ReadMasses;
 ReadMassRatio;
 ReadTotalMass;
+NameEmailList;
 
 Begin["`Private`"];
 
@@ -205,6 +206,9 @@ ReadMetadataKey[run_String, keyPattern_] :=
 
       MatchQ[results[[1]], "string"[_]],
       results[[1,1]],
+
+      MatchQ[results[[1]], "value"["name_email_list"[___]]],
+      NameEmailList@@results[[1,1]] /. "name_email"["pname"[pname_],"email"[email_]] :> {pname,email},
 
       True,
       Error["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
