@@ -6,6 +6,7 @@ StartingFrequency;
 UsefulWaveformTime;
 HaveInfiniteRadiusWaveforms;
 ReadMetadataKey;
+HaveMetadataKey;
 ReadRuns;
 ReadResolution;
 ExpectedConvergenceOrder;
@@ -207,6 +208,22 @@ ReadMetadataKey[run_String, keyPattern_] :=
 
       True,
       Error["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
+
+HaveMetadataKey[run_String, keyPattern_] :=
+  Module[
+    {md, results},
+    md = ParseMetadataFile[run];
+    results = Cases[md,
+                 "section"[___, 
+                           "section_name"["keyword"["metadata"]],
+                           ___,
+                           "elements"[___,
+                                      "element"["key"[keyPattern], v_], 
+                                      ___]] :> v,
+                 Infinity];
+
+    Length[results] === 1];
+
 
 NRDF`InitialData`ReadADMMass[run_String] :=
   ReadMetadataKey[run, "initial-ADM-energy"];
