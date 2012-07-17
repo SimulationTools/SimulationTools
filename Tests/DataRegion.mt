@@ -153,6 +153,27 @@ Test[
 
 
 (****************************************************************)
+(* CoordinateSpacing                                            *)
+(****************************************************************)
+Test[
+    Catch[CoordinateSpacing[dr],
+      ErrorString["CoordinateSpacing can only be used with 1-dimensional DataRegions."], f]
+    ,
+    f[{{}, {}}, ErrorString["CoordinateSpacing can only be used with 1-dimensional DataRegions."]]
+    ,
+    TestID->"CoordinateSpacing n-dimensional"
+]
+
+Test[
+    CoordinateSpacing[dr[[1,1]]]
+    ,
+    0.3
+    ,
+    TestID->"CoordinateSpacing 1-dimensional"
+]
+
+
+(****************************************************************)
 (* CoordinateSpacings                                           *)
 (****************************************************************)
 Test[
