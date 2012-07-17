@@ -48,8 +48,15 @@ DataRepresentationQ[_] = False;
 SyntaxInformation[Endpoints] =
  {"ArgumentsPattern" -> {_}};
 
-Endpoints[d_?DataRepresentationQ] := First[CoordinateRanges[d]];
+Endpoints[d_?DataRepresentationQ] :=
+ Module[{ndim},
+  ndim = ArrayDepth[d];
+  If[ndim =!= 1,
+  	Error["Endpoints should only be used with 1 dimensional data representations."];
+  ];
 
+  First[CoordinateRanges[d]]
+];
 
 (**********************************************************)
 (* Add                                                    *)
