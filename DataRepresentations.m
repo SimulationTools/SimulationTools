@@ -1,6 +1,9 @@
 (* Copyright (C) 2012 Ian Hinder and Barry Wardell *)
 
-BeginPackage["DataRepresentations`"];
+BeginPackage["DataRepresentations`",
+ {
+  "Error`"
+ }];
 
 DataRepresentationQ::usage = "DataRepresentationQ[d] returns True if d is a DataRepresentation type.";
 
