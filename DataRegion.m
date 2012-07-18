@@ -551,20 +551,20 @@ Downsampled[d_DataRegion, n_List] :=
 (* Resampled                                              *)
 (**********************************************************)
 
-DataRegion /: Resampled[d_DataRegion, grid_List] :=
+DataRegion /: Resampled[d_DataRegion, grid_List, p_:3] :=
  Module[{dims, interp, vars, tmp, iterators, data},
   dims = Dimensions[grid];
   If[dims =!= {ArrayDepth[d], 3},
   	Error["Expected a list of triples for each dimension in the DataRegion."];
   ];
-  Quiet[interp = Interpolation[d];, ListInterpolation::inhr];
+  Quiet[interp = Interpolation[d, InterpolationOrder -> p];, ListInterpolation::inhr];
   vars = tmp /@ Range[ArrayDepth[d]];
   iterators = MapThread[Join[{#1}, #2] &, {vars, grid}];
   data = Table[interp @@ vars, Evaluate[Sequence @@ iterators]];
   ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], VariableName -> VariableName[d]]
 ];
 
-Resampled[ds:{DataRegion[__]...}] :=
+Resampled[ds:{DataRegion[__]...}, p_:3] :=
   Module[{x1, x2, dx, grid},
     x1 = Max /@ Transpose[MinCoordinates /@ ds];
     x2 = Min /@ Transpose[MaxCoordinates /@ ds];
@@ -573,7 +573,7 @@ Resampled[ds:{DataRegion[__]...}] :=
 
     If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
 
-    Map[Resampled[#, grid] &, ds]
+    Map[Resampled[#, grid, p] &, ds]
 ];
 
 
