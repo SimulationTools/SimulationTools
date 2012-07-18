@@ -405,14 +405,14 @@ DataTable /: Resampled[d_DataTable, {{t1_, t2_, dt_}}, p_:8] :=
 Resampled[ds:{DataTable[__]...}, p_:8] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
     If[Length[ds] === 0, Return[{}]];
-    dts = Map[First@CoordinateSpacings, ds];
+    dts = Map[MinCoordinateSpacing, ds];
     dt = Apply[Min, dts];
     ranges = Map[Endpoints, ds];
     t1s = Map[First, ranges];
     t2s = Map[Last, ranges];
     t1 = Apply[Max, t1s];
     t2 = Apply[Min, t2s];
-    Map[Resampled[#, {t1, t2, dt}, p] &, ds];
+    Map[Resampled[#, {t1, t2, dt}, p] &, ds]
 ];
 
 
