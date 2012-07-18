@@ -349,7 +349,7 @@ DataTable /: Part[d:DataTable[l_, x___], args__] :=
  Module[{data},
   data = Part[l, args];
 
-  If[Length[data] === 1,
+  If[Length[data] === 1 || ArrayDepth[data] === 1,
   	Error["Operations which would return a DataTable with a single element are not currently supported."];
   ];
   DataTable[data, x]
