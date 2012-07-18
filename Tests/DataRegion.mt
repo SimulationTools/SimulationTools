@@ -263,19 +263,11 @@ Test[
 ]
 
 Test[
-    ToListOfData[Drop[dr, None, 2]]
-    ,
-    Drop[data, None, 2]
-    ,
-    TestID->"Drop2"
-]
-
-Test[
     Catch[Drop[dr, None, -2], ErrorString["Negative part specifications are not currently supported by DataRegion."]]
     ,
     {{},{}}
     ,
-    TestID->"Drop3"
+    TestID->"Drop2"
 ]
 
 
