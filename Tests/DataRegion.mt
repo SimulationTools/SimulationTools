@@ -241,6 +241,26 @@ Test[
 
 
 (****************************************************************)
+(* Endpoints                                                    *)
+(****************************************************************)
+Test[
+    Catch[Endpoints[dr], ErrorString["Endpoints should only be used with 1 dimensional data representations."], f]
+    ,
+    f[{{}, {}}, ErrorString["Endpoints should only be used with 1 dimensional data representations."]]
+    ,
+    TestID->"Endpoints n-dimensional"
+]
+
+Test[
+    Endpoints[dr[[1,1]]]
+    ,
+    {30., 30.9}
+    ,
+    TestID->"Endpoints 1-dimensional"
+]
+
+
+(****************************************************************)
 (* Extract                                                      *)
 (****************************************************************)
 Test[
@@ -493,6 +513,18 @@ Test[
     True
     ,
     TestID->"SameGridQ True"
+]
+
+
+(****************************************************************)
+(* Shifted                                                      *)
+(****************************************************************)
+Test[
+    MinCoordinates[Shifted[dr, {1,2,3}]]
+    ,
+    {11., 22., 33.}
+    ,
+    TestID->"Shifted"
 ]
 
 
