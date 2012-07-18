@@ -318,10 +318,7 @@ MinCoordinates[d_DataTable] :=
 (****************************************************************)
 
 NDerivative[derivs__][d_DataTable, opts___] :=
- Module[{origin, spacing, dimensions, grid, data, deriv},
-  origin  = MinCoordinates[d];
-  spacing = CoordinateSpacings[d];
-  dimensions = Dimensions[d];
+ Module[{grid, data, deriv},
 
   (* Get the grid in the form {{x1, ..., xn}, {y1, ..., yn}, ...} *)
   grid = ToListOfCoordinates[d];
