@@ -640,12 +640,12 @@ InterpolatedMax[d_DataTable] :=
 (****************************************************************)
 
 SyntaxInformation[InterpolatedWhere] =
- {"ArgumentsPattern" -> {_}};
+ {"ArgumentsPattern" -> {_, _}};
 
 InterpolatedWhere[d_DataTable, f_] :=
  Module[{dInterpolater},
-  dInterpolater=Interpolation@MakeDataTable@DeleteCases[ToList[d],_?f];
-  MakeDataTable[ToList[d]/. {t_,x_}:>{t,dInterpolater[t]}/;f[{t,x}]]
+  dInterpolater=Interpolation @ ToDataTable @ DeleteCases[ToList[d],_?f];
+  ToDataTable[ToList[d] /. {t_,x_} :> {t,dInterpolater[t]} /; f[{t,x}]]
 ];
 
 
