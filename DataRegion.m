@@ -370,7 +370,7 @@ Slab[d_DataRegion, s__, OptionsPattern[]]:=
 (**********************************************************)
 
 DataRegion /: Part[d_DataRegion, s__] :=
- Module[{partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing},
+ Module[{partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result},
   (* TODO: remove this restriction *)
   If[Count[{s}, _?Negative, Infinity] > 0,
     Error["Negative part specifications are not currently supported by DataRegion."];
@@ -427,11 +427,15 @@ DataRegion /: Part[d_DataRegion, s__] :=
   origin  = Pick[MinCoordinates[d] + (start - 1) * CoordinateSpacings[d], dimensionExists];
   spacing = Pick[stride * CoordinateSpacings[d], dimensionExists];
 
-  (* TODO: What happens if the result is a 0d DataRegion?  Should you
-     just get the data value, or should you get a 0d DataRegion? *)
+  Which[
+   ArrayDepth[data] === 0,
+     result = data;,
+   True,
+     (* TODO: Make sure other attributes get propagated *)
+     result = ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]];
+  ];
 
-  (* TODO: Make sure other attributes get propagated *)
-  ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
+  result
 ];
 
 

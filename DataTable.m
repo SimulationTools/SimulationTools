@@ -343,13 +343,19 @@ NDerivative[d_DataTable] :=
 (****************************************************************)
 
 DataTable /: Part[d:DataTable[l_, x___], args__] :=
- Module[{data},
+ Module[{data, result},
   data = Part[l, args];
 
-  If[Length[data] === 1 || ArrayDepth[data] === 1,
-  	Error["Operations which would return a DataTable with a single element are not currently supported."];
+  Which[
+   ArrayDepth[data] === 1,
+     result = data[[2]];,
+   Length[data] === 1,
+     Error["Operations which would return a DataTable with a single element are not currently supported."];,
+   True,
+     result = DataTable[data, x];
   ];
-  DataTable[data, x]
+
+  result
 ];
 
 
