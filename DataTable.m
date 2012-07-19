@@ -158,8 +158,7 @@ CoordinateSpacings[d_DataTable] :=
 
   ts = ToListOfCoordinates[d];
 
-  (* TODO: use Differences here *)
-  {Min[Drop[ts,1] - Drop[RotateRight[ts],1]]}
+  {Min[Differences[ts]]}
 ];
 
 
