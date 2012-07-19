@@ -132,6 +132,20 @@ CoordinateRanges[d_DataRegion] :=
 
 
 (**********************************************************)
+(* Length                                                 *)
+(**********************************************************)
+
+DataRegion /: Length[d_DataRegion] :=
+ Module[{length},
+  If[ArrayDepth[d] =!= 1,
+    Error["Length is only defined on 1D DataRegions."];
+  ,
+    length = Length[ToListOfData[d]];
+  ];
+  length
+];
+
+(**********************************************************)
 (* MinCoordinates                                         *)
 (**********************************************************)
 
