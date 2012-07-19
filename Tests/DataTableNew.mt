@@ -8,6 +8,9 @@ dt2   = ToDataTable[data2];
 
 dt3   = ToDataTable[Module[{om = 2}, N@Table[{t, t^2 Exp[I om t]}, {t, 0, 2 Pi, 2 Pi/10}]]];
 
+data4 = Table[{i, -(i-11/2)^2}, {i, 10}];
+dt4   = ToDataTable[data4];
+
 (****************************************************************)
 (* Built-in functions *)
 (****************************************************************)
@@ -89,6 +92,32 @@ Test[
     1
     ,
     TestID->"ArrayDepth"
+]
+
+
+(****************************************************************)
+(* CoordinateAtInterpolatedMax                                  *)
+(****************************************************************)
+
+Test[
+    CoordinateAtInterpolatedMax[dt4]
+    ,
+    5.499999999909634
+    ,
+    TestID->"CoordinateAtInterpolatedMax"
+]
+
+
+(****************************************************************)
+(* CoordinateAtMax                                              *)
+(****************************************************************)
+
+Test[
+    CoordinateAtMax[dt4]
+    ,
+    5
+    ,
+    TestID->"CoordinateAtMax"
 ]
 
 
@@ -310,6 +339,19 @@ Test[
     Sqrt[2485]
     ,
     TestID->"GridNorm"
+]
+
+
+(****************************************************************)
+(* InterpolatedMax                                              *)
+(****************************************************************)
+
+Test[
+    InterpolatedMax[dt4]
+    ,
+    0.
+    ,
+    TestID->"InterpolatedMax"
 ]
 
 
