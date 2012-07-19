@@ -393,7 +393,7 @@ Resampled[d_DataTable, {t1_?NumberQ, t2_?NumberQ, dt_?NumberQ}, p_Integer:8] :=
 
 DataTable /: Resampled[d_DataTable, {{t1_, t2_, dt_}}, p_:8] :=
  Module[{f, dt1, dt2},
-  {dt1,dt2} = Endpoints[d];
+  {dt1,dt2} = CoordinateRange[d];
   If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
     Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
           " for DataTable with range " <> ToString[{dt1,dt2}]]];
@@ -407,7 +407,7 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
     If[Length[ds] === 0, Return[{}]];
     dts = Map[MinCoordinateSpacing, ds];
     dt = Apply[Min, dts];
-    ranges = Map[Endpoints, ds];
+    ranges = Map[CoordinateRange, ds];
     t1s = Map[First, ranges];
     t2s = Map[Last, ranges];
     t1 = Apply[Max, t1s];
@@ -577,7 +577,7 @@ Options[AntiDerivative] = {InterpolationOrder->3};
 
 AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
  Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
-  {tMin, tMax} = Endpoints[d];
+  {tMin, tMax} = CoordinateRange[d];
   If[tbc < tMin || tbc > tMax,
    Error["AntiDerivative: boundary condition is not within range of DataTable"]];
   dt = First[CoordinateSpacings[d]];
@@ -1142,7 +1142,7 @@ UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;
 LocateMaximum = CoordinateAtInterpolatedMax;
 MaximumValue = InterpolatedMax;
-DataTableRange = Endpoints;
+DataTableRange = CoordinateRange;
 DataTableNormL2 = GridNorm;
 IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;

@@ -154,6 +154,26 @@ Test[
 
 
 (****************************************************************)
+(* CoordinateRange                                              *)
+(****************************************************************)
+Test[
+    Catch[CoordinateRange[dr], ErrorString["CoordinateRange should only be used with 1 dimensional data representations."], f]
+    ,
+    f[{{}, {}}, ErrorString["CoordinateRange should only be used with 1 dimensional data representations."]]
+    ,
+    TestID->"CoordinateRange n-dimensional"
+]
+
+Test[
+    CoordinateRange[dr[[1,1]]]
+    ,
+    {30., 30.9}
+    ,
+    TestID->"CoordinateRange 1-dimensional"
+]
+
+
+(****************************************************************)
 (* CoordinateRanges                                             *)
 (****************************************************************)
 Test[
@@ -268,26 +288,6 @@ Test[
     {{},{}}
     ,
     TestID->"Drop2"
-]
-
-
-(****************************************************************)
-(* Endpoints                                                    *)
-(****************************************************************)
-Test[
-    Catch[Endpoints[dr], ErrorString["Endpoints should only be used with 1 dimensional data representations."], f]
-    ,
-    f[{{}, {}}, ErrorString["Endpoints should only be used with 1 dimensional data representations."]]
-    ,
-    TestID->"Endpoints n-dimensional"
-]
-
-Test[
-    Endpoints[dr[[1,1]]]
-    ,
-    {30., 30.9}
-    ,
-    TestID->"Endpoints 1-dimensional"
 ]
 
 

@@ -12,14 +12,12 @@ ToListOfData::usage = "ToListOfData[d] returns a List of the data part of d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a List of the coordinates part of d.";
 
 (* TODO: Maybe add MapCoordinates, MapThreadCoordinates, MapThreadList *)
-(* TODO: Is MapList the right name? *)
 MapList::usage = "MapList[f, d] maps f over the coordinates and values in d.";
 
-(* TODO: Maybe add CoordinateSpacing? *)
 CoordinateSpacing::usage = "CoordinateSpacings[d] gives the spacing of the coordinates in d.";
 CoordinateSpacings::usage = "CoordinateSpacings[d] gives a List of the spacing of the coordinates in each dimension of d.";
+CoordinateRange::usage = "CoordinateRange[d] gives the coordinates of the first and last points of d.";
 CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edges of d. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
-Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
 MinCoordinate::usage = "MinCoordinate[d] returns the coordinate of the first point in in d.";
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
 MaxCoordinate::usage = "MaxCoordinate[d] returns the coordinate of the last point in in d.";
@@ -47,23 +45,6 @@ Begin["`Private`"];
 
 DataRepresentationQ[_] = False;
 
-
-(**********************************************************)
-(* Endpoints                                              *)
-(**********************************************************)
-
-SyntaxInformation[Endpoints] =
- {"ArgumentsPattern" -> {_}};
-
-Endpoints[d_?DataRepresentationQ] :=
- Module[{ndim},
-  ndim = ArrayDepth[d];
-  If[ndim =!= 1,
-  	Error["Endpoints should only be used with 1 dimensional data representations."];
-  ];
-
-  First[CoordinateRanges[d]]
-];
 
 (**********************************************************)
 (* Add                                                    *)
@@ -103,6 +84,24 @@ CoordinateOutline[d_?DataRepresentationQ] :=
   shapes = {Line, Rectangle, Cuboid};
 
   shapes[[ndims]]@@coords
+];
+
+
+(**********************************************************)
+(* CoordinateRange                                        *)
+(**********************************************************)
+
+SyntaxInformation[CoordinateRange] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateRange[d_?DataRepresentationQ] :=
+ Module[{ndim},
+  ndim = ArrayDepth[d];
+  If[ndim =!= 1,
+  	Error["CoordinateRange only be used with 1 dimensional data representations."];
+  ];
+
+  First[CoordinateRanges[d]]
 ];
 
 
