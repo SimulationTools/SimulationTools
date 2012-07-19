@@ -661,21 +661,29 @@ DataTable /: Length[DataTable[d_,___]] :=
 (* PadLeft                                                      *)
 (****************************************************************)
 
-DataTable /: PadLeft[d_DataTable, n_] :=
-  MakeDataTable[Transpose[{
-    First[DataTableRange[d]] - Spacing[d] (n-Length[d]+1) + Range[n] Spacing[d],
-    PadLeft[DepVar[d], n]}]];
-
+DataTable /: PadLeft[d_DataTable, n_, x___] :=
+ Module[{spacing, coords},
+  If[Length[{x}] > 1,
+    Error["Arguments "<>ToString[{x}]<>" not supported by PadLeft"];
+  ];
+  spacing = CoordinateSpacing[d];
+  coords  = Range[n] spacing + First[MinCoordinates[d]] - spacing (n-Length[d]+1);
+  ToDataTable[Transpose[{coords, PadLeft[ToListOfData[d], n, x]}]]
+];
 
 (****************************************************************)
 (* PadRight                                                      *)
 (****************************************************************)
 
-DataTable /: PadRight[d_DataTable, n_] :=
-  MakeDataTable[Transpose[{
-    First[DataTableRange[d]] + (Range[n]-1) Spacing[d],
-    PadRight[DepVar[d], n]}]];
-
+DataTable /: PadRight[d_DataTable, n_, x___] :=
+ Module[{spacing, coords},
+  If[Length[{x}] > 1,
+    Error["Arguments "<>ToString[{x}]<>" not supported by PadRight"];
+  ];
+  spacing = CoordinateSpacing[d];
+  coords  = (Range[n]-1) spacing + First[MinCoordinates[d]];
+  ToDataTable[Transpose[{coords, PadRight[ToListOfData[d], n, x]}]]
+];
 
 (****************************************************************)
 (* Phase                                                        *)
