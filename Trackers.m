@@ -41,7 +41,7 @@ xyToAzimuth[{x1_DataTable, y1_DataTable}] :=
   Module[{x,y,t},
     {x,y} = ToListOfData /@ IntersectDataTables[{x1,y1}];
     t = ToListOfCoordinates[x1];
-    Phase[MapThread[{#1,{#2,#3}} &,{t,x,y}]]];
+    ToDataTable@DataRepresentations`Private`phase[MapThread[{#1,{#2,#3}} &,{t,x,y}]]];
 
 ReadTrackerAzimuth[run_String, tracker:trackerPattern] :=
   xyToAzimuth[ReadTrackerCoordinates[run, tracker][[{1,2}]]];
