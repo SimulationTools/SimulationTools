@@ -2,7 +2,8 @@
 
 BeginPackage["DataRepresentations`",
  {
-  "Error`"
+  "Error`",
+  "Utils`"
  }];
 
 DataRepresentationQ::usage = "DataRepresentationQ[d] returns True if d is a DataRepresentation type.";
@@ -42,6 +43,9 @@ Sub::usage = "Sub[d1, d2] subtracts d2 from d1 after they have been resampled on
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d. The derivs argument should be of the same form as in the first argument of Derivative.";
+
+Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
+Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
 
 Begin["`Private`"];
 
@@ -171,6 +175,18 @@ First[d_?DataRepresentationQ] := d[[1]];
 Protect[First];
 
 
+(****************************************************************)
+(* Frequency                                                    *)
+(****************************************************************)
+
+SyntaxInformation[Frequency] =
+ {"ArgumentsPattern" -> {_}};
+
+(* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
+Frequency[d_?DataRepresentationQ] :=
+  If[$NRMMACompatibilityVersion < 1, NDerivative[Phase[d]], NDerivative[1][Phase[d]]];
+
+
 (**********************************************************)
 (* GridNorm                                               *)
 (**********************************************************)
@@ -272,6 +288,35 @@ SyntaxInformation[NDerivative] =
  {"ArgumentsPattern" -> {_, ___}};
 
 Global`StandardDefinition[NDerivative] = True;
+
+
+(****************************************************************)
+(* Phase                                                        *)
+(****************************************************************)
+
+SyntaxInformation[Phase] =
+ {"ArgumentsPattern" -> {_}};
+
+(* TODO: check the continuity algorithm and see if it can be improved *)
+
+phase[tb:List[{_, _}...]] :=
+  phase[Map[{#[[1]],{Re[#[[2]]], Im[#[[2]]]}} &, tb]];
+
+phase[tb:{{_, {_, _}}...}] :=
+  Module[{phaseTb,x,y,t,previousPhase, i, currentPhase = 0, cycles =
+          0, nPoints},
+  nPoints = Length[tb];
+  phaseTb = Table[i, {i, 1, nPoints}];
+  For[i = 1, i <= nPoints, i++,
+   t = tb[[i, 1]];
+   x = tb[[i, 2, 1]];
+   y = tb[[i, 2, 2]];
+   currentPhase = If[!(x==0 && y ==0), ArcTan[x, y], 0];
+   If[currentPhase - previousPhase > Pi, cycles--];
+   If[currentPhase - previousPhase < -Pi, cycles++];
+   previousPhase = currentPhase;
+   phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
+  Return[phaseTb]];
 
 
 (**********************************************************)

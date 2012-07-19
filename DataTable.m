@@ -12,9 +12,6 @@ DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensiona
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
-Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
-Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
-
 MinCoordinateSpacing::usage = "MinCoordinateSpacings[d] gives the smallest spacing of the coordinates in d.";
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
@@ -358,6 +355,13 @@ DataTable /: Part[d:DataTable[l_, x___], args__] :=
   result
 ];
 
+(**********************************************************)
+(* Phase                                                  *)
+(**********************************************************)
+
+Phase[d_DataTable] :=
+  ToDataTable[DataRepresentations`Private`phase[ToList[d]]];
+
 
 (**********************************************************)
 (* Plotting functions                                     *)
@@ -555,18 +559,6 @@ DataTable /: InverseFourier[d_DataTable, t0_:0.0, opts:OptionsPattern[]] :=
 ];
 
 (****************************************************************)
-(* Frequency                                                    *)
-(****************************************************************)
-
-SyntaxInformation[Frequency] =
- {"ArgumentsPattern" -> {_}};
-
-(* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
-Frequency[d:DataTable[__]] :=
-  If[$NRMMACompatibilityVersion < 1, NDerivative[Phase[d]], NDerivative[1][Phase[d]]];
-
-
-(****************************************************************)
 (* AntiDerivative                                               *)
 (****************************************************************)
 
@@ -703,38 +695,6 @@ DataTable /: PadRight[d_DataTable, n_, x___] :=
   coords  = (Range[n]-1) spacing + First[MinCoordinates[d]];
   ToDataTable[Transpose[{coords, PadRight[ToListOfData[d], n, x]}]]
 ];
-
-(****************************************************************)
-(* Phase                                                        *)
-(****************************************************************)
-
-SyntaxInformation[Phase] =
- {"ArgumentsPattern" -> {_}};
-
-(* TODO: check the continuity algorithm and see if it can be improved *)
-
-Phase[tb:List[{_, _}...]] :=
-  Phase[Map[{#[[1]],{Re[#[[2]]], Im[#[[2]]]}} &, tb]];
-
-Phase[tb:{{_, {_, _}}...}] :=
-  Module[{phaseTb,x,y,t,previousPhase, i, currentPhase = 0, cycles =
-          0, nPoints},
-  nPoints = Length[tb];
-  phaseTb = Table[i, {i, 1, nPoints}];
-  For[i = 1, i <= nPoints, i++,
-   t = tb[[i, 1]];
-   x = tb[[i, 2, 1]];
-   y = tb[[i, 2, 2]];
-   currentPhase = If[!(x==0 && y ==0), ArcTan[x, y], 0];
-   If[currentPhase - previousPhase > Pi, cycles--];
-   If[currentPhase - previousPhase < -Pi, cycles++];
-   previousPhase = currentPhase;
-   phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
-  Return[phaseTb]];
-
-Phase[d:DataTable[__]] :=
-  ApplyToList[Phase, d];
-
 
 (**********************************************************)
 (* RestrictedToCommonInterval                             *)

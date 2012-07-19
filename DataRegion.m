@@ -682,6 +682,19 @@ NDerivative[d_DataRegion] :=
 
 
 (**********************************************************)
+(* Phase                                                  *)
+(**********************************************************)
+
+Phase[d_DataRegion] :=
+ Module[{},
+  If[ArrayDepth[d] =!= 1,
+    Error["Phase only supports 1 dimensional DataRegions."];
+  ];
+
+  ToDataRegion[DataRepresentations`Private`phase[ToList[d]][[All, 2]], MinCoordinates[d], CoordinateSpacings[d]]
+];
+
+(**********************************************************)
 (* Interpolation                                          *)
 (**********************************************************)
 
