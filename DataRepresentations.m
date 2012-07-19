@@ -24,7 +24,7 @@ MaxCoordinate::usage = "MaxCoordinate[d] returns the coordinate of the last poin
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are defined on the same coordinate grid.";
-Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta."; (* TODO: What's the sign convention on delta? *)
+Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta.";
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
