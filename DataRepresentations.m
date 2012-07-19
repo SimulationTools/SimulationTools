@@ -23,6 +23,7 @@ MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of 
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
+SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are defined on the same coordinate grid.";
 Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta."; (* TODO: What's the sign convention on delta? *)
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
@@ -234,6 +235,14 @@ Global`StandardDefinition[NDerivative] = True;
 
 SyntaxInformation[Resampled] =
  {"ArgumentsPattern" -> {_, ___}};
+
+
+(**********************************************************)
+(* SameGridQ                                              *)
+(**********************************************************)
+
+SyntaxInformation[SameGridQ] =
+ {"ArgumentsPattern" -> {_, _}};
 
 
 (****************************************************************)

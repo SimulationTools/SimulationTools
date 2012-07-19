@@ -14,8 +14,6 @@ ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion 
 
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
 
-SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are DataRegions defined on the same grid (origin, spacing, size).";
-
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
@@ -469,9 +467,6 @@ DataRegion /: Drop[d_DataRegion, s__] :=
 (**********************************************************)
 (* SameGridQ                                              *)
 (**********************************************************)
-
-SyntaxInformation[SameGridQ] =
- {"ArgumentsPattern" -> {_, _}};
 
 DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
  Module[{origin, spacing, dims},
