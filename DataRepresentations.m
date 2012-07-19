@@ -19,9 +19,11 @@ MapList::usage = "MapList[f, d] maps f over the coordinates and values in d.";
 CoordinateSpacing::usage = "CoordinateSpacings[d] gives the spacing of the coordinates in d.";
 CoordinateSpacings::usage = "CoordinateSpacings[d] gives a List of the spacing of the coordinates in each dimension of d.";
 CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edges of d. This is a list of {min,max} pairs, each corresponding to one dimension of d.";
-MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
-MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
+MinCoordinate::usage = "MinCoordinate[d] returns the coordinate of the first point in in d.";
+MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
+MaxCoordinate::usage = "MaxCoordinate[d] returns the coordinate of the last point in in d.";
+MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are defined on the same coordinate grid.";
 Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta."; (* TODO: What's the sign convention on delta? *)
@@ -191,11 +193,45 @@ SyntaxInformation[MapList] =
 
 
 (**********************************************************)
+(* MinCoordinate                                          *)
+(**********************************************************)
+
+SyntaxInformation[MinCoordinate] =
+ {"ArgumentsPattern" -> {_}};
+
+MinCoordinate[d_?DataRepresentationQ] :=
+ Module[{},
+  If[ArrayDepth[d] =!= 1,
+    Error["MinCoordinate can only be used with 1-dimensional data representations."];
+  ];
+
+  First[MinCoordinates[d]]
+];
+
+
+(**********************************************************)
 (* MinCoordinates                                         *)
 (**********************************************************)
 
 SyntaxInformation[MinCoordinates] =
  {"ArgumentsPattern" -> {_}};
+
+
+(**********************************************************)
+(* MaxCoordinate                                          *)
+(**********************************************************)
+
+SyntaxInformation[MaxCoordinate] =
+ {"ArgumentsPattern" -> {_}};
+
+MaxCoordinate[d_?DataRepresentationQ] :=
+ Module[{},
+  If[ArrayDepth[d] =!= 1,
+    Error["MaxCoordinate can only be used with 1-dimensional data representations."];
+  ];
+
+  First[MaxCoordinates[d]]
+];
 
 
 (**********************************************************)
