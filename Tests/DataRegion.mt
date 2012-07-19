@@ -550,6 +550,23 @@ Test[
 ]
 
 
+Test[
+    SameGridQ[dr, dr2, dr3]
+    ,
+    False
+    ,
+    TestID->"SameGridQ multiple False"
+]
+
+Test[
+    SameGridQ[dr, dr2, dr2]
+    ,
+    True
+    ,
+    TestID->"SameGridQ multiple True"
+]
+
+
 (****************************************************************)
 (* Shifted                                                      *)
 (****************************************************************)

@@ -482,13 +482,17 @@ DataRegion /: Drop[d_DataRegion, s__] :=
 (* SameGridQ                                              *)
 (**********************************************************)
 
-DataRegion /: SameGridQ[dr1_DataRegion, dr2_DataRegion] :=
- Module[{origin, spacing, dims},
-   origin  = MinCoordinates /@ {dr1, dr2};
-   spacing = CoordinateSpacings /@ {dr1, dr2};
-   dims    = Dimensions /@ {dr1, dr2};
+DataRegion /: SameGridQ[drs:DataRegion[__]..] :=
+ Module[{origins, spacings, dims},
+  If[Length[{drs}] < 2,
+    Error["SameGridQ expects at least two arguments."];
+  ];
 
-   (SameQ@@origin) && (SameQ@@spacing) && (SameQ@@dims)
+  origins  = MinCoordinates /@ {drs};
+  spacings = CoordinateSpacings /@ {drs};
+  dims     = Dimensions /@ {drs};
+
+  (SameQ@@origins) && (SameQ@@spacings) && (SameQ@@dims)
 ];
 
 

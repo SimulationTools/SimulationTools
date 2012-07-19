@@ -656,6 +656,22 @@ Test[
     TestID->"SameGridQ True"
 ]
 
+Test[
+    SameGridQ[dt, dt, dt2]
+    ,
+    False
+    ,
+    TestID->"SameGridQ multiple False"
+]
+
+Test[
+    SameGridQ[dt, dt, dt]
+    ,
+    True
+    ,
+    TestID->"SameGridQ multiple True"
+]
+
 
 (****************************************************************)
 (* Shifted                                                      *)

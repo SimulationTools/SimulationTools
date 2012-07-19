@@ -242,7 +242,7 @@ SyntaxInformation[Resampled] =
 (**********************************************************)
 
 SyntaxInformation[SameGridQ] =
- {"ArgumentsPattern" -> {_, _}};
+ {"ArgumentsPattern" -> {_, __}};
 
 
 (****************************************************************)

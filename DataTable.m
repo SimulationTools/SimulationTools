@@ -418,12 +418,14 @@ Resampled[ds:{DataTable[__]...}, p_:8] :=
 (* SameGridQ                                              *)
 (**********************************************************)
 
-DataTable /: SameGridQ[dt1_DataTable, dt2_DataTable] :=
- Module[{t1, t2},
-   t1 = ToListOfCoordinates[dt1];
-   t2 = ToListOfCoordinates[dt2];
-   
-   SameQ[t1, t2]
+DataTable /: SameGridQ[dts:DataTable[__]..] :=
+ Module[{coords},
+  If[Length[{dts}] < 2,
+    Error["SameGridQ expects at least two arguments."];
+  ];
+
+  coords = ToListOfCoordinates /@ {dts};
+  SameQ @@ coords
 ];
 
 
