@@ -69,6 +69,7 @@ Module[{packages =
   "SystemStatistics",
   "Tracks",
   "TwoPunctures",
+  "Utils",
   "Waveforms",
   "YlmDecomp"},
   ErrorDefinition, DefFn, DefFnQ, withCustomSetDelayed, extraPackages},
