@@ -12,44 +12,59 @@ BeginPackage["Waveforms`",
   "RunFiles`"
  }];
 
-SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized.";
-ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
+(* Public *)
+
+AlignedPhases::usage = "AlignedPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. The independent variable is assumed to be a phase so that the resulting phases all start out within 2\[Pi] of each other.";
+Psi4ToStrain::usage = "Psi4ToStrain[psi4, omega0] converts a DataTable containing psi4[t] into strain h[t] using the Fixed Frequency Integration method with a cut-off frequency omega0.\nPsi4ToStrain[psi4, {t1, t2}] converts using time domain integration, choosing integration constants such that h[t1] = h[t2] = 0.";
+ReadCycles::usage = "ReadCycles[run, start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.\nReadCycles[psi4, start] operates on the DataTable psi4 instead of run.";
+ReadExtrapolatedPsi4::usage = "ReadExtrapolatedPsi4[run, l, m] extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
+ReadExtrapolatedStrain::usage = "ReadExtrapolatedStrain[run, l, m, om0] reads the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius.";
 ReadPsi4::usage = "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from run.";
-ReadPsi4Phase::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold.";
-ReadPsi4RadiiStrings::usage = "ReadPsi4RadiiStrings[run] returns a list of the radii (in original string form) at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
-ReadPsi4Radii::usage = "ReadPsi4Radii[run] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
 ReadPsi4Modes::usage = "ReadPsi4Modes[run] returns a list of the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) that are available in run.";
-RunName::usage = "RunName is a DataTable attribute added by ReadPsi4.";
-RadiusRange;
-StrainFromPsi4::usage = "StrainFromPsi4[psi4, omega0] converts a DataTable containing psi4[t] into strain and its time derivative, {h[t], h'[t]}, using the method of Reisswig and Pollney with a cut-off frequency omega0.
-StrainFromPsi4[psi4, {t0, t1}] converts using time domain integration.";
-NumCycles::usage = "NumCycles[run, start] gives the number of gravitational wave cycles for run. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.
-NumCycles[psi4, start] operates on the DataTable psi4 instead of run.";
-AlignPhases::usage = "AlignPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. The independent variable is assumed to be a phase so that the resulting phases all start out within 2\[Pi] of each other.";
-Continuous;
-ExtrapolatePsi4::usage = "ExtrapolatePsi4[run, l, m] extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
-ExtrapolatePsi4Amplitude::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the amplitude of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
-ExtrapolatePsi4Phase::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the phase of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
-UseTortoiseCoordinate::usage = "UseTortoiseCoordinate is an option for radius extrapolation routines which specifies whether the radial coordinate should be converted to a tortoise coordinate. This may improve the accuracy of the extrapolation.";
-TortoiseCoordinate::usage = "TortoiseCoordinate[r, M] gives the tortoise coordinate corresponding to radius r assuming a Schwarzschild black hole of mass M. The constant of integration is chosen so that the tortoise and radial coordinate coincide at r=4M.";
+ReadPsi4Radii::usage = "ReadPsi4Radii[run] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.";
+ImportWaveform::usage = "ImportWaveform[filename] imports an ASCII waveform file with columns time, real part and imaginary part and returns it as a DataTable.";
 
-ExtrapolateScalarFull;
-ExtrapolateScalar;
-ExtrapolatedValue;
-ExtrapolateScalarWithRadii;
+(* Old function names *)
 
-ExtrapolatedCurve;
-ExtrapolateDataTables;
-RadiusTimeDataToTimeRadiusData;
-ExtrapolateRadiatedQuantity;
-ApplyToPhases;
-ExtrapolationError;
-
-
+AlignPhases = AlignedPhases;
+ExtrapolatePsi4 = ReadExtrapolatedPsi4;
+ExtrapolateStrain = ReadExtrapolatedStrain;
+NumCycles = ReadCycles;
+ReadPsi4;
+ReadPsi4Modes;
+ReadPsi4Radii;
 ReadWaveformFile;
+SchmidtAngle = ReadSchmidtAngle;
+StrainFromPsi4 = Psi4ToStrain;
+ReconstructPsi4 = ReadReconstructedPsi4;
+ReadWaveformFile = ImportWaveform;
+
+(* Deprecated / Experimental*)
+
+Continuous;
 AlignMaxima;
 AlignMaximaOfAbs;
-ExtrapolateStrain;
+ApplyToPhases;
+ExtrapolateDataTables;
+ExtrapolatePsi4Amplitude(*::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the amplitude of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius."*);
+ExtrapolatePsi4Phase(*::usage = "ExtrapolatePsi4Amplitude[run, l, m] extrapolates the phase of the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius."*);
+ExtrapolateRadiatedQuantity;
+ExtrapolateScalar;
+ExtrapolateScalarFull;
+ExtrapolateScalarWithRadii;
+ExtrapolatedCurve;
+ExtrapolatedValue;
+ExtrapolationError;
+RadiusRange;
+RadiusTimeDataToTimeRadiusData;
+ReadPsi4Phase(*::usage = "ReadPsi4Phase[run, l, m, r, threshold] returns a DataTable of the phase of the complex l,m mode of Psi4 at radius r from run.  The phase is cut off after the time that the amplitude goes below threshold."*);
+ReadPsi4RadiiStrings(*::usage = "ReadPsi4RadiiStrings[run] returns a list of the radii (in original string form) at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run."*);
+RunName(*::usage = "RunName is a DataTable attribute added by ReadPsi4."*);
+StrainDotFromPsi4;
+UseTortoiseCoordinate(*::usage = "UseTortoiseCoordinate is an option for radius extrapolation routines which specifies whether the radial coordinate should be converted to a tortoise coordinate. This may improve the accuracy of the extrapolation."*);
+TortoiseCoordinate(*::usage = "TortoiseCoordinate[r, M] gives the tortoise coordinate corresponding to radius r assuming a Schwarzschild black hole of mass M. The constant of integration is chosen so that the tortoise and radial coordinate coincide at r=4M."*);
+SchmidtAngle(*::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized."*);
+ReadReconstructedPsi4(*::usage = "ReadReconstructedPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r."*);
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -132,7 +147,7 @@ ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
    DataTableInterval[Phase[psi4], {rAmpTb[[1, 1]] - 100.0, t2}]];
 
 (* TODO: this does not work because SpinWeightedSphericalHarmonic is not found *)
-ReconstructPsi4[sim_, t_, rad_: Automatic] :=
+ReadReconstructedPsi4[sim_, t_, rad_: Automatic] :=
  Module[{modes, psi4modes, harmonics, cf, psi4},
   modes = ReadPsi4Modes[sim];
   psi4modes = Interpolation[ReadPsi4[sim, #[[1]], #[[2]], rad]][t] & /@ modes;
@@ -143,7 +158,7 @@ ReconstructPsi4[sim_, t_, rad_: Automatic] :=
 ];
 
 (* TODO: this does not work because SpinWeightedSphericalHarmonic is not found *)
-SchmidtAngle[run_, t_, rad_: Automatic] := 
+ReadSchmidtAngle[run_, t_, rad_: Automatic] := 
  Module[{psi4, psi4l2m2, psi4l2mm2, th1},
   psi4 = ReconstructPsi4[run, t, rad];
   psi4l2m2[th1_?NumericQ, ph1_?NumericQ] := 
@@ -250,7 +265,7 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
 
 Options[AlignPhases] = {Continuous -> False};
 
-AlignPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
+AlignedPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
   Module[{phaseFns, refPhases, adjustments, adjusted,
           ranges, min, max, constTb, phase1},
     If[Length[phaseTbs] < 2, Return[phaseTbs]];
@@ -348,14 +363,14 @@ ExtrapolatePsi4Amplitude[runName_String, l_, m_, opts:OptionsPattern[]] :=
     reader[run_, rad_] := rad Abs[ReadPsi4[run, l, m, rad]];
     ExtrapolateRadiatedQuantity[runName, reader, opts]];
 
-DefineMemoFunction[ExtrapolatePsi4[runName_String, l_, m_, opts:OptionsPattern[]],
+DefineMemoFunction[ReadExtrapolatedPsi4[runName_String, l_, m_, opts:OptionsPattern[]],
   Module[{phase,amp,psi4},
     phase = ExtrapolatePsi4Phase[runName, l, m, opts];
     amp = ExtrapolatePsi4Amplitude[runName, l, m, opts];
     psi4 = MapThreadData[#1 Exp[I #2] &, {amp, phase}];
     psi4]];
 
-ExtrapolateStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]] :=
+ReadExtrapolatedStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]] :=
   Module[
     {phaseReader,ampReader,phase,amp},
 
@@ -410,7 +425,7 @@ ffi[{f_, d_}, f0_] :=
 ffiDataTable[d_DataTable, f0_] :=
   MapList[ffi[#, f0 / (2. Pi)] &, d];
 
-StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
+Psi4ToStrain[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
          uniform = UniformGridQ[psi4], t0},
   psi4Uniform = If[uniform, psi4, MakeUniform[psi4]];
@@ -421,7 +436,7 @@ StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
   {h, dh} = InverseFourier[#,t0] & /@ {hf, dhf};
   If[uniform, h, ResampleDataTable[h,psi4]]];
 
-StrainFromPsi4[psi4_DataTable, range:(_List | All)] :=
+Psi4ToStrain[psi4_DataTable, range:(_List | All)] :=
   Module[{range2},
     range2 = If[range === All,
      DataTableRange[psi4],
@@ -429,7 +444,7 @@ StrainFromPsi4[psi4_DataTable, range:(_List | All)] :=
     StrainFromPsi4[psi4, range2[[1]], range2[[2]]]
   ];
 
-StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
+Psi4ToStrain[psi4_DataTable, fitStart_, fitEnd_] :=
   Module[{tStart, tStep, tEnd, psi4Fn, ints, dataRealTb, modelReal, 
           fitReal, dataImagTb, modelImag, fitImag, hTb, ar, br, ai, bi},
     {tStart, tEnd} = DataTableRange[psi4];
@@ -456,14 +471,14 @@ StrainFromPsi4[psi4_DataTable, fitStart_, fitEnd_] :=
     Return[MakeDataTable[hTb]];
 ];
 
-NumCycles[sim_String, start_] := Module[{psi4, rads, r},
+ReadCycles[sim_String, start_] := Module[{psi4, rads, r},
   rads = ReadPsi4Radii[sim];
   r = If[rads === {}, 0, First[rads]];
   psi4 = ReadPsi4[sim, 2, 2, r];
   NumCycles[psi4, start]
   ]
 
-NumCycles[psi4_DataTable, start_] :=
+ReadCycles[psi4_DataTable, start_] :=
  Module[{mergertime, phasei, cycles},
   mergertime = LocateMaximum[Abs[psi4]];
   phasei = Interpolation[Phase[psi4]];
@@ -482,7 +497,7 @@ AlignMaximaOfAbs[ds_List] :=
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
 
-ReadWaveformFile[file_] :=
+ImportWaveform[file_] :=
   Module[
     {data, lockFile, waitForLock, releaseLock},
     If[FileType[file] ===None,

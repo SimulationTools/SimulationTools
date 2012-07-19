@@ -106,17 +106,17 @@ ToList[ExtrapolateRadiatedQuantity[
 (****************************************************************)
 
 Test[
-  StrainFromPsi4[ToDataTable[{{0.0,1+3I},{0.1,5+0.2I}}],0.1]
+  Psi4ToStrain[ToDataTable[{{0.0,1+3I},{0.1,5+0.2I}}],0.1]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-1.m"}]]
   ,
-  TestID->"StrainFromPsi4-1"
+  TestID->"Psi4ToStrain-1"
     ]
 
 Test[
-  ToList[StrainFromPsi4[ReadPsi4[$NRMMATestRun,2,2,100],0.02]][[{1,2,200,-1}]]
+  ToList[Psi4ToStrain[ReadPsi4[$NRMMATestRun,2,2,100],0.02]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-2.m"}]]
   ,
-  TestID->"StrainFromPsi4-2"
+  TestID->"Psi4ToStrain-2"
     ]
