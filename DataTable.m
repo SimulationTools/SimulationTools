@@ -4,7 +4,7 @@ BeginPackage["DataTable`",
  {
   "DataRepresentations`",
   "Error`",
-  "NR`",
+  "NRMMA`",
   "Profile`"
  }];
 

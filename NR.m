@@ -21,8 +21,6 @@ BeginPackage["NR`",
   "Timers`"
  }];
 
-$NRMMACompatibilityVersion::usage = "$NRMMACompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of NRMMA."
-
 FilterNaNs::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data.";
 NaNQ::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data.";
 
@@ -43,7 +41,6 @@ InitialDimensionlessSpin;
 
 Begin["`Private`"];
 
-$NRMMACompatibilityVersion = 1.0;
 RunDirectory := Global`RunDirectory;
 
 (**********************************************************)
