@@ -397,21 +397,7 @@ Test[
 	TestID->"DataTableRange"
 ]
 
-(****************************************************************)
-(* Phase *)
-(****************************************************************)
 
-Module[{ph},
-Test[
-        ph = Phase@MakeDataTable[
-          Module[{om = 2}, 
-                 N@Table[{t, t^2 Exp[I om t]}, {t, 0, 2 Pi, 2 Pi/10}]]];
-        DepVar[ph] == 2 IndVar[ph]
-        ,
-        True
-	,
-	TestID->"Phase"
-]]
 
 (* Have tests *)
 
