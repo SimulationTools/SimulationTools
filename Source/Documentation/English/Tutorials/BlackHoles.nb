@@ -1,0 +1,200 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Black Holes", "Title"],
+
+Cell["\<\
+A simulation can contain any number of black holes, numbered 1, 2, 3, ... .  \
+Functions are provided to get the mass and spin of each black hole.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Working with black holes", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[GridBox[{
+   {"ReadBlackHoleMass", Cell["ReadBlackHoleSpin", "TableText"]},
+   {"ReadBlackHoleIrreducibleMass", "\[Placeholder]"}
+  }]], "DefinitionBox"],
+
+Cell["\<\
+Functions for reading black hole information.\
+\>", "Caption"],
+
+Cell[CellGroupData[{
+
+Cell["Mass", "Subsection"],
+
+Cell["\<\
+The function ReadBlackHoleMass gives the mass of one of the black holes as a \
+function of time.  This is the physical mass of the black hole, including the \
+spin contribution.  \
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"mass1", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"run", ",", "1"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ToList", "[", "mass1", "]"}], "//", "Short"}]], "Input"],
+
+Cell["\<\
+When simulating binary systems, the inspiralling black holes are \
+conventionally taken to be 1 and 2, and the final merged black hole is 3.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"mass2", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"run", ",", "2"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"mass3", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"run", ",", "3"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"{", 
+   RowBox[{"mass1", ",", "mass2", ",", "mass3"}], "}"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Spin", "Subsection"],
+
+Cell[TextData[{
+ "The function ReadBlackHoleSpin gives the spin of one of the black holes as \
+a function of time.  This is the dimensionful angular momentum; i.e. it has \
+units of ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"[", "mass", "]"}], "2"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ".  "
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"spin1", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin1x", ",", "spin1y", ",", "spin1z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"spin2", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin2x", ",", "spin2y", ",", "spin2z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"spin3", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin3x", ",", "spin3y", ",", "spin3z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"run", ",", "3"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin1x", ",", "spin3z"}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "0.1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input"],
+
+Cell["\<\
+Since the result is a list, you can compute the magnitude of the spin vector \
+using the Norm function:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"spin1Norm", "=", 
+  RowBox[{"Norm", "[", "spin1", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "spin1Norm", "]"}]], "Input"],
+
+Cell["\<\
+You can also compute the dimensionless spin by dividing by the mass squared:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"j1", "=", 
+  RowBox[{
+   RowBox[{"spin1Norm", "~", "Div", "~", "mass1"}], "^", "2"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "j1", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Irreducible mass", "Subsection"],
+
+Cell["\<\
+If there is no spin information available in the simulation then \
+ReadBlackHoleMass cannot be used.  If it is known that the spins are \
+negligible, then the irreducible mass can be used as a mass measurement.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"massIrr1", "=", 
+  RowBox[{"ReadBlackHoleIrreducibleMass", "[", 
+   RowBox[{"run", ",", "1"}], "]"}]}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation notes", "Section"],
+
+Cell["\<\
+NRMMA obtains black hole information from any of the following sources:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+AHFinderDirect and QuasiLocalMeasures Cactus output;\
+\>", "Item"],
+
+Cell["\<\
+Numerical Relativity Data Format (NRDF) output files\
+\>", "Item"]
+}, Open  ]],
+
+Cell["\<\
+In both cases, the black holes are numbered according to the output data. So \
+black hole 1 corresponds to AHFinderDirect horizon 1 (QuasiLocalMeasures \
+horizon 0), or NRDF body 1 from the metadata file.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{782, 1031},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
