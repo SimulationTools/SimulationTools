@@ -18,7 +18,6 @@ SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are DataRegions 
 
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 
-CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
 (* TODO: Add Metadata function and user-defined metadata *)
@@ -617,34 +616,6 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
 Unprotect /@ $1DPlotFunctions;
 Scan[(#[ds:List[DataRegion[___]..], opts___] := #[ToList/@ ds, opts])&, $1DPlotFunctions];
 Protect /@ $1DPlotFunctions;
-
-
-(**********************************************************)
-(* CoordinateOutline                                      *)
-(**********************************************************)
-
-SyntaxInformation[CoordinateOutline] =
- {"ArgumentsPattern" -> {_}};
-
-CoordinateOutline[d_DataRegion] :=
- Module[{ndims, coords, shapes},
-  ndims = ArrayDepth[d];
-
-  If[ndims > 3,
-    Error["Dimension "<>ToString[ndims]<>" of DataRegion not supported by Outline."]
-  ];
-
-  coords = CoordinateRanges[d];
-
-  If[ndims === 1,
-    coords = {Transpose[Join[{{0,0}}, coords]]},
-    coords = Transpose[coords]
-  ];
-
-  shapes = {Line, Rectangle, Cuboid};
-
-  shapes[[ndims]]@@coords
-];
 
 
 (**********************************************************)

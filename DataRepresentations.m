@@ -22,6 +22,7 @@ CoordinateRanges::usage = "CoordinateRanges[d] gives the coordinates of the edge
 MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of the first point in each direction in d.";
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 Endpoints::usage = "Endpoints[d] gives the coordinates of the first and last points of d.";
+CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
 Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta."; (* TODO: What's the sign convention on delta? *)
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
@@ -72,6 +73,34 @@ Add[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], H
   Apply[Plus, Resampled[{d1, d2}, p]];
 
 Add[a_?NumberQ, b_?NumberQ] := a+b;
+
+
+(**********************************************************)
+(* CoordinateOutline                                      *)
+(**********************************************************)
+
+SyntaxInformation[CoordinateOutline] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateOutline[d_?DataRepresentationQ] :=
+ Module[{ndims, coords, shapes},
+  ndims = ArrayDepth[d];
+
+  If[ndims > 3,
+    Error["Dimension "<>ToString[ndims]<>" of data representation not supported by Outline."]
+  ];
+
+  coords = CoordinateRanges[d];
+
+  If[ndims === 1,
+    coords = {Transpose[Join[{{0,0}}, coords]]},
+    coords = Transpose[coords]
+  ];
+
+  shapes = {Line, Rectangle, Cuboid};
+
+  shapes[[ndims]]@@coords
+];
 
 
 (**********************************************************)
