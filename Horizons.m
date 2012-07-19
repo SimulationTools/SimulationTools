@@ -36,6 +36,7 @@ ReadAHPhase;
 InitialSpin;
 SpinAngle;
 InitialSpinAngle;
+HaveHorizonData;
 
 Begin["`Private`"];
 
@@ -201,6 +202,9 @@ InitialSpin[run_] :=
   If[Norm@S0 > Norm@S1,
    S0,
    S1]];
+
+HaveHorizonData[run_, i_] :=
+  FileIsInRun[run, "BH_diagnostics.ah"<>ToString[i]<>".gp"];
 
 End[];
 
