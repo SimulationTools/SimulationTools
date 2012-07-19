@@ -645,12 +645,22 @@ Protect /@ $1DPlotFunctions;
 SyntaxInformation[Coordinate] =
  {"ArgumentsPattern" -> {_, _}};
 
-Coordinate[d_DataRegion, dim_] :=
- Module[{origin, spacing, dims, max, ca, dm, dp, res},
+Coordinate[d_DataRegion, dir_:Automatic] :=
+ Module[{origin, spacing, ndims, dims, max, dim, ca, dm, dp, res},
+  ndims   = ArrayDepth[d];
   dims    = Dimensions[d];
   origin  = MinCoordinates[d];
   spacing = CoordinateSpacings[d];
   max     = MaxCoordinates[d];
+
+  If[dir === Automatic,
+    If[ndims =!= 1,
+      Error["Dimension not specified for "<>ToString[ndims]<>"-dimensional DataRegion"];
+    ];
+    dim = 1;
+  ,
+    dim = dir;
+  ];
 
   ca[x_, {}] := x;
   ca[x_, l_] := ConstantArray[x, l];
