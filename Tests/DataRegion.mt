@@ -629,7 +629,7 @@ slabs = {
   Sequence[10.0 ;; 10.1, ;; 20.2, 30.3]*)
 };
 
-slabTest[p_, s] :=
+slabTest[p_, s_] :=
  Test[
     Slab[dr, s /. List -> Sequence]
     ,
@@ -638,7 +638,7 @@ slabTest[p_, s] :=
     TestID->"Slab "<>ToString[s]
  ];
 
-Scan[slabTest, Transpose[{parts[[1;;5]], slabs}]];
+MapThread[slabTest, {parts[[1;;5]], slabs}];
 
 
 (****************************************************************)

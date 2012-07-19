@@ -14,8 +14,6 @@ ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion 
 
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
 
-Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
-
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
@@ -330,36 +328,6 @@ Shifted[d_DataRegion, delta_List] :=
   spacing = CoordinateSpacings[d];
 
   ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
-];
-
-
-(**********************************************************)
-(* Slab                                                   *)
-(**********************************************************)
-
-Options[Slab] = {
-  "Tolerance" -> 0.
-};
-
-SyntaxInformation[Slab] =
- {"ArgumentsPattern" -> {_, __, OptionsPattern[]}};
-
-(* TODO: Implement Tolerance support *)
-Slab[d_DataRegion, s__, OptionsPattern[]]:=
- Module[{slabSpec, spacing, origin, indexrange},
-  spacing = CoordinateSpacings[d];
-  origin  = MinCoordinates[d];
-
-  slabSpec = PadRight[{s}, ArrayDepth[d], All];
-
-  (* Convert coordinate range to index range *)
-  indexrange = Round[(slabSpec-origin)/spacing] + 1 //.
-    {Round[(All + a_) b_] + 1 -> All,
-     Round[(Span[x__] + a_) b_] +1 :> Span[Sequence @@ (Round[({x} + a) b] + 1)]
-    };
-
-  (* Get the relevant part of the data *)
-  Part[d, Sequence@@indexrange]
 ];
 
 
