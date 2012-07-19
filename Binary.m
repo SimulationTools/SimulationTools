@@ -24,6 +24,8 @@ ReadBinaryInclination::usage = "ReadBinaryInclination[run] gives the spherical p
 ReadBinarySeparation::usage = "ReadBinarySeparation[run] gives the distance between the two bodies in the binary as a function of time as a DataTable.";
 ReadBinaryPhase::usage = "ReadBinaryPhase[run] gives the phase, phi, (in the xy plane) of the binary's relative orbit.";
 
+ToListOfPoints::usage = "ToListOfPoints[{x, y, ...}] takes DataTables representing x, y, ... coordinates and gives a list {{x1, y1, ...}, {x2, y2, ...}, ...} suitable for plotting with Line or ListPointPlot3D.";
+
 Begin["`Private`"];
 
 (* We assume that there is only one binary in a simulation *)
@@ -83,6 +85,9 @@ ReadBinarySeparation[run_, opts:OptionsPattern[]] :=
 Options[ReadBinaryPhase] = Options[binaryTracker];
 ReadBinaryPhase[run_, opts:OptionsPattern[]] :=
   ReadBinaryAzimuth[run,opts];
+
+ToListOfPoints[ds:{_DataTable...}] :=
+  Transpose[ToListOfData/@ds];
 
 End[];
 EndPackage[];
