@@ -15,7 +15,6 @@ ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 MinCoordinateSpacing::usage = "MinCoordinateSpacings[d] gives the smallest spacing of the coordinates in d.";
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
-CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in the DataTable d. This is guaranteed to coincide with a data point in the DataTable.";
 CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
 InterpolatedMax::usage = "InterpolatedMax[d] returns the maximum value of the interpolant of a DataTable d";
 
@@ -596,24 +595,6 @@ Coordinate[d_DataTable, dir_:Automatic] :=
 
 
 (****************************************************************)
-(* CoordinateAtMax                                              *)
-(****************************************************************)
-
-SyntaxInformation[CoordinateAtMax] =
- {"ArgumentsPattern" -> {_}};
-
-CoordinateAtMax[d_DataTable] :=
- Module[{tMax, fMax, l, maxFind, t1, t2},
-  l = ToList[d];
-  {t1, t2} = DataTableRange[d];
-  fMax = -Infinity;
-  maxFind[{t_, f_}] :=
-   If[f > fMax, fMax = f; tMax = t];
-  Scan[maxFind, l];
-  Return[tMax]];
-
-
-(****************************************************************)
 (* CoordinateAtInterpolatedMax                                  *)
 (****************************************************************)
 
@@ -1113,6 +1094,16 @@ Options[DataTableInterval] = {Interval -> {Closed, Open}};
 DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
  RestrictedToInterval[d, {t1, t2}, Interval -> OptionValue[Interval]];
 
+LocateMaximumPoint[d_DataTable] :=
+ Module[{tMax, fMax, l, maxFind, t1, t2},
+  l = ToList[d];
+  {t1, t2} = DataTableRange[d];
+  fMax = -Infinity;
+  maxFind[{t_, f_}] :=
+   If[f > fMax, fMax = f; tMax = t];
+  Scan[maxFind, l];
+  Return[tMax]];
+
 UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;
 LocateMaximum = CoordinateAtInterpolatedMax;
@@ -1122,7 +1113,6 @@ DataTableNormL2 = GridNorm;
 IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;
 InvertDataTable = FunctionInverse;
-LocateMaximumPoint = CoordinateAtMax;
 
 End[];
 

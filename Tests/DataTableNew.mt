@@ -129,11 +129,24 @@ Test[
 (****************************************************************)
 
 Test[
-    CoordinateAtMax[dt4]
+    CoordinateAtMax[dt]
     ,
-    5
+    10
     ,
     TestID->"CoordinateAtMax"
+]
+
+
+(****************************************************************)
+(* CoordinatesAtMax                                              *)
+(****************************************************************)
+
+Test[
+    CoordinatesAtMax[dt4]
+    ,
+    {5, 6}
+    ,
+    TestID->"CoordinatesAtMax"
 ]
 
 

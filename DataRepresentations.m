@@ -28,6 +28,9 @@ Coordinate::usage = "Coordinate[d, i] returns a data representation of the same 
 SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are defined on the same coordinate grid.";
 Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta.";
 
+CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in d. This is guaranteed to coincide with a data point.";
+CoordinatesAtMax::usage = "CoordinatesAtMax[d] finds a list of the coordinates at which the maximum occurs in d. This is guaranteed to coincide with a data point.";
+
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
@@ -71,6 +74,35 @@ Add[a_?NumberQ, b_?NumberQ] := a+b;
 
 SyntaxInformation[Coordinate] =
  {"ArgumentsPattern" -> {_, ___}};
+
+
+(****************************************************************)
+(* CoordinateAtMax                                              *)
+(****************************************************************)
+
+SyntaxInformation[CoordinateAtMax] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinateAtMax[d_?DataRepresentationQ] :=
+ Module[{coord},
+  coord = CoordinatesAtMax[d];
+
+  If[Length[coord] =!= 1,
+    Error["Multiple maxima found."];
+  ];
+  First[coord]
+]
+
+
+(****************************************************************)
+(* CoordinatesAtMax                                              *)
+(****************************************************************)
+
+SyntaxInformation[CoordinatesAtMax] =
+ {"ArgumentsPattern" -> {_}};
+
+CoordinatesAtMax[d_?DataRepresentationQ] :=
+  Extract[ToListOfCoordinates[d], Position[d, Max[d]]];
 
 
 (**********************************************************)
