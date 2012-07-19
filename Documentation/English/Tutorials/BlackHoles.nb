@@ -1,0 +1,782 @@
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Black Holes",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/tutorial/Black Holes"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["BLACKHOLES TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/tutorial/DataTable"], "NumericalRelativity":>
+       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"]},
+       
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[None], None}]}], 
+       Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["Black Holes", "Title"],
+
+Cell["\<\
+A simulation can contain any number of black holes, numbered 1, 2, 3, ... .  \
+Functions are provided to get the mass and spin of each black hole.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Working with black holes", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input",
+ CellLabel->"In[2]:="],
+
+Cell[BoxData[GridBox[{
+   {"ReadBlackHoleMass", Cell["ReadBlackHoleSpin", "TableText"]},
+   {"ReadBlackHoleIrreducibleMass", "\[Placeholder]"}
+  }]], "DefinitionBox"],
+
+Cell["Functions for reading black hole information.", "Caption"],
+
+Cell[CellGroupData[{
+
+Cell["Mass", "Subsection"],
+
+Cell["\<\
+The function ReadBlackHoleMass gives the mass of one of the black holes as a \
+function of time.  This is the physical mass of the black hole, including the \
+spin contribution.  \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"mass1", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"run", ",", "1"}], "]"}]}]], "Input",
+ CellLabel->"In[3]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
+ CellLabel->"Out[3]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ToList", "[", "mass1", "]"}], "//", "Short"}]], "Input",
+ CellLabel->"In[4]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.5000039216000015`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "149", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"300.`", ",", "0.952048382458761`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellLabel->"Out[4]//Short="]
+}, Open  ]],
+
+Cell["\<\
+When simulating binary systems, the inspiralling black holes are \
+conventionally taken to be 1 and 2, and the final merged black hole is 3.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"mass2", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"run", ",", "2"}], "]"}]}]], "Input",
+ CellLabel->"In[5]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
+ CellLabel->"Out[5]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"mass3", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"run", ",", "3"}], "]"}]}]], "Input",
+ CellLabel->"In[6]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "97", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"108.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
+ CellLabel->"Out[6]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"{", 
+   RowBox[{"mass1", ",", "mass2", ",", "mass3"}], "}"}], "]"}]], "Input",
+ CellLabel->"In[7]:="],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxFjQlQ1GUYh1dQFFY5ygtUYB1O8QAxYhXhJ4JYiwHLJXKzF8ty7KGmjsqq
+OIqoGMIq2BQOhIQHeYSGGtiQkqWGW8CEyuGBoBOG4AGE2Qzfuzvzn51nnu95
+f7yULKHEiMPhHHn//f/PfmXFYv4kToffGELR/fU4DrElBK+qeO/etY/xTPTo
+/hlqIrbHdrPEIRN67wDh5u4zk4ldkNz8IPgNvZ+PnEeCdlPy7ig9/c25qcSL
+4b80jjeDeAk6Qm7esiD2wh29m5kVsTcWLLhebU28FPd31MociX2we6Je4ELs
+i6Zn0hIeMdAy+5axJ/EKGFn35joQ++Nt/CK+wa/ErtOuXB/iAIirTjgGEAfi
+N125aTDxKuw4rslMIA7CMuMITSjxaiBuSkUk8SeQPmzwDSL+FOF5c/ca3gvg
+pjttargXDJ7umlcM8Rp0rZ44LZX4MyyKbtPGE4fg6mhp7hbiUHjkvW3dxlgb
+ii1CxZzd5MPQKrpZtpl8GCQc2+ad5IUovr/EfQN5IQad/3Ax9OH43f1gm5p8
+OIweOO/PIR+BCQ0+rob9CPD50r488pEwi3nz6AD5SNgH1lw8RD4KTbzspELy
+UZjV4f5aRz4arg+r4g6Tj0ZgBf94Cfm1MDf5rqmc/FocHRD5/Uk+Bnbpnofr
+ycfARbqxffw45teBdyBn/i7G2nWoFVR23jViPhazWo90NE1gPhbZnVfs88cz
+H4drFUdHvw1nPg4C3YQv/OZ2jfl4dJ/qV52s6h7z8Uj3OBGjVP495hPQfL7k
+WrZqjLUJmLKMOwI184l4VNjQ2MlYmwjH4bOeuRrmk9D45IKt8foxRhIsjgR/
+EMVYmwTfr8o8DzOuT8IrjUvuGcacZMRf5lbfpT4Ze+1a6vTUJ8P3ZcjZFuqT
+YSkXK+9Rn4Igc5uUdupTYHxMUvqc+hSsuj60/yX1KTA/6KB9Tb0Ii5yO/UUe
+Ioy/MFL9gnoRnm3LnN5LvQidzuGVT6kXY9DGTUMMMVYGFOc9o14M3haFWw/1
+YkTGHfUy9BIUZX48YOglWHxhuJXeayUoSK2ppHv1EogWyK37qJfip4S1AYPU
+S+EvlFcMUS+Fze7Zk0epl+IH7alIkw2sl+FSVcM5LmPIEPRy1MOSsVaGoqu/
+ulszrpehUOfdNYf6VAyUFEQ7UJ+K2wOXVi6kPhWxwumPl1CfCm+H5uLl1MvR
+HrfCPJB6Oa6clxUEUy/HgKW8IIp6OTiaJ2cSqE+DJFRjJ6M+DTyrp8NZ1KfB
+/5LnzE3Up8Hp6fYbO6hXYLQ21XQf9QpcbjMLPkS9AjPW90cUUa9Ao6K8roT6
+dLyz+dH1OPXp6PefFFlNfTr0e7P1P1OfDh+nyrAH1GcgMTBqRR/1GbC47GLX
+T30GFBtw4jn1GZDsksb3Up+Jntta4QD1mVhmq/Az2cj6TETXdZVPY1yfCYsP
+14t4jDlZKOMO2s5njCxcnLH1xkfUZ4Fr1fuLP/VZOHgo3ymEeiVO3rldGM3Y
+Xonvt27rEdE9JfQeWSkZjJOUmKSfV7yR7isxPL2Rv5NxqRJr+Fc99tGeEtNe
+OTsWMe5QIiw/+8tS2leBu7zAtYr2VajL77CooX0VBCO68DraV2GeV+G9RtpX
+wYrvzdXTvgqbMh7eb6N9FWqNPP59TPsqFAVs39NH+2pYNhdNfEP7aow0eLSM
++5ztq9GQE1tjxjhJDf1MVcJUxlo11r0QjM5hXKpG4r09GU6M69Wobol1W/ie
+/wOWQdQt
+     "]]}, 
+   {Hue[0.9060679774997897, 0.6, 0.6], LineBox[CompressedData["
+1:eJxFjQ0w1HkchzeK2C50vdALtvGaXjids6V8ElcXHdZb8rrW7lrL2l3VVVPZ
+SlNSlJcturnTcHJ6cZXU6IVuXLnuetF2mEOkV+pOJ0o4XTfj97Uz/9l55vk9
+3w8vLkUg1uNwOEc+fv//s19xQTx/IqfDcxQhf/79OA6xKXzflvM+fGgfZXN0
+af8ZbCC2xg7jmEEDem8DwZbnZyYRO0DY+NBvgN7PR/oT33Yj8s4oOv3DuanE
+n8FrSSRvBvFidPjfum1C7Ia7OidjM2J3LFhwo8KCeAnadlZLbYk9sMdQ5+tA
+vBwNLyWFPGKgafZtfVfiFdCz6M6wIfbC+6hF/DG/ErtPO3I9iL0RX37C1pvY
+B79rS4z8iL/EzuOpimjiVViqH5waQLwaiPykNIT4K0ge1y1fRbwGQZlz9429
+94WT9rTR2D0/8LTX3cKJ16JzteG0BOKvsSisRRNF7I+rI0UZW4kD4JL5vnk7
+Y00Atgrkc/aQD0Sz6FbxFvKBEHMsG3eRF6CgbbHzRvIC9Ns/cBjrg3DPOatF
+TT4Ieg/tD6STD8aEOg/Hsf1g8PmSnkzyITAOH3hykHwIrH2qLh4iH4oGXlps
+HvlQzOpwfqclHwbHx+WRueTD4FPKP15Ifh0mG/zUUEJ+HY72iTz/IB8OqyTX
+3Fry4XCQbGofP4759eAdTJ+/m7FmPap9yx7d12M+ArOaj3Q0TGA+AmmPrlhn
+j2c+ErWlR0d+DGI+Emu0Ew57zu0c9VF4eqpXdbL8+aiPgtLlRLhS+feoj8aD
+84XX01SjrInGpKXcYaiZj0FrXl39I8aaGNgOnXXNSGU+FreeVVrqbxhlxGLK
+Eb8poYw1sfD4rtg1l3FtLPpSHTLOMOYIIbzMrbhPvRCZVk01OuqF8Hzjf7aJ
+eiFMZfHKVurjsHryzLh26uOgf0xc9Ir6OKy6MXjgDfVxMM6y0byjXgQnu2N/
+kocIBpXDFa+pF+Gv7Yrp3dSL0GYfVPaC+nj0z3RKJUY8fLwLMl9SHw+rrXKn
+Lurj4R951G2sFyNX8UXfWC/GosqhZnqvEeNwQlUZ3asVQ7hAZtFDvQQ/R6/z
+7qdeAm+BrHSQegnM98yeNEK9BBc0p0IMNrJeisryunNcxpBizZsRF1PGGikO
+X/3N2YJxrRRZWvfOOdQnYKAwJ8yG+gTc67u0ciH1CRAKpj9dTH0C3G0aC5ZR
+L0NL5IrJPtTLcOW8NMePehl6TWU5odTLMKJ+diaa+kRIA1KtpNQnYrbZi6EU
+6hPhdcnVfDP1iXB4sePmTurlGK5OMNpPvRzXWoz9DlEvx4wNvcH51MtRLy+p
+KaQ+CR9mXnM8Tn0SXntNDKmgPgm6fWm6X6hPwnK7ssCH1Ccjxid0RQ/1yTC5
+7GDVS30yFBtx4hX1yRDvlkR1U69A1x2NoI96BZZayj0NNrFegZCazpJpjGsV
+MPl0g4jHmJOCYm6/5XzGSMHFGdtufk59Crhm3b96UZ+CrEPZdv7UK3Hy7p28
+MMbWSlzYtr1LRPeU0LmkxCUzjlXCUDevYBPdV2Joej1/F+MiJdbyr7rspz0l
+pr21t81n3KFEYHbat0W0rwJ3WY5jOe2rUJPdYVJF+yr4DmuDamhfhXluea31
+tK+CGd+dq6N9FTYnP25roX0VqvVc/n1K+yrke+/Y20P7apg25hsO0L4aw3Uu
+TeO+Yftq3EiPqDJmHKuGzlwVPZWxRo31r31H5jAuUiOmdW+yHeNaNSqaIpwW
+fuT/AAJv1Q0=
+     "]]}, 
+   {Hue[0.1421359549995791, 0.6, 0.6], LineBox[CompressedData["
+1:eJxFzXtMU3cYxvGKCShVgaCgREEyhheU2VBQYhhPERcTJE6YoFxK77dD23MO
+qMQonE2NikaggBm6P/ASZWggOoaoaBvDJssyltlNlgnqWFyAmUG0TiNYh5ff
+a5Om+ebt5/fE6pw5xgCZTKad+r7+ffspRH9feN3qpH/T36RUiCCVVzZY8K5l
+RTgVmTYiN7F7EboDUvfFcuxejJ9WbqtWO9i9GImrhCSBZ3c1Onwnp0sCu6uR
+G2yZrRLZvQThC4Nv/8laKsH3135NOVTG7hocOb8henr5u4YGzsRDYXmsJQ2S
+uwKV9aw9GjScHjrYxlqmxS9VFW23yWvRml3t8ZLX4nCy8mI/eS3cVgM/QF6H
+9NYo3X3yOsw5YWx+RF6HbcoXR56Qn7ofjZOekdfjo/gTf9AdeszomGwfJ69H
+gW1dxCh5PQaX5LYMkzfAF5VQRg0DVJlNh/8hb8AHu7iEEfIGbCr6MuW9N6Le
+sdr33huh7Jj4nf4vGVFn6Wyh9zxGaFdaF4yRN+GmemvmU/ImfJJjPfuCvAmR
++xfO8pM34bJ0YUvgdubNuNLac0nOGmZkP/ErQllLZtRd/3HVAtYeM1zH1gwt
+Im/B8+Ou/DjyFvT5utYlkrdAkxPxUEneAmXcnaY08lYMFqnmrCdvRfc3ZtdG
+8laMh1pdeeSt8It/t6nJ22D8tCzGTN6G2LDhCSd5GzK6kuZXkLdh6XDlrc/J
+c/BftcysJs+h+27wxlryHCLLH3/WSJ5DL3fGfZx8KV5F3Vh2knwpxjNmbGkn
+X4rfDlZ5vyNfio/jWzbfI29Hyfo81Rh5O0KuLY15TN4ObjvOPSJvh3GvqXiU
+vAMjfVKOj7wDa6O59MAdzDuQ7x46M4+1x4GQ8HJ9LGuZE6flT6NXsIYTlyN3
+30om78TssNEfMsg7UVtbE7+JPI+vf+5ryGe9mMe3u/eM6Ok9Hl6FU2dnreER
+5F3etIPe5zER0Zv6BetmHtmp1xXVtMdj3n9LPmxk/YDH5pqqr5ppX4A8zbWs
+lfYFuGsehHTSvoCsyWO5btoXsDylYaCX9gWEpa6Re2lfQIX9r8G7tC/gaoDi
+5UPaF9CYWXlgjPZFhN5pDHpO+yImexT903ayfRE9+wo7g1lrRHjnC+q5rCUR
+BeNZ/kWsm0WUDBywx7P2iGjvL0xInOr/AZKq74A=
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 300.}, {0, 0.952048382458761}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellLabel->"Out[7]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Spin", "Subsection"],
+
+Cell[TextData[{
+ "The function ReadBlackHoleSpin gives the spin of one of the black holes as \
+a function of time.  This is the dimensionful angular momentum; i.e. it has \
+units of ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"[", "mass", "]"}], "2"], TraditionalForm]]],
+ ".  "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"spin1", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin1x", ",", "spin1y", ",", "spin1z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input",
+ CellLabel->"In[8]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False], ",", 
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False], ",", 
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False]}], "}"}]], "Output",
+ CellLabel->"Out[8]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"spin2", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin2x", ",", "spin2y", ",", "spin2z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input",
+ CellLabel->"In[9]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False], ",", 
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False], ",", 
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False]}], "}"}]], "Output",
+ CellLabel->"Out[9]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"spin3", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin3x", ",", "spin3y", ",", "spin3z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"run", ",", "3"}], "]"}]}]}]], "Input",
+ CellLabel->"In[10]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False], ",", 
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False], ",", 
+   TagBox[
+    RowBox[{"DataTable", "[", 
+     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+    DataTable`DataTable,
+    Editable->False]}], "}"}]], "Output",
+ CellLabel->"Out[10]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin1x", ",", "spin3z"}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "0.1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input",
+ CellLabel->"In[11]:="],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1: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
+
+     "]]}, 
+   {Hue[0.9060679774997897, 0.6, 0.6], LineBox[CompressedData["
+1:eJw1zQ1M1AUcxvHDFihGiRoDlwonCrSZRoldETybYnPDGSlJINwLd3Bw70dG
+QitYKmTKS0B0IG8JpxCIOOQd4YQTwhSRsCWSECEmmYAFY21U1j3/7b/bs999
+/l8Pme4dxRKBQCD7933y+/8TgQLTk6e5g3u16pmph0d/CfxvpkSgP816bdVW
+2xYcxMmKubEd9rwfRG/Xof2O8+O2eyRyNAVVI7O2nRKJNSFixeA071HYYu8c
+1v0771E45uQS9u5D3sUwHdfktv/GuxjeVllJEbdAAnP3r++/yA0J/t7suU08
+xf9L4G731GX/B7bdKYHSt8Zt5j69FEnDOemtk/RS1AoXsrT36KVocnFt956g
+l6JlMjPKOk4vw/Bcnlz8M70M5v1BZp8xehnc9mUFO47Sy+B6IMBz8if6aFS3
+Nug7R+ijseHlQEnGHfpohHeXeYQO00cjTzp9ctNtejnEniuCl/5IL8dryYdz
+J3+gl6Ngt2d9xy16OfaUbTpSMUSvwPDxM46Z39Mr8PbnS6s/GqRXoD3BLnTf
+TXoFCj+prXxzgD4Gw2PrBgNu0Mcgas3A/VX99DF4qapFMn2NPgaJy8Jm//iO
+PhZbvROLBq7SxyLVN9W5qo8+Fj5t29oqv6WPxcXXRSlHeumVMI641ct76JUQ
+zvQ/iLhCr0STJT1YZKVX4tW7Q43Cbvo4XD3mt/BcF30c3EWFplkLfRwCnNaf
+utNJHwfL3tm+ng76eKTutis+d4k+HhP2vV757fTxEL+R/SiljT4eQR9f2aNp
+pVfBXHFjY2gLvQqLifOiHc30KvTZtTr5NtGrkCMKSRI20qtRbSmPf6GBXg2f
+E8vmXS/Sq7G4XXvUuZ5ejdqVKdK/LtBroFvvXXqrjl4DlYMoou48vQb56/JX
+J9fSa2A67RcQfo5ei7w03xxpDb0Wcxecu0Kr6bV4nFyXEPINvRZBIQv9kVX0
+OlyfsZT7V9LrIHFR93idpdchfHSLr/cZeh2KAz9zWWKm12Og38tpvty23fXw
+c7w3NnOa39Pj0E65/c2vbVuiR3P4UPZgGb+vx6Wux7d7Sm27VI+pVx7515ew
+p8fezXefbii27VE9DDUe281F7BswCYeSolPsG9C3YXHQVMi+AV7PH/A7UcC+
+AX+GxHWkm9g3YOPh/LOpX7FvQGZHbFpSPvsGvGc+X/nhl+wbkNFS75CQx74R
+ecLrO/W57BvxacPy5boc9o34IKxxheYL9o3wt6itmmz2jXg2c9eEOot9I9Zm
+rFyrzWTfiMvCt8zajPHAfwBxhAhe
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 300.}, {-0.1, 1}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellLabel->"Out[11]="]
+}, Open  ]],
+
+Cell["\<\
+Since the result is a list, you can compute the magnitude of the spin vector \
+using the Norm function:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"spin1Norm", "=", 
+  RowBox[{"Norm", "[", "spin1", "]"}]}]], "Input",
+ CellLabel->"In[12]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
+ CellLabel->"Out[12]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "spin1Norm", "]"}]], "Input",
+ CellLabel->"In[13]:="],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxd0nk81Hkcx/GpbdFIrhKlyRm2Va1CmPSWVJYOV64w42aYq0OXmk62rWSR
+dFFpiqi0UoscFVodknSXSodNhUrWQ4/a9rHfzz/r8fDweD3e8/x9hmEcLvGO
+GszhcLK/ff/7k76WOHuoVJ2OcmaJvCZtdf0jvay1kPJuVoZoWwdrfbjw5+q4
+WmvO+K+N4NDgUfyX6le2m4H7TCW/UduI7ZbguadlL9AzYf0jdK0P1hzgDmI9
+Gd3FvMxwSR/zNqiNj5o5sEeX7VPxcmsCcpv0WNtBuNvQviGD9mmYcnRsW9Ln
+kawdwdNX4dSa67PmQzzq2t9dFeSdUbj889JJLcNYA/3PKj4ZCDisXXDHrX3U
+HZ3vWM9EDldye9sGVdauCJmnyzvjy2U9C47n94aUp6uzdsOaZDVzPSMN1rMx
+NdxcONpei/UcVBhOnPA1RJv1XNxrvZWiVzmCtTuqx5/r4K41YP0zQssuukbW
+0fv3wESZINTgylDWnuiZ6GqrMKWeB75iRVur23DW81HSnXJ32H0d1gtQL3XM
+HM6jv9dCvB2xRfT7F/Z8xUJEGKpWPzYdzXYvXDPdmMprNmS7F7perp9v1kmf
+rzc2fekpyNFi71fhDaviJ37Leun388G8u7YhC53o+T6Qlq5LajtJn48vqmKH
+DTiVjGG7LzanNtdYP+ex3Q+XFpcrDbzZ/4/CD9WcsS1zM83Yvggnij5elriP
+Y/siHD/cIJovN2W7PzST5RWdWZZs90eX2LS/IWIS2wNQ+ibXbcwYW7YHYJhk
+y6r0ZEe2B8Ijq1c4pGMm2wPBHdgVclV3PtuDEJC60VtNI4jtQRBuj75abRzN
+9mCk1Rj5utfL2R6MCRqKFd4qa9m+GMYiPqfdJZXt/2tOCO7VbFAxv17H9hA4
+59xT3OxuZ3soNmgH+lx6x1oRiplWui6L3tIehuQ9Tlnn39AeBnPzQ/v2U3ME
+8LctX/oDNQQwC548LayTXi/A9H2favivWdcIMPXsxDE9HeSFgEpnasUr8kKs
+0bizU/ySvBAP1IZUWb4gL8TS52mhde3kw8FTz4gMe0Y+HFJfN6XVU/LhsNLM
+8OQ+IR8OfX9ns1ePyUegqKJMWvOIfAS0f5oh2PGQfARszx809ntAPgJHhd3b
+x98nH4lYMy1PtXvkI+GyemXmqzvkI5HublZafZv8t9cfHL/pSCv5KDzfepSb
+dot8FOb8qla0poV8FOqXDPLzuUk+CvnrThZMbyYfjQdPeS3ON8hHw3N0c4du
+E/looLBc0H2NfDQUQwPef7xKPgYWlkn7m6+Qj0G0zXrtwkbyMXCqtK0s+JN8
+DKocHRSbLpOPheCRQWlkA/lYmPQ0vQ6uJx8LZW2qp0Md+VjMbms9a3KJfBxu
+bbHr17xIPg5GDntz3teSj8NCjXH7HtaQj0PjgveNDdXk47HefdCBE1Xk4/FC
+5bJF9nny8QhzSu9SVJKPB39t/bzECvIiKI/cMPcrJy9Cb1Kfg+sf5EVoHFSh
+YXOOvAgZDl6rTM6ST0BRbX68YRn5BEzZNrRP/wz5BPTaizdrl5JPgFJHIRw4
+TT4RknGWebdLyCdCpOoQXHKKfCKyedkjVp8kn4icw3bOQSfIi5GVYpMhLCYv
+xqfT2hf9isiL8WF1yRKv4+TFcPPqbwopJC/B9Z7afH4BeQkEegkNFsfIS+D1
+ZJKN5VHyEmTN+EVvsJK8FPebLDT68lkbSWHHffm05zA9T4plsyJVbh5iLZDi
+QlBrestBer4UVRc/3G/IY50nReeULn5pLt2TYoF12/dlB1g/kUJWbGyv3E/3
+ZXgF1dz9++i+DI2mX1py9tJ9GSxG+ttt20P3Zej1iqtOzaH7MpivzD62fjfd
+lyGtOiZlVTbdlyFQeapgxS66L8OO8lLVJVl0X44sk+uzpJl0X46NZerqkgy6
+L8fygLNaib/RfTn4tQl1iel0X47habNfJOyk+3KM3aEzVpxG9+W4YDJHKd7R
+PuMfrQDMRA==
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 300.}, {0., 0.62314725080504}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellLabel->"Out[13]="]
+}, Open  ]],
+
+Cell["\<\
+You can also compute the dimensionless spin by dividing by the mass squared:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"j1", "=", 
+  RowBox[{
+   RowBox[{"spin1Norm", "~", "Div", "~", "mass1"}], "^", "2"}]}]], "Input",
+ CellLabel->"In[14]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
+ CellLabel->"Out[14]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "j1", "]"}]], "Input",
+ CellLabel->"In[15]:="],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1: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
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 300.}, {0., 0.42915526618921207`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellLabel->"Out[15]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Irreducible mass", "Subsection"],
+
+Cell["\<\
+If there is no spin information available in the simulation then \
+ReadBlackHoleMass cannot be used.  If it is known that the spins are \
+negligible, then the irreducible mass can be used as a mass measurement.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"massIrr1", "=", 
+  RowBox[{"ReadBlackHoleIrreducibleMass", "[", 
+   RowBox[{"run", ",", "1"}], "]"}]}]], "Input",
+ CellLabel->"In[16]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"DataTable", "[", 
+   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "150", 
+    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
+  DataTable`DataTable,
+  Editable->False]], "Output",
+ CellLabel->"Out[16]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation notes", "Section"],
+
+Cell["\<\
+NRMMA obtains black hole information from any of the following sources:\
+\>", "Text"],
+
+Cell["AHFinderDirect and QuasiLocalMeasures Cactus output;", "Item"],
+
+Cell["Numerical Relativity Data Format (NRDF) output files", "Item"],
+
+Cell["\<\
+In both cases, the black holes are numbered according to the output data. So \
+black hole 1 corresponds to AHFinderDirect horizon 1 (QuasiLocalMeasures \
+horizon 0), or NRDF body 1 from the metadata file.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedTutorialsSection",
+ WholeCellGroupOpener->True],
+
+Cell[TextData[ButtonBox["DataTable",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/DataTable"]], "RelatedTutorials"],
+
+Cell[TextData[ButtonBox["NumericalRelativity",
+ BaseStyle->"Link",
+ ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Black Holes",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
+    "Black Holes Tutorial", "language" -> "en", "paclet" -> "BlackHoles", 
+    "status" -> "None", "summary" -> 
+    "Tutorial for reading black hole information from simulations", 
+    "synonyms" -> {}, "title" -> "Black Holes", "windowTitle" -> 
+    "Black Holes", "type" -> "Tutorial", "uri" -> 
+    "nrmma/tutorial/Black Holes"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+
