@@ -16,8 +16,6 @@ VariableName::usage = "VariableName[d] returns the variable name in DataRegion d
 
 Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified by the coordinates the coordinates {x1min, x1max}, ....";
 
-Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
-
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
@@ -641,9 +639,6 @@ Protect /@ $1DPlotFunctions;
 (**********************************************************)
 (* Coordinate                                             *)
 (**********************************************************)
-
-SyntaxInformation[Coordinate] =
- {"ArgumentsPattern" -> {_, _}};
 
 Coordinate[d_DataRegion, dir_:Automatic] :=
  Module[{origin, spacing, ndims, dims, max, dim, ca, dm, dp, res},

@@ -588,6 +588,21 @@ AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
   gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], ListAttributes[d]]];
 
 
+(**********************************************************)
+(* Coordinate                                             *)
+(**********************************************************)
+
+Coordinate[d_DataTable, dir_:Automatic] :=
+ Module[{coord},
+  If[(dir =!= Automatic) && (dir =!= 1),
+    Error["Dimension "<>ToString[dir]<>" is not valid for DataTables"];
+  ];
+
+  coord = ToListOfCoordinates[d];
+  ToDataTable[Transpose[{coord, coord}]]
+];
+
+
 (****************************************************************)
 (* CoordinateAtMax                                              *)
 (****************************************************************)

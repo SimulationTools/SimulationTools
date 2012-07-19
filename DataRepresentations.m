@@ -23,6 +23,7 @@ MinCoordinates::usage = "MinCoordinates[d] returns a list of the coordinates of 
 MaxCoordinate::usage = "MaxCoordinate[d] returns the coordinate of the last point in in d.";
 MaxCoordinates::usage = "MaxCoordinates[d] returns a list of the coordinates of the last point in each direction in d.";
 CoordinateOutline::usage = "CoordinateOutline[d] generates a graphical representation of the outline of d";
+Coordinate::usage = "Coordinate[d, i] returns a data representation of the same shape as d whose data is the i coordinate of d.";
 SameGridQ::usage = "SameGridQ[d1, d2] returns True if d1 and d2 are defined on the same coordinate grid.";
 Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shifted by delta.";
 
@@ -57,6 +58,14 @@ Add[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], H
   Apply[Plus, Resampled[{d1, d2}, p]];
 
 Add[a_?NumberQ, b_?NumberQ] := a+b;
+
+
+(**********************************************************)
+(* Coordinate                                             *)
+(**********************************************************)
+
+SyntaxInformation[Coordinate] =
+ {"ArgumentsPattern" -> {_, ___}};
 
 
 (**********************************************************)
