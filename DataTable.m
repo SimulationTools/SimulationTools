@@ -221,7 +221,6 @@ $NonDataTableFunctions =
 $DataTableFunctions =
   {FilterNaNs};
 
-(* TODO: maybe simplify this by splitting out into a version for OneIdentity functions and a version for others *)
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  MemberQ[$DataTableFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
