@@ -67,6 +67,7 @@ Module[{packages =
   "SimView",
   "SimViewRRMHD",
   "SystemStatistics",
+  "Trackers",
   "Tracks",
   "TwoPunctures",
   "Utils",

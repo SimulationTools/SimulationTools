@@ -39,6 +39,9 @@ InitialSpinAngle;
 
 Begin["`Private`"];
 
+Horizons`Trackers`ReadCoordinates[runName_, i_] :=
+  Table[ReadAHCentroidCoord[runName, i, dir], {dir, 1, 3}];
+
 ReadIHSpin[runName_, hn_] :=
  MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
   ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
