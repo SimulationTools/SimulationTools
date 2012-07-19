@@ -29,6 +29,7 @@ Module[{packages =
  {"Ascii1D",
   "Ascii",
   "BHCoordinates",
+  "Binary",
   "CarpetIOHDF5",
   "CarpetHDF5",
   "CoordinateTransformations",
