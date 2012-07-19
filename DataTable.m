@@ -4,6 +4,7 @@ BeginPackage["DataTable`",
  {
   "DataRepresentations`",
   "Error`",
+  "NR`",
   "Profile`"
  }];
 
@@ -12,7 +13,7 @@ ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a Da
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
-Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of the DataTable d.";
+Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
 
 MinCoordinateSpacing::usage = "MinCoordinateSpacings[d] gives the smallest spacing of the coordinates in d.";
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
@@ -558,7 +559,7 @@ SyntaxInformation[Frequency] =
 
 (* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
 Frequency[d:DataTable[__]] :=
-  NDerivative[Phase[d]];
+  If[$NRMMACompatibilityVersion < 1, NDerivative[Phase[d]], NDerivative[1][Phase[d]]];
 
 
 (****************************************************************)
