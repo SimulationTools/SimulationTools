@@ -107,7 +107,7 @@ CoordinateRange[d_?DataRepresentationQ] :=
  Module[{ndim},
   ndim = ArrayDepth[d];
   If[ndim =!= 1,
-  	Error["CoordinateRange only be used with 1 dimensional data representations."];
+    Error["CoordinateRange should only be used with 1 dimensional data representations."];
   ];
 
   First[CoordinateRanges[d]]
