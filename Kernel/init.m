@@ -30,6 +30,7 @@ Module[{packages =
   "Ascii",
   "BHCoordinates",
   "Binary",
+  "BlackHole",
   "CarpetIOHDF5",
   "CarpetHDF5",
   "CoordinateTransformations",
