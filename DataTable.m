@@ -764,7 +764,6 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
 SyntaxInformation[RestrictedToInterval] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
-(* TODO: Change the default for this to {Closed, Closed} *)
 Options[RestrictedToInterval] = {Interval -> {Closed, Closed}};
 
 RestrictedToInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
