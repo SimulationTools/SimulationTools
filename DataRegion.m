@@ -18,11 +18,11 @@ Slab::usage = "Slab[d, {{x1min, x1max}, ...}] gives the hyperslab of specified b
 
 Coordinate::usage = "Coordinate[d, i] returns a DataRegion of the same shape as d whose data is the i coordinate of d.";
 
-(* TODO: Add Metadata function and user-defined metadata *)
-
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
+
+(* TODO: Add Metadata function and user-defined metadata *)
 
 TimeDerivative;
 
