@@ -615,3 +615,23 @@ Test[
 ]
 
 
+(****************************************************************)
+(* UniformSpacingQ                                              *)
+(****************************************************************)
+Test[
+    UniformSpacingQ[dt]
+    ,
+    True
+    ,
+    TestID->"UniformSpacingQ True"
+]
+
+Test[
+    UniformSpacingQ[dt2]
+    ,
+    False
+    ,
+    TestID->"UniformSpacingQ False"
+]
+
+
