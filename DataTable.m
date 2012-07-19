@@ -226,10 +226,12 @@ $DataTableFunctions =
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  MemberQ[$DataTableFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
- Module[{args},
-  (* TODO: Check DataTables are on the same grid *)
+ Module[{args, ds, attrs},
   args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
   ds = Cases[{x, d, y}, _DataTable, Infinity];
+  If[Length[ds] > 1 && !(SameGridQ@@ds),
+    Error[ToString[f]<>" cannot operate on DataTables with different coordinates."];
+  ];
   attrs = Apply[Intersection, Map[ListAttributes, ds]];
   ToDataTable[Transpose[{ToListOfCoordinates[d], f@@args}], ListAttributes[d]]
 ];
@@ -274,14 +276,10 @@ MapList[f_, DataTable[l_, attrs___]] :=
 Unprotect[MapThread];
 
 MapThread[f_, ds:List[DataTable[__]...]] :=
- Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
-  lists = Map[ToList, ds];
-  lengths = Map[Length, lists];
-
-  If[!Apply[Equal,lengths],
-    Error["MapThreadData: DataTables are not all of the same length"]];
-
-  (* TODO: Check that the DataTables are "compatible"; i.e. their coordinates are the same to within a tolerance *)
+ Module[{vals, xs, fOfVals, tb, attrs},
+  If[Length[ds] > 1 && !(SameGridQ@@ds),
+    Error["MapThread cannot operate on DataTables with different coordinates."];
+  ];
 
   vals = Map[DepVar, ds];
   xs = IndVar[First[ds]];

@@ -305,9 +305,12 @@ $DataRegionFunctions =
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
  MemberQ[$DataRegionFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
- Module[{args},
-  (* TODO: Check DataRegions are on the same grid *)
+ Module[{args, ds},
   args = {x, d, y} /. dr_DataRegion :> ToListOfData[dr];
+  ds = Cases[{x, d, y}, _DataRegion, Infinity];
+  If[Length[ds] > 1 && !(SameGridQ@@ds),
+    Error[ToString[f]<>" cannot operate on DataRegions with different coordinates."];
+  ];
   DataRegion[attributes[d], f@@args]
 ];
 
@@ -532,8 +535,8 @@ Unprotect[MapThread];
 
 MapThread[f_, ds:List[DataRegion[___]..], n_:Automatic] :=
  Module[{depth},
-  If[Length[DeleteDuplicates[ds, SameGridQ]] =!= 1,
-  	Error["MapThread is only supported for DataRegions on the same grid."];
+  If[Length[ds] > 1 && !(SameGridQ@@ds),
+    Error["MapThread is only supported for DataRegions on the same grid."];
   ];
   depth = ArrayDepth[ds[[1]]];
   If[n =!= Automatic && n =!= depth,
