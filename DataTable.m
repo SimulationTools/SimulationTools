@@ -750,8 +750,6 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
     mins = Map[First, ranges];
     maxs = Map[Last, ranges];
 
-    (* TODO: add a check that the grids are compatible; and an option to disable the check? *)
-
     min = Max[mins];
     max = Min[maxs];
 
