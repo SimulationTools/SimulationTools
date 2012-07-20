@@ -10,18 +10,24 @@ BeginPackage["SystemStatistics`",
   "RunFiles`"
  }];
 
-ReadRunSpeed::usage = "ReadRunSpeed[run] returns a DataTable with the speed of a run in M/hr as a function of time.";
-RunCost::usage      = "RunCost[length, speed, nprocs] returns information about the cost of a run.";
-ReadMemory::usage   = "ReadMemory[run] returns a DataTable with the swap usage of run as a function of time.";
-ReadSwap::usage     = "ReadSwap[run] returns a DataTable with the swap usage of run as a function of time.";
-ReadWalltime::usage = "ReadWalltime[run] returns the total walltime used by sim.";
-ReadCPUHours::usage = "ReadCPUHours[run] returns the total number of CPU hours used by run.";
+ReadSimulationSpeed::usage = "ReadSimulationSpeed[simname] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
+ReadSimulationMemoryUsage::usage   = "ReadSimulationMemoryUsage[simname] gives the memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
+ReadSimulationSwapUsage::usage   = "ReadSimulationSwapUsage[simname] gives the swap memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
+ReadSimulationRunTime::usage = "ReadSimulationRuntime[simname] gives the real time elapsed during the execution of a simulation.";
+ReadSimulationCost::usage = "ReadSimulationCost[simname] gives the total number of CPU hours used by all processes in a simulation .";
 CPUHours;
 WallTimeDays;
 ReadWalltimeHours;
 CostAnalysis;
 PresentationCostAnalysis;
 ReadCarpetSpeed;
+
+(* Old names *)
+ReadRunSpeed = ReadSimulationSpeed;
+ReadMemory = ReadSimulationMemoryUsage;
+ReadSwap = ReadSimulationSwapUsage;
+ReadWalltime = ReadSimulationRunTime;
+ReadCPUHours = ReadSimulationCost;
 
 Begin["`Private`"];
 
