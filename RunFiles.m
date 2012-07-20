@@ -11,19 +11,20 @@ BeginPackage["RunFiles`",
   "Providers`"
  }];
 
-FindRunFiles::usage = "FindRunFiles[run, filename] returns a list containing the full names of files named filename in the different segments of run.";
+FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
+ReadSimulationCoreCount::usage    = "ReadCores[simname] gives the number of cores used by a simulation.";
+
+(* TODO: Do we really need these? We should be using FindRunFiles instead?
+  If there are no cases where they are necessary, remove them *)
+FindRunSegments(*::usage = "FindRunSegments[run] returns a list of all the segment directories for a run which is split across multiple segments."*);
+FindRunDir(*::usage = "FindRunDir[run] returns the directory which contains the output data for run.  You can give a full or relative pathname to the run directory, or a run name relative to the (Global) variable RunDirectory."*);
 
 (* TODO: These don't belong here *)
 ReadColumnFile;
 ReadColumnFile2;
-ReadCores::usage    = "ReadCores[run] returns the number of cores used by sim.";
 CarpetASCIIColumns;
 MergeFiles;
 
-(* TODO: Do we really need these? We should be using FindRunFiles instead?
-  If there are no cases where they are necessary, remove them *)
-FindRunSegments::usage = "FindRunSegments[run] returns a list of all the segment directories for a run which is split across multiple segments.";
-FindRunDir::usage = "FindRunDir[run] returns the directory which contains the output data for run.  You can give a full or relative pathname to the run directory, or a run name relative to the (Global) variable RunDirectory.";
 StandardOutputOfRun;
 SegmentStartDate;
 SegmentEndDate;
@@ -34,14 +35,18 @@ SegmentStartTimes;
 HaveRunDir;
 
 (* TODO: Deprecate/remove these *)
-FindRunFile::usage = "FindRunFile[run, filename] returns a list containing the full names of files named filename in the different segments of run.";
-FindRunFilesFromPattern::usage = "FindRunFilesFromPattern[run, pattern] returns a list of leaf file names matching pattern which are found in any of the segments of run.  To find the paths within each segment, use FindRunFile on each result from this list.";
-FindFirstRunFile::usage = "FindFirstRunFile[run, file] returns the full pathname of file in the first segment of run.";
-FileIsInRun::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run.";
+FindRunFile(*::usage = "FindRunFile[run, filename] returns a list containing the full names of files named filename in the different segments of run."*);
+FindRunFilesFromPattern(*::usage = "FindRunFilesFromPattern[run, pattern] returns a list of leaf file names matching pattern which are found in any of the segments of run.  To find the paths within each segment, use FindRunFile on each result from this list."*);
+FindFirstRunFile(*::usage = "FindFirstRunFile[run, file] returns the full pathname of file in the first segment of run."*);
+FileIsInRun(*::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run."*);
 
 (* TODO: Convert these to strings and make them options to FindRunFiles *)
 FullFilenames;
 LeafNamesOnly;
+
+(* Old names *)
+ReadCores = ReadSimulationCoreCount;
+FindRunFiles = FindSimulationFiles;
 
 Begin["`Private`"];
 
