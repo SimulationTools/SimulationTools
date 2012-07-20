@@ -72,7 +72,7 @@ data[DataRegion[attrs_, d_]] := d;
 
 DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
  Module[{name, dims, range},
-  name = VariableName[d] /. Undefined -> "<<unnamed>>";
+  name = VariableName[d] /. Null -> "<<unnamed>>";
   dims = Dimensions[d];
   range = CoordinateRanges[d];
 
@@ -180,8 +180,8 @@ VariableName[d_DataRegion] := VariableName /. attributes[d];
 (* TODO: add a CoordinateGrid[d] which returns {{min,max,d},...} *)
 
 Options[ToDataRegion] := {
-  "VariableName" -> Undefined,
-  "Time" -> Undefined};
+  "VariableName" -> Null,
+  "Time" -> Null};
 
 SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, ___, OptionsPattern[]}};

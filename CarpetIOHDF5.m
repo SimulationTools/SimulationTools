@@ -25,11 +25,11 @@ CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up 
 (****************************************************************)
 
 Options[CarpetIOHDF5`GridFunctions`ReadData] = {
-    "Iteration"       -> Undefined,
-    "Map"             -> Undefined,
-    "RefinementLevel" -> Undefined,
-    "TimeLevel"       -> Undefined,
-    "Variable"        -> Undefined,
+    "Iteration"       -> Null,
+    "Map"             -> Null,
+    "RefinementLevel" -> Null,
+    "TimeLevel"       -> Null,
+    "Variable"        -> Null,
     "StripGhostZones" -> True
   };
 
@@ -217,13 +217,13 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
   order  = Reverse /@ Range /@ ArrayDepth /@ data;
   data = MapThread[Transpose, {data, order}];
 
-  origin = "origin" /. annots /. "origin" -> Undefined;
-  spacing = "delta" /. annots /. "delta" -> Undefined;
-  name = "name" /. annots /. "name" -> Undefined;
+  origin = "origin" /. annots /. "origin" -> Null;
+  spacing = "delta" /. annots /. "delta" -> Null;
+  name = "name" /. annots /. "name" -> Null;
 
   ghosts = ("cctk_nghostzones" /. annots) /. "cctk_nghostzones" -> 0;
 
-  time = "time" /. annots /. "time" -> Undefined;
+  time = "time" /. annots /. "time" -> Null;
   dr = MapThread[ToDataRegion[#1,#2,#3,VariableName->#4,Time->#5] &,
                  {data, origin, spacing, name, time}];
 
