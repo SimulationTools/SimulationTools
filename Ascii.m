@@ -11,7 +11,10 @@ BeginPackage["Ascii`",
   "RunFiles`"
  }];
 
-ReadCarpetASCIIScalar::usage = "ReadCarpetASCIIScalar[run,filename] Reads Carpet ASCII 0D and Scalar data.";
+(* This should be handled through some sort of abstract "simulation
+   scalar" API, similar tot he GridFunctions API. *)
+
+ReadCarpetASCIIScalar(*::usage = "ReadCarpetASCIIScalar[run,filename] Reads Carpet ASCII 0D and Scalar data."*);
 
 Begin["`Private`"];
 
