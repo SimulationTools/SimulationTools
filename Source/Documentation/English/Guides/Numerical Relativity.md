@@ -40,7 +40,7 @@
 
    GuideSection[
      "Kicks",
-     {"Kick" -> "Compute the kick in km/s as measured from the gravitational waves",
+     {"ReadKick" -> "Compute the kick in km/s as measured from the gravitational waves",
      "SpinWeightedSphericalHarmonic" -> "Compute a spin-weighted spherical harmonic"}],
 
    GuideSection[
@@ -53,7 +53,6 @@
      "DataAnalysis",{"WaveformOverlap" -> "Compute the phase- and time-maximised overlap of two DataTables"}],
 
    GuideSection[
-     "NRExport",{"ExportSim" -> "Export various data from a simulation to a given directory",
-                "ExportConfig" -> "Export a set of simulations run at different resolutions"}]},
+     "NRExport",{"ExportNumericalRelativitySimulation" -> "Export various data from a simulation to a given directory"}]},
 
   "Tutorials" -> {"Numerical Relativity"}}

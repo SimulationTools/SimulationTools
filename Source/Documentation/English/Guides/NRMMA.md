@@ -49,10 +49,10 @@
       {"ReadPsi4" , {"read ", Cell[BoxData[SubscriptBox["\[Psi]", "4"]], "InlineFormula"], "waveform"}},
       {"ReadBlackHoleSpin", "read spin angular momentum of a black hole"},
       {"ReadBinaryCoordinates", "read coordinate locations of members of a binary system"},
-      {"Kick", "compute kick from waveform"}},
+      {"ReadKick", "compute kick from waveform"}},
     "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadBlackHoleMass", 
       "ReadBinarySeparation", "ReadBinaryPhase", 
-      "KickVector", "LinearMomentumFlux"},
+      "ReadKickVector", "ReadLinearMomentumFlux"},
     "MoreFunctionsLink" -> "paclet:nrmma/guide/Numerical Relativity"
    },
 
