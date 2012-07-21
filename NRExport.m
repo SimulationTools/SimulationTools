@@ -14,24 +14,25 @@ BeginPackage["NRExport`",
   "Waveforms`"
  }];
 
-ExportExtrapolatedStrain::usage = "ExportExtrapolatedStrain[run, file, mass, l, m, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
-ExportAllExtrapolatedStrain::usage = "ExportAllExtrapolatedStrain[run, file, mass, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates all modes of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
-ExportAllExtrapolatedWaveforms::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolates all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-ExportExtractedWaveform::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
-ExportAllExtractedWaveforms::usage = "ExportAllExtractedWaveforms[run, file] exports all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
-ExportAllWaveforms::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
+ExportExtrapolatedStrain(*::usage = "ExportExtrapolatedStrain[run, file, mass, l, m, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'."*);
+ExportAllExtrapolatedStrain(*::usage = "ExportAllExtrapolatedStrain[run, file, mass, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates all modes of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode."*);
+ExportExtrapolatedWaveform(*::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'."*);
+ExportAllExtrapolatedWaveforms(*::usage = "ExportAllExtrapolatedWaveforms[run, file, mass] extrapolates all modes of the waveform in run assuming mass is the ADM mass. The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode."*);
+ExportExtractedWaveform(*::usage = "ExportExtractedWaveform[run, file, l, m, rad] exports the (l,m) mode of the waveform extracted at radius rad in run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'."*);
+ExportAllExtractedWaveforms(*::usage = "ExportAllExtractedWaveforms[run, file] exports all modes of the waveform in run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode."*);
+ExportAllWaveforms(*::usage = "ExportAllWaveforms[run, file, mass] exports all extracted waveforms along with the extrapolated waveform for run to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode."*);
 
-ExportLocalQuantity::usage = "ExportLocalQuantity[run, quantity, bh, file] exports a local quantity for black hole bh to file. Possible choices of quantity are Coordinates or Spin.";
+ExportLocalQuantity(*::usage = "ExportLocalQuantity[run, quantity, bh, file] exports a local quantity for black hole bh to file. Possible choices of quantity are Coordinates or Spin."*);
 Coordinates;
 Spin;
 HorizonMass;
 
-ExportMetadata::usage = "ExportMetadata[file, run, mass, ecc] exports the metadata for run to file.";
-ExportSim::usage = "ExportSim[run, niceName, outputDirectory, mass, ecc] exports a full simulation, including waveforms, local quantities and metadata.";
-ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
-ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
-ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
+ExportMetadata(*::usage = "ExportMetadata[file, run, mass, ecc] exports the metadata for run to file."*);
+ExportNumericalRelativitySimulation::usage = "ExportNumericalRelativitySimulation[run, alias, directory, mass, eccentricity] exports a numerical relativity simulation in the Numerical Relativity Data Format (NRDF) including waveforms, local quantities (black hole masses, spins and coordinates) and metadata.  mass is the ADM mass of the system.";
+ExportConfig(*::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration."*);
+ExportStatus(*::usage = "ExportStatus is a variable which reports the current status of an export."*);
+
+ExportSim = ExportNumericalRelativitySimulation;
 
 Begin["`Private`"];
 
@@ -352,6 +353,8 @@ makeEntry[key_ -> val_, pad_:0] :=
 makeEntry[val_] :=
  If[StringQ[val], val, ToString[val, CForm]];
 
+(* ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\"."; *)
+
 Options[ExportMetadata] = {"JunkTime" -> None, "ExportSimFormat" -> "ASCII"};
 ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
  Module[{tJunk},
@@ -364,8 +367,8 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 
 (* Full run *)
 
-Options[ExportSim] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None};
-ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
+Options[ExportNumericalRelativitySimulation] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None};
+ExportNumericalRelativitySimulation[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
   Module[{dir, h, n, ext, all, export},
 
     h = ReadCoarseGridSpacing[run];
