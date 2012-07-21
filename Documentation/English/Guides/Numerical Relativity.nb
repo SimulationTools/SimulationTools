@@ -57,51 +57,39 @@ Cell[CellGroupData[{
 Cell["BHCoordinates", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ReadBHCoordinates",
+ Cell[TextData[ButtonBox["ReadBinaryCoordinates",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHCoordinates"]], 
+  ButtonData->
+   "paclet:Numerical Relativity packages/ref/ReadBinaryCoordinates"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
- "Get the position of one of the black holes in a simulation as a function of \
+ "Get the coordinates of a binary system as a function of time"
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadBinarySeparation",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:Numerical Relativity packages/ref/ReadBinarySeparation"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Get the separation between the members of a binary system as a function of \
 time"
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ReadBHSeparation",
+ Cell[TextData[ButtonBox["ReadBinaryPhase",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHSeparation"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBinaryPhase"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
- "Get the separation between the first two black holes in a simulation as a \
-function of time"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadBHPhase",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHPhase"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Get the phase of the relative orbit of the first two black holes in a \
-simulation as a function of time"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadBHTrajectories",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBHTrajectories"]],
-   "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Get the locus of the orbits of the first two black holes in a simulation as \
-a function of time"
+ "Get the phase of the relative orbit of a binary system as a function of time"
 }], "GuideText"]
 }, Open  ]],
 
@@ -143,9 +131,9 @@ Cell[TextData[{
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["AlignPhases",
+ Cell[TextData[ButtonBox["AlignedPhases",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/AlignPhases"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/AlignedPhases"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -156,9 +144,10 @@ converting from real and imaginary to amplitude and phase."
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ExtrapolatePsi4",
+ Cell[TextData[ButtonBox["ReadExtrapolatedPsi4",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ExtrapolatePsi4"]], 
+  ButtonData->
+   "paclet:Numerical Relativity packages/ref/ReadExtrapolatedPsi4"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -167,9 +156,9 @@ Cell[TextData[{
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["StrainFromPsi4",
+ Cell[TextData[ButtonBox["Psi4ToStrain",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/StrainFromPsi4"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/Psi4ToStrain"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -178,9 +167,9 @@ Cell[TextData[{
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["NumCycles",
+ Cell[TextData[ButtonBox["ReadCycles",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/NumCycles"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadCycles"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -189,37 +178,9 @@ Cell[TextData[{
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["AlignedPhases",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/AlignedPhases"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
  Cell[TextData[ButtonBox["ImportWaveform",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ImportWaveform"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Psi4ToStrain",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Psi4ToStrain"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadCycles",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadCycles"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadExtrapolatedPsi4",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadExtrapolatedPsi4"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
@@ -236,63 +197,26 @@ Cell[CellGroupData[{
 Cell["Horizons", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ReadAHCentroid",
+ Cell[TextData[ButtonBox["ReadBlackHoleMass",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHCentroid"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBlackHoleMass"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
- "Read the position of the centroid of an apparent horizon as a function of \
-time from a simulation"
+ "Read the mass of a black hole as a function of time from a simulation"
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ReadAHMass",
+ Cell[TextData[ButtonBox["ReadBlackHoleSpin",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHMass"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadBlackHoleSpin"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
- "Read the mass of an apparent horizon as a function of time from a simulation"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadAHRadius",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHRadius"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Read the radius of an apparent horizon as a function of time from a \
+ "Read the spin angular momentum of a black hole as a function of time from a \
 simulation"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadAHSeparation",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadAHSeparation"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Read the distance between the centroids of the first two apparent horizons \
-as a function of time from a simulation"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadIsolatedHorizonSpin",
-  BaseStyle->"Link",
-  ButtonData->
-   "paclet:Numerical Relativity packages/ref/ReadIsolatedHorizonSpin"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Read the spin angular momentum of an apparent horizon as a function of time \
-from a simulation"
 }], "GuideText"]
 }, Open  ]],
 
@@ -414,9 +338,9 @@ Cell[CellGroupData[{
 Cell["DataAnalysis", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ComputeOverlap",
+ Cell[TextData[ButtonBox["WaveformOverlap",
   BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ComputeOverlap"]], 
+  ButtonData->"paclet:Numerical Relativity packages/ref/WaveformOverlap"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -431,10 +355,7 @@ Cell[TextData[{
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["WaveformOverlap",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/WaveformOverlap"]], "InlineFunctionSans"]
+ " "
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
