@@ -23,7 +23,7 @@ Cell["RestrictedToInterval", "ObjectName"],
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
 RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d \
-in the range [x1, x2).\
+in the range [x1, x2].\
 \>"]}
   }]], "Usage"]
 }, Open  ]],
@@ -88,7 +88,7 @@ TaggingRules->{
     "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
     "paclet" -> "DataTable", "status" -> "None", "summary" -> 
     "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the \
-DataTable d in the range [x1, x2).", 
+DataTable d in the range [x1, x2].", 
     "synonyms" -> {
      "RestrictedToInterval", "RESTRICTEDTOINTERVAL", "restrictedtointerval"}, 
     "title" -> "RestrictedToInterval", "windowTitle" -> 

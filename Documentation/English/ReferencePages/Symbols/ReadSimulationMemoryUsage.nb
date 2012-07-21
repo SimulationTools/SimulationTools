@@ -1,0 +1,74 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SystemStatistics",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSimulationMemoryUsage",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadSimulationMemoryUsage", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadSimulationMemoryUsage",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"], "[", 
+       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the memory usage of a simulation in MB as a \
+DataTable as a function of coordinate time."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadSimulationMemoryUsage",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadSimulationMemoryUsage", "READSIMULATIONMEMORYUSAGE", 
+      "readsimulationmemoryusage"}, "index" -> True, "label" -> 
+    "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
+    "SystemStatistics", "status" -> "None", "summary" -> 
+    "ReadSimulationMemoryUsage[simname] gives the memory usage of a \
+simulation in MB as a DataTable as a function of coordinate time.", 
+    "synonyms" -> {
+     "ReadSimulationMemoryUsage", "READSIMULATIONMEMORYUSAGE", 
+      "readsimulationmemoryusage"}, "title" -> "ReadSimulationMemoryUsage", 
+    "windowTitle" -> "ReadSimulationMemoryUsage", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadSimulationMemoryUsage"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

@@ -1,0 +1,75 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Parameters",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Parameters"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSimulationParameter",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSimulationParameter"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadSimulationParameter", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadSimulationParameter",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadSimulationParameter"], "[", 
+       StyleBox[
+        RowBox[{"run", ",", " ", "pname"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]reads the value of the named parameter from the \
+simulation."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadSimulationParameter",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadSimulationParameter", "READSIMULATIONPARAMETER", 
+      "readsimulationparameter"}, "index" -> True, "label" -> 
+    "nrmma/Parameters Symbol", "language" -> "en", "paclet" -> "Parameters", 
+    "status" -> "None", "summary" -> 
+    "ReadSimulationParameter[run, pname] reads the value of the named \
+parameter from the simulation.", 
+    "synonyms" -> {
+     "ReadSimulationParameter", "READSIMULATIONPARAMETER", 
+      "readsimulationparameter"}, "title" -> "ReadSimulationParameter", 
+    "windowTitle" -> "ReadSimulationParameter", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadSimulationParameter"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

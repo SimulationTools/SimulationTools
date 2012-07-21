@@ -1,0 +1,76 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Parameters",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Parameters"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["FindSimulationParameters",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/FindSimulationParameters"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["FindSimulationParameters", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["FindSimulationParameters",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/FindSimulationParameters"], "[", 
+       StyleBox[
+        RowBox[{"run", ",", " ", "pattern"}], "TI"], "]"}]], "InlineFormula"],
+     
+     "\[LineSeparator]gives a list of the names of all the parameters which \
+match pattern which were set in the simulation."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"FindSimulationParameters",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "FindSimulationParameters", "FINDSIMULATIONPARAMETERS", 
+      "findsimulationparameters"}, "index" -> True, "label" -> 
+    "nrmma/Parameters Symbol", "language" -> "en", "paclet" -> "Parameters", 
+    "status" -> "None", "summary" -> 
+    "FindSimulationParameters[run, pattern] gives a list of the names of all \
+the parameters which match pattern which were set in the simulation.", 
+    "synonyms" -> {
+     "FindSimulationParameters", "FINDSIMULATIONPARAMETERS", 
+      "findsimulationparameters"}, "title" -> "FindSimulationParameters", 
+    "windowTitle" -> "FindSimulationParameters", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/FindSimulationParameters"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

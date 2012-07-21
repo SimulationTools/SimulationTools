@@ -11,25 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Frequency",
+ ButtonBox["CoordinatesAtMax",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Frequency"]
+  ButtonData->"paclet:nrmma/ref/CoordinatesAtMax"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Frequency", "ObjectName"],
+Cell["CoordinatesAtMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Frequency",
+       ButtonBox["CoordinatesAtMax",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Frequency"], "[", 
+        ButtonData->"paclet:nrmma/ref/CoordinatesAtMax"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the first derivative of the complex phase of \
-d."
+     "\[LineSeparator]finds a list of the coordinates at which the maximum \
+occurs in d. This is guaranteed to coincide with a data point."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +45,24 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Frequency",
+WindowTitle->"CoordinatesAtMax",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"Frequency", "FREQUENCY", "frequency"}, "index" -> True, 
-    "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "keywords" -> {
+     "CoordinatesAtMax", "COORDINATESATMAX", "coordinatesatmax"}, "index" -> 
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
     "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "Frequency[d] returns the first derivative of the complex phase of d.", 
-    "synonyms" -> {"Frequency", "FREQUENCY", "frequency"}, "title" -> 
-    "Frequency", "windowTitle" -> "Frequency", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Frequency"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "CoordinatesAtMax[d] finds a list of the coordinates at which the maximum \
+occurs in d. This is guaranteed to coincide with a data point.", 
+    "synonyms" -> {
+     "CoordinatesAtMax", "COORDINATESATMAX", "coordinatesatmax"}, "title" -> 
+    "CoordinatesAtMax", "windowTitle" -> "CoordinatesAtMax", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/CoordinatesAtMax"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

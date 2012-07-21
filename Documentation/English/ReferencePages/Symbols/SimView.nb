@@ -1514,7 +1514,7 @@ zHlyhIXWLDvfQr+3yNFx/PvAiJ7s95kDcswJXr9JMoS5RI7gDpe+AnPm013z
          ItemBox["288",
           Alignment->Right,
           StripOnInput->False], 
-         ItemBox["\<\"Tue 10 Jul 2012 17:34:00\"\>",
+         ItemBox["\<\"Fri 30 Mar 2012 14:24:16\"\>",
           Alignment->Right,
           StripOnInput->False]}
        },
@@ -1524,6 +1524,10 @@ zHlyhIXWLDvfQr+3yNFx/PvAiJ7s95kDcswJXr9JMoS5RI7gDpe+AnPm013z
        GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{0.5}}}],
       "Grid"], "\[SpanFromLeft]"},
     {
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "}"}], ",", 
+       RowBox[{"{", "}"}]}], "}"}], 
      GraphicsBox[{},
       AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
       Axes->True,
@@ -1543,109 +1547,8 @@ zHlyhIXWLDvfQr+3yNFx/PvAiJ7s95kDcswJXr9JMoS5RI7gDpe+AnPm013z
       Frame->True,
       ImageSize->250,
       LabelStyle->Medium,
-      PlotLabel->FormBox["\"S_i/m^2\\n\"", TraditionalForm],
-      PlotRange->{{0., 0.}, {0, 0.}},
-      PlotRangeClipping->True,
-      PlotRangePadding->{
-        Scaled[0.02], {Automatic, 
-         Scaled[0.02]}}], 
-     GraphicsBox[{{}, {}, 
-       {GrayLevel[0], AbsoluteThickness[1], LineBox[CompressedData["
-1:eJxdVXtUjHkYnujqWqjsxaWseyXFJqSH0IVuky50m2aamS5zacYtxMy0couQ
-oU3OliW5bRGdwm4mlhVKNZSirWiF1m0drMvYtaf354+dc74z5znP+7zP732/
-73s+O76cK+zF4XByPl3//bNfRcmVufbn7XUEIbjjqsk/a4keaInSxHcvUx6K
-CA+FaYi+XTs9mvBIKBqGr2/wB+m/QVGU6/aq7ljixyFeGzFwWIuCsANsV3bt
-zXqWRtgZtY+X7rs6Wk3YBcHcGxf7nPuO8BRUt12tO5uVTvhblO6qefskaD3h
-aTiycF3hAw3jp6P0qUXpnI0bCc/EREfvjistGYRnIe+hsizwD1YPjB3vWDXP
-wPxnwzx/vFxqv4bwHOTtcXdOeqgk7IXpzSEt9wsZPxcjDjdHfvw8zzwkVYhf
-1mpUhOdj9T8W27KHsP7eiJBd6FtazObzQckhVWDNITaPL7hpwd5Nzkzvh/tp
-xbrlMsYvwOty+SlVEcMLkeOZXjA1hvXzR3VnVWDDDg3hAIROubZz6yXmH4is
-p0I3zTLGByGsvrlycBftRx2Ektle4r98NxAfjEfja61GDthEfDAONFu3Jm5i
-/lxcL3B9P3cK1au54BwWuqYupHpOCHZhRodpdibxIWisdfyQrdpG/CK0rnHb
-bmvD+EVwHHRPOsOO+Ydi93zN1ntHaD51KJR6szbt5/sXBuNKqe3LfMaHYc6K
-BN/9Luz+h8PkAGdurgfVq8Px9EU/P5c3rH8EVtbnNt0+weaPQMjoZbUIYPrF
-qK00q/gijs23GN3T7Ra0LWX7W4LL9bZ7hEglfgnixr5WWV2TER+JbY6HM1e5
-RBIfCSPDiRtN8XzioxBVYpGmuEHvn/p/mBONADNeYbctl/hodOkvNPfLCCY+
-BoWTj4trLQirY3ArfILP+HvexMdiS6ZTzQzOAOJjIeD6D/rhp1DiebgcfTvk
-0kBeDwYP69OMNnS6TqN6Hvy+HOUlnWjag3U81IeeKStKtiV9HFZ75Po3ecaQ
-Pg7vr/uYu09LIH0c6gLK7xo9p/66OEQbd5Xc/iWa9HyEBZj+ap46m/R89C00
-CfDbx6N98bEto5fyWVFID9bxcSe48nJHB8sfAWpfV4T+PpbbgyHABYdbt7yj
-h5K/AMXL9sratA7kL4BTo79Zv6pFpI+H4WLkrrKW4eQfj9P6ra3dknDyj4db
-TZKv/9dy8o9Hhawut3jXUtILwct0EhgvXk7+QugrH2227kggvRAzVzjNqO5I
-JL0QBR9cxZG3WZ6IYCUx1gx2JAwRTE2yhE/cV5NehN4N0jtqDuWBToQxVgem
-uqasI70YL3wl1cXD6XmEGGfkBxuPHqU8UosxX+l1ONKd6nViiI2H3Xw3geVL
-ArSzAs5NOkgYCTi5NtbE4+BK0iegcZaLjYW9lPQJ0NcH91r4dxLpE3GJ79Em
-yaPnH4lYL6wyDAii86gTccgoR3esD+WFLhG+fEOMQ3466ZNw6/yyH3ezfEQS
-llSOsczNonp1EiY9+6DytKd+uiRAYn7MuonleTKq1s2XLi9g8ydjoHV3/1UC
-lgfJsP5ZtX/MBuafjBWpV4aVfc4/CToX70t3+4p4SFA2YeNEtzA6j1qCuhGX
-3DrbmL8EFseXFhWyeThSnJ533lE7jvwgxX7pvceWk1ieSPF946m14lGUHzop
-+pvtvOjTzvxlCO98XiTVM70Mlq6TozLfsPPL0JbtLfRsoTzVyXBTlFe+XL+V
-9HK8MrdUGSKySC+HAe8L1p7fSXo5guwW+VwMyCa9HDYtF1pOztxB+hS8cpqT
-38ryd2QK0qOUeQ/PUv4hBV6rd479WEM8LwXq3oauozHkr05BtVu085TRxBek
-IMKQmGGTupn8PunXPtissaP69k/9z5w5+c55O/krYNGMB2+Nt5C/An/unWri
-p6F5ocBvN7RP2kXE8xQY4LBDy9VTf7UCVkaXA7WBzF8Bt+eqIm8Hmk+nQHj/
-3HOp42g/7Z/6t9q8yuDTfjhKyIYcTG73o/OMVKJIHFZ2you+T1DCwtkgutvC
-/JXoX10ncpdRvVoJ07yG6hw+1RcoISh/EjthAfXXKdH+1KO8PScL/wJVgMGx
-
-         "]]}, 
-       {RGBColor[0, 0, 1], AbsoluteThickness[1], LineBox[CompressedData["
-1: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
-
-         "]]}},
-      AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
-      Axes->True,
-      AxesOrigin->{0, 0},
-      Epilog->InsetBox[
-        BoxData[
-         FormBox[
-          InterpretationBox[
-           TagBox[
-            
-            GridBox[{{""}}, AutoDelete -> False, 
-             GridBoxItemSize -> {
-              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 
-           
-           Grid[{}]], TraditionalForm]], 
-        Scaled[{0.05, 0.95}], {Left, Top}],
-      Frame->True,
-      ImageSize->250,
-      LabelStyle->Medium,
       PlotLabel->FormBox["\"arg[S_i]/deg\\n\"", TraditionalForm],
-      PlotRange->{{0., 300.}, {-512.9059239972632, 1543.6534801591258`}},
+      PlotRange->{{0., 0.}, {0., 0.}},
       PlotRangeClipping->True,
       PlotRangePadding->{
         Scaled[0.02], 
@@ -1672,8 +1575,8 @@ EtfbuQ2jFex+KVHbp6bfsmbWvxIdZ1x+Fduz+6KE6tikb3OKcvEPAnHHCA==
          StyleBox["\<\"t2\"\>",
           StripOnInput->False,
           FontSlant->Italic]},
-        {"\<\"0000\"\>", "\<\"Tue 10 Jul 2012 17:33:54\"\>", "0", "6.5`"},
-        {"\<\"0001\"\>", "\<\"Tue 10 Jul 2012 17:34:00\"\>", "7", "300"}
+        {"\<\"0000\"\>", "\<\"Fri 30 Mar 2012 14:24:13\"\>", "0", "6.5`"},
+        {"\<\"0001\"\>", "\<\"Fri 30 Mar 2012 14:24:16\"\>", "7", "300"}
        },
        AutoDelete->False,
        GridBoxAlignment->{"Columns" -> {{Left}}},

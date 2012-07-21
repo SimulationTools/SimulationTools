@@ -1,0 +1,74 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SystemStatistics",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSimulationSwapUsage",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSimulationSwapUsage"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadSimulationSwapUsage", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadSimulationSwapUsage",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadSimulationSwapUsage"], "[", 
+       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the swap memory usage of a simulation in MB as a \
+DataTable as a function of coordinate time."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadSimulationSwapUsage",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadSimulationSwapUsage", "READSIMULATIONSWAPUSAGE", 
+      "readsimulationswapusage"}, "index" -> True, "label" -> 
+    "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
+    "SystemStatistics", "status" -> "None", "summary" -> 
+    "ReadSimulationSwapUsage[simname] gives the swap memory usage of a \
+simulation in MB as a DataTable as a function of coordinate time.", 
+    "synonyms" -> {
+     "ReadSimulationSwapUsage", "READSIMULATIONSWAPUSAGE", 
+      "readsimulationswapusage"}, "title" -> "ReadSimulationSwapUsage", 
+    "windowTitle" -> "ReadSimulationSwapUsage", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadSimulationSwapUsage"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

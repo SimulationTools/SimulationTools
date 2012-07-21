@@ -7,28 +7,29 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SystemStatistics",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CoordinateOutline",
+ ButtonBox["ReadSimulationCost",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/CoordinateOutline"]
+  ButtonData->"paclet:nrmma/ref/ReadSimulationCost"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["CoordinateOutline", "ObjectName"],
+Cell["ReadSimulationCost", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["CoordinateOutline",
+       ButtonBox["ReadSimulationCost",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/CoordinateOutline"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]generates a graphical representation of the outline of d"
+        ButtonData->"paclet:nrmma/ref/ReadSimulationCost"], "[", 
+       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the total number of CPU hours used by all \
+processes in a simulation ."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -44,7 +45,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"CoordinateOutline",
+WindowTitle->"ReadSimulationCost",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -52,15 +53,16 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "CoordinateOutline", "COORDINATEOUTLINE", "coordinateoutline"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "CoordinateOutline[d] generates a graphical representation of the outline \
-of d", "synonyms" -> {
-     "CoordinateOutline", "COORDINATEOUTLINE", "coordinateoutline"}, "title" -> 
-    "CoordinateOutline", "windowTitle" -> "CoordinateOutline", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/CoordinateOutline"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+     "ReadSimulationCost", "READSIMULATIONCOST", "readsimulationcost"}, 
+    "index" -> True, "label" -> "nrmma/SystemStatistics Symbol", "language" -> 
+    "en", "paclet" -> "SystemStatistics", "status" -> "None", "summary" -> 
+    "ReadSimulationCost[simname] gives the total number of CPU hours used by \
+all processes in a simulation .", 
+    "synonyms" -> {
+     "ReadSimulationCost", "READSIMULATIONCOST", "readsimulationcost"}, 
+    "title" -> "ReadSimulationCost", "windowTitle" -> "ReadSimulationCost", 
+    "type" -> "Symbol", "uri" -> "nrmma/ref/ReadSimulationCost"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

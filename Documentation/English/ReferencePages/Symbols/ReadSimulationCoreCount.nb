@@ -1,0 +1,66 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["RunFiles",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/RunFiles"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSimulationCoreCount",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSimulationCoreCount"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadSimulationCoreCount", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell["\<\
+ReadCores[simname] gives the number of cores used by a simulation.\
+\>"]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadSimulationCoreCount",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadSimulationCoreCount", "READSIMULATIONCORECOUNT", 
+      "readsimulationcorecount"}, "index" -> True, "label" -> 
+    "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> "RunFiles", 
+    "status" -> "None", "summary" -> 
+    "ReadCores[simname] gives the number of cores used by a simulation.", 
+    "synonyms" -> {
+     "ReadSimulationCoreCount", "READSIMULATIONCORECOUNT", 
+      "readsimulationcorecount"}, "title" -> "ReadSimulationCoreCount", 
+    "windowTitle" -> "ReadSimulationCoreCount", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadSimulationCoreCount"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

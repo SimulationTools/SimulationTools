@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["CoordinateAtMax",
   BaseStyle->{"Link", "LinkTrail"},
@@ -28,9 +28,8 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/CoordinateAtMax"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]finds the coordinate at which a maximum occurs in the \
-DataTable d. This is guaranteed to coincide with a data point in the \
-DataTable."
+     "\[LineSeparator]finds the coordinate at which a maximum occurs in d. \
+This is guaranteed to coincide with a data point."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -54,11 +53,11 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {"CoordinateAtMax", "COORDINATEATMAX", "coordinateatmax"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
-    "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in the \
-DataTable d. This is guaranteed to coincide with a data point in the \
-DataTable.", 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
+    "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in d. \
+This is guaranteed to coincide with a data point.", 
     "synonyms" -> {"CoordinateAtMax", "COORDINATEATMAX", "coordinateatmax"}, 
     "title" -> "CoordinateAtMax", "windowTitle" -> "CoordinateAtMax", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/CoordinateAtMax"}, "SearchTextTranslated" -> 

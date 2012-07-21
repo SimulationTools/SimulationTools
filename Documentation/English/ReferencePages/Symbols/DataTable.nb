@@ -30,9 +30,8 @@ Cell[BoxData[GridBox[{
        "ApplyToList":>Documentation`HelpLookup[
        "paclet:nrmma/ref/ApplyToList"], "CoordinateAtInterpolatedMax":>
        Documentation`HelpLookup[
-       "paclet:nrmma/ref/CoordinateAtInterpolatedMax"], "CoordinateAtMax":>
-       Documentation`HelpLookup["paclet:nrmma/ref/CoordinateAtMax"], 
-       "DataTable":>Documentation`HelpLookup["paclet:nrmma/ref/DataTable"], 
+       "paclet:nrmma/ref/CoordinateAtInterpolatedMax"], "DataTable":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataTable"], 
        "DataTableDepVarInterval":>Documentation`HelpLookup[
        "paclet:nrmma/ref/DataTableDepVarInterval"], "DataTableInterval":>
        Documentation`HelpLookup["paclet:nrmma/ref/DataTableInterval"], 
@@ -43,8 +42,7 @@ Cell[BoxData[GridBox[{
        "paclet:nrmma/ref/DataTableRange"], "DepVar":>Documentation`HelpLookup[
        "paclet:nrmma/ref/DepVar"], "Downsample":>Documentation`HelpLookup[
        "paclet:nrmma/ref/Downsample"], "FilterDCT":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/FilterDCT"], "Frequency":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/Frequency"], "FunctionInverse":>
+       "paclet:nrmma/ref/FilterDCT"], "FunctionInverse":>
        Documentation`HelpLookup["paclet:nrmma/ref/FunctionInverse"], 
        "FunctionOfPhase":>Documentation`HelpLookup[
        "paclet:nrmma/ref/FunctionOfPhase"], "IndVar":>
@@ -77,15 +75,14 @@ Cell[BoxData[GridBox[{
        Documentation`HelpLookup["paclet:nrmma/ref/MaximumValue"], 
        "MinCoordinateSpacing":>Documentation`HelpLookup[
        "paclet:nrmma/ref/MinCoordinateSpacing"], "MonotonicQ":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MonotonicQ"], "Phase":>
-       Documentation`HelpLookup["paclet:nrmma/ref/Phase"], "PhaseOfFrequency":>
-       Documentation`HelpLookup["paclet:nrmma/ref/PhaseOfFrequency"], 
-       "ReadAttribute":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadAttribute"], "ResampleDataTable":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ResampleDataTable"], 
-       "ResampleDataTables":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ResampleDataTables"], "RestrictedToCommonInterval":>
-       Documentation`HelpLookup[
+       Documentation`HelpLookup["paclet:nrmma/ref/MonotonicQ"], 
+       "PhaseOfFrequency":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/PhaseOfFrequency"], "ReadAttribute":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ReadAttribute"], 
+       "ResampleDataTable":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/ResampleDataTable"], "ResampleDataTables":>
+       Documentation`HelpLookup["paclet:nrmma/ref/ResampleDataTables"], 
+       "RestrictedToCommonInterval":>Documentation`HelpLookup[
        "paclet:nrmma/ref/RestrictedToCommonInterval"], "RestrictedToInterval":>
        Documentation`HelpLookup["paclet:nrmma/ref/RestrictedToInterval"], 
        "ShiftDataTable":>Documentation`HelpLookup[
@@ -279,7 +276,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["d3 = MapThread[f,{d,d2}]", "Input",
+Cell["d3 = MapThread[#1 + #2 &,{d,d2}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
@@ -304,18 +301,11 @@ Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"0", ",", 
-     RowBox[{"f", "[", 
-      RowBox[{"0.5`", ",", "0.479425538604203`"}], "]"}]}], "}"}], ",", 
+    RowBox[{"0", ",", "0.979425538604203`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"0.1`", ",", 
-     RowBox[{"f", "[", 
-      RowBox[{"0.6`", ",", "0.5646424733950354`"}], "]"}]}], "}"}], ",", 
+    RowBox[{"0.1`", ",", "1.1646424733950353`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"0.3`", ",", 
-     RowBox[{"f", "[", 
-      RowBox[{"0.3`", ",", "0.29552020666133955`"}], "]"}]}], "}"}]}], 
-  "}"}]], "Output",
+    RowBox[{"0.3`", ",", "0.5955202066613395`"}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
@@ -392,16 +382,6 @@ Cell[TextData[{
    ButtonBox["CoordinateAtInterpolatedMax",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/CoordinateAtInterpolatedMax"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["CoordinateAtMax",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/CoordinateAtMax"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -492,16 +472,6 @@ Cell[TextData[{
    ButtonBox["FilterDCT",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/FilterDCT"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["Frequency",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/Frequency"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -732,16 +702,6 @@ Cell[TextData[{
    ButtonBox["MonotonicQ",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/MonotonicQ"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["Phase",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/Phase"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 

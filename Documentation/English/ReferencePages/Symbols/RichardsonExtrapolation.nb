@@ -1,0 +1,83 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Convergence",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/Convergence"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["RichardsonExtrapolation",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolation"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["RichardsonExtrapolation", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["RichardsonExtrapolation",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/RichardsonExtrapolation"], "[", 
+       StyleBox[
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"f1", ",", " ", "f2"}], "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"h1", ",", " ", "h2"}], "}"}], ",", " ", "p"}], "TI"], 
+       "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the order p Richardson extrapolant of f1 and f2 \
+at h = 0 assuming that f[h] = O[h^p]. f1 and f2 can either be real numbers or \
+DataTables, and the returned value will be of the same type."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"RichardsonExtrapolation",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "RichardsonExtrapolation", "RICHARDSONEXTRAPOLATION", 
+      "richardsonextrapolation"}, "index" -> True, "label" -> 
+    "nrmma/Convergence Symbol", "language" -> "en", "paclet" -> "Convergence",
+     "status" -> "None", "summary" -> 
+    "RichardsonExtrapolation[{f1, f2}, {h1, h2}, p] gives the order p \
+Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = O[h^p]. f1 \
+and f2 can either be real numbers or DataTables, and the returned value will \
+be of the same type.", 
+    "synonyms" -> {
+     "RichardsonExtrapolation", "RICHARDSONEXTRAPOLATION", 
+      "richardsonextrapolation"}, "title" -> "RichardsonExtrapolation", 
+    "windowTitle" -> "RichardsonExtrapolation", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/RichardsonExtrapolation"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

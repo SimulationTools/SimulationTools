@@ -1,0 +1,68 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SystemStatistics",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSimulationRunTime",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSimulationRunTime"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadSimulationRunTime", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell["\<\
+ReadSimulationRuntime[simname] gives the real time elapsed during the \
+execution of a simulation.\
+\>"]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadSimulationRunTime",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadSimulationRunTime", "READSIMULATIONRUNTIME", 
+      "readsimulationruntime"}, "index" -> True, "label" -> 
+    "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
+    "SystemStatistics", "status" -> "None", "summary" -> 
+    "ReadSimulationRuntime[simname] gives the real time elapsed during the \
+execution of a simulation.", 
+    "synonyms" -> {
+     "ReadSimulationRunTime", "READSIMULATIONRUNTIME", 
+      "readsimulationruntime"}, "title" -> "ReadSimulationRunTime", 
+    "windowTitle" -> "ReadSimulationRunTime", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadSimulationRunTime"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

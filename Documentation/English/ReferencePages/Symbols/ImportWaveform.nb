@@ -7,28 +7,29 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->"paclet:nrmma/guide/Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CoordinateOutline",
+ ButtonBox["ImportWaveform",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/CoordinateOutline"]
+  ButtonData->"paclet:nrmma/ref/ImportWaveform"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["CoordinateOutline", "ObjectName"],
+Cell["ImportWaveform", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["CoordinateOutline",
+       ButtonBox["ImportWaveform",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/CoordinateOutline"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]generates a graphical representation of the outline of d"
+        ButtonData->"paclet:nrmma/ref/ImportWaveform"], "[", 
+       StyleBox["filename", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]imports an ASCII waveform file with columns time, real \
+part and imaginary part and returns it as a DataTable."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -44,22 +45,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"CoordinateOutline",
+WindowTitle->"ImportWaveform",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {
-     "CoordinateOutline", "COORDINATEOUTLINE", "coordinateoutline"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "CoordinateOutline[d] generates a graphical representation of the outline \
-of d", "synonyms" -> {
-     "CoordinateOutline", "COORDINATEOUTLINE", "coordinateoutline"}, "title" -> 
-    "CoordinateOutline", "windowTitle" -> "CoordinateOutline", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/CoordinateOutline"}, "SearchTextTranslated" -> 
+    "keywords" -> {"ImportWaveform", "IMPORTWAVEFORM", "importwaveform"}, 
+    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
+    "ImportWaveform[filename] imports an ASCII waveform file with columns \
+time, real part and imaginary part and returns it as a DataTable.", 
+    "synonyms" -> {"ImportWaveform", "IMPORTWAVEFORM", "importwaveform"}, 
+    "title" -> "ImportWaveform", "windowTitle" -> "ImportWaveform", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ImportWaveform"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

@@ -7,33 +7,34 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->"paclet:nrmma/guide/Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Slab",
+ ButtonBox["AlignedPhases",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Slab"]
+  ButtonData->"paclet:nrmma/ref/AlignedPhases"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Slab", "ObjectName"],
+Cell["AlignedPhases", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Slab",
+       ButtonBox["AlignedPhases",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Slab"], "[", 
+        ButtonData->"paclet:nrmma/ref/AlignedPhases"], "[", 
        StyleBox[
-        RowBox[{"d", ",", " ", 
+        RowBox[{
          RowBox[{"{", 
-          RowBox[{"x1min", ",", " ", "x1max"}], "}"}], ",", " ", "..."}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the hyperslab of d specified by the coordinates \
-{x1min, x1max}, ...."
+          RowBox[{"d1", ",", " ", "..."}], "}"}], ",", " ", "t"}], "TI"], 
+       "]"}]], "InlineFormula"],
+     "\[LineSeparator]aligns the DataTables {d1, ...} at time t. The \
+independent variable is assumed to be a phase so that the resulting phases \
+all start out within 2\[Pi] of each other."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -61,7 +62,8 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Tolerance", "0.", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Continuous", "False", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -84,19 +86,23 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Slab",
+WindowTitle->"AlignedPhases",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Slab", "SLAB", "slab"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "Slab[d, {x1min, x1max}, ...] gives the hyperslab of d specified by the \
-coordinates {x1min, x1max}, ....", "synonyms" -> {"Slab", "SLAB", "slab"}, 
-    "title" -> "Slab", "windowTitle" -> "Slab", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Slab"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"AlignedPhases", "ALIGNEDPHASES", "alignedphases"}, 
+    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
+    "AlignedPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. \
+The independent variable is assumed to be a phase so that the resulting \
+phases all start out within 2\[Pi] of each other.", 
+    "synonyms" -> {"AlignedPhases", "ALIGNEDPHASES", "alignedphases"}, 
+    "title" -> "AlignedPhases", "windowTitle" -> "AlignedPhases", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/AlignedPhases"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -1,0 +1,74 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SystemStatistics",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadSimulationSpeed",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/ReadSimulationSpeed"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadSimulationSpeed", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadSimulationSpeed",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadSimulationSpeed"], "[", 
+       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the execution speed of a simulation (simulation \
+coordinate time per real time elapsed) as a DataTable as a function of \
+simulation coordinate time."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadSimulationSpeed",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "ReadSimulationSpeed", "READSIMULATIONSPEED", "readsimulationspeed"}, 
+    "index" -> True, "label" -> "nrmma/SystemStatistics Symbol", "language" -> 
+    "en", "paclet" -> "SystemStatistics", "status" -> "None", "summary" -> 
+    "ReadSimulationSpeed[simname] gives the execution speed of a simulation \
+(simulation coordinate time per real time elapsed) as a DataTable as a \
+function of simulation coordinate time.", 
+    "synonyms" -> {
+     "ReadSimulationSpeed", "READSIMULATIONSPEED", "readsimulationspeed"}, 
+    "title" -> "ReadSimulationSpeed", "windowTitle" -> "ReadSimulationSpeed", 
+    "type" -> "Symbol", "uri" -> "nrmma/ref/ReadSimulationSpeed"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

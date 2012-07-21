@@ -87,9 +87,8 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Time", "Undefined", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "VariableName", "Undefined", Cell[
+   {Cell["      ", "TableRowIcon"], "Time", "Null", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "VariableName", "Null", Cell[
     "", "TableText"]}
   },
   GridBoxAlignment->{

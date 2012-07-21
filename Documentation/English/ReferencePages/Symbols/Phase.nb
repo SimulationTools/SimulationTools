@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Phase",
   BaseStyle->{"Link", "LinkTrail"},
@@ -52,8 +52,8 @@ TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", "keywords" -> {"Phase", "PHASE", "phase"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
+    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
+    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
     "Phase[d] gives the phase of the complex variable in DataTable d.  The \
 resulting phase will be continuous for sufficiently smooth input data.", 
     "synonyms" -> {"Phase", "PHASE", "phase"}, "title" -> "Phase", 

@@ -11,25 +11,24 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Frequency",
+ ButtonBox["MinCoordinate",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Frequency"]
+  ButtonData->"paclet:nrmma/ref/MinCoordinate"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Frequency", "ObjectName"],
+Cell["MinCoordinate", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Frequency",
+       ButtonBox["MinCoordinate",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Frequency"], "[", 
+        ButtonData->"paclet:nrmma/ref/MinCoordinate"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the first derivative of the complex phase of \
-d."
+     "\[LineSeparator]returns the coordinate of the first point in in d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,21 +44,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Frequency",
+WindowTitle->"MinCoordinate",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"Frequency", "FREQUENCY", "frequency"}, "index" -> True, 
-    "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "Frequency[d] returns the first derivative of the complex phase of d.", 
-    "synonyms" -> {"Frequency", "FREQUENCY", "frequency"}, "title" -> 
-    "Frequency", "windowTitle" -> "Frequency", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Frequency"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "keywords" -> {"MinCoordinate", "MINCOORDINATE", "mincoordinate"}, 
+    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
+     "summary" -> 
+    "MinCoordinate[d] returns the coordinate of the first point in in d.", 
+    "synonyms" -> {"MinCoordinate", "MINCOORDINATE", "mincoordinate"}, 
+    "title" -> "MinCoordinate", "windowTitle" -> "MinCoordinate", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/MinCoordinate"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

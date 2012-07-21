@@ -1,0 +1,79 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["nrmma",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/nrmma"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["DataAnalysis",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/guide/DataAnalysis"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["WaveformOverlap",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:nrmma/ref/WaveformOverlap"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["WaveformOverlap", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["WaveformOverlap",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/WaveformOverlap"], "[", 
+       StyleBox[
+        RowBox[{
+        "h1", ",", " ", "h2", ",", " ", "s", ",", " ", "f1", ",", " ", "f2", 
+         ",", " ", "M", ",", " ", "pad"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the (maximized over phase and time shift) overlap \
+of the waveform DataTables h1 and h2 over the frequency range [f1,f2] with \
+the noise function s. The mass of the system is given by M in units of the \
+solar mass. The optional argument pad may be given to pad out the waveform so \
+that a more accurate time shift may be obtained."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"WaveformOverlap",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "nrmma`", 
+    "keywords" -> {"WaveformOverlap", "WAVEFORMOVERLAP", "waveformoverlap"}, 
+    "index" -> True, "label" -> "nrmma/DataAnalysis Symbol", "language" -> 
+    "en", "paclet" -> "DataAnalysis", "status" -> "None", "summary" -> 
+    "WaveformOverlap[h1, h2, s, f1, f2, M, pad] gives the (maximized over \
+phase and time shift) overlap of the waveform DataTables h1 and h2 over the \
+frequency range [f1,f2] with the noise function s. The mass of the system is \
+given by M in units of the solar mass. The optional argument pad may be given \
+to pad out the waveform so that a more accurate time shift may be obtained.", 
+    "synonyms" -> {"WaveformOverlap", "WAVEFORMOVERLAP", "waveformoverlap"}, 
+    "title" -> "WaveformOverlap", "windowTitle" -> "WaveformOverlap", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/WaveformOverlap"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+
