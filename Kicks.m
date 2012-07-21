@@ -15,7 +15,7 @@ ReadKickVector::usage = "KickVector[run, r, lMax] computes the vector kick in km
 ReadLinearMomentumRadiated::usage = "LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum radiated as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is an integral of the result of LinearMomentumFlux with an initial boundary condition of zero.";
 ReadLinearMomentumFlux::usage = "LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is the derivative of the result of LinearMomentumRadiated.";
 AngularMomentumFlux(*::usage = "WARNING: THIS FUNCTION IS IN DEVELOPMENT AND HAS NOT BEEN TESTED. AngularMomentumFlux[run, dir, r, lMax] computes the angular momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable."*);
-SpinWeightedSphericalHarmonic::usage = "SpinWeightedSphericalHarmonic[s, l, m, \[Theta], \[Phi]] gives the spin weighted spherical harmonic.";
+(* SpinWeightedSphericalHarmonic::usage = "SpinWeightedSphericalHarmonic[s, l, m, \[Theta], \[Phi]] gives the spin weighted spherical harmonic."; *)
 
 Kick = ReadKick;
 KickVector = ReadKickVector;
