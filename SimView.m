@@ -21,7 +21,7 @@ SimView[sim, rad] gives a quick overview of the simulation sim with waveforms ex
 SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....
 SimView[{sim1, sim2, ...}, rad] gives a quick overview of the simulations sim1, sim2, ... with waveforms extracted at radius rad.";
 
-FinishTime::usage = "FinishTime[run] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."
+FinishTime(*::usage = "FinishTime[run] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
 
 Begin["`Private`"];
 
