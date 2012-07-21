@@ -10,7 +10,7 @@
     "ToList[d]",
     "d2 = Map[Sin,d]",
     "ToList[d2]",
-    "d3 = MapThread[f,{d,d2}]",
+    "d3 = MapThread[#1 + #2 &,{d,d2}]",
     "ToList[d3]"
     },
   "See Also" -> 
