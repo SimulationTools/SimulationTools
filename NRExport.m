@@ -14,8 +14,6 @@ BeginPackage["NRExport`",
   "Waveforms`"
  }];
 
-JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts.";
-
 ExportExtrapolatedStrain::usage = "ExportExtrapolatedStrain[run, file, mass, l, m, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
 ExportAllExtrapolatedStrain::usage = "ExportAllExtrapolatedStrain[run, file, mass, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates all modes of the waveform in run assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveforms are then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'. For ASCII data, multiple files are created, one for each mode.";
 ExportExtrapolatedWaveform::usage = "ExportExtrapolatedWaveform[run, file, mass, l, m] extrapolates the (l,m) mode of the waveform in run assuming mass is the ADM mass. The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'.";
@@ -34,8 +32,6 @@ ExportSim::usage = "ExportSim[run, niceName, outputDirectory, mass, ecc] exports
 ExportConfig::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory] exports a collection of simulations (at different resolutions, for example) all corresponding to the same physical configuration.";
 ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\".";
 ExportStatus::usage = "ExportStatus is a variable which reports the current status of an export.";
-ExportOnly;
-ExcludeModes::usage = "ExcludeModes is an option for ExportSim.";
 
 Begin["`Private`"];
 
@@ -44,8 +40,10 @@ ExportStatus = "";
 (* Waveforms *)
 
 (* We cut off the first part of the extrapolated waveform where the junk dominates *)
-Options[ExportExtrapolatedWaveform] = {JunkTime -> None};
-Options[ExportExtrapolatedStrain] = {JunkTime -> None};
+Options[ExportExtrapolatedWaveform] = {"JunkTime" -> None};
+Options[ExportExtrapolatedStrain] = {"JunkTime" -> None};
+
+(* JunkTime::usage = "JunkTime is an option for ExportExtrapolatedWaveform, ExportAllExtrapolatedWaveforms and ExportMetadata which specifies how long the junk radiation lasts."; *)
 
 fileExtension[file_] :=
   Module[{ext},
@@ -354,7 +352,7 @@ makeEntry[key_ -> val_, pad_:0] :=
 makeEntry[val_] :=
  If[StringQ[val], val, ToString[val, CForm]];
 
-Options[ExportMetadata] = {JunkTime -> None, ExportSimFormat -> "ASCII"};
+Options[ExportMetadata] = {"JunkTime" -> None, "ExportSimFormat" -> "ASCII"};
 ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
  Module[{tJunk},
   tJunk  = OptionValue[JunkTime];
@@ -366,7 +364,7 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 
 (* Full run *)
 
-Options[ExportSim] = {ExportSimFormat -> "ASCII", ExportOnly -> All, ExcludeModes -> None};
+Options[ExportSim] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None};
 ExportSim[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
   Module[{dir, h, n, ext, all, export},
 
