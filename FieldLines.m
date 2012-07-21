@@ -2,7 +2,7 @@
 
 BeginPackage["FieldLines`",
  {
-  "CarpetHDF5`",
+  "GridFunctions`",
   "DataAnalysis`",
   "DataRegion`",
   "DataRepresentations`",
