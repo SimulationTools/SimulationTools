@@ -14,22 +14,26 @@
  "Packages" -> {
 
     GuideSection[
+      "DataRepresentations",
+      {"ToList" -> "Convert a DataRepresentation to a Mathematica list",
+       "Add" -> "Add two DataRepresentations together, resampling onto a common coordinate range grid if necessary",
+       "ToListOfData" -> "extract the data from a DataRepresentation",
+       "ToListOfCoordinates" -> "extract the coordinates from a DataRepresentation",
+      "CoordinateRanges" -> "get the list of minimum and maximum coordinates of a DataRegion",
+      "Slab" -> "extract (possibly lower-dimensional) slabs of data from a DataRegion", 
+       "NDerivative" -> "Numerically differentiate a DataRepresentation"}],
+
+    GuideSection[
       "DataTable",
       {"DataTable" -> "representation of 1-dimensional time-series data",
-       "MakeDataTable" -> "convert a list of pairs of numbers to a DataTable",
-       "ToList" -> "convert a DataTable to a list of pairs of numbers",
-       "NDerivative" -> "numerically differentiate a DataTable",
+       "ToDataTable" -> "convert a list of numbers or another object to a DataTable",
        "Phase" -> "Compute the phase (argument) of a complex-valued DataTable"}],
 
    GuideSection[
      "DataRegion",
      {"DataRegion" -> "representation of arbitrary dimensional data on an evenly spaced grid",
-      "ToDataRegion" -> "convert an N-dimensional nested list of numbers to a DataRegion",
-      "ToDataTable" -> "convert a 1-dimensional DataRegion to a DataTable",
-      "GetData" -> "convert a DataRegion to an N-dimensional nested list of numbers",
-      "GetDataRange" -> "get the list of minimum and maximum coordinates of a DataRegion",
-      "SliceData" -> "extract lower-dimensional slices of data from a DataRegion",
-      "Strip" -> "Remove a certain number of points from the outer layers of a DataRegion"}]},
+      "ToDataRegion" -> "convert an N-dimensional nested list of numbers to a DataRegion" (*,
+      "Strip" -> "Remove a certain number of points from the outer layers of a DataRegion" *)}]},
 
  "Tutorials" -> {
    "DataRegion",

@@ -20,9 +20,9 @@
       {"DataTable", "representation of 1D data"},
       {"DataRegion", "representation of arbitrary dimensional data on an evenly spaced grid"}
     },
-    "Functions" -> {"Frequency", "Phase", "MakeDataRegion", 
-      "MergeDataRegions", "ToDataTable", "GetData", "GetOrigin", 
-      "MakeDataTable", "IntersectDataTables", "ToList"},
+    "Functions" -> {"Frequency", "Phase", "ToDataRegion", 
+      "ToDataTable", "ToListOfData", "MinCoordinates", 
+      "RestrictedToCommonInterval", "ToList"},
     "MoreFunctionsLink" -> "paclet:nrmma/guide/Data Representations"
    },
 
@@ -37,23 +37,21 @@
    {"Title" -> "Simulation Information",
     "DetailedFunctions" -> {
       {"SimView" , "provide a quick graphical overview of a simulation"},
-      {"LookupParameter", "read the value of a specified parameter from a simulation"},
-      {"FindParameters", "search for available parameters"}},
-    "Functions" -> {"ReadRunSpeed", "ReadWalltime", "ReadCores", 
-      "ReadMemory", "ReadSwap", "ReadCPUHours"}
+      {"ReadSimulationParameter", "read the value of a specified parameter from a simulation"},
+      {"FindSimulationParameters", "search for available parameters"}},
+    "Functions" -> {"ReadSimulationSpeed", "ReadSimulationRunTime", "ReadSimulationCoreCount", 
+      "ReadSimulationMemoryUsage", "ReadSimulationSwapUsage", "ReadSimulationCost"}
    },
 
    {"Title" -> "Numerical Relativity",
     "Link" -> "paclet:nrmma/guide/Numerical Relativity",
     "DetailedFunctions" -> {
       {"ReadPsi4" , {"read ", Cell[BoxData[SubscriptBox["\[Psi]", "4"]], "InlineFormula"], "waveform"}},
-      {"ReadIsolatedHorizonSpin", "read spin computed by the IsolatedHorizon thorn"},
-      {"ReadAHRadius", "read apparent horizon radius from AHFinderDirect thorn"},
-      {"ReadBHCoordinate", "read coordinate location of puncture"},
+      {"ReadBlackHoleSpin", "read spin angular momentum of a black hole"},
+      {"ReadBinaryCoordinates", "read coordinate locations of members of a binary system"},
       {"Kick", "compute kick from waveform"}},
-    "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadAHMass", 
-      "ReadAHSeparation", "ReadAHCentroid", "ReadBHPhase", 
-      "ReadBHSeparation", "ReadBHSpeed", "ReadBHTrajectories", 
+    "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadBlackHoleMass", 
+      "ReadBinarySeparation", "ReadBinaryPhase", 
       "KickVector", "LinearMomentumFlux"},
     "MoreFunctionsLink" -> "paclet:nrmma/guide/Numerical Relativity"
    },
@@ -63,7 +61,7 @@
       {"PresentationArrayPlot", "create a 2D array plot with a legend"},
       {"PresentationListLinePlot", "create a presentation-quality 1D plot"},
       {"DynamicListLinePlot", "version of ListLinePlot which allows zooming by dragging a box with the mouse"},
-      {"Grids", "read and plot Carpet grid structures"},
+      (* {"Grids", "read and plot Carpet grid structures"}, *)
       {"MakeMovie", "generating image files and movies using an external tool (e.g. ffmpeg)"}}
    },
 
@@ -76,7 +74,7 @@
    {"Title" -> "Utilities",
     "DetailedFunctions" -> {
       {"ClearAllMemos", "memoisation of functions; i.e. in-memory caching of values so that they don't have to be recomputed"},
-      {"FindRunFile", "find instances of a specific file across all restarts"}}
+      {"FindSimulationFiles", "find instances of a specific file across all segments of a simulation"}}
    }
 
    (* {"Title" -> "Data Sources", *)

@@ -15,29 +15,28 @@
 
    GuideSection[
      "BHCoordinates",
-     {"ReadBHCoordinates" -> "Get the position of one of the black holes in a simulation as a function of time",
-     "ReadBHSeparation" -> "Get the separation between the first two black holes in a simulation as a function of time",
-     "ReadBHPhase" -> "Get the phase of the relative orbit of the first two black holes in a simulation as a function of time",
-     "ReadBHTrajectories" -> "Get the locus of the orbits of the first two black holes in a simulation as a function of time"}],
+     {"ReadBinaryCoordinates" -> "Get the coordinates of a binary system as a function of time",
+     "ReadBinarySeparation" -> "Get the separation between the members of a binary system as a function of time",
+     "ReadBinaryPhase" -> "Get the phase of the relative orbit of a binary system as a function of time"}],
 
    GuideSection[
      "Waveforms",
      {"ReadPsi4" -> "Read an (l,m) spherical harmonic mode of Psi4 from a simulation", 
       "ReadPsi4Radii" -> "Get the radii at which Psi4 was decomposed",
       "ReadPsi4Modes" -> "Get the (l,m) modes of Psi4 which are available in a simulation",
-      "AlignPhases" -> "Add multiples of 2 Pi to a set of phases such that they are close together at a particular time.  This is necessary due to the 2 Pi ambiguity when converting from real and imaginary to amplitude and phase.",
-      "ExtrapolatePsi4" -> "Read an (l,m) mode of Psi4 extrapolated to infinite radius from a simulation",
-      "StrainFromPsi4" -> "Convert an (l,m) mode of Psi4 to the corresponding mode of the strain, h.",
-      "NumCycles" -> "Read the number of waveform cycles in the (2,2) mode of a simulation"
+      "AlignedPhases" -> "Add multiples of 2 Pi to a set of phases such that they are close together at a particular time.  This is necessary due to the 2 Pi ambiguity when converting from real and imaginary to amplitude and phase.",
+      "ReadExtrapolatedPsi4" -> "Read an (l,m) mode of Psi4 extrapolated to infinite radius from a simulation",
+      "Psi4ToStrain" -> "Convert an (l,m) mode of Psi4 to the corresponding mode of the strain, h.",
+      "ReadCycles" -> "Read the number of waveform cycles in the (2,2) mode of a simulation"
      }],
 
    GuideSection[
      "Horizons",
-     {"ReadAHCentroid" -> "Read the position of the centroid of an apparent horizon as a function of time from a simulation",
-      "ReadAHMass" -> "Read the mass of an apparent horizon as a function of time from a simulation",
-      "ReadAHRadius" -> "Read the radius of an apparent horizon as a function of time from a simulation",
-     "ReadAHSeparation" -> "Read the distance between the centroids of the first two apparent horizons as a function of time from a simulation",
-      "ReadIsolatedHorizonSpin" -> "Read the spin angular momentum of an apparent horizon as a function of time from a simulation"}],
+     {(* "ReadAHCentroid" -> "Read the position of the centroid of an apparent horizon as a function of time from a simulation", *)
+      "ReadBlackHoleMass" -> "Read the mass of a black hole as a function of time from a simulation",
+      (* "ReadAHRadius" -> "Read the radius of an apparent horizon as a function of time from a simulation", *)
+     (* "ReadAHSeparation" -> "Read the distance between the centroids of the first two apparent horizons as a function of time from a simulation", *)
+      "ReadBlackHoleSpin" -> "Read the spin angular momentum of a black hole as a function of time from a simulation"}],
 
    GuideSection[
      "Kicks",
@@ -51,7 +50,7 @@
      "CoordinateTransformations",{}],
 
    GuideSection[
-     "DataAnalysis",{"ComputeOverlap" -> "Compute the phase- and time-maximised overlap of two DataTables"}],
+     "DataAnalysis",{"WaveformOverlap" -> "Compute the phase- and time-maximised overlap of two DataTables"}],
 
    GuideSection[
      "NRExport",{"ExportSim" -> "Export various data from a simulation to a given directory",
