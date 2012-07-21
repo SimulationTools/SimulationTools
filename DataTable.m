@@ -91,6 +91,10 @@ Begin["`Private`"];
 (* DataTable *)
 (****************************************************************)
 
+check[d_DataTable, where_:None] :=
+  If[!MatchQ[d,DataTable[{{_?NumberQ, _?NumberQ|_List}...},___]],
+    Error[If[where===None,"",where<>": "]<>"Invalid DataTable"]];
+
 (* TODO: Remove this hack *)
 DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
 
@@ -98,6 +102,7 @@ SetAttributes[DataTable, {ReadProtected}];
 
 DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
  Module[{dims, range},
+  check[d, "MakeBoxes"];
   dims  = Dimensions[d];
   range = CoordinateRanges[d];
 
@@ -258,8 +263,11 @@ DataTable /: Map[f_, DataTable[l_, attrs___]] :=
 (****************************************************************)
 
 MapList[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[f,l], attrs];
-
+  Module[{l2},
+    l2 = Map[f,l];
+    If[!MatchQ[l2[[1]],{_?NumberQ, _?NumberQ|_List}],
+      Error["MapList: Result is not numeric: "<>ToString[l2[[1]]]]];
+    DataTable[l2, attrs]];
 
 (****************************************************************)
 (* MapThread *)
