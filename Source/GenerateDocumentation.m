@@ -120,6 +120,8 @@ Module[
       tutorials];
 
   tutorialTitles = {
+    "BlackHoles.html" -> "Black holes",
+    "Binaries.html" -> "Binary systems",
     "DataRegion.html" -> "DataRegion", 
     "DataTable.html" -> "DataTable", 
     "GridFunctions.html" -> "Grid functions",
