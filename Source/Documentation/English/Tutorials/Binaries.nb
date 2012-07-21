@@ -1,0 +1,256 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Binary Systems", "Title"],
+
+Cell["\<\
+Simulations of binary systems, for example binary black hole or binary \
+neutron star simulations in numerical relativity, are supported.  It is \
+assumed that there is only one binary in a simulation, and functions are \
+provided to access the coordinate properties of the members of the binary, as \
+well as their relative orbit.  The members of the binary are identified by \
+integers 1 and 2.  In general, if no member index is given, the result refers \
+to the relative orbit of the binary.\
+\>", "Text"],
+
+Cell["\<\
+The binaries functions work with simulation data from the PunctureTracker, \
+MinTracker, ShiftTracker and AHFinderDirect codes, as well those in Numerical \
+Relativity Data Format (NRDF).\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Working with binary systems", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "nrmma`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"RunDirectory", "=", "$NRMMATestRunDirectory"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[GridBox[{
+   {"ReadBinarySeparation", Cell["ReadBinaryPhase", "TableText"]},
+   {"ReadBinaryCoordinates", "ToListOfPoints"}
+  }]], "DefinitionBox"],
+
+Cell["Functions for reading black hole information.", "Caption"],
+
+Cell[CellGroupData[{
+
+Cell["Orbital separation", "Subsection"],
+
+Cell["\<\
+The function ReadBinarySeparation gives the distance between the two members \
+of the binary as a function of time.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"r", "=", 
+  RowBox[{"ReadBinarySeparation", "[", "run", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Take", "[", 
+  RowBox[{
+   RowBox[{"ToList", "[", "r", "]"}], ",", "10"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PresentationListLinePlot", "[", 
+  RowBox[{"r", ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<t\>\"", ",", "\"\<D\>\""}], "}"}]}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Orbital phase", "Subsection"],
+
+Cell["\<\
+ReadBinaryPhase gives the orbital phase, or azimuthal angle (in radians) \
+projected into the xy plane, of the relative orbit vector (i.e. the vector \
+joining the two members of the binary).\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"phi", "=", 
+  RowBox[{"ReadBinaryPhase", "[", "run", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PresentationListLinePlot", "[", 
+  RowBox[{"phi", ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<t\>\"", ",", "\"\<\!\(\*SubscriptBox[\(\[Phi]\), \(orb\)]\)\>\""}], 
+     "}"}]}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Trajectories", "Subsection"],
+
+Cell["\<\
+The function ReadBinaryCoordinates gives a list of coordinates x, y and z.  \
+Each is a DataTable containing a coordinate position as a function of time.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"path1", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x1", ",", "y1", ",", "z1"}], "}"}], "=", 
+   RowBox[{"ReadBinaryCoordinates", "[", 
+    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"path2", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x2", ",", "y2", ",", "z2"}], "}"}], "=", 
+   RowBox[{"ReadBinaryCoordinates", "[", 
+    RowBox[{"run", ",", "2"}], "]"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"PresentationListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x1", ",", "x2"}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<t\>\"", ",", "\"\<x\>\""}], "}"}]}]}], "]"}]], "Input"],
+
+Cell["\<\
+If no binary index is given, then the coordinates are of the relative orbit.\
+\>", "Text"],
+
+Cell["\<\
+The function ToListOfPoints can be used to convert a list of coordinate \
+DataTables into a list of points suitable for plotting:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"Take", "[", 
+  RowBox[{
+   RowBox[{"ToListOfPoints", "[", "path1", "]"}], ",", "10"}], 
+  "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Graphics3D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Darker", "@", "Green"}], ",", 
+     RowBox[{"Line", "[", 
+      RowBox[{"ToListOfPoints", "[", "path1", "]"}], "]"}], ",", "Blue", ",", 
+     
+     RowBox[{"Line", "[", 
+      RowBox[{"ToListOfPoints", "[", "path2", "]"}], "]"}]}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"All", ",", "All", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+   RowBox[{"AxesLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}]}], 
+  "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Interpolated coordinates", "Subsection"],
+
+Cell["\<\
+Sometime you may not want to consider the discrete output of the simulation.  \
+You can use Interpolation on DataTables to create a function containing the \
+coordinates:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"pos", "=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"xFn", "=", 
+       RowBox[{"Interpolation", "[", "x1", "]"}]}], ",", 
+      RowBox[{"yFn", "=", 
+       RowBox[{"Interpolation", "[", "y1", "]"}]}], ",", 
+      RowBox[{"zFn", "=", 
+       RowBox[{"Interpolation", "[", "z1", "]"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Function", "[", 
+     RowBox[{"t", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"xFn", "[", "t", "]"}], ",", 
+        RowBox[{"yFn", "[", "t", "]"}], ",", 
+        RowBox[{"zFn", "[", "t", "]"}]}], "}"}]}], "]"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"pos", "[", "3.5", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation notes", "Section"],
+
+Cell["\<\
+NRMMA obtains binary system information (in order of preference) from any of \
+the following sources:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["PunctureTracker Cactus output", "Item"],
+
+Cell["AHFinderDirect Cactus output", "Item"],
+
+Cell["MinTracker Cactus output", "Item"],
+
+Cell["ShiftTracker Cactus output", "Item"],
+
+Cell["\<\
+Numerical Relativity Data Format (NRDF) output files [not yet implemented]\
+\>", "Item"]
+}, Open  ]],
+
+Cell["\<\
+In all cases, the binary members are numbered in the same sequence as the \
+output data, and it is assumed that the first two tracked objects correspond \
+to the binary.  For PunctureTracker, MinTracker and ShiftTracker, trackers 0 \
+and 1 correspond to binary members 1 and 2.  For AHFinderDirect and NRDF, the \
+mapping between tracker index and binary member is one to one.\
+\>", "Text"],
+
+Cell[TextData[{
+ "If you wish to use different trackers (see the Trackers documentation) for \
+the binary members, then any of the ReadBinary* functions can take an option \
+Trackers -> {tracker1, tracker2}, where ",
+ Cell[BoxData[
+  FormBox["trackeri", TraditionalForm]]],
+ " = {typei, indexi} to specify which trackers to use for the binary."
+}], "Text"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{782, 1031},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
