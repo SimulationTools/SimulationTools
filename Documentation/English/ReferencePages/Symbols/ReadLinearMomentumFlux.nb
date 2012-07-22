@@ -11,31 +11,23 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/Kicks"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["LinearMomentumFlux",
+ ButtonBox["ReadLinearMomentumFlux",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/LinearMomentumFlux"]
+  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumFlux"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["LinearMomentumFlux", "ObjectName"],
+Cell["ReadLinearMomentumFlux", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["LinearMomentumFlux",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/LinearMomentumFlux"], "[", 
-       StyleBox[
-        RowBox[{"run", ",", " ", "dir", ",", " ", "r", ",", " ", "lMax"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]computes the linear momentum flux as a function of time \
-from the multipolar decomposition of Psi4 on a sphere at radius r in \
-direction dir (an integer from 1 to 3) using modes up to l = lMax.  It \
-returns a DataTable.  The result is the derivative of the result of \
-LinearMomentumRadiated."
-    }]]}
+   {"", Cell["\<\
+LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux as a \
+function of time from the multipolar decomposition of Psi4 on a sphere at \
+radius r in direction dir (an integer from 1 to 3) using modes up to l = \
+lMax.  It returns a DataTable.  The result is the derivative of the result of \
+LinearMomentumRadiated.\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -50,7 +42,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"LinearMomentumFlux",
+WindowTitle->"ReadLinearMomentumFlux",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -58,19 +50,21 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "LinearMomentumFlux", "LINEARMOMENTUMFLUX", "linearmomentumflux"}, 
-    "index" -> True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", 
-    "paclet" -> "Kicks", "status" -> "None", "summary" -> 
+     "ReadLinearMomentumFlux", "READLINEARMOMENTUMFLUX", 
+      "readlinearmomentumflux"}, "index" -> True, "label" -> 
+    "nrmma/Kicks Symbol", "language" -> "en", "paclet" -> "Kicks", "status" -> 
+    "None", "summary" -> 
     "LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux \
 as a function of time from the multipolar decomposition of Psi4 on a sphere \
 at radius r in direction dir (an integer from 1 to 3) using modes up to l = \
 lMax.  It returns a DataTable.  The result is the derivative of the result of \
 LinearMomentumRadiated.", 
     "synonyms" -> {
-     "LinearMomentumFlux", "LINEARMOMENTUMFLUX", "linearmomentumflux"}, 
-    "title" -> "LinearMomentumFlux", "windowTitle" -> "LinearMomentumFlux", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/LinearMomentumFlux"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+     "ReadLinearMomentumFlux", "READLINEARMOMENTUMFLUX", 
+      "readlinearmomentumflux"}, "title" -> "ReadLinearMomentumFlux", 
+    "windowTitle" -> "ReadLinearMomentumFlux", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadLinearMomentumFlux"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

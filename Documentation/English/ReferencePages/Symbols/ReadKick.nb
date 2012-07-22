@@ -11,29 +11,21 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/Kicks"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Kick",
+ ButtonBox["ReadKick",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Kick"]
+  ButtonData->"paclet:nrmma/ref/ReadKick"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Kick", "ObjectName"],
+Cell["ReadKick", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["Kick",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Kick"], "[", 
-       StyleBox[
-        RowBox[{"run", ",", " ", "dir", ",", " ", "r", ",", " ", "lMax"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]computes the kick component in km/s from the multipolar \
-decomposition of Psi4 on a sphere at radius r in direction dir (an integer \
-from 1 to 3) using modes up to l = lMax"
-    }]]}
+   {"", Cell["\<\
+Kick[run, dir, r, lMax] computes the kick component in km/s from the \
+multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an \
+integer from 1 to 3) using modes up to l = lMax\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -48,21 +40,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Kick",
+WindowTitle->"ReadKick",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Kick", "KICK", "kick"}, "index" -> 
-    True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", "paclet" -> 
-    "Kicks", "status" -> "None", "summary" -> 
+   "context" -> "nrmma`", "keywords" -> {"ReadKick", "READKICK", "readkick"}, 
+    "index" -> True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", 
+    "paclet" -> "Kicks", "status" -> "None", "summary" -> 
     "Kick[run, dir, r, lMax] computes the kick component in km/s from the \
 multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an \
 integer from 1 to 3) using modes up to l = lMax", 
-    "synonyms" -> {"Kick", "KICK", "kick"}, "title" -> "Kick", "windowTitle" -> 
-    "Kick", "type" -> "Symbol", "uri" -> "nrmma/ref/Kick"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "synonyms" -> {"ReadKick", "READKICK", "readkick"}, "title" -> "ReadKick",
+     "windowTitle" -> "ReadKick", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadKick"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

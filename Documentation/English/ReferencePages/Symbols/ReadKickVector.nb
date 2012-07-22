@@ -7,26 +7,24 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NRExport",
+ ButtonBox["Kicks",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/NRExport"],
+  ButtonData->"paclet:nrmma/guide/Kicks"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ExcludeModes",
+ ButtonBox["ReadKickVector",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ExcludeModes"]
+  ButtonData->"paclet:nrmma/ref/ReadKickVector"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ExcludeModes", "ObjectName"],
+Cell["ReadKickVector", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[TextData[ButtonBox["ExcludeModes",
-      BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/ExcludeModes"]], "InlineFormula"],
-     "\[LineSeparator] is an option for ExportSim."
-    }]]}
+   {"", Cell["\<\
+KickVector[run, r, lMax] computes the vector kick in km/s from the multipolar \
+decomposition of Psi4 on a sphere at radius r using modes up to l = lMax\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -41,21 +39,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ExcludeModes",
+WindowTitle->"ReadKickVector",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ExcludeModes", "EXCLUDEMODES", "excludemodes"}, "index" -> 
-    True, "label" -> "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> 
-    "NRExport", "status" -> "None", "summary" -> 
-    "ExcludeModes is an option for ExportSim.", 
-    "synonyms" -> {"ExcludeModes", "EXCLUDEMODES", "excludemodes"}, "title" -> 
-    "ExcludeModes", "windowTitle" -> "ExcludeModes", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ExcludeModes"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "keywords" -> {"ReadKickVector", "READKICKVECTOR", "readkickvector"}, 
+    "index" -> True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", 
+    "paclet" -> "Kicks", "status" -> "None", "summary" -> 
+    "KickVector[run, r, lMax] computes the vector kick in km/s from the \
+multipolar decomposition of Psi4 on a sphere at radius r using modes up to l \
+= lMax", "synonyms" -> {"ReadKickVector", "READKICKVECTOR", "readkickvector"},
+     "title" -> "ReadKickVector", "windowTitle" -> "ReadKickVector", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadKickVector"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

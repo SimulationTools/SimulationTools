@@ -11,31 +11,23 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/Kicks"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["LinearMomentumRadiated",
+ ButtonBox["ReadLinearMomentumRadiated",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/LinearMomentumRadiated"]
+  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumRadiated"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["LinearMomentumRadiated", "ObjectName"],
+Cell["ReadLinearMomentumRadiated", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["LinearMomentumRadiated",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/LinearMomentumRadiated"], "[", 
-       StyleBox[
-        RowBox[{"run", ",", " ", "dir", ",", " ", "r", ",", " ", "lMax"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]computes the linear momentum radiated as a function of \
-time from the multipolar decomposition of Psi4 on a sphere at radius r in \
-direction dir (an integer from 1 to 3) using modes up to l = lMax.  It \
-returns a DataTable.  The result is an integral of the result of \
-LinearMomentumFlux with an initial boundary condition of zero."
-    }]]}
+   {"", Cell["\<\
+LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum \
+radiated as a function of time from the multipolar decomposition of Psi4 on a \
+sphere at radius r in direction dir (an integer from 1 to 3) using modes up \
+to l = lMax.  It returns a DataTable.  The result is an integral of the \
+result of LinearMomentumFlux with an initial boundary condition of zero.\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -50,7 +42,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"LinearMomentumRadiated",
+WindowTitle->"ReadLinearMomentumRadiated",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -58,8 +50,8 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "LinearMomentumRadiated", "LINEARMOMENTUMRADIATED", 
-      "linearmomentumradiated"}, "index" -> True, "label" -> 
+     "ReadLinearMomentumRadiated", "READLINEARMOMENTUMRADIATED", 
+      "readlinearmomentumradiated"}, "index" -> True, "label" -> 
     "nrmma/Kicks Symbol", "language" -> "en", "paclet" -> "Kicks", "status" -> 
     "None", "summary" -> 
     "LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum \
@@ -68,10 +60,10 @@ sphere at radius r in direction dir (an integer from 1 to 3) using modes up \
 to l = lMax.  It returns a DataTable.  The result is an integral of the \
 result of LinearMomentumFlux with an initial boundary condition of zero.", 
     "synonyms" -> {
-     "LinearMomentumRadiated", "LINEARMOMENTUMRADIATED", 
-      "linearmomentumradiated"}, "title" -> "LinearMomentumRadiated", 
-    "windowTitle" -> "LinearMomentumRadiated", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/LinearMomentumRadiated"}, "SearchTextTranslated" -> "", 
+     "ReadLinearMomentumRadiated", "READLINEARMOMENTUMRADIATED", 
+      "readlinearmomentumradiated"}, "title" -> "ReadLinearMomentumRadiated", 
+    "windowTitle" -> "ReadLinearMomentumRadiated", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadLinearMomentumRadiated"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

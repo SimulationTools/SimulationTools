@@ -11,28 +11,31 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/NRExport"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ExportSim",
+ ButtonBox["ExportNumericalRelativitySimulation",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ExportSim"]
+  ButtonData->"paclet:nrmma/ref/ExportNumericalRelativitySimulation"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ExportSim", "ObjectName"],
+Cell["ExportNumericalRelativitySimulation", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ExportSim",
+       ButtonBox["ExportNumericalRelativitySimulation",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ExportSim"], "[", 
+        ButtonData->"paclet:nrmma/ref/ExportNumericalRelativitySimulation"], 
+       "[", 
        StyleBox[
         RowBox[{
-        "run", ",", " ", "niceName", ",", " ", "outputDirectory", ",", " ", 
-         "mass", ",", " ", "ecc"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]exports a full simulation, including waveforms, local \
-quantities and metadata."
+        "run", ",", " ", "alias", ",", " ", "directory", ",", " ", "mass", 
+         ",", " ", "eccentricity"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]exports a numerical relativity simulation in the \
+Numerical Relativity Data Format (NRDF) including waveforms, local quantities \
+(black hole masses, spins and coordinates) and metadata.  mass is the ADM \
+mass of the system."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -88,22 +91,32 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ExportSim",
+WindowTitle->"ExportNumericalRelativitySimulation",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"ExportSim", "EXPORTSIM", "exportsim"}, "index" -> True, 
-    "label" -> "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> 
-    "NRExport", "status" -> "None", "summary" -> 
-    "ExportSim[run, niceName, outputDirectory, mass, ecc] exports a full \
-simulation, including waveforms, local quantities and metadata.", 
-    "synonyms" -> {"ExportSim", "EXPORTSIM", "exportsim"}, "title" -> 
-    "ExportSim", "windowTitle" -> "ExportSim", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ExportSim"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "keywords" -> {
+     "ExportNumericalRelativitySimulation", 
+      "EXPORTNUMERICALRELATIVITYSIMULATION", 
+      "exportnumericalrelativitysimulation"}, "index" -> True, "label" -> 
+    "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> "NRExport", 
+    "status" -> "None", "summary" -> 
+    "ExportNumericalRelativitySimulation[run, alias, directory, mass, \
+eccentricity] exports a numerical relativity simulation in the Numerical \
+Relativity Data Format (NRDF) including waveforms, local quantities (black \
+hole masses, spins and coordinates) and metadata.  mass is the ADM mass of \
+the system.", 
+    "synonyms" -> {
+     "ExportNumericalRelativitySimulation", 
+      "EXPORTNUMERICALRELATIVITYSIMULATION", 
+      "exportnumericalrelativitysimulation"}, "title" -> 
+    "ExportNumericalRelativitySimulation", "windowTitle" -> 
+    "ExportNumericalRelativitySimulation", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ExportNumericalRelativitySimulation"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
