@@ -40,8 +40,7 @@
 
    GuideSection[
      "Kicks",
-     {"ReadKick" -> "Compute the kick in km/s as measured from the gravitational waves",
-     "SpinWeightedSphericalHarmonic" -> "Compute a spin-weighted spherical harmonic"}],
+     {"ReadKick" -> "Compute the kick in km/s as measured from gravitational waves"}],
 
    GuideSection[
      "InitialData",{"ReadADMMass" -> "Read the ADM mass of the spacetime from a simulation, computed from the initial data"}],
