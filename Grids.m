@@ -35,7 +35,6 @@ PlotGrid;
 GridsBoxes;
 ReadCarpetGrids;
 PlotCarpetGrids2D;
-RescaleGrids(*::usage = "RescaleGrids[grids, coordinatesize] rescales 'grids' such that the coarsest grid has spacing 'coordinatesize'."*);
 
 (* TODO: Decide which of these we want to keep/rename/remove *)
 FinestGridSpacing::usage = "FinestGridSpacing[run] computes the grid spacing on the finest refinement level in run.";
@@ -172,10 +171,10 @@ mergeFiles[files_List] :=
     Return[Join[truncated, rest]];
   ];
 
-RescaleGrids[grids_, spacing_] :=
+rescaleGrids[grids_, spacing_] :=
  Module[{range, rescaledgrids},
   If[Depth[grids]==6,
-    rescaledgrids = Map[RescaleGrids[#, spacing]&, grids];
+    rescaledgrids = Map[rescaleGrids[#, spacing]&, grids];
   ,
     range = Max[grids[[2]]] - Min[grids[[2]]];
     rescaledgrids = MapAt[spacing (#-range/2)&, grids, 2];
@@ -222,7 +221,7 @@ DefineMemoFunction[PlotGridsAndAH2D[sim_String],
 
   (* Get grid information *)
   grids = ReadCarpetGrids[sim];
-  grids = RescaleGrids[grids, ReadCoarseGridSpacing[sim]];
+  grids = rescaleGrids[grids, ReadCoarseGridSpacing[sim]];
 
   (* We need the timestep to relate iteration number to time *)
   dt = ReadFineTimeStep[sim];
