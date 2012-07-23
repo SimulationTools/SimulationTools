@@ -12,7 +12,7 @@ BeginPackage["RunFiles`",
  }];
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
-ReadSimulationCoreCount::usage    = "ReadCores[simname] gives the number of cores used by a simulation.";
+ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
 
 (* TODO: Do we really need these? We should be using FindRunFiles instead?
   If there are no cases where they are necessary, remove them *)
