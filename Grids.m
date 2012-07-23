@@ -23,6 +23,7 @@ ReadCarpetGrids;
 PlotCarpetGrids2D;
 RescaleGrids(*::usage = "RescaleGrids[grids, coordinatesize] rescales 'grids' such that the coarsest grid has spacing 'coordinatesize'."*);
 
+(* TODO: Decide which of these we want to keep/rename/remove *)
 FinestGridSpacing::usage = "FinestGridSpacing[run] computes the grid spacing on the finest refinement level in run.";
 ReadCoarseGridSpacing::usage = "ReadCoarseGridSpacing[run] reads the coarse grid spacing for run.";
 ReadCoarseTimeStep::usage = "ReadCoarseTimeStep[run] reads the coarse time step for run.";
