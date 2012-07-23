@@ -9,6 +9,7 @@ TestSuite[
 		"DataTable.mt",
 		"DataTableNew.mt",
 		"GridFunctions.mt",
+		"Grids.mt",
 		"Memo.mt",
 		"NR.mt",
 		"RunFiles.mt",
