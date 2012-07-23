@@ -25,8 +25,30 @@ BeginPackage["Grids`",
   "RunFiles`"
  }];
 
-PlotGridsAndAH2D::usage = "PlotGridsAndAH2D[run] generates a 2D plot of the grid structure and apparent horizons in which the timestep can be interactively changed.";
+ReadTimeStep::usage = "ReadTimeStep[run] returns a list of the time step sizes on each refinement level in run." <>
+  "ReadTimeStep[run, level] reads the time step on a specific refinement level in run.";
+ReadGridSpacing::usage = "ReadGridSpacing[run] returns a list of the grid spacings on each refinement level in run." <>
+  "ReadGridSpacing[run, level] reads the grid spacing on a specific refinement level in run.";
+ReadAngularPoints::usage = "ReadAngularPoints[run] reads the number of angular points in the Llama spherical patches of run.";
 
+ReadTimeRange::usage = "ReadTimeRange[run] reads the range of times at which data is available for run.";
+ReadInnerBoundary::usage = "ReadInnerBoundary[run] reads the position of the inner boundary of the Llama spherical patches of run.";
+ReadOuterBoundary::usage = "ReadOuterBoundary[run] reads the position of the outer boundary of the Llama spherical patches of run.";
+
+ReadRefinementLevels::usage = "ReadRefinementLevels[run] returns a list containing the refinement level numbers present in run.";
+
+
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+PlotGridsAndAH2D(*::usage = "PlotGridsAndAH2D[run] generates a 2D plot of the grid structure and apparent horizons in which the timestep can be interactively changed."*);
+ReadGridStructure(*::usage = "ReadGridStructure[run] computes the grid structure for run. For each refinement level it returns a list of the form {level, box radii, coarse spacing, number of points, courant factor, level exists every}."*);
+
+
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
 
 AnimateGrids(*::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run"*);
 LoadGrids;
@@ -36,28 +58,189 @@ GridsBoxes;
 ReadCarpetGrids;
 PlotCarpetGrids2D;
 
-(* TODO: Decide which of these we want to keep/rename/remove *)
-FinestGridSpacing::usage = "FinestGridSpacing[run] computes the grid spacing on the finest refinement level in run.";
-ReadCoarseGridSpacing::usage = "ReadCoarseGridSpacing[run] reads the coarse grid spacing for run.";
-ReadCoarseTimeStep::usage = "ReadCoarseTimeStep[run] reads the coarse time step for run.";
-ReadAngularPoints::usage = "ReadAngularPoints[run] reads the number of angular points in the (Llama) spherical patches of run.";
-ReadInnerBoundary::usage = "ReadInnerBoundary[run] reads the position of the inner boundary of the (Llama) spherical patches of run.";
-ReadOuterBoundary::usage = "ReadOuterBoundary[run] reads the position of the outer boundary of the (Llama) spherical patches of run.";
-ReadFineTimeStep::usage = "ReadFineTimeStep[run] reads the finest possible time step for run corresponding to a single iteration.";
-ReadTimeRange::usage = "ReadTimeRange[run] reads the range of times at which data is available for run.";
-GridSpacingOnLevel::usage = "GridSpacingOnLevel[run, level] reads the grid spacing on a refinement level in run.";
-BoxRadiiOnLevel::usage = "BoxRadiiOnLevel[run, level] reads the radii of the refinement boxes on a refinement level in run.";
-BoxRadiiForCentre::usage = "BoxRadiiForCentre[run, centre] reads the radii of the refinement boxes around centre (as specified by CarpetRegrid2) in run.";
-CountRefinementLevels::usage = "CountRefinementLevels[run] reads the maximum possible number of refinement levels in run.
-CountRefinementLevels[run, centre] reads the number of active refinement levels for centre in run.";
-RefinementLevels::usage = "RefinementLevels[run] returns a list containing the refinement level numbers present in run.";
-TimeRefinementFactors::usage = "TimeRefinementFactors[run] reads the time refinement factors for run.";
-CourantFactorOnLevel::usage = "CourantFactorOnLevel[run, level] computes the Courant factor on level for run.";
-LevelExistsEvery::usage = "LevelExistsEvery[run, level] computes how often (in iterations) a refinement level exists in run.";
-RadialPoints::usage = "RadialPoints[run, level] computes the number of radial points on a refinement level in run.";
-GridStructure::usage = "GridStructure[run] computes the grid structure for run. For each refinement level it returns a list of the form {level, box radii, coarse spacing, number of points, courant factor, level exists every}.";
+FinestGridSpacing;
+ReadCoarseGridSpacing;
+ReadCoarseTimeStep;
+ReadFineTimeStep;
+GridSpacingOnLevel;
+BoxRadiiOnLevel;
+BoxRadiiForCentre;
+CountRefinementLevels;
+RefinementLevels;
+TimeRefinementFactors;
+CourantFactorOnLevel;
+LevelExistsEvery;
+RadialPoints;
+GridStructure;
 
 Begin["`Private`"];
+
+(**********************************************************)
+(* ReadTimeStep                                           *)
+(**********************************************************)
+
+SyntaxInformation[ReadTimeStep] =
+ {"ArgumentsPattern" -> {_, ___}};
+
+ReadTimeStep[run_] :=
+ Module[{trf, dt},
+  trf = TimeRefinementFactors[run];
+  dt = ToExpression[LookupParameter[run, "Time::timestep", $Failed]];
+
+  If[dt =!= $Failed,
+    Return[dt/trf];
+  ,
+    Return[$Failed];
+  ];
+];
+
+ReadTimeStep[run_, level_] :=
+  ReadTimeStep[run][[level+1]];
+
+
+(**********************************************************)
+(* ReadGridSpacing                                        *)
+(**********************************************************)
+
+SyntaxInformation[ReadGridSpacing] =
+ {"ArgumentsPattern" -> {_, ___}};
+
+ReadGridSpacing[run_] :=
+ Module[{h0, l},
+  h0 = ToExpression[LookupParameter[run, "CoordBase::dx",
+    LookupParameter[run, "Coordinates::h_cartesian"]]];
+  l = ReadRefinementLevels[run];
+  h0 / 2^l
+];
+
+ReadGridSpacing[run_, l_] :=
+  ReadGridSpacing[run][[l]];
+
+
+(**********************************************************)
+(* ReadAngularPoints                                      *)
+(**********************************************************)
+
+SyntaxInformation[ReadAngularPoints] =
+ {"ArgumentsPattern" -> {_}};
+
+ReadAngularPoints[run_] :=
+  Module[{},
+    ToExpression[LookupParameter[run, "Coordinates::n_angular"]]
+  ];
+
+
+(**********************************************************)
+(* ReadTimeRange                                          *)
+(**********************************************************)
+
+SyntaxInformation[ReadTimeRange] =
+ {"ArgumentsPattern" -> {_}};
+
+(* TODO: Make this more flexible by not relying on PunctureTracker *)
+ReadTimeRange[run_] :=
+  Module[{pairs, first, last},
+   pairs = ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}];
+   first = pairs[[1, 2]];
+   last = pairs[[-1, 2]];
+   {first, last}];
+
+
+(**********************************************************)
+(* ReadInnerBoundary                                      *)
+(**********************************************************)
+
+SyntaxInformation[ReadInnerBoundary] =
+ {"ArgumentsPattern" -> {_}};
+
+ReadInnerBoundary[run_] :=
+  ToExpression[LookupParameter[run, "Coordinates::sphere_inner_radius"]];
+
+
+(**********************************************************)
+(* ReadOuterBoundary                                      *)
+(**********************************************************)
+
+SyntaxInformation[ReadOuterBoundary] =
+ {"ArgumentsPattern" -> {_}};
+
+(* TODO: Add support for Cartesian grids *)
+ReadOuterBoundary[run_] :=
+  ToExpression[LookupParameter[run, "Coordinates::sphere_outer_radius"]];
+
+
+(**********************************************************)
+(* ReadRefinementLevels                                   *)
+(**********************************************************)
+
+SyntaxInformation[ReadRefinementLevels] =
+ {"ArgumentsPattern" -> {_}};
+
+ReadRefinementLevels[run_String] :=
+  Table[l, {l, 0, CountRefinementLevels[run]-1}];
+
+
+
+
+
+
+
+
+(****************************************************************)
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+(****************************************************************)
+
+(**********************************************************)
+(* PlotGridsAndAH2D                                       *)
+(**********************************************************)
+
+DefineMemoFunction[PlotGridsAndAH2D[sim_String],
+  Module[{radius1, xpos1, ypos1, radius2, xpos2, ypos2, grids, dt},
+
+  (* Get horizon position and radius for both black holes *)
+  radius1 = Interpolation[ReadAHRadius[sim, 1]];
+  xpos1 = Interpolation[ReadBHCoordinate[sim, 0, 1]];
+  ypos1 = Interpolation[ReadBHCoordinate[sim, 0, 2]];
+  radius2 = Interpolation[ReadAHRadius[sim, 2]];
+  xpos2 = Interpolation[ReadBHCoordinate[sim, 1, 1]];
+  ypos2 = Interpolation[ReadBHCoordinate[sim, 1, 2]];
+
+  (* Get grid information *)
+  grids = ReadCarpetGrids[sim];
+  grids = rescaleGrids[grids, ReadCoarseGridSpacing[sim]];
+
+  (* We need the timestep to relate iteration number to time *)
+  dt = ReadFineTimeStep[sim];
+
+  Show[Graphics[PlotCarpetGrids2D[grids, dt, #]],
+    Graphics[Disk[{xpos1[#], ypos1[#]}, radius1[#]]],
+    Graphics[Disk[{xpos2[#], ypos2[#]}, radius2[#]]],
+    PlotLabel -> "t=" <> ToString[#]] &
+
+  ]
+];
+
+
+(**********************************************************)
+(* ReadGridStructure                                      *)
+(**********************************************************)
+
+ReadGridStructure[runName_String] :=
+  Map[{#, BoxRadiiOnLevel[runName, #],
+       GridSpacingOnLevel[runName, #],
+       RadialPoints[runName, #],
+       CourantFactorOnLevel[runName, #],
+       LevelExistsEvery[runName, #]} &, RefinementLevels[runName]];
+
+
+
+(****************************************************************)
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
+(****************************************************************)
 
 LoadGrids[runName_] :=
  Module[{allLines, linesByt1, linesByt2, its, ts},
@@ -208,32 +391,6 @@ PlotCarpetGrids2D[run_String] :=
   tRange = ReadTimeRange[run];
   Manipulate[Graphics[PlotCarpetGrids2D[grids, dt, t]], {{t, tRange[[1]], "t"}, tRange[[1]], tRange[[2]]}]];
 
-DefineMemoFunction[PlotGridsAndAH2D[sim_String],
-  Module[{radius1, xpos1, ypos1, radius2, xpos2, ypos2, grids, dt},
-
-  (* Get horizon position and radius for both black holes *)
-  radius1 = Interpolation[ReadAHRadius[sim, 1]];
-  xpos1 = Interpolation[ReadBHCoordinate[sim, 0, 1]];
-  ypos1 = Interpolation[ReadBHCoordinate[sim, 0, 2]];
-  radius2 = Interpolation[ReadAHRadius[sim, 2]];
-  xpos2 = Interpolation[ReadBHCoordinate[sim, 1, 1]];
-  ypos2 = Interpolation[ReadBHCoordinate[sim, 1, 2]];
-
-  (* Get grid information *)
-  grids = ReadCarpetGrids[sim];
-  grids = rescaleGrids[grids, ReadCoarseGridSpacing[sim]];
-
-  (* We need the timestep to relate iteration number to time *)
-  dt = ReadFineTimeStep[sim];
-
-  Show[Graphics[PlotCarpetGrids2D[grids, dt, #]],
-    Graphics[Disk[{xpos1[#], ypos1[#]}, radius1[#]]],
-    Graphics[Disk[{xpos2[#], ypos2[#]}, radius2[#]]],
-    PlotLabel -> "t=" <> ToString[#]] &
-
-  ]
-];
-
 PlotCarpetGrids2D[run_String, t_?NumberQ] :=
   Module[{grids, dt, tRange},
   grids = ReadCarpetGrids[run];
@@ -253,21 +410,6 @@ ReadCoarseGridSpacing[runName_] :=
   Module[{h0},
     h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
       LookupParameter[runName, "Coordinates::h_cartesian", $Failed]]]
-  ];
-
-ReadAngularPoints[runName_] :=
-  Module[{},
-    ToExpression[LookupParameter[runName, "Coordinates::n_angular"]]
-  ];
-
-ReadInnerBoundary[runName_] :=
-  Module[{},
-    ToExpression[LookupParameter[runName, "Coordinates::sphere_inner_radius"]]
-  ];
-
-ReadOuterBoundary[runName_] :=
-  Module[{},
-    ToExpression[LookupParameter[runName, "Coordinates::sphere_outer_radius"]]
   ];
 
 FinestGridSpacing[runName_] :=
@@ -355,15 +497,6 @@ ReadFineTimeStep[run_] :=
     2];
   {{it1, t1}, {it2, t2}} = pairs;
   dtFine = (t2 - t1)/(it2 - it1)];
-
-ReadTimeRange[run_] :=
-  Module[{pairs, first, last},
-   pairs = ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}];
-   first = pairs[[1, 2]];
-   last = pairs[[-1, 2]];
-   {first, last}];
-
-
 
 End[];
 
