@@ -127,8 +127,8 @@ ReadGridSpacing[run_] :=
   h0 / 2^l
 ];
 
-ReadGridSpacing[run_, l_] :=
-  ReadGridSpacing[run][[l]];
+ReadGridSpacing[run_, level_] :=
+  ReadGridSpacing[run][[level+1]];
 
 
 (**********************************************************)
