@@ -1,7 +1,7 @@
 (* Mathematica Test File *)
 
 RunDirectory = $NRMMATestRunDirectory;
-TestReferenceDirectory = FileNameJoin[{$NRMMADirectory,"Data/TestReference"}];
+TestReferenceDirectory = FileNameJoin[{$NRMMAInstallationDirectory,"Data/TestReference"}];
 
 var = "phi";
 
