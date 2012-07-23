@@ -105,10 +105,11 @@ ReadTimeStep[run_, level_] :=
 SyntaxInformation[ReadGridSpacing] =
  {"ArgumentsPattern" -> {_, ___}};
 
+(* TODO: Should this return the grid spacing in each direction? *)
 ReadGridSpacing[run_] :=
  Module[{h0, l},
   h0 = ToExpression[LookupParameter[run, "CoordBase::dx",
-    LookupParameter[run, "Coordinates::h_cartesian"]]];
+    LookupParameter[run, "Coordinates::h_cartesian", $Failed]]];
   l = ReadRefinementLevels[run];
   h0 / 2^l
 ];
