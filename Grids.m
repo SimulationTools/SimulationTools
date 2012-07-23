@@ -35,7 +35,7 @@ ReadTimeRange::usage = "ReadTimeRange[run] reads the range of times at which dat
 ReadInnerBoundary::usage = "ReadInnerBoundary[run] reads the position of the inner boundary of the Llama spherical patches of run.";
 ReadOuterBoundary::usage = "ReadOuterBoundary[run] reads the position of the outer boundary of the Llama spherical patches of run.";
 
-ReadRefinementLevels::usage = "ReadRefinementLevels[run] returns a list containing the refinement level numbers present in run.";
+ReadMaxRefinementLevels::usage = "ReadMaxRefinementLevels[run] returns the maximum number of refinement levels present in run.";
 
 
 (****************************************************************)
@@ -123,7 +123,7 @@ ReadGridSpacing[run_] :=
  Module[{h0, l},
   h0 = ToExpression[LookupParameter[run, "CoordBase::dx",
     LookupParameter[run, "Coordinates::h_cartesian", $Failed]]];
-  l = ReadRefinementLevels[run];
+  l = Range[ReadMaxRefinementLevels[run]] - 1;
   h0 / 2^l
 ];
 
@@ -184,14 +184,14 @@ ReadOuterBoundary[run_] :=
 
 
 (**********************************************************)
-(* ReadRefinementLevels                                   *)
+(* ReadMaxRefinementLevels                                *)
 (**********************************************************)
 
-SyntaxInformation[ReadRefinementLevels] =
+SyntaxInformation[ReadMaxRefinementLevels] =
  {"ArgumentsPattern" -> {_}};
 
-ReadRefinementLevels[run_String] :=
-  Table[l, {l, 0, CountRefinementLevels[run]-1}];
+ReadMaxRefinementLevels[run_String] :=
+  ToExpression[LookupParameter[run, "Carpet::max_refinement_levels"]];
 
 
 
