@@ -83,7 +83,8 @@ Module[{packages =
   "TwoPunctures",
   "Utils",
   "Waveforms",
-  "YlmDecomp"},
+  "YlmDecomp",
+  If[$VersionNumber >= 8, "Wavelets", Sequence[]]},
   ErrorDefinition, DefFn, DefFnQ, withCustomSetDelayed, extraPackages},
 
   extraPackages = {"Stack`", "Error`", "MessageCatcher`"};
@@ -241,10 +242,3 @@ CheckAssignments[fn_, validSymbolsp_, (Module|DynamicModule|With)[defs_, body_]]
        LongForm -> False] &, packages];
 ]
 
-(* Load tools which require Mathematica 8 or newer *)
-If[$VersionNumber >= 8,
-  Unprotect[$Packages];
-  $Packages = Complement[$Packages, {"nrmma8`"}];
-  Protect[$Packages];
-  Needs["nrmma8`"];
-];

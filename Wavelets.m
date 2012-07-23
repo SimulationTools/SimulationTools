@@ -14,17 +14,21 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["nrmma8`",
+BeginPackage["Wavelets`",
  {
   "DataRegion`",
   "DataRepresentations`",
   "DataTable`"
  }];
 
-FilterWavelet::usage = "FilterWavelet[data] filters 'data' using a discrete wavelet transform and making use of the SURELevel thresholding."
-WaveletType::usage = "WaveletType is an option for FilterWavelet which specifies the type of wavelet. The default is DaubechiesWavelet[4]."
-WaveletRefinementLevels::usage = "WaveletRefinementLevels is an option for FilterWavelet which specefies the number of refinement levels to use. The default is 6."
-WaveletThreshold::usage = "WaveletThreshold is an option for FilterWavelet which sets the thresholding specification. The default is {\"SURELevel\"}." 
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+FilterWavelet(*::usage = "FilterWavelet[data] filters 'data' using a discrete wavelet transform and making use of the SURELevel thresholding."*);
+WaveletType(*::usage = "WaveletType is an option for FilterWavelet which specifies the type of wavelet. The default is DaubechiesWavelet[4]."*);
+WaveletRefinementLevels(*::usage = "WaveletRefinementLevels is an option for FilterWavelet which specefies the number of refinement levels to use. The default is 6."*);
+WaveletThreshold(*::usage = "WaveletThreshold is an option for FilterWavelet which sets the thresholding specification. The default is {\"SURELevel\"}."*);
 
 Begin["`Private`"];
 
