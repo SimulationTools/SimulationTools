@@ -22,10 +22,18 @@ BeginPackage["Plotting`",
   "Error`"
  }];
 
-(* TODO: Do we want to keep these usage messages? *)
-DynamicListLinePlot::usage = "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale.";
-PresentationListLinePlot::usage = "PresentationListLinePlot[args] is a wrapper around ListLinePlot which uses a plot style designed to be more attractive than the default Mathematica plot style.  A plot legend can be added by giving the option PlotLegend -> {set1, set2, ...} where seti are labels for each of the curves in the plot.";
-PresentationArrayPlot::usage = "PresentationArrayPlot[d] plots a 2-dimensional DataRegion using ArrayPlot.  The data range of the plot is determined automatically from the DataRegion.  The plot style is designed to be more attractive than the default Mathematica plot style.";
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+DynamicListLinePlot(*::usage = "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale."*);
+PresentationListLinePlot(*::usage = "PresentationListLinePlot[args] is a wrapper around ListLinePlot which uses a plot style designed to be more attractive than the default Mathematica plot style.  A plot legend can be added by giving the option PlotLegend -> {set1, set2, ...} where seti are labels for each of the curves in the plot."*);
+PresentationArrayPlot(*::usage = "PresentationArrayPlot[d] plots a 2-dimensional DataRegion using ArrayPlot.  The data range of the plot is determined automatically from the DataRegion.  The plot style is designed to be more attractive than the default Mathematica plot style."*);
+
+
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
 
 MakePlotLegend;
 ListLinePlotWithLegend;
@@ -46,9 +54,6 @@ FilterPlot(*::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLineP
 PlotKeySize;
 DynamicShow;
 LegendBackground;
-
-
-(* Deprecated functions *)
 ScaledColorFunction;
 ColorMapLegend;
 QuickSlicePlot;
