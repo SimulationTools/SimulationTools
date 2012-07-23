@@ -21,10 +21,6 @@ If[$VersionNumber == 8., ListLogPlot[{1}]];
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]<>"/PirahaPeg"];
 
-$NRMMADirectory = FileNameDrop[FindFile["nrmma`"], -2];
-$NRMMATestRunDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
-$NRMMATestRun = "bbh";
-
 Module[{packages =
  {"Ascii1D",
   "Ascii",
@@ -54,7 +50,6 @@ Module[{packages =
   "NR",
   "NRDF",
   "NRExport",
-  "nrmmaVersion",
   "Parameters",
   "Performance",
   "Piraha",
