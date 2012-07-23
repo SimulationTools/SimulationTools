@@ -85,23 +85,23 @@ DefineMemoFunction[ParseParameterFile[from_String],
  ]
 ];
 
-LookupParameter[parFile_List, name_, default_:None] :=
+ReadSimulationParameter[parFile_List, name_, default_:None] :=
  Module[{l},
   l = Cases[parFile, ParameterSetting[ToLowerCase[name], x_] -> x];
   If[l === {} && default =!= None, Return[default]];
   If[Length[l] == 0, Error["Parameter " <> name <> " not found"]];
   First[l]];
 
-LookupParameter[from_String, name_, default_:None] :=
+ReadSimulationParameter[from_String, name_, default_:None] :=
   Module[{},
     (* Assume the parameter file is named after the run *)
     LookupParameter[ParseParameterFile[from], name, default]
   ];
 
-FindParameters[parFile_String, pattern_] :=
+FindSimulationParameters[parFile_String, pattern_] :=
   FindParameters[ParseParameterFile[parFile], pattern];
 
-FindParameters[parFile_List, pattern_] :=
+FindSimulationParameters[parFile_List, pattern_] :=
   Module[{parameters},
     parameters = Cases[parFile, ParameterSetting[name_,value_] -> name];
     Select[parameters, StringMatchQ[#, pattern, IgnoreCase->True] &]];
