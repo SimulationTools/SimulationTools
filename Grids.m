@@ -11,15 +11,17 @@ BeginPackage["Grids`",
   "RunFiles`"
  }];
 
-AnimateGrids::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run";
+PlotGridsAndAH2D::usage = "PlotGridsAndAH2D[run] generates a 2D plot of the grid structure and apparent horizons in which the timestep can be interactively changed.";
+
+
+AnimateGrids(*::usage = "AnimateGrids[runname] creates an animation of the grid structure of a run"*);
 LoadGrids;
 PlotGrids;
 PlotGrid;
 GridsBoxes;
 ReadCarpetGrids;
 PlotCarpetGrids2D;
-PlotGridsAndAH2D::usage = "PlotGridsAndAH2D[run] generates a 2D plot of the grid structure and apparent horizons in which the timestep can be interactively changed.";
-RescaleGrids::usage = "RescaleGrids[grids, coordinatesize] rescales 'grids' such that the coarsest grid has spacing 'coordinatesize'.";
+RescaleGrids(*::usage = "RescaleGrids[grids, coordinatesize] rescales 'grids' such that the coarsest grid has spacing 'coordinatesize'."*);
 
 FinestGridSpacing::usage = "FinestGridSpacing[run] computes the grid spacing on the finest refinement level in run.";
 ReadCoarseGridSpacing::usage = "ReadCoarseGridSpacing[run] reads the coarse grid spacing for run.";
