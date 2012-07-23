@@ -83,15 +83,28 @@ SyntaxInformation[ReadTimeStep] =
  {"ArgumentsPattern" -> {_, ___}};
 
 ReadTimeStep[run_] :=
- Module[{trf, dt},
-  trf = TimeRefinementFactors[run];
-  dt = ToExpression[LookupParameter[run, "Time::timestep", $Failed]];
+ Module[{method, dt, dtfac, trf},
+  method = LookupParameter[run, "Time::timestep_method", "courant_static"];
 
-  If[dt =!= $Failed,
-    Return[dt/trf];
-  ,
-    Return[$Failed];
+  Which[
+   StringMatchQ[method, "given", IgnoreCase -> True],
+    dt = ToExpression[LookupParameter[run, "Time::timestep", $Failed]];,
+   StringMatchQ[method, "courant_static", IgnoreCase -> True],
+    dtfac = ToExpression[LookupParameter[run, "Time::dtfac", $Failed]];
+    If[dtfac === $Failed,
+      dt = $Failed;
+    ,
+      dt = dtfac * ReadGridSpacing[run, 0];
+    ];,
+   True,
+    dt = $Failed
   ];
+
+  If[dt === $Failed, Return[$Failed]];
+
+  trf = TimeRefinementFactors[run];
+
+  dt/trf
 ];
 
 ReadTimeStep[run_, level_] :=
