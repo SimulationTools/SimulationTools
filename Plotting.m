@@ -8,25 +8,27 @@ BeginPackage["Plotting`",
   "Error`"
  }];
 
+(* TODO: Do we want to keep these usage messages? *)
+DynamicListLinePlot::usage = "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale.";
+PresentationListLinePlot::usage = "PresentationListLinePlot[args] is a wrapper around ListLinePlot which uses a plot style designed to be more attractive than the default Mathematica plot style.  A plot legend can be added by giving the option PlotLegend -> {set1, set2, ...} where seti are labels for each of the curves in the plot.";
+PresentationArrayPlot::usage = "PresentationArrayPlot[d] plots a 2-dimensional DataRegion using ArrayPlot.  The data range of the plot is determined automatically from the DataRegion.  The plot style is designed to be more attractive than the default Mathematica plot style.";
+
 MakePlotLegend;
 ListLinePlotWithLegend;
 ListLogLinearPlotWithLegend;
 PlotLegend;
 LegendPosition;
-DynamicListLinePlot::usage = "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale.";
-PresentationListLinePlot::usage = "PresentationListLinePlot[args] is a wrapper around ListLinePlot which uses a plot style designed to be more attractive than the default Mathematica plot style.  A plot legend can be added by giving the option PlotLegend -> {set1, set2, ...} where seti are labels for each of the curves in the plot.";
-PresentationArrayPlot::usage = "PresentationArrayPlot[d] plots a 2-dimensional DataRegion using ArrayPlot.  The data range of the plot is determined automatically from the DataRegion.  The plot style is designed to be more attractive than the default Mathematica plot style.";
 ColorRange;
 ColorMap;
 PresentationPlotStyles;
 PresentationPlotColors;
 LegendOrientation;
 LegendLineSize;
-PlotFit::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."
+PlotFit(*::usage = "PlotFit[data, model, pars, var] takes the same arguments as FindFit and returns a plot of the fitted function as well as the result of the fit."*);
 PlotKey;
 DynamicArrayPlot;
-FitPlot::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with parameters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."
-FilterPlot::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out.";
+FitPlot(*::usage = "FitPlot[data, model, pars, {t, t1, t2}] generates a ListLinePlot of data and a fit (using FindFit) to model with parameters pars for the variable t in the range t1 to t2.  The parameters to FitPlot are analogous to those of FindFit."*);
+FilterPlot(*::usage = "FilterPlot[data, out, om, {t1, t2}] generates a ListLinePlot of data and applies a discrete cosine transform filter to a portion between t1 and t2 (using FilterDCT) cutting off frequencies above om.  t1, t2 and om can be varied in the resulting plot.  When the Update button is pressed, the filtered data is stored in out."*);
 PlotKeySize;
 DynamicShow;
 LegendBackground;
