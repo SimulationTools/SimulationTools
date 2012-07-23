@@ -6,7 +6,7 @@ BeginPackage["Providers`",
  }];
 
 CallProvidedFunction;
-ProviderPreferences::usage = "ProviderPreferences[f] gives a list of providers for feature f which determines the preference for data from these providers.  This can be reset by the user, either globally or within a Block.";
+ProviderPreferences(*::usage = "ProviderPreferences[f] gives a list of providers for feature f which determines the preference for data from these providers.  This can be reset by the user, either globally or within a Block."*);
 
 Begin["`Private`"];
 

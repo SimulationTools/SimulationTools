@@ -5,7 +5,7 @@ BeginPackage["ReadHDF5`",
   "Error`"
  }];
 
-ReadHDF5::usage = "ReadHDF5[file] provides a wrapper around ImportHDF5 if h5mma is available and falls back to the built-in Import otherwise." 
+ReadHDF5(*::usage = "ReadHDF5[file] provides a wrapper around ImportHDF5 if h5mma is available and falls back to the built-in Import otherwise."*); 
 
 Begin["`Private`"];
 

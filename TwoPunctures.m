@@ -10,8 +10,8 @@ BeginPackage["TwoPunctures`",
   "RunFiles`"
  }];
 
-ReadPunctureADMMasses::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn.";
-ReadPunctureADMMassParameters::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn.";
+ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn."*);
+ReadPunctureADMMassParameters(*::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn."*);
 TotalMass;
 InitialSpinAngularMomentum;
 InitialLinearMomentum;
@@ -20,7 +20,7 @@ InitialAngularMomentum;
 
 MassRatio;
 SymmetricMassRatio;
-ReadTwoPuncturesData::usage = "ReadTwoPuncturesData[file, col] reads a data file output by the standalone TwoPunctures code by Marcus Ansorg and returns a DataRegion containing the data in column col. col can be 1, 2 or 3 for the coordinates or >= 4 for the data.";
+ReadTwoPuncturesData(*::usage = "ReadTwoPuncturesData[file, col] reads a data file output by the standalone TwoPunctures code by Marcus Ansorg and returns a DataRegion containing the data in column col. col can be 1, 2 or 3 for the coordinates or >= 4 for the data."*);
 
 Begin["`Private`"];
 
