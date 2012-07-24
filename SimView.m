@@ -26,18 +26,62 @@ BeginPackage["SimView`",
   "Parameters`",
   "Plotting`",
   "RunFiles`",
+  "SimViewRRMHD`",
   "SystemStatistics`",
   "Waveforms`"
  }];
 
-SimView::usage = "SimView[sim] gives a quick overview of the simulation sim.
-SimView[sim, rad] gives a quick overview of the simulation sim with waveforms extracted at radius rad.
-SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....
-SimView[{sim1, sim2, ...}, rad] gives a quick overview of the simulations sim1, sim2, ... with waveforms extracted at radius rad.";
+SimulationOverview::usage = "SimulationOverview[sim] gives a quick overview of the simulation sim.
+SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....";
 
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
+
+SimView;
 FinishTime(*::usage = "FinishTime[run] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
 
 Begin["`Private`"];
+
+(**********************************************************)
+(* SimulationOverview                                     *)
+(**********************************************************)
+
+Options[SimulationOverview] = {
+  "SimulationType" -> Automatic
+};
+
+SyntaxInformation[SimulationOverview] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+SimulationOverview[sim_String, opts___] :=
+  SimulationOverview[{sim}, opts];
+
+SimulationOverview[sims_List, OptionsPattern[]] :=
+ Module[{type, res},
+  type = OptionValue[SimulationType];
+
+  (* TODO: Add detection of the simulation type *)
+  type = type /. Automatic -> "BBH";
+
+  Which[
+   type === "BBH",
+    res = SimView[sims];,
+   MatchQ[type, {"BBH", "ExtractionRadius" -> _}],
+   	res = SimView[sims, type[[2,2]]];,
+   type === "RRMHD",
+    res = SimViewRRMHD[sims];,
+   True,
+    Error["Unrecognised simulation type " <> ToString[type]];
+  ];
+
+  res
+];
+
+
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
 
 segmentInfo[dirName_] :=
  Module[{mtFile, mtTimes, mtt1, mtt2, idNo, date, col},
