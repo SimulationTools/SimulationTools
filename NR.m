@@ -55,6 +55,7 @@ InitialDimensionlessSpin;
 
 Begin["`Private`"];
 
+(* TODO: Rename this to $SimulationDirectory *)
 RunDirectory := Global`RunDirectory;
 
 (**********************************************************)
