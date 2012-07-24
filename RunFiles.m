@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-(* TODO: if a run doesn't have a parameter file in it, nrmma cannot find ANY files! *)
+(* TODO: if a sim doesn't have a parameter file in it, nrmma cannot find ANY files! *)
 
 BeginPackage["RunFiles`",
  {
@@ -29,8 +29,8 @@ ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the 
 
 (* TODO: Do we really need these? We should be using FindRunFiles instead?
   If there are no cases where they are necessary, remove them *)
-FindRunSegments(*::usage = "FindRunSegments[run] returns a list of all the segment directories for a run which is split across multiple segments."*);
-FindRunDir(*::usage = "FindRunDir[run] returns the directory which contains the output data for run.  You can give a full or relative pathname to the run directory, or a run name relative to the (Global) variable RunDirectory."*);
+FindRunSegments(*::usage = "FindRunSegments[sim] returns a list of all the segment directories for a sim which is split across multiple segments."*);
+FindRunDir(*::usage = "FindRunDir[sim] returns the directory which contains the output data for sim.  You can give a full or relative pathname to the sim directory, or a sim name relative to the (Global) variable SimulationDirectory."*);
 
 (* TODO: These don't belong here *)
 ReadColumnFile;

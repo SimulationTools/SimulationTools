@@ -39,7 +39,7 @@ AsciiTimeOfIndex(*::usage = "AsciiTimeOfIndex[data,i] returns the time, t, of th
 
 ReadCarpetASCII1D(*::usage = "ReadCarpetASCII1D[filename, dir] reads a 1D CarpetIOASCII output file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of lists of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times, and the outermost list is over refinement levels."*);
 
-ReadCarpetASCII1DFromRun(*::usage = "UNTESTED!! ReadCarpetASCII1DFromRun[run, filename, rl, dir] reads a 1D CarpetIOASCII output file from filename in run.  The function returns a single refinement level rl from the file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times."*);
+ReadCarpetASCII1DFromRun(*::usage = "UNTESTED!! ReadCarpetASCII1DFromRun[sim, filename, rl, dir] reads a 1D CarpetIOASCII output file from filename in sim.  The function returns a single refinement level rl from the file.  It assumes that the output is in direction dir, running from 1 to 3. The data is returned as a list of the form {{t1, d1}, {t2, d2}, ..., {tn, dn}} where the ti are the times and the di are DataTables representing the 1D data at those times."*);
 
 AsciiData1D;
 

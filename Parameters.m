@@ -21,8 +21,8 @@ BeginPackage["Parameters`",
   "RunFiles`"
  }];
 
-FindSimulationParameters::usage  = "FindSimulationParameters[run, pattern] gives a list of the names of all the parameters which match pattern which were set in the simulation.";
-ReadSimulationParameter::usage = "ReadSimulationParameter[run, pname] reads the value of the named parameter from the simulation.";
+FindSimulationParameters::usage  = "FindSimulationParameters[sim, pattern] gives a list of the names of all the parameters which match pattern which were set in the simulation.";
+ReadSimulationParameter::usage = "ReadSimulationParameter[sim, pname] reads the value of the named parameter from the simulation.";
 ParseParameterFile;
 
 LookupParameter = ReadSimulationParameter;

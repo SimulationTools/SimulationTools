@@ -24,7 +24,7 @@ BeginPackage["Timers`",
 
 (* Interface with CactusTimers package *)
 
-ReadTimerFromRun(*::usage = "ReadTimerFromRun[run, timername, proc] returns data for the timer called timername on process proc from the AllTimers output of the TimerReport thorn.  proc is optional and defaults to 0."*);
+ReadTimerFromRun(*::usage = "ReadTimerFromRun[sim, timername, proc] returns data for the timer called timername on process proc from the AllTimers output of the TimerReport thorn.  proc is optional and defaults to 0."*);
 ChartTimersFromRun;
 TimersFile;
 IndependentTimersFromRun;

@@ -25,7 +25,7 @@ BeginPackage["CarpetHDF5Plot`",
   "RunFiles`"
  }];
 
-Carpet1DPlotter(*::usage = "Carpet1DPlotter[run] generates an interactive plot of the 1D HDF5 variables in run"*);
+Carpet1DPlotter(*::usage = "Carpet1DPlotter[sim] generates an interactive plot of the 1D HDF5 variables in sim"*);
 
 (* To Do:
 

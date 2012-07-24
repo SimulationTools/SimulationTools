@@ -24,8 +24,8 @@ BeginPackage["TwoPunctures`",
   "RunFiles`"
  }];
 
-ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[run] reads the ADM masses of the punctures in run as computed by the TwoPunctures thorn."*);
-ReadPunctureADMMassParameters(*::usage  = "ReadPunctureADMMassParameters[run] reads the ADM masses of the punctures in run as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn."*);
+ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[sim] reads the ADM masses of the punctures in sim as computed by the TwoPunctures thorn."*);
+ReadPunctureADMMassParameters(*::usage  = "ReadPunctureADMMassParameters[sim] reads the ADM masses of the punctures in sim as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn."*);
 TotalMass;
 InitialSpinAngularMomentum;
 InitialLinearMomentum;

@@ -39,7 +39,7 @@ SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2,
 (****************************************************************)
 
 SimView;
-FinishTime(*::usage = "FinishTime[run] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
+FinishTime(*::usage = "FinishTime[sim] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
 
 Begin["`Private`"];
 

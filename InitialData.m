@@ -24,7 +24,7 @@ BeginPackage["InitialData`",
   "RunFiles`"
  }];
 
-ReadADMMass::usage = "ReadADMMass[run] reads the ADM mass of the spacetime from the initial data slice";
+ReadADMMass::usage = "ReadADMMass[sim] reads the ADM mass of the spacetime from the initial data slice";
 
 Begin["`Private`"];
 

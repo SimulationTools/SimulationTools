@@ -24,15 +24,15 @@ BeginPackage["GridFunctions`",
   "RunFiles`"
  }];
 
-ReadGridFunction::usage = "ReadGridFunction[run, var, dims] reads variable var from run and returns it as a DataRegion object.  dims is a list of the dimensions to read, and these dimensions must correspond to available output.  Dimensions in dims can be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
-ReadIterations::usage = "ReadIterations[run, var, dims] reads the iterations present for the grid function var in the directory run.";
-ReadMaps::usage = "ReadMaps[run, var, dims] reads the multipatch maps present  for the grid function var in the directory run.";
-ReadRefinementLevels::usage = "ReadRefinementLevels[run, var, dims] reads the refinement levels present for the grid function var in the directory run.";
-ReadTimeLevels::usage = "ReadTimeLevels[run, var, dims] reads the timelevels present for the grid function var in the directory run.";
+ReadGridFunction::usage = "ReadGridFunction[sim, var, dims] reads variable var from sim and returns it as a DataRegion object.  dims is a list of the dimensions to read, and these dimensions must correspond to available output.  Dimensions in dims can be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
+ReadIterations::usage = "ReadIterations[sim, var, dims] reads the iterations present for the grid function var in sim.";
+ReadMaps::usage = "ReadMaps[sim, var, dims] reads the multipatch maps present  for the grid function var in sim.";
+ReadRefinementLevels::usage = "ReadRefinementLevels[sim, var, dims] reads the refinement levels present for the grid function var in sim.";
+ReadTimeLevels::usage = "ReadTimeLevels[sim, var, dims] reads the timelevels present for the grid function var in sim.";
 
-ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the iteration it on refinement level rl of the CarpetHDF5 file named var in the directory run.";
-
-StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed";
+(* TODO: Should these be experimental? *)
+ReadTime::usage = "ReadTime[sim, var, it, rl] reads the time associated with the iteration it on refinement level rl of the variable var in sim.";
+StripGhostZones::usage = "StripGhostZones is a boolean option which indicates that ghost zones should be removed";
 
 
 Begin["`Private`"];

@@ -25,18 +25,18 @@ BeginPackage["Binary`",
   "Horizons`"
  }];
 
-ReadBinaryCoordinates::usage = "ReadBinaryCoordinates[run, i] gives the Cartesian coordinates of body i of the binary as a function of time.  The result is a list of DataTables, one for each coordinate direction.\nReadBinaryCoordinates[run] gives the Cartesian coordinates of the relative orbit of the binary.";
+ReadBinaryCoordinates::usage = "ReadBinaryCoordinates[sim, i] gives the Cartesian coordinates of body i of the binary as a function of time.  The result is a list of DataTables, one for each coordinate direction.\nReadBinaryCoordinates[sim] gives the Cartesian coordinates of the relative orbit of the binary.";
 
-ReadBinaryVelocity::usage = "ReadBinaryVelocity[run, i] gives the Cartesian components of the velocity of body i of the binary as a function of time.  The result is a list of DataTables, one for each coordinate direction. \nReadBinaryVelocity[run] gives the Cartesian components of the velocity of the relative orbit of the binary.";
+ReadBinaryVelocity::usage = "ReadBinaryVelocity[sim, i] gives the Cartesian components of the velocity of body i of the binary as a function of time.  The result is a list of DataTables, one for each coordinate direction. \nReadBinaryVelocity[sim] gives the Cartesian components of the velocity of the relative orbit of the binary.";
 
-ReadBinaryRadius::usage = "ReadBinaryRadius[run, i] gives the spherical polar radial coordinate of body i of the binary as a function of time as a DataTable.\nReadBinaryRadius[run] gives the separation of the binary.";
+ReadBinaryRadius::usage = "ReadBinaryRadius[sim, i] gives the spherical polar radial coordinate of body i of the binary as a function of time as a DataTable.\nReadBinaryRadius[sim] gives the separation of the binary.";
 
-ReadBinaryAzimuth::usage = "ReadBinaryAzimuth[run, i] gives the spherical polar azimuthal coordinate (phi) of body i of the binary as a function of time as a DataTable.\nReadBinaryAzimuth[run] gives the azimuthal coordinate of the relative orbit of the binary.";
+ReadBinaryAzimuth::usage = "ReadBinaryAzimuth[sim, i] gives the spherical polar azimuthal coordinate (phi) of body i of the binary as a function of time as a DataTable.\nReadBinaryAzimuth[sim] gives the azimuthal coordinate of the relative orbit of the binary.";
 
-ReadBinaryInclination::usage = "ReadBinaryInclination[run] gives the spherical polar inclination coordinate (theta) of body i of the binary as a function of time as a DataTable.\nReadBinaryInclination[run] gives the inclination angle of the relative orbit of the binary.";
+ReadBinaryInclination::usage = "ReadBinaryInclination[sim] gives the spherical polar inclination coordinate (theta) of body i of the binary as a function of time as a DataTable.\nReadBinaryInclination[sim] gives the inclination angle of the relative orbit of the binary.";
 
-ReadBinarySeparation::usage = "ReadBinarySeparation[run] gives the distance between the two bodies in the binary as a function of time as a DataTable.";
-ReadBinaryPhase::usage = "ReadBinaryPhase[run] gives the phase, phi, (in the xy plane) of the binary's relative orbit.";
+ReadBinarySeparation::usage = "ReadBinarySeparation[sim] gives the distance between the two bodies in the binary as a function of time as a DataTable.";
+ReadBinaryPhase::usage = "ReadBinaryPhase[sim] gives the phase, phi, (in the xy plane) of the binary's relative orbit.";
 
 ToListOfPoints::usage = "ToListOfPoints[{x, y, ...}] takes DataTables representing x, y, ... coordinates and gives a list {{x1, y1, ...}, {x2, y2, ...}, ...} suitable for plotting with Line or ListPointPlot3D.";
 

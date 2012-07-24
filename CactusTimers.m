@@ -21,7 +21,7 @@ BeginPackage["CactusTimers`",
  }];
 
 ChartTimers(*::usage = "ChartTimers[timers] gives a pie chart of the timers.  Note that it only makes sense if the timers are independent.\nChartTimers[filename, n] gives a pie chart of the top n independent timers in file 'filename'.  If omitted, n defaults to 15."*);
-IndependentTimers(*::usage = "IndependentTimers[timers] converts a list of raw Cactus timers into a set of timers whose values add to the total run time.\nIndependentTimers[filename] computes the independent timers directly from a timer file."*);
+IndependentTimers(*::usage = "IndependentTimers[timers] converts a list of raw Cactus timers into a set of timers whose values add to the total sim time.\nIndependentTimers[filename] computes the independent timers directly from a timer file."*);
 ParseTimersFile(*::usage = "ParseTimersFile[filename] reads a timer file produced using the output_all_timers parameter of TimerReport and returns a list of the form {{timer, value}, ...}.  It takes the last entry in the timer file, corresponding to the full time of the simulation."*);
 LargestTimers(*::usage = "LargestTimers[timers, n] gives a sorted list of the n - 1 largest timers.  Appended to the end of this list is an entry called 'Rest' which is the sum of the timers which were not included."*);
 TotalTime(*::usage = "TotalTime[timers] gives the total time from a set of independent timers.  Note that if the set is not independent, the output is meaningless."*);

@@ -24,9 +24,9 @@ BeginPackage["BlackHole`",
   "Horizons`"
  }];
 
-ReadBlackHoleMass::usage = "ReadBlackHoleMass[run, i] gives the mass of the ith black hole in the simulation as a function of time as a DataTable.";
-ReadBlackHoleIrreducibleMass::usage = "ReadBlackHoleIrreducibleMass[run, i] gives the irreducible mass of the ith black hole in the simulation as a function of time as a DataTable.";
-ReadBlackHoleSpin::usage = "ReadBlackHoleSpin[run, i] gives a list of DataTables of the Cartesian coordinate components of the spin angular momentum of the ith black hole in the simulation as a function of time.";
+ReadBlackHoleMass::usage = "ReadBlackHoleMass[sim, i] gives the mass of the ith black hole in the simulation as a function of time as a DataTable.";
+ReadBlackHoleIrreducibleMass::usage = "ReadBlackHoleIrreducibleMass[sim, i] gives the irreducible mass of the ith black hole in the simulation as a function of time as a DataTable.";
+ReadBlackHoleSpin::usage = "ReadBlackHoleSpin[sim, i] gives a list of DataTables of the Cartesian coordinate components of the spin angular momentum of the ith black hole in the simulation as a function of time.";
 
 Begin["`Private`"];
 
