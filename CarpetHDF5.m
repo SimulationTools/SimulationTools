@@ -26,20 +26,11 @@ BeginPackage["CarpetHDF5`",
   "RunFiles`"
  }];
 
-(* New CarpetHDF5 API *)
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
 
-(* ReadGridFunction::usage = "ReadGridFunction[run, var, it, rl] reads a grid function from the CarpetHDF5 file named var in the directory run and returns it as a DataRegion object.  The iteration is given by it, and the refinement level by rl (rl defaults to the first level in the file if it is omitted).  Optional arguments: Variable -> Automatic | varname specifies the variable to read from files containing more than one variable, Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned."; *)
-(* ReadIterations::usage = "ReadIterations[run, var, rl] reads the iterations present in the CarpetHDF5 file named var in the directory run.  Only those iterations present on refinement level rl are returned.  rl defaults to All if it is omitted."; *)
-(* ReadMaps::usage = "ReadMaps[run, var] reads the multipatch maps present in the CarpetHDF5 file named var in the directory run."; *)
-(* ReadRefinementLevels::usage = "ReadRefinementLevels[run, var] reads the refinement levels present in the CarpetHDF5 file named var in the directory run."; *)
-(* ReadTimeLevels::usage = "ReadTimeLevels[run, var] reads the timelevels present in the CarpetHDF5 file named var in the directory run."; *)
-ReadVariables::usage = "ReadVariables[run, var] reads the variable names present in the CarpetHDF5 file named var in the directory run.";
-(* ReadTime::usage = "ReadTime[run, var, it, rl] reads the time associated with the iteration it on refinement level rl of the CarpetHDF5 file named var in the directory run."; *)
-
-(* StripGhostZones::usage = "StripGhostZones is a boolean option to various CarpetHDF5 functions which indicates that ghost zones should be removed"; *)
-
-(* Exported symbols *)
-
+ReadVariables;
 ReadCarpetHDF5;
 CarpetHDF5DatasetName;
 ReadCarpetHDF5Variable;
@@ -55,7 +46,6 @@ CarpetHDF5FileInfo;
 CarpetHDF5Attribute;
 CarpetHDF5Attributes;
 CarpetHDF5Time;
-
 CarpetHDF5Manipulate;
 CarpetManipulatePlotFunction;
 
