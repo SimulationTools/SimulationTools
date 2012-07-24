@@ -1,13 +1,13 @@
 (* Mathematica Test File *)
 
-RunDirectory = $NRMMATestRunDirectory;
+RunDirectory = $NRMMATestSimulationDirectory;
 
 TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
 
 (* ReadBHCoordinates *)
 
 Test[
-  ToList[ReadBHCoordinates[$NRMMATestRun, 0]][[{1,2,-1}]]
+  ToList[ReadBHCoordinates[$NRMMATestSimulation, 0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHCoordinates-0.m"}]]
   ,
@@ -15,7 +15,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHCoordinates[$NRMMATestRun, 1]][[{1,2,-1}]]
+  ToList[ReadBHCoordinates[$NRMMATestSimulation, 1]][[{1,2,-1}]]
   ,
   {{0, {-3, 0, 0}},
    {0.5, {-2.99948598445407, -0.0115049097956219, -1.27623664921498*^-20}}, 
@@ -25,7 +25,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHCoordinate[$NRMMATestRun, 0, 1]][[{1,2,-1}]]
+  ToList[ReadBHCoordinate[$NRMMATestSimulation, 0, 1]][[{1,2,-1}]]
   ,
   {{0, 3}, {0.5, 2.99948598445407}, 
    {300, 5.93161911032243*^-18}},
@@ -33,7 +33,7 @@ Test[
     ]
 
 Test[
-  ReadBHTrajectory[$NRMMATestRun, 0][[{1,2,-1}]]
+  ReadBHTrajectory[$NRMMATestSimulation, 0][[{1,2,-1}]]
   ,
   {{3, 0}, {2.99948598445407, 0.0115049097956219}, 
    {5.93161911032243*^-18, 2.88757513001964*^-17}},
@@ -41,7 +41,7 @@ Test[
     ]
 
 Test[
-  ReadBHTrajectories[$NRMMATestRun][[All,{1,2,-1}]]
+  ReadBHTrajectories[$NRMMATestSimulation][[All,{1,2,-1}]]
   ,
   {{{3, 0}, {2.99948598445407, 0.0115049097956219}, 
     {5.93161911032243*^-18, 2.88757513001964*^-17}}, 
@@ -51,7 +51,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHSeparation[$NRMMATestRun]][[{1,2,-1}]]
+  ToList[ReadBHSeparation[$NRMMATestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHSeparation.m"}]]
   ,
@@ -59,7 +59,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHRadius[$NRMMATestRun,0]][[{1,2,-1}]]
+  ToList[ReadBHRadius[$NRMMATestSimulation,0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHRadius.m"}]]
   ,
@@ -67,7 +67,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHPhase[$NRMMATestRun,0]][[{1,2,-1}]]
+  ToList[ReadBHPhase[$NRMMATestSimulation,0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhase-0.m"}]]
   ,
@@ -75,7 +75,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHInclination[$NRMMATestRun]][[{1,2,-1}]]
+  ToList[ReadBHInclination[$NRMMATestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHInclination.m"}]]
   ,
@@ -83,7 +83,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHPhase[$NRMMATestRun]][[{1,2,-1}]]
+  ToList[ReadBHPhase[$NRMMATestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhase.m"}]]
   ,
@@ -91,7 +91,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHPhaseOfFrequency[$NRMMATestRun]][[{1,2,-1}]]
+  ToList[ReadBHPhaseOfFrequency[$NRMMATestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhaseOfFrequency.m"}]]
   ,
@@ -99,7 +99,7 @@ Test[
     ]
 
 Test[
-  ToList[ReadBHSpeed[$NRMMATestRun,0]][[{1,2,-1}]]
+  ToList[ReadBHSpeed[$NRMMATestSimulation,0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHSpeed.m"}]]
   ,
@@ -107,7 +107,7 @@ Test[
     ]
 
 Test[
-  BHCoordinateMergerTime[$NRMMATestRun]
+  BHCoordinateMergerTime[$NRMMATestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"BHCoordinateMergerTime.m"}]]
   ,
@@ -115,7 +115,7 @@ Test[
     ]
 
 Test[
-  InitialSeparation[$NRMMATestRun]
+  InitialSeparation[$NRMMATestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"InitialSeparation.m"}]]
   ,
@@ -123,7 +123,7 @@ Test[
     ]
 
 Test[
-  InitialPosition[$NRMMATestRun,0]
+  InitialPosition[$NRMMATestSimulation,0]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"InitialPosition.m"}]]
   ,

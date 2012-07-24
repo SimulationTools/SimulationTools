@@ -1,6 +1,6 @@
 (* Mathematica Test File *)
 
-RunDirectory = $NRMMATestRunDirectory;
+RunDirectory = $NRMMATestSimulationDirectory;
 
 TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
 
@@ -20,7 +20,7 @@ Module[
 	TestID->"ReadPsi4_mp_asc"]]
 
 Test[
-  ToList[ReadPsi4[$NRMMATestRun,2,2,100]][[{1,2,200,-1}]]
+  ToList[ReadPsi4[$NRMMATestSimulation,2,2,100]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadPsi4.m"}]]
   ,
@@ -28,7 +28,7 @@ Test[
     ]
 
 Test[
-  ReadPsi4Radii[$NRMMATestRun]
+  ReadPsi4Radii[$NRMMATestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadPsi4Radii.m"}]]
   ,
@@ -113,7 +113,7 @@ Test[
     ]
 
 Test[
-  ToList[Psi4ToStrain[ReadPsi4[$NRMMATestRun,2,2,100],0.02]][[{1,2,200,-1}]]
+  ToList[Psi4ToStrain[ReadPsi4[$NRMMATestSimulation,2,2,100],0.02]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-2.m"}]]
   ,

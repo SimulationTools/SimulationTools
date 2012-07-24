@@ -29,8 +29,8 @@ $NRMMAVersion::usage = "$NRMMAVersionNumber is a string that gives the version o
 (* Experimental                                                 *)
 (****************************************************************)
 
-$NRMMATestRunDirectory;
-$NRMMATestRun;
+$NRMMATestSimulationDirectory;
+$NRMMATestSimulation;
 
 (****************************************************************)
 (* Deprecated                                                   *)
@@ -41,8 +41,8 @@ nrmmaVersion;
 Begin["`Private`"];
 
 $NRMMAInstallationDirectory = FileNameDrop[FindFile["nrmma`"], -2];
-$NRMMATestRunDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
-$NRMMATestRun = "bbh";
+$NRMMATestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
+$NRMMATestSimulation = "bbh";
 
 $NRMMAVersionNumber        = 1.0;
 $NRMMAReleaseNumber        = 0;

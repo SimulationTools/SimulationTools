@@ -1,13 +1,13 @@
 (* Mathematica Test File *)
 
-RunDirectory = $NRMMATestRunDirectory;
+SimulationDirectory = $NRMMATestSimulationDirectory;
 
 (****************************************************************)
 (* ReadTimeStep                                                 *)
 (****************************************************************)
 
 Test[
-	ReadTimeStep[$NRMMATestRun]
+	ReadTimeStep[$NRMMATestSimulation]
 	,
 	{0.5, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625, 0.001953125}
 	,
@@ -15,7 +15,7 @@ Test[
 ]
 
 Test[
-	ReadTimeStep[$NRMMATestRun, 3]
+	ReadTimeStep[$NRMMATestSimulation, 3]
 	,
 	0.125
 	,
@@ -28,7 +28,7 @@ Test[
 (****************************************************************)
 
 Test[
-	ReadGridSpacing[$NRMMATestRun]
+	ReadGridSpacing[$NRMMATestSimulation]
 	,
 	{2., 1., 0.5, 0.25, 0.125, 0.0625, 0.03125}
 	,
@@ -36,7 +36,7 @@ Test[
 ]
 
 Test[
-	ReadGridSpacing[$NRMMATestRun, 3]
+	ReadGridSpacing[$NRMMATestSimulation, 3]
 	,
 	0.25
 	,
@@ -49,7 +49,7 @@ Test[
 (****************************************************************)
 
 Test[
-	ReadTimeRange[$NRMMATestRun]
+	ReadTimeRange[$NRMMATestSimulation]
 	,
 	{0, 300}
 	,
@@ -62,7 +62,7 @@ Test[
 (****************************************************************)
 
 Test[
-	ReadMaxRefinementLevels[$NRMMATestRun]
+	ReadMaxRefinementLevels[$NRMMATestSimulation]
 	,
 	7
 	,
