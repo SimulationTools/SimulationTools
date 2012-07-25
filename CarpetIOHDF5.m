@@ -206,7 +206,7 @@ CarpetIOHDF5DatasetName[var_String, it_Integer, m:(_Integer|None), rl:(_Integer|
 (* ReadCarpetIOHDF5Datasets *)
 (****************************************************************)
 
-Options[ReadCarpetIOHDF5Datasets] = {StripGhostZones -> True};
+Options[ReadCarpetIOHDF5Datasets] = {"StripGhostZones" -> True};
 
 (* Read a list of datasets into DataRegions *)
 ReadCarpetIOHDF5Datasets[file_String, {}, opts:OptionsPattern[]] := {};
@@ -261,7 +261,7 @@ CarpetIOHDF5Components[file_, it_, rl_] :=
 (* Read all datasets for a variable *)
 Options[ReadCarpetIOHDF5Components] = {"StripGhostZones" -> True};
 
-ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_Integer, map_, opts___] :=
+ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_Integer, map_, opts:OptionsPattern[]] :=
   Module[{fileNames, datasets, pattern, components, names, varNames, varName, directory, leaf, leafPrefix},
     If[FileType[file] === None,
       Error["File " <> file <> " not found in ReadCarpetIOHDF5Components"]];
@@ -293,7 +293,7 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
     datasets = Flatten[
       MapThread[
         ReadCarpetIOHDF5Datasets[#1, #2, 
-                                 FilterRules[{opts},Options[ReadCarpetIOHDF5DataSets]]] &, 
+                                 FilterRules[{opts},Options[ReadCarpetIOHDF5Datasets]]] &,
                                  {fileNames, names}]];
 
     datasets
