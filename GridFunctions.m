@@ -31,9 +31,13 @@ ReadRefinementLevels::usage = "ReadRefinementLevels[sim, var, dims] reads the re
 ReadTimeLevels::usage = "ReadTimeLevels[sim, var, dims] reads the timelevels present for the grid function var in sim.";
 
 (* TODO: Should these be experimental? *)
-ReadTime::usage = "ReadTime[sim, var, it, rl] reads the time associated with the iteration it on refinement level rl of the variable var in sim.";
 StripGhostZones::usage = "StripGhostZones is a boolean option which indicates that ghost zones should be removed";
 
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
+
+ReadTime;
 
 Begin["`Private`"];
 
