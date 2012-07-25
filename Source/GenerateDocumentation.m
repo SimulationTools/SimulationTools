@@ -2,7 +2,7 @@
 
 << ApplicationTools`;
 
-RunDirectory = $NRMMATestSimulationDirectory;
+$SimulationPath = $NRMMATestSimulationDirectory;
 
 packages =
 { 

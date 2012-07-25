@@ -8,7 +8,7 @@
    "ReadMemory",
    "ReadRunSpeed",
    "ReadWalltime",
-   "SimView"
+   "SimulationOverview"
    },
   "More About" -> {"nrmma"}
 }

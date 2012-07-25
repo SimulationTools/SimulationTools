@@ -36,7 +36,7 @@
 
    {"Title" -> "Simulation Information",
     "DetailedFunctions" -> {
-      {"SimView" , "provide a quick graphical overview of a simulation"},
+      {"SimulationOverview" , "provide a quick graphical overview of a simulation"},
       {"ReadSimulationParameter", "read the value of a specified parameter from a simulation"},
       {"FindSimulationParameters", "search for available parameters"}},
     "Functions" -> {"ReadSimulationSpeed", "ReadSimulationRunTime", "ReadSimulationCoreCount", 

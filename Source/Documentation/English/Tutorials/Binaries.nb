@@ -27,7 +27,7 @@ Cell[BoxData[
  RowBox[{"<<", "nrmma`"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"RunDirectory", "=", "$NRMMATestSimulationDirectory"}]], "Input"],
+ RowBox[{"$SimulationPath", "=", "$NRMMATestSimulationDirectory"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{

@@ -11,7 +11,7 @@
    "ReadMemory",
    "ReadRunSpeed",
    "ReadSwap",
-   "SimView"
+   "SimulationOverview"
    },
   "More About" -> {"nrmma"}
 }

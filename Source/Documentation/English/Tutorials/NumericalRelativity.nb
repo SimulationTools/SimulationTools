@@ -15,16 +15,16 @@ Cell[BoxData[
 Cell[TextData[{
  "Set the ",
  Cell[BoxData[
-  ButtonBox["RunDirectory",
+  ButtonBox["$SimulationPath",
    BaseStyle->"Link",
-   ButtonData->"paclet:Global/ref/RunDirectory"]], "InlineFormula"],
+   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
  " variable to the directory containing your simulations"
 }], "MathCaption"],
 
 Cell[BoxData[
  RowBox[{"(*", 
   RowBox[{
-   RowBox[{"RunDirectory", "=", 
+   RowBox[{"$SimulationPath", "=", 
     RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}], 
   "*)"}]], "Input"],
 
