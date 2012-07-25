@@ -27,8 +27,8 @@ BeginPackage["Grids`",
 
 ReadTimeStep::usage = "ReadTimeStep[sim] returns a list of the time step sizes on each refinement level in sim." <>
   "ReadTimeStep[sim, level] reads the time step on a specific refinement level in sim.";
-ReadGridSpacing::usage = "ReadGridSpacing[sim] returns a list of the grid spacings in each direction on each refinement level in sim." <>
-  "ReadGridSpacing[sim, level] reads the grid spacing in each direction on a specific refinement level in sim.";
+ReadGridSpacings::usage = "ReadGridSpacings[sim] returns a list of the grid spacings in each direction on each refinement level in sim." <>
+  "ReadGridSpacings[sim, level] reads the grid spacing in each direction on a specific refinement level in sim.";
 
 ReadTimeRange::usage = "ReadTimeRange[sim] reads the range of times at which data is available for sim.";
 
@@ -95,7 +95,7 @@ ReadTimeStep[run_] :=
     If[dtfac === $Failed,
       dt = $Failed;
     ,
-      dt = dtfac * Min[ReadGridSpacing[run, 0]];
+      dt = dtfac * Min[ReadGridSpacings[run]];
     ];,
    True,
     dt = $Failed
@@ -113,30 +113,42 @@ ReadTimeStep[run_, level_] :=
 
 
 (**********************************************************)
-(* ReadGridSpacing                                        *)
+(* ReadGridSpacings                                       *)
 (**********************************************************)
 
-SyntaxInformation[ReadGridSpacing] =
- {"ArgumentsPattern" -> {_, ___}};
+Options[ReadGridSpacings] = {
+	"Map"             -> Automatic,
+    "RefinementLevel" -> Automatic
+  };
 
-ReadGridSpacing[run_] :=
- Module[{h0, l},
+SyntaxInformation[ReadGridSpacings] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+ReadGridSpacings[run_, OptionsPattern[]] :=
+ Module[{rl, h0},
+  If[OptionValue[Map] =!= Automatic,
+  	Error["Specifying a map is currently not supported."];
+  ];
+
+  rl  = OptionValue[RefinementLevel] /. Automatic -> 0;
+
+  If[rl >= ReadMaxRefinementLevels[run],
+  	Error["Refinement level " <> ToString[rl] <> " does not exist."];
+  ];
+
   h0 = ToExpression[LookupParameter[run, "Coordinates::h_cartesian", $Failed]];
 
   If[h0 =!= $Failed,
     h0 = {h0, h0, h0};
   ,
-    h0 = {LookupParameter[run, "CoordBase::dx", $Failed],
+    h0 = ToExpression /@
+    	 {LookupParameter[run, "CoordBase::dx", $Failed],
           LookupParameter[run, "CoordBase::dy", $Failed],
           LookupParameter[run, "CoordBase::dz", $Failed]};
   ];
 
-  l = Range[ReadMaxRefinementLevels[run]] - 1;
-  Map[# / 2^l &, h0]
+  h0 / 2^rl
 ];
-
-ReadGridSpacing[run_, level_] :=
-  ReadGridSpacing[run][[level+1]];
 
 
 (**********************************************************)
