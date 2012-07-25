@@ -27,8 +27,8 @@ BeginPackage["Grids`",
 
 ReadTimeStep::usage = "ReadTimeStep[sim] returns a list of the time step sizes on each refinement level in sim." <>
   "ReadTimeStep[sim, level] reads the time step on a specific refinement level in sim.";
-ReadGridSpacing::usage = "ReadGridSpacing[sim] returns a list of the grid spacings on each refinement level in sim." <>
-  "ReadGridSpacing[sim, level] reads the grid spacing on a specific refinement level in sim.";
+ReadGridSpacing::usage = "ReadGridSpacing[sim] returns a list of the grid spacings in each direction on each refinement level in sim." <>
+  "ReadGridSpacing[sim, level] reads the grid spacing in each direction on a specific refinement level in sim.";
 ReadAngularPoints::usage = "ReadAngularPoints[sim] reads the number of angular points in the Llama spherical patches of sim.";
 
 ReadTimeRange::usage = "ReadTimeRange[sim] reads the range of times at which data is available for sim.";
@@ -94,7 +94,7 @@ ReadTimeStep[run_] :=
     If[dtfac === $Failed,
       dt = $Failed;
     ,
-      dt = dtfac * ReadGridSpacing[run, 0];
+      dt = dtfac * Min[ReadGridSpacing[run, 0]];
     ];,
    True,
     dt = $Failed
@@ -118,13 +118,20 @@ ReadTimeStep[run_, level_] :=
 SyntaxInformation[ReadGridSpacing] =
  {"ArgumentsPattern" -> {_, ___}};
 
-(* TODO: Should this return the grid spacing in each direction? *)
 ReadGridSpacing[run_] :=
  Module[{h0, l},
-  h0 = ToExpression[LookupParameter[run, "CoordBase::dx",
-    LookupParameter[run, "Coordinates::h_cartesian", $Failed]]];
+  h0 = ToExpression[LookupParameter[run, "Coordinates::h_cartesian", $Failed]];
+
+  If[h0 =!= $Failed,
+    h0 = {h0, h0, h0};
+  ,
+    h0 = {LookupParameter[run, "CoordBase::dx", $Failed],
+          LookupParameter[run, "CoordBase::dy", $Failed],
+          LookupParameter[run, "CoordBase::dz", $Failed]};
+  ];
+
   l = Range[ReadMaxRefinementLevels[run]] - 1;
-  h0 / 2^l
+  Map[# / 2^l &, h0]
 ];
 
 ReadGridSpacing[run_, level_] :=
