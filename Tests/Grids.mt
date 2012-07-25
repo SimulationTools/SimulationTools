@@ -1,6 +1,6 @@
 (* Mathematica Test File *)
 
-RunDirectory = $NRMMATestSimulationDirectory;
+$SimulationPath = $NRMMATestSimulationDirectory;
 
 (****************************************************************)
 (* ReadTimeStep                                                 *)

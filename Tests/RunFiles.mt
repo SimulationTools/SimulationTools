@@ -3,7 +3,7 @@
 testDirectory = FileNameJoin[{$TemporaryDirectory,"nrmma-unit-tests","RunFiles"}];
 DeleteDirectory[testDirectory,DeleteContents->True];
 CreateDirectory[testDirectory];
-RunDirectory = FileNameJoin[{testDirectory,"simulations"}];
+$SimulationPath = FileNameJoin[{testDirectory,"simulations"}];
 
 (* FindRunDir *)
 

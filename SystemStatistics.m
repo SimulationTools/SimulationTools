@@ -45,8 +45,6 @@ ReadCPUHours = ReadSimulationCost;
 
 Begin["`Private`"];
 
-RunDirectory := Global`RunDirectory;
-
 ReadRunSpeed[runName_] := 
   If[FindRunFile[runName, "runstats.asc"] =!= {},
      MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
@@ -92,7 +90,7 @@ CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
  Module[{runs, costElems, header, tMerger, data},
   tMerger = If[tMergerp === None, T, tMergerp];
   runs = Last /@ 
-    FileNameSplit /@ FileNames[prefix <> "_*", RunDirectory];
+    FileNameSplit /@ FileNames[prefix <> "_*", $SimulationPath];
   costElems[run_] :=
    Module[{speed, cores, days, cpuHours},
     speed = Catch[Last@DepVar@ReadRunSpeed[run]];

@@ -21,7 +21,8 @@ BeginPackage["RunFiles`",
   "Error`",
   "Memo`",
   "Profile`",
-  "Providers`"
+  "Providers`",
+  "Utils`"
  }];
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
@@ -85,30 +86,27 @@ HaveRunDir[runName_String] :=
   (* Probably don't really need to use exceptions for this *)
 
 (* Given the name of a run directory, return a path to it *)
+findRunDir[runNamep_String] :=
+ Module[{dir, dirs},Print["findRunDir: ", runNamep, ", ", $SimulationPath];
+  If[FileExistsQ[runNamep], Return[runNamep]];
+
+  If[StringTake[runNamep,1] === "/", Return[None]];
+
+  dirs = FileNames[runNamep, $SimulationPath];
+  Which[
+   Length[dirs]>1,
+    Error["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]];,
+   Length[dirs] === 1,
+    dir = First[dirs];,
+   Length[dirs] === 0,
+    dir = None;
+  ];
+  dir
+];
+
 FindRunDir[runName_String] :=
   Module[
-    {d, findRunDir},
-
-    findRunDir[runNamep_String] :=
-    Module[
-      {dir, dirs},
-
-      dir = runNamep;
-      If[FileExistsQ[dir], Return[dir]];
-
-      If[StringTake[runNamep,1] === "/", Return[None]];
-
-      If[StringQ[Global`RunDirectory],
-         dir = FileNameJoin[Join[FileNameSplit[Global`RunDirectory],FileNameSplit[runNamep]]];
-         If[FileExistsQ[dir], Return[dir]];
-
-         dirs = FileNames[runNamep, {Global`RunDirectory}, 2];
-         If[Length[dirs] > 1,
-            Error["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]]];
-
-         If[Length[dirs] === 1, Return[dirs[[1]]]]];
-      
-      None];
+    {d},
 
     d = findRunDir[runName];
     If[d =!= None, Return[d]];

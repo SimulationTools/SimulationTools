@@ -41,7 +41,6 @@ FPrint[x_] := (Print[x//InputForm]; x);
 
 NRDF`RunFiles`HaveData[runDir_String,___] :=
   haveRunDir[runDir];
-  (* FileExistsQ[FileNameJoin[{RunDirectory,runDir,FileNameTake[runDir,-1]<>".bbh"}]]; *)
 
 NRDF`Waveforms`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
@@ -50,7 +49,7 @@ NRDF`InitialData`HaveData[runDir_,___] :=
   NRDF`RunFiles`HaveData[runDir];
 
 NRDF`RunFiles`FindRunDirSegments[dir_] :=
-  {findRunDir[dir]};
+  {FindRunDir[dir]};
 
 DefineMemoFunction[ParseMetadataFile[run_String],
   CleanParseTree[Parse["nrdfmd.peg","file",findMetadataFile[run]]]];
@@ -90,28 +89,20 @@ readPsi4HDF5Data[file_String, dataset_String] :=
     Map[{#[[1]], #[[2]] + I #[[3]]} &,
         ReadHDF5[file, {"Datasets", dataset}]]];
 
-findRunDir[run_String] :=
-  If[FileExistsQ[run], run,
-     If[ValueQ[Global`RunDirectory] && FileExistsQ[FileNameJoin[{Global`RunDirectory,run}]],
-        FileNameJoin[{Global`RunDirectory,run}],
-        Error["Cannot find run "<>ToString[run]]]];
-
 haveMetadataFile[dir_String] :=
   FileNames["*.bbh", dir] =!= {};
 
 findMetadataFile[run_String] :=
       Module[{files},
-             files = FileNames["*.bbh", findRunDir[run]];
+             files = FileNames["*.bbh", FindRunDir[run]];
              If[Length[files] =!= 1, Error["Failed to find exactly one metadata file in run "<>
-                                           run<>" in directory "<>findRunDir[run]]];
+                                           run<>" in directory "<>FindRunDir[run]]];
              files[[1]]];
 
 haveRunDir[run_String] :=
-  If[haveMetadataFile[run],
+  If[haveMetadataFile[FindRunDir[run]],
      True,
-     If[ValueQ[Global`RunDirectory] && haveMetadataFile[FileNameJoin[{Global`RunDirectory, run}]],
-        True,
-        False]];
+     False];
 
 
 ensureLocalFile[run_String, file_String] :=
@@ -119,7 +110,7 @@ ensureLocalFile[run_String, file_String] :=
     {src,dst},
     (* Print["ensureLocalFile: run = ", run]; *)
     (* Print["ensureLocalFile: file = ", file]; *)
-    dst = FileNameJoin[{findRunDir[run],file}];
+    dst = FileNameJoin[{FindRunDir[run],file}];
     If[FileExistsQ[dst], Return[Null]];
     If[!ValueQ[Global`BackingDirectory],
        Error["Cannot find file "<>file<>" in run "<>run<>" and BackingDirectory has not been set"]];
@@ -155,7 +146,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
     If[Length[filenames] === 0, Error["Cannot find filename in metadata file for 2,2 mode in "<>runName]];
     If[Length[filenames] > 1, Error["Found multiple files in metadata file for 2,2 mode in "<>runName]];
 
-    (* Print["run dir = ", findRunDir[runName]]; *)
+    (* Print["run dir = ", FindRunDir[runName]]; *)
 
     filename = filenames[[1]];
 
@@ -167,10 +158,10 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
     data =
     If[Length[tmp] === 0,
        ensureLocalFile[runName, filenames[[1]]];
-       ReadWaveformFile[FileNameJoin[{findRunDir[runName], filename}]],
+       ReadWaveformFile[FileNameJoin[{FindRunDir[runName], filename}]],
        (* else *)
        ensureLocalFile[runName, tmp[[1,1]]];
-       readPsi4HDF5Data[FileNameJoin[{findRunDir[runName], tmp[[1,1]]}], tmp[[1,2]]]];
+       readPsi4HDF5Data[FileNameJoin[{FindRunDir[runName], tmp[[1,1]]}], tmp[[1,2]]]];
 
     (* Print["data = ", data]; *)
 
@@ -242,7 +233,7 @@ HaveInfiniteRadiusWaveforms[run_] :=
 ReadRuns[dirp_:Automatic] :=
   Module[{dir},
     dir = If[dirp === Automatic,
-             If[ValueQ[Global`RunDirectory], Global`RunDirectory, "."],
+             If[Length[$SimulationPath]===1, First[$SimulationPath], "."],
              dirp];
     Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]];
 

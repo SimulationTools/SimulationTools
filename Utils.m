@@ -25,6 +25,17 @@ $NRMMAVersionNumber::usage = "$NRMMAVersionNumber is a real number which gives t
 $NRMMAReleaseNumber::usage = "$NRMMAReleaseNumber is an integer which gives the current NRMMA release number.";
 $NRMMAVersion::usage = "$NRMMAVersionNumber is a string that gives the version of NRMMA you are running.";
 
+
+(* If $SimulationPath is not set, then just set it to be RunDirectory *)
+If[ValueQ[Global`$SimulationPath],
+  Utils`Private`simulationPath = Global`$SimulationPath;
+,
+  Utils`Private`simulationPath = {};
+];
+Remove[Global`$SimulationPath];
+
+$SimulationPath::usage = "$SimulationPath gives the default list of directories to search in attempting to find a simulation."; 
+
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
@@ -39,6 +50,11 @@ $NRMMATestSimulation;
 nrmmaVersion;
 
 Begin["`Private`"];
+
+If[simulationPath =!= {},
+  $SimulationPath = simulationPath;,
+  $SimulationPath := If[StringQ[Global`RunDirectory], {Global`RunDirectory}, {}];
+];
 
 $NRMMAInstallationDirectory = FileNameDrop[FindFile["nrmma`"], -2];
 $NRMMATestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
