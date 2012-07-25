@@ -244,8 +244,8 @@ readDatasetsFromFile[file_String, var_, it_, map_, rl_, opts___] :=
 
 ReadCarpetHDF5[file_String, ds_String, opts:OptionsPattern[]] := First[ReadCarpetHDF5[file, {ds}, opts]];
 
-Options[ReadCarpetHDF5Components] = {StripGhostZones -> True};
-ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
+Options[ReadCarpetHDF5Components] = {"StripGhostZones" -> True};
+ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts:OptionsPattern[]] :=
   Profile["ReadCarpetHDF5Components",
   Module[{fileNames, datasets, pattern, MultiFile, Filetype1D, Filetype2D, components, directory, leaf, leafPrefix},
     If[FileType[file] === None,
@@ -278,11 +278,16 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts___] :=
     datasets
 ]];
 
-ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl:(_Integer|None), map_:None, opts___]:=
+ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl:(_Integer|None), map_:None, opts:OptionsPattern[]]:=
   Profile["ReadCarpetHDF5Variable",
     MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
 
-Options[ReadCarpetHDF5Variable] = {Iteration -> None, Variable -> None, RefinementLevel -> None, Map -> None, StripGhostZones -> True};
+Options[ReadCarpetHDF5Variable] = {
+	"Iteration" -> None,
+	"Variable" -> None,
+	"RefinementLevel" -> None,
+	"Map" -> None,
+	"StripGhostZones" -> True};
 ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
   Module[{it, rl, var, map},
     If[FileType[file] === None, Error["ReadCarpetHDF5Variable: File " <> file <> " not found"]];
