@@ -29,11 +29,8 @@ ReadTimeStep::usage = "ReadTimeStep[sim] returns a list of the time step sizes o
   "ReadTimeStep[sim, level] reads the time step on a specific refinement level in sim.";
 ReadGridSpacing::usage = "ReadGridSpacing[sim] returns a list of the grid spacings in each direction on each refinement level in sim." <>
   "ReadGridSpacing[sim, level] reads the grid spacing in each direction on a specific refinement level in sim.";
-ReadAngularPoints::usage = "ReadAngularPoints[sim] reads the number of angular points in the Llama spherical patches of sim.";
 
 ReadTimeRange::usage = "ReadTimeRange[sim] reads the range of times at which data is available for sim.";
-ReadInnerBoundary::usage = "ReadInnerBoundary[sim] reads the position of the inner boundary of the Llama spherical patches of sim.";
-ReadOuterBoundary::usage = "ReadOuterBoundary[sim] reads the position of the outer boundary of the Llama spherical patches of sim.";
 
 ReadMaxRefinementLevels::usage = "ReadMaxRefinementLevels[sim] returns the maximum number of refinement levels present in sim.";
 
@@ -44,6 +41,10 @@ ReadMaxRefinementLevels::usage = "ReadMaxRefinementLevels[sim] returns the maxim
 
 PlotGridsAndAH2D(*::usage = "PlotGridsAndAH2D[sim] generates a 2D plot of the grid structure and apparent horizons in which the timestep can be interactively changed."*);
 ReadGridStructure(*::usage = "ReadGridStructure[sim] computes the grid structure for sim. For each refinement level it returns a list of the form {level, box radii, coarse spacing, number of points, courant factor, level exists every}."*);
+
+ReadInnerBoundary(*::usage = "ReadInnerBoundary[sim] reads the position of the inner boundary of the Llama spherical patches of sim."*);
+ReadOuterBoundary(*::usage = "ReadOuterBoundary[sim] reads the position of the outer boundary of the Llama spherical patches of sim."*);
+ReadAngularPoints(*::usage = "ReadAngularPoints[sim] reads the number of angular points in the Llama spherical patches of sim."*);
 
 
 (****************************************************************)
