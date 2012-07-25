@@ -9,11 +9,11 @@ dims1D = {"x"};
 dims2D = {"x","y"};
 dims3D = {"x","y","z"};
 
-(* ReadGridFunction *)
+(* ReadGridFunction (pre 1.0) *)
 
 Module[{data},
     Test[
-        data = GetData[ReadGridFunction[$NRMMATestSimulation, var, {"x"},Iteration -> 256]];
+        data = GetData[Block[{$NRMMACompatibilityVersion = 0}, ReadGridFunction[$NRMMATestSimulation, var, {"x"},Iteration -> 256]]];
         Part[data, {36, 59, 35, 35, 53, 13, 22, 57, 14, 58}]
     ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-1D.m"}]]
@@ -24,7 +24,7 @@ Module[{data},
 
 Module[{data},
     Test[
-        data = GetData[ReadGridFunction[$NRMMATestSimulation, var, {"x","y"}, Iteration -> 1024]];
+        data = GetData[Block[{$NRMMACompatibilityVersion = 0}, ReadGridFunction[$NRMMATestSimulation, var, {"x","y"}, Iteration -> 1024]]];
         Map[Part[data, Sequence @@ #] &,
             {{16, 39}, {4, 17}, {28, 58}, {96, 12}, {32, 38},
              {96, 52}, {27, 47}, {114, 5}, {105, 34}, {14, 5}}
@@ -38,7 +38,7 @@ Module[{data},
 
 Module[{data},
 	Test[
-        data = GetData[ReadGridFunction[$NRMMATestSimulation, var, {"x","y","z"}]];
+        data = GetData[Block[{$NRMMACompatibilityVersion = 0}, ReadGridFunction[$NRMMATestSimulation, var, {"x","y","z"}]]];
         Map[Part[data, Sequence @@ #] &,
             {{49, 1, 4}, {1, 59, 41}, {15, 36, 52}, {14, 20, 38}, {41, 71, 2},
              {18, 1, 35}, {8, 38, 53}, {25, 21, 37}, {51, 80, 44}, {44, 113, 37}}

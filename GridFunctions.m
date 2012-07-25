@@ -21,7 +21,8 @@ BeginPackage["GridFunctions`",
   "Error`",
   "Memo`",
   "Providers`",
-  "RunFiles`"
+  "RunFiles`",
+  "Utils`"
  }];
 
 ReadGridFunction::usage = "ReadGridFunction[sim, var, dims] reads variable var from sim and returns it as a DataRegion object.  dims is a list of the dimensions to read, and these dimensions must correspond to available output.  Dimensions in dims can be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
@@ -92,7 +93,7 @@ Options[ReadGridFunction] = {
     "Map"             -> Automatic,
     "RefinementLevel" -> Automatic,
     "TimeLevel"       -> Automatic,
-    "StripGhostZones" -> True,
+    "StripGhostZones" :> If[$NRMMACompatibilityVersion < 1, True, False],
     "Variable"        -> Automatic (* Only used by old interface *)
   };
 
