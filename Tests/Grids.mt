@@ -9,13 +9,13 @@ $SimulationPath = $NRMMATestSimulationDirectory;
 Test[
 	ReadTimeStep[$NRMMATestSimulation]
 	,
-	{0.5, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625, 0.001953125}
+	0.5
 	,
 	TestID->"ReadTimeStep"
 ]
 
 Test[
-	ReadTimeStep[$NRMMATestSimulation, 3]
+	ReadTimeStep[$NRMMATestSimulation, RefinementLevel -> 3]
 	,
 	0.125
 	,

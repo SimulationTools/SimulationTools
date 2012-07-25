@@ -25,11 +25,10 @@ BeginPackage["Grids`",
   "RunFiles`"
  }];
 
-ReadTimeStep::usage = "ReadTimeStep[sim] returns a list of the time step sizes on each refinement level in sim." <>
-  "ReadTimeStep[sim, level] reads the time step on a specific refinement level in sim.";
 ReadGridSpacings::usage = "ReadGridSpacings[sim] returns a list of the grid spacings in each direction on each refinement level in sim." <>
   "ReadGridSpacings[sim, level] reads the grid spacing in each direction on a specific refinement level in sim.";
 
+ReadTimeStep::usage = "ReadTimeStep[sim] returns the time step sizes in sim.";
 ReadTimeRange::usage = "ReadTimeRange[sim] reads the range of times at which data is available for sim.";
 
 ReadMaxRefinementLevels::usage = "ReadMaxRefinementLevels[sim] returns the maximum number of refinement levels present in sim.";
@@ -80,11 +79,20 @@ Begin["`Private`"];
 (* ReadTimeStep                                           *)
 (**********************************************************)
 
-SyntaxInformation[ReadTimeStep] =
- {"ArgumentsPattern" -> {_, ___}};
+Options[ReadTimeStep] = {
+	"Map"             -> Automatic,
+    "RefinementLevel" -> Automatic
+  };
 
-ReadTimeStep[run_] :=
- Module[{method, dt, dtfac, trf},
+SyntaxInformation[ReadTimeStep] =
+ {"ArgumentsPattern" -> {_, OptionsPattern[]}};
+
+ReadTimeStep[run_, OptionsPattern[]] :=
+ Module[{method, dt, dtfac, trf, rl},
+  If[OptionValue[Map] =!= Automatic,
+  	Error["Specifying a map is currently not supported."];
+  ];
+
   method = LookupParameter[run, "Time::timestep_method", "courant_static"];
 
   Which[
@@ -105,11 +113,14 @@ ReadTimeStep[run_] :=
 
   trf = TimeRefinementFactors[run];
 
-  dt/trf
-];
+  rl  = OptionValue[RefinementLevel] /. Automatic -> 0;
 
-ReadTimeStep[run_, level_] :=
-  ReadTimeStep[run][[level+1]];
+  If[rl >= ReadMaxRefinementLevels[run],
+  	Error["Refinement level " <> ToString[rl] <> " does not exist."];
+  ];
+
+  dt/trf[[rl+1]]
+];
 
 
 (**********************************************************)
