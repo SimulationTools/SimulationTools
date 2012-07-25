@@ -30,8 +30,6 @@ ReadMaps::usage = "ReadMaps[sim, var, dims] reads the multipatch maps present  f
 ReadRefinementLevels::usage = "ReadRefinementLevels[sim, var, dims] reads the refinement levels present for the grid function var in sim.";
 ReadTimeLevels::usage = "ReadTimeLevels[sim, var, dims] reads the timelevels present for the grid function var in sim.";
 
-(* TODO: Should these be experimental? *)
-StripGhostZones::usage = "StripGhostZones is a boolean option which indicates that ghost zones should be removed";
 
 (****************************************************************)
 (* Deprecated                                                   *)
