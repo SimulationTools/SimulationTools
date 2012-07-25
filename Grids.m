@@ -25,12 +25,9 @@ BeginPackage["Grids`",
   "RunFiles`"
  }];
 
-ReadGridSpacings::usage = "ReadGridSpacings[sim] returns a list of the grid spacings in each direction on each refinement level in sim." <>
-  "ReadGridSpacings[sim, level] reads the grid spacing in each direction on a specific refinement level in sim.";
-
 ReadTimeStep::usage = "ReadTimeStep[sim] returns the time step sizes in sim.";
+ReadGridSpacings::usage = "ReadGridSpacings[sim] returns a list of the grid spacing in each direction in sim.";
 ReadTimeRange::usage = "ReadTimeRange[sim] reads the range of times at which data is available for sim.";
-
 ReadMaxRefinementLevels::usage = "ReadMaxRefinementLevels[sim] returns the maximum number of refinement levels present in sim.";
 
 
