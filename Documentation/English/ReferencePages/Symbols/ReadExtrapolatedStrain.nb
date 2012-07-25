@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadExtrapolatedStrain"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "l", ",", " ", "m", ",", " ", "om0"}], "TI"],
+        RowBox[{"sim", ",", " ", "l", ",", " ", "m", ",", " ", "om0"}], "TI"],
         "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \
 \(4\)]\) at various radii from a simulation, converts them to strain using \
@@ -60,7 +60,7 @@ TaggingRules->{
       "readextrapolatedstrain"}, "index" -> True, "label" -> 
     "nrmma/Waveforms Symbol", "language" -> "en", "paclet" -> "Waveforms", 
     "status" -> "None", "summary" -> 
-    "ReadExtrapolatedStrain[run, l, m, om0] reads the (l, m) mode of \
+    "ReadExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of \
 \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at various radii from a simulation, \
 converts them to strain using Psi4ToStrain, and extrapolates the result to \
 infinite radius.", 

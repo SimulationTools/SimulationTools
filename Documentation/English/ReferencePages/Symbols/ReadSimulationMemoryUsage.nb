@@ -27,7 +27,7 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadSimulationMemoryUsage",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"], "[", 
-       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the memory usage of a simulation in MB as a \
 DataTable as a function of coordinate time."
     }]]}
@@ -57,8 +57,8 @@ TaggingRules->{
       "readsimulationmemoryusage"}, "index" -> True, "label" -> 
     "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
     "SystemStatistics", "status" -> "None", "summary" -> 
-    "ReadSimulationMemoryUsage[simname] gives the memory usage of a \
-simulation in MB as a DataTable as a function of coordinate time.", 
+    "ReadSimulationMemoryUsage[sim] gives the memory usage of a simulation in \
+MB as a DataTable as a function of coordinate time.", 
     "synonyms" -> {
      "ReadSimulationMemoryUsage", "READSIMULATIONMEMORYUSAGE", 
       "readsimulationmemoryusage"}, "title" -> "ReadSimulationMemoryUsage", 

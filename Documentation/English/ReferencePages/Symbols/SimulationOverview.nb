@@ -11,9 +11,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/SimView"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SimView",
+ ButtonBox["SimulationOverview",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/SimView"]
+  ButtonData->"paclet:nrmma/ref/SimulationOverview"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -75,56 +75,22 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["SimView", "ObjectName"],
+Cell["SimulationOverview", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["SimView",
+       ButtonBox["SimulationOverview",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SimView"], "[", 
+        ButtonData->"paclet:nrmma/ref/SimulationOverview"], "[", 
        StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives a quick overview of the simulation sim."
     }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["SimView",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SimView"], "[", 
-       StyleBox[
-        RowBox[{"sim", ",", " ", "rad"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives a quick overview of the simulation sim with \
-waveforms extracted at radius rad."
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["SimView",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SimView"], "[", 
-       StyleBox[
-        RowBox[{"{", 
-         RowBox[{"sim1", ",", " ", "sim2", ",", " ", "..."}], "}"}], "TI"], 
-       "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives a quick overview of the simulations sim1, sim2, \
-...."
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["SimView",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SimView"], "[", 
-       StyleBox[
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"sim1", ",", " ", "sim2", ",", " ", "..."}], "}"}], ",", 
-         " ", "rad"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives a quick overview of the simulations sim1, sim2, \
-... with waveforms extracted at radius rad."
-    }]]}
+   {"", Cell["\<\
+SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, \
+sim2, ....\
+\>"]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -158,16 +124,31 @@ be displayed on the same plots.\
 \>", "Notes"],
 
 Cell["\<\
-SimView produces plots of the waveforms, trajectories, run speed, memory \
-usage, simulation chunks, start times and end times.\
+SimulationOverview produces plots of the waveforms, trajectories, run speed, \
+memory usage, simulation chunks, start times and end times.\
 \>", "Notes"],
 
-Cell["SimView looks for simulations in RunDirectory.", "Notes"],
+Cell["SimulationOverview looks for simulations in $SimulationPath.", "Notes"],
 
 Cell["\<\
-SimView requires that the Multipole, PunctureTracker and SystemStatistics \
-thorns to have been activated in the simulation.\
-\>", "Notes"]
+SimulationOverview requires that the Multipole, PunctureTracker and \
+SystemStatistics thorns to have been activated in the simulation.\
+\>", "Notes"],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "SimulationType", "Automatic", Cell[
+    "", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -196,7 +177,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["SimView[\"bbh\"]", "Input",
+Cell["SimulationOverview[\"bbh\"]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
@@ -1514,7 +1495,7 @@ zHlyhIXWLDvfQr+3yNFx/PvAiJ7s95kDcswJXr9JMoS5RI7gDpe+AnPm013z
          ItemBox["288",
           Alignment->Right,
           StripOnInput->False], 
-         ItemBox["\<\"Fri 30 Mar 2012 14:24:16\"\>",
+         ItemBox["\<\"Tue 10 Jul 2012 17:34:00\"\>",
           Alignment->Right,
           StripOnInput->False]}
        },
@@ -1575,8 +1556,8 @@ zHlyhIXWLDvfQr+3yNFx/PvAiJ7s95kDcswJXr9JMoS5RI7gDpe+AnPm013z
          StyleBox["\<\"t2\"\>",
           StripOnInput->False,
           FontSlant->Italic]},
-        {"\<\"0000\"\>", "\<\"Fri 30 Mar 2012 14:24:13\"\>", "0", "6.5`"},
-        {"\<\"0001\"\>", "\<\"Fri 30 Mar 2012 14:24:16\"\>", "7", "300"}
+        {"\<\"0000\"\>", "\<\"Tue 10 Jul 2012 17:33:54\"\>", "0", "6.5`"},
+        {"\<\"0001\"\>", "\<\"Tue 10 Jul 2012 17:34:00\"\>", "7", "300"}
        },
        AutoDelete->False,
        GridBoxAlignment->{"Columns" -> {{Left}}},
@@ -1721,19 +1702,23 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"SimView",
+WindowTitle->"SimulationOverview",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"SimView", "SIMVIEW", "simview"}, 
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "SimulationOverview", "SIMULATIONOVERVIEW", "simulationoverview"}, 
     "index" -> True, "label" -> "nrmma/SimView Symbol", "language" -> "en", 
     "paclet" -> "SimView", "status" -> "None", "summary" -> 
     "produce a quick overview of a simulation", 
-    "synonyms" -> {"SimView", "SIMVIEW", "simview"}, "title" -> "SimView", 
-    "windowTitle" -> "SimView", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/SimView"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "synonyms" -> {
+     "SimulationOverview", "SIMULATIONOVERVIEW", "simulationoverview"}, 
+    "title" -> "SimulationOverview", "windowTitle" -> "SimulationOverview", 
+    "type" -> "Symbol", "uri" -> "nrmma/ref/SimulationOverview"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

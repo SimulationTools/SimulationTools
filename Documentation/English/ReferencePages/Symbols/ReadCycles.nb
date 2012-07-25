@@ -28,8 +28,8 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadCycles"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the number of gravitational wave cycles for run. \
+        RowBox[{"sim", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the number of gravitational wave cycles for sim. \
 The number of cycles is calculated starting at start and terminating at the \
 merger, which is determined from the maimum of the gravitational wave \
 signal."
@@ -42,7 +42,7 @@ signal."
         ButtonData->"paclet:nrmma/ref/ReadCycles"], "[", 
        StyleBox[
         RowBox[{"psi4", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]operates on the DataTable psi4 instead of run."
+     "\[LineSeparator]operates on the DataTable psi4 instead of sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -68,11 +68,11 @@ TaggingRules->{
     "keywords" -> {"ReadCycles", "READCYCLES", "readcycles"}, "index" -> True,
      "label" -> "nrmma/Waveforms Symbol", "language" -> "en", "paclet" -> 
     "Waveforms", "status" -> "None", "summary" -> 
-    "ReadCycles[run, start] gives the number of gravitational wave cycles for \
-run. The number of cycles is calculated starting at start and terminating at \
+    "ReadCycles[sim, start] gives the number of gravitational wave cycles for \
+sim. The number of cycles is calculated starting at start and terminating at \
 the merger, which is determined from the maimum of the gravitational wave \
 signal.\nReadCycles[psi4, start] operates on the DataTable psi4 instead of \
-run.", "synonyms" -> {"ReadCycles", "READCYCLES", "readcycles"}, "title" -> 
+sim.", "synonyms" -> {"ReadCycles", "READCYCLES", "readcycles"}, "title" -> 
     "ReadCycles", "windowTitle" -> "ReadCycles", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ReadCycles"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,

@@ -27,7 +27,7 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadSimulationSpeed",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadSimulationSpeed"], "[", 
-       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the execution speed of a simulation (simulation \
 coordinate time per real time elapsed) as a DataTable as a function of \
 simulation coordinate time."
@@ -57,7 +57,7 @@ TaggingRules->{
      "ReadSimulationSpeed", "READSIMULATIONSPEED", "readsimulationspeed"}, 
     "index" -> True, "label" -> "nrmma/SystemStatistics Symbol", "language" -> 
     "en", "paclet" -> "SystemStatistics", "status" -> "None", "summary" -> 
-    "ReadSimulationSpeed[simname] gives the execution speed of a simulation \
+    "ReadSimulationSpeed[sim] gives the execution speed of a simulation \
 (simulation coordinate time per real time elapsed) as a DataTable as a \
 function of simulation coordinate time.", 
     "synonyms" -> {

@@ -27,7 +27,7 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadSimulationCost",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadSimulationCost"], "[", 
-       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the total number of CPU hours used by all \
 processes in a simulation ."
     }]]}
@@ -56,8 +56,8 @@ TaggingRules->{
      "ReadSimulationCost", "READSIMULATIONCOST", "readsimulationcost"}, 
     "index" -> True, "label" -> "nrmma/SystemStatistics Symbol", "language" -> 
     "en", "paclet" -> "SystemStatistics", "status" -> "None", "summary" -> 
-    "ReadSimulationCost[simname] gives the total number of CPU hours used by \
-all processes in a simulation .", 
+    "ReadSimulationCost[sim] gives the total number of CPU hours used by all \
+processes in a simulation .", 
     "synonyms" -> {
      "ReadSimulationCost", "READSIMULATIONCOST", "readsimulationcost"}, 
     "title" -> "ReadSimulationCost", "windowTitle" -> "ReadSimulationCost", 

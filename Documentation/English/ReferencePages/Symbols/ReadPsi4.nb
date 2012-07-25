@@ -56,10 +56,10 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadPsi4"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "l", ",", " ", "m", ",", " ", "r"}], "TI"], 
+        RowBox[{"sim", ",", " ", "l", ",", " ", "m", ",", " ", "r"}], "TI"], 
        "]"}]], "InlineFormula"],
      "\[LineSeparator]returns a DataTable of the l,m mode of Psi4 at radius r \
-from run."
+from sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -121,10 +121,14 @@ Cell[BoxData[
        RowBox[{"-", "4.76982968622533`*^-10"}], "+", 
        RowBox[{"3.968952260113716`*^-8", " ", "\[ImaginaryI]"}]}]}], "}"}], 
     ",", 
-    RowBox[{"\[LeftSkeleton]", "599", "\[RightSkeleton]"}], ",", 
     RowBox[{"{", 
-     RowBox[{"300.`", ",", 
-      RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}], "}"}]}], "}"}],
+     RowBox[{"0.5`", ",", 
+      RowBox[{
+       RowBox[{"-", 
+        RowBox[{"\[LeftSkeleton]", "23", "\[RightSkeleton]"}]}], "+", 
+       RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}]}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "598", "\[RightSkeleton]"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}], "}"}],
   Short]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
@@ -969,8 +973,8 @@ TaggingRules->{
    "context" -> "nrmma`", "keywords" -> {"ReadPsi4", "READPSI4", "readpsi4"}, 
     "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
     "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
-    "ReadPsi4[run, l, m, r] returns a DataTable of the l,m mode of Psi4 at \
-radius r from run.", "synonyms" -> {"ReadPsi4", "READPSI4", "readpsi4"}, 
+    "ReadPsi4[sim, l, m, r] returns a DataTable of the l,m mode of Psi4 at \
+radius r from sim.", "synonyms" -> {"ReadPsi4", "READPSI4", "readpsi4"}, 
     "title" -> "ReadPsi4", "windowTitle" -> "ReadPsi4", "type" -> "Symbol", 
     "uri" -> "nrmma/ref/ReadPsi4"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},

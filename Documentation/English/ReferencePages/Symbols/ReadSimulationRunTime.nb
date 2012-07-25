@@ -22,8 +22,8 @@ Cell["ReadSimulationRunTime", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
-ReadSimulationRuntime[simname] gives the real time elapsed during the \
-execution of a simulation.\
+ReadSimulationRuntime[sim] gives the real time elapsed during the execution \
+of a simulation.\
 \>"]}
   }]], "Usage"]
 }, Open  ]],
@@ -51,7 +51,7 @@ TaggingRules->{
       "readsimulationruntime"}, "index" -> True, "label" -> 
     "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
     "SystemStatistics", "status" -> "None", "summary" -> 
-    "ReadSimulationRuntime[simname] gives the real time elapsed during the \
+    "ReadSimulationRuntime[sim] gives the real time elapsed during the \
 execution of a simulation.", 
     "synonyms" -> {
      "ReadSimulationRunTime", "READSIMULATIONRUNTIME", 

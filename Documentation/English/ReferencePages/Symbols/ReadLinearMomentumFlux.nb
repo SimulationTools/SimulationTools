@@ -22,7 +22,7 @@ Cell["ReadLinearMomentumFlux", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
-LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux as a \
+LinearMomentumFlux[sim, dir, r, lMax] computes the linear momentum flux as a \
 function of time from the multipolar decomposition of Psi4 on a sphere at \
 radius r in direction dir (an integer from 1 to 3) using modes up to l = \
 lMax.  It returns a DataTable.  The result is the derivative of the result of \
@@ -54,7 +54,7 @@ TaggingRules->{
       "readlinearmomentumflux"}, "index" -> True, "label" -> 
     "nrmma/Kicks Symbol", "language" -> "en", "paclet" -> "Kicks", "status" -> 
     "None", "summary" -> 
-    "LinearMomentumFlux[run, dir, r, lMax] computes the linear momentum flux \
+    "LinearMomentumFlux[sim, dir, r, lMax] computes the linear momentum flux \
 as a function of time from the multipolar decomposition of Psi4 on a sphere \
 at radius r in direction dir (an integer from 1 to 3) using modes up to l = \
 lMax.  It returns a DataTable.  The result is the derivative of the result of \

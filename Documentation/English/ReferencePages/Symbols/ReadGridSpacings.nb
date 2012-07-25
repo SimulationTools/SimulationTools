@@ -7,35 +7,29 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Movie",
+ ButtonBox["Grids",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Movie"],
+  ButtonData->"paclet:nrmma/guide/Grids"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["MakeMovie",
+ ButtonBox["ReadGridSpacings",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/MakeMovie"]
+  ButtonData->"paclet:nrmma/ref/ReadGridSpacings"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["MakeMovie", "ObjectName"],
+Cell["ReadGridSpacings", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["MakeMovie",
+       ButtonBox["ReadGridSpacings",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/MakeMovie"], "[", 
-       StyleBox[
-        RowBox[{"filenamebase", ",", " ", "expression", ",", " ", 
-         RowBox[{"{", 
-          RowBox[{"var", ",", " ", "v1", ",", " ", "v2", ",", " ", "dv"}], 
-          "}"}]}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]evaluates expression (which should be a graphical \
-object) for values of var from v1 to v2 in steps of dv and writes the result \
-to a PNG file filenamebase with an index number appended.  The images are \
-then combined into an MP4 file using FFMPEG."
+        ButtonData->"paclet:nrmma/ref/ReadGridSpacings"], "[", 
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns a list of the grid spacing in each direction in \
+sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -63,8 +57,9 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "FFMPEG", "ffmpeg", Cell["", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "FrameRate", "1", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
+    "", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -87,24 +82,24 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"MakeMovie",
+WindowTitle->"ReadGridSpacings",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "nrmma`", 
-    "keywords" -> {"MakeMovie", "MAKEMOVIE", "makemovie"}, "index" -> True, 
-    "label" -> "nrmma/Movie Symbol", "language" -> "en", "paclet" -> "Movie", 
-    "status" -> "None", "summary" -> 
-    "MakeMovie[filenamebase, expression, {var, v1, v2, dv}] evaluates \
-expression (which should be a graphical object) for values of var from v1 to \
-v2 in steps of dv and writes the result to a PNG file filenamebase with an \
-index number appended.  The images are then combined into an MP4 file using \
-FFMPEG.", "synonyms" -> {"MakeMovie", "MAKEMOVIE", "makemovie"}, "title" -> 
-    "MakeMovie", "windowTitle" -> "MakeMovie", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/MakeMovie"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "keywords" -> {
+     "ReadGridSpacings", "READGRIDSPACINGS", "readgridspacings"}, "index" -> 
+    True, "label" -> "nrmma/Grids Symbol", "language" -> "en", "paclet" -> 
+    "Grids", "status" -> "None", "summary" -> 
+    "ReadGridSpacings[sim] returns a list of the grid spacing in each \
+direction in sim.", 
+    "synonyms" -> {
+     "ReadGridSpacings", "READGRIDSPACINGS", "readgridspacings"}, "title" -> 
+    "ReadGridSpacings", "windowTitle" -> "ReadGridSpacings", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/ReadGridSpacings"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

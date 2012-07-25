@@ -22,7 +22,7 @@ Cell["ReadLinearMomentumRadiated", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
-LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum \
+LinearMomentumRadiated[sim, dir, r, lMax] computes the linear momentum \
 radiated as a function of time from the multipolar decomposition of Psi4 on a \
 sphere at radius r in direction dir (an integer from 1 to 3) using modes up \
 to l = lMax.  It returns a DataTable.  The result is an integral of the \
@@ -54,7 +54,7 @@ TaggingRules->{
       "readlinearmomentumradiated"}, "index" -> True, "label" -> 
     "nrmma/Kicks Symbol", "language" -> "en", "paclet" -> "Kicks", "status" -> 
     "None", "summary" -> 
-    "LinearMomentumRadiated[run, dir, r, lMax] computes the linear momentum \
+    "LinearMomentumRadiated[sim, dir, r, lMax] computes the linear momentum \
 radiated as a function of time from the multipolar decomposition of Psi4 on a \
 sphere at radius r in direction dir (an integer from 1 to 3) using modes up \
 to l = lMax.  It returns a DataTable.  The result is an integral of the \

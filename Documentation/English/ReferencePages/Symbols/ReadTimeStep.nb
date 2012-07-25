@@ -7,31 +7,28 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GridFunctions",
+ ButtonBox["Grids",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/GridFunctions"],
+  ButtonData->"paclet:nrmma/guide/Grids"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["ReadTime",
+ ButtonBox["ReadTimeStep",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadTime"]
+  ButtonData->"paclet:nrmma/ref/ReadTimeStep"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["ReadTime", "ObjectName"],
+Cell["ReadTimeStep", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["ReadTime",
+       ButtonBox["ReadTimeStep",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadTime"], "[", 
-       StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "it", ",", " ", "rl"}], 
-        "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]reads the time associated with the iteration it on \
-refinement level rl of the CarpetHDF5 file named var in the directory run."
+        ButtonData->"paclet:nrmma/ref/ReadTimeStep"], "[", 
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the time step sizes in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -59,16 +56,8 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
-    "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
     "", "TableText"]}
   },
   GridBoxAlignment->{
@@ -76,9 +65,9 @@ Cell[BoxData[GridBox[{
     "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
  GridBoxOptions->{
  GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
-   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -92,20 +81,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"ReadTime",
+WindowTitle->"ReadTimeStep",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"ReadTime", "READTIME", "readtime"}, 
-    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
-    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
-    "ReadTime[run, var, it, rl] reads the time associated with the iteration \
-it on refinement level rl of the CarpetHDF5 file named var in the directory \
-run.", "synonyms" -> {"ReadTime", "READTIME", "readtime"}, "title" -> 
-    "ReadTime", "windowTitle" -> "ReadTime", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadTime"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"ReadTimeStep", "READTIMESTEP", "readtimestep"}, "index" -> 
+    True, "label" -> "nrmma/Grids Symbol", "language" -> "en", "paclet" -> 
+    "Grids", "status" -> "None", "summary" -> 
+    "ReadTimeStep[sim] returns the time step sizes in sim.", 
+    "synonyms" -> {"ReadTimeStep", "READTIMESTEP", "readtimestep"}, "title" -> 
+    "ReadTimeStep", "windowTitle" -> "ReadTimeStep", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/ReadTimeStep"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

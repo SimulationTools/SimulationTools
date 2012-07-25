@@ -77,9 +77,27 @@ Cell[CellGroupData[{
 
 Cell["Constructing", "Section"],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"<<", "nrmma`"}]], "Input",
  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Global`$SimulationPath", "::", "shdw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \
+\[NoBreak]\\!\\(\\\"$SimulationPath\\\"\\)\[NoBreak] appears in multiple \
+contexts \[NoBreak]\\!\\({\\\"Global`\\\", \\\"Utils`\\\"}\\)\[NoBreak]; \
+definitions in context \[NoBreak]\\!\\(\\\"Global`\\\"\\)\[NoBreak] may \
+shadow or be shadowed by other definitions. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/shdw\\\", ButtonNote -> \
+\\\"Global`$SimulationPath::shdw\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellLabel->"During evaluation of In[1]:="]
+}, Open  ]],
 
 Cell["\<\
 You can construct a DataTable object from a list of {x, f} pairs:\

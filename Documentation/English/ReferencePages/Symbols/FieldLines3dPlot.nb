@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/FieldLines3dPlot"], "[", 
        StyleBox[
         RowBox[{
-        "run", ",", "field", ",", "it", ",", "rfl", ",", "plane", ",", 
+        "sim", ",", "field", ",", "it", ",", "rfl", ",", "plane", ",", 
          "function2", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Plots the fieldlines and the density plot of 3D data of \
 a field B, E, v. Plane takes values from 0 to 2."
@@ -250,7 +250,7 @@ TaggingRules->{
      "FieldLines3dPlot", "FIELDLINES3DPLOT", "fieldlines3dplot"}, "index" -> 
     True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
     "FieldLines", "status" -> "None", "summary" -> 
-    "FieldLines3dPlot[run,field,it,rfl,plane,function2,opts] Plots the \
+    "FieldLines3dPlot[sim,field,it,rfl,plane,function2,opts] Plots the \
 fieldlines and the density plot of 3D data of a field B, E, v. Plane takes \
 values from 0 to 2.", 
     "synonyms" -> {

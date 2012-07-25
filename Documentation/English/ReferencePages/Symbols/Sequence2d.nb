@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/Sequence2d"], "[", 
        StyleBox[
         RowBox[{
-        "path", ",", "runlist", ",", "var", ",", "rfl", ",", "function", ",", 
+        "path", ",", "simlist", ",", "var", ",", "rfl", ",", "function", ",", 
          "xmin", ",", "xmax", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Create a sequence of figures of a 2D variable with \
 fixed color range."
@@ -213,7 +213,7 @@ TaggingRules->{
     "keywords" -> {"Sequence2d", "SEQUENCE2D", "sequence2d"}, "index" -> True,
      "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
     "FieldLines", "status" -> "None", "summary" -> 
-    "Sequence2d[path,runlist,var,rfl,function,xmin,xmax,opts] Create a \
+    "Sequence2d[path,simlist,var,rfl,function,xmin,xmax,opts] Create a \
 sequence of figures of a 2D variable with fixed color range.", 
     "synonyms" -> {"Sequence2d", "SEQUENCE2D", "sequence2d"}, "title" -> 
     "Sequence2d", "windowTitle" -> "Sequence2d", "type" -> "Symbol", "uri" -> 

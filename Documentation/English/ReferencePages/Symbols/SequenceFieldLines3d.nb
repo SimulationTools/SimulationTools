@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/SequenceFieldLines3d"], "[", 
        StyleBox[
         RowBox[{
-        "path", ",", "runlist", ",", "field", ",", "rfl", ",", "plane", ",", 
+        "path", ",", "simlist", ",", "field", ",", "rfl", ",", "plane", ",", 
          "function", ",", "xmin1", ",", "xmax1", ",", "opts"}], "TI"], "]"}]],
        "InlineFormula"],
      "\[LineSeparator]Create a sequence of figures of a 3D variable with its \
@@ -251,7 +251,7 @@ TaggingRules->{
      "SequenceFieldLines3d", "SEQUENCEFIELDLINES3D", "sequencefieldlines3d"}, 
     "index" -> True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en",
      "paclet" -> "FieldLines", "status" -> "None", "summary" -> 
-    "SequenceFieldLines3d[path,runlist,field,rfl,plane,function,xmin1,xmax1,\
+    "SequenceFieldLines3d[path,simlist,field,rfl,plane,function,xmin1,xmax1,\
 opts] Create a sequence of figures of a 3D variable with its field lines with \
 a fixed color range. Plane takes values from 0 to 2.", 
     "synonyms" -> {

@@ -28,9 +28,9 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadGridFunction"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
-     "\[LineSeparator]reads variable var from run and returns it as a \
+     "\[LineSeparator]reads variable var from sim and returns it as a \
 DataRegion object.  dims is a list of the dimensions to read, and these \
 dimensions must correspond to available output.  Dimensions in dims can be \
 given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, \
@@ -70,7 +70,7 @@ Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
     "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "False", Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
     "", "TableText"]},
@@ -109,7 +109,7 @@ TaggingRules->{
      "ReadGridFunction", "READGRIDFUNCTION", "readgridfunction"}, "index" -> 
     True, "label" -> "nrmma/GridFunctions Symbol", "language" -> "en", 
     "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
-    "ReadGridFunction[run, var, dims] reads variable var from run and returns \
+    "ReadGridFunction[sim, var, dims] reads variable var from sim and returns \
 it as a DataRegion object.  dims is a list of the dimensions to read, and \
 these dimensions must correspond to available output.  Dimensions in dims can \
 be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, \

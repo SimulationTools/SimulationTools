@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/FieldLinesData2d"], "[", 
        StyleBox[
-        RowBox[{"run", ",", "field", ",", "it", ",", "rfl", ",", "plane"}], 
+        RowBox[{"sim", ",", "field", ",", "it", ",", "rfl", ",", "plane"}], 
         "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Calculates the fieldlines of 2D data of a field B, E, v \
 etc. Plane takes values from 0 to 2."
@@ -58,7 +58,7 @@ TaggingRules->{
      "FieldLinesData2d", "FIELDLINESDATA2D", "fieldlinesdata2d"}, "index" -> 
     True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
     "FieldLines", "status" -> "None", "summary" -> 
-    "FieldLinesData2d[run,field,it,rfl,plane] Calculates the fieldlines of 2D \
+    "FieldLinesData2d[sim,field,it,rfl,plane] Calculates the fieldlines of 2D \
 data of a field B, E, v etc. Plane takes values from 0 to 2.", 
     "synonyms" -> {
      "FieldLinesData2d", "FIELDLINESDATA2D", "fieldlinesdata2d"}, "title" -> 

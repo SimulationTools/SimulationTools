@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/FindSimulationParameters"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "pattern"}], "TI"], "]"}]], "InlineFormula"],
+        RowBox[{"sim", ",", " ", "pattern"}], "TI"], "]"}]], "InlineFormula"],
      
      "\[LineSeparator]gives a list of the names of all the parameters which \
 match pattern which were set in the simulation."
@@ -59,7 +59,7 @@ TaggingRules->{
       "findsimulationparameters"}, "index" -> True, "label" -> 
     "nrmma/Parameters Symbol", "language" -> "en", "paclet" -> "Parameters", 
     "status" -> "None", "summary" -> 
-    "FindSimulationParameters[run, pattern] gives a list of the names of all \
+    "FindSimulationParameters[sim, pattern] gives a list of the names of all \
 the parameters which match pattern which were set in the simulation.", 
     "synonyms" -> {
      "FindSimulationParameters", "FINDSIMULATIONPARAMETERS", 

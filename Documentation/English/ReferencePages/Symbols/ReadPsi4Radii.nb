@@ -27,9 +27,9 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadPsi4Radii",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadPsi4Radii"], "[", 
-       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns a list of the radii at which the modes of \
-\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run."
+\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -55,8 +55,8 @@ TaggingRules->{
     "keywords" -> {"ReadPsi4Radii", "READPSI4RADII", "readpsi4radii"}, 
     "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
     "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
-    "ReadPsi4Radii[run] returns a list of the radii at which the modes of \
-\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in run.", 
+    "ReadPsi4Radii[sim] returns a list of the radii at which the modes of \
+\!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in sim.", 
     "synonyms" -> {"ReadPsi4Radii", "READPSI4RADII", "readpsi4radii"}, 
     "title" -> "ReadPsi4Radii", "windowTitle" -> "ReadPsi4Radii", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadPsi4Radii"}, "SearchTextTranslated" -> 

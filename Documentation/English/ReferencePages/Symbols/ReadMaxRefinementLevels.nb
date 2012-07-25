@@ -11,25 +11,25 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/Grids"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["FinestGridSpacing",
+ ButtonBox["ReadMaxRefinementLevels",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/FinestGridSpacing"]
+  ButtonData->"paclet:nrmma/ref/ReadMaxRefinementLevels"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["FinestGridSpacing", "ObjectName"],
+Cell["ReadMaxRefinementLevels", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["FinestGridSpacing",
+       ButtonBox["ReadMaxRefinementLevels",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/FinestGridSpacing"], "[", 
-       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]computes the grid spacing on the finest refinement \
-level in run."
+        ButtonData->"paclet:nrmma/ref/ReadMaxRefinementLevels"], "[", 
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]returns the maximum number of refinement levels present \
+in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -45,7 +45,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"FinestGridSpacing",
+WindowTitle->"ReadMaxRefinementLevels",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -53,16 +53,18 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "FinestGridSpacing", "FINESTGRIDSPACING", "finestgridspacing"}, "index" -> 
-    True, "label" -> "nrmma/Grids Symbol", "language" -> "en", "paclet" -> 
-    "Grids", "status" -> "None", "summary" -> 
-    "FinestGridSpacing[run] computes the grid spacing on the finest \
-refinement level in run.", 
+     "ReadMaxRefinementLevels", "READMAXREFINEMENTLEVELS", 
+      "readmaxrefinementlevels"}, "index" -> True, "label" -> 
+    "nrmma/Grids Symbol", "language" -> "en", "paclet" -> "Grids", "status" -> 
+    "None", "summary" -> 
+    "ReadMaxRefinementLevels[sim] returns the maximum number of refinement \
+levels present in sim.", 
     "synonyms" -> {
-     "FinestGridSpacing", "FINESTGRIDSPACING", "finestgridspacing"}, "title" -> 
-    "FinestGridSpacing", "windowTitle" -> "FinestGridSpacing", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/FinestGridSpacing"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+     "ReadMaxRefinementLevels", "READMAXREFINEMENTLEVELS", 
+      "readmaxrefinementlevels"}, "title" -> "ReadMaxRefinementLevels", 
+    "windowTitle" -> "ReadMaxRefinementLevels", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/ReadMaxRefinementLevels"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadExtrapolatedPsi4"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "l", ",", " ", "m"}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "l", ",", " ", "m"}], "TI"], "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\
 \[Psi]\), \(4\)]\) to infinite radius."
@@ -58,7 +58,7 @@ TaggingRules->{
      "ReadExtrapolatedPsi4", "READEXTRAPOLATEDPSI4", "readextrapolatedpsi4"}, 
     "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
     "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
-    "ReadExtrapolatedPsi4[run, l, m] extrapolates the (l, m) mode of \
+    "ReadExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of \
 \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.", 
     "synonyms" -> {
      "ReadExtrapolatedPsi4", "READEXTRAPOLATEDPSI4", "readextrapolatedpsi4"}, 

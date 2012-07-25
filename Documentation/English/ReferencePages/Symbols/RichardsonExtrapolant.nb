@@ -11,22 +11,22 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/Convergence"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["RichardsonExtrapolation",
+ ButtonBox["RichardsonExtrapolant",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolation"]
+  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolant"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["RichardsonExtrapolation", "ObjectName"],
+Cell["RichardsonExtrapolant", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["RichardsonExtrapolation",
+       ButtonBox["RichardsonExtrapolant",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/RichardsonExtrapolation"], "[", 
+        ButtonData->"paclet:nrmma/ref/RichardsonExtrapolant"], "[", 
        StyleBox[
         RowBox[{
          RowBox[{"{", 
@@ -52,7 +52,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"RichardsonExtrapolation",
+WindowTitle->"RichardsonExtrapolant",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -60,19 +60,19 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "nrmma`", 
     "keywords" -> {
-     "RichardsonExtrapolation", "RICHARDSONEXTRAPOLATION", 
-      "richardsonextrapolation"}, "index" -> True, "label" -> 
+     "RichardsonExtrapolant", "RICHARDSONEXTRAPOLANT", 
+      "richardsonextrapolant"}, "index" -> True, "label" -> 
     "nrmma/Convergence Symbol", "language" -> "en", "paclet" -> "Convergence",
      "status" -> "None", "summary" -> 
-    "RichardsonExtrapolation[{f1, f2}, {h1, h2}, p] gives the order p \
+    "RichardsonExtrapolant[{f1, f2}, {h1, h2}, p] gives the order p \
 Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = O[h^p]. f1 \
 and f2 can either be real numbers or DataTables, and the returned value will \
 be of the same type.", 
     "synonyms" -> {
-     "RichardsonExtrapolation", "RICHARDSONEXTRAPOLATION", 
-      "richardsonextrapolation"}, "title" -> "RichardsonExtrapolation", 
-    "windowTitle" -> "RichardsonExtrapolation", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/RichardsonExtrapolation"}, "SearchTextTranslated" -> "", 
+     "RichardsonExtrapolant", "RICHARDSONEXTRAPOLANT", 
+      "richardsonextrapolant"}, "title" -> "RichardsonExtrapolant", 
+    "windowTitle" -> "RichardsonExtrapolant", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/RichardsonExtrapolant"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

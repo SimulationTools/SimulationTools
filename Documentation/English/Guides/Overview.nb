@@ -47,82 +47,11 @@ Cell["AsyncCommand", "GuideFunctionsSubsection"],
 
 Cell["BHCoordinates", "GuideFunctionsSubsection"],
 
-Cell[CellGroupData[{
-
 Cell["CactusTimers", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ChartTimers",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ChartTimers"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["FindTimers",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FindTimers"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["IndependentTimers",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/IndependentTimers"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["LargestTimers",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/LargestTimers"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ListTimers",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ListTimers"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ParseTimersFile",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ParseTimersFile"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["TimerScaling",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/TimerScaling"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["TotalTime",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/TotalTime"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell["CarpetHDF5Plot", "GuideFunctionsSubsection"],
 
-Cell[CellGroupData[{
-
 Cell["CarpetHDF5", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadVariables",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadVariables"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell["CarpetIOHDF5", "GuideFunctionsSubsection"],
 
@@ -148,10 +77,9 @@ Cell[TextData[{
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
- Cell[TextData[ButtonBox["RichardsonExtrapolation",
+ Cell[TextData[ButtonBox["RichardsonExtrapolant",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolation"]], 
-  "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolant"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -545,13 +473,6 @@ Cell[TextData[{
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
- Cell[TextData[ButtonBox["ColorRanges3d",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ColorRanges3d"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
  Cell[TextData[ButtonBox["FieldLines2dPlot",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/FieldLines2dPlot"]], "InlineFunctionSans"],
@@ -597,14 +518,6 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["MovieFieldLines3d",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/MovieFieldLines3d"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadIterationsFromRun",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadIterationsFromRun"]], 
-  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
@@ -663,23 +576,9 @@ Cell[TextData[{
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
- Cell[TextData[ButtonBox["ReadTime",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTime"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
  Cell[TextData[ButtonBox["ReadTimeLevels",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTimeLevels"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["StripGhostZones",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/StripGhostZones"]], "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/ReadTimeLevels"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -688,123 +587,17 @@ Cell[CellGroupData[{
 Cell["Grids", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["AnimateGrids",
+ Cell[TextData[ButtonBox["ReadGridSpacings",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/AnimateGrids"]], "InlineFunctionSans"],
+  ButtonData->"paclet:nrmma/ref/ReadGridSpacings"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
- Cell[TextData[ButtonBox["BoxRadiiForCentre",
+ Cell[TextData[ButtonBox["ReadMaxRefinementLevels",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/BoxRadiiForCentre"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["BoxRadiiOnLevel",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/BoxRadiiOnLevel"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CountRefinementLevels",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CountRefinementLevels"]], 
+  ButtonData->"paclet:nrmma/ref/ReadMaxRefinementLevels"]], 
   "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CourantFactorOnLevel",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CourantFactorOnLevel"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["FinestGridSpacing",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FinestGridSpacing"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["GridSpacingOnLevel",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GridSpacingOnLevel"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["GridStructure",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GridStructure"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["LevelExistsEvery",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/LevelExistsEvery"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["PlotGridsAndAH2D",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/PlotGridsAndAH2D"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["RadialPoints",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RadialPoints"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadAngularPoints",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadAngularPoints"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadCoarseGridSpacing",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadCoarseGridSpacing"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadCoarseTimeStep",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadCoarseTimeStep"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadFineTimeStep",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadFineTimeStep"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadInnerBoundary",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadInnerBoundary"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadOuterBoundary",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadOuterBoundary"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
@@ -816,23 +609,9 @@ Cell[TextData[{
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
- Cell[TextData[ButtonBox["RefinementLevels",
+ Cell[TextData[ButtonBox["ReadTimeStep",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RefinementLevels"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["RescaleGrids",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RescaleGrids"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["TimeRefinementFactors",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/TimeRefinementFactors"]], "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/ReadTimeStep"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -909,20 +688,7 @@ Cell[TextData[{
 
 Cell["MinTracker", "GuideFunctionsSubsection"],
 
-Cell[CellGroupData[{
-
 Cell["Movie", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["MakeMovie",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MakeMovie"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell["MultipoleASCII", "GuideFunctionsSubsection"],
 
@@ -948,46 +714,9 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell["nrmma8", "GuideFunctionsSubsection"],
 
-Cell[TextData[{
- Cell[TextData[ButtonBox["FilterWavelet",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FilterWavelet"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["WaveletRefinementLevels",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/WaveletRefinementLevels"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["WaveletType",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/WaveletType"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["nrmmaVersion", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["nrmmaVersion",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/nrmmaVersion"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1009,110 +738,17 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell["Plotting", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["DynamicListLinePlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DynamicListLinePlot"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["FilterPlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FilterPlot"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["FitPlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FitPlot"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["PlotFit",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/PlotFit"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["PresentationArrayPlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/PresentationArrayPlot"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["PresentationListLinePlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/PresentationListLinePlot"]], 
-  "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell["Profile", "GuideFunctionsSubsection"],
 
-Cell[TextData[{
- Cell[TextData[ButtonBox["ClearProfile",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ClearProfile"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Profile",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Profile"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["Providers", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ProviderPreferences",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ProviderPreferences"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell["PunctureTracker", "GuideFunctionsSubsection"],
 
 Cell["Quasinormal", "GuideFunctionsSubsection"],
 
-Cell[CellGroupData[{
-
 Cell["ReadHDF5", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadHDF5",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadHDF5"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ShowHDF5Progress",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ShowHDF5Progress"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1143,9 +779,9 @@ Cell[CellGroupData[{
 Cell["SimView", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["SimView",
+ Cell[TextData[ButtonBox["SimulationOverview",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/SimView"]], "InlineFunctionSans"],
+  ButtonData->"paclet:nrmma/ref/SimulationOverview"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
@@ -1155,37 +791,7 @@ Cell[TextData[{
 
 Cell["SimViewRRMHD", "GuideFunctionsSubsection"],
 
-Cell[CellGroupData[{
-
 Cell["Stack", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ClearStack",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ClearStack"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CurrentStack",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CurrentStack"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ShowStack",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ShowStack"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["WithStackFrame",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/WithStackFrame"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1230,50 +836,11 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell["Timers", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadTimerFromRun",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTimerFromRun"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell["Tracks", "GuideFunctionsSubsection"],
 
-Cell[CellGroupData[{
-
 Cell["TwoPunctures", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadPunctureADMMasses",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadPunctureADMMasses"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadPunctureADMMassParameters",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadPunctureADMMassParameters"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadTwoPuncturesData",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTwoPuncturesData"]], 
-  "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
 
 Cell["VTK", "GuideFunctionsSubsection"],
 

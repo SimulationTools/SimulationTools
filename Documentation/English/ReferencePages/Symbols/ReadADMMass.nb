@@ -27,7 +27,7 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadADMMass",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadADMMass"], "[", 
-       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the ADM mass of the spacetime from the initial \
 data slice"
     }]]}
@@ -55,7 +55,7 @@ TaggingRules->{
     "keywords" -> {"ReadADMMass", "READADMMASS", "readadmmass"}, "index" -> 
     True, "label" -> "nrmma/InitialData Symbol", "language" -> "en", "paclet" -> 
     "InitialData", "status" -> "None", "summary" -> 
-    "ReadADMMass[run] reads the ADM mass of the spacetime from the initial \
+    "ReadADMMass[sim] reads the ADM mass of the spacetime from the initial \
 data slice", "synonyms" -> {"ReadADMMass", "READADMMASS", "readadmmass"}, 
     "title" -> "ReadADMMass", "windowTitle" -> "ReadADMMass", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadADMMass"}, "SearchTextTranslated" -> "",

@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/SequenceFieldLines2d"], "[", 
        StyleBox[
         RowBox[{
-        "path", ",", "runlist", ",", "field", ",", "rfl", ",", "plane", ",", 
+        "path", ",", "simlist", ",", "field", ",", "rfl", ",", "plane", ",", 
          "function", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Create a sequence of figures of a 2D variable with its \
 field lines with a fixed color range. Plane takes values from 0 to 2."
@@ -250,7 +250,7 @@ TaggingRules->{
      "SequenceFieldLines2d", "SEQUENCEFIELDLINES2D", "sequencefieldlines2d"}, 
     "index" -> True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en",
      "paclet" -> "FieldLines", "status" -> "None", "summary" -> 
-    "SequenceFieldLines2d[path,runlist,field,rfl,plane,function,opts] Create \
+    "SequenceFieldLines2d[path,simlist,field,rfl,plane,function,opts] Create \
 a sequence of figures of a 2D variable with its field lines with a fixed \
 color range. Plane takes values from 0 to 2.", 
     "synonyms" -> {

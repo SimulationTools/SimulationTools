@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/MovieFieldLines3d"], "[", 
        StyleBox[
         RowBox[{
-        "runlist", ",", "field", ",", "rfl", ",", "plane", ",", "function", 
+        "simlist", ",", "field", ",", "rfl", ",", "plane", ",", "function", 
          ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Create a movie of the field lines of a 3D variable with \
 fixed color range. Plane takes values from 0 to 2."
@@ -250,7 +250,7 @@ TaggingRules->{
      "MovieFieldLines3d", "MOVIEFIELDLINES3D", "moviefieldlines3d"}, "index" -> 
     True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
     "FieldLines", "status" -> "None", "summary" -> 
-    "MovieFieldLines3d[runlist,field,rfl,plane,function,opts] Create a movie \
+    "MovieFieldLines3d[simlist,field,rfl,plane,function,opts] Create a movie \
 of the field lines of a 3D variable with fixed color range. Plane takes \
 values from 0 to 2.", 
     "synonyms" -> {

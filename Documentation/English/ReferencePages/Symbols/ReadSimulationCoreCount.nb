@@ -21,9 +21,15 @@ Cell[CellGroupData[{
 Cell["ReadSimulationCoreCount", "ObjectName"],
 
 Cell[BoxData[GridBox[{
-   {"", Cell["\<\
-ReadCores[simname] gives the number of cores used by a simulation.\
-\>"]}
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadSimulationCoreCount",
+        BaseStyle->"Link",
+        ButtonData->"paclet:nrmma/ref/ReadSimulationCoreCount"], "[", 
+       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the number of cores used by a simulation."
+    }]]}
   }]], "Usage"]
 }, Open  ]],
 
@@ -50,7 +56,8 @@ TaggingRules->{
       "readsimulationcorecount"}, "index" -> True, "label" -> 
     "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> "RunFiles", 
     "status" -> "None", "summary" -> 
-    "ReadCores[simname] gives the number of cores used by a simulation.", 
+    "ReadSimulationCoreCount[simname] gives the number of cores used by a \
+simulation.", 
     "synonyms" -> {
      "ReadSimulationCoreCount", "READSIMULATIONCORECOUNT", 
       "readsimulationcorecount"}, "title" -> "ReadSimulationCoreCount", 

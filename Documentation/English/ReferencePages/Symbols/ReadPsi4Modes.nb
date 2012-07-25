@@ -27,9 +27,9 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadPsi4Modes",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadPsi4Modes"], "[", 
-       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns a list of the modes of \!\(\*SubscriptBox[\(\
-\[Psi]\), \(4\)]\) that are available in run."
+\[Psi]\), \(4\)]\) that are available in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -55,8 +55,8 @@ TaggingRules->{
     "keywords" -> {"ReadPsi4Modes", "READPSI4MODES", "readpsi4modes"}, 
     "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
     "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
-    "ReadPsi4Modes[run] returns a list of the modes of \!\(\*SubscriptBox[\(\
-\[Psi]\), \(4\)]\) that are available in run.", 
+    "ReadPsi4Modes[sim] returns a list of the modes of \!\(\*SubscriptBox[\(\
+\[Psi]\), \(4\)]\) that are available in sim.", 
     "synonyms" -> {"ReadPsi4Modes", "READPSI4MODES", "readpsi4modes"}, 
     "title" -> "ReadPsi4Modes", "windowTitle" -> "ReadPsi4Modes", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadPsi4Modes"}, "SearchTextTranslated" -> 

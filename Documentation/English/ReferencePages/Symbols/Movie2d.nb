@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/Movie2d"], "[", 
        StyleBox[
         RowBox[{
-        "runlist", ",", "var", ",", "rfl", ",", "function", ",", "opts"}], 
+        "simlist", ",", "var", ",", "rfl", ",", "function", ",", "opts"}], 
         "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Create a movie of a 2D variable with fixed color \
 range."
@@ -212,7 +212,7 @@ TaggingRules->{
    "context" -> "nrmma`", "keywords" -> {"Movie2d", "MOVIE2D", "movie2d"}, 
     "index" -> True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en",
      "paclet" -> "FieldLines", "status" -> "None", "summary" -> 
-    "Movie2d[runlist,var,rfl,function,opts] Create a movie of a 2D variable \
+    "Movie2d[simlist,var,rfl,function,opts] Create a movie of a 2D variable \
 with fixed color range.", "synonyms" -> {"Movie2d", "MOVIE2D", "movie2d"}, 
     "title" -> "Movie2d", "windowTitle" -> "Movie2d", "type" -> "Symbol", 
     "uri" -> "nrmma/ref/Movie2d"}, "SearchTextTranslated" -> "", "LinkTrails" -> 

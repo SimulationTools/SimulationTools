@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadSimulationParameter"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "pname"}], "TI"], "]"}]], "InlineFormula"],
+        RowBox[{"sim", ",", " ", "pname"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the value of the named parameter from the \
 simulation."
     }]]}
@@ -58,7 +58,7 @@ TaggingRules->{
       "readsimulationparameter"}, "index" -> True, "label" -> 
     "nrmma/Parameters Symbol", "language" -> "en", "paclet" -> "Parameters", 
     "status" -> "None", "summary" -> 
-    "ReadSimulationParameter[run, pname] reads the value of the named \
+    "ReadSimulationParameter[sim, pname] reads the value of the named \
 parameter from the simulation.", 
     "synonyms" -> {
      "ReadSimulationParameter", "READSIMULATIONPARAMETER", 

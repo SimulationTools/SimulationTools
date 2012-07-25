@@ -22,7 +22,7 @@ Cell["ReadKickVector", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
-KickVector[run, r, lMax] computes the vector kick in km/s from the multipolar \
+KickVector[sim, r, lMax] computes the vector kick in km/s from the multipolar \
 decomposition of Psi4 on a sphere at radius r using modes up to l = lMax\
 \>"]}
   }]], "Usage"]
@@ -49,7 +49,7 @@ TaggingRules->{
     "keywords" -> {"ReadKickVector", "READKICKVECTOR", "readkickvector"}, 
     "index" -> True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", 
     "paclet" -> "Kicks", "status" -> "None", "summary" -> 
-    "KickVector[run, r, lMax] computes the vector kick in km/s from the \
+    "KickVector[sim, r, lMax] computes the vector kick in km/s from the \
 multipolar decomposition of Psi4 on a sphere at radius r using modes up to l \
 = lMax", "synonyms" -> {"ReadKickVector", "READKICKVECTOR", "readkickvector"},
      "title" -> "ReadKickVector", "windowTitle" -> "ReadKickVector", "type" -> 

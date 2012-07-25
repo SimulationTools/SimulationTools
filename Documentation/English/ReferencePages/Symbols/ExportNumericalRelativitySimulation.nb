@@ -30,7 +30,7 @@ Cell[BoxData[GridBox[{
        "[", 
        StyleBox[
         RowBox[{
-        "run", ",", " ", "alias", ",", " ", "directory", ",", " ", "mass", 
+        "sim", ",", " ", "alias", ",", " ", "directory", ",", " ", "mass", 
          ",", " ", "eccentricity"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]exports a numerical relativity simulation in the \
 Numerical Relativity Data Format (NRDF) including waveforms, local quantities \
@@ -104,7 +104,7 @@ TaggingRules->{
       "exportnumericalrelativitysimulation"}, "index" -> True, "label" -> 
     "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> "NRExport", 
     "status" -> "None", "summary" -> 
-    "ExportNumericalRelativitySimulation[run, alias, directory, mass, \
+    "ExportNumericalRelativitySimulation[sim, alias, directory, mass, \
 eccentricity] exports a numerical relativity simulation in the Numerical \
 Relativity Data Format (NRDF) including waveforms, local quantities (black \
 hole masses, spins and coordinates) and metadata.  mass is the ADM mass of \

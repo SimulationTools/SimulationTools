@@ -28,10 +28,10 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadTimeLevels"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]reads the timelevels present for the grid function var \
-in the directory run."
+in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -64,7 +64,7 @@ Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
     "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "False", Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
     "", "TableText"]}
@@ -100,8 +100,8 @@ TaggingRules->{
     "keywords" -> {"ReadTimeLevels", "READTIMELEVELS", "readtimelevels"}, 
     "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
     "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
-    "ReadTimeLevels[run, var, dims] reads the timelevels present for the grid \
-function var in the directory run.", 
+    "ReadTimeLevels[sim, var, dims] reads the timelevels present for the grid \
+function var in sim.", 
     "synonyms" -> {"ReadTimeLevels", "READTIMELEVELS", "readtimelevels"}, 
     "title" -> "ReadTimeLevels", "windowTitle" -> "ReadTimeLevels", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadTimeLevels"}, "SearchTextTranslated" -> 

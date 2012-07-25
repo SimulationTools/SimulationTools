@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/MovieFieldLines2d"], "[", 
        StyleBox[
         RowBox[{
-        "runlist", ",", "field", ",", "rfl", ",", "plane", ",", "function", 
+        "simlist", ",", "field", ",", "rfl", ",", "plane", ",", "function", 
          ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Create a movie of the field lines of a 2D variable with \
 fixed color range. Plane takes values from 0 to 2."
@@ -252,7 +252,7 @@ TaggingRules->{
      "MovieFieldLines2d", "MOVIEFIELDLINES2D", "moviefieldlines2d"}, "index" -> 
     True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
     "FieldLines", "status" -> "None", "summary" -> 
-    "MovieFieldLines2d[runlist,field,rfl,plane,function,opts] Create a movie \
+    "MovieFieldLines2d[simlist,field,rfl,plane,function,opts] Create a movie \
 of the field lines of a 2D variable with fixed color range. Plane takes \
 values from 0 to 2.", 
     "synonyms" -> {

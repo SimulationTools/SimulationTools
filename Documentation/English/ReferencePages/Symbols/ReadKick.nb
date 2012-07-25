@@ -22,7 +22,7 @@ Cell["ReadKick", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
-Kick[run, dir, r, lMax] computes the kick component in km/s from the \
+Kick[sim, dir, r, lMax] computes the kick component in km/s from the \
 multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an \
 integer from 1 to 3) using modes up to l = lMax\
 \>"]}
@@ -49,7 +49,7 @@ TaggingRules->{
    "context" -> "nrmma`", "keywords" -> {"ReadKick", "READKICK", "readkick"}, 
     "index" -> True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", 
     "paclet" -> "Kicks", "status" -> "None", "summary" -> 
-    "Kick[run, dir, r, lMax] computes the kick component in km/s from the \
+    "Kick[sim, dir, r, lMax] computes the kick component in km/s from the \
 multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an \
 integer from 1 to 3) using modes up to l = lMax", 
     "synonyms" -> {"ReadKick", "READKICK", "readkick"}, "title" -> "ReadKick",

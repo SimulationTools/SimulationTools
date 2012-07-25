@@ -29,7 +29,7 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/FieldLines2dPlot"], "[", 
        StyleBox[
         RowBox[{
-        "run", ",", "field", ",", "it", ",", "rfl", ",", "plane", ",", 
+        "sim", ",", "field", ",", "it", ",", "rfl", ",", "plane", ",", 
          "function2", ",", "opts"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]Plots the fieldlines and the density plot of 2D data of \
 a field B, E, v"
@@ -252,7 +252,7 @@ TaggingRules->{
      "FieldLines2dPlot", "FIELDLINES2DPLOT", "fieldlines2dplot"}, "index" -> 
     True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en", "paclet" -> 
     "FieldLines", "status" -> "None", "summary" -> 
-    "FieldLines2dPlot[run,field,it,rfl,plane,function2,opts] Plots the \
+    "FieldLines2dPlot[sim,field,it,rfl,plane,function2,opts] Plots the \
 fieldlines and the density plot of 2D data of a field B, E, v", 
     "synonyms" -> {
      "FieldLines2dPlot", "FIELDLINES2DPLOT", "fieldlines2dplot"}, "title" -> 

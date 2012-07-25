@@ -28,10 +28,10 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadMaps"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]reads the multipatch maps present  for the grid \
-function var in the directory run."
+function var in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -63,7 +63,7 @@ Cell[BoxData[GridBox[{
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
     "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "False", Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
     "", "TableText"]},
@@ -100,11 +100,11 @@ TaggingRules->{
    "context" -> "nrmma`", "keywords" -> {"ReadMaps", "READMAPS", "readmaps"}, 
     "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
     "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
-    "ReadMaps[run, var, dims] reads the multipatch maps present  for the grid \
-function var in the directory run.", 
-    "synonyms" -> {"ReadMaps", "READMAPS", "readmaps"}, "title" -> "ReadMaps",
-     "windowTitle" -> "ReadMaps", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadMaps"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "ReadMaps[sim, var, dims] reads the multipatch maps present  for the grid \
+function var in sim.", "synonyms" -> {"ReadMaps", "READMAPS", "readmaps"}, 
+    "title" -> "ReadMaps", "windowTitle" -> "ReadMaps", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/ReadMaps"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

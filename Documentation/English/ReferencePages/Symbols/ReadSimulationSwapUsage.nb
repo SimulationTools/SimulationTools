@@ -27,7 +27,7 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadSimulationSwapUsage",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadSimulationSwapUsage"], "[", 
-       StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the swap memory usage of a simulation in MB as a \
 DataTable as a function of coordinate time."
     }]]}
@@ -57,8 +57,8 @@ TaggingRules->{
       "readsimulationswapusage"}, "index" -> True, "label" -> 
     "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
     "SystemStatistics", "status" -> "None", "summary" -> 
-    "ReadSimulationSwapUsage[simname] gives the swap memory usage of a \
-simulation in MB as a DataTable as a function of coordinate time.", 
+    "ReadSimulationSwapUsage[sim] gives the swap memory usage of a simulation \
+in MB as a DataTable as a function of coordinate time.", 
     "synonyms" -> {
      "ReadSimulationSwapUsage", "READSIMULATIONSWAPUSAGE", 
       "readsimulationswapusage"}, "title" -> "ReadSimulationSwapUsage", 

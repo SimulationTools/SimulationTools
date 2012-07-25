@@ -217,9 +217,9 @@ Cell[CellGroupData[{
 Cell["Simulation Information", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["SimView",
+ Cell[TextData[ButtonBox["SimulationOverview",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/SimView"]], "InlineFunctionSans"],
+  ButtonData->"paclet:nrmma/ref/SimulationOverview"]], "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",

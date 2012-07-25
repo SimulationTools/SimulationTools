@@ -28,10 +28,10 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadRefinementLevels"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]reads the refinement levels present for the grid \
-function var in the directory run."
+function var in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -62,7 +62,7 @@ Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "False", Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
     "", "TableText"]},
@@ -101,8 +101,8 @@ TaggingRules->{
      "ReadRefinementLevels", "READREFINEMENTLEVELS", "readrefinementlevels"}, 
     "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
     "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
-    "ReadRefinementLevels[run, var, dims] reads the refinement levels present \
-for the grid function var in the directory run.", 
+    "ReadRefinementLevels[sim, var, dims] reads the refinement levels present \
+for the grid function var in sim.", 
     "synonyms" -> {
      "ReadRefinementLevels", "READREFINEMENTLEVELS", "readrefinementlevels"}, 
     "title" -> "ReadRefinementLevels", "windowTitle" -> 

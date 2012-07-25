@@ -28,7 +28,7 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ColorRanges2d"], "[", 
        StyleBox[
-        RowBox[{"runlist", ",", "var", ",", "rfl", ",", "func"}], "TI"], 
+        RowBox[{"simlist", ",", "var", ",", "rfl", ",", "func"}], "TI"], 
        "]"}]], "InlineFormula"],
      "\[LineSeparator]Calculate a list of the universal Minimum and Maximum \
 among 2D data of several simulations. ColorRange can be used in order to set \
@@ -58,7 +58,7 @@ TaggingRules->{
     "keywords" -> {"ColorRanges2d", "COLORRANGES2D", "colorranges2d"}, 
     "index" -> True, "label" -> "nrmma/FieldLines Symbol", "language" -> "en",
      "paclet" -> "FieldLines", "status" -> "None", "summary" -> 
-    "ColorRanges2d[runlist,var,rfl,func] Calculate a list of the universal \
+    "ColorRanges2d[simlist,var,rfl,func] Calculate a list of the universal \
 Minimum and Maximum among 2D data of several simulations. ColorRange can be \
 used in order to set a universal ColorBar in movies.", 
     "synonyms" -> {"ColorRanges2d", "COLORRANGES2D", "colorranges2d"}, 

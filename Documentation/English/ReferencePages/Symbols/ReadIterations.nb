@@ -28,10 +28,10 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadIterations"], "[", 
        StyleBox[
-        RowBox[{"run", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]reads the iterations present for the grid function var \
-in the directory run."
+in sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -62,7 +62,7 @@ Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
     "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "StripGhostZones", "True", Cell[
+   {Cell["      ", "TableRowIcon"], "StripGhostZones", "False", Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
     "", "TableText"]},
@@ -100,8 +100,8 @@ TaggingRules->{
     "keywords" -> {"ReadIterations", "READITERATIONS", "readiterations"}, 
     "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
     "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
-    "ReadIterations[run, var, dims] reads the iterations present for the grid \
-function var in the directory run.", 
+    "ReadIterations[sim, var, dims] reads the iterations present for the grid \
+function var in sim.", 
     "synonyms" -> {"ReadIterations", "READITERATIONS", "readiterations"}, 
     "title" -> "ReadIterations", "windowTitle" -> "ReadIterations", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadIterations"}, "SearchTextTranslated" -> 

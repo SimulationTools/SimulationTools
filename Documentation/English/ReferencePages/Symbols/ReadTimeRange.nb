@@ -27,9 +27,9 @@ Cell[BoxData[GridBox[{
        ButtonBox["ReadTimeRange",
         BaseStyle->"Link",
         ButtonData->"paclet:nrmma/ref/ReadTimeRange"], "[", 
-       StyleBox["run", "TI"], "]"}]], "InlineFormula"],
+       StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the range of times at which data is available for \
-run."
+sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -55,8 +55,8 @@ TaggingRules->{
     "keywords" -> {"ReadTimeRange", "READTIMERANGE", "readtimerange"}, 
     "index" -> True, "label" -> "nrmma/Grids Symbol", "language" -> "en", 
     "paclet" -> "Grids", "status" -> "None", "summary" -> 
-    "ReadTimeRange[run] reads the range of times at which data is available \
-for run.", "synonyms" -> {"ReadTimeRange", "READTIMERANGE", "readtimerange"}, 
+    "ReadTimeRange[sim] reads the range of times at which data is available \
+for sim.", "synonyms" -> {"ReadTimeRange", "READTIMERANGE", "readtimerange"}, 
     "title" -> "ReadTimeRange", "windowTitle" -> "ReadTimeRange", "type" -> 
     "Symbol", "uri" -> "nrmma/ref/ReadTimeRange"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
