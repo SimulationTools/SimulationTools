@@ -49,10 +49,12 @@ getDataSubDir[output_String] :=
 
 SimFactory`RunFiles`FindRunDirSegments[dir_] :=
   Module[
-    {restarts, dataSubDir, dataDirs, segments},
+    {restarts, merged, dataSubDir, dataDirs, segments},
     restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
+    merged = FileNames["merged", dir];
     dataSubDir = getDataSubDir[restarts[[1]]];
     dataDirs = FileNameJoin[{#, dataSubDir}] & /@ restarts;
+    dataDirs = Join[merged, dataDirs];
     segments = Select[dataDirs, DirectoryQ]
 ];
 
