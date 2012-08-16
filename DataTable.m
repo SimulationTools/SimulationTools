@@ -745,6 +745,8 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
 (* RestrictedToInterval                                   *)
 (**********************************************************)
 
+(* TODO: Do we really need this when we have Slab? Also
+   the name is awkward to write. *)
 SyntaxInformation[RestrictedToInterval] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
