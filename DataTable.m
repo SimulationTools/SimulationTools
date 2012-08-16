@@ -460,10 +460,10 @@ DataTable /: SameGridQ[dts:DataTable[__]..] :=
 (* Shifted                                                      *)
 (****************************************************************)
 
-Shifted[d_DataTable, dt_?NumberQ] :=
+Shifted[d_DataTable, dt_?NumericQ] :=
  AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
 
-Shifted[d_DataTable, {dt_?NumberQ}] := Shifted[d, dt];
+Shifted[d_DataTable, {dt_?NumericQ}] := Shifted[d, dt];
 
 
 (****************************************************************)
