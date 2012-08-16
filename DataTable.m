@@ -904,7 +904,7 @@ FunctionInverse[d_DataTable] :=
 DataTable /: Composition[d_DataTable, p_DataTable] :=
  Module[{dInterp, data},
   dInterp = Interpolation[d];
-  coords = ToListOfData[p];
+  coords = ToListOfCoordinates[p];
   data = dInterp[ToListOfData[p]];
   AddAttributes[ToDataTable[Transpose[{coords, data}]], ListAttributes[d]]
 ];
