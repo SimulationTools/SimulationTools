@@ -39,7 +39,20 @@ Cell[BoxData[
 
 Cell[BoxData[
  TagBox[
-  RowBox[{"{", "}"}],
+  RowBox[{"{", 
+   RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Guides/Data Representations.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Guides/NRMMA.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Guides/Numerical Relativity.nb\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "114", "\[RightSkeleton]"}], 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Tutorials/Kicks.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Tutorials/NRMMAIntroduction.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
+Documentation/English/Tutorials/NumericalRelativity.nb\"\>"}], "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
 
@@ -267,18 +280,6 @@ Cell[BoxData[
   "Undocumented symbols for package Error skipped:\n", {
    "CatchError", "Error", "ErrorMessage", "ErrorStack", "ErrorString", 
     "ErrorTag"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package FieldLines skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ColorRanges\"\>", ",", "\<\"ColorRanges3d\"\>", 
-     ",", "\<\"ReadIterationsFromRun\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package FieldLines skipped:\n", {
-   "ColorRanges", "ColorRanges3d", "ReadIterationsFromRun"}],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -735,30 +736,6 @@ Cell[BoxData["\<\"Documented options do not match actual options for \
 RestrictedToInterval\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
-FieldLines2dPlot\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-FieldLines3dPlot\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-Movie2d\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-MovieFieldLines2d\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-MovieFieldLines3d\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-Sequence2d\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-SequenceFieldLines2d\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
-SequenceFieldLines3d\"\>"], "Print"],
-
-Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadGridFunction\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
@@ -790,21 +767,7 @@ AlignedPhases\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
 
-Cell[BoxData["\<\"Building tutorials\"\>"], "Print"]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"ListLinePlot", "::", "lpn"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"\[NoBreak]\\!\\(Norm[spin]\\)\[NoBreak] is not a list of \
-numbers or pairs of numbers. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/ListLinePlot\\\", ButtonNote -> \
-\\\"ListLinePlot::lpn\\\"]\\)\"\>"}]], "Message", "MSG"],
-
-Cell[CellGroupData[{
+Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
 
 Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print"],
 
