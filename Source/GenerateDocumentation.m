@@ -23,7 +23,7 @@ packages =
   "DataTable",
   "Empty",
   "Error",
-  "FieldLines",
+  (*"FieldLines",*)
   "GridFunctions",
   "Grids",
   "Horizons",

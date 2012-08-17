@@ -28,43 +28,60 @@ BeginPackage["FieldLines`",
   "RunFiles`"
  }];
 
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
 FieldLinesData2d::usage = "FieldLinesData2d[sim,field,it,rfl,plane] "<>
+	"(EXPERIMENTAL)"<>
 	"Calculates the fieldlines of 2D data of a field B, E, v etc. "<>
 	"Plane takes values from 0 to 2.";
 FieldLinesData3d::usage = "FieldLinesData3d[sim,field,it,rfl,plane] "<>
+	"(EXPERIMENTAL)"<>
 	"Calculates the fieldlines of 3D data of a field B, E, v etc. "<>
 	"Plane takes values from 0 to 2.";
 FieldLines2dPlot::usage = "FieldLines2dPlot[sim,field,it,rfl,plane,function2,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Plots the fieldlines and the density plot of 2D data of a field B, E, v";
 FieldLines3dPlot::usage = "FieldLines3dPlot[sim,field,it,rfl,plane,function2,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Plots the fieldlines and the density plot of 3D data of a field B, E, v. "<>
 	"Plane takes values from 0 to 2.";
 MovieFieldLines2d::usage = "MovieFieldLines2d[simlist,field,rfl,plane,function,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Create a movie of the field lines of a 2D variable with fixed color range. "<>
 	"Plane takes values from 0 to 2.";
 MovieFieldLines3d::usage = "MovieFieldLines3d[simlist,field,rfl,plane,function,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Create a movie of the field lines of a 3D variable with fixed color range. "<>
 	"Plane takes values from 0 to 2.";
 SequenceFieldLines2d::usage = "SequenceFieldLines2d[path,simlist,field,rfl,plane,function,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Create a sequence of figures of a 2D variable with its field lines with a fixed "<>
 	"color range. Plane takes values from 0 to 2.";
 SequenceFieldLines3d::usage = "SequenceFieldLines3d[path,simlist,field,rfl,plane,function,xmin1,xmax1,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Create a sequence of figures of a 3D variable with its field lines with a fixed "<>
 	"color range. Plane takes values from 0 to 2.";
 Movie2d::usage = "Movie2d[simlist,var,rfl,function,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Create a movie of a 2D variable with fixed color range.";
 Sequence2d::usage = "Sequence2d[path,simlist,var,rfl,function,xmin,xmax,opts] "<>
+	"(EXPERIMENTAL)"<>
 	"Create a sequence of figures of a 2D variable with fixed color range.";
 ColorRanges2d::usage = "ColorRanges2d[simlist,var,rfl,func] "<>
+	"(EXPERIMENTAL)"<>
 	"Calculate a list of the universal Minimum and Maximum among 2D data of several "<>
 	"simulations. ColorRange can be used in order to set a universal ColorBar in movies.";
-ColorRanges3d(*::usage = "ColorRanges3d[simlist,var,plane,rfl,func] "<>
+ColorRanges3d::usage = "ColorRanges3d[simlist,var,plane,rfl,func] "<>
+	"(EXPERIMENTAL)"<>
 	"Calculate a list of the universal Minimum and Maximum among 3D data of several "<>
 	"simulations. ColorRange can be used in order to set a universal ColorBar in movies. "<>
-	"Plane takes values from 0 to 2."*);
+	"Plane takes values from 0 to 2.";
 ColorRanges;
-ReadIterationsFromRun(*::usage = "ReadIterationsFromRun[simlist,var,rfl] "<>
-	"Read Iteration List from a list of simulations"*);
+ReadIterationsFromRun::usage = "ReadIterationsFromRun[simlist,var,rfl] "<>
+	"(EXPERIMENTAL)"<>
+	"Read Iteration List from a list of simulations";
 
 Begin["`Private`"];
 
