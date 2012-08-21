@@ -82,8 +82,7 @@ FileNameTake[s_] :=
   --------------------------------------------------------------------*)
 
 HaveRunDir[runName_String] :=
-  Catch[FindRunDir[runName];True,ErrorTag[FindRunDir::nofind],False &];
-  (* Probably don't really need to use exceptions for this *)
+  findRunDir[runName] =!= None;
 
 (* Given the name of a run directory, return a path to it *)
 findRunDir[runNamep_String] :=
