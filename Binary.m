@@ -20,6 +20,7 @@ BeginPackage["Binary`",
   "DataTable`",
   "Error`",
   "Memo`",
+  "Plotting`",
   "RunFiles`",
   "Trackers`",
   "Horizons`"
@@ -42,9 +43,18 @@ ToListOfPoints::usage = "ToListOfPoints[{x, y, ...}] takes DataTables representi
 
 Begin["`Private`"];
 
-(* We assume that there is only one binary in a simulation *)
 Options[binaryTracker] = {"Trackers" -> Automatic};
 binaryTracker[run_String, i:(1|2), opts:OptionsPattern[]] :=
+  Module[
+    {b},
+    b = binaryTrackerNoFail[run,i,opts];
+    If[b === None, 
+       Error["No binary data (PunctureTracker, AHFinderDirect, MinTracker or ShiftTracker) found in run "<>run],
+       b]];
+
+(* We assume that there is only one binary in a simulation *)
+Options[binaryTrackerNoFail] = Options[binaryTracker];
+binaryTrackerNoFail[run_String, i:(1|2), opts:OptionsPattern[]] :=
   Which[
     OptionValue[Trackers] =!= Automatic,
     If[!MatchQ[OptionValue[Trackers], {{_String, _Integer}, {_String, _Integer}}],
@@ -68,7 +78,8 @@ binaryTracker[run_String, i:(1|2), opts:OptionsPattern[]] :=
     {"ShiftTracker", i-1},
 
     True,
-    Error["No binary data (PunctureTracker, AHFinderDirect, MinTracker or ShiftTracker) found in run "<>run]];
+    None];
+
 
 (* Map the binary functions to the tracker functions, determining the
    correct tracker to use automatically. *)
@@ -102,6 +113,29 @@ ReadBinaryPhase[run_, opts:OptionsPattern[]] :=
 
 ToListOfPoints[ds:{_DataTable...}] :=
   Transpose[ToListOfData/@ds];
+
+tracks2D[run_, i_] :=
+  ToListOfPoints[Take[ReadBinaryCoordinates[run,i],2]];
+
+tracks2D[run_] :=
+  {tracks2D[run,1],tracks2D[run,2]};
+
+Binary`SimulationOverview`Plots[runNames1_] :=
+  Module[{runNames},
+    runNames = Select[runNames1, (binaryTrackerNoFail[#,1] =!= None && binaryTrackerNoFail[#,2] =!= None) &];
+    If[runNames === {},
+       None,
+
+       {{PresentationListLinePlot[
+         Flatten[tracks2D/@runNames,1],
+           AspectRatio -> Automatic, PlotLabel -> "Trajectories\n", PlotRange -> All]},
+        {PresentationListLinePlot[
+          Map[ReadBinarySeparation, runNames],
+          PlotRange -> {0, All}, PlotLabel -> "Separation\n",
+          PlotLegend -> runNames, LegendPosition -> {Right, Top}],
+         PresentationListLinePlot[
+           Map[NDerivative[ReadBinaryAzimuth[#]]&, runNames],
+           PlotRange -> {0, Automatic}, PlotLabel -> "Frequency\n"]}}]];
 
 End[];
 EndPackage[];
