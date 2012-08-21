@@ -94,7 +94,7 @@ simMemPlot[runNames1_] :=
               PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n"]]]];
 
 haveMem[sim_String] :=
-  FindSimulationFiles[sim, "systemstatistics::process_memory_mb.maximum.asc"] =!= None;
+  FindSimulationFiles[sim, "systemstatistics::process_memory_mb.maximum.asc"] =!= {};
 
 ReadSwap[runName_] :=
   MakeDataTable[ReadColumnFile[
