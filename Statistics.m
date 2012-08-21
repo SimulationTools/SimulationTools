@@ -102,11 +102,12 @@ FinishTimeString[run_] :=
 
 
 cost[run_] :=
+  Module[{cores = ReadCores[run]},
   Item[#,Alignment->Right] & /@ 
-  {run, ReadCores[run],  Catch[ReadCPUHours[run],_],
-   Catch[ReadWalltimeHours[run]/24,_],  Catch[ReadCores[run]*24,_],
+  {run, cores,  ReadCPUHours[run],
+   ReadWalltimeHours[run]/24, If[cores =!= None, cores*24, None],
    DateString[FinishTime[run]]
-  };
+  } /. None -> "-"];
 
 Statistics`SimulationOverview`Plots[runNames_] :=
   Module[
