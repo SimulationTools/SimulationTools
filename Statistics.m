@@ -28,7 +28,7 @@ BeginPackage["Statistics`",
 Begin["`Private`"];
 
 segmentInfo[dirName_] :=
- Module[{mtFile, mtTimes, mtt1, mtt2, idNo, date, col},
+ Module[{mtFile, mtTimes, mtt1, mtt2, idNos, idNo, date, col},
   mtFile = FileNameJoin[{dirName, "/runstats.asc"}];
   col=2;
   If[FileType[mtFile] === None,
@@ -45,8 +45,10 @@ segmentInfo[dirName_] :=
    mtt2 = "";
    date = ""];
   
-  idNo = StringCases[
-     dirName, (__ ~~ "/output-" ~~ id__ ~~ "/" ~~ __) -> id][[1]];
+  idNos = StringCases[
+     dirName, (__ ~~ "/output-" ~~ id__ ~~ "/" ~~ __) -> id];
+  idNo = If[idNos =!= {}, idNos[[1]], "0000"];
+
   {ID -> idNo, LastDate -> date,
    T1 -> mtt1, T2 -> mtt2}]
 
@@ -72,16 +74,20 @@ LastOutputCoordinateTime[run_] :=
   Module[{segs,segInfos,segInfo},
     segs = FindRunSegments[run];
     segInfos = segmentInfo/@segs;
+    If[(T2/.segInfos[[1]]) === "", Return[None]];
     segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
     T2/.segInfo];
 
 FinalCoordinateTime[run_] :=
-  ToExpression@LookupParameter[run, "Cactus::cctk_final_time"];
+  If[FindSimulationParameters[run, "Cactus::cctk_final_time"] =!= {},
+     ToExpression@LookupParameter[run, "Cactus::cctk_final_time"],
+     None];
 
 FinishTime[run_] :=
   Module[{segs,segInfos,segInfo,t,tFinal,speed,seconds,lastDate,finishDate},
     segs = FindRunSegments[run];
     segInfos = segmentInfo/@segs;
+    If[(T2/.segInfos[[1]]) === "", Return[None]];
     segInfo = Last[Select[segInfos, ((T2 /. #) =!= "") &]];
     t = T2/.segInfo;
 
@@ -95,10 +101,11 @@ FinishTime[run_] :=
   ];
 
 FinishTimeString[run_] :=
-  Module[{},
+  Module[{ft},
     If[Abs[LastOutputCoordinateTime[run] - FinalCoordinateTime[run]] < 1,
       "Finished",
-      DateString[FinishTime[run]]]];
+       ft = FinishTime[run];
+       If[ft =!= None, DateString[ft], "-"]]];
 
 
 cost[run_] :=
@@ -106,7 +113,7 @@ cost[run_] :=
   Item[#,Alignment->Right] & /@ 
   {run, cores,  ReadCPUHours[run],
    ReadWalltimeHours[run]/24, If[cores =!= None, cores*24, None],
-   DateString[FinishTime[run]]
+   FinishTimeString[run]
   } /. None -> "-"];
 
 Statistics`SimulationOverview`Plots[runNames_] :=
