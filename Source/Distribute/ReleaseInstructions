@@ -16,7 +16,7 @@ Prepare h5mma package
 (in h5mma) make h5mma.tar.gz
 tar zxvf h5mma.tar.gz -C h5mma
 (repeat for other supported architectures)
-pkgbuild --identifier com.h5mma.pkg --root h5mma --install-location ~/Library/Mathematica/Applications/h5mma h5mma.pkg
+pkgbuild --identifier com.h5mma.pkg --root h5mma --install-location /Library/Mathematica/Applications/h5mma h5mma.pkg
 
 Create dmg for Mac OS X
 =======================
