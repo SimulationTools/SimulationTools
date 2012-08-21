@@ -113,7 +113,7 @@ SimView[runNames_List, r_] :=
     providers = {"SystemStatistics", "Binary", "Waveforms", "Statistics"};
 
     plots = Join@@DeleteCases[
-      Table[Symbol[p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None];
+      Table[Symbol[p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None|{None}];
 
     grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]],
                   SpanFromLeft}} ~Join~ plots,
