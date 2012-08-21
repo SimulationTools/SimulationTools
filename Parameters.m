@@ -45,8 +45,8 @@ unbreakBrokenStrings[lines2_List] :=
       Reverse[pairs]];
     Return[lines]];
 
-DefineMemoFunction[ParseParameterFile[from_String],
- Module[{lines, parseLine, strip, fileName, fileNames},
+findParameterFile[from_String] :=
+Module[{fileNames, fileName},
   If[StringMatchQ[from, __ ~~ ".par"],
     (* Is "from" a full parameter file name? *)
     fileNames = {from},
@@ -55,11 +55,19 @@ DefineMemoFunction[ParseParameterFile[from_String],
     If[Length[fileNames] == 0,
       fileNames = FindRunFile[from, from <> "-1.par"];
       If[Length[fileNames] == 0,
-        Error["Cannot find parameter file " <> ToString[from]]],
-      fileNames = FindRunFile[from, fileNames[[1]]]]
-  ];
+        Return[None]],
+      fileNames = FindRunFile[from, fileNames[[1]]]]];
 
-  fileName = First[fileNames];
+  fileName = First[fileNames]];
+
+DefineMemoFunction[ParseParameterFile[from_String],
+ Module[{lines, parseLine, strip, fileName},
+
+  fileName = findParameterFile[from];
+
+  If[fileName === None,
+     Error["Cannot find parameter file in " <> ToString[from]]];
+
   lines = ReadList[fileName, String];
   lines = unbreakBrokenStrings[lines];
 
