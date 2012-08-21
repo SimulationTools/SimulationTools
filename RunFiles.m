@@ -27,6 +27,7 @@ BeginPackage["RunFiles`",
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
 ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
+ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time elapsed during the execution of a simulation.";
 
 (* TODO: Do we really need these? We should be using FindRunFiles instead?
   If there are no cases where they are necessary, remove them *)
@@ -47,6 +48,7 @@ RunDutyCycle;
 SegmentCoordinateTimeInterval;
 SegmentStartTimes;
 HaveRunDir;
+ReadWalltimeHours;
 
 (* TODO: Deprecate/remove these *)
 FindRunFile(*::usage = "FindRunFile[run, filename] returns a list containing the full names of files named filename in the different segments of run."*);
@@ -61,6 +63,7 @@ LeafNamesOnly;
 (* Old names *)
 ReadCores = ReadSimulationCoreCount;
 FindRunFiles = FindSimulationFiles;
+ReadWalltime = ReadSimulationRunTime;
 
 Begin["`Private`"];
 
@@ -335,6 +338,18 @@ SegmentStartTimes[run_] :=
 
 FileIsInRun[run_, file_] :=
   FindRunFile[run, file] =!= {};
+
+ReadWalltime[runName_] :=
+  Module[{segmentTime, files},
+    segmentTime[file_] :=
+      ReadColumnFile[file, {9, 14}][[-1,2]];
+    files = FindRunFile[runName, "carpet::timing..asc"];
+    Plus@@(segmentTime /@ files)];
+
+ReadWalltimeHours[runName_] := 
+  If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
+    ReadWalltime[runName]/3600,
+  Error["ReadWalltimeHours: No walltime information in run " <> runName]];
 
 End[];
 
