@@ -1,0 +1,9 @@
+exclude *.git
+exclude Tests
+exclude Source
+exclude Data/TestReference
+exclude piraha-src.jar
+exclude .MathematicaResources
+exclude .gitignore	
+exclude .gitmodules	
+exclude .project

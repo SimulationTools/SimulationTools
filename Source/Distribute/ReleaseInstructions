@@ -1,0 +1,37 @@
+Prepare the files
+=================
+
+rsync -avh --filter="merge filter.rules" ../../ SimulationTools/
+
+date +"%Y.%m.%d-%H.%M" > SimulationTools/BUILD_ID
+git rev-parse HEAD > SimulationTools/GIT_REVISION
+
+Prepare SimulationTools package
+===============================
+pkgbuild --identifier com.simulationtools.pkg --root SimulationTools --install-location ~/Library/Mathematica/Applications/SimulationTools SimulationTools.pkg
+
+Prepare h5mma package
+=====================
+
+(in h5mma) make h5mma.tar.gz
+tar zxvf h5mma.tar.gz -C h5mma
+(repeat for other supported architectures)
+pkgbuild --identifier com.h5mma.pkg --root h5mma --install-location ~/Library/Mathematica/Applications/h5mma h5mma.pkg
+
+Create dmg for Mac OS X
+=======================
+
+hdiutil convert -quiet empty.dmg -format UDSP -o SimulationTools
+hdiutil mount -quiet SimulationTools.sparseimage
+productbuild --package h5mma.pkg --package SimulationTools.pkg --package-path . "/Volumes/SimulationTools/Install SimulationTools.pkg"
+hdiutil eject -quiet /Volumes/SimulationTools
+hdiutil convert -quiet SimulationTools.sparseimage -format UDBZ -o SimulationTools.dmg
+rm SimulationTools.sparseimage
+mv SimulationTools.dmg SimulationTools-1.0.dmg
+
+Create tarball for Linux
+========================
+
+tar -czf SimulationTools-1.0.tar.gz SimulationTools
+
+rm -rf SimulationTools
