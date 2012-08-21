@@ -119,7 +119,22 @@ SetAttributes[DataTable, {ReadProtected}];
 
 DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
  Module[{dims, range},
-  check[d, "MakeBoxes"];
+  If[!validQ[d], 
+  TagBox[
+   RowBox[
+    {"DataTable",
+     "[",
+     RowBox[
+      {
+       "\"<\"",
+       "\[InvisibleSpace]",
+       "\">\""
+      }],
+     "]"
+    }],
+   DataTable,
+   Editable -> False],
+  (* else *)
   dims  = Dimensions[d];
   range = CoordinateRanges[d];
 
@@ -141,7 +156,7 @@ DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
     }],
    DataTable,
    Editable -> False]
-];
+]];
 
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
