@@ -21,10 +21,18 @@ BeginPackage["Providers`",
 
 CallProvidedFunction;
 ProviderPreferences(*::usage = "ProviderPreferences[f] gives a list of providers for feature f which determines the preference for data from these providers.  This can be reset by the user, either globally or within a Block."*);
+HaveData;
 
 Begin["`Private`"];
 
 ProviderPreferences[_] := {};
+
+HaveData[base_String, args__] :=
+  (* TODO: refactor this and CallProvidedFunction *)
+  Module[{providerHaveFns, have},
+    providerHaveFns = Names["*`"<>base<>"`HaveData"];
+    have = Map[ToExpression[#][args] &, providerHaveFns];
+    Or@@have];
 
 CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
   Module[
