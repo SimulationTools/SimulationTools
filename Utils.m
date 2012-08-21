@@ -79,10 +79,12 @@ $NRMMAVersion :=
 
   gitrev = Quiet@ReadList[FileNameJoin[{path, "GIT_REVISION"}],"String"];
   If[SameQ[gitrev, $Failed],
-    gitrev = First@ReadList["!git --git-dir "<>FileNameJoin[{path, ".git"}]<>" rev-parse HEAD", String];
+    gitrev = Quiet@First@ReadList["!git --git-dir "<>FileNameJoin[{path, ".git"}]<>" rev-parse HEAD", String];
   ,
     gitrev = First[gitrev];
   ];
+
+  If[!StringQ[gitrev], gitrev = "<unknown>"];
 
   version <> "." <> release <> buildid <> " (git revision: " <> gitrev <>")"
 ]
