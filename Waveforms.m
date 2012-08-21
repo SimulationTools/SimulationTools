@@ -21,6 +21,7 @@ BeginPackage["Waveforms`",
   "Error`",
   "InitialData`",
   "Memo`",
+  "Plotting`",
   "Providers`",
   "ReadHDF5`",
   "RunFiles`"
@@ -543,6 +544,29 @@ ImportWaveform[file_] :=
        Error["Failed to open file "<>file]];
 
     MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, data], NumberQ[#[[2]]]&]]];
+
+(****************************************************************)
+(* Simulation Overview                                          *)
+(****************************************************************)
+
+Waveforms`SimulationOverview`Plots[runNames1_] :=
+  Module[{runNames, rs, r},
+    runNames = Select[runNames1, HaveData["Waveforms",#] &];
+    If[runNames === {},
+       None,
+       rs = Intersection@@(ReadPsi4Radii/@runNames);
+       (* TODO: This should probably be a plot rather than an error *)
+       If[rs === {}, Error["No common radii in simulations "<>ToString[runNames]]];
+       r = First[rs];
+       {{PresentationListLinePlot[
+         Map[Re[ReadPsi4[#, 2, 2, r]]&, runNames],
+         PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r]<>"\n",
+         PlotLegend -> runNames],
+         PresentationListLinePlot[
+           (Log10@Abs@ReadPsi4[#, 2, 2, r] &) /@ runNames,
+           PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r]<>"\n",
+           PlotLegend -> runNames,
+           FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]}}]];
 
 End[];
 
