@@ -66,8 +66,7 @@ SimFactory`RunFiles`ReadCores[dir_, runName_] :=
                     FileNameJoin[{dir, "SIMFACTORY/properties.ini"}]},
                    FileExistsQ];
     If[Length[files] === 0,
-       ReadCores::nodata = "No data for ReadCores in run `1`";
-       Error[ReadCores::nodata, runName]];
+       Return[None]];
     file = First[files];
     If[FileNameTake[file,-1] === "properties.ini",
        ToExpression@IniVariable[FindRunSegments[runName][[1]]<>"/../SIMFACTORY/properties.ini", "procs"],

@@ -121,7 +121,9 @@ FindRunDir[runName_String] :=
 ];
 
 ReadCores[run_] :=
-  CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}];
+  If[HaveData["RunFiles", FindRunDir[run]],
+    CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
+    None];
 
 (*--------------------------------------------------------------------
   Finding segments in run directories
