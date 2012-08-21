@@ -110,7 +110,11 @@ SimView[runNames_List, r_] :=
   (*      ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}], *)
   (*   PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_]; *)
 
+    (* TODO: Add the RRMHD data as new SimulationOverview providers *)
     providers = {"SystemStatistics", "Binary", "Waveforms", "Statistics"};
+
+    (* This does not give the ordering that we like *)
+    (* providers = Map[First@StringSplit[#,"`"] &, Names["*`SimulationOverview`Plots"]]; *)
 
     plots = Join@@DeleteCases[
       Table[Symbol[p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None|{None}];
