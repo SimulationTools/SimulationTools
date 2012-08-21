@@ -45,6 +45,9 @@ unbreakBrokenStrings[lines2_List] :=
       Reverse[pairs]];
     Return[lines]];
 
+haveParameterFile[from_String] :=
+  findParameterFile[from] =!= None;
+
 findParameterFile[from_String] :=
 Module[{fileNames, fileName},
   If[StringMatchQ[from, __ ~~ ".par"],
@@ -107,7 +110,7 @@ ReadSimulationParameter[from_String, name_, default_:None] :=
   ];
 
 FindSimulationParameters[parFile_String, pattern_] :=
-  FindParameters[ParseParameterFile[parFile], pattern];
+  If[haveParameterFile[parFile], FindParameters[ParseParameterFile[parFile], pattern], {}];
 
 FindSimulationParameters[parFile_List, pattern_] :=
   Module[{parameters},
