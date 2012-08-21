@@ -115,8 +115,7 @@ FindRunDir[runName_String] :=
     d = findRunDir[runName<>"-all"];
     If[d =!= None, Return[d]];
 
-    FindRunDir::nofind = "Cannot find run `1`";
-    ErrorMessage[FindRunDir::nofind,runName];
+    Error["Cannot find run "<>runName]
 ];
 
 ReadCores[run_] :=

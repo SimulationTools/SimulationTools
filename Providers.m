@@ -48,8 +48,8 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
       providers[[posns[[1,1]]]],
 
       numProviders === 0,
-      CallProvidedFunction::nodata = "No data for `1`";
-      ErrorMessage[CallProvidedFunction::nodata, base<>"`"<>fn<>"["<>
+
+      Error["No data for `1`", base<>"`"<>fn<>"["<>
                    StringJoin[Riffle[ToString[#,InputForm]&/@args,","]]<>"]"],
 
       numProviders > 1,
@@ -57,8 +57,8 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
       Module[
         {choices = Select[ProviderPreferences[base], MemberQ[providersWithData,#]&]},
         If[choices === {},
-           CallProvidedFunction::mulsrc = "Multiple data sources for `1` (`2`) and ProviderPreferences[`3`] does not specify which is preferred.  Please set ProviderPreferences[`3`] to a list of providers for `1` indicating the order in which they are preferred.";
-           ErrorMessage[CallProvidedFunction::mulsrc, base, StringJoin[Riffle[providersWithData,", "]], ToString[base,InputForm]],
+           Error["Multiple data sources for `1` (`2`) and ProviderPreferences[`3`] does not specify which is preferred.  Please set ProviderPreferences[`3`] to a list of providers for `1` indicating the order in which they are preferred.",
+                 base, StringJoin[Riffle[providersWithData,", "]], ToString[base,InputForm]],
            (* else *)
            First[choices]]]];
     
