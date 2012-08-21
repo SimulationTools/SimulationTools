@@ -20,7 +20,7 @@ Error(*::usage = "Error[message, arg1, arg2, ...] reports an error to the user."
 
 Begin["`Private`"];
 
-Error[s_String, args__] :=
+Error[s_String, args___] :=
   Module[
     {},
     Print[StringForm[s,args]];
