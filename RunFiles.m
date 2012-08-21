@@ -130,11 +130,13 @@ ReadCores[run_] :=
 FindRunSegments[runName_] :=
   FindRunDirSegments[FindRunDir[runName]];
 
-FindRunDirSegments[runDir_] :=        
-  If[FileType[runDir] === Directory,
-     {runDir},
+FindRunDirSegments[runDir_] :=
+  If[HaveData["RunFiles", runDir],
+     CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}],
      (* else *)
-     CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}]];
+     If[FileType[runDir] === Directory,
+     {runDir},
+        Error[runDir<>" is not a directory or simulation"]]];
 
 (*--------------------------------------------------------------------
   Finding files from runs
