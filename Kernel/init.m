@@ -78,6 +78,7 @@ Module[{packages =
   "SimFactory",
   "SimView",
   "SimViewRRMHD",
+  "Statistics",
   "SystemStatistics",
   "Trackers",
   "Tracks",
