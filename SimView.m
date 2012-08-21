@@ -213,17 +213,17 @@ SimView[runNames_List, r_] :=
     PlotLegend -> runNames,
     FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}],_];
 
-  spinNorms = Catch[
-   PresentationListLinePlot[
-     Flatten@Table[
-       Norm@ReadIsolatedHorizonDimensionlessSpin[run, hn],{run,runNames},{hn,0,1}],
-    PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2\n", ImageSize -> size],_];
+  (* spinNorms = Catch[ *)
+  (*  PresentationListLinePlot[ *)
+  (*    Flatten@Table[ *)
+  (*      Norm@ReadIsolatedHorizonDimensionlessSpin[run, hn],{run,runNames},{hn,0,1}], *)
+  (*   PlotRange -> {0,Automatic}, PlotLabel -> "S_i/m^2\n", ImageSize -> size],_]; *)
 
-  spinPhases = Catch[
-   PresentationListLinePlot[
-     Flatten@Table[
-       ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}],
-    PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_];
+  (* spinPhases = Catch[ *)
+  (*  PresentationListLinePlot[ *)
+  (*    Flatten@Table[ *)
+  (*      ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}], *)
+  (*   PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_]; *)
 
   segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
@@ -247,8 +247,8 @@ SimView[runNames_List, r_] :=
        {speed, memory}, 
        {trajectories, radius},
        {rePsi4, ampPsi4},
-       {costTable,SpanFromLeft},
-       {spinNorms, spinPhases}}~Join~
+       {costTable,SpanFromLeft}(*,
+       {spinNorms, spinPhases}*)}~Join~
        segments, 
        Spacings -> {0, 1}];
   Return[grid]
