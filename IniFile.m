@@ -29,9 +29,12 @@ IniVariable;
 Begin["`Private`"];
 
 DefineMemoFunction[ReadIniFile[file_],
-  Flatten[StringCases[
-    ReadList[file, String],
-    key__ ~~ "=" ~~ value___ :> {StringTrim@key -> StringTrim@value}]]];
+  If[FileType[file] === None, 
+     Error["Ini file "<>file<>" not found"],
+     (* else *)
+     Flatten[StringCases[
+       ReadList[file, String],
+       key__ ~~ "=" ~~ value___ :> {StringTrim@key -> StringTrim@value}]]]];
 
 IniVariable[file_, key_] :=
   Module[{map = ReadIniFile[file]},
