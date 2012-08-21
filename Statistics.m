@@ -112,7 +112,8 @@ cost[run_] :=
   Module[{cores = ReadCores[run]},
   Item[#,Alignment->Right] & /@ 
   {run, cores,  ReadCPUHours[run],
-   ReadWalltimeHours[run]/24, If[cores =!= None, cores*24, None],
+   Module[{h=ReadWalltimeHours[run]}, If[h===None,None,h/24]],
+   If[cores =!= None, cores*24, None],
    FinishTimeString[run]
   } /. None -> "-"];
 
