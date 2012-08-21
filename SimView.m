@@ -25,6 +25,7 @@ BeginPackage["SimView`",
   "NR`",
   "Parameters`",
   "Plotting`",
+  "Providers`",
   "RunFiles`",
   "SimViewRRMHD`",
   "SystemStatistics`",
@@ -121,20 +122,11 @@ SimView[runName_String, opts___] := SimView[{runName}, opts];
 
 SimView[runNames_List] :=
   Module[{r, rads},
-    rads = ReadPsi4Radii[First[runNames]];
-    r = If[rads === {}, 0, First[rads]];
-    SimView[runNames, r]];
-
-memoryPlot[runNames_List, size_] :=
-  Module[{swaps, mems},
-   swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns],_];
-   If[StringQ[swaps], swaps = {{0,0}}];
-   mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns],_];
-   If[StringQ[mems], mems = {{0,0}}];
-
-   Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
-     PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
-     PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n", ImageSize -> size]];
+    If[And@@(HaveData["Waveforms",#] & /@ runNames),         
+      rads = ReadPsi4Radii[First[runNames]],
+      rads = {}];
+      r = If[rads === {}, 0, First[rads]];
+      SimView[runNames, r]];
 
 LastOutputTime[run_] :=
   Module[{segs,segInfos,segInfo,lastDate},
@@ -177,41 +169,9 @@ FinishTimeString[run_] :=
 
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
-    segments, cost, costTable, ampPsi4, grid},
+    segments, cost, costTable, ampPsi4, grid, plots},
   size = {350, 100};
   size = 250;
-  speed = Catch[
-   PresentationListLinePlot[Map[ReadRunSpeed, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Speed\n", ImageSize -> size,
-    PlotLegend -> runNames, LegendPosition -> {Left, Bottom}], _];
-  memory = memoryPlot[runNames, size];
-  trajectories = Catch[
-   PresentationListLinePlot[
-    Flatten[Map[
-      ReadBHTrajectories, runNames], 1], 
-    AspectRatio -> Automatic, PlotLabel -> "Trajectories\n", 
-    ImageSize -> size, PlotRange -> All],_];
-  radius = Catch[
-   PresentationListLinePlot[
-    Map[ReadBHSeparation, runNames], 
-    PlotRange -> {0, All}, PlotLabel -> "Separation\n", ImageSize -> size,
-    PlotLegend -> runNames, LegendPosition -> {Right, Top}],_];
-  frequency = Catch[
-   PresentationListLinePlot[
-    Map[NDerivative[ReadBHPhase[#]]&, runNames],
-    PlotRange -> {0, Automatic}, PlotLabel -> "Frequency\n", 
-    ImageSize -> size],_];
-  rePsi4 = Catch[
-   PresentationListLinePlot[
-    Map[Re[ReadPsi4[#, 2, 2, r]]&, runNames], 
-    PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r]<>"\n", ImageSize -> size,
-    PlotLegend -> runNames],_];
-  ampPsi4 = Catch[
-   PresentationListLinePlot[
-    (Log10@Abs@ReadPsi4[#, 2, 2, r] &) /@ runNames, 
-    PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r]<>"\n", ImageSize -> size,
-    PlotLegend -> runNames,
-    FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}],_];
 
   (* spinNorms = Catch[ *)
   (*  PresentationListLinePlot[ *)
@@ -225,32 +185,32 @@ SimView[runNames_List, r_] :=
   (*      ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}], *)
   (*   PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_]; *)
 
-  segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
-    Join~Map[{#, segmentSummary[#]} &, runNames];
+  (* segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~ *)
+  (*   Join~Map[{#, segmentSummary[#]} &, runNames]; *)
 
-  cost[run_] := 
-    Item[#,Alignment->Right] & /@ {run, Catch[ReadCores[run],_],  Catch[ReadCPUHours[run],_],
-      Catch[ReadWalltimeHours[run]/24,_],  Catch[ReadCores[run]*24,_],
-      DateString[FinishTime[run]]
-      };
+  (* cost[run_] :=  *)
+  (*   Item[#,Alignment->Right] & /@ {run, Catch[ReadCores[run],_],  Catch[ReadCPUHours[run],_], *)
+  (*     Catch[ReadWalltimeHours[run]/24,_],  Catch[ReadCores[run]*24,_], *)
+  (*     DateString[FinishTime[run]] *)
+  (*     }; *)
 
-  costTable = Grid[{{Style["Simulation",Bold],
-                     Style["Cores",Bold], 
-                     Style["CPU hrs.",Bold], 
-                     Style["Days",Bold], 
-                     Style["CPU hrs./day",Bold],
-                     Style["Estimated finish", Bold]}}
-                    ~Join~
-                   Map[cost, runNames], Spacings->{2,0.5}];
+  (* costTable = Grid[{{Style["Simulation",Bold], *)
+  (*                    Style["Cores",Bold],  *)
+  (*                    Style["CPU hrs.",Bold],  *)
+  (*                    Style["Days",Bold],  *)
+  (*                    Style["CPU hrs./day",Bold], *)
+  (*                    Style["Estimated finish", Bold]}} *)
+  (*                   ~Join~ *)
+  (*                  Map[cost, runNames], Spacings->{2,0.5}]; *)
 
-  grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft},
-       {speed, memory}, 
-       {trajectories, radius},
-       {rePsi4, ampPsi4},
-       {costTable,SpanFromLeft}(*,
-       {spinNorms, spinPhases}*)}~Join~
-       segments, 
+  plots = Join[SystemStatistics`SimulationOverview`Plots[runNames],
+               Binary`SimulationOverview`Plots[runNames],
+               Waveforms`SimulationOverview`Plots[runNames]];
+
+  grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft}} ~Join~ plots,
        Spacings -> {0, 1}];
+
+
   Return[grid]
   ];
 
