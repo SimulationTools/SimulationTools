@@ -353,7 +353,7 @@ ReadWalltime[runName_] :=
 ReadWalltimeHours[runName_] := 
   If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
     ReadWalltime[runName]/3600,
-  Error["ReadWalltimeHours: No walltime information in run " <> runName]];
+  None];
 
 End[];
 
