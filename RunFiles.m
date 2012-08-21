@@ -128,15 +128,10 @@ FindRunSegments[runName_] :=
   FindRunDirSegments[FindRunDir[runName]];
 
 FindRunDirSegments[runDir_] :=        
-  Module[
-    {segments},
-    segments = Catch[CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}],
-                     ErrorTag[CallProvidedFunction::nodata],
-                     If[FileType[runDir] === Directory,
-                        (* Assume we have pointed to a standard single-segment run directory *)
-                        Return[{runDir}],
-                        Throw[#1,#2]] &];
-    segments];
+  If[FileType[runDir] === Directory,
+     {runDir},
+     (* else *)
+     CallProvidedFunction["RunFiles","FindRunDirSegments",{runDir}]];
 
 (*--------------------------------------------------------------------
   Finding files from runs
