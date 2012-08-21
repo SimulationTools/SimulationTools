@@ -21,6 +21,7 @@ BeginPackage["SystemStatistics`",
   "Error`",
   "IniFile`",
   "Memo`",
+  "Plotting`",
   "RunFiles`"
  }];
 
@@ -50,6 +51,22 @@ ReadRunSpeed[runName_] :=
      MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
      ReadCarpetSpeed[runName]];
 
+SystemStatistics`SimulationOverview`Plots[runNames1_] :=
+  {Replace[DeleteCases[{simSpeedPlot[runNames1], simMemPlot[runNames1]},None],{}->None]};
+
+simSpeedPlot[runNames1_] :=
+  Module[{runNames},
+    runNames = Select[runNames1, haveRunSpeed];
+    If[runNames === {},
+       None,
+
+       Plotting`PresentationListLinePlot[Map[ReadSimulationSpeed, runNames],
+                                PlotRange -> {0, All}, PlotLabel -> "Speed\n",
+                                Plotting`PlotLegend -> runNames, Plotting`LegendPosition -> {Left, Bottom}]]];
+
+haveRunSpeed[sim_String] :=
+  FindSimulationFiles[sim, "carpet::timing..asc"] =!= {} || FindSimulationFiles[sim, "runstats.asc"] =!= {};
+
 ReadCarpetSpeed[runName_] :=
   MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
 
@@ -72,6 +89,27 @@ ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
      MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {"time", "maxrss_mb"}]],
      MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
+
+simMemPlot[runNames1_] :=
+  Module[
+    {runNames},
+    runNames = Select[runNames1, haveMem];
+    If[runNames === {},
+       None,
+       
+       Module[
+         {swaps, mems},
+         swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns],_];
+         If[StringQ[swaps], swaps = {{0,0}}];
+         mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns],_];
+         If[StringQ[mems], mems = {{0,0}}];
+         
+         Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
+              PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
+              PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n"]]]];
+
+haveMem[sim_String] :=
+  FindSimulationFiles[sim, "systemstatistics::process_memory_mb.maximum.asc"] =!= None;
 
 ReadSwap[runName_] :=
   MakeDataTable[ReadColumnFile[
