@@ -96,7 +96,7 @@ SimView[runNames_List] :=
 
 SimView[runNames_List, r_] :=
  Module[{speed, trajectories, size, memory, radius, frequency, rePsi4,
-    segments, cost, costTable, ampPsi4, grid, plots},
+    segments, cost, costTable, ampPsi4, grid, plots, providers},
   size = {350, 100};
   size = 250;
 
@@ -112,10 +112,10 @@ SimView[runNames_List, r_] :=
   (*      ReadIsolatedHorizonSpinPhase[run, hn]/Degree,{run,runNames},{hn,0,1}], *)
   (*   PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_]; *)
 
-  plots = Join[SystemStatistics`SimulationOverview`Plots[runNames],
-               Binary`SimulationOverview`Plots[runNames],
-               Waveforms`SimulationOverview`Plots[runNames],
-               Statistics`SimulationOverview`Plots[runNames]];
+  providers = {"SystemStatistics", "Binary", "Waveforms", "Statistics"};
+
+  plots = Join@@DeleteCases[
+    Table[Symbol[p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None];
 
   grid = Grid[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft}} ~Join~ plots,
        Spacings -> {0, 1}];
