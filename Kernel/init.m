@@ -58,6 +58,7 @@ Module[{packages =
   "InitialData",
   "Kicks",
   "Memo",
+  "MessageCatcher",
   "MinTracker",
   "Movie",
   "MultipoleASCII",
