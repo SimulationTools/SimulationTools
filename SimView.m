@@ -79,6 +79,12 @@ SimulationOverview[sims_List, OptionsPattern[]] :=
   res
 ];
 
+GraphicsPadding[g_Graphics] :=
+ BorderDimensions[
+  Image[Show[g, LabelStyle -> White, Background -> White]]];
+
+GraphicsPadding[gs : {__Graphics}] :=
+ MapThread[Max, Map[GraphicsPadding, gs], 2];
 
 (****************************************************************)
 (* Deprecated                                                   *)
