@@ -66,7 +66,7 @@ SimFactory`RunFiles`ReadCores[dir_, runName_] :=
                     FileNameJoin[{dir, "SIMFACTORY/properties.ini"}]},
                    FileExistsQ];
     If[Length[files] === 0,
-       Return[None]];
+       Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>runName<>"\""]];
     file = First[files];
     If[FileNameTake[file,-1] === "properties.ini",
        ToExpression@IniVariable[FindRunSegments[runName][[1]]<>"/../SIMFACTORY/properties.ini", "procs"],

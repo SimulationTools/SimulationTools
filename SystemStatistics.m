@@ -68,7 +68,7 @@ ReadCarpetSpeed[runName_] :=
   MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
 
 ReadCPUHours[runName_] := 
-  Module[{c = ReadCores[runName]}, If[c===None,None,  ReadWalltimeHours[runName] * c]];
+  ReadCores[runName] * ReadWalltimeHours[runName];
 
 ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},

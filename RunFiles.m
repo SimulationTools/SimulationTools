@@ -65,6 +65,10 @@ ReadCores = ReadSimulationCoreCount;
 FindRunFiles = FindSimulationFiles;
 ReadWalltime = ReadSimulationRunTime;
 
+(* Exceptions *)
+NoSimulationCoreCountAvailable;
+NoSimulationRunTimeAvailable;
+
 Begin["`Private`"];
 
 If[FileNameJoin[{"a","b"}] =!= "a/b",
@@ -123,7 +127,7 @@ FindRunDir[runName_String] :=
 ReadCores[run_] :=
   If[HaveData["RunFiles", FindRunDir[run]],
     CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
-    None];
+    Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""]];
 
 (*--------------------------------------------------------------------
   Finding segments in run directories
@@ -353,7 +357,9 @@ ReadWalltime[runName_] :=
 ReadWalltimeHours[runName_] := 
   If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
     ReadWalltime[runName]/3600,
-  None];
+    (* else *)
+    Error[NoSimulationRunTimeAvailable,
+          "Simulation run time not available in \""<>runName<>"\""]];
 
 End[];
 
