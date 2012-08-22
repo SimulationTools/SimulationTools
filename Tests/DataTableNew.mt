@@ -200,10 +200,9 @@ Test[
 ]
 
 Test[
-    CheckAbort[CoordinateSpacing[dt2], $Failed]
+    WithExceptions[CoordinateSpacing[dt2], CoordinateSpacingNonUniform -> e]
     ,
-    (* f[{{}, {}}, ErrorString["CoordinateSpacing undefined for non-uniform DataTables."]] *)
-    $Failed
+    e
     ,
     TestID->"CoordinateSpacing-nonuniform"
 ]
@@ -842,10 +841,9 @@ Test[
 ]
 
 Test[
-    CheckAbort[Take[dt, {3}], $Failed]
-  (* ErrorString["Operations which would return a DataTable with a single element are not currently supported."] *)
+    WithExceptions[Take[dt, {3}], DataTableSingle -> e]
     ,
-    $Failed
+    e
     ,
     TestID->"Take3"
 ]

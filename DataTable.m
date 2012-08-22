@@ -99,6 +99,11 @@ InvertDataTable;
 FunctionOfPhase;
 LocateMaximumPoint;
 
+(* Exceptions *)
+
+CoordinateSpacingNonUniform;
+DataTableSingle;
+
 Begin["`Private`"];
 
 (****************************************************************)
@@ -186,7 +191,8 @@ CoordinateSpacing[d_DataTable] := First[CoordinateSpacings[d]];
 CoordinateSpacings[d_DataTable] :=
  Module[{ts},
   If[!UniformSpacingQ[d],
-  	Error["CoordinateSpacing undefined for non-uniform DataTables."];
+  	Error[CoordinateSpacingNonUniform,
+              "CoordinateSpacing undefined for non-uniform DataTables."];
   ];
 
   ts = ToListOfCoordinates[d];
@@ -230,7 +236,8 @@ DataTable /: Drop[d:DataTable[l_, x___], args__] :=
   data = Drop[l, args];
 
   If[Length[data] === 1,
-  	Error["Operations which would return a DataTable with a single element are not currently supported."];
+  	Error[DataTableSingle,
+              "Operations which would return a DataTable with a single element are not currently supported."];
   ];
   DataTable[data, x]
 ];
@@ -386,7 +393,8 @@ DataTable /: Part[d:DataTable[l_, x___], args__] :=
    ArrayDepth[data] === 1,
      result = data[[2]];,
    Length[data] === 1,
-     Error["Operations which would return a DataTable with a single element are not currently supported."];,
+     Error[DataTableSingle,
+           "Operations which would return a DataTable with a single element are not currently supported."];,
    True,
      result = DataTable[data, x];
   ];
@@ -493,7 +501,8 @@ DataTable /: Take[d:DataTable[l_, x___], args__] :=
   data = Take[l, args];
 
   If[Length[data] === 1,
-  	Error["Operations which would return a DataTable with a single element are not currently supported."];
+  	Error[DataTableSingle,
+              "Operations which would return a DataTable with a single element are not currently supported."];
   ];
   DataTable[data, x]
 ];
