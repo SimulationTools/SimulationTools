@@ -184,9 +184,10 @@ Test[
 (* CoordinateRange                                              *)
 (****************************************************************)
 Test[
-    Catch[CoordinateRange[dr], ErrorString["CoordinateRange should only be used with 1 dimensional data representations."], f]
+    CheckAbort[CoordinateRange[dr], $Failed]
+    (* ErrorString["CoordinateRange should only be used with 1 dimensional data representations."] *)
     ,
-    f[{{}, {}}, ErrorString["CoordinateRange should only be used with 1 dimensional data representations."]]
+    $Failed
     ,
     TestID->"CoordinateRange n-dimensional"
 ]
@@ -216,10 +217,10 @@ Test[
 (* CoordinateSpacing                                            *)
 (****************************************************************)
 Test[
-    Catch[CoordinateSpacing[dr],
-      ErrorString["CoordinateSpacing can only be used with 1-dimensional DataRegions."], f]
+    CheckAbort[CoordinateSpacing[dr], $Failed]
+      (* ErrorString["CoordinateSpacing can only be used with 1-dimensional DataRegions."] *)
     ,
-    f[{{}, {}}, ErrorString["CoordinateSpacing can only be used with 1-dimensional DataRegions."]]
+    $Failed
     ,
     TestID->"CoordinateSpacing n-dimensional"
 ]
@@ -310,9 +311,10 @@ Test[
 ]
 
 Test[
-    Catch[Drop[dr, None, -2], ErrorString["Negative part specifications are not currently supported by DataRegion."]]
+    CheckAbort[Drop[dr, None, -2], $Failed]
+(* ErrorString["Negative part specifications are not currently supported by DataRegion."]] *)
     ,
-    {{},{}}
+    $Failed
     ,
     TestID->"Drop2"
 ]
