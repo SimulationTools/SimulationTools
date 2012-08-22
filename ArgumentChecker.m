@@ -26,6 +26,8 @@ Begin["`Private`"];
 cleanArg[arg_] :=
   arg /. ((y_Symbol)[xs___] /; MemberQ[Attributes[y], ReadProtected]) -> y; (* Not ideal, but robust *)
 
+forStringForm[s_String] := StringReplace[s,"`"->"`.`"];
+
 SetAttributes[WithArgumentChecking, HoldFirst];
 WithArgumentChecking[expr_] :=
   Module[
@@ -39,8 +41,8 @@ WithArgumentChecking[expr_] :=
         Block[
           {inCheck = True},
           (* Print["Defining ", fn, "[", StringJoin@Riffle[ToString/@{args},","],"]"]; *)
-          fn[x___] := Error["Invalid arguments to "<>ToString[fn]<>"\nCalled as "<>ToString[fn]<>"["<>
-                            StringJoin[Riffle[ToString[InputForm[cleanArg[#]]] & /@ {x}, ", "]] <> 
+          fn[x___] := Error["Invalid arguments to "<>forStringForm@ToString[fn]<>"\nCalled as "<>forStringForm@ToString[fn]<>"["<>
+                            StringJoin[Riffle[forStringForm@ToString[InputForm[cleanArg[#]]] & /@ {x}, ", "]] <> 
                             "]"];
           fn[args] := rhs];
 
