@@ -184,10 +184,9 @@ Test[
 (* CoordinateRange                                              *)
 (****************************************************************)
 Test[
-    CheckAbort[CoordinateRange[dr], $Failed]
-    (* ErrorString["CoordinateRange should only be used with 1 dimensional data representations."] *)
+    WithExceptions[CoordinateRange[dr], CoordinateRangeDimensions -> e]
     ,
-    $Failed
+    e
     ,
     TestID->"CoordinateRange n-dimensional"
 ]
