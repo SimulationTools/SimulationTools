@@ -17,8 +17,15 @@
 BeginPackage["Error`"];
 
 Error(*::usage = "Error[message, arg1, arg2, ...] reports an error to the user."*);
+WithExceptions;
 
 Begin["`Private`"];
+
+$ExceptionsActive = False;
+
+(****************************************************************)
+(* Error                                                        *)
+(****************************************************************)
 
 Error[s_String, args___] :=
   Module[
@@ -26,6 +33,28 @@ Error[s_String, args___] :=
     Print[StringForm[s,args]];
     Assert[False]; (* Allow this to be caught by the debugger *)
     Abort[]];
+
+Error[e_Symbol, s_String, args___] :=
+  If[!$ExceptionsActive,
+     Error[s <> " ("<>ToString[e]<>")",args],
+     Throw[s, e]];
+
+(****************************************************************)
+(* CatchException                                               *)
+(****************************************************************)
+
+SetAttributes[WithExceptions, HoldAll];
+WithExceptions[expr_, exception_ -> result_] :=
+  (* Only support a single exception at a time for the moment *)
+  Module[
+    {expr1},
+    expr1 := expr; (* Ensure that if Return is called in expr, we return to the correct place *)
+    Catch[Block[{$ExceptionsActive = True}, expr1],
+          exception,
+          result &]];
+
+WithExceptions[___] :=
+  Error["Invalid arguments to WithExceptions"];
 
 End[];
 
