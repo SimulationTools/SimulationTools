@@ -71,6 +71,9 @@ GetCoordinate;
 ResampleDataRegion;
 ResampleDataRegions;
 
+(* Exceptions *)
+CoordinateSpacingDimensions;
+NoNegativeParts;
 
 Begin["`Private`"];
 
@@ -119,7 +122,8 @@ DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
 CoordinateSpacing[d_DataRegion] :=
  Module[{},
   If[ArrayDepth[d] =!= 1,
-  	Error["CoordinateSpacing can only be used with 1-dimensional DataRegions."];
+  	Error[CoordinateSpacingDimensions,
+              "CoordinateSpacing can only be used with 1-dimensional DataRegions."];
   ];
 
   First[CoordinateSpacings[d]]
@@ -353,7 +357,8 @@ DataRegion /: Part[d_DataRegion, s__] :=
  Module[{partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result},
   (* TODO: remove this restriction *)
   If[Count[{s}, _?Negative, Infinity] > 0,
-    Error["Negative part specifications are not currently supported by DataRegion."];
+    Error[NoNegativeParts,
+          "Negative part specifications are not currently supported by DataRegion."];
   ];
 
   (* Any dimensions not explicitly mentioned are assumed to be All *)
