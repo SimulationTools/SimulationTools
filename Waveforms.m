@@ -560,11 +560,11 @@ Waveforms`SimulationOverview`Plots[runNames1_] :=
        r = First[rs];
        {{PresentationListLinePlot[
          Map[Re[ReadPsi4[#, 2, 2, r]]&, runNames],
-         PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r]<>"\n",
+         PlotRange -> All, PlotLabel -> "Re[Psi422], R = "<>ToString[r],
          PlotLegend -> runNames],
          PresentationListLinePlot[
            (Log10@Abs@ReadPsi4[#, 2, 2, r] &) /@ runNames,
-           PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r]<>"\n",
+           PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r],
            PlotLegend -> runNames,
            FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]}}]];
 

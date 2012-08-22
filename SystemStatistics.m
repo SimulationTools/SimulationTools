@@ -58,7 +58,7 @@ simSpeedPlot[runNames1_] :=
        None,
 
        Plotting`PresentationListLinePlot[Map[ReadSimulationSpeed, runNames],
-                                PlotRange -> {0, All}, PlotLabel -> "Speed\n",
+                                PlotRange -> {0, All}, PlotLabel -> "Speed",
                                 Plotting`PlotLegend -> runNames, Plotting`LegendPosition -> {Left, Bottom}]]];
 
 haveRunSpeed[sim_String] :=
@@ -91,7 +91,7 @@ simMemPlot[runNames1_] :=
          
          Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
               PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
-              PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory\n"]]]];
+              PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory"]]]];
 
 haveMem[sim_String] :=
   FindSimulationFiles[sim, "systemstatistics::process_memory_mb.maximum.asc"] =!= {};

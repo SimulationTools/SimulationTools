@@ -128,14 +128,14 @@ Binary`SimulationOverview`Plots[runNames1_] :=
 
        {{PresentationListLinePlot[
          Flatten[tracks2D/@runNames,1],
-           AspectRatio -> Automatic, PlotLabel -> "Trajectories\n", PlotRange -> All]},
+           AspectRatio -> Automatic, PlotLabel -> "Trajectories", PlotRange -> All]},
         {PresentationListLinePlot[
           Map[ReadBinarySeparation, runNames],
-          PlotRange -> {0, All}, PlotLabel -> "Separation\n",
+          PlotRange -> {0, All}, PlotLabel -> "Separation",
           PlotLegend -> runNames, LegendPosition -> {Right, Top}],
          PresentationListLinePlot[
            Map[NDerivative[ReadBinaryAzimuth[#]]&, runNames],
-           PlotRange -> {0, Automatic}, PlotLabel -> "Frequency\n"]}}]];
+           PlotRange -> {0, Automatic}, PlotLabel -> "Frequency"]}}]];
 
 End[];
 EndPackage[];
