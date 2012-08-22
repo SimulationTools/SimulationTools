@@ -21,7 +21,7 @@ WithExceptions;
 
 Begin["`Private`"];
 
-$ExceptionsActive = False;
+$ExceptionsActive = {};
 
 (****************************************************************)
 (* Error                                                        *)
@@ -35,7 +35,7 @@ Error[s_String, args___] :=
     Abort[]];
 
 Error[e_Symbol, s_String, args___] :=
-  If[!$ExceptionsActive,
+  If[!MemberQ[$ExceptionsActive, e],
      Error[s <> " ("<>ToString[e]<>")",args],
      Throw[s, e]];
 
@@ -49,7 +49,7 @@ WithExceptions[expr_, exception_ -> result_] :=
   Module[
     {expr1},
     expr1 := expr; (* Ensure that if Return is called in expr, we return to the correct place *)
-    Catch[Block[{$ExceptionsActive = True}, expr1],
+    Catch[Block[{$ExceptionsActive = Append[$ExceptionsActive, exception]}, expr1],
           exception,
           result &]];
 
