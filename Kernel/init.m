@@ -35,6 +35,7 @@ If[$VersionNumber == 8., ListLogPlot[{1}]];
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]<>"/PirahaPeg"];
 
+Needs["ArgumentChecker`"];
 Module[{packages =
  {"Ascii1D",
   "Ascii",
