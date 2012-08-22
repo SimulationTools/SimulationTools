@@ -36,6 +36,9 @@ $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
 $Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]<>"/PirahaPeg"];
 
 Needs["ArgumentChecker`"];
+
+Needs["Error`"];
+
 Module[{packages =
  {"Ascii1D",
   "Ascii",
@@ -50,7 +53,6 @@ Module[{packages =
   "DataRegion",
   "DataRepresentations",
   "DataTable",
-  "Error",
   "FieldLines",
   "GridFunctions",
   "Grids",
@@ -95,7 +97,7 @@ Module[{packages =
   $Packages = Complement[$Packages, packages];
   Protect[$Packages];
 
-  Scan[Needs, packages];
+  ArgumentChecker`WithArgumentChecking[Scan[Needs, packages]];
 
   NRMMADoc[] :=
     Scan[Information[(# ~~ (Except["`"] ..)),
