@@ -127,7 +127,7 @@ SimView[runNames_List, r_] :=
 
     grid = Grid[Join[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft}},
                 plots],
-                Spacings -> {0, 1}, ItemSize->{All,Automatic}];
+                Spacings -> {0, 1}, ItemSize->{{All},Automatic}];
     grid = Replace[grid, g_Graphics :> Show[g,ImageSize->250], {3}];
     padding = GraphicsPadding[Cases[grid,_Graphics,{3}]];
     grid = Replace[grid, g_Graphics :> Show[g,ImagePadding->padding], {3}];
