@@ -98,7 +98,7 @@ findRunDir[runNamep_String] :=
 
   If[StringTake[runNamep,1] === "/", Return[None]];
 
-  dirs = FileNames[runNamep, $SimulationPath, 2];
+  dirs = FileNames[runNamep, SimulationPath[], 2];
   Which[
    Length[dirs]>1,
     Error["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]];,

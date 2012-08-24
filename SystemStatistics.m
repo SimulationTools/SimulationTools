@@ -22,7 +22,8 @@ BeginPackage["SystemStatistics`",
   "IniFile`",
   "Memo`",
   "Plotting`",
-  "RunFiles`"
+  "RunFiles`",
+  "Utils`"
  }];
 
 ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
@@ -113,7 +114,7 @@ CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
  Module[{runs, costElems, header, tMerger, data},
   tMerger = If[tMergerp === None, T, tMergerp];
   runs = Last /@ 
-    FileNameSplit /@ FileNames[prefix <> "_*", $SimulationPath];
+    FileNameSplit /@ FileNames[prefix <> "_*", SimulationPath[]];
   costElems[run_] :=
    Module[{speed, cores, days, cpuHours},
     speed = Catch[Last@DepVar@ReadRunSpeed[run]];

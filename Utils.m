@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Utils`"];
+BeginPackage["Utils`", {"Error`"}];
 
 $NRMMACompatibilityVersion::usage = "$NRMMACompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of NRMMA.";
 
@@ -25,16 +25,9 @@ $NRMMAVersionNumber::usage = "$NRMMAVersionNumber is a real number which gives t
 $NRMMAReleaseNumber::usage = "$NRMMAReleaseNumber is an integer which gives the current NRMMA release number.";
 $NRMMAVersion::usage = "$NRMMAVersionNumber is a string that gives the version of NRMMA you are running.";
 
+SimulationPath::usage = "SimulationPath[] gives the list of directories which NRMMA will search for simulations.  It contains those directories listed in $SimulationPath as well as (for backward compatibility) the value of RunDirectory if it exists.";
 
-(* If $SimulationPath is not set, then just set it to be RunDirectory *)
-If[ValueQ[Global`$SimulationPath],
-  Utils`Private`simulationPath = Global`$SimulationPath;
-,
-  Utils`Private`simulationPath = {};
-];
-Remove[Global`$SimulationPath];
-
-$SimulationPath::usage = "$SimulationPath gives the default list of directories to search in attempting to find a simulation."; 
+Global`$SimulationPath::usage = "$SimulationPath is the default list of directories to search in attempting to find a simulation."; 
 
 (****************************************************************)
 (* Experimental                                                 *)
@@ -50,11 +43,6 @@ $NRMMATestSimulation;
 nrmmaVersion;
 
 Begin["`Private`"];
-
-If[simulationPath =!= {},
-  $SimulationPath = simulationPath;,
-  $SimulationPath := If[StringQ[Global`RunDirectory], {Global`RunDirectory}, {}];
-];
 
 $NRMMAInstallationDirectory = FileNameDrop[FindFile["nrmma`"], -2];
 $NRMMATestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
@@ -101,6 +89,20 @@ $NRMMAInformation :=
 (****************************************************************)
 
 nrmmaVersion[] = $NRMMAInformation;
+
+SimulationPath[] :=
+  Join[If[ValueQ[Global`$SimulationPath],
+          If[MatchQ[Global`$SimulationPath, {_String...}],
+             Global`$SimulationPath,
+             Error["Invalid $SimulationPath; it should be a list of strings, but it is currently "<>
+                   ToString[Global`$SimulationPath,InputForm]]],
+          {}],
+       If[ValueQ[Global`RunDirectory], 
+          If[MatchQ[Global`RunDirectory, _String],
+             {Global`RunDirectory},
+             Error["Invalid RunDirectory; it should be a atring, but it is currently "<>
+                   ToString[Global`RunDirectory,InputForm]]],
+          {}]];
 
 End[];
 EndPackage[];

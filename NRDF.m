@@ -23,7 +23,8 @@ BeginPackage["NRDF`",
   "Piraha`",
   "ReadHDF5`",
   "RunFiles`",
-  "Waveforms`"
+  "Waveforms`",
+  "Utils`"
  }];
 
 ParseMetadataFile;
@@ -233,7 +234,7 @@ HaveInfiniteRadiusWaveforms[run_] :=
 ReadRuns[dirp_:Automatic] :=
   Module[{dir},
     dir = If[dirp === Automatic,
-             If[Length[$SimulationPath]===1, First[$SimulationPath], "."],
+             If[Length[SimulationPath[]]===1, First[SimulationPath[]], "."],
              dirp];
     Map[FileNameDrop[FileNameDrop[#,-1],Length[FileNameSplit[dir]]] &,FileNames["*/*/*/*.bbh", dir]]];
 
