@@ -81,7 +81,7 @@ MapThread[BuildGuide, {sourceGuides, destGuides}];
 
 Print["Building tutorials"];
 tutorialSources = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "English", "Tutorials"}], Infinity];
-Map[BuildTutorial[FileNameJoin[{Directory[], #}]]&, tutorialSources];
+Map[(Print[#]; BuildTutorial[FileNameJoin[{Directory[], #}]])&, tutorialSources];
 
 Print["Indexing Documentation"];
 BuildIndex["nrmma"];
@@ -105,36 +105,84 @@ generateHTMLDocumentation[] := Module[
 
   docDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Documentation"}];
 
-  dest = If[StringQ[$HTMLDestination], $HTMLDestination, "~/Sites/nrmma/examples"];
+  dest = If[StringQ[$HTMLDestination], $HTMLDestination, "~/Sites/nrmma/Documentation"];
 
-  tutorials = 
-  Select[FileNames["*", FileNameJoin[{docDir, "English/Tutorials"}], 
-                   Infinity], ! DirectoryQ[#] &];
+  exportTutorials[] :=
+  Module[
+    {tutorials, tutorialHTMLNames, tutorialTitles, tutorialDest},
 
-  Print["Exporting tutorials"];
+    tutorials = 
+    Select[FileNames["*", FileNameJoin[{docDir, "English/Tutorials"}], 
+                     Infinity], ! DirectoryQ[#] &];
 
-  Scan[exportNotebook[dest,#] &, tutorials];
+    Print["Exporting tutorials"];
+    tutorialDest = dest<>"/English/Tutorials";
+    CreateDirectory[tutorialDest, CreateIntermediateDirectories -> True];
+    Scan[exportNotebook[tutorialDest,#] &, tutorials];
 
-  tutorialHTMLNames = 
-  Map[StringReplace[FileNameTake[#, -1], ".nb" -> ".html"] &, 
-      tutorials];
+    (* tutorialHTMLNames =  *)
+    (* Map[StringReplace[FileNameTake[#, -1], ".nb" -> ".html"] &,  *)
+    (*     tutorials]; *)
 
-  tutorialTitles = {
-    "BlackHoles.html" -> "Black holes",
-    "Binaries.html" -> "Binary systems",
-    "DataRegion.html" -> "DataRegion", 
-    "DataTable.html" -> "DataTable", 
-    "GridFunctions.html" -> "Grid functions",
-    "Kicks.html" -> "Kicks", 
-    "NRMMAIntroduction.html" -> "Introduction", 
-    "NumericalRelativity.html" -> "Numerical Relativity"};
+    (* tutorialTitles = { *)
+    (*   "BlackHoles.html" -> "Black holes", *)
+    (*   "Binaries.html" -> "Binary systems", *)
+    (*   "DataRegion.html" -> "DataRegion",  *)
+    (*   "DataTable.html" -> "DataTable",  *)
+    (*   "GridFunctions.html" -> "Grid functions", *)
+    (*   "Kicks.html" -> "Kicks",  *)
+    (*   "NRMMAIntroduction.html" -> "Introduction",  *)
+    (*   "NumericalRelativity.html" -> "Numerical Relativity"}; *)
 
-  Print["Exporting tutorial index"];
+    (* Print["Exporting tutorial index"]; *)
 
-  Export[dest<>"/list.html", 
-         Map["<li><a href = \"examples/" <> # <> 
-             "\">" <> (# /. tutorialTitles) <> "</a></li>" &, 
-             tutorialHTMLNames], "Text"]];
+    (* Export[dest<>"/list.html",  *)
+    (*        Map["<li><a href = \"examples/" <> # <>  *)
+    (*            "\">" <> (# /. tutorialTitles) <> "</a></li>" &,  *)
+    (*            tutorialHTMLNames], "Text"]; *)
+
+        ];
+
+  exportGuides[] :=
+  Module[
+    {notebooks, htmlNames, titles, guideDest},
+
+    notebooks = 
+    Select[FileNames["*", FileNameJoin[{docDir, "English/Guides"}], 
+                     Infinity], ! DirectoryQ[#] &];
+
+    Print["Exporting guides"];
+    guideDest = dest<>"/English/Guides";
+    CreateDirectory[guideDest, CreateIntermediateDirectories -> True];
+
+    Scan[exportNotebook[guideDest,#] &, notebooks];
+
+    (* htmlNames =  *)
+    (* Map[StringReplace[FileNameTake[#, -1], ".nb" -> ".html"] &,  *)
+    (*     tutorials]; *)
+
+    (* titles = { *)
+    (*   "BlackHoles.html" -> "Black holes", *)
+    (*   "Binaries.html" -> "Binary systems", *)
+    (*   "DataRegion.html" -> "DataRegion",  *)
+    (*   "DataTable.html" -> "DataTable",  *)
+    (*   "GridFunctions.html" -> "Grid functions", *)
+    (*   "Kicks.html" -> "Kicks",  *)
+    (*   "NRMMAIntroduction.html" -> "Introduction",  *)
+    (*   "NumericalRelativity.html" -> "Numerical Relativity"}; *)
+
+    (* Print["Exporting guide index"]; *)
+
+    (* Export[dest<>"/guide-list.html",  *)
+    (*        Map["<li><a href = \"examples/" <> # <>  *)
+    (*            "\">" <> (# /. titles) <> "</a></li>" &,  *)
+    (*            htmlNames], "Text"]; *)
+        ];
+
+    exportTutorials[];
+    exportGuides[];
+
+];
 
 generateHTMLDocumentation[];
 
