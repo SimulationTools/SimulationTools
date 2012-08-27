@@ -30,7 +30,9 @@ Cell[BoxData[GridBox[{
        "ApplyToList":>Documentation`HelpLookup[
        "paclet:nrmma/ref/ApplyToList"], "CoordinateAtInterpolatedMax":>
        Documentation`HelpLookup[
-       "paclet:nrmma/ref/CoordinateAtInterpolatedMax"], "DataTable":>
+       "paclet:nrmma/ref/CoordinateAtInterpolatedMax"], 
+       "CoordinateSpacingNonUniform":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/CoordinateSpacingNonUniform"], "DataTable":>
        Documentation`HelpLookup["paclet:nrmma/ref/DataTable"], 
        "DataTableDepVarInterval":>Documentation`HelpLookup[
        "paclet:nrmma/ref/DataTableDepVarInterval"], "DataTableInterval":>
@@ -39,13 +41,14 @@ Cell[BoxData[GridBox[{
        "paclet:nrmma/ref/DataTableListLinePlot"], "DataTableNormL2":>
        Documentation`HelpLookup["paclet:nrmma/ref/DataTableNormL2"], 
        "DataTableRange":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataTableRange"], "DepVar":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DepVar"], "Downsample":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/Downsample"], "FilterDCT":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/FilterDCT"], "FunctionInverse":>
-       Documentation`HelpLookup["paclet:nrmma/ref/FunctionInverse"], 
-       "FunctionOfPhase":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/FunctionOfPhase"], "IndVar":>
+       "paclet:nrmma/ref/DataTableRange"], "DataTableSingle":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataTableSingle"], "DepVar":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DepVar"], "Downsample":>
+       Documentation`HelpLookup["paclet:nrmma/ref/Downsample"], "FilterDCT":>
+       Documentation`HelpLookup["paclet:nrmma/ref/FilterDCT"], 
+       "FunctionInverse":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/FunctionInverse"], "FunctionOfPhase":>
+       Documentation`HelpLookup["paclet:nrmma/ref/FunctionOfPhase"], "IndVar":>
        Documentation`HelpLookup["paclet:nrmma/ref/IndVar"], 
        "IntegrateDataTable":>Documentation`HelpLookup[
        "paclet:nrmma/ref/IntegrateDataTable"], "IntegrateDataTableZeroEnd":>
@@ -389,6 +392,16 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
+   ButtonBox["CoordinateSpacingNonUniform",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/CoordinateSpacingNonUniform"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
    ButtonBox["DataTable",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/DataTable"],
@@ -442,6 +455,16 @@ Cell[TextData[{
    ButtonBox["DataTableRange",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/DataTableRange"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["DataTableSingle",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/DataTableSingle"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 

@@ -684,7 +684,14 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["ReadSimulationCoreCount",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ReadSimulationCoreCount"]], 
-  "InlineFunctionSans"]
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadSimulationRunTime",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadSimulationRunTime"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -726,14 +733,6 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["ReadSimulationMemoryUsage",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadSimulationRunTime",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationRunTime"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 

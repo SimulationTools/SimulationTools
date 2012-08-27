@@ -21,19 +21,22 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegion"], "DataRegionArrayPlot":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionArrayPlot"], 
-       "DataRegionContourPlot":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionContourPlot"], "DataRegionDensityPlot":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionDensityPlot"], 
-       "DataRegionMatrixPlot":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionMatrixPlot"], "DataRegionPart":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionPart"], 
-       "DataRegionPlot":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionPlot"], "DataRegionPlot3D":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionPlot3D"], 
-       "DynamicDataRegionArrayPlot":>Documentation`HelpLookup[
+        StripOnInput->False], {"CoordinateSpacingDimensions":>
+       Documentation`HelpLookup[
+       "paclet:nrmma/ref/CoordinateSpacingDimensions"], "DataRegion":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataRegion"], 
+       "DataRegionArrayPlot":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataRegionArrayPlot"], "DataRegionContourPlot":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionContourPlot"], 
+       "DataRegionDensityPlot":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataRegionDensityPlot"], "DataRegionMatrixPlot":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionMatrixPlot"], 
+       "DataRegionPart":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataRegionPart"], "DataRegionPlot":>
+       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionPlot"], 
+       "DataRegionPlot3D":>Documentation`HelpLookup[
+       "paclet:nrmma/ref/DataRegionPlot3D"], "DynamicDataRegionArrayPlot":>
+       Documentation`HelpLookup[
        "paclet:nrmma/ref/DynamicDataRegionArrayPlot"], "EvaluateOnDataRegion":>
        Documentation`HelpLookup["paclet:nrmma/ref/EvaluateOnDataRegion"], 
        "GetAttributes":>Documentation`HelpLookup[
@@ -54,7 +57,8 @@ Cell[BoxData[GridBox[{
        "paclet:nrmma/ref/MapDataRegion"], "MapThreadDataRegion":>
        Documentation`HelpLookup["paclet:nrmma/ref/MapThreadDataRegion"], 
        "MergeDataRegions":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MergeDataRegions"], "NormL2":>
+       "paclet:nrmma/ref/MergeDataRegions"], "NoNegativeParts":>
+       Documentation`HelpLookup["paclet:nrmma/ref/NoNegativeParts"], "NormL2":>
        Documentation`HelpLookup["paclet:nrmma/ref/NormL2"], "Outline":>
        Documentation`HelpLookup["paclet:nrmma/ref/Outline"], 
        "ResampleDataRegion":>Documentation`HelpLookup[
@@ -363,6 +367,16 @@ Cell[TextData[ButtonBox["SEE ALSO",
 Cell[TextData[{
  Cell[BoxData[
   StyleBox[
+   ButtonBox["CoordinateSpacingDimensions",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/CoordinateSpacingDimensions"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
    ButtonBox["DataRegion",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/DataRegion"],
@@ -596,6 +610,16 @@ Cell[TextData[{
    ButtonBox["MergeDataRegions",
     BaseStyle->"Link",
     ButtonData->"paclet:nrmma/ref/MergeDataRegions"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["NoNegativeParts",
+    BaseStyle->"Link",
+    ButtonData->"paclet:nrmma/ref/NoNegativeParts"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 

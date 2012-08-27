@@ -83,27 +83,9 @@ Cell["Loading the package", "Subsection"],
 
 Cell["Load the package", "MathCaption"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"<<", "nrmma`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Global`$SimulationPath", "::", "shdw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Symbol \
-\[NoBreak]\\!\\(\\\"$SimulationPath\\\"\\)\[NoBreak] appears in multiple \
-contexts \[NoBreak]\\!\\({\\\"Global`\\\", \\\"Utils`\\\"}\\)\[NoBreak]; \
-definitions in context \[NoBreak]\\!\\(\\\"Global`\\\"\\)\[NoBreak] may \
-shadow or be shadowed by other definitions. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/shdw\\\", ButtonNote -> \
-\\\"Global`$SimulationPath::shdw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[1]:="]
-}, Open  ]]
+ CellLabel->"In[1]:="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -212,26 +194,9 @@ the copy in memory will not be.  To clear the cache, use the function ",
 
 Cell["Clear data cache", "MathCaption"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"ClearAllMemos", "[", "]"}]], "Input",
- CellLabel->"In[3]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Unset", "::", "norep"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Assignment on \[NoBreak]\\!\\(FindRunFilesFromPattern\\)\
-\[NoBreak] for \[NoBreak]\\!\\(FindRunFilesFromPattern[\\(\\(\\\"bbh\\\", \\(\
-\\(RegularExpression[\\\"phi(\\\\\\\\.\\\\\\\\d){0,1}.xy.h5\\\"]\\)\\), \
-\\(\\(FullFilenames \[Rule] True\\)\\)\\)\\)]\\)\[NoBreak] not found. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Unset/norep\\\", \
-ButtonNote -> \\\"Unset::norep\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[3]:="]
-}, Open  ]]
+ CellLabel->"In[3]:="]
 }, Open  ]]
 }, Open  ]],
 

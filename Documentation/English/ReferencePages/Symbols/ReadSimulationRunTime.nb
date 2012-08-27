@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SystemStatistics",
+ ButtonBox["RunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+  ButtonData->"paclet:nrmma/guide/RunFiles"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationRunTime",
   BaseStyle->{"Link", "LinkTrail"},
@@ -49,8 +49,8 @@ TaggingRules->{
     "keywords" -> {
      "ReadSimulationRunTime", "READSIMULATIONRUNTIME", 
       "readsimulationruntime"}, "index" -> True, "label" -> 
-    "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
-    "SystemStatistics", "status" -> "None", "summary" -> 
+    "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> "RunFiles", 
+    "status" -> "None", "summary" -> 
     "ReadSimulationRuntime[sim] gives the real time elapsed during the \
 execution of a simulation.", 
     "synonyms" -> {

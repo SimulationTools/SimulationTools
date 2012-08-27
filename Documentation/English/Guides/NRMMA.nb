@@ -194,21 +194,7 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ReadTimeLevels",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTimeLevels"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadTime",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTime"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadVariables",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadVariables"]], "InlineFunctionSans"]
+  ButtonData->"paclet:nrmma/ref/ReadTimeLevels"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -404,54 +390,7 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell[CellGroupData[{
-
 Cell["Visualization", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["PresentationArrayPlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/PresentationArrayPlot"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "create a 2D array plot with a legend"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["PresentationListLinePlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/PresentationListLinePlot"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "create a presentation-quality 1D plot"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["DynamicListLinePlot",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DynamicListLinePlot"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "version of ListLinePlot which allows zooming by dragging a box with the \
-mouse"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["MakeMovie",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MakeMovie"]], "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "generating image files and movies using an external tool (e.g. ffmpeg)"
-}], "GuideText"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 

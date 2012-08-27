@@ -69,36 +69,21 @@ Cell[CellGroupData[{
 
 Cell["Working with binary systems", "Section"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"<<", "nrmma`"}]], "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Global`$SimulationPath", "::", "shdw"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Symbol \
-\[NoBreak]\\!\\(\\\"$SimulationPath\\\"\\)\[NoBreak] appears in multiple \
-contexts \[NoBreak]\\!\\({\\\"Global`\\\", \\\"Utils`\\\"}\\)\[NoBreak]; \
-definitions in context \[NoBreak]\\!\\(\\\"Global`\\\"\\)\[NoBreak] may \
-shadow or be shadowed by other definitions. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/shdw\\\", ButtonNote -> \
-\\\"Global`$SimulationPath::shdw\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[1]:="]
-}, Open  ]],
-
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"$SimulationPath", "=", "$NRMMATestSimulationDirectory"}]], "Input",
+ RowBox[{"$SimulationPath", "=", 
+  RowBox[{"{", "$NRMMATestSimulationDirectory", "}"}]}]], "Input",
  CellLabel->"In[2]:="],
 
-Cell[BoxData["\<\"/Users/barry/Library/Mathematica/Applications/nrmma/Data/\
-Simulations\"\>"], "Output",
+Cell[BoxData[
+ RowBox[{"{", \
+"\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Data/Simulations\"\>", 
+  "}"}]], "Output",
  CellLabel->"Out[2]="]
 }, Open  ]],
 
@@ -2393,9 +2378,9 @@ Cell[BoxData[
   RowBox[{"t$", ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"xFn$6781", "[", "t$", "]"}], ",", 
-     RowBox[{"yFn$6781", "[", "t$", "]"}], ",", 
-     RowBox[{"zFn$6781", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
+     RowBox[{"xFn$3267", "[", "t$", "]"}], ",", 
+     RowBox[{"yFn$3267", "[", "t$", "]"}], ",", 
+     RowBox[{"zFn$3267", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[14]="]
 }, Open  ]],
 
