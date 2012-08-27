@@ -2,7 +2,7 @@
 
 << ApplicationTools`;
 
-$SimulationPath = $NRMMATestSimulationDirectory;
+$SimulationPath = {$NRMMATestSimulationDirectory};
 
 packages =
 { 
