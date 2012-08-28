@@ -204,6 +204,8 @@ generateHTMLDocumentation[] := Module[
     docSymbols = ToString/@Flatten[Map[Last,packageSymbols],1];
     symbolsSrcDir = FileNameJoin[{srcDir}];
 
+    Print["$Context = ", $Context];
+    Print["Global`* contains ", Names["Global`*"]];
     Scan[(Print[#];
           GenerateHTMLSymbolReferencePage[
             #,
