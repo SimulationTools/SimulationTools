@@ -1,6 +1,6 @@
 Module[{packages},
 
-packages = Table[{"Title" -> ToString[ps[[1]]], "Functions" -> ToString /@ ps[[2]]}, {ps, $PackageSymbols}];
+packages = Table[{"Title" -> ToString[ps[[1]]], "Functions" -> ToString /@ ps[[2]]}, {ps, Select[$PackageSymbols, #[[2]] =!= {} &]}];
 
 {
  "Application" -> "nrmma",
