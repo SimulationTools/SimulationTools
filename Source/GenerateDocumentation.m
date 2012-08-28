@@ -97,15 +97,41 @@ BuildIndex["nrmma"];
 
 Print["Exporting HTML Documentation"];
 
+docLink[s_String] :=
+ StringReplace[s,
+  {"paclet:nrmma/ref/" ~~ ss__ :> 
+    "/Documentation/English/ReferencePages/Symbols/" <> ss <> 
+     ".html",
+   
+   "paclet:nrmma/tutorial/" ~~ ss__ :> 
+    "/Documentation/English/Tutorials/" <> StringReplace[ss," "->""] <> ".html",
+   
+   "paclet:nrmma/guide/" ~~ ss__ :>
+    "/Documentation/English/Guides/" <> StringReplace[ss," "->""] <> ".html"}];
+
 generateHTMLDocumentation[] := Module[
   {exportNotebook, docDir,dest,tutorials,tutorialHTMLNames,tutorialTitles},
 
   exportNotebook[dest_String, nbf_String] :=
-  Module[{nb},
+  Module[{nb, nn, n2},
          Print["  Exporting ", FileNameTake[nbf,-1]];
          nb = NotebookOpen[nbf];
+         nn = NotebookGet[nb]; (* Get expression content from pointer object *)
+
+         (* Fix documentation links since Mathematica repoints them to
+            wolfram.com.  Might also be able to use
+            ConversionRules. *)
+         n2 = nn /. 
+         ButtonBox[content_, BaseStyle -> "Link", 
+                   ButtonData -> 
+                   paclet_?(StringMatchQ[#, 
+                                         StartOfString ~~ "paclet:" ~~ __] &)] :> 
+         Module[{url = docLink[paclet]},
+                ButtonBox[content, BaseStyle -> "Hyperlink",
+                          ButtonData -> {URL[url], None}, ButtonNote -> url]];
+
          Export[dest<>"/" <> 
-                StringReplace[FileNameTake[nbf, -1], ".nb" -> ".html"], nb];
+                StringReplace[FileNameTake[nbf, -1], ".nb" -> ".html"], n2];
          NotebookClose[nb]];
 
   docDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Documentation"}];
