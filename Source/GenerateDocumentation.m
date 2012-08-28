@@ -167,10 +167,14 @@ generateHTMLDocumentation[] := Module[
 
     Print["Exporting tutorial index"];
 
-    Export[dest<>"/list.html",
-           Map["<li><a href = \"examples/" <> # <>
-               "\">" <> (# /. tutorialTitles) <> "</a></li>" &,
-               tutorialHTMLNames], "Text"];
+    Export[FileNameJoin[{dest,"English","Tutorials","Tutorials.html"}], 
+           Table["<li><a href = \"Documentation/English/Tutorials/"<>g<>"\">"<>(g/.tutorialTitles)<>"</a></li>", {g, tutorialHTMLNames}], "Text"];
+
+
+    (* Export[dest<>"/list.html", *)
+    (*        Map["<li><a href = \"examples/" <> # <> *)
+    (*            "\">" <> (# /. tutorialTitles) <> "</a></li>" &, *)
+    (*            tutorialHTMLNames], "Text"]; *)
 
         ];
 
