@@ -176,38 +176,15 @@ generateHTMLDocumentation[] := Module[
 
   exportGuides[] :=
   Module[
-    {notebooks, htmlNames, titles, guideDest},
+    {srcDir, guideNames},
+    srcDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Source"}];
+    guideNames = Map[StringReplace[FileNameTake[#,-1],".md"->""] &, sourceGuides];
 
-    notebooks = 
-    Select[FileNames["*", FileNameJoin[{docDir, "English/Guides"}], 
-                     Infinity], ! DirectoryQ[#] &];
-
-    Print["Exporting guides"];
-    guideDest = dest<>"/English/Guides";
-    Quiet[CreateDirectory[guideDest, CreateIntermediateDirectories -> True],CreateDirectory::filex];
-
-    Scan[exportNotebook[guideDest,#] &, notebooks];
-
-    (* htmlNames =  *)
-    (* Map[StringReplace[FileNameTake[#, -1], ".nb" -> ".html"] &,  *)
-    (*     tutorials]; *)
-
-    (* titles = { *)
-    (*   "BlackHoles.html" -> "Black holes", *)
-    (*   "Binaries.html" -> "Binary systems", *)
-    (*   "DataRegion.html" -> "DataRegion",  *)
-    (*   "DataTable.html" -> "DataTable",  *)
-    (*   "GridFunctions.html" -> "Grid functions", *)
-    (*   "Kicks.html" -> "Kicks",  *)
-    (*   "NRMMAIntroduction.html" -> "Introduction",  *)
-    (*   "NumericalRelativity.html" -> "Numerical Relativity"}; *)
-
-    (* Print["Exporting guide index"]; *)
-
-    (* Export[dest<>"/guide-list.html",  *)
-    (*        Map["<li><a href = \"examples/" <> # <>  *)
-    (*            "\">" <> (# /. titles) <> "</a></li>" &,  *)
-    (*            htmlNames], "Text"]; *)
+    Scan[(Print[#];
+          GenerateHTMLGuidePage[
+            #,
+            FileNameJoin[{srcDir,"Documentation/English/Guides/"<>#<>".md"}],
+            dest]) &, guideNames];
         ];
 
   exportSymbols[] :=
