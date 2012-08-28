@@ -55,14 +55,14 @@
     "MoreFunctionsLink" -> "paclet:nrmma/guide/Numerical Relativity"
    },
 
-   {"Title" -> "Visualization",
-    "DetailedFunctions" -> {
-      {"PresentationArrayPlot", "create a 2D array plot with a legend"},
-      {"PresentationListLinePlot", "create a presentation-quality 1D plot"},
-      {"DynamicListLinePlot", "version of ListLinePlot which allows zooming by dragging a box with the mouse"},
-      (* {"Grids", "read and plot Carpet grid structures"}, *)
-      {"MakeMovie", "generating image files and movies using an external tool (e.g. ffmpeg)"}}
-   },
+   (* {"Title" -> "Visualization", *)
+   (*  "DetailedFunctions" -> { *)
+   (*    {"PresentationArrayPlot", "create a 2D array plot with a legend"}, *)
+   (*    {"PresentationListLinePlot", "create a presentation-quality 1D plot"}, *)
+   (*    {"DynamicListLinePlot", "version of ListLinePlot which allows zooming by dragging a box with the mouse"}, *)
+   (*    (\* {"Grids", "read and plot Carpet grid structures"}, *\) *)
+   (*    {"MakeMovie", "generating image files and movies using an external tool (e.g. ffmpeg)"}} *)
+   (* }, *)
 
    {"Title" -> "Analysis",
     "DetailedFunctions" -> {
