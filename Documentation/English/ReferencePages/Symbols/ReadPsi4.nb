@@ -94,15 +94,18 @@ Cell["ReadPsi4[\"bbh\",2,2,100]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+ RowBox[{"DataTable", "[", 
+  TemplateBox[{"\"<\"","601","\">,\"",RowBox[{"{", 
+      RowBox[{"{", 
+        RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]},
+   "Row",
+   DisplayFunction->(
+    RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+      "\[InvisibleSpace]", #4}]& ),
+   InterpretationFunction->(RowBox[{"Row", "[", 
+      RowBox[{"{", 
+        RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )], 
+  "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -124,8 +127,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"0.5`", ",", 
       RowBox[{
-       RowBox[{"-", 
-        RowBox[{"\[LeftSkeleton]", "23", "\[RightSkeleton]"}]}], "+", 
+       RowBox[{"-", "4.689331344977631`*^-10"}], "+", 
        RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}]}], "}"}], ",", 
     RowBox[{"\[LeftSkeleton]", "598", "\[RightSkeleton]"}], ",", 
     RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}], "}"}],

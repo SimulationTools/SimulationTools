@@ -213,15 +213,15 @@ Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{"{", 
+   RowBox[{
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.1`", ",", "0.6`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -248,15 +248,16 @@ Cell["d2 = Map[Sin,d]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{"{", 
+   RowBox[{
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "0.479425538604203`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.1`", ",", "0.5646424733950354`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.3`", ",", "0.29552020666133955`"}], "}"}]}], "}"}], 
+  "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -283,15 +284,16 @@ Cell["d3 = MapThread[#1 + #2 &,{d,d2}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{"{", 
+   RowBox[{
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "0.979425538604203`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.1`", ",", "1.1646424733950353`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.3`", ",", "0.5955202066613395`"}], "}"}]}], "}"}], 
+  "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 

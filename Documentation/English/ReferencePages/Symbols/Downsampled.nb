@@ -106,15 +106,17 @@ Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3},{0.4,0.2}}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "4", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{"{", 
+   RowBox[{
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0.4`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.1`", ",", "0.6`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.3`", ",", "0.3`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.4`", ",", "0.2`"}], "}"}]}], "}"}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -124,15 +126,13 @@ Cell["d2 = Downsampled[d,2]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "2", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{"{", 
+   RowBox[{
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
