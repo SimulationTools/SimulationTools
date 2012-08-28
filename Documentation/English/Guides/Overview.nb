@@ -39,24 +39,6 @@ This page gives an overview of all the functions and symbols provided by \
 nrmma.\
 \>", "GuideAbstract"],
 
-Cell["Ascii", "GuideFunctionsSubsection"],
-
-Cell["Ascii1D", "GuideFunctionsSubsection"],
-
-Cell["AsyncCommand", "GuideFunctionsSubsection"],
-
-Cell["BHCoordinates", "GuideFunctionsSubsection"],
-
-Cell["CactusTimers", "GuideFunctionsSubsection"],
-
-Cell["CarpetHDF5Plot", "GuideFunctionsSubsection"],
-
-Cell["CarpetHDF5", "GuideFunctionsSubsection"],
-
-Cell["CarpetIOHDF5", "GuideFunctionsSubsection"],
-
-Cell["CircularPN", "GuideFunctionsSubsection"],
-
 Cell[CellGroupData[{
 
 Cell["Convergence", "GuideFunctionsSubsection"],
@@ -457,10 +439,6 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell["Empty", "GuideFunctionsSubsection"],
-
-Cell["Error", "GuideFunctionsSubsection"],
-
 Cell[CellGroupData[{
 
 Cell["GridFunctions", "GuideFunctionsSubsection"],
@@ -533,10 +511,6 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell["Horizons", "GuideFunctionsSubsection"],
-
-Cell["IniFile", "GuideFunctionsSubsection"],
-
 Cell[CellGroupData[{
 
 Cell["InitialData", "GuideFunctionsSubsection"],
@@ -604,18 +578,6 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell["MinTracker", "GuideFunctionsSubsection"],
-
-Cell["Movie", "GuideFunctionsSubsection"],
-
-Cell["MultipoleASCII", "GuideFunctionsSubsection"],
-
-Cell["MultipoleHDF5", "GuideFunctionsSubsection"],
-
-Cell["NR", "GuideFunctionsSubsection"],
-
-Cell["NRDF", "GuideFunctionsSubsection"],
-
 Cell[CellGroupData[{
 
 Cell["NRExport", "GuideFunctionsSubsection"],
@@ -631,10 +593,6 @@ Cell[TextData[{
  " "
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
-
-Cell["nrmma8", "GuideFunctionsSubsection"],
-
-Cell["nrmmaVersion", "GuideFunctionsSubsection"],
 
 Cell[CellGroupData[{
 
@@ -655,18 +613,6 @@ Cell[TextData[{
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
-
-Cell["Plotting", "GuideFunctionsSubsection"],
-
-Cell["Profile", "GuideFunctionsSubsection"],
-
-Cell["Providers", "GuideFunctionsSubsection"],
-
-Cell["PunctureTracker", "GuideFunctionsSubsection"],
-
-Cell["Quasinormal", "GuideFunctionsSubsection"],
-
-Cell["ReadHDF5", "GuideFunctionsSubsection"],
 
 Cell[CellGroupData[{
 
@@ -695,10 +641,6 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell["ShiftTracker", "GuideFunctionsSubsection"],
-
-Cell["SimFactory", "GuideFunctionsSubsection"],
-
 Cell[CellGroupData[{
 
 Cell["SimView", "GuideFunctionsSubsection"],
@@ -713,10 +655,6 @@ Cell[TextData[{
  " "
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
-
-Cell["SimViewRRMHD", "GuideFunctionsSubsection"],
-
-Cell["Stack", "GuideFunctionsSubsection"],
 
 Cell[CellGroupData[{
 
@@ -752,14 +690,6 @@ Cell[TextData[{
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
-
-Cell["Timers", "GuideFunctionsSubsection"],
-
-Cell["Tracks", "GuideFunctionsSubsection"],
-
-Cell["TwoPunctures", "GuideFunctionsSubsection"],
-
-Cell["VTK", "GuideFunctionsSubsection"],
 
 Cell[CellGroupData[{
 
@@ -827,9 +757,7 @@ Cell[TextData[{
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ReadPsi4Radii"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell["YlmDecomp", "GuideFunctionsSubsection"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
