@@ -87,9 +87,10 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Time", "Null", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Time", "Null", Cell[
+    "A time to associate with the DataRegion", "TableText"]},
    {Cell["      ", "TableRowIcon"], "VariableName", "Null", Cell[
-    "", "TableText"]}
+    "A variable name to associate with the DataRegion", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

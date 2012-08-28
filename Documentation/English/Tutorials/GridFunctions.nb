@@ -279,32 +279,6 @@ Cell[TextData[{
  ". If the options Iteration, Map, RefinementLevel or Variable are specified, \
 then only iterations corresponding to those will be included."
 }], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "ReadTime[",
- StyleBox["run",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["var",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["dims",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["it",
-  FontSlant->"Italic"],
- "]"
-}], "Subsection"],
-
-Cell[TextData[{
- "Read the coordinate time associated with this grid function at iteration ",
- StyleBox["it",
-  FontSlant->"Italic"],
- "."
-}], "Text"]
 }, Open  ]]
 }, Open  ]],
 
@@ -379,26 +353,14 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ReadTime", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
-   RowBox[{"Iteration", "->", "4096"}]}], "]"}]], "Input",
- CellLabel->"In[5]:="],
-
-Cell[BoxData["64.`"], "Output",
- CellLabel->"Out[5]="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
  RowBox[{"ReadTimeLevels", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData[
  RowBox[{"{", "0", "}"}]], "Output",
- CellLabel->"Out[6]="]
+ CellLabel->"Out[5]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -409,7 +371,7 @@ Cell[BoxData[
    RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
     RowBox[{"Iteration", "->", "4096"}], ",", 
     RowBox[{"RefinementLevel", "\[Rule]", "3"}]}], "]"}]}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  TagBox[
@@ -427,14 +389,14 @@ Cell[BoxData[
         RowBox[{"-", "10.75`"}], ",", "10.75`"}], "}"}]}], "}"}]}], "]"}],
   DataRegion`DataRegion,
   Editable->False]], "Output",
- CellLabel->"Out[7]="]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"PresentationArrayPlot", "[", "phi", "]"}]], "Input",
- CellLabel->"In[8]:="],
+ CellLabel->"In[7]:="],
 
 Cell[BoxData[
  TemplateBox[{GraphicsBox[
@@ -2547,7 +2509,7 @@ TwPqG2ZfhFhEs0E1cdSqhN4Er1dM/n7RBHf5Iae2IUc2lMysvk4XbYB4KQff
   InterpretationFunction->(RowBox[{"Row", "[", 
      RowBox[{"{", 
        RowBox[{#, ",", #2}], "}"}], "]"}]& )]], "Output",
- CellLabel->"Out[8]="]
+ CellLabel->"Out[7]="]
 }, Open  ]]
 }, Open  ]],
 

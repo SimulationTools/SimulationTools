@@ -390,8 +390,6 @@ Cell[TextData[{
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
-Cell["Visualization", "GuideFunctionsSubsection"],
-
 Cell[CellGroupData[{
 
 Cell["Analysis", "GuideFunctionsSubsection"],
