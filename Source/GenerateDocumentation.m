@@ -148,7 +148,7 @@ generateHTMLDocumentation[] := Module[
 
     Print["Exporting tutorials"];
     tutorialDest = dest<>"/English/Tutorials";
-    CreateDirectory[tutorialDest, CreateIntermediateDirectories -> True];
+    Quiet[CreateDirectory[tutorialDest, CreateIntermediateDirectories -> True],CreateDirectory::filex];
     Scan[exportNotebook[tutorialDest,#] &, tutorials];
 
     (* tutorialHTMLNames =  *)
@@ -184,7 +184,7 @@ generateHTMLDocumentation[] := Module[
 
     Print["Exporting guides"];
     guideDest = dest<>"/English/Guides";
-    CreateDirectory[guideDest, CreateIntermediateDirectories -> True];
+    Quiet[CreateDirectory[guideDest, CreateIntermediateDirectories -> True],CreateDirectory::filex];
 
     Scan[exportNotebook[guideDest,#] &, notebooks];
 
