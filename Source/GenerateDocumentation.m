@@ -9,6 +9,14 @@ Format[DataTable[l_List, attrs__]] :=
 
 $SimulationPath = {$NRMMATestSimulationDirectory};
 
+(* BeginPackage["GenerateDocumentation`", {"ApplicationTools`"}]; *)
+
+GenerateDocumentation[] :=
+  Module[
+    {packages,packageSymbols,undocumentedSymbols,docPackage,
+     sourceGuides,
+     destGuides,tutorialSources,docLink,generateHTMLDocumentation},
+
 packages =
 { 
   "Ascii",
@@ -68,6 +76,8 @@ packages =
 };
 
 packageSymbols = Map[# -> DocumentedSymbols[#] &, packages];
+
+$PackageSymbols = packageSymbols; (* Used in the Overview.md file *)
 
 undocumentedSymbols = Map[# -> UndocumentedSymbols[#] &, packages] /. (_ -> {}) -> Sequence[];
 (* Map[Print["Undocumented symbols for package "<>#[[1]]<>" skipped:\n", #[[2]]]&, undocumentedSymbols]; *)
@@ -219,5 +229,8 @@ generateHTMLDocumentation[] := Module[
     ];
 
 generateHTMLDocumentation[];
+        ];
+
+GenerateDocumentation[];
 
 Print["Done"];
