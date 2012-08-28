@@ -201,6 +201,10 @@ Options[ToDataRegion] := {
   "VariableName" -> Null,
   "Time" -> Null};
 
+DocumentationBuilder`OptionDescriptions["ToDataRegion"] = {
+"VariableName" -> "A variable name to associate with the DataRegion",
+"Time" -> "A time to associate with the DataRegion"}; (* TODO: should this be deprecated? *)
+
 SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, ___, OptionsPattern[]}};
 
