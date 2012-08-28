@@ -101,7 +101,7 @@ docLink[s_String] :=
  StringReplace[s,
   {"paclet:nrmma/ref/" ~~ ss__ :> 
     "/Documentation/English/ReferencePages/Symbols/" <> ss <> 
-     ".html",
+     ".xml",
    
    "paclet:nrmma/tutorial/" ~~ ss__ :> 
     "/Documentation/English/Tutorials/" <> StringReplace[ss," "->""] <> ".html",
