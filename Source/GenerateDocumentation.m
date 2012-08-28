@@ -210,10 +210,25 @@ generateHTMLDocumentation[] := Module[
     (*            htmlNames], "Text"]; *)
         ];
 
+  exportSymbols[] :=
+  Module[
+    {srcDir, docSymbols, symbolSrcDir},
+
+    srcDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Source"}];
+    docSymbols = ToString/@Flatten[Map[Last,packageSymbols],1];
+    symbolsSrcDir = FileNameJoin[{srcDir}];
+
+    Scan[(Print[#];
+          GenerateHTMLSymbolReferencePage[
+            #,
+            FileNameJoin[{symbolsSrcDir,"Documentation/English/ReferencePages/Symbols/"<>#<>".md"}], 
+            dest]) &, docSymbols]];
+
     exportTutorials[];
     exportGuides[];
-
-];
+    exportSymbols[];
+    
+    ];
 
 generateHTMLDocumentation[];
 
