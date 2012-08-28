@@ -184,6 +184,8 @@ generateHTMLDocumentation[] := Module[
     srcDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Source"}];
     guideNames = Map[StringReplace[FileNameTake[#,-1],".md"->""] &, sourceGuides];
 
+    Quiet[CreateDirectory[FileNameJoin[{dest,"English","Guides"}],
+                          CreateIntermediateDirectories -> True],CreateDirectory::filex];
     Export[FileNameJoin[{dest,"English","Guides","Guides.html"}], 
            Table["<li><a href = \"Documentation/English/Guides/"<>g<>".xml\">"<>g<>"</a></li>", {g, guideNames}], "Text"];
 
