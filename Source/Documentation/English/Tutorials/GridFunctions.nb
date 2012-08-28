@@ -234,32 +234,6 @@ Cell[TextData[{
  ". If the options Iteration, Map, RefinementLevel or Variable are specified, \
 then only iterations corresponding to those will be included."
 }], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "ReadTime[",
- StyleBox["run",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["var",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["dims",
-  FontSlant->"Italic"],
- ", ",
- StyleBox["it",
-  FontSlant->"Italic"],
- "]"
-}], "Subsection"],
-
-Cell[TextData[{
- "Read the coordinate time associated with this grid function at iteration ",
- StyleBox["it",
-  FontSlant->"Italic"],
- "."
-}], "Text"]
 }, Open  ]]
 }, Open  ]],
 
@@ -295,11 +269,6 @@ Cell[BoxData[
  RowBox[{"ReadMaps", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"ReadTime", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
-   RowBox[{"Iteration", "->", "4096"}]}], "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadTimeLevels", "[", 

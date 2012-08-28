@@ -30,7 +30,7 @@
     "DetailedFunctions" -> {
       {"ReadGridFunction", "read data for a grid function at a specific iteration"}},
     "Functions" -> {"ReadIterations", "ReadMaps", 
-      "ReadRefinementLevels", "ReadTimeLevels", "ReadTime", 
+      "ReadRefinementLevels", "ReadTimeLevels", 
       "ReadVariables"}
    },
 
