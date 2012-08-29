@@ -110,6 +110,8 @@ Begin["`Private`"];
 (* DataTable *)
 (****************************************************************)
 
+DocumentationBuilder`SymbolDescription["DataTable"] = "representation of 1D data";
+
 check[d_DataTable, where_:None] :=
   If[!validQ[d],
     Error[If[where===None,"",where<>": "]<>"Invalid DataTable"]];

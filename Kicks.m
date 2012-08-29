@@ -166,6 +166,9 @@ harmonicOverlap[{l_, m_, lp_, mp_}, 3] :=
 (* Linear momentum *)
 (************************************************************************************)
 
+DocumentationBuilder`SymbolDescription["ReadKick"] =
+  "compute kick from waveform";
+
 Kick[run_String, dir_Integer, r_, lMax_Integer] :=
    SpeedOfLight/1000*
      Last@DepVar@LinearMomentumRadiated[run,dir,r,lMax];

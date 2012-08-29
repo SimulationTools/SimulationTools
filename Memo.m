@@ -25,6 +25,9 @@ If[!ValueQ[$cache], $cache = {}];
 
 Global`StandardDefinition[DefineMemoFunction] = True;
 
+DocumentationBuilder`SymbolDescription["ClearAllMemos"] =
+  "memoisation of functions; i.e. in-memory caching of values so that they don't have to be recomputed";
+
 SetAttributes[DefineMemoFunction, HoldAll];
 DefineMemoFunction[name_[args___], body_] :=
     pat : name[args] := (AppendTo[$cache, Hold[pat]]; pat = body);

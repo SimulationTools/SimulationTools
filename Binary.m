@@ -94,6 +94,9 @@ Options[binaryFn] = Options[binaryTracker];
 Evaluate[binaryFn][run_, i_, opts:OptionsPattern[]] :=
     Evaluate[trackerFn][run, binaryTracker[run,i,opts]];
 
+DocumentationBuilder`SymbolDescription["ReadBinaryCoordinates"] =
+  "read coordinate locations of members of a binary system";
+
 Evaluate[binaryFn][run_, opts:OptionsPattern[]] :=
     Evaluate[trackerFn][run, Sequence@@Table[binaryTracker[run,i,opts],{i,1,2}]]],
 

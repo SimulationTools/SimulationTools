@@ -17,8 +17,8 @@
    {"Title" -> "Data Representations",
     "Link" -> "paclet:nrmma/guide/Data Representations",
     "DetailedFunctions" -> {
-      {"DataTable", "representation of 1D data"},
-      {"DataRegion", "representation of arbitrary dimensional data on an evenly spaced grid"}
+      {"DataTable"},
+      {"DataRegion"}
     },
     "Functions" -> {"Frequency", "Phase", "ToDataRegion", 
       "ToDataTable", "ToListOfData", "MinCoordinates", 
@@ -28,16 +28,16 @@
 
    {"Title" -> "Reading Grid Variables",
     "DetailedFunctions" -> {
-      {"ReadGridFunction", "read data for a grid function at a specific iteration"}},
+      {"ReadGridFunction"}},
     "Functions" -> {"ReadIterations", "ReadMaps", 
       "ReadRefinementLevels", "ReadTimeLevels"}
    },
 
    {"Title" -> "Simulation Information",
     "DetailedFunctions" -> {
-      {"SimulationOverview" , "provide a quick graphical overview of a simulation"},
-      {"ReadSimulationParameter", "read the value of a specified parameter from a simulation"},
-      {"FindSimulationParameters", "search for available parameters"}},
+      {"SimulationOverview"},
+      {"ReadSimulationParameter"},
+      {"FindSimulationParameters"}},
     "Functions" -> {"ReadSimulationSpeed", "ReadSimulationRunTime", "ReadSimulationCoreCount", 
       "ReadSimulationMemoryUsage", "ReadSimulationSwapUsage", "ReadSimulationCost"}
    },
@@ -45,10 +45,10 @@
    {"Title" -> "Numerical Relativity",
     "Link" -> "paclet:nrmma/guide/Numerical Relativity",
     "DetailedFunctions" -> {
-      {"ReadPsi4" , {"read ", Cell[BoxData[SubscriptBox["\[Psi]", "4"]], "InlineFormula"], "waveform"}},
-      {"ReadBlackHoleSpin", "read spin angular momentum of a black hole"},
-      {"ReadBinaryCoordinates", "read coordinate locations of members of a binary system"},
-      {"ReadKick", "compute kick from waveform"}},
+      {"ReadPsi4"},
+      {"ReadBlackHoleSpin"},
+      {"ReadBinaryCoordinates"},
+      {"ReadKick"}},
     "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadBlackHoleMass", 
       "ReadBinarySeparation", "ReadBinaryPhase", 
       "ReadKickVector", "ReadLinearMomentumFlux"},
@@ -66,14 +66,14 @@
 
    {"Title" -> "Analysis",
     "DetailedFunctions" -> {
-      {"ConvergenceMultiplier", "compute a convergence multiplier given specified resolutions and convergence order"},
-      {"ConvergenceRate", "compute the convergence rate as a function of time"}}
+      {"ConvergenceMultiplier"},
+      {"ConvergenceRate"}}
    },
 
    {"Title" -> "Utilities",
     "DetailedFunctions" -> {
-      {"ClearAllMemos", "memoisation of functions; i.e. in-memory caching of values so that they don't have to be recomputed"},
-      {"FindSimulationFiles", "find instances of a specific file across all segments of a simulation"}}
+      {"ClearAllMemos"},
+      {"FindSimulationFiles"}}
    }
 
    (* {"Title" -> "Data Sources", *)

@@ -55,6 +55,9 @@ ResolutionCode[n_Integer] :=
 
 ResName[s_String, n_] := s <> ResolutionCode[n];
 
+DocumentationBuilder`SymbolDescription["ConvergenceMultiplier"] =
+  "compute a convergence multiplier given specified resolutions and convergence order";
+
 ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
   Module[{eq, eqs, f, f0, f1, h, c},
     eq = f[h] == f0 + f1 h^p;
@@ -124,6 +127,9 @@ RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations3, {CRf1, C
 RichardExtrapolationExpression3 = CRf0 /. Solve[RichardsonExtrapolationEquation3, CRf0][[1]];
 
 Global`StandardDefinition[ConvergenceRate] = True;
+
+DocumentationBuilder`SymbolDescription["ConvergenceRate"] =
+  "compute the convergence rate as a function of time";
 
 ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] := 
  Module[{rateEq, rate}, 

@@ -116,6 +116,9 @@ ReadPsi4Modes[runName_] :=
   Operations on Psi4
   --------------------------------------------------------------------*)
 
+DocumentationBuilder`SymbolDescription["ReadPsi4"] =
+ "read Psi4 waveform";
+
 DefineMemoFunction[
   ReadPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_:Automatic],
   Module[{radii, radString},

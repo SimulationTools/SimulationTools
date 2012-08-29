@@ -36,6 +36,9 @@ ReadBlackHoleMass[run_String, i_Integer /; i > 0] :=
 ReadBlackHoleIrreducibleMass[run_String, i_Integer /; i > 0] :=
   ReadAHMass[run, i];
 
+DocumentationBuilder`SymbolDescription["ReadBlackHoleSpin"] =
+  "read spin angular momentum of a black hole";
+
 ReadBlackHoleSpin[run_String, i_Integer /; i > 0] :=
   Table[ReadIsolatedHorizonSpin[run, i-1, dir], {dir, 1, 3}];
 

@@ -52,6 +52,10 @@ Options[SimulationOverview] = {
   "SimulationType" -> Automatic
 };
 
+DocumentationBuilder`SymbolDescription["SimulationOverview"] =
+  "provide a quick graphical overview of a simulation";
+
+
 SyntaxInformation[SimulationOverview] =
  {"ArgumentsPattern" -> {_, OptionsPattern[]}};
 

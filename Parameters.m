@@ -103,11 +103,17 @@ ReadSimulationParameter[parFile_List, name_, default_:None] :=
   If[Length[l] == 0, Error["Parameter " <> name <> " not found"]];
   First[l]];
 
+DocumentationBuilder`SymbolDescription["ReadSimulationParameter"] =
+  "read the value of a specified parameter from a simulation";
+
 ReadSimulationParameter[from_String, name_, default_:None] :=
   Module[{},
     (* Assume the parameter file is named after the run *)
     LookupParameter[ParseParameterFile[from], name, default]
   ];
+
+DocumentationBuilder`SymbolDescription["FindSimulationParameters"] =
+  "search for available parameters";
 
 FindSimulationParameters[parFile_String, pattern_] :=
   If[haveParameterFile[parFile], FindParameters[ParseParameterFile[parFile], pattern], {}];

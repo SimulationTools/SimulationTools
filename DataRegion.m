@@ -82,6 +82,9 @@ Begin["`Private`"];
 (* the internal format of a DataRegion object.                                *)
 (******************************************************************************)
 
+DocumentationBuilder`SymbolDescription["DataRegion"] =
+  "representation of arbitrary dimensional data on an evenly spaced grid";
+
 SetAttributes[DataRegion, {NHoldFirst, ReadProtected}];
 DataRepresentationQ[DataRegion[attrs_, data_]] = True;
 attributes[DataRegion[attrs_, data_]] := attrs;

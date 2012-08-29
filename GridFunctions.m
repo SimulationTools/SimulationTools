@@ -97,6 +97,10 @@ Options[ReadGridFunction] = {
     "Variable"        -> Automatic (* Only used by old interface *)
   };
 
+DocumentationBuilder`SymbolDescription["ReadGridFunction"] =
+  "read data for a grid function at a specific iteration";
+
+
 ReadGridFunction[run_String, var_String, dims1:DimsPattern, opts:OptionsPattern[]] :=
   Module[
     {options, fileName, dims = parseDims[dims1]},
