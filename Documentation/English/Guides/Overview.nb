@@ -106,24 +106,6 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["DataAnalysis", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["SolarMassInSeconds",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["WaveformOverlap",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/WaveformOverlap"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["DataRegion", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
@@ -513,55 +495,6 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["InitialData", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadADMMass",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadADMMass"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Kicks", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadKick",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadKick"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadKickVector",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadKickVector"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadLinearMomentumFlux",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumFlux"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadLinearMomentumRadiated",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumRadiated"]], 
-  "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["Memo", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
@@ -575,22 +508,6 @@ Cell[TextData[{
  Cell[TextData[ButtonBox["DefineMemoFunction",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/DefineMemoFunction"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["NRExport", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ExportNumericalRelativitySimulation",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ExportNumericalRelativitySimulation"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -693,9 +610,68 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["Waveforms", "GuideFunctionsSubsection"],
+Cell["Numerical Relativity", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
+ Cell[TextData[ButtonBox["SolarMassInSeconds",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["WaveformOverlap",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/WaveformOverlap"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadADMMass",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadADMMass"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadKick",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadKick"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadKickVector",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadKickVector"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadLinearMomentumFlux",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumFlux"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadLinearMomentumRadiated",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumRadiated"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ExportNumericalRelativitySimulation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportNumericalRelativitySimulation"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
  Cell[TextData[ButtonBox["AlignedPhases",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/AlignedPhases"]], "InlineFunctionSans"],

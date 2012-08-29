@@ -295,10 +295,7 @@ Cell[TextData[{
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
- "read ",
- Cell[BoxData[
-  SubscriptBox["\[Psi]", "4"]], "InlineFormula"],
- "waveform"
+ "read Psi4 waveform"
 }], "GuideText"],
 
 Cell[TextData[{
