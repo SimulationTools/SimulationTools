@@ -29,33 +29,15 @@ If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 ReadHDF5[file_String, opts_:"Datasets"] :=
 Module[{result, dsIndices},
-  If[$h5mma,
-    result = ImportHDF5[file, opts];
-  ,
-    (* Deal with the fact that Mathematica requires a dataset index rather than name for Annotations and Dimensions *)
-    If[MatchQ[opts, {"Annotations"|"Dimensions",_}],
-      dsIndices = dsNamesToIndices[file, opts[[2]]];
-      result = Import[file, {opts[[1]], dsIndices}];
-    ,
-      result = Import[file, opts];
-    ];
-    (* Handle the fact that Mathematica returns something different if only a single dataset is requested *)
-    If[MatchQ[opts, {_,{_}}],
-      result = {result};
-    ];
+  If[!$h5mma,
+    Error["The required h5mma package has not been loaded. Make sure it is installed and functioning correctly."];
   ];
 
-  If[result == $Failed, Error["Error importing " <> ToString[opts]<>" from "<>file]];
+  result = ImportHDF5[file, opts];
+  If[result == $Failed,
+    Error["Error importing " <> ToString[opts]<>" from "<>file]];
 
   result
-];
-
-dsNamesToIndices[file_, dsNames_] := Module[{dsList, datasets, indices},
-  dsList = If[!ListQ[dsNames], {dsNames}, dsNames];
-  datasets = ReadHDF5[file];
-
-  indices = Map[Position[Import[file],#,1,1][[1,1]]&, dsList];
-  indices
 ];
 
 End[];
