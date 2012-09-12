@@ -39,6 +39,10 @@ Module[{result, dsIndices},
     ,
       result = Import[file, opts];
     ];
+    (* Handle the fact that Mathematica returns something different if only a single dataset is requested *)
+    If[MatchQ[opts, {_,{_}}],
+      result = {result};
+    ];
   ];
 
   If[result == $Failed, Error["Error importing " <> ToString[opts]<>" from "<>file]];
