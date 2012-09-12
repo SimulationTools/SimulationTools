@@ -8,7 +8,7 @@ git rev-parse HEAD > SimulationTools/GIT_REVISION
 
 Prepare SimulationTools package
 ===============================
-pkgbuild --identifier com.simulationtools.pkg --root SimulationTools --install-location ~/Library/Mathematica/Applications/SimulationTools SimulationTools.pkg
+pkgbuild --identifier com.simulationtools.pkg --root SimulationTools --install-location /Library/Mathematica/Applications/SimulationTools SimulationTools.pkg
 
 Prepare h5mma package
 =====================
