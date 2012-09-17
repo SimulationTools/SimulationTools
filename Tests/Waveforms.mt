@@ -4,6 +4,9 @@ $SimulationPath = {$NRMMATestSimulationDirectory};
 
 TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
 
+testDirectory = FileNameJoin[{$TemporaryDirectory,"nrmma-unit-tests","Waveforms"}];
+DeleteDirectory[testDirectory,DeleteContents->True];
+CreateDirectory[testDirectory];
 
 (******************************* Waveforms *********************************)
 
@@ -119,3 +122,21 @@ Test[
   ,
   TestID->"Psi4ToStrain-2"
     ]
+
+
+(****************************************************************)
+(* ImportWaveform and ExportWaveform *)
+(****************************************************************)
+
+Module[
+  {filename = FileNameJoin[{testDirectory,"ExportWaveform.asc"}],
+   waveform = ToDataTable@Table[{t, Exp[-(t - 300)^2/100^2] Exp[I 0.1 t]}, {t, 0, 600, 10}]},
+  Test[
+
+  ExportWaveform[filename, waveform];
+  ImportWaveform[filename]
+  ,
+  waveform
+  ,
+  TestID->"ImportExportWaveform"
+    ]]
