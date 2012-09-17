@@ -190,3 +190,46 @@ Module[{runDir,runName="testrun12",testFile="MyFile.asc",testFilePaths},
 	,
 		TestID->"FindFirstRunFile"
 	]]
+	
+(* FindSimulationFiles *)	
+	
+Module[{runDir,runName="testrun12",testDirPaths,testFile="MyFile.asc",testFilePaths},
+	runDir = FileNameJoin[{simulationPath,runName}];
+	CreateDirectory[runDir];
+	CreateDirectory[FileNameJoin[{runDir,"SIMFACTORY"}]];
+	testDirPaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
+		CreateDirectory[f,CreateIntermediateDirectories->True];
+		f],{i,0,3}];
+
+	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
+		CreateDirectory[f,CreateIntermediateDirectories->True];
+		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
+
+	Test[
+		FindSimulationFiles[runName,testFile]
+	,
+		testFilePaths
+	,
+		TestID->"FindSimulationFiles_SimFactory2"
+	]]	
+	
+Module[{runDir,runName="testrun13",otherRunName="mysim",testDirPaths,testFile="MyFile.asc",testFilePaths},
+	runDir = FileNameJoin[{simulationPath,runName}];
+	CreateDirectory[runDir];
+	CreateDirectory[FileNameJoin[{runDir,"SIMFACTORY"}]];
+	testDirPaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],otherRunName}]},
+		CreateDirectory[f,CreateIntermediateDirectories->True];
+		f],{i,0,3}];
+
+	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],otherRunName}]},
+		CreateDirectory[f,CreateIntermediateDirectories->True];
+		Export[FileNameJoin[{f,"anything.par"}],"Test","Text"];
+		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
+
+	Test[
+		FindSimulationFiles[runName,testFile]
+	,
+		testFilePaths
+	,
+		TestID->"FindSimulationFiles_SimFactory2_OtherName"
+	]]	
