@@ -38,6 +38,7 @@ ReadPsi4::usage = "ReadPsi4[sim, l, m, r] returns a DataTable of the l,m mode of
 ReadPsi4Modes::usage = "ReadPsi4Modes[sim] returns a list of the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) that are available in sim.";
 ReadPsi4Radii::usage = "ReadPsi4Radii[sim] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in sim.";
 ImportWaveform::usage = "ImportWaveform[filename] imports an ASCII waveform file with columns time, real part and imaginary part and returns it as a DataTable.";
+ExportWaveform::usage = "ExportWaveform[filename, d] exports a complex DataTable as an ASCII file with columns time, real part and imaginary part.";
 
 (* Old function names *)
 
@@ -547,6 +548,9 @@ ImportWaveform[file_] :=
        Error["Failed to open file "<>file]];
 
     MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, data], NumberQ[#[[2]]]&]]];
+
+ExportWaveform[file_String, d_DataTable] :=
+  Export[file, Map[{#[[1]], Re[#[[2]]], Im[#[[2]]]} &, ToList[d]], "Table"];
 
 (****************************************************************)
 (* Simulation Overview                                          *)
