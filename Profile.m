@@ -33,8 +33,10 @@ ClearProfile[] :=
 
 SetAttributes[Profile, HoldAll];
 
-Profile[name_, code_] :=
-  Module[{time, result, name2, result2, subTimers},
+Profile[name_, code_] := code;
+(* Below is the old implementation of Profile which is currently disabled.
+
+   Module[{time, result, name2, result2, subTimers},
     name2 = Evaluate[name];
     {result2,subTimers} = Reap[{time, result} = AbsoluteTiming[ReleaseHold[code]]];
     If[Head[ProfileTime[name2]] === ProfileTime, ProfileTime[name2] = 0.0];
@@ -43,6 +45,7 @@ Profile[name_, code_] :=
     ProfileCount[name2] += 1;
     Sow[Timer[name2,time,If[subTimers === {}, {}, subTimers[[1]]]]];
     result];
+*)
 
 (* The code below is a prototype for handling a tree of timer
    information from Profile.  It needs to be tidied up and a good
