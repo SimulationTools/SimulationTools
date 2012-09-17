@@ -1,6 +1,6 @@
 (* Mathematica Test File *)
 
-$SimulationPath = $NRMMATestSimulationDirectory;
+$SimulationPath = {$NRMMATestSimulationDirectory};
 
 TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
 
