@@ -23,14 +23,82 @@ BeginPackage["DataAnalysis`",
   "Units`"
  }];
 
-WaveformOverlap::usage = "WaveformOverlap[h1, h2, s, f1, f2, M, pad] gives the (maximized over phase and time shift) overlap of the waveform DataTables h1 and h2 over the frequency range [f1,f2] with the noise function s. The mass of the system is given by M in units of the solar mass. The optional argument pad may be given to pad out the waveform so that a more accurate time shift may be obtained.";
-SolarMassInSeconds::usage = "SolarMassInSeconds gives the value of GM/\!\(\*SuperscriptBox[\(c\), \(3\)]\) in seconds.";
+WaveformMatch::usage = "WaveformMatch[{h1, h2}, s] gives the match "<>
+ "of the time-domain waveforms h1 and h2 with the noise function s.";
+SolarMassInSeconds::usage = "SolarMassInSeconds gives the value of GM/c^3 in seconds, "<>
+ "where M is the mass of the sun.";
 
-ComputeOverlap = WaveformOverlap;
+
+(****************************************************************)
+(* Deprecated *)
+(****************************************************************)
+
+ComputeOverlap;
 
 Begin["`Private`"];
 
+(**********************************************************)
+(* SolarMassInSeconds                                     *)
+(**********************************************************)
+
 SolarMassInSeconds = Convert[(SolarMass GravitationalConstant)/SpeedOfLight^3,Second]/Second;
+
+
+(**********************************************************)
+(* WaveformMatch                                          *)
+(**********************************************************)
+
+SyntaxInformation[WaveformMatch] =
+ {"ArgumentsPattern" -> {{_, _}, _, ___}};
+
+Options[WaveformMatch] = {"Pad" -> None};
+
+DocumentationBuilder`MoreInformation["WaveformMatch"] =
+ {
+  "The match is maximized over phase and time shifts.",
+  "The noise function s must be a DataTable defined on the frequency range to be integrated over.",
+  "The match is computed as given by Eq. (4) of Phys. Rev. D 84, 064029 (2011).",
+  "The units of the waveforms and of the noise function must be consistent. For noise "<>
+  "curves given in Hz, this means the independent variable in the waveforms must be in "<>
+  "units of seconds."
+ };
+
+DocumentationBuilder`OptionDescriptions["WaveformMatch"] =
+ {
+  "Pad" ->  "The option Pad may be given to pad out the waveform to the specified size "<>
+            "so that a more accurate time shift can be obtained."
+ };
+
+WaveformMatch[{wf1_DataTable, wf2_DataTable}, s_DataTable, OptionsPattern[]] :=
+  Module[{wf1t, wf2t, sn, norm1, norm2, integrand, msun, pad},
+    (* We take the Fourier transform of the waveforms *)
+    wf1t = Fourier[wf1];
+    wf2t = Fourier[wf2];
+
+	(* Resample the waveforms and noise function onto the same grid *)
+    {wf1t, wf2t, sn} = Resampled[{wf1t, wf2t, s}];
+
+    (* Compute normalization - First here indicates no time shift *)
+    norm1 = 4 First[Abs[InverseFourier[Abs[wf1t]^2/sn, FourierParameters -> {-1,1}]]];
+    norm2 = 4 First[Abs[InverseFourier[Abs[wf2t]^2/sn, FourierParameters -> {-1,1}]]];
+
+    (* Compute the inner product integrand *)
+    integrand = (wf1t Conjugate[wf2t]) / sn;
+
+    (* Use PadRight to enable a more accurate time shift which doesn't need to be an
+       integer multiple of the sampling frequency. *)
+    pad = OptionValue["Pad"];
+    If[!SameQ[pad, None], integrand = PadRight[integrand, pad]];
+
+    (* Compute the match integral maximized over time and phase shift using Max and Abs. *)
+    4 Max[Abs[InverseFourier[integrand, FourierParameters -> {-1,1}]]]/Sqrt[norm1 norm2]
+];
+
+
+
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
 
 ComputeOverlap[wf1_, wf2_, s_, f1_, f2_, M_, pad_:None] := 
   Module[{wf1r, wf2r, h1, h2, sn, norm1, norm2, integrand, msun},
