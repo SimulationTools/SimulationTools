@@ -31,7 +31,8 @@ BeginPackage["Waveforms`",
 
 AlignedPhases::usage = "AlignedPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. The independent variable is assumed to be a phase so that the resulting phases all start out within 2\[Pi] of each other.";
 Psi4ToStrain::usage = "Psi4ToStrain[psi4, omega0] converts a DataTable containing psi4[t] into strain h[t] using the Fixed Frequency Integration method with a cut-off frequency omega0.\nPsi4ToStrain[psi4, {t1, t2}] converts using time domain integration, choosing integration constants such that h[t1] = h[t2] = 0.";
-ReadCycles::usage = "ReadCycles[sim, start] gives the number of gravitational wave cycles for sim. The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the gravitational wave signal.\nReadCycles[psi4, start] operates on the DataTable psi4 instead of sim.";
+NumCycles::usage = "NumCycles[psi4, start] gives the number of gravitational wave cycles in the waveform psi4.";
+ReadCycles::usage = "ReadCycles[sim, start] gives the number of gravitational wave cycles for sim.";
 ReadExtrapolatedPsi4::usage = "ReadExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
 ReadExtrapolatedStrain::usage = "ReadExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius.";
 ReadPsi4::usage = "ReadPsi4[sim, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from sim.";
@@ -96,6 +97,48 @@ Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
+
+(**********************************************************)
+(* NumCycles                                              *)
+(**********************************************************)
+
+DocumentationBuilder`MoreInformation["NumCycles"] =
+  {"The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the waveform amplitude."};
+
+SyntaxInformation[NumCycles] =
+ {"ArgumentsPattern" -> {_, _}};
+
+NumCycles[psi4_DataTable, start_] :=
+ Module[{mergertime, phasei, cycles},
+  mergertime = LocateMaximum[Abs[psi4]];
+  phasei = Interpolation[Phase[psi4]];
+  cycles = (phasei[start] - phasei[mergertime])/(2 \[Pi] );
+  cycles
+];
+
+
+(**********************************************************)
+(* ReadCycles                                             *)
+(**********************************************************)
+
+DocumentationBuilder`MoreInformation["ReadCycles"] =
+ {
+  "The number of cycles is calculated starting at start and terminating at the merger, which is determined from the maimum of the waveform amplitude.",
+  "ReadCycles[sim, start] is equivalent to NumCycles[ReadPsi4[sim, 2,2, First[ReadPsi4Radii[sim]]], start]."
+ };
+
+SyntaxInformation[ReadCycles] =
+ {"ArgumentsPattern" -> {_, _}};
+
+ReadCycles[sim_String, start_] :=
+ Module[{psi4, rads, r},
+  rads = ReadPsi4Radii[sim];
+  r = If[rads === {}, 0, First[rads]];
+  psi4 = ReadPsi4[sim, 2, 2, r];
+  NumCycles[psi4, start]
+];
+
+
 
 (*--------------------------------------------------------------------
   Reading Psi4 from an external provider
@@ -489,21 +532,6 @@ Psi4ToStrain[psi4_DataTable, fitStart_, fitEnd_] :=
       {t, tStart, tEnd, tStep}];
     Return[MakeDataTable[hTb]];
 ];
-
-ReadCycles[sim_String, start_] := Module[{psi4, rads, r},
-  rads = ReadPsi4Radii[sim];
-  r = If[rads === {}, 0, First[rads]];
-  psi4 = ReadPsi4[sim, 2, 2, r];
-  NumCycles[psi4, start]
-  ]
-
-ReadCycles[psi4_DataTable, start_] :=
- Module[{mergertime, phasei, cycles},
-  mergertime = LocateMaximum[Abs[psi4]];
-  phasei = Interpolation[Phase[psi4]];
-  cycles = (phasei[start] - phasei[mergertime])/(2 \[Pi] );
-  cycles
-  ]
 
 AlignMaxima[ds_List] :=
   Module[{maxima},

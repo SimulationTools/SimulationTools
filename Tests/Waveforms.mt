@@ -8,6 +8,31 @@ testDirectory = FileNameJoin[{$TemporaryDirectory,"nrmma-unit-tests","Waveforms"
 DeleteDirectory[testDirectory,DeleteContents->True];
 CreateDirectory[testDirectory];
 
+(****************************************************************)
+(* ReadCycles                                                   *)
+(****************************************************************)
+
+Test[
+    ReadCycles[$NRMMATestSimulation, 150]
+    ,
+    2.7650708168336315
+    ,
+    TestID->"ReadCycles"
+]
+
+(****************************************************************)
+(* NumCycles                                                    *)
+(****************************************************************)
+
+Test[
+    NumCycles[ReadPsi4[$NRMMATestSimulation,2,2,100], 150]
+    ,
+    2.7650708168336315
+    ,
+    TestID->"NumCycles"
+]
+
+
 (******************************* Waveforms *********************************)
 
 Module[
