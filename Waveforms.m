@@ -136,7 +136,7 @@ ReadWaveformCycles[sim_String, start_] :=
   rads = ReadPsi4Radii[sim];
   r = If[rads === {}, 0, First[rads]];
   psi4 = ReadPsi4[sim, 2, 2, r];
-  NumCycles[psi4, start]
+  WaveformCycles[psi4, start]
 ];
 
 
