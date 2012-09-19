@@ -56,8 +56,13 @@ Begin["`Private`"];
 (***************************************************************************************)
 
 (* Gather various information about the datasets in a file *)
-DefineMemoFunction[datasetAttributes[file_],
-  Module[{attributeRules, datasets, dsattrs},
+datasetAttributes[file_] :=
+  Module[{timestamp, attributeRules, datasets, dsattrs},
+    timestamp = FileDate[file];
+    If[cache[file]["timestamp"] === timestamp,
+      Return[cache[file]["data"]];
+    ];
+
     Profile["datasetAttributes[file]",
 
     (* Convert dataset name strings into rules *)
@@ -81,8 +86,11 @@ DefineMemoFunction[datasetAttributes[file_],
     dsattrs = dsattrs /. {"var" -> None, "it" -> None, "tl" -> None,
                           "rl" -> None, "c" -> None, "m" -> None}];
 
+    (* Cache the result *)
+    cache[file]["timestamp"] = timestamp;
+    cache[file]["data"] = dsattrs;
+
     dsattrs]
-  ]
 ];
 
 datasetsWith[datasets_List, attr_Rule] := 
@@ -103,13 +111,10 @@ datasetAttribute[datasets_List, attr_] :=
 datasetAttribute[file_String, attr_] :=
   datasetAttribute[datasetAttributes[file], attr];
 
-DefineMemoFunction[Datasets[file_],
-  ReadHDF5[file, "Datasets"]
-];
-
-Annotations[file_, ds_]:= Profile["Annotations", ReadHDF5[file, {"Annotations", ds}]];
-Dims[file_, ds_]:= ReadHDF5[file, {"Dimensions", ds}];
-HDF5Data[file_, ds_] := Profile["HDF5Data", ReadHDF5[file, {"Datasets", ds}]];
+Datasets[file_]         := ReadHDF5[file, "Datasets"];
+Annotations[file_, ds_] := Profile["Annotations", ReadHDF5[file, {"Annotations", ds}]];
+Dims[file_, ds_]        := ReadHDF5[file, {"Dimensions", ds}];
+HDF5Data[file_, ds_]    := Profile["HDF5Data", ReadHDF5[file, {"Datasets", ds}]];
 
 firstOrNone[l_List] :=
   If[l === {}, None, First[l]];
