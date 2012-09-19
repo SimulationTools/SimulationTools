@@ -29,22 +29,40 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:nrmma/ref/ReadCycles"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the number of gravitational wave cycles for sim. \
-The number of cycles is calculated starting at start and terminating at the \
-merger, which is determined from the maimum of the gravitational wave \
-signal."
-    }]]},
-   {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["ReadCycles",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadCycles"], "[", 
-       StyleBox[
-        RowBox[{"psi4", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]operates on the DataTable psi4 instead of sim."
+     "\[LineSeparator]gives the number of gravitational wave cycles for sim."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["\<\
+The number of cycles is calculated starting at start and terminating at the \
+merger, which is determined from the maimum of the waveform amplitude.\
+\>", "Notes"],
+
+Cell["\<\
+ReadCycles[sim, start] is equivalent to NumCycles[ReadPsi4[sim, 2,2, \
+First[ReadPsi4Radii[sim]]], start].\
+\>", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -69,9 +87,6 @@ TaggingRules->{
      "label" -> "nrmma/Waveforms Symbol", "language" -> "en", "paclet" -> 
     "Waveforms", "status" -> "None", "summary" -> 
     "ReadCycles[sim, start] gives the number of gravitational wave cycles for \
-sim. The number of cycles is calculated starting at start and terminating at \
-the merger, which is determined from the maimum of the gravitational wave \
-signal.\nReadCycles[psi4, start] operates on the DataTable psi4 instead of \
 sim.", "synonyms" -> {"ReadCycles", "READCYCLES", "readcycles"}, "title" -> 
     "ReadCycles", "windowTitle" -> "ReadCycles", "type" -> "Symbol", "uri" -> 
     "nrmma/ref/ReadCycles"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},

@@ -7,32 +7,33 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["DataAnalysis",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->"paclet:nrmma/guide/DataAnalysis"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Slab",
+ ButtonBox["WaveformMatch",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Slab"]
+  ButtonData->"paclet:nrmma/ref/WaveformMatch"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Slab", "ObjectName"],
+Cell["WaveformMatch", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Slab",
+       ButtonBox["WaveformMatch",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Slab"], "[", 
+        ButtonData->"paclet:nrmma/ref/WaveformMatch"], "[", 
        StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"x1min", " ", ";;", " ", "x1max"}], ",", " ", "..."}], "TI"],
-        "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the hyperslab of d over the coordinate ranges \
-[x1min, x1max], ...."
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"h1", ",", " ", "h2"}], "}"}], ",", " ", "s"}], "TI"], 
+       "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the match of the time-domain waveforms h1 and h2 \
+with the noise function s."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -57,10 +58,30 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
+Cell["The match is maximized over phase and time shifts.", "Notes"],
+
+Cell["\<\
+The noise function s must be a DataTable defined on the frequency range to be \
+integrated over.\
+\>", "Notes"],
+
+Cell["\<\
+The match is computed as given by Eq. (4) of Phys. Rev. D 84, 064029 (2011).\
+\>", "Notes"],
+
+Cell["\<\
+The units of the waveforms and of the noise function must be consistent. For \
+noise curves given in Hz, this means the independent variable in the \
+waveforms must be in units of seconds.\
+\>", "Notes"],
+
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Tolerance", "0.", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Pad", "None", Cell["\<\
+The option Pad may be given to pad out the waveform to the specified size so \
+that a more accurate time shift can be obtained.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
@@ -83,20 +104,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Slab",
+WindowTitle->"WaveformMatch",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Slab", "SLAB", "slab"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the \
-coordinate ranges [x1min, x1max], ....", 
-    "synonyms" -> {"Slab", "SLAB", "slab"}, "title" -> "Slab", "windowTitle" -> 
-    "Slab", "type" -> "Symbol", "uri" -> "nrmma/ref/Slab"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"WaveformMatch", "WAVEFORMMATCH", "waveformmatch"}, 
+    "index" -> True, "label" -> "nrmma/DataAnalysis Symbol", "language" -> 
+    "en", "paclet" -> "DataAnalysis", "status" -> "None", "summary" -> 
+    "WaveformMatch[{h1, h2}, s] gives the match of the time-domain waveforms \
+h1 and h2 with the noise function s.", 
+    "synonyms" -> {"WaveformMatch", "WAVEFORMMATCH", "waveformmatch"}, 
+    "title" -> "WaveformMatch", "windowTitle" -> "WaveformMatch", "type" -> 
+    "Symbol", "uri" -> "nrmma/ref/WaveformMatch"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

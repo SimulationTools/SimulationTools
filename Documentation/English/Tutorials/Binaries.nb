@@ -82,8 +82,8 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", \
-"\<\"/Users/ian/Library/Mathematica/Applications/nrmma/Data/Simulations\"\>", 
-  "}"}]], "Output",
+"\<\"/Users/barry/Library/Mathematica/Applications/nrmma/Data/Simulations\"\>\
+", "}"}]], "Output",
  CellLabel->"Out[2]="]
 }, Open  ]],
 
@@ -2378,9 +2378,9 @@ Cell[BoxData[
   RowBox[{"t$", ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"xFn$6613", "[", "t$", "]"}], ",", 
-     RowBox[{"yFn$6613", "[", "t$", "]"}], ",", 
-     RowBox[{"zFn$6613", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
+     RowBox[{"xFn$6582", "[", "t$", "]"}], ",", 
+     RowBox[{"yFn$6582", "[", "t$", "]"}], ",", 
+     RowBox[{"zFn$6582", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[14]="]
 }, Open  ]],
 

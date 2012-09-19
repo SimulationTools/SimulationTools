@@ -46,7 +46,7 @@ Documentation/English/Guides/Data Representations.nb\"\>",
 Documentation/English/Guides/NRMMA.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
 Documentation/English/Guides/Numerical Relativity.nb\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "114", "\[RightSkeleton]"}], 
+    RowBox[{"\[LeftSkeleton]", "104", "\[RightSkeleton]"}], 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
 Documentation/English/Tutorials/Kicks.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/nrmma/\
@@ -66,708 +66,267 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Ascii skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"ReadCarpetASCIIScalar\"\>", "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Ascii skipped:\n", {
-   "ReadCarpetASCIIScalar"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Ascii1D skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"AsciiData1D\"\>", ",", "\<\"AsciiDataOfIndex\"\>", 
-     ",", "\<\"AsciiTimeOfIndex\"\>", ",", "\<\"ReadCarpetASCII1D\"\>", 
-     ",", "\<\"ReadCarpetASCII1DFromRun\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Ascii1D skipped:\n", {
-   "AsciiData1D", "AsciiDataOfIndex", "AsciiTimeOfIndex", "ReadCarpetASCII1D",
-     "ReadCarpetASCII1DFromRun"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package BHCoordinates \
-skipped:\\n\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"BHCoordinateMergerTime\"\>", ",", "\<\"InitialPosition\"\>", 
-     ",", "\<\"InitialSeparation\"\>", ",", "\<\"ReadBHCoordinate\"\>", 
-     ",", "\<\"ReadBHCoordinates\"\>", ",", "\<\"ReadBHInclination\"\>", 
-     ",", "\<\"ReadBHPhase\"\>", ",", "\<\"ReadBHPhaseOfFrequency\"\>", 
-     ",", "\<\"ReadBHRadius\"\>", ",", "\<\"ReadBHSeparation\"\>", 
-     ",", "\<\"ReadBHSpeed\"\>", ",", "\<\"ReadBHTrajectories\"\>", 
-     ",", "\<\"ReadBHTrajectory\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package BHCoordinates skipped:\n", {
-   "BHCoordinateMergerTime", "InitialPosition", "InitialSeparation", 
-    "ReadBHCoordinate", "ReadBHCoordinates", "ReadBHInclination", 
-    "ReadBHPhase", "ReadBHPhaseOfFrequency", "ReadBHRadius", 
-    "ReadBHSeparation", "ReadBHSpeed", "ReadBHTrajectories", 
-    "ReadBHTrajectory"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package CactusTimers skipped:\\n\"\>",
-    "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ChartTimers\"\>", ",", "\<\"EvolutionTimers\"\>", 
-     ",", "\<\"FindTimers\"\>", ",", "\<\"IndependentTimers\"\>", 
-     ",", "\<\"LargestTimers\"\>", ",", "\<\"ListTimers\"\>", 
-     ",", "\<\"NonScheduleTimers\"\>", ",", "\<\"ParseTimersFile\"\>", 
-     ",", "\<\"ParseTimersTogetherFile\"\>", ",", "\<\"ReadTimer\"\>", 
-     ",", "\<\"ScheduleTimerQ\"\>", ",", "\<\"ScheduleTimers\"\>", 
-     ",", "\<\"TimerScaling\"\>", ",", "\<\"TimerScalingX\"\>", 
-     ",", "\<\"TotalTime\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package CactusTimers skipped:\n", {
-   "ChartTimers", "EvolutionTimers", "FindTimers", "IndependentTimers", 
-    "LargestTimers", "ListTimers", "NonScheduleTimers", "ParseTimersFile", 
-    "ParseTimersTogetherFile", "ReadTimer", "ScheduleTimerQ", 
-    "ScheduleTimers", "TimerScaling", "TimerScalingX", "TotalTime"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package CarpetHDF5 skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"CarpetHDF5Attribute\"\>", 
-     ",", "\<\"CarpetHDF5Attributes\"\>", ",", "\<\"CarpetHDF5Components\"\>",
-      ",", "\<\"CarpetHDF5DatasetName\"\>", ",", "\<\"CarpetHDF5FileInfo\"\>",
-      ",", "\<\"CarpetHDF5Iterations\"\>", 
-     ",", "\<\"CarpetHDF5Manipulate\"\>", ",", "\<\"CarpetHDF5Maps\"\>", 
-     ",", "\<\"CarpetHDF5RefinementLevels\"\>", ",", "\<\"CarpetHDF5Time\"\>",
-      ",", "\<\"CarpetHDF5TimeLevels\"\>", ",", "\<\"CarpetHDF5Variables\"\>",
-      ",", "\<\"CarpetManipulatePlotFunction\"\>", 
-     ",", "\<\"ReadCarpetHDF5\"\>", ",", "\<\"ReadCarpetHDF5Components\"\>", 
-     ",", "\<\"ReadCarpetHDF5Variable\"\>", 
-     ",", "\<\"ReadCarpetHDF5VariableFromRun\"\>", 
-     ",", "\<\"ReadVariables\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package CarpetHDF5 skipped:\n", {
-   "CarpetHDF5Attribute", "CarpetHDF5Attributes", "CarpetHDF5Components", 
-    "CarpetHDF5DatasetName", "CarpetHDF5FileInfo", "CarpetHDF5Iterations", 
-    "CarpetHDF5Manipulate", "CarpetHDF5Maps", "CarpetHDF5RefinementLevels", 
-    "CarpetHDF5Time", "CarpetHDF5TimeLevels", "CarpetHDF5Variables", 
-    "CarpetManipulatePlotFunction", "ReadCarpetHDF5", 
-    "ReadCarpetHDF5Components", "ReadCarpetHDF5Variable", 
-    "ReadCarpetHDF5VariableFromRun", "ReadVariables"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Convergence skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"LoadConvergenceSeries\"\>", ",", "\<\"NPoints\"\>", 
-     ",", "\<\"RescaledErrors\"\>", ",", "\<\"ResName\"\>", 
-     ",", "\<\"ResolutionCode\"\>", ",", "\<\"RichardsonError\"\>", 
-     ",", "\<\"RichardsonExtrapolate\"\>", 
-     ",", "\<\"RichardsonExtrapolate3\"\>", 
-     ",", "\<\"RichardsonExtrapolationError\"\>", 
-     ",", "\<\"RichardsonRelativeError\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Convergence skipped:\n", {
-   "LoadConvergenceSeries", "NPoints", "RescaledErrors", "ResName", 
-    "ResolutionCode", "RichardsonError", "RichardsonExtrapolate", 
-    "RichardsonExtrapolate3", "RichardsonExtrapolationError", 
-    "RichardsonRelativeError"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package DataAnalysis skipped:\\n\"\>",
-    "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"ComputeOverlap\"\>", "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package DataAnalysis skipped:\n", {
-   "ComputeOverlap"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package DataRegion skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"DataRegionArrayPlot\"\>", 
-     ",", "\<\"DataRegionContourPlot\"\>", 
-     ",", "\<\"DataRegionDensityPlot\"\>", 
-     ",", "\<\"DataRegionMatrixPlot\"\>", ",", "\<\"DataRegionPart\"\>", 
-     ",", "\<\"DataRegionPlot\"\>", ",", "\<\"DataRegionPlot3D\"\>", 
-     ",", "\<\"DynamicDataRegionArrayPlot\"\>", 
-     ",", "\<\"EvaluateOnDataRegion\"\>", ",", "\<\"GetAttributes\"\>", 
-     ",", "\<\"GetCoordinate\"\>", ",", "\<\"GetData\"\>", 
-     ",", "\<\"GetDataRange\"\>", ",", "\<\"GetDimensions\"\>", 
-     ",", "\<\"GetNumDimensions\"\>", ",", "\<\"GetOrigin\"\>", 
-     ",", "\<\"GetSpacing\"\>", ",", "\<\"GetTime\"\>", 
-     ",", "\<\"GetVariableName\"\>", ",", "\<\"MakeDataRegion\"\>", 
-     ",", "\<\"MapDataRegion\"\>", ",", "\<\"MapThreadDataRegion\"\>", 
-     ",", "\<\"MergeDataRegions\"\>", ",", "\<\"NormL2\"\>", 
-     ",", "\<\"Outline\"\>", ",", "\<\"ResampleDataRegion\"\>", 
-     ",", "\<\"ResampleDataRegions\"\>", ",", "\<\"SliceData\"\>", 
-     ",", "\<\"Strip\"\>", ",", "\<\"TableToDataRegion\"\>", 
-     ",", "\<\"TimeDerivative\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package DataRegion skipped:\n", {
-   "DataRegionArrayPlot", "DataRegionContourPlot", "DataRegionDensityPlot", 
-    "DataRegionMatrixPlot", "DataRegionPart", "DataRegionPlot", 
-    "DataRegionPlot3D", "DynamicDataRegionArrayPlot", "EvaluateOnDataRegion", 
-    "GetAttributes", "GetCoordinate", "GetData", "GetDataRange", 
-    "GetDimensions", "GetNumDimensions", "GetOrigin", "GetSpacing", "GetTime",
-     "GetVariableName", "MakeDataRegion", "MapDataRegion", 
-    "MapThreadDataRegion", "MergeDataRegions", "NormL2", "Outline", 
-    "ResampleDataRegion", "ResampleDataRegions", "SliceData", "Strip", 
-    "TableToDataRegion", "TimeDerivative"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package DataTable skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"AbsOfPhase\"\>", ",", "\<\"AddAttribute\"\>", 
-     ",", "\<\"AddAttributes\"\>", ",", "\<\"ApplyToList\"\>", 
-     ",", "\<\"DataTableDepVarInterval\"\>", ",", "\<\"DataTableInterval\"\>",
-      ",", "\<\"DataTableListLinePlot\"\>", ",", "\<\"DataTableNormL2\"\>", 
-     ",", "\<\"DataTableRange\"\>", ",", "\<\"DepVar\"\>", 
-     ",", "\<\"Downsample\"\>", ",", "\<\"FilterDCT\"\>", 
-     ",", "\<\"FunctionInverse\"\>", ",", "\<\"FunctionOfPhase\"\>", 
-     ",", "\<\"IndVar\"\>", ",", "\<\"IntegrateDataTable\"\>", 
-     ",", "\<\"IntegrateDataTableZeroEnd\"\>", 
-     ",", "\<\"IntegrateDataTableZeroStart\"\>", 
-     ",", "\<\"InterpolateWhereFunction\"\>", 
-     ",", "\<\"IntersectDataTables\"\>", ",", "\<\"InvertDataTable\"\>", 
-     ",", "\<\"ListAttributes\"\>", ",", "\<\"LocateMaximum\"\>", 
-     ",", "\<\"LocateMaximumPoint\"\>", ",", "\<\"MakeDataTable\"\>", 
-     ",", "\<\"MakeInterpolatingDataTable\"\>", ",", "\<\"MakeUniform\"\>", 
-     ",", "\<\"MapData\"\>", ",", "\<\"MapIndVar\"\>", 
-     ",", "\<\"MapThreadData\"\>", ",", "\<\"MaximumValue\"\>", 
-     ",", "\<\"MonotonicQ\"\>", ",", "\<\"PhaseOfFrequency\"\>", 
-     ",", "\<\"ReadAttribute\"\>", ",", "\<\"ResampleDataTable\"\>", 
-     ",", "\<\"ResampleDataTables\"\>", ",", "\<\"ShiftDataTable\"\>", 
-     ",", "\<\"ShiftPhase\"\>", ",", "\<\"Spacing\"\>", 
-     ",", "\<\"UniformGridQ\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package DataTable skipped:\n", {
-   "AbsOfPhase", "AddAttribute", "AddAttributes", "ApplyToList", 
-    "DataTableDepVarInterval", "DataTableInterval", "DataTableListLinePlot", 
-    "DataTableNormL2", "DataTableRange", "DepVar", "Downsample", "FilterDCT", 
-    "FunctionInverse", "FunctionOfPhase", "IndVar", "IntegrateDataTable", 
-    "IntegrateDataTableZeroEnd", "IntegrateDataTableZeroStart", 
-    "InterpolateWhereFunction", "IntersectDataTables", "InvertDataTable", 
-    "ListAttributes", "LocateMaximum", "LocateMaximumPoint", "MakeDataTable", 
-    "MakeInterpolatingDataTable", "MakeUniform", "MapData", "MapIndVar", 
-    "MapThreadData", "MaximumValue", "MonotonicQ", "PhaseOfFrequency", 
-    "ReadAttribute", "ResampleDataTable", "ResampleDataTables", 
-    "ShiftDataTable", "ShiftPhase", "Spacing", "UniformGridQ"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Error skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"CatchError\"\>", ",", "\<\"Error\"\>", 
-     ",", "\<\"ErrorMessage\"\>", ",", "\<\"ErrorStack\"\>", 
-     ",", "\<\"ErrorString\"\>", ",", "\<\"ErrorTag\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Error skipped:\n", {
-   "CatchError", "Error", "ErrorMessage", "ErrorStack", "ErrorString", 
-    "ErrorTag"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package GridFunctions \
-skipped:\\n\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"ReadTime\"\>", "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package GridFunctions skipped:\n", {"ReadTime"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Grids skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"AnimateGrids\"\>", ",", "\<\"BoxRadiiForCentre\"\>", 
-     ",", "\<\"BoxRadiiOnLevel\"\>", ",", "\<\"CountRefinementLevels\"\>", 
-     ",", "\<\"CourantFactorOnLevel\"\>", ",", "\<\"FinestGridSpacing\"\>", 
-     ",", "\<\"GridsBoxes\"\>", ",", "\<\"GridSpacingOnLevel\"\>", 
-     ",", "\<\"GridStructure\"\>", ",", "\<\"LevelExistsEvery\"\>", 
-     ",", "\<\"LoadGrids\"\>", ",", "\<\"PlotCarpetGrids2D\"\>", 
-     ",", "\<\"PlotGrid\"\>", ",", "\<\"PlotGrids\"\>", 
-     ",", "\<\"PlotGridsAndAH2D\"\>", ",", "\<\"RadialPoints\"\>", 
-     ",", "\<\"ReadAngularPoints\"\>", ",", "\<\"ReadCarpetGrids\"\>", 
-     ",", "\<\"ReadCoarseGridSpacing\"\>", ",", "\<\"ReadCoarseTimeStep\"\>", 
-     ",", "\<\"ReadFineTimeStep\"\>", ",", "\<\"ReadGridStructure\"\>", 
-     ",", "\<\"ReadInnerBoundary\"\>", ",", "\<\"ReadOuterBoundary\"\>", 
-     ",", "\<\"RefinementLevels\"\>", ",", "\<\"TimeRefinementFactors\"\>"}], 
-    "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Grids skipped:\n", {
-   "AnimateGrids", "BoxRadiiForCentre", "BoxRadiiOnLevel", 
-    "CountRefinementLevels", "CourantFactorOnLevel", "FinestGridSpacing", 
-    "GridsBoxes", "GridSpacingOnLevel", "GridStructure", "LevelExistsEvery", 
-    "LoadGrids", "PlotCarpetGrids2D", "PlotGrid", "PlotGrids", 
-    "PlotGridsAndAH2D", "RadialPoints", "ReadAngularPoints", 
-    "ReadCarpetGrids", "ReadCoarseGridSpacing", "ReadCoarseTimeStep", 
-    "ReadFineTimeStep", "ReadGridStructure", "ReadInnerBoundary", 
-    "ReadOuterBoundary", "RefinementLevels", "TimeRefinementFactors"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Horizons skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ChristodoulouMass\"\>", ",", "\<\"HaveHorizonData\"\>", 
-     ",", "\<\"InitialSpin\"\>", ",", "\<\"InitialSpinAngle\"\>", 
-     ",", "\<\"ReadAHCentroid\"\>", ",", "\<\"ReadAHCentroidCoord\"\>", 
-     ",", "\<\"ReadAHColumn\"\>", ",", "\<\"ReadAHColumns\"\>", 
-     ",", "\<\"ReadAHMass\"\>", ",", "\<\"ReadAHMaxRadius\"\>", 
-     ",", "\<\"ReadAHMinRadius\"\>", ",", "\<\"ReadAHPhase\"\>", 
-     ",", "\<\"ReadAHQuadrupoleXX\"\>", ",", "\<\"ReadAHQuadrupoleXY\"\>", 
-     ",", "\<\"ReadAHQuadrupoleXZ\"\>", ",", "\<\"ReadAHQuadrupoleYY\"\>", 
-     ",", "\<\"ReadAHQuadrupoleYZ\"\>", ",", "\<\"ReadAHQuadrupoleZZ\"\>", 
-     ",", "\<\"ReadAHRadius\"\>", ",", "\<\"ReadAHSeparation\"\>", 
-     ",", "\<\"ReadIHSpin\"\>", ",", "\<\"ReadIHSpinPhase\"\>", 
-     ",", "\<\"ReadIHSpinX\"\>", ",", "\<\"ReadIHSpinY\"\>", 
-     ",", "\<\"ReadIsolatedHorizonDimensionlessSpin\"\>", 
-     ",", "\<\"ReadIsolatedHorizonSpin\"\>", 
-     ",", "\<\"ReadIsolatedHorizonSpinPhase\"\>", ",", "\<\"SpinAngle\"\>"}], 
-    "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Horizons skipped:\n", {
-   "ChristodoulouMass", "HaveHorizonData", "InitialSpin", "InitialSpinAngle", 
-    "ReadAHCentroid", "ReadAHCentroidCoord", "ReadAHColumn", "ReadAHColumns", 
-    "ReadAHMass", "ReadAHMaxRadius", "ReadAHMinRadius", "ReadAHPhase", 
-    "ReadAHQuadrupoleXX", "ReadAHQuadrupoleXY", "ReadAHQuadrupoleXZ", 
-    "ReadAHQuadrupoleYY", "ReadAHQuadrupoleYZ", "ReadAHQuadrupoleZZ", 
-    "ReadAHRadius", "ReadAHSeparation", "ReadIHSpin", "ReadIHSpinPhase", 
-    "ReadIHSpinX", "ReadIHSpinY", "ReadIsolatedHorizonDimensionlessSpin", 
-    "ReadIsolatedHorizonSpin", "ReadIsolatedHorizonSpinPhase", "SpinAngle"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package IniFile skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"IniVariable\"\>", ",", "\<\"ReadIniFile\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package IniFile skipped:\n", {
-   "IniVariable", "ReadIniFile"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Kicks skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"AngularMomentumFlux\"\>", ",", "\<\"Kick\"\>", 
-     ",", "\<\"KickVector\"\>", ",", "\<\"LinearMomentumFlux\"\>", 
-     ",", "\<\"LinearMomentumRadiated\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Kicks skipped:\n", {
-   "AngularMomentumFlux", "Kick", "KickVector", "LinearMomentumFlux", 
-    "LinearMomentumRadiated"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Movie skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"MakeMovie\"\>", ",", "\<\"PadIndex\"\>", 
-     ",", "\<\"PreviewMovie\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Movie skipped:\n", {
-   "MakeMovie", "PadIndex", "PreviewMovie"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package NR skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"Data\"\>", ",", "\<\"Eccentricity\"\>", 
-     ",", "\<\"FilterNaNs\"\>", ",", "\<\"FitEcc\"\>", 
-     ",", "\<\"FitEccOm\"\>", ",", "\<\"FitFunction\"\>", 
-     ",", "\<\"FitParameters\"\>", ",", "\<\"FittedFunction\"\>", 
-     ",", "\<\"InitialDimensionlessSpin\"\>", ",", "\<\"LRange\"\>", 
-     ",", "\<\"NaNQ\"\>", ",", "\<\"PercentageDifference\"\>", 
-     ",", "\<\"ReadHamiltonianConstraintNorm\"\>", ",", "\<\"ReturnValue\"\>",
-      ",", "\<\"ToFixedWidth\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package NR skipped:\n", {
-   "Data", "Eccentricity", "FilterNaNs", "FitEcc", "FitEccOm", "FitFunction", 
-    "FitParameters", "FittedFunction", "InitialDimensionlessSpin", "LRange", 
-    "NaNQ", "PercentageDifference", "ReadHamiltonianConstraintNorm", 
-    "ReturnValue", "ToFixedWidth"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package NRDF skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ExpectedConvergenceOrder\"\>", 
-     ",", "\<\"HaveInfiniteRadiusWaveforms\"\>", 
-     ",", "\<\"ParseMetadataFile\"\>", ",", "\<\"ReadMetadataKey\"\>", 
-     ",", "\<\"ReadResolution\"\>", ",", "\<\"ReadRuns\"\>", 
-     ",", "\<\"StartingFrequency\"\>", ",", "\<\"UsefulWaveformTime\"\>"}], 
-    "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package NRDF skipped:\n", {
-   "ExpectedConvergenceOrder", "HaveInfiniteRadiusWaveforms", 
-    "ParseMetadataFile", "ReadMetadataKey", "ReadResolution", "ReadRuns", 
-    "StartingFrequency", "UsefulWaveformTime"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package NRExport skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"Coordinates\"\>", ",", "\<\"ExportAllExtractedWaveforms\"\>",
-      ",", "\<\"ExportAllExtrapolatedStrain\"\>", 
-     ",", "\<\"ExportAllExtrapolatedWaveforms\"\>", 
-     ",", "\<\"ExportAllWaveforms\"\>", ",", "\<\"ExportConfig\"\>", 
-     ",", "\<\"ExportExtractedWaveform\"\>", 
-     ",", "\<\"ExportExtrapolatedStrain\"\>", 
-     ",", "\<\"ExportExtrapolatedWaveform\"\>", 
-     ",", "\<\"ExportLocalQuantity\"\>", ",", "\<\"ExportMetadata\"\>", 
-     ",", "\<\"ExportSim\"\>", ",", "\<\"ExportStatus\"\>", 
-     ",", "\<\"HorizonMass\"\>", ",", "\<\"Spin\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package NRExport skipped:\n", {
-   "Coordinates", "ExportAllExtractedWaveforms", 
-    "ExportAllExtrapolatedStrain", "ExportAllExtrapolatedWaveforms", 
-    "ExportAllWaveforms", "ExportConfig", "ExportExtractedWaveform", 
-    "ExportExtrapolatedStrain", "ExportExtrapolatedWaveform", 
-    "ExportLocalQuantity", "ExportMetadata", "ExportSim", "ExportStatus", 
-    "HorizonMass", "Spin"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Parameters skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"FindParameters\"\>", ",", "\<\"LookupParameter\"\>", 
-     ",", "\<\"ParseParameterFile\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Parameters skipped:\n", {
-   "FindParameters", "LookupParameter", "ParseParameterFile"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Plotting skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ColorMap\"\>", ",", "\<\"ColorMapLegend\"\>", 
-     ",", "\<\"ColorRange\"\>", ",", "\<\"DynamicArrayPlot\"\>", 
-     ",", "\<\"DynamicListLinePlot\"\>", ",", "\<\"DynamicShow\"\>", 
-     ",", "\<\"FilterPlot\"\>", ",", "\<\"FitPlot\"\>", 
-     ",", "\<\"LegendBackground\"\>", ",", "\<\"LegendLineSize\"\>", 
-     ",", "\<\"LegendOrientation\"\>", ",", "\<\"LegendPosition\"\>", 
-     ",", "\<\"ListLinePlotWithLegend\"\>", 
-     ",", "\<\"ListLogLinearPlotWithLegend\"\>", 
-     ",", "\<\"MakePlotLegend\"\>", ",", "\<\"PlotFit\"\>", 
-     ",", "\<\"PlotKey\"\>", ",", "\<\"PlotKeySize\"\>", 
-     ",", "\<\"PlotLegend\"\>", ",", "\<\"PresentationArrayPlot\"\>", 
-     ",", "\<\"PresentationListLinePlot\"\>", 
-     ",", "\<\"PresentationPlotColors\"\>", 
-     ",", "\<\"PresentationPlotStyles\"\>", ",", "\<\"QuickSlicePlot\"\>", 
-     ",", "\<\"ScaledColorFunction\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Plotting skipped:\n", {
-   "ColorMap", "ColorMapLegend", "ColorRange", "DynamicArrayPlot", 
-    "DynamicListLinePlot", "DynamicShow", "FilterPlot", "FitPlot", 
-    "LegendBackground", "LegendLineSize", "LegendOrientation", 
-    "LegendPosition", "ListLinePlotWithLegend", "ListLogLinearPlotWithLegend",
-     "MakePlotLegend", "PlotFit", "PlotKey", "PlotKeySize", "PlotLegend", 
-    "PresentationArrayPlot", "PresentationListLinePlot", 
-    "PresentationPlotColors", "PresentationPlotStyles", "QuickSlicePlot", 
-    "ScaledColorFunction"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Profile skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ClearProfile\"\>", ",", "\<\"Profile\"\>", 
-     ",", "\<\"ProfileCount\"\>", ",", "\<\"ProfileTime\"\>", 
-     ",", "\<\"Timer\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Profile skipped:\n", {
-   "ClearProfile", "Profile", "ProfileCount", "ProfileTime", "Timer"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Providers skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"CallProvidedFunction\"\>", 
-     ",", "\<\"ProviderPreferences\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Providers skipped:\n", {
-   "CallProvidedFunction", "ProviderPreferences"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package ReadHDF5 skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"ReadHDF5\"\>", "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package ReadHDF5 skipped:\n", {"ReadHDF5"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package RunFiles skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"CarpetASCIIColumns\"\>", ",", "\<\"FileIsInRun\"\>", 
-     ",", "\<\"FindFirstRunFile\"\>", ",", "\<\"FindRunDir\"\>", 
-     ",", "\<\"FindRunFile\"\>", ",", "\<\"FindRunFiles\"\>", 
-     ",", "\<\"FindRunFilesFromPattern\"\>", ",", "\<\"FindRunSegments\"\>", 
-     ",", "\<\"FullFilenames\"\>", ",", "\<\"HaveRunDir\"\>", 
-     ",", "\<\"LeafNamesOnly\"\>", ",", "\<\"MergeFiles\"\>", 
-     ",", "\<\"ReadColumnFile\"\>", ",", "\<\"ReadColumnFile2\"\>", 
-     ",", "\<\"ReadCores\"\>", ",", "\<\"RunDutyCycle\"\>", 
-     ",", "\<\"SegmentCoordinateTimeInterval\"\>", 
-     ",", "\<\"SegmentDuration\"\>", ",", "\<\"SegmentEndDate\"\>", 
-     ",", "\<\"SegmentStartDate\"\>", ",", "\<\"SegmentStartTimes\"\>", 
-     ",", "\<\"StandardOutputOfRun\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package RunFiles skipped:\n", {
-   "CarpetASCIIColumns", "FileIsInRun", "FindFirstRunFile", "FindRunDir", 
-    "FindRunFile", "FindRunFiles", "FindRunFilesFromPattern", 
-    "FindRunSegments", "FullFilenames", "HaveRunDir", "LeafNamesOnly", 
-    "MergeFiles", "ReadColumnFile", "ReadColumnFile2", "ReadCores", 
-    "RunDutyCycle", "SegmentCoordinateTimeInterval", "SegmentDuration", 
-    "SegmentEndDate", "SegmentStartDate", "SegmentStartTimes", 
-    "StandardOutputOfRun"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package SimView skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"FinishTime\"\>", ",", "\<\"SimView\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package SimView skipped:\n", {
-   "FinishTime", "SimView"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package SimViewRRMHD skipped:\\n\"\>",
-    "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"SimViewRRMHD\"\>", "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package SimViewRRMHD skipped:\n", {
-   "SimViewRRMHD"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Stack skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ClearStack\"\>", ",", "\<\"CurrentStack\"\>", 
-     ",", "\<\"CurrentStackFrame\"\>", ",", "\<\"ShowStack\"\>", 
-     ",", "\<\"WithStackFrame\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Stack skipped:\n", {
-   "ClearStack", "CurrentStack", "CurrentStackFrame", "ShowStack", 
-    "WithStackFrame"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package SystemStatistics \
-skipped:\\n\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"CostAnalysis\"\>", ",", "\<\"CPUHours\"\>", 
-     ",", "\<\"PresentationCostAnalysis\"\>", ",", "\<\"ReadCarpetSpeed\"\>", 
-     ",", "\<\"ReadCPUHours\"\>", ",", "\<\"ReadMemory\"\>", 
-     ",", "\<\"ReadRunSpeed\"\>", ",", "\<\"ReadSwap\"\>", 
-     ",", "\<\"ReadWalltime\"\>", ",", "\<\"ReadWalltimeHours\"\>", 
-     ",", "\<\"WallTimeDays\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package SystemStatistics skipped:\n", {
-   "CostAnalysis", "CPUHours", "PresentationCostAnalysis", "ReadCarpetSpeed", 
-    "ReadCPUHours", "ReadMemory", "ReadRunSpeed", "ReadSwap", "ReadWalltime", 
-    "ReadWalltimeHours", "WallTimeDays"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Timers skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"ChartEvolutionTimersFromRun\"\>", 
-     ",", "\<\"ChartTimersFromRun\"\>", ",", "\<\"CollectTimers\"\>", 
-     ",", "\<\"CTGammaTimerCollections\"\>", ",", "\<\"FindTimersFromRun\"\>",
-      ",", "\<\"IndependentTimersFromRun\"\>", 
-     ",", "\<\"ParseTimersFileFromRun\"\>", 
-     ",", "\<\"ParseTimersFileFromRunCore\"\>", 
-     ",", "\<\"ReadAllTimerIterations\"\>", ",", "\<\"ReadAllTimers\"\>", 
-     ",", "\<\"ReadTimerFromRun\"\>", ",", "\<\"TimersFile\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Timers skipped:\n", {
-   "ChartEvolutionTimersFromRun", "ChartTimersFromRun", "CollectTimers", 
-    "CTGammaTimerCollections", "FindTimersFromRun", 
-    "IndependentTimersFromRun", "ParseTimersFileFromRun", 
-    "ParseTimersFileFromRunCore", "ReadAllTimerIterations", "ReadAllTimers", 
-    "ReadTimerFromRun", "TimersFile"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Tracks skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"AnimateTracks\"\>", ",", "\<\"PlotTracks\"\>", 
-     ",", "\<\"ReadTracks\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Tracks skipped:\n", {
-   "AnimateTracks", "PlotTracks", "ReadTracks"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package TwoPunctures skipped:\\n\"\>",
-    "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"InitialAngularMomentum\"\>", 
-     ",", "\<\"InitialLinearMomentum\"\>", 
-     ",", "\<\"InitialOrbitalAngularMomentum\"\>", 
-     ",", "\<\"InitialSpinAngularMomentum\"\>", ",", "\<\"MassRatio\"\>", 
-     ",", "\<\"ReadPunctureADMMasses\"\>", 
-     ",", "\<\"ReadPunctureADMMassParameters\"\>", 
-     ",", "\<\"ReadTwoPuncturesData\"\>", ",", "\<\"SymmetricMassRatio\"\>", 
-     ",", "\<\"TotalMass\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package TwoPunctures skipped:\n", {
-   "InitialAngularMomentum", "InitialLinearMomentum", 
-    "InitialOrbitalAngularMomentum", "InitialSpinAngularMomentum", 
-    "MassRatio", "ReadPunctureADMMasses", "ReadPunctureADMMassParameters", 
-    "ReadTwoPuncturesData", "SymmetricMassRatio", "TotalMass"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Undocumented symbols for package Waveforms skipped:\\n\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"AlignMaxima\"\>", ",", "\<\"AlignMaximaOfAbs\"\>", 
-     ",", "\<\"AlignPhaseAt\"\>", ",", "\<\"AlignPhases\"\>", 
-     ",", "\<\"ApplyFunction\"\>", ",", "\<\"ApplyToPhases\"\>", 
-     ",", "\<\"Continuous\"\>", ",", "\<\"ExtrapolateDataTables\"\>", 
-     ",", "\<\"ExtrapolatedCurve\"\>", ",", "\<\"ExtrapolatedValue\"\>", 
-     ",", "\<\"ExtrapolatePsi4\"\>", ",", "\<\"ExtrapolatePsi4Amplitude\"\>", 
-     ",", "\<\"ExtrapolatePsi4Phase\"\>", 
-     ",", "\<\"ExtrapolateRadiatedQuantity\"\>", 
-     ",", "\<\"ExtrapolateScalar\"\>", ",", "\<\"ExtrapolateScalarFull\"\>", 
-     ",", "\<\"ExtrapolateScalarWithRadii\"\>", 
-     ",", "\<\"ExtrapolateStrain\"\>", ",", "\<\"ExtrapolationError\"\>", 
-     ",", "\<\"ExtrapolationErrorRelative\"\>", 
-     ",", "\<\"ExtrapolationOrder\"\>", ",", "\<\"MassADM\"\>", 
-     ",", "\<\"NonUniformGrid\"\>", ",", "\<\"NumCycles\"\>", 
-     ",", "\<\"RadiusRange\"\>", 
-     ",", "\<\"RadiusTimeDataToTimeRadiusData\"\>", 
-     ",", "\<\"ReadPsi4Phase\"\>", ",", "\<\"ReadPsi4RadiiStrings\"\>", 
-     ",", "\<\"ReadReconstructedPsi4\"\>", ",", "\<\"ReadSchmidtAngle\"\>", 
-     ",", "\<\"ReadWaveformFile\"\>", ",", "\<\"ReconstructPsi4\"\>", 
-     ",", "\<\"RunName\"\>", ",", "\<\"SchmidtAngle\"\>", 
-     ",", "\<\"StrainDotFromPsi4\"\>", ",", "\<\"StrainFromPsi4\"\>", 
-     ",", "\<\"TortoiseCoordinate\"\>", 
-     ",", "\<\"UseTortoiseCoordinate\"\>"}], "}"}]}],
-  SequenceForm[
-  "Undocumented symbols for package Waveforms skipped:\n", {
-   "AlignMaxima", "AlignMaximaOfAbs", "AlignPhaseAt", "AlignPhases", 
-    "ApplyFunction", "ApplyToPhases", "Continuous", "ExtrapolateDataTables", 
-    "ExtrapolatedCurve", "ExtrapolatedValue", "ExtrapolatePsi4", 
-    "ExtrapolatePsi4Amplitude", "ExtrapolatePsi4Phase", 
-    "ExtrapolateRadiatedQuantity", "ExtrapolateScalar", 
-    "ExtrapolateScalarFull", "ExtrapolateScalarWithRadii", 
-    "ExtrapolateStrain", "ExtrapolationError", "ExtrapolationErrorRelative", 
-    "ExtrapolationOrder", "MassADM", "NonUniformGrid", "NumCycles", 
-    "RadiusRange", "RadiusTimeDataToTimeRadiusData", "ReadPsi4Phase", 
-    "ReadPsi4RadiiStrings", "ReadReconstructedPsi4", "ReadSchmidtAngle", 
-    "ReadWaveformFile", "ReconstructPsi4", "RunName", "SchmidtAngle", 
-    "StrainDotFromPsi4", "StrainFromPsi4", "TortoiseCoordinate", 
-    "UseTortoiseCoordinate"}],
-  Editable->False]], "Print"],
-
 Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print"],
+
+Cell[BoxData["\<\"ConvergenceMultiplier\"\>"], "Print"],
+
+Cell[BoxData["\<\"ConvergenceRate\"\>"], "Print"],
+
+Cell[BoxData["\<\"RichardsonExtrapolant\"\>"], "Print"],
+
+Cell[BoxData["\<\"CartesianToThornburg\"\>"], "Print"],
+
+Cell[BoxData["\<\"KerrAxialTortoise\"\>"], "Print"],
+
+Cell[BoxData["\<\"RadialToTortoise\"\>"], "Print"],
+
+Cell[BoxData["\<\"ThornburgToCartesian\"\>"], "Print"],
+
+Cell[BoxData["\<\"TortoiseToRadial\"\>"], "Print"],
+
+Cell[BoxData["\<\"SolarMassInSeconds\"\>"], "Print"],
+
+Cell[BoxData["\<\"WaveformMatch\"\>"], "Print"],
+
+Cell[BoxData["\<\"DataRegion\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToDataRegion\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ToDataRegion\"\>"], "Print"],
 
+Cell[BoxData["\<\"VariableName\"\>"], "Print"],
+
+Cell[BoxData["\<\"Add\"\>"], "Print"],
+
+Cell[BoxData["\<\"Coordinate\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateAtMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateOutline\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateRange\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateRanges\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinatesAtMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateSpacing\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateSpacings\"\>"], "Print"],
+
+Cell[BoxData["\<\"DataRepresentationQ\"\>"], "Print"],
+
+Cell[BoxData["\<\"Div\"\>"], "Print"],
+
+Cell[BoxData["\<\"Downsampled\"\>"], "Print"],
+
+Cell[BoxData["\<\"Frequency\"\>"], "Print"],
+
+Cell[BoxData["\<\"GridNorm\"\>"], "Print"],
+
+Cell[BoxData["\<\"MapList\"\>"], "Print"],
+
+Cell[BoxData["\<\"MaxCoordinate\"\>"], "Print"],
+
+Cell[BoxData["\<\"MaxCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"MinCoordinate\"\>"], "Print"],
+
+Cell[BoxData["\<\"MinCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"Mul\"\>"], "Print"],
+
+Cell[BoxData["\<\"NDerivative\"\>"], "Print"],
+
+Cell[BoxData["\<\"Phase\"\>"], "Print"],
+
+Cell[BoxData["\<\"Resampled\"\>"], "Print"],
+
+Cell[BoxData["\<\"SameGridQ\"\>"], "Print"],
+
+Cell[BoxData["\<\"Shifted\"\>"], "Print"],
+
+Cell[BoxData["\<\"Slab\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 Slab\"\>"], "Print"],
+
+Cell[BoxData["\<\"Sub\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToList\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for ToList\"\
 \>"], "Print"],
 
+Cell[BoxData["\<\"ToListOfCoordinates\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ToListOfCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToListOfData\"\>"], "Print"],
+
+Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
 AntiDerivative\"\>"], "Print"],
 
+Cell[BoxData["\<\"CoordinateAtInterpolatedMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"DataTable\"\>"], "Print"],
+
+Cell[BoxData["\<\"InterpolatedMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"InterpolatedWhere\"\>"], "Print"],
+
+Cell[BoxData["\<\"MinCoordinateSpacing\"\>"], "Print"],
+
+Cell[BoxData["\<\"RestrictedToCommonInterval\"\>"], "Print"],
+
+Cell[BoxData["\<\"RestrictedToInterval\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 RestrictedToInterval\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToDataTable\"\>"], "Print"],
+
+Cell[BoxData["\<\"UniformSpacingQ\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadGridFunction\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadGridFunction\"\>"], "Print"],
 
+Cell[BoxData["\<\"ReadIterations\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadIterations\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadMaps\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for ReadMaps\
 \"\>"], "Print"],
 
+Cell[BoxData["\<\"ReadRefinementLevels\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadRefinementLevels\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadTimeLevels\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadTimeLevels\"\>"], "Print"],
 
+Cell[BoxData["\<\"ReadGridSpacings\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadGridSpacings\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadMaxRefinementLevels\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadTimeRange\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadTimeStep\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ReadTimeStep\"\>"], "Print"],
 
+Cell[BoxData["\<\"ReadADMMass\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadKick\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadKickVector\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadLinearMomentumFlux\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadLinearMomentumRadiated\"\>"], "Print"],
+
+Cell[BoxData["\<\"ClearAllMemos\"\>"], "Print"],
+
+Cell[BoxData["\<\"DefineMemoFunction\"\>"], "Print"],
+
+Cell[BoxData["\<\"$MultipolePsi4Variable\"\>"], "Print"],
+
+Cell[BoxData["\<\"ExportNumericalRelativitySimulation\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 ExportNumericalRelativitySimulation\"\>"], "Print"],
+
+Cell[BoxData["\<\"FindSimulationParameters\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationParameter\"\>"], "Print"],
+
+Cell[BoxData["\<\"FindSimulationFiles\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationCoreCount\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
+
+Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
 
 Cell[BoxData["\<\"Documented options do not match actual options for \
 SimulationOverview\"\>"], "Print"],
 
+Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationSpeed\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
+
+Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
+
 Cell[BoxData["\<\"Documented options do not match actual options for \
 AlignedPhases\"\>"], "Print"],
+
+Cell[BoxData["\<\"ExportWaveform\"\>"], "Print"],
+
+Cell[BoxData["\<\"ImportWaveform\"\>"], "Print"],
+
+Cell[BoxData["\<\"NumCycles\"\>"], "Print"],
+
+Cell[BoxData["\<\"Psi4ToStrain\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadCycles\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadExtrapolatedPsi4\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadExtrapolatedStrain\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadPsi4\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadPsi4Modes\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadPsi4Radii\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Binaries.md\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataRegion.md\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataTable.md\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/GridFunctions.md\"\>\
+"], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Kicks.md\"\>"], \
+"Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/NRMMAIntroduction.md\
+\"\>"], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/NumericalRelativity.\
+md\"\>"], "Print"],
 
 Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print"],
 
@@ -779,7 +338,36 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", "\[InvisibleSpace]", "\<\"Binaries.nb\"\>"}],
   SequenceForm["  Exporting ", "Binaries.nb"],
-  Editable->False]], "Print"],
+  Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{
+   "NotebookTools`StylesheetsDump`recursivelyBuildStyleData", "::", 
+    "duplicatestyledata"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"-- Message text not found -- \
+(\[NoBreak]\\!\\(\\*InterpretationBox[\\(NotebookObject[\\(\\(\\*PanelBox[\
+GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
+\\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
+True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
+FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
+FrontEndObject[LinkObject[\\\"mw8_shm\\\", 1, 1]], 244]]]]], \
+Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
+\\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"244\\\", \
+\\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
+Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
+Function[Annotation[Slot[1], \
+\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
+Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
+Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
+NotebookObject[FrontEndObject[LinkObject[\\\"mw8_shm\\\", 1, 1]], 244], \
+Rule[Editable, False]]\\)\[NoBreak]) \
+(\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
+"Message", "MSG"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -789,11 +377,82 @@ Cell[BoxData[
   Editable->False]], "Print"],
 
 Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{
+   "NotebookTools`StylesheetsDump`recursivelyBuildStyleData", "::", 
+    "duplicatestyledata"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"-- Message text not found -- \
+(\[NoBreak]\\!\\(\\*InterpretationBox[\\(NotebookObject[\\(\\(\\*PanelBox[\
+GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
+\\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
+True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
+FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
+FrontEndObject[LinkObject[\\\"mw8_shm\\\", 1, 1]], 244]]]]], \
+Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
+\\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"244\\\", \
+\\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
+Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
+Function[Annotation[Slot[1], \
+\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
+Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
+Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
+NotebookObject[FrontEndObject[LinkObject[\\\"mw8_shm\\\", 1, 1]], 244], \
+Rule[Editable, False]]\\)\[NoBreak]) \
+(\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
+"Message", "MSG"],
+
+Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"DataRegion.nb\"\>"}],
   SequenceForm["  Exporting ", "DataRegion.nb"],
   Editable->False]], "Print"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{
+   "NotebookTools`StylesheetsDump`recursivelyBuildStyleData", "::", 
+    "duplicatestyledata"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"-- Message text not found -- \
+(\[NoBreak]\\!\\(\\*InterpretationBox[\\(NotebookObject[\\(\\(\\*PanelBox[\
+GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
+\\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
+True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
+FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
+FrontEndObject[LinkObject[\\\"mw8_shm\\\", 1, 1]], 244]]]]], \
+Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
+\\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"244\\\", \
+\\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
+Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
+Function[Annotation[Slot[1], \
+\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
+Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
+Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
+NotebookObject[FrontEndObject[LinkObject[\\\"mw8_shm\\\", 1, 1]], 244], \
+Rule[Editable, False]]\\)\[NoBreak]) \
+(\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
+"Message", "MSG"],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(NotebookTools`StylesheetsDump`\
+recursivelyBuildStyleData :: duplicatestyledata\\), \\\"MessageName\\\"]\\)\
+\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  InterpretationBox[
@@ -831,12 +490,439 @@ Cell[BoxData[
 
 Cell[BoxData["\<\"Exporting tutorial index\"\>"], "Print"],
 
+Cell[BoxData["\<\"Data Representations\"\>"], "Print"],
+
+Cell[BoxData["\<\"NRMMA\"\>"], "Print"],
+
+Cell[BoxData["\<\"Numerical Relativity\"\>"], "Print"],
+
+Cell[BoxData["\<\"Overview\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"$Context = \"\>", "\[InvisibleSpace]", "\<\"Global`\"\>"}],
+  SequenceForm["$Context = ", "Global`"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Global`* contains \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"a\"\>", ",", "\<\"addErr\"\>", ",", "\<\"attrs\"\>", 
+     ",", "\<\"AutoQuoteCharacters\"\>", ",", "\<\"BackFaceColor\"\>", 
+     ",", "\<\"BackFaceGlowColor\"\>", ",", "\<\"BackFaceOpacity\"\>", 
+     ",", "\<\"BackFaceSpecularColor\"\>", 
+     ",", "\<\"BackFaceSpecularExponent\"\>", ",", "\<\"BackingDirectory\"\>",
+      ",", "\<\"Beveled\"\>", ",", "\<\"bh0x\"\>", 
+     ",", "\<\"CellInsertionPointCell\"\>", ",", "\<\"collect\"\>", 
+     ",", "\<\"Color\"\>", ",", "\<\"content\"\>", ",", "\<\"content$\"\>", 
+     ",", "\<\"cr4\"\>", ",", "\<\"CreateCellID\"\>", ",", "\<\"d\"\>", 
+     ",", "\<\"d1\"\>", ",", "\<\"d2\"\>", ",", "\<\"d3\"\>", 
+     ",", "\<\"data\"\>", ",", "\<\"DefaultFaceGridsStyle\"\>", 
+     ",", "\<\"DefaultFrameTicksStyle\"\>", 
+     ",", "\<\"DefaultGridLinesStyle\"\>", ",", "\<\"DefaultTicksStyle\"\>", 
+     ",", "\<\"dest\"\>", ",", "\<\"destGuides\"\>", 
+     ",", "\<\"destGuides$668\"\>", ",", "\<\"dest$\"\>", 
+     ",", "\<\"dest$18684\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>",
+      ",", "\<\"docDir$18684\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"docLink\"\>", ",", "\<\"docLink$668\"\>", 
+     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$668\"\>", 
+     ",", "\<\"docSymbols\"\>", ",", "\<\"docSymbols$\"\>", 
+     ",", "\<\"docSymbols$361191\"\>", ",", "\<\"dr\"\>", 
+     ",", "\<\"DrawBackFaces\"\>", ",", "\<\"dt\"\>", ",", "\<\"Ex\"\>", 
+     ",", "\<\"exact\"\>", ",", "\<\"exportGuides\"\>", 
+     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$18684\"\>", 
+     ",", "\<\"exportNotebook\"\>", ",", "\<\"exportNotebook$\"\>", 
+     ",", "\<\"exportNotebook$18684\"\>", ",", "\<\"exportSymbols\"\>", 
+     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$18684\"\>", 
+     ",", "\<\"exportTutorials\"\>", ",", "\<\"exportTutorials$\"\>", 
+     ",", "\<\"exportTutorials$18684\"\>", ",", "\<\"f\"\>", 
+     ",", "\<\"FileNotFound\"\>", ",", "\<\"formatType\"\>", 
+     ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
+      ",", "\<\"FrontFaceSpecularExponent\"\>", ",", "\<\"g\"\>", 
+     ",", "\<\"GenerateAnnotationDialog\"\>", 
+     ",", "\<\"GeneratedCellStyles\"\>", ",", "\<\"GenerateDocumentation\"\>",
+      ",", "\<\"generateHTMLDocumentation\"\>", 
+     ",", "\<\"generateHTMLDocumentation$668\"\>", 
+     ",", "\<\"GenerateHTMLGuidePage\"\>", 
+     ",", "\<\"GenerateHTMLSymbolReferencePage\"\>", 
+     ",", "\<\"GhostCellInEmptyNotebook\"\>", ",", "\<\"GreekStyle\"\>", 
+     ",", "\<\"guideNames\"\>", ",", "\<\"guideNames$\"\>", ",", "\<\"h\"\>", 
+     ",", "\<\"h1\"\>", ",", "\<\"h2\"\>", ",", "\<\"h3\"\>", 
+     ",", "\<\"HistoryData\"\>", ",", "\<\"Iteration\"\>", ",", "\<\"j1\"\>", 
+     ",", "\<\"l\"\>", ",", "\<\"LineHeight\"\>", 
+     ",", "\<\"LowerCaseStyle\"\>", ",", "\<\"mass1\"\>", 
+     ",", "\<\"mass2\"\>", ",", "\<\"mass3\"\>", ",", "\<\"massIrr1\"\>", 
+     ",", "\<\"n2\"\>", ",", "\<\"n2$\"\>", ",", "\<\"nb\"\>", 
+     ",", "\<\"nbf\"\>", ",", "\<\"nbf$\"\>", ",", "\<\"nb$\"\>", 
+     ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", ",", "\<\"nn$\"\>", 
+     ",", "\<\"NRMMADoc\"\>", ",", "\<\"order\"\>", ",", "\<\"p\"\>", 
+     ",", "\<\"package\"\>", ",", "\<\"package100\"\>", 
+     ",", "\<\"package101\"\>", ",", "\<\"package102\"\>", 
+     ",", "\<\"package103\"\>", ",", "\<\"package104\"\>", 
+     ",", "\<\"package105\"\>", ",", "\<\"package107\"\>", 
+     ",", "\<\"package108\"\>", ",", "\<\"package109\"\>", 
+     ",", "\<\"package110\"\>", ",", "\<\"package111\"\>", 
+     ",", "\<\"package112\"\>", ",", "\<\"package113\"\>", 
+     ",", "\<\"package114\"\>", ",", "\<\"package116\"\>", 
+     ",", "\<\"package117\"\>", ",", "\<\"package118\"\>", 
+     ",", "\<\"package119\"\>", ",", "\<\"package120\"\>", 
+     ",", "\<\"package121\"\>", ",", "\<\"package122\"\>", 
+     ",", "\<\"package123\"\>", ",", "\<\"package124\"\>", 
+     ",", "\<\"package125\"\>", ",", "\<\"package126\"\>", 
+     ",", "\<\"package127\"\>", ",", "\<\"package128\"\>", 
+     ",", "\<\"package129\"\>", ",", "\<\"package96\"\>", 
+     ",", "\<\"package97\"\>", ",", "\<\"package98\"\>", 
+     ",", "\<\"packages\"\>", ",", "\<\"packageSymbols\"\>", 
+     ",", "\<\"packageSymbols$668\"\>", ",", "\<\"packages$668\"\>", 
+     ",", "\<\"packages$9232\"\>", ",", "\<\"package$\"\>", 
+     ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
+     ",", "\<\"PasteAutoQuoteCharacters\"\>", ",", "\<\"path1\"\>", 
+     ",", "\<\"path2\"\>", ",", "\<\"phi\"\>", ",", "\<\"pos\"\>", 
+     ",", "\<\"ps\"\>", ",", "\<\"psi4\"\>", ",", "\<\"r\"\>", 
+     ",", "\<\"RefinementLevel\"\>", ",", "\<\"result\"\>", 
+     ",", "\<\"ReturnCreatesNewCell\"\>", ",", "\<\"run\"\>", 
+     ",", "\<\"RunDirectory\"\>", ",", "\<\"s\"\>", ",", "\<\"sections\"\>", 
+     ",", "\<\"sections2\"\>", ",", "\<\"source10\"\>", 
+     ",", "\<\"source106\"\>", ",", "\<\"source11\"\>", 
+     ",", "\<\"source115\"\>", ",", "\<\"source12\"\>", 
+     ",", "\<\"source13\"\>", ",", "\<\"source130\"\>", 
+     ",", "\<\"source131\"\>", ",", "\<\"source132\"\>", 
+     ",", "\<\"source133\"\>", ",", "\<\"source134\"\>", 
+     ",", "\<\"source135\"\>", ",", "\<\"source136\"\>", 
+     ",", "\<\"source137\"\>", ",", "\<\"source14\"\>", 
+     ",", "\<\"source15\"\>", ",", "\<\"source16\"\>", 
+     ",", "\<\"source17\"\>", ",", "\<\"source18\"\>", 
+     ",", "\<\"source19\"\>", ",", "\<\"source20\"\>", 
+     ",", "\<\"source21\"\>", ",", "\<\"source22\"\>", 
+     ",", "\<\"source23\"\>", ",", "\<\"source24\"\>", 
+     ",", "\<\"source25\"\>", ",", "\<\"source26\"\>", 
+     ",", "\<\"source27\"\>", ",", "\<\"source28\"\>", 
+     ",", "\<\"source29\"\>", ",", "\<\"source3\"\>", ",", "\<\"source30\"\>",
+      ",", "\<\"source31\"\>", ",", "\<\"source32\"\>", 
+     ",", "\<\"source33\"\>", ",", "\<\"source34\"\>", 
+     ",", "\<\"source35\"\>", ",", "\<\"source36\"\>", 
+     ",", "\<\"source37\"\>", ",", "\<\"source38\"\>", 
+     ",", "\<\"source39\"\>", ",", "\<\"source4\"\>", ",", "\<\"source40\"\>",
+      ",", "\<\"source41\"\>", ",", "\<\"source42\"\>", 
+     ",", "\<\"source43\"\>", ",", "\<\"source44\"\>", 
+     ",", "\<\"source45\"\>", ",", "\<\"source46\"\>", 
+     ",", "\<\"source47\"\>", ",", "\<\"source48\"\>", 
+     ",", "\<\"source49\"\>", ",", "\<\"source5\"\>", ",", "\<\"source50\"\>",
+      ",", "\<\"source51\"\>", ",", "\<\"source52\"\>", 
+     ",", "\<\"source53\"\>", ",", "\<\"source54\"\>", 
+     ",", "\<\"source55\"\>", ",", "\<\"source56\"\>", 
+     ",", "\<\"source57\"\>", ",", "\<\"source58\"\>", 
+     ",", "\<\"source59\"\>", ",", "\<\"source6\"\>", ",", "\<\"source60\"\>",
+      ",", "\<\"source61\"\>", ",", "\<\"source62\"\>", 
+     ",", "\<\"source63\"\>", ",", "\<\"source64\"\>", 
+     ",", "\<\"source65\"\>", ",", "\<\"source66\"\>", 
+     ",", "\<\"source67\"\>", ",", "\<\"source68\"\>", 
+     ",", "\<\"source69\"\>", ",", "\<\"source7\"\>", ",", "\<\"source70\"\>",
+      ",", "\<\"source71\"\>", ",", "\<\"source72\"\>", 
+     ",", "\<\"source73\"\>", ",", "\<\"source74\"\>", 
+     ",", "\<\"source75\"\>", ",", "\<\"source76\"\>", 
+     ",", "\<\"source77\"\>", ",", "\<\"source78\"\>", 
+     ",", "\<\"source79\"\>", ",", "\<\"source8\"\>", ",", "\<\"source80\"\>",
+      ",", "\<\"source81\"\>", ",", "\<\"source82\"\>", 
+     ",", "\<\"source83\"\>", ",", "\<\"source84\"\>", 
+     ",", "\<\"source85\"\>", ",", "\<\"source86\"\>", 
+     ",", "\<\"source87\"\>", ",", "\<\"source88\"\>", 
+     ",", "\<\"source89\"\>", ",", "\<\"source9\"\>", ",", "\<\"source90\"\>",
+      ",", "\<\"source91\"\>", ",", "\<\"source92\"\>", 
+     ",", "\<\"source93\"\>", ",", "\<\"source94\"\>", 
+     ",", "\<\"source95\"\>", ",", "\<\"source99\"\>", 
+     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$668\"\>", 
+     ",", "\<\"spin\"\>", ",", "\<\"spin1\"\>", ",", "\<\"spin1Norm\"\>", 
+     ",", "\<\"spin1x\"\>", ",", "\<\"spin1y\"\>", ",", "\<\"spin1z\"\>", 
+     ",", "\<\"spin2\"\>", ",", "\<\"spin2x\"\>", ",", "\<\"spin2y\"\>", 
+     ",", "\<\"spin2z\"\>", ",", "\<\"spin3\"\>", ",", "\<\"spin3x\"\>", 
+     ",", "\<\"spin3y\"\>", ",", "\<\"spin3z\"\>", ",", "\<\"srcDir\"\>", 
+     ",", "\<\"srcDir$\"\>", ",", "\<\"srcDir$361191\"\>", ",", "\<\"ss\"\>", 
+     ",", "\<\"ss$\"\>", ",", "\<\"StandardDefinition\"\>", 
+     ",", "\<\"StripStyleOnPaste\"\>", ",", "\<\"StyleDefintions\"\>", 
+     ",", "\<\"symbols\"\>", ",", "\<\"symbolsSrcDir\"\>", 
+     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$361191\"\>", 
+     ",", "\<\"symbols$\"\>", ",", "\<\"s$\"\>", ",", "\<\"t\"\>", 
+     ",", "\<\"tb\"\>", ",", "\<\"TrackCellChangeTimes\"\>", 
+     ",", "\<\"traj0\"\>", ",", "\<\"traj1\"\>", ",", "\<\"tutorialDest\"\>", 
+     ",", "\<\"tutorialDest$\"\>", ",", "\<\"tutorialHTMLNames\"\>", 
+     ",", "\<\"tutorialHTMLNames$\"\>", 
+     ",", "\<\"tutorialHTMLNames$18684\"\>", ",", "\<\"tutorials\"\>", 
+     ",", "\<\"tutorialSources\"\>", ",", "\<\"tutorialSources$668\"\>", 
+     ",", "\<\"tutorials$\"\>", ",", "\<\"tutorials$18684\"\>", 
+     ",", "\<\"tutorialTitles\"\>", ",", "\<\"tutorialTitles$\"\>", 
+     ",", "\<\"tutorialTitles$18684\"\>", ",", "\<\"t$\"\>", 
+     ",", "\<\"undocumentedSymbols\"\>", 
+     ",", "\<\"undocumentedSymbols$668\"\>", ",", "\<\"url\"\>", 
+     ",", "\<\"url$\"\>", ",", "\<\"x\"\>", ",", "\<\"x1\"\>", 
+     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$6537\"\>", 
+     ",", "\<\"y\"\>", ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", 
+     ",", "\<\"yFn\"\>", ",", "\<\"yFn$6537\"\>", ",", "\<\"z1\"\>", 
+     ",", "\<\"z2\"\>", ",", "\<\"zFn\"\>", ",", "\<\"zFn$6537\"\>", 
+     ",", "\<\"$HTMLDestination\"\>", ",", "\<\"$PackageSymbols\"\>", 
+     ",", "\<\"$SimulationPath\"\>"}], "}"}]}],
+  SequenceForm[
+  "Global`* contains ", {
+   "a", "addErr", "attrs", "AutoQuoteCharacters", "BackFaceColor", 
+    "BackFaceGlowColor", "BackFaceOpacity", "BackFaceSpecularColor", 
+    "BackFaceSpecularExponent", "BackingDirectory", "Beveled", "bh0x", 
+    "CellInsertionPointCell", "collect", "Color", "content", "content$", 
+    "cr4", "CreateCellID", "d", "d1", "d2", "d3", "data", 
+    "DefaultFaceGridsStyle", "DefaultFrameTicksStyle", 
+    "DefaultGridLinesStyle", "DefaultTicksStyle", "dest", "destGuides", 
+    "destGuides$668", "dest$", "dest$18684", "docDir", "docDir$", 
+    "docDir$18684", "docFiles", "docLink", "docLink$668", "docPackage", 
+    "docPackage$668", "docSymbols", "docSymbols$", "docSymbols$361191", "dr", 
+    "DrawBackFaces", "dt", "Ex", "exact", "exportGuides", "exportGuides$", 
+    "exportGuides$18684", "exportNotebook", "exportNotebook$", 
+    "exportNotebook$18684", "exportSymbols", "exportSymbols$", 
+    "exportSymbols$18684", "exportTutorials", "exportTutorials$", 
+    "exportTutorials$18684", "f", "FileNotFound", "formatType", 
+    "FrontFaceGlowColor", "FrontFaceSpecularColor", 
+    "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
+    "GeneratedCellStyles", "GenerateDocumentation", 
+    "generateHTMLDocumentation", "generateHTMLDocumentation$668", 
+    "GenerateHTMLGuidePage", "GenerateHTMLSymbolReferencePage", 
+    "GhostCellInEmptyNotebook", "GreekStyle", "guideNames", "guideNames$", 
+    "h", "h1", "h2", "h3", "HistoryData", "Iteration", "j1", "l", 
+    "LineHeight", "LowerCaseStyle", "mass1", "mass2", "mass3", "massIrr1", 
+    "n2", "n2$", "nb", "nbf", "nbf$", "nb$", "newSyms", "nn", "nn$", 
+    "NRMMADoc", "order", "p", "package", "package100", "package101", 
+    "package102", "package103", "package104", "package105", "package107", 
+    "package108", "package109", "package110", "package111", "package112", 
+    "package113", "package114", "package116", "package117", "package118", 
+    "package119", "package120", "package121", "package122", "package123", 
+    "package124", "package125", "package126", "package127", "package128", 
+    "package129", "package96", "package97", "package98", "packages", 
+    "packageSymbols", "packageSymbols$668", "packages$668", "packages$9232", 
+    "package$", "paclet", "paclet$", "PasteAutoQuoteCharacters", "path1", 
+    "path2", "phi", "pos", "ps", "psi4", "r", "RefinementLevel", "result", 
+    "ReturnCreatesNewCell", "run", "RunDirectory", "s", "sections", 
+    "sections2", "source10", "source106", "source11", "source115", "source12",
+     "source13", "source130", "source131", "source132", "source133", 
+    "source134", "source135", "source136", "source137", "source14", 
+    "source15", "source16", "source17", "source18", "source19", "source20", 
+    "source21", "source22", "source23", "source24", "source25", "source26", 
+    "source27", "source28", "source29", "source3", "source30", "source31", 
+    "source32", "source33", "source34", "source35", "source36", "source37", 
+    "source38", "source39", "source4", "source40", "source41", "source42", 
+    "source43", "source44", "source45", "source46", "source47", "source48", 
+    "source49", "source5", "source50", "source51", "source52", "source53", 
+    "source54", "source55", "source56", "source57", "source58", "source59", 
+    "source6", "source60", "source61", "source62", "source63", "source64", 
+    "source65", "source66", "source67", "source68", "source69", "source7", 
+    "source70", "source71", "source72", "source73", "source74", "source75", 
+    "source76", "source77", "source78", "source79", "source8", "source80", 
+    "source81", "source82", "source83", "source84", "source85", "source86", 
+    "source87", "source88", "source89", "source9", "source90", "source91", 
+    "source92", "source93", "source94", "source95", "source99", 
+    "sourceGuides", "sourceGuides$668", "spin", "spin1", "spin1Norm", 
+    "spin1x", "spin1y", "spin1z", "spin2", "spin2x", "spin2y", "spin2z", 
+    "spin3", "spin3x", "spin3y", "spin3z", "srcDir", "srcDir$", 
+    "srcDir$361191", "ss", "ss$", "StandardDefinition", "StripStyleOnPaste", 
+    "StyleDefintions", "symbols", "symbolsSrcDir", "symbolsSrcDir$", 
+    "symbolsSrcDir$361191", "symbols$", "s$", "t", "tb", 
+    "TrackCellChangeTimes", "traj0", "traj1", "tutorialDest", "tutorialDest$",
+     "tutorialHTMLNames", "tutorialHTMLNames$", "tutorialHTMLNames$18684", 
+    "tutorials", "tutorialSources", "tutorialSources$668", "tutorials$", 
+    "tutorials$18684", "tutorialTitles", "tutorialTitles$", 
+    "tutorialTitles$18684", "t$", "undocumentedSymbols", 
+    "undocumentedSymbols$668", "url", "url$", "x", "x1", "x2", "xFn", 
+    "xFn$6537", "y", "y1", "y2", "yFn", "yFn$6537", "z1", "z2", "zFn", 
+    "zFn$6537", "$HTMLDestination", "$PackageSymbols", "$SimulationPath"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"ConvergenceMultiplier\"\>"], "Print"],
+
+Cell[BoxData["\<\"ConvergenceRate\"\>"], "Print"],
+
+Cell[BoxData["\<\"RichardsonExtrapolant\"\>"], "Print"],
+
+Cell[BoxData["\<\"CartesianToThornburg\"\>"], "Print"],
+
+Cell[BoxData["\<\"KerrAxialTortoise\"\>"], "Print"],
+
+Cell[BoxData["\<\"RadialToTortoise\"\>"], "Print"],
+
+Cell[BoxData["\<\"ThornburgToCartesian\"\>"], "Print"],
+
+Cell[BoxData["\<\"TortoiseToRadial\"\>"], "Print"],
+
+Cell[BoxData["\<\"SolarMassInSeconds\"\>"], "Print"],
+
+Cell[BoxData["\<\"WaveformMatch\"\>"], "Print"],
+
+Cell[BoxData["\<\"DataRegion\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToDataRegion\"\>"], "Print"],
+
+Cell[BoxData["\<\"VariableName\"\>"], "Print"],
+
+Cell[BoxData["\<\"Add\"\>"], "Print"],
+
+Cell[BoxData["\<\"Coordinate\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateAtMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateOutline\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateRange\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateRanges\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinatesAtMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateSpacing\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateSpacings\"\>"], "Print"],
+
+Cell[BoxData["\<\"DataRepresentationQ\"\>"], "Print"],
+
+Cell[BoxData["\<\"Div\"\>"], "Print"],
+
+Cell[BoxData["\<\"Downsampled\"\>"], "Print"],
+
+Cell[BoxData["\<\"Frequency\"\>"], "Print"],
+
+Cell[BoxData["\<\"GridNorm\"\>"], "Print"],
+
+Cell[BoxData["\<\"MapList\"\>"], "Print"],
+
+Cell[BoxData["\<\"MaxCoordinate\"\>"], "Print"],
+
+Cell[BoxData["\<\"MaxCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"MinCoordinate\"\>"], "Print"],
+
+Cell[BoxData["\<\"MinCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"Mul\"\>"], "Print"],
+
+Cell[BoxData["\<\"NDerivative\"\>"], "Print"],
+
+Cell[BoxData["\<\"Phase\"\>"], "Print"],
+
+Cell[BoxData["\<\"Resampled\"\>"], "Print"],
+
+Cell[BoxData["\<\"SameGridQ\"\>"], "Print"],
+
+Cell[BoxData["\<\"Shifted\"\>"], "Print"],
+
+Cell[BoxData["\<\"Slab\"\>"], "Print"],
+
+Cell[BoxData["\<\"Sub\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToList\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToListOfCoordinates\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToListOfData\"\>"], "Print"],
+
+Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
+
+Cell[BoxData["\<\"CoordinateAtInterpolatedMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"DataTable\"\>"], "Print"],
+
+Cell[BoxData["\<\"InterpolatedMax\"\>"], "Print"],
+
+Cell[BoxData["\<\"InterpolatedWhere\"\>"], "Print"],
+
+Cell[BoxData["\<\"MinCoordinateSpacing\"\>"], "Print"],
+
+Cell[BoxData["\<\"RestrictedToCommonInterval\"\>"], "Print"],
+
+Cell[BoxData["\<\"RestrictedToInterval\"\>"], "Print"],
+
+Cell[BoxData["\<\"ToDataTable\"\>"], "Print"],
+
+Cell[BoxData["\<\"UniformSpacingQ\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadGridFunction\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadIterations\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadMaps\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadRefinementLevels\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadTimeLevels\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadGridSpacings\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadMaxRefinementLevels\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadTimeRange\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadTimeStep\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadADMMass\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadKick\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadKickVector\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadLinearMomentumFlux\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadLinearMomentumRadiated\"\>"], "Print"],
+
+Cell[BoxData["\<\"ClearAllMemos\"\>"], "Print"],
+
+Cell[BoxData["\<\"DefineMemoFunction\"\>"], "Print"],
+
+Cell[BoxData["\<\"$MultipolePsi4Variable\"\>"], "Print"],
+
+Cell[BoxData["\<\"ExportNumericalRelativitySimulation\"\>"], "Print"],
+
+Cell[BoxData["\<\"FindSimulationParameters\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationParameter\"\>"], "Print"],
+
+Cell[BoxData["\<\"FindSimulationFiles\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationCoreCount\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
+
+Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationSpeed\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
+
+Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
+
+Cell[BoxData["\<\"ExportWaveform\"\>"], "Print"],
+
+Cell[BoxData["\<\"ImportWaveform\"\>"], "Print"],
+
+Cell[BoxData["\<\"NumCycles\"\>"], "Print"],
+
+Cell[BoxData["\<\"Psi4ToStrain\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadCycles\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadExtrapolatedPsi4\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadExtrapolatedStrain\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadPsi4\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadPsi4Modes\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadPsi4Radii\"\>"], "Print"],
+
 Cell[BoxData["\<\"Done\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]]
 },
 WindowSize->{740, 867},
-WindowMargins->{{202, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 1}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

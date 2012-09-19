@@ -178,9 +178,23 @@ Cell[TextData[{
 }], "GuideText"],
 
 Cell[TextData[{
+ Cell[TextData[ButtonBox["ExportWaveform",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/ExportWaveform"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
  Cell[TextData[ButtonBox["ImportWaveform",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/ImportWaveform"]], "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["NumCycles",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/NumCycles"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
@@ -319,24 +333,16 @@ Cell[CellGroupData[{
 Cell["DataAnalysis", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["WaveformOverlap",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/WaveformOverlap"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Compute the phase- and time-maximised overlap of two DataTables"
-}], "GuideText"],
-
-Cell[TextData[{
  Cell[TextData[ButtonBox["SolarMassInSeconds",
   BaseStyle->"Link",
   ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
- " "
+ " ",
+ Cell[TextData[ButtonBox["WaveformMatch",
+  BaseStyle->"Link",
+  ButtonData->"paclet:nrmma/ref/WaveformMatch"]], "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 

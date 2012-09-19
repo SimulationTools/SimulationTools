@@ -7,32 +7,30 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->"paclet:nrmma/guide/Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Slab",
+ ButtonBox["NumCycles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Slab"]
+  ButtonData->"paclet:nrmma/ref/NumCycles"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Slab", "ObjectName"],
+Cell["NumCycles", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Slab",
+       ButtonBox["NumCycles",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Slab"], "[", 
+        ButtonData->"paclet:nrmma/ref/NumCycles"], "[", 
        StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"x1min", " ", ";;", " ", "x1max"}], ",", " ", "..."}], "TI"],
-        "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the hyperslab of d over the coordinate ranges \
-[x1min, x1max], ...."
+        RowBox[{"psi4", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the number of gravitational wave cycles in the \
+waveform psi4."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -57,19 +55,10 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
-Cell["The following options can be given: ", "Notes"],
-
-Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Tolerance", "0.", Cell["", "TableText"]}
-  },
-  GridBoxAlignment->{
-   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
-    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True}}}}]
+Cell["\<\
+The number of cycles is calculated starting at start and terminating at the \
+merger, which is determined from the maimum of the waveform amplitude.\
+\>", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -83,20 +72,21 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Slab",
+WindowTitle->"NumCycles",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Slab", "SLAB", "slab"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the \
-coordinate ranges [x1min, x1max], ....", 
-    "synonyms" -> {"Slab", "SLAB", "slab"}, "title" -> "Slab", "windowTitle" -> 
-    "Slab", "type" -> "Symbol", "uri" -> "nrmma/ref/Slab"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {"NumCycles", "NUMCYCLES", "numcycles"}, "index" -> True, 
+    "label" -> "nrmma/Waveforms Symbol", "language" -> "en", "paclet" -> 
+    "Waveforms", "status" -> "None", "summary" -> 
+    "NumCycles[psi4, start] gives the number of gravitational wave cycles in \
+the waveform psi4.", "synonyms" -> {"NumCycles", "NUMCYCLES", "numcycles"}, 
+    "title" -> "NumCycles", "windowTitle" -> "NumCycles", "type" -> "Symbol", 
+    "uri" -> "nrmma/ref/NumCycles"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -25,8 +25,8 @@ Cell[BoxData[GridBox[{
      Cell[TextData[ButtonBox["SolarMassInSeconds",
       BaseStyle->"Link",
       ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFormula"],
-     "\[LineSeparator] gives the value of GM/\!\(\*SuperscriptBox[\(c\), \
-\(3\)]\) in seconds."
+     "\[LineSeparator] gives the value of GM/c^3 in seconds, where M is the \
+mass of the sun."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -53,8 +53,8 @@ TaggingRules->{
      "SolarMassInSeconds", "SOLARMASSINSECONDS", "solarmassinseconds"}, 
     "index" -> True, "label" -> "nrmma/DataAnalysis Symbol", "language" -> 
     "en", "paclet" -> "DataAnalysis", "status" -> "None", "summary" -> 
-    "SolarMassInSeconds gives the value of GM/\!\(\*SuperscriptBox[\(c\), \(3\
-\)]\) in seconds.", 
+    "SolarMassInSeconds gives the value of GM/c^3 in seconds, where M is the \
+mass of the sun.", 
     "synonyms" -> {
      "SolarMassInSeconds", "SOLARMASSINSECONDS", "solarmassinseconds"}, 
     "title" -> "SolarMassInSeconds", "windowTitle" -> "SolarMassInSeconds", 

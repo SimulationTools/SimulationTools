@@ -7,32 +7,27 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:nrmma/guide/nrmma"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["MultipoleHDF5",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->"paclet:nrmma/guide/MultipoleHDF5"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Slab",
+ ButtonBox["$MultipolePsi4Variable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Slab"]
+  ButtonData->"paclet:nrmma/ref/$MultipolePsi4Variable"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Slab", "ObjectName"],
+Cell["$MultipolePsi4Variable", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["Slab",
-        BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Slab"], "[", 
-       StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"x1min", " ", ";;", " ", "x1max"}], ",", " ", "..."}], "TI"],
-        "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the hyperslab of d over the coordinate ranges \
-[x1min, x1max], ...."
+     Cell[TextData[ButtonBox["$MultipolePsi4Variable",
+      BaseStyle->"Link",
+      ButtonData->"paclet:nrmma/ref/$MultipolePsi4Variable"]], 
+      "InlineFormula"],
+     "\[LineSeparator] specifies the name of the variable used to store Psi4 \
+by the Multipole thorn."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -57,19 +52,10 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
-Cell["The following options can be given: ", "Notes"],
-
-Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Tolerance", "0.", Cell["", "TableText"]}
-  },
-  GridBoxAlignment->{
-   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
-    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
- GridBoxOptions->{
- GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True}}}}]
+Cell["\<\
+The value of $MultipolePsi4Variable should be the same as is set in the \
+'name' section of the 'variable' parameter for the Multipole thorn.\
+\>", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -83,20 +69,26 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Slab",
+WindowTitle->"$MultipolePsi4Variable",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Slab", "SLAB", "slab"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
-    "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the \
-coordinate ranges [x1min, x1max], ....", 
-    "synonyms" -> {"Slab", "SLAB", "slab"}, "title" -> "Slab", "windowTitle" -> 
-    "Slab", "type" -> "Symbol", "uri" -> "nrmma/ref/Slab"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "nrmma`", 
+    "keywords" -> {
+     "$MultipolePsi4Variable", "$MULTIPOLEPSI4VARIABLE", 
+      "$multipolepsi4variable"}, "index" -> True, "label" -> 
+    "nrmma/MultipoleHDF5 Symbol", "language" -> "en", "paclet" -> 
+    "MultipoleHDF5", "status" -> "None", "summary" -> 
+    "$MultipolePsi4Variable specifies the name of the variable used to store \
+Psi4 by the Multipole thorn.", 
+    "synonyms" -> {
+     "$MultipolePsi4Variable", "$MULTIPOLEPSI4VARIABLE", 
+      "$multipolepsi4variable"}, "title" -> "$MultipolePsi4Variable", 
+    "windowTitle" -> "$MultipolePsi4Variable", "type" -> "Symbol", "uri" -> 
+    "nrmma/ref/$MultipolePsi4Variable"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
