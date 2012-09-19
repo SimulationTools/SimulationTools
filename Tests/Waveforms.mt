@@ -9,27 +9,27 @@ DeleteDirectory[testDirectory,DeleteContents->True];
 CreateDirectory[testDirectory];
 
 (****************************************************************)
-(* ReadCycles                                                   *)
+(* WaveformCycles                                               *)
 (****************************************************************)
 
 Test[
-    ReadCycles[$NRMMATestSimulation, 150]
+    ReadWaveformCycles[$NRMMATestSimulation, 150]
     ,
     2.7650708168336315
     ,
-    TestID->"ReadCycles"
+    TestID->"ReadWaveformCycles"
 ]
 
 (****************************************************************)
-(* NumCycles                                                    *)
+(* WaveformCycles                                               *)
 (****************************************************************)
 
 Test[
-    NumCycles[ReadPsi4[$NRMMATestSimulation,2,2,100], 150]
+    WaveformCycles[ReadPsi4[$NRMMATestSimulation,2,2,100], 150]
     ,
     2.7650708168336315
     ,
-    TestID->"NumCycles"
+    TestID->"WaveformCycles"
 ]
 
 
