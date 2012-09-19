@@ -4,6 +4,7 @@ TestSuite[
 	{
 		"BHCoordinates.mt",
 		"CarpetHDF5.mt",
+		"DataAnalysis.mt",
 		"DataRegion.mt",
 		"DataRegionDeprecated.mt",
 		"DataTable.mt",
