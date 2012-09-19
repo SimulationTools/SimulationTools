@@ -24,17 +24,25 @@ BeginPackage["MultipoleHDF5`",
   "RunFiles`"
  }];
 
+$MultipolePsi4Variable::usage = "$MultipolePsi4Variable specifies the name of the "<>
+ "variable used to store Psi4 by the Multipole thorn.";
+
 Begin["`Private`"];
 
-MultipolePsi4Variable = "psi4";
+$MultipolePsi4Variable = "psi4";
+DocumentationBuilder`MoreInformation["$MultipolePsi4Variable"] =
+ {
+  "The value of $MultipolePsi4Variable should be the same as is set in the 'name' "<>
+  "section of the 'variable' parameter for the Multipole thorn."
+ };
 
 getFiles[runName_] :=
   Module[{runFiles},
   If[FileType[runName]===File,
       runFiles = {runName},
-      runFiles = FindRunFile[runName, "mp_"<>MultipolePsi4Variable<>".h5"];
+      runFiles = FindRunFile[runName, "mp_"<>$MultipolePsi4Variable<>".h5"];
       If[runFiles === {},
-        runFiles = FindRunFile[runName, MultipolePsi4Variable<>".h5"];
+        runFiles = FindRunFile[runName, $MultipolePsi4Variable<>".h5"];
       ];
   ];
 
