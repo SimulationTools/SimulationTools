@@ -49,7 +49,7 @@ CoordinatesAtMax::usage = "CoordinatesAtMax[d] finds a list of the coordinates a
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
-Slab::usage = "Slab[d, {x1min, x1max}, ...] gives the hyperslab of d specified by the coordinates {x1min, x1max}, ....";
+Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
 
 (* TODO: Is there a better system?  These are abbreviations. *)
 Add::usage = "Add[d1, d2] adds d1 and d2 after they have been resampled onto the intersection of their bounding boxes.";
@@ -398,12 +398,18 @@ SyntaxInformation[Slab] =
 
 (* TODO: Implement Tolerance support *)
 Slab[d_?DataRepresentationQ, s__, OptionsPattern[]]:=
- Module[{slabSpec, spacing, origin, endpoints, indexrange},
+ Module[{slabSpec, valid, spacing, origin, endpoints, indexrange},
   spacing   = CoordinateSpacings[d];
   origin    = MinCoordinates[d];
   endpoints = MaxCoordinates[d];
 
   slabSpec = PadRight[{s}, ArrayDepth[d], All];
+
+  valid = Apply[And, Map[((#===All)||(Head[#]===Span)||(NumericQ[#])||MatchQ[#, {_?NumericQ}])&, slabSpec]];
+  If[!valid,
+    Error["Coordinate ranges must be specified using either Span[x1, x2] "<>
+     "(equivalently x1;;x2), All, a single coordinate or a single element list."];
+  ];
 
   (* Convert coordinate range to index range *)
   indexrange = MapThread[(#1 /.{x_?NumericQ :> Round[(x-#2)/#3] + 1})&, {slabSpec, origin, spacing}];
