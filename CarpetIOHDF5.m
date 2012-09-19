@@ -308,8 +308,13 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
 (* datasetAttributes *)
 (****************************************************************)
 
-DefineMemoFunction[datasetAttributes[file_],
-  Module[{attributeRules, datasets, dsattrs},
+datasetAttributes[file_] :=
+  Module[{timestamp, attributeRules, datasets, dsattrs},
+    timestamp = FileDate[file];
+    If[cache[file]["timestamp"] === timestamp,
+      Return[cache[file]["data"]];
+    ];
+
     Profile["datasetAttributes[file]",
 
     (* Convert dataset name strings into rules *)
@@ -333,8 +338,11 @@ DefineMemoFunction[datasetAttributes[file_],
     dsattrs = dsattrs /. {"var" -> None, "it" -> None, "tl" -> None,
                           "rl" -> None, "c" -> None, "m" -> None}];
 
+    (* Cache the result *)
+    cache[file]["timestamp"] = timestamp;
+    cache[file]["data"] = dsattrs;
+
     dsattrs]
-  ]
 ];
 
 datasetsWith[datasets_List, attr_Rule] := 
@@ -358,10 +366,7 @@ datasetAttribute[file_String, attr_] :=
 attributeNamesToNumbers[expr_] := expr /. {"Iteration" -> 2, "TimeLevel" -> 3,
   "RefinementLevel" -> 4, "Map" -> 6, "Variable" -> 7};
 
-DefineMemoFunction[Datasets[file_],
-  ReadHDF5[file, "Datasets"]
-];
-
+Datasets[file_]         := ReadHDF5[file, "Datasets"];
 Annotations[file_, ds_] := Profile["Annotations", ReadHDF5[file, {"Annotations", ds}]];
 Dims[file_, ds_]        := ReadHDF5[file, {"Dimensions", ds}];
 HDF5Data[file_, ds_]    := Profile["HDF5Data", ReadHDF5[file, {"Datasets", ds}]];
