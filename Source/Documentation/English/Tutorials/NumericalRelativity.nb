@@ -58,7 +58,9 @@ Cell[BoxData[GridBox[{
    {"Frequency", Cell["Abs", "TableText"]}
   }]], "DefinitionBox"],
 
-Cell["Functions for working with Numerical Relativity waveforms.", "Caption"],
+Cell["\<\
+Basic functions for working with Numerical Relativity waveforms.\
+\>", "Caption"],
 
 Cell["\<\
 Read (2,2) mode of waveform extracted at r=100M from a simulation\
@@ -92,7 +94,99 @@ Cell[BoxData[
    RowBox[{"PlotRange", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{
-      RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input"]
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input"],
+
+Cell[BoxData[GridBox[{
+   {"WaveformCycles", "Psi4ToStrain"},
+   {"ReadWaveformCycles", Cell["WaveformMatch", "TableText"]},
+   {"Frequency", Cell["", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["\<\
+Functions for doing data analysis on Numerical Relativity waveforms.\
+\>", "Caption"],
+
+Cell["Get the Advanced LIGO Zero Det, High Power noise curve", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"sn", "=", 
+  RowBox[{"ToDataTable", "[", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+    "\"\<https://dcc.ligo.org/public/0002/T0900288/003/ZERO_DET_high_P.txt\>\"\
+", ",", "\"\<TABLE\>\""}], "]"}], "]"}]}]], "Input"],
+
+Cell["\<\
+Get the strain waveform extracted at r=30M and r=100M from a binary black \
+hole simulation\
+\>", "MathCaption"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f0", "=", "0.2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h30", "=", 
+   RowBox[{"Psi4ToStrain", "[", 
+    RowBox[{
+     RowBox[{"Shifted", "[", 
+      RowBox[{
+       RowBox[{"30", 
+        RowBox[{"ReadPsi4", "[", 
+         RowBox[{"run", ",", "2", ",", "2", ",", "30"}], "]"}]}], ",", 
+       RowBox[{"-", 
+        RowBox[{"TortoiseCoordinate", "[", 
+         RowBox[{"30", ",", 
+          RowBox[{"ReadADMMass", "[", "run", "]"}]}], "]"}]}]}], "]"}], ",", 
+     "f0"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h100", "=", 
+   RowBox[{"Psi4ToStrain", "[", 
+    RowBox[{
+     RowBox[{"Shifted", "[", 
+      RowBox[{
+       RowBox[{"100", 
+        RowBox[{"ReadPsi4", "[", 
+         RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}], ",", 
+       RowBox[{"-", 
+        RowBox[{"TortoiseCoordinate", "[", 
+         RowBox[{"100", ",", 
+          RowBox[{"ReadADMMass", "[", "run", "]"}]}], "]"}]}]}], "]"}], ",", 
+     "f0"}], "]"}]}], ";"}]}], "Input"],
+
+Cell["\<\
+Convert the time variable from units of the binary mass to seconds, assuming \
+the mass of the binary is 60 solar masses\
+\>", "MathCaption"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"h30", "=", 
+   RowBox[{"MapList", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"60", "SolarMassInSeconds"}], ",", "1"}], "}"}], "#"}], 
+      "&"}], ",", "h30"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h100", "=", 
+   RowBox[{"MapList", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"60", "SolarMassInSeconds"}], ",", "1"}], "}"}], "#"}], 
+      "&"}], ",", "h100"}], "]"}]}], ";"}]}], "Input"],
+
+Cell["Compute the match between the two waveforms", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"WaveformMatch", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"h30", ",", "h100"}], "}"}], ",", "sn"}], "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -220,8 +314,9 @@ Cell[BoxData[
 },
 Saveable->True,
 WindowSize->{725, 750},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowMargins->{{229, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
