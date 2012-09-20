@@ -83,6 +83,7 @@ UseTortoiseCoordinate(*::usage = "UseTortoiseCoordinate is an option for radius 
 TortoiseCoordinate(*::usage = "TortoiseCoordinate[r, M] gives the tortoise coordinate corresponding to radius r assuming a Schwarzschild black hole of mass M. The constant of integration is chosen so that the tortoise and radial coordinate coincide at r=4M."*);
 SchmidtAngle(*::usage = "SchmidtAngle[sim, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized."*);
 ReadReconstructedPsi4(*::usage = "ReadReconstructedPsi4[sim, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r."*);
+FixedFrequencyIntegrate;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -487,6 +488,17 @@ ffi[{f_, d_}, f0_] :=
 
 ffiDataTable[d_DataTable, f0_] :=
   MapList[ffi[#, f0 / (2. Pi)] &, d];
+
+FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
+ Module[{qUniform,t0,qTilde,intqTilde,intq,
+         uniform = UniformGridQ[q]},
+  qUniform = If[uniform, q, MakeUniform[q]];
+  t0 = DataTableRange[qUniform][[1]];
+  qTilde = Fourier[qUniform];
+  intqTilde = ffiDataTable[qTilde, f0];
+  intq = InverseFourier[intqTilde,t0];
+  (* TODO: I'm not sure where the "-" comes from here, but it seems to be necessary *)
+  -If[uniform, intq, ResampleDataTable[intq,q]]];
 
 Psi4ToStrain[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
