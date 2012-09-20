@@ -158,27 +158,26 @@ Convert the time variable from units of the binary mass to seconds, assuming \
 the mass of the binary is 60 solar masses\
 \>", "MathCaption"],
 
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rescaleTime", "[", 
+   RowBox[{"{", 
+    RowBox[{"t_", ",", "f_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"60", "SolarMassInSeconds", " ", "t"}], ",", "f"}], 
+   "}"}]}]], "Input"],
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{"h30", "=", 
    RowBox[{"MapList", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"60", "SolarMassInSeconds"}], ",", "1"}], "}"}], "#"}], 
-      "&"}], ",", "h30"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{"rescaleTime", ",", "h30"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"h100", "=", 
    RowBox[{"MapList", "[", 
-    RowBox[{
-     RowBox[{
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"60", "SolarMassInSeconds"}], ",", "1"}], "}"}], "#"}], 
-      "&"}], ",", "h100"}], "]"}]}], ";"}]}], "Input"],
+    RowBox[{"rescaleTime", ",", "h100"}], "]"}]}], ";"}]}], "Input"],
 
 Cell["Compute the match between the two waveforms", "MathCaption"],
 
