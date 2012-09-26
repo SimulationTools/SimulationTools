@@ -401,6 +401,7 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
 
 Global`StandardDefinition[ffi] = True;
 
+(* Note that these expect input in Fourier space *)
 ffi[{f_, d_}, f0_] :=
  Module[{div},
   div = 2. Pi I If[f>0., Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
