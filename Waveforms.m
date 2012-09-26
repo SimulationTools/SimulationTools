@@ -210,6 +210,9 @@ RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
   If[! (Length[Union[lengths]] === 1), 
   Error["ExtrapolateDataTables: Input DataTable objects do not have \
   the same number of points: ", lengths]];
+  allts = IndVar/@dts;
+  If[!Equal@@allts,
+     Error["RadiusTimeDataToTimeRadiusData: Input DataTables do not have the same coordinates"]];
   ts = Map[First, First[lists]];
   tbToVec[tb_] := Map[Last, tb];
   vecs = Map[tbToVec, lists];
