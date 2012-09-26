@@ -65,6 +65,19 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     radStrs
   ];
 
+DefineMemoFunction[NRDF`Waveforms`ReadPsi4Modes[runName_],
+  Module[
+    {md, sections, keys, modes},
+    md = ParseMetadataFile[runName];
+    md = processMetadata[md];
+    sections = Cases[md,
+                  "section"[___, "section_name"["keyword"["psi4t-data"]], contents___] :> contents
+                  , Infinity];
+    keys = Cases[sections, "element"["key"[k_], v_] :> k, Infinity];
+    modes = Select[keys, StringMatchQ[#,NumberString ~~ "," ~~ Whitespace... ~~ NumberString] &];
+    modes = Map[Map[ToExpression, StringSplit[#, ","]] &, modes];
+    Union[modes]]];
+
 readPsi4HDF5Data[file_String, dataset_String] :=
   MakeDataTable[
     Map[{#[[1]], #[[2]] + I #[[3]]} &,
