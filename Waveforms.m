@@ -39,6 +39,7 @@ ReadWaveformFile;
 AlignMaxima;
 AlignMaximaOfAbs;
 ExtrapolateStrain;
+FixedFrequencyIntegrate;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -413,6 +414,18 @@ ffi[{f_, d_}, f0_] :=
 
 ffiDataTable[d_DataTable, f0_] :=
   Map[ffi[#, f0 / (2. Pi)] &, d];
+
+
+FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
+ Module[{qUniform,t0,qTilde,intqTilde,intq,
+         uniform = UniformGridQ[q]},
+  qUniform = If[uniform, q, MakeUniform[q]];
+  t0 = DataTableRange[qUniform][[1]];
+  qTilde = Fourier[qUniform];
+  intqTilde = ffiDataTable[qTilde, f0];
+  intq = InverseFourier[intqTilde,t0];
+  (* TODO: I'm not sure where the "-" comes from here, but it seems to be necessary *)
+  -If[uniform, intq, ResampleDataTable[intq,q]]];
 
 StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
