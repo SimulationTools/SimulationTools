@@ -16,11 +16,6 @@ ShowHDF5Progress = False;
 ReadHDF5[file_String, opts_:"Datasets"] :=
 Module[{tempCell, result, dsIndices},
   If[$h5mma,
-    If[ShowHDF5Progress === True,
-      h5mma`ReadDatasetsProgress = 0;
-      tempCell = PrintTemporary[Dynamic[Column[{"Scanning " <> Last@FileNameSplit[file],
-                   ProgressIndicator[h5mma`ReadDatasetsProgress]}]]]];
-
     result = ImportHDF5[file, opts];
 
     If[ShowHDF5Progress === True, NotebookDelete[tempCell]];
