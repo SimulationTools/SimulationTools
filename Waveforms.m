@@ -202,7 +202,7 @@ ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
   ExtrapolatedValue /. ExtrapolateScalarFull[order, MapThread[List, {rads, Map[f, rads]}]];
 
 RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
- Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads},
+ Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads, allts},
   rads = Map[First, rdTb];
 (*  Print["rads = ", rads];*)
   dts = Map[Last, rdTb];
