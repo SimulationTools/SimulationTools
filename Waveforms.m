@@ -321,9 +321,6 @@ ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
               (* else *)
               OptionValue[Radii]];
 
-    Print["ExtrapolateRadiatedQuantity: rads = ", rads];
-    Print["ExtrapolateRadiatedQuantity: allRads = ", allRads];
-
     missingRadii = Complement[rads, allRads];
     If[missingRadii =!= {},
        Error["ExtrapolateRadiatedQuantity: Radii "<>ToString[missingRadii]<>" are missing in run "<>runName]];
