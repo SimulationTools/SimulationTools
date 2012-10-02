@@ -20,7 +20,7 @@ Test[
     ,
     EquivalenceFunction -> withinRoundoff,
     TestID->"WaveformMatch with the same waveform"
-]
+];
 
 Test[
     WaveformMatch[{wf1, wf2}, sn]
@@ -29,5 +29,5 @@ Test[
     ,
     EquivalenceFunction -> withinRoundoff,
     TestID->"WaveformMatch with different waveforms"
-]
+];
 ]
