@@ -202,7 +202,6 @@ Module[{runDir,runName="testrun12.1",testDirPaths,testFile="MyFile.asc",testFile
 		f],{i,0,3}];
 
 	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
-		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
 
 	Test[
@@ -222,7 +221,6 @@ Module[{runDir,runName="testrun13",otherRunName="mysim",testDirPaths,testFile="M
 		f],{i,0,3}];
 
 	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],otherRunName}]},
-		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Export[FileNameJoin[{f,"anything.par"}],"Test","Text"];
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
 
