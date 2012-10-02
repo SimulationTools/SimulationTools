@@ -14,33 +14,33 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["MinTracker`",
+BeginPackage["SimulationTools`MinTracker`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 Begin["`Private`"];
 
 fileName[tracker_] := "MinTracker"<>ToString[tracker]<>".asc";
 
-MinTracker`BHCoordinates`ReadBHCoordinates[runName_String,
+SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName_String,
                                                    tracker_Integer] :=
   Module[{list, list2},
     list = ReadColumnFile[runName, fileName[tracker], {2,3,4,5}];
     list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
     Return[MakeDataTable[list2, {RunName -> runName}]]];
 
-MinTracker`Trackers`ReadCoordinates[runName_String, 
+SimulationTools`MinTracker`Trackers`ReadCoordinates[runName_String, 
                                       tracker_Integer] :=
   Module[{list},
     list = ReadColumnFile[runName, fileName[tracker], {2,3,4,5}];
     Return[Table[ToDataTable[list[[All,{1,dir+1}]]], {dir, 1, 3}]]];
 
-MinTracker`BHCoordinates`HaveData[runName_String, tracker_Integer] :=
+SimulationTools`MinTracker`BHCoordinates`HaveData[runName_String, tracker_Integer] :=
   FileIsInRun[runName, fileName[tracker]];
 
 End[];

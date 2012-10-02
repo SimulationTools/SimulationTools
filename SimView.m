@@ -14,22 +14,22 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimView`",
+BeginPackage["SimulationTools`SimView`",
  {
-  "BHCoordinates`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Horizons`",
-  "Memo`",
-  "NR`",
-  "Parameters`",
-  "Plotting`",
-  "Providers`",
-  "RunFiles`",
-  "SimViewRRMHD`",
-  "SystemStatistics`",
-  "Waveforms`"
+  "SimulationTools`BHCoordinates`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Horizons`",
+  "SimulationTools`Memo`",
+  "SimulationTools`NR`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`Providers`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`SimViewRRMHD`",
+  "SimulationTools`SystemStatistics`",
+  "SimulationTools`Waveforms`"
  }];
 
 SimulationOverview::usage = "SimulationOverview[sim] gives a quick overview of the simulation sim.
@@ -124,10 +124,10 @@ SimView[runNames_List, r_] :=
     providers = {"SystemStatistics", "Binary", "Waveforms", "Statistics"};
 
     (* This does not give the ordering that we like *)
-    (* providers = Map[First@StringSplit[#,"`"] &, Names["*`SimulationOverview`Plots"]]; *)
+    (* providers = Map[StringSplit[#,"`"][[2]] &, Names["SimulationTools`*`SimulationOverview`Plots"]]; *)
 
     plots = Join@@DeleteCases[
-      Table[Symbol[p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None|{None}];
+      Table[Symbol["SimulationTools`"<>p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None|{None}];
 
     grid = Grid[Join[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft}},
                 plots],

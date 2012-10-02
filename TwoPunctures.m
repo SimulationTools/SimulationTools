@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["TwoPunctures`",
+BeginPackage["SimulationTools`TwoPunctures`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "Parameters`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`RunFiles`"
  }];
 
 ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[sim] reads the ADM masses of the punctures in sim as computed by the TwoPunctures thorn."*);
@@ -38,12 +38,12 @@ ReadTwoPuncturesData(*::usage = "ReadTwoPuncturesData[file, col] reads a data fi
 
 Begin["`Private`"];
 
-TwoPunctures`InitialData`HaveData[run_String, ___] :=
+SimulationTools`TwoPunctures`InitialData`HaveData[run_String, ___] :=
   HaveRunDir[run] && (
     FindRunFile[run, "ADM_mass_tot.asc"] =!= {} ||
     StandardOutputOfRun[run] =!= {});
 
-TwoPunctures`InitialData`ReadADMMass[runName_String] :=
+SimulationTools`TwoPunctures`InitialData`ReadADMMass[runName_String] :=
   Module[{massMDFiles, output, lines},
     massMDFiles = FindRunFile[runName, "ADM_mass_tot.asc"];
     If[massMDFiles =!= {},

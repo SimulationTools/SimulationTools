@@ -14,16 +14,16 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Binary`",
+BeginPackage["SimulationTools`Binary`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "Plotting`",
-  "RunFiles`",
-  "Trackers`",
-  "Horizons`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Trackers`",
+  "SimulationTools`Horizons`"
  }];
 
 ReadBinaryCoordinates::usage = "ReadBinaryCoordinates[sim, i] gives the Cartesian coordinates of body i of the binary as a function of time.  The result is a list of DataTables, one for each coordinate direction.\nReadBinaryCoordinates[sim] gives the Cartesian coordinates of the relative orbit of the binary.";
@@ -61,20 +61,20 @@ binaryTrackerNoFail[run_String, i:(1|2), opts:OptionsPattern[]] :=
        Error["Unrecognised Trackers option: should be {{trackertype1, index1}, {trackertype2, index2}}"]];
     OptionValue[Trackers][[i]],
 
-    PunctureTracker`BHCoordinates`HaveData[run, 0] &&
-    PunctureTracker`BHCoordinates`HaveData[run, 1],
+    SimulationTools`PunctureTracker`BHCoordinates`HaveData[run, 0] &&
+    SimulationTools`PunctureTracker`BHCoordinates`HaveData[run, 1],
     {"PunctureTracker", i-1},
     
     HaveHorizonData[run, 1] &&
     HaveHorizonData[run, 2],
     {"Horizons", i},
     
-    MinTracker`BHCoordinates`HaveData[run, 0] &&
-    MinTracker`BHCoordinates`HaveData[run, 1],
+    SimulationTools`MinTracker`BHCoordinates`HaveData[run, 0] &&
+    SimulationTools`MinTracker`BHCoordinates`HaveData[run, 1],
     {"MinTracker", i-1},
 
-    ShiftTracker`BHCoordinates`HaveData[run, 0] &&
-    ShiftTracker`BHCoordinates`HaveData[run, 1],
+    SimulationTools`ShiftTracker`BHCoordinates`HaveData[run, 0] &&
+    SimulationTools`ShiftTracker`BHCoordinates`HaveData[run, 1],
     {"ShiftTracker", i-1},
 
     True,
@@ -123,7 +123,7 @@ tracks2D[run_, i_] :=
 tracks2D[run_] :=
   {tracks2D[run,1],tracks2D[run,2]};
 
-Binary`SimulationOverview`Plots[runNames1_] :=
+SimulationTools`Binary`SimulationOverview`Plots[runNames1_] :=
   Module[{runNames},
     runNames = Select[runNames1, (binaryTrackerNoFail[#,1] =!= None && binaryTrackerNoFail[#,2] =!= None) &];
     If[runNames === {},

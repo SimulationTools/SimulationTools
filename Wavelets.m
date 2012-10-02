@@ -14,11 +14,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Wavelets`",
+BeginPackage["SimulationTools`Wavelets`",
  {
-  "DataRegion`",
-  "DataRepresentations`",
-  "DataTable`"
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`"
  }];
 
 (****************************************************************)

@@ -14,16 +14,16 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SystemStatistics`",
+BeginPackage["SimulationTools`SystemStatistics`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "IniFile`",
-  "Memo`",
-  "Plotting`",
-  "RunFiles`",
-  "Utils`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`IniFile`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Utils`"
  }];
 
 ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
@@ -49,7 +49,7 @@ ReadRunSpeed[runName_] :=
      MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
      ReadCarpetSpeed[runName]];
 
-SystemStatistics`SimulationOverview`Plots[runNames1_] :=
+SimulationTools`SystemStatistics`SimulationOverview`Plots[runNames1_] :=
   {Replace[DeleteCases[{simSpeedPlot[runNames1], simMemPlot[runNames1]},None],{}->None]};
 
 simSpeedPlot[runNames1_] :=
@@ -58,9 +58,9 @@ simSpeedPlot[runNames1_] :=
     If[runNames === {},
        None,
 
-       Plotting`PresentationListLinePlot[Map[ReadSimulationSpeed, runNames],
+       SimulationTools`Plotting`PresentationListLinePlot[Map[ReadSimulationSpeed, runNames],
                                 PlotRange -> {0, All}, PlotLabel -> "Speed",
-                                Plotting`PlotLegend -> runNames, Plotting`LegendPosition -> {Left, Bottom}]]];
+                                SimulationTools`Plotting`PlotLegend -> runNames, SimulationTools`Plotting`LegendPosition -> {Left, Bottom}]]];
 
 haveRunSpeed[sim_String] :=
   FindSimulationFiles[sim, "carpet::timing..asc"] =!= {} || FindSimulationFiles[sim, "runstats.asc"] =!= {};
@@ -85,9 +85,9 @@ simMemPlot[runNames1_] :=
        
        Module[
          {swaps, mems},
-         swaps = Catch[Catch[Map[ReadSwap, runNames],RunFiles`Private`UnknownColumns],_];
+         swaps = Catch[Catch[Map[ReadSwap, runNames],SimulationTools`RunFiles`Private`UnknownColumns],_];
          If[StringQ[swaps], swaps = {{0,0}}];
-         mems = Catch[Catch[Map[ReadMemory, runNames],RunFiles`Private`UnknownColumns],_];
+         mems = Catch[Catch[Map[ReadMemory, runNames],SimulationTools`RunFiles`Private`UnknownColumns],_];
          If[StringQ[mems], mems = {{0,0}}];
          
          Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],

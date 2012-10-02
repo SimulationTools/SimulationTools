@@ -14,11 +14,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Parameters`",
+BeginPackage["SimulationTools`Parameters`",
  {
-  "Memo`",
-  "Error`",
-  "RunFiles`"
+  "SimulationTools`Memo`",
+  "SimulationTools`Error`",
+  "SimulationTools`RunFiles`"
  }];
 
 FindSimulationParameters::usage  = "FindSimulationParameters[sim, pattern] gives a list of the names of all the parameters which match pattern which were set in the simulation.";

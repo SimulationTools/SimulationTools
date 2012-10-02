@@ -14,9 +14,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["ReadHDF5`",
+BeginPackage["SimulationTools`ReadHDF5`",
  {
-  "Error`"
+  "SimulationTools`Error`"
  }];
 
 ReadHDF5(*::usage = "ReadHDF5[file] provides a wrapper around ImportHDF5 if h5mma is available and falls back to the built-in Import otherwise."*); 
@@ -44,6 +44,6 @@ End[];
 EndPackage[];
 
 (* Add h5mma to $ContextPath since Get[] inside `Private` does not do so. *)
-If[ReadHDF5`Private`$h5mma,
+If[SimulationTools`ReadHDF5`Private`$h5mma,
   If[!MemberQ[$ContextPath, "h5mma`"], AppendTo[$ContextPath, "h5mma`"]];
 ];

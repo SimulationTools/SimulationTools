@@ -14,13 +14,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Trackers`",
+BeginPackage["SimulationTools`Trackers`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 ReadTrackerCoordinates::usage = "ReadTrackerCoordinates[sim, tracker] gives the Cartesian coordinates of the tracker as a function of time.  The result is a list of DataTables, one for each coordinate direction. tracker is a list of the form {type, index}.\nReadTrackerCoordinates[sim, tracker1, tracker2] gives the Cartesian components of the vector joining the two trackers as a function of time.  The result is a list of DataTables, one for each coordinate direction. tracker1 and tracker2 are lists of the form {type, index}.";
@@ -34,7 +34,7 @@ Begin["`Private`"];
 trackerPattern = {_String, _Integer};
 
 ReadTrackerCoordinates[run_String, tracker:{type_, i_}] :=
-  Symbol[type<>"`Trackers`ReadCoordinates"][run, i];
+  Symbol["SimulationTools`"<>type<>"`Trackers`ReadCoordinates"][run, i];
 
 ReadTrackerCoordinates[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
   ReadTrackerCoordinates[run, tracker1] - ReadTrackerCoordinates[run, tracker2];
@@ -55,7 +55,7 @@ xyToAzimuth[{x1_DataTable, y1_DataTable}] :=
   Module[{x,y,t},
     {x,y} = ToListOfData /@ IntersectDataTables[{x1,y1}];
     t = ToListOfCoordinates[x1];
-    ToDataTable@DataRepresentations`Private`phase[MapThread[{#1,{#2,#3}} &,{t,x,y}]]];
+    ToDataTable@SimulationTools`DataRepresentations`Private`phase[MapThread[{#1,{#2,#3}} &,{t,x,y}]]];
 
 ReadTrackerAzimuth[run_String, tracker:trackerPattern] :=
   xyToAzimuth[ReadTrackerCoordinates[run, tracker][[{1,2}]]];

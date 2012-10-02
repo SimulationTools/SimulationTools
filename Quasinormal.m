@@ -14,11 +14,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Quasinormal`",
+BeginPackage["SimulationTools`Quasinormal`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`"
  }];
 
 QuasinormalMode;

@@ -14,9 +14,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["MessageCatcher`",
+BeginPackage["SimulationTools`MessageCatcher`",
  {
-  "Error`"
+  "SimulationTools`Error`"
  }];
 
 WithCaughtMessages::usage = "WithCaughtMessages[expr] evaluates expr, converting any generated messages into exceptions";

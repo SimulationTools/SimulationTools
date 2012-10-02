@@ -14,19 +14,19 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimFactory`",
+BeginPackage["SimulationTools`SimFactory`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "IniFile`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`IniFile`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 Begin["`Private`"];
 
-SimFactory`RunFiles`HaveData[runDir_,___] :=
+SimulationTools`SimFactory`RunFiles`HaveData[runDir_,___] :=
   FileType[FileNameJoin[{runDir, "SIMULATION_ID"}]] =!= None ||
   FileType[FileNameJoin[{runDir, "SIMFACTORY"}]] =!= None;
 
@@ -47,7 +47,7 @@ getDataSubDir[output_String] :=
     FileNameTake[parFiles[[1]], {-2}]
 ];
 
-SimFactory`RunFiles`FindRunDirSegments[dir_] :=
+SimulationTools`SimFactory`RunFiles`FindRunDirSegments[dir_] :=
   Module[
     {restarts, merged, dataSubDir, dataDirs, segments},
     restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
@@ -58,7 +58,7 @@ SimFactory`RunFiles`FindRunDirSegments[dir_] :=
     segments = Select[dataDirs, DirectoryQ]
 ];
 
-SimFactory`RunFiles`ReadCores[dir_, runName_] :=
+SimulationTools`SimFactory`RunFiles`ReadCores[dir_, runName_] :=
   Module[
     {files, file},
     files = Select[{FileNameJoin[{dir, "SIMFACTORY", "PROCS"}],

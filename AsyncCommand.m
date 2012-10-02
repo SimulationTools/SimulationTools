@@ -14,9 +14,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["AsyncCommand`",
+BeginPackage["SimulationTools`AsyncCommand`",
  {
-  "Error`"
+  "SimulationTools`Error`"
  }];
 
 ExecuteAsyncCommand;

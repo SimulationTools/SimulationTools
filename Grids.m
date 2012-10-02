@@ -14,15 +14,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Grids`",
+BeginPackage["SimulationTools`Grids`",
  {
-  "BHCoordinates`",
-  "Error`",
-  "Horizons`",
-  "Memo`",
-  "NR`",
-  "Parameters`",
-  "RunFiles`"
+  "SimulationTools`BHCoordinates`",
+  "SimulationTools`Error`",
+  "SimulationTools`Horizons`",
+  "SimulationTools`Memo`",
+  "SimulationTools`NR`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`RunFiles`"
  }];
 
 ReadTimeStep::usage = "ReadTimeStep[sim] returns the time step sizes in sim.";

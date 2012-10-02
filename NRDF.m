@@ -14,17 +14,17 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["NRDF`",
+BeginPackage["SimulationTools`NRDF`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
   "Piraha`",
-  "ReadHDF5`",
-  "RunFiles`",
-  "Waveforms`",
-  "Utils`"
+  "SimulationTools`ReadHDF5`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Waveforms`",
+  "SimulationTools`Utils`"
  }];
 
 ParseMetadataFile;
@@ -40,16 +40,16 @@ Begin["`Private`"];
 
 FPrint[x_] := (Print[x//InputForm]; x);
 
-NRDF`RunFiles`HaveData[runDir_String,___] :=
+SimulationTools`NRDF`RunFiles`HaveData[runDir_String,___] :=
   haveRunDir[runDir];
 
-NRDF`Waveforms`HaveData[runDir_,___] :=
-  NRDF`RunFiles`HaveData[runDir];
+SimulationTools`NRDF`Waveforms`HaveData[runDir_,___] :=
+  SimulationTools`NRDF`RunFiles`HaveData[runDir];
 
-NRDF`InitialData`HaveData[runDir_,___] :=
-  NRDF`RunFiles`HaveData[runDir];
+SimulationTools`NRDF`InitialData`HaveData[runDir_,___] :=
+  SimulationTools`NRDF`RunFiles`HaveData[runDir];
 
-NRDF`RunFiles`FindRunDirSegments[dir_] :=
+SimulationTools`NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {FindRunDir[dir]};
 
 DefineMemoFunction[ParseMetadataFile[run_String],
@@ -59,7 +59,7 @@ processMetadata[md_] :=
   md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
          "key"[k_String] :> "key"[ToLowerCase[k]]};
 
-NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
+SimulationTools`NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
     {md, radii, radStrs},
     md = ParseMetadataFile[runName];
@@ -130,7 +130,7 @@ syncFile[src_String, dst_String] :=
      If[FileType[dst] === None,
         Error["File " <> src <> " could not be downloaded"]]]];
 
-NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
+SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[
     {md, filenames, filename, tmp,data, radPattern},
     md = ParseMetadataFile[runName];
@@ -153,7 +153,7 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
 
     (* Print["filename = ", filename]; *)
 
-    (* Print["NRDF`Waveforms`ReadPsi4Data: runName = ", runName]; *)
+    (* Print["SimulationTools`NRDF`Waveforms`ReadPsi4Data: runName = ", runName]; *)
 
     tmp = StringCases[filename, base__~~".h5:"~~ds__ :> {base<>".h5",ds}];
     data =
@@ -219,7 +219,7 @@ ReadMetadataKey[run_String, keyPattern_] :=
       True,
       Error["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
 
-NRDF`InitialData`ReadADMMass[run_String] :=
+SimulationTools`NRDF`InitialData`ReadADMMass[run_String] :=
   ReadMetadataKey[run, "initial-ADM-energy"];
 
 StartingFrequency[run_] :=

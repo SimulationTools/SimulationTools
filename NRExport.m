@@ -14,18 +14,18 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["NRExport`",
+BeginPackage["SimulationTools`NRExport`",
  {
-  "BHCoordinates`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Grids`",
-  "Horizons`",
-  "NR`",
-  "Parameters`",
-  "TwoPunctures`",
-  "Waveforms`"
+  "SimulationTools`BHCoordinates`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Grids`",
+  "SimulationTools`Horizons`",
+  "SimulationTools`NR`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`TwoPunctures`",
+  "SimulationTools`Waveforms`"
  }];
 
 ExportExtrapolatedStrain(*::usage = "ExportExtrapolatedStrain[sim, file, mass, l, m, \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\)] extrapolates the (l,m) mode of the waveform in sim assuming mass is the ADM mass and then computes the strain using the fixed-frequency integration method with cutoff frequency \!\(\*SubscriptBox[\(\[Omega]\), \(0\)]\). The extrapolated waveform is then exported to file. The output format depends on the file extension which can be either '.asc', '.asc.gz' or '.h5'."*);

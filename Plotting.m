@@ -14,12 +14,12 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Plotting`",
+BeginPackage["SimulationTools`Plotting`",
  {
-  "DataRegion`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`"
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`"
  }];
 
 (****************************************************************)

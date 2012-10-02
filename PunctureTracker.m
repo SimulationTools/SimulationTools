@@ -14,13 +14,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["PunctureTracker`",
+BeginPackage["SimulationTools`PunctureTracker`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 Begin["`Private`"];
@@ -28,7 +28,7 @@ Begin["`Private`"];
 fileName =
   "puncturetracker::pt_loc..asc";
 
-PunctureTracker`BHCoordinates`ReadBHCoordinates[runName_, i_] :=
+SimulationTools`PunctureTracker`BHCoordinates`ReadBHCoordinates[runName_, i_] :=
  Module[{nTrackers},
   nTrackers = 10;
   MakeDataTable[{#[[1]], {#[[2]], #[[3]], #[[4]]}} & /@ 
@@ -36,7 +36,7 @@ PunctureTracker`BHCoordinates`ReadBHCoordinates[runName_, i_] :=
                    {9, 13 + nTrackers*1 + i, 
       13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]]];
 
-PunctureTracker`Trackers`ReadCoordinates[runName_, i_] :=
+SimulationTools`PunctureTracker`Trackers`ReadCoordinates[runName_, i_] :=
  Module[{nTrackers},
   nTrackers = 10;
   Table[ToDataTable[{#[[1]], #[[dir+1]]} & /@ 
@@ -44,7 +44,7 @@ PunctureTracker`Trackers`ReadCoordinates[runName_, i_] :=
                    {9, 13 + nTrackers*1 + i, 
       13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]], {dir, 1, 3}]];
 
-PunctureTracker`BHCoordinates`HaveData[runName_String, tracker_Integer] :=
+SimulationTools`PunctureTracker`BHCoordinates`HaveData[runName_String, tracker_Integer] :=
   FileIsInRun[runName, fileName];
 
 End[];

@@ -14,9 +14,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Providers`",
+BeginPackage["SimulationTools`Providers`",
  {
-  "Error`"
+  "SimulationTools`Error`"
  }];
 
 CallProvidedFunction;
@@ -30,7 +30,7 @@ ProviderPreferences[_] := {};
 HaveData[base_String, args__] :=
   (* TODO: refactor this and CallProvidedFunction *)
   Module[{providerHaveFns, have},
-    providerHaveFns = Names["*`"<>base<>"`HaveData"];
+    providerHaveFns = Names["SimulationTools`*`"<>base<>"`HaveData"];
     have = Map[ToExpression[#][args] &, providerHaveFns];
     Or@@have];
 
@@ -40,8 +40,8 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
 
     (* Print["CallProvidedFunction["<>StringJoin[Riffle[ToString[#,InputForm]& /@ {base, fn, args, method},","]]<>"]"]; *)
 
-    providerHaveFns = Names["*`"<>base<>"`HaveData"];
-    providers = Map[First[StringSplit[#,"`"]] &, providerHaveFns];
+    providerHaveFns = Names["SimulationTools`*`"<>base<>"`HaveData"];
+    providers = Map[StringSplit[#,"`"][[2]] &, providerHaveFns];
 
     (* providers = ToExpression/@providerFns; *)
     have = Map[ToExpression[#]@@args &, providerHaveFns];
@@ -73,10 +73,10 @@ CallProvidedFunction[base_String, fn_String, args_List, method_:Automatic] :=
     If[!MemberQ[providers, provider],
        Error[base<>": Provider "<>ToString[provider,InputForm]<>" not found"]];
 
-    If[Names[provider<>"`"<>base<>"`"<>fn] === {},
-       Error["Function "<>provider<>"`.`"<>base<>"`.`"<>fn<>" not found"]];
+    If[Names["SimulationTools`"<>provider<>"`"<>base<>"`"<>fn] === {},
+       Error["Function SimulationTools`"<>provider<>"`.`"<>base<>"`.`"<>fn<>" not found"]];
 
-    f = ToExpression[provider<>"`"<>base<>"`"<>fn];
+    f = ToExpression["SimulationTools`"<>provider<>"`"<>base<>"`"<>fn];
     (* Print["calling ", f, " with ", {args}]; *)
     f@@args];
 

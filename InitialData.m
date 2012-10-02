@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["InitialData`",
+BeginPackage["SimulationTools`InitialData`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "Providers`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Providers`",
+  "SimulationTools`RunFiles`"
  }];
 
 ReadADMMass::usage = "ReadADMMass[sim] reads the ADM mass of the spacetime from the initial data slice";

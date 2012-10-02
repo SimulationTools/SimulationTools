@@ -14,17 +14,17 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Waveforms`",
+BeginPackage["SimulationTools`Waveforms`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "InitialData`",
-  "Memo`",
-  "Plotting`",
-  "Providers`",
-  "ReadHDF5`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`InitialData`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`Providers`",
+  "SimulationTools`ReadHDF5`",
+  "SimulationTools`RunFiles`"
  }];
 
 (* Public *)
@@ -597,7 +597,7 @@ ExportWaveform[file_String, d_DataTable] :=
 (* Simulation Overview                                          *)
 (****************************************************************)
 
-Waveforms`SimulationOverview`Plots[runNames1_] :=
+SimulationTools`Waveforms`SimulationOverview`Plots[runNames1_] :=
   Module[{runNames, rs, r},
     runNames = Select[runNames1, HaveData["Waveforms",#] &];
     If[runNames === {},

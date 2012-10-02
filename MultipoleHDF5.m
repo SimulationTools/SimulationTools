@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["MultipoleHDF5`",
+BeginPackage["SimulationTools`MultipoleHDF5`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "ReadHDF5`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`ReadHDF5`",
+  "SimulationTools`RunFiles`"
  }];
 
 $MultipolePsi4Variable::usage = "$MultipolePsi4Variable specifies the name of the "<>
@@ -49,10 +49,10 @@ getFiles[runName_] :=
   runFiles
 ];
 
-MultipoleHDF5`Waveforms`HaveData[runName_, args___] :=
-  HaveRunDir[runName] && MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+SimulationTools`MultipoleHDF5`Waveforms`HaveData[runName_, args___] :=
+  HaveRunDir[runName] && SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
 
-MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
+SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4},
     runFiles = getFiles[runName];
     datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
@@ -61,14 +61,14 @@ MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
     Return[MakeDataTable[psi4]]];
 
-MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName_] :=
+SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{datasets, radii},
     datasets = Union@@Map[ReadHDF5[#] &, getFiles[runName]];
     radii = Sort[(Union@@StringCases[datasets, "r" ~~ x : (NumberString|"inf") :> x])];
     radii
   ];
 
-MultipoleHDF5`Waveforms`ReadPsi4Modes[runName_] :=
+SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4Modes[runName_] :=
   Module[{datasets, modes},
     datasets = Union@@Map[ReadHDF5, getFiles[runName]];
     modes = Sort[Round /@ ToExpression /@ (Union@@StringCases[datasets, "l" ~~ l:NumberString ~~ "_m" ~~ m:NumberString :> {l,m}])];

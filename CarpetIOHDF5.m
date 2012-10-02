@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["CarpetIOHDF5`",
+BeginPackage["SimulationTools`CarpetIOHDF5`",
  {
-  "DataRegion`",
-  "DataRepresentations`",
-  "Error`",
-  "Memo`",
-  "Profile`",
-  "ReadHDF5`"
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Profile`",
+  "SimulationTools`ReadHDF5`"
  }];
 
 Begin["`Private`"];
@@ -30,13 +30,13 @@ Begin["`Private`"];
 (* HaveData *)
 (****************************************************************)
 
-CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up in Providers *)
+SimulationTools`CarpetIOHDF5`GridFunctions`HaveData[___] := True; (* This needs to be tidied up in Providers *)
 
 (****************************************************************)
 (* ReadData *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadData] = {
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData] = {
     "Iteration"       -> Null,
     "Map"             -> Null,
     "RefinementLevel" -> Null,
@@ -45,7 +45,7 @@ Options[CarpetIOHDF5`GridFunctions`ReadData] = {
     "StripGhostZones" -> True
   };
 
-CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
   MergeDataRegions[ReadCarpetIOHDF5Components[file,
     OptionValue[Variable],
     OptionValue[Iteration],
@@ -59,10 +59,10 @@ CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
 (* ToFileName *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ToFileName] =
-  FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["StripGhostZones"]];
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName] =
+  FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["StripGhostZones"]];
 
-CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:OptionsPattern[]] :=
+SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:OptionsPattern[]] :=
   Module[
     {map, filename, dimspattern},
     map = Switch[OptionValue[Map],
@@ -93,64 +93,64 @@ CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:Options
 (* ReadIterations *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadIterations] =
-  FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Iteration"]];
-CarpetIOHDF5`GridFunctions`ReadIterations[file_String, opts:OptionsPattern[]] :=
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations] =
+  FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["Iteration"]];
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadIterations]]]
+    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations]]]
   ],2];
 
 (****************************************************************)
 (* ReadMaps *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadMaps] =
-  FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Map"]];
-CarpetIOHDF5`GridFunctions`ReadMaps[file_String, opts:OptionsPattern[]] :=
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps] =
+  FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["Map"]];
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadMaps]]]
+    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps]]]
   ],6];
 
 (****************************************************************)
 (* ReadRefinementLevels *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadRefinementLevels] =
-  FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["RefinementLevel"]];
-CarpetIOHDF5`GridFunctions`ReadRefinementLevels[file_String, opts:OptionsPattern[]] :=
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels] =
+  FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["RefinementLevel"]];
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadRefinementLevels]]]
+    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels]]]
   ],4];
 
 (****************************************************************)
 (* ReadTimeLevels *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadTimeLevels] =
-  FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["TimeLevel"]];
-CarpetIOHDF5`GridFunctions`ReadTimeLevels[file_String, opts:OptionsPattern[]] :=
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadTimeLevels] =
+  FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["TimeLevel"]];
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadTimeLevels[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadTimeLevels]]]
+    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadTimeLevels]]]
   ],3];
 
 (****************************************************************)
 (* ReadVariables *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadVariables] =
-  FilterRules[Options[CarpetIOHDF5`GridFunctions`ReadData], Except["Variable"]];
-CarpetIOHDF5`GridFunctions`ReadVariables[file_String, opts:OptionsPattern[]] :=
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables] =
+  FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["Variable"]];
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[file_String, opts:OptionsPattern[]] :=
   datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadVariables]]]
+    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables]]]
   ],1];
 
 (****************************************************************)
 (* ReadTime *)
 (****************************************************************)
 
-Options[CarpetIOHDF5`GridFunctions`ReadTime] =
-  Options[CarpetIOHDF5`GridFunctions`ReadData];
-CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPattern[]] :=
+Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadTime] =
+  Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData];
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPattern[]] :=
   Module[
     {varNames, varName, dsName, annots},
 
@@ -162,7 +162,7 @@ CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPattern[]] :=
     varNames = datasetAttribute[
       datasetsWith[file,
                    attributeNamesToNumbers[
-                     FilterRules[{opts},Options[CarpetIOHDF5`GridFunctions`ReadVariables]]]], 1];
+                     FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables]]]], 1];
 
     If[Length[varNames] === 0, Error["Cannot find dataset with "<>ToString[{opts}]<>" in HDF5 file "<>file]];
     varName = First[varNames];
@@ -177,13 +177,13 @@ CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPattern[]] :=
 (* Defaults                                                                            *)
 (***************************************************************************************)
 
-CarpetIOHDF5`GridFunctions`DefaultIteration[its_List] := 0;
+SimulationTools`CarpetIOHDF5`GridFunctions`DefaultIteration[its_List] := 0;
 
-CarpetIOHDF5`GridFunctions`DefaultMap[maps_List] := None;
+SimulationTools`CarpetIOHDF5`GridFunctions`DefaultMap[maps_List] := None;
 
-CarpetIOHDF5`GridFunctions`DefaultRefinementLevel[run_, var_] := 0;
+SimulationTools`CarpetIOHDF5`GridFunctions`DefaultRefinementLevel[run_, var_] := 0;
 
-CarpetIOHDF5`GridFunctions`DefaultTimeLevel[run_, var_] := 0;
+SimulationTools`CarpetIOHDF5`GridFunctions`DefaultTimeLevel[run_, var_] := 0;
 
 (***************************************************************************************)
 (* Private functions                                                                   *)
@@ -281,7 +281,7 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
     components = Map[CarpetIOHDF5Components[#, it, rl]&, fileNames];
 
     (* Figure out what the variable is called inside the file *)
-    varNames = CarpetIOHDF5`GridFunctions`ReadVariables[file,
+    varNames = SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[file,
       "Iteration" -> it, "Map"-> map, "RefinementLevel" -> rl, "TimeLevel" -> tl];
 
     varName = First[Select[varNames, StringMatchQ[#, ___ ~~ var ~~ ___] &]];

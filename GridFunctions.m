@@ -14,15 +14,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["GridFunctions`",
+BeginPackage["SimulationTools`GridFunctions`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "Providers`",
-  "RunFiles`",
-  "Utils`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Providers`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Utils`"
  }];
 
 ReadGridFunction::usage = "ReadGridFunction[sim, var, dims] reads variable var from sim and returns it as a DataRegion object.  dims is a list of the dimensions to read, and these dimensions must correspond to available output.  Dimensions in dims can be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";

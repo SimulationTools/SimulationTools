@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Stack`"];
+BeginPackage["SimulationTools`Stack`"];
 
 WithStackFrame(*::usage = "WithStackFrame[sf,expr] evaluates expr and adds the stack frame sf to the evaluation stack."*);
 ShowStack(*::usage = "ShowStack[] returns a representation of the evaluation stack in a form suitable for display."*);

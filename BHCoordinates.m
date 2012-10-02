@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["BHCoordinates`",
+BeginPackage["SimulationTools`BHCoordinates`",
  {
-  "RunFiles`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "Providers`"
+  "SimulationTools`RunFiles`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Providers`"
  }];
 
 (* This package is deprecated.  Please use the Binary package instead. *)

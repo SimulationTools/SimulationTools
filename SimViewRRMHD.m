@@ -14,20 +14,20 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimViewRRMHD`",
+BeginPackage["SimulationTools`SimViewRRMHD`",
  {
-  "Ascii1D`",
-  "Ascii`",
-  "BHCoordinates`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "NR`",
-  "Parameters`",
-  "Plotting`",
-  "RunFiles`",
-  "SystemStatistics`"
+  "SimulationTools`Ascii1D`",
+  "SimulationTools`Ascii`",
+  "SimulationTools`BHCoordinates`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`NR`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`SystemStatistics`"
  }];
 
 SimViewRRMHD;

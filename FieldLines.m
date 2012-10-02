@@ -14,18 +14,18 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["FieldLines`",
+BeginPackage["SimulationTools`FieldLines`",
  {
-  "GridFunctions`",
-  "DataAnalysis`",
-  "DataRegion`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Parameters`",
-  "Plotting`",
-  "Profile`",
-  "RunFiles`"
+  "SimulationTools`GridFunctions`",
+  "SimulationTools`DataAnalysis`",
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`Profile`",
+  "SimulationTools`RunFiles`"
  }];
 
 (****************************************************************)

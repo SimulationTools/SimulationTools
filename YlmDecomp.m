@@ -14,13 +14,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["YlmDecomp`",
+BeginPackage["SimulationTools`YlmDecomp`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 Begin["`Private`"];
@@ -39,10 +39,10 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
   runFiles
 ];
 
-YlmDecomp`Waveforms`HaveData[runName_, args___] :=
-  !StringMatchQ[Catch[FindRunDir[runName]], "Cannot*"] && YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+SimulationTools`YlmDecomp`Waveforms`HaveData[runName_, args___] :=
+  !StringMatchQ[Catch[FindRunDir[runName]], "Cannot*"] && SimulationTools`YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
 
-YlmDecomp`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
+SimulationTools`YlmDecomp`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{fileName, threeCols, psi4},
     fileName = "Ylm_WEYLSCAL4::"<>YlmDecompPsi4Variable<>"r_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
@@ -50,7 +50,7 @@ YlmDecomp`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[MakeDataTable[psi4]]];
 
-YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName_] :=
+SimulationTools`YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{names, radiusFromFileName, radii},
     names = getFiles[runName];
     radiusFromFileName[name_] :=
@@ -59,7 +59,7 @@ YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName_] :=
         ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
     radii = Sort[Union[Map[radiusFromFileName, names]]]];
 
-YlmDecomp`Waveforms`ReadPsi4Modes[runName_] :=
+SimulationTools`YlmDecomp`Waveforms`ReadPsi4Modes[runName_] :=
   Module[{names},
     names = getFiles[runName];
     Sort[Round /@ ToExpression /@ (Union@@StringCases[names,

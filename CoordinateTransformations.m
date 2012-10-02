@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["CoordinateTransformations`"];
+BeginPackage["SimulationTools`CoordinateTransformations`"];
 
 (* Exported symbols *)
 RadialToTortoise::usage = "RadialToTortoise[r, M] gives the value of the Schwarzschild tortoise coordinate corresponding to the radial coordinate, r.";

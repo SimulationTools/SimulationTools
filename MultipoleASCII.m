@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["MultipoleASCII`",
+BeginPackage["SimulationTools`MultipoleASCII`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "MultipoleHDF5`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`MultipoleHDF5`",
+  "SimulationTools`RunFiles`"
  }];
 
 Begin["`Private`"];
@@ -36,10 +36,10 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
   runFiles
 ];
 
-MultipoleASCII`Waveforms`HaveData[runName_, args___] :=
-  HaveRunDir[runName] && MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+SimulationTools`MultipoleASCII`Waveforms`HaveData[runName_, args___] :=
+  HaveRunDir[runName] && SimulationTools`MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
 
-MultipoleASCII`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
+SimulationTools`MultipoleASCII`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{fileName, threeCols, psi4},
     fileName = "mp_"<>$MultipolePsi4Variable<>"_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
@@ -47,7 +47,7 @@ MultipoleASCII`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, ra
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
     Return[MakeDataTable[psi4]]];
 
-MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName_] :=
+SimulationTools`MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{names, radiusFromFileName, radii},
     names = getFiles[runName];
     radiusFromFileName[name_] :=
@@ -56,7 +56,7 @@ MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName_] :=
         ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
     radii = Sort[Union[Map[radiusFromFileName, names]]]];
 
-MultipoleASCII`Waveforms`ReadPsi4Modes[runName_] :=
+SimulationTools`MultipoleASCII`Waveforms`ReadPsi4Modes[runName_] :=
   Module[{names},
    names = getFiles[runName];
    Sort[Round /@ ToExpression /@ 

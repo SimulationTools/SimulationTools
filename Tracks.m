@@ -14,13 +14,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Tracks`",
+BeginPackage["SimulationTools`Tracks`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "NR`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`NR`",
+  "SimulationTools`RunFiles`"
  }];
 
 AnimateTracks;

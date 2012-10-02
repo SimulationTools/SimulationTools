@@ -14,10 +14,10 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["CactusTimers`",
+BeginPackage["SimulationTools`CactusTimers`",
  {
-  "Error`",
-  "Profile`"
+  "SimulationTools`Error`",
+  "SimulationTools`Profile`"
  }];
 
 ChartTimers(*::usage = "ChartTimers[timers] gives a pie chart of the timers.  Note that it only makes sense if the timers are independent.\nChartTimers[filename, n] gives a pie chart of the top n independent timers in file 'filename'.  If omitted, n defaults to 15."*);

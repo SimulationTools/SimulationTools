@@ -14,15 +14,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["CarpetHDF5Plot`",
+BeginPackage["SimulationTools`CarpetHDF5Plot`",
  {
-  "CarpetHDF5`",
-  "DataRegion`",
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Plotting`",
-  "RunFiles`"
+  "SimulationTools`CarpetHDF5`",
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`RunFiles`"
  }];
 
 Carpet1DPlotter(*::usage = "Carpet1DPlotter[sim] generates an interactive plot of the 1D HDF5 variables in sim"*);

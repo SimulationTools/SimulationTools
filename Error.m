@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Error`"];
+BeginPackage["SimulationTools`Error`"];
 
 Error(*::usage = "Error[message, arg1, arg2, ...] reports an error to the user."*);
 WithExceptions;

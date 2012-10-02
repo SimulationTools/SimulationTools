@@ -14,13 +14,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["DataRegion`",
+BeginPackage["SimulationTools`DataRegion`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "NR`",
-  "Profile`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`NR`",
+  "SimulationTools`Profile`"
  }];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
@@ -711,7 +711,7 @@ Phase[d_DataRegion] :=
     Error["Phase only supports 1 dimensional DataRegions."];
   ];
 
-  ToDataRegion[DataRepresentations`Private`phase[ToList[d]][[All, 2]], MinCoordinates[d], CoordinateSpacings[d]]
+  ToDataRegion[SimulationTools`DataRepresentations`Private`phase[ToList[d]][[All, 2]], MinCoordinates[d], CoordinateSpacings[d]]
 ];
 
 (**********************************************************)

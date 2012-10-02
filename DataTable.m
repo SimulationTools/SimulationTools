@@ -14,12 +14,12 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["DataTable`",
+BeginPackage["SimulationTools`DataTable`",
  {
-  "DataRepresentations`",
-  "Error`",
-  "Profile`",
-  "Utils`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`Error`",
+  "SimulationTools`Profile`",
+  "SimulationTools`Utils`"
  }];
 
 DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of data (fi) with an associated coordinate (xi).  DataTable objects print as DataTable[...] to avoid printing the potentially large data content.  The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.";
@@ -374,7 +374,7 @@ DataTable /: Part[d:DataTable[l_, x___], args__] :=
 (**********************************************************)
 
 Phase[d_DataTable] :=
-  ToDataTable[DataRepresentations`Private`phase[ToList[d]]];
+  ToDataTable[SimulationTools`DataRepresentations`Private`phase[ToList[d]]];
 
 
 (**********************************************************)
@@ -486,12 +486,12 @@ ToDataTable[l_List, attrRules:{(_ -> _) ...}] :=
   (* The attrRules are currently unsupported *)
   DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
 
-ToDataTable[d_DataRegion`DataRegion] :=
+ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
  Module[{ndims, xmin, xmax, spacing, data},
   ndims = ArrayDepth[d];
   If[ ndims != 1,
 	Error["ToDataTable: Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
-          <> DataRegion`VariableName[d] <> "' is greater than 1."]
+          <> SimulationTools`DataRegion`VariableName[d] <> "' is greater than 1."]
   ];
 
   {{xmin, xmax}} = CoordinateRanges[d];

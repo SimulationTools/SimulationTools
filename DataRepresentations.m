@@ -14,10 +14,10 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["DataRepresentations`",
+BeginPackage["SimulationTools`DataRepresentations`",
  {
-  "Error`",
-  "Utils`"
+  "SimulationTools`Error`",
+  "SimulationTools`Utils`"
  }];
 
 DataRepresentationQ::usage = "DataRepresentationQ[d] returns True if d is a DataRepresentation type.";

@@ -14,11 +14,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["CarpetVTK`",
+BeginPackage["SimulationTools`CarpetVTK`",
  {
-  "DataRegion`",
-  "DataRepresentations`",
-  "Error`"
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`Error`"
  }];
 
 (* Exported symbols *)

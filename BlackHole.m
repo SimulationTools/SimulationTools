@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["BlackHole`",
+BeginPackage["SimulationTools`BlackHole`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "RunFiles`",
-  "Horizons`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Horizons`"
  }];
 
 ReadBlackHoleMass::usage = "ReadBlackHoleMass[sim, i] gives the mass of the ith black hole in the simulation as a function of time as a DataTable.";

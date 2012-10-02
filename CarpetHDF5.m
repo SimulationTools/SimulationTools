@@ -14,16 +14,16 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["CarpetHDF5`",
+BeginPackage["SimulationTools`CarpetHDF5`",
  {
-  "DataRegion`",
-  "DataRepresentations`",
-  "Error`",
-  "GridFunctions`",
-  "Memo`",
-  "Profile`",
-  "ReadHDF5`",
-  "RunFiles`"
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`Error`",
+  "SimulationTools`GridFunctions`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Profile`",
+  "SimulationTools`ReadHDF5`",
+  "SimulationTools`RunFiles`"
  }];
 
 (****************************************************************)
@@ -376,26 +376,26 @@ getFileOfIt[run_, var_, it_] :=
 
 (* Options[ReadGridFunction] = {Variable -> Automatic, *)
 (*   Map -> Automatic, StripGhostZones -> True}; *)
-GridFunctions`ReadGridFunction[run_String, var_String, it_Integer, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
+SimulationTools`GridFunctions`ReadGridFunction[run_String, var_String, it_Integer, rl:(_Integer|Automatic):Automatic, opts:OptionsPattern[]] :=
   Profile["ReadGridFunction",
   ReadCarpetHDF5Variable[getFileOfIt[run, var, it], getVar[run, var, OptionValue[Variable]],
     it, getRL[run, var, rl], getMap[run, var, OptionValue[Map]],
     FilterRules[{opts}, Options[ReadCarpetHDF5Variable]]]];
 
 (* Options[ReadIterations] = {}; *)
-GridFunctions`ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
+SimulationTools`GridFunctions`ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
   Union@@Map[CarpetHDF5Iterations[#,getRL[run, var, rl]] &, FindRunFile[run, var]];
 
 (* Options[ReadMaps] = {}; *)
-GridFunctions`ReadMaps[run_, var_, opts:OptionsPattern[]] :=
+SimulationTools`GridFunctions`ReadMaps[run_, var_, opts:OptionsPattern[]] :=
   CarpetHDF5Maps[FindFirstRunFile[run, var]];
 
 (* Options[ReadRefinementLevels] = {}; *)
-GridFunctions`ReadRefinementLevels[run_, var_, opts:OptionsPattern[]] :=
+SimulationTools`GridFunctions`ReadRefinementLevels[run_, var_, opts:OptionsPattern[]] :=
   CarpetHDF5RefinementLevels[FindFirstRunFile[run, var]];
 
 (* Options[ReadTimeLevels] = {}; *)
-GridFunctions`ReadTimeLevels[run_, var_, opts:OptionsPattern[]] :=
+SimulationTools`GridFunctions`ReadTimeLevels[run_, var_, opts:OptionsPattern[]] :=
   CarpetHDF5TimeLevels[FindFirstRunFile[run, var]];
 
 Options[ReadVariables] = {};
@@ -403,7 +403,7 @@ ReadVariables[run_, var_, opts:OptionsPattern[]] :=
   CarpetHDF5Variables[FindFirstRunFile[run, var]];
 
 (* Options[ReadTime] = {Variable -> Automatic, Map -> Automatic}; *)
-GridFunctions`ReadTime[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
+SimulationTools`GridFunctions`ReadTime[run_, var_, it_, rl_:Automatic, opts:OptionsPattern[]] :=
   Profile["ReadTime",
     CarpetHDF5Time[getFileOfIt[run, var, it],
     getVar[run, var, OptionValue[Variable]],

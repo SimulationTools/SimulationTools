@@ -14,12 +14,12 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Timers`",
+BeginPackage["SimulationTools`Timers`",
  {
-  "CactusTimers`",
-  "Error`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`CactusTimers`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 (* Interface with CactusTimers package *)

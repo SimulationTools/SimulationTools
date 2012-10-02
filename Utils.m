@@ -14,7 +14,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Utils`", {"Error`"}];
+BeginPackage["SimulationTools`Utils`",
+ {
+  "SimulationTools`Error`"
+ }
+];
 
 $SimulationToolsCompatibilityVersion::usage = "$SimulationToolsCompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of SimulationTools.";
 

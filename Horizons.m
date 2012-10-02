@@ -14,13 +14,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Horizons`",
+BeginPackage["SimulationTools`Horizons`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "RunFiles`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`RunFiles`"
  }];
 
 ReadIHSpin;
@@ -54,7 +54,7 @@ HaveHorizonData;
 
 Begin["`Private`"];
 
-Horizons`Trackers`ReadCoordinates[runName_, i_] :=
+SimulationTools`Horizons`Trackers`ReadCoordinates[runName_, i_] :=
   Table[ReadAHCentroidCoord[runName, i, dir], {dir, 1, 3}];
 
 ReadIHSpin[runName_, hn_] :=

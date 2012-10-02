@@ -16,23 +16,23 @@
 
 (* A package for dealing with numerical relativity data *)
 
-BeginPackage["NR`",
+BeginPackage["SimulationTools`NR`",
  {
-  "BHCoordinates`",
-  "Convergence`",
-  "DataRepresentations`",
-  "DataRegion`",
-  "DataTable`",
-  "Error`",
-  "Horizons`",
-  "Kicks`",
-  "Memo`",
-  "Parameters`",
-  "Plotting`",
-  "ReadHDF5`",
-  "RunFiles`",
-  "SystemStatistics`",
-  "Timers`"
+  "SimulationTools`BHCoordinates`",
+  "SimulationTools`Convergence`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataRegion`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Horizons`",
+  "SimulationTools`Kicks`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`Plotting`",
+  "SimulationTools`ReadHDF5`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`SystemStatistics`",
+  "SimulationTools`Timers`"
  }];
 
 FilterNaNs(*::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data."*);

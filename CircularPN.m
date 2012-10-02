@@ -22,7 +22,7 @@ We will give references to this review with each expression.  We also
 use the notation from this review, and provide a converter to other
 notations. *)
 
-BeginPackage["CircularPN`"];
+BeginPackage["SimulationTools`CircularPN`"];
 
 (* PN variables *)
 

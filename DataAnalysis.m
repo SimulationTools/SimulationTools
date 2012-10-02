@@ -14,11 +14,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["DataAnalysis`",
+BeginPackage["SimulationTools`DataAnalysis`",
  {
-  "DataRepresentations`",
-  "DataTable`",
-  "Error`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
   "PhysicalConstants`",
   "Units`"
  }];

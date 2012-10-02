@@ -14,14 +14,14 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["Statistics`",
+BeginPackage["SimulationTools`Statistics`",
  {
-  "DataTable`",
-  "Error`",
-  "Memo`",
-  "Parameters`",
-  "RunFiles`",
-  "SystemStatistics`"
+  "SimulationTools`DataTable`",
+  "SimulationTools`Error`",
+  "SimulationTools`Memo`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`RunFiles`",
+  "SimulationTools`SystemStatistics`"
  }];
 
 
@@ -117,7 +117,7 @@ cost[run_] :=
    WithExceptions[ReadCores[run]*24,         NoSimulationCoreCountAvailable -> "-"],
    FinishTimeString[run]};
 
-Statistics`SimulationOverview`Plots[runNames_] :=
+SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
   Module[
     {costTable, segments},
 
