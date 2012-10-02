@@ -26,6 +26,10 @@ If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
    ListLogPlot unless we call ListLogPlot once first. *)
 If[$VersionNumber == 8., ListLogPlot[{1}]];
 
+If[$Input === "nrmma.m",
+   Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
+   Abort[]];
+
 Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
   Needs["SimulationTools`ArgumentChecker`"];
   Needs["SimulationTools`Error`"];
