@@ -4,7 +4,7 @@
 
 Paclet[
   Name -> "SimulationTools",
-  Version -> "0.0.1",
+  Version -> "1.0.0",
   MathematicaVersion -> "6+",
   Creator -> "Ian Hinder and Barry Wardell",
   Description -> "SimulationTools is a suite of Mathematica packages for analysing data from computer simulations.",
