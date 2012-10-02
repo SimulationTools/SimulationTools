@@ -72,17 +72,19 @@ NoSimulationRunTimeAvailable;
 Begin["`Private`"];
 
 If[Head[FileNameJoin[{"a","b"}]] === FileNameJoin,
-(* FileNameJoin is not defined *)
-(* TODO: check $System and choose separator *)
-$FileNameSeparator = "/";
+
+(* FileNameJoin (available since v7) is not defined.
+   $PathnameSeparator has been available since v2, according to the
+   documentation. *)
+
 FileNameJoin[elems_] :=
-  StringJoin[Riffle[elems, $FileNameSeparator]];
+  StringJoin[Riffle[elems, $PathnameSeparator]];
 
 FileNameDepth[s_] :=
-  Length[StringCases[s,$FileNameSeparator]] + 1;
+  Length[StringCases[s,$PathnameSeparator]] + 1;
 
 FileNameTake[s_] :=
-  Last[StringSplit[s, $FileNameSeparator]];
+  Last[StringSplit[s, $PathnameSeparator]];
 
 ]; 
 
