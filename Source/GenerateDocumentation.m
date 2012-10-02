@@ -19,14 +19,18 @@ GenerateDocumentation[] :=
 
 packages =
 { 
+  (*"ArgumentChecker",*)
   "Ascii",
   "Ascii1D",
   "AsyncCommand",
   "BHCoordinates",
+  (*"Binary",*)
+  (*"BlackHole",*)
   "CactusTimers",
-  "CarpetHDF5Plot",
   "CarpetHDF5",
+  "CarpetHDF5Plot",
   "CarpetIOHDF5",
+  (*"CarpetVTK",*)
   "CircularPN",
   "Convergence",
   "CoordinateTransformations",
@@ -44,6 +48,7 @@ packages =
   "InitialData",
   "Kicks",
   "Memo",
+  (*"MessageCatcher",*)
   "MinTracker",
   "Movie",
   "MultipoleASCII",
@@ -51,9 +56,8 @@ packages =
   "NR",
   "NRDF",
   "NRExport",
-  "nrmma8",
-  "nrmmaVersion",
   "Parameters",
+  (*"Performance",*)
   "Plotting",
   "Profile",
   "Providers",
@@ -66,12 +70,15 @@ packages =
   "SimView",
   "SimViewRRMHD",
   "Stack",
+  (*"Statistics",*)
   "SystemStatistics",
   "Timers",
+  (*"Trackers",*)
   "Tracks",
   "TwoPunctures",
-  "VTK",
+  (*"Utils",*)
   "Waveforms",
+  (*"Wavelets",*)
   "YlmDecomp"
 };
 
