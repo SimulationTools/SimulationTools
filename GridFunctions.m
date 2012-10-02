@@ -30,13 +30,13 @@ ReadIterations::usage = "ReadIterations[sim, var, dims] reads the iterations pre
 ReadMaps::usage = "ReadMaps[sim, var, dims] reads the multipatch maps present  for the grid function var in sim.";
 ReadRefinementLevels::usage = "ReadRefinementLevels[sim, var, dims] reads the refinement levels present for the grid function var in sim.";
 ReadTimeLevels::usage = "ReadTimeLevels[sim, var, dims] reads the timelevels present for the grid function var in sim.";
+FindGridFunctions::usage = "FindGridFunctions[sim] gives the names of gridfunctions with data available in a simulation.";
+ReadGridFunctionDimensions::usage = "ReadGridFunctionDimensions[sim, var] gives the available dimensions of a gridfunction in a simulation.";
 
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
 
-FindGridFunctions;
-ReadGridFunctionDimensions;
 
 (****************************************************************)
 (* Deprecated                                                   *)
