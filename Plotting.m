@@ -436,7 +436,12 @@ PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
     range = OptionValue[ColorRange];
 	plotkeysize = OptionValue[PlotKeySize];
 
-    If[range === Automatic, range = {Min[data], Max[data]}];
+    If[range === Automatic,
+       range = {minNone[data], maxNone[data]};
+       If[range[[1]] === range[[2]],
+          range[[2]] = range[[1]]+0.1]];
+
+    If[
     keyPlot = key[OptionValue[ColorMap],range,plotkeysize];
 
     plot = DataRegionArrayPlot[data, Sequence@@FilterRules[{opts},Options[ArrayPlot]],
