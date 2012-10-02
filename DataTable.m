@@ -124,46 +124,11 @@ DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
 
 SetAttributes[DataTable, {ReadProtected}];
 
-DataTable /: MakeBoxes[d_DataTable, StandardForm] :=
- Module[{dims, range},
+(* DataTables are formatted like SparseArrays *)
+Format[d:DataTable[l_ /; (Head[l]=!=SequenceForm), ___]] :=
   If[!validQ[d], 
-  TagBox[
-   RowBox[
-    {"DataTable",
-     "[",
-     RowBox[
-      {
-       "\"<\"",
-       "\[InvisibleSpace]",
-       "\">\""
-      }],
-     "]"
-    }],
-   DataTable,
-   Editable -> False],
-  (* else *)
-  dims  = Dimensions[d];
-  range = CoordinateRanges[d];
-
-  TagBox[
-   RowBox[
-    {"DataTable",
-     "[",
-     RowBox[
-      {
-       "\"<\"",
-       "\[InvisibleSpace]",
-       Sequence@@Riffle[dims, ","],
-       "\[InvisibleSpace]",
-       "\">\"",
-       ",",
-       ToBoxes[range]
-      }],
-     "]"
-    }],
-   DataTable,
-   Editable -> False]
-]];
+   DataTable[SequenceForm@@{"<", "invalid", ">"}],
+   DataTable[SequenceForm@@{"<", Length[l], ">"}, {{l[[1, 1]], l[[-1, 1]]}}]];
 
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
 

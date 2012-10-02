@@ -90,33 +90,23 @@ DataRepresentationQ[DataRegion[attrs_, data_]] = True;
 attributes[DataRegion[attrs_, data_]] := attrs;
 data[DataRegion[attrs_, d_]] := d;
 
-DataRegion /: MakeBoxes[d_DataRegion, StandardForm] :=
- Module[{name, dims, range},
-  name = VariableName[d] /. Null -> "<<unnamed>>";
-  dims = Dimensions[d];
-  range = CoordinateRanges[d];
+(* Todo: this could be extended *)
+validQ[d_DataRegion] :=
+  MatchQ[d,DataRegion[{_Rule...}, _List]] &&
+  Complement[{VariableName, Origin, Spacing, Time}, (List@@d)[[1,All,1]]] === {};
 
-  TagBox[
-   RowBox[
-    {"DataRegion",
-     "[",
-     RowBox[
-      {ToString[name],
-       ",",
-       "\"<\"",
-       "\[InvisibleSpace]",
-       Sequence@@Riffle[dims, ","],
-       "\[InvisibleSpace]",
-       "\">\"",
-       ",",
-       ToBoxes[range]
-      }],
-     "]"
-    }],
-   DataRegion,
-   Editable -> False]
-];
+(* DataRegions are formatted like SparseArrays *)
+Format[d:DataRegion[attrs_List, l_List]] :=
+  If[!validQ[d], 
+     DataRegion[SequenceForm@@{"<", "invalid", ">"}],
+     Module[
+       {name, dims, range},
+       name = VariableName[d] /. Null -> "<<unnamed>>";
+       dims = Dimensions[d];
+       range = CoordinateRanges[d];
 
+       DataRegion[ToString[name], SequenceForm@@{"<", Sequence@@Riffle[dims,","], ">"},
+                  range]]];
 
 (**********************************************************)
 (* CoordinateSpacing                                      *)
