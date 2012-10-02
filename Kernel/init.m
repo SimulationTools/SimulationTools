@@ -87,9 +87,5 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
     Protect[$Packages];
 
     ArgumentChecker`WithArgumentChecking[Scan[Needs, packages]];
-
-    SimulationToolsDoc[] :=
-      Scan[Information[(# ~~ (Except["`"] ..)),
-         LongForm -> False] &, packages];
   ]
 ]
