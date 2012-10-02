@@ -27,7 +27,7 @@ $Memoisation::usage = "$Memoisation is a variable which controls whether expensi
 Begin["`Private`"];
 
 If[!ValueQ[$Memoisation],
-  If[$NRMMACompatibilityVersion < 1,
+  If[$SimulationToolsCompatibilityVersion < 1,
     $Memoisation = True;
   ,
     $Memoisation = False;

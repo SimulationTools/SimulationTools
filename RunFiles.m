@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-(* TODO: if a sim doesn't have a parameter file in it, nrmma cannot find ANY files! *)
+(* TODO: if a sim doesn't have a parameter file in it, SimulationTools cannot find ANY files! *)
 
 BeginPackage["RunFiles`",
  {

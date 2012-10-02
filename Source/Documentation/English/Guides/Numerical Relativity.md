@@ -1,16 +1,16 @@
 
 {
- "Application" -> "nrmma",
+ "Application" -> "SimulationTools",
  "Package" -> "Numerical Relativity packages",
  "Title" -> "Numerical Relativity",
  "Summary" -> 
-   "Numerical Relativity functionality in NRMMA",
+   "Numerical Relativity functionality in SimulationTools",
  "Description" -> 
-   {"NRMMA provides various functions for analysing Numerical Relativity data "},
- "Keywords" -> {"nrmma", "NRMMA"},
+   {"SimulationTools provides various functions for analysing Numerical Relativity data "},
+ "Keywords" -> {"SimulationTools", "SimulationTools"},
  "Label" -> "Numerical Relativity guide",
  "Synonyms" -> {},
- "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
+ "URL" -> "http://bitbucket.org/ianhinder/SimulationTools" ,
  "Packages" -> {
 
    GuideSection[

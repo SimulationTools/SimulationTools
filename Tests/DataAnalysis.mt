@@ -1,12 +1,12 @@
-$SimulationPath = {$NRMMATestSimulationDirectory};
+$SimulationPath = {$SimulationToolsTestSimulationDirectory};
 
 (****************************************************************)
 (* NumCycles                                                    *)
 (****************************************************************)
 
 Module[
- {wf1 = Psi4ToStrain[Shifted[30 ReadPsi4[$NRMMATestSimulation, 2, 2, 30], -TortoiseCoordinate[30, ReadADMMass[$NRMMATestSimulation]]], 0.1],
-  wf2 = Psi4ToStrain[Shifted[100 ReadPsi4[$NRMMATestSimulation, 2, 2, 100], -TortoiseCoordinate[100, ReadADMMass[$NRMMATestSimulation]]], 0.1],
+ {wf1 = Psi4ToStrain[Shifted[30 ReadPsi4[$SimulationToolsTestSimulation, 2, 2, 30], -TortoiseCoordinate[30, ReadADMMass[$SimulationToolsTestSimulation]]], 0.1],
+  wf2 = Psi4ToStrain[Shifted[100 ReadPsi4[$SimulationToolsTestSimulation, 2, 2, 100], -TortoiseCoordinate[100, ReadADMMass[$SimulationToolsTestSimulation]]], 0.1],
   sn  = ToDataTable[Table[{f, 125/100 + f/5 - f^2}, {f, -1, 1, 0.01}]],
   withinRoundoff
  },

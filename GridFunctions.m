@@ -93,7 +93,7 @@ Options[ReadGridFunction] = {
     "Map"             -> Automatic,
     "RefinementLevel" -> Automatic,
     "TimeLevel"       -> Automatic,
-    "StripGhostZones" :> If[$NRMMACompatibilityVersion < 1, True, False],
+    "StripGhostZones" :> If[$SimulationToolsCompatibilityVersion < 1, True, False],
     "Variable"        -> Automatic (* Only used by old interface *)
   };
 

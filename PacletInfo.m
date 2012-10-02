@@ -3,11 +3,11 @@
 (* created 2011/03/14*)
 
 Paclet[
-  Name -> "nrmma",
+  Name -> "SimulationTools",
   Version -> "0.0.1",
   MathematicaVersion -> "6+",
   Creator -> "Ian Hinder and Barry Wardell",
-  Description -> "NRMMA is a suite of Mathematica packages for analysing data in Numerical Relativity.",
+  Description -> "SimulationTools is a suite of Mathematica packages for analysing data from computer simulations.",
   Extensions -> 
   {
     { "Kernel",
@@ -31,7 +31,6 @@ Paclet[
         "MultipoleHDF5`",
         "NR`",
         "NRExport`",
-        "nrmmaVersion`",
         "Parameters`",
         "Plotting`",
         "Profile`",
@@ -52,9 +51,9 @@ Paclet[
 
     {"Documentation",
      Language -> "English", 
-     MainPage -> "Guides/NRMMA",
+     MainPage -> "Guides/SimulationTools",
      Resources -> 
-     	{"Guides/NRMMA"}
+     	{"Guides/SimulationTools"}
     }
   }
 ]

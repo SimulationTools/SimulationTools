@@ -8,5 +8,5 @@
   "See Also" -> 
     {"DataTable", "DataRegion", "ToDataTable", "ToDataRegion",
      "ToListOfCoordinates", "ToList"},
-  "More About" -> {"nrmma", "Data Representations"}
+  "More About" -> {"SimulationTools", "Data Representations"}
 }

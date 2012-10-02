@@ -234,7 +234,7 @@ SyntaxInformation[Frequency] =
 
 (* TODO: Since this uses NDerivative, we should be able to specify the method and order of accuracy *)
 Frequency[d_?DataRepresentationQ] :=
-  If[$NRMMACompatibilityVersion < 1, NDerivative[Phase[d]], NDerivative[1][Phase[d]]];
+  If[$SimulationToolsCompatibilityVersion < 1, NDerivative[Phase[d]], NDerivative[1][Phase[d]]];
 
 
 (**********************************************************)

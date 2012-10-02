@@ -1,7 +1,7 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Project: nrmma", "Title"],
+Cell["Project: SimulationTools", "Title"],
 
 Cell[TextData[{
  "Wolfram ",
@@ -12,18 +12,8 @@ Cell[TextData[{
 
 Cell["This notebook is created to test the project.", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData["\<\"Loading nrmma\"\>"], "Print"],
-
-Cell[BoxData["\<\"Loading h5mma\"\>"], "Print"]
-}, Open  ]]
-}, Open  ]],
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -316,3 +306,4 @@ FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",
 StyleDefinitions->"Default.nb"
 ]
+

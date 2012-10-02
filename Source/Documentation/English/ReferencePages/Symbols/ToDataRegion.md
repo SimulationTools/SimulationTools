@@ -6,5 +6,5 @@
   "See Also" -> {
     "ToList", "DataRegion"
    },
-  "More About" -> {"nrmma", "Data Representations"}
+  "More About" -> {"SimulationTools", "Data Representations"}
 }

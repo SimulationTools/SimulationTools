@@ -13,5 +13,5 @@
     "Map[# -> LookupParameter[\"bbh\", #] &, carpetParams] // TableForm"
    },
   "See Also" -> {"FindParameters"},
-  "More About" -> {"nrmma"}
+  "More About" -> {"SimulationTools"}
 }

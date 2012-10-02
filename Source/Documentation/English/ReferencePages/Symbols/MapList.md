@@ -7,5 +7,5 @@
     },
   "See Also" -> 
     {"DataTable", "Map", "ToList"},
-  "More About" -> {"nrmma", "Data Representations"}
+  "More About" -> {"SimulationTools", "Data Representations"}
 }

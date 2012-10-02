@@ -342,7 +342,7 @@ Test[
 ]
 
 Test[
-    Block[{$NRMMACompatibilityVersion = 0.0}, Frequency[dt3]]
+    Block[{$SimulationToolsCompatibilityVersion = 0.0}, Frequency[dt3]]
     ,
     DataTable[{{0., 2.}, {0.6283185307179586, 2.}, {1.2566370614359172, 2.},
       {1.8849555921538759, 2.}, {2.5132741228718345, 2.}, {3.141592653589793, 2.},

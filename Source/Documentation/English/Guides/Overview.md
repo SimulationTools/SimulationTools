@@ -11,16 +11,16 @@ sections2 = Join[DeleteCases[sections, _?(MemberQ[collect[[1,2]], #] &) -> _], n
 packages = Table[{"Title" -> ToString[ps[[1]]], "Functions" -> ToString /@ ps[[2]]}, {ps, sections2}];
 
 {
- "Application" -> "nrmma",
+ "Application" -> "SimulationTools",
  "Package" -> "Overview",
- "Title" -> "NRMMA Overview",
+ "Title" -> "SimulationTools Overview",
  "Summary" -> 
-   "Overview of all functions and symbols provided by nrmma",
- "Description" -> "This page gives an overview of all the functions and symbols provided by nrmma.",
- "Keywords" -> {"nrmma", "NRMMA", "Overview"},
- "Label" -> "NRMMA Application",
- "Synonyms" -> {"NRMMAOverview", "nrmmaOverview"},
- "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
+   "Overview of all functions and symbols provided by SimulationTools",
+ "Description" -> "This page gives an overview of all the functions and symbols provided by SimulationTools.",
+ "Keywords" -> {"SimulationTools", "SimulationTools", "Overview"},
+ "Label" -> "SimulationTools Application",
+ "Synonyms" -> {"SimulationToolsOverview", "SimulationToolsOverview"},
+ "URL" -> "http://bitbucket.org/ianhinder/SimulationTools" ,
  "Packages" -> packages
 }
 ]

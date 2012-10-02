@@ -16,7 +16,7 @@
 *)
 
 
-(* Load NRMMA packages when << nrmma` is run *)
+(* Load SimulationTools packages when << SimulationTools` is run *)
 
 (* Work around a bug in ImportString in Mathematica 8. Without this,
    DataRegion's definition of GetData will cause problems. *)
@@ -26,14 +26,14 @@ If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
    ListLogPlot unless we call ListLogPlot once first. *)
 If[$VersionNumber == 8., ListLogPlot[{1}]];
 
-(* We need to modify the $Path because the packages in nrmma don't
-   specify their dependencies as nrmma`DataTable`, but as just
+(* We need to modify the $Path because the packages in SimulationTools don't
+   specify their dependencies as SimulationTools`DataTable`, but as just
    DataTable`.  Changing this would break existing users.  When users
-   are all using nrmma as a Mathematica application, we can change
+   are all using SimulationTools as a Mathematica application, we can change
    this. *)
 
-$Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]];
-$Path = Prepend[$Path, FileNameDrop[FindFile["nrmma`"], -2]<>"/PirahaPeg"];
+$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]];
+$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"];
 
 Needs["ArgumentChecker`"];
 
@@ -99,7 +99,7 @@ Module[{packages =
 
   ArgumentChecker`WithArgumentChecking[Scan[Needs, packages]];
 
-  NRMMADoc[] :=
+  SimulationToolsDoc[] :=
     Scan[Information[(# ~~ (Except["`"] ..)),
        LongForm -> False] &, packages];
 ]

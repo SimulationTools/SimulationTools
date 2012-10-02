@@ -15,5 +15,5 @@
     },
   "See Also" -> 
     Names["DataRegion`*"],
-  "More About" -> {"nrmma", "Data Representations"}
+  "More About" -> {"SimulationTools", "Data Representations"}
 }

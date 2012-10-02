@@ -10,5 +10,5 @@
    "ReadWalltime",
    "SimulationOverview"
    },
-  "More About" -> {"nrmma"}
+  "More About" -> {"SimulationTools"}
 }

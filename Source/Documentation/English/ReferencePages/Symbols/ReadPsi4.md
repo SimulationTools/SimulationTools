@@ -9,5 +9,5 @@
   "See Also" -> {
     "ReadPsi4Radii", "ReadPsi4Modes", "ReadWaveformFile"
    },
-  "More About" -> {"nrmma"}
+  "More About" -> {"SimulationTools"}
 }

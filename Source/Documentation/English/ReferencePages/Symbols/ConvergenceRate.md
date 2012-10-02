@@ -9,5 +9,5 @@
     "ListLinePlot[ConvergenceRate[{f[h1], f[h2], f[h3]}, {h1, h2, h3}], PlotRange -> {0, 10}]"
    },
   "See Also" -> {"ConvergenceMultiplier"},
-  "More About" -> {"nrmma"}
+  "More About" -> {"SimulationTools"}
 }

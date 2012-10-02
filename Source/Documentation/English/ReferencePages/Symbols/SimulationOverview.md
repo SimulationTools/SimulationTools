@@ -1,6 +1,6 @@
 {
  "Summary" -> "produce a quick overview of a simulation",
- "URL" -> "http://bitbucket.org/ianhinder/nrmma",
+ "URL" -> "http://bitbucket.org/ianhinder/SimulationTools",
  "Tutorials" -> {"NumericalRelativity"},
  "See Also" -> {
    "ReadCores",
@@ -10,7 +10,7 @@
    "ReadSwap",
    "ReadWalltime"
    },
-  "More About" -> {"nrmma"},
+  "More About" -> {"SimulationTools"},
   "More Information" -> {
     "If not specified, rad defaults to the first available extraction radius.",
     "A list of run names may be given, in which case data from all the runs will be displayed on the same plots.",

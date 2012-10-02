@@ -1,6 +1,6 @@
 Resources[
     Version[1],
-    ExecutionBuildCommand["<<nrmma`"],
+    ExecutionBuildCommand["<<SimulationTools`"],
     Paclet[
         DocumentationFolder["Documentation"],
         PacletFolder["."],

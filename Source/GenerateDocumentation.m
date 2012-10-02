@@ -1,4 +1,4 @@
-<< nrmma`;
+<< SimulationTools`;
 
 << ApplicationTools`;
 
@@ -7,7 +7,7 @@ DataTable /: MakeBoxes[d_DataTable, StandardForm] =.;
 Format[DataTable[l_List, attrs__]] :=
  DataTable[Row[{"<", Length[l], ">,", {{l[[1, 1]], l[[-1, 1]]}}}]];
 
-$SimulationPath = {$NRMMATestSimulationDirectory};
+$SimulationPath = {$SimulationToolsTestSimulationDirectory};
 
 (* BeginPackage["GenerateDocumentation`", {"ApplicationTools`"}]; *)
 
@@ -91,7 +91,7 @@ undocumentedSymbols = Map[# -> UndocumentedSymbols[#] &, packages] /. (_ -> {}) 
 
 Print["Building symbol reference pages"];
 docPackage[package_ -> symbols_] :=
-  Map[(Print[#]; BuildSymbolReference["nrmma", #, "Source"]) &, symbols];
+  Map[(Print[#]; BuildSymbolReference["SimulationTools", #, "Source"]) &, symbols];
 Scan[docPackage, packageSymbols];
 
 Print["Building guides"];
@@ -106,7 +106,7 @@ tutorialSources = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "En
 Map[(Print[#]; BuildTutorial[FileNameJoin[{Directory[], #}]])&, tutorialSources];
 
 Print["Indexing Documentation"];
-BuildIndex["nrmma"];
+BuildIndex["SimulationTools"];
 
 (**********************************************************************************************************)
 (* HTML Documentation *)
@@ -116,14 +116,14 @@ Print["Exporting HTML Documentation"];
 
 docLink[s_String] :=
  StringReplace[s,
-  {"paclet:nrmma/ref/" ~~ ss__ :> 
+  {"paclet:SimulationTools/ref/" ~~ ss__ :> 
     "/Documentation/English/ReferencePages/Symbols/" <> ss <> 
      ".xml",
    
-   "paclet:nrmma/tutorial/" ~~ ss__ :> 
+   "paclet:SimulationTools/tutorial/" ~~ ss__ :> 
     "/Documentation/English/Tutorials/" <> StringReplace[ss," "->""] <> ".html",
    
-   "paclet:nrmma/guide/" ~~ ss__ :>
+   "paclet:SimulationTools/guide/" ~~ ss__ :>
     "/Documentation/English/Guides/" <> StringReplace[ss," "->""] <> ".html"}];
 
 generateHTMLDocumentation[] := Module[
@@ -151,9 +151,9 @@ generateHTMLDocumentation[] := Module[
                 StringReplace[FileNameTake[nbf, -1], ".nb" -> ".html"], n2];
          NotebookClose[nb]];
 
-  docDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Documentation"}];
+  docDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Documentation"}];
 
-  dest = If[StringQ[$HTMLDestination], $HTMLDestination, "~/Sites/nrmma/Documentation"];
+  dest = If[StringQ[$HTMLDestination], $HTMLDestination, "~/Sites/SimulationTools/Documentation"];
 
   exportTutorials[] :=
   Module[
@@ -179,7 +179,7 @@ generateHTMLDocumentation[] := Module[
       "DataTable.html" -> "DataTable",
       "GridFunctions.html" -> "Grid functions",
       "Kicks.html" -> "Kicks",
-      "NRMMAIntroduction.html" -> "Introduction",
+      "SimulationToolsIntroduction.html" -> "Introduction",
       "NumericalRelativity.html" -> "Numerical Relativity"};
 
     Print["Exporting tutorial index"];
@@ -198,7 +198,7 @@ generateHTMLDocumentation[] := Module[
   exportGuides[] :=
   Module[
     {srcDir, guideNames},
-    srcDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Source"}];
+    srcDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Source"}];
     guideNames = Map[StringReplace[FileNameTake[#,-1],".md"->""] &, sourceGuides];
 
     Quiet[CreateDirectory[FileNameJoin[{dest,"English","Guides"}],
@@ -217,7 +217,7 @@ generateHTMLDocumentation[] := Module[
   Module[
     {srcDir, docSymbols, symbolsSrcDir},
 
-    srcDir = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Source"}];
+    srcDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Source"}];
     docSymbols = ToString/@Flatten[Map[Last,packageSymbols],1];
     symbolsSrcDir = FileNameJoin[{srcDir}];
 

@@ -5,5 +5,5 @@
     },
   "See Also" -> 
     {"DataTable", "ToDataTable"},
-  "More About" -> {"nrmma", "Data Representations"}
+  "More About" -> {"SimulationTools", "Data Representations"}
 }

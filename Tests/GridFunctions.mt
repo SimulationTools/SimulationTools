@@ -1,7 +1,7 @@
 (* Mathematica Test File *)
 
-$SimulationPath = {$NRMMATestSimulationDirectory};
-TestReferenceDirectory = FileNameJoin[{$NRMMAInstallationDirectory,"Data/TestReference"}];
+$SimulationPath = {$SimulationToolsTestSimulationDirectory};
+TestReferenceDirectory = FileNameJoin[{$SimulationToolsInstallationDirectory,"Data/TestReference"}];
 
 var = "phi";
 
@@ -13,7 +13,7 @@ dims3D = {"x","y","z"};
 
 Module[{data},
     Test[
-        data = GetData[Block[{$NRMMACompatibilityVersion = 0}, ReadGridFunction[$NRMMATestSimulation, var, {"x"},Iteration -> 256]]];
+        data = GetData[Block[{$SimulationToolsCompatibilityVersion = 0}, ReadGridFunction[$SimulationToolsTestSimulation, var, {"x"},Iteration -> 256]]];
         Part[data, {36, 59, 35, 35, 53, 13, 22, 57, 14, 58}]
     ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-1D.m"}]]
@@ -24,7 +24,7 @@ Module[{data},
 
 Module[{data},
     Test[
-        data = GetData[Block[{$NRMMACompatibilityVersion = 0}, ReadGridFunction[$NRMMATestSimulation, var, {"x","y"}, Iteration -> 1024]]];
+        data = GetData[Block[{$SimulationToolsCompatibilityVersion = 0}, ReadGridFunction[$SimulationToolsTestSimulation, var, {"x","y"}, Iteration -> 1024]]];
         Map[Part[data, Sequence @@ #] &,
             {{16, 39}, {4, 17}, {28, 58}, {96, 12}, {32, 38},
              {96, 52}, {27, 47}, {114, 5}, {105, 34}, {14, 5}}
@@ -38,7 +38,7 @@ Module[{data},
 
 Module[{data},
 	Test[
-        data = GetData[Block[{$NRMMACompatibilityVersion = 0}, ReadGridFunction[$NRMMATestSimulation, var, {"x","y","z"}]]];
+        data = GetData[Block[{$SimulationToolsCompatibilityVersion = 0}, ReadGridFunction[$SimulationToolsTestSimulation, var, {"x","y","z"}]]];
         Map[Part[data, Sequence @@ #] &,
             {{49, 1, 4}, {1, 59, 41}, {15, 36, 52}, {14, 20, 38}, {41, 71, 2},
              {18, 1, 35}, {8, 38, 53}, {25, 21, 37}, {51, 80, 44}, {44, 113, 37}}
@@ -54,7 +54,7 @@ Module[{data},
 (* ReadIterations *)
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, {"x"}]
+    ReadIterations[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
 ,
@@ -62,7 +62,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, {"x","y"}]
+    ReadIterations[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
 ,
@@ -70,7 +70,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, {"x","y","z"}]
+    ReadIterations[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
 ,
@@ -80,7 +80,7 @@ Test[
 (* Dimensions specifications *)
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, {1}]
+    ReadIterations[$SimulationToolsTestSimulation, var, {1}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
 ,
@@ -88,7 +88,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, {1,2}]
+    ReadIterations[$SimulationToolsTestSimulation, var, {1,2}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
 ,
@@ -96,7 +96,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, {1,2,3}]
+    ReadIterations[$SimulationToolsTestSimulation, var, {1,2,3}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
 ,
@@ -104,7 +104,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, "x"]
+    ReadIterations[$SimulationToolsTestSimulation, var, "x"]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
 ,
@@ -112,7 +112,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, "xy"]
+    ReadIterations[$SimulationToolsTestSimulation, var, "xy"]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
 ,
@@ -120,7 +120,7 @@ Test[
 ]
 
 Test[
-    ReadIterations[$NRMMATestSimulation, var, "xyz"]
+    ReadIterations[$SimulationToolsTestSimulation, var, "xyz"]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
 ,
@@ -131,7 +131,7 @@ Test[
 (* ReadMaps *)
 
 Test[
-    ReadMaps[$NRMMATestSimulation, var, {"x"}]
+    ReadMaps[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-1D.m"}]]
 ,
@@ -139,7 +139,7 @@ Test[
 ]
 
 Test[
-    ReadMaps[$NRMMATestSimulation, var, {"x","y"}]
+    ReadMaps[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-2D.m"}]]
 ,
@@ -147,7 +147,7 @@ Test[
 ]
 
 Test[
-    ReadMaps[$NRMMATestSimulation, var, {"x","y","z"}]
+    ReadMaps[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-3D.m"}]]
 ,
@@ -157,7 +157,7 @@ Test[
 (* ReadRefinementLevels *)
 
 Test[
-    ReadRefinementLevels[$NRMMATestSimulation, var, {"x"}]
+    ReadRefinementLevels[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-1D.m"}]]
 ,
@@ -165,7 +165,7 @@ Test[
 ]
 
 Test[
-    ReadRefinementLevels[$NRMMATestSimulation, var, {"x","y"}]
+    ReadRefinementLevels[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-2D.m"}]]
 ,
@@ -173,7 +173,7 @@ Test[
 ]
 
 Test[
-    ReadRefinementLevels[$NRMMATestSimulation, var, {"x","y","z"}]
+    ReadRefinementLevels[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-3D.m"}]]
 ,
@@ -184,7 +184,7 @@ Test[
 (* ReadTime *)
 
 Test[
-    ReadTime[$NRMMATestSimulation, var, {"x"}, Iteration -> 256, RefinementLevel -> 5]
+    ReadTime[$SimulationToolsTestSimulation, var, {"x"}, Iteration -> 256, RefinementLevel -> 5]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-1D.m"}]]
 ,
@@ -192,7 +192,7 @@ Test[
 ]
 
 Test[
-    ReadTime[$NRMMATestSimulation, var, {"x","y"}, Iteration -> 1024, RefinementLevel -> 2]
+    ReadTime[$SimulationToolsTestSimulation, var, {"x","y"}, Iteration -> 1024, RefinementLevel -> 2]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-2D.m"}]]
 ,
@@ -200,7 +200,7 @@ Test[
 ]
 
 Test[
-    ReadTime[$NRMMATestSimulation, var, {"x","y","z"}, Iteration -> 8192, RefinementLevel -> 0]
+    ReadTime[$SimulationToolsTestSimulation, var, {"x","y","z"}, Iteration -> 8192, RefinementLevel -> 0]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-3D.m"}]]
 ,
@@ -210,7 +210,7 @@ Test[
 (* ReadTimeLevels *)
 
 Test[
-    ReadTimeLevels[$NRMMATestSimulation, var, {"x"}]
+    ReadTimeLevels[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-1D.m"}]]
 ,
@@ -218,7 +218,7 @@ Test[
 ]
 
 Test[
-    ReadTimeLevels[$NRMMATestSimulation, var, {"x","y"}]
+    ReadTimeLevels[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-2D.m"}]]
 ,
@@ -226,7 +226,7 @@ Test[
 ]
 
 Test[
-    ReadTimeLevels[$NRMMATestSimulation, var, {"x","y","z"}]
+    ReadTimeLevels[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-3D.m"}]]
 ,

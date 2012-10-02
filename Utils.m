@@ -16,16 +16,16 @@
 
 BeginPackage["Utils`", {"Error`"}];
 
-$NRMMACompatibilityVersion::usage = "$NRMMACompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of NRMMA.";
+$SimulationToolsCompatibilityVersion::usage = "$SimulationToolsCompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of SimulationTools.";
 
-$NRMMAInformation::usage = "$NRMMAInformation is a list of rules that gives information about the version of NRMMA you are running.";
-$NRMMAInstallationDirectory::usage = "$NRMMAInstallationDirectory gives the top-level directory in which NRMMA is installed.";
+$SimulationToolsInformation::usage = "$SimulationToolsInformation is a list of rules that gives information about the version of SimulationTools you are running.";
+$SimulationToolsInstallationDirectory::usage = "$SimulationToolsInstallationDirectory gives the top-level directory in which SimulationTools is installed.";
 
-$NRMMAVersionNumber::usage = "$NRMMAVersionNumber is a real number which gives the current NRMMA version number.";
-$NRMMAReleaseNumber::usage = "$NRMMAReleaseNumber is an integer which gives the current NRMMA release number.";
-$NRMMAVersion::usage = "$NRMMAVersionNumber is a string that gives the version of NRMMA you are running.";
+$SimulationToolsVersionNumber::usage = "$SimulationToolsVersionNumber is a real number which gives the current SimulationTools version number.";
+$SimulationToolsReleaseNumber::usage = "$SimulationToolsReleaseNumber is an integer which gives the current SimulationTools release number.";
+$SimulationToolsVersion::usage = "$SimulationToolsVersionNumber is a string that gives the version of SimulationTools you are running.";
 
-SimulationPath::usage = "SimulationPath[] gives the list of directories which NRMMA will search for simulations.  It contains those directories listed in $SimulationPath as well as (for backward compatibility) the value of RunDirectory if it exists.";
+SimulationPath::usage = "SimulationPath[] gives the list of directories which SimulationTools will search for simulations.  It contains those directories listed in $SimulationPath as well as (for backward compatibility) the value of RunDirectory if it exists.";
 
 Global`$SimulationPath::usage = "$SimulationPath is the default list of directories to search in attempting to find a simulation."; 
 
@@ -33,8 +33,8 @@ Global`$SimulationPath::usage = "$SimulationPath is the default list of director
 (* Experimental                                                 *)
 (****************************************************************)
 
-$NRMMATestSimulationDirectory;
-$NRMMATestSimulation;
+$SimulationToolsTestSimulationDirectory;
+$SimulationToolsTestSimulation;
 
 (****************************************************************)
 (* Deprecated                                                   *)
@@ -44,19 +44,19 @@ nrmmaVersion;
 
 Begin["`Private`"];
 
-$NRMMAInstallationDirectory = FileNameDrop[FindFile["nrmma`"], -2];
-$NRMMATestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"], -2], "Data","Simulations"}];
-$NRMMATestSimulation = "bbh";
+$SimulationToolsInstallationDirectory = FileNameDrop[FindFile["SimulationTools`"], -2];
+$SimulationToolsTestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"], -2], "Data","Simulations"}];
+$SimulationToolsTestSimulation = "bbh";
 
-$NRMMAVersionNumber        = 1.0;
-$NRMMAReleaseNumber        = 0;
-$NRMMACompatibilityVersion = $NRMMAVersionNumber;
+$SimulationToolsVersionNumber        = 1.0;
+$SimulationToolsReleaseNumber        = 0;
+$SimulationToolsCompatibilityVersion = $SimulationToolsVersionNumber;
 
-$NRMMAVersion :=
+$SimulationToolsVersion :=
  Module[{path, version, release, buildid, gitrev},
-  path = $NRMMAInstallationDirectory;
-  version = ToString[NumberForm[$NRMMAVersionNumber, {Infinity, 1}]];
-  release = ToString[$NRMMAReleaseNumber];
+  path = $SimulationToolsInstallationDirectory;
+  version = ToString[NumberForm[$SimulationToolsVersionNumber, {Infinity, 1}]];
+  release = ToString[$SimulationToolsReleaseNumber];
 
   buildid = Quiet@ReadList[FileNameJoin[{path, "BUILD_ID"}], "String"];
   If[SameQ[buildid, $Failed],
@@ -77,18 +77,18 @@ $NRMMAVersion :=
   version <> "." <> release <> buildid <> " (git revision: " <> gitrev <>")"
 ]
 
-$NRMMAInformation :=
-  {"InstallationDirectory" -> $NRMMAInstallationDirectory,
-   "Version" -> $NRMMAVersion,
-   "VersionNumber" -> $NRMMAVersionNumber,
-   "ReleaseNumber" -> $NRMMAReleaseNumber}
+$SimulationToolsInformation :=
+  {"InstallationDirectory" -> $SimulationToolsInstallationDirectory,
+   "Version" -> $SimulationToolsVersion,
+   "VersionNumber" -> $SimulationToolsVersionNumber,
+   "ReleaseNumber" -> $SimulationToolsReleaseNumber}
 
 
 (****************************************************************)
 (* Deprecated                                                   *)
 (****************************************************************)
 
-nrmmaVersion[] = $NRMMAInformation;
+nrmmaVersion[] = $SimulationToolsInformation;
 
 SimulationPath[] :=
   Join[If[ValueQ[Global`$SimulationPath],

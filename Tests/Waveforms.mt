@@ -1,10 +1,10 @@
 (* Mathematica Test File *)
 
-$SimulationPath = {$NRMMATestSimulationDirectory};
+$SimulationPath = {$SimulationToolsTestSimulationDirectory};
 
-TestReferenceDirectory = FileNameJoin[{FileNameDrop[FindFile["nrmma`"],-2],"Data/TestReference"}];
+TestReferenceDirectory = FileNameJoin[{$SimulationToolsInstallationDirectory,"Data/TestReference"}];
 
-testDirectory = FileNameJoin[{$TemporaryDirectory,"nrmma-unit-tests","Waveforms"}];
+testDirectory = FileNameJoin[{$TemporaryDirectory,"SimulationTools-unit-tests","Waveforms"}];
 DeleteDirectory[testDirectory,DeleteContents->True];
 CreateDirectory[testDirectory];
 
@@ -13,7 +13,7 @@ CreateDirectory[testDirectory];
 (****************************************************************)
 
 Test[
-    ReadWaveformCycles[$NRMMATestSimulation, 150]
+    ReadWaveformCycles[$SimulationToolsTestSimulation, 150]
     ,
     2.7650708168336315
     ,
@@ -25,7 +25,7 @@ Test[
 (****************************************************************)
 
 Test[
-    WaveformCycles[ReadPsi4[$NRMMATestSimulation,2,2,100], 150]
+    WaveformCycles[ReadPsi4[$SimulationToolsTestSimulation,2,2,100], 150]
     ,
     2.7650708168336315
     ,
@@ -48,7 +48,7 @@ Module[
 	TestID->"ReadPsi4_mp_asc"]]
 
 Test[
-  ToList[ReadPsi4[$NRMMATestSimulation,2,2,100]][[{1,2,200,-1}]]
+  ToList[ReadPsi4[$SimulationToolsTestSimulation,2,2,100]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadPsi4.m"}]]
   ,
@@ -56,7 +56,7 @@ Test[
     ]
 
 Test[
-  ReadPsi4Radii[$NRMMATestSimulation]
+  ReadPsi4Radii[$SimulationToolsTestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadPsi4Radii.m"}]]
   ,
@@ -141,7 +141,7 @@ Test[
     ]
 
 Test[
-  ToList[Psi4ToStrain[ReadPsi4[$NRMMATestSimulation,2,2,100],0.02]][[{1,2,200,-1}]]
+  ToList[Psi4ToStrain[ReadPsi4[$SimulationToolsTestSimulation,2,2,100],0.02]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-2.m"}]]
   ,

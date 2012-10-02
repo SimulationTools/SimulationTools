@@ -3,7 +3,7 @@
  "Package" -> "nrmma",
  "Title" -> "NRMMA Package",
  "Summary" -> 
-   "A package for analysing data in Numerical Relativity.",
+   "A package for analysing data from computer simulations.",
  "Description" -> 
    {"NRMMA is a ", StyleBox["Mathematica", FontSlant->"Italic"],
     " application for analysing data from numerical simulations.  See ",

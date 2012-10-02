@@ -30,7 +30,7 @@ Begin["`Private`"];
 
 (* TODO: this won't work because of the absolute path and missing QNM data *)
 ReadMOm[l_, m_, n_] :=
- Import["~/Projects/nrmma/QNM-DATA/n" <> ToString[n + 1] <> "l" <> 
+ Import["~/Projects/SimulationTools/QNM-DATA/n" <> ToString[n + 1] <> "l" <> 
    ToString[l] <> 
    "m" <> (If[m >= 0, ToString[m], "m" <> ToString[-m]]) <> ".dat"]
 

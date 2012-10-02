@@ -18,7 +18,7 @@ EnsureJava[] :=
      Null,
      (* else *)
      InstallJava[];
-     AddToClassPath[FileNameJoin[{nrmmaDir,"PirahaPeg","piraha.jar"}]];
+     AddToClassPath[FileNameJoin[{SimulationToolsDir,"PirahaPeg","piraha.jar"}]];
      javaInstalled = True];
 
 (* The JRE does not share a current directory with the Mathematica
@@ -28,7 +28,7 @@ EnsureJava[] :=
 absPath[s_String] :=
   If[StringTake[s,1] === $PathnameSeparator, s, FileNameJoin[{Directory[],s}]];
 
-nrmmaDir = FileNameDrop[FindFile["nrmma`"],-2];
+SimulationToolsDir = FileNameDrop[FindFile["SimulationTools`"],-2];
 
 DefFn[
   Parse[grammarFileName_String, pattern_String, inputFileName_String] :=
@@ -39,8 +39,8 @@ DefFn[
 
     If[FileExistsQ[grammarFileName],
        gf = grammarFileName,
-       If[FileExistsQ[FileNameJoin[{nrmmaDir, "Grammars", grammarFileName}]],
-          gf=FileNameJoin[{nrmmaDir, "Grammars", grammarFileName}],
+       If[FileExistsQ[FileNameJoin[{SimulationToolsDir, "Grammars", grammarFileName}]],
+          gf=FileNameJoin[{SimulationToolsDir, "Grammars", grammarFileName}],
           Error[StringForm["Cannot find grammar '`1`'", grammarFileName]]]];
 
     g = JavaNew["edu.lsu.cct.piraha.Grammar"];
