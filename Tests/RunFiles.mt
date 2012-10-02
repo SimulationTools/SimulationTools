@@ -193,7 +193,7 @@ Module[{runDir,runName="testrun12",testFile="MyFile.asc",testFilePaths},
 	
 (* FindSimulationFiles *)	
 	
-Module[{runDir,runName="testrun12",testDirPaths,testFile="MyFile.asc",testFilePaths},
+Module[{runDir,runName="testrun12.1",testDirPaths,testFile="MyFile.asc",testFilePaths},
 	runDir = FileNameJoin[{simulationPath,runName}];
 	CreateDirectory[runDir];
 	CreateDirectory[FileNameJoin[{runDir,"SIMFACTORY"}]];
