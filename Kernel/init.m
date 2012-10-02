@@ -26,71 +26,70 @@ If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
    ListLogPlot unless we call ListLogPlot once first. *)
 If[$VersionNumber == 8., ListLogPlot[{1}]];
 
-PrependTo[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"];
+Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
+  Needs["SimulationTools`ArgumentChecker`"];
+  Needs["SimulationTools`Error`"];
 
-Needs["SimulationTools`ArgumentChecker`"];
+  Module[{packages =
+   {"SimulationTools`Ascii1D`",
+    "SimulationTools`Ascii`",
+    "SimulationTools`BHCoordinates`",
+    "SimulationTools`Binary`",
+    "SimulationTools`BlackHole`",
+    "SimulationTools`CarpetIOHDF5`",
+    "SimulationTools`CarpetHDF5`",
+    "SimulationTools`CoordinateTransformations`",
+    "SimulationTools`Convergence`",
+    "SimulationTools`DataAnalysis`",
+    "SimulationTools`DataRegion`",
+    "SimulationTools`DataRepresentations`",
+    "SimulationTools`DataTable`",
+    "SimulationTools`FieldLines`",
+    "SimulationTools`GridFunctions`",
+    "SimulationTools`Grids`",
+    "SimulationTools`Horizons`",
+    "SimulationTools`IniFile`",
+    "SimulationTools`InitialData`",
+    "SimulationTools`Kicks`",
+    "SimulationTools`Memo`",
+    "SimulationTools`MessageCatcher`",
+    "SimulationTools`MinTracker`",
+    "SimulationTools`Movie`",
+    "SimulationTools`MultipoleASCII`",
+    "SimulationTools`MultipoleHDF5`",
+    "SimulationTools`NR`",
+    "SimulationTools`NRDF`",
+    "SimulationTools`NRExport`",
+    "SimulationTools`Parameters`",
+    "SimulationTools`Performance`",
+    "SimulationTools`Plotting`",
+    "SimulationTools`Profile`",
+    "SimulationTools`Providers`",
+    "SimulationTools`PunctureTracker`",
+    "SimulationTools`ReadHDF5`",
+    "SimulationTools`RunFiles`",
+    "SimulationTools`ShiftTracker`",
+    "SimulationTools`SimFactory`",
+    "SimulationTools`SimView`",
+    "SimulationTools`SimViewRRMHD`",
+    "SimulationTools`Statistics`",
+    "SimulationTools`SystemStatistics`",
+    "SimulationTools`Trackers`",
+    "SimulationTools`Tracks`",
+    "SimulationTools`TwoPunctures`",
+    "SimulationTools`Utils`",
+    "SimulationTools`Waveforms`",
+    "SimulationTools`YlmDecomp`",
+    If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]}},
 
-Needs["SimulationTools`Error`"];
+    Unprotect[$Packages];
+    $Packages = Complement[$Packages, packages];
+    Protect[$Packages];
 
-Module[{packages =
- {"SimulationTools`Ascii1D`",
-  "SimulationTools`Ascii`",
-  "SimulationTools`BHCoordinates`",
-  "SimulationTools`Binary`",
-  "SimulationTools`BlackHole`",
-  "SimulationTools`CarpetIOHDF5`",
-  "SimulationTools`CarpetHDF5`",
-  "SimulationTools`CoordinateTransformations`",
-  "SimulationTools`Convergence`",
-  "SimulationTools`DataAnalysis`",
-  "SimulationTools`DataRegion`",
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`FieldLines`",
-  "SimulationTools`GridFunctions`",
-  "SimulationTools`Grids`",
-  "SimulationTools`Horizons`",
-  "SimulationTools`IniFile`",
-  "SimulationTools`InitialData`",
-  "SimulationTools`Kicks`",
-  "SimulationTools`Memo`",
-  "SimulationTools`MessageCatcher`",
-  "SimulationTools`MinTracker`",
-  "SimulationTools`Movie`",
-  "SimulationTools`MultipoleASCII`",
-  "SimulationTools`MultipoleHDF5`",
-  "SimulationTools`NR`",
-  "SimulationTools`NRDF`",
-  "SimulationTools`NRExport`",
-  "SimulationTools`Parameters`",
-  "SimulationTools`Performance`",
-  "SimulationTools`Plotting`",
-  "SimulationTools`Profile`",
-  "SimulationTools`Providers`",
-  "SimulationTools`PunctureTracker`",
-  "SimulationTools`ReadHDF5`",
-  "SimulationTools`RunFiles`",
-  "SimulationTools`ShiftTracker`",
-  "SimulationTools`SimFactory`",
-  "SimulationTools`SimView`",
-  "SimulationTools`SimViewRRMHD`",
-  "SimulationTools`Statistics`",
-  "SimulationTools`SystemStatistics`",
-  "SimulationTools`Trackers`",
-  "SimulationTools`Tracks`",
-  "SimulationTools`TwoPunctures`",
-  "SimulationTools`Utils`",
-  "SimulationTools`Waveforms`",
-  "SimulationTools`YlmDecomp`",
-  If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]}},
+    ArgumentChecker`WithArgumentChecking[Scan[Needs, packages]];
 
-  Unprotect[$Packages];
-  $Packages = Complement[$Packages, packages];
-  Protect[$Packages];
-
-  ArgumentChecker`WithArgumentChecking[Scan[Needs, packages]];
-
-  SimulationToolsDoc[] :=
-    Scan[Information[(# ~~ (Except["`"] ..)),
-       LongForm -> False] &, packages];
+    SimulationToolsDoc[] :=
+      Scan[Information[(# ~~ (Except["`"] ..)),
+         LongForm -> False] &, packages];
+  ]
 ]
