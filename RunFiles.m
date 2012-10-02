@@ -71,16 +71,18 @@ NoSimulationRunTimeAvailable;
 
 Begin["`Private`"];
 
-If[FileNameJoin[{"a","b"}] =!= "a/b",
-
+If[Head[FileNameJoin[{"a","b"}]] === FileNameJoin,
+(* FileNameJoin is not defined *)
+(* TODO: check $System and choose separator *)
+$FileNameSeparator = "/";
 FileNameJoin[elems_] :=
-  StringJoin[Riffle[elems, "/"]];
+  StringJoin[Riffle[elems, $FileNameSeparator]];
 
 FileNameDepth[s_] :=
-  Length[StringCases[s,"/"]] + 1;
+  Length[StringCases[s,$FileNameSeparator]] + 1;
 
 FileNameTake[s_] :=
-  Last[StringSplit[s, "/"]];
+  Last[StringSplit[s, $FileNameSeparator]];
 
 ]; 
 
