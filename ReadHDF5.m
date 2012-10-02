@@ -28,7 +28,7 @@ $h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
 If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 ReadHDF5[file_String, opts_:"Datasets"] :=
-Module[{result, dsIndices},
+Module[{result},
   If[!$h5mma,
     Error["The required h5mma package has not been loaded. Make sure it is installed and functioning correctly."];
   ];

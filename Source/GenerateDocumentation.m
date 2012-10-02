@@ -127,7 +127,7 @@ docLink[s_String] :=
     "/Documentation/English/Guides/" <> StringReplace[ss," "->""] <> ".html"}];
 
 generateHTMLDocumentation[] := Module[
-  {exportNotebook, docDir,dest,tutorials,tutorialHTMLNames,tutorialTitles, exportTutorials, exportGuides, exportSymbols},
+  {exportNotebook, docDir,dest, exportTutorials, exportGuides, exportSymbols},
 
   exportNotebook[dest_String, nbf_String] :=
   Module[{nb, nn, n2},

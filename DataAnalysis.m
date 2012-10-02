@@ -70,7 +70,7 @@ DocumentationBuilder`OptionDescriptions["WaveformMatch"] =
  };
 
 WaveformMatch[{wf1_DataTable, wf2_DataTable}, s_DataTable, OptionsPattern[]] :=
-  Module[{wf1t, wf2t, sn, norm1, norm2, integrand, msun, pad},
+  Module[{wf1t, wf2t, sn, norm1, norm2, integrand, pad},
     (* We take the Fourier transform of the waveforms *)
     wf1t = Fourier[wf1];
     wf2t = Fourier[wf2];
