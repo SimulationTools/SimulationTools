@@ -441,7 +441,6 @@ PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
        If[range[[1]] === range[[2]],
           range[[2]] = range[[1]]+0.1]];
 
-    If[
     keyPlot = key[OptionValue[ColorMap],range,plotkeysize];
 
     plot = DataRegionArrayPlot[data, Sequence@@FilterRules[{opts},Options[ArrayPlot]],
