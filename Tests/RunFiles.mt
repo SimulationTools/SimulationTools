@@ -1,7 +1,7 @@
 (* Mathematica Test File *)
 
 testDirectory = FileNameJoin[{$TemporaryDirectory,"SimulationTools-unit-tests","RunFiles"}];
-DeleteDirectory[testDirectory,DeleteContents->True];
+If[FileExistsQ[testDirectory], DeleteDirectory[testDirectory,DeleteContents->True]];
 CreateDirectory[testDirectory];
 simulationPath = FileNameJoin[{testDirectory,"simulations"}];
 $SimulationPath = {simulationPath};
