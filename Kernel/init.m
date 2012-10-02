@@ -26,14 +26,7 @@ If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
    ListLogPlot unless we call ListLogPlot once first. *)
 If[$VersionNumber == 8., ListLogPlot[{1}]];
 
-(* We need to modify the $Path because the packages in SimulationTools don't
-   specify their dependencies as SimulationTools`DataTable`, but as just
-   DataTable`.  Changing this would break existing users.  When users
-   are all using SimulationTools as a Mathematica application, we can change
-   this. *)
-
-$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]];
-$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"];
+PrependTo[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"];
 
 Needs["SimulationTools`ArgumentChecker`"];
 
