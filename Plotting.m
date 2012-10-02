@@ -29,7 +29,7 @@ BeginPackage["Plotting`",
 DynamicListLinePlot(*::usage = "DynamicListLinePlot[args] is a wrapper around ListLinePlot which adds the ability to zoom into a region of the plot by dragging a box with the mouse.  Double-click to return to the previous zoom level and right-click to show a button-bar with various options including resetting the plot range to All or Automatic, joining the points in the plot, or using a log scale."*);
 PresentationListLinePlot(*::usage = "PresentationListLinePlot[args] is a wrapper around ListLinePlot which uses a plot style designed to be more attractive than the default Mathematica plot style.  A plot legend can be added by giving the option PlotLegend -> {set1, set2, ...} where seti are labels for each of the curves in the plot."*);
 PresentationArrayPlot(*::usage = "PresentationArrayPlot[d] plots a 2-dimensional DataRegion using ArrayPlot.  The data range of the plot is determined automatically from the DataRegion.  The plot style is designed to be more attractive than the default Mathematica plot style."*);
-
+PresentationArrayPlot2;
 
 (****************************************************************)
 (* Deprecated                                                   *)
@@ -496,6 +496,54 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
      DataRegionArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
        ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]
 ];
+
+
+(* PresentationArrayPlot2 (EXPERIMENTAL) *)
+
+(* This is work-in-progress for replacing PresentationArrayPlot.  It's
+   main advantage is that it returns a Graphics object which can be
+   combined with others using Show.  It does this by making the colour
+   bar an inset of the plot rather than an external object which needs
+   to be combined using Row, which is not a Graphics, and cannot be
+   used in Show. *)
+
+Options[key2] = Options[DensityPlot];
+
+key2[{min_, max_}, opts : OptionsPattern[]] :=
+ DensityPlot[y, {x, 0, 1}, {y, min, max}, Frame -> True, 
+  PlotRangePadding -> 0, FrameTicks -> {{All, None}, {None, None}}, 
+  AspectRatio -> Full, opts]
+
+Options[PresentationArrayPlot2] =
+ Join[
+  {"ValueRange" -> Automatic, 
+   "ColorScheme" -> "LightTemperatureMap", "PlotLegend" -> True, 
+   "LegendPosition" -> {Right, Top}}, Options[ArrayPlot]];
+
+PresentationArrayPlot2[data_, opts : OptionsPattern[]] :=
+ Module[{range, plot, legend, plotOpts},
+  range = Switch[OptionValue[ValueRange],
+    Automatic, {minNone[data], maxNone[data]},
+    {_, _}, OptionValue[ValueRange],
+    _, Error[
+     "Unrecognised value " <> ToString[OptionValue[ValueRange]] <> 
+      "for option ValueRange to PresentationArrayPlot"]];
+
+  If[MatchQ[range, {a_,a_}], range[[2]] = range[[1]]+0.1];
+
+  plotOpts = {LabelStyle -> Medium, 
+    ColorFunction -> ColorData[{OptionValue[ColorScheme], range}], 
+    ColorFunctionScaling -> False};
+  plot = ArrayPlot[data, FilterRules[{opts}, Options[ArrayPlot]], 
+    FrameTicks -> {{All, None}, {All, None}}, 
+    PlotRangePadding -> None, plotOpts];
+  legend = If[OptionValue[PlotLegend],
+    Epilog -> 
+     Inset[key2[range, FilterRules[{opts}, Options[key2]], plotOpts], 
+      Offset[{-10, -10}, Scaled[{1, 1}]], ImageScaled[{1, 1}], 
+      Scaled[{0.3, 0.5}]],
+    Graphics[]];
+  Show[plot, legend]];
 
 End[];
 
