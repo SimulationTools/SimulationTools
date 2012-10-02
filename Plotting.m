@@ -425,6 +425,12 @@ DocumentationBuilder`OptionDescriptions["PresentationArrayPlot"] = {
   "PlotKeySize" -> "{w,h} to indicate the width and height of the plot key",
   "PlotKey" -> "whether to display a plot key"};
 
+minNone[d_DataRegion] :=
+  Min[Flatten[DeleteCases[ToListOfData[d], None, Infinity]]];
+
+maxNone[d_DataRegion] :=
+  Max[Flatten[DeleteCases[ToListOfData[d], None, Infinity]]];
+
 PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
   Module[{range, keyPlot, plotkeysize, plot},
     range = OptionValue[ColorRange];
