@@ -596,12 +596,16 @@ Resampled[ds:{DataRegion[__]...}, p_:3] :=
 
 $1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
 $2DPlotFunctions = {ListDensityPlot, ArrayPlot, ListPlot3D, ListContourPlot};
+$3DPlotFunctions = {ListContourPlot3D};
 
 DataRegion /: f_Symbol[d_DataRegion, args___] :=
  plotWrapper[f, 1, d, args] /; MemberQ[$1DPlotFunctions, f];
 
 DataRegion /: f_Symbol[d_DataRegion, args___] :=
  plotWrapper[f, 2, d, args] /; MemberQ[$2DPlotFunctions, f];
+
+DataRegion /: f_Symbol[d_DataRegion, args___] :=
+ plotWrapper[f, 3, d, args] /; MemberQ[$3DPlotFunctions, f];
 
 plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
  Module[{ndims, dataRange, data},
