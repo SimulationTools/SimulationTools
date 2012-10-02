@@ -21,7 +21,8 @@ BeginPackage["SimulationTools`CarpetIOHDF5`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
-  "SimulationTools`ReadHDF5`"
+  "SimulationTools`ReadHDF5`",
+  "SimulationTools`RunFiles`"
  }];
 
 Begin["`Private`"];
@@ -172,6 +173,39 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPat
     annots = Annotations[file, dsName];
     "time" /. annots];
 
+(****************************************************************)
+(* FindGridFunctions *)
+(****************************************************************)
+
+SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
+ Module[{pattern, h5Files, vars, leafnames, basenames, varnames, 
+   var},
+  pattern = 
+   var__ ~~ 
+    "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
+      "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
+  h5Files = FindSimulationFiles["bbh", pattern];
+  leafnames = FileNameTake[#, -1] & /@ h5Files;
+  varnames = Union[First[StringSplit[#, "."]] & /@ leafnames]];
+
+(****************************************************************)
+(* ReadGridFunctionDimensions *)
+(****************************************************************)
+
+SimulationTools`CarpetIOHDF5`GridFunctions`ReadGridFunctionDimensions[sim_String, varName_String] :=
+  Module[{pattern, h5Files, leafnames, dimensions, dimStrings, 
+   dimRules, x},
+  pattern = 
+   varName ~~ 
+    "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
+      "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
+  h5Files = FindSimulationFiles["bbh", pattern];
+  leafnames = FileNameTake[#, -1] & /@ h5Files;
+  dimStrings = StringSplit[#, "."][[2]] & /@ leafnames;
+  dimRules =
+   {(x_String /; StringMatchQ[x, "file_" ~~ (DigitCharacter ..)]) -> 
+     "xyz"};
+  Union[dimStrings /. dimRules]];
 
 (***************************************************************************************)
 (* Defaults                                                                            *)

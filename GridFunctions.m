@@ -31,6 +31,12 @@ ReadMaps::usage = "ReadMaps[sim, var, dims] reads the multipatch maps present  f
 ReadRefinementLevels::usage = "ReadRefinementLevels[sim, var, dims] reads the refinement levels present for the grid function var in sim.";
 ReadTimeLevels::usage = "ReadTimeLevels[sim, var, dims] reads the timelevels present for the grid function var in sim.";
 
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+FindGridFunctions;
+ReadGridFunctionDimensions;
 
 (****************************************************************)
 (* Deprecated                                                   *)
@@ -163,6 +169,12 @@ ReadTime[run_String, var_String, dims1:DimsPattern, opts:OptionsPattern[]] :=
        notFound[run,var,dims,options]];
     CallProvidedFunction["GridFunctions", "ReadTime", {fileName, "Variable" -> var, options}]
 ];
+
+FindGridFunctions[sim_String] :=
+  CallProvidedFunction["GridFunctions", "FindGridFunctions", {sim}];
+
+ReadGridFunctionDimensions[sim_String, varName_String] :=
+  CallProvidedFunction["GridFunctions", "ReadGridFunctionDimensions", {sim, varName}];
 
 Options[getFileOfIt] = Options[ReadGridFunction];
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=

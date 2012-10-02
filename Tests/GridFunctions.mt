@@ -232,3 +232,19 @@ Test[
 ,
     TestID->"ReadTimeLevels-3D"
 ]
+
+Test[
+    FindGridFunctions[$SimulationToolsTestSimulation]
+,
+    {"phi"}
+,
+    TestID->"FindGridFunctions"
+]
+
+Test[
+    ReadGridFunctionDimensions[$SimulationToolsTestSimulation, "phi"]
+,
+    {"x", "xy", "xyz"}
+,
+    TestID->"ReadGridFunctionDimensions"
+]
