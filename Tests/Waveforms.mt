@@ -76,7 +76,7 @@ Test[
   ,
   19.46294218585005
   ,
-  TestID->"ExtrapolateScalar-1"
+  TestID->"ExtrapolateScalar-2"
     ]
 
 Test[
@@ -97,6 +97,39 @@ Test[
   {{0, 19.73214285714284}, {5, 24.732142857142843}, {10, 29.73214285714284}}
   ,
   TestID->"ExtrapolateDataTables-2"
+    ]
+
+(****************************************************************)
+(* RadialExtrapolation                                          *)
+(****************************************************************)
+
+Test[
+  RadialExtrapolation[Transpose@Table[{r, 20 + r^-1 + 2 r^-2}, {r, 10, 30, 5}],
+                      2]
+  ,
+  19.99999999999999
+  ,
+  TestID->"RadialExtrapolation-1"
+    ]
+
+Test[
+  RadialExtrapolation[Transpose@Table[{r, 20 + r^-1 + 2 r^-2}, {r, 1, 5, 1}], 
+                      1]
+  ,
+  19.46294218585005
+  ,
+  TestID->"RadialExtrapolation-2"
+    ]
+
+Test[
+  ToList@RadialExtrapolation[Transpose@Table[
+    {r, ToDataTable[Table[{t, t + 20 + r^-1 + 2 r^-2},
+                       {t, 0, 10, 5}]]}, 
+    {r, 1, 5, 1}], 1]
+  ,
+  {{0, 19.46294218585005}, {5, 24.46294218585005}, {10, 29.462942185850054}}
+  ,
+  TestID->"RadialExtrapolationDataTable-1"
     ]
 
 Test[
@@ -126,6 +159,18 @@ ToList[ExtrapolateRadiatedQuantity[
    {18, 38.000000000000014}, {23, 43.00000000000001}, {28, 48.000000000000014}, {33, 53.000000000000014}, 
    {38, 58.00000000000004}, {43, 63.000000000000036}, {48, 68.00000000000001}},
   TestID->"ExtrapolateRadiatedQuantity"
+    ]
+
+Test[
+ToList[RadiallyExtrapolatedWave[
+  Transpose@Table[{r, 
+    MakeDataTable[
+     Table[{t, t - r + 20 + r^-1 + 2 r^-2}, {t, 0, 100, 5}]]}, {r, 2, 
+    50, 1}], 2, AbsPhase -> False]],
+  {{-2, 18.000000000000007}, {3, 23.00000000000001}, {8, 28.00000000000001}, {13, 33.00000000000002}, 
+   {18, 38.000000000000014}, {23, 43.00000000000001}, {28, 48.000000000000014}, {33, 53.000000000000014}, 
+   {38, 58.00000000000004}, {43, 63.000000000000036}, {48, 68.00000000000001}},
+  TestID->"RadiallyExtrapolatedWave"
     ]
 
 (****************************************************************)

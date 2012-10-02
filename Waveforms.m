@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`Waveforms`",
  {
+  "SimulationTools`CoordinateTransformations`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
@@ -40,6 +41,7 @@ ReadPsi4Modes::usage = "ReadPsi4Modes[sim] returns a list of the modes of \!\(\*
 ReadPsi4Radii::usage = "ReadPsi4Radii[sim] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in sim.";
 ImportWaveform::usage = "ImportWaveform[filename] imports an ASCII waveform file with columns time, real part and imaginary part and returns it as a DataTable.";
 ExportWaveform::usage = "ExportWaveform[filename, d] exports a complex DataTable as an ASCII file with columns time, real part and imaginary part.";
+RadialExtrapolation::usage = "FIXME";
 
 (* Old function names *)
 
@@ -84,6 +86,14 @@ TortoiseCoordinate(*::usage = "TortoiseCoordinate[r, M] gives the tortoise coord
 SchmidtAngle(*::usage = "SchmidtAngle[sim, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized."*);
 ReadReconstructedPsi4(*::usage = "ReadReconstructedPsi4[sim, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r."*);
 FixedFrequencyIntegrate;
+
+ToRetardedTime;
+ToAbsPhase;
+ToComplex;
+ReadRadiallyExtrapolatedWave;
+RadiallyExtrapolatedWave;
+ReadRadiallyExtrapolatedPsi4;
+ReadRadiallyExtrapolatedStrain;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -620,6 +630,140 @@ SimulationTools`Waveforms`SimulationOverview`Plots[runNames1_] :=
            PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r],
            PlotLegend -> runNames,
            FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]}}]];
+
+(****************************************************************)
+(* Extrapolation                                                *)
+(****************************************************************)
+
+(* RadialExtrapolation *)
+
+RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
+  Module[
+    {model, a, x, xf, fit},
+    If[!And@@Map[NumberQ,fs], 
+       Error["RadialExtrapolation: Input data is not numeric"]];
+    If[!And@@Map[NumberQ,rs], 
+       Error["RadialExtrapolation: Input radii are not numeric"]];
+    model = Sum[a[i] x^i, {i, 0, order}];
+    xf = Map[{1./#[[1]], #[[2]]} &, Thread[{rs,fs}]];
+    fit = FindFit[xf, model, Table[a[i], {i, 0, order}], x];
+    a[0] /. fit];
+
+RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
+  Module[
+    {t, ds, rds, de, result},
+    If[!SameGridQ[fs], 
+       Error["RadialExtrapolation: Input DataTables are not defined on the same grid"]];
+    If[!And@@Map[NumberQ,rs], 
+       Error["RadialExtrapolation: Input radii are not numeric"]];
+
+    t = ToListOfCoordinates[fs[[1]]];
+    ds = ToListOfData/@fs;
+    rds = Transpose[ds];
+    de = Map[RadialExtrapolation[{rs, #}, order] &,rds];
+    ToDataTable[Thread[{t,de}]]];
+
+(* ToAbsPhase *)
+
+ToAbsPhase[f_DataTable] :=
+  {Abs[f], Phase[f]};
+
+ToAbsPhase[fs:{_DataTable...}, tAlign_] :=
+  {Abs/@fs, AlignedPhases[Phase/@fs, tAlign]};
+
+(* ToComplex *)
+
+ToComplex[{a_DataTable,phi_DataTable}] :=
+  a Exp[I phi];
+
+(* ToRetardedTime *)
+
+ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
+  Shifted[f, -rStarOfr[r]];
+
+ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
+  Resampled[MapThread[ToRetardedTime, {rs,fs}]];
+
+(* RadiallyExtrapolatedWave *)
+
+notOptionQ[x_] := ! OptionQ[x];
+Options[RadiallyExtrapolatedWave] = {"AbsPhase" -> True};
+RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}}, 
+                         order_Integer,
+                         rStarOfr : (_?notOptionQ) : Identity, 
+                         opts:OptionsPattern[]] :=
+  Module[
+    {ret,ext},
+    ret = ToRetardedTime[{rs,fs},rStarOfr];
+    ext[ds_] := RadialExtrapolation[{rs, ds}, order];
+
+    If[OptionValue[AbsPhase],
+       ToComplex[Map[ext, Transpose[ToAbsPhase/@ret]]],
+       ext[ret]]];
+
+(* ReadRadiallyExtrapolatedWave *)
+
+Options[ReadRadiallyExtrapolatedWave] =
+  {"RadialCoordinateTransformation" -> None,
+   "AbsPhase" -> True};
+
+ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
+                             order_Integer, OptionsPattern[]] :=
+  RadiallyExtrapolatedWave[
+    Transpose[
+      Table[{r,reader[r]}, {r,rads}]],
+    order, 
+    OptionValue[RadialCoordinateTransformation] /.
+    {None -> Identity,
+     RadialToTortoise ->(RadialToTortoise[#,ReadADMMass[run]] &),
+     IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
+    AbsPhase -> OptionValue[AbsPhase]];
+
+(* selectRadii *)
+
+selectRadii[rads_List, range:(Automatic|{_,_}), list:(Automatic|_List)] :=
+  If[range =!= Automatic,
+     Select[rads, (range[[1]] <= # <= range[[2]]) &],
+     If[list =!= Automatic,
+        list,
+        If[range === Automatic && list === Automatic,
+           rads,
+           Error["Cannot specify both RadiusRange and Radii"]]]];
+
+(* ReadRadiallyExtrapolatedPsi4 *)
+
+Options[ReadRadiallyExtrapolatedPsi4] = 
+  Join[Options[ReadRadiallyExtrapolatedWave],
+       {"RadiusRange" -> Automatic,
+        "Radii" -> Automatic}];
+
+ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
+                             order_Integer, opts:OptionsPattern[]] :=
+  ReadRadiallyExtrapolatedWave[
+    run,
+    ReadPsi4[run,l,m,#] &,
+    selectRadii[ReadPsi4Radii[run],
+                OptionValue[RadiusRange], OptionValue[Radii]],
+    order, opts];
+
+(* ReadRadiallyExtrapolatedStrain *)
+
+(*
+  - Not all modes are suitable for FFI (e.g. the 2,0 mode is non-oscillatory
+  - The user should be able to select the strain conversion method
+  - Some simulations might have CCE or other precomputed strain data; we should allow
+    the user to choose
+*)
+
+Options[ReadRadiallyExtrapolatedStrain] = Options[ReadRadiallyExtrapolatedPsi4];
+ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
+                               order_Integer, opts:OptionsPattern[]] :=
+  ReadRadiallyExtrapolatedWave[
+    run,
+    Psi4ToStrain[ReadPsi4[run,l,m,#], om0] &,
+    selectRadii[ReadPsi4Radii[run],
+                OptionValue[RadiusRange], OptionValue[Radii]],
+    order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]];
 
 End[];
 
