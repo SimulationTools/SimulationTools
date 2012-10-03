@@ -36,7 +36,7 @@ If[!ValueQ[$Memoisation],
 
 If[!ValueQ[$cache], $cache = {}];
 
-Global`StandardDefinition[DefineMemoFunction] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[DefineMemoFunction] = True;
 
 DocumentationBuilder`SymbolDescription["ClearAllMemos"] =
   "memoisation of functions; i.e. in-memory caching of values so that they don't have to be recomputed";

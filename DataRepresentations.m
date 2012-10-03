@@ -337,7 +337,7 @@ Mul[a_?NumberQ, b_?NumberQ] := a b;
 SyntaxInformation[NDerivative] =
  {"ArgumentsPattern" -> {_, ___}};
 
-Global`StandardDefinition[NDerivative] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[NDerivative] = True;
 
 
 (****************************************************************)

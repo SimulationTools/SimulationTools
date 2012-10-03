@@ -242,7 +242,7 @@ ReadSchmidtAngle[run_, t_, rad_: Automatic] :=
   Extrapolation
   --------------------------------------------------------------------*)
 
-Global`StandardDefinition[ExtrapolateScalarFull] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[ExtrapolateScalarFull] = True;
 
 ExtrapolateScalarFull[order_, rfTb_] :=
   Module[{radModel, rfCompact, a, x, fit, curve, rMin},
@@ -284,12 +284,12 @@ ExtrapolateScalarFull[0, rfTb_] :=
      ExtrapolatedCurve -> curve}]]; 
 *)
 
-Global`StandardDefinition[ExtrapolateScalar] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[ExtrapolateScalar] = True;
 ExtrapolateScalar[args__] :=
  ExtrapolatedValue /. ExtrapolateScalarFull[args];
 
 (* TODO: what does this function do?  Why does it map f over the radii? *)
-Global`StandardDefinition[ExtrapolateScalarWithRadii] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[ExtrapolateScalarWithRadii] = True;
 ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
   ExtrapolatedValue /. ExtrapolateScalarFull[order, MapThread[List, {rads, Map[f, rads]}]];
 
@@ -478,7 +478,7 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
     psi4];
 *)
 
-Global`StandardDefinition[ffi] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[ffi] = True;
 
 ffi[{f_, d_}, f0_] :=
  Module[{div},

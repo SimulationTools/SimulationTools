@@ -20,6 +20,7 @@ BeginPackage["SimulationTools`ArgumentChecker`",
  }];
 
 WithArgumentChecking;
+StandardDefinition;
 
 Begin["`Private`"];
 
@@ -37,7 +38,7 @@ WithArgumentChecking[expr_] :=
       {SetDelayed},
 
       Unprotect[SetDelayed];
-      SetDelayed[(fn_Symbol /; (Context[fn] =!= "System`" && Global`StandardDefinition[fn] =!= True))[args___], rhs_] /; !TrueQ[inCheck] :=
+      SetDelayed[(fn_Symbol /; (Context[fn] =!= "System`" && StandardDefinition[fn] =!= True))[args___], rhs_] /; !TrueQ[inCheck] :=
         Block[
           {inCheck = True},
           (* Print["Defining ", fn, "[", StringJoin@Riffle[ToString/@{args},","],"]"]; *)

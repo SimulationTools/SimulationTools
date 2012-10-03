@@ -126,7 +126,7 @@ ConvergenceRateEquations3 = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp + CRf2 CRh[i]
 RichardsonExtrapolationEquation3 = Eliminate[ConvergenceRateEquations3, {CRf1, CRf2}];
 RichardExtrapolationExpression3 = CRf0 /. Solve[RichardsonExtrapolationEquation3, CRf0][[1]];
 
-Global`StandardDefinition[ConvergenceRate] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[ConvergenceRate] = True;
 
 DocumentationBuilder`SymbolDescription["ConvergenceRate"] =
   "compute the convergence rate as a function of time";
@@ -139,7 +139,7 @@ ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] :=
   rate = Quiet[Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, {FindRoot::"cvmit", FindRoot::"lstol"}], {FindRoot::"cvmit", FindRoot::"lstol"}];
   If[rate < 0.1 || rate > 14.9, Return[None], Return[rate]]];
 
-Global`StandardDefinition[ConvergenceRateSlow] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[ConvergenceRateSlow] = True;
 
 ConvergenceRateSlow[fs:{f1_, f2_, f3_}, hs:{h1_, h2_, h3_}] :=
   Module[{eq, eqs, el, a0, a1},
@@ -167,7 +167,7 @@ ConvergenceRate[ds:{DataTable[__]..}, hs_List] :=
       ds2 = ds];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
 
-Global`StandardDefinition[RichardsonExtrapolate] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[RichardsonExtrapolate] = True;
 
 RichardsonExtrapolant[F1_, F2_, h1_, h2_, p_] :=
   Module[{},
@@ -209,7 +209,7 @@ RichardsonExtrapolant[ds:{d1_DataTable, d2_DataTable, d3_DataTable}, p_] :=
 RichardsonExtrapolate[{F1_, F2_, F3_}, {h1_, h2_, h3_}, p_] :=
   RichardsonExtrapolate[F2, F3, h2, h3, p];
 
-Global`StandardDefinition[RichardsonExtrapolate3] = True;
+SimulationTools`ArgumentChecker`StandardDefinition[RichardsonExtrapolate3] = True;
 
 RichardsonExtrapolate3[F1_, F2_, F3_, h1_, h2_, h3_, p_] :=
   Module[{},
