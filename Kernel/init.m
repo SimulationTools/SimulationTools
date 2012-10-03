@@ -29,11 +29,9 @@ If[$Input === "nrmma.m",
    Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
    Abort[]];
 
-Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
-  Needs["SimulationTools`ArgumentChecker`"];
-  Needs["SimulationTools`Error`"];
 
-  Module[{packages =
+BeginPackage["SimulationTools`"]
+$SimulationToolsPackages =
    {"SimulationTools`Ascii1D`",
     "SimulationTools`Ascii`",
     "SimulationTools`BHCoordinates`",
@@ -83,12 +81,16 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
     "SimulationTools`Utils`",
     "SimulationTools`Waveforms`",
     "SimulationTools`YlmDecomp`",
-    If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]}},
+    If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]};
+EndPackage[]
 
-    Unprotect[$Packages];
-    $Packages = Complement[$Packages, packages];
-    Protect[$Packages];
+Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
+  Needs["SimulationTools`ArgumentChecker`"];
+  Needs["SimulationTools`Error`"];
 
-    ArgumentChecker`WithArgumentChecking[Scan[Needs, packages]];
-  ]
+  Unprotect[$Packages];
+  $Packages = Complement[$Packages, SimulationTools`$SimulationToolsPackages];
+  Protect[$Packages];
+
+  ArgumentChecker`WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
 ]
