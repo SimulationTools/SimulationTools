@@ -33,7 +33,7 @@ $SimulationToolsVersion::usage = "$SimulationToolsVersionNumber is a string that
 
 SimulationPath::usage = "SimulationPath[] gives the list of directories which SimulationTools will search for simulations.  It contains those directories listed in $SimulationPath as well as (for backward compatibility) the value of RunDirectory if it exists.";
 
-Global`$SimulationPath::usage = "$SimulationPath is the default list of directories to search in attempting to find a simulation."; 
+$SimulationPath::usage = "$SimulationPath is the default list of directories to search in attempting to find a simulation.";
 
 (****************************************************************)
 (* Experimental                                                 *)
@@ -141,11 +141,11 @@ $SimulationToolsInformation :=
    "ReleaseNumber" -> $SimulationToolsReleaseNumber}
 
 SimulationPath[] :=
-  Join[If[ValueQ[Global`$SimulationPath],
-          If[MatchQ[Global`$SimulationPath, {_String...}],
-             Global`$SimulationPath,
+  Join[If[ValueQ[$SimulationPath],
+          If[MatchQ[$SimulationPath, {_String...}],
+             $SimulationPath,
              Error["Invalid $SimulationPath; it should be a list of strings, but it is currently "<>
-                   ToString[Global`$SimulationPath,InputForm]]],
+                   ToString[$SimulationPath,InputForm]]],
           {}],
        If[MemberQ[Names["Global`*"], "RunDirectory"],
           If[MatchQ[ToExpression["Global`RunDirectory"], _String],
