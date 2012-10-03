@@ -561,7 +561,7 @@ ImportWaveform[file_] :=
   Module[
     {data, lockFile, waitForLock, releaseLock},
     If[FileType[file] ===None,
-       Error["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
+       Error["ImportWaveform: File "<>file<>" does not exist"]];
 
     (* If[FileExtension[file] === "gz", *)
     (*    data = Import["!gunzip< "<>file,"Table"], *)
