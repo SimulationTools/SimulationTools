@@ -80,11 +80,11 @@ packages =
   "YlmDecomp"
 };
 
-packageSymbols = Map[# -> DocumentedSymbols[#] &, packages];
+packageSymbols = Map[# -> DocumentedSymbols["SimulationTools", #] &, packages];
 
 $PackageSymbols = packageSymbols; (* Used in the Overview.md file *)
 
-undocumentedSymbols = Map[# -> UndocumentedSymbols[#] &, packages] /. (_ -> {}) -> Sequence[];
+undocumentedSymbols = Map[# -> UndocumentedSymbols["SimulationTools", #] &, packages] /. (_ -> {}) -> Sequence[];
 (* Map[Print["Undocumented symbols for package "<>#[[1]]<>" skipped:\n", #[[2]]]&, undocumentedSymbols]; *)
 
 Print["Building symbol reference pages"];
