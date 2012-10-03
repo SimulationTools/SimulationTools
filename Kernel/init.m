@@ -30,9 +30,8 @@ If[$Input === "nrmma.m",
    Abort[]];
 
 Get["SimulationTools`SimulationTools`"];
-
-Needs["SimulationTools`ArgumentChecker`"];
-Needs["SimulationTools`Error`"];
+Get["SimulationTools`ArgumentChecker`"];
+Get["SimulationTools`Error`"];
 
 Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
   Unprotect[$Packages];
