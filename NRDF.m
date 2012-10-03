@@ -105,31 +105,6 @@ haveRunDir[run_String] :=
      True,
      False];
 
-
-ensureLocalFile[run_String, file_String] :=
-  Module[
-    {src,dst},
-    (* Print["ensureLocalFile: run = ", run]; *)
-    (* Print["ensureLocalFile: file = ", file]; *)
-    dst = FileNameJoin[{FindRunDir[run],file}];
-    If[FileExistsQ[dst], Return[Null]];
-    If[!ValueQ[Global`BackingDirectory],
-       Error["Cannot find file "<>file<>" in run "<>run<>" and BackingDirectory has not been set"]];
-    src = FileNameJoin[{Global`BackingDirectory,run,file}];
-    (* Print["ensureLocalFile: src = ", src]; *)
-    (* Print["ensureLocalFile: dst = ", dst]; *)
-    syncFile[src,dst]];
-
-
-syncFile[src_String, dst_String] :=
-  Module[{output},
-  If[FileType[dst] === None,
-     Print[StringForm["Syncing file `1` to `2`", src, dst]];
-     output = ReadList["! rsync -avz "<>src<>" "<>dst<>" >>rsync.log 2>&1 </dev/null", String];
-     log[StringJoin[Riffle[output,"\n"]]];
-     If[FileType[dst] === None,
-        Error["File " <> src <> " could not be downloaded"]]]];
-
 SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[
     {md, filenames, filename, tmp,data, radPattern},
@@ -158,10 +133,8 @@ SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, ra
     tmp = StringCases[filename, base__~~".h5:"~~ds__ :> {base<>".h5",ds}];
     data =
     If[Length[tmp] === 0,
-       ensureLocalFile[runName, filenames[[1]]];
        ReadWaveformFile[FileNameJoin[{FindRunDir[runName], filename}]],
        (* else *)
-       ensureLocalFile[runName, tmp[[1,1]]];
        readPsi4HDF5Data[FileNameJoin[{FindRunDir[runName], tmp[[1,1]]}], tmp[[1,2]]]];
 
     (* Print["data = ", data]; *)
