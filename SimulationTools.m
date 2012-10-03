@@ -20,7 +20,7 @@ BeginPackage["SimulationTools`",
  }
 ];
 
-$SimulationToolsPackages;
+$SimulationToolsPackages::usage = "$SimulationToolsPackages is a list of all packages loaded as part of SimulationTools";
 
 $SimulationToolsCompatibilityVersion::usage = "$SimulationToolsCompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of SimulationTools.";
 
