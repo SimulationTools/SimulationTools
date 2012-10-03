@@ -29,7 +29,7 @@ If[$Input === "nrmma.m",
    Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
    Abort[]];
 
-Get["SimulationTools`SimulationTools`"];
+Get["SimulationTools`Kernel`SimulationTools`"];
 Get["SimulationTools`ArgumentChecker`"];
 Get["SimulationTools`Error`"];
 
