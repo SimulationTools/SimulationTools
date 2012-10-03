@@ -87,13 +87,6 @@ $SimulationToolsInformation :=
    "VersionNumber" -> $SimulationToolsVersionNumber,
    "ReleaseNumber" -> $SimulationToolsReleaseNumber}
 
-
-(****************************************************************)
-(* Deprecated                                                   *)
-(****************************************************************)
-
-nrmmaVersion[] = $SimulationToolsInformation;
-
 SimulationPath[] :=
   Join[If[ValueQ[Global`$SimulationPath],
           If[MatchQ[Global`$SimulationPath, {_String...}],
@@ -101,12 +94,18 @@ SimulationPath[] :=
              Error["Invalid $SimulationPath; it should be a list of strings, but it is currently "<>
                    ToString[Global`$SimulationPath,InputForm]]],
           {}],
-       If[ValueQ[Global`RunDirectory], 
-          If[MatchQ[Global`RunDirectory, _String],
-             {Global`RunDirectory},
+       If[MemberQ[Names["Global`*"], "RunDirectory"],
+          If[MatchQ[ToExpression["Global`RunDirectory"], _String],
+             {ToExpression["Global`RunDirectory"]},
              Error["Invalid RunDirectory; it should be a atring, but it is currently "<>
-                   ToString[Global`RunDirectory,InputForm]]],
+                   ToString[ToExpression["Global`RunDirectory"],InputForm]]],
           {}]];
+
+(****************************************************************)
+(* Deprecated                                                   *)
+(****************************************************************)
+
+nrmmaVersion[] = $SimulationToolsInformation;
 
 End[];
 EndPackage[];
