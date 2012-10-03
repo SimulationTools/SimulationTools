@@ -16,8 +16,6 @@
 *)
 
 
-(* Load SimulationTools packages when << SimulationTools` is run *)
-
 (* Work around a bug in ImportString in Mathematica 8. Without this,
    DataRegion's definition of GetData will cause problems. *)
 If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
@@ -26,6 +24,7 @@ If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
    ListLogPlot unless we call ListLogPlot once first. *)
 If[$VersionNumber == 8., ListLogPlot[{1}]];
 
+(* Give a warning to users who try to load the old nrmma package *)
 If[$Input === "nrmma.m",
    Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
    Abort[]];
