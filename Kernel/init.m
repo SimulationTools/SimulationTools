@@ -29,60 +29,7 @@ If[$Input === "nrmma.m",
    Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
    Abort[]];
 
-
-BeginPackage["SimulationTools`"]
-$SimulationToolsPackages =
-   {"SimulationTools`Ascii1D`",
-    "SimulationTools`Ascii`",
-    "SimulationTools`BHCoordinates`",
-    "SimulationTools`Binary`",
-    "SimulationTools`BlackHole`",
-    "SimulationTools`CarpetIOHDF5`",
-    "SimulationTools`CarpetHDF5`",
-    "SimulationTools`CoordinateTransformations`",
-    "SimulationTools`Convergence`",
-    "SimulationTools`DataAnalysis`",
-    "SimulationTools`DataRegion`",
-    "SimulationTools`DataRepresentations`",
-    "SimulationTools`DataTable`",
-    "SimulationTools`FieldLines`",
-    "SimulationTools`GridFunctions`",
-    "SimulationTools`Grids`",
-    "SimulationTools`Horizons`",
-    "SimulationTools`IniFile`",
-    "SimulationTools`InitialData`",
-    "SimulationTools`Kicks`",
-    "SimulationTools`Memo`",
-    "SimulationTools`MessageCatcher`",
-    "SimulationTools`MinTracker`",
-    "SimulationTools`Movie`",
-    "SimulationTools`MultipoleASCII`",
-    "SimulationTools`MultipoleHDF5`",
-    "SimulationTools`NR`",
-    "SimulationTools`NRDF`",
-    "SimulationTools`NRExport`",
-    "SimulationTools`Parameters`",
-    "SimulationTools`Performance`",
-    "SimulationTools`Plotting`",
-    "SimulationTools`Profile`",
-    "SimulationTools`Providers`",
-    "SimulationTools`PunctureTracker`",
-    "SimulationTools`ReadHDF5`",
-    "SimulationTools`RunFiles`",
-    "SimulationTools`ShiftTracker`",
-    "SimulationTools`SimFactory`",
-    "SimulationTools`SimView`",
-    "SimulationTools`SimViewRRMHD`",
-    "SimulationTools`Statistics`",
-    "SimulationTools`SystemStatistics`",
-    "SimulationTools`Trackers`",
-    "SimulationTools`Tracks`",
-    "SimulationTools`TwoPunctures`",
-    "SimulationTools`Utils`",
-    "SimulationTools`Waveforms`",
-    "SimulationTools`YlmDecomp`",
-    If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]};
-EndPackage[]
+Get["SimulationTools`SimulationTools`"];
 
 Needs["SimulationTools`ArgumentChecker`"];
 Needs["SimulationTools`Error`"];

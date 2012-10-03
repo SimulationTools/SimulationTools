@@ -22,7 +22,7 @@ BeginPackage["SimulationTools`RunFiles`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
   "SimulationTools`Providers`",
-  "SimulationTools`Utils`"
+  "SimulationTools`"
  }];
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";

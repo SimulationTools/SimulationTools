@@ -24,7 +24,7 @@ BeginPackage["SimulationTools`NRDF`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`RunFiles`",
   "SimulationTools`Waveforms`",
-  "SimulationTools`Utils`"
+  "SimulationTools`"
  }];
 
 ParseMetadataFile;

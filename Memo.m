@@ -16,7 +16,7 @@
 
 BeginPackage["SimulationTools`Memo`",
  {
-  "SimulationTools`Utils`"
+  "SimulationTools`"
  }
 ];
 

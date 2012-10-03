@@ -17,7 +17,7 @@
 BeginPackage["SimulationTools`DataRepresentations`",
  {
   "SimulationTools`Error`",
-  "SimulationTools`Utils`"
+  "SimulationTools`"
  }];
 
 DataRepresentationQ::usage = "DataRepresentationQ[d] returns True if d is a DataRepresentation type.";

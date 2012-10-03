@@ -23,7 +23,7 @@ BeginPackage["SimulationTools`SystemStatistics`",
   "SimulationTools`Memo`",
   "SimulationTools`Plotting`",
   "SimulationTools`RunFiles`",
-  "SimulationTools`Utils`"
+  "SimulationTools`"
  }];
 
 ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
