@@ -84,13 +84,13 @@ $SimulationToolsPackages =
     If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]};
 EndPackage[]
 
-Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
-  Needs["SimulationTools`ArgumentChecker`"];
-  Needs["SimulationTools`Error`"];
+Needs["SimulationTools`ArgumentChecker`"];
+Needs["SimulationTools`Error`"];
 
+Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
   Unprotect[$Packages];
   $Packages = Complement[$Packages, $SimulationToolsPackages];
   Protect[$Packages];
 
-  SimulationTools`ArgumentChecker`WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
+  WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
 ]
