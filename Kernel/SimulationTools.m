@@ -21,8 +21,6 @@ BeginPackage["SimulationTools`",
  }
 ];
 
-$SimulationToolsPackages::usage = "$SimulationToolsPackages is a list of all packages loaded as part of SimulationTools";
-
 $SimulationToolsCompatibilityVersion::usage = "$SimulationToolsCompatibilityVersion sets the behaviour of functions to be compatible with that of a specific version of SimulationTools.";
 
 $SimulationToolsInformation::usage = "$SimulationToolsInformation is a list of rules that gives information about the version of SimulationTools you are running.";
@@ -51,20 +49,28 @@ nrmmaVersion;
 
 Begin["`Private`"];
 
-$SimulationToolsPackages =
-   {"SimulationTools`Ascii1D`",
+packages = {
+  (*"SimulationTools`Kernel`SimulationTools`",*)
     "SimulationTools`Ascii`",
+    "SimulationTools`Ascii1D`",
+  (*"SimulationTools`AsyncCommand`,"*)
     "SimulationTools`BHCoordinates`",
     "SimulationTools`Binary`",
     "SimulationTools`BlackHole`",
-    "SimulationTools`CarpetIOHDF5`",
+  (*"SimulationTools`CactusTimers`",*)
     "SimulationTools`CarpetHDF5`",
-    "SimulationTools`CoordinateTransformations`",
+  (*"SimulationTools`CarpetHDF5Plot`",*)
+    "SimulationTools`CarpetIOHDF5`",
+  (*"SimulationTools`CarpetVTK`",*)
+  (*"SimulationTools`CircularPN`",*)
     "SimulationTools`Convergence`",
+    "SimulationTools`CoordinateTransformations`",
     "SimulationTools`DataAnalysis`",
     "SimulationTools`DataRegion`",
     "SimulationTools`DataRepresentations`",
     "SimulationTools`DataTable`",
+  (*"SimulationTools`Empty`",*)
+  (*"SimulationTools`Error`",*)
     "SimulationTools`FieldLines`",
     "SimulationTools`GridFunctions`",
     "SimulationTools`Grids`",
@@ -87,20 +93,24 @@ $SimulationToolsPackages =
     "SimulationTools`Profile`",
     "SimulationTools`Providers`",
     "SimulationTools`PunctureTracker`",
+  (*"SimulationTools`Quasinormal`",*)
     "SimulationTools`ReadHDF5`",
     "SimulationTools`RunFiles`",
     "SimulationTools`ShiftTracker`",
     "SimulationTools`SimFactory`",
     "SimulationTools`SimView`",
     "SimulationTools`SimViewRRMHD`",
+  (*"SimulationTools`Stack`",*)
     "SimulationTools`Statistics`",
     "SimulationTools`SystemStatistics`",
+  (*"SimulationTools`Timers`",*)
     "SimulationTools`Trackers`",
     "SimulationTools`Tracks`",
     "SimulationTools`TwoPunctures`",
     "SimulationTools`Waveforms`",
-    "SimulationTools`YlmDecomp`",
-    If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]]};
+    If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]],
+    "SimulationTools`YlmDecomp`"
+   };
 
 $SimulationToolsInstallationDirectory = FileNameDrop[FindFile["SimulationTools`"], -2];
 $SimulationToolsTestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"], -2], "Data","Simulations"}];

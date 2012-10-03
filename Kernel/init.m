@@ -35,8 +35,8 @@ Get["SimulationTools`Error`"];
 
 Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
   Unprotect[$Packages];
-  $Packages = Complement[$Packages, $SimulationToolsPackages];
+  $Packages = Complement[$Packages, SimulationTools`Private`packages];
   Protect[$Packages];
 
-  WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
+  WithArgumentChecking[Scan[Needs, SimulationTools`Private`packages]];
 ]
