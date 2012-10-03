@@ -1,9 +1,5 @@
 << SimulationTools`;
-
 << ApplicationTools`;
-
-Format[DataTable[l_List, attrs__]] :=
- DataTable[Row[{"<", Length[l], ">,", {{l[[1, 1]], l[[-1, 1]]}}}]];
 
 $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 
