@@ -3,8 +3,6 @@
 
 $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 
-(* BeginPackage["GenerateDocumentation`", {"ApplicationTools`"}]; *)
-
 GenerateDocumentation[] :=
   Module[
     {packages,packageSymbols,undocumentedSymbols,docPackage,
