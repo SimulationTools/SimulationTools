@@ -92,5 +92,5 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
   $Packages = Complement[$Packages, SimulationTools`$SimulationToolsPackages];
   Protect[$Packages];
 
-  ArgumentChecker`WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
+  SimulationTools`ArgumentChecker`WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
 ]
