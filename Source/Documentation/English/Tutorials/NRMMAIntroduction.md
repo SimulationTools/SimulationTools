@@ -1,10 +1,10 @@
 {
- "Application" -> "nrmma",
- "Title" -> "Introduction to NRMMA",
+ "Application" -> "SimulationTools",
+ "Title" -> "Introduction to SimulationTools",
  "Related Tutorials" -> {"CarpetHDF5", "DataTable", "DataRegion", "Kicks"},
  "Keywords" -> {},
- "Label" -> "nrmma Tutorial",
- "Package" -> "nrmma",
- "Summary" -> "Tutorial for the nrmma application.",
+ "Label" -> "SimulationTools Tutorial",
+ "Package" -> "SimulationTools",
+ "Summary" -> "Tutorial for the SimulationTools application.",
  "Synonyms" -> {}
  }

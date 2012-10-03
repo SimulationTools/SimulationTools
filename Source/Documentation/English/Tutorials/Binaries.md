@@ -1,5 +1,5 @@
 {
- "Application" -> "nrmma",
+ "Application" -> "SimulationTools",
  "Title" -> "Binary systems",
  "Related Tutorials" -> {"DataTable", "NumericalRelativity", "BlackHoles"},
  "Keywords" -> {},

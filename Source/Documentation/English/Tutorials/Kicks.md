@@ -1,9 +1,9 @@
 {
- "Application" -> "nrmma",
+ "Application" -> "SimulationTools",
  "Title" -> "Kicks",
  "Related Tutorials" -> {"DataTable", "NumericalRelativity"},
  "Keywords" -> {},
- "Label" -> "nrmma Tutorial",
+ "Label" -> "SimulationTools Tutorial",
  "Package" -> "Kicks",
  "Summary" -> "Tutorial for the Kicks package.",
  "Synonyms" -> {}

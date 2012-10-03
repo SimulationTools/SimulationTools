@@ -1,5 +1,5 @@
 {
- "Application" -> "nrmma",
+ "Application" -> "SimulationTools",
  "Title" -> "Black Holes",
  "Related Tutorials" -> {"DataTable", "NumericalRelativity"},
  "Keywords" -> {},
