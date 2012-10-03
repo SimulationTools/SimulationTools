@@ -4,6 +4,10 @@
 
 (* Load NRMMA packages when << nrmma` is run *)
 
+BeginPackage["nrmma`"];
+
+Begin["`Private`"];
+
 (* Work around a bug in ImportString in Mathematica 8. Without this,
    DataRegion's definition of GetData will cause problems. *)
 If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
@@ -216,3 +220,7 @@ If[$VersionNumber >= 8,
   Protect[$Packages];
   Needs["nrmma8`"];
 ];
+
+End[];
+
+EndPackage[];
