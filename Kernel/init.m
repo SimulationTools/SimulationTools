@@ -89,7 +89,7 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
   Needs["SimulationTools`Error`"];
 
   Unprotect[$Packages];
-  $Packages = Complement[$Packages, SimulationTools`$SimulationToolsPackages];
+  $Packages = Complement[$Packages, $SimulationToolsPackages];
   Protect[$Packages];
 
   SimulationTools`ArgumentChecker`WithArgumentChecking[Scan[Needs, $SimulationToolsPackages]];
