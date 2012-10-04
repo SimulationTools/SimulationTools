@@ -327,7 +327,7 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
   ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &], opts];
 
 
-Options[AlignPhases] = {Continuous -> False};
+Options[AlignedPhases] = {Continuous -> False};
 
 DocumentationBuilder`OptionDescriptions["AlignedPhases"] = {
   Continuous -> "Whether to allow continuous shifts in alignment. Setting this to "<>
