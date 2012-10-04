@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Convergence",
+ ButtonBox["SimulationTools`Convergence",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Convergence"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Convergence"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["RichardsonExtrapolant",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/RichardsonExtrapolant"]
+  ButtonData->"paclet:SimulationTools/ref/RichardsonExtrapolant"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["RichardsonExtrapolant",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/RichardsonExtrapolant"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/RichardsonExtrapolant"], "[", 
+       
        StyleBox[
         RowBox[{
          RowBox[{"{", 
@@ -58,12 +59,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "RichardsonExtrapolant", "RICHARDSONEXTRAPOLANT", 
       "richardsonextrapolant"}, "index" -> True, "label" -> 
-    "nrmma/Convergence Symbol", "language" -> "en", "paclet" -> "Convergence",
-     "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`Convergence Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Convergence", "status" -> "None", "summary" -> 
     "RichardsonExtrapolant[{f1, f2}, {h1, h2}, p] gives the order p \
 Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = O[h^p]. f1 \
 and f2 can either be real numbers or DataTables, and the returned value will \
@@ -72,8 +73,8 @@ be of the same type.",
      "RichardsonExtrapolant", "RICHARDSONEXTRAPOLANT", 
       "richardsonextrapolant"}, "title" -> "RichardsonExtrapolant", 
     "windowTitle" -> "RichardsonExtrapolant", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/RichardsonExtrapolant"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/RichardsonExtrapolant"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

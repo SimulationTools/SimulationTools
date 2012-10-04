@@ -3,27 +3,28 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
+ ButtonBox["SimulationTools`DataRegion",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ToDataRegion",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ToDataRegion"]
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS`DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
         StripOnInput->False], {"ToList":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToList"], "DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegion"]},
+       "paclet:SimulationTools/ref/ToList"], "DataRegion":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/DataRegion"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -32,10 +33,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"], 
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"], 
        RowBox[{"Data", " ", "Representations"}]:>Documentation`HelpLookup[
-       "paclet:nrmma/guide/Data Representations"]},
+       "paclet:SimulationTools/guide/Data Representations"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -54,7 +55,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ToDataRegion",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToDataRegion"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ToDataRegion"], "[", 
        StyleBox[
         RowBox[{"data", ",", " ", "origin", ",", " ", "spacing"}], "TI"], 
        "]"}]], "InlineFormula"],
@@ -132,20 +133,20 @@ Cell["d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20}, {0.1, 0.2}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "2", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "3", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 2, ",", 3, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
-     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+     RowBox[{"{", 
+      RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -199,7 +200,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ToList",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToList"],
+    ButtonData->"paclet:SimulationTools/ref/ToList"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -209,7 +210,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["DataRegion",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegion"],
+    ButtonData->"paclet:SimulationTools/ref/DataRegion"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -229,13 +230,14 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"],
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"],
 
 Cell[TextData[ButtonBox["Data Representations",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/Data Representations"]], "MoreAbout"]
+ ButtonData->
+  "paclet:SimulationTools/guide/Data Representations"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -255,16 +257,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"ToDataRegion", "TODATAREGION", "todataregion"}, "index" -> 
-    True, "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
+    True, "label" -> "SimulationTools/SimulationTools`DataRegion Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataRegion", "status" -> 
+    "None", "summary" -> 
     "ToDataRegion[data, origin, spacing] creates a DataRegion object from the \
 N-dimensional array (nested list) data.", 
     "synonyms" -> {"ToDataRegion", "TODATAREGION", "todataregion"}, "title" -> 
     "ToDataRegion", "windowTitle" -> "ToDataRegion", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ToDataRegion"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "uri" -> "SimulationTools/ref/ToDataRegion"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

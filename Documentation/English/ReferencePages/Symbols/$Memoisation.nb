@@ -7,28 +7,27 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SimulationTools`DataRegion",
+ ButtonBox["SimulationTools`Memo",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataRegion"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Memo"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["VariableName",
+ ButtonBox["$Memoisation",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/ref/VariableName"]
+  ButtonData->"paclet:SimulationTools/ref/$Memoisation"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["VariableName", "ObjectName"],
+Cell["$Memoisation", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{
-       ButtonBox["VariableName",
-        BaseStyle->"Link",
-        ButtonData->"paclet:SimulationTools/ref/VariableName"], "[", 
-       StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]returns the variable name in DataRegion d."
+     Cell[TextData[ButtonBox["$Memoisation",
+      BaseStyle->"Link",
+      ButtonData->"paclet:SimulationTools/ref/$Memoisation"]], 
+      "InlineFormula"],
+     "\[LineSeparator] is a variable which controls whether expensive \
+functions are memoised or not."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -44,21 +43,22 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"VariableName",
+WindowTitle->"$Memoisation",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "SimulationTools`", 
-    "keywords" -> {"VariableName", "VARIABLENAME", "variablename"}, "index" -> 
-    True, "label" -> "SimulationTools/SimulationTools`DataRegion Symbol", 
-    "language" -> "en", "paclet" -> "SimulationTools`DataRegion", "status" -> 
+    "keywords" -> {"$Memoisation", "$MEMOISATION", "$memoisation"}, "index" -> 
+    True, "label" -> "SimulationTools/SimulationTools`Memo Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`Memo", "status" -> 
     "None", "summary" -> 
-    "VariableName[d] returns the variable name in DataRegion d.", 
-    "synonyms" -> {"VariableName", "VARIABLENAME", "variablename"}, "title" -> 
-    "VariableName", "windowTitle" -> "VariableName", "type" -> "Symbol", 
-    "uri" -> "SimulationTools/ref/VariableName"}, "SearchTextTranslated" -> 
+    "$Memoisation is a variable which controls whether expensive functions \
+are memoised or not.", 
+    "synonyms" -> {"$Memoisation", "$MEMOISATION", "$memoisation"}, "title" -> 
+    "$Memoisation", "windowTitle" -> "$Memoisation", "type" -> "Symbol", 
+    "uri" -> "SimulationTools/ref/$Memoisation"}, "SearchTextTranslated" -> 
   "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Waveforms",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Waveforms"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Psi4ToStrain",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Psi4ToStrain"]
+  ButtonData->"paclet:SimulationTools/ref/Psi4ToStrain"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["Psi4ToStrain",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Psi4ToStrain"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/Psi4ToStrain"], "[", 
        StyleBox[
         RowBox[{"psi4", ",", " ", "omega0"}], "TI"], "]"}]], "InlineFormula"],
      
@@ -39,7 +39,7 @@ omega0."
       RowBox[{
        ButtonBox["Psi4ToStrain",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Psi4ToStrain"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/Psi4ToStrain"], "[", 
        StyleBox[
         RowBox[{"psi4", ",", " ", 
          RowBox[{"{", 
@@ -68,18 +68,19 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"Psi4ToStrain", "PSI4TOSTRAIN", "psi4tostrain"}, "index" -> 
-    True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", "paclet" -> 
-    "Waveforms", "status" -> "None", "summary" -> 
+    True, "label" -> "SimulationTools/SimulationTools`Waveforms Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`Waveforms", "status" -> 
+    "None", "summary" -> 
     "Psi4ToStrain[psi4, omega0] converts a DataTable containing psi4[t] into \
 strain h[t] using the Fixed Frequency Integration method with a cut-off \
 frequency omega0.\nPsi4ToStrain[psi4, {t1, t2}] converts using time domain \
 integration, choosing integration constants such that h[t1] = h[t2] = 0.", 
     "synonyms" -> {"Psi4ToStrain", "PSI4TOSTRAIN", "psi4tostrain"}, "title" -> 
     "Psi4ToStrain", "windowTitle" -> "Psi4ToStrain", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/Psi4ToStrain"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "uri" -> "SimulationTools/ref/Psi4ToStrain"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GridFunctions",
+ ButtonBox["SimulationTools`GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/GridFunctions"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadMaps",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadMaps"]
+  ButtonData->"paclet:SimulationTools/ref/ReadMaps"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadMaps",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadMaps"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadMaps"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
@@ -97,13 +97,15 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"ReadMaps", "READMAPS", "readmaps"}, 
-    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
-    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", 
+    "keywords" -> {"ReadMaps", "READMAPS", "readmaps"}, "index" -> True, 
+    "label" -> "SimulationTools/SimulationTools`GridFunctions Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`GridFunctions", "status" -> 
+    "None", "summary" -> 
     "ReadMaps[sim, var, dims] reads the multipatch maps present  for the grid \
 function var in sim.", "synonyms" -> {"ReadMaps", "READMAPS", "readmaps"}, 
     "title" -> "ReadMaps", "windowTitle" -> "ReadMaps", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ReadMaps"}, "SearchTextTranslated" -> "", 
+    "uri" -> "SimulationTools/ref/ReadMaps"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

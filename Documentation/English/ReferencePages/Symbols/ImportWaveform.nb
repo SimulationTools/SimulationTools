@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Waveforms",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Waveforms"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ImportWaveform",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ImportWaveform"]
+  ButtonData->"paclet:SimulationTools/ref/ImportWaveform"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ImportWaveform",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ImportWaveform"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ImportWaveform"], "[", 
        StyleBox["filename", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]imports an ASCII waveform file with columns time, real \
 part and imaginary part and returns it as a DataTable."
@@ -51,16 +51,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"ImportWaveform", "IMPORTWAVEFORM", "importwaveform"}, 
-    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
-    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
     "ImportWaveform[filename] imports an ASCII waveform file with columns \
 time, real part and imaginary part and returns it as a DataTable.", 
     "synonyms" -> {"ImportWaveform", "IMPORTWAVEFORM", "importwaveform"}, 
     "title" -> "ImportWaveform", "windowTitle" -> "ImportWaveform", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ImportWaveform"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/ImportWaveform"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

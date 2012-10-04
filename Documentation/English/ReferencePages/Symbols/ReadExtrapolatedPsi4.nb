@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Waveforms",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Waveforms"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadExtrapolatedPsi4",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadExtrapolatedPsi4"]
+  ButtonData->"paclet:SimulationTools/ref/ReadExtrapolatedPsi4"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadExtrapolatedPsi4",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadExtrapolatedPsi4"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadExtrapolatedPsi4"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "l", ",", " ", "m"}], "TI"], "]"}]], 
       "InlineFormula"],
@@ -53,19 +53,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadExtrapolatedPsi4", "READEXTRAPOLATEDPSI4", "readextrapolatedpsi4"}, 
-    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
-    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
     "ReadExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of \
 \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.", 
     "synonyms" -> {
      "ReadExtrapolatedPsi4", "READEXTRAPOLATEDPSI4", "readextrapolatedpsi4"}, 
     "title" -> "ReadExtrapolatedPsi4", "windowTitle" -> 
     "ReadExtrapolatedPsi4", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadExtrapolatedPsi4"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadExtrapolatedPsi4"}, "SearchTextTranslated" -> "",
+   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

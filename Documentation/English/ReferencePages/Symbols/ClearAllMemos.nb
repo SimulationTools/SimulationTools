@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Memo",
+ ButtonBox["SimulationTools`Memo",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Memo"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Memo"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ClearAllMemos",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ClearAllMemos"]
+  ButtonData->"paclet:SimulationTools/ref/ClearAllMemos"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ClearAllMemos",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ClearAllMemos"], "[", "]"}]], 
+        ButtonData->"paclet:SimulationTools/ref/ClearAllMemos"], "[", "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]wipes the cache of functions that have been memoised \
 using DefineMemoFunction."
@@ -51,16 +51,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"ClearAllMemos", "CLEARALLMEMOS", "clearallmemos"}, 
-    "index" -> True, "label" -> "nrmma/Memo Symbol", "language" -> "en", 
-    "paclet" -> "Memo", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "SimulationTools/SimulationTools`Memo Symbol",
+     "language" -> "en", "paclet" -> "SimulationTools`Memo", "status" -> 
+    "None", "summary" -> 
     "ClearAllMemos[] wipes the cache of functions that have been memoised \
 using DefineMemoFunction.", 
     "synonyms" -> {"ClearAllMemos", "CLEARALLMEMOS", "clearallmemos"}, 
     "title" -> "ClearAllMemos", "windowTitle" -> "ClearAllMemos", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ClearAllMemos"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/ClearAllMemos"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

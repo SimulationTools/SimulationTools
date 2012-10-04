@@ -3,13 +3,13 @@ Cell[" ", "TutorialColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/tutorial/GridFunctions"]
+  ButtonData->"paclet:SimulationTools/tutorial/GridFunctions"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -18,9 +18,9 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataRegion"], "NumericalRelativity":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"]},
-       
+       "paclet:SimulationTools/tutorial/DataRegion"], "NumericalRelativity":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/NumericalRelativity"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -29,7 +29,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
            URL[None], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
@@ -57,7 +58,7 @@ simulations.  It is currently capable of reading HDF5 and ASCII files \
 produced by Carpet and returns variables as ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " objects."
 }], "Text"],
 
@@ -287,7 +288,7 @@ Cell[CellGroupData[{
 Cell["Example", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
  CellLabel->"In[1]:="],
 
 Cell[TextData[{
@@ -374,21 +375,23 @@ Cell[BoxData[
  CellLabel->"In[6]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-    RowBox[{"ML_BSSN", "::", "phi"}], ",", "\<\"<\"\>", "\[InvisibleSpace]", 
-    "47", ",", "87", "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "0.75`"}], ",", "10.75`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"-", "10.75`"}], ",", "10.75`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"ML_BSSN::phi\.01\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "47", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "87", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 47, ",", 87, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.75`"}], ",", "10.75`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "10.75`"}], ",", "10.75`"}], "}"}]}], "}"}]}], 
+  "]"}]], "Output",
  CellLabel->"Out[6]="]
 }, Open  ]],
 
@@ -2531,11 +2534,14 @@ Cell[TextData[ButtonBox["RELATED TUTORIALS",
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataRegion"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], \
+"RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
@@ -2551,13 +2557,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
-    "nrmma Tutorial", "language" -> "en", "paclet" -> "GridFunctions", 
-    "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "GridFunctions", "status" -> "None", "summary" -> 
     "Tutorial for the GridFunctions package.", "synonyms" -> {}, "title" -> 
     "GridFunctions", "windowTitle" -> "GridFunctions", "type" -> "Tutorial", 
-    "uri" -> "nrmma/tutorial/GridFunctions"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "uri" -> "SimulationTools/tutorial/GridFunctions"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

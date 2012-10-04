@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GridFunctions",
+ ButtonBox["SimulationTools`GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/GridFunctions"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadRefinementLevels",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadRefinementLevels"]
+  ButtonData->"paclet:SimulationTools/ref/ReadRefinementLevels"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadRefinementLevels",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadRefinementLevels"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadRefinementLevels"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
@@ -96,19 +96,21 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadRefinementLevels", "READREFINEMENTLEVELS", "readrefinementlevels"}, 
-    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
-    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`GridFunctions Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`GridFunctions", "status" -> "None", 
+    "summary" -> 
     "ReadRefinementLevels[sim, var, dims] reads the refinement levels present \
 for the grid function var in sim.", 
     "synonyms" -> {
      "ReadRefinementLevels", "READREFINEMENTLEVELS", "readrefinementlevels"}, 
     "title" -> "ReadRefinementLevels", "windowTitle" -> 
     "ReadRefinementLevels", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadRefinementLevels"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadRefinementLevels"}, "SearchTextTranslated" -> "",
+   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

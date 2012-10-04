@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SystemStatistics",
+ ButtonBox["SimulationTools`SystemStatistics",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`SystemStatistics"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationSpeed",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadSimulationSpeed"]
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationSpeed"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadSimulationSpeed",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadSimulationSpeed"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadSimulationSpeed"], "[", 
        StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the execution speed of a simulation (simulation \
 coordinate time per real time elapsed) as a DataTable as a function of \
@@ -52,18 +52,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadSimulationSpeed", "READSIMULATIONSPEED", "readsimulationspeed"}, 
-    "index" -> True, "label" -> "nrmma/SystemStatistics Symbol", "language" -> 
-    "en", "paclet" -> "SystemStatistics", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`SystemStatistics Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`SystemStatistics", "status" -> "None", 
+    "summary" -> 
     "ReadSimulationSpeed[sim] gives the execution speed of a simulation \
 (simulation coordinate time per real time elapsed) as a DataTable as a \
 function of simulation coordinate time.", 
     "synonyms" -> {
      "ReadSimulationSpeed", "READSIMULATIONSPEED", "readsimulationspeed"}, 
     "title" -> "ReadSimulationSpeed", "windowTitle" -> "ReadSimulationSpeed", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/ReadSimulationSpeed"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/ReadSimulationSpeed"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

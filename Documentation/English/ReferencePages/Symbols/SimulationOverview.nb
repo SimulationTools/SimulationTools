@@ -3,27 +3,28 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SimView",
+ ButtonBox["SimulationTools`SimView",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/SimView"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`SimView"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["SimulationOverview",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/SimulationOverview"]
+  ButtonData->"paclet:SimulationTools/ref/SimulationOverview"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["SIMVIEW PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS`SIMVIEW PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"NumericalRelativity":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"]},
-       
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/NumericalRelativity"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -33,13 +34,14 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
         StripOnInput->False], {"ReadCores":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadCores"], "ReadCPUHours":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ReadCPUHours"], 
-       "ReadMemory":>Documentation`HelpLookup["paclet:nrmma/ref/ReadMemory"], 
-       "ReadRunSpeed":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadRunSpeed"], "ReadSwap":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadSwap"], "ReadWalltime":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadWalltime"]},
+       "paclet:SimulationTools/ref/ReadCores"], "ReadCPUHours":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadCPUHours"], 
+       "ReadMemory":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadMemory"], "ReadRunSpeed":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadRunSpeed"], 
+       "ReadSwap":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSwap"], "ReadWalltime":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadWalltime"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -48,8 +50,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"]},
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -58,9 +60,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
-           URL["http://bitbucket.org/ianhinder/nrmma"], None}]}], 
+           URL["http://bitbucket.org/ianhinder/SimulationTools"], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
@@ -83,7 +86,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["SimulationOverview",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SimulationOverview"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/SimulationOverview"], "[", 
        StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives a quick overview of the simulation sim."
     }]]},
@@ -1735,9 +1738,9 @@ S16sNVhqqvo/QhJSlw==
              StyleBox["\<\"t2\"\>",
               StripOnInput->False,
               FontSlant->Italic]},
-            {"\<\"0000\"\>", "\<\"Tue 10 Jul 2012 17:33:54\"\>", "0", 
+            {"\<\"0000\"\>", "\<\"Tue 10 Jul 2012 12:33:54\"\>", "0", 
              "6.5`"},
-            {"\<\"0001\"\>", "\<\"Tue 10 Jul 2012 17:34:00\"\>", "7", "300"}
+            {"\<\"0001\"\>", "\<\"Tue 10 Jul 2012 12:34:00\"\>", "7", "300"}
            },
            AutoDelete->False,
            GridBoxAlignment->{"Columns" -> {{Left}}},
@@ -1780,7 +1783,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadCores",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadCores"],
+    ButtonData->"paclet:SimulationTools/ref/ReadCores"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1790,7 +1793,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadCPUHours",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadCPUHours"],
+    ButtonData->"paclet:SimulationTools/ref/ReadCPUHours"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1800,7 +1803,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadMemory",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadMemory"],
+    ButtonData->"paclet:SimulationTools/ref/ReadMemory"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1810,7 +1813,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadRunSpeed",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadRunSpeed"],
+    ButtonData->"paclet:SimulationTools/ref/ReadRunSpeed"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1820,7 +1823,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadSwap",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadSwap"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSwap"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1830,7 +1833,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadWalltime",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadWalltime"],
+    ButtonData->"paclet:SimulationTools/ref/ReadWalltime"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -1853,7 +1856,8 @@ Cell[TextData[ButtonBox["TUTORIALS",
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "Tutorials"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], "Tutorials"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1871,9 +1875,9 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"]
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1893,16 +1897,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "SimulationOverview", "SIMULATIONOVERVIEW", "simulationoverview"}, 
-    "index" -> True, "label" -> "nrmma/SimView Symbol", "language" -> "en", 
-    "paclet" -> "SimView", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`SimView Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`SimView", "status" -> "None", "summary" -> 
     "produce a quick overview of a simulation", 
     "synonyms" -> {
      "SimulationOverview", "SIMULATIONOVERVIEW", "simulationoverview"}, 
     "title" -> "SimulationOverview", "windowTitle" -> "SimulationOverview", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/SimulationOverview"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/SimulationOverview"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

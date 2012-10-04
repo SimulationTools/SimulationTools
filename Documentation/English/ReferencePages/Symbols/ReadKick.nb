@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Kicks",
+ ButtonBox["SimulationTools`Kicks",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Kicks"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Kicks"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadKick",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadKick"]
+  ButtonData->"paclet:SimulationTools/ref/ReadKick"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -46,15 +46,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"ReadKick", "READKICK", "readkick"}, 
-    "index" -> True, "label" -> "nrmma/Kicks Symbol", "language" -> "en", 
-    "paclet" -> "Kicks", "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", 
+    "keywords" -> {"ReadKick", "READKICK", "readkick"}, "index" -> True, 
+    "label" -> "SimulationTools/SimulationTools`Kicks Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`Kicks", "status" -> "None", "summary" -> 
     "Kick[sim, dir, r, lMax] computes the kick component in km/s from the \
 multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an \
 integer from 1 to 3) using modes up to l = lMax", 
     "synonyms" -> {"ReadKick", "READKICK", "readkick"}, "title" -> "ReadKick",
      "windowTitle" -> "ReadKick", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadKick"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadKick"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

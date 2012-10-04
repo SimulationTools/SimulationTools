@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GridFunctions",
+ ButtonBox["SimulationTools`GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/GridFunctions"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadIterations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadIterations"]
+  ButtonData->"paclet:SimulationTools/ref/ReadIterations"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadIterations",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadIterations"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadIterations"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
@@ -96,16 +96,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"ReadIterations", "READITERATIONS", "readiterations"}, 
-    "index" -> True, "label" -> "nrmma/GridFunctions Symbol", "language" -> 
-    "en", "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`GridFunctions Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`GridFunctions", "status" -> "None", 
+    "summary" -> 
     "ReadIterations[sim, var, dims] reads the iterations present for the grid \
 function var in sim.", 
     "synonyms" -> {"ReadIterations", "READITERATIONS", "readiterations"}, 
     "title" -> "ReadIterations", "windowTitle" -> "ReadIterations", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ReadIterations"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/ReadIterations"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

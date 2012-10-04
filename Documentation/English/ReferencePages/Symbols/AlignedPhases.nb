@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Waveforms",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Waveforms"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["AlignedPhases",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/AlignedPhases"]
+  ButtonData->"paclet:SimulationTools/ref/AlignedPhases"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["AlignedPhases",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/AlignedPhases"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/AlignedPhases"], "[", 
        StyleBox[
         RowBox[{
          RowBox[{"{", 
@@ -92,17 +92,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"AlignedPhases", "ALIGNEDPHASES", "alignedphases"}, 
-    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
-    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
     "AlignedPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. \
 The independent variable is assumed to be a phase so that the resulting \
 phases all start out within 2\[Pi] of each other.", 
     "synonyms" -> {"AlignedPhases", "ALIGNEDPHASES", "alignedphases"}, 
     "title" -> "AlignedPhases", "windowTitle" -> "AlignedPhases", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/AlignedPhases"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/AlignedPhases"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["RunFiles",
+ ButtonBox["SimulationTools`RunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/RunFiles"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`RunFiles"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationRunTime",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadSimulationRunTime"]
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationRunTime"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -45,20 +45,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadSimulationRunTime", "READSIMULATIONRUNTIME", 
       "readsimulationruntime"}, "index" -> True, "label" -> 
-    "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> "RunFiles", 
-    "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`RunFiles Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`RunFiles", "status" -> "None", "summary" -> 
     "ReadSimulationRuntime[sim] gives the real time elapsed during the \
 execution of a simulation.", 
     "synonyms" -> {
      "ReadSimulationRunTime", "READSIMULATIONRUNTIME", 
       "readsimulationruntime"}, "title" -> "ReadSimulationRunTime", 
     "windowTitle" -> "ReadSimulationRunTime", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadSimulationRunTime"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadSimulationRunTime"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

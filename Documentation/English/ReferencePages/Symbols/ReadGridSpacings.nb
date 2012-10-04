@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Grids",
+ ButtonBox["SimulationTools`Grids",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Grids"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Grids"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadGridSpacings",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadGridSpacings"]
+  ButtonData->"paclet:SimulationTools/ref/ReadGridSpacings"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadGridSpacings",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadGridSpacings"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadGridSpacings"], "[", 
        StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns a list of the grid spacing in each direction in \
 sim."
@@ -88,18 +88,19 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadGridSpacings", "READGRIDSPACINGS", "readgridspacings"}, "index" -> 
-    True, "label" -> "nrmma/Grids Symbol", "language" -> "en", "paclet" -> 
-    "Grids", "status" -> "None", "summary" -> 
+    True, "label" -> "SimulationTools/SimulationTools`Grids Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`Grids", "status" -> 
+    "None", "summary" -> 
     "ReadGridSpacings[sim] returns a list of the grid spacing in each \
 direction in sim.", 
     "synonyms" -> {
      "ReadGridSpacings", "READGRIDSPACINGS", "readgridspacings"}, "title" -> 
     "ReadGridSpacings", "windowTitle" -> "ReadGridSpacings", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ReadGridSpacings"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/ReadGridSpacings"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

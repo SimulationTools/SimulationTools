@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["RunFiles",
+ ButtonBox["SimulationTools`RunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/RunFiles"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`RunFiles"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["FindSimulationFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/FindSimulationFiles"]
+  ButtonData->"paclet:SimulationTools/ref/FindSimulationFiles"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["FindSimulationFiles",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/FindSimulationFiles"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/FindSimulationFiles"], "[", 
        StyleBox[
         RowBox[{"simname", ",", " ", "filename"}], "TI"], "]"}]], 
       "InlineFormula"],
@@ -54,11 +54,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "FindSimulationFiles", "FINDSIMULATIONFILES", "findsimulationfiles"}, 
-    "index" -> True, "label" -> "nrmma/RunFiles Symbol", "language" -> "en", 
-    "paclet" -> "RunFiles", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`RunFiles Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`RunFiles", "status" -> "None", "summary" -> 
     "FindSimulationFiles[simname, filename] gives all the files with the \
 given name across all the segments of a simulation.  filename can be a \
 string, a string expression or a regular expression.  This function always \
@@ -66,7 +67,7 @@ returns full pathnames.",
     "synonyms" -> {
      "FindSimulationFiles", "FINDSIMULATIONFILES", "findsimulationfiles"}, 
     "title" -> "FindSimulationFiles", "windowTitle" -> "FindSimulationFiles", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/FindSimulationFiles"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/FindSimulationFiles"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

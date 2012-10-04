@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["SameGridQ",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/SameGridQ"]
+  ButtonData->"paclet:SimulationTools/ref/SameGridQ"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["SameGridQ",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/SameGridQ"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/SameGridQ"], "[", 
        StyleBox[
         RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns True if d1 and d2 are defined on the same \
@@ -52,14 +53,15 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"SameGridQ", "SAMEGRIDQ", "samegridq"}, "index" -> True, 
-    "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "label" -> "SimulationTools/SimulationTools`DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataRepresentations", 
+    "status" -> "None", "summary" -> 
     "SameGridQ[d1, d2] returns True if d1 and d2 are defined on the same \
 coordinate grid.", "synonyms" -> {"SameGridQ", "SAMEGRIDQ", "samegridq"}, 
     "title" -> "SameGridQ", "windowTitle" -> "SameGridQ", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/SameGridQ"}, "SearchTextTranslated" -> "", 
+    "uri" -> "SimulationTools/ref/SameGridQ"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

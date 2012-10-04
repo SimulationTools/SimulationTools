@@ -3,27 +3,28 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["SimulationTools`DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ToDataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ToDataTable"]
+  ButtonData->"paclet:SimulationTools/ref/ToDataTable"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS`DATATABLE PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
         StripOnInput->False], {"ToList":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToList"], "DataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataTable"]},
+       "paclet:SimulationTools/ref/ToList"], "DataTable":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/DataTable"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -32,10 +33,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"], 
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"], 
        RowBox[{"Data", " ", "Representations"}]:>Documentation`HelpLookup[
-       "paclet:nrmma/guide/Data Representations"]},
+       "paclet:SimulationTools/guide/Data Representations"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -54,7 +55,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ToDataTable",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToDataTable"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ToDataTable"], "[", 
        StyleBox[
         RowBox[{"{", 
          RowBox[{
@@ -76,7 +77,7 @@ sense."
       RowBox[{
        ButtonBox["ToDataTable",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToDataTable"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ToDataTable"], "[", 
        StyleBox["dr", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]converts a 1-dimensional DataRegion into a DataTable."
     }]]}
@@ -114,14 +115,15 @@ Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
-  RowBox[{"{", 
-   RowBox[{
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 3, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0.1`", ",", "0.6`"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}], "]"}]], "Output",
+     RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -164,7 +166,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ToList",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToList"],
+    ButtonData->"paclet:SimulationTools/ref/ToList"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -174,7 +176,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["DataTable",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataTable"],
+    ButtonData->"paclet:SimulationTools/ref/DataTable"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -194,13 +196,14 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"],
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"],
 
 Cell[TextData[ButtonBox["Data Representations",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/Data Representations"]], "MoreAbout"]
+ ButtonData->
+  "paclet:SimulationTools/guide/Data Representations"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -220,10 +223,11 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"ToDataTable", "TODATATABLE", "todatatable"}, "index" -> 
-    True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> 
-    "DataTable", "status" -> "None", "summary" -> 
+    True, "label" -> "SimulationTools/SimulationTools`DataTable Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataTable", "status" -> 
+    "None", "summary" -> 
     "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object \
 out of the list passed. The independent variables, xi, should be \
 monotonically increasing real numbers and may have a variable increment.  The \
@@ -232,8 +236,8 @@ operations (+, -, *, /) make sense.\nToDataTable[dr] converts a 1-dimensional \
 DataRegion into a DataTable.", 
     "synonyms" -> {"ToDataTable", "TODATATABLE", "todatatable"}, "title" -> 
     "ToDataTable", "windowTitle" -> "ToDataTable", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ToDataTable"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "SimulationTools/ref/ToDataTable"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Mul",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Mul"]
+  ButtonData->"paclet:SimulationTools/ref/Mul"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["Mul",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Mul"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/Mul"], "[", 
        StyleBox[
         RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]multiplies d1 by d2 after they have been resampled onto \
@@ -52,13 +53,16 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Mul", "MUL", "mul"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", "keywords" -> {"Mul", "MUL", "mul"}, 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "Mul[d1, d2] multiplies d1 by d2 after they have been resampled onto the \
 intersection of their bounding boxes.", "synonyms" -> {"Mul", "MUL", "mul"}, 
     "title" -> "Mul", "windowTitle" -> "Mul", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Mul"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "SimulationTools/ref/Mul"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
+  ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

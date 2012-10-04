@@ -3,26 +3,27 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Convergence",
+ ButtonBox["SimulationTools`Convergence",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Convergence"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Convergence"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ConvergenceMultiplier",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ConvergenceMultiplier"]
+  ButtonData->"paclet:SimulationTools/ref/ConvergenceMultiplier"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["CONVERGENCE PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS`CONVERGENCE PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
         StripOnInput->False], {"ConvergenceRate":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ConvergenceRate"]},
+       "paclet:SimulationTools/ref/ConvergenceRate"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -31,8 +32,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"]},
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -51,7 +52,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ConvergenceMultiplier",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ConvergenceMultiplier"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ConvergenceMultiplier"], "[", 
+       
        StyleBox[
         RowBox[{
          RowBox[{"{", 
@@ -186,7 +188,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ConvergenceRate",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ConvergenceRate"],
+    ButtonData->"paclet:SimulationTools/ref/ConvergenceRate"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -210,9 +212,9 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"]
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -232,20 +234,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ConvergenceMultiplier", "CONVERGENCEMULTIPLIER", 
       "convergencemultiplier"}, "index" -> True, "label" -> 
-    "nrmma/Convergence Symbol", "language" -> "en", "paclet" -> "Convergence",
-     "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`Convergence Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Convergence", "status" -> "None", "summary" -> 
     "ConvergenceMultiplier[{h1,h2,h3},p] computes the expected ratio \
 (f[h1]-f[h2])/(f[h2]-f[h3]) when f[h] has a Taylor expansion f[h] = O[h^p].", 
     "synonyms" -> {
      "ConvergenceMultiplier", "CONVERGENCEMULTIPLIER", 
       "convergencemultiplier"}, "title" -> "ConvergenceMultiplier", 
     "windowTitle" -> "ConvergenceMultiplier", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ConvergenceMultiplier"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ConvergenceMultiplier"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

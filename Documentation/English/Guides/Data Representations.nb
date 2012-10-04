@@ -3,13 +3,13 @@ Cell[" ", "GuideColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Data Representations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable and DataRegion"]
+  ButtonData->"paclet:SimulationTools/guide/DataTable and DataRegion"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -18,8 +18,9 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataRegion"], "DataTable":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/DataTable"]},
+       "paclet:SimulationTools/tutorial/DataRegion"], "DataTable":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/DataTable"]},
+       
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -28,9 +29,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
-           URL["http://bitbucket.org/ianhinder/nrmma"], None}]}], 
+           URL["http://bitbucket.org/ianhinder/SimulationTools"], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
@@ -48,25 +50,26 @@ Cell[CellGroupData[{
 Cell["Data Representations", "GuideTitle"],
 
 Cell[TextData[{
- "NRMMA uses two different representations of numerical data.  The DataTable \
-is designed for time-series data, and consists of a monotonically-increasing \
-time coordinate and corresponding data values, which can be of any type.  The \
-time coordinate does not have to be regularly spaced.  The DataRegion \
-represents an N-dimensional block of data on a uniform grid.  The data must \
-consist of real or complex numbers, or the quantities None or Missing[].  The \
-data is stored efficiently in memory. Each point has an associated set of \
-coordinates, and these are specified by giving the origin and spacing of the \
-DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  Many commonly-used \
-Mathematica functions are defined on compatible DataTables and DataRegions \
-(those with the same coordinates), for example Plus (+), Minus (-), Times \
-(*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan etc.  See the ",
+ "SimulationTools uses two different representations of numerical data.  The \
+DataTable is designed for time-series data, and consists of a \
+monotonically-increasing time coordinate and corresponding data values, which \
+can be of any type.  The time coordinate does not have to be regularly \
+spaced.  The DataRegion represents an N-dimensional block of data on a \
+uniform grid.  The data must consist of real or complex numbers, or the \
+quantities None or Missing[].  The data is stored efficiently in memory. Each \
+point has an associated set of coordinates, and these are specified by giving \
+the origin and spacing of the DataRegion as {ox, oy, ... oz} and {dx, dy, \
+..., dz}.  Many commonly-used Mathematica functions are defined on compatible \
+DataTables and DataRegions (those with the same coordinates), for example \
+Plus (+), Minus (-), Times (*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan \
+etc.  See the ",
  Cell[TextData[ButtonBox["DataTable",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/tutorial/DataTable"]]],
+  ButtonData->"paclet:SimulationTools/tutorial/DataTable"]]],
  " and ",
  Cell[TextData[ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/tutorial/DataRegion"]]],
+  ButtonData->"paclet:SimulationTools/tutorial/DataRegion"]]],
  " tutorials."
 }], "GuideAbstract"],
 
@@ -150,168 +153,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "Numerically differentiate a DataRepresentation"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["Coordinate",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Coordinate"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinateAtMax",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinateAtMax"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinateOutline",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinateOutline"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinateRange",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinateRange"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinatesAtMax",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinatesAtMax"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinateSpacing",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinateSpacing"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinateSpacings",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinateSpacings"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["DataRepresentationQ",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRepresentationQ"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Div",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Div"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Downsampled",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Downsampled"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Frequency",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Frequency"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["GridNorm",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GridNorm"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["MapList",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MapList"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["MaxCoordinate",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MaxCoordinate"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["MaxCoordinates",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MaxCoordinates"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["MinCoordinate",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MinCoordinate"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["MinCoordinates",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MinCoordinates"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Mul",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Mul"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Phase",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Phase"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Resampled",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Resampled"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["SameGridQ",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/SameGridQ"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Shifted",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Shifted"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["Sub",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Sub"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
+}], "GuideText"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -349,64 +191,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "Compute the phase (argument) of a complex-valued DataTable"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["AntiDerivative",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/AntiDerivative"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["CoordinateAtInterpolatedMax",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/CoordinateAtInterpolatedMax"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["InterpolatedMax",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/InterpolatedMax"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["InterpolatedWhere",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/InterpolatedWhere"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["MinCoordinateSpacing",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MinCoordinateSpacing"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["RestrictedToCommonInterval",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RestrictedToCommonInterval"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["RestrictedToInterval",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RestrictedToInterval"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["UniformSpacingQ",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/UniformSpacingQ"]], "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
+}], "GuideText"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -433,17 +218,7 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "convert an N-dimensional nested list of numbers to a DataRegion"
-}], "GuideText"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["VariableName",
-  BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/VariableName"]], "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " "
-}], "InlineGuideFunctionListing"]
+}], "GuideText"]
 }, Open  ]]
 }, Open  ]],
 
@@ -453,11 +228,11 @@ Cell["TUTORIALS", "GuideTutorialsSection"],
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "GuideTutorial"],
+ ButtonData->"paclet:SimulationTools/tutorial/DataRegion"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "GuideTutorial"]
+ ButtonData->"paclet:SimulationTools/tutorial/DataTable"]], "GuideTutorial"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -477,12 +252,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"nrmma", "NRMMA"}, "index" -> True, 
-    "label" -> "NRMMA guide", "language" -> "en", "paclet" -> 
-    "DataTable and DataRegion", "status" -> "None", "summary" -> 
-    "Representations of data in NRMMA", "synonyms" -> {}, "title" -> 
+   "context" -> "SimulationTools`", "keywords" -> {"SimulationTools"}, 
+    "index" -> True, "label" -> "SimulationTools guide", "language" -> "en", 
+    "paclet" -> "DataTable and DataRegion", "status" -> "None", "summary" -> 
+    "Representations of data in SimulationTools", "synonyms" -> {}, "title" -> 
     "Data Representations", "windowTitle" -> "Data Representations", "type" -> 
-    "Guide", "uri" -> "nrmma/guide/DataTable and DataRegion"}, 
+    "Guide", "uri" -> "SimulationTools/guide/DataTable and DataRegion"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

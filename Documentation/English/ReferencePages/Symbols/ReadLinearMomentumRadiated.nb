@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Kicks",
+ ButtonBox["SimulationTools`Kicks",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Kicks"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Kicks"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadLinearMomentumRadiated",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumRadiated"]
+  ButtonData->"paclet:SimulationTools/ref/ReadLinearMomentumRadiated"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -48,12 +48,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadLinearMomentumRadiated", "READLINEARMOMENTUMRADIATED", 
       "readlinearmomentumradiated"}, "index" -> True, "label" -> 
-    "nrmma/Kicks Symbol", "language" -> "en", "paclet" -> "Kicks", "status" -> 
-    "None", "summary" -> 
+    "SimulationTools/SimulationTools`Kicks Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Kicks", "status" -> "None", "summary" -> 
     "LinearMomentumRadiated[sim, dir, r, lMax] computes the linear momentum \
 radiated as a function of time from the multipolar decomposition of Psi4 on a \
 sphere at radius r in direction dir (an integer from 1 to 3) using modes up \
@@ -63,8 +63,8 @@ result of LinearMomentumFlux with an initial boundary condition of zero.",
      "ReadLinearMomentumRadiated", "READLINEARMOMENTUMRADIATED", 
       "readlinearmomentumradiated"}, "title" -> "ReadLinearMomentumRadiated", 
     "windowTitle" -> "ReadLinearMomentumRadiated", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadLinearMomentumRadiated"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadLinearMomentumRadiated"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

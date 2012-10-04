@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["CoordinateAtMax",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/CoordinateAtMax"]
+  ButtonData->"paclet:SimulationTools/ref/CoordinateAtMax"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["CoordinateAtMax",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/CoordinateAtMax"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/CoordinateAtMax"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]finds the coordinate at which a maximum occurs in d. \
 This is guaranteed to coincide with a data point."
@@ -51,17 +52,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"CoordinateAtMax", "COORDINATEATMAX", "coordinateatmax"}, 
-    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
-    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
-     "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in d. \
 This is guaranteed to coincide with a data point.", 
     "synonyms" -> {"CoordinateAtMax", "COORDINATEATMAX", "coordinateatmax"}, 
     "title" -> "CoordinateAtMax", "windowTitle" -> "CoordinateAtMax", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/CoordinateAtMax"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/CoordinateAtMax"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

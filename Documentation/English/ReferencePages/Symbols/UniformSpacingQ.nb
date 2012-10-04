@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["SimulationTools`DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["UniformSpacingQ",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/UniformSpacingQ"]
+  ButtonData->"paclet:SimulationTools/ref/UniformSpacingQ"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["UniformSpacingQ",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/UniformSpacingQ"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/UniformSpacingQ"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns True if the DataTable has a uniform grid \
 spacing and False if the grid spacing is variable.  The grid spacings are \
@@ -52,17 +52,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"UniformSpacingQ", "UNIFORMSPACINGQ", "uniformspacingq"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataTable Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`DataTable", "status" -> "None", "summary" -> 
     "UniformSpacingQ[d] returns True if the DataTable has a uniform grid \
 spacing and False if the grid spacing is variable.  The grid spacings are \
 considered uniform if they are equal up to a tolerance of 1e-5.", 
     "synonyms" -> {"UniformSpacingQ", "UNIFORMSPACINGQ", "uniformspacingq"}, 
     "title" -> "UniformSpacingQ", "windowTitle" -> "UniformSpacingQ", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/UniformSpacingQ"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/UniformSpacingQ"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CoordinateTransformations",
+ ButtonBox["SimulationTools`CoordinateTransformations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CoordinateTransformations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`CoordinateTransformations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["TortoiseToRadial",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/TortoiseToRadial"]
+  ButtonData->"paclet:SimulationTools/ref/TortoiseToRadial"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["TortoiseToRadial",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/TortoiseToRadial"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/TortoiseToRadial"], "[", 
        StyleBox[
         RowBox[{"rstar_", ",", " ", "M"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the value of the radial coordinate corresponding \
@@ -52,19 +53,21 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "TortoiseToRadial", "TORTOISETORADIAL", "tortoisetoradial"}, "index" -> 
-    True, "label" -> "nrmma/CoordinateTransformations Symbol", "language" -> 
-    "en", "paclet" -> "CoordinateTransformations", "status" -> "None", 
+    True, "label" -> 
+    "SimulationTools/SimulationTools`CoordinateTransformations Symbol", 
+    "language" -> "en", "paclet" -> 
+    "SimulationTools`CoordinateTransformations", "status" -> "None", 
     "summary" -> 
     "TortoiseToRadial[rstar_, M] gives the value of the radial coordinate \
 corresponding to the Schwarzschild tortoise coordinate, rstar.", 
     "synonyms" -> {
      "TortoiseToRadial", "TORTOISETORADIAL", "tortoisetoradial"}, "title" -> 
     "TortoiseToRadial", "windowTitle" -> "TortoiseToRadial", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/TortoiseToRadial"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/TortoiseToRadial"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

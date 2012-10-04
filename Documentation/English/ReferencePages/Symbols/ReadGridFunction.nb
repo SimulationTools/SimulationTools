@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GridFunctions",
+ ButtonBox["SimulationTools`GridFunctions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/GridFunctions"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`GridFunctions"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadGridFunction",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadGridFunction"]
+  ButtonData->"paclet:SimulationTools/ref/ReadGridFunction"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadGridFunction",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadGridFunction"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadGridFunction"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
@@ -104,11 +104,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadGridFunction", "READGRIDFUNCTION", "readgridfunction"}, "index" -> 
-    True, "label" -> "nrmma/GridFunctions Symbol", "language" -> "en", 
-    "paclet" -> "GridFunctions", "status" -> "None", "summary" -> 
+    True, "label" -> "SimulationTools/SimulationTools`GridFunctions Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`GridFunctions", "status" -> 
+    "None", "summary" -> 
     "ReadGridFunction[sim, var, dims] reads variable var from sim and returns \
 it as a DataRegion object.  dims is a list of the dimensions to read, and \
 these dimensions must correspond to available output.  Dimensions in dims can \
@@ -120,8 +121,8 @@ from the variable before it is returned.",
     "synonyms" -> {
      "ReadGridFunction", "READGRIDFUNCTION", "readgridfunction"}, "title" -> 
     "ReadGridFunction", "windowTitle" -> "ReadGridFunction", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ReadGridFunction"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/ReadGridFunction"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

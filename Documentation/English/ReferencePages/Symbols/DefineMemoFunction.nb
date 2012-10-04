@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Memo",
+ ButtonBox["SimulationTools`Memo",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Memo"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Memo"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["DefineMemoFunction",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/DefineMemoFunction"]
+  ButtonData->"paclet:SimulationTools/ref/DefineMemoFunction"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -24,7 +24,8 @@ Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[TextData[ButtonBox["DefineMemoFunction",
       BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/DefineMemoFunction"]], "InlineFormula"],
+      ButtonData->"paclet:SimulationTools/ref/DefineMemoFunction"]], 
+      "InlineFormula"],
      "\[LineSeparator][f[args], body] defines a function f with arguments \
 args and body body such that the result of the function is remembered after \
 the first time it is called.  This is used to cache data that is expensive to \
@@ -50,11 +51,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "DefineMemoFunction", "DEFINEMEMOFUNCTION", "definememofunction"}, 
-    "index" -> True, "label" -> "nrmma/Memo Symbol", "language" -> "en", 
-    "paclet" -> "Memo", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> "SimulationTools/SimulationTools`Memo Symbol",
+     "language" -> "en", "paclet" -> "SimulationTools`Memo", "status" -> 
+    "None", "summary" -> 
     "DefineMemoFunction[f[args], body] defines a function f with arguments \
 args and body body such that the result of the function is remembered after \
 the first time it is called.  This is used to cache data that is expensive to \
@@ -62,7 +64,7 @@ read or compute.  See ClearAllMemos for flushing this cache.",
     "synonyms" -> {
      "DefineMemoFunction", "DEFINEMEMOFUNCTION", "definememofunction"}, 
     "title" -> "DefineMemoFunction", "windowTitle" -> "DefineMemoFunction", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/DefineMemoFunction"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/DefineMemoFunction"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["CoordinateRange",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/CoordinateRange"]
+  ButtonData->"paclet:SimulationTools/ref/CoordinateRange"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["CoordinateRange",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/CoordinateRange"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/CoordinateRange"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the coordinates of the first and last points of d."
     }]]}
@@ -50,16 +51,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"CoordinateRange", "COORDINATERANGE", "coordinaterange"}, 
-    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
-    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
-     "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "CoordinateRange[d] gives the coordinates of the first and last points of \
 d.", "synonyms" -> {"CoordinateRange", "COORDINATERANGE", "coordinaterange"}, 
     "title" -> "CoordinateRange", "windowTitle" -> "CoordinateRange", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/CoordinateRange"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/CoordinateRange"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

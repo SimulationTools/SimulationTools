@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["DataRepresentationQ",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/DataRepresentationQ"]
+  ButtonData->"paclet:SimulationTools/ref/DataRepresentationQ"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["DataRepresentationQ",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/DataRepresentationQ"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/DataRepresentationQ"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns True if d is a DataRepresentation type."
     }]]}
@@ -50,17 +51,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "DataRepresentationQ", "DATAREPRESENTATIONQ", "datarepresentationq"}, 
-    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
-    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
-     "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "DataRepresentationQ[d] returns True if d is a DataRepresentation type.", 
     "synonyms" -> {
      "DataRepresentationQ", "DATAREPRESENTATIONQ", "datarepresentationq"}, 
     "title" -> "DataRepresentationQ", "windowTitle" -> "DataRepresentationQ", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/DataRepresentationQ"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/DataRepresentationQ"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

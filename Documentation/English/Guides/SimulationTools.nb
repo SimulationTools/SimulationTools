@@ -3,29 +3,31 @@ Cell[" ", "GuideColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NRMMA Package",
+ ButtonBox["SimulationTools Package",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"]
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA GUIDE", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS GUIDE", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"NRMMAIntroduction":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/NRMMAIntroduction"], "DataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/DataRegion"], 
-       "DataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataTable"], "NumericalRelativity":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"], 
+        StripOnInput->False], {"SimulationToolsIntroduction":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SimulationToolsIntroduction"], 
+       "DataRegion":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/DataRegion"], "DataTable":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/DataTable"], 
+       "NumericalRelativity":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/NumericalRelativity"], 
        "GridFunctions":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/GridFunctions"], "Kicks":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/Kicks"]},
+       "paclet:SimulationTools/tutorial/GridFunctions"], "Kicks":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/Kicks"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -34,9 +36,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
-           URL["http://bitbucket.org/ianhinder/nrmma"], None}]}], 
+           URL["http://bitbucket.org/ianhinder/SimulationTools"], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
@@ -51,16 +54,16 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["NRMMA Package", "GuideTitle"],
+Cell["SimulationTools Package", "GuideTitle"],
 
 Cell[TextData[{
- "NRMMA is a ",
+ "SimulationTools is a ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
  " application for analysing data from numerical simulations.  See ",
- Cell[TextData[ButtonBox["NRMMAIntroduction",
+ Cell[TextData[ButtonBox["SimulationToolsIntroduction",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/tutorial/NRMMAIntroduction"]]],
+  ButtonData->"paclet:SimulationTools/tutorial/SimulationToolsIntroduction"]]],
  " for an introduction."
 }], "GuideAbstract"],
 
@@ -69,12 +72,14 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Data Representations \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
-  "paclet:nrmma/guide/Data Representations"]], "GuideFunctionsSubsection"],
+  "paclet:SimulationTools/guide/Data Representations"]], \
+"GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["DataTable",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataTable"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/DataTable"]], 
+  "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -84,7 +89,7 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"]], "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -94,49 +99,54 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["Frequency",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Frequency"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/Frequency"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["Phase",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Phase"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/Phase"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ToDataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToDataRegion"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ToDataTable",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToDataTable"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ToDataTable"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ToListOfData",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToListOfData"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ToListOfData"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["MinCoordinates",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/MinCoordinates"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/MinCoordinates"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["RestrictedToCommonInterval",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/RestrictedToCommonInterval"]], 
+  ButtonData->"paclet:SimulationTools/ref/RestrictedToCommonInterval"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -144,14 +154,14 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ToList",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToList"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ToList"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["...",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/guide/Data Representations"]], 
+  ButtonData->"paclet:SimulationTools/guide/Data Representations"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
@@ -163,7 +173,8 @@ Cell["Reading Grid Variables", "GuideFunctionsSubsection"],
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadGridFunction",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadGridFunction"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadGridFunction"]], 
+  "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -173,28 +184,31 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadIterations",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadIterations"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadIterations"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadMaps",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadMaps"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadMaps"]], "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadRefinementLevels",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadRefinementLevels"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadRefinementLevels"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadTimeLevels",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadTimeLevels"]], "InlineFunctionSans"]
+  ButtonData->"paclet:SimulationTools/ref/ReadTimeLevels"]], 
+  "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -205,7 +219,8 @@ Cell["Simulation Information", "GuideFunctionsSubsection"],
 Cell[TextData[{
  Cell[TextData[ButtonBox["SimulationOverview",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/SimulationOverview"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/SimulationOverview"]], 
+  "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -215,7 +230,7 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadSimulationParameter",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationParameter"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationParameter"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -226,7 +241,7 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["FindSimulationParameters",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FindSimulationParameters"]], 
+  ButtonData->"paclet:SimulationTools/ref/FindSimulationParameters"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -237,7 +252,7 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadSimulationSpeed",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationSpeed"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationSpeed"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -245,7 +260,7 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ReadSimulationRunTime",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationRunTime"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationRunTime"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -253,7 +268,7 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ReadSimulationCoreCount",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationCoreCount"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationCoreCount"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -261,7 +276,7 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ReadSimulationMemoryUsage",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationMemoryUsage"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -269,7 +284,7 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ReadSimulationSwapUsage",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationSwapUsage"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationSwapUsage"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -277,7 +292,8 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["ReadSimulationCost",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadSimulationCost"]], "InlineFunctionSans"]
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationCost"]], 
+  "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 
@@ -286,12 +302,13 @@ Cell[CellGroupData[{
 Cell[TextData[ButtonBox["Numerical Relativity \[RightGuillemet]",
  BaseStyle->{"Link", "GuideFunctionsSubsection"},
  ButtonData->
-  "paclet:nrmma/guide/Numerical Relativity"]], "GuideFunctionsSubsection"],
+  "paclet:SimulationTools/guide/Numerical Relativity"]], \
+"GuideFunctionsSubsection"],
 
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadPsi4",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadPsi4"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadPsi4"]], "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -301,7 +318,8 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadBlackHoleSpin",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadBlackHoleSpin"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadBlackHoleSpin"]], 
+  "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -311,7 +329,7 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadBinaryCoordinates",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadBinaryCoordinates"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadBinaryCoordinates"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -322,7 +340,7 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadKick",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadKick"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadKick"]], "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -332,49 +350,55 @@ Cell[TextData[{
 Cell[TextData[{
  Cell[TextData[ButtonBox["ReadPsi4Modes",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadPsi4Modes"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadPsi4Modes"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadPsi4Radii",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadPsi4Radii"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadPsi4Radii"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadBlackHoleMass",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadBlackHoleMass"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadBlackHoleMass"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadBinarySeparation",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadBinarySeparation"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadBinarySeparation"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadBinaryPhase",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadBinaryPhase"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadBinaryPhase"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadKickVector",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadKickVector"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ReadKickVector"]], 
+  "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
  Cell[TextData[ButtonBox["ReadLinearMomentumFlux",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ReadLinearMomentumFlux"]], 
+  ButtonData->"paclet:SimulationTools/ref/ReadLinearMomentumFlux"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -382,7 +406,7 @@ Cell[TextData[{
  " ",
  Cell[TextData[ButtonBox["...",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/guide/Numerical Relativity"]], 
+  ButtonData->"paclet:SimulationTools/guide/Numerical Relativity"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
@@ -394,7 +418,7 @@ Cell["Analysis", "GuideFunctionsSubsection"],
 Cell[TextData[{
  Cell[TextData[ButtonBox["ConvergenceMultiplier",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ConvergenceMultiplier"]], 
+  ButtonData->"paclet:SimulationTools/ref/ConvergenceMultiplier"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -406,7 +430,8 @@ convergence order"
 Cell[TextData[{
  Cell[TextData[ButtonBox["ConvergenceRate",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ConvergenceRate"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ConvergenceRate"]], 
+  "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -421,7 +446,8 @@ Cell["Utilities", "GuideFunctionsSubsection"],
 Cell[TextData[{
  Cell[TextData[ButtonBox["ClearAllMemos",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ClearAllMemos"]], "InlineFunctionSans"],
+  ButtonData->"paclet:SimulationTools/ref/ClearAllMemos"]], 
+  "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
@@ -432,7 +458,7 @@ don't have to be recomputed"
 Cell[TextData[{
  Cell[TextData[ButtonBox["FindSimulationFiles",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/FindSimulationFiles"]], 
+  ButtonData->"paclet:SimulationTools/ref/FindSimulationFiles"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -446,29 +472,33 @@ Cell[CellGroupData[{
 
 Cell["TUTORIALS", "GuideTutorialsSection"],
 
-Cell[TextData[ButtonBox["NRMMAIntroduction",
+Cell[TextData[ButtonBox["SimulationToolsIntroduction",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NRMMAIntroduction"]], "GuideTutorial"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationToolsIntroduction"]], \
+"GuideTutorial"],
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "GuideTutorial"],
+ ButtonData->"paclet:SimulationTools/tutorial/DataRegion"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "GuideTutorial"],
+ ButtonData->"paclet:SimulationTools/tutorial/DataTable"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "GuideTutorial"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["GridFunctions",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/GridFunctions"]], "GuideTutorial"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/GridFunctions"]], "GuideTutorial"],
 
 Cell[TextData[ButtonBox["Kicks",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/Kicks"]], "GuideTutorial"]
+ ButtonData->"paclet:SimulationTools/tutorial/Kicks"]], "GuideTutorial"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -482,19 +512,20 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"NRMMA Package",
+WindowTitle->"SimulationTools Package",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"nrmma", "NRMMA"}, "index" -> True, 
-    "label" -> "NRMMA Application", "language" -> "en", "paclet" -> "nrmma", 
-    "status" -> "None", "summary" -> 
-    "A package for analysing data in Numerical Relativity.", 
-    "synonyms" -> {"NRMMA", "nrmma"}, "title" -> "NRMMA Package", 
-    "windowTitle" -> "NRMMA Package", "type" -> "Guide", "uri" -> 
-    "nrmma/guide/nrmma"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "SimulationTools`", "keywords" -> {"SimulationTools"}, 
+    "index" -> True, "label" -> "SimulationTools Application", "language" -> 
+    "en", "paclet" -> "SimulationTools", "status" -> "None", "summary" -> 
+    "A package for analysing data from computer simulations.", 
+    "synonyms" -> {"SimulationTools"}, "title" -> "SimulationTools Package", 
+    "windowTitle" -> "SimulationTools Package", "type" -> "Guide", "uri" -> 
+    "SimulationTools/guide/SimulationTools"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

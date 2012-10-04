@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Coordinate",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Coordinate"]
+  ButtonData->"paclet:SimulationTools/ref/Coordinate"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["Coordinate",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Coordinate"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/Coordinate"], "[", 
        StyleBox[
         RowBox[{"d", ",", " ", "i"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns a data representation of the same shape as d \
@@ -52,15 +53,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"Coordinate", "COORDINATE", "coordinate"}, "index" -> True,
-     "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+     "label" -> "SimulationTools/SimulationTools`DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataRepresentations", 
+    "status" -> "None", "summary" -> 
     "Coordinate[d, i] returns a data representation of the same shape as d \
 whose data is the i coordinate of d.", 
     "synonyms" -> {"Coordinate", "COORDINATE", "coordinate"}, "title" -> 
     "Coordinate", "windowTitle" -> "Coordinate", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Coordinate"}, "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+    "SimulationTools/ref/Coordinate"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Parameters",
+ ButtonBox["SimulationTools`Parameters",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Parameters"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Parameters"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationParameter",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadSimulationParameter"]
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationParameter"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadSimulationParameter",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadSimulationParameter"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadSimulationParameter"], 
+       "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "pname"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the value of the named parameter from the \
@@ -52,20 +53,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadSimulationParameter", "READSIMULATIONPARAMETER", 
       "readsimulationparameter"}, "index" -> True, "label" -> 
-    "nrmma/Parameters Symbol", "language" -> "en", "paclet" -> "Parameters", 
-    "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`Parameters Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Parameters", "status" -> "None", "summary" -> 
     "ReadSimulationParameter[sim, pname] reads the value of the named \
 parameter from the simulation.", 
     "synonyms" -> {
      "ReadSimulationParameter", "READSIMULATIONPARAMETER", 
       "readsimulationparameter"}, "title" -> "ReadSimulationParameter", 
     "windowTitle" -> "ReadSimulationParameter", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadSimulationParameter"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadSimulationParameter"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

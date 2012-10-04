@@ -3,13 +3,13 @@ Cell[" ", "TutorialColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/tutorial/DataTable"]
+  ButtonData->"paclet:SimulationTools/tutorial/DataTable"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -18,9 +18,9 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataRegion"], "NumericalRelativity":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"]},
-       
+       "paclet:SimulationTools/tutorial/DataRegion"], "NumericalRelativity":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/NumericalRelativity"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -29,7 +29,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
            URL[None], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
@@ -78,7 +79,7 @@ Cell[CellGroupData[{
 Cell["Constructing", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
  CellLabel->"In[1]:="],
 
 Cell["\<\
@@ -142,15 +143,16 @@ Cell[BoxData[
  CellLabel->"In[3]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[3]="]
 }, Open  ]],
 
@@ -372,11 +374,14 @@ Cell[TextData[ButtonBox["RELATED TUTORIALS",
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataRegion"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], \
+"RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
@@ -392,12 +397,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
-    "nrmma Tutorial", "language" -> "en", "paclet" -> "DataTable", "status" -> 
-    "None", "summary" -> "Tutorial for the DataTable package.", 
-    "synonyms" -> {}, "title" -> "DataTable", "windowTitle" -> "DataTable", 
-    "type" -> "Tutorial", "uri" -> "nrmma/tutorial/DataTable"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "DataTable", "status" -> "None", "summary" -> 
+    "Tutorial for the DataTable package.", "synonyms" -> {}, "title" -> 
+    "DataTable", "windowTitle" -> "DataTable", "type" -> "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/DataTable"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

@@ -3,30 +3,32 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ToListOfCoordinates",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"]
+  ButtonData->"paclet:SimulationTools/ref/ToListOfCoordinates"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATAREPRESENTATIONS PACLET SYMBOL", "PacletNameCell"], Cell[
-    TextData[{
+   {Cell["SIMULATIONTOOLS`DATAREPRESENTATIONS PACLET SYMBOL", 
+     "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
         StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataTable"], "ToDataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToDataTable"], "ToListOfData":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ToListOfData"], "ToList":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ToList"]},
+       "paclet:SimulationTools/ref/DataTable"], "ToDataTable":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/ToDataTable"], 
+       "ToListOfData":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ToListOfData"], "ToList":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/ToList"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -35,10 +37,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"], 
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"], 
        RowBox[{"Data", " ", "Representations"}]:>Documentation`HelpLookup[
-       "paclet:nrmma/guide/Data Representations"]},
+       "paclet:SimulationTools/guide/Data Representations"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -57,7 +59,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ToListOfCoordinates",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ToListOfCoordinates"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ToListOfCoordinates"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]a List of the coordinates part of d."
     }]]}
@@ -131,14 +133,15 @@ Cell["d = ToDataTable[{{0,0.5},{0.1,0.6},{0.3,0.3}}]", "Input",
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
-  RowBox[{"{", 
-   RowBox[{
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 3, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"0", ",", "0.5`"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0.1`", ",", "0.6`"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"0.3`", ",", "0.3`"}], "}"}]}], "}"}], "]"}]], "Output",
+     RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -175,7 +178,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["DataTable",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataTable"],
+    ButtonData->"paclet:SimulationTools/ref/DataTable"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -185,7 +188,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ToDataTable",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToDataTable"],
+    ButtonData->"paclet:SimulationTools/ref/ToDataTable"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -195,7 +198,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ToListOfData",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToListOfData"],
+    ButtonData->"paclet:SimulationTools/ref/ToListOfData"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -205,7 +208,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ToList",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToList"],
+    ButtonData->"paclet:SimulationTools/ref/ToList"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -225,13 +228,14 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"],
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"],
 
 Cell[TextData[ButtonBox["Data Representations",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/Data Representations"]], "MoreAbout"]
+ ButtonData->
+  "paclet:SimulationTools/guide/Data Representations"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -251,17 +255,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ToListOfCoordinates", "TOLISTOFCOORDINATES", "tolistofcoordinates"}, 
-    "index" -> True, "label" -> "nrmma/DataRepresentations Symbol", 
-    "language" -> "en", "paclet" -> "DataRepresentations", "status" -> "None",
-     "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "ToListOfCoordinates[d] a List of the coordinates part of d.", 
     "synonyms" -> {
      "ToListOfCoordinates", "TOLISTOFCOORDINATES", "tolistofcoordinates"}, 
     "title" -> "ToListOfCoordinates", "windowTitle" -> "ToListOfCoordinates", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/ToListOfCoordinates"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/ToListOfCoordinates"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["SimulationTools`DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["AntiDerivative",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/AntiDerivative"]
+  ButtonData->"paclet:SimulationTools/ref/AntiDerivative"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["AntiDerivative",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/AntiDerivative"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/AntiDerivative"], "[", 
        StyleBox[
         RowBox[{"d", ",", " ", 
          RowBox[{"{", 
@@ -91,16 +91,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"AntiDerivative", "ANTIDERIVATIVE", "antiderivative"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataTable Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`DataTable", "status" -> "None", "summary" -> 
     "AntiDerivative[d, {x, f}] returns the first integral, I, of the \
 DataTable d, with the integration constant chosen such that I[x] = f.", 
     "synonyms" -> {"AntiDerivative", "ANTIDERIVATIVE", "antiderivative"}, 
     "title" -> "AntiDerivative", "windowTitle" -> "AntiDerivative", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/AntiDerivative"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/AntiDerivative"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

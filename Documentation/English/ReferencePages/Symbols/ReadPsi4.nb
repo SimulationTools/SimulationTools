@@ -3,29 +3,30 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Waveforms",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Waveforms"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadPsi4",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadPsi4"]
+  ButtonData->"paclet:SimulationTools/ref/ReadPsi4"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["WAVEFORMS PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS`WAVEFORMS PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
         StripOnInput->False], {"ReadPsi4Radii":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadPsi4Radii"], "ReadPsi4Modes":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ReadPsi4Modes"], 
+       "paclet:SimulationTools/ref/ReadPsi4Radii"], "ReadPsi4Modes":>
+       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadPsi4Modes"], 
        "ReadWaveformFile":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ReadWaveformFile"]},
+       "paclet:SimulationTools/ref/ReadWaveformFile"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -34,8 +35,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"]},
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -54,7 +55,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadPsi4",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadPsi4"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadPsi4"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "l", ",", " ", "m", ",", " ", "r"}], "TI"], 
        "]"}]], "InlineFormula"],
@@ -95,17 +96,15 @@ Cell["ReadPsi4[\"bbh\",2,2,100]", "Input",
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
-  TemplateBox[{"\"<\"","601","\">,\"",RowBox[{"{", 
-      RowBox[{"{", 
-        RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]},
-   "Row",
-   DisplayFunction->(
-    RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
-      "\[InvisibleSpace]", #4}]& ),
-   InterpretationFunction->(RowBox[{"Row", "[", 
-      RowBox[{"{", 
-        RowBox[{#, ",", #2, ",", #3, ",", #4}], "}"}], "]"}]& )], 
-  "]"}]], "Output",
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 601, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -911,7 +910,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadPsi4Radii",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadPsi4Radii"],
+    ButtonData->"paclet:SimulationTools/ref/ReadPsi4Radii"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -921,7 +920,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadPsi4Modes",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadPsi4Modes"],
+    ButtonData->"paclet:SimulationTools/ref/ReadPsi4Modes"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -931,7 +930,7 @@ Cell[TextData[{
   StyleBox[
    ButtonBox["ReadWaveformFile",
     BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ReadWaveformFile"],
+    ButtonData->"paclet:SimulationTools/ref/ReadWaveformFile"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -951,9 +950,9 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"]
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -973,13 +972,15 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"ReadPsi4", "READPSI4", "readpsi4"}, 
-    "index" -> True, "label" -> "nrmma/Waveforms Symbol", "language" -> "en", 
-    "paclet" -> "Waveforms", "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", 
+    "keywords" -> {"ReadPsi4", "READPSI4", "readpsi4"}, "index" -> True, 
+    "label" -> "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`Waveforms", "status" -> "None", 
+    "summary" -> 
     "ReadPsi4[sim, l, m, r] returns a DataTable of the l,m mode of Psi4 at \
 radius r from sim.", "synonyms" -> {"ReadPsi4", "READPSI4", "readpsi4"}, 
     "title" -> "ReadPsi4", "windowTitle" -> "ReadPsi4", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/ReadPsi4"}, "SearchTextTranslated" -> "", 
+    "uri" -> "SimulationTools/ref/ReadPsi4"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

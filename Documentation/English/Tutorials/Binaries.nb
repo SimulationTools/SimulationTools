@@ -3,13 +3,13 @@ Cell[" ", "TutorialColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Binary systems",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/tutorial/Binary systems"]
+  ButtonData->"paclet:SimulationTools/tutorial/Binary systems"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -18,10 +18,10 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataTable"], "NumericalRelativity":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"], 
-       "BlackHoles":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/BlackHoles"]},
+       "paclet:SimulationTools/tutorial/DataTable"], "NumericalRelativity":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/NumericalRelativity"], "BlackHoles":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/BlackHoles"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -30,7 +30,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
            URL[None], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
@@ -70,20 +71,20 @@ Cell[CellGroupData[{
 Cell["Working with binary systems", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
  CellLabel->"In[1]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"$SimulationPath", "=", 
-  RowBox[{"{", "$NRMMATestSimulationDirectory", "}"}]}]], "Input",
+  RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}]], "Input",
  CellLabel->"In[2]:="],
 
 Cell[BoxData[
  RowBox[{"{", \
-"\<\"/Users/barry/Library/Mathematica/Applications/nrmma/Data/Simulations\"\>\
-", "}"}]], "Output",
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations\"\>", "}"}]], "Output",
  CellLabel->"Out[2]="]
 }, Open  ]],
 
@@ -116,15 +117,16 @@ Cell[BoxData[
  CellLabel->"In[4]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 601, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[4]="]
 }, Open  ]],
 
@@ -358,15 +360,16 @@ Cell[BoxData[
  CellLabel->"In[7]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 601, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[7]="]
 }, Open  ]],
 
@@ -568,33 +571,36 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 601, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 601, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 601, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False]}], "}"}]], "Output",
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
  CellLabel->"Out[9]="]
 }, Open  ]],
 
@@ -612,33 +618,36 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 601, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 601, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 601, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False]}], "}"}]], "Output",
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
  CellLabel->"Out[10]="]
 }, Open  ]],
 
@@ -2378,9 +2387,9 @@ Cell[BoxData[
   RowBox[{"t$", ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"xFn$6582", "[", "t$", "]"}], ",", 
-     RowBox[{"yFn$6582", "[", "t$", "]"}], ",", 
-     RowBox[{"zFn$6582", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
+     RowBox[{"xFn$9899", "[", "t$", "]"}], ",", 
+     RowBox[{"yFn$9899", "[", "t$", "]"}], ",", 
+     RowBox[{"zFn$9899", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[14]="]
 }, Open  ]],
 
@@ -2405,8 +2414,8 @@ Cell[CellGroupData[{
 Cell["Implementation notes", "Section"],
 
 Cell["\<\
-NRMMA obtains binary system information (in order of preference) from any of \
-the following sources:\
+SimulationTools obtains binary system information (in order of preference) \
+from any of the following sources:\
 \>", "Text"],
 
 Cell["PunctureTracker Cactus output", "Item"],
@@ -2457,16 +2466,18 @@ Cell[TextData[ButtonBox["RELATED TUTORIALS",
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataTable"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"],
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["BlackHoles",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/BlackHoles"]], "RelatedTutorials"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/BlackHoles"]], "RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
@@ -2482,13 +2493,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
-    "Binary Systems Tutorial", "language" -> "en", "paclet" -> "Binary", 
-    "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "Binary Systems Tutorial", "language" -> "en", "paclet" -> 
+    "Binary", "status" -> "None", "summary" -> 
     "Tutorial for reading binary system information from simulations", 
     "synonyms" -> {}, "title" -> "Binary systems", "windowTitle" -> 
     "Binary systems", "type" -> "Tutorial", "uri" -> 
-    "nrmma/tutorial/Binary systems"}, "SearchTextTranslated" -> "", 
+    "SimulationTools/tutorial/Binary systems"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

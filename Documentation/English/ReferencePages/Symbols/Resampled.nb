@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Resampled",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Resampled"]
+  ButtonData->"paclet:SimulationTools/ref/Resampled"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["Resampled",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Resampled"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/Resampled"], "[", 
        StyleBox[
         RowBox[{"d", ",", " ", 
          RowBox[{"{", 
@@ -59,16 +60,17 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"Resampled", "RESAMPLED", "resampled"}, "index" -> True, 
-    "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    "label" -> "SimulationTools/SimulationTools`DataRepresentations Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataRepresentations", 
+    "status" -> "None", "summary" -> 
     "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a \
 DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, \
 dy, ...}.", "synonyms" -> {"Resampled", "RESAMPLED", "resampled"}, "title" -> 
     "Resampled", "windowTitle" -> "Resampled", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/Resampled"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "SimulationTools/ref/Resampled"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

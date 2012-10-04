@@ -3,13 +3,13 @@ Cell[" ", "TutorialColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["DataRegion",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/tutorial/DataRegion"]
+  ButtonData->"paclet:SimulationTools/tutorial/DataRegion"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -18,10 +18,10 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"CarpetHDF5":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/CarpetHDF5"], "DataTable":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/DataTable"], 
+       "paclet:SimulationTools/tutorial/CarpetHDF5"], "DataTable":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/DataTable"], 
        "NumericalRelativity":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/NumericalRelativity"]},
+       "paclet:SimulationTools/tutorial/NumericalRelativity"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -30,7 +30,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
            URL[None], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
@@ -53,13 +54,13 @@ Cell[TextData[{
  "A ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " is an n-dimensional block of numbers on a uniform regular Cartesian \
 coordinate grid. A DataRegion object contains the block of numbers, as well \
 as the specification of the coordinate grid.\nA ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " object is printed in ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
@@ -90,7 +91,7 @@ Cell[TextData[{
  "Using ",
  ButtonBox["ToDataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToDataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"],
  "[",
  StyleBox["data",
   FontSlant->"Italic"],
@@ -103,7 +104,7 @@ Cell[TextData[{
  "] we can create a ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " object from the (multidimensional) list ",
  StyleBox["data.",
   FontSlant->"Italic"],
@@ -126,8 +127,9 @@ given by the lists ",
  " = {ox, oy, ...} and ",
  StyleBox["spacing ",
   FontSlant->"Italic"],
- "= {dx, dy, ...}.  NRMMA uses row-major order because that is the convention \
-adopted by ",
+ "= {dx, dy, ...}.  ",
+ "SimulationTools",
+ " uses row-major order because that is the convention adopted by ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
  ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C\
@@ -202,19 +204,20 @@ Cell[BoxData[
  CellLabel->"In[2]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[2]="]
 }, Open  ]],
 
@@ -222,7 +225,7 @@ Cell[TextData[{
  "Multiple ",
  ButtonBox["DataRegions",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegions"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegions"],
  " d1, d2, ... can be merged into a single enclosing one using \
 ToDataRegion[{d1, d2, ...}];"
 }], "Text"]
@@ -245,14 +248,14 @@ Cell[TextData[{
  "A 1D DataRegion can be converted to a DataTable object using ",
  ButtonBox["ToDataTable",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToDataTable"],
+  ButtonData->"paclet:SimulationTools/ref/ToDataTable"],
  "."
 }], "Text"],
 
 Cell[TextData[{
  ButtonBox["ToListOfData r",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetData"],
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
  "eturns the data in the DataRegion as a nested list."
 }], "Text"],
 
@@ -304,7 +307,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["ToListOfCoordinates r",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetData"],
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
  "eturns the coordinates of all the points in the DataRegion"
 }], "Text"],
 
@@ -467,7 +470,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["ToList r",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetData"],
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
  "eturns a list containing all the data and all the coordinates from the \
 DataRegion."
 }], "Text"],
@@ -665,7 +668,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["Dimensions",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetDimensions"],
+  ButtonData->"paclet:SimulationTools/ref/GetDimensions"],
  " returns a list {",
  StyleBox["nx",
   FontSlant->"Italic"],
@@ -693,7 +696,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["MinCoordinates ",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetOrigin"],
+  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
  "returns the minimum coordinates of the DataRegion."
 }], "Text"],
 
@@ -712,7 +715,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["MaxCoordinates ",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetOrigin"],
+  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
  "returns the maximum coordinates of the DataRegion"
 }], "Text"],
 
@@ -731,7 +734,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["VariableName",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetVariableName"],
+  ButtonData->"paclet:SimulationTools/ref/GetVariableName"],
  " returns a string containing the name of the DataRegion.  This name can be \
 set using the Variable option of ToDataRegion."
 }], "Text"],
@@ -749,7 +752,7 @@ Cell[BoxData["\<\"MyData\"\>"], "Output",
 Cell[TextData[{
  ButtonBox["CoordinateRanges",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetDataRange"],
+  ButtonData->"paclet:SimulationTools/ref/GetDataRange"],
  " returns a list of the form {{",
  StyleBox["xmin",
   FontSlant->"Italic"],
@@ -790,7 +793,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["CoordinateSpacings",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetSpacing"],
+  ButtonData->"paclet:SimulationTools/ref/GetSpacing"],
  " returns the spacing between points in the DataRegion in each direction."
 }], "Text"],
 
@@ -809,7 +812,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["ArrayDepth ",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetNumDimensions"],
+  ButtonData->"paclet:SimulationTools/ref/GetNumDimensions"],
  "returns an integer corresponding to the dimensionality of the data."
 }], "Text"],
 
@@ -836,7 +839,7 @@ Cell[TextData[{
  " function has been overloaded to work on ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " objects. The resulting function will generically be a function of ",
  StyleBox["n",
   FontSlant->"Italic"],
@@ -905,7 +908,7 @@ Cell[TextData[{
  " function, i.e. d[[2]] etc, has been overloaded to work on ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " objects. You can extract a single value, for example d[[3,8,1]], or a \
 lower-dimensional DataRegion, d[[All,All,12]].  You can also specify ranges \
 of indices: d[[All,3;;8,12]].  Unless the result is a single point, the \
@@ -916,7 +919,7 @@ Cell[TextData[{
  "The ",
  ButtonBox["Slab",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Slab"],
+  ButtonData->"paclet:SimulationTools/ref/Slab"],
  " function allows you to extract part of a DataRegion by coordinate rather \
 than by index, as in Part above.  For example, if you have a 3D DataRegion \
 and you want to obtain a slice in the xy plane at z = 3.5,  you can use \
@@ -930,19 +933,20 @@ Cell[BoxData["d"], "Input",
  CellLabel->"In[16]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[16]="]
 }, Open  ]],
 
@@ -955,16 +959,16 @@ Cell[BoxData[
  CellLabel->"In[17]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[17]="]
 }, Open  ]]
 }, Open  ]],
@@ -1612,7 +1616,7 @@ aHyZBP8BJ9YoZQ==
 Cell[TextData[{
  ButtonBox["Outline",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Outline"],
+  ButtonData->"paclet:SimulationTools/ref/Outline"],
  " produces a ",
  ButtonBox["Graphics",
   BaseStyle->"Link",
@@ -1632,7 +1636,7 @@ Cell[TextData[{
  ") with a shape corresponding to that of the ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  "."
 }], "Text"],
 
@@ -1674,20 +1678,20 @@ Cell[BoxData[
  CellLabel->"In[23]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
-     "6", ",", "11", "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[23]="]
 }, Open  ]],
 
@@ -1702,19 +1706,20 @@ Cell[BoxData[
  CellLabel->"In[24]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[24]="]
 }, Open  ]],
 
@@ -1725,19 +1730,20 @@ Cell[BoxData[
  CellLabel->"In[25]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[25]="]
 }, Open  ]],
 
@@ -1748,19 +1754,20 @@ Cell[BoxData[
  CellLabel->"In[26]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[26]="]
 }, Open  ]],
 
@@ -1771,19 +1778,20 @@ Cell[BoxData[
  CellLabel->"In[27]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[27]="]
 }, Open  ]],
 
@@ -1794,19 +1802,20 @@ Cell[BoxData[
  CellLabel->"In[28]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
-   "MyData", ",", "\<\"<\"\>", "\[InvisibleSpace]", "6", ",", "11", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"MyData\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[28]="]
 }, Open  ]]
 }, Open  ]]
@@ -1830,15 +1839,19 @@ Cell[TextData[ButtonBox["RELATED TUTORIALS",
 
 Cell[TextData[ButtonBox["CarpetHDF5",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/CarpetHDF5"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/CarpetHDF5"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataTable"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], \
+"RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
@@ -1854,12 +1867,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
-    "nrmma Tutorial", "language" -> "en", "paclet" -> "DataRegion", "status" -> 
-    "None", "summary" -> "Tutorial for the DataRegion package.", 
-    "synonyms" -> {}, "title" -> "DataRegion", "windowTitle" -> "DataRegion", 
-    "type" -> "Tutorial", "uri" -> "nrmma/tutorial/DataRegion"}, 
-  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "DataRegion", "status" -> "None", "summary" -> 
+    "Tutorial for the DataRegion package.", "synonyms" -> {}, "title" -> 
+    "DataRegion", "windowTitle" -> "DataRegion", "type" -> "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/DataRegion"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

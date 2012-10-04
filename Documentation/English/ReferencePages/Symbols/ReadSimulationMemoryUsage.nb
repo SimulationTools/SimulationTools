@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SystemStatistics",
+ ButtonBox["SimulationTools`SystemStatistics",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/SystemStatistics"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`SystemStatistics"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationMemoryUsage",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"]
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationMemoryUsage"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadSimulationMemoryUsage",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadSimulationMemoryUsage"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadSimulationMemoryUsage"], 
+       "[", 
        StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the memory usage of a simulation in MB as a \
 DataTable as a function of coordinate time."
@@ -51,20 +52,21 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadSimulationMemoryUsage", "READSIMULATIONMEMORYUSAGE", 
       "readsimulationmemoryusage"}, "index" -> True, "label" -> 
-    "nrmma/SystemStatistics Symbol", "language" -> "en", "paclet" -> 
-    "SystemStatistics", "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`SystemStatistics Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`SystemStatistics", "status" -> "None", 
+    "summary" -> 
     "ReadSimulationMemoryUsage[sim] gives the memory usage of a simulation in \
 MB as a DataTable as a function of coordinate time.", 
     "synonyms" -> {
      "ReadSimulationMemoryUsage", "READSIMULATIONMEMORYUSAGE", 
       "readsimulationmemoryusage"}, "title" -> "ReadSimulationMemoryUsage", 
     "windowTitle" -> "ReadSimulationMemoryUsage", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadSimulationMemoryUsage"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadSimulationMemoryUsage"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

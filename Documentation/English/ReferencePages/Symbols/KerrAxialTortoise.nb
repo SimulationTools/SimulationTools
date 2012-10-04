@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["CoordinateTransformations",
+ ButtonBox["SimulationTools`CoordinateTransformations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/CoordinateTransformations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`CoordinateTransformations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["KerrAxialTortoise",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/KerrAxialTortoise"]
+  ButtonData->"paclet:SimulationTools/ref/KerrAxialTortoise"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["KerrAxialTortoise",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/KerrAxialTortoise"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/KerrAxialTortoise"], "[", 
        StyleBox[
         RowBox[{"a", ",", " ", "M", ",", " ", "r0", ",", " ", "rmax"}], "TI"],
         "]"}]], "InlineFormula"],
@@ -54,11 +55,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "KerrAxialTortoise", "KERRAXIALTORTOISE", "kerraxialtortoise"}, "index" -> 
-    True, "label" -> "nrmma/CoordinateTransformations Symbol", "language" -> 
-    "en", "paclet" -> "CoordinateTransformations", "status" -> "None", 
+    True, "label" -> 
+    "SimulationTools/SimulationTools`CoordinateTransformations Symbol", 
+    "language" -> "en", "paclet" -> 
+    "SimulationTools`CoordinateTransformations", "status" -> "None", 
     "summary" -> 
     "KerrAxialTortoise[a, M, r0, rmax] returns a function representing the \
 Kerr tortoise coordinate as a function of the radial coordinate. The \
@@ -66,8 +69,8 @@ arguments M, a, r0 and rmax are optional and may be omitted.",
     "synonyms" -> {
      "KerrAxialTortoise", "KERRAXIALTORTOISE", "kerraxialtortoise"}, "title" -> 
     "KerrAxialTortoise", "windowTitle" -> "KerrAxialTortoise", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/KerrAxialTortoise"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/KerrAxialTortoise"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

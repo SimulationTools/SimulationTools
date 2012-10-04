@@ -3,75 +3,26 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools`DataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataRegion"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["DataRegion",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRegion"],
- StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRegion",
-  BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/DataRegion"]
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS`DATAREGION PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"CoordinateSpacingDimensions":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/CoordinateSpacingDimensions"], "DataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegion"], 
-       "DataRegionArrayPlot":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionArrayPlot"], "DataRegionContourPlot":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionContourPlot"], 
-       "DataRegionDensityPlot":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionDensityPlot"], "DataRegionMatrixPlot":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionMatrixPlot"], 
-       "DataRegionPart":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionPart"], "DataRegionPlot":>
-       Documentation`HelpLookup["paclet:nrmma/ref/DataRegionPlot"], 
-       "DataRegionPlot3D":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/DataRegionPlot3D"], "DynamicDataRegionArrayPlot":>
-       Documentation`HelpLookup[
-       "paclet:nrmma/ref/DynamicDataRegionArrayPlot"], "EvaluateOnDataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/EvaluateOnDataRegion"], 
-       "GetAttributes":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/GetAttributes"], "GetCoordinate":>
-       Documentation`HelpLookup["paclet:nrmma/ref/GetCoordinate"], "GetData":>
-       Documentation`HelpLookup["paclet:nrmma/ref/GetData"], "GetDataRange":>
-       Documentation`HelpLookup["paclet:nrmma/ref/GetDataRange"], 
-       "GetDimensions":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/GetDimensions"], "GetNumDimensions":>
-       Documentation`HelpLookup["paclet:nrmma/ref/GetNumDimensions"], 
-       "GetOrigin":>Documentation`HelpLookup["paclet:nrmma/ref/GetOrigin"], 
-       "GetSpacing":>Documentation`HelpLookup["paclet:nrmma/ref/GetSpacing"], 
-       "GetTime":>Documentation`HelpLookup["paclet:nrmma/ref/GetTime"], 
-       "GetVariableName":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/GetVariableName"], "MakeDataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MakeDataRegion"], 
-       "MapDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MapDataRegion"], "MapThreadDataRegion":>
-       Documentation`HelpLookup["paclet:nrmma/ref/MapThreadDataRegion"], 
-       "MergeDataRegions":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/MergeDataRegions"], "NoNegativeParts":>
-       Documentation`HelpLookup["paclet:nrmma/ref/NoNegativeParts"], "NormL2":>
-       Documentation`HelpLookup["paclet:nrmma/ref/NormL2"], "Outline":>
-       Documentation`HelpLookup["paclet:nrmma/ref/Outline"], 
-       "ResampleDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ResampleDataRegion"], "ResampleDataRegions":>
-       Documentation`HelpLookup["paclet:nrmma/ref/ResampleDataRegions"], 
-       "SliceData":>Documentation`HelpLookup["paclet:nrmma/ref/SliceData"], 
-       "Strip":>Documentation`HelpLookup["paclet:nrmma/ref/Strip"], 
-       "TableToDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/TableToDataRegion"], "TimeDerivative":>
-       Documentation`HelpLookup["paclet:nrmma/ref/TimeDerivative"], 
-       "ToDataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/ref/ToDataRegion"], "VariableName":>
-       Documentation`HelpLookup["paclet:nrmma/ref/VariableName"]},
+        StripOnInput->False], {},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -80,10 +31,10 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"nrmma":>Documentation`HelpLookup[
-       "paclet:nrmma/guide/nrmma"], 
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"], 
        RowBox[{"Data", " ", "Representations"}]:>Documentation`HelpLookup[
-       "paclet:nrmma/guide/Data Representations"]},
+       "paclet:SimulationTools/guide/Data Representations"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -102,7 +53,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["DataRegion",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/DataRegion"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/DataRegion"], "[", 
        StyleBox["...", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]is a representation of an N-dimensional array of \
 numbers on a regular grid."
@@ -177,20 +128,20 @@ Cell["d = ToDataRegion[{{1,2,3},{4,5,6}}, {10, 20}, {0.1, 0.2}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "2", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "3", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 2, ",", 3, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
-     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+     RowBox[{"{", 
+      RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -228,20 +179,20 @@ Cell["d2 = Map[Sin,d]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "2", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "3", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 2, ",", 3, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
-     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+     RowBox[{"{", 
+      RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -284,20 +235,20 @@ Cell["d3 = MapThread[f,{d,d2}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataRegion", "[", 
-   RowBox[{
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "2", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "3", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 2, ",", 3, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{
-     RowBox[{"<<", "unnamed"}], ">>"}], ",", "\<\"<\"\>", "\[InvisibleSpace]",
-     "2", ",", "3", "\[InvisibleSpace]", "\<\">\"\>", ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
-      RowBox[{"{", 
-       RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}],
-  DataRegion`DataRegion,
-  Editable->False]], "Output",
+     RowBox[{"{", 
+      RowBox[{"10.`", ",", "10.1`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"20.`", ",", "20.4`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -364,364 +315,7 @@ Cell[TextData[ButtonBox["SEE ALSO",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "SeeAlsoSection"],
 
-Cell[TextData[{
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["CoordinateSpacingDimensions",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/CoordinateSpacingDimensions"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionArrayPlot",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionArrayPlot"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionContourPlot",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionContourPlot"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionDensityPlot",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionDensityPlot"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionMatrixPlot",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionMatrixPlot"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionPart",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionPart"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionPlot",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionPlot"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DataRegionPlot3D",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DataRegionPlot3D"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["DynamicDataRegionArrayPlot",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/DynamicDataRegionArrayPlot"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["EvaluateOnDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/EvaluateOnDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetAttributes",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetAttributes"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetCoordinate",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetCoordinate"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetData",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetData"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetDataRange",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetDataRange"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetDimensions",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetDimensions"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetNumDimensions",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetNumDimensions"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetOrigin",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetOrigin"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetSpacing",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetSpacing"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetTime",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetTime"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["GetVariableName",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/GetVariableName"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["MakeDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/MakeDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["MapDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/MapDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["MapThreadDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/MapThreadDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["MergeDataRegions",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/MergeDataRegions"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["NoNegativeParts",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/NoNegativeParts"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["NormL2",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/NormL2"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["Outline",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/Outline"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ResampleDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ResampleDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ResampleDataRegions",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ResampleDataRegions"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["SliceData",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/SliceData"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["Strip",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/Strip"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["TableToDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/TableToDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["TimeDerivative",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/TimeDerivative"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["ToDataRegion",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/ToDataRegion"],
-   FontFamily->"Verdana"]], "InlineFormula"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[BoxData[
-  StyleBox[
-   ButtonBox["VariableName",
-    BaseStyle->"Link",
-    ButtonData->"paclet:nrmma/ref/VariableName"],
-   FontFamily->"Verdana"]], "InlineFormula"]
-}], "SeeAlso"]
+Cell["", "SeeAlso"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -739,13 +333,14 @@ Cell[TextData[ButtonBox["MORE ABOUT",
      FrontEnd`SelectedNotebook[], After, 
      CellContents]}]& )]], "MoreAboutSection"],
 
-Cell[TextData[ButtonBox["nrmma",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/nrmma"]], "MoreAbout"],
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"],
 
 Cell[TextData[ButtonBox["Data Representations",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/guide/Data Representations"]], "MoreAbout"]
+ ButtonData->
+  "paclet:SimulationTools/guide/Data Representations"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -765,15 +360,16 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"DataRegion", "DATAREGION", "dataregion"}, "index" -> True,
-     "label" -> "nrmma/DataRegion Symbol", "language" -> "en", "paclet" -> 
-    "DataRegion", "status" -> "None", "summary" -> 
+     "label" -> "SimulationTools/SimulationTools`DataRegion Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataRegion", "status" -> 
+    "None", "summary" -> 
     "DataRegion[...] is a representation of an N-dimensional array of numbers \
 on a regular grid.", "synonyms" -> {"DataRegion", "DATAREGION", "dataregion"},
      "title" -> "DataRegion", "windowTitle" -> "DataRegion", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/DataRegion"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/DataRegion"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

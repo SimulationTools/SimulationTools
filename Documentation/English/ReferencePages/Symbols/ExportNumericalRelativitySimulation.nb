@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NRExport",
+ ButtonBox["SimulationTools`NRExport",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/NRExport"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`NRExport"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ExportNumericalRelativitySimulation",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ExportNumericalRelativitySimulation"]
+  ButtonData->"paclet:SimulationTools/ref/ExportNumericalRelativitySimulation"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ExportNumericalRelativitySimulation",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ExportNumericalRelativitySimulation"], 
+        ButtonData->
+         "paclet:SimulationTools/ref/ExportNumericalRelativitySimulation"], 
        "[", 
        StyleBox[
         RowBox[{
@@ -97,13 +98,13 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ExportNumericalRelativitySimulation", 
       "EXPORTNUMERICALRELATIVITYSIMULATION", 
       "exportnumericalrelativitysimulation"}, "index" -> True, "label" -> 
-    "nrmma/NRExport Symbol", "language" -> "en", "paclet" -> "NRExport", 
-    "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`NRExport Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`NRExport", "status" -> "None", "summary" -> 
     "ExportNumericalRelativitySimulation[sim, alias, directory, mass, \
 eccentricity] exports a numerical relativity simulation in the Numerical \
 Relativity Data Format (NRDF) including waveforms, local quantities (black \
@@ -115,8 +116,8 @@ the system.",
       "exportnumericalrelativitysimulation"}, "title" -> 
     "ExportNumericalRelativitySimulation", "windowTitle" -> 
     "ExportNumericalRelativitySimulation", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ExportNumericalRelativitySimulation"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "SimulationTools/ref/ExportNumericalRelativitySimulation"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

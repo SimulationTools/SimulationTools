@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataAnalysis",
+ ButtonBox["SimulationTools`DataAnalysis",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataAnalysis"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataAnalysis"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["SolarMassInSeconds",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]
+  ButtonData->"paclet:SimulationTools/ref/SolarMassInSeconds"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -24,7 +24,8 @@ Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[TextData[ButtonBox["SolarMassInSeconds",
       BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/SolarMassInSeconds"]], "InlineFormula"],
+      ButtonData->"paclet:SimulationTools/ref/SolarMassInSeconds"]], 
+      "InlineFormula"],
      "\[LineSeparator] gives the value of GM/c^3 in seconds, where M is the \
 mass of the sun."
     }]]}
@@ -48,17 +49,19 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "SolarMassInSeconds", "SOLARMASSINSECONDS", "solarmassinseconds"}, 
-    "index" -> True, "label" -> "nrmma/DataAnalysis Symbol", "language" -> 
-    "en", "paclet" -> "DataAnalysis", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataAnalysis Symbol", "language" -> "en",
+     "paclet" -> "SimulationTools`DataAnalysis", "status" -> "None", 
+    "summary" -> 
     "SolarMassInSeconds gives the value of GM/c^3 in seconds, where M is the \
 mass of the sun.", 
     "synonyms" -> {
      "SolarMassInSeconds", "SOLARMASSINSECONDS", "solarmassinseconds"}, 
     "title" -> "SolarMassInSeconds", "windowTitle" -> "SolarMassInSeconds", 
-    "type" -> "Symbol", "uri" -> "nrmma/ref/SolarMassInSeconds"}, 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/SolarMassInSeconds"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

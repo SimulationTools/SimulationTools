@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["SimulationTools`DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["RestrictedToInterval",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/RestrictedToInterval"]
+  ButtonData->"paclet:SimulationTools/ref/RestrictedToInterval"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -82,19 +82,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "RestrictedToInterval", "RESTRICTEDTOINTERVAL", "restrictedtointerval"}, 
-    "index" -> True, "label" -> "nrmma/DataTable Symbol", "language" -> "en", 
-    "paclet" -> "DataTable", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataTable Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`DataTable", "status" -> "None", "summary" -> 
     "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the \
 DataTable d in the range [x1, x2].", 
     "synonyms" -> {
      "RestrictedToInterval", "RESTRICTEDTOINTERVAL", "restrictedtointerval"}, 
     "title" -> "RestrictedToInterval", "windowTitle" -> 
     "RestrictedToInterval", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/RestrictedToInterval"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/RestrictedToInterval"}, "SearchTextTranslated" -> "",
+   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

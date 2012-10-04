@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["RunFiles",
+ ButtonBox["SimulationTools`RunFiles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/RunFiles"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`RunFiles"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationCoreCount",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadSimulationCoreCount"]
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationCoreCount"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadSimulationCoreCount",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadSimulationCoreCount"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadSimulationCoreCount"], 
+       "[", 
        StyleBox["simname", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the number of cores used by a simulation."
     }]]}
@@ -50,20 +51,20 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "ReadSimulationCoreCount", "READSIMULATIONCORECOUNT", 
       "readsimulationcorecount"}, "index" -> True, "label" -> 
-    "nrmma/RunFiles Symbol", "language" -> "en", "paclet" -> "RunFiles", 
-    "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`RunFiles Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`RunFiles", "status" -> "None", "summary" -> 
     "ReadSimulationCoreCount[simname] gives the number of cores used by a \
 simulation.", 
     "synonyms" -> {
      "ReadSimulationCoreCount", "READSIMULATIONCORECOUNT", 
       "readsimulationcorecount"}, "title" -> "ReadSimulationCoreCount", 
     "windowTitle" -> "ReadSimulationCoreCount", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/ReadSimulationCoreCount"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/ReadSimulationCoreCount"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

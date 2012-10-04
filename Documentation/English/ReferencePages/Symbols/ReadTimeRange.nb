@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Grids",
+ ButtonBox["SimulationTools`Grids",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Grids"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Grids"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadTimeRange",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/ReadTimeRange"]
+  ButtonData->"paclet:SimulationTools/ref/ReadTimeRange"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["ReadTimeRange",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/ReadTimeRange"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadTimeRange"], "[", 
        StyleBox["sim", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the range of times at which data is available for \
 sim."
@@ -51,15 +51,16 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"ReadTimeRange", "READTIMERANGE", "readtimerange"}, 
-    "index" -> True, "label" -> "nrmma/Grids Symbol", "language" -> "en", 
-    "paclet" -> "Grids", "status" -> "None", "summary" -> 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Grids Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Grids", "status" -> "None", "summary" -> 
     "ReadTimeRange[sim] reads the range of times at which data is available \
 for sim.", "synonyms" -> {"ReadTimeRange", "READTIMERANGE", "readtimerange"}, 
     "title" -> "ReadTimeRange", "windowTitle" -> "ReadTimeRange", "type" -> 
-    "Symbol", "uri" -> "nrmma/ref/ReadTimeRange"}, "SearchTextTranslated" -> 
-  "", "LinkTrails" -> ""},
+    "Symbol", "uri" -> "SimulationTools/ref/ReadTimeRange"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

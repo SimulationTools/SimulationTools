@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["NDerivative",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/NDerivative"]
+  ButtonData->"paclet:SimulationTools/ref/NDerivative"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -24,7 +25,7 @@ Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[TextData[ButtonBox["NDerivative",
       BaseStyle->"Link",
-      ButtonData->"paclet:nrmma/ref/NDerivative"]], "InlineFormula"],
+      ButtonData->"paclet:SimulationTools/ref/NDerivative"]], "InlineFormula"],
      "\[LineSeparator][derivs][d] returns a numerical derivative of d. The \
 derivs argument should be of the same form as in the first argument of \
 Derivative."
@@ -49,16 +50,18 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+    True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "NDerivative[derivs][d] returns a numerical derivative of d. The derivs \
 argument should be of the same form as in the first argument of Derivative.", 
     "synonyms" -> {"NDerivative", "NDERIVATIVE", "nderivative"}, "title" -> 
     "NDerivative", "windowTitle" -> "NDerivative", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/NDerivative"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "SimulationTools/ref/NDerivative"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

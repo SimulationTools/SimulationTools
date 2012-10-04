@@ -3,34 +3,33 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Waveforms",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/Waveforms"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["NumCycles",
+ ButtonBox["ReadWaveformCycles",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/NumCycles"]
+  ButtonData->"paclet:SimulationTools/ref/ReadWaveformCycles"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["NumCycles", "ObjectName"],
+Cell["ReadWaveformCycles", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["NumCycles",
+       ButtonBox["ReadWaveformCycles",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/NumCycles"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/ReadWaveformCycles"], "[", 
        StyleBox[
-        RowBox[{"psi4", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the number of gravitational wave cycles in the \
-waveform psi4."
+        RowBox[{"sim", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]gives the number of gravitational wave cycles for sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -56,8 +55,13 @@ Cell[TextData[Cell[BoxData[
  CellGroupingRules->{"SectionGrouping", 50}],
 
 Cell["\<\
-The number of cycles is calculated starting at start and terminating at the \
+The number of cycles is calculated starting at 'start' and terminating at the \
 merger, which is determined from the maimum of the waveform amplitude.\
+\>", "Notes"],
+
+Cell["\<\
+ReadWaveformCycles[sim, start] is equivalent to WaveformCycles[ReadPsi4[sim, \
+2,2, First[ReadPsi4Radii[sim]]], start].\
 \>", "Notes"]
 }, Open  ]],
 
@@ -72,21 +76,25 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"NumCycles",
+WindowTitle->"ReadWaveformCycles",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
-    "keywords" -> {"NumCycles", "NUMCYCLES", "numcycles"}, "index" -> True, 
-    "label" -> "nrmma/Waveforms Symbol", "language" -> "en", "paclet" -> 
-    "Waveforms", "status" -> "None", "summary" -> 
-    "NumCycles[psi4, start] gives the number of gravitational wave cycles in \
-the waveform psi4.", "synonyms" -> {"NumCycles", "NUMCYCLES", "numcycles"}, 
-    "title" -> "NumCycles", "windowTitle" -> "NumCycles", "type" -> "Symbol", 
-    "uri" -> "nrmma/ref/NumCycles"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+   "context" -> "SimulationTools`", 
+    "keywords" -> {
+     "ReadWaveformCycles", "READWAVEFORMCYCLES", "readwaveformcycles"}, 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
+    "ReadWaveformCycles[sim, start] gives the number of gravitational wave \
+cycles for sim.", 
+    "synonyms" -> {
+     "ReadWaveformCycles", "READWAVEFORMCYCLES", "readwaveformcycles"}, 
+    "title" -> "ReadWaveformCycles", "windowTitle" -> "ReadWaveformCycles", 
+    "type" -> "Symbol", "uri" -> "SimulationTools/ref/ReadWaveformCycles"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

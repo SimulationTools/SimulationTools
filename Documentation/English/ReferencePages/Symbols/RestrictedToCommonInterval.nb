@@ -3,17 +3,17 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataTable",
+ ButtonBox["SimulationTools`DataTable",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataTable"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["RestrictedToCommonInterval",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/RestrictedToCommonInterval"]
+  ButtonData->"paclet:SimulationTools/ref/RestrictedToCommonInterval"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +26,8 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["RestrictedToCommonInterval",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/RestrictedToCommonInterval"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/RestrictedToCommonInterval"], 
+       "[", 
        StyleBox[
         RowBox[{"{", 
          RowBox[{"d1", ",", " ", "d2", ",", " ", "..."}], "}"}], "TI"], 
@@ -55,12 +56,12 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", 
+   "context" -> "SimulationTools`", 
     "keywords" -> {
      "RestrictedToCommonInterval", "RESTRICTEDTOCOMMONINTERVAL", 
       "restrictedtocommoninterval"}, "index" -> True, "label" -> 
-    "nrmma/DataTable Symbol", "language" -> "en", "paclet" -> "DataTable", 
-    "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`DataTable Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`DataTable", "status" -> "None", "summary" -> 
     "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied \
 set of DataTables but restricted to having their independent variables within \
 the same range, which is the intersection of the ranges of the inputs.", 
@@ -68,8 +69,8 @@ the same range, which is the intersection of the ranges of the inputs.",
      "RestrictedToCommonInterval", "RESTRICTEDTOCOMMONINTERVAL", 
       "restrictedtocommoninterval"}, "title" -> "RestrictedToCommonInterval", 
     "windowTitle" -> "RestrictedToCommonInterval", "type" -> "Symbol", "uri" -> 
-    "nrmma/ref/RestrictedToCommonInterval"}, "SearchTextTranslated" -> "", 
-  "LinkTrails" -> ""},
+    "SimulationTools/ref/RestrictedToCommonInterval"}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

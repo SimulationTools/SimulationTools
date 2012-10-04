@@ -3,13 +3,13 @@ Cell[" ", "TutorialColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Black Holes",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/tutorial/Black Holes"]
+  ButtonData->"paclet:SimulationTools/tutorial/Black Holes"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -18,9 +18,9 @@ Cell[BoxData[GridBox[{
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataTable"], "NumericalRelativity":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/NumericalRelativity"]},
-       
+       "paclet:SimulationTools/tutorial/DataTable"], "NumericalRelativity":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/NumericalRelativity"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -29,7 +29,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
            URL[None], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
@@ -58,7 +59,7 @@ Cell[CellGroupData[{
 Cell["Working with black holes", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
@@ -92,15 +93,16 @@ Cell[BoxData[
  CellLabel->"In[3]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 151, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[3]="]
 }, Open  ]],
 
@@ -138,15 +140,16 @@ Cell[BoxData[
  CellLabel->"In[5]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 151, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[5]="]
 }, Open  ]],
 
@@ -159,15 +162,16 @@ Cell[BoxData[
  CellLabel->"In[6]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "97", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "97", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 97, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"108.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"108.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[6]="]
 }, Open  ]],
 
@@ -308,33 +312,36 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False]}], "}"}]], "Output",
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
  CellLabel->"Out[8]="]
 }, Open  ]],
 
@@ -352,33 +359,36 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False]}], "}"}]], "Output",
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
  CellLabel->"Out[9]="]
 }, Open  ]],
 
@@ -396,33 +406,36 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False], ",", 
-   TagBox[
-    RowBox[{"DataTable", "[", 
-     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-      "\[InvisibleSpace]", "\<\">\"\>", ",", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
       RowBox[{"{", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-    DataTable`DataTable,
-    Editable->False]}], "}"}]], "Output",
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
  CellLabel->"Out[10]="]
 }, Open  ]],
 
@@ -527,15 +540,16 @@ Cell[BoxData[
  CellLabel->"In[12]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 151, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[12]="]
 }, Open  ]],
 
@@ -607,15 +621,16 @@ Cell[BoxData[
  CellLabel->"In[14]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 151, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[14]="]
 }, Open  ]],
 
@@ -694,15 +709,16 @@ Cell[BoxData[
  CellLabel->"In[16]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "150", 
-    "\[InvisibleSpace]", "\<\">\"\>", ",", 
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "150", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 150, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[16]="]
 }, Open  ]]
 }, Open  ]]
@@ -713,7 +729,8 @@ Cell[CellGroupData[{
 Cell["Implementation notes", "Section"],
 
 Cell["\<\
-NRMMA obtains black hole information from any of the following sources:\
+SimulationTools obtains black hole information from any of the following \
+sources:\
 \>", "Text"],
 
 Cell["AHFinderDirect and QuasiLocalMeasures Cactus output;", "Item"],
@@ -745,11 +762,14 @@ Cell[TextData[ButtonBox["RELATED TUTORIALS",
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataTable"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/NumericalRelativity"]], "RelatedTutorials"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativity"]], \
+"RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
@@ -765,14 +785,14 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
-    "Black Holes Tutorial", "language" -> "en", "paclet" -> "BlackHoles", 
-    "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "Black Holes Tutorial", "language" -> "en", "paclet" -> 
+    "BlackHoles", "status" -> "None", "summary" -> 
     "Tutorial for reading black hole information from simulations", 
     "synonyms" -> {}, "title" -> "Black Holes", "windowTitle" -> 
     "Black Holes", "type" -> "Tutorial", "uri" -> 
-    "nrmma/tutorial/Black Holes"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "SimulationTools/tutorial/Black Holes"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

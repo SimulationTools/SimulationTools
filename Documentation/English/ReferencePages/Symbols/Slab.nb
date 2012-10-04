@@ -3,17 +3,18 @@ Cell[" ", "SymbolColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["DataRepresentations",
+ ButtonBox["SimulationTools`DataRepresentations",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/DataRepresentations"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["Slab",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/ref/Slab"]
+  ButtonData->"paclet:SimulationTools/ref/Slab"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
@@ -26,7 +27,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        ButtonBox["Slab",
         BaseStyle->"Link",
-        ButtonData->"paclet:nrmma/ref/Slab"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/Slab"], "[", 
        StyleBox[
         RowBox[{"d", ",", " ", 
          RowBox[{"x1min", " ", ";;", " ", "x1max"}], ",", " ", "..."}], "TI"],
@@ -89,13 +90,15 @@ PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {"Slab", "SLAB", "slab"}, "index" -> 
-    True, "label" -> "nrmma/DataRepresentations Symbol", "language" -> "en", 
-    "paclet" -> "DataRepresentations", "status" -> "None", "summary" -> 
+   "context" -> "SimulationTools`", "keywords" -> {"Slab", "SLAB", "slab"}, 
+    "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
+    "None", "summary" -> 
     "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the \
 coordinate ranges [x1min, x1max], ....", 
     "synonyms" -> {"Slab", "SLAB", "slab"}, "title" -> "Slab", "windowTitle" -> 
-    "Slab", "type" -> "Symbol", "uri" -> "nrmma/ref/Slab"}, 
+    "Slab", "type" -> "Symbol", "uri" -> "SimulationTools/ref/Slab"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

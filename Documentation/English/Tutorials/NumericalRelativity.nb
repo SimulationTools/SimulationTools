@@ -3,26 +3,27 @@ Cell[" ", "TutorialColorBar",
  CellMargins->{{Inherited, Inherited}, {-5, 0}}],
 
 Cell[TextData[{
- ButtonBox["nrmma",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/guide/nrmma"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Numerical Relativity with NRMMA",
+ ButtonBox["Numerical Relativity with SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:nrmma/tutorial/Numerical Relativity with NRMMA"]
+  ButtonData->
+   "paclet:SimulationTools/tutorial/Numerical Relativity with SimulationTools"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["NRMMA TUTORIAL", "PacletNameCell"], Cell[TextData[{
+   {Cell["SIMULATIONTOOLS TUTORIAL", "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"CarpetHDF5":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/CarpetHDF5"], "DataTable":>
-       Documentation`HelpLookup["paclet:nrmma/tutorial/DataTable"], 
+       "paclet:SimulationTools/tutorial/CarpetHDF5"], "DataTable":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/DataTable"], 
        "DataRegion":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/DataRegion"], "Kicks":>Documentation`HelpLookup[
-       "paclet:nrmma/tutorial/Kicks"]},
+       "paclet:SimulationTools/tutorial/DataRegion"], "Kicks":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/Kicks"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -31,7 +32,8 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"URL \[RightGuillemet]\"\>",
-        StripOnInput->False], {"\<\"Go to nrmma website\"\>":>FrontEndExecute[{
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
          NotebookLocate[{
            URL[None], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
@@ -48,7 +50,7 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["Numerical Relativity in NRMMA", "Title"],
+Cell["Numerical Relativity in SimulationTools", "Title"],
 
 Cell[CellGroupData[{
 
@@ -57,7 +59,7 @@ Cell["Getting Started", "Section"],
 Cell["Load the package", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input",
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
  CellLabel->"In[1]:="],
 
 Cell[TextData[{
@@ -79,9 +81,9 @@ Cell[BoxData[
 
 Cell[TextData[{
  "There are many functions in the ",
- ButtonBox["NRMMA",
+ ButtonBox["SimulationTools",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/guide/NRMMA"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  " package contains functions for dealing with NR waveforms, BH trajectories, \
 apparent horizons, run statistics, convergence testing and more. "
 }], "Text"],
@@ -89,7 +91,7 @@ apparent horizons, run statistics, convergence testing and more. "
 Cell["\<\
 In this tutorial we look at a binary black hole simulation called \
 \[OpenCurlyDoubleQuote]bbh\[CloseCurlyDoubleQuote] (this is the example \
-simulation which is distributed with NRMMA).\
+simulation which is distributed with SimulationTools).\
 \>", "MathCaption"],
 
 Cell[BoxData[
@@ -108,7 +110,9 @@ Cell[BoxData[GridBox[{
    {"Frequency", Cell["Abs", "TableText"]}
   }]], "DefinitionBox"],
 
-Cell["Functions for working with Numerical Relativity waveforms.", "Caption"],
+Cell["\<\
+Basic functions for working with Numerical Relativity waveforms.\
+\>", "Caption"],
 
 Cell["\<\
 Read (2,2) mode of waveform extracted at r=100M from a simulation\
@@ -123,11 +127,16 @@ Cell[BoxData[
  CellLabel->"In[4]:="],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"DataTable", "[", 
-   RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "\<\">\"\>"}], "]"}],
-  DataTable`DataTable,
-  Editable->False]], "Output",
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 601, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[4]="]
 }, Open  ]],
 
@@ -901,6 +910,125 @@ NvbpS+tP9vOorFxI77eW9B89IFhO/D/RbuWI
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
  CellLabel->"Out[7]="]
+}, Open  ]],
+
+Cell[BoxData[GridBox[{
+   {"WaveformCycles", "Psi4ToStrain"},
+   {"ReadWaveformCycles", Cell["WaveformMatch", "TableText"]},
+   {"Frequency", Cell["", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["\<\
+Functions for doing data analysis on Numerical Relativity waveforms.\
+\>", "Caption"],
+
+Cell["Get the Advanced LIGO Zero Det, High Power noise curve", "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sn", "=", 
+  RowBox[{"ToDataTable", "[", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+    "\"\<https://dcc.ligo.org/public/0002/T0900288/003/ZERO_DET_high_P.txt\>\"\
+", ",", "\"\<TABLE\>\""}], "]"}], "]"}]}]], "Input",
+ CellLabel->"In[8]:="],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "3000", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 3000, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"8.999999999999998`", ",", "8191.999999999997`"}], "}"}], 
+    "}"}]}], "]"}]], "Output",
+ CellLabel->"Out[8]="]
+}, Open  ]],
+
+Cell["\<\
+Get the strain waveform extracted at r=30M and r=100M from a binary black \
+hole simulation\
+\>", "MathCaption"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f0", "=", "0.2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h30", "=", 
+   RowBox[{"Psi4ToStrain", "[", 
+    RowBox[{
+     RowBox[{"Shifted", "[", 
+      RowBox[{
+       RowBox[{"30", 
+        RowBox[{"ReadPsi4", "[", 
+         RowBox[{"run", ",", "2", ",", "2", ",", "30"}], "]"}]}], ",", 
+       RowBox[{"-", 
+        RowBox[{"TortoiseCoordinate", "[", 
+         RowBox[{"30", ",", 
+          RowBox[{"ReadADMMass", "[", "run", "]"}]}], "]"}]}]}], "]"}], ",", 
+     "f0"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h100", "=", 
+   RowBox[{"Psi4ToStrain", "[", 
+    RowBox[{
+     RowBox[{"Shifted", "[", 
+      RowBox[{
+       RowBox[{"100", 
+        RowBox[{"ReadPsi4", "[", 
+         RowBox[{"run", ",", "2", ",", "2", ",", "100"}], "]"}]}], ",", 
+       RowBox[{"-", 
+        RowBox[{"TortoiseCoordinate", "[", 
+         RowBox[{"100", ",", 
+          RowBox[{"ReadADMMass", "[", "run", "]"}]}], "]"}]}]}], "]"}], ",", 
+     "f0"}], "]"}]}], ";"}]}], "Input",
+ CellLabel->"In[9]:="],
+
+Cell["\<\
+Convert the time variable from units of the binary mass to seconds, assuming \
+the mass of the binary is 60 solar masses\
+\>", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rescaleTime", "[", 
+   RowBox[{"{", 
+    RowBox[{"t_", ",", "f_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"60", "SolarMassInSeconds", " ", "t"}], ",", "f"}], 
+   "}"}]}]], "Input",
+ CellLabel->"In[12]:="],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"h30", "=", 
+   RowBox[{"MapList", "[", 
+    RowBox[{"rescaleTime", ",", "h30"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h100", "=", 
+   RowBox[{"MapList", "[", 
+    RowBox[{"rescaleTime", ",", "h100"}], "]"}]}], ";"}]}], "Input",
+ CellLabel->"In[13]:="],
+
+Cell["Compute the match between the two waveforms", "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"WaveformMatch", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"h30", ",", "h100"}], "}"}], ",", "sn"}], "]"}]], "Input",
+ CellLabel->"In[15]:="],
+
+Cell[BoxData["0.8402714267133728`"], "Output",
+ CellLabel->"Out[15]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -927,14 +1055,14 @@ Cell[BoxData[
   RowBox[{"traj0", "=", 
    RowBox[{"ReadBHTrajectory", "[", 
     RowBox[{"run", ",", "0"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[8]:="],
+ CellLabel->"In[16]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Take", "[", 
   RowBox[{"traj0", ",", "10"}], "]"}]], "Input",
- CellLabel->"In[9]:="],
+ CellLabel->"In[17]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -960,7 +1088,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"2.945171234278`", ",", "0.57973163080433`"}], "}"}]}], 
   "}"}]], "Output",
- CellLabel->"Out[9]="]
+ CellLabel->"Out[17]="]
 }, Open  ]],
 
 Cell["Puncture 1 trajectory", "MathCaption"],
@@ -970,7 +1098,7 @@ Cell[BoxData[
   RowBox[{"traj1", "=", 
    RowBox[{"ReadBHTrajectory", "[", 
     RowBox[{"run", ",", "1"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[10]:="],
+ CellLabel->"In[18]:="],
 
 Cell[CellGroupData[{
 
@@ -981,7 +1109,7 @@ Cell[BoxData[
     RowBox[{"traj0", ",", "traj1"}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
    RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}]], "Input",
- CellLabel->"In[11]:="],
+ CellLabel->"In[19]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1416,7 +1544,7 @@ Q6stP1eTYJWy3azFqhHkdppisi0iwT79rMHfRsYwaMaDXTuDBP8H3yFe4g==
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[11]="]
+ CellLabel->"Out[19]="]
 }, Open  ]],
 
 Cell["Separation of the BHs (radius of relative orbit)", "MathCaption"],
@@ -1426,7 +1554,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadBHSeparation", "[", "run", "]"}], "]"}]], "Input",
- CellLabel->"In[12]:="],
+ CellLabel->"In[20]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1575,7 +1703,7 @@ lvJVNax/S99557+Z2zOYOD0GX1/JRbySIc6JQc0J620+/YlFMdjnfu7JHnXi
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[12]="]
+ CellLabel->"Out[20]="]
 }, Open  ]],
 
 Cell["Phase of orbit", "MathCaption"],
@@ -1585,7 +1713,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadBHPhase", "[", "run", "]"}], "]"}]], "Input",
- CellLabel->"In[13]:="],
+ CellLabel->"In[21]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1728,7 +1856,7 @@ Xuf8fyvxe5c=
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[13]="]
+ CellLabel->"Out[21]="]
 }, Open  ]],
 
 Cell["Individual coordinates", "MathCaption"],
@@ -1738,13 +1866,13 @@ Cell[BoxData[
   RowBox[{"bh0x", "=", 
    RowBox[{"ReadBHCoordinate", "[", 
     RowBox[{"run", ",", "0", ",", "1"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[14]:="],
+ CellLabel->"In[22]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "bh0x", "]"}]], "Input",
- CellLabel->"In[15]:="],
+ CellLabel->"In[23]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1873,7 +2001,7 @@ baZH
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[15]="]
+ CellLabel->"Out[23]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -1893,7 +2021,7 @@ Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadAHRadius", "[", 
    RowBox[{"run", ",", "1"}], "]"}], "]"}]], "Input",
- CellLabel->"In[16]:="],
+ CellLabel->"In[24]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1940,7 +2068,7 @@ zu4XZn8DnEX9AA==
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[16]="]
+ CellLabel->"Out[24]="]
 }, Open  ]],
 
 Cell["Apparent horizon mass", "MathCaption"],
@@ -1955,7 +2083,7 @@ Cell[BoxData[
    RowBox[{"PlotRange", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[17]:="],
+ CellLabel->"In[25]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1998,7 +2126,7 @@ dayILJch7XufoT5ytQwlmiKD5Ql0X4b7X4+XZ3zyf6o+w5Y=
   PlotRangeClipping->True,
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
- CellLabel->"Out[17]="]
+ CellLabel->"Out[25]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -2020,7 +2148,7 @@ Cell[BoxData[{
  RowBox[{"Take", "[", 
   RowBox[{
    RowBox[{"ToList", "[", "spin", "]"}], ",", "10"}], "]"}]}], "Input",
- CellLabel->"In[18]:="],
+ CellLabel->"In[26]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -2086,7 +2214,7 @@ Cell[BoxData[
       RowBox[{"9.16704467517086`*^-20", ",", 
        RowBox[{"-", "3.80459315915694`*^-18"}], ",", 
        "0.0000747886520903558`"}], "}"}]}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[19]="]
+ CellLabel->"Out[27]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2099,7 +2227,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{
       RowBox[{"-", "0.1"}], ",", "0.8"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[20]:="],
+ CellLabel->"In[28]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -2146,7 +2274,7 @@ PuMfrQDMRA==
   PlotRangeClipping->True,
   PlotRangePadding->{
     Scaled[0.02], Automatic}]], "Output",
- CellLabel->"Out[20]="]
+ CellLabel->"Out[28]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -2168,19 +2296,22 @@ Cell[TextData[ButtonBox["RELATED TUTORIALS",
 
 Cell[TextData[ButtonBox["CarpetHDF5",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/CarpetHDF5"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/CarpetHDF5"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataTable"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataTable"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/DataRegion"]], "RelatedTutorials"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataRegion"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["Kicks",
  BaseStyle->"Link",
- ButtonData->"paclet:nrmma/tutorial/Kicks"]], "RelatedTutorials"]
+ ButtonData->"paclet:SimulationTools/tutorial/Kicks"]], "RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
@@ -2190,19 +2321,20 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Numerical Relativity with NRMMA",
+WindowTitle->"Numerical Relativity with SimulationTools",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "nrmma`", "keywords" -> {}, "index" -> True, "label" -> 
-    "nrmma NR Tutorial", "language" -> "en", "paclet" -> "nrmma", "status" -> 
-    "None", "summary" -> 
-    "Numerical Relativity tutorial for the nrmma application.", 
-    "synonyms" -> {}, "title" -> "Numerical Relativity with NRMMA", 
-    "windowTitle" -> "Numerical Relativity with NRMMA", "type" -> "Tutorial", 
-    "uri" -> "nrmma/tutorial/Numerical Relativity with NRMMA"}, 
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools NR Tutorial", "language" -> "en", "paclet" -> 
+    "SimulationTools", "status" -> "None", "summary" -> 
+    "Numerical Relativity tutorial for the SimulationTools application.", 
+    "synonyms" -> {}, "title" -> "Numerical Relativity with SimulationTools", 
+    "windowTitle" -> "Numerical Relativity with SimulationTools", "type" -> 
+    "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/Numerical Relativity with SimulationTools"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
