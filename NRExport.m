@@ -401,7 +401,14 @@ ExportNumericalRelativitySimulation[run_String, niceName_, outputDirectory_, mas
     Print[run <> " -> " <> dir];
     If[FileType[dir] === None, CreateDirectory[dir]];
 
-    If[OptionValue[ExportSimFormat]==="ASCII", ext = ".asc.gz", ext = ".h5"];
+    Switch[ToString[OptionValue[ExportSimFormat]],
+     "ASCII",
+      ext = ".asc.gz";,
+     "HDF5",
+      ext = ".h5",
+     _,
+      Error["Unsupported value " <> ToString[OptionValue[ExportSimFormat]] <> " for ExportSimFormat option."]
+    ];
 
     all = {"ExtrapolatedWaves", "Metadata", "Coordinates", "Spin", "HorizonMass", "FiniteRadiiWaves"};
     export = If[OptionValue[ExportOnly] === All, all, OptionValue[ExportOnly]];
