@@ -233,7 +233,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
   f = Switch[what,
     Coordinates, ReadBHCoordinates[run, i-1],
     Spin, ReadIsolatedHorizonSpin[run, i-1],
-    HorizonMass, ReadChristodoulou[run, i, i-1]];
+    HorizonMass, ChristodoulouMass[run, i, i-1]];
 
   Switch[fileExtension[file],
   "asc",
