@@ -117,7 +117,9 @@ $SimulationToolsTestSimulation = "bbh";
 
 $SimulationToolsVersionNumber        = 1.0;
 $SimulationToolsReleaseNumber        = 0;
-$SimulationToolsCompatibilityVersion = $SimulationToolsVersionNumber;
+If[!ValueQ[$SimulationToolsCompatibilityVersion],
+  $SimulationToolsCompatibilityVersion = $SimulationToolsVersionNumber;
+];
 
 $SimulationToolsVersion :=
  Module[{path, version, release, buildid, gitrev},
