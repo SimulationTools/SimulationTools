@@ -27,7 +27,7 @@
       "AlignedPhases" -> "Add multiples of 2 Pi to a set of phases such that they are close together at a particular time.  This is necessary due to the 2 Pi ambiguity when converting from real and imaginary to amplitude and phase.",
       "ReadExtrapolatedPsi4" -> "Read an (l,m) mode of Psi4 extrapolated to infinite radius from a simulation",
       "Psi4ToStrain" -> "Convert an (l,m) mode of Psi4 to the corresponding mode of the strain, h.",
-      "ReadCycles" -> "Read the number of waveform cycles in the (2,2) mode of a simulation"
+      "ReadWaveformCycles" -> "Read the number of waveform cycles in the (2,2) mode of a simulation."
      }],
 
    GuideSection[
@@ -49,7 +49,7 @@
      "CoordinateTransformations",{}],
 
    GuideSection[
-     "DataAnalysis",{"WaveformOverlap" -> "Compute the phase- and time-maximised overlap of two DataTables"}],
+     "DataAnalysis",{"WaveformMatch" -> "Compute the phase- and time-maximised overlap of two DataTables"}],
 
    GuideSection[
      "NRExport",{"ExportNumericalRelativitySimulation" -> "Export various data from a simulation to a given directory"}]},
