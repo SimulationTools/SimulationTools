@@ -16,8 +16,7 @@
 
 BeginPackage["SimulationTools`",
  {
-  "SimulationTools`Error`",
-  "Global`"
+  "SimulationTools`Error`"
  }
 ];
 
