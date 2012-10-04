@@ -24,11 +24,11 @@ Cell[CellGroupData[{
 Cell["Working with binary systems", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"$SimulationPath", "=", 
-  RowBox[{"{", "$NRMMATestSimulationDirectory", "}"}]}]], "Input"],
+  RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -206,8 +206,8 @@ Cell[CellGroupData[{
 Cell["Implementation notes", "Section"],
 
 Cell["\<\
-NRMMA obtains binary system information (in order of preference) from any of \
-the following sources:\
+SimulationTools obtains binary system information (in order of preference) \
+from any of the following sources:\
 \>", "Text"],
 
 Cell[CellGroupData[{

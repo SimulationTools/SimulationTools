@@ -1,7 +1,9 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["Numerical Relativity in NRMMA", "Title"],
+Cell["\<\
+Numerical Relativity in SimulationTools\
+\>", "Title"],
 
 Cell[CellGroupData[{
 
@@ -10,7 +12,7 @@ Cell["Getting Started", "Section"],
 Cell["Load the package", "MathCaption"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell[TextData[{
  "Set the ",
@@ -30,9 +32,9 @@ Cell[BoxData[
 
 Cell[TextData[{
  "There are many functions in the ",
- ButtonBox["NRMMA",
+ ButtonBox["SimulationTools",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/guide/NRMMA"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  " package contains functions for dealing with NR waveforms, BH trajectories, \
 apparent horizons, run statistics, convergence testing and more. "
 }], "Text"],
@@ -40,7 +42,7 @@ apparent horizons, run statistics, convergence testing and more. "
 Cell["\<\
 In this tutorial we look at a binary black hole simulation called \
 \[OpenCurlyDoubleQuote]bbh\[CloseCurlyDoubleQuote] (this is the example \
-simulation which is distributed with NRMMA).\
+simulation which is distributed with SimulationTools).\
 \>", "MathCaption"],
 
 Cell[BoxData[

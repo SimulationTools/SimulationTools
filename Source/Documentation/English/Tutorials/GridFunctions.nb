@@ -12,7 +12,7 @@ simulations.  It is currently capable of reading HDF5 and ASCII files \
 produced by Carpet and returns variables as ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " objects."
 }], "Text"],
 
@@ -242,7 +242,7 @@ Cell[CellGroupData[{
 Cell["Example", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell[TextData[{
  "Examine the variable ",

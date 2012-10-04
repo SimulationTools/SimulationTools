@@ -33,7 +33,7 @@ Cell[CellGroupData[{
 Cell["Constructing", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell["\<\
 You can construct a DataTable object from a list of {x, f} pairs:\

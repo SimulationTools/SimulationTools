@@ -1,16 +1,16 @@
 
 {
- "Application" -> "nrmma",
+ "Application" -> "SimulationTools",
  "Package" -> "DataTable and DataRegion",
  "Title" -> "Data Representations",
  "Summary" -> 
-   "Representations of data in NRMMA",
+   "Representations of data in SimulationTools",
  "Description" -> 
-   {"NRMMA uses two different representations of numerical data.  The DataTable is designed for time-series data, and consists of a monotonically-increasing time coordinate and corresponding data values, which can be of any type.  The time coordinate does not have to be regularly spaced.  The DataRegion represents an N-dimensional block of data on a uniform grid.  The data must consist of real or complex numbers, or the quantities None or Missing[].  The data is stored efficiently in memory. Each point has an associated set of coordinates, and these are specified by giving the origin and spacing of the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  Many commonly-used Mathematica functions are defined on compatible DataTables and DataRegions (those with the same coordinates), for example Plus (+), Minus (-), Times (*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan etc.  See the ", TutorialLink["nrmma", "DataTable"], " and ", TutorialLink["nrmma", "DataRegion"], " tutorials."},
- "Keywords" -> {"nrmma", "NRMMA"},
- "Label" -> "NRMMA guide",
+   {"SimulationTools uses two different representations of numerical data.  The DataTable is designed for time-series data, and consists of a monotonically-increasing time coordinate and corresponding data values, which can be of any type.  The time coordinate does not have to be regularly spaced.  The DataRegion represents an N-dimensional block of data on a uniform grid.  The data must consist of real or complex numbers, or the quantities None or Missing[].  The data is stored efficiently in memory. Each point has an associated set of coordinates, and these are specified by giving the origin and spacing of the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  Many commonly-used Mathematica functions are defined on compatible DataTables and DataRegions (those with the same coordinates), for example Plus (+), Minus (-), Times (*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan etc.  See the ", TutorialLink["SimulationTools", "DataTable"], " and ", TutorialLink["SimulationTools", "DataRegion"], " tutorials."},
+ "Keywords" -> {"SimulationTools"},
+ "Label" -> "SimulationTools guide",
  "Synonyms" -> {},
- "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
+ "URL" -> "http://bitbucket.org/ianhinder/SimulationTools" ,
  "Packages" -> {
 
     GuideSection[

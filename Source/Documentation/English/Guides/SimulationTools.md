@@ -1,21 +1,21 @@
 {
- "Application" -> "nrmma",
- "Package" -> "nrmma",
- "Title" -> "NRMMA Package",
+ "Application" -> "SimulationTools",
+ "Package" -> "SimulationTools",
+ "Title" -> "SimulationTools Package",
  "Summary" -> 
    "A package for analysing data from computer simulations.",
  "Description" -> 
-   {"NRMMA is a ", StyleBox["Mathematica", FontSlant->"Italic"],
+   {"SimulationTools is a ", StyleBox["Mathematica", FontSlant->"Italic"],
     " application for analysing data from numerical simulations.  See ",
-    TutorialLink["nrmma", "NRMMAIntroduction"], " for an introduction."},
- "Keywords" -> {"nrmma", "NRMMA"},
- "Label" -> "NRMMA Application",
- "Synonyms" -> {"NRMMA", "nrmma"},
- "URL" -> "http://bitbucket.org/ianhinder/nrmma" ,
+    TutorialLink["SimulationTools", "SimulationToolsIntroduction"], " for an introduction."},
+ "Keywords" -> {"SimulationTools"},
+ "Label" -> "SimulationTools Application",
+ "Synonyms" -> {"SimulationTools"},
+ "URL" -> "http://bitbucket.org/ianhinder/SimulationTools" ,
  "Packages" -> {
 
    {"Title" -> "Data Representations",
-    "Link" -> "paclet:nrmma/guide/Data Representations",
+    "Link" -> "paclet:SimulationTools/guide/Data Representations",
     "DetailedFunctions" -> {
       {"DataTable"},
       {"DataRegion"}
@@ -23,7 +23,7 @@
     "Functions" -> {"Frequency", "Phase", "ToDataRegion", 
       "ToDataTable", "ToListOfData", "MinCoordinates", 
       "RestrictedToCommonInterval", "ToList"},
-    "MoreFunctionsLink" -> "paclet:nrmma/guide/Data Representations"
+    "MoreFunctionsLink" -> "paclet:SimulationTools/guide/Data Representations"
    },
 
    {"Title" -> "Reading Grid Variables",
@@ -43,7 +43,7 @@
    },
 
    {"Title" -> "Numerical Relativity",
-    "Link" -> "paclet:nrmma/guide/Numerical Relativity",
+    "Link" -> "paclet:SimulationTools/guide/Numerical Relativity",
     "DetailedFunctions" -> {
       {"ReadPsi4"},
       {"ReadBlackHoleSpin"},
@@ -52,7 +52,7 @@
     "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadBlackHoleMass", 
       "ReadBinarySeparation", "ReadBinaryPhase", 
       "ReadKickVector", "ReadLinearMomentumFlux"},
-    "MoreFunctionsLink" -> "paclet:nrmma/guide/Numerical Relativity"
+    "MoreFunctionsLink" -> "paclet:SimulationTools/guide/Numerical Relativity"
    },
 
    (* {"Title" -> "Visualization", *)
@@ -82,7 +82,7 @@
 
  },
  "Tutorials" -> {
-   "NRMMAIntroduction",
+   "SimulationToolsIntroduction",
    "DataRegion",
    "DataTable",
    "NumericalRelativity",

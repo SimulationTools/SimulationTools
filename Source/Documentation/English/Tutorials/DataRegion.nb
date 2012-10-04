@@ -7,13 +7,13 @@ Cell[TextData[{
  "A ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " is an n-dimensional block of numbers on a uniform regular Cartesian \
 coordinate grid. A DataRegion object contains the block of numbers, as well \
 as the specification of the coordinate grid.\nA ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " object is printed in ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
@@ -44,7 +44,7 @@ Cell[TextData[{
  "Using ",
  ButtonBox["ToDataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToDataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"],
  "[",
  StyleBox["data",
   FontSlant->"Italic"],
@@ -57,7 +57,7 @@ Cell[TextData[{
  "] we can create a ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " object from the (multidimensional) list ",
  StyleBox["data.",
   FontSlant->"Italic"],
@@ -80,8 +80,9 @@ given by the lists ",
  " = {ox, oy, ...} and ",
  StyleBox["spacing ",
   FontSlant->"Italic"],
- "= {dx, dy, ...}.  NRMMA uses row-major order because that is the convention \
-adopted by ",
+ "= {dx, dy, ...}.  ",
+ "SimulationTools",
+ " uses row-major order because that is the convention adopted by ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
  ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C\
@@ -116,7 +117,7 @@ Cell[TextData[{
  "Multiple ",
  ButtonBox["DataRegions",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegions"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegions"],
  " d1, d2, ... can be merged into a single enclosing one using \
 ToDataRegion[{d1, d2, ...}];"
 }], "Text"]
@@ -139,14 +140,14 @@ Cell[TextData[{
  "A 1D DataRegion can be converted to a DataTable object using ",
  ButtonBox["ToDataTable",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/ToDataTable"],
+  ButtonData->"paclet:SimulationTools/ref/ToDataTable"],
  "."
 }], "Text"],
 
 Cell[TextData[{
  ButtonBox["ToListOfData r",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetData"],
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
  "eturns the data in the DataRegion as a nested list."
 }], "Text"],
 
@@ -156,7 +157,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["ToListOfCoordinates r",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetData"],
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
  "eturns the coordinates of all the points in the DataRegion"
 }], "Text"],
 
@@ -166,7 +167,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["ToList r",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetData"],
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
  "eturns a list containing all the data and all the coordinates from the \
 DataRegion."
 }], "Text"],
@@ -177,7 +178,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["Dimensions",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetDimensions"],
+  ButtonData->"paclet:SimulationTools/ref/GetDimensions"],
  " returns a list {",
  StyleBox["nx",
   FontSlant->"Italic"],
@@ -196,7 +197,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["MinCoordinates ",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetOrigin"],
+  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
  "returns the minimum coordinates of the DataRegion."
 }], "Text"],
 
@@ -206,7 +207,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["MaxCoordinates ",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetOrigin"],
+  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
  "returns the maximum coordinates of the DataRegion"
 }], "Text"],
 
@@ -216,7 +217,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["VariableName",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetVariableName"],
+  ButtonData->"paclet:SimulationTools/ref/GetVariableName"],
  " returns a string containing the name of the DataRegion.  This name can be \
 set using the Variable option of ToDataRegion."
 }], "Text"],
@@ -227,7 +228,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["CoordinateRanges",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetDataRange"],
+  ButtonData->"paclet:SimulationTools/ref/GetDataRange"],
  " returns a list of the form {{",
  StyleBox["xmin",
   FontSlant->"Italic"],
@@ -255,7 +256,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["CoordinateSpacings",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetSpacing"],
+  ButtonData->"paclet:SimulationTools/ref/GetSpacing"],
  " returns the spacing between points in the DataRegion in each direction."
 }], "Text"],
 
@@ -265,7 +266,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["ArrayDepth ",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/GetNumDimensions"],
+  ButtonData->"paclet:SimulationTools/ref/GetNumDimensions"],
  "returns an integer corresponding to the dimensionality of the data."
 }], "Text"],
 
@@ -285,7 +286,7 @@ Cell[TextData[{
  " function has been overloaded to work on ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " objects. The resulting function will generically be a function of ",
  StyleBox["n",
   FontSlant->"Italic"],
@@ -303,9 +304,7 @@ Cell[BoxData[
  RowBox[{"f", "[", 
   RowBox[{"0.12222", ",", "5.78"}], "]"}]], "Input"],
 
-Cell["\<\
-Perform a line integral using the interpolating function:\
-\>", "Text"],
+Cell["Perform a line integral using the interpolating function:", "Text"],
 
 Cell[BoxData[
  RowBox[{"NIntegrate", "[", 
@@ -324,7 +323,7 @@ Cell[TextData[{
  " function, i.e. d[[2]] etc, has been overloaded to work on ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  " objects. You can extract a single value, for example d[[3,8,1]], or a \
 lower-dimensional DataRegion, d[[All,All,12]].  You can also specify ranges \
 of indices: d[[All,3;;8,12]].  Unless the result is a single point, the \
@@ -335,7 +334,7 @@ Cell[TextData[{
  "The ",
  ButtonBox["Slab",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Slab"],
+  ButtonData->"paclet:SimulationTools/ref/Slab"],
  " function allows you to extract part of a DataRegion by coordinate rather \
 than by index, as in Part above.  For example, if you have a 3D DataRegion \
 and you want to obtain a slice in the xy plane at z = 3.5,  you can use \
@@ -399,7 +398,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["Outline",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/Outline"],
+  ButtonData->"paclet:SimulationTools/ref/Outline"],
  " produces a ",
  ButtonBox["Graphics",
   BaseStyle->"Link",
@@ -419,7 +418,7 @@ Cell[TextData[{
  ") with a shape corresponding to that of the ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:nrmma/ref/DataRegion"],
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
  "."
 }], "Text"],
 

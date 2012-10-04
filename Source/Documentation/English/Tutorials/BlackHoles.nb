@@ -13,7 +13,7 @@ Cell[CellGroupData[{
 Cell["Working with black holes", "Section"],
 
 Cell[BoxData[
- RowBox[{"<<", "nrmma`"}]], "Input"],
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -24,9 +24,7 @@ Cell[BoxData[GridBox[{
    {"ReadBlackHoleIrreducibleMass", "\[Placeholder]"}
   }]], "DefinitionBox"],
 
-Cell["\<\
-Functions for reading black hole information.\
-\>", "Caption"],
+Cell["Functions for reading black hole information.", "Caption"],
 
 Cell[CellGroupData[{
 
@@ -79,8 +77,7 @@ units of ",
  Cell[BoxData[
   FormBox[
    SuperscriptBox[
-    RowBox[{"[", "mass", "]"}], "2"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+    RowBox[{"[", "mass", "]"}], "2"], TraditionalForm]]],
  ".  "
 }], "Text"],
 
@@ -165,18 +162,15 @@ Cell[CellGroupData[{
 Cell["Implementation notes", "Section"],
 
 Cell["\<\
-NRMMA obtains black hole information from any of the following sources:\
+SimulationTools obtains black hole information from any of the following \
+sources:\
 \>", "Text"],
 
 Cell[CellGroupData[{
 
-Cell["\<\
-AHFinderDirect and QuasiLocalMeasures Cactus output;\
-\>", "Item"],
+Cell["AHFinderDirect and QuasiLocalMeasures Cactus output;", "Item"],
 
-Cell["\<\
-Numerical Relativity Data Format (NRDF) output files\
-\>", "Item"]
+Cell["Numerical Relativity Data Format (NRDF) output files", "Item"]
 }, Open  ]],
 
 Cell["\<\
