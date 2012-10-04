@@ -26,13 +26,7 @@ $Memoisation::usage = "$Memoisation is a variable which controls whether expensi
 
 Begin["`Private`"];
 
-If[!ValueQ[$Memoisation],
-  If[$SimulationToolsCompatibilityVersion < 1,
-    $Memoisation = True;
-  ,
-    $Memoisation = False;
-  ];
-];
+$Memoisation := If[$SimulationToolsCompatibilityVersion < 1, True, False];
 
 If[!ValueQ[$cache], $cache = {}];
 
