@@ -53,7 +53,10 @@ Cell["The following options can be given: ", "Notes"],
 Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], "Interval", 
     RowBox[{"{", 
-     RowBox[{"Closed", ",", " ", "Closed"}], "}"}], Cell["", "TableText"]}
+     RowBox[{"Closed", ",", " ", "Closed"}], "}"}], Cell["\<\
+Controls whether the specified interval endpoints should be interpreted as \
+Open or Closed.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

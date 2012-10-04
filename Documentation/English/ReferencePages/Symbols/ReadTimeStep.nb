@@ -56,9 +56,10 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell[
+    "The map to read from.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RefinementLevel", "Automatic", Cell[
-    "", "TableText"]}
+    "The refinement level to read from.", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

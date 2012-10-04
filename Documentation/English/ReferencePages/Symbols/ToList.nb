@@ -86,8 +86,10 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Flatten", "False", Cell[
-    "", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Flatten", "False", Cell["\<\
+When set to True, ToList operating on data representations of dimension \
+greater than one will produce a flattened list of values.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

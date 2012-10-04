@@ -141,8 +141,9 @@ SystemStatistics thorns to have been activated in the simulation.\
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "SimulationType", "Automatic", Cell[
-    "", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "SimulationType", "Automatic", Cell["\<\
+Type of simulation. Possible choices are \"BBH\", {\"BBH\", rad} or \"RRHMD\".\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

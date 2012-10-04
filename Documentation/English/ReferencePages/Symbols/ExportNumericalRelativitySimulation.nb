@@ -64,12 +64,18 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "ExcludeModes", "None", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "ExportOnly", "All", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "ExportSimFormat", "ASCII", Cell[
-    "", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "ExcludeModes", "None", Cell["\<\
+A list of {l,m} spherical harmonic modes to exclude from the export.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ExportOnly", "All", Cell["\<\
+Which data to export from a simulation. Possible values are All, or a list of \
+items including any of \"ExtrapolatedWaves\", \"Metadata\", \"Coordinates\", \
+\"Spin\", \"HorizonMass\" or \"FiniteRadiiWaves\".\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "ExportSimFormat", "ASCII", Cell["\<\
+Data format for exported simulation. \"ASCII\" and \"HDF5\" are the currently \
+supported formats.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

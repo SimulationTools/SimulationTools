@@ -60,14 +60,15 @@ Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
    {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell["", "TableText"]},
+    "The iteration to read from.", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell[
+    "The map to read from.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "StripGhostZones", "False", Cell[
-    "", "TableText"]},
+    "Whether to remove ghost zones from the data.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "TimeLevel", "Automatic", Cell[
-    "", "TableText"]},
+    "The time level to read from.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Variable", "Automatic", Cell[
-    "", "TableText"]}
+    "The variable to read. This option is no longer used.", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

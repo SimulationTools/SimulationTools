@@ -166,6 +166,17 @@ Cell[TextData[{
  StyleBox["\[LongDash]", "GuideEmDash"],
  " ",
  "Convert an (l,m) mode of Psi4 to the corresponding mode of the strain, h."
+}], "GuideText"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ReadWaveformCycles",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/ReadWaveformCycles"]],
+   "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Read the number of waveform cycles in the (2,2) mode of a simulation."
 }], "GuideText"]
 }, Open  ]],
 
@@ -232,7 +243,21 @@ initial data"
 
 Cell["CoordinateTransformations", "GuideFunctionsSubsection"],
 
+Cell[CellGroupData[{
+
 Cell["DataAnalysis", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["WaveformMatch",
+  BaseStyle->"Link",
+  ButtonData->"paclet:Numerical Relativity packages/ref/WaveformMatch"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " ",
+ "Compute the phase- and time-maximised overlap of two DataTables"
+}], "GuideText"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 

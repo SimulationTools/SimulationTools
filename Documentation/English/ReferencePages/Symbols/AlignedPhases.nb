@@ -62,8 +62,10 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "Continuous", "False", Cell[
-    "", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "Continuous", "False", Cell["\<\
+Whether to allow continuous shifts in alignment. Setting this to False forces \
+alignement to be done in multiples of 2 Pi only.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

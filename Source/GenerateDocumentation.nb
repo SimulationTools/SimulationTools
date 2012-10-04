@@ -43,14 +43,14 @@ Cell[BoxData[
    RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Documentation/English/Guides/Data Representations.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides/NRMMA.nb\"\>", 
+Documentation/English/Guides/Numerical Relativity.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides/Numerical Relativity.nb\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "107", "\[RightSkeleton]"}], 
+Documentation/English/Guides/Overview.nb\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "110", "\[RightSkeleton]"}], 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/NRMMAIntroduction.nb\"\>", 
+Documentation/English/Tutorials/NumericalRelativity.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/NumericalRelativity.nb\"\>"}], "}"}],
+Documentation/English/Tutorials/SimulationToolsIntroduction.nb\"\>"}], "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
 
@@ -204,29 +204,9 @@ Cell[BoxData["\<\"Shifted\"\>"], "Print"],
 
 Cell[BoxData["\<\"Slab\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Tolerance} \
-for Slab\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"Sub\"\>"], "Print"],
 
 Cell[BoxData["\<\"ToList\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Flatten} \
-for ToList\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -236,16 +216,6 @@ Cell[BoxData[
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToListOfCoordinates\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Flatten} \
-for ToListOfCoordinates\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -265,16 +235,6 @@ Cell[BoxData[
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options \
-{InterpolationOrder} for AntiDerivative\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"CoordinateAtInterpolatedMax\"\>"], "Print"],
 
@@ -298,16 +258,6 @@ Cell[BoxData["\<\"RestrictedToCommonInterval\"\>"], "Print"],
 
 Cell[BoxData["\<\"RestrictedToInterval\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Interval} \
-for RestrictedToInterval\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ToDataTable\"\>"], "Print"],
 
 Cell[BoxData[
@@ -323,94 +273,23 @@ Cell[BoxData["\<\"FindGridFunctions\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadGridFunction\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Iteration, \
-Map, RefinementLevel, StripGhostZones, TimeLevel, Variable} for \
-ReadGridFunction\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadGridFunctionDimensions\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadIterations\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Map, \
-RefinementLevel, StripGhostZones, TimeLevel, Variable} for ReadIterations\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadMaps\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Iteration, \
-RefinementLevel, StripGhostZones, TimeLevel, Variable} for ReadMaps\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"ReadRefinementLevels\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Iteration, \
-Map, StripGhostZones, TimeLevel, Variable} for ReadRefinementLevels\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadTimeLevels\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Iteration, \
-Map, RefinementLevel, StripGhostZones, Variable} for ReadTimeLevels\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadGridSpacings\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Map, \
-RefinementLevel} for ReadGridSpacings\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"ReadMaxRefinementLevels\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadTimeRange\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadTimeStep\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Map, \
-RefinementLevel} for ReadTimeStep\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"ReadADMMass\"\>"], "Print"],
 
@@ -432,17 +311,6 @@ Cell[BoxData["\<\"$MultipolePsi4Variable\"\>"], "Print"],
 
 Cell[BoxData["\<\"ExportNumericalRelativitySimulation\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options \
-{ExcludeModes, ExportOnly, ExportSimFormat} for \
-ExportNumericalRelativitySimulation\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"FindSimulationParameters\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationParameter\"\>"], "Print"],
@@ -455,16 +323,6 @@ Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
 
 Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options \
-{SimulationType} for SimulationOverview\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
@@ -474,16 +332,6 @@ Cell[BoxData["\<\"ReadSimulationSpeed\"\>"], "Print"],
 Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
 
 Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {Continuous} \
-for AlignedPhases\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"ExportWaveform\"\>"], "Print"],
 
@@ -507,26 +355,6 @@ Cell[BoxData["\<\"WaveformCycles\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"WARNING (1): Skipped reference in guide \\\"Waveforms\\\" to \
-undocumented symbol ReadCycles\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"WARNING (1): Skipped reference in guide \\\"DataAnalysis\\\" \
-to undocumented symbol WaveformOverlap\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Binaries.md\"\>"], \
@@ -540,14 +368,14 @@ Cell[BoxData[
      ",", "\<\"pos\"\>", ",", "\<\"r\"\>", ",", "\<\"result\"\>", 
      ",", "\<\"run\"\>", ",", "\<\"t\"\>", ",", "\<\"t$\"\>", 
      ",", "\<\"x1\"\>", ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", 
-     ",", "\<\"xFn$9899\"\>", ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", 
-     ",", "\<\"yFn\"\>", ",", "\<\"yFn$9899\"\>", ",", "\<\"z1\"\>", 
-     ",", "\<\"z2\"\>", ",", "\<\"zFn\"\>", ",", "\<\"zFn$9899\"\>"}], "}"}]}],
+     ",", "\<\"xFn$9875\"\>", ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", 
+     ",", "\<\"yFn\"\>", ",", "\<\"yFn$9875\"\>", ",", "\<\"z1\"\>", 
+     ",", "\<\"z2\"\>", ",", "\<\"zFn\"\>", ",", "\<\"zFn$9875\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
    "path1", "path2", "phi", "pos", "r", "result", "run", "t", "t$", "x1", 
-    "x2", "xFn", "xFn$9899", "y1", "y2", "yFn", "yFn$9899", "z1", "z2", "zFn",
-     "zFn$9899"}],
+    "x2", "xFn", "xFn$9875", "y1", "y2", "yFn", "yFn$9875", "z1", "z2", "zFn",
+     "zFn$9875"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
@@ -674,17 +502,17 @@ GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
 \\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
 True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
 FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
-FrontEndObject[LinkObject[\\\"qri_shm\\\", 1, 1]], 254]]]]], \
+FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275]]]]], \
 Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
 \\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
-\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"254\\\", \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"275\\\", \
 \\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
 Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
 Function[Annotation[Slot[1], \
 \\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
 Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
 Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
-NotebookObject[FrontEndObject[LinkObject[\\\"qri_shm\\\", 1, 1]], 254], \
+NotebookObject[FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275], \
 Rule[Editable, False]]\\)\[NoBreak]) \
 (\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
 "Message", "MSG"],
@@ -709,17 +537,17 @@ GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
 \\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
 True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
 FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
-FrontEndObject[LinkObject[\\\"qri_shm\\\", 1, 1]], 254]]]]], \
+FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275]]]]], \
 Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
 \\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
-\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"254\\\", \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"275\\\", \
 \\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
 Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
 Function[Annotation[Slot[1], \
 \\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
 Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
 Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
-NotebookObject[FrontEndObject[LinkObject[\\\"qri_shm\\\", 1, 1]], 254], \
+NotebookObject[FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275], \
 Rule[Editable, False]]\\)\[NoBreak]) \
 (\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
 "Message", "MSG"],
@@ -744,17 +572,17 @@ GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
 \\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
 True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
 FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
-FrontEndObject[LinkObject[\\\"qri_shm\\\", 1, 1]], 254]]]]], \
+FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275]]]]], \
 Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
 \\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
-\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"254\\\", \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"275\\\", \
 \\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
 Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
 Function[Annotation[Slot[1], \
 \\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
 Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
 Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
-NotebookObject[FrontEndObject[LinkObject[\\\"qri_shm\\\", 1, 1]], 254], \
+NotebookObject[FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275], \
 Rule[Editable, False]]\\)\[NoBreak]) \
 (\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
 "Message", "MSG"],
@@ -913,19 +741,19 @@ Cell[BoxData[
      ",", "\<\"DefaultGridLinesStyle\"\>", ",", "\<\"DefaultTicksStyle\"\>", 
      ",", "\<\"dest\"\>", ",", "\<\"destGuides\"\>", 
      ",", "\<\"destGuides$721\"\>", ",", "\<\"dest$\"\>", 
-     ",", "\<\"dest$27501\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>",
-      ",", "\<\"docDir$27501\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"dest$27477\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>",
+      ",", "\<\"docDir$27477\"\>", ",", "\<\"docFiles\"\>", 
      ",", "\<\"docLink\"\>", ",", "\<\"docLink$721\"\>", 
      ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$721\"\>", 
      ",", "\<\"docSymbols\"\>", ",", "\<\"docSymbols$\"\>", 
-     ",", "\<\"docSymbols$372487\"\>", ",", "\<\"DrawBackFaces\"\>", 
+     ",", "\<\"docSymbols$372463\"\>", ",", "\<\"DrawBackFaces\"\>", 
      ",", "\<\"Ex\"\>", ",", "\<\"exportGuides\"\>", 
-     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$27501\"\>", 
+     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$27477\"\>", 
      ",", "\<\"exportNotebook\"\>", ",", "\<\"exportNotebook$\"\>", 
-     ",", "\<\"exportNotebook$27501\"\>", ",", "\<\"exportSymbols\"\>", 
-     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$27501\"\>", 
+     ",", "\<\"exportNotebook$27477\"\>", ",", "\<\"exportSymbols\"\>", 
+     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$27477\"\>", 
      ",", "\<\"exportTutorials\"\>", ",", "\<\"exportTutorials$\"\>", 
-     ",", "\<\"exportTutorials$27501\"\>", ",", "\<\"formatType\"\>", 
+     ",", "\<\"exportTutorials$27477\"\>", ",", "\<\"formatType\"\>", 
      ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
       ",", "\<\"FrontFaceSpecularExponent\"\>", ",", "\<\"g\"\>", 
      ",", "\<\"GenerateAnnotationDialog\"\>", 
@@ -1012,10 +840,10 @@ Cell[BoxData[
      ",", "\<\"source97\"\>", ",", "\<\"source98\"\>", 
      ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$721\"\>", 
      ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
-     ",", "\<\"srcDir$372487\"\>", ",", "\<\"ss\"\>", ",", "\<\"ss$\"\>", 
+     ",", "\<\"srcDir$372463\"\>", ",", "\<\"ss\"\>", ",", "\<\"ss$\"\>", 
      ",", "\<\"StripStyleOnPaste\"\>", ",", "\<\"StyleDefintions\"\>", 
      ",", "\<\"symbols\"\>", ",", "\<\"symbolsSrcDir\"\>", 
-     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$372487\"\>", 
+     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$372463\"\>", 
      ",", "\<\"symbols$\"\>", ",", "\<\"s$\"\>", 
      ",", "\<\"TrackCellChangeTimes\"\>", ",", "\<\"tutorialDest\"\>", 
      ",", "\<\"tutorialDest$\"\>", ",", "\<\"tutorialHTMLNames\"\>", 
@@ -1024,9 +852,8 @@ Cell[BoxData[
      ",", "\<\"tutorials$\"\>", ",", "\<\"tutorialTitles\"\>", 
      ",", "\<\"tutorialTitles$\"\>", ",", "\<\"undocumentedSymbols\"\>", 
      ",", "\<\"undocumentedSymbols$721\"\>", ",", "\<\"url\"\>", 
-     ",", "\<\"url$\"\>", ",", "\<\"WaveformOverlap\"\>", 
-     ",", "\<\"$HTMLDestination\"\>", ",", "\<\"$PackageSymbols\"\>"}], 
-    "}"}]}],
+     ",", "\<\"url$\"\>", ",", "\<\"$HTMLDestination\"\>", 
+     ",", "\<\"$PackageSymbols\"\>"}], "}"}]}],
   SequenceForm[
   "Global`* contains ", {
    "AutoQuoteCharacters", "BackFaceColor", "BackFaceGlowColor", 
@@ -1034,14 +861,14 @@ Cell[BoxData[
     "Beveled", "CellInsertionPointCell", "collect", "Color", "content", 
     "content$", "CreateCellID", "DefaultFaceGridsStyle", 
     "DefaultFrameTicksStyle", "DefaultGridLinesStyle", "DefaultTicksStyle", 
-    "dest", "destGuides", "destGuides$721", "dest$", "dest$27501", "docDir", 
-    "docDir$", "docDir$27501", "docFiles", "docLink", "docLink$721", 
+    "dest", "destGuides", "destGuides$721", "dest$", "dest$27477", "docDir", 
+    "docDir$", "docDir$27477", "docFiles", "docLink", "docLink$721", 
     "docPackage", "docPackage$721", "docSymbols", "docSymbols$", 
-    "docSymbols$372487", "DrawBackFaces", "Ex", "exportGuides", 
-    "exportGuides$", "exportGuides$27501", "exportNotebook", 
-    "exportNotebook$", "exportNotebook$27501", "exportSymbols", 
-    "exportSymbols$", "exportSymbols$27501", "exportTutorials", 
-    "exportTutorials$", "exportTutorials$27501", "formatType", 
+    "docSymbols$372463", "DrawBackFaces", "Ex", "exportGuides", 
+    "exportGuides$", "exportGuides$27477", "exportNotebook", 
+    "exportNotebook$", "exportNotebook$27477", "exportSymbols", 
+    "exportSymbols$", "exportSymbols$27477", "exportTutorials", 
+    "exportTutorials$", "exportTutorials$27477", "formatType", 
     "FrontFaceGlowColor", "FrontFaceSpecularColor", 
     "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
     "GeneratedCellStyles", "GenerateDocumentation", 
@@ -1076,14 +903,14 @@ Cell[BoxData[
     "source83", "source84", "source85", "source86", "source87", "source88", 
     "source89", "source9", "source90", "source91", "source92", "source93", 
     "source94", "source95", "source96", "source97", "source98", 
-    "sourceGuides", "sourceGuides$721", "srcDir", "srcDir$", "srcDir$372487", 
+    "sourceGuides", "sourceGuides$721", "srcDir", "srcDir$", "srcDir$372463", 
     "ss", "ss$", "StripStyleOnPaste", "StyleDefintions", "symbols", 
-    "symbolsSrcDir", "symbolsSrcDir$", "symbolsSrcDir$372487", "symbols$", 
+    "symbolsSrcDir", "symbolsSrcDir$", "symbolsSrcDir$372463", "symbols$", 
     "s$", "TrackCellChangeTimes", "tutorialDest", "tutorialDest$", 
     "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", "tutorialSources",
      "tutorialSources$721", "tutorials$", "tutorialTitles", "tutorialTitles$",
      "undocumentedSymbols", "undocumentedSymbols$721", "url", "url$", 
-    "WaveformOverlap", "$HTMLDestination", "$PackageSymbols"}],
+    "$HTMLDestination", "$PackageSymbols"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ConvergenceMultiplier\"\>"], "Print"],

@@ -61,8 +61,10 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "InterpolationOrder", "3", Cell[
-    "", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "InterpolationOrder", "3", Cell["\<\
+The order of interpolation to use. This may be take value supported by the \
+Interpolation function.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
