@@ -382,6 +382,15 @@ ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
 (* Full run *)
 
 Options[ExportNumericalRelativitySimulation] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None};
+DocumentationBuilder`OptionDescriptions["ExportNumericalRelativitySimulation"] = {
+  "ExportSimFormat" -> "Data format for exported simulation. \"ASCII\" and \"HDF5\" are "<>
+    "the currently supported formats.",
+  "ExportOnly" -> "Which data to export from a simulation. Possible values are All, or "<>
+    "a list of items including any of \"ExtrapolatedWaves\", \"Metadata\", "<>
+    "\"Coordinates\", \"Spin\", \"HorizonMass\" or \"FiniteRadiiWaves\".",
+  "ExcludeModes" -> "A list of {l,m} spherical harmonic modes to exclude from the export."
+  };
+
 ExportNumericalRelativitySimulation[run_String, niceName_, outputDirectory_, mass_, ecc_, OptionsPattern[]] :=
   Module[{dir, h, n, ext, all, export},
 

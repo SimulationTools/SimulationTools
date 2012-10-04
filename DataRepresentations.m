@@ -393,6 +393,10 @@ Options[Slab] = {
   "Tolerance" -> 0.
 };
 
+DocumentationBuilder`OptionDescriptions["Slab"] = {
+  "Tolerance" -> "The Tolerance option is currently ignored."
+};
+
 SyntaxInformation[Slab] =
  {"ArgumentsPattern" -> {_, __, OptionsPattern[]}};
 
@@ -445,6 +449,11 @@ Sub[a_?NumberQ, b_?NumberQ] := a-b;
 
 Options[ToList] = {"Flatten" -> False};
 
+DocumentationBuilder`OptionDescriptions["ToList"] = {
+  "Flatten" -> "When set to True, ToList operating on data representations of "<>
+    "dimension greater than one will produce a flattened list of values."
+};
+
 SyntaxInformation[ToList] =
  {"ArgumentsPattern" -> {_, OptionsPattern[]}};
 
@@ -454,6 +463,11 @@ SyntaxInformation[ToList] =
 (**********************************************************)
 
 Options[ToListOfCoordinates] = {"Flatten" -> False};
+
+DocumentationBuilder`OptionDescriptions["ToListOfCoordinates"] = {
+  "Flatten" -> "When set to True, ToListOfCoordinates operating on data representations of "<>
+    "dimension greater than one will produce a flattened list of values."
+};
 
 SyntaxInformation[ToListOfCoordinates] =
  {"ArgumentsPattern" -> {_, OptionsPattern[]}};

@@ -582,6 +582,11 @@ SyntaxInformation[AntiDerivative] =
 
 Options[AntiDerivative] = {InterpolationOrder->3};
 
+DocumentationBuilder`OptionDescriptions["AntiDerivative"] = {
+  InterpolationOrder -> "The order of interpolation to use. This may be take value "<>
+    "supported by the Interpolation function."
+};
+
 AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
  Module[{tMin, tMax, dFn, gFn, g, t, dt, gTb},
   {tMin, tMax} = CoordinateRange[d];
@@ -745,6 +750,11 @@ SyntaxInformation[RestrictedToInterval] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
 Options[RestrictedToInterval] = {Interval -> {Closed, Closed}};
+
+DocumentationBuilder`OptionDescriptions["RestrictedToInterval"] = {
+  Interval -> "Controls whether the specified interval endpoints should be "<>
+    "interpreted as Open or Closed."
+};
 
 RestrictedToInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
   Module[

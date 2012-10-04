@@ -103,6 +103,15 @@ Options[ReadGridFunction] = {
     "Variable"        -> Automatic (* Only used by old interface *)
   };
 
+DocumentationBuilder`OptionDescriptions["ReadGridFunction"] = {
+    "Iteration"       -> "The iteration to read from.",
+    "Map"             -> "The map to read from.",
+    "RefinementLevel" -> "The refinement level to read from.",
+    "TimeLevel"       -> "The time level to read from.",
+    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
+    "Variable"        -> "The variable to read. This option is no longer used."
+  };
+
 DocumentationBuilder`SymbolDescription["ReadGridFunction"] =
   "read data for a grid function at a specific iteration";
 
@@ -139,22 +148,53 @@ fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPatte
                files]];
 
 Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iteration"]];
+DocumentationBuilder`OptionDescriptions["ReadIterations"] = {
+    "Map"             -> "The map to read from.",
+    "RefinementLevel" -> "The refinement level to read from.",
+    "TimeLevel"       -> "The time level to read from.",
+    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
+    "Variable"        -> "The variable to read. This option is no longer used."
+  };
 ReadIterations[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadIterations", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                           "Iteration" -> _]];
 
 Options[ReadMaps] = FilterRules[Options[ReadGridFunction], Except["Map"]];
+DocumentationBuilder`OptionDescriptions["ReadMaps"] = {
+    "Iteration"       -> "The iteration to read from.",
+    "RefinementLevel" -> "The refinement level to read from.",
+    "TimeLevel"       -> "The time level to read from.",
+    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
+    "Variable"        -> "The variable to read. This option is no longer used."
+  };
+
 ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadMaps", run, var, parseDims[dims], 
             Append[DeleteCases[ApplyDefaults[run, var, {opts}],"Map" -> _, Infinity],
                    "Map" -> All]];
 
 Options[ReadRefinementLevels] = FilterRules[Options[ReadGridFunction], Except["RefinementLevel"]];
+DocumentationBuilder`OptionDescriptions["ReadRefinementLevels"] = {
+    "Iteration"       -> "The iteration to read from.",
+    "Map"             -> "The map to read from.",
+    "TimeLevel"       -> "The time level to read from.",
+    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
+    "Variable"        -> "The variable to read. This option is no longer used."
+  };
+
 ReadRefinementLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadRefinementLevels", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                                 "RefinementLevel" -> _]];
 
 Options[ReadTimeLevels] = FilterRules[Options[ReadGridFunction], Except["TimeLevel"]];
+DocumentationBuilder`OptionDescriptions["ReadTimeLevels"] = {
+    "Iteration"       -> "The iteration to read from.",
+    "Map"             -> "The map to read from.",
+    "RefinementLevel" -> "The refinement level to read from.",
+    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
+    "Variable"        -> "The variable to read. This option is no longer used."
+  };
+
 ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadTimeLevels", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                                 "TimeLevel" -> _]];

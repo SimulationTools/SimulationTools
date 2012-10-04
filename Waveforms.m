@@ -329,6 +329,11 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
 
 Options[AlignPhases] = {Continuous -> False};
 
+DocumentationBuilder`OptionDescriptions["AlignedPhases"] = {
+  Continuous -> "Whether to allow continuous shifts in alignment. Setting this to "<>
+    "False forces alignement to be done in multiples of 2 Pi only."
+};
+
 AlignedPhases[phaseTbs:{DataTable[__] ...}, t_, opts:OptionsPattern[]] :=
   Module[{phaseFns, refPhases, adjustments, adjusted,
           ranges, min, max, constTb, phase1},

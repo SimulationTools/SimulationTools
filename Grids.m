@@ -81,6 +81,11 @@ Options[ReadTimeStep] = {
     "RefinementLevel" -> Automatic
   };
 
+DocumentationBuilder`OptionDescriptions["ReadTimeStep"] = {
+    "Map"             -> "The map to read from.",
+    "RefinementLevel" -> "The refinement level to read from."
+  };
+
 SyntaxInformation[ReadTimeStep] =
  {"ArgumentsPattern" -> {_, OptionsPattern[]}};
 
@@ -127,6 +132,11 @@ ReadTimeStep[run_, OptionsPattern[]] :=
 Options[ReadGridSpacings] = {
 	"Map"             -> Automatic,
     "RefinementLevel" -> Automatic
+  };
+
+DocumentationBuilder`OptionDescriptions["ReadGridSpacings"] = {
+    "Map"             -> "The map to read from.",
+    "RefinementLevel" -> "The refinement level to read from."
   };
 
 SyntaxInformation[ReadGridSpacings] =

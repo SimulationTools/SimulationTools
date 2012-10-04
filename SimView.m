@@ -52,6 +52,11 @@ Options[SimulationOverview] = {
   "SimulationType" -> Automatic
 };
 
+DocumentationBuilder`OptionDescriptions["SimulationOverview"] = {
+  "SimulationType" -> "Type of simulation. Possible choices are \"BBH\", {\"BBH\", rad} "<>
+    "or \"RRHMD\"."
+};
+
 DocumentationBuilder`SymbolDescription["SimulationOverview"] =
   "provide a quick graphical overview of a simulation";
 
