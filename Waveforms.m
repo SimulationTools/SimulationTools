@@ -640,9 +640,11 @@ SimulationTools`Waveforms`SimulationOverview`Plots[runNames1_] :=
 RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
   Module[
     {model, a, x, xf, fit},
-    If[!And@@Map[NumberQ,fs], 
+
+    (* These checks do not seem to affect performance *)
+    If[!And@@Map[NumberQ,fs],
        Error["RadialExtrapolation: Input data is not numeric"]];
-    If[!And@@Map[NumberQ,rs], 
+    If[!And@@Map[NumberQ,rs],
        Error["RadialExtrapolation: Input radii are not numeric"]];
     model = Sum[a[i] x^i, {i, 0, order}];
     xf = Map[{1./#[[1]], #[[2]]} &, Thread[{rs,fs}]];
@@ -652,9 +654,10 @@ RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
 RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
   Module[
     {t, ds, rds, de, result},
-    If[!SameGridQ[fs], 
+    (* These checks do not seem to affect performance *)
+    If[!SameGridQ[fs],
        Error["RadialExtrapolation: Input DataTables are not defined on the same grid"]];
-    If[!And@@Map[NumberQ,rs], 
+    If[!And@@Map[NumberQ,rs],
        Error["RadialExtrapolation: Input radii are not numeric"]];
 
     t = ToListOfCoordinates[fs[[1]]];
