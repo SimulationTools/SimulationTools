@@ -708,11 +708,11 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
 (* ReadRadiallyExtrapolatedWave *)
 
 Options[ReadRadiallyExtrapolatedWave] =
-  {"RadialCoordinateTransformation" -> None,
-   "AbsPhase" -> True};
+  Join[{"RadialCoordinateTransformation" -> None},
+       Options[RadiallyExtrapolatedWave]];
 
 ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
-                             order_Integer, OptionsPattern[]] :=
+                             order_Integer, opts:OptionsPattern[]] :=
   RadiallyExtrapolatedWave[
     Transpose[
       Table[{r,reader[r]}, {r,rads}]],
@@ -721,7 +721,7 @@ ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
     {None -> Identity,
      RadialToTortoise -> (RadialToTortoise[#,ReadADMMass[run]] &),
      IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
-    AbsPhase -> OptionValue[AbsPhase]];
+    FilterRules[{opts}, Options[RadiallyExtrapolatedWave]]];
 
 (* selectRadii *)
 
@@ -748,7 +748,7 @@ ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
     (# ReadPsi4[run,l,m,#]) &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
-    order, opts];
+    order, FilterRules[{opts},Options[ReadRadiallyExtrapolatedWave]]];
 
 (* ReadRadiallyExtrapolatedStrain *)
 
