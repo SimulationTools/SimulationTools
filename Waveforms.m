@@ -745,7 +745,7 @@ ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
                              order_Integer, opts:OptionsPattern[]] :=
   ReadRadiallyExtrapolatedWave[
     run,
-    ReadPsi4[run,l,m,#] &,
+    (# ReadPsi4[run,l,m,#]) &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
     order, opts];
@@ -764,7 +764,7 @@ ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
                                order_Integer, opts:OptionsPattern[]] :=
   ReadRadiallyExtrapolatedWave[
     run,
-    Psi4ToStrain[ReadPsi4[run,l,m,#], om0] &,
+    Psi4ToStrain[# ReadPsi4[run,l,m,#], om0] &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
     order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]];
