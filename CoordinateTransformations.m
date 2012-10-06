@@ -25,10 +25,16 @@ CartesianToThornburg::usage = "CartesianToThornburg[{x, y, z}, patch] gives the 
 
 KerrAxialTortoise::usage = "KerrAxialTortoise[a, M, r0, rmax] returns a function representing the Kerr tortoise coordinate as a function of the radial coordinate. The arguments M, a, r0 and rmax are optional and may be omitted."
 
+IsotropicToSchwarzschild;
+IsotropicToTortoise;
+
 Begin["`Private`"];
 
 RadialToTortoise[r_, M_:1] := r + 2 M Log[r/(2 M)-1];
 TortoiseToRadial[rstar_, M_:1] := 2 M(1+ProductLog[E^(rstar/(2 M)-1)]);
+IsotropicToSchwarzschild[r_, M_] := r (1 + M/(2 r))^2;
+IsotropicToTortoise[r_,M_] :=
+  RadialToTortoise[IsotropicToSchwarzschild[r,M],M];
 
 ThornburgToCartesian[{\[Theta]_, \[Phi]_, r_}, patch_Integer/;(patch>=1&&patch<=6)] := Module[{x, y, z},
   Switch[patch,
