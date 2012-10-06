@@ -682,7 +682,7 @@ ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
   Shifted[f, -rStarOfr[r]];
 
 ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
-  Resampled[MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}]];
+  MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}];
 
 (* RadiallyExtrapolatedWave *)
 
@@ -702,8 +702,8 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
        tAlign = If[OptionValue[DiscretePhaseAlignmentTime] === Automatic,
                    Max[CoordinateRange[First[ret]][[1]], 0],
                    OptionValue[DiscretePhaseAlignmentTime]];
-       ToComplex[Map[ext, ToAbsPhase[ret,tAlign]]],
-       ext[ret]]];
+       ToComplex[Map[ext, Resampled/@ToAbsPhase[ret,tAlign]]],
+       ext[Resampled[ret]]]];
 
 (* ReadRadiallyExtrapolatedWave *)
 
