@@ -646,10 +646,9 @@ RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
        Error["RadialExtrapolation: Input data is not numeric"]];
     If[!And@@Map[NumberQ,rs],
        Error["RadialExtrapolation: Input radii are not numeric"]];
-    model = Sum[a[i] x^i, {i, 0, order}];
+
     xf = Map[{1./#[[1]], #[[2]]} &, Thread[{rs,fs}]];
-    fit = FindFit[xf, model, Table[a[i], {i, 0, order}], x];
-    a[0] /. fit];
+    Fit[xf, Table[x^i, {i, 0, order}], {x}][[1]]];
 
 RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
   Module[
