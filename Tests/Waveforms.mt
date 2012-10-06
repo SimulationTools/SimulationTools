@@ -204,6 +204,21 @@ Test[ToRetardedTime[30., ToDataTable[{{0.0, 1.}, {2.0, 2.0}}],
                     Function[r,r^2]],
      ToDataTable[{{0.0-30.^2, 1.},{2.-30.^2.,2.0}}],
     TestID -> "ToRetardedTime-2"]
+
+(****************************************************************)
+(* ReadRadiallyExtrapolatedPsi4 *)
+(****************************************************************)
+
+Test[
+  ReadRadiallyExtrapolatedPsi4[
+    $SimulationToolsTestSimulation,2,2,1,
+    RadialCoordinateTransformation->RadialToTortoise],
+  ExtrapolatePsi4[$SimulationToolsTestSimulation, 2, 2,
+                  ExtrapolationOrder -> 1],
+  EquivalenceFunction -> ((Abs[GridNorm[#1-#2]] < 10.^-16) &),
+  TestID -> "ReadRadiallyExtrapolatedPsi4"]
+
+(****************************************************************)
 (* StrainFromPsi4 *)
 (****************************************************************)
 
