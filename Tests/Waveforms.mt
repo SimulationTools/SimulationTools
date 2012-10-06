@@ -174,6 +174,36 @@ ToList[RadiallyExtrapolatedWave[
     ]
 
 (****************************************************************)
+(* ToAbsPhase *)
+(****************************************************************)
+
+Test[ToAbsPhase[ToDataTable[{{0.0, 0.+I},{0.1, 1. + I}}]],
+     {ToDataTable[{{0.0,1.},{0.1,Sqrt[2]//N}}],
+      ToDataTable[{{0.0,Pi/2.},{0.1,Pi/4.}}]},
+     TestID->"ToAbsPhase"]
+
+(****************************************************************)
+(* ToComplex *)
+(****************************************************************)
+
+Test[ToComplex[{ToDataTable[{{0.0,1.},{0.1,Sqrt[2]//N}}],
+                ToDataTable[{{0.0,Pi/2.},{0.1,Pi/4.}}]}],
+     ToDataTable[{{0.0, 0.+I},{0.1, 1. + I}}],
+     EquivalenceFunction -> ((Abs[GridNorm[#1-#2]] < 10.^-16) &),
+     TestID->"ToComplex"]
+
+(****************************************************************)
+(* ToRetardedTime *)
+(****************************************************************)
+
+Test[ToRetardedTime[30., ToDataTable[{{0.0,1.},{1.0,2.0}}]],
+     ToDataTable[{{-30., 1.},{-29.,2.0}}],
+    TestID -> "ToRetardedTime-1"]     
+
+Test[ToRetardedTime[30., ToDataTable[{{0.0, 1.}, {2.0, 2.0}}],
+                    Function[r,r^2]],
+     ToDataTable[{{0.0-30.^2, 1.},{2.-30.^2.,2.0}}],
+    TestID -> "ToRetardedTime-2"]
 (* StrainFromPsi4 *)
 (****************************************************************)
 
