@@ -245,7 +245,7 @@ SyntaxInformation[GridNorm] =
  {"ArgumentsPattern" -> {_}};
 
 GridNorm[d_?DataRepresentationQ] :=
- Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[d^2]]];
+ Sqrt[Times @@ CoordinateSpacings[d] * Plus @@ Flatten[ToListOfData[Abs[d]^2]]];
 
 
 (**********************************************************)
