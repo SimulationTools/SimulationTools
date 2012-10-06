@@ -682,7 +682,7 @@ ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
   Shifted[f, -rStarOfr[r]];
 
 ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
-  Resampled[MapThread[ToRetardedTime, {rs,fs}]];
+  Resampled[MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}]];
 
 (* RadiallyExtrapolatedWave *)
 
