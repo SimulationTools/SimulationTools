@@ -719,7 +719,7 @@ ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
     order, 
     OptionValue[RadialCoordinateTransformation] /.
     {None -> Identity,
-     RadialToTortoise ->(RadialToTortoise[#,ReadADMMass[run]] &),
+     RadialToTortoise -> (RadialToTortoise[#,ReadADMMass[run]] &),
      IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
     AbsPhase -> OptionValue[AbsPhase]];
 
