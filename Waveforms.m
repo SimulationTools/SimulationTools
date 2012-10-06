@@ -687,18 +687,22 @@ ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
 (* RadiallyExtrapolatedWave *)
 
 notOptionQ[x_] := ! OptionQ[x];
-Options[RadiallyExtrapolatedWave] = {"AbsPhase" -> True};
+Options[RadiallyExtrapolatedWave] = {"AbsPhase" -> True,
+                                     "DiscretePhaseAlignmentTime" -> Automatic};
 RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}}, 
                          order_Integer,
                          rStarOfr : (_?notOptionQ) : Identity, 
                          opts:OptionsPattern[]] :=
   Module[
-    {ret,ext},
+    {ret,ext,tAlign},
     ret = ToRetardedTime[{rs,fs},rStarOfr];
     ext[ds_] := RadialExtrapolation[{rs, ds}, order];
 
     If[OptionValue[AbsPhase],
-       ToComplex[Map[ext, Transpose[ToAbsPhase/@ret]]],
+       tAlign = If[OptionValue[DiscretePhaseAlignmentTime] === Automatic,
+                   Max[CoordinateRange[First[ret]][[1]], 0],
+                   OptionValue[DiscretePhaseAlignmentTime]];
+       ToComplex[Map[ext, ToAbsPhase[ret,tAlign]]],
        ext[ret]]];
 
 (* ReadRadiallyExtrapolatedWave *)
