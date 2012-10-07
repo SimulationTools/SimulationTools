@@ -9,6 +9,10 @@ CatchError::usage = "CatchError[expr] evaluates expr, and returns its result unl
 ErrorTag;
 ErrorString;
 
+Error::error = "An error has been detected: `1`";
+
+$MessageOnError = False;
+
 Begin["`Private`"];
 
 Error::badargs = "Bad arguments to Error: `1`"
@@ -21,7 +25,8 @@ ErrorMessage[tag_MessageName, args___] :=
   Throw[{{args}, CurrentStack[]}, ErrorTag[tag]];
 
 Error[s_String, args___] :=
-  Throw[{{args}, CurrentStack[]}, ErrorString[s]];
+  (If[$MessageOnError,Message[Error::error, ToString[StringForm[s,args]]]];
+  Throw[{{args}, CurrentStack[]}, ErrorString[s]]);
 
 SetAttributes[CatchError, HoldAll];
 CatchError[expr_] :=
