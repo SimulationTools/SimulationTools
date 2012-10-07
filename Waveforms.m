@@ -49,6 +49,7 @@ ReadRadiallyExtrapolatedWave;
 RadiallyExtrapolatedWave;
 ReadRadiallyExtrapolatedPsi4;
 ReadRadiallyExtrapolatedStrain;
+Psi4PerturbativeCorrection;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
@@ -700,6 +701,13 @@ ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
     order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]];
+
+(****************************************************************)
+(* Psi4PerturbativeCorrection                                   *)
+(****************************************************************)
+
+Psi4PerturbativeCorrection[rpsi4_DataTable, l_Integer, r_?NumberQ, om0_?NumberQ] :=
+  rpsi4 - 1/2 (l - 1) (l + 2) FixedFrequencyIntegrate[rpsi4/r, om0];
 
 End[];
 
