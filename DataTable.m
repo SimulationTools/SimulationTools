@@ -62,6 +62,9 @@ Format[DataTable[l_, attrs___]] := "DataTable"["..."];
 
 SetAttributes[Redefine, HoldAll];
 
+validQ[d_DataTable] :=
+  MatchQ[d,DataTable[{{_?NumberQ, _?NumberQ|_List}...},___]];
+
 Redefine[f_[args___], newDef_] :=
   Module[{},
     Unprotect[f];
@@ -443,8 +446,10 @@ Spacing[d:DataTable[__]] :=
     ts = IndVar[d];
     Min[Drop[ts,1] - Drop[RotateRight[ts],1]]]
 
-ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
+ResampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
+    Assert[Apply[And,validQ/@ds]];
+
     If[Length[ds] === 0, Return[{}]];
     dts = Map[Spacing, ds];
     dt = Apply[Min, dts];
