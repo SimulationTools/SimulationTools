@@ -462,8 +462,10 @@ ResampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
 
 DataTableInterval[x___] := Error["DataTableInterval: Invalid arguments: "<>ToString[{x}]];
 
+rangepatt = _?NumberQ | All;
+
 Options[DataTableInterval] = {Interval -> {Closed, Open}};
-DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
+DataTableInterval[d_DataTable, {t1:rangepatt, t2:rangepatt}, opts:OptionsPattern[]] :=
   Module[
     {range, tMin, tMax, lower, upper, eps=10.^-6},
     range = DataTableRange[d];
@@ -483,7 +485,7 @@ DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
     d /. DataTable[l_, x___] :>
     DataTable[Select[l,lower[#[[1]],tMin-eps] && upper[#[[1]], tMax+eps] &], x]];
 
-DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
+DataTableDepVarInterval[d_DataTable, {y1_?NumberQ, y2_?NumberQ}] :=
   d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
 
 IntersectDataTables[d1_DataTable, d2_DataTable] :=
