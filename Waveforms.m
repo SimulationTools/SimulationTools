@@ -1,5 +1,6 @@
 
-BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`", "Providers`", "InitialData`", "Error`"}];
+BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`", "Providers`", "InitialData`", "Error`",
+                            "CoordinateTransformations`"}];
 
 SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized.";
 ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
