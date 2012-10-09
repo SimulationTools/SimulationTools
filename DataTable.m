@@ -436,6 +436,9 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
 ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
   Module[
     {d2, template2},
+    (* This might be leading to unexplained differences *)
+    (* If[DepVar[d] === DepVar[template], *)
+    (*    Return[d]]; *)
     {d2, template2} = IntersectDataTables[d,template];
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
