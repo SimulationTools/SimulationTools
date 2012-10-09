@@ -582,6 +582,9 @@ RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
 
     Assert[Apply[And,DataTable`Private`validQ/@fs]];
 
+    If[order===0,
+       Return[fs[[Ordering[rs][[-1]]]]]];
+
     (* These checks do not seem to affect performance *)
     If[!SameGridQ[fs],
        Error["RadialExtrapolation: Input DataTables are not defined on the same grid"]];
