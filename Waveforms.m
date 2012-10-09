@@ -618,6 +618,27 @@ ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
 ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
   MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}];
 
+resampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
+  Module[{ref, res},
+    Assert[Apply[And,DataTable`Private`validQ/@ds]];
+
+    If[Length[ds] === 0, Return[{}]];
+
+    (* Print["spacings: ", Spacing/@ds//FullForm]; *)
+
+    (* TODO: The ordering here can be affected by roundoff-level
+       differences, leading to results well above the roundoff level.
+       In the case that the spacings are equal within a tolerance, the
+       ordering should be the input ordering. *)
+
+    ref = First[Sort[ds, OrderedQ[{Spacing[#1], Spacing[#2]}] &]];
+    (* Print["ordering:", Ordering[ds, All, OrderedQ[{Spacing[#1],Spacing[#2]}] &]]; *)
+    (* Print["ranges: ", DataTableRange/@ds//FullForm]; *)
+    (* Print["ref: ", DataTableRange[ref], " ", Spacing[ref]]; *)
+    res = ResampleDataTable[#, ref] & /@ ds;
+    (* Print["resampled ranges: ", DataTableRange/@res//FullForm]; *)
+    IntersectDataTables[res]];
+
 (* RadiallyExtrapolatedWave *)
 
 notOptionQ[x_] := ! OptionQ[x];
@@ -640,8 +661,8 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
                    OptionValue[DiscretePhaseAlignmentTime]];
        (* Print["tAlign = ", tAlign]; *)
        
-       ToComplex[Map[ext, ResampleDataTables/@ToAbsPhase[ret,tAlign]]],
-       ext[ResampleDataTables[ret]]]];
+       ToComplex[Map[ext, resampleDataTables/@ToAbsPhase[ret,tAlign]]],
+       ext[resampleDataTables[ret]]]];
 
 (* ReadRadiallyExtrapolatedWave *)
 
