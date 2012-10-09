@@ -268,12 +268,14 @@ DataTable /: Map[f_, DataTable[l_, attrs___]] :=
 (* MapList *)
 (****************************************************************)
 
-MapList[f_, DataTable[l_, attrs___]] :=
-  Module[{l2},
-    l2 = Map[f,l];
-    If[!MatchQ[l2[[1]],{_?NumberQ, _?NumberQ|_List}],
-      Error["MapList: Result is not numeric: "<>ToString[l2[[1]]]]];
-    DataTable[l2, attrs]];
+MapList[f_, dt_DataTable] :=
+  Module[{fdt, t},
+    fdt = Map[f, ToList[dt]];
+    t = ToListOfCoordinates[dt];
+    If[!MatchQ[fdt[[1]], _?NumericQ],
+      Error["MapList: Result is not numeric: "<>ToString[fdt[[1]]]]];
+    ToDataTable[Transpose[{t,fdt}]]
+];
 
 (****************************************************************)
 (* MapThread *)
