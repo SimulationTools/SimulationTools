@@ -313,6 +313,7 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
 
     (* Get a list of components in each file *)
     components = Map[CarpetIOHDF5Components[#, it, rl]&, fileNames];
+    components = components /. {} -> {None};
 
     (* Figure out what the variable is called inside the file *)
     varNames = SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[file,
