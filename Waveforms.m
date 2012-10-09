@@ -249,9 +249,15 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, opts___] :=
   trd = RadiusTimeDataToTimeRadiusData[rdTb];
   rds = Map[Last,trd];
   ts = Map[First,trd];
+  (* Print["t = ", First[ts]]; *)
   If[p > Length[rdTb]-1,
     Error["Insufficient radii (", Length[rdTb], ") for extrapolation at order ", p]];
+  (* Print["order = ", p]; *)
+  (* Print["rs = ", Map[First,rdTb]]; *)
+
   extraps = Map[ExtrapolateScalar[p, #] &, rds];
+  (* Print[{rds[[1]], extraps[[1]]}]; *)
+  
   MakeDataTable[MapThread[List, {ts, extraps}]]];
 
 ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}, opts___] :=
@@ -312,12 +318,19 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     If[!(alignPhaseAt === None),
       fTbs = AlignPhases[fTbs, alignPhaseAt]];
 
+    (* Print["fTbs ranges: ", DataTableRange /@ fTbs//FullForm]; *)
+
     fTbsRes = 
          If[OptionValue[NonUniformGrid],
             Module[
-              {highRes},
+              {highRes,res},
               highRes = fTbs[[Ordering[Spacing /@ fTbs][[1]]]];
-              IntersectDataTables[ResampleDataTable[#, highRes] & /@ fTbs]],
+              (* Print["spacings: ", Spacing/@fTbs//FullForm]; *)
+              (* Print["ordering = ", Ordering[Spacing /@ fTbs][[1]]]; *)
+              (* Print["ref: ", DataTableRange[highRes], " ", Spacing[highRes]]; *)
+              res = ResampleDataTable[#, highRes] & /@ fTbs;
+              (* Print["resampled ranges: ", DataTableRange/@res//FullForm]; *)
+              IntersectDataTables[res]],
             (* else *)
             ResampleDataTables[fTbs]];
     applyFunction = OptionValue[ApplyFunction];
@@ -592,13 +605,14 @@ RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
        Error["RadialExtrapolation: Input radii are not numeric"]];
 
     t = ToListOfCoordinates[fs[[1]]];
-    (* Print["t = ", Short[t]]; *)
+    (* Print["t = ", First[t]]; *)
     ds = ToListOfData/@fs;
     (* Print["ds = ", Short[ds]]; *)
     rds = Transpose[ds];
     (* Print["rds = ", Short[rds]]; *)
     (* Print["Before RadialExtrapolation"]; *)
     de = Map[RadialExtrapolation[{rs, #}, order] &,rds];
+    (* Print[{Thread[{rs,rds[[1]]}], de[[1]]}]; *)
     (* Print["de = ", de]; *)
     ToDataTable[Thread[{t,de}]]];
 
@@ -659,6 +673,8 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
     (* Print["ret = ", ret]; *)
     (* Print["Max[CoordinateRange[First[ret]][[1]],0] = ", Max[CoordinateRange[First[ret]][[1]], 0]]; *)
     ext[ds_] := RadialExtrapolation[{rs, ds}, order];
+
+    (* Print["rs = ", rs]; *)
 
     If[OptionValue[AbsPhase],
        tAlign = If[OptionValue[DiscretePhaseAlignmentTime] === Automatic,
