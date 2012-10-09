@@ -72,6 +72,7 @@ CoordinateRange = DataTableRange;
 ToListOfData = DepVar;
 ToListOfCoordinates = IndVar;
 AlignedPhases = AlignPhases;
+Psi4ToStrain = StrainFromPsi4;
 
 ToDataTable[l_List] := MakeDataTable[l];
 
