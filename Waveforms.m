@@ -567,6 +567,8 @@ ReadWaveformFile[file_] :=
 (* Extrapolation                                                *)
 (****************************************************************)
 
+extrapOrderPattern = _Integer | {_Integer, _Integer};
+
 (* RadialExtrapolation *)
 
 RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
@@ -665,15 +667,15 @@ notOptionQ[x_] := ! OptionQ[x];
 Options[RadiallyExtrapolatedWave] = {"AbsPhase" -> True,
                                      "DiscretePhaseAlignmentTime" -> Automatic};
 RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}}, 
-                         order_Integer,
+                         order : extrapOrderPattern,
                          rStarOfr : (_?notOptionQ) : Identity, 
                          opts:OptionsPattern[]] :=
   Module[
-    {ret,ext,tAlign,temp},
+    {ret,ext,tAlign,temp,orders},
     ret = ToRetardedTime[{rs,fs},rStarOfr];
     (* Print["ret = ", ret]; *)
     (* Print["Max[CoordinateRange[First[ret]][[1]],0] = ", Max[CoordinateRange[First[ret]][[1]], 0]]; *)
-    ext[ds_] := RadialExtrapolation[{rs, ds}, order];
+    ext[ds_,p_] := RadialExtrapolation[{rs, ds}, p];
 
     (* Print["rs = ", rs]; *)
 
@@ -681,10 +683,11 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
        tAlign = If[OptionValue[DiscretePhaseAlignmentTime] === Automatic,
                    Max[CoordinateRange[First[ret]][[1]], 0],
                    OptionValue[DiscretePhaseAlignmentTime]];
-       (* Print["tAlign = ", tAlign]; *)
+       orders = Switch[order, _Integer, {order, order}, {_Integer, _Integer}, order, _, Error["Error"]];
        
-       ToComplex[Map[ext, resampleDataTables/@ToAbsPhase[ret,tAlign]]],
-       ext[resampleDataTables[ret]]]];
+       ToComplex[MapThread[ext, {resampleDataTables/@ToAbsPhase[ret,tAlign], orders}]],
+       If[ListQ[order], Error["Can only specify a list of extraolation orders when AbsPhase is True"]];
+       ext[resampleDataTables[ret],order]]];
 
 (* ReadRadiallyExtrapolatedWave *)
 
@@ -693,7 +696,7 @@ Options[ReadRadiallyExtrapolatedWave] =
        Options[RadiallyExtrapolatedWave]];
 
 ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
-                             order_Integer, opts:OptionsPattern[]] :=
+                             order : extrapOrderPattern, opts:OptionsPattern[]] :=
   RadiallyExtrapolatedWave[
     Transpose[
       Table[{r,reader[r]}, {r,rads}]],
@@ -723,8 +726,8 @@ Options[ReadRadiallyExtrapolatedPsi4] =
         "Radii" -> Automatic,
         "PerturbativeAdjustment" -> False}];
 
-ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
-                             order_Integer, opts:OptionsPattern[]] :=
+DefineMemoFunction[ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
+                                                order : extrapOrderPattern, opts:OptionsPattern[]],
   ReadRadiallyExtrapolatedWave[
     run,
     (If[OptionValue[PerturbativeAdjustment],
@@ -732,7 +735,7 @@ ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
         Identity][# ReadPsi4[run,l,m,#]]) &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
-    order, FilterRules[{opts},Options[ReadRadiallyExtrapolatedWave]]];
+    order, FilterRules[{opts},Options[ReadRadiallyExtrapolatedWave]]]];
 
 (* ReadRadiallyExtrapolatedStrain *)
 
@@ -744,8 +747,8 @@ ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
 *)
 
 Options[ReadRadiallyExtrapolatedStrain] = Options[ReadRadiallyExtrapolatedPsi4];
-ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
-                               order_Integer, opts:OptionsPattern[]] :=
+DefineMemoFunction[ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
+                               order : extrapOrderPattern, opts:OptionsPattern[]],
   ReadRadiallyExtrapolatedWave[
     run,
     Psi4ToStrain[If[OptionValue[PerturbativeAdjustment],
@@ -753,7 +756,7 @@ ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
         Identity][# ReadPsi4[run,l,m,#]], om0] &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
-    order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]];
+    order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]]];
 
 (****************************************************************)
 (* Psi4PerturbativeCorrection                                   *)
