@@ -76,7 +76,7 @@ WaveformMatch[{wf1_DataTable, wf2_DataTable}, s_DataTable, OptionsPattern[]] :=
     wf2t = Fourier[wf2];
 
 	(* Resample the waveforms and noise function onto the same grid *)
-    {wf1t, wf2t, sn} = Resampled[{wf1t, wf2t, s}];
+    {wf1t, wf2t, sn} = SimulationTools`DataTable`Private`resampled[{wf1t, wf2t, s}];
 
     (* Compute normalization - First here indicates no time shift *)
     norm1 = 4 First[Abs[InverseFourier[Abs[wf1t]^2/sn, FourierParameters -> {-1,1}]]];

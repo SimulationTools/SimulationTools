@@ -704,8 +704,8 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
        tAlign = If[OptionValue[DiscretePhaseAlignmentTime] === Automatic,
                    Max[CoordinateRange[First[ret]][[1]], 0],
                    OptionValue[DiscretePhaseAlignmentTime]];
-       ToComplex[Map[ext, Resampled/@ToAbsPhase[ret,tAlign]]],
-       ext[Resampled[ret]]]];
+       ToComplex[Map[ext, SimulationTools`DataTable`Private`resampled/@ToAbsPhase[ret,tAlign]]],
+       ext[SimulationTools`DataTable`Private`resampled[ret]]]];
 
 (* ReadRadiallyExtrapolatedWave *)
 

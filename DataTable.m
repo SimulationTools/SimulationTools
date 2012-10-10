@@ -398,45 +398,6 @@ Protect /@ $1DPlotFunctions;
 
 
 (**********************************************************)
-(* Resampled                                              *)
-(**********************************************************)
-(* TODO: Implement Resampled[d:DataTable[__], template:DataTable[__], p_Integer:8] *)
-
-Resampled[d_DataTable, dt_?NumberQ, p_Integer:8] :=
- Module[{t1, t2},
-  {t1, t2} = DataTableRange[d];
-  Resampled[d, {t1, t2, dt}, p]
-];
-
-Resampled[d_DataTable, {t1_?NumberQ, t2_?NumberQ, dt_?NumberQ}, p_Integer:8] :=
- Resampled[d, {{t1, t2, dt}}, p];
-
-DataTable /: Resampled[d_DataTable, {{t1_, t2_, dt_}}, p_:8] :=
- Module[{f, dt1, dt2},
-  {dt1,dt2} = CoordinateRange[d];
-  If[t1 < dt1 || t2 > dt2 || t1 > t2 || dt < 0,
-    Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
-          " for DataTable with range " <> ToString[{dt1,dt2}]]];
-  f = Interpolation[d, InterpolationOrder -> p];
-  (* TODO: possibly remove/replace the Attributes functions here *)
-  AddAttributes[ToDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]
-];
-
-Resampled[ds:{DataTable[__]...}, p_:8] :=
-  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
-    If[Length[ds] === 0, Return[{}]];
-    dts = Map[MinCoordinateSpacing, ds];
-    dt = Apply[Min, dts];
-    ranges = Map[CoordinateRange, ds];
-    t1s = Map[First, ranges];
-    t2s = Map[Last, ranges];
-    t1 = Apply[Max, t1s];
-    t2 = Apply[Min, t2s];
-    Map[Resampled[#, {t1, t2, dt}, p] &, ds]
-];
-
-
-(**********************************************************)
 (* SameGridQ                                              *)
 (**********************************************************)
 
@@ -1136,6 +1097,19 @@ LocateMaximumPoint[d_DataTable] :=
    If[f > fMax, fMax = f; tMax = t];
   Scan[maxFind, l];
   Return[tMax]];
+
+resampled[ds:{DataTable[__]...}, p_:8] :=
+  Module[{dts, dt, ranges, t1s, t2s, t1, t2},
+    If[Length[ds] === 0, Return[{}]];
+    dts = Map[MinCoordinateSpacing, ds];
+    dt = Apply[Min, dts];
+    ranges = Map[CoordinateRange, ds];
+    t1s = Map[First, ranges];
+    t2s = Map[Last, ranges];
+    t1 = Apply[Max, t1s];
+    t2 = Apply[Min, t2s];
+    Map[Resampled[#, {{t1, t2, dt}}, InterpolationOrder -> p] &, ds]
+];
 
 UniformGridQ = UniformSpacingQ;
 InterpolateWhereFunction = InterpolatedWhere;

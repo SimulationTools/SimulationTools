@@ -46,7 +46,10 @@ CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a max
 CoordinatesAtMax::usage = "CoordinatesAtMax[d] finds a list of the coordinates at which the maximum occurs in d. This is guaranteed to coincide with a data point.";
 
 (* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
-Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.";
+Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a data representation with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}."<>
+  "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ...."<>
+  "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
+  "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
@@ -79,8 +82,11 @@ DataRepresentationQ[_] = False;
 SyntaxInformation[Add] =
  {"ArgumentsPattern" -> {_, _, ___}};
 
-Add[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
-  Apply[Plus, Resampled[{d1, d2}, p]];
+Add[d1_SimulationTools`DataRegion`DataRegion, d2_SimulationTools`DataRegion`DataRegion, p_:3] :=
+  Apply[Plus, SimulationTools`DataRegion`Private`resampled[{d1, d2}, p]];
+
+Add[d1_SimulationTools`DataTable`DataTable, d2_SimulationTools`DataTable`DataTable, p_:3] :=
+  Apply[Plus, SimulationTools`DataTable`Private`resampled[{d1, d2}, p]];
 
 Add[a_?NumberQ, b_?NumberQ] := a+b;
 
@@ -200,8 +206,11 @@ SyntaxInformation[CoordinateSpacing] =
 SyntaxInformation[Div] =
  {"ArgumentsPattern" -> {_, _, ___}};
 
-Div[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
-  Apply[Divide, Resampled[{d1, d2}, p]];
+Div[d1_SimulationTools`DataRegion`DataRegion, d2_SimulationTools`DataRegion`DataRegion, p_:3] :=
+  Apply[Divide, SimulationTools`DataRegion`Private`resampled[{d1, d2}, p]];
+
+Div[d1_SimulationTools`DataTable`DataTable, d2_SimulationTools`DataTable`DataTable, p_:3] :=
+  Apply[Divide, SimulationTools`DataTable`Private`resampled[{d1, d2}, p]];
 
 Div[a_?NumberQ, b_?NumberQ] := a/b;
 
@@ -324,8 +333,11 @@ SyntaxInformation[MaxCoordinates] =
 SyntaxInformation[Mul] =
  {"ArgumentsPattern" -> {_, _, ___}};
 
-Mul[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
-  Apply[Times, Resampled[{d1, d2}, p]];
+Mul[d1_SimulationTools`DataRegion`DataRegion, d2_SimulationTools`DataRegion`DataRegion, p_:3] :=
+  Apply[Times, SimulationTools`DataRegion`Private`resampled[{d1, d2}, p]];
+
+Mul[d1_SimulationTools`DataTable`DataTable, d2_SimulationTools`DataTable`DataTable, p_:3] :=
+  Apply[Times, SimulationTools`DataTable`Private`resampled[{d1, d2}, p]];
 
 Mul[a_?NumberQ, b_?NumberQ] := a b;
 
@@ -374,7 +386,59 @@ phase[tb:{{_, {_, _}}...}] :=
 (**********************************************************)
 
 SyntaxInformation[Resampled] =
- {"ArgumentsPattern" -> {_, ___}};
+ {"ArgumentsPattern" -> {_, _, OptionsPattern[]}};
+
+Options[Resampled] = {InterpolationOrder -> 8};
+
+DocumentationBuilder`OptionDescriptions["Resampled"] = {
+  InterpolationOrder -> "The order of interpolation to use. This may be take value "<>
+    "supported by the Interpolation function. The default is 8."
+};
+
+(* Resample a list of data representations onto the same grid *)
+Resampled[ds:{(_?DataRepresentationQ)...}, grid_, opts___] /; SameQ[Head/@ds] :=
+  Map[Resampled[#, grid, opts]&, ds];
+
+(* Resample onto a grid with the same range, but with new grid spacings *)
+Resampled[d_?DataRepresentationQ, dxs:{(_?NumericQ)...}, opts___] :=
+ Module[{coords, grids},
+  coords = CoordinateRanges[d];
+  grids = MapThread[Append, {coords, dxs}];
+  Resampled[d, grids, opts]
+];
+
+(* Resample onto the grid of another data representation *)
+Resampled[d_?DataRepresentationQ, onto_?DataRepresentationQ, OptionsPattern[]] :=
+ Module[{f},
+  f = Interpolation[dt, InterpolationOrder -> OptionValue["InterpolationOrder"]];
+  MapList[Apply[f, Drop[#, -1]]&, onto]
+];
+
+(* Resample onto a grid specified by {x_min, x_max, dx} in each direction *)
+Resampled[d_?DataRepresentationQ, grid:{{_?NumericQ, _?NumericQ, _?NumericQ}...}, OptionsPattern[]] :=
+ Module[{dims, interp, vars, tmp, iterators, data, res},
+  dims = Dimensions[grid];
+  If[dims =!= {ArrayDepth[d], 3},
+  	Error["Expected a list of triples for each dimension in the data representation."];
+  ];
+  interp = Interpolation[d, InterpolationOrder -> OptionValue["InterpolationOrder"]];
+  vars = tmp /@ Range[ArrayDepth[d]];
+  iterators = MapThread[Join[{#1}, #2] &, {vars, grid}];
+
+  (* TODO: Make this not depend on the type of data representation. *)
+  Switch[Head[d],
+   SimulationTools`DataRegion`DataRegion,
+    data = Table[interp @@ vars, Evaluate[Sequence @@ iterators]];
+    res = SimulationTools`DataRegion`ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], VariableName -> SimulationTools`DataRegion`VariableName[d]];,
+   SimulationTools`DataTable`DataTable,
+    data = Table[Join[vars, {interp @@ vars}], Evaluate[Sequence @@ iterators]];
+    res = SimulationTools`DataTable`ToDataTable[data];,
+   _,
+    Error["Can not resample an object of type "<>ToString[Head[d]]<>"."];
+  ];
+
+  res
+];
 
 
 (**********************************************************)
@@ -438,8 +502,11 @@ SyntaxInformation[Shifted] =
 SyntaxInformation[Sub] =
  {"ArgumentsPattern" -> {_, _, ___}};
 
-Sub[d1_?DataRepresentationQ, d2_?DataRepresentationQ, p_:3] /; SameQ[Head[d1], Head[d2]] :=
-  Apply[Subtract, Resampled[{d1, d2}, p]];
+Sub[d1_SimulationTools`DataRegion`DataRegion, d2_SimulationTools`DataRegion`DataRegion, p_:3] :=
+  Apply[Subtract, SimulationTools`DataRegion`Private`resampled[{d1, d2}, p]];
+
+Sub[d1_SimulationTools`DataTable`DataTable, d2_SimulationTools`DataTable`DataTable, p_:3] :=
+  Apply[Subtract, SimulationTools`DataTable`Private`resampled[{d1, d2}, p]];
 
 Sub[a_?NumberQ, b_?NumberQ] := a-b;
 

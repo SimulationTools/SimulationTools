@@ -549,36 +549,6 @@ Downsampled[d_DataRegion, n_List] :=
 
 
 (**********************************************************)
-(* Resampled                                              *)
-(**********************************************************)
-
-DataRegion /: Resampled[d_DataRegion, grid_List, p_:3] :=
- Module[{dims, interp, vars, tmp, iterators, data},
-  dims = Dimensions[grid];
-  If[dims =!= {ArrayDepth[d], 3},
-  	Error["Expected a list of triples for each dimension in the DataRegion."];
-  ];
-  Quiet[interp = Interpolation[d, InterpolationOrder -> p];, ListInterpolation::inhr];
-  vars = tmp /@ Range[ArrayDepth[d]];
-  iterators = MapThread[Join[{#1}, #2] &, {vars, grid}];
-  data = Table[interp @@ vars, Evaluate[Sequence @@ iterators]];
-  ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], VariableName -> VariableName[d]]
-];
-
-Resampled[ds:{DataRegion[__]...}, p_:3] :=
-  Module[{x1, x2, dx, grid},
-    x1 = Max /@ Transpose[MinCoordinates /@ ds];
-    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
-    dx = Min /@ Transpose[CoordinateSpacings /@ ds];
-    grid = Transpose[{x1, x2, dx}];
-
-    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
-
-    Map[Resampled[#, grid, p] &, ds]
-];
-
-
-(**********************************************************)
 (* Plotting functions                                     *)
 (**********************************************************)
 
@@ -1175,6 +1145,18 @@ MergeDataRegions[regions_List] :=
   Scan[insertArray[dat, GetData[#], chunkOffset[#, X1, spacing]] &, 
    regions];
   MakeDataRegion[Developer`ToPackedArray[dat], GetVariableName[regions[[1]]], {}, X1, GetSpacing[regions[[1]]], GetTime[regions[[1]]]]]
+];
+
+resampled[ds:{DataRegion[__]...}, p_:3] :=
+  Module[{x1, x2, dx, grid},
+    x1 = Max /@ Transpose[MinCoordinates /@ ds];
+    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
+    dx = Min /@ Transpose[CoordinateSpacings /@ ds];
+    grid = Transpose[{x1, x2, dx}];
+
+    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
+
+    Map[Resampled[#, grid, InterpolationOrder -> p] &, ds]
 ];
 
 End[];

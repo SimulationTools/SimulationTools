@@ -78,7 +78,7 @@ Scan[test4, SimulationTools`DataRegion`Private`$2DPlotFunctions]
 (****************************************************************)
 
 Test[
-    Add[dr2, dr4]
+    Quiet[Add[dr2, dr4], ListInterpolation::inhr]
     ,
     DataRegion[{VariableName -> "test region", SimulationTools`DataRegion`Private`Origin -> {10., 20., 30.3}, Spacing -> {0.1, 0.2, 0.3}, SimulationTools`DataRegion`Private`Time -> Null}, {{{335., 338., 341.00000000000006}, {365., 368., 371.00000000000006}, {395., 398., 401.}}, {{635., 638., 641.}, {665., 668., 671.}, {695., 698., 701.}}}]
     ,
@@ -274,7 +274,7 @@ Test[
 (****************************************************************)
 
 Test[
-    Div[dr2, dr4]
+    Quiet[Div[dr2, dr4],ListInterpolation::inhr]
     ,
     DataRegion[{VariableName -> "test region", SimulationTools`DataRegion`Private`Origin -> {10., 20., 30.3}, Spacing -> {0.1, 0.2, 0.3}, SimulationTools`DataRegion`Private`Time -> Null}, {{{2.018018018018018, 2.0178571428571432, 2.017699115044248}, {2.0165289256198347, 2.016393442622951, 2.016260162601626}, {2.015267175572519, 2.015151515151515, 2.0150375939849625}}, {{2.009478672985782, 2.009433962264151, 2.0093896713615025}, {2.009049773755656, 2.009009009009009, 2.008968609865471}, {2.0086580086580086, 2.0086206896551726, 2.0085836909871246}}}]
     ,
@@ -499,7 +499,7 @@ Test[
 (****************************************************************)
 
 Test[
-    Mul[dr2, dr4]
+    Quiet[Mul[dr2, dr4],ListInterpolation::inhr]
     ,
     DataRegion[{VariableName -> "test region", SimulationTools`DataRegion`Private`Origin -> {10., 20., 30.3}, Spacing -> {0.1, 0.2, 0.3}, SimulationTools`DataRegion`Private`Time -> Null}, {{{24864., 25312.000000000004, 25764.000000000007}, {29524., 30012.000000000004, 30504.000000000007}, {34584., 35112., 35644.}}, {{89464., 90312., 91164.}, {98124., 99012., 99904.}, {107184., 108112., 109044.}}}]
     ,
@@ -593,7 +593,7 @@ Test[
 grid = {{10.`, 10.05`, 0.05}, {20.`, 20.3`, 0.1}, {30.`, 30.9`, 0.4}};
 
 Test[
-    Resampled[dr, grid]
+    Quiet[Resampled[dr, grid], ListInterpolation::inhr]
     ,
     DataRegion[{
       VariableName -> "test region",
@@ -607,10 +607,10 @@ Test[
       ]
     ,
     TestID->"Resampled"
-]
+];
 
 Test[
-    Resampled[{dr, dr4}]
+    Quiet[SimulationTools`DataRegion`Private`resampled[{dr, dr4}], ListInterpolation::inhr]
     ,
     {
      DataRegion[{VariableName -> "test region", SimulationTools`DataRegion`Private`Origin -> {10., 20., 30.3}, Spacing -> {0.1, 0.2, 0.3}, SimulationTools`DataRegion`Private`Time -> Null}, {{{112., 113.00000000000001, 114.00000000000001}, {122., 123.00000000000001, 124.00000000000001}, {132., 133., 134.}}, {{212., 213., 214.}, {222., 223., 224.}, {232., 233., 234.}}}], 
@@ -618,7 +618,7 @@ Test[
     }
     ,
     TestID->"Resampled list of DataRegions"
-]
+];
 
 
 (****************************************************************)
@@ -700,7 +700,7 @@ MapThread[slabTest, {parts[[1;;5]], slabs}];
 (****************************************************************)
 
 Test[
-    Sub[dr2, dr4]
+    Quiet[Sub[dr2, dr4], ListInterpolation::inhr]
     ,
     DataRegion[{VariableName -> "test region", SimulationTools`DataRegion`Private`Origin -> {10., 20., 30.3}, Spacing -> {0.1, 0.2, 0.3}, SimulationTools`DataRegion`Private`Time -> Null}, {{{113., 114.00000000000003, 115.00000000000001}, {123., 124.00000000000003, 125.00000000000001}, {133., 134., 135.}}, {{213., 214., 215.}, {223., 224., 225.}, {233., 234., 235.}}}]
     ,
