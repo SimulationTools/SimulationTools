@@ -455,7 +455,8 @@ FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
   intqTilde = ffiDataTable[qTilde, f0];
   intq = InverseFourier[intqTilde,t0];
   (* TODO: I'm not sure where the "-" comes from here, but it seems to be necessary *)
-  -If[uniform, intq, ResampleDataTable[intq,q]]];
+  -If[uniform, intq, Quiet[ResampleDataTable[intq,q,Intersect->False],
+                           InterpolatingFunction::dmval]]];
 
 StrainFromPsi4[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
