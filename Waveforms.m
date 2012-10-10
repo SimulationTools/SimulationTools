@@ -720,13 +720,16 @@ selectRadii[rads_List, range:(Automatic|{_,_}), list:(Automatic|_List)] :=
 Options[ReadRadiallyExtrapolatedPsi4] = 
   Join[Options[ReadRadiallyExtrapolatedWave],
        {"RadiusRange" -> Automatic,
-        "Radii" -> Automatic}];
+        "Radii" -> Automatic,
+        "PerturbativeAdjustment" -> False}];
 
 ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
                              order_Integer, opts:OptionsPattern[]] :=
   ReadRadiallyExtrapolatedWave[
     run,
-    (# ReadPsi4[run,l,m,#]) &,
+    (If[OptionValue[PerturbativeAdjustment],
+        Function[rpsi4,Psi4PerturbativeCorrection[rpsi4,l,#,om0]], (* TODO: pass in om0 *)
+        Identity][# ReadPsi4[run,l,m,#]]) &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
     order, FilterRules[{opts},Options[ReadRadiallyExtrapolatedWave]]];
@@ -745,7 +748,9 @@ ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
                                order_Integer, opts:OptionsPattern[]] :=
   ReadRadiallyExtrapolatedWave[
     run,
-    Psi4ToStrain[# ReadPsi4[run,l,m,#], om0] &,
+    Psi4ToStrain[If[OptionValue[PerturbativeAdjustment],
+        Function[rpsi4,Psi4PerturbativeCorrection[rpsi4,l,#,om0]],
+        Identity][# ReadPsi4[run,l,m,#]], om0] &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
     order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]];
