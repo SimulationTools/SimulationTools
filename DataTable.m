@@ -433,13 +433,16 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
 
-ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
+Options[ResampleDataTable] = {"Intersect" -> True};
+ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8, OptionsPattern[]] :=
   Module[
     {d2, template2},
     (* This might be leading to unexplained differences *)
     (* If[DepVar[d] === DepVar[template], *)
     (*    Return[d]]; *)
-    {d2, template2} = IntersectDataTables[d,template];
+    {d2, template2} = If[OptionValue[Intersect],
+                         IntersectDataTables[d,template],
+                         {d,template}];
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
                   ListAttributes[d]]];
