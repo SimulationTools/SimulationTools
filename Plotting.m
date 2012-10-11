@@ -106,6 +106,7 @@ ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
           FilterRules[{opts}, Options[MakePlotLegend]]],
           Scaled[scale], pos]]];
 
+Options[PresentationListLinePlot] = Options[ListLinePlotWithLegend];
 PresentationListLinePlot[args___, opts:OptionsPattern[]] :=
   ListLinePlotWithLegend[args,opts,LabelStyle->Medium,Frame->True];
 
