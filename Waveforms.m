@@ -529,6 +529,16 @@ AlignMaximaOfAbs[ds_List] :=
    maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
+(* ImportGzip[file_String, as_] := *)
+(*   Module[ *)
+(*     {id,tempfile,data}, *)
+(*     id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz"; *)
+(*     tempfile = FileNameJoin[{$TemporaryDirectory,id}]; *)
+(*     CopyFile[file, tempfile]; *)
+(*     data = Import[tempfile,as]; *)
+(*     DeleteFile[tempfile]; *)
+(*     data]; *)
+
 ImportGzip[file_String, as_] :=
   ImportString[ReadGzipFile[file],as];
 
