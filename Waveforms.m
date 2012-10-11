@@ -609,6 +609,8 @@ RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
     (* Print["rs = ", Short[rs]]; *)
 
     Assert[Apply[And,DataTable`Private`validQ/@fs]];
+    If[Length[rs] =!= Length[fs], Error["The number of radii and the number of DataTables are not the same"]];
+    If[Length[rs] === 0, Error["Cannot extrapolate an empty list of DataTables"]];
 
     If[order===0,
        Return[fs[[Ordering[rs][[-1]]]]]];
@@ -709,15 +711,18 @@ Options[ReadRadiallyExtrapolatedWave] =
 
 ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
                              order : extrapOrderPattern, opts:OptionsPattern[]] :=
-  RadiallyExtrapolatedWave[
-    Transpose[
-      Table[{r,reader[r]}, {r,rads}]],
-    order, 
-    OptionValue[RadialCoordinateTransformation] /.
-    {None -> Identity,
-     RadialToTortoise -> (RadialToTortoise[#,ReadADMMass[run]] &),
-     IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
-    FilterRules[{opts}, Options[RadiallyExtrapolatedWave]]];
+  If[Length[rads] ===0,
+     Error["ReadRadiallyExtrapolatedWave: No waveform radii supplied for run "<>run],
+     (* else *)
+     RadiallyExtrapolatedWave[
+       Transpose[
+         Table[{r,reader[r]}, {r,rads}]],
+       order, 
+       OptionValue[RadialCoordinateTransformation] /.
+       {None -> Identity,
+        RadialToTortoise -> (RadialToTortoise[#,ReadADMMass[run]] &),
+        IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
+       FilterRules[{opts}, Options[RadiallyExtrapolatedWave]]]];
 
 (* selectRadii *)
 
