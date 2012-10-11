@@ -1,6 +1,6 @@
 
 BeginPackage["Waveforms`", {"RunFiles`", "DataTable`", "Memo`", "ReadHDF5`", "Providers`", "InitialData`", "Error`",
-                            "CoordinateTransformations`"}];
+                            "CoordinateTransformations`", "h5mma`"}];
 
 SchmidtAngle::usage = "SchmidtAngle[run, t, r] computes the angle between the z-axis and the direction in which the (2,2) and (2,-2) modes are maximized.";
 ReconstructPsi4::usage = "ReconstructPsi4[run, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r.";
@@ -529,6 +529,8 @@ AlignMaximaOfAbs[ds_List] :=
    maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
+ImportGzip[file_String, as_] :=
+  ImportString[ReadGzipFile[file],as];
 
 ReadWaveformFile[file_] :=
   Module[
@@ -536,10 +538,10 @@ ReadWaveformFile[file_] :=
     If[FileType[file] ===None,
        Error["ReadWaveformFile: File "<>file<>" does not exist",Global`FileNotFound]];
 
-    (* If[FileExtension[file] === "gz", *)
-    (*    data = Import["!gunzip< "<>file,"Table"], *)
-    (*    data = Import[file,"Table"]]; *)
-
+    If[FileExtension[file] === "gz",
+       data = ImportGzip[file,"Table"],
+       data = Import[file,"Table"]];
+    Return[MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, data], NumberQ[#[[2]]]&]]];
     (* The Mathematica GZIP reader creates temporary files in /tmp.
        If multiple kernels try to open gzipped files with the same
        leaf name, this causes these temporary files to be corrupted,
