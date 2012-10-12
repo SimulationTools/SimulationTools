@@ -44,7 +44,6 @@ NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
     {md, radii, radStrs},
     md = ParseMetadataFile[runName];
-    Put[md, "~/metadata.m"];
 
     md = processMetadata[md];
 
