@@ -406,7 +406,8 @@ Redefine[Interpolation[d:DataTable[___], args___],
    Interpolation[ToList[d], args]];
 
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
- AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
+ AddAttributes[MakeDataTable[ToList[d] + ConstantArray[{dt,0.}, Length[d]]],
+               ListAttributes[d]];
 
 DataTableRange[dt:DataTable[__]] :=
   Module[{list = ToList[dt], t1, t2},
