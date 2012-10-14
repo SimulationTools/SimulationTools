@@ -442,9 +442,21 @@ ffi[{f_, d_}, f0_] :=
   {f, d/div}
 ];
 
-ffiDataTable[d_DataTable, f0_] :=
-  Map[ffi[#, f0 / (2. Pi)] &, d];
+(* ffiDataTable[d_DataTable, f0_] := *)
+(*   Map[ffi[#, f0 / (2. Pi)] &, d]; *)
 
+(* This version is about 10 times faster (0.28s -> 0.026s) than the
+   original and gives the same answer in test cases. *)
+ffiDataTable[d_DataTable, f0_] :=
+ Module[{fs, fs2, gs, f1, mask1, mask2, mask},
+  f1 = f0/(2. Pi);
+  fs = IndVar[d];
+  gs = DepVar[d];
+  mask1 = (Sign[(fs/f1) - 1.] + 1.)/2.;
+  mask2 = (Sign[(-fs/f1) - 1.] + 1.)/2.;
+  mask = 1. - (1. - mask1) (1. - mask2);
+  fs2 = mask fs + (1. - mask) f1 Sign[fs - $MachineEpsilon];
+  MakeDataTable@Thread[{fs, gs/(2. Pi I fs2)}]];
 
 FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
  Module[{qUniform,t0,qTilde,intqTilde,intq,
