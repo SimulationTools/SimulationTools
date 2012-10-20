@@ -901,10 +901,7 @@ DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
 (* Export                                                       *)
 (****************************************************************)
 
-(* TODO: This is too general; we should probably be specific in the
-   types we want to export as *)
-
-DataTable /: Export[file_String, dt_DataTable, type___ /; First[{type}] =!= "PNG"] :=
+DataTable /: Export[file_String, dt_DataTable, type___] :=
   Export[file, Flatten/@ToList[dt], type];
 
 
