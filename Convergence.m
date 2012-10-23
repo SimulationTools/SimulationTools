@@ -136,6 +136,12 @@ ConvergenceRate[{F1_?NumberQ, F2_, F3_}, {h1_, h2_, h3_}] :=
   rateEq = 
    ConvergenceRatePEquation /. {CRF[1] -> F1, CRF[2] -> F2, 
       CRF[3] -> F3, CRh[1] -> h1, CRh[2] -> h2, CRh[3] -> h3} // N;
+
+  (* This can happen if F1, F2 and F3 are all 0 *)
+  If[rateEq === True,
+    Return[None];
+  ];
+
   rate = Quiet[Check[CRp /. FindRoot[rateEq, {CRp, 1, 15}], None, {FindRoot::"cvmit", FindRoot::"lstol"}], {FindRoot::"cvmit", FindRoot::"lstol"}];
   If[rate < 0.1 || rate > 14.9, Return[None], Return[rate]]];
 
