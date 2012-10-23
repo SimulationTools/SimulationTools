@@ -224,7 +224,7 @@ getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
     If[Length[haveIts] === 0,
        None,
-       haveIts[[1,1]]]];
+       haveIts[[-1,1]]]];
 
 getFileIts[fileName_, opts:OptionsPattern[]] :=
   CallProvidedFunction["GridFunctions","ReadIterations",{fileName,opts}];
