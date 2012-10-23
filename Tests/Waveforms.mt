@@ -56,6 +56,22 @@ Test[
     ]
 
 Test[
+  WithExceptions[ReadPsi4[$SimulationToolsTestSimulation,2,2,99], Psi4RadiusNotFound -> $Failed]
+  ,
+  $Failed
+  ,
+  TestID->"ReadPsi4-2"
+    ]
+
+Test[
+  MatchQ[WithExceptions[ReadPsi4[$SimulationToolsTestSimulation,2,2,100.001], Psi4RadiusNotFound -> $Failed], _DataTable]
+  ,
+  True
+  ,
+  TestID->"ReadPsi4-3"
+    ]
+
+Test[
   ReadPsi4Radii[$SimulationToolsTestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadPsi4Radii.m"}]]
