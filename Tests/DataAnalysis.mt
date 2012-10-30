@@ -11,7 +11,7 @@ Module[
   withinRoundoff
  },
 
-withinRoundoff[a_, b_] := 2 Abs[(a-b)/(a+b)] < 10^-15;
+withinRoundoff[a_, b_] := 2 Abs[(a-b)/(a+b)] < 10^-12;
 
 Test[
     WaveformMatch[{wf1, wf1}, sn]
