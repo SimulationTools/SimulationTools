@@ -410,7 +410,7 @@ Resampled[d_?DataRepresentationQ, dxs:{(_?NumericQ)...}, opts___] :=
 (* Resample onto the grid of another data representation *)
 Resampled[d_?DataRepresentationQ, onto_?DataRepresentationQ, OptionsPattern[]] :=
  Module[{f},
-  f = Interpolation[dt, InterpolationOrder -> OptionValue["InterpolationOrder"]];
+  f = Interpolation[d, InterpolationOrder -> OptionValue["InterpolationOrder"]];
   MapList[Apply[f, Drop[#, -1]]&, onto]
 ];
 
