@@ -784,26 +784,8 @@ ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
 ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
   MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}];
 
-resampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
-  Module[{ref, res},
-    Assert[Apply[And,SimulationTools`DataTable`Private`validQ/@ds]];
-
-    If[Length[ds] === 0, Return[{}]];
-
-    (* Print["spacings: ", Spacing/@ds//FullForm]; *)
-
-    (* TODO: The ordering here can be affected by roundoff-level
-       differences, leading to results well above the roundoff level.
-       In the case that the spacings are equal within a tolerance, the
-       ordering should be the input ordering. *)
-
-    ref = First[Sort[ds, OrderedQ[{Spacing[#1], Spacing[#2]}] &]];
-    (* Print["ordering:", Ordering[ds, All, OrderedQ[{Spacing[#1],Spacing[#2]}] &]]; *)
-    (* Print["ranges: ", DataTableRange/@ds//FullForm]; *)
-    (* Print["ref: ", DataTableRange[ref], " ", Spacing[ref]]; *)
-    res = ResampleDataTable[#, ref] & /@ ds;
-    (* Print["resampled ranges: ", DataTableRange/@res//FullForm]; *)
-    IntersectDataTables[res]];
+resampleDataTables[ds:{DataTable[__]...}] :=
+  Map[Resampled[#, Slab[First[ds], Span@@CommonInterval[ds]]] &, ds];
 
 (* RadiallyExtrapolatedWave *)
 
@@ -835,11 +817,6 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
                    OptionValue[DiscretePhaseAlignmentTime]];
        orders = Switch[order, _Integer, {order, order}, {_Integer, _Integer}, order, _, Error["Error"]];
        
-       (* TODO: This version of resampling was introduced on the nrar branch,
-          where recent master branch functionality was not available.  Probably
-          want to reimplement this using other functions.  This might change numerical
-          results; need to check this. *)
-
        ToComplex[MapThread[ext, {resampled/@ToAbsPhase[ret,tAlign], orders}]],
        (* else *)
        If[ListQ[order], Error["Can only specify a list of extraolation orders when AbsPhase is True"]];
