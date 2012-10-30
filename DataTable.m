@@ -36,8 +36,6 @@ InterpolatedWhere::usage = "InterpolatedWhere[d, f] returns a new DataTable wher
 AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I, of the DataTable d, with the integration constant chosen such that I[x] = f.";
 
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
-RestrictedToInterval::usage = "RestrictedToCommonInterval[d, {x1, x2}] returns a subset of the DataTable d in the range [x1, x2].";
-
 
 (****************************************************************)
 (* Experimental                                                 *)
@@ -60,6 +58,7 @@ MonotonicQ;
 FunctionInverse;
 Composition;
 
+RestrictedToInterval;
 
 (****************************************************************)
 (* Deprecated *)
@@ -711,8 +710,6 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
 (* RestrictedToInterval                                   *)
 (**********************************************************)
 
-(* TODO: Do we really need this when we have Slab? Also
-   the name is awkward to write. *)
 SyntaxInformation[RestrictedToInterval] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
