@@ -70,10 +70,15 @@ DocumentationBuilder`OptionDescriptions["WaveformMatch"] =
  };
 
 WaveformMatch[{wf1_DataTable, wf2_DataTable}, s_DataTable, OptionsPattern[]] :=
-  Module[{wf1t, wf2t, sn, norm1, norm2, integrand, pad},
+  Module[{wf1t, wf2t, sn, omegatof, norm1, norm2, integrand, pad},
     (* We take the Fourier transform of the waveforms *)
     wf1t = Fourier[wf1];
     wf2t = Fourier[wf2];
+
+    (* Convert from rad s^-1 to Hz *)
+    omegatof[{omega_, d_}] := {omega/(2 Pi), d};
+    wf1t = ApplyToList[Map[omegatof, #] &, wf1t];
+    wf2t = ApplyToList[Map[omegatof, #] &, wf2t];
 
 	(* Resample the waveforms and noise function onto the same grid *)
     {wf1t, wf2t, sn} = SimulationTools`DataTable`Private`resampled[{wf1t, wf2t, s}];

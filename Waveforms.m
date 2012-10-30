@@ -535,48 +535,48 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
 SimulationTools`ArgumentChecker`StandardDefinition[ffi] = True;
 
 (* Note that these expect input in Fourier space *)
-ffi[{f_, d_}, f0_] :=
+ffi[{omega_, d_}, omega0_] :=
  Module[{div},
-  div = 2. Pi I If[f>0., Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
+  div = I If[omega>0., Max[omega, omega0, $MachineEpsilon], Min[omega, -omega0, -$MachineEpsilon]];
   d/div
 ];
 
-(* ffiDataTable[d_DataTable, f0_] := *)
-(*   MapList[ffi[#, f0 / (2. Pi)] &, d]; *)
+(* ffiDataTable[d_DataTable, omega0_] := *)
+(*   MapList[ffi[#, omega0] &, d]; *)
 
 (* This version is about 10 times faster (0.28s -> 0.026s) than the
    original and gives the same answer in test cases. *)
-ffiDataTable[d_DataTable, f0_] :=
- Module[{fs, fs2, gs, f1, mask1, mask2, mask},
-  f1 = f0/(2. Pi);
-  fs = IndVar[d];
+ffiDataTable[d_DataTable, omega0_] :=
+ Module[{omegas, omegas2, gs, omega1, mask1, mask2, mask},
+  omega1 = omega0;
+  omegas = IndVar[d];
   gs = DepVar[d];
-  mask1 = (Sign[(fs/f1) - 1.] + 1.)/2.;
-  mask2 = (Sign[(-fs/f1) - 1.] + 1.)/2.;
+  mask1 = (Sign[(omegas/omega1) - 1.] + 1.)/2.;
+  mask2 = (Sign[(-omegas/omega1) - 1.] + 1.)/2.;
   mask = 1. - (1. - mask1) (1. - mask2);
-  fs2 = mask fs + (1. - mask) f1 Sign[fs - $MachineEpsilon];
-  MakeDataTable@Thread[{fs, gs/(2. Pi I fs2)}]];
+  omegas2 = mask omegas + (1. - mask) omega1 Sign[omegas - $MachineEpsilon];
+  MakeDataTable@Thread[{omegas, gs/(I omegas2)}]];
 
-FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
+FixedFrequencyIntegrate[q_DataTable, omega0_?NumericQ] :=
  Module[{qUniform,t0,qTilde,intqTilde,intq,
          uniform = UniformGridQ[q]},
   qUniform = If[uniform, q, MakeUniform[q]];
   t0 = DataTableRange[qUniform][[1]];
   qTilde = Fourier[qUniform];
-  intqTilde = ffiDataTable[qTilde, f0];
+  intqTilde = ffiDataTable[qTilde, omega0];
   intq = InverseFourier[intqTilde,t0];
   (* TODO: I'm not sure where the "-" comes from here, but it seems to be necessary *)
   -If[uniform, intq, Quiet[ResampleDataTable[intq,q,Intersect->False],
                            InterpolatingFunction::dmval]]];
 
-Psi4ToStrain[psi4_DataTable, f0_?NumericQ] :=
+Psi4ToStrain[psi4_DataTable, omega0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
          uniform = UniformGridQ[psi4], t0},
   psi4Uniform = If[uniform, psi4, MakeUniform[psi4]];
   t0 = DataTableRange[psi4Uniform][[1]];
   psi4f = Fourier[psi4Uniform];
-  dhf = ffiDataTable[psi4f, f0];
-  hf = ffiDataTable[dhf, f0];
+  dhf = ffiDataTable[psi4f, omega0];
+  hf = ffiDataTable[dhf, omega0];
   {h, dh} = InverseFourier[#,t0] & /@ {hf, dhf};
   If[uniform, h, ResampleDataTable[h,psi4]]];
 
