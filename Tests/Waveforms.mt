@@ -225,13 +225,19 @@ Test[ToRetardedTime[30., ToDataTable[{{0.0, 1.}, {2.0, 2.0}}],
 (* ReadRadiallyExtrapolatedPsi4 *)
 (****************************************************************)
 
+(* These no longer give the same answer by default because the
+   resampling behaviour has changed.  We now resample onto the grid of
+   the highest resolution version instead of constructing a new
+   uniform grid.  This preserves nonuniform DataTables. Test that the
+   results are the same when the compatibility variable is set *)
+
 Test[
-  ReadRadiallyExtrapolatedPsi4[
+   Block[{$UniformGridExtrapolation = True},  ReadRadiallyExtrapolatedPsi4[
     $SimulationToolsTestSimulation,2,2,1,
-    RadialCoordinateTransformation->RadialToTortoise],
+    RadialCoordinateTransformation->RadialToTortoise]],
   ExtrapolatePsi4[$SimulationToolsTestSimulation, 2, 2,
                   ExtrapolationOrder -> 1],
-  EquivalenceFunction -> ((Abs[GridNorm[#1-#2]] < 10.^-16) &),
+  EquivalenceFunction -> ((Norm[ToListOfCoordinates[#1] - ToListOfCoordinates[#2]] < 10.^-16 && Abs[GridNorm[#1-#2]] < 10.^-16) &),
   TestID -> "ReadRadiallyExtrapolatedPsi4"]
 
 (****************************************************************)
