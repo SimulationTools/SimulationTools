@@ -21,6 +21,7 @@ ShowStack(*::usage = "ShowStack[] returns a representation of the evaluation sta
 CurrentStack(*::usage = "CurrentStack[] returns the current evaluation stack."*);
 ClearStack(*::usage = "ClearStack[] clears the current evaluation stack."*);
 CurrentStackFrame;
+StackStringList;
 
 Begin["`Private`"];
 
@@ -68,6 +69,11 @@ WithStackFrame[sf_, expr_] :=
 ShowStack[s_:Automatic] :=
   Scan[
     Print["in ", Short[#]] &,
+    Reverse@If[s===Automatic, stack, s]/.Hold->HoldForm];
+
+StackStringList[s_:Automatic] :=
+  Map[
+    StringJoin["in ", ToString@Short[#]] &,
     Reverse@If[s===Automatic, stack, s]/.Hold->HoldForm];
 
 CurrentStack[] :=

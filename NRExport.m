@@ -370,12 +370,17 @@ makeEntry[val_] :=
 (* ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\"."; *)
 
 Options[ExportMetadata] = {"JunkTime" -> None, "ExportSimFormat" -> "ASCII"};
-ExportMetadata[file_, run_, mass_, ecc_, OptionsPattern[]] :=
+ExportMetadata[file_String, run_String, mass_, ecc_, OptionsPattern[]] :=
  Module[{tJunk},
   tJunk  = OptionValue[JunkTime];
   If[SameQ[tJunk, None], tJunk = 0;];
 
   Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk, OptionValue[ExportSimFormat]]], "Text"];
+];
+
+ExportMetadata[file_String, md_List] :=
+ Module[{tJunk},
+  Export[file, makeMetadataFile[md], "Text"];
 ];
 
 

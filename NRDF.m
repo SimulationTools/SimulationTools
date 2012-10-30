@@ -32,9 +32,15 @@ StartingFrequency;
 UsefulWaveformTime;
 HaveInfiniteRadiusWaveforms;
 ReadMetadataKey;
+HaveMetadataKey;
 ReadRuns;
 ReadResolution;
 ExpectedConvergenceOrder;
+ReadMasses;
+ReadMassRatio;
+ReadTotalMass;
+NameEmailList;
+EmailList;
 
 Begin["`Private`"];
 
@@ -63,7 +69,6 @@ SimulationTools`NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[
     {md, radii, radStrs},
     md = ParseMetadataFile[runName];
-    Put[md, "~/metadata.m"];
 
     md = processMetadata[md];
 
@@ -76,7 +81,7 @@ SimulationTools`NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     radii = Select[radii, (!MatchQ[#, "value"["keyword"["extrapolated"]]]) &];
 
     If[Length[radii] === 0,
-       Print["No Psi4 radii found in metadata file of "<>runName];
+       (* Print["No Psi4 radii found in metadata file of "<>runName]; *)
        {}];
 
     Map[If[!MatchQ[#,"value"["number"[n_]|"keyword"["infinite"]]],
@@ -84,6 +89,19 @@ SimulationTools`NRDF`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     radStrs = radii/.{"value"["number"[n_]] -> n, "value"["keyword"["infinite"]] -> "inf"};
     radStrs
   ];
+
+DefineMemoFunction[NRDF`Waveforms`ReadPsi4Modes[runName_],
+  Module[
+    {md, sections, keys, modes},
+    md = ParseMetadataFile[runName];
+    md = processMetadata[md];
+    sections = Cases[md,
+                  "section"[___, "section_name"["keyword"["psi4t-data"]], contents___] :> contents
+                  , Infinity];
+    keys = Cases[sections, "element"["key"[k_], v_] :> k, Infinity];
+    modes = Select[keys, StringMatchQ[#,NumberString ~~ "," ~~ Whitespace... ~~ NumberString] &];
+    modes = Map[Map[ToExpression, StringSplit[#, ","]] &, modes];
+    Union[modes]]];
 
 readPsi4HDF5Data[file_String, dataset_String] :=
   MakeDataTable[
@@ -95,7 +113,7 @@ haveMetadataFile[dir_String] :=
 
 findMetadataFile[run_String] :=
       Module[{files},
-             files = FileNames["*.bbh", FindRunDir[run]];
+             files = FileNames["*.bbh", FindRunDir[run],1];
              If[Length[files] =!= 1, Error["Failed to find exactly one metadata file in run "<>
                                            run<>" in directory "<>FindRunDir[run]]];
              files[[1]]];
@@ -105,14 +123,17 @@ haveRunDir[run_String] :=
      True,
      False];
 
-SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String] :=
+Options[SimulationTools`NRDF`Waveforms`ReadPsi4Data] = {"Section" -> "psi4t-data"};
+
+SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String,
+                            opts:OptionsPattern[]] :=
   Module[
     {md, filenames, filename, tmp,data, radPattern},
     md = ParseMetadataFile[runName];
     md = processMetadata[md];
     radPattern = If[rad==="inf", "keyword"["infinite"], "number"[rad]];
     filenames = Cases[md,
-                      "section"[___, "section_name"["keyword"["psi4t-data"]], ___,
+                      "section"[___, "section_name"["keyword"[OptionValue[Section]]], ___,
                                 "elements"[___,
                                            "element"["key"["extraction-radius"], "value"[radPattern]], ___,
                                            "element"["key"["2,2"|"2,+2"|"2, 2"],"string"[f_]],___],
@@ -159,6 +180,7 @@ SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, ra
          radNum = ImportString[rad,"List"][[1]];
          absMax = radNum Max[Abs[data]];
          If[absMax > 1.0,
+            (* Print["WARNING: dividing stored data by quoted radius"]; *)
             data = data / radNum]]];
 
     data];
@@ -189,8 +211,29 @@ ReadMetadataKey[run_String, keyPattern_] :=
       MatchQ[results[[1]], "string"[_]],
       results[[1,1]],
 
+      MatchQ[results[[1]], "value"["name_email_list"[___]]],
+      NameEmailList@@results[[1,1]] /. "name_email"["pname"[pname_],"email"[email_]] :> {pname,email},
+
+      MatchQ[results[[1]], "value"["email_list"[___]]],
+      EmailList@@results[[1,1]] /. "email"[email_] :> email,
+
       True,
       Error["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
+
+HaveMetadataKey[run_String, keyPattern_] :=
+  Module[
+    {md, results},
+    md = ParseMetadataFile[run];
+    results = Cases[md,
+                 "section"[___, 
+                           "section_name"["keyword"["metadata"]],
+                           ___,
+                           "elements"[___,
+                                      "element"["key"[keyPattern], v_], 
+                                      ___]] :> v,
+                 Infinity];
+
+    Length[results] === 1];
 
 SimulationTools`NRDF`InitialData`ReadADMMass[run_String] :=
   ReadMetadataKey[run, "initial-ADM-energy"];
@@ -216,6 +259,16 @@ ReadResolution[run_String] :=
 
 ExpectedConvergenceOrder[run_String] :=
   ReadMetadataKey[run, "resolution-expected-order"];
+
+ReadMasses[run_String] :=
+  {ReadMetadataKey[run, "mass1"],ReadMetadataKey[run, "mass2"]};
+
+ReadMassRatio[run_String] :=
+  Divide@@ReadMasses[run];
+
+ReadTotalMass[run_String] :=
+  Plus@@ReadMasses[run];
+
 
 End[];
 

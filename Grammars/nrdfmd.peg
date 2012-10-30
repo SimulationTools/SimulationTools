@@ -2,7 +2,7 @@ skipper = \b([ \t\n\r]+|#.*)*
 end = ([ \t]+|#.*)*\r*(\n|$)
 name = [A-Za-z][A-Za-z0-9]*
 keyword = [A-Za-z][A-Za-z0-9\-]*
-int = [0-9]+
+int = (-)?[0-9]+
 number = {-eformat}|{-fformat}|{-int}
 fformat = (-)?[0-9]*.[0-9]*
 eformat = (-)?[0-9]*.[0-9]*e-[0-9]+
@@ -13,7 +13,7 @@ name_email = {pname}[ \t]+<{email}>
 name_email_list = {name_email}((([ \t]*,[ \t]*)|([ \t]+)){name_email})*
 email_list = {email}((([ \t]*,[ \t]*)|([ \t]+)){email})*
 
-string = [a-zA-Z0-9/:+\-()=. _,*{};]+
+string = [a-zA-Z0-9/:+\-()=. _,*{};"@]+
 
 #filename = [a-zA-Z0-9/+\-()=. _]+
 #datasetname = [a-zA-Z0-9/+\-()=. _]+

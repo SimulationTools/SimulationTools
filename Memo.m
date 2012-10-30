@@ -43,7 +43,11 @@ DefineMemoFunction[name_[args___], body_] :=
  ]
 
 ClearAllMemos[] :=
-  ($cache /. Hold -> Unset; $cache = {};)
+   (* Use Quiet here to avoid an unexplained warning message about
+      assignments not being found.  This seems to be a problem after
+      an exception has been thrown previously, but I don't understand
+      why. *)
+   Quiet[($cache /. Hold -> Unset; $cache = {};),Unset::norep];
 
 End[];
 

@@ -115,6 +115,9 @@ ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
 (*    style = styleInListLinePlot[
       ListLinePlot[args, FilterRules[{opts}, Options[ListLinePlot]]]]; *)
 
+    If[MatchQ[First[{args}], DataTable[{}]],
+       Error["Cannot plot an empty DataTable"]];
+
     If[OptionValue[PlotStyle] === Automatic,
       style = PresentationPlotStyles,
       style = OptionValue[PlotStyle]];
@@ -134,6 +137,7 @@ ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
           FilterRules[{opts}, Options[MakePlotLegend]]],
           Scaled[scale], pos]]];
 
+Options[PresentationListLinePlot] = Options[ListLinePlotWithLegend];
 PresentationListLinePlot[args___, opts:OptionsPattern[]] :=
   ListLinePlotWithLegend[args,opts,LabelStyle->Medium,Frame->True];
 

@@ -18,6 +18,11 @@ BeginPackage["SimulationTools`Error`"];
 
 Error(*::usage = "Error[message, arg1, arg2, ...] reports an error to the user."*);
 WithExceptions;
+Error::error = "An error has been detected: `1`";
+
+(* TODO: this should not be set on package load as it will override the user's choice *)
+$MessageOnError = False;
+
 
 Begin["`Private`"];
 
@@ -30,6 +35,10 @@ $ExceptionsActive = {};
 Error[s_String, args___] :=
   Module[
     {},
+	(*  We probably don't need both the message and the assertion; either is
+        sufficient to trigger the debugger.  Also, we should support this
+        mechanism for the symbol version of this function as well. *)
+    If[$MessageOnError,Message[Error::error, ToString[StringForm[s,args]]]];
     Print[StringForm[s,args]];
     Assert[False]; (* Allow this to be caught by the debugger *)
     Abort[]];

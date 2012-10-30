@@ -139,6 +139,7 @@ DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
 CoordinateRanges[d_DataTable] :=
   Module[{list = ToList[d], t1, t2},
+    If[Length[list] === 0, Error["Cannot compute the range of an empty DataTable"]];
     t1 = First[list][[1]];
     t2 = Last[list][[1]];
     {{t1,t2}}];
@@ -417,7 +418,8 @@ DataTable /: SameGridQ[dts:DataTable[__]..] :=
 (****************************************************************)
 
 Shifted[d_DataTable, dt_?NumericQ] :=
- AddAttributes[MakeDataTable[Map[{#[[1]] + dt, #[[2]]} &, ToList[d]]], ListAttributes[d]];
+ AddAttributes[MakeDataTable[ToList[d] + ConstantArray[{dt,0.}, Length[d]]],
+               ListAttributes[d]];
 
 Shifted[d_DataTable, {dt_?NumericQ}] := Shifted[d, dt];
 
@@ -1006,16 +1008,23 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
 
-ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8] :=
+Options[ResampleDataTable] = {"Intersect" -> True};
+ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8, OptionsPattern[]] :=
   Module[
     {d2, template2},
-    {d2, template2} = IntersectDataTables[d,template];
+    (* This might be leading to unexplained differences *)
+    (* If[DepVar[d] === DepVar[template], *)
+    (*    Return[d]]; *)
+    {d2, template2} = If[OptionValue[Intersect],
+                         IntersectDataTables[d,template],
+                         {d,template}];
     f = Interpolation[d, InterpolationOrder -> p];
     AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
                   ListAttributes[d]]];
 
-ResampleDataTables[ds:{DataTable[__]...}, p_:8] :=
+ResampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
+    Assert[Apply[And,validQ/@ds]];
     If[Length[ds] === 0, Return[{}]];
     dts = Map[Spacing, ds];
     dt = Apply[Min, dts];
@@ -1066,7 +1075,7 @@ MakeUniform[d_DataTable] :=
 ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  Shifted[d, dt];
 
-DataTableDepVarInterval[d_DataTable, {y1_, y2_}] :=
+DataTableDepVarInterval[d_DataTable, {y1_?NumberQ, y2_?NumberQ}] :=
   d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
 
 (* TODO: Could implement this in terms of Composition[d, FunctionInverse[p]], but it would not be an identical algorithm *)
@@ -1081,8 +1090,10 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
   AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
 
+rangepatt = _?NumberQ | All;
+
 Options[DataTableInterval] = {Interval -> {Closed, Open}};
-DataTableInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
+DataTableInterval[d_DataTable, {t1:rangepatt, t2:rangepatt}, opts:OptionsPattern[]] :=
  RestrictedToInterval[d, {t1, t2}, Interval -> OptionValue[Interval]];
 
 LocateMaximumPoint[d_DataTable] :=

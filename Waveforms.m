@@ -25,7 +25,8 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
   "SimulationTools`ReadHDF5`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "h5mma`"
  }];
 
 (* Public *)
@@ -94,6 +95,7 @@ ReadRadiallyExtrapolatedWave;
 RadiallyExtrapolatedWave;
 ReadRadiallyExtrapolatedPsi4;
 ReadRadiallyExtrapolatedStrain;
+Psi4PerturbativeCorrection;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -105,6 +107,7 @@ Options[ExtrapolateRadiatedQuantity] =
    ApplyFunction -> None, 
    AlignPhaseAt -> None,
    RadiusRange -> All,
+   "Radii" -> All,
    ExtrapolationErrorRelative -> False,
    NonUniformGrid -> False};
 
@@ -311,7 +314,7 @@ ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
 (* TODO: There must be a better way to do this in Mathematica, e.g. using Transpose *)
 (* TODO: This function should be internal *)
 RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
- Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads},
+ Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads, allts},
   rads = Map[First, rdTb];
 (*  Print["rads = ", rads];*)
   dts = Map[Last, rdTb];
@@ -320,6 +323,9 @@ RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
   If[! (Length[Union[lengths]] === 1), 
   Error["ExtrapolateDataTables: Input DataTable objects do not have \
   the same number of points: ", lengths]];
+  allts = IndVar/@dts;
+  If[!Equal@@allts,
+     Error["RadiusTimeDataToTimeRadiusData: Input DataTables do not have the same coordinates"]];
   ts = Map[First, First[lists]];
   tbToVec[tb_] := Map[Last, tb];
   vecs = Map[tbToVec, lists];
@@ -335,7 +341,15 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, opts___] :=
   trd = RadiusTimeDataToTimeRadiusData[rdTb];
   rds = Map[Last,trd];
   ts = Map[First,trd];
+  (* Print["t = ", First[ts]]; *)
+  If[p > Length[rdTb]-1,
+    Error["Insufficient radii (", Length[rdTb], ") for extrapolation at order ", p]];
+  (* Print["order = ", p]; *)
+  (* Print["rs = ", Map[First,rdTb]]; *)
+
   extraps = Map[ExtrapolateScalar[p, #] &, rds];
+  (* Print[{rds[[1]], extraps[[1]]}]; *)
+  
   MakeDataTable[MapThread[List, {ts, extraps}]]];
 
 ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}, opts___] :=
@@ -401,12 +415,19 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     If[!(alignPhaseAt === None),
       fTbs = AlignPhases[fTbs, alignPhaseAt]];
 
+    (* Print["fTbs ranges: ", DataTableRange /@ fTbs//FullForm]; *)
+
     fTbsRes = 
          If[OptionValue[NonUniformGrid],
             Module[
-              {highRes},
+              {highRes,res},
               highRes = fTbs[[Ordering[Spacing /@ fTbs][[1]]]];
-              IntersectDataTables[ResampleDataTable[#, highRes] & /@ fTbs]],
+              (* Print["spacings: ", Spacing/@fTbs//FullForm]; *)
+              (* Print["ordering = ", Ordering[Spacing /@ fTbs][[1]]]; *)
+              (* Print["ref: ", DataTableRange[highRes], " ", Spacing[highRes]]; *)
+              res = ResampleDataTable[#, highRes] & /@ fTbs;
+              (* Print["resampled ranges: ", DataTableRange/@res//FullForm]; *)
+              IntersectDataTables[res]],
             (* else *)
             ResampleDataTables[fTbs]];
     applyFunction = OptionValue[ApplyFunction];
@@ -419,12 +440,23 @@ ExtrapolateRadiatedQuantity[rdTb : {{_, DataTable[__]} ...}, OptionsPattern[]] :
     ExtrapolateDataTables[OptionValue[ExtrapolationOrder], resWithr]];
 
 ExtrapolateRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[]] :=
-  Module[{allRads, rads, fs, rdTb, rMin, rMax, mADM},
+  Module[{allRads, rads, missingRadii, fs, rdTb, rMin, rMax, mADM},
+
     allRads = ReadPsi4Radii[runName];
-    rads = If[OptionValue[RadiusRange] === All,
-      allRads,
-      {rMin, rMax} = OptionValue[RadiusRange]; 
-      Select[allRads, # >= rMin && # <= rMax &]];
+    rads = If[OptionValue[Radii] === All,
+              rads = If[OptionValue[RadiusRange] === All,
+                        allRads,
+                        {rMin, rMax} = OptionValue[RadiusRange]; 
+                        Select[allRads, # >= rMin && # <= rMax &]],
+              (* else *)
+              OptionValue[Radii]];
+
+    missingRadii = Complement[rads, allRads];
+    If[missingRadii =!= {},
+       Error["ExtrapolateRadiatedQuantity: Radii "<>ToString[missingRadii]<>" are missing in run "<>runName]];
+
+    (* If[Union[rads] =!= Union[allRads], *)
+    (*    Error["ExtrapolateRadiatedQuantity: Radii "<>ToString[Complement[rads, allRads]]<>" not found in run "<>runName]]; *)
 
     fs = Map[reader[runName, #] &, rads];
     rdTb = MapThread[List, {rads, fs}];
@@ -454,7 +486,7 @@ DefineMemoFunction[ReadExtrapolatedPsi4[runName_String, l_, m_, opts:OptionsPatt
     psi4 = MapThreadData[#1 Exp[I #2] &, {amp, phase}];
     psi4]];
 
-ReadExtrapolatedStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]] :=
+DefineMemoFunction[ReadExtrapolatedStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]],
   Module[
     {phaseReader,ampReader,phase,amp},
 
@@ -467,7 +499,7 @@ ReadExtrapolatedStrain[runName_String, l_, m_, om_, opts:OptionsPattern[]] :=
     phase = ExtrapolateRadiatedQuantity[runName, phaseReader, AlignPhaseAt->100, opts];
     amp = ExtrapolateRadiatedQuantity[runName, ampReader, opts];
 
-    MapThreadData[#1 Exp[I #2] &, {amp, phase}]];
+    MapThreadData[#1 Exp[I #2] &, {amp, phase}]]];
 
 ExtrapolationError[f_, args__, opts:OptionsPattern[]] :=
   Module[{p, newOpts, fpp1, fp},
@@ -500,14 +532,28 @@ ExtrapolateComplexRadiatedQuantity[runName_String, reader_, opts:OptionsPattern[
 
 SimulationTools`ArgumentChecker`StandardDefinition[ffi] = True;
 
+(* Note that these expect input in Fourier space *)
 ffi[{f_, d_}, f0_] :=
  Module[{div},
   div = 2. Pi I If[f>0., Max[f, f0, $MachineEpsilon], Min[f, -f0, -$MachineEpsilon]];
   d/div
 ];
 
+(* ffiDataTable[d_DataTable, f0_] := *)
+(*   MapList[ffi[#, f0 / (2. Pi)] &, d]; *)
+
+(* This version is about 10 times faster (0.28s -> 0.026s) than the
+   original and gives the same answer in test cases. *)
 ffiDataTable[d_DataTable, f0_] :=
-  MapList[ffi[#, f0 / (2. Pi)] &, d];
+ Module[{fs, fs2, gs, f1, mask1, mask2, mask},
+  f1 = f0/(2. Pi);
+  fs = IndVar[d];
+  gs = DepVar[d];
+  mask1 = (Sign[(fs/f1) - 1.] + 1.)/2.;
+  mask2 = (Sign[(-fs/f1) - 1.] + 1.)/2.;
+  mask = 1. - (1. - mask1) (1. - mask2);
+  fs2 = mask fs + (1. - mask) f1 Sign[fs - $MachineEpsilon];
+  MakeDataTable@Thread[{fs, gs/(2. Pi I fs2)}]];
 
 FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
  Module[{qUniform,t0,qTilde,intqTilde,intq,
@@ -518,7 +564,8 @@ FixedFrequencyIntegrate[q_DataTable, f0_?NumericQ] :=
   intqTilde = ffiDataTable[qTilde, f0];
   intq = InverseFourier[intqTilde,t0];
   (* TODO: I'm not sure where the "-" comes from here, but it seems to be necessary *)
-  -If[uniform, intq, ResampleDataTable[intq,q]]];
+  -If[uniform, intq, Quiet[ResampleDataTable[intq,q,Intersect->False],
+                           InterpolatingFunction::dmval]]];
 
 Psi4ToStrain[psi4_DataTable, f0_?NumericQ] :=
  Module[{psi4Uniform, psi4f, dhf, hf, dh, h,
@@ -576,6 +623,18 @@ AlignMaximaOfAbs[ds_List] :=
    maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
+(* ImportGzip[file_String, as_] := *)
+(*   Module[ *)
+(*     {id,tempfile,data}, *)
+(*     id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz"; *)
+(*     tempfile = FileNameJoin[{$TemporaryDirectory,id}]; *)
+(*     CopyFile[file, tempfile]; *)
+(*     data = Import[tempfile,as]; *)
+(*     DeleteFile[tempfile]; *)
+(*     data]; *)
+
+ImportGzip[file_String, as_] :=
+  ImportString[ReadGzipFile[file],as];
 
 ImportWaveform[file_] :=
   Module[
@@ -583,10 +642,10 @@ ImportWaveform[file_] :=
     If[FileType[file] ===None,
        Error["ImportWaveform: File "<>file<>" does not exist"]];
 
-    (* If[FileExtension[file] === "gz", *)
-    (*    data = Import["!gunzip< "<>file,"Table"], *)
-    (*    data = Import[file,"Table"]]; *)
-
+    If[FileExtension[file] === "gz",
+       data = ImportGzip[file,"Table"],
+       data = Import[file,"Table"]];
+    Return[MakeDataTable[Select[Map[{#[[1]],#[[2]]+I #[[3]]}&, data], NumberQ[#[[2]]]&]]];
     (* The Mathematica GZIP reader creates temporary files in /tmp.
        If multiple kernels try to open gzipped files with the same
        leaf name, this causes these temporary files to be corrupted,
@@ -640,6 +699,8 @@ SimulationTools`Waveforms`SimulationOverview`Plots[runNames1_] :=
 (* Extrapolation                                                *)
 (****************************************************************)
 
+extrapOrderPattern = _Integer | {_Integer, _Integer};
+
 (* RadialExtrapolation *)
 
 RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
@@ -653,11 +714,27 @@ RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
        Error["RadialExtrapolation: Input radii are not numeric"]];
 
     xf = Map[{1./#[[1]], #[[2]]} &, Thread[{rs,fs}]];
+
+    model = Sum[a[i] x^i, {i, 0, order}];
+    fit = FindFit[xf, model, Table[a[i], {i, 0, order}], x];
+    Return[a[0] /. fit];
+
     Fit[xf, Table[x^i, {i, 0, order}], {x}][[1]]];
 
 RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
   Module[
     {t, ds, rds, de, result},
+
+    (* Print["order = ", order]; *)
+    (* Print["rs = ", Short[rs]]; *)
+
+    Assert[Apply[And,SimulationTools`DataTable`Private`validQ/@fs]];
+    If[Length[rs] =!= Length[fs], Error["The number of radii and the number of DataTables are not the same"]];
+    If[Length[rs] === 0, Error["Cannot extrapolate an empty list of DataTables"]];
+
+    If[order===0,
+       Return[fs[[Ordering[rs][[-1]]]]]];
+
     (* These checks do not seem to affect performance *)
     If[!SameGridQ[fs],
        Error["RadialExtrapolation: Input DataTables are not defined on the same grid"]];
@@ -665,9 +742,15 @@ RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
        Error["RadialExtrapolation: Input radii are not numeric"]];
 
     t = ToListOfCoordinates[fs[[1]]];
+    (* Print["t = ", First[t]]; *)
     ds = ToListOfData/@fs;
+    (* Print["ds = ", Short[ds]]; *)
     rds = Transpose[ds];
+    (* Print["rds = ", Short[rds]]; *)
+    (* Print["Before RadialExtrapolation"]; *)
     de = Map[RadialExtrapolation[{rs, #}, order] &,rds];
+    (* Print[{Thread[{rs,rds[[1]]}], de[[1]]}]; *)
+    (* Print["de = ", de]; *)
     ToDataTable[Thread[{t,de}]]];
 
 (* ToAbsPhase *)
@@ -691,26 +774,61 @@ ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
 ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
   MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}];
 
+resampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
+  Module[{ref, res},
+    Assert[Apply[And,SimulationTools`DataTable`Private`validQ/@ds]];
+
+    If[Length[ds] === 0, Return[{}]];
+
+    (* Print["spacings: ", Spacing/@ds//FullForm]; *)
+
+    (* TODO: The ordering here can be affected by roundoff-level
+       differences, leading to results well above the roundoff level.
+       In the case that the spacings are equal within a tolerance, the
+       ordering should be the input ordering. *)
+
+    ref = First[Sort[ds, OrderedQ[{Spacing[#1], Spacing[#2]}] &]];
+    (* Print["ordering:", Ordering[ds, All, OrderedQ[{Spacing[#1],Spacing[#2]}] &]]; *)
+    (* Print["ranges: ", DataTableRange/@ds//FullForm]; *)
+    (* Print["ref: ", DataTableRange[ref], " ", Spacing[ref]]; *)
+    res = ResampleDataTable[#, ref] & /@ ds;
+    (* Print["resampled ranges: ", DataTableRange/@res//FullForm]; *)
+    IntersectDataTables[res]];
+
 (* RadiallyExtrapolatedWave *)
 
 notOptionQ[x_] := ! OptionQ[x];
 Options[RadiallyExtrapolatedWave] = {"AbsPhase" -> True,
                                      "DiscretePhaseAlignmentTime" -> Automatic};
 RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}}, 
-                         order_Integer,
+                         order : extrapOrderPattern,
                          rStarOfr : (_?notOptionQ) : Identity, 
                          opts:OptionsPattern[]] :=
   Module[
-    {ret,ext,tAlign},
+    {ret,ext,tAlign,temp,orders},
     ret = ToRetardedTime[{rs,fs},rStarOfr];
-    ext[ds_] := RadialExtrapolation[{rs, ds}, order];
+    (* Print["ret = ", ret]; *)
+    (* Print["Max[CoordinateRange[First[ret]][[1]],0] = ", Max[CoordinateRange[First[ret]][[1]], 0]]; *)
+    ext[ds_,p_] := RadialExtrapolation[{rs, ds}, p];
+
+    (* Print["rs = ", rs]; *)
 
     If[OptionValue[AbsPhase],
        tAlign = If[OptionValue[DiscretePhaseAlignmentTime] === Automatic,
                    Max[CoordinateRange[First[ret]][[1]], 0],
                    OptionValue[DiscretePhaseAlignmentTime]];
-       ToComplex[Map[ext, SimulationTools`DataTable`Private`resampled/@ToAbsPhase[ret,tAlign]]],
-       ext[SimulationTools`DataTable`Private`resampled[ret]]]];
+       orders = Switch[order, _Integer, {order, order}, {_Integer, _Integer}, order, _, Error["Error"]];
+       
+       (* TODO: This version of resampling was introduced on the nrar branch,
+          where recent master branch functionality was not available.  Probably
+          want to reimplement this using other functions.  This might change numerical
+          results; need to check this. *)
+
+       ToComplex[MapThread[ext, {resampleDataTables/@ToAbsPhase[ret,tAlign], orders}]],
+       (* else *)
+       If[ListQ[order], Error["Can only specify a list of extraolation orders when AbsPhase is True"]];
+
+       ext[resampleDataTables[ret],order]]];
 
 (* ReadRadiallyExtrapolatedWave *)
 
@@ -719,16 +837,19 @@ Options[ReadRadiallyExtrapolatedWave] =
        Options[RadiallyExtrapolatedWave]];
 
 ReadRadiallyExtrapolatedWave[run_String, reader_, rads_List,
-                             order_Integer, opts:OptionsPattern[]] :=
-  RadiallyExtrapolatedWave[
-    Transpose[
-      Table[{r,reader[r]}, {r,rads}]],
-    order, 
-    OptionValue[RadialCoordinateTransformation] /.
-    {None -> Identity,
-     RadialToTortoise -> (RadialToTortoise[#,ReadADMMass[run]] &),
-     IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
-    FilterRules[{opts}, Options[RadiallyExtrapolatedWave]]];
+                             order : extrapOrderPattern, opts:OptionsPattern[]] :=
+  If[Length[rads] ===0,
+     Error["ReadRadiallyExtrapolatedWave: No waveform radii supplied for run "<>run],
+     (* else *)
+     RadiallyExtrapolatedWave[
+       Transpose[
+         Table[{r,reader[r]}, {r,rads}]],
+       order, 
+       OptionValue[RadialCoordinateTransformation] /.
+       {None -> Identity,
+        RadialToTortoise -> (RadialToTortoise[#,ReadADMMass[run]] &),
+        IsotropicToTortoise -> (IsotropicToTortoise[#,ReadADMMass[run]] &)},
+       FilterRules[{opts}, Options[RadiallyExtrapolatedWave]]]];
 
 (* selectRadii *)
 
@@ -746,16 +867,19 @@ selectRadii[rads_List, range:(Automatic|{_,_}), list:(Automatic|_List)] :=
 Options[ReadRadiallyExtrapolatedPsi4] = 
   Join[Options[ReadRadiallyExtrapolatedWave],
        {"RadiusRange" -> Automatic,
-        "Radii" -> Automatic}];
+        "Radii" -> Automatic,
+        "PerturbativeAdjustment" -> False}];
 
-ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
-                             order_Integer, opts:OptionsPattern[]] :=
+DefineMemoFunction[ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
+                                                order : extrapOrderPattern, opts:OptionsPattern[]],
   ReadRadiallyExtrapolatedWave[
     run,
-    (# ReadPsi4[run,l,m,#]) &,
+    (If[OptionValue[PerturbativeAdjustment],
+        Function[rpsi4,Psi4PerturbativeCorrection[rpsi4,l,#,om0]], (* TODO: pass in om0 *)
+        Identity][# ReadPsi4[run,l,m,#]]) &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
-    order, FilterRules[{opts},Options[ReadRadiallyExtrapolatedWave]]];
+    order, FilterRules[{opts},Options[ReadRadiallyExtrapolatedWave]]]];
 
 (* ReadRadiallyExtrapolatedStrain *)
 
@@ -767,14 +891,23 @@ ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
 *)
 
 Options[ReadRadiallyExtrapolatedStrain] = Options[ReadRadiallyExtrapolatedPsi4];
-ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
-                               order_Integer, opts:OptionsPattern[]] :=
+DefineMemoFunction[ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
+                               order : extrapOrderPattern, opts:OptionsPattern[]],
   ReadRadiallyExtrapolatedWave[
     run,
-    Psi4ToStrain[# ReadPsi4[run,l,m,#], om0] &,
+    Psi4ToStrain[If[OptionValue[PerturbativeAdjustment],
+        Function[rpsi4,Psi4PerturbativeCorrection[rpsi4,l,#,om0]],
+        Identity][# ReadPsi4[run,l,m,#]], om0] &,
     selectRadii[ReadPsi4Radii[run],
                 OptionValue[RadiusRange], OptionValue[Radii]],
-    order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]];
+    order, FilterRules[{opts}, Options[ReadRadiallyExtrapolatedWave]]]];
+
+(****************************************************************)
+(* Psi4PerturbativeCorrection                                   *)
+(****************************************************************)
+
+Psi4PerturbativeCorrection[rpsi4_DataTable, l_Integer, r_?NumberQ, om0_?NumberQ] :=
+  rpsi4 - 1/2 (l - 1) (l + 2) FixedFrequencyIntegrate[rpsi4/r, om0];
 
 End[];
 
