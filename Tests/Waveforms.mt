@@ -148,6 +148,10 @@ Test[
   TestID->"RadialExtrapolationDataTable-1"
     ]
 
+(****************************************************************)
+(* AlignPhases                                                  *)
+(****************************************************************)
+
 Test[
   Map[ToList, 
       AlignPhases[
@@ -159,11 +163,19 @@ Test[
   TestID->"AlignPhases"
     ]
 
+(****************************************************************)
+(* TortoiseCoordinate                                           *)
+(****************************************************************)
+
 Test[
   TortoiseCoordinate[r, Madm],
   r + 2 Madm Log[r/(2. Madm) - 1.],
   TestID->"TortoiseCoordinate"
     ]
+
+(****************************************************************)
+(* ExtrapolateRadiatedQuantity                                  *)
+(****************************************************************)
 
 Test[
 ToList[ExtrapolateRadiatedQuantity[
@@ -176,6 +188,10 @@ ToList[ExtrapolateRadiatedQuantity[
    {38, 58.00000000000004}, {43, 63.000000000000036}, {48, 68.00000000000001}},
   TestID->"ExtrapolateRadiatedQuantity"
     ]
+
+(****************************************************************)
+(* RadiallyExtrapolatedWave                                     *)
+(****************************************************************)
 
 Test[
 ToList[RadiallyExtrapolatedWave[
