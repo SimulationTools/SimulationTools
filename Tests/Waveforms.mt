@@ -252,11 +252,17 @@ Test[
   TestID->"Psi4ToStrain-1"
     ]
 
+withinRoundoff[a_?NumericQ, b_?NumericQ] := 
+  If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-13];
+withinRoundoff[a_List, b_List] := 
+  And @@ Flatten[MapThread[withinRoundoff, {a, b}, 2]];
+
 Test[
   ToList[Psi4ToStrain[ReadPsi4[$SimulationToolsTestSimulation,2,2,100],0.02]][[{1,2,200,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-2.m"}]]
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"Psi4ToStrain-2"
     ]
 
