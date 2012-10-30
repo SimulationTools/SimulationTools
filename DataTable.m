@@ -235,6 +235,7 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  Module[{args, ds, attrs},
   args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
   ds = Cases[{x, d, y}, _DataTable, Infinity];
+  Assert[Apply[And,validQ /@ ds]];
   If[Length[ds] > 1 && !(SameGridQ@@ds),
     Error[ToString[f]<>" cannot operate on DataTables with different coordinates."];
   ];
