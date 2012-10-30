@@ -37,6 +37,8 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 
+CommonInterval;
+
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
@@ -705,6 +707,20 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
     ds2 = Map[RestrictedToInterval[#,{min, max}, Interval -> {Closed,Closed}] &, ds];
     ds2];
 
+
+(**********************************************************)
+(* CommonInterval                                         *)
+(**********************************************************)
+
+CommonInterval[ds:{(_DataTable)...}] :=
+  Module[{ranges, mins, maxs, min, max, ds2},
+    ranges = Map[CoordinateRange, ds];
+    mins = Map[First, ranges];
+    maxs = Map[Last, ranges];
+
+    min = Max[mins];
+    max = Min[maxs];
+    {min, max}];
 
 (**********************************************************)
 (* RestrictedToInterval                                   *)
