@@ -25,8 +25,7 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
   "SimulationTools`ReadHDF5`",
-  "SimulationTools`RunFiles`",
-  "h5mma`"
+  "SimulationTools`RunFiles`"
  }];
 
 (* Public *)
@@ -117,6 +116,8 @@ Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
+
+$h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
 
 (**********************************************************)
 (* WaveformCycles                                         *)
@@ -636,7 +637,14 @@ AlignMaximaOfAbs[ds_List] :=
 (*     data]; *)
 
 ImportGzip[file_String, as_] :=
-  ImportString[ReadGzipFile[file],as];
+  (* ICH: My version of h5mma contains a GZIP file reader because the
+     Mathematica reader has many problems. It shouldn't be in h5mma,
+     and should eventually move into another package.  Fall back to
+     using Import if the h5mma function is not available.  This should
+     work as long as usage is light. *)
+  If[$h5mma && ValueQ[ReadGzipFile],
+     ImportString[ReadGzipFile[file],as],
+     Import[file, as]];
 
 ImportWaveform[file_] :=
   Module[
