@@ -97,6 +97,8 @@ ReadRadiallyExtrapolatedPsi4;
 ReadRadiallyExtrapolatedStrain;
 Psi4PerturbativeCorrection;
 
+$UniformGridExtrapolation;
+
 (* Exceptions *)
 Psi4RadiusNotFound;
 
@@ -805,7 +807,13 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
                          rStarOfr : (_?notOptionQ) : Identity, 
                          opts:OptionsPattern[]] :=
   Module[
-    {ret,ext,tAlign,temp,orders},
+    {ret,ext,tAlign,temp,orders,resampled},
+
+    resampled =
+    If[$UniformGridExtrapolation === True,
+       SimulationTools`DataTable`Private`resampled,
+       resampleDataTables];
+
     ret = ToRetardedTime[{rs,fs},rStarOfr];
     (* Print["ret = ", ret]; *)
     (* Print["Max[CoordinateRange[First[ret]][[1]],0] = ", Max[CoordinateRange[First[ret]][[1]], 0]]; *)
@@ -824,11 +832,11 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
           want to reimplement this using other functions.  This might change numerical
           results; need to check this. *)
 
-       ToComplex[MapThread[ext, {resampleDataTables/@ToAbsPhase[ret,tAlign], orders}]],
+       ToComplex[MapThread[ext, {resampled/@ToAbsPhase[ret,tAlign], orders}]],
        (* else *)
        If[ListQ[order], Error["Can only specify a list of extraolation orders when AbsPhase is True"]];
 
-       ext[resampleDataTables[ret],order]]];
+       ext[resampled[ret],order]]];
 
 (* ReadRadiallyExtrapolatedWave *)
 
