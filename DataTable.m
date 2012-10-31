@@ -378,6 +378,7 @@ DataTable /: Part[d:DataTable[l_, x___], args__] :=
 (* Phase                                                  *)
 (**********************************************************)
 
+(* TODO: clean up Phase implementation *)
 Phase[d_DataTable] :=
   ToDataTable[SimulationTools`DataRepresentations`Private`phase[ToList[d]]];
 

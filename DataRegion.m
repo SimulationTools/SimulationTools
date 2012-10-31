@@ -684,6 +684,10 @@ Phase[d_DataRegion] :=
   ToDataRegion[SimulationTools`DataRepresentations`Private`phase[ToList[d]][[All, 2]], MinCoordinates[d], CoordinateSpacings[d]]
 ];
 
+(* TODO: clean up Phase implementation *)
+(* DataRegion /: Phase[d_DataRegion] /; ArrayDepth[d] > 1 :=  *)
+(*   Error["Cannot compute the phase of a DataRegion with dimension greater than 1Phase does not currently supportonly supports 1 dimensional DataRegions."]; *)
+
 (**********************************************************)
 (* Interpolation                                          *)
 (**********************************************************)

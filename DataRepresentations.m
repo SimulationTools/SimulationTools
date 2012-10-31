@@ -380,6 +380,20 @@ phase[tb:{{_, {_, _}}...}] :=
    phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
   Return[phaseTb]];
 
+(* TODO: clean up Phase implementation *)
+(* Phase[d_?DataRepresentationQ] := *)
+(*   UnwrapPhaseVector[Arg[d]]; *)
+
+(****************************************************************)
+(* UnwrapPhaseVector                                            *)
+(****************************************************************)
+
+(* With thanks to Sascha Husa for pointing this out *)
+UnwrapPhaseVector[data_List] :=
+  (* Juergen Tischer, http://forums.wolfram.com/mathgroup/archive/1998/May/msg00105.html *)
+  FoldList[Round[(#1 - #2)/(2 Pi)] 2 Pi + #2 &,
+           First[data], 
+           Rest[data]];
 
 (**********************************************************)
 (* Resampled                                              *)
