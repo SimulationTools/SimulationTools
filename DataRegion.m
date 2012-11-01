@@ -458,7 +458,6 @@ DataRegion /: Take[d_DataRegion, s__] :=
 
 DataRegion /: Drop[d_DataRegion, s__] :=
  Module[{partSpec},
-  (* TODO: relax this restriction *)
   If[Count[{s}, List[__]] > 0,
     Error["\"List\" part specifications are not currently supported by DataRegion."];
   ];
