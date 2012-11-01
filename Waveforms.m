@@ -214,7 +214,6 @@ DefineMemoFunction[
 (* Return a list of radii available *)
 ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
 
-(* TODO: this function should be deprecated *)
 ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
  Module[{psi4, rAmp, rAmpTb, t2, phase},
 
