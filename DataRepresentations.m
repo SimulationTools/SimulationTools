@@ -45,7 +45,6 @@ Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shi
 CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in d. This is guaranteed to coincide with a data point.";
 CoordinatesAtMax::usage = "CoordinatesAtMax[d] finds a list of the coordinates at which the maximum occurs in d. This is guaranteed to coincide with a data point.";
 
-(* TODO: Add WithResampling (and WithResampling[order]) which evaluate their argument allowing resampling for algebraic operations.  Use InheritedBlock for this *)
 Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a data representation with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}."<>
   "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ...."<>
   "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
