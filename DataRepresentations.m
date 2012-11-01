@@ -443,7 +443,7 @@ Resampled[d_?DataRepresentationQ, grid:{{_?NumericQ, _?NumericQ, _?NumericQ}...}
   Switch[Head[d],
    SimulationTools`DataRegion`DataRegion,
     data = Table[interp @@ vars, Evaluate[Sequence @@ iterators]];
-    res = SimulationTools`DataRegion`ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], VariableName -> SimulationTools`DataRegion`VariableName[d]];,
+    res = SimulationTools`DataRegion`ToDataRegion[data, grid[[All, 1]], grid[[All, 3]], "VariableName" -> SimulationTools`DataRegion`VariableName[d]];,
    SimulationTools`DataTable`DataTable,
     data = Table[Join[vars, {interp @@ vars}], Evaluate[Sequence @@ iterators]];
     res = SimulationTools`DataTable`ToDataTable[data];,

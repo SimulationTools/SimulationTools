@@ -93,7 +93,7 @@ data[DataRegion[attrs_, d_]] := d;
 (* Todo: this could be extended *)
 validQ[d_DataRegion] :=
   MatchQ[d,DataRegion[{_Rule...}, _List]] &&
-  Complement[{VariableName, Origin, Spacing, Time}, (List@@d)[[1,All,1]]] === {};
+  Complement[{"VariableName", "Origin", "Spacing"}, (List@@d)[[1,All,1]]] === {};
 
 (* DataRegions are formatted like SparseArrays *)
 Format[d:DataRegion[attrs_List, l_List]] :=
@@ -127,7 +127,7 @@ CoordinateSpacing[d_DataRegion] :=
 (* CoordinateSpacings                                     *)
 (**********************************************************)
 
-CoordinateSpacings[d_DataRegion] := Spacing /. attributes[d];
+CoordinateSpacings[d_DataRegion] := "Spacing" /. attributes[d];
 
 
 (**********************************************************)
@@ -156,7 +156,7 @@ DataRegion /: Length[d_DataRegion] :=
 (* MinCoordinates                                         *)
 (**********************************************************)
 
-MinCoordinates[d_DataRegion] := Origin /. attributes[d];
+MinCoordinates[d_DataRegion] := "Origin" /. attributes[d];
 
 
 (**********************************************************)
@@ -174,7 +174,7 @@ MaxCoordinates[d_DataRegion] :=
 SyntaxInformation[VariableName] =
  {"ArgumentsPattern" -> {_}};
 
-VariableName[d_DataRegion] := VariableName /. attributes[d];
+VariableName[d_DataRegion] := "VariableName" /. attributes[d];
 
 
 (**********************************************************)
@@ -192,11 +192,11 @@ VariableName[d_DataRegion] := VariableName /. attributes[d];
 
 Options[ToDataRegion] := {
   "VariableName" -> Null,
-  "Time" -> Null};
+  "Attributes" -> {}};
 
 DocumentationBuilder`OptionDescriptions["ToDataRegion"] = {
 "VariableName" -> "A variable name to associate with the DataRegion",
-"Time" -> "A time to associate with the DataRegion"}; (* TODO: should this be deprecated? *)
+"Attributes" -> "Attributes to associate with the DataRegion"};
 
 SyntaxInformation[ToDataRegion] =
  {"ArgumentsPattern" -> {_, ___, OptionsPattern[]}};
@@ -209,10 +209,10 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
   If[ArrayDepth[data] =!= Length[spacing],
     Error["ToDataRegion: Data and spacing have inconsistent dimensions"]];
   DataRegion[
-    {VariableName -> OptionValue["VariableName"],
-     Origin -> SetPrecision[origin, precision],
-     Spacing -> SetPrecision[spacing, precision],
-     Time -> OptionValue["Time"]
+    {"VariableName" -> OptionValue["VariableName"],
+     "Origin" -> SetPrecision[origin, precision],
+     "Spacing" -> SetPrecision[spacing, precision],
+     Sequence@@OptionValue["Attributes"]
     },
     Developer`ToPackedArray[data]
   ]
@@ -244,7 +244,7 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
   MapThread[(data[[Sequence@@#1]] = ToListOfData[#2])&, {offsets, ds}];
 
   (* Create the new DataRegion *)
-  ToDataRegion[Developer`ToPackedArray[data], x1, dx, VariableName -> VariableName[ds[[1]]]]
+  ToDataRegion[Developer`ToPackedArray[data], x1, dx, "VariableName" -> VariableName[ds[[1]]]]
 ];
 
 
@@ -357,7 +357,7 @@ Shifted[d_DataRegion, delta_List] :=
   origin  = MinCoordinates[d] + delta;
   spacing = CoordinateSpacings[d];
 
-  ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]]
+  ToDataRegion[data, origin, spacing, "VariableName" -> VariableName[d]]
 ];
 
 
@@ -427,7 +427,7 @@ DataRegion /: Part[d_DataRegion, s__] :=
      result = data;,
    True,
      (* TODO: Make sure other attributes get propagated *)
-     result = ToDataRegion[data, origin, spacing, VariableName -> VariableName[d]];
+     result = ToDataRegion[data, origin, spacing, "VariableName" -> VariableName[d]];
   ];
 
   result
@@ -642,7 +642,7 @@ Coordinate[d_DataRegion, dir_:Automatic] :=
 
   If[Dimensions[res] =!= dims, Error["GetCoordinateError"]];
 
-  ToDataRegion[res, origin, spacing, VariableName -> VariableName[d]]
+  ToDataRegion[res, origin, spacing, "VariableName" -> VariableName[d]]
 ];
 
 
@@ -730,6 +730,8 @@ SyntaxInformation[TimeDerivative] =
 UFDWeights[m_, n_, s_, h_] :=
  CoefficientList[Normal[Series[x^s Log[x]^m, {x, 1, n}]/h^m], x]
 
+getTime[DataRegion[h_, _]] := "Time" /. h;
+
 TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
  Module[{nd, dims, spacing, origin, variable, sorted, times, dt, stencil, offset, deriv, attr, newTime},
   nd = ArrayDepth/@dr;
@@ -763,10 +765,10 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
   ];
 
   (* Sort DataRegions by time *)
-  sorted = SortBy[dr, GetTime];
+  sorted = SortBy[dr, getTime];
 
   (* Check spacing is uniform *)
-  times = GetTime/@sorted;
+  times = getTime/@sorted;
   If[Apply[Or, Map[# > 10^-10 &, Abs[1 - Differences[times]/Differences[times][[1]]]]],
     Error["Error, can't compute time derivative from DataRegions with non-uniform spacing in time."];
     Return[$Failed];
@@ -786,7 +788,7 @@ TimeDerivative[dr:{__DataRegion}, centering_:Automatic] :=
 
   (* Correct time and variable name attributes *)
   newTime = times[[1]]+offset*dt;
-  attr=replaceRules[attributes[deriv], {Time-> newTime, VariableName -> "dt_"<>variable[[1]]}];
+  attr=replaceRules[attributes[deriv], {"Time"-> newTime, "VariableName" -> "dt_"<>variable[[1]]}];
 
   DataRegion[attr, ToListOfData[deriv]]
 ];
