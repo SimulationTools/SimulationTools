@@ -235,7 +235,11 @@ ReadCarpetHDF5[file_String, ds_List, OptionsPattern[]] :=
   time = "time" /. annots;
   dr = MapThread[ToDataRegion[#1,#2,#3,VariableName->#4,Time->#5] &,
                  {data, origin, spacing, name, time}];
-  If[strip, MapThread[Strip, {dr, ghosts}], dr]
+  If[strip,
+    MapThread[Take[#1, Sequence@@Transpose[{#2, -#2}]] &, {dr, ghosts+1}]
+  ,
+    dr
+  ]
 ]];
 
 readDatasetsFromFile[file_String, var_, it_, map_, rl_, opts___] :=
@@ -285,7 +289,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts:OptionsPattern[]] :=
 
 ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl:(_Integer|None), map_:None, opts:OptionsPattern[]]:=
   Profile["ReadCarpetHDF5Variable",
-    MergeDataRegions[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
+    ToDataRegion[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
 
 Options[ReadCarpetHDF5Variable] = {
 	"Iteration" -> None,
