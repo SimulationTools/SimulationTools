@@ -309,9 +309,9 @@ Test[
 ]
 
 Test[
-    WithExceptions[Drop[dr, None, -2], NoNegativeParts -> e]
+    ToList[Drop[dr, None, -2]]
     ,
-    e
+    Drop[ToList[dr], None, -2]
     ,
     TestID->"Drop2"
 ]
