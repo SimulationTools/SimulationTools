@@ -54,12 +54,6 @@ Downsampled::usage = "Downsampled[d, n] returns a version of d with only every n
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
 
-(* TODO: Is there a better system?  These are abbreviations. *)
-Add::usage = "Add[d1, d2] adds d1 and d2 after they have been resampled onto the intersection of their bounding boxes.";
-Div::usage = "Div[d1, d2] divides d1 by d2 after they have been resampled onto the intersection of their bounding boxes.";
-Mul::usage = "Mul[d1, d2] multiplies d1 by d2 after they have been resampled onto the intersection of their bounding boxes.";
-Sub::usage = "Sub[d1, d2] subtracts d2 from d1 after they have been resampled onto the intersection of their bounding boxes.";
-
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d. The derivs argument should be of the same form as in the first argument of Derivative.";
@@ -69,6 +63,12 @@ Frequency::usage = "Frequency[d] returns the first derivative of the complex pha
 
 (* Exceptions *)
 CoordinateRangeDimensions;
+
+(* Deprecated *)
+Add;
+Div;
+Mul;
+Sub;
 
 Begin["`Private`"];
 
