@@ -464,7 +464,7 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
     Return[$Failed];
     Error["Operation requires automatic resampling but $ResamplingFunction is not set"];,
    _?DataRepresentationQ,
-    onto = $ResamplingFunction,
+    onto = Slab[$ResamplingFunction, Span@@SimulationTools`DataTable`CommonInterval[ds]];,
    "First",
     onto = Slab[First[ds], Span@@SimulationTools`DataTable`CommonInterval[ds]];,
    "Last",
