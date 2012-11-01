@@ -366,15 +366,13 @@ Shifted[d_DataRegion, delta_List] :=
 (**********************************************************)
 
 DataRegion /: Part[d_DataRegion, s__] :=
- Module[{partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result},
-  (* TODO: remove this restriction *)
-  If[Count[{s}, _?Negative, Infinity] > 0,
-    Error[NoNegativeParts,
-          "Negative part specifications are not currently supported by DataRegion."];
-  ];
-
+ Module[{dims, n, partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result},
   (* Any dimensions not explicitly mentioned are assumed to be All *)
   partSpec = PadRight[{s}, ArrayDepth[d], All];
+
+  (* Convert negative part specifications to positive ones *)
+  dims = Dimensions[d];
+  partSpec = MapThread[(#1 /. (n_?Negative :> n+#2+1))&,{partSpec, dims}];
 
   (* Figure out which dimensions still exist in the new DataRegion *)
   dimensionExists =
