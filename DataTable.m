@@ -26,7 +26,7 @@ DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensiona
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
-MinCoordinateSpacing::usage = "MinCoordinateSpacings[d] gives the smallest spacing of the coordinates in d.";
+MinCoordinateSpacing::usage = "MinCoordinateSpacing[d] gives the smallest spacing of the coordinates in d.";
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
 CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
