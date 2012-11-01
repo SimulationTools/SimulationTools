@@ -189,14 +189,12 @@ ReadAngularPoints[run_] :=
 SyntaxInformation[ReadTimeRange] =
  {"ArgumentsPattern" -> {_}};
 
-(* TODO: Make this more flexible by not relying on PunctureTracker *)
 ReadTimeRange[run_] :=
-  Module[{pairs, first, last},
-   pairs = ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}];
-   first = pairs[[1, 2]];
-   last = pairs[[-1, 2]];
-   {first, last}];
-
+ Module[{segs, times},
+  segs = FindRunSegments[run];
+  times = Flatten[Cases[SegmentCoordinateTimeInterval /@ segs, Except[None]]];
+  {Min[times], Max[times]}
+];
 
 (**********************************************************)
 (* ReadInnerBoundary                                      *)
