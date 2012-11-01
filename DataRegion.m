@@ -316,13 +316,19 @@ $DataRegionFunctions =
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
  MemberQ[$DataRegionFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
- Module[{args, ds},
-  args = {x, d, y} /. dr_DataRegion :> ToListOfData[dr];
+ Module[{args, ds, rds},
   ds = Cases[{x, d, y}, _DataRegion, Infinity];
   If[Length[ds] > 1 && !(SameGridQ@@ds),
-    Error[ToString[f]<>" cannot operate on DataRegions with different coordinates."];
+    rds = Resampled[ds];
+    If[rds === $Failed,
+      Error[ToString[f]<>" cannot operate on DataRegions with different coordinates. To allow this, set the $ResamplingFunction variable."];
+    ];
+    args = ({x, d, y} /. Thread[ds -> rds]) /. dr_DataRegion :> ToListOfData[dr];
+  ,
+    rds = ds;
+    args = {x, d, y} /. dr_DataRegion :> ToListOfData[dr];
   ];
-  DataRegion[attributes[d], f@@args]
+  DataRegion[attributes[First[rds]], f@@args]
 ];
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;

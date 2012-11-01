@@ -233,15 +233,21 @@ $DataTableFunctions =
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  MemberQ[$DataTableFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
- Module[{args, ds, attrs},
-  args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
+ Module[{args, ds, rds, attrs},
   ds = Cases[{x, d, y}, _DataTable, Infinity];
   Assert[Apply[And,validQ /@ ds]];
   If[Length[ds] > 1 && !(SameGridQ@@ds),
-    Error[ToString[f]<>" cannot operate on DataTables with different coordinates."];
+    rds = Resampled[ds];
+    If[rds === $Failed,
+      Error[ToString[f]<>" cannot operate on DataTables with different coordinates. Too allow this, set the $ResamplingFunction variable."];
+    ];
+    args = ({x, d, y} /. Thread[ds -> rds]) /. dt_DataTable :> ToListOfData[dt];
+  ,
+    rds = ds;
+    args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
   ];
   attrs = Apply[Intersection, Map[ListAttributes, ds]];
-  ToDataTable[Transpose[{ToListOfCoordinates[d], f@@args}], ListAttributes[d]]
+  ToDataTable[Transpose[{ToListOfCoordinates[First[rds]], f@@args}], ListAttributes[d]]
 ];
 
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
