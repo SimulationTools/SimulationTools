@@ -29,10 +29,6 @@ FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all t
 ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
 ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time elapsed during the execution of a simulation.";
 
-(* TODO: Do we really need these? We should be using FindRunFiles instead?
-  If there are no cases where they are necessary, remove them *)
-FindRunSegments(*::usage = "FindRunSegments[sim] returns a list of all the segment directories for a sim which is split across multiple segments."*);
-FindRunDir(*::usage = "FindRunDir[sim] returns the directory which contains the output data for sim.  You can give a full or relative pathname to the sim directory, or a sim name relative to the (Global) variable SimulationDirectory."*);
 
 (* TODO: These don't belong here *)
 ReadColumnFile;
@@ -50,11 +46,13 @@ SegmentStartTimes;
 HaveRunDir;
 ReadWalltimeHours;
 
-(* TODO: Deprecate/remove these *)
-FindRunFile(*::usage = "FindRunFile[run, filename] returns a list containing the full names of files named filename in the different segments of run."*);
-FindRunFilesFromPattern(*::usage = "FindRunFilesFromPattern[run, pattern] returns a list of leaf file names matching pattern which are found in any of the segments of run.  To find the paths within each segment, use FindRunFile on each result from this list."*);
-FindFirstRunFile(*::usage = "FindFirstRunFile[run, file] returns the full pathname of file in the first segment of run."*);
-FileIsInRun(*::usage = "FileIsInRun[run, filename] returns True or False depending on whether a file named filename can be found in run."*);
+(* Deprecated *)
+FindRunSegments;
+FindRunDir;
+FindRunFile;
+FindRunFilesFromPattern;
+FindFirstRunFile;
+FileIsInRun;
 
 (* TODO: Convert these to strings and make them options to FindRunFiles *)
 FullFilenames;
