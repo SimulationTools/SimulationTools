@@ -50,6 +50,7 @@ Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d 
   "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ...."<>
   "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
   "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
+$ResamplingFunction::usage = "$ResamplingFunction is a variable which controls the type of automatic resampling which should be done.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
@@ -400,7 +401,7 @@ UnwrapPhaseVector[data_List] :=
 (**********************************************************)
 
 SyntaxInformation[Resampled] =
- {"ArgumentsPattern" -> {_, _, OptionsPattern[]}};
+ {"ArgumentsPattern" -> {_, ___, OptionsPattern[]}};
 
 Options[Resampled] = {InterpolationOrder -> 8};
 
@@ -452,6 +453,41 @@ Resampled[d_?DataRepresentationQ, grid:{{_?NumericQ, _?NumericQ, _?NumericQ}...}
   ];
 
   res
+];
+
+
+$ResamplingFunction = None;
+Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/@ds] :=
+ Module[{onto, x1, x2, dx},
+  Switch[$ResamplingFunction,
+   None,
+    Return[$Failed];
+    Error["Operation requires automatic resampling but $ResamplingFunction is not set"];,
+   _?DataRepresentationQ,
+    onto = $ResamplingFunction,
+   "First",
+    onto = Slab[First[ds], Span@@SimulationTools`DataTable`CommonInterval[ds]];,
+   "Last",
+    onto = Slab[Last[ds], Span@@SimulationTools`DataTable`CommonInterval[ds]];,
+   "Finest",
+    x1 = Max /@ Transpose[MinCoordinates /@ ds];
+    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
+    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
+    dx = Min /@ Transpose[CoordinateSpacings /@ ds];
+    onto = Transpose[{x1, x2, dx}];,
+   "Coarsest",
+    x1 = Max /@ Transpose[MinCoordinates /@ ds];
+    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
+    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
+    dx = Max /@ Transpose[CoordinateSpacings /@ ds];
+    onto = Transpose[{x1, x2, dx}];,
+   _String,
+    Error["Unknown $ResamplingFunction preset: "<>$ResamplingFunction];,
+   _,
+    onto = $ResamplingFunction[ds];
+  ];
+
+  Resampled[ds, onto, opts]
 ];
 
 
