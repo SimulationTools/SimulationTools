@@ -218,6 +218,7 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
   ]
 ];
 
+(* TODO: Do we really want to call this ToDataRegion? How about ToMergedDataRegion instead? *)
 ToDataRegion[ds:List[DataRegion[___]..]] :=
  Module[{x1, x2, dx, n, data, offsets},
   (* Find the shape of the bounding-box DataRegion *)
@@ -246,6 +247,14 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
   ToDataRegion[Developer`ToPackedArray[data], x1, dx, VariableName -> VariableName[ds[[1]]]]
 ];
 
+
+ToDataRegion[d_SimulationTools`DataTable`DataTable] :=
+ Module[{ndims, xmin, xmax, spacing, data},
+  origin = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
+  data = ToListOfData[d];
+  ToDataRegion[Developer`ToPackedArray[data], origin, spacing]
+];
 
 (**********************************************************)
 (* ToListOfData                                           *)
