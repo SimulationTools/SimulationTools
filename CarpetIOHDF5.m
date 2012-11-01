@@ -47,7 +47,7 @@ Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData] = {
   };
 
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
-  MergeDataRegions[ReadCarpetIOHDF5Components[file,
+  ToDataRegion[ReadCarpetIOHDF5Components[file,
     OptionValue[Variable],
     OptionValue[Iteration],
     OptionValue[RefinementLevel],
@@ -274,7 +274,7 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
                  {data, origin, spacing, name, time}];
 
   If[OptionValue[StripGhostZones]==True,
-    dr = MapThread[Strip, {dr, ghosts}]];
+    dr = MapThread[Take[#1, Sequence@@Transpose[{#2, -#2}]] &, {dr, ghosts+1}]];
 
   dr
 ]];
