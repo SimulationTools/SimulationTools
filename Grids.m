@@ -40,6 +40,7 @@ ReadGridStructure(*::usage = "ReadGridStructure[sim] computes the grid structure
 
 ReadInnerBoundary(*::usage = "ReadInnerBoundary[sim] reads the position of the inner boundary of the Llama spherical patches of sim."*);
 ReadOuterBoundary(*::usage = "ReadOuterBoundary[sim] reads the position of the outer boundary of the Llama spherical patches of sim."*);
+ReadOuterBoundaries(*::usage = "ReadOuterBoundary[sim] reads the position of the outer boundary of the Llama spherical patches of sim."*);
 ReadAngularPoints(*::usage = "ReadAngularPoints[sim] reads the number of angular points in the Llama spherical patches of sim."*);
 
 
@@ -214,9 +215,24 @@ ReadInnerBoundary[run_] :=
 SyntaxInformation[ReadOuterBoundary] =
  {"ArgumentsPattern" -> {_}};
 
-(* TODO: Add support for Cartesian grids *)
 ReadOuterBoundary[run_] :=
   ToExpression[LookupParameter[run, "Coordinates::sphere_outer_radius"]];
+
+
+(**********************************************************)
+(* ReadOuterBoundaries                                    *)
+(**********************************************************)
+
+SyntaxInformation[ReadOuterBoundaries] =
+ {"ArgumentsPattern" -> {_}};
+
+ReadOuterBoundaries[run_] :=
+ Module[{xmin, xmax, ymin, ymax, zmin, zmax},
+  {xmin, xmax, ymin, ymax, zmin, zmax} =
+    ToExpression[LookupParameter[run, "CoordBase::"<>#]]& /@
+      {"xmin", "xmax", "ymin", "ymax", "zmin", "zmax"};
+  {{xmin, xmax}, {ymin, ymax}, {zmin, zmax}}
+];
 
 
 (**********************************************************)
