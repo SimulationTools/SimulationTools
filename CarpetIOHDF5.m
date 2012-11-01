@@ -155,11 +155,6 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPat
   Module[
     {varNames, varName, dsName, annots},
 
-    (* TODO: This function should be accelerated assuming that the
-       relationship between time and iteration is linear.  We should
-       also think about what to do about the RefinementLevel argument
-       to this function. *)
-
     varNames = datasetAttribute[
       datasetsWith[file,
                    attributeNamesToNumbers[

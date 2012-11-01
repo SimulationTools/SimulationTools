@@ -151,7 +151,6 @@ FindRunDirSegments[runDir_] :=
 DocumentationBuilder`SymbolDescription["FindSimulationFiles"] =
   "find instances of a specific file across all segments of a simulation";
 
-(* TODO: Should this be used as the general interface for RunFiles? *)
 FindRunFiles[run_String, filename_String] := FindRunFile[run, filename];
 FindRunFiles[run_String, filename:(_StringExpression|_RegularExpression)] :=
   FindRunFilesFromPattern[run, filename, FullFilenames -> True];
