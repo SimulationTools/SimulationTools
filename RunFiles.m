@@ -14,8 +14,6 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-(* TODO: if a sim doesn't have a parameter file in it, SimulationTools cannot find ANY files! *)
-
 BeginPackage["SimulationTools`RunFiles`",
  {
   "SimulationTools`Error`",
