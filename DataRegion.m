@@ -409,6 +409,8 @@ DataRegion /: Part[d_DataRegion, s__] :=
        ];
        start  = partSpec[[1]];
        stride = partSpec[[2]] - partSpec[[1]];,
+      partSpec === None,
+       Error["Part specification would yield a DataRegion with no data."];,
       True,
        Error["Part specification "<>ToString[partSpec]<>" not supported."];
      ];
@@ -440,11 +442,6 @@ DataRegion /: Part[d_DataRegion, s__] :=
 
 DataRegion /: Take[d_DataRegion, s__] :=
  Module[{partSpec},
-  (* TODO: remove this restriction *)
-  If[Count[{s}, None, Infinity] > 0,
-    Error["\"None\" part specifications are not currently supported by DataRegion."];
-  ];
-
   partSpec = Map[# /.
     {List[x_]  :> List[x],
      List[x__] :> Span[x],
@@ -461,11 +458,6 @@ DataRegion /: Take[d_DataRegion, s__] :=
 
 DataRegion /: Drop[d_DataRegion, s__] :=
  Module[{partSpec},
-  (* TODO: remove this restriction *)
-  If[Count[{s}, All, Infinity] > 0,
-    Error["\"All\" part specifications are not currently supported by DataRegion."];
-  ];
-
   (* TODO: relax this restriction *)
   If[Count[{s}, List[__]] > 0,
     Error["\"List\" part specifications are not currently supported by DataRegion."];
@@ -473,7 +465,8 @@ DataRegion /: Drop[d_DataRegion, s__] :=
 
   partSpec = Map[# /.
     {n_Integer :> If[n<0, Span[1, n-1], Span[n+1, All]],
-     None -> All
+     None -> All,
+     All -> None
     } &, {s}];
 
   Part[d, Sequence @@ partSpec]
