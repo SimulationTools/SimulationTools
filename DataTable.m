@@ -27,6 +27,7 @@ ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a Da
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
 MinCoordinateSpacing::usage = "MinCoordinateSpacing[d] gives the smallest spacing of the coordinates in d.";
+MaxCoordinateSpacing::usage = "MaxCoordinateSpacing[d] gives the largest spacing of the coordinates in d.";
 UniformSpacingQ::usage = "UniformSpacingQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
 
 CoordinateAtInterpolatedMax::usage = "CoordinateAtInterpolatedMax[d] finds the time at which a maximum occurs in the range of the DataTable d. This time is interpolated and may not coincide with a data point in the DataTable.";
@@ -167,6 +168,21 @@ CoordinateSpacings[d_DataTable] :=
   ts = ToListOfCoordinates[d];
 
   {Min[Differences[ts]]}
+];
+
+
+(**********************************************************)
+(* MaxCoordinateSpacing                                   *)
+(**********************************************************)
+
+SyntaxInformation[MaxCoordinateSpacing] =
+ {"ArgumentsPattern" -> {_}};
+
+MaxCoordinateSpacing[d_DataTable] :=
+ Module[{ts},
+  ts = ToListOfCoordinates[d];
+
+  Max[Differences[ts]]
 ];
 
 
