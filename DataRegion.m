@@ -224,7 +224,9 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
   (* Find the shape of the bounding-box DataRegion *)
   x1 = Min /@ Transpose[MinCoordinates /@ ds];
   x2 = Max /@ Transpose[MaxCoordinates /@ ds];
-  dx = DeleteDuplicates[CoordinateSpacings /@ ds];
+
+  (* We allow the spacings to differ by a very small amount, close to roundoff *)
+  dx = DeleteDuplicates[CoordinateSpacings /@ ds, (Max[Abs[1-#1/#2]]<10^-15)&];
 
   (* TODO: Check that all origins are separated by multiples of their spacing. *)
   If[Length[dx] =!= 1,
