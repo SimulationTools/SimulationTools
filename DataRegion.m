@@ -228,7 +228,7 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
 
   (* TODO: Check that all origins are separated by multiples of their spacing. *)
   If[Length[dx] =!= 1,
-    Error["ToDataRegion only supportes merging DataRegions with the same grid spacing."];
+    Error["ToDataRegion only supports merging DataRegions with the same grid spacing."];
   ,
     dx = First[dx];
   ];
