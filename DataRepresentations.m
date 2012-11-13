@@ -490,18 +490,10 @@ SyntaxInformation[SameGridQ] =
 (* Slab                                                   *)
 (**********************************************************)
 
-Options[Slab] = {
-  "Tolerance" -> 0.
-};
-
-DocumentationBuilder`OptionDescriptions["Slab"] = {
-  "Tolerance" -> "The Tolerance option is currently ignored."
-};
-
 SyntaxInformation[Slab] =
- {"ArgumentsPattern" -> {_, __, OptionsPattern[]}};
+ {"ArgumentsPattern" -> {_, __}};
 
-Slab[d_?DataRepresentationQ, s__, OptionsPattern[]]:=
+Slab[d_?DataRepresentationQ, s__]:=
  Module[{slabSpec, valid, spacing, origin, endpoints, indexrange},
   spacing   = CoordinateSpacings[d];
   origin    = MinCoordinates[d];
