@@ -49,7 +49,6 @@ Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d 
   "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ...."<>
   "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
   "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
-$ResamplingMethod::usage = "$ResamplingMethod is a variable which controls the type of automatic resampling which should be done.";
 WithResampling::usage = "WithResampling[method, expr] evaluates expr with automatic resampling enabled.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
@@ -61,6 +60,9 @@ NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d
 
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
+
+(* Experimental *)
+$ResamplingMethod(*::usage = "$ResamplingMethod is a variable which controls the type of automatic resampling which should be done."*);
 
 (* Exceptions *)
 CoordinateRangeDimensions;
