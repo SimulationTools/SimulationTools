@@ -891,10 +891,16 @@ DataTable /: Composition[d_DataTable, p_DataTable] :=
 SyntaxInformation[MonotonicQ] =
  {"ArgumentsPattern" -> {_}};
 
-MonotonicQ[d_DataTable, tol_:0.] :=
-  Module[{positive = (# > tol &)},
-  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]];
+MonotonicQ[d_DataTable, tol_] :=
+ Module[{positive},
+  If[tol == 0,
+    MonotonicQ[d]
+  ];
+  positive = (# > tol &);
+  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]
+];
 
+MonotonicQ[d_DataTable] := Abs[Plus @@ Sign[Differences[ToListOfCoordinates[d]]]] == (Length[d]-1);
 
 (****************************************************************)
 (* Dot                                                          *)
