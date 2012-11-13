@@ -471,32 +471,6 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
     onto = Slab[First[ds], Span@@SimulationTools`DataTable`CommonInterval[ds]];,
    "Last",
     onto = Slab[Last[ds], Span@@SimulationTools`DataTable`CommonInterval[ds]];,
-   "Finest",
-    x1 = Max /@ Transpose[MinCoordinates /@ ds];
-    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
-    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
-    (* TODO: this is a bit hackish. There should be a way to do it without knowing
-             the data representation type *)
-    Switch[Head[ds[[1]]],
-     SimulationTools`DataRegion`DataRegion,
-      dx = Min /@ Transpose[CoordinateSpacings /@ ds];,
-     SimulationTools`DataTable`DataTable,
-      dx = {Min[SimulationTools`DataTable`MinCoordinateSpacing /@ ds]};
-    ];
-    onto = Transpose[{x1, x2, dx}];,
-   "Coarsest",
-    x1 = Max /@ Transpose[MinCoordinates /@ ds];
-    x2 = Min /@ Transpose[MaxCoordinates /@ ds];
-    If[Or@@Negative[x2 - x1], Error["Intersection of boxes is empty"]];
-    (* TODO: this is a bit hackish. There should be a way to do it without knowing
-             the data representation type *)
-    Switch[Head[ds[[1]]],
-     SimulationTools`DataRegion`DataRegion,
-      dx = Max /@ Transpose[CoordinateSpacings /@ ds];,
-     SimulationTools`DataTable`DataTable,
-      dx = {Max[SimulationTools`DataTable`MaxCoordinateSpacing /@ ds]};
-    ];
-    onto = Transpose[{x1, x2, dx}];,
    _String,
     Error["Unknown $ResamplingMethod preset: "<>$ResamplingMethod];,
    _,
