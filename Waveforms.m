@@ -555,7 +555,7 @@ ffiDataTable[d_DataTable, omega0_] :=
   mask2 = (Sign[(-omegas/omega1) - 1.] + 1.)/2.;
   mask = 1. - (1. - mask1) (1. - mask2);
   omegas2 = mask omegas + (1. - mask) omega1 Sign[omegas - $MachineEpsilon];
-  MakeDataTable@Thread[{omegas, gs/(I omegas2)}]];
+  MakeDataTable@Thread[{omegas, gs/(-I omegas2)}]];
 
 FixedFrequencyIntegrate[q_DataTable, omega0_?NumericQ] :=
  Module[{qUniform,t0,qTilde,intqTilde,intq,
@@ -565,8 +565,7 @@ FixedFrequencyIntegrate[q_DataTable, omega0_?NumericQ] :=
   qTilde = Fourier[qUniform];
   intqTilde = ffiDataTable[qTilde, omega0];
   intq = InverseFourier[intqTilde,t0];
-  (* TODO: I'm not sure where the "-" comes from here, but it seems to be necessary *)
-  -If[uniform, intq, Quiet[ResampleDataTable[intq,q,Intersect->False],
+  If[uniform, intq, Quiet[ResampleDataTable[intq,q,Intersect->False],
                            InterpolatingFunction::dmval]]];
 
 Psi4ToStrain[psi4_DataTable, omega0_?NumericQ] :=
