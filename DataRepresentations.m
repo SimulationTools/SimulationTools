@@ -501,7 +501,6 @@ DocumentationBuilder`OptionDescriptions["Slab"] = {
 SyntaxInformation[Slab] =
  {"ArgumentsPattern" -> {_, __, OptionsPattern[]}};
 
-(* TODO: Implement Tolerance support *)
 Slab[d_?DataRepresentationQ, s__, OptionsPattern[]]:=
  Module[{slabSpec, valid, spacing, origin, endpoints, indexrange},
   spacing   = CoordinateSpacings[d];
