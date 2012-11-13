@@ -308,13 +308,10 @@ SimulationTools`ArgumentChecker`StandardDefinition[ExtrapolateScalar] = True;
 ExtrapolateScalar[args__] :=
  ExtrapolatedValue /. ExtrapolateScalarFull[args];
 
-(* TODO: what does this function do?  Why does it map f over the radii? *)
 SimulationTools`ArgumentChecker`StandardDefinition[ExtrapolateScalarWithRadii] = True;
 ExtrapolateScalarWithRadii[f_, rads_List, order_:1] :=
   ExtrapolatedValue /. ExtrapolateScalarFull[order, MapThread[List, {rads, Map[f, rads]}]];
 
-(* TODO: There must be a better way to do this in Mathematica, e.g. using Transpose *)
-(* TODO: This function should be internal *)
 RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
  Module[{rads, dts, ts, lists, tbToVec, vecs, rfTbs, combineWithRads, lengths, rfWithRads, allts},
   rads = Map[First, rdTb];
