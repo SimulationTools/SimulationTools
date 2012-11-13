@@ -110,6 +110,17 @@ Format[d:DataRegion[attrs_List, l_List]] :=
                   range]]];
 
 (**********************************************************)
+(* CommonInterval                                         *)
+(**********************************************************)
+
+CommonInterval[ds:{(_DataRegion)...}] :=
+ Module[{ranges, mins, maxs, min, max, ds2},
+  mins = Max /@ Transpose[MinCoordinates /@ ds];
+  maxs = Min /@ Transpose[MaxCoordinates /@ ds];
+  Transpose[{mins, maxs}]
+];
+
+(**********************************************************)
 (* CoordinateSpacing                                      *)
 (**********************************************************)
 

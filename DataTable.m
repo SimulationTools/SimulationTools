@@ -38,8 +38,6 @@ AntiDerivative::usage = "AntiDerivative[d, {x, f}] returns the first integral, I
 
 RestrictedToCommonInterval::usage = "RestrictedToCommonInterval[{d1, d2, ...}] returns copies of the supplied set of DataTables but restricted to having their independent variables within the same range, which is the intersection of the ranges of the inputs.";
 
-CommonInterval;
-
 (****************************************************************)
 (* Experimental                                                 *)
 (****************************************************************)
@@ -710,7 +708,7 @@ CommonInterval[ds:{(_DataTable)...}] :=
 
     min = Max[mins];
     max = Min[maxs];
-    {min, max}];
+    {{min, max}}];
 
 (**********************************************************)
 (* RestrictedToInterval                                   *)

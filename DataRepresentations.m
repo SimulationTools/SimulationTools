@@ -61,6 +61,9 @@ NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
 
+(* Experimental *)
+CommonInterval;
+
 (* Exceptions *)
 CoordinateRangeDimensions;
 
