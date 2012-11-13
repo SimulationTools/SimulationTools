@@ -522,6 +522,12 @@ Slab[d_?DataRepresentationQ, s__, OptionsPattern[]]:=
   Part[d, Sequence@@indexrange]
 ];
 
+Slab[d_SimulationTools`DataTable`DataTable, s__, OptionsPattern[]] /; !UniformSpacingQ[d] :=
+ Module[{t},
+  t = ToListOfCoordinates[d];
+  Pick[d, Thread[Thread[t >= s[[1]]] && Thread[t <= s[[2]]]]]
+];
+
 
 (****************************************************************)
 (* Shifted                                                      *)
