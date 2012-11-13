@@ -280,6 +280,8 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
 DataTable /: Interpolation[d_DataTable, args___] :=
    Interpolation[ToList[d], args];
 
+DataTable /: Interpolation[d_DataTable, args___] /; !MonotonicQ[d]:=
+   Error["Can not interpolate a non-monotonic DataTable."];
 
 (****************************************************************)
 (* Map *)
