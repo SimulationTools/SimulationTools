@@ -47,7 +47,7 @@ Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData] = {
   };
 
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
-  ToDataRegion[ReadCarpetIOHDF5Components[file,
+  MergedDataRegion[ReadCarpetIOHDF5Components[file,
     OptionValue[Variable],
     OptionValue[Iteration],
     OptionValue[RefinementLevel],

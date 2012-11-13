@@ -289,7 +289,7 @@ ReadCarpetHDF5Components[file_, var_, it_, rl_, map_, opts:OptionsPattern[]] :=
 
 ReadCarpetHDF5Variable[file_String, var_String, it_Integer, rl:(_Integer|None), map_:None, opts:OptionsPattern[]]:=
   Profile["ReadCarpetHDF5Variable",
-    ToDataRegion[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
+    MergedDataRegion[ReadCarpetHDF5Components[file, var, it, rl, map, Sequence@@FilterRules[{opts}, Options[ReadCarpetHDF5Components]]]]];
 
 Options[ReadCarpetHDF5Variable] = {
 	"Iteration" -> None,

@@ -25,6 +25,7 @@ BeginPackage["SimulationTools`DataRegion`",
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
 ToDataRegion::usage = "ToDataRegion[data, origin, spacing] creates a DataRegion object from the N-dimensional array (nested list) data.";
+MergedDataRegion::usage = "MergedDataRegion[{dr1, dr2, ..., drn}] creates a DataRegion object by combining each of the DataRegions dr1, dr2, ..., drn.";
 
 VariableName::usage = "VariableName[d] returns the variable name in DataRegion d.";
 
@@ -218,8 +219,23 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
   ]
 ];
 
-(* TODO: Do we really want to call this ToDataRegion? How about ToMergedDataRegion instead? *)
-ToDataRegion[ds:List[DataRegion[___]..]] :=
+ToDataRegion[d_SimulationTools`DataTable`DataTable] :=
+ Module[{ndims, xmin, xmax, spacing, data},
+  origin = MinCoordinates[d];
+  spacing = CoordinateSpacings[d];
+  data = ToListOfData[d];
+  ToDataRegion[Developer`ToPackedArray[data], origin, spacing]
+];
+
+
+(**********************************************************)
+(* MergedDataRegion                                       *)
+(**********************************************************)
+
+SyntaxInformation[MergedDataRegion] =
+ {"ArgumentsPattern" -> {_}};
+
+MergedDataRegion[ds:List[DataRegion[___]..]] :=
  Module[{x1, x2, dx, n, data, offsets},
   (* Find the shape of the bounding-box DataRegion *)
   x1 = Min /@ Transpose[MinCoordinates /@ ds];
@@ -230,7 +246,7 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
 
   (* TODO: Check that all origins are separated by multiples of their spacing. *)
   If[Length[dx] =!= 1,
-    Error["ToDataRegion only supports merging DataRegions with the same grid spacing."];
+    Error["MergedDataRegion only supports merging DataRegions with the same grid spacing."];
   ,
     dx = First[dx];
   ];
@@ -249,14 +265,6 @@ ToDataRegion[ds:List[DataRegion[___]..]] :=
   ToDataRegion[Developer`ToPackedArray[data], x1, dx, "VariableName" -> VariableName[ds[[1]]]]
 ];
 
-
-ToDataRegion[d_SimulationTools`DataTable`DataTable] :=
- Module[{ndims, xmin, xmax, spacing, data},
-  origin = MinCoordinates[d];
-  spacing = CoordinateSpacings[d];
-  data = ToListOfData[d];
-  ToDataRegion[Developer`ToPackedArray[data], origin, spacing]
-];
 
 (**********************************************************)
 (* ToListOfData                                           *)
