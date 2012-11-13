@@ -523,48 +523,6 @@ ToListOfCoordinates[DataTable[l_, ___]] :=
 (****************************************************************)
 
 (****************************************************************)
-(* FourierDCT                                                   *)
-(****************************************************************)
-
-DataTable /: FourierDCT[d_DataTable,args___] :=
- Module[{df, fs},
-  (* I think these frequencies are right *)
-  df = 2 Pi/-Subtract @@ DataTableRange[d];
-  fs = Table[i df, {i, 0, Length[d] - 1}];
-  MakeDataTable@MapThread[List, {fs, Abs@FourierDCT[DepVar@d,args]}]/
-   N[Sqrt[Length[d]]]
-];
-
-(****************************************************************)
-(* Fourier                                                      *)
-(****************************************************************)
-
-DataTable /: Fourier[d_DataTable,args___] :=
- Module[{amp, l, n, T, freq},
-  amp = Fourier[DepVar[d],args];
-  l = Length[d];
-  n = Floor[l/2];
-  amp = RotateRight[amp, n];
-  T = Spacing[d]*l;
-  freq = Range[-n, l - 1 - n]/T;
-  Return[MakeDataTable[Transpose[{freq, amp}]]];
-];
-
-(****************************************************************)
-(* InverseFourier                                               *)
-(****************************************************************)
-
-DataTable /: InverseFourier[d_DataTable, t0_:0.0, opts:OptionsPattern[]] :=
- Module[{amp, time, df, l, n},
-  l = Length[d];
-  n = Floor[l/2];
-  amp = InverseFourier[RotateLeft[DepVar[d], n],opts];
-  df = Spacing[d];
-  time = t0 + Range[0, l - 1]/(df*l);
-  Return[MakeDataTable[Transpose[{time, amp}]]];
-];
-
-(****************************************************************)
 (* AntiDerivative                                               *)
 (****************************************************************)
 
@@ -976,6 +934,48 @@ DataTable /: Norm[d:DataTable[__]] :=
 (* Deprecated                                                   *)
 (****************************************************************)
 (****************************************************************)
+
+(****************************************************************)
+(* FourierDCT                                                   *)
+(****************************************************************)
+
+DataTable /: FourierDCT[d_DataTable,args___] :=
+ Module[{df, fs},
+  (* I think these frequencies are right *)
+  df = 2 Pi/-Subtract @@ DataTableRange[d];
+  fs = Table[i df, {i, 0, Length[d] - 1}];
+  MakeDataTable@MapThread[List, {fs, Abs@FourierDCT[DepVar@d,args]}]/
+   N[Sqrt[Length[d]]]
+];
+
+(****************************************************************)
+(* Fourier                                                      *)
+(****************************************************************)
+
+DataTable /: Fourier[d_DataTable,args___] :=
+ Module[{amp, l, n, T, freq},
+  amp = Fourier[DepVar[d],args];
+  l = Length[d];
+  n = Floor[l/2];
+  amp = RotateRight[amp, n];
+  T = Spacing[d]*l;
+  freq = Range[-n, l - 1 - n]/T;
+  Return[MakeDataTable[Transpose[{freq, amp}]]];
+];
+
+(****************************************************************)
+(* InverseFourier                                               *)
+(****************************************************************)
+
+DataTable /: InverseFourier[d_DataTable, t0_:0.0, opts:OptionsPattern[]] :=
+ Module[{amp, time, df, l, n},
+  l = Length[d];
+  n = Floor[l/2];
+  amp = InverseFourier[RotateLeft[DepVar[d], n],opts];
+  df = Spacing[d];
+  time = t0 + Range[0, l - 1]/(df*l);
+  Return[MakeDataTable[Transpose[{time, amp}]]];
+];
 
 MakeDataTable[l_List] :=
   DataTable[Developer`ToPackedArray[l]];
