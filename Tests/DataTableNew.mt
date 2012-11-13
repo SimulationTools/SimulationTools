@@ -889,3 +889,38 @@ Test[
 ]
 
 
+(****************************************************************)
+(* WithResampling                                               *)
+(****************************************************************)
+
+Test[
+    WithResampling["First", Resampled[{dt, dt2}]]
+    ,
+    Resampled[{dt, dt2}, dt]
+    ,
+    TestID->"WithResampling First"
+]
+
+Test[
+    WithResampling["Last", Resampled[{dt2, dt}]]
+    ,
+    Resampled[{dt2, dt}, dt]
+    ,
+    TestID->"WithResampling Last"
+]
+
+Test[
+    WithResampling["Finest", Resampled[{dt, dt2}]]
+    ,
+    Resampled[{dt, dt2}, dt]
+    ,
+    TestID->"WithResampling"
+]
+
+Test[
+    WithResampling["Coarsest", Resampled[{dt, dt3}]]
+    ,
+    Resampled[{dt, dt3}, dt[[1;;6]]]
+    ,
+    TestID->"WithResampling Coarsest"
+]
