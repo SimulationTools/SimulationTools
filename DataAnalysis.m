@@ -23,10 +23,10 @@ BeginPackage["SimulationTools`DataAnalysis`",
   "Units`"
  }];
 
-WaveformMatch::usage = "WaveformMatch[{h1, h2}, s] gives the match "<>
- "of the time-domain waveforms h1 and h2 with the noise function s.";
-SolarMassInSeconds::usage = "SolarMassInSeconds gives the value of GM/c^3 in seconds, "<>
- "where M is the mass of the sun.";
+WaveformMatch(*::usage = "WaveformMatch[{h1, h2}, s] gives the match "<>
+ "of the time-domain waveforms h1 and h2 with the noise function s."*);
+SolarMassInSeconds(*::usage = "SolarMassInSeconds gives the value of GM/c^3 in seconds, "<>
+ "where M is the mass of the sun."*);
 
 
 (****************************************************************)
