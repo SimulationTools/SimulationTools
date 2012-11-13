@@ -765,8 +765,12 @@ Test[
     TestID->"ToDataRegion"
 ]
 
+(****************************************************************)
+(* MergedDataRegion                                             *)
+(****************************************************************)
+
 Test[
-    ToDataRegion[{dr, dr3}]
+    MergedDataRegion[{dr, dr3}]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {9.9, 20., 30.}, "Spacing" -> {0.1, 0.2, 0.3}},
      {{{222, 224, 226, 228}, {242, 244, 246, 248}, {262, 264, 266, 268}},
