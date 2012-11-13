@@ -493,7 +493,12 @@ SyntaxInformation[SameGridQ] =
 SyntaxInformation[Slab] =
  {"ArgumentsPattern" -> {_, __}};
 
-Slab[d_?DataRepresentationQ, s__]:=
+Slab[d_SimulationTools`DataTable`DataTable, s__] :=
+  If[!SimulationTools`DataTable`UniformSpacingQ[d], slabnu[d, s], slab[d, s]];
+
+Slab[d_SimulationTools`DataRegion`DataRegion, s__] := slab[d, s];
+
+slab[d_?DataRepresentationQ, s__]:=
  Module[{slabSpec, valid, spacing, origin, endpoints, indexrange},
   spacing   = CoordinateSpacings[d];
   origin    = MinCoordinates[d];
@@ -514,10 +519,16 @@ Slab[d_?DataRepresentationQ, s__]:=
   Part[d, Sequence@@indexrange]
 ];
 
-Slab[d_SimulationTools`DataTable`DataTable, s__, OptionsPattern[]] /; !UniformSpacingQ[d] :=
- Module[{t},
+slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable`UniformSpacingQ[d] :=
+ Module[{t, spacings, tleft, tright},
   t = ToListOfCoordinates[d];
-  Pick[d, Thread[Thread[t >= s[[1]]] && Thread[t <= s[[2]]]]]
+
+  (* We allow a tolerance of half the local grid spacing *)
+  spacings = Differences[t]/2;
+  tright = t - ArrayPad[spacings, {1, 0}, spacings[[1]]];
+  tleft = t + ArrayPad[spacings, {0, 1}, spacings[[-1]]];
+
+  Pick[d, Thread[Thread[tleft > s[[1]]] && Thread[tright < s[[2]]]]]
 ];
 
 
