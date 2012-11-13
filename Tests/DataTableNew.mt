@@ -811,6 +811,14 @@ slabTest[p_, s_] :=
 
 MapThread[slabTest, {parts, slabs}];
 
+Test[
+    Slab[dt2, 9 ;; 13]
+    ,
+    DataTable[{{9, 13}, {16, 14}}]
+    ,
+    TestID->"Slab non-uniform"
+];
+
 
 (****************************************************************)
 (* Sub                                                          *)
