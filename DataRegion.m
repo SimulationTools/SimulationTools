@@ -332,7 +332,7 @@ DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
   If[Length[ds] > 1 && !(SameGridQ@@ds),
     rds = Resampled[ds];
     If[rds === $Failed,
-      Error[ToString[f]<>" cannot operate on DataRegions with different coordinates. To allow this, set the $ResamplingFunction variable."];
+      Error[ToString[f]<>" cannot operate on DataRegions with different coordinates. To allow this, set the $ResamplingMethod variable."];
     ];
     args = ({x, d, y} /. Thread[ds -> rds]) /. dr_DataRegion :> ToListOfData[dr];
   ,

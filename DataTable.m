@@ -255,7 +255,7 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
   If[Length[ds] > 1 && !(SameGridQ@@ds),
     rds = Resampled[ds];
     If[rds === $Failed,
-      Error[ToString[f]<>" cannot operate on DataTables with different coordinates. Too allow this, set the $ResamplingFunction variable."];
+      Error[ToString[f]<>" cannot operate on DataTables with different coordinates. Too allow this, set the $ResamplingMethod variable."];
     ];
     args = ({x, d, y} /. Thread[ds -> rds]) /. dt_DataTable :> ToListOfData[dt];
   ,

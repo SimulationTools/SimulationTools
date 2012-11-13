@@ -49,7 +49,7 @@ Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d 
   "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ...."<>
   "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
   "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
-$ResamplingFunction::usage = "$ResamplingFunction is a variable which controls the type of automatic resampling which should be done.";
+$ResamplingMethod::usage = "$ResamplingMethod is a variable which controls the type of automatic resampling which should be done.";
 Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
   "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
@@ -455,15 +455,15 @@ Resampled[d_?DataRepresentationQ, grid:{{_?NumericQ, _?NumericQ, _?NumericQ}...}
 ];
 
 
-If[!ValueQ[$ResamplingFunction], $ResamplingFunction = None];
+If[!ValueQ[$ResamplingMethod], $ResamplingMethod = None];
 Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/@ds] :=
  Module[{onto, x1, x2, dx},
-  Switch[$ResamplingFunction,
+  Switch[$ResamplingMethod,
    None,
     Return[$Failed];
-    Error["Operation requires automatic resampling but $ResamplingFunction is not set"];,
+    Error["Operation requires automatic resampling but $ResamplingMethod is not set"];,
    _?DataRepresentationQ,
-    onto = Slab[$ResamplingFunction, Span@@SimulationTools`DataTable`CommonInterval[ds]];,
+    onto = Slab[$ResamplingMethod, Span@@SimulationTools`DataTable`CommonInterval[ds]];,
    "First",
     onto = Slab[First[ds], Span@@SimulationTools`DataTable`CommonInterval[ds]];,
    "Last",
@@ -495,9 +495,9 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
     ];
     onto = Transpose[{x1, x2, dx}];,
    _String,
-    Error["Unknown $ResamplingFunction preset: "<>$ResamplingFunction];,
+    Error["Unknown $ResamplingMethod preset: "<>$ResamplingMethod];,
    _,
-    onto = $ResamplingFunction[ds];
+    onto = $ResamplingMethod[ds];
   ];
 
   Resampled[ds, onto, opts]
