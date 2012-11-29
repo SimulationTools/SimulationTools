@@ -24,6 +24,7 @@ BeginPackage["SimulationTools`NRExport`",
   "SimulationTools`Horizons`",
   "SimulationTools`NR`",
   "SimulationTools`Parameters`",
+  "SimulationTools`ReadHDF5`",
   "SimulationTools`TwoPunctures`",
   "SimulationTools`Waveforms`"
  }];
@@ -194,7 +195,12 @@ ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, r_] :=
   Switch[fileExtension[file],
   "h5",
     dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>rad;
-    Export[file, final, {"Datasets", dataset}, "Append"->True];,
+    Module[
+      {tmp = file<>".tmp.h5"},
+      If[FileExistsQ[tmp], SetStatus["Deleting existing temporary file "<>tmp]; DeleteFile[tmp]];
+      If[FileExistsQ[file],RenameFile[file, tmp]];
+      Export[tmp, final, {"Datasets", dataset}, "Append"->True];
+      RenameFile[tmp,file]];,
   "asc",
     Export[file, final, "TABLE"];,
   "asc.gz",
@@ -250,7 +256,13 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
     Export[file, f, {"GZIP", "TABLE"}];,
   "h5",
     dsName = (what /. {Coordinates -> "traj", Spin -> "spin", HorizonMass -> "horizon_mass"}) <> ToString[i];
-    Export[file, f, {"Datasets", dsName}, "Append"->True];,
+   
+    Module[
+      {tmp = file<>".tmp.h5"},
+      If[FileExistsQ[tmp], SetStatus["Deleting existing temporary file "<>tmp]; DeleteFile[tmp]];
+      If[FileExistsQ[file],RenameFile[file, tmp]];
+      Export[tmp, f, {"Datasets", dsName}, "Append"->True];
+      RenameFile[tmp,file]];,
   _,
     Error["Unsupported file format: "<>fileExtension[file]];
   ];
