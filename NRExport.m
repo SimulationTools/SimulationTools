@@ -75,6 +75,13 @@ fileBaseName[file_] :=
     base = FileBaseName[FileBaseName[file]]];
   base];
 
+SetStatus[str_] :=
+  Module[
+    {},
+    If[$FrontEnd === Null,
+       Print[str]];
+    ExportStatus = str];
+
 ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer, OptionsPattern[]] :=
  Module[{dir, extrap, junkTime, afterjunk, final, dataset},
   dir = DirectoryName[file];
@@ -82,7 +89,7 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
     CreateDirectory[dir];
   ];
 
-  ExportStatus = "Exporting extrapolated waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file;
+  SetStatus["Exporting extrapolated waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file];
 
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   junkTime  = OptionValue[JunkTime];
@@ -131,7 +138,7 @@ ExportExtrapolatedStrain[run_String, file_String, mass_, l_Integer, m_Integer, o
     CreateDirectory[dir];
   ];
 
-  ExportStatus = "Exporting extrapolated strain waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file;
+  SetStatus["Exporting extrapolated strain waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file];
 
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   strain    = StrainFromPsi4[extrap, om];
@@ -178,7 +185,8 @@ ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, r_] :=
     CreateDirectory[dir];
   ];
 
-  ExportStatus = "Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>rad<>") to "<>file;
+
+  SetStatus["Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>rad<>") to "<>file];
 
   psi4  = ReadPsi4[run, l, m, Round[ToExpression[rad]]];
   final = Join[Re[psi4], Im[psi4]];
@@ -228,7 +236,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
     CreateDirectory[dir];
   ];
 
-  ExportStatus = "Exporting " <> ToString[what] <> " data for "<>run<>" to "<>file;
+  SetStatus["Exporting " <> ToString[what] <> " data for "<>run<>" to "<>file];
 
   f = Switch[what,
     Coordinates, ReadBHCoordinates[run, i-1],
