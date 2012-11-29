@@ -187,6 +187,12 @@ ExportExtractedWaveform[run_String, file_String, l_Integer, m_Integer, r_] :=
   ];
 
 
+  If[fileExtension[file] === "h5" && FileExistsQ[file],
+     dataset="l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>rad;
+     If[MemberQ[ReadHDF5[file], "/"<>dataset],
+        SetStatus["Skipping existing dataset "<>file<>":"<>dataset];
+        Return[]]];
+
   SetStatus["Exporting extracted waveform for "<>run<>" ("<>ToString[l]<>", "<>ToString[m]<>", "<>rad<>") to "<>file];
 
   psi4  = ReadPsi4[run, l, m, Round[ToExpression[rad]]];
@@ -241,6 +247,14 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
   If[dir=!="" && FileType[dir]=!=Directory,
     CreateDirectory[dir];
   ];
+
+  If[fileExtension[file] === "h5" && FileExistsQ[file],
+     dsName = (what /. {Coordinates -> "traj", Spin -> "spin", HorizonMass -> "horizon_mass"}) <> ToString[i];
+     If[MemberQ[ReadHDF5[file], "/"<>dsName],
+        SetStatus["Skipping existing dataset "<>file<>":"<>dsName];
+        Return[],
+       (*else*)
+       SetStatus["Not skipping for "<>file<>":"<>dsName]]];
 
   SetStatus["Exporting " <> ToString[what] <> " data for "<>run<>" to "<>file];
 
