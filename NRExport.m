@@ -446,7 +446,7 @@ ExportNumericalRelativitySimulation[run_String, niceName_, outputDirectory_, mas
 
 Options[ExportConfig] = Options[ExportSim];
 ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPattern[]] :=
-  Scan[ExportSim[#, name, outputDirectory, Madm, ecc, opts] &, sims];
+  Scan[ExportNumericalRelativitySimulation[#, name, outputDirectory, Madm, ecc, opts] &, sims];
 
 End[];
 
