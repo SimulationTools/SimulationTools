@@ -285,8 +285,8 @@ DataTable /: Interpolation[d_DataTable, args___] /; !MonotonicQ[d]:=
 (* Map *)
 (****************************************************************)
 
-DataTable /: Map[f_, DataTable[l_, attrs___]] :=
-  DataTable[Transpose[{l[[All,1]],Map[f,l[[All,2]]]}], attrs];
+DataTable /: Map[f_, d_DataTable] :=
+  ToDataTable[ToListOfCoordinates[d], Map[f,ToListOfData[d]]];
 
 
 (****************************************************************)
@@ -331,20 +331,14 @@ Protect[MapThread];
 (* MaxCoordinates                                         *)
 (**********************************************************)
 
-MaxCoordinates[d_DataTable] :=
-  Module[{list = ToList[d], t2},
-    t2 = Last[list][[1]];
-    {t2}];
+MaxCoordinates[d_DataTable] := {Last[ToListOfCoordinates[d]]};
 
 
 (**********************************************************)
 (* MinCoordinates                                         *)
 (**********************************************************)
 
-MinCoordinates[d_DataTable] :=
-  Module[{list = ToList[d], t1},
-    t1 = First[list][[1]];
-    {t1}];
+MinCoordinates[d_DataTable] := {First[ToListOfCoordinates[d]]};
 
 
 (****************************************************************)
@@ -629,8 +623,8 @@ InterpolatedWhere[d_DataTable, f_] :=
 (* Length                                                 *)
 (**********************************************************)
 
-DataTable /: Length[DataTable[d_,___]] :=
-  Length[d];
+DataTable /: Length[d_DataTable] :=
+  Length[ToListOfCoordinates[d]];
 
 
 (****************************************************************)
