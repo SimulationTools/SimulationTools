@@ -262,7 +262,7 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
     args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
   ];
   attrs = Apply[Intersection, Map[ListAttributes, ds]];
-  ToDataTable[Transpose[{ToListOfCoordinates[First[rds]], f@@args}], ListAttributes[d]]
+  ToDataTable[ToListOfCoordinates[First[rds]], f@@args]
 ];
 
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
