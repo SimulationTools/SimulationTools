@@ -138,10 +138,11 @@ DataRepresentationQ[DataTable[l_, attrs___]] = True;
 (**********************************************************)
 
 CoordinateRanges[d_DataTable] :=
-  Module[{list = ToList[d], t1, t2},
-    If[Length[list] === 0, Error["Cannot compute the range of an empty DataTable"]];
-    t1 = First[list][[1]];
-    t2 = Last[list][[1]];
+  Module[{coords, t1, t2},
+    coords = ToListOfCoordinates[d];
+    If[Length[coords] === 0, Error["Cannot compute the range of an empty DataTable"]];
+    t1 = First[coords];
+    t2 = Last[coords];
     {{t1,t2}}];
 
 
