@@ -444,9 +444,7 @@ DataTable /: SameGridQ[dts:DataTable[__]..] :=
 (****************************************************************)
 
 Shifted[d_DataTable, dt_?NumericQ] :=
-  Module[{list = ToList[d]},
-    AddAttributes[MakeDataTable[Thread[{list[[All,1]] + dt, list[[All,2]]}]],
-                  ListAttributes[d]]];
+    ToDataTable[ToListOfCoordinates[d] + dt, ToListOfData[d]];
 
 Shifted[d_DataTable, {dt_?NumericQ}] := Shifted[d, dt];
 
