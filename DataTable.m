@@ -864,7 +864,7 @@ ListAttributes[d:DataTable[l_, attrs___]] :=
 (****************************************************************)
 
 FunctionInverse[d_DataTable] :=
-  MakeDataTable[MapThread[List,{DepVar[d],IndVar[d]}]];
+  ToDataTable[ToListOfData[d], ToListOfCoordinates[d]];
 
 
 (****************************************************************)
