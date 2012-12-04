@@ -43,7 +43,7 @@ Module[
 	Test[
 		ReadPsi4[run,2,2,30]
 	,
-		DataTable[data,RunName -> run]
+		DataTable[Transpose[data],RunName -> run]
 	,
 	TestID->"ReadPsi4_mp_asc"]]
 
