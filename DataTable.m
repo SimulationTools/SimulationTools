@@ -479,6 +479,13 @@ DataTable /: Take[d:DataTable[l_, x___], args__] :=
 
 ToDataTable[l_List] :=
   DataTable[Developer`ToPackedArray[l]];
+ToDataTable[t_List, f_List] :=
+ Module[{},
+  If[Length[t] =!= Length[f],
+    Error["ToDataTable: Dependent and independent variables must be Lists of the same length."];
+  ];
+  DataTable[Developer`ToPackedArray[Transpose[{t, f}]]]
+];
 
 ToDataTable[l_List, attrRules:{(_ -> _) ...}] :=
   (* The attrRules are currently unsupported *)
