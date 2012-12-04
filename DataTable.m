@@ -763,7 +763,7 @@ UniformSpacingQ[d_DataTable] :=
   Module[
     {ts, dts, dt1, tol = 10.^-5},
     ts = IndVar[d];
-    dts = Drop[ts,1] - Drop[RotateRight[ts],1];
+    dts = Differences[ts];
     dt1 = dts[[1]];
     Max[Abs[dts - dt1]] < tol];
 
