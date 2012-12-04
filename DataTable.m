@@ -117,7 +117,7 @@ check[d_DataTable, where_:None] :=
     Error[If[where===None,"",where<>": "]<>"Invalid DataTable"]];
 
 validQ[d_DataTable] :=
-  MatchQ[d,DataTable[{{_?NumericQ, _?NumericQ|_List}...},___]];
+  MatchQ[d,DataTable[{{_?NumericQ...}, {(_?NumericQ|_List)...}},___]];
 
 (* TODO: Remove this hack *)
 DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
@@ -128,7 +128,7 @@ SetAttributes[DataTable, {ReadProtected}];
 Format[d:DataTable[l_ /; (Head[l]=!=SequenceForm), ___]] :=
   If[!validQ[d], 
    DataTable[SequenceForm@@{"<", "invalid", ">"}],
-   DataTable[SequenceForm@@{"<", Length[l], ">"}, {{l[[1, 1]], l[[-1, 1]]}}]];
+   DataTable[SequenceForm@@{"<", Length[l[[1]]], ">"}, {{l[[1, 1]], l[[1, -1]]}}]];
 
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
 
@@ -217,9 +217,9 @@ Downsampled[d_DataTable, n_Integer] :=
 
 DataTable /: Drop[d:DataTable[l_, x___], args__] :=
  Module[{data},
-  data = Drop[l, args];
+  data = Drop[#, args] & /@ l;
 
-  If[Length[data] === 1,
+  If[Length[data[[1]]] === 1,
   	Error[DataTableSingle,
               "Operations which would return a DataTable with a single element are not currently supported."];
   ];
@@ -374,12 +374,12 @@ NDerivative[d_DataTable] :=
 
 DataTable /: Part[d:DataTable[l_, x___], args__] :=
  Module[{data, result},
-  data = Part[l, args];
+  data = Part[#, args] & /@ l;
 
   Which[
    ArrayDepth[data] === 1,
      result = data[[2]];,
-   Length[data] === 1,
+   Length[data[[1]]] === 1,
      Error[DataTableSingle,
            "Operations which would return a DataTable with a single element are not currently supported."];,
    True,
@@ -454,9 +454,9 @@ Shifted[d_DataTable, {dt_?NumericQ}] := Shifted[d, dt];
 
 DataTable /: Take[d:DataTable[l_, x___], args__] :=
  Module[{data},
-  data = Take[l, args];
+  data = Take[#, args] & /@ l;
 
-  If[Length[data] === 1,
+  If[Length[data[[1]]] === 1,
   	Error[DataTableSingle,
               "Operations which would return a DataTable with a single element are not currently supported."];
   ];
@@ -469,18 +469,19 @@ DataTable /: Take[d:DataTable[l_, x___], args__] :=
 (****************************************************************)
 
 ToDataTable[l_List] :=
-  DataTable[Developer`ToPackedArray[l]];
+  DataTable[Developer`ToPackedArray /@ Transpose[l]];
+
 ToDataTable[t_List, f_List] :=
  Module[{},
   If[Length[t] =!= Length[f],
     Error["ToDataTable: Dependent and independent variables must be Lists of the same length."];
   ];
-  DataTable[Developer`ToPackedArray[Transpose[{t, f}]]]
+  DataTable[Developer`ToPackedArray /@ {t, f}]
 ];
 
 ToDataTable[l_List, attrRules:{(_ -> _) ...}] :=
   (* The attrRules are currently unsupported *)
-  DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
+  DataTable[Developer`ToPackedArray /@ Transpose[l], Apply[Sequence,attrRules]];
 
 ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
  Module[{ndims, xmin, xmax, spacing, data},
@@ -501,23 +502,21 @@ ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
 (* ToList *)
 (****************************************************************)
 
-ToList[DataTable[l_, ___]] := l;
+ToList[DataTable[l_, ___]] := Transpose[l];
 
 
 (****************************************************************)
 (* ToListOfData *)
 (****************************************************************)
 
-ToListOfData[DataTable[l_, ___]] :=
-  Map[#[[2]]&, l];
+ToListOfData[DataTable[l_, ___]] := l[[2]];
 
 
 (****************************************************************)
 (* ToListOfCoordinates *)
 (****************************************************************)
 
-ToListOfCoordinates[DataTable[l_, ___]] :=
-  l[[All,1]];
+ToListOfCoordinates[DataTable[l_, ___]] := l[[1]];
 
 
 
@@ -990,10 +989,10 @@ DataTable /: InverseFourier[d_DataTable, t0_:0.0, opts:OptionsPattern[]] :=
 ];
 
 MakeDataTable[l_List] :=
-  DataTable[Developer`ToPackedArray[l]];
+  DataTable[Developer`ToPackedArray /@ Transpose[l]];
 
 MakeDataTable[l_List, attrRules:{(_ -> _) ...}] :=
-  DataTable[Developer`ToPackedArray[l], Apply[Sequence,attrRules]];
+  DataTable[Developer`ToPackedArray /@ Transpose[l], Apply[Sequence,attrRules]];
 
 (* This is never used, and should be removed *)
 MakeDataTable[f_InterpolatingFunction, dt_] :=
