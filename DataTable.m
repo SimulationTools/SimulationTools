@@ -888,12 +888,13 @@ SyntaxInformation[MonotonicQ] =
  {"ArgumentsPattern" -> {_}};
 
 MonotonicQ[d_DataTable, tol_] :=
- Module[{positive},
+ Module[{positive, coords},
   If[tol == 0,
     MonotonicQ[d]
   ];
+  coords = ToListOfCoordinates[d];
   positive = (# > tol &);
-  Apply[And, positive /@ Drop[Drop[RotateLeft[IndVar[d]] - IndVar[d],1],-1]]
+  Apply[And, positive /@ Drop[Drop[RotateLeft[coords] - coords,1],-1]]
 ];
 
 MonotonicQ[d_DataTable] := Abs[Plus @@ Sign[Differences[ToListOfCoordinates[d]]]] == (Length[d]-1);
