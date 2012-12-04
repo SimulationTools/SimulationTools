@@ -739,8 +739,8 @@ RestrictedToInterval[d_DataTable, {t1_, t2_}, opts:OptionsPattern[]] :=
                    _, Error["Unrecognised option Interval -> "
                             <>ToString[OptionValue[Interval], InputForm]]];
 
-    d /. DataTable[l_, x___] :>
-    DataTable[Select[l,lower[#[[1]],tMin-eps] && upper[#[[1]], tMax+eps] &], x]];
+    d /. dt_DataTable :>
+    ToDataTable[Select[ToList[dt],lower[#[[1]],tMin-eps] && upper[#[[1]], tMax+eps] &]]];
 
 
 (**********************************************************)
