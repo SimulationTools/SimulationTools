@@ -312,17 +312,15 @@ MapList[f_, dt_DataTable] :=
 Unprotect[MapThread];
 
 MapThread[f_, ds:List[DataTable[__]...]] :=
- Module[{vals, xs, fOfVals, tb, attrs},
+ Module[{vals, xs, fOfVals},
   If[Length[ds] > 1 && !(SameGridQ@@ds),
     Error["MapThread cannot operate on DataTables with different coordinates."];
   ];
 
-  vals = Map[DepVar, ds];
-  xs = IndVar[First[ds]];
+  vals = Map[ToListOfData, ds];
+  xs = ToListOfCoordinates[First[ds]];
   fOfVals = MapThread[f, vals];
-  tb = MapThread[List, {xs,fOfVals}];
-  attrs = Apply[Intersection, Map[ListAttributes, ds]];
-  MakeDataTable[tb,attrs]
+  ToDataTable[xs,fOfVals]
 ];
 
 Protect[MapThread];
