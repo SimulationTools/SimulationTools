@@ -171,9 +171,9 @@ Test[
 (****************************************************************)
 
 Test[
-	ApplyToList[f,DataTable[{{1,10},{2,11},{3,12}}]]
+	ApplyToList[Part[#,{1,3}]&,DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
-	DataTable[f[{{1,10},{2,11},{3,12}}]]
+	DataTable[{{1, 3}, {10, 12}}]
 	,
 	TestID->"ApplyToList"
 ]
