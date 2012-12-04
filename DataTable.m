@@ -753,7 +753,7 @@ SyntaxInformation[UniformSpacingQ] =
 UniformSpacingQ[d_DataTable] :=
   Module[
     {ts, dts, dt1, tol = 10.^-5},
-    ts = IndVar[d];
+    ts = ToListOfCoordinates[d];
     dts = Differences[ts];
     dt1 = dts[[1]];
     Max[Abs[dts - dt1]] < tol];
