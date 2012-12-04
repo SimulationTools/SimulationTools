@@ -565,7 +565,7 @@ Coordinate[d_DataTable, dir_:Automatic] :=
   ];
 
   coord = ToListOfCoordinates[d];
-  ToDataTable[Transpose[{coord, coord}]]
+  ToDataTable[coord, coord]
 ];
 
 
