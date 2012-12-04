@@ -299,7 +299,7 @@ MapList[f_, dt_DataTable] :=
     t = ToListOfCoordinates[dt];
     If[!MatchQ[fdt[[1]], _?NumericQ],
       Error["MapList: Result is not numeric: "<>ToString[fdt[[1]]]]];
-    ToDataTable[Transpose[{t,fdt}]]
+    ToDataTable[t, fdt]
 ];
 
 (****************************************************************)
@@ -360,7 +360,7 @@ NDerivative[derivs__][d_DataTable, opts___] :=
 
   deriv = NDSolve`FiniteDifferenceDerivative[Derivative[derivs], grid, data, opts];
 
-  ToDataTable[Transpose[{grid, deriv}]]
+  ToDataTable[grid, deriv]
 ];
 
 (* TODO: This form is deprecated *)
@@ -502,7 +502,7 @@ ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
   {{xmin, xmax}} = CoordinateRanges[d];
   {spacing} = CoordinateSpacings[d];
   data = ToListOfData[d];
-  ToDataTable[Transpose[{Range[xmin, xmax, spacing],data}]]
+  ToDataTable[Range[xmin, xmax, spacing], data]
 ];
 
 
@@ -644,7 +644,7 @@ DataTable /: PadLeft[d_DataTable, n_, x___] :=
   ];
   spacing = CoordinateSpacing[d];
   coords  = Range[n] spacing + First[MinCoordinates[d]] - spacing (n-Length[d]+1);
-  ToDataTable[Transpose[{coords, PadLeft[ToListOfData[d], n, x]}]]
+  ToDataTable[coords, PadLeft[ToListOfData[d], n, x]]
 ];
 
 (****************************************************************)
@@ -658,7 +658,7 @@ DataTable /: PadRight[d_DataTable, n_, x___] :=
   ];
   spacing = CoordinateSpacing[d];
   coords  = (Range[n]-1) spacing + First[MinCoordinates[d]];
-  ToDataTable[Transpose[{coords, PadRight[ToListOfData[d], n, x]}]]
+  ToDataTable[coords, PadRight[ToListOfData[d], n, x]]
 ];
 
 (**********************************************************)
@@ -885,7 +885,7 @@ DataTable /: Composition[d_DataTable, p_DataTable] :=
   dInterp = Interpolation[d];
   coords = ToListOfCoordinates[p];
   data = dInterp[ToListOfData[p]];
-  AddAttributes[ToDataTable[Transpose[{coords, data}]], ListAttributes[d]]
+  AddAttributes[ToDataTable[coords, data], ListAttributes[d]]
 ];
 
 
