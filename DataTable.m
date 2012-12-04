@@ -1005,20 +1005,20 @@ MakeDataTable[f_InterpolatingFunction, dt_] :=
 MakeDataTable[xs_List, ys_List] :=
   MakeDataTable[MapThread[List, {xs,ys}]];
 
-DepVar[DataTable[l_, ___]] :=
-  Map[#[[2]]&, l];
+DepVar[d_DataTable] :=
+  ToListOfData[d];
 
-IndVar[DataTable[l_, ___]] :=
-  Map[#[[1]]&, l];
+IndVar[d_DataTable] :=
+  ToListOfCoordinates[d];
 
-MapData[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[{#[[1]], f[#[[2]]]}&, l], attrs];
+MapData[f_, d_DataTable] :=
+  Map[f, d];
 
-MapIndVar[f_, DataTable[l_, attrs___]] :=
-  DataTable[Map[{#[[1]], f[#[[1]]]}&, l], attrs];
+MapIndVar[f_, d_DataTable] :=
+  ToDataTable[IndVar[d], Map[f, IndVar[d]]];
 
 ApplyToList[f_, d_DataTable] :=
-  d /. DataTable[l_, x___] :> DataTable[f[l], x];
+  ToDataTable[f[ToList[d]]];
 
 MapThreadData[f_, ds:List[DataTable[__]..]] :=
   Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
@@ -1092,7 +1092,7 @@ MakeInterpolatingDataTable[d:DataTable[__], dt_] :=
     t2 = Last[l][[1]];
     f = Interpolation[l];
     l2 = Table[{t, f[t]}, {t, t1, t2, dt}];
-    d /. DataTable[_, x___] -> DataTable[l2, x]];
+    ToDataTable[l2]];
 
 ShiftPhase[d_DataTable, dph_] :=
   MapData[Exp[I dph] # &, d];
@@ -1126,7 +1126,7 @@ ShiftDataTable[dt_?NumberQ, d : DataTable[__]] :=
  Shifted[d, dt];
 
 DataTableDepVarInterval[d_DataTable, {y1_?NumberQ, y2_?NumberQ}] :=
-  d /. DataTable[data_, attrs___] :> DataTable[Select[data,#[[2]] >= y1 && #[[2]] < y2 &], attrs];
+  ToDataTable[Select[ToList[d],#[[2]] >= y1 && #[[2]] < y2 &]];
 
 (* TODO: Could implement this in terms of Composition[d, FunctionInverse[p]], but it would not be an identical algorithm *)
 FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
