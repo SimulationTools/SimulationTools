@@ -468,20 +468,19 @@ DataTable /: Take[d:DataTable[l_, x___], args__] :=
 (* ToDataTable *)
 (****************************************************************)
 
-ToDataTable[l_List] :=
-  DataTable[Developer`ToPackedArray /@ Transpose[l]];
-
-ToDataTable[t_List, f_List] :=
+ToDataTable[t_List, f_List, attrRules:{(_ -> _)...}:{}] :=
  Module[{},
   If[Length[t] =!= Length[f],
     Error["ToDataTable: Dependent and independent variables must be Lists of the same length."];
   ];
-  DataTable[Developer`ToPackedArray /@ {t, f}]
+  DataTable[Developer`ToPackedArray /@ {t, f}, Sequence@@attrRules]
 ];
 
-ToDataTable[l_List, attrRules:{(_ -> _) ...}] :=
-  (* The attrRules are currently unsupported *)
-  DataTable[Developer`ToPackedArray /@ Transpose[l], Apply[Sequence,attrRules]];
+ToDataTable[l_List, attrRules:{(_ -> _)..}] :=
+  ToDataTable[Sequence@@Transpose[l], attrRules];
+
+ToDataTable[l_List] :=
+  ToDataTable@@Transpose[l];
 
 ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
  Module[{ndims, xmin, xmax, spacing, data},
