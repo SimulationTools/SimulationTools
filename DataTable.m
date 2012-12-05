@@ -117,7 +117,8 @@ check[d_DataTable, where_:None] :=
     Error[If[where===None,"",where<>": "]<>"Invalid DataTable"]];
 
 validQ[d_DataTable] :=
-  MatchQ[d,DataTable[{{_?NumericQ...}, {(_?NumericQ|_List)...}},___]];
+  MatchQ[d, DataTable[{{__?NumericQ}, {__?NumericQ}}]] ||
+  MatchQ[d, DataTable[{{__?NumericQ}, {__List}}]];
 
 (* TODO: Remove this hack *)
 DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
