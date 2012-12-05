@@ -261,7 +261,6 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
     rds = ds;
     args = {x, d, y} /. dt_DataTable :> ToListOfData[dt];
   ];
-  attrs = Apply[Intersection, Map[ListAttributes, ds]];
   ToDataTable[ToListOfCoordinates[First[rds]], f@@args]
 ];
 
@@ -549,7 +548,7 @@ AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
   gFn = g /.
     NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
      1]];
-  gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}], ListAttributes[d]]];
+  gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}]]];
 
 
 (**********************************************************)
@@ -874,7 +873,7 @@ DataTable /: Composition[d_DataTable, p_DataTable] :=
   dInterp = Interpolation[d];
   coords = ToListOfCoordinates[p];
   data = dInterp[ToListOfData[p]];
-  AddAttributes[ToDataTable[coords, data], ListAttributes[d]]
+  ToDataTable[coords, data]
 ];
 
 
@@ -1030,8 +1029,7 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     xs = IndVar[First[ds]];
     fOfVals = MapThread[f, vals];
     tb = MapThread[List, {xs,fOfVals}];
-    attrs = Apply[Intersection, Map[ListAttributes, ds]];
-    MakeDataTable[tb,attrs]];
+    MakeDataTable[tb]];
 
 Downsample[d_DataTable, n_Integer] :=
   ApplyToList[downsample[#, n] &, d];
@@ -1054,7 +1052,7 @@ ResampleDataTable[d:DataTable[__], {t1_, t2_, dt_}, p_Integer] :=
       Error["ResampleDataTable: bad range spec " <> ToString[{t1,t2,dt}] <>
             " for DataTable with range " <> ToString[{dt1,dt2}]]];
     f = Interpolation[d, InterpolationOrder -> p];
-    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]], ListAttributes[d]]];
+    MakeDataTable[Table[{t, f[t]}, {t, t1, t2, dt}]]];
 
 Options[ResampleDataTable] = {"Intersect" -> True};
 ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8, OptionsPattern[]] :=
@@ -1067,8 +1065,7 @@ ResampleDataTable[d:DataTable[__], template:DataTable[__], p_Integer:8, OptionsP
                          IntersectDataTables[d,template],
                          {d,template}];
     f = Interpolation[d, InterpolationOrder -> p];
-    AddAttributes[MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]],
-                  ListAttributes[d]]];
+    MakeDataTable[Table[{t, f[t]}, {t, IndVar[template2]}]]];
 
 ResampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
   Module[{dts, dt, ranges, t1s, t2s, t1, t2},
@@ -1136,7 +1133,7 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
   dOftFn = Interpolation[d];
   dOfphiTb = 
    Table[{phi, dOftFn[tOfphiFn[phi]]}, {phi, phiMin, phiMax, dp}];
-  AddAttributes[MakeDataTable[dOfphiTb], ListAttributes[d]]];
+  MakeDataTable[dOfphiTb]];
 
 rangepatt = _?NumberQ | All;
 
