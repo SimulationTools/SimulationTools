@@ -249,7 +249,7 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  MemberQ[$DataTableFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
  Module[{args, ds, rds, attrs},
-  ds = Cases[{x, d, y}, _DataTable, Infinity];
+  ds = Cases[{x, d, y}, _DataTable];
   Assert[Apply[And,validQ /@ ds]];
   If[Length[ds] > 1 && !(SameGridQ@@ds),
     rds = Resampled[ds];
