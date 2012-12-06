@@ -477,10 +477,22 @@ ToDataTable[t_List, f_List, attrRules:{(_ -> _)...}:{}] :=
 ];
 
 ToDataTable[l_List, attrRules:{(_ -> _)..}] :=
-  ToDataTable[Sequence@@Transpose[l], attrRules];
+ Module[{dims},
+  dims = Dimensions[l];
+  If[!MatchQ[dims, {_, 2}],
+    Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
+  ];
+  ToDataTable[Sequence@@Transpose[l], attrRules]
+];
 
 ToDataTable[l_List] :=
-  ToDataTable@@Transpose[l];
+ Module[{dims},
+  dims = Dimensions[l];
+  If[!MatchQ[dims, {_, 2}],
+    Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
+  ];
+  ToDataTable@@Transpose[l]
+];
 
 ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
  Module[{ndims, xmin, xmax, spacing, data},
