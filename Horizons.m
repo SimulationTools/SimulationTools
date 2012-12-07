@@ -185,6 +185,9 @@ ChristodoulouMass[run_, ahn_, ihn_] :=
  Module[{mIrr, S},
   mIrr = ReadAHMass[run, ahn];
   S = MapData[Norm, ReadIsolatedHorizonSpin[run, ihn]];
+  (* TODO: We don't need to resample here; it would be sufficient to
+     restrict mIrr to the grid of S, as mIrr must exist everywhere S
+     does *)
   {mIrr, S} = ResampleDataTables[{mIrr, S}];
   Sqrt[mIrr^2 + S^2/(4 mIrr^2)]];
 
