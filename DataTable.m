@@ -216,15 +216,16 @@ Downsampled[d_DataTable, n_Integer] :=
 (* Drop                                                         *)
 (****************************************************************)
 
-DataTable /: Drop[d:DataTable[l_, x___], args__] :=
- Module[{data},
-  data = Drop[#, args] & /@ l;
+DataTable /: Drop[d_DataTable, args__] :=
+ Module[{coord, data},
+  coord = Drop[ToListOfCoordinates[d], args];
+  data = Drop[ToListOfData[d], args];
 
-  If[Length[data[[1]]] === 1,
+  If[Length[data] === 1,
   	Error[DataTableSingle,
               "Operations which would return a DataTable with a single element are not currently supported."];
   ];
-  DataTable[data, x]
+  ToDataTable[coord, data]
 ];
 
 
@@ -372,18 +373,19 @@ NDerivative[d_DataTable] :=
 (* Part                                                         *)
 (****************************************************************)
 
-DataTable /: Part[d:DataTable[l_, x___], args__] :=
- Module[{data, result},
-  data = Part[#, args] & /@ l;
+DataTable /: Part[d_DataTable, args__] :=
+ Module[{coord, data, result},
+  coord = Part[ToListOfCoordinates[d], args];
+  data = Part[ToListOfData[d], args];
 
   Which[
-   ArrayDepth[data] === 1,
-     result = data[[2]];,
-   Length[data[[1]]] === 1,
+   ArrayDepth[data] === 0,
+     result = data;,
+   Length[data] === 1,
      Error[DataTableSingle,
            "Operations which would return a DataTable with a single element are not currently supported."];,
    True,
-     result = DataTable[data, x];
+     result = ToDataTable[coord, data];
   ];
 
   result
@@ -452,15 +454,16 @@ Shifted[d_DataTable, {dt_?NumericQ}] := Shifted[d, dt];
 (* Take                                                         *)
 (****************************************************************)
 
-DataTable /: Take[d:DataTable[l_, x___], args__] :=
- Module[{data},
-  data = Take[#, args] & /@ l;
+DataTable /: Take[d_DataTable, args__] :=
+ Module[{coord, data},
+  coord = Take[ToListOfCoordinates[d], args];
+  data = Take[ToListOfData[d], args];
 
-  If[Length[data[[1]]] === 1,
+  If[Length[data] === 1,
   	Error[DataTableSingle,
               "Operations which would return a DataTable with a single element are not currently supported."];
   ];
-  DataTable[data, x]
+  ToDataTable[coord, data]
 ];
 
 
