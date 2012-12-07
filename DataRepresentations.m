@@ -391,12 +391,33 @@ phase[tb:{{_, {_, _}}...}] :=
 (* UnwrapPhaseVector                                            *)
 (****************************************************************)
 
+(* The current implementation is an optimisation of the following *)
 (* With thanks to Sascha Husa for pointing this out *)
+(* Juergen Tischer, http://forums.wolfram.com/mathgroup/archive/1998/May/msg00105.html *)
+(*
 UnwrapPhaseVector[data_List] :=
-  (* Juergen Tischer, http://forums.wolfram.com/mathgroup/archive/1998/May/msg00105.html *)
   FoldList[Round[(#1 - #2)/(2 Pi)] 2 Pi + #2 &,
            First[data], 
            Rest[data]];
+*)
+
+(* Only compile this when it is first used. This both speeds up the package
+   loading and avoids problems caused by our argument checker. *)
+unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
+ Module[{diffs, corr, cumulcorr},
+  (* Compute the differences between successive points *)
+  diffs = Differences[data];
+
+  (* Add a jump of 2 Pi each time the difference is between
+     successive points is greater than Pi *)
+  corr = -Round[diffs/(2 Pi)] 2 Pi;
+  cumulcorr = Accumulate[corr];
+
+  (* Add the corrections to the original data *)
+  Join[data[[{1}]], data[[2 ;; -1]] + cumulcorr]
+ ], CompilationTarget -> "C", RuntimeOptions -> "Speed"];
+
+UnwrapPhaseVector[data_List] := unwrapPhaseVector[data];
 
 (**********************************************************)
 (* Resampled                                              *)
