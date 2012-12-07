@@ -94,7 +94,7 @@ ReadBHPhase[runName_String] :=
     x0 = ReadBHCoordinates[runName, 0];
     x1 = ReadBHCoordinates[runName, 1];
     l = Min[Length[x0],Length[x1]];
-    xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
+    xyTrans = MapThread[((#1[[1]]-#2[[1]])+I(#1[[2]]-#2[[2]]))&, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
     Return[Phase[xyTrans]];
   ];
 
@@ -113,7 +113,7 @@ ReadBHInclination[runName_String] :=
 ReadBHPhase[runName_String, i_] :=
   Module[{x0, xyTrans},
     x0 = ReadBHCoordinates[runName, i];
-    xyTrans = MapData[Take[#,2] &, x0]; (* Project into xy plane *)
+    xyTrans = Map[(#[[1]]+ I #[[2]])&, x0]; (* Project into xy plane *)
     Return[Phase[xyTrans]];
   ];
 
