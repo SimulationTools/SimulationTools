@@ -63,6 +63,7 @@ Frequency::usage = "Frequency[d] returns the first derivative of the complex pha
 
 (* Experimental *)
 CommonInterval;
+UnwrapPhaseVector;
 
 (* Exceptions *)
 CoordinateRangeDimensions;
