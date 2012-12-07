@@ -51,6 +51,8 @@ InitialSpin;
 SpinAngle;
 InitialSpinAngle;
 HaveHorizonData;
+HaveIsolatedHorizonSpinData;
+HaveChristodoulouMassData;
 
 Begin["`Private`"];
 
@@ -176,6 +178,9 @@ DefineMemoFunction[ReadAHCentroidCoord[runName_, hn_, dir_],
    list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,2+dir}];
    Return[MakeDataTable[list, {RunName -> runName}]]]];
 
+HaveChristodoulouMassData[run_, ahn_, ihn_] :=
+  HaveHorizonData[run,ahn] && HaveIsolatedHorizonSpinData[run,ihn];
+
 ChristodoulouMass[run_, ahn_, ihn_] :=
  Module[{mIrr, S},
   mIrr = ReadAHMass[run, ahn];
@@ -219,6 +224,9 @@ InitialSpin[run_] :=
 
 HaveHorizonData[run_, i_] :=
   FileIsInRun[run, "BH_diagnostics.ah"<>ToString[i]<>".gp"];
+
+HaveIsolatedHorizonSpinData[run_, i_] :=
+  FileIsInRun[run, "quasilocalmeasures::qlm_scalars..asc"] || FileIsInRun[run, "isolatedhorizon::ih_scalars..asc"];
 
 End[];
 
