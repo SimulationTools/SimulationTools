@@ -58,7 +58,7 @@ GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete
 
 NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d. The derivs argument should be of the same form as in the first argument of Derivative.";
 
-Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for sufficiently smooth input data.";
+Phase::usage = "Phase[d] gives the phase of the complex variable in d.  The resulting phase will be continuous for sufficiently smooth input data.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
 
 (* Experimental *)
@@ -363,30 +363,12 @@ SimulationTools`ArgumentChecker`StandardDefinition[NDerivative] = True;
 SyntaxInformation[Phase] =
  {"ArgumentsPattern" -> {_}};
 
-(* TODO: check the continuity algorithm and see if it can be improved *)
+Phase[d_?DataRepresentationQ] :=
+  UnwrapPhaseVector[Arg[d]];
 
-phase[tb:List[{_, _}...]] :=
-  phase[Map[{#[[1]],{Re[#[[2]]], Im[#[[2]]]}} &, tb]];
+Phase[d_?DataRepresentationQ] /; ArrayDepth[d] > 1 :=
+  Error["Cannot compute the phase of a data representation with dimension greater than 1."];
 
-phase[tb:{{_, {_, _}}...}] :=
-  Module[{phaseTb,x,y,t,previousPhase, i, currentPhase = 0, cycles =
-          0, nPoints},
-  nPoints = Length[tb];
-  phaseTb = Table[i, {i, 1, nPoints}];
-  For[i = 1, i <= nPoints, i++,
-   t = tb[[i, 1]];
-   x = tb[[i, 2, 1]];
-   y = tb[[i, 2, 2]];
-   currentPhase = If[!(x==0 && y ==0), ArcTan[x, y], 0];
-   If[currentPhase - previousPhase > Pi, cycles--];
-   If[currentPhase - previousPhase < -Pi, cycles++];
-   previousPhase = currentPhase;
-   phaseTb[[i]] = {t, 2 Pi cycles + currentPhase}];
-  Return[phaseTb]];
-
-(* TODO: clean up Phase implementation *)
-(* Phase[d_?DataRepresentationQ] := *)
-(*   UnwrapPhaseVector[Arg[d]]; *)
 
 (****************************************************************)
 (* UnwrapPhaseVector                                            *)

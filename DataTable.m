@@ -511,15 +511,6 @@ DataTable /: Part[d_DataTable, args__] :=
 ];
 
 (**********************************************************)
-(* Phase                                                  *)
-(**********************************************************)
-
-(* TODO: clean up Phase implementation *)
-Phase[d_DataTable] :=
-  ToDataTable[SimulationTools`DataRepresentations`Private`phase[ToList[d]]];
-
-
-(**********************************************************)
 (* Pick                                                   *)
 (**********************************************************)
 
