@@ -107,6 +107,12 @@ DataTableSingle;
 Begin["`Private`"];
 
 (****************************************************************)
+(****************************************************************)
+(* Inernal format dependent functions                           *)
+(****************************************************************)
+(****************************************************************)
+
+(****************************************************************)
 (* DataTable *)
 (****************************************************************)
 
@@ -120,9 +126,6 @@ validQ[d_DataTable] :=
   MatchQ[d, DataTable[{{__?NumericQ}, {__?NumericQ}}]] ||
   MatchQ[d, DataTable[{{__?NumericQ}, {__List}}]];
 
-(* TODO: Remove this hack *)
-DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
-
 SetAttributes[DataTable, {ReadProtected}];
 
 (* DataTables are formatted like SparseArrays *)
@@ -132,6 +135,122 @@ Format[d:DataTable[l_ /; (Head[l]=!=SequenceForm), ___]] :=
    DataTable[SequenceForm@@{"<", Length[l[[1]]], ">"}, {{l[[1, 1]], l[[1, -1]]}}]];
 
 DataRepresentationQ[DataTable[l_, attrs___]] = True;
+
+(****************************************************************)
+(* ToDataTable *)
+(****************************************************************)
+
+ToDataTable[t_List, f_List, attrRules:{(_ -> _)...}:{}] :=
+ Module[{},
+  If[Length[t] =!= Length[f],
+    Error["ToDataTable: Dependent and independent variables must be Lists of the same length."];
+  ];
+  DataTable[Developer`ToPackedArray /@ {t, f}, Sequence@@attrRules]
+];
+
+ToDataTable[l_List, attrRules:{(_ -> _)..}] :=
+ Module[{dims},
+  dims = Dimensions[l];
+  If[!MatchQ[dims, {_, 2}],
+    Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
+  ];
+  ToDataTable[Sequence@@Transpose[l], attrRules]
+];
+
+ToDataTable[l_List] :=
+ Module[{dims},
+  dims = Dimensions[l];
+  If[!MatchQ[dims, {_, 2}],
+    Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
+  ];
+  ToDataTable@@Transpose[l]
+];
+
+ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
+ Module[{ndims, xmin, xmax, spacing, data},
+  ndims = ArrayDepth[d];
+  If[ ndims != 1,
+	Error["ToDataTable: Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
+          <> SimulationTools`DataRegion`VariableName[d] <> "' is greater than 1."]
+  ];
+
+  {{xmin, xmax}} = CoordinateRanges[d];
+  {spacing} = CoordinateSpacings[d];
+  data = ToListOfData[d];
+  ToDataTable[Range[xmin, xmax, spacing], data]
+];
+
+
+(****************************************************************)
+(* ToList *)
+(****************************************************************)
+
+ToList[DataTable[l_, ___]] := Transpose[l];
+
+(****************************************************************)
+(* ToListOfData *)
+(****************************************************************)
+
+ToListOfData[DataTable[l_, ___]] := l[[2]];
+
+(****************************************************************)
+(* ToListOfCoordinates *)
+(****************************************************************)
+
+ToListOfCoordinates[DataTable[l_, ___]] := l[[1]];
+
+(****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+(****************************************************************)
+(* AddAttribute                                                 *)
+(****************************************************************)
+
+AddAttribute[d:DataTable[x__], name_ -> val_] :=
+  DataTable[x, name -> val];
+
+
+(****************************************************************)
+(* AddAttributes                                                *)
+(****************************************************************)
+
+AddAttributes[d:DataTable[x__], attrRules_List] :=
+  DataTable[x, Apply[Sequence, attrRules]];
+
+
+(****************************************************************)
+(* ReadAttribute                                                *)
+(****************************************************************)
+
+ReadAttribute[d:DataTable[l_, attrs___], name_] :=
+  Module[{val},
+    val = name /. {attrs};
+    If[val === name,
+      Error["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
+    Return[val]];
+
+
+(****************************************************************)
+(* ListAttributes                                               *)
+(****************************************************************)
+
+ListAttributes[d:DataTable[l_, attrs___]] :=
+  {attrs};
+
+
+(****************************************************************)
+(****************************************************************)
+(* End of inernal format dependent functions                    *)
+(****************************************************************)
+(****************************************************************)
+
+
+(**********************************************************)
+(* Dimensions                                             *)
+(**********************************************************)
+
+DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
 
 
 (**********************************************************)
@@ -468,73 +587,6 @@ DataTable /: Take[d_DataTable, args__] :=
 
 
 (****************************************************************)
-(* ToDataTable *)
-(****************************************************************)
-
-ToDataTable[t_List, f_List, attrRules:{(_ -> _)...}:{}] :=
- Module[{},
-  If[Length[t] =!= Length[f],
-    Error["ToDataTable: Dependent and independent variables must be Lists of the same length."];
-  ];
-  DataTable[Developer`ToPackedArray /@ {t, f}, Sequence@@attrRules]
-];
-
-ToDataTable[l_List, attrRules:{(_ -> _)..}] :=
- Module[{dims},
-  dims = Dimensions[l];
-  If[!MatchQ[dims, {_, 2}],
-    Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
-  ];
-  ToDataTable[Sequence@@Transpose[l], attrRules]
-];
-
-ToDataTable[l_List] :=
- Module[{dims},
-  dims = Dimensions[l];
-  If[!MatchQ[dims, {_, 2}],
-    Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
-  ];
-  ToDataTable@@Transpose[l]
-];
-
-ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
- Module[{ndims, xmin, xmax, spacing, data},
-  ndims = ArrayDepth[d];
-  If[ ndims != 1,
-	Error["ToDataTable: Number of dimensions " <> ToString[ndims] <> " in DataRegion '" 
-          <> SimulationTools`DataRegion`VariableName[d] <> "' is greater than 1."]
-  ];
-
-  {{xmin, xmax}} = CoordinateRanges[d];
-  {spacing} = CoordinateSpacings[d];
-  data = ToListOfData[d];
-  ToDataTable[Range[xmin, xmax, spacing], data]
-];
-
-
-(****************************************************************)
-(* ToList *)
-(****************************************************************)
-
-ToList[DataTable[l_, ___]] := Transpose[l];
-
-
-(****************************************************************)
-(* ToListOfData *)
-(****************************************************************)
-
-ToListOfData[DataTable[l_, ___]] := l[[2]];
-
-
-(****************************************************************)
-(* ToListOfCoordinates *)
-(****************************************************************)
-
-ToListOfCoordinates[DataTable[l_, ___]] := l[[1]];
-
-
-
-(****************************************************************)
 (****************************************************************)
 (* DataTable specific                                           *)
 (****************************************************************)
@@ -834,42 +886,6 @@ FilterDCT[f_List, nModes_Integer,
     tableRange[FilterDCT[tableRange[f, range1], nModes], range2];
    {t1, t2, t3} = partitionTable[f, range2];
    Return[Join[t1, filtered, t3]]];
-
-
-(****************************************************************)
-(* AddAttribute                                                 *)
-(****************************************************************)
-
-AddAttribute[d:DataTable[x__], name_ -> val_] :=
-  DataTable[x, name -> val];
-
-
-(****************************************************************)
-(* AddAttributes                                                *)
-(****************************************************************)
-
-AddAttributes[d:DataTable[x__], attrRules_List] :=
-  DataTable[x, Apply[Sequence, attrRules]];
-
-
-(****************************************************************)
-(* ReadAttribute                                                *)
-(****************************************************************)
-
-ReadAttribute[d:DataTable[l_, attrs___], name_] :=
-  Module[{val},
-    val = name /. {attrs};
-    If[val === name,
-      Error["Attribute "<>ToString[name]<>" not found in "<>ToString[d]]];
-    Return[val]];
-
-
-(****************************************************************)
-(* ListAttributes                                               *)
-(****************************************************************)
-
-ListAttributes[d:DataTable[l_, attrs___]] :=
-  {attrs};
 
 
 (****************************************************************)
