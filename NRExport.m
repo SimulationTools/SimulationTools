@@ -258,6 +258,14 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
 
   SetStatus["Exporting " <> ToString[what] <> " data for "<>run<>" to "<>file];
 
+  If[what === HorizonMass && !HaveChristodoulouMassData[run,i,i-1],
+     SetStatus["Warning: Horizon mass data not found for BH "<>ToString[i]<>" in "<>run];
+     Return[]];
+
+  If[what === Spin && !HaveIsolatedHorizonSpinData[run,i-1],
+     SetStatus["Warning: Spin data not found for BH "<>ToString[i]<>" in "<>run];
+     Return[]];
+
   f = Switch[what,
     Coordinates, ReadBHCoordinates[run, i-1],
     Spin, ReadIsolatedHorizonSpin[run, i-1],
