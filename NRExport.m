@@ -309,7 +309,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
     eta  = LookupParameter[run, evolution<>"::BetaDriver"];
     bibtex = "Brown:2008sb";,
     True,
-    Error["Unknow evolution code used"];
+    Error["Unknown evolution code used"];
   ];
 
   {(* "comments" -> "", *)
