@@ -341,7 +341,7 @@ $NonDataRegionFunctions =
   {ArrayDepth, Dimensions, Total, Mean, Position, Extract};
 
 $DataRegionFunctions =
-  {FilterNaNs};
+  {FilterNaNs, UnwrapPhaseVector};
 
 DataRegion /: f_Symbol[x___, d_DataRegion, y___] /;
  MemberQ[$DataRegionFunctions, f] ||
