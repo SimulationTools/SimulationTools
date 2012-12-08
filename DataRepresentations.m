@@ -531,7 +531,7 @@ slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable
   t = ToListOfCoordinates[d];
 
   (* We allow a tolerance of half the local grid spacing *)
-  spacings = Differences[t]/2;
+  spacings = 0.5 Differences[t];
   tright = t - ArrayPad[spacings, {1, 0}, spacings[[1]]];
   tleft = t + ArrayPad[spacings, {0, 1}, spacings[[-1]]];
 
