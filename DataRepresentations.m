@@ -535,7 +535,7 @@ slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable
   tright = t - ArrayPad[spacings, {1, 0}, spacings[[1]]];
   tleft = t + ArrayPad[spacings, {0, 1}, spacings[[-1]]];
 
-  Pick[d, Thread[Thread[tleft > s[[1]]] && Thread[tright < s[[2]]]]]
+  Pick[d, Sign[tleft - s[[1]]] + Sign[s[[2]] - tright], 2]
 ];
 
 
