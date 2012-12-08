@@ -514,7 +514,7 @@ DataTable /: Part[d_DataTable, args__] :=
 (* Pick                                                   *)
 (**********************************************************)
 
-DataTable/: Pick[dr_DataTable, elements_] := ToDataTable[Pick[ToList[dr], elements]];
+DataTable/: Pick[dr_DataTable, elements_, patt___] := ToDataTable[Pick[ToList[dr], elements, patt]];
 
 
 (**********************************************************)
