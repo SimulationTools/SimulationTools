@@ -154,7 +154,7 @@ ToDataTable[l_List, attrRules:{(_ -> _)..}] :=
   If[!MatchQ[dims, {_, 2}],
     Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
   ];
-  ToDataTable[Sequence@@Transpose[l], attrRules]
+  ToDataTable[l[[All, 1]], l[[All, 2]], attrRules]
 ];
 
 ToDataTable[l_List] :=
@@ -163,7 +163,7 @@ ToDataTable[l_List] :=
   If[!MatchQ[dims, {_, 2}],
     Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
   ];
-  ToDataTable@@Transpose[l]
+  ToDataTable[l[[All, 1]], l[[All, 2]]]
 ];
 
 ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
