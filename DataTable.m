@@ -514,7 +514,9 @@ DataTable /: Part[d_DataTable, args__] :=
 (* Pick                                                   *)
 (**********************************************************)
 
-DataTable/: Pick[dr_DataTable, elements_, patt___] := ToDataTable[Pick[ToList[dr], elements, patt]];
+DataTable/: Pick[dt_DataTable, elements_, patt___] :=
+ ToDataTable[Pick[ToListOfCoordinates[dt], elements, patt],
+             Pick[ToListOfData[dt], elements, patt]];
 
 
 (**********************************************************)
