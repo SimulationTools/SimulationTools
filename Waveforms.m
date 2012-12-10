@@ -35,6 +35,7 @@ ExtrapolateRadiatedQuantity;
 ApplyToPhases;
 ExtrapolationError;
 
+ffiDataTable;
 
 ReadWaveformFile;
 AlignMaxima;
