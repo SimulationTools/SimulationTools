@@ -393,8 +393,8 @@ unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
 
   (* Add a jump of 2 Pi each time the difference is between
      successive points is greater than Pi *)
-  corr = -Round[diffs/(2 Pi)] 2 Pi;
-  cumulcorr = Accumulate[corr];
+  corr = Round[diffs/(2 Pi)];
+  cumulcorr = (- 2 Pi) Accumulate[corr];
 
   (* Add the corrections to the original data *)
   Join[data[[{1}]], data[[2 ;; -1]] + cumulcorr]
