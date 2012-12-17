@@ -103,7 +103,8 @@ ReadIsolatedHorizonSpin[runName_, hn_] :=
     MapThreadData[{#1,#2,#3} &, spins]];
 
 ReadIsolatedHorizonDimensionlessSpin[runName_, hn_] :=
-  ReadIsolatedHorizonSpin[runName, hn] ~Div~ ChristodoulouMass[runName, hn+1, hn]^2;
+  Apply[Divide, SimulationTools`DataRegion`Private`resampled[
+    {ReadIsolatedHorizonSpin[runName, hn], ChristodoulouMass[runName, hn+1, hn]^2}]];
 
 ReadIsolatedHorizonSpinPhase[runName_, hn_] :=
   MakeDataTable@Phase@ToList@MapData[Drop[#,-1]&, ReadIsolatedHorizonSpin[runName, hn]];

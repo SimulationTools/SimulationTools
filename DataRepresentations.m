@@ -207,6 +207,8 @@ SyntaxInformation[CoordinateSpacing] =
 (* Div                                                    *)
 (**********************************************************)
 
+If[$VersionNumber < 9,
+
 SyntaxInformation[Div] =
  {"ArgumentsPattern" -> {_, _, ___}};
 
@@ -218,6 +220,7 @@ Div[d1_SimulationTools`DataTable`DataTable, d2_SimulationTools`DataTable`DataTab
 
 Div[a_?NumberQ, b_?NumberQ] := a/b;
 
+]
 
 (**********************************************************)
 (* Downsampled                                            *)
