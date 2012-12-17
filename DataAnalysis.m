@@ -19,7 +19,6 @@ BeginPackage["SimulationTools`DataAnalysis`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
-  "PhysicalConstants`",
   "Units`"
  }];
 
@@ -41,8 +40,12 @@ Begin["`Private`"];
 (* SolarMassInSeconds                                     *)
 (**********************************************************)
 
-SolarMassInSeconds = Convert[(SolarMass GravitationalConstant)/SpeedOfLight^3,Second]/Second;
-
+If[$VersionNumber < 9,
+  Needs["PhysicalConstants`"];
+  SolarMassInSeconds = Convert[(SolarMass GravitationalConstant)/SpeedOfLight^3,Second]/Second;
+,
+  SolarMassInSeconds = QuantityMagnitude[UnitConvert[Quantity["SolarMass"] Quantity["GravitationalConstant"] / Quantity["SpeedOfLight"]^3, "Seconds"]];
+]
 
 (**********************************************************)
 (* WaveformMatch                                          *)
