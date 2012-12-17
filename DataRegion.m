@@ -559,21 +559,6 @@ MapThread[f_, ds:List[DataRegion[___]..], n_:Automatic] :=
 
 Protect[MapThread];
 
-
-(**********************************************************)
-(* Downsampled                                            *)
-(**********************************************************)
-
-Downsampled[d_DataRegion, n_Integer] :=
- Module[{ndims},
-  ndims = ArrayDepth[d];
-  Downsampled[d, ConstantArray[n,ndims]]
-];
-
-Downsampled[d_DataRegion, n_List] :=
-  Take[d, Apply[Sequence, Transpose[{ConstantArray[1, ArrayDepth[d]], Dimensions[d], n}]]];
-
-
 (**********************************************************)
 (* Plotting functions                                     *)
 (**********************************************************)
@@ -1002,18 +987,6 @@ Strip[d_DataRegion, n_List, m_List] :=
     origin = GetOrigin[d];
     spacing = GetSpacing[d];
     d2 = MakeDataRegion[data2, GetVariableName[d], {}, (origin + n * spacing), spacing, GetTime[d]]];
-
-
-Downsample[d_DataRegion, n_Integer] :=
-  Module[{ndims},
-    ndims = GetNumDimensions[d];
-    Downsample[d, ConstantArray[n,ndims]]];
-
-Downsample[d_DataRegion, n_List] :=
- Module[{data, data2, d2},
-  data = GetData[d];
-  data2 = Take[data, Apply[Sequence, Map[{1, -1, #} &, Reverse[n]]]];
-  d2 = MakeDataRegion[data2, GetVariableName[d], {}, GetOrigin[d], GetSpacing[d]*n, GetTime[d]]];
 
 MapDataRegion[f_, d_DataRegion] :=
  Module[{dim, data},

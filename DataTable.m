@@ -72,7 +72,6 @@ MapData;
 MapIndVar;
 ApplyToList;
 MapThreadData;
-Downsample;
 Spacing;
 DataTableRange;
 DataTableNormL2;
@@ -318,17 +317,6 @@ MinCoordinateSpacing[d_DataTable] :=
 
   Min[Differences[ts]]
 ];
-
-
-(**********************************************************)
-(* Downsampled                                            *)
-(**********************************************************)
-
-downsample[l_List, n_Integer] :=
-  Take[l, {1, Length[l], n}];
-
-Downsampled[d_DataTable, n_Integer] :=
-  ApplyToList[downsample[#, n] &, d];
 
 
 (****************************************************************)
@@ -1055,9 +1043,6 @@ MapThreadData[f_, ds:List[DataTable[__]..]] :=
     fOfVals = MapThread[f, vals];
     tb = MapThread[List, {xs,fOfVals}];
     MakeDataTable[tb]];
-
-Downsample[d_DataTable, n_Integer] :=
-  ApplyToList[downsample[#, n] &, d];
 
 Spacing[d:DataTable[__]] := MinCoordinateSpacing[d];
 

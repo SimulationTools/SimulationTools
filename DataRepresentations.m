@@ -50,8 +50,6 @@ Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d 
   "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
   "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
 WithResampling::usage = "WithResampling[method, expr] evaluates expr with automatic resampling enabled.";
-Downsampled::usage = "Downsampled[d, n] returns a version of d with only every nth element.\n"<>
-  "Downsampled[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
 
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
@@ -60,6 +58,11 @@ NDerivative::usage = "NDerivative[derivs][d] returns a numerical derivative of d
 
 Phase::usage = "Phase[d] gives the phase of the complex variable in d.  The resulting phase will be continuous for sufficiently smooth input data.";
 Frequency::usage = "Frequency[d] returns the first derivative of the complex phase of d.";
+
+If[$VersionNumber < 9,
+  Downsample::usage = "Downsample[d, n] returns a version of d with only every nth element.\n"<>
+    "Downsample[d, {n1, n2, ...nk}] returns a version of d with only every {n1, n2, ...}-th element in the direction k."
+];
 
 (* Experimental *)
 CommonInterval;
@@ -73,6 +76,7 @@ Add;
 Div;
 Mul;
 Sub;
+Downsampled;
 
 Begin["`Private`"];
 
@@ -223,12 +227,27 @@ Div[a_?NumberQ, b_?NumberQ] := a/b;
 ]
 
 (**********************************************************)
-(* Downsampled                                            *)
+(* Downsample                                             *)
 (**********************************************************)
 
-SyntaxInformation[DownSampled] =
- {"ArgumentsPattern" -> {_, _}};
+downsample[d_, n_Integer] :=
+ Module[{ndims},
+  ndims = ArrayDepth[d];
+  downsample[d, ConstantArray[n, ndims]]
+];
 
+downsample[d_, n_List] :=
+  Take[d, Apply[Sequence, Transpose[{ConstantArray[1, ArrayDepth[d]], Dimensions[d], n}]]];
+
+SimulationTools`DataRegion`DataRegion /:
+ Downsample[d_SimulationTools`DataRegion`DataRegion, n_] :=
+  Module[{nn},
+  nn = If[ListQ[n] && $SimulationToolsCompatibilityVersion < 1, Reverse[n], n];
+  downsample[d, nn]
+];
+
+SimulationTools`DataTable`DataTable /:
+  Downsample[d_SimulationTools`DataTable`DataTable, n_] := downsample[d, n];
 
 (**********************************************************)
 (* First                                                  *)
@@ -613,6 +632,14 @@ SyntaxInformation[WithResampling] =
 SetAttributes[WithResampling, HoldRest];
 WithResampling[method_, expr_] :=
  Block[{$ResamplingMethod = method}, expr];
+
+
+(**********************************************************)
+(* Deprecated                                             *)
+(**********************************************************)
+
+Downsampled[d_?DataRepresentationQ, n_] := downsample[d, n];
+
 
 End[];
 EndPackage[];
