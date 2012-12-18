@@ -17,7 +17,8 @@ Test[
     ,
     2.7650708168336315
     ,
-    TestID->"ReadWaveformCycles"
+    TestID->"ReadWaveformCycles",
+	EquivalenceFunction -> ((Abs[#1-#2] < 6*10^-5) &)
 ]
 
 (****************************************************************)
@@ -29,7 +30,8 @@ Test[
     ,
     2.7650708168336315
     ,
-    TestID->"WaveformCycles"
+    TestID->"WaveformCycles",
+	EquivalenceFunction -> ((Abs[#1-#2] < 6*10^-5) &)
 ]
 
 

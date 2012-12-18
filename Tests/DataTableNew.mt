@@ -117,7 +117,8 @@ Test[
     ,
     5.499999999909634
     ,
-    TestID->"CoordinateAtInterpolatedMax"
+    TestID->"CoordinateAtInterpolatedMax",
+	EquivalenceFunction -> ((Abs[#1-#2] < 2*10^-5) &)
 ]
 
 
@@ -371,7 +372,8 @@ Test[
     ,
     0.
     ,
-    TestID->"InterpolatedMax"
+    TestID->"InterpolatedMax",
+	EquivalenceFunction -> ((Abs[#1-#2] < 3*10^-10) &)
 ]
 
 

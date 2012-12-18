@@ -290,7 +290,8 @@ Test[
         ,        
         0.6666666689068567`
 	,
-	TestID->"LocateMaximum"
+	TestID->"LocateMaximum",
+	EquivalenceFunction -> ((Abs[#1-#2] < 3*10^-6) &)
 ]
 
 (****************************************************************)
@@ -302,7 +303,8 @@ Test[
         ,        
         0.14814814814814817`
 	,
-	TestID->"MaximumValue"
+	TestID->"MaximumValue",
+	EquivalenceFunction -> ((Abs[#1-#2] < 9*10^-12) &)
 ]
 
 (****************************************************************)
