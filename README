@@ -10,5 +10,5 @@ data from Numerical Relativity simulations using the Einstein Toolkit Cactus
 code, but it includes many components which are useful for general data.
 Adding support for other codes is possible.
 
-Please see https://bitbucket.org/ianhinder/simulationtools/wiki/Home for
-installation instructions and an introduction.  
+Please see http://simulationtools.org/ for installation instructions
+and an introduction.
