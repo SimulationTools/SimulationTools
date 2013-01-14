@@ -14,5 +14,6 @@ TestSuite[
 		"Memo.mt",
 		"NR.mt",
 		"RunFiles.mt",
+		"SimView.mt",
 		"Waveforms.mt"
 		}]
