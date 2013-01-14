@@ -52,14 +52,7 @@ ReadTrackerRadius[run_String, tracker1:trackerPattern, tracker2:trackerPattern] 
   Norm@ReadTrackerCoordinates[run, tracker1, tracker2];
 
 xyToAzimuth[{x1_DataTable, y1_DataTable}] :=
-  Module[{x,y,t},
-    {x,y} = ToListOfData /@ IntersectDataTables[{x1,y1}];
-    t = ToListOfCoordinates[x1];
-    ToDataTable@SimulationTools`DataRepresentations`Private`phase[MapThread[{#1,{#2,#3}} &,{t,x,y}]]];
-
-(* TODO: use simpler version of xyToAximuth *)
-(* xyToAzimuth[{x1_DataTable, y1_DataTable}] := *)
-(*   UnwindPhaseVector[ArcTan[x1,y1]] *)
+  UnwindPhaseVector[ArcTan[x1,y1]];
 
 ReadTrackerAzimuth[run_String, tracker:trackerPattern] :=
   xyToAzimuth[ReadTrackerCoordinates[run, tracker][[{1,2}]]];
