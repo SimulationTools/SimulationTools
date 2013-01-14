@@ -42,7 +42,7 @@ Begin["`Private`"];
 
 If[$VersionNumber < 9,
   Needs["PhysicalConstants`"];
-  SolarMassInSeconds = Convert[(SolarMass GravitationalConstant)/SpeedOfLight^3,Second]/Second;
+  SolarMassInSeconds = Convert[(SolarMass PhysicalConstants`GravitationalConstant)/PhysicalConstants`SpeedOfLight^3,Second]/Second;
 ,
   SolarMassInSeconds = QuantityMagnitude[UnitConvert[Quantity["SolarMass"] Quantity["GravitationalConstant"] / Quantity["SpeedOfLight"]^3, "Seconds"]];
 ]
