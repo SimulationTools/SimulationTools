@@ -52,7 +52,7 @@ ReadTrackerRadius[run_String, tracker1:trackerPattern, tracker2:trackerPattern] 
   Norm@ReadTrackerCoordinates[run, tracker1, tracker2];
 
 xyToAzimuth[{x1_DataTable, y1_DataTable}] :=
-  UnwindPhaseVector[ArcTan[x1,y1]];
+  UnwrapPhaseVector[ArcTan@@RestrictedToCommonInterval[{x1,y1}]];
 
 ReadTrackerAzimuth[run_String, tracker:trackerPattern] :=
   xyToAzimuth[ReadTrackerCoordinates[run, tracker][[{1,2}]]];
