@@ -122,8 +122,8 @@ check[d_DataTable, where_:None] :=
     Error[If[where===None,"",where<>": "]<>"Invalid DataTable"]];
 
 validQ[d_DataTable] :=
-  MatchQ[d, DataTable[{{__?NumericQ}, {__?NumericQ}}]] ||
-  MatchQ[d, DataTable[{{__?NumericQ}, {__List}}]];
+  MatchQ[d, DataTable[{{__?NumericQ}, {__?NumericQ}}, ___]] ||
+  MatchQ[d, DataTable[{{__?NumericQ}, {__List}}, ___]];
 
 SetAttributes[DataTable, {ReadProtected}];
 
