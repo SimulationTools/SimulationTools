@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`DataTable`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`Error`",
   "SimulationTools`Profile`",
+  "SimulationTools`Utils`",
   "SimulationTools`"
  }];
 

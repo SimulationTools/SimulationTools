@@ -19,8 +19,8 @@ BeginPackage["SimulationTools`DataRegion`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
-  "SimulationTools`NR`",
-  "SimulationTools`Profile`"
+  "SimulationTools`Profile`",
+  "SimulationTools`Utils`"
  }];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";
