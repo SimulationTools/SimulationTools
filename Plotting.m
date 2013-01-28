@@ -447,7 +447,7 @@ PresentationArrayPlot[data_DataRegion, opts:OptionsPattern[]] :=
 
     keyPlot = key[OptionValue[ColorMap],range,plotkeysize];
 
-    plot = DataRegionArrayPlot[data, Sequence@@FilterRules[{opts},Options[ArrayPlot]],
+    plot = ArrayPlot[data, Sequence@@FilterRules[{opts},Options[ArrayPlot]],
              ImageSize->{400,400}, ColorFunctionScaling -> False,
              ColorFunction -> ScaledColorFunction[OptionValue[ColorMap], range],
              FrameTicks -> True, LabelStyle -> Medium];
@@ -497,7 +497,7 @@ QuickSlicePlot[v_DataRegion, {min_, max_}, colorMap_: "TemperatureMap", opts___]
  Module[{cf},
   cf = ScaledColorFunction[colorMap, {min, max}];
   GraphicsGrid[{{
-     DataRegionArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
+     ArrayPlot[v, FrameTicks -> True, FrameLabel -> {"y", "x"},
        ColorFunction -> cf, ImageSize->300,opts], ColorMapLegend[cf, {min, max}]}}]
 ];
 
