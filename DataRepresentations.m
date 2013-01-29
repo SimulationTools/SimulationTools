@@ -431,7 +431,7 @@ UnwrapPhaseVector[data_List] := unwrapPhaseVector[data];
 SyntaxInformation[Resampled] =
  {"ArgumentsPattern" -> {_, ___, OptionsPattern[]}};
 
-Options[Resampled] = {InterpolationOrder -> 8};
+Options[Resampled] = {"InterpolationOrder" -> 8};
 
 DocumentationBuilder`OptionDescriptions["Resampled"] = {
   InterpolationOrder -> "The order of interpolation to use. This may be take value "<>

@@ -32,7 +32,7 @@ WaveletThreshold(*::usage = "WaveletThreshold is an option for FilterWavelet whi
 
 Begin["`Private`"];
 
-Options[FilterWavelet] = {WaveletType->DaubechiesWavelet[4], WaveletRefinementLevels->6, WaveletThreshold->{"SURELevel"}};
+Options[FilterWavelet] = {"WaveletType"->DaubechiesWavelet[4], "WaveletRefinementLevels"->6, "WaveletThreshold"->{"SURELevel"}};
 
 tableRange[t_List, {tStart_?NumberQ, tEnd_?NumberQ}] :=
   Select[t, 

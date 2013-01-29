@@ -313,7 +313,7 @@ ReadCarpetHDF5VariableFromRun[run_String, var_String, opts:OptionsPattern[]] :=
 
 (* Data manipulation *)
 
-Options[CarpetHDF5Manipulate] = {CarpetHDF5ManipulatePlotFunction -> DataRegionDensityPlot};
+Options[CarpetHDF5Manipulate] = {"CarpetHDF5ManipulatePlotFunction" -> DataRegionDensityPlot};
 CarpetHDF5Manipulate[file_, var_String, rl_, map_:None, opts:OptionsPattern[]]:=
 (* Candidate for deletion? *)
   Module[{data, axesOrigin, numDims, plotType},

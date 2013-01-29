@@ -77,8 +77,8 @@ withStyle[elem_, style_List] :=
 withStyle[elem_, style_] :=
   {style, elem};
 
-Options[MakePlotLegend] = {LegendOrientation -> Vertical, LegendLineSize -> 40,
-                           LegendBackground -> None};
+Options[MakePlotLegend] = {"LegendOrientation" -> Vertical, "LegendLineSize" -> 40,
+                           "LegendBackground" -> None};
 
 MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic,
                opts:OptionsPattern[]] :=
@@ -105,8 +105,8 @@ styleInListLinePlot[lp_] :=
     Cases[lp, {styles___, _Line} :> {styles}, Infinity]];
 
 Options[ListLinePlotWithLegend] =
-  Join[Options[ListLinePlot], {PlotLegend -> {}, LegendPosition -> {Left, Top},
-                               LegendBackground -> None}, Options[MakePlotLegend]];
+  Join[Options[ListLinePlot], {"PlotLegend" -> {}, "LegendPosition" -> {Left, Top},
+                               "LegendBackground" -> None}, Options[MakePlotLegend]];
 
 ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
   Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single},

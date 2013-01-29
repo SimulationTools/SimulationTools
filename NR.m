@@ -125,7 +125,7 @@ PercentageDifference[ap_,bp_] :=
 ReadHamiltonianConstraintNorm[run_] :=
   ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
 
-Options[FitEcc] = {ReturnValue -> FittedFunction};
+Options[FitEcc] = {"ReturnValue" -> FittedFunction};
 
 FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
  Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t, a, e, phi, b, n},
@@ -143,7 +143,7 @@ FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
    _, Error["Unknown option given to FitEcc"]]
   ];
 
-Options[FitEccOm] = {ReturnValue -> FittedFunction};
+Options[FitEccOm] = {"ReturnValue" -> FittedFunction};
 
 FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
  Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t, a, e, n, phi, b},

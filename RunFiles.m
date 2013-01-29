@@ -174,7 +174,7 @@ DefineMemoFunction[FindFirstRunFile[runName_String, fileName_String],
     If[files === {}, Error["File " <> fileName <> " not found in run " <> runName]];
     files[[1]]]]];
 
-Options[FindRunFilesFromPattern] = {FullFilenames -> False, LeafNamesOnly -> False};
+Options[FindRunFilesFromPattern] = {"FullFilenames" -> False, "LeafNamesOnly" -> False};
 DefineMemoFunction[FindRunFilesFromPattern[runName_String, filePattern:(_String|_StringExpression|_RegularExpression), opts:OptionsPattern[]],
   Module[{segments, nToDrop, names},
     segments = FindRunSegments[runName];

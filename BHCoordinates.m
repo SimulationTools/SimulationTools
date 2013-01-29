@@ -46,7 +46,7 @@ Begin["`Private`"];
 
 
 (* TODO: Add input range checking to all these functions *)
-Options[ReadBHCoordinates] = {Method -> Automatic};
+Options[ReadBHCoordinates] = {"Method" -> Automatic};
 ReadBHCoordinates[run_, tracker_, opts:OptionsPattern[]] :=
   CallProvidedFunction["BHCoordinates","ReadBHCoordinates",{run,tracker}, OptionValue[Method]];
 

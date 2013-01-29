@@ -102,15 +102,15 @@ $UniformGridExtrapolation;
 Psi4RadiusNotFound;
 
 Options[ExtrapolateRadiatedQuantity] = 
-  {ExtrapolationOrder -> 1,
-   UseTortoiseCoordinate -> True,
-   MassADM -> None,
-   ApplyFunction -> None, 
-   AlignPhaseAt -> None,
-   RadiusRange -> All,
+  {"ExtrapolationOrder" -> 1,
+   "UseTortoiseCoordinate" -> True,
+   "MassADM" -> None,
+   "ApplyFunction" -> None, 
+   "AlignPhaseAt" -> None,
+   "RadiusRange" -> All,
    "Radii" -> All,
-   ExtrapolationErrorRelative -> False,
-   NonUniformGrid -> False};
+   "ExtrapolationErrorRelative" -> False,
+   "NonUniformGrid" -> False};
 
 Options[ExtrapolationError] = Options[ExtrapolateRadiatedQuantity];
 Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
@@ -333,7 +333,7 @@ RadiusTimeDataToTimeRadiusData[rdTb : {{_, DataTable[__]} ...}] :=
   rfWithRads = Map[combineWithRads, rfTbs];
   MapThread[List, {ts, rfWithRads}]];
 
-Options[ExtrapolateDataTables] = {Resample -> False};
+Options[ExtrapolateDataTables] = {"Resample" -> False};
 
 ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, opts___] :=
  Module[{trd, rds, ts, extraps},
@@ -355,7 +355,7 @@ ExtrapolateDataTables[p_Integer, rdTb : {{_, DataTable[__]} ...}, {rMin_, rMax_}
   ExtrapolateDataTables[p,Select[rdTb, #[[1]] >= rMin && #[[1]] <= rMax &], opts];
 
 
-Options[AlignedPhases] = {Continuous -> False};
+Options[AlignedPhases] = {"Continuous" -> False};
 
 DocumentationBuilder`OptionDescriptions["AlignedPhases"] = {
   Continuous -> "Whether to allow continuous shifts in alignment. Setting this to "<>

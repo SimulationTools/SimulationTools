@@ -160,7 +160,7 @@ key[mapName_String, {min_, max_}, plotkeysize_,opts___] :=
       If[Abs[c] < 10^-15, 0, N@c], {c, min, max, (max - min)/10}],
      False, False, False}]
 
-Options[FieldLines2dPlot] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{ColorRanges->Automatic};
+Options[FieldLines2dPlot] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{"ColorRanges"->Automatic};
 (*SetOptions[newplot,ImageSize->300];*)
  FieldLines2dPlot[run_,field_,it_,rfl_,plane_,function_,opts:OptionsPattern[]]:=
 Catch[Module[{planestr,(*runstr,*)data,ndims,dataRange,plot1,plot2,plotRange,imageSize},
@@ -234,7 +234,7 @@ plot1=ArrayPlot[func@data,Frame-> {{True,True},{True,True}},Axes->True,FrameTick
       (* "RMHD code","Ideal-MHD code"],"Ideal-MHD code"],FontFamily->fontname,Bold,14],opts]]]*)
 "R_"<>run,"I_"<>run],"I_"<>run],FontFamily->fontname,Bold,14],opts]]]
 *)
-Options[MovieFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{ColorRanges->Automatic};
+Options[MovieFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{"ColorRanges"->Automatic};
 
 MovieFieldLines2d[run_,field_,rfl_,plane_,function2_,opts:OptionsPattern[]]:=
 Catch[Module[{planestr,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,imageSize,xmin1,xmax1},
@@ -319,7 +319,7 @@ Catch[Module[{(*colorrange1,*)planestr,iterations,imageSize},
 				ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]]],
 		{it,iterations}]]];
 
-Options[Movie2d] = Options[ListDensityPlot]~Join~{ColorRanges->Automatic};
+Options[Movie2d] = Options[ListDensityPlot]~Join~{"ColorRanges"->Automatic};
 Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 	Catch[Module[{colorrange,xmincolorrange,plane,data1,ndims,datarange,plotrange,imagesize,xmaxcolorrange,iterations,xmin,xmax},
 		colorrange=If[ToString[OptionValue[Movie2d,ColorRanges]]==="Automatic", 
@@ -359,7 +359,7 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 					ControlType->{Slider,PopupMenu,PopupMenu},
 					SynchronousUpdating->False]]];
 
-Options[Sequence2d] = Options[ListDensityPlot]~Join~{ColorRanges->Automatic};
+Options[Sequence2d] = Options[ListDensityPlot]~Join~{"ColorRanges"->Automatic};
 Sequence2d[path_,run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 	Catch[Module[{(*colorrange,*)plane,data1,ndims,datarange,plotrange,imagesize,iterations,xmin,xmax},
 (*		colorrange=ColorRanges[run,var,rfl,function];*)

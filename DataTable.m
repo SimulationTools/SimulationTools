@@ -581,7 +581,7 @@ DataTable /: Take[d_DataTable, args__] :=
 SyntaxInformation[AntiDerivative] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
-Options[AntiDerivative] = {InterpolationOrder->3};
+Options[AntiDerivative] = {"InterpolationOrder"->3};
 
 DocumentationBuilder`OptionDescriptions["AntiDerivative"] = {
   InterpolationOrder -> "The order of interpolation to use. This may be take value "<>
@@ -762,7 +762,7 @@ CommonInterval[ds:{(_DataTable)...}] :=
 SyntaxInformation[RestrictedToInterval] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
-Options[RestrictedToInterval] = {Interval -> {Closed, Closed}};
+Options[RestrictedToInterval] = {"Interval" -> {Closed, Closed}};
 
 DocumentationBuilder`OptionDescriptions["RestrictedToInterval"] = {
   Interval -> "Controls whether the specified interval endpoints should be "<>
@@ -1148,7 +1148,7 @@ FunctionOfPhase[d_DataTable, p_DataTable, {t1_, t2_}, dp_: 0.01] :=
 
 rangepatt = _?NumberQ | All;
 
-Options[DataTableInterval] = {Interval -> {Closed, Open}};
+Options[DataTableInterval] = {"Interval" -> {Closed, Open}};
 DataTableInterval[d_DataTable, {t1:rangepatt, t2:rangepatt}, opts:OptionsPattern[]] :=
  RestrictedToInterval[d, {t1, t2}, Interval -> OptionValue[Interval]];
 

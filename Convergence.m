@@ -66,7 +66,7 @@ ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
      f[h1] - f[h2] == c (f[h2] - f[h3]) 
        /. (eqs /. Equal -> Rule), c][[1]] // N]];
 
-Options[LoadConvergenceSeries] = {Downsample -> False, Interpolate -> False};
+Options[LoadConvergenceSeries] = {"Downsample" -> False, "Interpolate" -> False};
 
 LoadConvergenceSeries[runBase_,ns:{n1_,n2_,n3_},reader_,namer_, opts___] :=
   Module[{downsample = Downsample /. {opts} /. Options[LoadConvergenceSeries],
