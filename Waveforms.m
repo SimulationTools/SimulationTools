@@ -30,18 +30,20 @@ BeginPackage["SimulationTools`Waveforms`",
 
 (* Public *)
 
-AlignedPhases::usage = "AlignedPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t. The independent variable is assumed to be a phase so that the resulting phases all start out within 2\[Pi] of each other.";
+AlignedPhases::usage = "AlignedPhases[{d1, ...}, t] aligns the DataTables {d1, ...} at time t, either exactly or to within multiples of 2 \[Pi].";
 Psi4ToStrain::usage = "Psi4ToStrain[psi4, omega0] converts a DataTable containing psi4[t] into strain h[t] using the Fixed Frequency Integration method with a cut-off frequency omega0.\nPsi4ToStrain[psi4, {t1, t2}] converts using time domain integration, choosing integration constants such that h[t1] = h[t2] = 0.";
 WaveformCycles::usage = "WaveformCycles[psi4, start] gives the number of gravitational wave cycles in the waveform psi4.";
-ReadWaveformCycles::usage = "ReadWaveformCycles[sim, start] gives the number of gravitational wave cycles for sim.";
-ReadExtrapolatedPsi4::usage = "ReadExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) to infinite radius.";
-ReadExtrapolatedStrain::usage = "ReadExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius.";
+ReadWaveformCycles::usage = "ReadWaveformCycles[sim, start] gives the number of gravitational wave cycles in Psi4 for simulation sim.";
+ReadExtrapolatedPsi4 (*::usage = "ReadExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of Psi4 from the simulation to infinite radius." *);
+ReadExtrapolatedStrain (*::usage = "ReadExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius."*);
 ReadPsi4::usage = "ReadPsi4[sim, l, m, r] returns a DataTable of the l,m mode of Psi4 at radius r from sim.";
-ReadPsi4Modes::usage = "ReadPsi4Modes[sim] returns a list of the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) that are available in sim.";
-ReadPsi4Radii::usage = "ReadPsi4Radii[sim] returns a list of the radii at which the modes of \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) are available in sim.";
+ReadPsi4Modes::usage = "ReadPsi4Modes[sim] returns a list of the modes of Psi4 that are available in sim.";
+ReadPsi4Radii::usage = "ReadPsi4Radii[sim] returns a list of the radii at which the modes of Psi4 are available in sim.";
 ImportWaveform::usage = "ImportWaveform[filename] imports an ASCII waveform file with columns time, real part and imaginary part and returns it as a DataTable.";
 ExportWaveform::usage = "ExportWaveform[filename, d] exports a complex DataTable as an ASCII file with columns time, real part and imaginary part.";
-RadialExtrapolation::usage = "FIXME";
+RadialExtrapolation; (* TODO *)
+ReadRadiallyExtrapolatedPsi4::usage = "ReadRadiallyExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of Psi4 from the simulation to infinite radius.";
+ReadRadiallyExtrapolatedStrain::usage = "ReadRadiallyExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of Psi4 at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius.";
 
 (* Old function names *)
 
@@ -87,13 +89,11 @@ SchmidtAngle(*::usage = "SchmidtAngle[sim, t, r] computes the angle between the 
 ReadReconstructedPsi4(*::usage = "ReadReconstructedPsi4[sim, t, r] returns a CompiledFunction of two real arguments (\[Theta] and \[Phi]) which is computed by summing all the spherical harmonic modes, \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) at time t and radius r."*);
 FixedFrequencyIntegrate;
 
-ToRetardedTime;
+ToRetardedTime;  (* TODO *)
 ToAbsPhase;
 ToComplex;
-ReadRadiallyExtrapolatedWave;
-RadiallyExtrapolatedWave;
-ReadRadiallyExtrapolatedPsi4;
-ReadRadiallyExtrapolatedStrain;
+ReadRadiallyExtrapolatedWave;  (* TODO *)
+RadiallyExtrapolatedWave;  (* TODO *)
 Psi4PerturbativeCorrection;
 
 $UniformGridExtrapolation;
@@ -124,7 +124,7 @@ $h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
 (**********************************************************)
 
 DocumentationBuilder`MoreInformation["WaveformCycles"] =
-  {"The number of cycles is calculated starting at 'start' and terminating at the merger, which is determined from the maimum of the waveform amplitude."};
+  {"The number of cycles is calculated starting at t = start and terminating at the merger, which is determined from the maximum of the Psi4 waveform amplitude."};
 
 SyntaxInformation[WaveformCycles] =
  {"ArgumentsPattern" -> {_, _}};
@@ -144,8 +144,9 @@ WaveformCycles[psi4_DataTable, start_] :=
 
 DocumentationBuilder`MoreInformation["ReadWaveformCycles"] =
  {
-  "The number of cycles is calculated starting at 'start' and terminating at the merger, which is determined from the maimum of the waveform amplitude.",
-  "ReadWaveformCycles[sim, start] is equivalent to WaveformCycles[ReadPsi4[sim, 2,2, First[ReadPsi4Radii[sim]]], start]."
+  "The number of cycles is calculated starting at 'start' and terminating at the merger, which is determined from the maximum of the Psi4 waveform amplitude.",
+  "ReadWaveformCycles[sim, start] is equivalent to WaveformCycles[ReadPsi4[sim, 2,2, First[ReadPsi4Radii[sim]]], start].",
+  "The lowest extraction radius is used to compute the number of cycles."
  };
 
 SyntaxInformation[ReadWaveformCycles] =

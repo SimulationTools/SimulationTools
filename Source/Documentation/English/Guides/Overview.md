@@ -1,6 +1,6 @@
 Module[{packages, collect, sections, sections2},
 
-collect = {"Numerical Relativity" -> {"DataAnalysis", "InitialData", "Kicks", "NRExport", "Waveforms"}};
+collect = {"Numerical Relativity" -> {"InitialData", "NRExport", "Waveforms"}};
 
 sections = Select[$PackageSymbols, #[[2]] =!= {} &];
 

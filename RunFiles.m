@@ -25,7 +25,7 @@ BeginPackage["SimulationTools`RunFiles`",
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
 ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
-ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time elapsed during the execution of a simulation.";
+ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time in seconds elapsed during the execution of a simulation.";
 
 
 (* TODO: These don't belong here *)

@@ -25,7 +25,7 @@
       "ReadPsi4Radii" -> "Get the radii at which Psi4 was decomposed",
       "ReadPsi4Modes" -> "Get the (l,m) modes of Psi4 which are available in a simulation",
       "AlignedPhases" -> "Add multiples of 2 Pi to a set of phases such that they are close together at a particular time.  This is necessary due to the 2 Pi ambiguity when converting from real and imaginary to amplitude and phase.",
-      "ReadExtrapolatedPsi4" -> "Read an (l,m) mode of Psi4 extrapolated to infinite radius from a simulation",
+      "ReadRadiallyExtrapolatedPsi4" -> "Read an (l,m) mode of Psi4 extrapolated to infinite radius from a simulation",
       "Psi4ToStrain" -> "Convert an (l,m) mode of Psi4 to the corresponding mode of the strain, h.",
       "ReadWaveformCycles" -> "Read the number of waveform cycles in the (2,2) mode of a simulation."
      }],
@@ -38,9 +38,9 @@
      (* "ReadAHSeparation" -> "Read the distance between the centroids of the first two apparent horizons as a function of time from a simulation", *)
       "ReadBlackHoleSpin" -> "Read the spin angular momentum of a black hole as a function of time from a simulation"}],
 
-   GuideSection[
-     "Kicks",
-     {"ReadKick" -> "Compute the kick in km/s as measured from gravitational waves"}],
+   (* GuideSection[ *)
+   (*   "Kicks", *)
+   (*   {"ReadKick" -> "Compute the kick in km/s as measured from gravitational waves"}], *)
 
    GuideSection[
      "InitialData",{"ReadADMMass" -> "Read the ADM mass of the spacetime from a simulation, computed from the initial data"}],
@@ -48,8 +48,8 @@
    GuideSection[
      "CoordinateTransformations",{}],
 
-   GuideSection[
-     "DataAnalysis",{"WaveformMatch" -> "Compute the phase- and time-maximised overlap of two DataTables"}],
+   (* GuideSection[ *)
+   (*   "DataAnalysis",{"WaveformMatch" -> "Compute the phase- and time-maximised overlap of two DataTables"}], *)
 
    GuideSection[
      "NRExport",{"ExportNumericalRelativitySimulation" -> "Export various data from a simulation to a given directory"}]},

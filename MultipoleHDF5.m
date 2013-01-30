@@ -24,6 +24,7 @@ BeginPackage["SimulationTools`MultipoleHDF5`",
   "SimulationTools`RunFiles`"
  }];
 
+(* TODO: can this be obtained from the parameter file? *)
 $MultipolePsi4Variable::usage = "$MultipolePsi4Variable specifies the name of the "<>
  "variable used to store Psi4 by the Multipole thorn.";
 

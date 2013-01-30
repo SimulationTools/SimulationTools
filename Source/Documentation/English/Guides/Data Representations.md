@@ -16,7 +16,6 @@
     GuideSection[
       "DataRepresentations",
       {"ToList" -> "Convert a DataRepresentation to a Mathematica list",
-       "Add" -> "Add two DataRepresentations together, resampling onto a common coordinate range grid if necessary",
        "ToListOfData" -> "extract the data from a DataRepresentation",
        "ToListOfCoordinates" -> "extract the coordinates from a DataRepresentation",
       "CoordinateRanges" -> "get the list of minimum and maximum coordinates of a DataRegion",

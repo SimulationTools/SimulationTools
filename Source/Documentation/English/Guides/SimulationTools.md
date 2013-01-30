@@ -47,11 +47,9 @@
     "DetailedFunctions" -> {
       {"ReadPsi4"},
       {"ReadBlackHoleSpin"},
-      {"ReadBinaryCoordinates"},
-      {"ReadKick"}},
+      {"ReadBinaryCoordinates"}},
     "Functions" -> {"ReadPsi4Modes", "ReadPsi4Radii", "ReadBlackHoleMass", 
-      "ReadBinarySeparation", "ReadBinaryPhase", 
-      "ReadKickVector", "ReadLinearMomentumFlux"},
+      "ReadBinarySeparation", "ReadBinaryPhase"}, 
     "MoreFunctionsLink" -> "paclet:SimulationTools/guide/Numerical Relativity"
    },
 

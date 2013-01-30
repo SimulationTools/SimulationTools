@@ -29,7 +29,7 @@ BeginPackage["SimulationTools`SystemStatistics`",
 ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
 ReadSimulationMemoryUsage::usage   = "ReadSimulationMemoryUsage[sim] gives the memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
 ReadSimulationSwapUsage::usage   = "ReadSimulationSwapUsage[sim] gives the swap memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
-ReadSimulationCost::usage = "ReadSimulationCost[sim] gives the total number of CPU hours used by all processes in a simulation .";
+ReadSimulationCost::usage = "ReadSimulationCost[sim] gives the total number of core-hours used by all processes and segments in a simulation.";
 CPUHours;
 WallTimeDays;
 CostAnalysis;
