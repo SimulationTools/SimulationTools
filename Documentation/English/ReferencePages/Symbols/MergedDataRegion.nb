@@ -1,0 +1,76 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools`DataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataRegion"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["MergedDataRegion",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/ref/MergedDataRegion"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["MergedDataRegion", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["MergedDataRegion",
+        BaseStyle->"Link",
+        ButtonData->"paclet:SimulationTools/ref/MergedDataRegion"], "[", 
+       StyleBox[
+        RowBox[{"{", 
+         RowBox[{"dr1", ",", " ", "dr2", ",", " ", "...", ",", " ", "drn"}], 
+         "}"}], "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]creates a DataRegion object by combining each of the \
+DataRegions dr1, dr2, ..., drn."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"MergedDataRegion",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", 
+    "keywords" -> {
+     "MergedDataRegion", "MERGEDDATAREGION", "mergeddataregion"}, "index" -> 
+    True, "label" -> "SimulationTools/SimulationTools`DataRegion Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools`DataRegion", "status" -> 
+    "None", "summary" -> 
+    "MergedDataRegion[{dr1, dr2, ..., drn}] creates a DataRegion object by \
+combining each of the DataRegions dr1, dr2, ..., drn.", 
+    "synonyms" -> {
+     "MergedDataRegion", "MERGEDDATAREGION", "mergeddataregion"}, "title" -> 
+    "MergedDataRegion", "windowTitle" -> "MergedDataRegion", "type" -> 
+    "Symbol", "uri" -> "SimulationTools/ref/MergedDataRegion"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

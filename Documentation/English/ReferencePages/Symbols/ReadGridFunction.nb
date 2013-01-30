@@ -16,6 +16,36 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ReadGridFunction"]
 }], "LinkTrail"],
 
+Cell[BoxData[GridBox[{
+   {Cell["SIMULATIONTOOLS`GRIDFUNCTIONS PACLET SYMBOL", "PacletNameCell"], 
+    Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"ReadGridFunctionDimensions":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadGridFunctionDimensions"], 
+       "FindGridFunctions":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/FindGridFunctions"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"], "GridFunctions":>
+       Documentation`HelpLookup["paclet:SimulationTools/guide/GridFunctions"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]"
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
 Cell[CellGroupData[{
 
 Cell["ReadGridFunction", "ObjectName"],
@@ -62,6 +92,11 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
+Cell["\<\
+Currently, 1D, 2D and 3D HDF5 data is supported, and this data must exist \
+either in the simulation directory or one level down.\
+\>", "Notes"],
+
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
@@ -86,6 +121,117 @@ Cell[BoxData[GridBox[{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
    "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection"],
+
+Cell[CellGroupData[{
+
+Cell["ReadGridFunction[\"bbh\", \"phi\",\"xy\"]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"ML_BSSN::phi\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "66", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "125", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 66, ",", 125, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.`"}], ",", "124.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "124.`"}], ",", "124.`"}], "}"}]}], "}"}]}], 
+  "]"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadGridFunctionDimensions",
+    BaseStyle->"Link",
+    ButtonData->"paclet:SimulationTools/ref/ReadGridFunctionDimensions"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["FindGridFunctions",
+    BaseStyle->"Link",
+    ButtonData->"paclet:SimulationTools/ref/FindGridFunctions"],
+   FontFamily->"Verdana"]], "InlineFormula"]
+}], "SeeAlso"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection"],
+
+Cell[TextData[ButtonBox["SimulationTools",
+ BaseStyle->"Link",
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"],
+
+Cell[TextData[ButtonBox["GridFunctions",
+ BaseStyle->"Link",
+ ButtonData->"paclet:SimulationTools/guide/GridFunctions"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{

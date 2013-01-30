@@ -1648,7 +1648,12 @@ Cell[BoxData[
  CellLabel->"In[22]:="],
 
 Cell[BoxData[
- GraphicsBox[RectangleBox[{0., 0.}, {1., 6.}]]], "Output",
+ GraphicsBox[
+  RectangleBox[SimulationTools`DataRegion`Private`Origin, {
+   SimulationTools`DataRegion`Private`Origin + 
+    5 SimulationTools`DataTable`Spacing, 
+    SimulationTools`DataRegion`Private`Origin + 
+    10 SimulationTools`DataTable`Spacing}]]], "Output",
  CellLabel->"Out[22]="]
 }, Open  ]]
 }, Open  ]],

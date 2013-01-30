@@ -7,33 +7,32 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SimulationTools`DataTable",
+ ButtonBox["SimulationTools`Waveforms",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["AntiDerivative",
+ ButtonBox["ReadRadiallyExtrapolatedPsi4",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/ref/AntiDerivative"]
+  ButtonData->"paclet:SimulationTools/ref/ReadRadiallyExtrapolatedPsi4"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["AntiDerivative", "ObjectName"],
+Cell["ReadRadiallyExtrapolatedPsi4", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["AntiDerivative",
+       ButtonBox["ReadRadiallyExtrapolatedPsi4",
         BaseStyle->"Link",
-        ButtonData->"paclet:SimulationTools/ref/AntiDerivative"], "[", 
+        ButtonData->
+         "paclet:SimulationTools/ref/ReadRadiallyExtrapolatedPsi4"], "[", 
        StyleBox[
-        RowBox[{"d", ",", " ", 
-         RowBox[{"{", 
-          RowBox[{"x", ",", " ", "f"}], "}"}]}], "TI"], "]"}]], 
+        RowBox[{"sim", ",", " ", "l", ",", " ", "m"}], "TI"], "]"}]], 
       "InlineFormula"],
-     "\[LineSeparator]returns the first integral, I, of the DataTable d, with \
-the integration constant chosen such that I[x] = f."
+     "\[LineSeparator]extrapolates the (l, m) mode of Psi4 from the \
+simulation to infinite radius."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -61,7 +60,16 @@ Cell[TextData[Cell[BoxData[
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "InterpolationOrder", "3", Cell[
+   {Cell["      ", "TableRowIcon"], "AbsPhase", "True", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "DiscretePhaseAlignmentTime", "Automatic",
+     Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PerturbativeAdjustment", "False", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RadialCoordinateTransformation", "None", 
+    Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Radii", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RadiusRange", "Automatic", Cell[
     "", "TableText"]}
   },
   GridBoxAlignment->{
@@ -69,9 +77,9 @@ Cell[BoxData[GridBox[{
     "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
  GridBoxOptions->{
  GridBoxBackground->{
-  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
-   "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True}}}}]
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -85,22 +93,26 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"AntiDerivative",
+WindowTitle->"ReadRadiallyExtrapolatedPsi4",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
    "context" -> "SimulationTools`", 
-    "keywords" -> {"AntiDerivative", "ANTIDERIVATIVE", "antiderivative"}, 
-    "index" -> True, "label" -> 
-    "SimulationTools/SimulationTools`DataTable Symbol", "language" -> "en", 
-    "paclet" -> "SimulationTools`DataTable", "status" -> "None", "summary" -> 
-    "AntiDerivative[d, {x, f}] returns the first integral, I, of the \
-DataTable d, with the integration constant chosen such that I[x] = f.", 
-    "synonyms" -> {"AntiDerivative", "ANTIDERIVATIVE", "antiderivative"}, 
-    "title" -> "AntiDerivative", "windowTitle" -> "AntiDerivative", "type" -> 
-    "Symbol", "uri" -> "SimulationTools/ref/AntiDerivative"}, 
+    "keywords" -> {
+     "ReadRadiallyExtrapolatedPsi4", "READRADIALLYEXTRAPOLATEDPSI4", 
+      "readradiallyextrapolatedpsi4"}, "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
+    "ReadRadiallyExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of \
+Psi4 from the simulation to infinite radius.", 
+    "synonyms" -> {
+     "ReadRadiallyExtrapolatedPsi4", "READRADIALLYEXTRAPOLATEDPSI4", 
+      "readradiallyextrapolatedpsi4"}, "title" -> 
+    "ReadRadiallyExtrapolatedPsi4", "windowTitle" -> 
+    "ReadRadiallyExtrapolatedPsi4", "type" -> "Symbol", "uri" -> 
+    "SimulationTools/ref/ReadRadiallyExtrapolatedPsi4"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

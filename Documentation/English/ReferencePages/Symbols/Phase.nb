@@ -29,8 +29,8 @@ Cell[BoxData[GridBox[{
         BaseStyle->"Link",
         ButtonData->"paclet:SimulationTools/ref/Phase"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the phase of the complex variable in DataTable d. \
- The resulting phase will be continuous for sufficiently smooth input data."
+     "\[LineSeparator]gives the phase of the complex variable in d.  The \
+resulting phase will be continuous for sufficiently smooth input data."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -57,8 +57,8 @@ TaggingRules->{
     "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
     "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
     "None", "summary" -> 
-    "Phase[d] gives the phase of the complex variable in DataTable d.  The \
-resulting phase will be continuous for sufficiently smooth input data.", 
+    "Phase[d] gives the phase of the complex variable in d.  The resulting \
+phase will be continuous for sufficiently smooth input data.", 
     "synonyms" -> {"Phase", "PHASE", "phase"}, "title" -> "Phase", 
     "windowTitle" -> "Phase", "type" -> "Symbol", "uri" -> 
     "SimulationTools/ref/Phase"}, "SearchTextTranslated" -> "", "LinkTrails" -> 

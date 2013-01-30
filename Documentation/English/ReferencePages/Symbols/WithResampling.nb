@@ -12,26 +12,26 @@ Cell[TextData[{
   ButtonData->
    "paclet:SimulationTools/guide/SimulationTools`DataRepresentations"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["Sub",
+ ButtonBox["WithResampling",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/ref/Sub"]
+  ButtonData->"paclet:SimulationTools/ref/WithResampling"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["Sub", "ObjectName"],
+Cell["WithResampling", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["Sub",
+       ButtonBox["WithResampling",
         BaseStyle->"Link",
-        ButtonData->"paclet:SimulationTools/ref/Sub"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/WithResampling"], "[", 
        StyleBox[
-        RowBox[{"d1", ",", " ", "d2"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]subtracts d2 from d1 after they have been resampled \
-onto the intersection of their bounding boxes."
+        RowBox[{"method", ",", " ", "expr"}], "TI"], "]"}]], "InlineFormula"],
+     
+     "\[LineSeparator]evaluates expr with automatic resampling enabled."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -47,22 +47,24 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"Sub",
+WindowTitle->"WithResampling",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
  "ModificationHighlight" -> False, 
   "Metadata" -> {
-   "context" -> "SimulationTools`", "keywords" -> {"Sub", "SUB", "sub"}, 
+   "context" -> "SimulationTools`", 
+    "keywords" -> {"WithResampling", "WITHRESAMPLING", "withresampling"}, 
     "index" -> True, "label" -> 
     "SimulationTools/SimulationTools`DataRepresentations Symbol", "language" -> 
     "en", "paclet" -> "SimulationTools`DataRepresentations", "status" -> 
     "None", "summary" -> 
-    "Sub[d1, d2] subtracts d2 from d1 after they have been resampled onto the \
-intersection of their bounding boxes.", "synonyms" -> {"Sub", "SUB", "sub"}, 
-    "title" -> "Sub", "windowTitle" -> "Sub", "type" -> "Symbol", "uri" -> 
-    "SimulationTools/ref/Sub"}, "SearchTextTranslated" -> "", "LinkTrails" -> 
-  ""},
+    "WithResampling[method, expr] evaluates expr with automatic resampling \
+enabled.", 
+    "synonyms" -> {"WithResampling", "WITHRESAMPLING", "withresampling"}, 
+    "title" -> "WithResampling", "windowTitle" -> "WithResampling", "type" -> 
+    "Symbol", "uri" -> "SimulationTools/ref/WithResampling"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
 2011)",

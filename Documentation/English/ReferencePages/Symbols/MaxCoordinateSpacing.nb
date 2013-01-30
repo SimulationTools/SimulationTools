@@ -11,24 +11,24 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:SimulationTools/guide/SimulationTools`DataTable"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["MinCoordinateSpacing",
+ ButtonBox["MaxCoordinateSpacing",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/ref/MinCoordinateSpacing"]
+  ButtonData->"paclet:SimulationTools/ref/MaxCoordinateSpacing"]
 }], "LinkTrail"],
 
 Cell[CellGroupData[{
 
-Cell["MinCoordinateSpacing", "ObjectName"],
+Cell["MaxCoordinateSpacing", "ObjectName"],
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
      Cell[BoxData[
       RowBox[{
-       ButtonBox["MinCoordinateSpacing",
+       ButtonBox["MaxCoordinateSpacing",
         BaseStyle->"Link",
-        ButtonData->"paclet:SimulationTools/ref/MinCoordinateSpacing"], "[", 
+        ButtonData->"paclet:SimulationTools/ref/MaxCoordinateSpacing"], "[", 
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the smallest spacing of the coordinates in d."
+     "\[LineSeparator]gives the largest spacing of the coordinates in d."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -44,7 +44,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"MinCoordinateSpacing",
+WindowTitle->"MaxCoordinateSpacing",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -52,16 +52,16 @@ TaggingRules->{
   "Metadata" -> {
    "context" -> "SimulationTools`", 
     "keywords" -> {
-     "MinCoordinateSpacing", "MINCOORDINATESPACING", "mincoordinatespacing"}, 
+     "MaxCoordinateSpacing", "MAXCOORDINATESPACING", "maxcoordinatespacing"}, 
     "index" -> True, "label" -> 
     "SimulationTools/SimulationTools`DataTable Symbol", "language" -> "en", 
     "paclet" -> "SimulationTools`DataTable", "status" -> "None", "summary" -> 
-    "MinCoordinateSpacing[d] gives the smallest spacing of the coordinates in \
+    "MaxCoordinateSpacing[d] gives the largest spacing of the coordinates in \
 d.", "synonyms" -> {
-     "MinCoordinateSpacing", "MINCOORDINATESPACING", "mincoordinatespacing"}, 
-    "title" -> "MinCoordinateSpacing", "windowTitle" -> 
-    "MinCoordinateSpacing", "type" -> "Symbol", "uri" -> 
-    "SimulationTools/ref/MinCoordinateSpacing"}, "SearchTextTranslated" -> "",
+     "MaxCoordinateSpacing", "MAXCOORDINATESPACING", "maxcoordinatespacing"}, 
+    "title" -> "MaxCoordinateSpacing", "windowTitle" -> 
+    "MaxCoordinateSpacing", "type" -> "Symbol", "uri" -> 
+    "SimulationTools/ref/MaxCoordinateSpacing"}, "SearchTextTranslated" -> "",
    "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

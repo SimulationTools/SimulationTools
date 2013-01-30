@@ -67,6 +67,37 @@ from sim."
 
 Cell[CellGroupData[{
 
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["\<\
+The Psi4 data can come from the Multipole or Ylm_Decomp thorns, or a \
+simulation in the Numerical Relativity Data Format\
+\>", "Notes"],
+
+Cell["\<\
+The alias chosen for Psi4 in Multipole can be chosen by setting \
+$MultipolePsi4Variable (the default is \"psi4\")\
+\>", "Notes"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell[TextData[ButtonBox["EXAMPLES",
  BaseStyle->None,
  Appearance->{Automatic, None},

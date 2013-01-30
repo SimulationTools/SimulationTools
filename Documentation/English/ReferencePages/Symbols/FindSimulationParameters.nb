@@ -16,6 +16,33 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/FindSimulationParameters"]
 }], "LinkTrail"],
 
+Cell[BoxData[GridBox[{
+   {Cell["SIMULATIONTOOLS`PARAMETERS PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"ReadSimulationParameter":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationParameter"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/guide/SimulationTools"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]"
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
 Cell[CellGroupData[{
 
 Cell["FindSimulationParameters", "ObjectName"],
@@ -35,6 +62,139 @@ Cell[BoxData[GridBox[{
 match pattern which were set in the simulation."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["\<\
+The parameter file must be available in the simulation output directory, and \
+only the parameters found there will be returned.\
+\>", "Notes"],
+
+Cell["\<\
+The pattern is the same as is used in Mathematica's StringMatchQ; it can be a \
+simple wildcarded string, a StringExpression, or a RegularExpression.\
+\>", "Notes"],
+
+Cell["\<\
+Parameter names are returned as strings in the form \"<thorn>::<param>\".\
+\>", "Notes"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection"],
+
+Cell[CellGroupData[{
+
+Cell["FindSimulationParameters[\"bbh\",\"CoordBase::*\"]", "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"coordbase::domainsize\"\>", ",", "\<\"coordbase::xmin\"\>", 
+   ",", "\<\"coordbase::ymin\"\>", ",", "\<\"coordbase::zmin\"\>", 
+   ",", "\<\"coordbase::xmax\"\>", ",", "\<\"coordbase::ymax\"\>", 
+   ",", "\<\"coordbase::zmax\"\>", ",", "\<\"coordbase::dx\"\>", 
+   ",", "\<\"coordbase::dy\"\>", ",", "\<\"coordbase::dz\"\>", 
+   ",", "\<\"coordbase::boundary_size_x_lower\"\>", 
+   ",", "\<\"coordbase::boundary_size_y_lower\"\>", 
+   ",", "\<\"coordbase::boundary_size_z_lower\"\>", 
+   ",", "\<\"coordbase::boundary_size_x_upper\"\>", 
+   ",", "\<\"coordbase::boundary_size_y_upper\"\>", 
+   ",", "\<\"coordbase::boundary_size_z_upper\"\>", 
+   ",", "\<\"coordbase::boundary_shiftout_x_lower\"\>", 
+   ",", "\<\"coordbase::boundary_shiftout_z_lower\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[1]:= "]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  StyleBox[
+   ButtonBox["ReadSimulationParameter",
+    BaseStyle->"Link",
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationParameter"],
+   FontFamily->"Verdana"]], "InlineFormula"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " "
+}], "SeeAlso"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection"],
+
+Cell[TextData[ButtonBox["SimulationTools",
+ BaseStyle->"Link",
+ ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"]
 }, Open  ]],
 
 Cell[CellGroupData[{

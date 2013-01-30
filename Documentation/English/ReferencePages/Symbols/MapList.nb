@@ -91,7 +91,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["f[{t_, a_}] := {t^2, a^2}", "Input",
+Cell["f[{t_, a_}] := a^2-t", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData["Null"], "Output",
@@ -132,7 +132,7 @@ Cell[BoxData[
     Editable->False], ",", 
    RowBox[{"{", 
     RowBox[{"{", 
-     RowBox[{"0", ",", "0.09`"}], "}"}], "}"}]}], "]"}]], "Output",
+     RowBox[{"0", ",", "0.3`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]],
 
@@ -147,9 +147,10 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"0", ",", "0.25`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"0.010000000000000002`", ",", "0.36`"}], "}"}], ",", 
+    RowBox[{"0.1`", ",", "0.26`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"0.09`", ",", "0.09`"}], "}"}]}], "}"}]], "Output",
+    RowBox[{"0.3`", ",", 
+     RowBox[{"-", "0.21`"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

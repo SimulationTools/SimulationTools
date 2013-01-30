@@ -56,8 +56,9 @@ Cell[TextData[Cell[BoxData[
  CellGroupingRules->{"SectionGrouping", 50}],
 
 Cell["\<\
-The number of cycles is calculated starting at 'start' and terminating at the \
-merger, which is determined from the maimum of the waveform amplitude.\
+The number of cycles is calculated starting at t = start and terminating at \
+the merger, which is determined from the maximum of the Psi4 waveform \
+amplitude.\
 \>", "Notes"]
 }, Open  ]],
 

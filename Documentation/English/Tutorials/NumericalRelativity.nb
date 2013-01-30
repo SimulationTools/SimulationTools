@@ -1004,6 +1004,8 @@ Cell[BoxData[
    "}"}]}]], "Input",
  CellLabel->"In[12]:="],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[{
  RowBox[{
   RowBox[{"h30", "=", 
@@ -1016,6 +1018,30 @@ Cell[BoxData[{
     RowBox[{"rescaleTime", ",", "h100"}], "]"}]}], ";"}]}], "Input",
  CellLabel->"In[13]:="],
 
+Cell[BoxData[
+ InterpretationBox["\<\"MapList: Result is not numeric: {-0.0104151, \
+-0.00209131 - 0.00243278 I}\"\>",
+  StringForm[
+  "MapList: Result is not numeric: {-0.0104151, -0.00209131 - 0.00243278 I}"],
+  
+  Editable->False]], "Print",
+ CellLabel->"During evaluation of In[13]:="],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellLabel->"Out[13]="],
+
+Cell[BoxData[
+ InterpretationBox["\<\"MapList: Result is not numeric: {-0.0318382, \
+0.000158342 + 0.000520831 I}\"\>",
+  StringForm[
+  "MapList: Result is not numeric: {-0.0318382, 0.000158342 + 0.000520831 I}"],
+  Editable->False]], "Print",
+ CellLabel->"During evaluation of In[13]:="],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellLabel->"Out[14]="]
+}, Open  ]],
+
 Cell["Compute the match between the two waveforms", "MathCaption"],
 
 Cell[CellGroupData[{
@@ -1027,7 +1053,14 @@ Cell[BoxData[
     RowBox[{"h30", ",", "h100"}], "}"}], ",", "sn"}], "]"}]], "Input",
  CellLabel->"In[15]:="],
 
-Cell[BoxData["0.8402714267133728`"], "Output",
+Cell[BoxData[
+ InterpretationBox["\<\"ToDataTable: Data is not a list of {t, f[t]} \
+elements.\"\>",
+  StringForm["ToDataTable: Data is not a list of {t, f[t]} elements."],
+  Editable->False]], "Print",
+ CellLabel->"During evaluation of In[15]:="],
+
+Cell[BoxData["$Aborted"], "Output",
  CellLabel->"Out[15]="]
 }, Open  ]]
 }, Open  ]],

@@ -1,0 +1,125 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools`Waveforms",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools`Waveforms"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["ReadRadiallyExtrapolatedStrain",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/ref/ReadRadiallyExtrapolatedStrain"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["ReadRadiallyExtrapolatedStrain", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["ReadRadiallyExtrapolatedStrain",
+        BaseStyle->"Link",
+        ButtonData->
+         "paclet:SimulationTools/ref/ReadRadiallyExtrapolatedStrain"], "[", 
+       StyleBox[
+        RowBox[{"sim", ",", " ", "l", ",", " ", "m", ",", " ", "om0"}], "TI"],
+        "]"}]], "InlineFormula"],
+     "\[LineSeparator]reads the (l, m) mode of Psi4 at various radii from a \
+simulation, converts them to strain using Psi4ToStrain, and extrapolates the \
+result to infinite radius."
+    }]]}
+  }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "AbsPhase", "True", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "DiscretePhaseAlignmentTime", "Automatic",
+     Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PerturbativeAdjustment", "False", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RadialCoordinateTransformation", "None", 
+    Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "Radii", "Automatic", Cell[
+    "", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RadiusRange", "Automatic", Cell[
+    "", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ReadRadiallyExtrapolatedStrain",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", 
+    "keywords" -> {
+     "ReadRadiallyExtrapolatedStrain", "READRADIALLYEXTRAPOLATEDSTRAIN", 
+      "readradiallyextrapolatedstrain"}, "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
+    "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
+    "ReadRadiallyExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of \
+Psi4 at various radii from a simulation, converts them to strain using \
+Psi4ToStrain, and extrapolates the result to infinite radius.", 
+    "synonyms" -> {
+     "ReadRadiallyExtrapolatedStrain", "READRADIALLYEXTRAPOLATEDSTRAIN", 
+      "readradiallyextrapolatedstrain"}, "title" -> 
+    "ReadRadiallyExtrapolatedStrain", "windowTitle" -> 
+    "ReadRadiallyExtrapolatedStrain", "type" -> "Symbol", "uri" -> 
+    "SimulationTools/ref/ReadRadiallyExtrapolatedStrain"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

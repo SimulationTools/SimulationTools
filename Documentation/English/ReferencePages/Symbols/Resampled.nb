@@ -37,10 +37,50 @@ Cell[BoxData[GridBox[{
            RowBox[{"{", 
             RowBox[{"y0", ",", " ", "y1", ",", " ", "dy"}], "}"}], ",", " ", 
            "..."}], "}"}]}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]resamples d to produce a DataRegion with coordinate \
-ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}."
+     "\[LineSeparator]resamples d to produce a data representation with \
+coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, \
+...}.Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, \
+but with constant spacing dx, dy, ....Resampled[d1, d2] resamples d1 onto the \
+coordinate grid of d2.Resampled[{d1, d2, ...}, grid] returns a list of \
+resampled data representations all onto the coordinate grid specified by grid."
     }]]}
   }]], "Usage"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50}],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "InterpolationOrder", "8", Cell[
+    "", "TableText"]}
+  },
+  GridBoxAlignment->{
+   "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
+    "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -66,10 +106,14 @@ TaggingRules->{
     "language" -> "en", "paclet" -> "SimulationTools`DataRepresentations", 
     "status" -> "None", "summary" -> 
     "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a \
-DataRegion with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, \
-dy, ...}.", "synonyms" -> {"Resampled", "RESAMPLED", "resampled"}, "title" -> 
-    "Resampled", "windowTitle" -> "Resampled", "type" -> "Symbol", "uri" -> 
-    "SimulationTools/ref/Resampled"}, "SearchTextTranslated" -> "", 
+data representation with coordinate ranges {x0, x1}, {y0, y1}, ... and \
+spacings {dx, dy, ...}.Resampled[d, {dx, dy, ...}] resamples d onto a grid of \
+the same extent, but with constant spacing dx, dy, ....Resampled[d1, d2] \
+resamples d1 onto the coordinate grid of d2.Resampled[{d1, d2, ...}, grid] \
+returns a list of resampled data representations all onto the coordinate grid \
+specified by grid.", "synonyms" -> {"Resampled", "RESAMPLED", "resampled"}, 
+    "title" -> "Resampled", "windowTitle" -> "Resampled", "type" -> "Symbol", 
+    "uri" -> "SimulationTools/ref/Resampled"}, "SearchTextTranslated" -> "", 
   "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

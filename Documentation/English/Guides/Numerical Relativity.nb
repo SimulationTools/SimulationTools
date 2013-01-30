@@ -146,10 +146,10 @@ converting from real and imaginary to amplitude and phase."
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ReadExtrapolatedPsi4",
+ Cell[TextData[ButtonBox["ReadRadiallyExtrapolatedPsi4",
   BaseStyle->"Link",
   ButtonData->
-   "paclet:Numerical Relativity packages/ref/ReadExtrapolatedPsi4"]], 
+   "paclet:Numerical Relativity packages/ref/ReadRadiallyExtrapolatedPsi4"]], 
   "InlineFunctionSans"],
  " ",
  StyleBox["\[LongDash]", "GuideEmDash"],
@@ -210,22 +210,6 @@ simulation"
 
 Cell[CellGroupData[{
 
-Cell["Kicks", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["ReadKick",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/ReadKick"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Compute the kick in km/s as measured from gravitational waves"
-}], "GuideText"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["InitialData", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
@@ -242,22 +226,6 @@ initial data"
 }, Open  ]],
 
 Cell["CoordinateTransformations", "GuideFunctionsSubsection"],
-
-Cell[CellGroupData[{
-
-Cell["DataAnalysis", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["WaveformMatch",
-  BaseStyle->"Link",
-  ButtonData->"paclet:Numerical Relativity packages/ref/WaveformMatch"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Compute the phase- and time-maximised overlap of two DataTables"
-}], "GuideText"]
-}, Open  ]],
 
 Cell[CellGroupData[{
 

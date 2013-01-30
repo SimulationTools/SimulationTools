@@ -29,7 +29,8 @@ Cell[BoxData[GridBox[{
         ButtonData->"paclet:SimulationTools/ref/ReadWaveformCycles"], "[", 
        StyleBox[
         RowBox[{"sim", ",", " ", "start"}], "TI"], "]"}]], "InlineFormula"],
-     "\[LineSeparator]gives the number of gravitational wave cycles for sim."
+     "\[LineSeparator]gives the number of gravitational wave cycles in Psi4 \
+for simulation sim."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -56,12 +57,16 @@ Cell[TextData[Cell[BoxData[
 
 Cell["\<\
 The number of cycles is calculated starting at 'start' and terminating at the \
-merger, which is determined from the maimum of the waveform amplitude.\
+merger, which is determined from the maximum of the Psi4 waveform amplitude.\
 \>", "Notes"],
 
 Cell["\<\
 ReadWaveformCycles[sim, start] is equivalent to WaveformCycles[ReadPsi4[sim, \
 2,2, First[ReadPsi4Radii[sim]]], start].\
+\>", "Notes"],
+
+Cell["\<\
+The lowest extraction radius is used to compute the number of cycles.\
 \>", "Notes"]
 }, Open  ]],
 
@@ -89,7 +94,7 @@ TaggingRules->{
     "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
     "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
     "ReadWaveformCycles[sim, start] gives the number of gravitational wave \
-cycles for sim.", 
+cycles in Psi4 for simulation sim.", 
     "synonyms" -> {
      "ReadWaveformCycles", "READWAVEFORMCYCLES", "readwaveformcycles"}, 
     "title" -> "ReadWaveformCycles", "windowTitle" -> "ReadWaveformCycles", 

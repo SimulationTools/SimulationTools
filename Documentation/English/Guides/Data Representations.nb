@@ -89,18 +89,6 @@ Cell[TextData[{
 }], "GuideText"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["Add",
-  BaseStyle->"Link",
-  ButtonData->"paclet:DataTable and DataRegion/ref/Add"]], 
-  "InlineFunctionSans"],
- " ",
- StyleBox["\[LongDash]", "GuideEmDash"],
- " ",
- "Add two DataRepresentations together, resampling onto a common coordinate \
-range grid if necessary"
-}], "GuideText"],
-
-Cell[TextData[{
  Cell[TextData[ButtonBox["ToListOfData",
   BaseStyle->"Link",
   ButtonData->"paclet:DataTable and DataRegion/ref/ToListOfData"]], 
