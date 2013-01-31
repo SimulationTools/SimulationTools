@@ -105,6 +105,13 @@ ReadColumnFile[runName_String, fileName_String, cols_List] :=
       cols2 = cols];
   extractColumns[ReadColumnFile[runName, fileName], cols2]];
 
+ReadColumnFile[fileName_String, cols_List] :=
+  Module[
+    {data}
+    data = ReadColumnFile[fileName];
+    colNums = ColumnNumbers[fileName, cols];
+    extractColumns[data,colNums]];
+
 (* Column numbering functions *)
 
 (*stripWhiteSpace[s_String] := StringCases[s, (StartOfLine ~~ (Whitespace ~~ x___ ~~ Whitespace ~~ EndOfLine) :> x][[1]];*)
