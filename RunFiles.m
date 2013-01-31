@@ -356,7 +356,7 @@ FileIsInRun[run_, file_] :=
 ReadWalltime[runName_] :=
   Module[{segmentTime, files},
     segmentTime[file_] :=
-      ReadColumnFile[file, {9, 14}][[-1,2]];
+      ReadColumnFile[file, ColumnNumbers[file,{"time", "time_total"}]][[-1,2]];
     files = FindRunFile[runName, "carpet::timing..asc"];
     Plus@@(segmentTime /@ files)];
 
