@@ -52,9 +52,10 @@ RunDutyCycle[run_] :=
                                       SegmentEndDate[Last[segs]], "Second"][[1]];
     totalRunTime / totalElapsedTime //N];
 
-SegmentCoordinateTimeInterval[dir_] :=
- Module[{times =
-    Catch[First /@ ReadColumnFile[dir, "carpet::timing..asc", ColumnNumbers[{"time"}]]]},
+SegmentCoordinateTimeInterval[segdir_] :=
+ Module[{times},
+  times =
+     Catch[First /@ ReadColumnFile[segdir, "carpet::timing..asc", {"time"}]];
   If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]];
 
 SegmentStartTimes[run_] :=
