@@ -24,6 +24,9 @@ If[$VersionNumber == 8. && $ReleaseNumber == 0, ImportString["", "Table"]];
    ListLogPlot unless we call ListLogPlot once first. *)
 If[$VersionNumber == 8., ListLogPlot[{1}]];
 
+(* Work around a bug in Mathematica 9.0.1 *)
+If[$VersionNumber == 9. && $ReleaseNumber == 1, Quantity["GravitationalConstant"]];
+
 (* Give a warning to users who try to load the old nrmma package *)
 If[$Input === "nrmma.m",
    Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
