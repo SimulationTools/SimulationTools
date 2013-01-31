@@ -24,18 +24,8 @@ BeginPackage["SimulationTools`RunFiles`",
  }];
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
-ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
-ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time in seconds elapsed during the execution of a simulation.";
 
-StandardOutputOfRun;
-SegmentStartDate;
-SegmentEndDate;
-SegmentDuration;
-RunDutyCycle;
-SegmentCoordinateTimeInterval;
-SegmentStartTimes;
 HaveRunDir;
-ReadWalltimeHours;
 
 (* Deprecated *)
 FindRunSegments;
@@ -50,13 +40,7 @@ FullFilenames;
 LeafNamesOnly;
 
 (* Old names *)
-ReadCores = ReadSimulationCoreCount;
 FindRunFiles = FindSimulationFiles;
-ReadWalltime = ReadSimulationRunTime;
-
-(* Exceptions *)
-NoSimulationCoreCountAvailable;
-NoSimulationRunTimeAvailable;
 
 Begin["`Private`"];
 
@@ -117,11 +101,6 @@ FindRunDir[runName_String] :=
     Error["Cannot find run "<>runName]
 ];
 
-ReadCores[run_] :=
-  If[HaveData["RunFiles", FindRunDir[run]],
-    CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
-    Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""]];
-
 (*--------------------------------------------------------------------
   Finding segments in run directories
   --------------------------------------------------------------------*)
@@ -179,17 +158,6 @@ DefineMemoFunction[FindRunFilesFromPattern[runName_String, filePattern:(_String|
     names
 ]];
 
-
-(*--------------------------------------------------------------------
-  High-level operations on files from runs
-  --------------------------------------------------------------------*)
-
-StandardOutputOfRun[runName_String] :=
-  Module[{segments, files1, files2},
-    segments = FindRunSegments[runName];
-    files1 = Map[FileNameJoin[{#, "../"<>Last@FileNameSplit@runName<>".out"}] &, segments];
-    files2 = Select[files1, FileType[#] =!= None &]];
-
 stringToReal[s_String] :=
   Profile["stringToReal",
  Module[{p, n, mantissa, exponent},
@@ -202,50 +170,8 @@ stringToReal[s_String] :=
    1.0*mantissa*10^exponent]
   ]];
 
-SegmentStartDate[dir_] :=
-  FileDate[FileNameJoin[{dir, "/carpet::timing..asc"}]];
-
-SegmentEndDate[dir_] :=
-  Module[{parFile},
-    parFile = First[FileNames["*.par", dir]];
-    FileDate[parFile]];
-
-SegmentDuration[dir_] :=
-  DateDifference[SegmentEndDate[dir], SegmentStartDate[dir], "Second"][[1]];
-
-RunDutyCycle[run_] :=
-  Module[{segs = FindRunSegments[run], totalRunTime, totalElapsedTime},
-    totalRunTime = Plus@@(SegmentDuration /@ segs);
-    totalElapsedTime = DateDifference[SegmentStartDate[First[segs]],
-                                      SegmentEndDate[Last[segs]], "Second"][[1]];
-    totalRunTime / totalElapsedTime //N];
-
-SegmentCoordinateTimeInterval[dir_] :=
- Module[{times =
-    Catch[First /@ ReadColumnFile[dir, "carpet::timing..asc", ColumnNumbers[{"time"}]]]},
-  If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]];
-
-SegmentStartTimes[run_] :=
- Module[{segs = FindRunSegments[run]},
-  First /@
-   Select[SegmentCoordinateTimeInterval /@ segs, # =!= None &]];
-
 FileIsInRun[run_, file_] :=
   FindRunFile[run, file] =!= {};
-
-ReadWalltime[runName_] :=
-  Module[{segmentTime, files},
-    segmentTime[file_] :=
-      ReadColumnFile[file, ColumnNumbers[file,{"time", "time_total"}]][[-1,2]];
-    files = FindRunFile[runName, "carpet::timing..asc"];
-    Plus@@(segmentTime /@ files)];
-
-ReadWalltimeHours[runName_] := 
-  If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
-    ReadWalltime[runName]/3600,
-    (* else *)
-    Error[NoSimulationRunTimeAvailable,
-          "Simulation run time not available in \""<>runName<>"\""]];
 
 End[];
 
