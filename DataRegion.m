@@ -247,7 +247,7 @@ SyntaxInformation[MergedDataRegion] =
  {"ArgumentsPattern" -> {_}};
 
 MergedDataRegion[ds:List[DataRegion[___]..]] :=
- Module[{x1, x2, dx, n, data, offsets},
+ Module[{x1, x2, dx, n, data, offsets, attrs},
   (* Find the shape of the bounding-box DataRegion *)
   x1 = Min /@ Transpose[MinCoordinates /@ ds];
   x2 = Max /@ Transpose[MaxCoordinates /@ ds];
@@ -272,8 +272,10 @@ MergedDataRegion[ds:List[DataRegion[___]..]] :=
   (* Insert existing data *)
   MapThread[(data[[Sequence@@#1]] = ToListOfData[#2])&, {offsets, ds}];
 
+  attrs = DeleteCases[GetAttributes[ds[[1]]], ("VariableName" -> _) | ("Spacing" -> _) | ("Origin" -> _)];
+
   (* Create the new DataRegion *)
-  ToDataRegion[Developer`ToPackedArray[data], x1, dx, "VariableName" -> VariableName[ds[[1]]]]
+  ToDataRegion[Developer`ToPackedArray[data], x1, dx, "VariableName" -> VariableName[ds[[1]]], "Attributes" -> attrs]
 ];
 
 
@@ -387,7 +389,8 @@ Shifted[d_DataRegion, delta_List] :=
 (**********************************************************)
 
 DataRegion /: Part[d_DataRegion, s__] :=
- Module[{dims, n, partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result},
+ Module[{dims, n, partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result, attrs},
+
   (* Any dimensions not explicitly mentioned are assumed to be All *)
   partSpec = PadRight[{s}, ArrayDepth[d], All];
 
@@ -449,8 +452,8 @@ DataRegion /: Part[d_DataRegion, s__] :=
    ArrayDepth[data] === 0,
      result = data;,
    True,
-     (* TODO: Make sure other attributes get propagated *)
-     result = ToDataRegion[data, origin, spacing, "VariableName" -> VariableName[d]];
+     attrs = DeleteCases[GetAttributes[d], ("VariableName" -> _) | ("Spacing" -> _) | ("Origin" -> _)];
+     result = ToDataRegion[data, origin, spacing, "VariableName" -> VariableName[d], "Attributes" -> attrs];
   ];
 
   result
