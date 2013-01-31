@@ -871,10 +871,31 @@ GetData[d_DataRegion] := Transpose[data[d], Reverse[Range[GetNumDimensions[d]]]]
 GetAttributes[d_DataRegion] := attributes[d];
 GetDimensions[d_DataRegion] := Reverse[Dimensions[GetData[d]]];
 GetNumDimensions[d_DataRegion] := ArrayDepth[data[d]];
-GetOrigin[DataRegion[h_, __]] := Origin /. h;
-GetSpacing[DataRegion[h_, __]] := Spacing /. h;
-GetTime[DataRegion[h_, _]] := Time /. h;
-GetVariableName[DataRegion[h_, __]] := VariableName /. h;
+
+GetTime[DataRegion[h_, _]] := 
+  Which[
+    MemberQ[First/@h, "Time"], "Time" /. h,
+    MemberQ[First/@h, Time], Time /. h,
+    True, Error["No time available in DataRegion"]];
+
+GetOrigin[DataRegion[h_, _]] := 
+  Which[
+    MemberQ[First/@h, "Origin"], "Origin" /. h,
+    MemberQ[First/@h, Origin], Origin /. h,
+    True, Error["No origin available in DataRegion"]];
+
+GetSpacing[DataRegion[h_, _]] := 
+  Which[
+    MemberQ[First/@h, "Spacing"], "Spacing" /. h,
+    MemberQ[First/@h, Spacing], Spacing /. h,
+    True, Error["No spacing available in DataRegion"]];
+
+GetVariableName[DataRegion[h_, _]] := 
+  Which[
+    MemberQ[First/@h, "VariableName"], "VariableName" /. h,
+    MemberQ[First/@h, VariableName], VariableName /. h,
+    True, Error["No variable name available in DataRegion"]];
+
 GetDataRange[v_DataRegion] :=
   Module[{origin, spacing, dimensions, min, max},
     origin = GetOrigin[v];
