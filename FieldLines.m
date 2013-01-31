@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright 2010-2012 Kyriaki Dionysopoulou
 
    This program is free software: you can redistribute it and/or modify
@@ -94,7 +96,9 @@ keyfontsize=Directive[FontFamily-> fontname,12];
 
 MsolarInms=SolarMassInSeconds 1000;
 
-data[it_,var_,run_,rfl_]:=Map[ReadGridFunction[#,var,it,rfl]&,run]
+downsample[d_,every_]:=Join[{d[[1]]},Select[d,Flatten[Mod[Position[d,#],every]][[1]]==0&]];
+
+data[it_,var_,run_,rfl_]:=Map[ReadGridFunction[#,var,it,rfl]&,run];
 minits[run_,var_,rfl_]:=Flatten[Position[Map[Max[ReadIterations[#,var,rfl]]&,run],Min[Map[Max[ReadIterations[#,var,rfl]]&,run]]]][[1]];
 
 datait[runlist_,var_,it_,rfl_,sliceplane___]:=
@@ -113,7 +117,7 @@ ColorRanges3d[runlist_,var_,sliceplane_,rfl_,func_]:=With[{data=Map[datait[runli
 (*ColorRanges[runlist_,var_]:={Min[Map[Log10[Abs[datait[runlist,var,#]]+10^-20]&,its[runlist]]],Max[Map[Log10[Abs[datait[runlist,var,#]]+10^-20]&,its[runlist]]]}*)
 
 
-FieldLinesData2d[run_,field_,it_,rfl_,plane_]:=
+FieldLinesData2d[run_,field_,it_,rfl_,plane_,unit_]:=
 Module[{field1,field2,fieldint1,fieldint2,fieldlines,x1Min,x2Min,x1Max,x2Max},
 Catch[If[plane===1,
     field1=ReadGridFunction[run,StringJoin[field,"x.xz.h5"],it,rfl,StripGhostZones->True];
@@ -127,8 +131,8 @@ Catch[If[plane===1,
 	    Error["Unrecognized plane option " <>plane]]]];
 fieldint1=Interpolation[field1];
   fieldint2=Interpolation[field2];
-  {{x1Min,x1Max},{x2Min,x2Max}}=GetDataRange[field1];
-fieldlines=Table[{{x1,x2},{fieldint1[x1,x2],fieldint2[x1,x2]}},{x1,x1Min,x1Max,GetSpacing[field1][[1]]},{x2,x2Min,x2Max,GetSpacing[field1][[2]]}]
+  {{x1Min,x1Max},{x2Min,x2Max}}=CoordinateRanges[field1];
+fieldlines=Table[{{x1 unit,x2 unit},{fieldint1[x1,x2],fieldint2[x1,x2]}},{x1,x1Min,x1Max,CoordinateSpacings[field1][[1]]},{x2,x2Min,x2Max,CoordinateSpacings[field1][[2]]}]
 ]];
 
 FieldLinesData3d[run_,field_,it_,rfl_,plane_]:=
@@ -145,8 +149,8 @@ Catch[If[plane===1,
 	    Error["Unrecognized plane option " <>plane]]]];
 fieldint1=Interpolation[field1];
   fieldint2=Interpolation[field2];
-  {{x1Min,x1Max},{x2Min,x2Max}}=GetDataRange[field1];
-fieldlines=Table[{fieldint1[x1,x2],fieldint2[x1,x2]},{x1,x1Min,x1Max,GetSpacing[field1][[1]]},{x2,x2Min,x2Max,GetSpacing[field1][[2]]}]
+  {{x1Min,x1Max},{x2Min,x2Max}}=CoordinateRanges[field1];
+fieldlines=Table[{fieldint1[x1,x2],fieldint2[x1,x2]},{x1,x1Min,x1Max,CoordinateSpacings[field1][[1]]},{x2,x2Min,x2Max,CoordinateSpacings[field1][[2]]}]
 ]]
 
 key[mapName_String, {min_, max_}, plotkeysize_,opts___] :=
@@ -160,15 +164,19 @@ key[mapName_String, {min_, max_}, plotkeysize_,opts___] :=
       If[Abs[c] < 10^-15, 0, N@c], {c, min, max, (max - min)/10}],
      False, False, False}]
 
-Options[FieldLines2dPlot] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{"ColorRanges"->Automatic};
+Options[FieldLines2dPlot] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{ColorRanges->Automatic,PlotVariable->"rho.xz.h5",Units->"Normal"};
 (*SetOptions[newplot,ImageSize->300];*)
  FieldLines2dPlot[run_,field_,it_,rfl_,plane_,function_,opts:OptionsPattern[]]:=
-Catch[Module[{planestr,(*runstr,*)data,ndims,dataRange,plot1,plot2,plotRange,imageSize},
+Catch[Module[{planestr,(*runstr,*)data,ndims,dataRange,plot1,plot2,plotRange,imageSize,units},
 planestr=If[plane===0,"yz",If[plane===1,"xz","xy"]];
 (*runstr=If[Length[run]>20,StringTake[run,-20],run];*)
-data=ReadGridFunction[run,StringJoin[field,"_norm."<>planestr<>".h5"],it,rfl,StripGhostZones->True];
+data=ReadGridFunction[run,OptionValue[FieldLines2dPlot,PlotVariable],it,rfl,StripGhostZones->True];
 ndims = GetNumDimensions[data];
-dataRange=If[ndims==1, GetDataRange[data][[1]],GetDataRange[data]];
+If[ToString[Head@OptionValue[FieldLines2dPlot,Units]]==="Real",
+		units=OptionValue[FieldLines2dPlot,Units],
+		If[ToString@OptionValue[FieldLines2dPlot,Units]==="Normal",units=1,
+		Throw["OptionValue Units not recognized"]]];
+dataRange=If[ndims==1, CoordinateRanges[data][[1]],CoordinateRanges[data]] units;
 plotRange=If[ToString[OptionValue[FieldLines2dPlot,PlotRange]]==="All",dataRange,OptionValue[FieldLines2dPlot,PlotRange]];
 imageSize=If[ToString[OptionValue[FieldLines2dPlot,ImageSize]]==="Automatic",300,OptionValue[FieldLines2dPlot,ImageSize]];
 data = GetData[data];
@@ -177,7 +185,7 @@ plot1=ArrayPlot[function[data],PlotRange->plotRange,ImageSize->imageSize,DataRan
 							ColorFunctionScaling->False,Frame-> {{True,True},{True,True}},Axes->True,
 							FrameTicks->True,LabelStyle->Medium,
 							FrameLabel->{{StringTake[planestr,1],""},{StringTake[planestr,-1],""}}];
-plot2=ListStreamPlot[FieldLinesData2d[run,field,it,rfl,plane],
+plot2=ListStreamPlot[FieldLinesData2d[run,field,it,rfl,plane,units],
 					DataRange->dataRange,PlotRange->plotRange,ImageSize->imageSize,FilterRules[{opts},Options[ListStreamPlot]],
 					StreamPoints->Coarse,Mesh->10,StreamScale->None,
 					StreamStyle->Directive[Black,Thick], 
@@ -200,7 +208,7 @@ planestr=If[plane===0,"yz",If[plane===1,"xz","xy"]];
 (*runstr=If[Length[run]>20,StringTake[run,-20],run];*)
 data=SliceData[ReadGridFunction[run,StringJoin[field,"_norm.file_0.h5"],it,rfl,StripGhostZones->True],plane];
 ndims = GetNumDimensions[data];
-dataRange=If[ndims==1, GetDataRange[data][[1]],GetDataRange[data]];
+dataRange=If[ndims==1, CoordinateRanges[data][[1]],CoordinateRanges[data]];
 plotRange=If[ToString[OptionValue[FieldLines3dPlot,PlotRange]]==="All",dataRange,OptionValue[FieldLines3dPlot,PlotRange]];
 imageSize=If[ToString[OptionValue[FieldLines3dPlot,ImageSize]]==="Automatic",300,OptionValue[FieldLines3dPlot,ImageSize]];
 data = GetData[data];
@@ -226,7 +234,7 @@ Show[{plot1,plot2},BaseStyle-> basesize,FrameStyle->fontsize,
 newplotdensity[it_,run_,var_,rfl_,func_,opts___]:=Catch[Module[{data,ndims,dataRange,plot1,plot2},
 data=ReadGridFunction[run,StringJoin[var,".xz.h5"],it,rfl,StripGhostZones->True];
 ndims = GetNumDimensions[data];
-dataRange=If[ndims==1, GetDataRange[data][[1]],GetDataRange[data]];
+dataRange=If[ndims==1, CoordinateRanges[data][[1]],CoordinateRanges[data]];
 data = GetData[data];
 data = Reverse[data];
 plot1=ArrayPlot[func@data,Frame-> {{True,True},{True,True}},Axes->True,FrameTicks->True,LabelStyle->Medium,DataRange->dataRange,PlotRange->dataRange,ColorFunctionScaling->False,BaseStyle-> basesize,FrameStyle->fontsize,FrameLabel->{{"x",""},{"z",""}},PlotLabel-> Style[If[Length[FindParameters[run, "whisky::whisky_Rmhd_on"]] == 1, If[StringCases[LookupParameter[run, "whisky::whisky_Rmhd_on"], 
@@ -234,22 +242,23 @@ plot1=ArrayPlot[func@data,Frame-> {{True,True},{True,True}},Axes->True,FrameTick
       (* "RMHD code","Ideal-MHD code"],"Ideal-MHD code"],FontFamily->fontname,Bold,14],opts]]]*)
 "R_"<>run,"I_"<>run],"I_"<>run],FontFamily->fontname,Bold,14],opts]]]
 *)
-Options[MovieFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{"ColorRanges"->Automatic};
+Options[MovieFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{DownSample->1,ColorRanges->Automatic,PlotVariable->"rho.xz.h5",Units->Normal};
 
 MovieFieldLines2d[run_,field_,rfl_,plane_,function2_,opts:OptionsPattern[]]:=
-Catch[Module[{planestr,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,imageSize,xmin1,xmax1},
+Catch[Module[{planestr,plotvariable,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,imageSize,xmin1,xmax1},
 	planestr=If[plane===0,"yz",If[plane===1,"xz","xy"]];
+	plotvariable=OptionValue[MovieFieldLines2d,PlotVariable];
 	colorrange1=If[ToString[OptionValue[MovieFieldLines2d,ColorRanges]]==="Automatic", 
-							ColorRanges2d[run,field<>"_norm."<>planestr<>".h5",rfl,function2],
+							ColorRanges2d[run,plotvariable,rfl,function2],
 							OptionValue[MovieFieldLines2d,ColorRanges]];
 	xmincolorrange1= Range[colorrange1[[1]],colorrange1[[2]],(colorrange1[[2]]-colorrange1[[1]])/100];
 	xmaxcolorrange1 = Reverse[xmincolorrange1];
 	imageSize=If[ToString[OptionValue[MovieFieldLines2d,ImageSize]]==="Automatic",300,OptionValue[MovieFieldLines2d,ImageSize]];
-	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]]},field<>"_norm."<>planestr<>".h5",rfl];
+	iterations = downsample[ReadIterationsFromRun[{run[[minits[run,plotvariable,rfl]]]},plotvariable,rfl],OptionValue[MovieFieldLines2d,DownSample]];
 	Manipulate[With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize},AspectRatio->10],
-		data=ReadGridFunction[run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]],field<>"_norm."<>planestr<>".h5",it,rfl,StripGhostZones->True]},
-		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
-			Row[Append[Map[FieldLines2dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
+		data=ReadTime[run[[minits[run,plotvariable,rfl]]],plotvariable,it,rfl,StripGhostZones->True]},
+		Column[{Style["t = " <> ToString[data MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
+			Row[Append[Map[FieldLines2dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,FilterRules[{opts},Options[FieldLines2dPlot]],ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
 				ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]],
@@ -267,8 +276,8 @@ Catch[Module[{planestr,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,im
 	imageSize=If[ToString[OptionValue[MovieFieldLines3d,ImageSize]]==="Automatic",300,OptionValue[MovieFieldLines3d,ImageSize]];
 	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]]},field<>"_norm."<>"file_0"<>".h5",rfl];
 	Manipulate[With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
-		data=SliceData[ReadGridFunction[run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]],field<>"_norm."<>"file_0"<>".h5",it,rfl,StripGhostZones->True],plane]},
-		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
+		data=ReadTime[run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]],field<>"_norm."<>"file_0"<>".h5",it,rfl,StripGhostZones->True]},
+		Column[{Style["t = " <> ToString[data MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 			Row[Append[Map[FieldLines3dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
@@ -276,7 +285,7 @@ Catch[Module[{planestr,colorrange1,xmincolorrange1,xmaxcolorrange1,iterations,im
 		{it,iterations},{xmin1,xmincolorrange1},{xmax1,xmaxcolorrange1},
 		ControlType->{Slider,PopupMenu,PopupMenu},SynchronousUpdating->False]]];
 
-Options[SequenceFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot];
+Options[SequenceFieldLines2d] = Options[ArrayPlot]~Join~Options[ListStreamPlot]~Join~{DownSample->1,PlotVariable->"rho.xz.h5",Units->Normal};
 SequenceFieldLines2d[path_,run_,field_,rfl_,plane_,function2_,xmin1_,xmax1_,opts:OptionsPattern[]]:=
 Catch[Module[{planestr,(*colorrange1,*)iterations,imageSize},
 	planestr=If[plane===0,"yz",If[plane===1,"xz","xy"]];
@@ -284,18 +293,19 @@ Catch[Module[{planestr,(*colorrange1,*)iterations,imageSize},
 	If[Not[DirectoryQ[path]],CreateDirectory[path]];
 	If[Not[DirectoryQ[path<>"/"<>field]],CreateDirectory[path<>"/"<>field]];
 	If[Not[DirectoryQ[path<>"/"<>field<>"/"<>planestr]],CreateDirectory[path<>"/"<>field<>"/"<>planestr]];
+	If[Not[DirectoryQ[path<>"/"<>field<>"/"<>planestr<>"/rfl"<>ToString[rfl]]],CreateDirectory[path<>"/"<>field<>"/"<>planestr<>"/rfl"<>ToString[rfl]]];
 (*Print[OptionValue[movienew,ImageSize],OptionValue[movienew,PlotRange]];*)
 (*	Print["ColorRanges: ",ColorRanges[run,field<>"_norm."<>plane<>".h5",rfl,function2]];*)
 	imageSize=If[ToString[OptionValue[SequenceFieldLines2d,ImageSize]]==="Automatic",300,OptionValue[SequenceFieldLines2d,ImageSize]];
-	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]]},field<>"_norm."<>planestr<>".h5",rfl];
+	iterations = downsample[ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]]},field<>"_norm."<>planestr<>".h5",rfl],OptionValue[SequenceFieldLines2d,DownSample]];
 	Print[iterations];
-	Do[Export[path<>"/"<>field<>"/"<>planestr<>"/"<>ToString[1000000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
-		data=ReadGridFunction[run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]],field<>"_norm."<>planestr<>".h5",it,rfl,StripGhostZones->True]},
-		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
-			Row[Append[Map[FieldLines2dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
+	Do[Export[path<>"/"<>field<>"/"<>planestr<>"/rfl"<>ToString[rfl]<>"/"<>ToString[1000000+it]<>".png",With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
+		data=ReadTime[run[[minits[run,field<>"_norm."<>planestr<>".h5",rfl]]],field<>"_norm."<>planestr<>".h5",it,rfl,StripGhostZones->True]},
+		Column[{Style["t = " <> ToString[data MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
+			Row[Append[Map[FieldLines2dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,FilterRules[{opts},Options[ArrayPlot]~Join~Options[ListStreamPlot]],ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
-				ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]]],
+				ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]],"PNG"],
 		{it,iterations}]]];
 
 Options[SequenceFieldLines3d] = Options[ArrayPlot]~Join~Options[ListStreamPlot];
@@ -311,8 +321,8 @@ Catch[Module[{(*colorrange1,*)planestr,iterations,imageSize},
 	imageSize=If[ToString[OptionValue[SequenceFieldLines3d,ImageSize]]==="Automatic",300,OptionValue[SequenceFieldLines3d,ImageSize]];
 	iterations = ReadIterationsFromRun[{run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]]},field<>"_norm."<>"file_0"<>".h5",rfl];
 	Do[Export[path<>"/"<>field<>"/"<>planestr<>"/"<>ToString[1000000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin1,xmax1},{Automatic,imageSize}],
-		data=SliceData[ReadGridFunction[run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]],field<>"_norm."<>"file_0"<>".h5",it,rfl,StripGhostZones->True],plane]},
-		Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
+		data=ReadTime[run[[minits[run,field<>"_norm."<>"file_0"<>".h5",rfl]]],field<>"_norm."<>"file_0"<>".h5",it,rfl,StripGhostZones->True]},
+		Column[{Style["t = " <> ToString[data MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
 			Row[Append[Map[FieldLines3dPlot[#,field,it,rfl,plane,function2,ImageSize->imageSize,opts,ColorFunctionScaling->False,
 							ColorFunction-> ScaledColorFunction["TemperatureMap",{xmin1,xmax1}]]&,run],keymag],
 				"  ",
@@ -331,15 +341,16 @@ Movie2d[run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 		xmaxcolorrange = Reverse[xmincolorrange];
 		data1 = ReadGridFunction[run[[1]],var,iterations[[1]],rfl,StripGhostZones->True];
 		ndims = GetNumDimensions[data1];
-		datarange = If[ndims==1, GetDataRange[data1][[1]],GetDataRange[data1]];
+		datarange = If[ndims==1, CoordinateRanges[data1][[1]],CoordinateRanges[data1]];
 		plotrange = If[OptionValue[Movie2d,PlotRange]==={Full,Full,Automatic},datarange,OptionValue[Movie2d,PlotRange]];
 		imagesize = If[ToString[OptionValue[Movie2d,ImageSize]]==="Automatic",300,OptionValue[Movie2d,ImageSize]];
 		Manipulate[With[{keymag=key["TemperatureMap",{xmin,xmax},
 							{Automatic,imagesize}],
-							data=ReadGridFunction[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
-						Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
-							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
-											PlotRange->Append[plotrange,All],ImageSize->imagesize,FilterRules[{opts},Options[ListDensityPlot]],
+							data=ReadTime[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
+						Column[{Style["t = " <> ToString[data MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
+							Row[Append[Map[ListDensityPlot[function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
+											DataRange->datarange,PlotRange->Append[plotrange,All],ImageSize->imagesize,
+											FilterRules[{opts},Options[ListDensityPlot]],
 											Frame->{{True,True},{True,True}}, 
 											Axes-> True,
 											FrameLabel->{{StringTake[plane,-1],""},{StringTake[plane,1],
@@ -371,22 +382,24 @@ Sequence2d[path_,run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 		If[Not[DirectoryQ[path<>"/"<>StringSplit[var,"."][[1]]]],CreateDirectory[path<>"/"<>StringSplit[var,"."][[1]]]];
 		If[Not[DirectoryQ[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane]],
 			CreateDirectory[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane]];
+		If[Not[DirectoryQ[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane<>"/rfl"<>ToString[rfl]]],
+			CreateDirectory[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane<>"/rfl"<>ToString[rfl]]];
 		data1 = ReadGridFunction[run[[1]],var,iterations[[1]],rfl,StripGhostZones->True];
 		ndims = GetNumDimensions[data1];
-		datarange = If[ndims==1, GetDataRange[data1][[1]],GetDataRange[data1]];
+		datarange = If[ndims==1, CoordinateRanges[data1][[1]],CoordinateRanges[data1]];
 		plotrange = If[OptionValue[Sequence2d,PlotRange]==={Full,Full,Automatic},datarange,OptionValue[Sequence2d,PlotRange]];
 		imagesize = If[ToString[OptionValue[Sequence2d,ImageSize]]==="Automatic",300,OptionValue[Sequence2d,ImageSize]];
 		{xmin,xmax}= (*{-9.66,*)If[ToString[OptionValue[Sequence2d,ColorRanges]]==="Automatic", 
 							ColorRanges2d[run,var,rfl,function],
 							OptionValue[Sequence2d,ColorRanges]];
 		(*If[CreateDirectory["/home/kdionyso/Desktop/movies/"<>path]]*)
-		Do[Export[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane<>"/"<>ToString[1000000+it]<>".jpg",With[{keymag=key["TemperatureMap",{xmin,xmax}(*[[2]]}*),
+		Do[Export[path<>"/"<>StringSplit[var,"."][[1]]<>"/"<>plane<>"/rfl"<>ToString[rfl]<>"/"<>ToString[1000000+it]<>".png",With[{keymag=key["TemperatureMap",{xmin,xmax}(*[[2]]}*),
 							{Automatic,imagesize}],
 							magrange={xmin,xmax},
-							data=ReadGridFunction[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
-						Column[{Style["t = " <> ToString[GetTime[data] MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
-							Row[Append[Map[DataRegionPlot[ListDensityPlot,2,function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
-											PlotRange->Append[plotrange,All],ImageSize->imagesize,
+							data=ReadTime[run[[minits[run,var,rfl]]],var,it,rfl,StripGhostZones->True]},
+						Column[{Style["t = " <> ToString[data MsolarInms]<>" ms",FontFamily->fontname,Bold,20],
+							Row[Append[Map[ListDensityPlot[function[ReadGridFunction[#,var,it,rfl,StripGhostZones->True]],
+											DataRange->datarange,PlotRange->Append[plotrange,All],ImageSize->imagesize,
 											FilterRules[{opts},Options[ListDensityPlot]],Frame->{{True,True},{True,True}}, 
 											Axes-> True,
 											FrameLabel->{{StringTake[plane,-1],""},{StringTake[plane,1],
@@ -400,7 +413,7 @@ Sequence2d[path_,run_,var_,rfl_,function_,opts:OptionsPattern[]]:=
 											ClippingStyle->{Blue,Red},MeshFunctions->{#3&},
 											Mesh->10,
 											ColorFunction-> ScaledColorFunction["TemperatureMap",magrange]]&,run],keymag],
-										"  ",ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]]],
+										"  ",ImageMargins-> {{2,2},{2,2}}]},Center,Spacings->1]],"PNG"],
 					{it,iterations}]]];
 
 
