@@ -253,7 +253,7 @@ MergedDataRegion[ds:List[DataRegion[___]..]] :=
   x2 = Max /@ Transpose[MaxCoordinates /@ ds];
 
   (* We allow the spacings to differ by a very small amount, close to roundoff *)
-  dx = DeleteDuplicates[CoordinateSpacings /@ ds, (Max[Abs[1-#1/#2]]<10^-15)&];
+  dx = DeleteDuplicates[CoordinateSpacings /@ ds, (Max[Abs[1-#1/#2]]<10^-13)&];
 
   (* TODO: Check that all origins are separated by multiples of their spacing. *)
   If[Length[dx] =!= 1,
