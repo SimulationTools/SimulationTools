@@ -62,6 +62,7 @@ packages = {
     "SimulationTools`CarpetIOHDF5`",
   (*"SimulationTools`CarpetVTK`",*)
   (*"SimulationTools`CircularPN`",*)
+    "SimulationTools`ColumnFile`",
     "SimulationTools`Convergence`",
     "SimulationTools`CoordinateTransformations`",
     "SimulationTools`DataAnalysis`",
@@ -95,8 +96,10 @@ packages = {
   (*"SimulationTools`Quasinormal`",*)
     "SimulationTools`ReadHDF5`",
     "SimulationTools`RunFiles`",
+    "SimulationTools`Segments`",
     "SimulationTools`ShiftTracker`",
     "SimulationTools`SimFactory`",
+    "SimulationTools`SimulationProperties`",
     "SimulationTools`SimView`",
     "SimulationTools`SimViewRRMHD`",
   (*"SimulationTools`Stack`",*)

@@ -23,7 +23,8 @@ BeginPackage["SimulationTools`Grids`",
   "SimulationTools`Memo`",
   "SimulationTools`NR`",
   "SimulationTools`Parameters`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Segments`"
  }];
 
 ReadTimeStep::usage = "ReadTimeStep[sim] returns the time step size in sim.";

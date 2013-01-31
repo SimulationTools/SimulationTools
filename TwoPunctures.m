@@ -21,7 +21,8 @@ BeginPackage["SimulationTools`TwoPunctures`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
   "SimulationTools`Parameters`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "SimulationTools`SimulationProperties`"
  }];
 
 ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[sim] reads the ADM masses of the punctures in sim as computed by the TwoPunctures thorn."*);
