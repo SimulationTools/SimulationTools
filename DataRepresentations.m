@@ -249,6 +249,10 @@ SimulationTools`DataRegion`DataRegion /:
 SimulationTools`DataTable`DataTable /:
   Downsample[d_SimulationTools`DataTable`DataTable, n_] := downsample[d, n];
 
+If[$VersionNumber < 9,
+Downsample[l_List, n_Integer] :=
+  Take[l, {1, Length[l], n}]];
+
 (**********************************************************)
 (* First                                                  *)
 (**********************************************************)
