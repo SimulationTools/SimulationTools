@@ -342,7 +342,7 @@ RunDutyCycle[run_] :=
 
 SegmentCoordinateTimeInterval[dir_] :=
  Module[{times =
-    Catch[First /@ ReadColumnFile[dir, "carpet::timing..asc", {9}]]},
+    Catch[First /@ ReadColumnFile[dir, "carpet::timing..asc", ColumnNumbers[{"time"}]]]},
   If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]];
 
 SegmentStartTimes[run_] :=
