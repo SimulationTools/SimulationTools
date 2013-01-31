@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`ColumnFile`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
   "SimulationTools`Providers`",
+  "SimulationTools`RunFiles`",
   "SimulationTools`"
  }];
 
