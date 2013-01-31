@@ -81,9 +81,7 @@ Cell[TextData[Cell[BoxData[
   Method->"Preemptive"]]]], "NotesSection",
  CellGroupingRules->{"SectionGrouping", 50}],
 
-Cell["This information is read from the simulation parameter file", "Notes"],
-
-Cell["Null", "Notes"]
+Cell["This information is read from the simulation parameter file", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{

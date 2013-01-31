@@ -106,9 +106,7 @@ Cell["\<\
 The cutoff frequency om0 can be chosen as half the initial physical \
 gravitational wave frequency.  For more information, see Reisswig and Pollney \
 2011\
-\>", "Notes"],
-
-Cell["Null", "Notes"]
+\>", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{

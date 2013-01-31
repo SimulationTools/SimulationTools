@@ -116,7 +116,7 @@ Cell[CellGroupData[{
 Cell["ReadSimulationRunTime[\"bbh\"]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["103.1973088191225`"], "Output",
+Cell[BoxData["18776.927876949347`"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

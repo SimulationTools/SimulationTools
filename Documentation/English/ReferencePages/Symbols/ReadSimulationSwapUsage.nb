@@ -88,18 +88,17 @@ Cell[TextData[Cell[BoxData[
 
 Cell["\<\
 This function requires output from the SystemStatistics thorn:
-IOScalar::outScalar_every      = 256
+
+IOScalar::outScalar_every = 256
 IOScalar::outScalar_reductions = \"maximum\"
-IOScalar::outScalar_vars       = \"SystemStatistics::process_memory_mb\"\
+IOScalar::outScalar_vars = \"SystemStatistics::process_memory_mb\"\
 \>", "Notes"],
 
 Cell["\<\
 The swap memory usage is the maximum across all processes in the simulation\
 \>", "Notes"],
 
-Cell["The memory is measured in bytes", "Notes"],
-
-Cell["Null", "Notes"]
+Cell["The memory is measured in bytes", "Notes"]
 }, Open  ]],
 
 Cell[CellGroupData[{

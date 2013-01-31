@@ -123,7 +123,7 @@ Cell[CellGroupData[{
 Cell["ReadSimulationCost[\"bbh\"]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["0.343991029397075`"], "Output",
+Cell[BoxData["62.58975958983116`"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]
