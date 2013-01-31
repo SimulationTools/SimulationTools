@@ -923,7 +923,8 @@ DataTable /: Dot[d1:DataTable[__], d2:DataTable[__]] :=
 (****************************************************************)
 
 DataTable /: Export[file_String, dt_DataTable, type___] :=
-  Export[file, Flatten/@ToList[dt], type];
+  If[{type} === {"PNG"}, Export[file, OutputForm[dt], type],
+  Export[file, Flatten/@ToList[dt], type]];
 
 
 (****************************************************************)
