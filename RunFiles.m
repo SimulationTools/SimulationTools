@@ -32,6 +32,7 @@ ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time i
 ReadColumnFile;
 ReadColumnFile2;
 CarpetASCIIColumns;
+ColumnNumbers;
 MergeFiles;
 
 StandardOutputOfRun;
@@ -311,8 +312,11 @@ CarpetASCIIColumns[run_String, fileName_String] :=
     CarpetASCIIColumns[First@files]];
 
 ColumnNumbers[run_String, fileName_String, colIDs_] :=
+  ColumnNumbers[First[FindRunFile[run, fileName]], colIDs];
+
+ColumnNumbers[fileName_String, colIDs_] :=
  Module[{colMap, result},
-  colMap = CarpetASCIIColumns[run, fileName];
+  colMap = CarpetASCIIColumns[fileName];
   result = colIDs /. colMap;
   If[Or@@(StringQ /@ result),
     Throw["ColumnNumbers: Unknown columns: " <> ToString[result], UnknownColumns]];
