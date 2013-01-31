@@ -4,17 +4,20 @@ AppendTo[$Path, "/Applications/Wolfram Workbench.app/configuration/org.eclipse.o
 << SimulationTools`
 
 tests = {
-  "BHCoordinates",
-  "CarpetHDF5",
-  "DataRegion",
-  "DataRegionDeprecated",
-  "DataTable",
-  "DataTableNew",
-  "GridFunctions",
-  "Memo",
-  "NR",
-  "RunFiles",
-  "Waveforms"
+		"BHCoordinates",
+		"CarpetHDF5",
+		"DataAnalysis",
+		"DataRegion",
+		"DataRegionDeprecated",
+		"DataTable",
+		"DataTableNew",
+		"GridFunctions",
+		"Grids",
+		"Memo",
+		"NR",
+		"RunFiles",
+		"SimView",
+		"Waveforms"
 };
 
 (Print["\n"]; TestRun[#<>".mt", Loggers -> {VerbosePrintLogger[]}, TestRunTitle -> #]) & /@ tests;
