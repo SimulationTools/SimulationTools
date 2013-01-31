@@ -17,6 +17,7 @@
 BeginPackage["SimulationTools`Grids`",
  {
   "SimulationTools`BHCoordinates`",
+  "SimulationTools`ColumnFile`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",

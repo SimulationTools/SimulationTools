@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`MultipoleHDF5`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
