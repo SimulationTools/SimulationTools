@@ -1,11 +1,12 @@
 {
   "More Information" ->
    {
-    "This function reads the file carpet::timing..asc output using IOASCII::out0D_vars = \"Carpet::timing\"",
+    "This function reads the file carpet::timing..asc output using IOASCII::out0D_vars = \"Carpet::timing\""
    },
 
   "Basic Examples" -> {
-    "ReadSimulationSpeed[\"bbh\"]"
+    "speed = ReadSimulationSpeed[\"bbh\"]",
+    "ListLinePlot[speed]"
     },
   "See Also" -> {
     "ReadSimulationCoreCount", "ReadSimulationRunTime"

@@ -1,7 +1,7 @@
 {
   "More Information" ->
    {
-     "This information is read from the simulation parameter file",
+     "This information is read from the simulation parameter file"
    },
 
   "Basic Examples" -> {
