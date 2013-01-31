@@ -290,7 +290,8 @@ Test[
     ,
     DataRegion[{"VariableName" -> "test region",
       "Origin" -> {10., 20., 30.},
-      "Spacing" -> {0.2, 0.4, 0.6}}, {{{111, 113}, {131, 133}}}]
+      "Spacing" -> {0.2, 0.4, 0.6},
+      "Time" -> 42}, {{{111, 113}, {131, 133}}}]
     ,
     TestID->"Downsampled"
 ]
@@ -772,7 +773,7 @@ Test[
 Test[
     MergedDataRegion[{dr, dr3}]
     ,
-    DataRegion[{"VariableName" -> "test region", "Origin" -> {9.9, 20., 30.}, "Spacing" -> {0.1, 0.2, 0.3}},
+    DataRegion[{"VariableName" -> "test region", "Origin" -> {9.9, 20., 30.}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42},
      {{{222, 224, 226, 228}, {242, 244, 246, 248}, {262, 264, 266, 268}},
       {{422, 424, 426, 428}, {442, 444, 446, 448}, {462, 464, 466, 468}},
       {{211, 212, 213, 214}, {221, 222, 223, 224}, {231, 232, 233, 234}}}]
