@@ -23,13 +23,11 @@ BeginPackage["SimulationTools`SimView`",
   "SimulationTools`Waveforms`"
  }];
 
+(* Supported *)
 SimulationOverview::usage = "SimulationOverview[sim] gives a quick overview of the simulation sim.
 SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....";
 
-(****************************************************************)
-(* Deprecated                                                   *)
-(****************************************************************)
-
+(* Deprecated *)
 SimView;
 FinishTime(*::usage = "FinishTime[sim] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
 
@@ -79,12 +77,12 @@ SimulationOverview[sims_List, OptionsPattern[]] :=
   res
 ];
 
-GraphicsPadding[g_Graphics] :=
+graphicsPadding[g_Graphics] :=
  BorderDimensions[
   Image[Show[g, LabelStyle -> White, Background -> White]]];
 
-GraphicsPadding[gs : {__Graphics}] :=
- MapThread[Max, Map[GraphicsPadding, gs], 2];
+graphicsPadding[gs : {__Graphics}] :=
+ MapThread[Max, Map[graphicsPadding, gs], 2];
 
 SimulationTools`SimView`SimulationOverview`Plots[runNames1_] :=
   {Replace[DeleteCases[{SimulationSpeedPlot[runNames1], SimulationMemoryPlot[runNames1]},None],{}->None]};
@@ -132,7 +130,7 @@ SimView[runNames_List, r_] :=
                 plots],
                 Spacings -> {0, 1}, ItemSize->{{All},Automatic}];
     grid = Replace[grid, g_Graphics :> Show[g,ImageSize->250], {3}];
-    padding = GraphicsPadding[Cases[grid,_Graphics,{3}]];
+    padding = graphicsPadding[Cases[grid,_Graphics,{3}]];
     grid = Replace[grid, g_Graphics :> Show[g,ImagePadding->padding], {3}];
 
     Return[grid]];
