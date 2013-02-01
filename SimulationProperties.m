@@ -47,7 +47,7 @@ Begin["`Private`"];
 ReadWalltime[runName_] :=
   Module[{segmentTime, files},
     segmentTime[file_] :=
-      ReadColumnFile[file, ColumnNumbers[file,{"time", "time_total"}]][[-1,2]];
+      (ReadColumnFile[file, {"time", "time_total"}][[-1,2]]);
     files = FindRunFile[runName, "carpet::timing..asc"];
     Plus@@(segmentTime /@ files)];
 
