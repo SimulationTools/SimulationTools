@@ -106,8 +106,8 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
   ];
 
 RunCost[length_, speed_, nProcs_] :=
- {CPUHours -> nProcs length/speed // N,
-  WallTimeDays -> length/speed/24 // N};
+ {"CPUHours" -> nProcs length/speed // N,
+  "WallTimeDays" -> length/speed/24 // N};
 
 PercentageDifference[ap_,bp_] :=
   Module[{a,b},
