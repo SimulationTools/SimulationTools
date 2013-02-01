@@ -18,11 +18,13 @@
 
 BeginPackage["SimulationTools`NR`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
-  "SimulationTools`Memo`"
+  "SimulationTools`Memo`",
+  "SimulationTools`TwoPunctures`"
  }];
 
 ReadHamiltonianConstraintNorm(*::usage = "ReadHamiltonianConstraintNorm[sim] reads the norm of the Hamiltonian constraint in sim."*);

@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`YlmDecomp`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
   "SimulationTools`RunFiles`"
  }];

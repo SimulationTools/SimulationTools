@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`ShiftTracker`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
   "SimulationTools`RunFiles`"
  }];

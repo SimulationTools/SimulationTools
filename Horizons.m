@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`Horizons`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Memo`",

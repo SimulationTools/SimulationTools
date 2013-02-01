@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`Memo`",
  {
+  "SimulationTools`ArgumentChecker`",
   "SimulationTools`"
  }
 ];
@@ -30,7 +31,7 @@ $Memoisation := If[$SimulationToolsCompatibilityVersion < 1, True, False];
 
 If[!ValueQ[$cache], $cache = {}];
 
-SimulationTools`ArgumentChecker`StandardDefinition[DefineMemoFunction] = True;
+StandardDefinition[DefineMemoFunction] = True;
 
 DocumentationBuilder`SymbolDescription["ClearAllMemos"] =
   "memoisation of functions; i.e. in-memory caching of values so that they don't have to be recomputed";

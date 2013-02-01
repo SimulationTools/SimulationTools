@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`Statistics`",
  {
+  "SimulationTools`DataTable`",
   "SimulationTools`ColumnFile`",
   "SimulationTools`Error`",
   "SimulationTools`Parameters`",

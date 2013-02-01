@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`MinTracker`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
   "SimulationTools`RunFiles`"
  }];

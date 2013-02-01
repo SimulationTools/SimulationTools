@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`TwoPunctures`",
  {
+  "SimulationTools`DataRegion`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
   "SimulationTools`Parameters`",

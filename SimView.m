@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`SimView`",
  {
+  "SimulationTools`Error`",
   "SimulationTools`Providers`",
   "SimulationTools`SimViewRRMHD`",
   "SimulationTools`SystemStatistics`",

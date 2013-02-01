@@ -18,7 +18,8 @@ BeginPackage["SimulationTools`SimFactory`",
  {
   "SimulationTools`Error`",
   "SimulationTools`IniFile`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "SimulationTools`SimulationProperties`"
  }];
 
 Begin["`Private`"];
