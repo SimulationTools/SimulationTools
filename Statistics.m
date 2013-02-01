@@ -24,6 +24,8 @@ BeginPackage["SimulationTools`Statistics`",
   "SimulationTools`SimulationProperties`"
  }];
 
+(* Experimental *)
+FinishTime(*::usage = "FinishTime[sim] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
 
 Begin["`Private`"];
 
