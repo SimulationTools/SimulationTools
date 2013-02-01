@@ -30,8 +30,8 @@ BeginPackage["SimulationTools`SimulationProperties`",
 ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time in seconds elapsed during the execution of a simulation.";
 ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
 ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
-
 ReadSimulationCost::usage = "ReadSimulationCost[sim] gives the total number of core-hours used by all processes and segments in a simulation.";
+
 CPUHours;
 WallTimeDays;
 CostAnalysis;
@@ -56,7 +56,7 @@ NoSimulationRunTimeAvailable;
 
 Begin["`Private`"];
 
-ReadWalltime[runName_] :=
+ReadSimulationRunTime[runName_] :=
   Module[{segmentTime, files},
     segmentTime[file_] :=
       (ReadColumnFile[file, {"time", "time_total"}][[-1,2]]);
@@ -70,7 +70,7 @@ ReadWalltimeHours[runName_] :=
     Error[NoSimulationRunTimeAvailable,
           "Simulation run time not available in \""<>runName<>"\""]];
 
-ReadCores[run_] :=
+ReadSimulationCoreCount[run_] :=
   If[HaveData["RunFiles", FindRunDir[run]],
     CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
     Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""]];
@@ -81,7 +81,7 @@ StandardOutputOfRun[runName_String] :=
     files1 = Map[FileNameJoin[{#, "../"<>Last@FileNameSplit@runName<>".out"}] &, segments];
     files2 = Select[files1, FileType[#] =!= None &]];
 
-ReadRunSpeed[runName_] := 
+ReadSimulationSpeed[runName_] := 
   If[FindRunFile[runName, "runstats.asc"] =!= {},
      MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
      ReadCarpetSpeed[runName]];
@@ -92,11 +92,11 @@ haveRunSpeed[sim_String] :=
 ReadCarpetSpeed[runName_] :=
   MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
 
-ReadCPUHours[runName_] := 
-  ReadCores[runName] * ReadWalltimeHours[runName];
+ReadSimulationCost[runName_] := 
+  ReadSimulationCoreCount[runName] * ReadWalltimeHours[runName];
 
 CPUHoursPerDay[runName_] :=
-  ReadCores[runName] * 24;
+  ReadSimulationCoreCount[runName] * 24;
 
 PresentationCostAnalysis[prefix_String, T_, tMerger_:None, mergerFactor_:2] :=
   Module[{table},
@@ -110,9 +110,9 @@ CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
     FileNameSplit /@ FileNames[prefix <> "_*", SimulationPath[]];
   costElems[run_] :=
    Module[{speed, cores, days, cpuHours},
-    speed = Catch[Last@DepVar@ReadRunSpeed[run]];
+    speed = Catch[Last@DepVar@ReadSimulationSpeed[run]];
     If[! NumberQ[speed], Return[None]];
-    cores = ReadCores[run];
+    cores = ReadSimulationCoreCount[run];
     days = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) /24.0;
     cpuHours = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) * cores;
     {cores, speed, days, cpuHours}];
