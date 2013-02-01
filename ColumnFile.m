@@ -107,7 +107,7 @@ ReadColumnFile[runName_String, fileName_String, cols_List] :=
 
 ReadColumnFile[fileName_String, cols_List] :=
   Module[
-    {data}
+    {data},
     data = ReadColumnFile[fileName];
     colNums = ColumnNumbers[fileName, cols];
     extractColumns[data,colNums]];
