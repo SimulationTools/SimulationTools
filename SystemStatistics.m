@@ -29,6 +29,7 @@ BeginPackage["SimulationTools`SystemStatistics`",
   "SimulationTools`"
  }];
 
+(* Supported *)
 ReadSimulationMemoryUsage::usage   = "ReadSimulationMemoryUsage[sim] gives the memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
 ReadSimulationSwapUsage::usage   = "ReadSimulationSwapUsage[sim] gives the swap memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
 
@@ -36,41 +37,42 @@ ReadSimulationSwapUsage::usage   = "ReadSimulationSwapUsage[sim] gives the swap 
 ReadMemory = ReadSimulationMemoryUsage;
 ReadSwap = ReadSimulationSwapUsage;
 
+(* Internal *)
 SimulationMemoryPlot;
 
 Begin["`Private`"];
 
-ReadMemory[runName_] :=
+ReadSimulationMemoryUsage[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
-     MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {"time", "maxrss_mb"}]],
-     MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
+     ToDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {"time", "maxrss_mb"}]],
+     ToDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
+
+ReadSimulationSwapUsage[runName_] :=
+  ToDataTable[ReadColumnFile[
+    runName, "systemstatistics::process_memory_mb.maximum.asc",
+    {"time", "swap_used_mb"}]];
 
 SimulationMemoryPlot[runNames1_] :=
   Module[
-    {runNames},
+    {runNames, haveMem},
+
+    haveMem[sim_String] :=
+    FindSimulationFiles[sim, "systemstatistics::process_memory_mb.maximum.asc"] =!= {};
+
     runNames = Select[runNames1, haveMem];
     If[runNames === {},
        None,
        
        Module[
          {swaps, mems},
-         swaps = Catch[Catch[Map[ReadSwap, runNames],UnknownColumns],_];
+         swaps = Catch[Catch[Map[ReadSimulationSwapUsage, runNames],UnknownColumns],_];
          If[StringQ[swaps], swaps = {{0,0}}];
-         mems = Catch[Catch[Map[ReadMemory, runNames],UnknownColumns],_];
+         mems = Catch[Catch[Map[ReadSimulationMemoryUsage, runNames],UnknownColumns],_];
          If[StringQ[mems], mems = {{0,0}}];
          
          Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
               PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
               PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory"]]]];
-
-haveMem[sim_String] :=
-  FindSimulationFiles[sim, "systemstatistics::process_memory_mb.maximum.asc"] =!= {};
-
-ReadSwap[runName_] :=
-  MakeDataTable[ReadColumnFile[
-    runName, "systemstatistics::process_memory_mb.maximum.asc",
-    {"time", "swap_used_mb"}]];
-
 
 End[];
 
