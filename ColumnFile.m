@@ -29,6 +29,9 @@ CarpetASCIIColumns;
 ColumnNumbers;
 MergeFiles;
 
+(* Exceptions *)
+UnknownColumns;
+
 Begin["`Private`"];
 
 ReadColumnFile[fileName_String] :=

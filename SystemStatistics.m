@@ -54,9 +54,9 @@ SimulationMemoryPlot[runNames1_] :=
        
        Module[
          {swaps, mems},
-         swaps = Catch[Catch[Map[ReadSwap, runNames],SimulationTools`RunFiles`Private`UnknownColumns],_];
+         swaps = Catch[Catch[Map[ReadSwap, runNames],UnknownColumns],_];
          If[StringQ[swaps], swaps = {{0,0}}];
-         mems = Catch[Catch[Map[ReadMemory, runNames],SimulationTools`RunFiles`Private`UnknownColumns],_];
+         mems = Catch[Catch[Map[ReadMemory, runNames],UnknownColumns],_];
          If[StringQ[mems], mems = {{0,0}}];
          
          Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
