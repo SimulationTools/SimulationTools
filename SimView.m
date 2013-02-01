@@ -86,7 +86,7 @@ GraphicsPadding[g_Graphics] :=
 GraphicsPadding[gs : {__Graphics}] :=
  MapThread[Max, Map[GraphicsPadding, gs], 2];
 
-SimulationTools`SystemStatistics`SimulationOverview`Plots[runNames1_] :=
+SimulationTools`SimView`SimulationOverview`Plots[runNames1_] :=
   {Replace[DeleteCases[{SimulationSpeedPlot[runNames1], SimulationMemoryPlot[runNames1]},None],{}->None]};
 
 (****************************************************************)
@@ -120,7 +120,7 @@ SimView[runNames_List, r_] :=
   (*   PlotRange -> Automatic, PlotLabel -> "arg[S_i]/deg\n", ImageSize -> size],_]; *)
 
     (* TODO: Add the RRMHD data as new SimulationOverview providers *)
-    providers = {"SystemStatistics", "Binary", "Waveforms", "Statistics"};
+    providers = {"SimView", "Binary", "Waveforms", "Statistics"};
 
     (* This does not give the ordering that we like *)
     (* providers = Map[StringSplit[#,"`"][[2]] &, Names["SimulationTools`*`SimulationOverview`Plots"]]; *)
