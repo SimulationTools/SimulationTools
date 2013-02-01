@@ -19,7 +19,7 @@ Test[
 Test[
   ReadSimulationRunTime[$SimulationToolsTestSimulation]
   ,
-  12
+  18776.927876949347
   ,
   TestID->"ReadSimulationRunTime"
     ]
