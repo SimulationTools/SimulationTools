@@ -59,6 +59,7 @@ packages =
   "RunFiles",
   "ShiftTracker",
   "SimFactory",
+  "SimulationProperties",
   "SimView",
   "SimViewRRMHD",
   "Stack",
