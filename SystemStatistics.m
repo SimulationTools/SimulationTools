@@ -29,57 +29,23 @@ BeginPackage["SimulationTools`SystemStatistics`",
   "SimulationTools`"
  }];
 
-ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
 ReadSimulationMemoryUsage::usage   = "ReadSimulationMemoryUsage[sim] gives the memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
 ReadSimulationSwapUsage::usage   = "ReadSimulationSwapUsage[sim] gives the swap memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
-ReadSimulationCost::usage = "ReadSimulationCost[sim] gives the total number of core-hours used by all processes and segments in a simulation.";
-CPUHours;
-WallTimeDays;
-CostAnalysis;
-PresentationCostAnalysis;
-ReadCarpetSpeed;
 
 (* Old names *)
-ReadRunSpeed = ReadSimulationSpeed;
 ReadMemory = ReadSimulationMemoryUsage;
 ReadSwap = ReadSimulationSwapUsage;
-ReadCPUHours = ReadSimulationCost;
+
+SimulationMemoryPlot;
 
 Begin["`Private`"];
-
-ReadRunSpeed[runName_] := 
-  If[FindRunFile[runName, "runstats.asc"] =!= {},
-     MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
-     ReadCarpetSpeed[runName]];
-
-SimulationTools`SystemStatistics`SimulationOverview`Plots[runNames1_] :=
-  {Replace[DeleteCases[{simSpeedPlot[runNames1], simMemPlot[runNames1]},None],{}->None]};
-
-simSpeedPlot[runNames1_] :=
-  Module[{runNames},
-    runNames = Select[runNames1, haveRunSpeed];
-    If[runNames === {},
-       None,
-
-       SimulationTools`Plotting`PresentationListLinePlot[Map[ReadSimulationSpeed, runNames],
-                                PlotRange -> {0, All}, PlotLabel -> "Speed",
-                                SimulationTools`Plotting`PlotLegend -> runNames, SimulationTools`Plotting`LegendPosition -> {Left, Bottom}]]];
-
-haveRunSpeed[sim_String] :=
-  FindSimulationFiles[sim, "carpet::timing..asc"] =!= {} || FindSimulationFiles[sim, "runstats.asc"] =!= {};
-
-ReadCarpetSpeed[runName_] :=
-  MakeDataTable@ReadColumnFile[runName, "carpet::timing..asc", {"time","physical_time_per_hour"}];
-
-ReadCPUHours[runName_] := 
-  ReadCores[runName] * ReadWalltimeHours[runName];
 
 ReadMemory[runName_] :=
   If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
      MakeDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {"time", "maxrss_mb"}]],
      MakeDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
-simMemPlot[runNames1_] :=
+SimulationMemoryPlot[runNames1_] :=
   Module[
     {runNames},
     runNames = Select[runNames1, haveMem];
@@ -105,31 +71,6 @@ ReadSwap[runName_] :=
     runName, "systemstatistics::process_memory_mb.maximum.asc",
     {"time", "swap_used_mb"}]];
 
-CPUHoursPerDay[runName_] :=
-  ReadCores[runName] * 24;
-
-PresentationCostAnalysis[prefix_String, T_, tMerger_:None, mergerFactor_:2] :=
-  Module[{table},
-    table = CostAnalysis[prefix,T,tMerger,mergerFactor];
-    Grid@Prepend[Drop[table, 1], Style[#, Bold] & /@ table[[1]]]]
-
-CostAnalysis[prefix_String, T_, tMergerp_:None, mergerFactor_:2] :=
- Module[{runs, costElems, header, tMerger, data},
-  tMerger = If[tMergerp === None, T, tMergerp];
-  runs = Last /@ 
-    FileNameSplit /@ FileNames[prefix <> "_*", SimulationPath[]];
-  costElems[run_] :=
-   Module[{speed, cores, days, cpuHours},
-    speed = Catch[Last@DepVar@ReadRunSpeed[run]];
-    If[! NumberQ[speed], Return[None]];
-    cores = ReadCores[run];
-    days = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) /24.0;
-    cpuHours = (tMerger/speed + (T-tMerger)/(mergerFactor*speed)) * cores;
-    {cores, speed, days, cpuHours}];
-  data = Sort[
-    Select[Map[costElems, runs], # =!= None &], #1[[1]] < #2[[1]] &];
-  header = {"Cores", "Speed", "Days", "CPU Hours"};
-  Prepend[data, header]];
 
 End[];
 

@@ -29,6 +29,7 @@ BeginPackage["SimulationTools`SimView`",
   "SimulationTools`RunFiles`",
   "SimulationTools`SimViewRRMHD`",
   "SimulationTools`SystemStatistics`",
+  "SimulationTools`SimulationProperties`",
   "SimulationTools`Waveforms`"
  }];
 
@@ -94,6 +95,9 @@ GraphicsPadding[g_Graphics] :=
 
 GraphicsPadding[gs : {__Graphics}] :=
  MapThread[Max, Map[GraphicsPadding, gs], 2];
+
+SimulationTools`SystemStatistics`SimulationOverview`Plots[runNames1_] :=
+  {Replace[DeleteCases[{SimulationSpeedPlot[runNames1], SimulationMemoryPlot[runNames1]},None],{}->None]};
 
 (****************************************************************)
 (* Deprecated                                                   *)
