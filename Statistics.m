@@ -113,10 +113,10 @@ FinishTimeString[run_] :=
 cost[run_] :=
   Item[#,Alignment->Right] & /@ 
   {run,
-   WithExceptions[ReadCores[run],            NoSimulationCoreCountAvailable -> "-"],
-   WithExceptions[ReadCPUHours[run],         NoSimulationCoreCountAvailable -> "-"],
+   WithExceptions[ReadSimulationCoreCount[run],            NoSimulationCoreCountAvailable -> "-"],
+   WithExceptions[ReadSimulationCost[run],         NoSimulationCoreCountAvailable -> "-"],
    WithExceptions[ReadWalltimeHours[run]/24, NoSimulationRunTimeAvailable -> "-"],
-   WithExceptions[ReadCores[run]*24,         NoSimulationCoreCountAvailable -> "-"],
+   WithExceptions[ReadSimulationCoreCount[run]*24,         NoSimulationCoreCountAvailable -> "-"],
    FinishTimeString[run]};
 
 SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
