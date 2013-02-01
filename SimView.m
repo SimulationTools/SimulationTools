@@ -16,17 +16,7 @@
 
 BeginPackage["SimulationTools`SimView`",
  {
-  "SimulationTools`BHCoordinates`",
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Horizons`",
-  "SimulationTools`Memo`",
-  "SimulationTools`NR`",
-  "SimulationTools`Parameters`",
-  "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
-  "SimulationTools`RunFiles`",
   "SimulationTools`SimViewRRMHD`",
   "SimulationTools`SystemStatistics`",
   "SimulationTools`SimulationProperties`",
