@@ -16,8 +16,6 @@
 
 BeginPackage["SimulationTools`Ascii1D`",
  {
-  "SimulationTools`ColumnFile`",
-  "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",

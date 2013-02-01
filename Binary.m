@@ -19,9 +19,7 @@ BeginPackage["SimulationTools`Binary`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
-  "SimulationTools`Memo`",
   "SimulationTools`Plotting`",
-  "SimulationTools`RunFiles`",
   "SimulationTools`Trackers`",
   "SimulationTools`Horizons`"
  }];

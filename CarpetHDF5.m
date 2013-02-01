@@ -17,7 +17,6 @@
 BeginPackage["SimulationTools`CarpetHDF5`",
  {
   "SimulationTools`DataRegion`",
-  "SimulationTools`DataRepresentations`",
   "SimulationTools`Error`",
   "SimulationTools`GridFunctions`",
   "SimulationTools`Memo`",

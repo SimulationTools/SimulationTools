@@ -16,11 +16,7 @@
 
 BeginPackage["SimulationTools`Tracks`",
  {
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`NR`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`DataRepresentations`"
  }];
 
 AnimateTracks;
@@ -31,6 +27,7 @@ Begin["`Private`"];
 
 ReadTracks[runName_, tracker_] :=
  Module[{xTb, yTb, zTb, xFn, yFn, zFn},
+  (* TODO: These functions no longer exist! *)
   xTb = ReadMinTrackerCoordinate[runName, tracker, 1];
   yTb = ReadMinTrackerCoordinate[runName, tracker, 2];
   zTb = ReadMinTrackerCoordinate[runName, tracker, 3];

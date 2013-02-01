@@ -16,8 +16,6 @@
 
 BeginPackage["SimulationTools`BHCoordinates`",
  {
-  "SimulationTools`ColumnFile`",
-  "SimulationTools`RunFiles`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",

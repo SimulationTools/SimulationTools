@@ -19,8 +19,6 @@ BeginPackage["SimulationTools`SimulationProperties`",
   "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
-  "SimulationTools`Memo`",
-  "SimulationTools`Profile`",
   "SimulationTools`Providers`",
   "SimulationTools`RunFiles`",
   "SimulationTools`"

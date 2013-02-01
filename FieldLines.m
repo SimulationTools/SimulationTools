@@ -22,12 +22,9 @@ BeginPackage["SimulationTools`FieldLines`",
   "SimulationTools`DataAnalysis`",
   "SimulationTools`DataRegion`",
   "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Parameters`",
-  "SimulationTools`Plotting`",
-  "SimulationTools`Profile`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`Plotting`"
  }];
 
 (****************************************************************)

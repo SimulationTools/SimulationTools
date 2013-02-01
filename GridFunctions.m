@@ -16,10 +16,7 @@
 
 BeginPackage["SimulationTools`GridFunctions`",
  {
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
   "SimulationTools`Error`",
-  "SimulationTools`Memo`",
   "SimulationTools`Providers`",
   "SimulationTools`RunFiles`",
   "SimulationTools`"

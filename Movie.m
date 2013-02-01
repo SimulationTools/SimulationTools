@@ -14,10 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimulationTools`Movie`",
- {
-  "SimulationTools`Error`"
- }];
+BeginPackage["SimulationTools`Movie`"];
 
 PadIndex;
 PreviewMovie;

@@ -16,18 +16,12 @@
 
 BeginPackage["SimulationTools`SimViewRRMHD`",
  {
-  "SimulationTools`Ascii1D`",
   "SimulationTools`Ascii`",
-  "SimulationTools`BHCoordinates`",
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`",
-  "SimulationTools`NR`",
   "SimulationTools`Parameters`",
   "SimulationTools`Plotting`",
-  "SimulationTools`RunFiles`",
-  "SimulationTools`SystemStatistics`"
+  "SimulationTools`RunFiles`"
  }];
 
 SimViewRRMHD;

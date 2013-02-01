@@ -16,9 +16,7 @@
 
 BeginPackage["SimulationTools`DataAnalysis`",
  {
-  "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
   "Units`"
  }];
 

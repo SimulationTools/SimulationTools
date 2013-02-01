@@ -16,11 +16,9 @@
 
 BeginPackage["SimulationTools`Convergence`",
  {
-  "SimulationTools`RunFiles`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`"
+  "SimulationTools`Error`"
  }];
 
 ConvergenceMultiplier::usage = "ConvergenceMultiplier[{h1,h2,h3},p] computes the expected ratio (f[h1]-f[h2])/(f[h2]-f[h3]) when f[h] has a Taylor expansion f[h] = O[h^p].";

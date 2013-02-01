@@ -18,21 +18,11 @@
 
 BeginPackage["SimulationTools`NR`",
  {
-  "SimulationTools`BHCoordinates`",
-  "SimulationTools`Convergence`",
   "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataRegion`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
-  "SimulationTools`Kicks`",
-  "SimulationTools`Memo`",
-  "SimulationTools`Parameters`",
-  "SimulationTools`Plotting`",
-  "SimulationTools`ReadHDF5`",
-  "SimulationTools`RunFiles`",
-  "SimulationTools`SystemStatistics`",
-  "SimulationTools`Timers`"
+  "SimulationTools`Memo`"
  }];
 
 ReadHamiltonianConstraintNorm(*::usage = "ReadHamiltonianConstraintNorm[sim] reads the norm of the Hamiltonian constraint in sim."*);

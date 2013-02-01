@@ -21,7 +21,6 @@ BeginPackage["SimulationTools`Grids`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",
-  "SimulationTools`NR`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
   "SimulationTools`Segments`"

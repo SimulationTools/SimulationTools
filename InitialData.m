@@ -16,12 +16,7 @@
 
 BeginPackage["SimulationTools`InitialData`",
  {
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`",
-  "SimulationTools`Providers`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`Providers`"
  }];
 
 ReadADMMass::usage = "ReadADMMass[sim] reads the ADM mass of the spacetime from the initial data slice";

@@ -16,11 +16,8 @@
 
 BeginPackage["SimulationTools`Kicks`",
  {
-  "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
   "SimulationTools`Memo`",
-  "SimulationTools`NR`",
   "SimulationTools`Profile`",
   "SimulationTools`Waveforms`"
  }];

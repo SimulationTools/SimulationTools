@@ -17,9 +17,7 @@
 BeginPackage["SimulationTools`CarpetIOHDF5`",
  {
   "SimulationTools`DataRegion`",
-  "SimulationTools`DataRepresentations`",
   "SimulationTools`Error`",
-  "SimulationTools`Memo`",
   "SimulationTools`Profile`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`RunFiles`"

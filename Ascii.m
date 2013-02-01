@@ -16,14 +16,9 @@
 
 BeginPackage["SimulationTools`Ascii`",
  {
-  "SimulationTools`Ascii1D`",
   "SimulationTools`ColumnFile`",
-  "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`",
-  "SimulationTools`Profile`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`Profile`"
  }];
 
 (* This should be handled through some sort of abstract "simulation

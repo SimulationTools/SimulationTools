@@ -16,11 +16,6 @@
 
 BeginPackage["SimulationTools`BlackHole`",
  {
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`",
-  "SimulationTools`RunFiles`",
   "SimulationTools`Horizons`"
  }];
 

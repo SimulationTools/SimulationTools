@@ -16,11 +16,8 @@
 
 BeginPackage["SimulationTools`SimFactory`",
  {
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`IniFile`",
-  "SimulationTools`Memo`",
   "SimulationTools`RunFiles`"
  }];
 

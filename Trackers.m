@@ -17,10 +17,7 @@
 BeginPackage["SimulationTools`Trackers`",
  {
   "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`DataTable`"
  }];
 
 ReadTrackerCoordinates::usage = "ReadTrackerCoordinates[sim, tracker] gives the Cartesian coordinates of the tracker as a function of time.  The result is a list of DataTables, one for each coordinate direction. tracker is a list of the form {type, index}.\nReadTrackerCoordinates[sim, tracker1, tracker2] gives the Cartesian components of the vector joining the two trackers as a function of time.  The result is a list of DataTables, one for each coordinate direction. tracker1 and tracker2 are lists of the form {type, index}.";

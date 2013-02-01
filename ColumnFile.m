@@ -18,9 +18,7 @@ BeginPackage["SimulationTools`ColumnFile`",
  {"SimulationTools`Error`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
-  "SimulationTools`Providers`",
-  "SimulationTools`RunFiles`",
-  "SimulationTools`"
+  "SimulationTools`RunFiles`"
  }];
 
 ReadColumnFile;

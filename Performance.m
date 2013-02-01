@@ -16,10 +16,6 @@
 
 BeginPackage["SimulationTools`Performance`",
  {
-  "SimulationTools`DataRepresentations`",
-  "SimulationTools`DataTable`",
-  "SimulationTools`Error`",
-  "SimulationTools`Memo`",
   "SimulationTools`RunFiles`"
  }];
 
