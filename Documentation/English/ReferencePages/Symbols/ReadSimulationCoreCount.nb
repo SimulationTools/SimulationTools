@@ -7,9 +7,10 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SimulationTools`RunFiles",
+ ButtonBox["SimulationTools`SimulationProperties",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/guide/SimulationTools`RunFiles"],
+  ButtonData->
+   "paclet:SimulationTools/guide/SimulationTools`SimulationProperties"],
  StyleBox[" > ", "LinkTrailSeparator"],
  ButtonBox["ReadSimulationCoreCount",
   BaseStyle->{"Link", "LinkTrail"},
@@ -17,8 +18,8 @@ Cell[TextData[{
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
-   {Cell["SIMULATIONTOOLS`RUNFILES PACLET SYMBOL", "PacletNameCell"], Cell[
-    TextData[{
+   {Cell["SIMULATIONTOOLS`SIMULATIONPROPERTIES PACLET SYMBOL", 
+     "PacletNameCell"], Cell[TextData[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
@@ -207,8 +208,9 @@ TaggingRules->{
     "keywords" -> {
      "ReadSimulationCoreCount", "READSIMULATIONCORECOUNT", 
       "readsimulationcorecount"}, "index" -> True, "label" -> 
-    "SimulationTools/SimulationTools`RunFiles Symbol", "language" -> "en", 
-    "paclet" -> "SimulationTools`RunFiles", "status" -> "None", "summary" -> 
+    "SimulationTools/SimulationTools`SimulationProperties Symbol", "language" -> 
+    "en", "paclet" -> "SimulationTools`SimulationProperties", "status" -> 
+    "None", "summary" -> 
     "ReadSimulationCoreCount[simname] gives the number of cores used by a \
 simulation.", 
     "synonyms" -> {

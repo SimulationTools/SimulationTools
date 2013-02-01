@@ -613,7 +613,15 @@ Cell[TextData[{
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
- " ",
+ " "
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["SimulationProperties", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
  Cell[TextData[ButtonBox["ReadSimulationCoreCount",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/ReadSimulationCoreCount"]], 
@@ -622,9 +630,25 @@ Cell[TextData[{
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
  " ",
+ Cell[TextData[ButtonBox["ReadSimulationCost",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationCost"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
  Cell[TextData[ButtonBox["ReadSimulationRunTime",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/ReadSimulationRunTime"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ReadSimulationSpeed",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/ReadSimulationSpeed"]], 
   "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
@@ -650,25 +674,9 @@ Cell[CellGroupData[{
 Cell["SystemStatistics", "GuideFunctionsSubsection"],
 
 Cell[TextData[{
- Cell[TextData[ButtonBox["ReadSimulationCost",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/ReadSimulationCost"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
  Cell[TextData[ButtonBox["ReadSimulationMemoryUsage",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/ReadSimulationMemoryUsage"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ReadSimulationSpeed",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/ReadSimulationSpeed"]], 
   "InlineFunctionSans"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
