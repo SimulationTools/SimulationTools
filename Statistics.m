@@ -16,11 +16,13 @@
 
 BeginPackage["SimulationTools`Statistics`",
  {
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
+  "SimulationTools`SimulationProperties`",
   "SimulationTools`SystemStatistics`"
  }];
 
