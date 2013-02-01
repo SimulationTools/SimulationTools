@@ -15,5 +15,6 @@ TestSuite[
 		"NR.mt",
 		"RunFiles.mt",
 		"SimView.mt",
+		"SimulationProperties.mt",
 		"Waveforms.mt"
 		}]
