@@ -24,6 +24,8 @@ BeginPackage["SimulationTools`SystemStatistics`",
   "SimulationTools`Memo`",
   "SimulationTools`Plotting`",
   "SimulationTools`RunFiles`",
+  "SimulationTools`Statistics`",
+  "SimulationTools`SimulationProperties`",
   "SimulationTools`"
  }];
 
