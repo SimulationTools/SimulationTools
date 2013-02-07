@@ -601,12 +601,6 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
   plotFunction[data, args, DataRange -> dataRange]
 ];
 
-(* We cannot use upvalues in the following as the DataRegion appears too deep *)
-(* TODO: Make this use plotWrapper for consistency *)
-Unprotect /@ $1DPlotFunctions;
-Scan[(#[ds:List[DataRegion[___]..], opts___] := #[ToList/@ ds, opts])&, $1DPlotFunctions];
-Protect /@ $1DPlotFunctions;
-
 
 (**********************************************************)
 (* Coordinate                                             *)

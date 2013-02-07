@@ -428,6 +428,28 @@ unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
 
 UnwrapPhaseVector[data_List] := unwrapPhaseVector[data];
 
+
+(**********************************************************)
+(* Plotting functions with Lists of DataRepresentations   *)
+(**********************************************************)
+
+(* We cannot use UpValues as the DataRepresentations appear
+   too deep. We also need to ensure that our new definitions
+   appear ahead of built-in ones *)
+sortedOverload[sym_] :=
+ Module[{tmp},
+  SimulationTools`ArgumentChecker`StandardDefinition[tmp] = True;
+  tmp[ds:List[(_?DataRepresentationQ)..], opts___] := sym[ToList /@ ds, opts];
+  ClearAttributes[sym, {Protected, ReadProtected}];
+  DownValues[sym] = Join[DownValues[tmp] /. tmp -> sym, DownValues[sym]];
+  SetAttributes[sym, {Protected, ReadProtected}];
+]
+
+$1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
+
+Scan[sortedOverload, $1DPlotFunctions];
+
+
 (**********************************************************)
 (* Resampled                                              *)
 (**********************************************************)

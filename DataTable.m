@@ -517,12 +517,6 @@ $1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
 DataTable /: f_Symbol[d_DataTable, args___] :=
  f[Evaluate[ToList[d]], args] /; MemberQ[$1DPlotFunctions, f];
 
-(* We cannot use upvalues in the following as the DataTable appears too deep *)
-(* TODO: Make this use plotWrapper for consistency *)
-Unprotect /@ $1DPlotFunctions;
-Scan[(#[ds:List[DataTable[___]..], opts___] := #[ToList /@ ds, opts])&, $1DPlotFunctions];
-Protect /@ $1DPlotFunctions;
-
 
 (**********************************************************)
 (* SameGridQ                                              *)
