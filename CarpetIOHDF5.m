@@ -72,18 +72,16 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|Al
 
     dimspattern = Which[
       SameQ[dims,All],
-      "(file_0){0,1}",
+      "(.(file_0){0,1})?",
 
       And@@Map[StringQ,dims],
       If[SameQ[StringJoin[dims], "xyz"],
-         "("<>StringJoin[dims]<>"|(file_0){0,1})",
-         StringJoin[dims]],
+         "(."<>StringJoin[dims]<>"|.(file_0){0,1})?",
+         "."<>StringJoin[dims]],
 
       True,
       Error["Unrecognised dimensions "<>ToString[dims,InputForm]]];
-
-    filename = var <> map <> "." <> dimspattern <> ".h5";
-
+    filename = var <> If[dims =!= All, map, ""] <> dimspattern <> ".h5";
     If[map =!= "" || dims === All || dimspattern =!= StringJoin[dims],
       Return[RegularExpression[filename]],
       Return[filename]]];
