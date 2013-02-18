@@ -307,8 +307,8 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
     components = components /. {} -> {None};
 
     (* Figure out what the variable is called inside the file *)
-    varNames = SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[file,
-      "Iteration" -> it, "Map"-> map, "RefinementLevel" -> rl, "TimeLevel" -> tl];
+    varNames = Flatten[Table[SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[f,
+      "Iteration" -> it, "Map"-> map, "RefinementLevel" -> rl, "TimeLevel" -> tl], {f, fileNames}]];
 
     varName = First[Select[varNames, StringMatchQ[#, ___ ~~ var ~~ ___] &]];
 
