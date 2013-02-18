@@ -43,7 +43,7 @@ ReadTime;
 
 Begin["`Private`"];
 
-DimsPattern = _List|_String;
+DimsPattern = _List|_String|All;
 
 parseDims[s_String] :=
   parseDims[Characters[s]];
@@ -51,6 +51,8 @@ parseDims[s_String] :=
 parseDims[dims:{(1|2|3)...}] := parseDims[dims /. {1->"x",2->"y",3->"z"}];
 
 parseDims[dims:{_String...}] := dims;
+
+parseDims[dims:All] := All;
 
 (* ApplyDefaults[opts, provider] := *)
 (*   Do[Which[ *)
