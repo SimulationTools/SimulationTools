@@ -249,13 +249,14 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
   annots = Annotations[file, ds];
 
   dims = Reverse /@ Dims[file, ds];
-
+  
+  nDims = Length[Dimensions[data]] - 1;
   (* Data from CarpetIOHDF5 is in Fortran column-major format. Transpose to get Mathematica row-major format *)
   order  = Reverse /@ Range /@ ArrayDepth /@ data;
   data = MapThread[Transpose, {data, order}];
 
-  origin = "origin" /. annots /. "origin" -> Null;
-  spacing = "delta" /. annots /. "delta" -> Null;
+  origin = "origin" /. annots /. "origin" -> ("iorigin" /. annots);
+  spacing = "delta" /. annots /. "delta" -> ConstantArray[1.,nDims];
   name = "name" /. annots /. "name" -> Null;
 
   ghosts = ("cctk_nghostzones" /. annots) /. "cctk_nghostzones" -> 0;
