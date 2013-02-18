@@ -385,7 +385,7 @@ datasetsWith[file_String, attr_List] :=
     Cases[datasetAttributes[file], pattern]];
 
 datasetAttribute[datasets_List, attr_] :=
-  Sort[Cases[DeleteDuplicates[datasets[[All, attr]]], Except[None]]];
+  Sort[DeleteDuplicates[datasets[[All, attr]]]];
 
 datasetAttribute[file_String, attr_] :=
   datasetAttribute[datasetAttributes[file], attr];
