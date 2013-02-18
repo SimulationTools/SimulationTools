@@ -93,9 +93,9 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|Al
 Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations] =
   FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["Iteration"]];
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations[file_String, opts:OptionsPattern[]] :=
-  datasetAttribute[datasetsWith[file,
+  Union@Flatten[Table[datasetAttribute[datasetsWith[f,
     attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations]]]
-  ],2];
+  ],2], {f, FileNames[StringReplace[file,".file_0.h5"->".file_*.h5"]]}],1];
 
 (****************************************************************)
 (* ReadMaps *)
