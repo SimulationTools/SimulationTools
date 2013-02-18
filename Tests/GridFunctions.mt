@@ -133,7 +133,7 @@ Test[
 Test[
     ReadMaps[$SimulationToolsTestSimulation, var, {"x"}]
 ,
-    Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-1D.m"}]]
+    {None}
 ,
     TestID->"ReadMaps-1D"
 ]
@@ -141,7 +141,7 @@ Test[
 Test[
     ReadMaps[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
-    Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-2D.m"}]]
+    {None}
 ,
     TestID->"ReadMaps-2D"
 ]
@@ -149,7 +149,7 @@ Test[
 Test[
     ReadMaps[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
-    Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-3D.m"}]]
+    {None}
 ,
     TestID->"ReadMaps-3D"
 ]
