@@ -275,9 +275,9 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
 (****************************************************************)
 
 (* Get a list of all components in a file *)
-CarpetIOHDF5Components[file_, it_, rl_] := 
+CarpetIOHDF5Components[file_, it_, rl_, map_] := 
   Profile["CarpetIOHDF5Components",
-  datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl}], 5]];
+  datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl, 6 -> map}], 5]];
 
 (****************************************************************)
 (* ReadCarpetIOHDF5Components *)
@@ -286,8 +286,9 @@ CarpetIOHDF5Components[file_, it_, rl_] :=
 (* Read all datasets for a variable *)
 Options[ReadCarpetIOHDF5Components] = {"StripGhostZones" -> True};
 
-ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_Integer, map_, opts:OptionsPattern[]] :=
-  Module[{fileNames, datasets, pattern, components, names, varNames, varName, directory, leaf, leafPrefix},
+ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer, map_, opts:OptionsPattern[]] :=
+  Module[{fileNames, datasets, pattern, components, names, varNames, varName, directory, leaf,
+          leafPrefix, haveComp},
     If[FileType[file] === None,
       Error["File " <> file <> " not found in ReadCarpetIOHDF5Components"]];
 
@@ -303,24 +304,24 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_Integer, tl_I
     ];
 
     (* Get a list of components in each file *)
-    components = Map[CarpetIOHDF5Components[#, it, rl]&, fileNames];
-    components = components /. {} -> {None};
+    components = Map[CarpetIOHDF5Components[#, it, rl, map]&, fileNames];
 
     (* Figure out what the variable is called inside the file *)
     varNames = Flatten[Table[SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[f,
       "Iteration" -> it, "Map"-> map, "RefinementLevel" -> rl, "TimeLevel" -> tl], {f, fileNames}]];
 
     varName = First[Select[varNames, StringMatchQ[#, ___ ~~ var ~~ ___] &]];
+    haveComp = Map[# =!= {} &, components];
 
     (* Construct a list of dataset names *)
-    names = Map[CarpetIOHDF5DatasetName[varName, it, map, rl, tl, #] &, components, {2}];
+    names = Map[CarpetIOHDF5DatasetName[varName, it, map, rl, tl, #] &, Pick[components,haveComp], {2}];
 
     (* Read the data *)
     datasets = Flatten[
       MapThread[
         ReadCarpetIOHDF5Datasets[#1, #2, 
                                  FilterRules[{opts},Options[ReadCarpetIOHDF5Datasets]]] &,
-                                 {fileNames, names}]];
+                                 {Pick[fileNames,haveComp], names}]];
 
     datasets
 ];
