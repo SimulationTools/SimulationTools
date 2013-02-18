@@ -203,7 +203,7 @@ ReadTime[run_String, var_String, dims1:DimsPattern, opts:OptionsPattern[]] :=
   Module[
     {options, fileName, dims = parseDims[dims1]},
     options = ApplyDefaults[run, var, {opts}];
-    fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration]];
+    fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration],options];
     If[fileName === None,
        notFound[run,var,dims,options]];
     CallProvidedFunction["GridFunctions", "ReadTime", {fileName, "Variable" -> var, options}]
