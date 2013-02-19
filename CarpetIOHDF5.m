@@ -337,22 +337,53 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
    is done in a specific way, which may appear odd, this is likely for
    performance reasons. *)
 
+(* Terminology:
+
+We use "attribute" here in a sense distrinct from that used in HDF5.
+Here, "attributes" are the values encoded in CarpetIOHDF5 dataset
+names, e.g. it=256 c=4 m=0 rl=9.
+
+Dataset Attributes Table (dsAttrTable): 
+
+   List of lists of attribute values for the HDF5 file.  There is one
+   row per dataset, and the columns are: varname, iteration,
+   timelevel, refinementlevel, component, map
+
+Attribute index (attrIndex):
+
+   The column number of the attribute in the dataset attributes table.
+   e.g. the attribute index for iteration is 2.
+
+Attribute value (attrVal):
+
+   The value of a specific attribute; eg. the value of the iteration
+   attribute for a given dataset might be 128.
+
+Attribute selector (attrSel):
+
+   An object used for searching for datasets where a given attribute
+   has a given value.  Of the form attrIndex -> attrVal.  e.g. 2 ->
+   128 would be an attribute selector which looked for datasets with
+   iteration = 128.
+
+Attribute name (attrName):
+
+   A name given to each of the attributes.
+
+*)
+
 (****************************************************************)
 (* datasetAttributesTable *)
 (****************************************************************)
 
-(* Return a 2D table of attributes for the HDF5 file.  There is one
-   row per dataset, and the columns are:
-
-     varname, iteration, timelevel, refinementlevel, component, map
-
+(* 
    This information is determined from the dataset name only (reading
    the attributes is much more expensive).  If a value is not present
    in the dataset name (e.g. the map for a single-map simulation), it
    is represented as None.  The file attributes table is cached, and
    only reread if the datestamp of the HDF5 file is changed. *)
 
-datasetAttributesTable[h5filename_] :=
+datasetAttributesTable[h5filename_String] :=
   Module[{timestamp, attributeRules, datasets, dsattrs},
     timestamp = FileDate[h5filename];
     If[cache[h5filename]["timestamp"] === timestamp,
@@ -395,16 +426,18 @@ datasetAttributesTable[h5filename_] :=
    has the given value.  The attrindex is the column number of the
    attribute in the attributes table. *)
 
-datasetsWith[datasets_List, attr_Rule] := 
-  Select[datasets, #[[attr[[1]]]] == attr[[2]] &];
+datasetsWith[dsAttrTable_List, attrsel:(attrIndex_Integer -> attrVal_)] := 
+ (Error["This function was thought to be unused"];
+  Select[dsAttrTable, #[[attrIndex]] == attrVal &]);
 
 (* Given the name of an HDF5 file, and a rule of the form attrindex ->
    val, return only those dataset attribute lists where the given
    attribute has the given value.  The attrindex is the column number
    of the attribute in the attributes table of the file. *)
 
-datasetsWith[h5filename_String, attr_Rule] := 
-  datasetsWith[datasetAttributesTable[h5filename], attr];
+datasetsWith[h5filename_String, attrsel:(attrIndex_Integer -> attrVal_)] := 
+ (Error["This function was thought to be unused"];
+  datasetsWith[datasetAttributesTable[h5filename], attrsel]);
 
 (* Given the name of an HDF5 file, and a list of rules of the form
    attrindex -> val, return only those dataset attribute lists where
@@ -412,25 +445,26 @@ datasetsWith[h5filename_String, attr_Rule] :=
    are the column numbers of the attribute in the attributes table of
    the file.  The odd use of patterns and Cases is for performance. *)
 
-datasetsWith[h5filename_String, attr_List] :=
-  Module[{attr2, pattern, w},
-    attr2 = attr /. ((x_->y_) :> (w[x] -> y));
-    pattern = Table[w[i], {i, 1, 6}] /. attr2 /. w[_] -> _;
+datasetsWith[h5filename_String, attrsels_List] :=
+  Module[{attrsels2, pattern, w},
+    attrsels2 = attrsels /. ((x_->y_) :> (w[x] -> y));
+    pattern = Table[w[i], {i, 1, 6}] /. attrsels2 /. w[_] -> _;
     Cases[datasetAttributesTable[h5filename], pattern]];
 
 (* Given a dataset attributes table, and an attribute index, return a
    list of the values that that attribute takes across all the
    datasets. *)
 
-datasetAttribute[datasets_List, attr_] :=
-  Sort[DeleteDuplicates[datasets[[All, attr]]]];
+datasetAttribute[dsAttrTable_List, attrIndex_Integer] :=
+  Sort[DeleteDuplicates[dsAttrTable[[All, attrIndex]]]];
 
 (* Given the name of an HDF5 file and an attribute index, return a
    list of the values that that attribute takes across all the
    datasets in the file. *)
 
-datasetAttribute[h5filename_String, attr_] :=
-  datasetAttribute[datasetAttributesTable[h5filename], attr];
+datasetAttribute[h5filename_String, attrIndex_Integer] :=
+ (Error["This function was thought to be unused"];
+  datasetAttribute[datasetAttributesTable[h5filename], attrIndex]);
 
 (* Convert the dataset attribute names to attribute indices as used in
    the 2D dataset attributes table *)
@@ -445,16 +479,16 @@ Datasets[h5filename_] :=
 (* Return a list of the attributes of the datasets in an HDF5 file.
    The lists of attributes are in the same order as the dataset names
    in Datasets[file]. *)
-Annotations[h5filename_String, datasetName_String] :=
+Annotations[h5filename_String, datasetName:(_String|_List)] :=
   Profile["Annotations",
     ReadHDF5[h5filename, {"Annotations", datasetName}]];
 
 (* Return the dimensions of the dataset with the given name; a list such as {nx, ny, nz} *)
-Dims[h5filename_String, datasetName_String] :=
+Dims[h5filename_String, datasetName:(_String|_List)] :=
   ReadHDF5[h5filename, {"Dimensions", datasetName}];
 
-(* Return the data of the dataset with the given name *)
-HDF5Data[h5filename_String, datasetname_String] :=
+(* Return the data of the dataset with the given name or list of names *)
+HDF5Data[h5filename_String, datasetName:(_String|_List)] :=
   Profile["HDF5Data", ReadHDF5[h5filename, {"Datasets", datasetName}]];
 
 End[];
