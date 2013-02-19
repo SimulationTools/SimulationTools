@@ -338,7 +338,7 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
    performance reasons. *)
 
 (****************************************************************)
-(* datasetAttributes *)
+(* datasetAttributesTable *)
 (****************************************************************)
 
 (* Return a 2D table of attributes for the HDF5 file.  There is one
@@ -352,19 +352,19 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
    is represented as None.  The file attributes table is cached, and
    only reread if the datestamp of the HDF5 file is changed. *)
 
-datasetAttributes[h5filename_] :=
+datasetAttributesTable[h5filename_] :=
   Module[{timestamp, attributeRules, datasets, dsattrs},
     timestamp = FileDate[h5filename];
     If[cache[h5filename]["timestamp"] === timestamp,
       Return[cache[h5filename]["data"]];
     ];
 
-    Profile["datasetAttributes[file]",
+    Profile["datasetAttributesTable[file]",
 
     (* Convert dataset name strings into rules *)
     datasets = Profile["Datasets", Datasets[h5filename]];
 
-    Profile["datasetAttributes/StringCases",
+    Profile["datasetAttributesTable/StringCases",
      attributeRules = StringCases[datasets,
      {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
       "tl=" ~~ x : NumberString :> ("tl" -> ToExpression[x]),
@@ -374,11 +374,11 @@ datasetAttributes[h5filename_] :=
       StartOfString ~~ "/" ~~ Shortest[x : __] ~~ " it=" :> ("var" -> x)},
       Overlaps -> True]];
 
-    Profile["datasetAttributes/Replace1",
+    Profile["datasetAttributesTable/Replace1",
     dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules];
 
     (* If an attribute isn't found for a dataset, set it to None *)
-    Profile["datasetAttributes/Replace2",
+    Profile["datasetAttributesTable/Replace2",
     dsattrs = dsattrs /. {"var" -> None, "it" -> None, "tl" -> None,
                           "rl" -> None, "c" -> None, "m" -> None}];
 
@@ -404,7 +404,7 @@ datasetsWith[datasets_List, attr_Rule] :=
    of the attribute in the attributes table of the file. *)
 
 datasetsWith[h5filename_String, attr_Rule] := 
-  datasetsWith[datasetAttributes[h5filename], attr];
+  datasetsWith[datasetAttributesTable[h5filename], attr];
 
 (* Given the name of an HDF5 file, and a list of rules of the form
    attrindex -> val, return only those dataset attribute lists where
@@ -416,7 +416,7 @@ datasetsWith[h5filename_String, attr_List] :=
   Module[{attr2, pattern, w},
     attr2 = attr /. ((x_->y_) :> (w[x] -> y));
     pattern = Table[w[i], {i, 1, 6}] /. attr2 /. w[_] -> _;
-    Cases[datasetAttributes[h5filename], pattern]];
+    Cases[datasetAttributesTable[h5filename], pattern]];
 
 (* Given a dataset attributes table, and an attribute index, return a
    list of the values that that attribute takes across all the
@@ -430,7 +430,7 @@ datasetAttribute[datasets_List, attr_] :=
    datasets in the file. *)
 
 datasetAttribute[h5filename_String, attr_] :=
-  datasetAttribute[datasetAttributes[h5filename], attr];
+  datasetAttribute[datasetAttributesTable[h5filename], attr];
 
 (* Convert the dataset attribute names to attribute indices as used in
    the 2D dataset attributes table *)
