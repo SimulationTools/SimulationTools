@@ -3,6 +3,8 @@
 $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 TestReferenceDirectory = FileNameJoin[{$SimulationToolsInstallationDirectory,"Data/TestReference"}];
 
+$SimulationToolsMPTestSimulation = "test7patch";
+
 var = "phi";
 
 dims1D = {"x"};
@@ -247,4 +249,36 @@ Test[
     {"x", "xy", "xyz"}
 ,
     TestID->"ReadGridFunctionDimensions"
+]
+
+(****************************************************************)
+(* Multipatch                                                   *)
+(****************************************************************)
+
+Module[{data},
+    Test[
+        data = ToListOfData[ReadGridFunction[$SimulationToolsMPTestSimulation, "x", {"z"},Iteration -> 0, Map -> 0]]
+    ,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-1D-mp-map0.m"}]]
+    ,
+        TestID->"ReadGridFunction-1D-mp-map0"
+    ]
+]
+
+Module[{data},
+    Test[
+        data = ToListOfData[ReadGridFunction[$SimulationToolsMPTestSimulation, "x", {"z"},Iteration -> 0, Map -> 1]]
+    ,
+    Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-1D-mp-map1.m"}]]
+    ,
+        TestID->"ReadGridFunction-1D-mp-map1"
+    ]
+]
+
+Test[
+    ReadMaps[$SimulationToolsMPTestSimulation, "x", {"z"}]
+,
+    {0, 1, 2, 3, 4, 5, 6}
+,
+    TestID->"ReadMaps-1D-mp"
 ]
