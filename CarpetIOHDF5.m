@@ -352,17 +352,17 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
    is represented as None.  The file attributes table is cached, and
    only reread if the datestamp of the HDF5 file is changed. *)
 
-datasetAttributes[file_] :=
+datasetAttributes[h5filename_] :=
   Module[{timestamp, attributeRules, datasets, dsattrs},
-    timestamp = FileDate[file];
-    If[cache[file]["timestamp"] === timestamp,
-      Return[cache[file]["data"]];
+    timestamp = FileDate[h5filename];
+    If[cache[h5filename]["timestamp"] === timestamp,
+      Return[cache[h5filename]["data"]];
     ];
 
     Profile["datasetAttributes[file]",
 
     (* Convert dataset name strings into rules *)
-    datasets = Profile["Datasets", Datasets[file]];
+    datasets = Profile["Datasets", Datasets[h5filename]];
 
     Profile["datasetAttributes/StringCases",
      attributeRules = StringCases[datasets,
@@ -383,8 +383,8 @@ datasetAttributes[file_] :=
                           "rl" -> None, "c" -> None, "m" -> None}];
 
     (* Cache the result *)
-    cache[file]["timestamp"] = timestamp;
-    cache[file]["data"] = dsattrs;
+    cache[h5filename]["timestamp"] = timestamp;
+    cache[h5filename]["data"] = dsattrs;
 
     dsattrs]
 ];
@@ -403,8 +403,8 @@ datasetsWith[datasets_List, attr_Rule] :=
    attribute has the given value.  The attrindex is the column number
    of the attribute in the attributes table of the file. *)
 
-datasetsWith[file_String, attr_Rule] := 
-  datasetsWith[datasetAttributes[file], attr];
+datasetsWith[h5filename_String, attr_Rule] := 
+  datasetsWith[datasetAttributes[h5filename], attr];
 
 (* Given the name of an HDF5 file, and a list of rules of the form
    attrindex -> val, return only those dataset attribute lists where
@@ -412,11 +412,11 @@ datasetsWith[file_String, attr_Rule] :=
    are the column numbers of the attribute in the attributes table of
    the file.  The odd use of patterns and Cases is for performance. *)
 
-datasetsWith[file_String, attr_List] :=
+datasetsWith[h5filename_String, attr_List] :=
   Module[{attr2, pattern, w},
     attr2 = attr /. ((x_->y_) :> (w[x] -> y));
     pattern = Table[w[i], {i, 1, 6}] /. attr2 /. w[_] -> _;
-    Cases[datasetAttributes[file], pattern]];
+    Cases[datasetAttributes[h5filename], pattern]];
 
 (* Given a dataset attributes table, and an attribute index, return a
    list of the values that that attribute takes across all the
@@ -429,8 +429,8 @@ datasetAttribute[datasets_List, attr_] :=
    list of the values that that attribute takes across all the
    datasets in the file. *)
 
-datasetAttribute[file_String, attr_] :=
-  datasetAttribute[datasetAttributes[file], attr];
+datasetAttribute[h5filename_String, attr_] :=
+  datasetAttribute[datasetAttributes[h5filename], attr];
 
 (* Convert the dataset attribute names to attribute indices as used in
    the 2D dataset attributes table *)
@@ -439,18 +439,23 @@ attributeNamesToNumbers[expr_] := expr /. {"Iteration" -> 2, "TimeLevel" -> 3,
   "RefinementLevel" -> 4, "Map" -> 6, "Variable" -> 7};
 
 (* Return a list of the names of the datasets in an HDF5 file *)
-Datasets[file_]         := ReadHDF5[file, "Datasets"];
+Datasets[h5filename_] :=
+  ReadHDF5[h5filename, "Datasets"];
 
 (* Return a list of the attributes of the datasets in an HDF5 file.
    The lists of attributes are in the same order as the dataset names
    in Datasets[file]. *)
-Annotations[file_, ds_] := Profile["Annotations", ReadHDF5[file, {"Annotations", ds}]];
+Annotations[h5filename_String, datasetName_String] :=
+  Profile["Annotations",
+    ReadHDF5[h5filename, {"Annotations", datasetName}]];
 
 (* Return the dimensions of the dataset with the given name; a list such as {nx, ny, nz} *)
-Dims[file_, ds_]        := ReadHDF5[file, {"Dimensions", ds}];
+Dims[h5filename_String, datasetName_String] :=
+  ReadHDF5[h5filename, {"Dimensions", datasetName}];
 
 (* Return the data of the dataset with the given name *)
-HDF5Data[file_, ds_]    := Profile["HDF5Data", ReadHDF5[file, {"Datasets", ds}]];
+HDF5Data[h5filename_String, datasetname_String] :=
+  Profile["HDF5Data", ReadHDF5[h5filename, {"Datasets", datasetName}]];
 
 End[];
 
