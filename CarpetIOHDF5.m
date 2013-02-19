@@ -333,9 +333,24 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
 (* Low-level interface for determining what's available in a file *)
 (***************************************************************************************)
 
+(* NB: These functions have been carefully optimised; where something
+   is done in a specific way, which may appear odd, this is likely for
+   performance reasons. *)
+
 (****************************************************************)
 (* datasetAttributes *)
 (****************************************************************)
+
+(* Return a 2D table of attributes for the HDF5 file.  There is one
+   row per dataset, and the columns are:
+
+     varname, iteration, timelevel, refinementlevel, component, map
+
+   This information is determined from the dataset name only (reading
+   the attributes is much more expensive).  If a value is not present
+   in the dataset name (e.g. the map for a single-map simulation), it
+   is represented as None.  The file attributes table is cached, and
+   only reread if the datestamp of the HDF5 file is changed. *)
 
 datasetAttributes[file_] :=
   Module[{timestamp, attributeRules, datasets, dsattrs},
@@ -374,11 +389,28 @@ datasetAttributes[file_] :=
     dsattrs]
 ];
 
+(* Given a list of dataset attribute lists (i.e. rows of the 2D
+   dataset attribute table), and a rule of the form attrindex -> val,
+   return only those dataset attribute lists where the given attribute
+   has the given value.  The attrindex is the column number of the
+   attribute in the attributes table. *)
+
 datasetsWith[datasets_List, attr_Rule] := 
   Select[datasets, #[[attr[[1]]]] == attr[[2]] &];
 
+(* Given the name of an HDF5 file, and a rule of the form attrindex ->
+   val, return only those dataset attribute lists where the given
+   attribute has the given value.  The attrindex is the column number
+   of the attribute in the attributes table of the file. *)
+
 datasetsWith[file_String, attr_Rule] := 
   datasetsWith[datasetAttributes[file], attr];
+
+(* Given the name of an HDF5 file, and a list of rules of the form
+   attrindex -> val, return only those dataset attribute lists where
+   the given attributes have all the given values.  The attrindexes
+   are the column numbers of the attribute in the attributes table of
+   the file.  The odd use of patterns and Cases is for performance. *)
 
 datasetsWith[file_String, attr_List] :=
   Module[{attr2, pattern, w},
@@ -386,18 +418,38 @@ datasetsWith[file_String, attr_List] :=
     pattern = Table[w[i], {i, 1, 6}] /. attr2 /. w[_] -> _;
     Cases[datasetAttributes[file], pattern]];
 
+(* Given a dataset attributes table, and an attribute index, return a
+   list of the values that that attribute takes across all the
+   datasets. *)
+
 datasetAttribute[datasets_List, attr_] :=
   Sort[DeleteDuplicates[datasets[[All, attr]]]];
+
+(* Given the name of an HDF5 file and an attribute index, return a
+   list of the values that that attribute takes across all the
+   datasets in the file. *)
 
 datasetAttribute[file_String, attr_] :=
   datasetAttribute[datasetAttributes[file], attr];
 
+(* Convert the dataset attribute names to attribute indices as used in
+   the 2D dataset attributes table *)
+
 attributeNamesToNumbers[expr_] := expr /. {"Iteration" -> 2, "TimeLevel" -> 3,
   "RefinementLevel" -> 4, "Map" -> 6, "Variable" -> 7};
 
+(* Return a list of the names of the datasets in an HDF5 file *)
 Datasets[file_]         := ReadHDF5[file, "Datasets"];
+
+(* Return a list of the attributes of the datasets in an HDF5 file.
+   The lists of attributes are in the same order as the dataset names
+   in Datasets[file]. *)
 Annotations[file_, ds_] := Profile["Annotations", ReadHDF5[file, {"Annotations", ds}]];
+
+(* Return the dimensions of the dataset with the given name; a list such as {nx, ny, nz} *)
 Dims[file_, ds_]        := ReadHDF5[file, {"Dimensions", ds}];
+
+(* Return the data of the dataset with the given name *)
 HDF5Data[file_, ds_]    := Profile["HDF5Data", ReadHDF5[file, {"Datasets", ds}]];
 
 End[];
