@@ -232,6 +232,41 @@ getLeafName[var_String, dims:DimsPattern, options_List] :=
   CallProvidedFunction["GridFunctions", "ToFileName", {var, dims, FilterRules[options, Except["StripGhostZones"]]}];
 
 (***************************************************************************************)
+(* Multipatch *)
+(***************************************************************************************)
+
+(* Suitable for use with ListDensityPlot. Example:
+
+ListDensityPlot[
+ ReadMultipatchGridFunction[run, "Psi4r", "xy", Log10[Abs[#]] &, 
+  Iteration -> 0], PlotRange -> All, ColorFunctionScaling -> False, 
+  ColorFunction -> cf, AspectRatio -> Automatic]
+
+Requires output of data and x and y coordinates in xy and yz plane.
+xy only needed for map 0, and yz only needed for maps 1 to 4.
+
+Useful, but not the end goal.  Eventually, we probably want to attach
+coordinates to DataRegions as additional attributes and read these in
+modified plotting functions.  We would also need a way to represent
+several patches as a single object. *)
+
+ReadMultipatchGridFunction[run_, var_, "xy", fn_, opts___] :=
+ Module[{fs, xs, ys, gs},
+  fs = MapThread[
+    fn@ReadGridFunction[run, var, #1, Map -> #2, opts] &, {{"xy", 
+      "yz", "yz", "yz", "yz"}, {0, 1, 2, 3, 4}}];
+  xs = Join[{GetCoordinate[fs[[1]], 1]}, 
+    Table[ReadGridFunction[run, "x", "yz", Map -> m, opts], {m, 1, 
+      4}]];
+  ys = Join[{GetCoordinate[fs[[1]], 2]}, 
+    Table[ReadGridFunction[run, "y", "yz", Map -> m, opts], {m, 1, 
+      4}]];
+  gs = Join @@ 
+    MapThread[
+     Flatten[MapThread[List, ToListOfData /@ {#1, #2, #3}, 2], 
+       1] &, {xs, ys, fs}]];
+
+(***************************************************************************************)
 (* Backward compatibility *)
 (***************************************************************************************)
 
