@@ -63,27 +63,28 @@ Options[SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName] =
 
 SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:OptionsPattern[]] :=
   Module[
-    {map, filename, dimspattern},
+    {filename, map, pattern},
     map = Switch[OptionValue[Map],
 		 _Integer, "."<>ToString[OptionValue[Map]],
 		 None, "",
-		 All, "(\\.\\d){0,1}",
+		 All, "(.\\d)?",
 		 _, Error["Unrecognised map "<>ToString[OptionValue[Map],InputForm]]];
 
-    dimspattern = Which[
+    pattern = Which[
       SameQ[dims,All],
-      "(.(file_0){0,1})?",
+      "(.file_0)?",
+
+      SameQ[StringJoin[dims], "xyz"],
+      "(" <> map <> ".xyz|.file_0)?",
 
       And@@Map[StringQ,dims],
-      If[SameQ[StringJoin[dims], "xyz"],
-         "(."<>StringJoin[dims]<>"|.(file_0){0,1})?",
-         "."<>StringJoin[dims]],
+      map <> "."<>StringJoin[dims],
 
       True,
       Error["Unrecognised dimensions "<>ToString[dims,InputForm]]];
-    filename = var <> If[dims =!= All, map, ""] <> dimspattern <> ".h5";
-    If[map =!= "" || dims === All || dimspattern =!= StringJoin[dims],
-      Return[RegularExpression[filename]],
+    filename = var <> pattern <> ".h5";
+    If[OptionValue[Map] === All || SameQ[dims,All] || SameQ[StringJoin[dims], "xyz"],
+      Return[RegularExpression[StringReplace[filename, "." -> "\\."]]],
       Return[filename]]];
 
 (****************************************************************)
