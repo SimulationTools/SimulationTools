@@ -831,7 +831,7 @@ ResampleDataRegions[ds:{DataRegion[__]...}, p_:3] :=
 
 
 MakeDataRegion[data_List, name_String, dims_List, origin_List, spacing_List, time_] :=
-  DataRegion[{VariableName -> name, Origin -> origin, Spacing -> spacing, Time -> time},
+  DataRegion[{"VariableName" -> name, "Origin" -> origin, "Spacing" -> spacing, "Time" -> time},
              Developer`ToPackedArray[Transpose[data, Reverse[Range[ArrayDepth[data]]]]]];
 
 SliceData[v:DataRegion[h_, __], dim_Integer, coord_:0] :=
