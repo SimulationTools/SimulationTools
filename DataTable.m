@@ -122,7 +122,10 @@ check[d_DataTable, where_:None] :=
 
 validQ[d_DataTable] :=
   MatchQ[d, DataTable[{{__?NumericQ}, {__?NumericQ}}, ___]] ||
-  MatchQ[d, DataTable[{{__?NumericQ}, {__List}}, ___]];
+  MatchQ[d, DataTable[{{__?NumericQ}, {__List}}, ___]] || 
+  (!Developer`PackedArrayQ[ToListOfData[d]] &&
+   MatchQ[d, DataTable[{{__?NumericQ}, {__}}, ___]] && 
+   MatchQ[ToListOfData[d], {(_?NumericQ | Indeterminate | ComplexInfinity)..}]);
 
 SetAttributes[DataTable, {ReadProtected}];
 
@@ -405,7 +408,7 @@ MapList[f_, dt_DataTable] :=
   Module[{fdt, t},
     fdt = Map[f, ToList[dt]];
     t = ToListOfCoordinates[dt];
-    If[!MatchQ[fdt[[1]], _?NumericQ],
+    If[!MatchQ[fdt[[1]], (_?NumericQ | Indeterminate | ComplexInfinity)],
       Error["MapList: Result is not numeric: "<>ToString[fdt[[1]]]]];
     ToDataTable[t, fdt]
 ];
