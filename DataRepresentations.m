@@ -516,7 +516,7 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
   Switch[$ResamplingMethod,
    None,
     Return[$Failed];
-    Error["Operation requires automatic resampling but $ResamplingMethod is not set"];,
+    Error["Operation requires automatic resampling but a resampling method is not set"];,
    _?DataRepresentationQ,
     onto = Slab[$ResamplingMethod, Sequence@@(Span@@@CommonInterval[ds])];,
    "First",
@@ -524,7 +524,7 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
    "Last",
     onto = Slab[Last[ds], Sequence@@(Span@@@CommonInterval[ds])];,
    _String,
-    Error["Unknown $ResamplingMethod preset: "<>$ResamplingMethod];,
+    Error["Unknown resampling method: "<>$ResamplingMethod];,
    _,
     onto = $ResamplingMethod[ds];
   ];
