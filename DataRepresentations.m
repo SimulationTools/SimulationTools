@@ -568,7 +568,7 @@ slab[d_?DataRepresentationQ, s__]:=
   ];
 
   (* Convert coordinate range to index range *)
-  indexrange = MapThread[(#1 /.{x_?NumericQ :> Round[(x-#2)/#3] + 1})&, {slabSpec, origin, spacing}];
+  indexrange = MapThread[(#1 /.{x_?NumericQ :> Round[(x-#2)/#3] + 1})&, {slabSpec, origin, spacing}]; (* FIXME: Add conversion from Span[..,All] *)
 
   (* Get the relevant part of the data *)
   Part[d, Sequence@@indexrange]
@@ -576,7 +576,7 @@ slab[d_?DataRepresentationQ, s__]:=
 
 slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable`UniformSpacingQ[d] :=
  Module[{t, spacings, tleft, tright},
-  t = ToListOfCoordinates[d];
+  t = ToListOfCoordinates[d]; (* FIXME: Add conversion from Span[..,All] *)
 
   (* We allow a tolerance of half the local grid spacing *)
   spacings = 0.5 Differences[t];
