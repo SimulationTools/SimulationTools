@@ -713,7 +713,7 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
        orders = Switch[order, _Integer, {order, order}, {_Integer, _Integer}, order, _, Error["Error"]];
        
        ToComplex[MapThread[ext, {resampleDataTables/@ToAbsPhase[ret,tAlign], orders}]],
-       If[ListQ[order], Error["Can only specify a list of extraolation orders when AbsPhase is True"]];
+       If[ListQ[order], Error["Can only specify a list of extrapolation orders when AbsPhase is True"]];
        ext[resampleDataTables[ret],order]]];
 
 (* ReadRadiallyExtrapolatedWave *)
