@@ -55,6 +55,7 @@ PartitionTable;
 MonotonicQ::usage = "MonotonicQ[d] returns True if the independent variable in the DataTable d is monotonically increasing";
 MakeUniform::usage = "MakeUniform[d] returns a DataTable with a uniform grid spacing from a DataTable with a nonuniform grid spacing.  This is accomplished via interpolation through ResampleDataTable.";
 UniformGridQ::usage = "UniformGridQ[d] returns True if the DataTable has a uniform grid spacing and False if the grid spacing is variable.  The grid spacings are considered uniform if they are equal up to a tolerance of 1e-5.";
+SameGridQ;
 
 Begin["`Private`"];
 
@@ -732,6 +733,16 @@ UniformGridQ[d_DataTable] :=
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
+
+DataTable /: SameGridQ[dts:DataTable[__]..] :=
+ Module[{coords},
+  If[Length[{dts}] < 2,
+    Error["SameGridQ expects at least two arguments."];
+  ];
+
+  coords = IndVar /@ {dts};
+  SameQ @@ coords
+];
 
 End[];
 
