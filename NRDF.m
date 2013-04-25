@@ -203,14 +203,17 @@ NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, rad_String,
 
     data];
 
-
 ReadMetadataKey[run_String, keyPattern_] :=
+  ReadMetadataKey[run, "metadata", keyPattern];
+
+ReadMetadataKey[run_String, section_String, keyPattern_] :=
   Module[
     {md, filenames, filename, tmp, results},
     md = ParseMetadataFile[run];
+
     results = Cases[md,
                  "section"[___, 
-                           "section_name"["keyword"["metadata"]],
+                           "section_name"["keyword"[section]],
                            ___,
                            "elements"[___,
                                       "element"["key"[keyPattern], v_], 
@@ -239,12 +242,15 @@ ReadMetadataKey[run_String, keyPattern_] :=
       Error["Unsupported metadata type for "<>ToString[keyPattern,InputForm]<>": "<>ToString[results[[1]],InputForm]]]];
 
 HaveMetadataKey[run_String, keyPattern_] :=
+  HaveMetadataKey[run, "metadata", keyPattern];
+
+HaveMetadataKey[run_String, section_String, keyPattern_] :=
   Module[
     {md, results},
     md = ParseMetadataFile[run];
     results = Cases[md,
                  "section"[___, 
-                           "section_name"["keyword"["metadata"]],
+                           "section_name"["keyword"[section]],
                            ___,
                            "elements"[___,
                                       "element"["key"[keyPattern], v_], 
