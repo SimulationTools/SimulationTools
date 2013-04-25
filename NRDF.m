@@ -275,6 +275,23 @@ ReadMassRatio[run_String] :=
 ReadTotalMass[run_String] :=
   Plus@@ReadMasses[run];
 
+readColumnData[file_String] :=
+  Module[
+    {tmp},
+    tmp = StringCases[file, base__~~".h5:"~~ds__ :> {base<>".h5",ds}];
+    If[Length[tmp] === 0,
+       ReadColumnFile[file],
+       ReadHDF5[tmp[[1,1]], {"Datasets", tmp[[1,2]]}]]];
+
+SimulationTools`NRDF`Trackers`ReadCoordinates[run_String, i_Integer] :=
+  Module[{base,file,data},
+    base = ReadMetadataKey[run, "body-data", "trajectory"<>ToString[i]];
+    file = FileNameJoin[{FindRunDir[run], base}];
+    data = readColumnData[file];
+    Table[MakeDataTable[data[[All,{1,d+1}]]], {d,1,3}]];
+
+SimulationTools`NRDF`BHCoordinates`HaveData[run_String, tracker_Integer] :=
+  HaveMetadataKey[run, "body-data", "trajectory"<>ToString[tracker]];
 
 End[];
 
