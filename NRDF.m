@@ -291,7 +291,7 @@ SimulationTools`NRDF`Trackers`ReadCoordinates[run_String, i_Integer] :=
     Table[MakeDataTable[data[[All,{1,d+1}]]], {d,1,3}]];
 
 SimulationTools`NRDF`BHCoordinates`HaveData[run_String, tracker_Integer] :=
-  HaveMetadataKey[run, "body-data", "trajectory"<>ToString[tracker]];
+  haveMetadataFile[FindRunDir[run]] && HaveMetadataKey[run, "body-data", "trajectory"<>ToString[tracker]];
 
 End[];
 
