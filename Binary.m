@@ -75,6 +75,10 @@ binaryTrackerNoFail[run_String, i:(1|2), opts:OptionsPattern[]] :=
     SimulationTools`ShiftTracker`BHCoordinates`HaveData[run, 1],
     {"ShiftTracker", i-1},
 
+    SimulationTools`NRDF`BHCoordinates`HaveData[run, 1] &&
+    SimulationTools`NRDF`BHCoordinates`HaveData[run, 2],
+    {"NRDF", i},
+
     True,
     None];
 
