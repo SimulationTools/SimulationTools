@@ -201,7 +201,7 @@ DefineMemoFunction[
     (rad === Infinity) && ((Infinity /. radii) === "inf"),
       radString = "inf",
     NumberQ[rad] && (Select[radii[[All,1]], NumberQ] =!= {}),
-      radString = First[Nearest[radii, rad]];
+      radString = First[Nearest[Select[radii,NumericQ[#[[1]]] &], rad]];
       If[Abs[ToExpression[radString] - ToExpression[rad]] > 0.01,
          Error[Psi4RadiusNotFound, "Radius "<>ToString[rad]<>" not found.  Available radii are "<>ToString[radii[[All,1]]]]],
     True,
