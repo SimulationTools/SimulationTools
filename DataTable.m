@@ -125,7 +125,7 @@ validQ[d_DataTable] :=
   MatchQ[d, DataTable[{{__?NumericQ}, {__List}}, ___]] || 
   (!Developer`PackedArrayQ[ToListOfData[d]] &&
    MatchQ[d, DataTable[{{__?NumericQ}, {__}}, ___]] && 
-   MatchQ[ToListOfData[d], {(_?NumericQ | Indeterminate | ComplexInfinity)..}]);
+   MatchQ[ToListOfData[d], {(_?NumericQ | Indeterminate | ComplexInfinity | Infinity | -Infinity)..}]);
 
 SetAttributes[DataTable, {ReadProtected}];
 
