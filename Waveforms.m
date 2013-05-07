@@ -665,7 +665,7 @@ ToComplex[{a_DataTable,phi_DataTable}] :=
 ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
   ShiftDataTable[-rStarOfr[r],f];
 
-ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
+ToRetardedTime[{rs:{_?NumericQ...}, fs:{_DataTable...}}, rStarOfr_:Identity] :=
   MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}];
 
 resampleDataTables[ds:{DataTable[__]...}, p : _Integer : 8] :=
