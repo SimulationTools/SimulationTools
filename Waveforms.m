@@ -52,6 +52,7 @@ RadiallyExtrapolatedWave;
 ReadRadiallyExtrapolatedPsi4;
 ReadRadiallyExtrapolatedStrain;
 Psi4PerturbativeCorrection;
+Psi4ToStrain;
 
 Options[ExtrapolateRadiatedQuantity] = 
   {ExtrapolationOrder -> 1,
