@@ -45,9 +45,9 @@ Shifted::usage = "Shifted[d, delta] returns a copy of d with the coordinates shi
 CoordinateAtMax::usage = "CoordinateAtMax[d] finds the coordinate at which a maximum occurs in d. This is guaranteed to coincide with a data point.";
 CoordinatesAtMax::usage = "CoordinatesAtMax[d] finds a list of the coordinates at which the maximum occurs in d. This is guaranteed to coincide with a data point.";
 
-Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a data representation with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}."<>
-  "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ...."<>
-  "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2."<>
+Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d to produce a data representation with coordinate ranges {x0, x1}, {y0, y1}, ... and spacings {dx, dy, ...}.\n"<>
+  "Resampled[d, {dx, dy, ...}] resamples d onto a grid of the same extent, but with constant spacing dx, dy, ....\n"<>
+  "Resampled[d1, d2] resamples d1 onto the coordinate grid of d2.\n"<>
   "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
 WithResampling::usage = "WithResampling[method, expr] evaluates expr with automatic resampling enabled.";
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
