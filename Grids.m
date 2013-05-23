@@ -244,7 +244,7 @@ SyntaxInformation[ReadMaxRefinementLevels] =
  {"ArgumentsPattern" -> {_}};
 
 ReadMaxRefinementLevels[run_String] :=
-  ToExpression[LookupParameter[run, "Carpet::max_refinement_levels"]];
+  ToExpression[LookupParameter[run, "Carpet::max_refinement_levels", 1]];
 
 
 
@@ -534,7 +534,7 @@ ReadCoarseTimeStep[runName_] :=
 
 TimeRefinementFactors[runName_String] :=
   Module[{s1, s2, s3s, facs},
-    s1 = LookupParameter[runName, "Carpet::time_refinement_factors"];
+    s1 = LookupParameter[runName, "Carpet::time_refinement_factors", "[1,2,4,8,16,32]"];
     s2 = StringCases[s1, ("[" ~~ facs__ ~~ "]") -> facs][[1]];
     s3s = StringSplit[s2, ","];
     facs = Map[ToExpression, s3s];
