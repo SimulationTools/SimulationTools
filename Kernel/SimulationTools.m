@@ -73,6 +73,7 @@ packages = {
   (*"SimulationTools`Error`",*)
     "SimulationTools`FieldLines`",
     "SimulationTools`GridFunctions`",
+    "SimulationTools`GridFunctionConvergence`",
     "SimulationTools`Grids`",
     "SimulationTools`Horizons`",
     "SimulationTools`IniFile`",
