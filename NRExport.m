@@ -331,6 +331,9 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "initial-ADM-angular-momentum" ->
     Norm@InitialAngularMomentum[run],
    "initial-separation" -> InitialSeparation[run],
+   Sequence @@ Table[
+      "initial-bh-mass-parameter" <> ToString[i] ->
+       ReadPunctureBareMassParameters[run][[i]], {i, 1, 2}],
    "initial-data-type" -> "Bowen-York quasicircular",
    "initial-data-bibtex-keys" -> "Bowen:1980yu Brandt:1997tf Ansorg:2004ds",
    "quasicircular-bibtex-keys" -> "Husa:2007rh",
