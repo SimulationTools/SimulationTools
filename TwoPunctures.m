@@ -26,6 +26,7 @@ BeginPackage["SimulationTools`TwoPunctures`",
 
 ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[sim] reads the ADM masses of the punctures in sim as computed by the TwoPunctures thorn."*);
 ReadPunctureADMMassParameters(*::usage  = "ReadPunctureADMMassParameters[sim] reads the ADM masses of the punctures in sim as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn."*);
+ReadPunctureBareMassParameters(*::usage  = "ReadPunctureBareMassParameters[sim] reads the bare masses of the punctures in sim as requested by the par_m_plus and par_m_minus parameters of the TwoPunctures thorn."*);
 TotalMass;
 InitialSpinAngularMomentum;
 InitialLinearMomentum;
@@ -87,7 +88,31 @@ DefineMemoFunction[ReadPunctureADMMassParameters[run_String],
   ToExpression/@{LookupParameter[run, "TwoPunctures::target_M_plus"], 
    LookupParameter[run, "TwoPunctures::target_M_minus"]}];
 
+DefineMemoFunction[ReadPunctureBareMassParameters[run_String],
+ Module[{masses, stdout, lines, mp, mm},
 
+  If[LookupParameter[run, "TwoPunctures::give_bare_mass"] != "no",
+    (* First try the parameter file *)
+    masses = ToExpression/@{LookupParameter[run, "TwoPunctures::par_m_plus"],
+                            LookupParameter[run, "TwoPunctures::par_m_minus"]};
+  ,
+    (* If the bare masses were not given explicitly, then search stdout *)
+    stdout = StandardOutputOfRun[run];
+
+    If[Length[stdout] < 1,
+      Error["Cannot find standard output for run "<>run]];
+
+    lines = FindList[First[stdout], "The two puncture masses are", 1];
+    masses = StringCases[lines,
+       "mp=" ~~ mp : NumberString ~~ " and mm=" ~~ mm : NumberString :>
+        ToExpression /@ {mp, mm}];
+    If[Dimensions[masses] != {1,1,2},
+      Error["Cannot determine bare masses from standard output of run "<>run]];
+    masses = masses[[1,1]];
+  ];
+  masses
+ ]
+];
 
 (* Read data output by the standalone TwoPunctures code by Marcus Ansorg *)
 ReadTwoPuncturesData[file_String, col_] :=
