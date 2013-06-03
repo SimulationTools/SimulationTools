@@ -27,6 +27,7 @@ BeginPackage["SimulationTools`TwoPunctures`",
 ReadPunctureADMMasses(*::usage = "ReadPunctureADMMasses[sim] reads the ADM masses of the punctures in sim as computed by the TwoPunctures thorn."*);
 ReadPunctureADMMassParameters(*::usage  = "ReadPunctureADMMassParameters[sim] reads the ADM masses of the punctures in sim as requested by the target_M_plus and target_M_minus parameters of the TwoPunctures thorn."*);
 ReadPunctureBareMassParameters(*::usage  = "ReadPunctureBareMassParameters[sim] reads the bare masses of the punctures in sim as requested by the par_m_plus and par_m_minus parameters of the TwoPunctures thorn."*);
+ReadPunctureSpinParameters;
 TotalMass;
 InitialSpinAngularMomentum;
 InitialLinearMomentum;
@@ -139,18 +140,18 @@ ReadTwoPuncturesData[file_String, col_] :=
 TotalMass[run_] :=
  Plus @@ ReadPunctureADMMassParameters[run];
 
+ReadPunctureSpinParameters[run_, idx_] := Module[{suffix},
+  suffix = If[idx == 0, "plus", "minus"];
+  Table[
+    ToExpression@
+      LookupParameter[run, "TwoPunctures::par_s_"<>suffix<>"[" <> ToString[i] <> "]", "0"],
+    {i, 0, 2}]
+];
+
 DefineMemoFunction[InitialSpinAngularMomentum[run_],
  Module[{sp, sm},
-  sp = Table[
-     ToExpression@
-      LookupParameter[run, 
-       "TwoPunctures::par_s_plus[" <> ToString[i] <> "]", "0"], {i, 0,
-       2}];
-  sm = Table[
-     ToExpression@
-      LookupParameter[run, 
-       "TwoPunctures::par_s_minus[" <> ToString[i] <> "]", "0"], {i, 
-      0, 2}];
+  sp = ReadPunctureSpinParameters[run, 0];
+  sm = ReadPunctureSpinParameters[run, 1];
   sp + sm]];
 
 InitialLinearMomentum[run_, idx_] :=
