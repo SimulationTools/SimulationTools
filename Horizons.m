@@ -201,6 +201,7 @@ ReadAHPhase[runName_String] :=
     Return[Phase[xyTrans]];
   ];
 
+(* TODO: This doesn't look right *)
 InitialSpin[run_, i_] :=
  First@DepVar@SpinAngle[run, i];
 
