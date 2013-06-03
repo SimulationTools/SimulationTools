@@ -116,7 +116,7 @@ DefineMemoFunction[ReadPunctureBareMassParameters[run_String],
           ToExpression /@ {mp, mm}];
     ];
 
-    If[Dimensions[masses] != {1,1,2},
+    If[!MatchQ[Dimensions[masses], {_Integer,1,2}],
       Error["Cannot determine bare masses from standard output of run "<>run]];
 
     (*  Need to take the last matched bare mass lines in case old-style output was used *)
