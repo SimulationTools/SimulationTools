@@ -102,9 +102,9 @@ DefineMemoFunction[ReadPunctureBareMassParameters[run_String],
     If[Length[stdout] < 1,
       Error["Cannot find standard output for run "<>run]];
 
-    lines = FindList[First[stdout], "The two puncture masses are", 1];
+    lines = FindList[First[stdout], {"The two puncture masses are", "bare mass: mp="}, 1];
     masses = StringCases[lines,
-       "mp=" ~~ mp : NumberString ~~ " and mm=" ~~ mm : NumberString :>
+       "mp=" ~~ mp : NumberString ~~ ___ ~~ "mm=" ~~ mm : NumberString :>
         ToExpression /@ {mp, mm}];
     If[Dimensions[masses] != {1,1,2},
       Error["Cannot determine bare masses from standard output of run "<>run]];
