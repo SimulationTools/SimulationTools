@@ -230,4 +230,39 @@ Module[{runDir,runName="testrun13",otherRunName="mysim",testDirPaths,testFile="M
 		testFilePaths
 	,
 		TestID->"FindSimulationFiles_SimFactory2_OtherName"
-	]]	
+	]]
+
+(* SimultionNames *)
+Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
+  Test[
+    SimulationNames[]
+  ,
+    {"bbh", "test7patch"}
+  ,
+    TestID -> "SimulationNames-1"
+  ]
+
+  Test[
+    SimulationNames["b*"]
+  ,
+    {"bbh"}
+  ,
+    TestID -> "SimulationNames-2"
+  ]
+
+  Test[
+    SimulationNames["bbh"]
+  ,
+    {"bbh"}
+  ,
+    TestID -> "SimulationNames-3"
+  ]
+
+  Test[
+    SimulationNames["invalid"]
+  ,
+    {}
+  ,
+    TestID -> "SimulationNames-4"
+  ]
+]
