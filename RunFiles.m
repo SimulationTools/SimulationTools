@@ -73,11 +73,11 @@ HaveRunDir[runName_String] :=
 (* Given the name of a run directory, return a path to it *)
 findRunDir[runNamep_String] :=
  Module[{dir, dirs},
-  If[FileExistsQ[runNamep], Return[runNamep]];
+  If[DirectoryQ[runNamep], Return[runNamep]];
 
   If[StringTake[runNamep,1] === "/", Return[None]];
 
-  dirs = FileNames[runNamep, SimulationPath[], 2];
+  dirs = SimulationNames[runNamep, "FullPath" -> True];
   Which[
    Length[dirs]>1,
     Error["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]];,
