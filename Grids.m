@@ -534,7 +534,7 @@ ReadCoarseTimeStep[runName_] :=
 
 TimeRefinementFactors[runName_String] :=
   Module[{s1, s2, s3s, facs},
-    s1 = LookupParameter[runName, "Carpet::time_refinement_factors", "[1,2,4,8,16,32]"];
+    s1 = LookupParameter[runName, "Carpet::time_refinement_factors", "[1,2,4,8,16,32,64,128,256]"];
     s2 = StringCases[s1, ("[" ~~ facs__ ~~ "]") -> facs][[1]];
     s3s = StringSplit[s2, ","];
     facs = Map[ToExpression, s3s];
