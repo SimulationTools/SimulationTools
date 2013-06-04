@@ -21,7 +21,7 @@ BeginPackage["SimulationTools`DataTable`",
   "SimulationTools`Utils`"
  }];
 
-DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of data (fi) with an associated coordinate (xi).  DataTable objects print as DataTable[...] to avoid printing the potentially large data content.  The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.";
+DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of data (fi) with an associated coordinate (xi).  DataTable objects print as DataTable[...] to avoid printing the potentially large data content.  The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense."; (* TODO: this last part is too vague *)
 ToDataTable::usage = "ToDataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] constructs a DataTable object out of the list passed. The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense.
 ToDataTable[dr] converts a 1-dimensional DataRegion into a DataTable.";
 
@@ -362,6 +362,8 @@ DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  Module[{args, ds, rds, attrs},
   ds = Cases[{x, d, y}, _DataTable];
   Assert[Apply[And,validQ /@ ds]];
+  (* TODO: using SameGridQ is very strict; it requires that the grids are
+     the same except for the last binary digit *)
   If[Length[ds] > 1 && !(SameGridQ@@ds),
     rds = Resampled[ds];
     If[rds === $Failed,
