@@ -24,6 +24,8 @@ BeginPackage["SimulationTools`RunFiles`",
  }];
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
+SimulationNames::usage = "SimulationNames[] lists all simulations." <>
+  "SimulationNames[form] lists all simulations whose names match the string pattern form.";
 
 HaveRunDir;
 
@@ -172,6 +174,18 @@ stringToReal[s_String] :=
 
 FileIsInRun[run_, file_] :=
   FindRunFile[run, file] =!= {};
+
+(**********************************************************)
+(* SimulationNames                                        *)
+(**********************************************************)
+
+SyntaxInformation[SimulationNames] =
+ {"ArgumentsPattern" -> {_.}};
+
+SimulationNames[form_] :=
+  Map[FileNameTake[#, -1]&, Select[FileNames[form, SimulationPath[]], DirectoryQ]];
+
+SimulationNames[] := SimulationNames[Except["."] ~~ "*"]
 
 End[];
 
