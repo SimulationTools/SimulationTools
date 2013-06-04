@@ -119,7 +119,7 @@ ReadHamiltonianConstraintNorm[run_] :=
 
 Options[FitEcc] = {"ReturnValue" -> FittedFunction};
 
-FitEcc[sep_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
+FitEcc[sep_DataTable, int : {t1_, t2_}, opts : OptionsPattern[]] :=
  Module[{eccModel, eccPars, eccData, eccFit, eccSepFitted, t, a, e, phi, b, n},
   eccModel = a (1 - e Cos[n t + phi]) + 1/2 e^2 (1 - Cos[2 n t]) + b t;
   eccPars = {{a, 10,11}, {b, -0.001, 0}, {e, -0.01, 0.01}, {n, 0.01, 0.1}, {phi, 0, Pi}};
