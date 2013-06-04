@@ -180,12 +180,25 @@ FileIsInRun[run_, file_] :=
 (**********************************************************)
 
 SyntaxInformation[SimulationNames] =
- {"ArgumentsPattern" -> {_.}};
+ {"ArgumentsPattern" -> {_., OptionsPattern[]}};
 
-SimulationNames[form_] :=
-  Map[FileNameTake[#, -1]&, Select[FileNames[form, SimulationPath[]], DirectoryQ]];
+Options[SimulationNames] = {"FullPath" -> False};
 
-SimulationNames[] := SimulationNames[Except["."] ~~ "*"]
+SimulationNames[form_, OptionsPattern[]] :=
+ Module[{dirs},
+  dirs = Select[FileNames[form, SimulationPath[]], DirectoryQ];
+  Switch[OptionValue["FullPath"],
+    False,
+    dirs = Map[FileNameTake[#, -1]&, dirs];,
+    True,
+    dirs = dirs,
+    _,
+    Error["Invalid value \""<>ToString[OptionValue["FullPath"]]<>"\" for FullPath option"]
+  ];
+  dirs
+];
+
+SimulationNames[OptionsPattern[]] := SimulationNames[Except["."] ~~ "*"]
 
 End[];
 
