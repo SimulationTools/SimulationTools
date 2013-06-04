@@ -24,6 +24,8 @@ BeginPackage["SimulationTools`RunFiles`",
  }];
 
 FindSimulationFiles::usage = "FindSimulationFiles[simname, filename] gives all the files with the given name across all the segments of a simulation.  filename can be a string, a string expression or a regular expression.  This function always returns full pathnames.";
+SimulationNames::usage = "SimulationNames[] lists all simulations." <>
+  "SimulationNames[form] lists all simulations whose names match the string pattern form.";
 
 HaveRunDir;
 
@@ -71,11 +73,11 @@ HaveRunDir[runName_String] :=
 (* Given the name of a run directory, return a path to it *)
 findRunDir[runNamep_String] :=
  Module[{dir, dirs},
-  If[FileExistsQ[runNamep], Return[runNamep]];
+  If[DirectoryQ[runNamep], Return[runNamep]];
 
   If[StringTake[runNamep,1] === "/", Return[None]];
 
-  dirs = FileNames[runNamep, SimulationPath[], 2];
+  dirs = SimulationNames[runNamep, "FullPath" -> True];
   Which[
    Length[dirs]>1,
     Error["Multiple runs called "<>runNamep<>" found: "<>ToString[dirs]];,
@@ -172,6 +174,31 @@ stringToReal[s_String] :=
 
 FileIsInRun[run_, file_] :=
   FindRunFile[run, file] =!= {};
+
+(**********************************************************)
+(* SimulationNames                                        *)
+(**********************************************************)
+
+SyntaxInformation[SimulationNames] =
+ {"ArgumentsPattern" -> {_., OptionsPattern[]}};
+
+Options[SimulationNames] = {"FullPath" -> False};
+
+SimulationNames[form_, OptionsPattern[]] :=
+ Module[{dirs},
+  dirs = Select[FileNames[form, SimulationPath[]], DirectoryQ];
+  Switch[OptionValue["FullPath"],
+    False,
+    dirs = Map[FileNameTake[#, -1]&, dirs];,
+    True,
+    dirs = dirs,
+    _,
+    Error["Invalid value \""<>ToString[OptionValue["FullPath"]]<>"\" for FullPath option"]
+  ];
+  dirs
+];
+
+SimulationNames[OptionsPattern[]] := SimulationNames[Except["."] ~~ "*"]
 
 End[];
 

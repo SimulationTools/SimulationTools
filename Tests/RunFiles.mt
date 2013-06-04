@@ -29,17 +29,6 @@ Module[{runDir,runName="testrunall"},
 	,
 		TestID->"FindRunDir_All"
 	]]
-
-Module[{runDir,runName="testrun2"},
-	runDir = FileNameJoin[{simulationPath,"intermediate",runName}];
-	CreateDirectory[runDir, CreateIntermediateDirectories->True];
-	Test[
-		FindRunDir[runName]
-	,
-		runDir
-	,
-		TestID->"FindRunDir_Int"
-	]]
 	
 Module[{runDir,runName="testrun3"},
 	runDir = FileNameJoin[{testDirectory,runName}];
@@ -230,4 +219,39 @@ Module[{runDir,runName="testrun13",otherRunName="mysim",testDirPaths,testFile="M
 		testFilePaths
 	,
 		TestID->"FindSimulationFiles_SimFactory2_OtherName"
-	]]	
+	]]
+
+(* SimultionNames *)
+Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
+  Test[
+    SimulationNames[]
+  ,
+    {"bbh", "test7patch"}
+  ,
+    TestID -> "SimulationNames-1"
+  ]
+
+  Test[
+    SimulationNames["b*"]
+  ,
+    {"bbh"}
+  ,
+    TestID -> "SimulationNames-2"
+  ]
+
+  Test[
+    SimulationNames["bbh"]
+  ,
+    {"bbh"}
+  ,
+    TestID -> "SimulationNames-3"
+  ]
+
+  Test[
+    SimulationNames["invalid"]
+  ,
+    {}
+  ,
+    TestID -> "SimulationNames-4"
+  ]
+]
