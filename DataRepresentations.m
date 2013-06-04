@@ -51,6 +51,7 @@ Resampled::usage = "Resampled[d, {{x0, x1, dx}, {y0, y1, dy}, ...}] resamples d 
   "Resampled[{d1, d2, ...}, grid] returns a list of resampled data representations all onto the coordinate grid specified by grid.";
 WithResampling::usage = "WithResampling[method, expr] evaluates expr with automatic resampling enabled.";
 Slab::usage = "Slab[d, x1min ;; x1max, ...] gives the hyperslab of d over the coordinate ranges [x1min, x1max], ....";
+(* TODO: Slab should check the types of its range arguments. At the moment, it returns invalid datatables *)
 
 GridNorm::usage = "GridNorm[d] returns the L2,dx norm of d. This is the discrete approximation to the L2 norm.";
 
