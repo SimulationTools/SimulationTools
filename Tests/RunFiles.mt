@@ -29,17 +29,6 @@ Module[{runDir,runName="testrunall"},
 	,
 		TestID->"FindRunDir_All"
 	]]
-
-Module[{runDir,runName="testrun2"},
-	runDir = FileNameJoin[{simulationPath,"intermediate",runName}];
-	CreateDirectory[runDir, CreateIntermediateDirectories->True];
-	Test[
-		FindRunDir[runName]
-	,
-		runDir
-	,
-		TestID->"FindRunDir_Int"
-	]]
 	
 Module[{runDir,runName="testrun3"},
 	runDir = FileNameJoin[{testDirectory,runName}];
