@@ -311,6 +311,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
     Error["Unknown evolution code used"];
   ];
 
+  (* TODO: Don't hardcode any of these *)
   {(* "comments" -> "", *)
    (* "documentation" -> "", *)
    (* "simulation-bibtex-keys" -> "", *)
