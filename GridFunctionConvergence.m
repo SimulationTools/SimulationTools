@@ -18,7 +18,8 @@ BeginPackage["SimulationTools`GridFunctionConvergence`",
  {"SimulationTools`Convergence`",
   "SimulationTools`GridFunctions`",
   "SimulationTools`Grids`",
-  "SimulationTools`DataRepresentations`"
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`"
  }];
 
 
@@ -34,17 +35,27 @@ convRateConst[{d12_, d23_}, {h1_, h2_, h3_}] :=
      Indeterminate -> None, Infinity -> None}, {Power::infy, 
     Infinity::indet}]];
 
-readTime[sim_, it_] :=
- ReadTimeStep[sim]*it - First[ReadTimeRange[sim]];
+readTime[sim_, it_, rl_] :=
+ ReadTimeStep[sim, RefinementLevel -> rl]*it - First[ReadTimeRange[sim]];
 
-GridFunctionConvergenceSet[runs_List, var_String, dims_, opts___] :=
- Module[{s, hs, itss, ks, rhos, commonIts, slider, checkIt, dt},
-  hs = ReadCoarseGridSpacing /@ runs;
-  ks = ReadCoarseTimeStep /@ runs;
-  itss = ReadIterations[#, var, dims] & /@ runs;
+(* Options[GridFunctionConvergenceSet] = {"Interpolation" -> True}; *)
+
+$bndPat = {{_Integer,_Integer}..};
+
+Options[GridFunctionConvergenceSet] = {Iteration -> 0, RefinementLevel -> 0};
+GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:OptionsPattern[]] :=
+ Module[{s, hs, itss, ks, rhos, commonIts, slider, checkIt, dtdis, dtdi},
+
+  hs = ReadGridSpacings[#, RefinementLevel -> OptionValue[RefinementLevel]][[1]] & /@ runs;
+
+  (* k is the time step on this refinement level -- UNUSED *)
+  ks = ReadTimeStep[#, RefinementLevel -> OptionValue[RefinementLevel]] & /@ runs;
+  itss = ReadIterations[#, var, dims, RefinementLevel -> OptionValue[RefinementLevel]] & /@ runs;
   rhos = Rationalize[hs[[1]]/hs];
   commonIts = Intersection @@ (itss/rhos);
-  dt = readTime[runs[[1]], itss[[1, 2]]]/itss[[1, 2]];
+  dtdis = Map[ReadTimeStep[#, RefinementLevel -> ReadMaxRefinementLevels[#] - 1] &, runs];
+  dtdi = dtdis[[1]];
+
   slider[Dynamic[i_]] :=
    Row[
     {"Iteration: ",
@@ -58,14 +69,20 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, opts___] :=
     Error["Iteration " <> ToString[it] <> 
       " is not present in this convergence set"]];
   
+  s["rhos"] = rhos;
+
   s["first-iteration"] = First[commonIts];
 
   s["last-iteration"] = Last[commonIts];
+
+  s["last-times"] = Last/@itss * dtdis;
 
   s["delta-iteration"] = 
    If[Length[commonIts] > 1, commonIts[[2]] - commonIts[[1]], 0];
 
   s["iterations"] = commonIts;
+
+  s["iterator"] = Sequence[s["first-iteration"], s["last-iteration"], s["delta-iteration"]];
 
   s["slider"] = slider[#] &;
 
@@ -84,10 +101,38 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, opts___] :=
    Module[{d = s["data", it]},
     Resampled[d, Last[d]]];
 
-  s["rescaled-errors", it_, p_] :=
-   Module[{d = s["resampled-data", it],
+  s["common-data", it_] :=
+   MapThread[
+     Downsample[Take[#1, Sequence @@ Transpose[Transpose[bnd + 1] {1, -1}]], #2] &, {s["data", it], 
+                                                   s["rhos"]}];
+
+  s["rescaled-errors", it_, p_, int_] :=
+   Module[{d = If[int, s["resampled-data", it], s["common-data",it]],
      cm = s["convergence-multiplier", p]},
     {d[[1]] - d[[2]], (d[[2]] - d[[3]]) cm}];
+
+  s["richardson-extrapolant", it_, p_, int_] :=
+   Module[
+     {d = If[int, s["resampled-data", it], s["common-data",it]],
+      rho = hs[[2]]/hs[[3]]},
+     (rho^p d[[3]] - d[[2]])/(rho^p-1)];
+
+  s["richardson-error", it_, p_, int_] :=
+   Module[
+     {d = If[int, s["resampled-data", it], s["common-data",it]],
+      rho = hs[[2]]/hs[[3]]},
+     d[[3]] - (rho^p d[[3]] - d[[2]])/(rho^p-1)];
+
+  s["richardson-error-norm", it_, p_, int_, coordRange_:All] :=
+   Module[
+     {nDims, slab, d = s["richardson-error", it, p, int]},
+     nDims = Length[Dimensions[d]];
+     slab = If[coordRange === All, Identity, Slab[#, Sequence@@coordRange] &];
+     GridNorm[slab[d]]];
+
+  s["richardson-error-norm-of-t", p_, int_, coordRange_:All] :=
+    Monitor[ToDataTable@Table[{N@s["time", it], s["richardson-error-norm", it, p, int, coordRange]},
+          {it, s["iterations"]}],ProgressIndicator[it/s["last-iteration"]]];
   
   s["difference", it_, {i_, j_}] :=
    Module[{d = s["resampled-data", it]},
@@ -95,9 +140,12 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, opts___] :=
   
   s["time", it_] :=
    (checkIt[it];
-    it dt);
+    it dtdi);
   
   s["grid-spacings"] = hs;
+
+  (* s["common-coordinates", it_:0] := *)
+  (*   ToListOfCoordinates/@s["data", it]; *)
 
   s["convergence-multiplier", p_Integer] :=
    ConvergenceMultiplier[hs, p];
@@ -105,17 +153,36 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, opts___] :=
   s["convergence-rate", xs_List] :=
    ConvergenceRate[xs, hs];
 
-  s["convergence-rate", it_Integer] :=
-   ConvergenceRate[s["resampled-data", it], hs];
+  s["convergence-rate", it_Integer, int_] :=
+   Module[{d = If[int, s["resampled-data", it], s["common-data",it]]},
+   ConvergenceRate[d, hs]];
 
-  s["convergence-rate-const", it_Integer] :=
-   Module[{d = s["resampled-data", it]},
-    convRateConst[{d[[1]] - d[[2]], d[[2]] - d[[3]]}, 
+  s["convergence-rate-const", it_Integer, int_] :=
+   Module[{d = If[int, s["resampled-data", it], s["common-data",it]]},
+   convRateConst[{d[[1]] - d[[2]], d[[2]] - d[[3]]}, 
      s["grid-spacings"]]];
+
+  s["convergence-norm-const", it_Integer, coordRange_:All] :=
+   Module[
+     {d = s["common-data", it], slab, nDims},
+     nDims = Length[Dimensions[d[[1]]]];
+     slab = If[coordRange === All, Identity, Slab[#, Sequence@@coordRange] &];
+     convRateConst[{GridNorm[slab[d[[1]] - d[[2]]]], GridNorm[slab[d[[2]] - d[[3]]]]}, 
+                   s["grid-spacings"]]];
+        
+  s["convergence-norm-const-of-t", coordRange_:All] :=
+    ToDataTable[s["function-of-t"][s["convergence-norm-const", #, coordRange] &]];
   
+  s["function-of-t"][f_] :=
+    Monitor[Table[{N@s["time", it], f[it]},
+          {it, s["iterations"]}],ProgressIndicator[it/s["last-iteration"]]];
+
   Format[s] = "<convergence-set>";
 
   s];
+
+
+
 
 End[];
 EndPackage[];
