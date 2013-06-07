@@ -57,6 +57,7 @@ LegendBackground;
 ScaledColorFunction;
 ColorMapLegend;
 QuickSlicePlot;
+RasterizeManipulate;
 
 Begin["`Private`"];
 
@@ -548,6 +549,20 @@ PresentationArrayPlot2[data_, opts : OptionsPattern[]] :=
       Scaled[{0.3, 0.5}]],
     Graphics[]];
   Show[plot, legend]];
+
+
+SetAttributes[RasterizeManipulate, HoldFirst]
+
+RasterizeManipulate[expr_, {var_, start_, end_, inc_, opts___}] :=
+ Module[{frames},
+  Monitor[
+   frames = 
+    Table[Module[{var = i}, Compress@Rasterize[expr]], {i, start, end,
+       inc}], ProgressIndicator[(i - start)/(end - start)]];
+  Manipulate[
+   Uncompress[frames[[1 + Round[(var - start)/inc]]]], {var, start, 
+    end, inc, opts}, SaveDefinitions -> True]];
+
 
 End[];
 
