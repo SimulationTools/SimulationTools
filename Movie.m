@@ -14,11 +14,16 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimulationTools`Movie`"];
+BeginPackage["SimulationTools`Movie`", {"SimulationTools`Error`",
+                                        "SimulationTools`Utils`"}];
 
 PadIndex;
 PreviewMovie;
 MakeMovie(*::usage = "MakeMovie[filenamebase, expression, {var, v1, v2, dv}] evaluates expression (which should be a graphical object) for values of var from v1 to v2 in steps of dv and writes the result to a PNG file filenamebase with an index number appended.  The images are then combined into an MP4 file using FFMPEG."*);
+
+ExportMovie;
+EncodeMovieFrameFiles;
+ExportMovieFrames;
 
 Begin["`Private`"];
 
@@ -53,6 +58,57 @@ MakeMovie[fileNameBase_, expr_, {var_, v1_, v2_, dv_:1}, opts:OptionsPattern[]] 
     Print[command];
     ReadList[command, String, NullRecords->True]
   ];
+
+(* New *)
+
+ExportMovieFrames[fileBase_String, frames_List, opts:OptionsPattern[]] :=
+  Do[
+    (* TODO: handle the case where there are files here already which
+       match the pattern. Maybe put them in a new temporary
+       directory. *)
+    Export[fileBase<>"."<>PadIndex[i-1,5]<>".png",
+           frames[[i]]],
+    {i,1,Length[frames]}];
+
+findFfmpeg[] := 
+  Module[
+    {ret,out,err},
+    (* TODO: running a user's profile might be slow; cache this? *)
+    {ret,out,err} = RunSubprocess[{"bash", "-l", "-c", "\"which ffmpeg\""}];
+    If[ret =!= 0, Error["Cannot find ffmpeg"]];
+    Last[out]];
+
+Options[EncodeMovieFrameFiles] = {"FFMPEG" -> "ffmpeg",
+                                  "FrameRate" -> 1};
+
+EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[]] :=
+  Module[
+    {cmd, cmdString, ffmpeg},
+
+    cmd = {findFfmpeg[],
+           "-y", 
+           "-f", "image2",
+           "-r", ToString[N@OptionValue["FrameRate"],CForm],
+           "-i", frameFilePattern,
+           "-b:v", "20M",
+           "-pix_fmt", "yuv420p",
+           movieFile};
+    Print[cmd];
+    {ret, out, err} = RunSubprocess[cmd];
+    Print[out];
+    Print[err];
+    If[ret =!= 0, Error["Failed to encode movie frame files to "<>movieFile<>". \n"<>err]];
+    ];
+
+ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
+  Module[
+    {base = FileNameJoin[{FileNameDrop[movieFile,-1],FileBaseName[movieFile]}]},
+    ExportMovieFrames[base, frames];
+    EncodeMovieFrameFiles[movieFile, base <> ".%5d.png"]];
+
+(* TODO: given a base name, create the movie in a temporary location,
+   and return the full path to it, or reveal it in the finder, so it
+   can be dragged into an email, or uploaded somewhere. *)
 
 End[];
 
