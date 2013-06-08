@@ -57,6 +57,7 @@ FilterDCT;
 MonotonicQ;
 FunctionInverse;
 Composition;
+ReplaceCoordinate;
 
 RestrictedToInterval;
 
@@ -696,6 +697,20 @@ DataTable /: PadRight[d_DataTable, n_, x___] :=
   spacing = CoordinateSpacing[d];
   coords  = (Range[n]-1) spacing + First[MinCoordinates[d]];
   ToDataTable[coords, PadRight[ToListOfData[d], n, x]]
+];
+
+(****************************************************************)
+(* ReplaceCoordinate                                            *)
+(****************************************************************)
+
+SyntaxInformation[ReplaceCoordinate] =
+ {"ArgumentsPattern" -> {_, _}};
+
+ReplaceCoordinate[d_DataTable, c_DataTable] :=
+ Module[{data, coord},
+ data = ToListOfData[d];
+ coord = ToListOfData[c];
+ ToDataTable[data, coord]
 ];
 
 (**********************************************************)
