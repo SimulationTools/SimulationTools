@@ -258,6 +258,8 @@ DataTable /: Dimensions[d_DataTable] := {Length[ToListOfData[d]]};
 (* CoordinateRanges                                       *)
 (**********************************************************)
 
+(* TODO: Should we sort these before returning them. This would affect
+         cases where the coordinates are decreasing *)
 CoordinateRanges[d_DataTable] :=
   Module[{coords, t1, t2},
     coords = ToListOfCoordinates[d];
