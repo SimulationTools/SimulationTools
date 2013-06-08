@@ -186,6 +186,7 @@ Options[SimulationNames] = {"FullPath" -> False};
 
 SimulationNames[form_, OptionsPattern[]] :=
  Module[{dirs},
+  If[SameQ[SimulationPath[], {}], Return[{}] ];
   dirs = Select[FileNames[form, SimulationPath[]], DirectoryQ];
   Switch[OptionValue["FullPath"],
     False,
