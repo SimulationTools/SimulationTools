@@ -704,15 +704,7 @@ SyntaxInformation[RestrictedToCommonInterval] =
  {"ArgumentsPattern" -> {__}};
 
 RestrictedToCommonInterval[d1_DataTable, d2_DataTable] :=
-  Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
-    {d1Min, d1Max} = DataTableRange[d1];
-    {d2Min, d2Max} = DataTableRange[d2];
-
-    dMin = Max[d1Min, d2Min];
-    dMax = Min[d1Max, d2Max];
-
-    Return[{RestrictedToInterval[d1,{dMin, dMax}, Interval -> {Closed,Closed}],
-            RestrictedToInterval[d2,{dMin, dMax}, Interval -> {Closed,Closed}]}]];
+  RestrictedToCommonInterval[{d1, d2}];
 
 RestrictedToCommonInterval[{d1_DataTable, d2_DataTable}] :=
   Module[{d1Min, d1Max, d2Min, d2Max, dMin, dMax},
