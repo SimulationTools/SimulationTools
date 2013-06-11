@@ -710,7 +710,7 @@ ReplaceCoordinate[d_DataTable, c_DataTable] :=
  Module[{data, coord},
  data = ToListOfData[d];
  coord = ToListOfData[c];
- ToDataTable[data, coord]
+ ToDataTable[coord, data]
 ];
 
 (**********************************************************)
