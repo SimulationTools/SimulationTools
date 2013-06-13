@@ -387,11 +387,11 @@ runAllData[run_String, mass_, ecc_, tJunk_, format_String] :=  Module[{modes, ra
  {"metadata" -> runMetadata[run, mass, ecc, tJunk],
   "body-data" ->
    {Sequence @@ Table["spin" <> ToString[i] ->
-      spinFileName[i,format], {i, 1, 2}],
+      spinFileName[i,format], {i, 1, 3}],
    Sequence @@ Table["trajectory" <> ToString[i] ->
       trajFileName[i,format], {i, 1, 2}],
    Sequence @@ Table["horizon-mass" <> ToString[i] ->
-      horMassFileName[i,format], {i, 1, 2}]},
+      horMassFileName[i,format], {i, 1, 3}]},
    Sequence @@ Table["Psi4t-data" -> Prepend[Map[waveform[#, rad, format] &, modes], "extraction-radius" -> rad], {rad, radii}]}
 ];
 
