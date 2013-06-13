@@ -15,6 +15,14 @@ ReadMassRatio;
 ReadTotalMass;
 NameEmailList;
 EmailList;
+ReadInitialBHPosition;
+ReadInitialBHMomentum;
+ReadInitialBHVelocity;
+HaveInitialBHMomentum;
+HaveInitialBHVelocity;
+ReadInitialBHSpin;
+ReadInitialBHMassParameter;
+ReadBHSpin;
 
 Begin["`Private`"];
 
@@ -279,6 +287,31 @@ ReadMassRatio[run_String] :=
 
 ReadTotalMass[run_String] :=
   Plus@@ReadMasses[run];
+
+ReadInitialBHPosition[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-position"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadInitialBHMomentum[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-momentum"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadInitialBHVelocity[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-velocity"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadInitialBHSpin[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-spin"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+HaveInitialBHMomentum[run_String] :=
+  HaveMetadataKey[run, "initial-bh-momentum1x"];
+
+HaveInitialBHVelocity[run_String] :=
+  HaveMetadataKey[run, "initial-bh-velocity1x"];
+
+ReadInitialBHMassParameter[run_String,i:(1|2)] :=
+  ReadMetadataKey[run, "initial-bh-mass-parameter"<>ToString[i]];
+
+ReadBHSpin[run_String, i:(1|2)] :=
+  Module[{location},
+    location = ReadMetadataKey[run,"body-data", "spin"<>ToString[i]]];
 
 
 End[];
