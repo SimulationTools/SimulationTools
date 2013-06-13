@@ -630,7 +630,7 @@ RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
        Return[fs[[Ordering[rs][[-1]]]]]];
 
     (* These checks do not seem to affect performance *)
-    If[!SameGridQ[fs],
+    If[!SameGridQ@@fs,
        Error["RadialExtrapolation: Input DataTables are not defined on the same grid"]];
     If[!And@@Map[NumberQ,rs],
        Error["RadialExtrapolation: Input radii are not numeric"]];
