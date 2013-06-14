@@ -23,6 +23,9 @@ HaveInitialBHVelocity;
 ReadInitialBHSpin;
 ReadInitialBHMassParameter;
 ReadBHSpin;
+ReadBHMass;
+ReadBHCoordinatesNRDF;
+ReadBHUsefulSpin;
 
 Begin["`Private`"];
 
@@ -306,6 +309,9 @@ ReadInitialBHVelocity[run_String, i:(1|2)] :=
 ReadInitialBHSpin[run_String, i:(1|2)] :=
   Table[ReadMetadataKey[run,"initial-bh-spin"<>ToString[i]<>d], {d,{"x","y","z"}}];
 
+ReadBHUsefulSpin[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"after-junkradiation-spin"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
 HaveInitialBHMomentum[run_String] :=
   HaveMetadataKey[run, "initial-bh-momentum1x"];
 
@@ -316,13 +322,17 @@ ReadInitialBHMassParameter[run_String,i:(1|2)] :=
   ReadMetadataKey[run, "initial-bh-mass-parameter"<>ToString[i]];
 
 ReadBHSpin[run_String, i:(1|2)] :=
-  Module[{location},
-    location = ReadMetadataKey[run,"body-data", "spin"<>ToString[i]]];
+  Module[{base,file,data},
+    base = ReadMetadataKey[run, "body-data", "spin"<>ToString[i]];
+    file = FileNameJoin[{FindRunDir[run], base}];
+    data = readColumnData[file];
+    Table[MakeDataTable[data[[All,{1,d+1}]]], {d,1,3}]];
 
 readColumnData[file_String] :=
   Module[
     {tmp},
     tmp = StringCases[file, base__~~".h5:"~~ds__ :> {base<>".h5",ds}];
+    (* Print["tmp = ", tmp]; *)
     If[Length[tmp] === 0,
        ReadColumnFile[file],
        ReadHDF5[tmp[[1,1]], {"Datasets", tmp[[1,2]]}]]];
@@ -333,6 +343,14 @@ ReadBHCoordinatesNRDF[run_String, i_Integer] :=
     file = FileNameJoin[{FindRunDir[run], base}];
     data = readColumnData[file];
     Table[MakeDataTable[data[[All,{1,d+1}]]], {d,1,3}]];
+
+ReadBHMass[run_String, i_Integer] :=
+  Module[{base,file,data},
+    base = ReadMetadataKey[run, "body-data", "horizon-mass"<>ToString[i]];
+    file = FileNameJoin[{FindRunDir[run], base}];
+    data = readColumnData[file];
+    MakeDataTable[data[[All,{1,2}]]]];
+
 
 HaveBHCoordinatesNRDF[run_String, tracker_Integer] :=
   HaveMetadataKey[run, "body-data", "trajectory"<>ToString[tracker]];
