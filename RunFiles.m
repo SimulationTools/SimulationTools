@@ -6,7 +6,7 @@
 
 (* Copyright (C) 2010 Ian Hinder and Barry Wardell *)
 
-BeginPackage["RunFiles`", {"Profile`", "Memo`", "Providers`", "Error`"}];
+BeginPackage["RunFiles`", {"Profile`", "Memo`", "Providers`", "Error`", "h5mma`"}];
 
 ReadColumnFile;
 ReadColumnFile2;
@@ -172,11 +172,21 @@ stringToReal[s_String] :=
 ReadColumnFile[fileName_String] :=
   ReadColumnFileWithFileName[fileName];
 
+ImportGzip[file_String, as_] :=
+  ImportString[ReadGzipFile[file],as];
+
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
   Module[{list, list2, isComment, file2, data},
   Profile["ReadColumnFile[" <> fileName <> "]",
     If[FileType[fileName] === None, Error["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
-    list = ReadList[fileName, String]; (* Blank lines omitted *)
+
+(* Print[1]; *)
+    If[FileExtension[fileName] === "gz",
+       (* Print["Importing gzip"]; *)
+       (* Print[fileName]; *)
+       list = StringSplit[ReadGzipFile[fileName],"\n"],
+       list = ReadList[fileName, String]; (* Blank lines omitted *)];
+
     isComment[x_] :=
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
     list2 = Select[list, !isComment[#] &];
