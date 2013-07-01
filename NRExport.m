@@ -364,6 +364,10 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
       "initial-bh-spin" <> ToString[i+1] <> coord[d] ->
        ReadPunctureSpinParameters[run, i][[d]],
         {i, 0, 1}, {d, 1, 3}],
+   "final-bh-mass" -> Last[ChristodoulouMass[run, 1, 0]],
+   Sequence @@ Flatten@Table[
+      "final-bh-spin" <> coord[d] ->
+       ReadIsolatedHorizonSpin[run, 0][[d]], {d, 1, 3}],
    "data-type" -> "NR"
    }
   ];
