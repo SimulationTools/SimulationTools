@@ -367,7 +367,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    "final-bh-mass" -> Last[ChristodoulouMass[run, 1, 0]],
    Sequence @@ Flatten@Table[
       "final-bh-spin" <> coord[d] ->
-       ReadIsolatedHorizonSpin[run, 0][[d]], {d, 1, 3}],
+       Last[ReadIsolatedHorizonSpin[run, 0]][[d]], {d, 1, 3}],
    "data-type" -> "NR"
    }
   ];
