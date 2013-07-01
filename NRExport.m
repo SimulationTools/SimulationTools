@@ -239,6 +239,13 @@ ExportAllWaveforms[run_String, file_String, mass_] := Module[{},
 ];
 
 
+(* Return the isolated horizon spins only for the range where the apparent horizon was found *)
+ihSpin[run_, i_] := Module[{ti, tf, dir, spins},
+  {ti, tf} = First[CoordinateRanges[ReadAHMass[run, i+1]]];
+  spins = Table[Slab[ReadIsolatedHorizonSpin[run, i, dir], ti;;tf], {dir, 3}];
+  Transpose[{ToListOfCoordinates[spins[[1]]], Sequence@@(ToListOfData/@spins)}]
+]
+
 (* Local quantities *)
 ExportLocalQuantity[run_String, what_, i_, file_String] :=
  Module[{dir, f, dsName},
@@ -267,7 +274,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
 
   f = Switch[what,
     Coordinates, ReadBHCoordinates[run, i-1],
-    Spin, ReadIsolatedHorizonSpin[run, i-1],
+    Spin, ihSpin[run, i-1],
     HorizonMass, ChristodoulouMass[run, i, i-1]];
 
   Switch[fileExtension[file],
