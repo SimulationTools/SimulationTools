@@ -130,9 +130,8 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:Optio
      slab = If[coordRange === All, Identity, Slab[#, Sequence@@coordRange] &];
      GridNorm[slab[d]]];
 
-  s["richardson-error-norm-of-t", p_, int_, coordRange_:All] :=
-    Monitor[ToDataTable@Table[{N@s["time", it], s["richardson-error-norm", it, p, int, coordRange]},
-          {it, s["iterations"]}],ProgressIndicator[it/s["last-iteration"]]];
+  s["richardson-error-norm-of-t", p_, int_, coordRange_:All, timeRange_:All] :=
+    ToDataTable[s["function-of-t"][s["richardson-error-norm", #, p, int, coordRange] &, timeRange]];
   
   s["difference", it_, {i_, j_}] :=
    Module[{d = s["resampled-data", it]},
@@ -170,12 +169,18 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:Optio
      convRateConst[{GridNorm[slab[d[[1]] - d[[2]]]], GridNorm[slab[d[[2]] - d[[3]]]]}, 
                    s["grid-spacings"]]];
         
-  s["convergence-norm-const-of-t", coordRange_:All] :=
-    ToDataTable[s["function-of-t"][s["convergence-norm-const", #, coordRange] &]];
+  s["convergence-norm-const-of-t", coordRange_:All, timeRange_:All] :=
+    ToDataTable[s["function-of-t"][s["convergence-norm-const", #, coordRange] &, timeRange]];
   
-  s["function-of-t"][f_] :=
-    Monitor[Table[{N@s["time", it], f[it]},
-          {it, s["iterations"]}],ProgressIndicator[it/s["last-iteration"]]];
+  s["function-of-t"][f_, timeRange_:All] :=
+    Module[
+      {allIts, allTimes, its},
+      allIts = s["iterations"];
+      allTimes = Map[s["time", #] &, allIts];
+      its = If[timeRange === All, allIts,
+               Pick[allIts, Map[timeRange[[1]] <= # <= timeRange[[2]] &, allTimes]]];
+      Monitor[Table[{N@s["time", it], f[it]},
+                    {it, its}],ProgressIndicator[(it-First[its])/(Last[its] - First[its])]]];
 
   Format[s] = "<convergence-set>";
 
