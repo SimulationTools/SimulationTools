@@ -613,7 +613,11 @@ Cell[TextData[{
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
   "InlineSeparator"],
- " "
+ " ",
+ Cell[TextData[ButtonBox["SimulationNames",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/SimulationNames"]], 
+  "InlineFunctionSans"]
 }], "InlineGuideFunctionListing"]
 }, Open  ]],
 

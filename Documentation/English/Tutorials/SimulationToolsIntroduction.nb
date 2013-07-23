@@ -78,7 +78,10 @@ to a standard uniform format.  \
 
 Cell[CellGroupData[{
 
-Cell["Essential Concepts", "Section"],
+Cell["\<\
+Essential Concepts (much moved into Simulations tutorial, probably want a \
+quick example tutorial here instead)\
+\>", "Section"],
 
 Cell[CellGroupData[{
 
@@ -93,7 +96,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Finding simulation directories", "Subsection"],
+Cell["Finding simulation directories (delete)", "Subsection"],
 
 Cell[TextData[{
  Cell[BoxData[
@@ -136,7 +139,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Chunking", "Subsection"],
+Cell["Chunking (delete)", "Subsection"],
 
 Cell[TextData[{
  "Simulations usually take more than one job on a supercomputer, and the \

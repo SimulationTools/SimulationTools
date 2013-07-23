@@ -147,7 +147,7 @@ Cell["ReadMaps[\"bbh\", \"phi\",\"xy\"]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- RowBox[{"{", "}"}]], "Output",
+ RowBox[{"{", "None", "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

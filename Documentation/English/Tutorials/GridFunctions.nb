@@ -347,7 +347,7 @@ Cell[BoxData[
  CellLabel->"In[4]:="],
 
 Cell[BoxData[
- RowBox[{"{", "}"}]], "Output",
+ RowBox[{"{", "None", "}"}]], "Output",
  CellLabel->"Out[4]="]
 }, Open  ]],
 
@@ -376,7 +376,7 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"DataRegion", "[", 
-  RowBox[{"\<\"ML_BSSN::phi\"\>", ",", 
+  RowBox[{"\<\"ML_BSSN::phi\.01\"\>", ",", 
    InterpretationBox[
     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "47", 
      "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "87", 
