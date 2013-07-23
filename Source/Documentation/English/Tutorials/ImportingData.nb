@@ -1,0 +1,70 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Importing Data", "Title"],
+
+Cell["\<\
+Most SimulationTools functions which process simulation data expect the data \
+to be in the form of DataRegions or DataTables.  If your code is not directly \
+supported by SimulationTools already, with customised functions for reading \
+the data, you can read simulation data into DataTables and DataRegions \
+manually.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["ASCII multi-column data", "Subsection"],
+
+Cell[TextData[{
+ "It is very common for simulation data to be stores as numeric columns of \
+ASCII data.  ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " can import such files directly using the Import function, and the \
+resulting lists of numbers can be converted to DataTables."
+}], "Text"],
+
+Cell["\<\
+Import numeric ASCII column data:\
+\>", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"ToDataTable", "[", 
+  RowBox[{
+   RowBox[{"Import", "[", 
+    RowBox[{"\"\</path/to/data.asc\>\"", ",", "\"\<Table\>\""}], "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5"}], "}"}]}], "]"}], "]"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["HDF5 data", "Subsection"],
+
+Cell["\<\
+Import multi-dimensional numeric HDF5 data:\
+\>", "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{"ToDataRegion", "[", 
+  RowBox[{"ImportHDF5", "[", 
+   RowBox[{"\"\</path/to/data.h5\>\"", ",", 
+    RowBox[{"{", 
+     RowBox[{"\"\<Datasets\>\"", ",", "\"\<mydataset\>\""}], "}"}]}], "]"}], 
+  "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{629, 756},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
