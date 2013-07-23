@@ -1,0 +1,559 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Data Representations", "Title"],
+
+Cell[TextData[{
+ "SimulationTools uses two different representations of numerical data. \n\n\
+The ",
+ StyleBox["DataTable",
+  FontSlant->"Italic"],
+ " is designed for time-series data, and consists of a \
+monotonically-increasing time coordinate and corresponding data values, which \
+can be of any type.  The time coordinate does not have to be regularly \
+spaced.  \n\nThe ",
+ StyleBox["DataRegion",
+  FontSlant->"Italic"],
+ " represents an N-dimensional block of data on a uniform grid.  The data \
+must consist of real or complex numbers, or the quantities None or Missing[]. \
+ The data is stored efficiently in memory. Each point has an associated set \
+of coordinates, and these are specified by giving the origin and spacing of \
+the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  \n\nCollectively, \
+DataTables and DataRegions are known in SimulationTools as ",
+ StyleBox["Data Representations.  ",
+  FontSlant->"Italic"],
+ "There are many functions for manipulating data representations.  Some only \
+make sense for DataTables or DataRegions respectively, but many are defined \
+to work on both types of object.\n\nMany commonly-used Mathematica functions \
+are defined on compatible DataTables and DataRegions (those with the same \
+coordinates), for example Plus (+), Minus (-), Times (*), Divide (/), Sqrt, \
+Power (d^a), Sin, Cos, Tan etc. "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Working with Data Representations\
+\>", "Section"],
+
+Cell[TextData[{
+ "Both DataTables and DataRegions can be created from ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " lists.  They act as opaque objects and are printed in an abbreviated form \
+to avoid cluttering up the notebook with all the numerical data."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Creating DataTables", "Subsection"],
+
+Cell["\<\
+Using ToDataTable[data], we can create a DataTable from a list of {t, f} \
+pairs:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"list", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"t", ",", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"2", "Pi", " ", "t"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}]}]], "Input",
+ CellID->702419557],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"ToDataTable", "[", "list", "]"}]}]], "Input"],
+
+Cell["\<\
+t is the independent variable and f is the dependent variable.\
+\>", "Text"],
+
+Cell["\<\
+The independent variable t should be monotonically increasing, but the \
+interval between points can vary.  The \"range\" of a DataTable is {t1, t2}, \
+where t1 is the first and t2 is the last value of the independent variable.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Creating DataRegions", "Subsection"],
+
+Cell[TextData[{
+ "Using ",
+ ButtonBox["ToDataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"],
+ "[",
+ StyleBox["data",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["origin",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["spacing",
+  FontSlant->"Italic"],
+ "] we can create a ",
+ ButtonBox["DataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
+ " object from the (multidimensional) list ",
+ StyleBox["data.",
+  FontSlant->"Italic"],
+ " This data is assumed to be in row-major order, eg. ",
+ StyleBox["data",
+  FontSlant->"Italic"],
+ "[[",
+ StyleBox["ix",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["iy",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["iz",
+  FontSlant->"Italic"],
+ "]] for the case of 3D data. The DataRegion will have an origin and spacing \
+given by the lists ",
+ StyleBox["origin",
+  FontSlant->"Italic"],
+ " = {ox, oy, ...} and ",
+ StyleBox["spacing ",
+  FontSlant->"Italic"],
+ "= {dx, dy, ...}.  SimulationTools uses row-major order because that is the \
+convention adopted by ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C\
+\[CloseCurlyDoubleQuote] order, not \[OpenCurlyDoubleQuote]Fortran\
+\[CloseCurlyDoubleQuote] order."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"data", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"x", "^", "2"}], "+", "y"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "1", ",", "0.2"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", "0", ",", "6", ",", "0.6"}], "}"}]}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"d", "=", 
+  RowBox[{"ToDataRegion", "[", 
+   RowBox[{"data", ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.2", ",", "0.6"}], "}"}]}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Mathematical operations on Data Representations\
+\>", "Subsection"],
+
+Cell[TextData[{
+ "You can use most numerical ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " functions which would work on lists of data also on Data Representations.  \
+For example,"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"tData", "=", 
+  RowBox[{"ToDataTable", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "t"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"sint", "=", 
+  RowBox[{"Sin", "[", "tData", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"cost", "=", 
+  RowBox[{"Cos", "[", "tData", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"sumSquared", "=", 
+  RowBox[{
+   RowBox[{"sint", "^", "2"}], "+", 
+   RowBox[{"cost", "^", "2"}]}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ToListOfData", "[", "sumSquared", "]"}]], "Input"],
+
+Cell[TextData[{
+ "Here we have created a DataTable for a t coordinate, applied Sin and Cos to \
+it, and formed the sum of their squares to obtain a DataTable which contains \
+the value 1.  Note that the Sin and Cos functions operate only on the data \
+part of the DataTable, and do not affect the coordinate part.  If you were to \
+do the same with ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " lists, the coordinate part would also be operated upon."
+}], "Text"],
+
+Cell["\<\
+(Technically, Data Representations can be used directly with all functions \
+which have the attributes NumericFunction and Listable)\
+\>", "Text"],
+
+Cell["\<\
+Multi-dimensional DataRegions support the same operations.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"d3", "=", 
+  RowBox[{"ToDataRegion", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "^", "3"}], "-", "y"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1", ",", "0.2"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", "0", ",", "6", ",", "0.6"}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0.2", ",", "0.6"}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"d", "+", "d3"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"d", "-", "d3"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"3.0", "*", "d"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Sin", "[", "d", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"Log10", "[", "d", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Converting between 1D DataRegions and DataTables\
+\>", "Subsection"],
+
+Cell[TextData[{
+ "A 1D DataRegion can be converted to a DataTable object using ",
+ ButtonBox["ToDataTable[dr].",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/ToDataTable"]
+}], "Text"],
+
+Cell["\<\
+A DataTable can be converted to a 1D DataRegion using ToDataRegion[dt].  Note \
+that the DataTable should have a uniform spacing.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Properties and data of Data Representations\
+\>", "Subsection"],
+
+Cell[TextData[{
+ ButtonBox["ToListOfData r",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
+ "eturns the data in the Data Representation as a nested list."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ToListOfData", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["ToListOfCoordinates r",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
+ "eturns the coordinates of all the points in the Data Representation"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ToListOfCoordinates", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["ToList r",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetData"],
+ "eturns a list containing all the data and all the coordinates from the Data \
+Representation."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ToList", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["Dimensions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetDimensions"],
+ " returns a list {",
+ StyleBox["nx",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["ny",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["nz, ...",
+  FontSlant->"Italic"],
+ "} containing the number of points in each direction."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"Dimensions", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["MinCoordinates ",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
+ "returns the minimum coordinates of the Data Representation."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"MinCoordinates", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["MaxCoordinates ",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
+ "returns the maximum coordinates of the Data Representation"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"MaxCoordinates", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["CoordinateRanges",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetDataRange"],
+ " returns a list of the form {{",
+ StyleBox["xmin",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["xmax",
+  FontSlant->"Italic"],
+ "}, {y",
+ StyleBox["min",
+  FontSlant->"Italic"],
+ ", y",
+ StyleBox["max",
+  FontSlant->"Italic"],
+ "}, {z",
+ StyleBox["min",
+  FontSlant->"Italic"],
+ ", z",
+ StyleBox["max",
+  FontSlant->"Italic"],
+ "}, ...} describing the minimum and maximum coordinates of the DataRegion."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"CoordinateRanges", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["CoordinateSpacings",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetSpacing"],
+ " returns the spacing between points in the Data Representation in each \
+direction."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"CoordinateSpacings", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["ArrayDepth ",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetNumDimensions"],
+ "returns an integer corresponding to the dimensionality of the data."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ArrayDepth", "[", "d", "]"}]], "Input"],
+
+Cell[TextData[{
+ ButtonBox["VariableName",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/GetVariableName"],
+ " returns a string containing the name of the DataRegion (DataTables do not \
+have an associated name).  This name can be set using the Variable option of \
+ToDataRegion."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"VariableName", "[", "d", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Interpolation", "Subsection"],
+
+Cell[TextData[{
+ "The ",
+ ButtonBox["Interpolation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Interpolation"],
+ " function has been overloaded to work on Data Representation objects. The \
+resulting function will generically be a function of ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " variables, where ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " is the dimensionality of the data."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"f", "=", 
+  RowBox[{"Interpolation", "[", "d", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"0.12222", ",", "5.78"}], "]"}]], "Input"],
+
+Cell["Perform a line integral using the interpolating function:", "Text"],
+
+Cell[BoxData[
+ RowBox[{"NIntegrate", "[", 
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"t", ",", 
+     RowBox[{"t", "^", "2"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Extracting subsets of data", "Subsection"],
+
+Cell[TextData[{
+ "The ",
+ ButtonBox["Part",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Interpolation"],
+ " function, i.e. d[[2]] etc, has been overloaded to work on Data \
+Representation objects. You can extract a single value, for example \
+d[[3,8,1]], or a lower-dimensional DataRegion, d[[All,All,12]].  You can also \
+specify ranges of indices: d[[All,3;;8,12]].  Unless the result is a single \
+point, the returned value is always a DataRegion."
+}], "Text"],
+
+Cell[TextData[{
+ "The ",
+ ButtonBox["Slab",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/Slab"],
+ " function allows you to extract part of a DataRegion by coordinate rather \
+than by index, as in Part above.  For example, if you have a 3D DataRegion \
+and you want to obtain a slice in the xy plane at z = 3.5,  you can use \
+d[[All,All,3.5]].  You can also specify coordinate ranges:  d[[-2.0;;+2.0, \
+-2.0;;+2.0, 3.5]]."
+}], "Text"],
+
+Cell[BoxData["d"], "Input"],
+
+Cell[BoxData[
+ RowBox[{"d2", "=", 
+  RowBox[{"Slab", "[", 
+   RowBox[{"d", ",", "All", ",", "3.0"}], "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Merging DataRegions", "Subsection"],
+
+Cell[TextData[{
+ "Multiple ",
+ ButtonBox["DataRegions",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/DataRegions"],
+ " d1, d2, ... can be merged into a single enclosing one using \
+ToDataRegion[{d1, d2, ...}];\n\nThis is not yet supported for DataTables."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plotting ", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"ListPlot", Cell["ArrayPlot", "TableText"]},
+   {"ListLinePlot", Cell["ListPlot3D", "TableText"]},
+   {"ListDensityPlot", Cell["ListContourPlot", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["Plotting functions.", "Caption"],
+
+Cell[TextData[{
+ "Several standard ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " plotting functions have been modified to work also with Data \
+Representations."
+}], "Text"],
+
+Cell["\<\
+ListPlot and ListLinePlot can be used with 1-dimensional DataRegions and \
+DataTables.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "d2", "]"}]], "Input"],
+
+Cell["\<\
+ListDensityPlot, ArrayPlot, ListPlot3D and ListContourPlot can be used with \
+2-dimensional DataRegions.  The DataRange option is computed automatically \
+from the coordinate information in the DataRegion.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "[", 
+  RowBox[{"d", ",", 
+   RowBox[{"FrameTicks", "\[Rule]", "True"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot3D", "[", "d", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListDensityPlot", "[", 
+  RowBox[{"d", ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{629, 756},
+WindowMargins->{{Automatic, 124}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
