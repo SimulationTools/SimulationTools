@@ -1,0 +1,35 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Convergence Testing", "Title"],
+
+Cell["\<\
+Many simulations involve the solution of partial differential equations using \
+finite difference methods.  Several simulations, identical apart from the \
+mesh spacing, are then compared to see how the numerical solution changes \
+with the grid spacing.  This is done both to show that the solution converges \
+to an exact solution, and to assess the numerical error.\
+\>", "Text"],
+
+Cell["\<\
+SimulationTools contains several functions to help in this process.\
+\>", "Text"],
+
+Cell["ConvergenceRate", "Subsection"],
+
+Cell["ConvergenceMultiplier", "Subsection"],
+
+Cell["RichardsonExtrapolant", "Subsection"]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{629, 756},
+WindowMargins->{{Automatic, 124}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
