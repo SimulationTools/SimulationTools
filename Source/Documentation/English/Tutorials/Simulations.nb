@@ -1,0 +1,142 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Simulations", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Finding simulation directories", "Subsection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["SimulationTools",
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
+ " has an interface for accessing \"simulations\" which are directories \
+containing simulation output.  The name of the simulation is the name of the \
+directory.  You can either specify a simulation by a full path, or by the \
+simulation name.  For the latter, SimulationTools needs to know which \
+directory to look in.  You can add this directory to the ",
+ Cell[BoxData[
+  ButtonBox["$SimulationPath",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
+ " variable and SimulationTools will then know where to find your \
+simulations.  \n\nFor example, suppose your simulations are stored in a \
+directory called \[OpenCurlyDoubleQuote]Simulations\[CloseCurlyDoubleQuote] \
+in your home directory."
+}], "Text"],
+
+Cell[TextData[{
+ "Add the directory containing your simulations to the ",
+ Cell[BoxData[
+  ButtonBox["$SimulationPath",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
+ " variable:"
+}], "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SimulationTools`$SimulationPath", "=", 
+   RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], 
+  ";"}]], "Input"],
+
+Cell[TextData[{
+ "You can add the above line to the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " init.m file which is loaded when ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " starts (it is  stored in Library/",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "/Kernel on Mac OS, and .",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "/Kernel on Linux)."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finding simulations", "Subsection"],
+
+Cell["\<\
+You can list all the simulations available on $SimulationPath:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"SimulationNames", "[", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Segments", "Subsection"],
+
+Cell[TextData[{
+ "Simulations usually take more than one job on a supercomputer, and the \
+output is spread across many different output directories, known as  \
+\"segments\" of the simulation.  ",
+ Cell[BoxData[
+  ButtonBox["SimulationTools",
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
+ " supports the SimFactory segmenting mechanism and almost all the file \
+reading functions go through a layer which automatically merges the files in \
+these chunks together, taking care to eliminate any duplicate data.  As such, \
+you should never have to worry about merging data from different segments \
+together, and in fact you can probably forget about the fact that the \
+simulation data is split into segments."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finding files in a simulation", "Subsection"],
+
+Cell["\<\
+Given the name of a simulation, and the name of an output file, you can \
+obtain full paths to all the instances of that file across all segments of \
+the simulation:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<mp_psi4.h5\>\""}], "]"}]], "Input"],
+
+Cell["\<\
+You can include wildcards in the filename.  For example, to list all the \
+available HDF5 files:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<*.h5\>\""}], "]"}]], "Input"],
+
+Cell["or all the available files:", "Text"],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}]], "Input"],
+
+Cell["\<\
+The output of FindSimulationFile is always a list of filenames.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{629, 756},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+
