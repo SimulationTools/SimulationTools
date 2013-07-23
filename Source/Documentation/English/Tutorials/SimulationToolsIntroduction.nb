@@ -1,15 +1,14 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["\<\
-Introduction to SimulationTools\
-\>", "Title"],
+Cell["Introduction to SimulationTools", "Title"],
 
 Cell[TextData[{
  Cell[BoxData[
   ButtonBox["SimulationTools",
    BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], "InlineFormula"],
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
  " is a suite of ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
@@ -30,7 +29,10 @@ to a standard uniform format.  \
 
 Cell[CellGroupData[{
 
-Cell["Essential Concepts", "Section"],
+Cell["\<\
+Essential Concepts (much moved into Simulations tutorial, probably want a \
+quick example tutorial here instead)\
+\>", "Section"],
 
 Cell[CellGroupData[{
 
@@ -44,13 +46,16 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Finding simulation directories", "Subsection"],
+Cell["\<\
+Finding simulation directories (delete)\
+\>", "Subsection"],
 
 Cell[TextData[{
  Cell[BoxData[
   ButtonBox["SimulationTools",
    BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], "InlineFormula"],
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
  " has an interface for accessing \"simulations\" which are directories \
 containing simulation output.  The name of the simulation is the name of the \
 directory.  You can either specify a simulation by a full path, or by the \
@@ -85,7 +90,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Chunking", "Subsection"],
+Cell["Chunking (delete)", "Subsection"],
 
 Cell[TextData[{
  "Simulations usually take more than one job on a supercomputer, and the \
@@ -93,7 +98,8 @@ output is spread across many different output directories (\"chunks\").  ",
  Cell[BoxData[
   ButtonBox["SimulationTools",
    BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], "InlineFormula"],
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
  " supports the SimFactory chunking mechanism and almost all the file reading \
 functions go through a layer which automatically merges the files in these \
 chunks together, taking care to eliminate any duplicate data.  As such, you \
@@ -111,7 +117,8 @@ Cell[TextData[{
  Cell[BoxData[
   ButtonBox["SimulationTools",
    BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], "InlineFormula"],
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
  " uses the ",
  Cell[BoxData[
   ButtonBox["DataTable",
@@ -156,7 +163,7 @@ Cell[BoxData[
 },
 Saveable->True,
 WindowSize->{725, 750},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 12}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
