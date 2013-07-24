@@ -1,0 +1,232 @@
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Simulations",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/tutorial/Simulations"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["SIMULATIONTOOLS TUTORIAL", "PacletNameCell"], Cell[TextData[Cell[
+    BoxData[
+     ActionMenuBox[
+      FrameBox["\<\"URL \[RightGuillemet]\"\>",
+       StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+      FrontEndExecute[{
+        NotebookLocate[{
+          URL[None], None}]}], 
+      Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>FrontEndExecute[{
+        NotebookLocate[{
+          URL[
+          "http://reference.wolfram.com/mathematica/guide/Mathematica.html"], 
+          None}]}]},
+      Appearance->None,
+      MenuAppearance->Automatic]],
+     LineSpacing->{1.4, 0}]], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["Simulations", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Finding simulation directories", "Subsection"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["SimulationTools",
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
+ " has an interface for accessing \"simulations\" which are directories \
+containing simulation output.  The name of the simulation is the name of the \
+directory.  You can either specify a simulation by a full path, or by the \
+simulation name.  For the latter, SimulationTools needs to know which \
+directory to look in.  You can add this directory to the ",
+ Cell[BoxData[
+  ButtonBox["$SimulationPath",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
+ " variable and SimulationTools will then know where to find your \
+simulations.  \n\nFor example, suppose your simulations are stored in a \
+directory called \[OpenCurlyDoubleQuote]Simulations\[CloseCurlyDoubleQuote] \
+in your home directory."
+}], "Text"],
+
+Cell[TextData[{
+ "Add the directory containing your simulations to the ",
+ Cell[BoxData[
+  ButtonBox["$SimulationPath",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
+ " variable:"
+}], "MathCaption"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SimulationTools`$SimulationPath", "=", 
+   RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}]], "Input",
+ CellLabel->"In[1]:="],
+
+Cell[TextData[{
+ "You can add the above line to the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " init.m file which is loaded when ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " starts (it is  stored in Library/",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "/Kernel on Mac OS, and .",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "/Kernel on Linux)."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finding simulations", "Subsection"],
+
+Cell["\<\
+You can list all the simulations available on $SimulationPath:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SimulationNames", "[", "]"}]], "Input",
+ CellLabel->"In[2]:="],
+
+Cell[BoxData[
+ InterpretationBox["\<\"Invalid $SimulationPath; it should be a list of \
+strings, but it is currently \\\"/Users/ian/Simulations\\\"\"\>",
+  StringForm[
+  "Invalid $SimulationPath; it should be a list of strings, but it is \
+currently \"/Users/ian/Simulations\""],
+  Editable->False]], "Print",
+ CellLabel->"During evaluation of In[2]:="],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellLabel->"Out[2]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Segments", "Subsection"],
+
+Cell[TextData[{
+ "Simulations usually take more than one job on a supercomputer, and the \
+output is spread across many different output directories, known as  \
+\"segments\" of the simulation.  ",
+ Cell[BoxData[
+  ButtonBox["SimulationTools",
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
+  "InlineFormula"],
+ " supports the SimFactory segmenting mechanism and almost all the file \
+reading functions go through a layer which automatically merges the files in \
+these chunks together, taking care to eliminate any duplicate data.  As such, \
+you should never have to worry about merging data from different segments \
+together, and in fact you can probably forget about the fact that the \
+simulation data is split into segments."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Finding files in a simulation", "Subsection"],
+
+Cell["\<\
+Given the name of a simulation, and the name of an output file, you can \
+obtain full paths to all the instances of that file across all segments of \
+the simulation:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<mp_psi4.h5\>\""}], "]"}]], "Input",
+ CellLabel->"In[3]:="],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\<\"bbh\"\>", ",", "\<\"mp_psi4.h5\"\>"}], "]"}]], "Output",
+ CellLabel->"Out[3]="]
+}, Open  ]],
+
+Cell["\<\
+You can include wildcards in the filename.  For example, to list all the \
+available HDF5 files:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<*.h5\>\""}], "]"}]], "Input",
+ CellLabel->"In[4]:="],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\<\"bbh\"\>", ",", "\<\"*.h5\"\>"}], "]"}]], "Output",
+ CellLabel->"Out[4]="]
+}, Open  ]],
+
+Cell["or all the available files:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}]], "Input",
+ CellLabel->"In[5]:="],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationFile", "[", 
+  RowBox[{"\<\"bbh\"\>", ",", "\<\"*\"\>"}], "]"}]], "Output",
+ CellLabel->"Out[5]="]
+}, Open  ]],
+
+Cell["\<\
+The output of FindSimulationFile is always a list of filenames.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Simulations",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "SimulationTools", "status" -> "None", "summary" -> 
+    "SimulationTools Simulations", "synonyms" -> {}, "title" -> "Simulations",
+     "windowTitle" -> "Simulations", "type" -> "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/Simulations"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+
