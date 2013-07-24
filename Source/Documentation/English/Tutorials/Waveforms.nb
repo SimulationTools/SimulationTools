@@ -11,9 +11,7 @@ radiation from a numerical relativity simulation.\
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Reading and exporting waveforms\
-\>", "Section"],
+Cell["Reading and exporting waveforms", "Section"],
 
 Cell[BoxData[
  RowBox[{"<<", "SimulationTools`"}]], "Input"],
@@ -34,26 +32,21 @@ and for reading waveforms in the NRDF format [http://arxiv.org/abs/0709.0093].\
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Reading data in Multipole format\
-\>", "Subsection"],
+Cell["Reading data in Multipole format", "Subsection"],
 
 Cell[BoxData[GridBox[{
    {"ReadPsi4", "ReadPsi4Modes", "ReadPsi4Radii"},
    {"$MultipolePsi4Variable", "\[Placeholder]", "\[Placeholder]"}
   }]], "DefinitionBox3Col"],
 
-Cell["\<\
-Reading data produced using the Multipole Cactus thorn.\
-\>", "Caption"],
+Cell["Reading data produced using the Multipole Cactus thorn.", "Caption"],
 
 Cell[TextData[{
  "Read in the (2,2) mode of the gravitational waveform from a binary black \
 hole merger, represented by ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " extracted at a radius of 100M"
 }], "Text"],
 
@@ -72,12 +65,17 @@ Cell[BoxData[
 
 Cell["\<\
 It is possible to specify the name of the output file produced by the \
-Multipole thorn using the Multipole::variables parameter, e.g.
+Multipole thorn using the Multipole::variables parameter in the simulation \
+parameter file, e.g.\
+\>", "Text"],
 
-multipole::variables = \[CloseCurlyDoubleQuote]weylscal4::psi4r{sw=-2 cmplx=\
-\[CloseCurlyQuote]weylscal4::psi4i\[CloseCurlyQuote] \
-name=\[CloseCurlyQuote]psi4\[CloseCurlyQuote]}\[CloseCurlyDoubleQuote]
+Cell["\<\
+\tMultipole::variables = \[OpenCurlyDoubleQuote]WeylScal4::Psi4r{sw=-2 cmplx=\
+\[CloseCurlyQuote]WeylScal4::Psi4i\[CloseCurlyQuote] \
+name=\[CloseCurlyQuote]psi4\[CloseCurlyQuote]}\[CloseCurlyDoubleQuote]\
+\>", "Text"],
 
+Cell["\<\
 By default, it is assumed that the name \[OpenCurlyQuote]psi4\
 \[CloseCurlyQuote] is used. This may be changed by setting \
 $MultipolePsi4Variable\
@@ -107,9 +105,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Reading waveforms in other formats\
-\>", "Subsection"],
+Cell["Reading waveforms in other formats", "Subsection"],
 
 Cell["\<\
 Waveform data from other sources can be imported in a standard ASCII format \
@@ -136,9 +132,7 @@ Cell[CellGroupData[{
 
 Cell["Exporting waveforms", "Subsection"],
 
-Cell["\<\
-Waveforms can be easily exported as ASCII files\
-\>", "Text"],
+Cell["Waveforms can be easily exported as ASCII files", "Text"],
 
 Cell[BoxData[
  RowBox[{"ExportWaveform", "[", 
@@ -169,9 +163,7 @@ Cell[BoxData[
      RowBox[{"Abs", "[", "\[Psi]4", "]"}]}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
 
-Cell["\<\
-Plot the phase of the complex waveform\
-\>", "Text"],
+Cell["Plot the phase of the complex waveform", "Text"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
@@ -201,8 +193,7 @@ Cell[TextData[{
 without having to go through the step of reading ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " explicitly"
 }], "Text"],
 
@@ -220,9 +211,15 @@ Cell[CellGroupData[{
 Cell["Aligning phases", "Subsubsection"],
 
 Cell["\<\
-Waveforms which are represented by a complex number typically have an \
-arbitrary origin for the complex phase. The AlignedPhases function adjusts \
-the phases of a set of waveforms such that they agree at a prescribed time.\
+It is often convenient to consider a complex waveform in terms of amplitude \
+and phase rather than real and imaginary parts.  When computing the phase, \
+there is a freedom to add multiples of 2\[Pi].  When compare two different \
+waveforms, it\[CloseCurlyQuote]s possible that different multiples of 2\[Pi] \
+have been added to each (this usually happens when the data is not smooth and \
+the algorithm to produce a continuous phase in the Phase function makes a \
+different choice for different waveforms).  The AlignedPhases function adds \
+multiples of 2\[Pi] to a set of phases to minimise their difference at a \
+specific time.\
 \>", "Text"],
 
 Cell[BoxData[{
@@ -280,8 +277,7 @@ Cell[TextData[{
 the complex scalar ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  ", whereas many analytic and data analysis calculations prefer to work with \
 the strain, ",
  StyleBox["h",
@@ -289,8 +285,7 @@ the strain, ",
  ", which is related to ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " by two time integrals. The function Psi4ToStrain does this conversion \
 using either fixed-frequency or time-domain integration methods."
 }], "Text"],
@@ -299,8 +294,7 @@ Cell[TextData[{
  "Convert ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " to ",
  StyleBox["h",
   FontSlant->"Italic"],
@@ -319,8 +313,7 @@ Cell[TextData[{
  "Convert ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " to ",
  StyleBox["h",
   FontSlant->"Italic"],
@@ -336,9 +329,7 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"0", ",", "280"}], "}"}]}], "]"}]}], ";"}]], "Input"],
 
-Cell["\<\
-Compare the two integration schemes\
-\>", "Text"],
+Cell["Compare the two integration schemes", "Text"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
@@ -356,16 +347,14 @@ Cell[TextData[{
 ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " at finite radius. However, their definition is in terms of ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " at future null infinity.  It is therefore common to extract at a sequence \
 of radii and extrapolate to infinite radius. SimulationTools provides some \
-automated functions for doing such an extrapolation."
+automated functions for performing such an extrapolation."
 }], "Text"],
 
 Cell[TextData[{
@@ -375,8 +364,7 @@ Cell[TextData[{
  " mode of ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " at all radii available in a simulation and produces a waveform which has \
 been extrapolated to infinite radius"
 }], "Text"],
@@ -407,8 +395,7 @@ Cell[TextData[{
 involves a delicate combination of conversion from ",
  Cell[BoxData[
   FormBox[
-   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
-  FormatType->"TraditionalForm"],
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]]],
  " to strain and extrapolation. The function ReadRadiallyExtrapolatedStrain \
 does this in a way that has been found to be generally robust"
 }], "Text"],
@@ -428,7 +415,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"100", 
       RowBox[{"Shifted", "[", 
-       RowBox[{"h", ",", 
+       RowBox[{"hFFI", ",", 
         RowBox[{"-", "100"}]}], "]"}]}], ",", "h\[Infinity]"}], "}"}], "]"}], 
   "]"}]], "Input"]
 }, Open  ]]
@@ -442,8 +429,8 @@ WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
-2013)",
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
 StyleDefinitions->"Default.nb"
 ]
 
