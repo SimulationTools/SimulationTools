@@ -61,9 +61,9 @@ ConvergenceMultiplier[{h1_, h2_, h3_}, p_] :=
   Module[{eq, eqs, f, f0, f1, h, c},
     eq = f[h] == f0 + f1 h^p;
     eqs = {eq /. h -> h1, eq /. h -> h2, eq /. h -> h3};
-    Return[c /. Solve[
+    Return[Simplify[c /. Solve[
      f[h1] - f[h2] == c (f[h2] - f[h3]) 
-       /. (eqs /. Equal -> Rule), c][[1]] // N]];
+       /. (eqs /. Equal -> Rule), c][[1]] // N]]];
 
 Options[LoadConvergenceSeries] = {"Downsample" -> False, "Interpolate" -> False};
 
