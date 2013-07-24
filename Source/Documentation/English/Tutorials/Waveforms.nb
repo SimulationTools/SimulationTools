@@ -1,0 +1,449 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Waveforms", "Title"],
+
+Cell["\<\
+SimulationTools has a large set of functionality for working with numerical \
+time-series waveforms such as one would obtain by extracting gravitational \
+radiation from a numerical relativity simulation.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Reading and exporting waveforms\
+\>", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input"],
+
+Cell["\<\
+SimulationTools supports a plug-in interface for reading waveform data. The \
+format of choice is HDF5 data using the naming conventions of the Multipole \
+Cactus thorn which is included with the Einstein Toolkit. There is also \
+support for reading waveforms as ASCII data produced by the Multipole thorn \
+and for reading waveforms in the NRDF format [http://arxiv.org/abs/0709.0093].\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Reading data in Multipole format\
+\>", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"ReadPsi4", "ReadPsi4Modes", "ReadPsi4Radii"},
+   {"$MultipolePsi4Variable", "\[Placeholder]", "\[Placeholder]"}
+  }]], "DefinitionBox3Col"],
+
+Cell["\<\
+Reading data produced using the Multipole Cactus thorn.\
+\>", "Caption"],
+
+Cell[TextData[{
+ "Read in the (2,2) mode of the gravitational waveform from a binary black \
+hole merger, represented by ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " extracted at a radius of 100M"
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"l", "=", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"m", "=", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r", "=", "100"}], ";"}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\[Psi]4", "=", 
+  RowBox[{"ReadPsi4", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "r"}], "]"}]}]], "Input"],
+
+Cell["\<\
+It is possible to specify the name of the output file produced by the \
+Multipole thorn using the Multipole::variables parameter, e.g.
+
+multipole::variables = \[CloseCurlyDoubleQuote]weylscal4::psi4r{sw=-2 cmplx=\
+\[CloseCurlyQuote]weylscal4::psi4i\[CloseCurlyQuote] \
+name=\[CloseCurlyQuote]psi4\[CloseCurlyQuote]}\[CloseCurlyDoubleQuote]
+
+By default, it is assumed that the name \[OpenCurlyQuote]psi4\
+\[CloseCurlyQuote] is used. This may be changed by setting \
+$MultipolePsi4Variable\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$MultipolePsi4Variable", "=", "\"\<psi4\>\""}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\[Psi]4", "=", 
+  RowBox[{"ReadPsi4", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "r"}], "]"}]}]], "Input"],
+
+Cell["\<\
+Waveforms can be produced for multiple (l,m) modes and multiple extraction \
+radii. The list of available modes and radii are both easily accessed\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ReadPsi4Modes", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ReadPsi4Radii", "[", "\"\<bbh\>\"", "]"}], "//", "Sort"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Reading waveforms in other formats\
+\>", "Subsection"],
+
+Cell["\<\
+Waveform data from other sources can be imported in a standard ASCII format \
+with three columns corresponding to time and the real and imaginary parts of \
+the waveform \
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"file", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "$SimulationToolsTestSimulationDirectory", ",", 
+      "\"\<bbh-nrdf/bbh-nrdf_10/psi4_l2_m2_r100.00.asc.gz\>\""}], "}"}], 
+    "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\[Psi]4", "=", 
+  RowBox[{"ImportWaveform", "[", "file", "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exporting waveforms", "Subsection"],
+
+Cell["\<\
+Waveforms can be easily exported as ASCII files\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ExportWaveform", "[", 
+  RowBox[{"\"\</tmp/psi4_l2_m2_r100.00.asc.gz\>\"", ",", "\[Psi]4"}], 
+  "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Working with waveforms", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Visualisation", "Subsection"],
+
+Cell["\<\
+Plot the real and imaginary parts along with the absolute value\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Re", "[", "\[Psi]4", "]"}], ",", 
+     RowBox[{"Im", "[", "\[Psi]4", "]"}], ",", 
+     RowBox[{"Abs", "[", "\[Psi]4", "]"}]}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
+
+Cell["\<\
+Plot the phase of the complex waveform\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"Phase", "[", "\[Psi]4", "]"}], "]"}]], "Input"],
+
+Cell["and plot the frequency", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"Frequency", "[", "\[Psi]4", "]"}], "]"}]], "Input"],
+
+Cell["\<\
+One frequently would like to know how many gravitational wave cycles are \
+present in a waveform as a measure of its length. The WaveformCycles function \
+does so by counting the number of oscillations from a prescribed time up to \
+the peak of the amplitude, which is assumed to correspond to the merger. In \
+the short example binary black hole simulation, there are approximately three \
+gravitational wave cycles before the merger.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"WaveformCycles", "[", 
+  RowBox[{"\[Psi]4", ",", "140"}], "]"}]], "Input"],
+
+Cell[TextData[{
+ "It is also possible to obtain this number directly from the simulation, \
+without having to go through the step of reading ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " explicitly"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ReadWaveformCycles", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "140"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Manipulating waveforms", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["Aligning phases", "Subsubsection"],
+
+Cell["\<\
+Waveforms which are represented by a complex number typically have an \
+arbitrary origin for the complex phase. The AlignedPhases function adjusts \
+the phases of a set of waveforms such that they agree at a prescribed time.\
+\>", "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Psi]4r30", "=", 
+   RowBox[{"Shifted", "[", 
+    RowBox[{
+     RowBox[{"30", 
+      RowBox[{"ReadPsi4", "[", 
+       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "30"}], "]"}]}], ",", 
+     RowBox[{"-", "30"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Psi]4r50", "=", 
+   RowBox[{"Shifted", "[", 
+    RowBox[{
+     RowBox[{"50", 
+      RowBox[{"ReadPsi4", "[", 
+       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "50"}], "]"}]}], ",", 
+     RowBox[{"-", "50"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Psi]4r80", "=", 
+   RowBox[{"Shifted", "[", 
+    RowBox[{
+     RowBox[{"80", 
+      RowBox[{"ReadPsi4", "[", 
+       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "80"}], "]"}]}], ",", 
+     RowBox[{"-", "80"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Psi]4r100", "=", 
+   RowBox[{"Shifted", "[", 
+    RowBox[{
+     RowBox[{"100", 
+      RowBox[{"ReadPsi4", "[", 
+       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "100"}], "]"}]}], ",", 
+     
+     RowBox[{"-", "100"}]}], "]"}]}], ";"}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"AlignedPhases", "[", 
+   RowBox[{
+    RowBox[{"Phase", "/@", 
+     RowBox[{"{", 
+      RowBox[{
+      "\[Psi]4r30", ",", "\[Psi]4r50", ",", "\[Psi]4r80", ",", 
+       "\[Psi]4r100"}], "}"}]}], ",", "70"}], "]"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Converting to strain", "Subsubsection"],
+
+Cell[TextData[{
+ "Waveforms from numerical relativity simulations are typically extracted as \
+the complex scalar ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", whereas many analytic and data analysis calculations prefer to work with \
+the strain, ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ ", which is related to ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " by two time integrals. The function Psi4ToStrain does this conversion \
+using either fixed-frequency or time-domain integration methods."
+}], "Text"],
+
+Cell[TextData[{
+ "Convert ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " to ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ " using fixed-frequency integration"
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Omega]0", "=", "0.015"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hFFI", "=", 
+   RowBox[{"Psi4ToStrain", "[", 
+    RowBox[{"\[Psi]4", ",", "\[Omega]0"}], "]"}]}], ";"}]}], "Input"],
+
+Cell[TextData[{
+ "Convert ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " to ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ " using time domain integration chosing the two arbitrary integration \
+constants such that the strain is 0 at t=0 and t=280"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hTD", "=", 
+   RowBox[{"Psi4ToStrain", "[", 
+    RowBox[{"\[Psi]4", ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "280"}], "}"}]}], "]"}]}], ";"}]], "Input"],
+
+Cell["\<\
+Compare the two integration schemes\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"Abs", "[", 
+   RowBox[{"{", 
+    RowBox[{"hFFI", ",", "hTD"}], "}"}], "]"}], "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Extrapolation", "Subsubsection"],
+
+Cell[TextData[{
+ "Waveforms from numerical simulations are normally obtained by extraction of \
+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " at finite radius. However, their definition is in terms of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " at future null infinity.  It is therefore common to extract at a sequence \
+of radii and extrapolate to infinite radius. SimulationTools provides some \
+automated functions for doing such an extrapolation."
+}], "Text"],
+
+Cell[TextData[{
+ "The function ReadRadiallyExtrapolatedPsi4 reads a specific (",
+ StyleBox["l,m)",
+  FontSlant->"Italic"],
+ " mode of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " at all radii available in a simulation and produces a waveform which has \
+been extrapolated to infinite radius"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"extrapolationorder", "=", "2"}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"\[Psi]4\[Infinity]", "=", 
+  RowBox[{"ReadRadiallyExtrapolatedPsi4", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "extrapolationorder"}], 
+   "]"}]}]], "Input"],
+
+Cell["\<\
+We can compare this extrapolated waveform to the one extracted at r=100M\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"Abs", "[", 
+   RowBox[{"{", 
+    RowBox[{"\[Psi]4r100", ",", "\[Psi]4\[Infinity]"}], "}"}], "]"}], 
+  "]"}]], "Input"],
+
+Cell[TextData[{
+ "One may also wish to compute the strain at future null infinity. This \
+involves a delicate combination of conversion from ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Psi]", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " to strain and extrapolation. The function ReadRadiallyExtrapolatedStrain \
+does this in a way that has been found to be generally robust"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"h\[Infinity]", "=", 
+   RowBox[{"ReadRadiallyExtrapolatedStrain", "[", 
+    RowBox[{
+    "\"\<bbh\>\"", ",", "l", ",", "m", ",", "\[Omega]0", ",", 
+     "extrapolationorder"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"Abs", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"100", 
+      RowBox[{"Shifted", "[", 
+       RowBox[{"h", ",", 
+        RowBox[{"-", "100"}]}], "]"}]}], ",", "h\[Infinity]"}], "}"}], "]"}], 
+  "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{1074, 769},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+
