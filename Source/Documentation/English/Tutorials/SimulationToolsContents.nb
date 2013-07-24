@@ -125,6 +125,15 @@ Cell[TextData[ButtonBox["Plotting",
  BaseStyle->"Link",
  ButtonData->"paclet:SimulationTools/tutorial/Plotting"]], "TOCChapter"],
 
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  ButtonBox[
+   RowBox[{"Advanced", " ", "analysis"}],
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/tutorial/AdvancedAnalysis"], 
+  TraditionalForm]],
+ FormatType->"TraditionalForm"]], "TOCChapter"],
+
 Cell[TextData[ButtonBox["Convergence testing",
  BaseStyle->"Link",
  ButtonData->
@@ -166,7 +175,7 @@ Cell[TextData[Cell[BoxData[
 },
 Saveable->True,
 WindowSize->{725, 750},
-WindowMargins->{{72, Automatic}, {-279, Automatic}},
+WindowMargins->{{238, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
