@@ -108,10 +108,6 @@ Cell[TextData[ButtonBox["Binaries",
  BaseStyle->"Link",
  ButtonData->"paclet:SimulationTools/tutorial/Binaries"]], "TOCChapter"],
 
-Cell[TextData[ButtonBox["Trackers",
- BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/Trackers"]], "TOCChapter"],
-
 Cell["Reference", "Section"],
 
 Cell[TextData[Cell[BoxData[

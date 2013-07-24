@@ -2387,9 +2387,9 @@ Cell[BoxData[
   RowBox[{"t$", ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"xFn$15627", "[", "t$", "]"}], ",", 
-     RowBox[{"yFn$15627", "[", "t$", "]"}], ",", 
-     RowBox[{"zFn$15627", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
+     RowBox[{"xFn$927389", "[", "t$", "]"}], ",", 
+     RowBox[{"yFn$927389", "[", "t$", "]"}], ",", 
+     RowBox[{"zFn$927389", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[14]="]
 }, Open  ]],
 
@@ -2436,16 +2436,7 @@ output data, and it is assumed that the first two tracked objects correspond \
 to the binary.  For PunctureTracker, MinTracker and ShiftTracker, trackers 0 \
 and 1 correspond to binary members 1 and 2.  For AHFinderDirect and NRDF, the \
 mapping between tracker index and binary member is one to one.\
-\>", "Text"],
-
-Cell[TextData[{
- "If you wish to use different trackers (see the Trackers documentation) for \
-the binary members, then any of the ReadBinary* functions can take an option \
-Trackers -> {tracker1, tracker2}, where ",
- Cell[BoxData[
-  FormBox["trackeri", TraditionalForm]]],
- " = {typei, indexi} to specify which trackers to use for the binary."
-}], "Text"]
+\>", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
