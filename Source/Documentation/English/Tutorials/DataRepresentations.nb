@@ -3,38 +3,65 @@ Notebook[{
 Cell[CellGroupData[{
 Cell["Data Representations", "Title"],
 
+Cell["\<\
+SimulationTools uses two different representations of numerical data. \
+\>", "Text"],
+
 Cell[TextData[{
- "SimulationTools uses two different representations of numerical data. \n\n\
-The ",
+ "The ",
  StyleBox["DataTable",
   FontSlant->"Italic"],
  " is designed for time-series data, and consists of a \
 monotonically-increasing time coordinate and corresponding data values, which \
 can be of any type.  The time coordinate does not have to be regularly \
-spaced.  \n\nThe ",
+spaced.  "
+}], "Text"],
+
+Cell[TextData[{
+ "The ",
  StyleBox["DataRegion",
   FontSlant->"Italic"],
  " represents an N-dimensional block of data on a uniform grid.  The data \
 must consist of real or complex numbers, or the quantities None or Missing[]. \
  The data is stored efficiently in memory. Each point has an associated set \
 of coordinates, and these are specified by giving the origin and spacing of \
-the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  \n\nCollectively, \
-DataTables and DataRegions are known in SimulationTools as ",
+the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  "
+}], "Text"],
+
+Cell[TextData[{
+ "Collectively, DataTables and DataRegions are known in SimulationTools as ",
  StyleBox["Data Representations.  ",
   FontSlant->"Italic"],
  "There are many functions for manipulating data representations.  Some only \
 make sense for DataTables or DataRegions respectively, but many are defined \
-to work on both types of object.\n\nMany commonly-used Mathematica functions \
-are defined on compatible DataTables and DataRegions (those with the same \
-coordinates), for example Plus (+), Minus (-), Times (*), Divide (/), Sqrt, \
-Power (d^a), Sin, Cos, Tan etc. "
+to work on both types of object."
 }], "Text"],
+
+Cell["\<\
+Many commonly-used Mathematica functions are defined on compatible DataTables \
+and DataRegions (those with the same coordinates), for example Plus (+), \
+Minus (-), Times (*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan etc. \
+\>", "Text"],
 
 Cell[CellGroupData[{
 
+Cell["Reasons to use Data Representations instead of lists", "Section"],
+
 Cell["\<\
-Working with Data Representations\
-\>", "Section"],
+Data Representations contain coordinate information as well as data; it is \
+frequently desirable to keep the coordinates along with the data.\
+\>", "Text"],
+
+Cell["\<\
+Mathematical operations defined on Data Representations operate only on the \
+data, as opposed to the data and coordinates, which would be the case if you \
+used a list containing data and coordinates.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Working with Data Representations", "Section"],
 
 Cell[TextData[{
  "Both DataTables and DataRegions can be created from ",
@@ -128,9 +155,9 @@ given by the lists ",
 convention adopted by ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
- ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C\
-\[CloseCurlyDoubleQuote] order, not \[OpenCurlyDoubleQuote]Fortran\
-\[CloseCurlyDoubleQuote] order."
+ ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C order\
+\[CloseCurlyDoubleQuote], not \[OpenCurlyDoubleQuote]Fortran order\
+\[CloseCurlyDoubleQuote]."
 }], "Text"],
 
 Cell[BoxData[
@@ -157,9 +184,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Mathematical operations on Data Representations\
-\>", "Subsection"],
+Cell["Mathematical operations on Data Representations", "Subsection"],
 
 Cell[TextData[{
  "You can use most numerical ",
@@ -179,6 +204,9 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"t", ",", "0", ",", "1", ",", "0.1"}], "}"}]}], "]"}], 
    "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ToList", "[", "tData", "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"sint", "=", 
@@ -213,9 +241,7 @@ Cell["\<\
 which have the attributes NumericFunction and Listable)\
 \>", "Text"],
 
-Cell["\<\
-Multi-dimensional DataRegions support the same operations.\
-\>", "Text"],
+Cell["Multi-dimensional DataRegions support the same operations.", "Text"],
 
 Cell[BoxData[
  RowBox[{"d3", "=", 
@@ -252,28 +278,31 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Converting between 1D DataRegions and DataTables\
-\>", "Subsection"],
+Cell["Converting between 1D DataRegions and DataTables", "Subsection"],
 
 Cell[TextData[{
  "A 1D DataRegion can be converted to a DataTable object using ",
- ButtonBox["ToDataTable[dr].",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/ToDataTable"]
+ Cell[BoxData[
+  FormBox[
+   ButtonBox["ToDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:SimulationTools/ref/ToDataTable"], 
+   TraditionalForm]]],
+ "[dr]."
 }], "Text"],
 
-Cell["\<\
-A DataTable can be converted to a 1D DataRegion using ToDataRegion[dt].  Note \
-that the DataTable should have a uniform spacing.\
-\>", "Text"]
+Cell[TextData[{
+ "A DataTable can be converted to a 1D DataRegion using ",
+ ButtonBox["ToDataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"],
+ "[dt].  Note that the DataTable should have a uniform spacing."
+}], "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Properties and data of Data Representations\
-\>", "Subsection"],
+Cell["Properties and data of Data Representations", "Subsection"],
 
 Cell[TextData[{
  ButtonBox["ToListOfData r",
@@ -491,9 +520,16 @@ Cell[TextData[{
  ButtonBox["DataRegions",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/DataRegions"],
- " d1, d2, ... can be merged into a single enclosing one using \
-ToDataRegion[{d1, d2, ...}];\n\nThis is not yet supported for DataTables."
-}], "Text"]
+ " d1, d2, ... can be merged into a single enclosing one using "
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ToDataRegion", "[", 
+  RowBox[{"{", 
+   RowBox[{"d1", ",", " ", "d2", ",", " ", "..."}], "}"}], "]"}]], "Input",
+ Evaluatable->False],
+
+Cell["This is not yet supported for DataTables.", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
