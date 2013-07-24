@@ -51,7 +51,7 @@ Cell[TextData[ButtonBox["Grid functions",
  BaseStyle->"Link",
  ButtonData->"paclet:SimulationTools/tutorial/GridFunctions"]], "TOCChapter"],
 
-Cell[TextData[ButtonBox["Grids",
+Cell[TextData[ButtonBox["Grid structure",
  BaseStyle->"Link",
  ButtonData->"paclet:SimulationTools/tutorial/Grids"]], "TOCChapter"],
 
