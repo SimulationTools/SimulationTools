@@ -1,0 +1,88 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Parameters", "Title"],
+
+Cell["\<\
+SimulationTools currently supports parameter files in the format used by \
+Cactus. It can list all parameters specified for a simulation, search for \
+parameters based on a pattern, or read the value of a specific parameters\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Accessing simulation parameters", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Reading parameters", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"FindSimulationParameters", Cell["ReadSimulationParameter", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["Functions for accessing parameters.", "Caption"],
+
+Cell["\<\
+The FindSimulationParameters function can be used to list all parameters set \
+in a simulation\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FindSimulationParameters", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}], "//", 
+  "Short"}]], "Input"],
+
+Cell["\<\
+or it can be used to list only a subset of parameters\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"FindSimulationParameters", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase*\>\""}], "]"}]], "Input"],
+
+Cell["\<\
+If you already know the parameter name, then you can just request the value \
+of that parameter using ReadSimulationParameter\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"dx", "=", 
+  RowBox[{"ReadSimulationParameter", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase::dx\>\""}], "]"}]}]], "Input"],
+
+Cell["\<\
+All parameter values are returned as strings which can then be converted to \
+the appropriate type\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"dx", "//", "InputForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"ToExpression", "[", "dx", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{885, 760},
+WindowMargins->{{174, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+
