@@ -733,15 +733,18 @@ SimulationTools obtains black hole information from any of the following \
 sources:\
 \>", "Text"],
 
-Cell["AHFinderDirect and QuasiLocalMeasures Cactus output;", "Item"],
+Cell["AHFinderDirect and QuasiLocalMeasures Cactus output;", "BulletedText"],
 
-Cell["Numerical Relativity Data Format (NRDF) output files", "Item"],
+Cell[CellGroupData[{
+
+Cell["Numerical Relativity Data Format (NRDF) output files", "BulletedText"],
 
 Cell["\<\
 In both cases, the black holes are numbered according to the output data. So \
 black hole 1 corresponds to AHFinderDirect horizon 1 (QuasiLocalMeasures \
 horizon 0), or NRDF body 1 from the metadata file.\
 \>", "Text"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

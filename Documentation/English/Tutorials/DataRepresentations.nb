@@ -47,7 +47,9 @@ Cell[TextData[{
 monotonically-increasing time coordinate and corresponding data values, which \
 can be of any type.  The time coordinate does not have to be regularly \
 spaced.  "
-}], "Text"],
+}], "BulletedText"],
+
+Cell[CellGroupData[{
 
 Cell[TextData[{
  "The ",
@@ -58,7 +60,7 @@ must consist of real or complex numbers, or the quantities None or Missing[]. \
  The data is stored efficiently in memory. Each point has an associated set \
 of coordinates, and these are specified by giving the origin and spacing of \
 the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  "
-}], "Text"],
+}], "BulletedText"],
 
 Cell[TextData[{
  "Collectively, DataTables and DataRegions are known in SimulationTools as ",
@@ -73,7 +75,8 @@ Cell["\<\
 Many commonly-used Mathematica functions are defined on compatible DataTables \
 and DataRegions (those with the same coordinates), for example Plus (+), \
 Minus (-), Times (*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan etc. \
-\>", "Text"],
+\>", "Text"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
