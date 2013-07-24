@@ -40,8 +40,8 @@ ReadPsi4Radii::usage = "ReadPsi4Radii[sim] returns a list of the radii at which 
 ImportWaveform::usage = "ImportWaveform[filename] imports an ASCII waveform file with columns time, real part and imaginary part and returns it as a DataTable.";
 ExportWaveform::usage = "ExportWaveform[filename, d] exports a complex DataTable as an ASCII file with columns time, real part and imaginary part.";
 RadialExtrapolation; (* TODO *)
-ReadRadiallyExtrapolatedPsi4::usage = "ReadRadiallyExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of Psi4 from the simulation to infinite radius.";
-ReadRadiallyExtrapolatedStrain::usage = "ReadRadiallyExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of Psi4 at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius.";
+ReadRadiallyExtrapolatedPsi4::usage = "ReadRadiallyExtrapolatedPsi4[sim, l, m, order] extrapolates the (l, m) mode of Psi4 from the simulation to infinite radius using a particular extrapolation order.";
+ReadRadiallyExtrapolatedStrain::usage = "ReadRadiallyExtrapolatedStrain[sim, l, m, om0, order] reads the (l, m) mode of Psi4 at various radii from a simulation, converts them to strain using Psi4ToStrain, and extrapolates the result to infinite radius using a particular extrapolation order.";
 
 (* Old function names *)
 

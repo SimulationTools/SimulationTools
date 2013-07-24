@@ -91,6 +91,7 @@ ExportExtrapolatedWaveform[run_String, file_String, mass_, l_Integer, m_Integer,
 
   SetStatus["Exporting extrapolated waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file];
 
+  (* TODO: don't hard code 200 here *)
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   junkTime  = OptionValue[JunkTime];
   If[!SameQ[junkTime, None],
@@ -140,6 +141,7 @@ ExportExtrapolatedStrain[run_String, file_String, mass_, l_Integer, m_Integer, o
 
   SetStatus["Exporting extrapolated strain waveform for "<>run<>"("<>ToString[l]<>", "<>ToString[m]<>") to "<>file];
 
+  (* TODO: don't hard code 200 here *)
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
   strain    = StrainFromPsi4[extrap, om];
   junkTime  = OptionValue[JunkTime];
