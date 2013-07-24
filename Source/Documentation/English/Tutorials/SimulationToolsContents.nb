@@ -88,11 +88,7 @@ Cell[TextData[ButtonBox["Black holes",
 
 Cell[TextData[ButtonBox["Binaries",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/Binaries"]], "TOCChapter"],
-
-Cell[TextData[ButtonBox["Trackers",
- BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/Trackers"]], "TOCChapter"]
+ ButtonData->"paclet:SimulationTools/tutorial/Binaries"]], "TOCChapter"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -106,8 +102,8 @@ Cell[TextData[Cell[BoxData[
    "All", " ", "SimulationTools", " ", "functions", " ", "and", " ", 
     "symbols"}],
    BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/guide/Overview"], TraditionalForm]],
- FormatType->"TraditionalForm"]], "TOCChapter"]
+   ButtonData->"paclet:SimulationTools/guide/Overview"], 
+  TraditionalForm]]]], "TOCChapter"]
 }, Open  ]]
 }, Open  ]]
 },
