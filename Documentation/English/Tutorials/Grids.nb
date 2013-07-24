@@ -49,32 +49,25 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["Grids", "Title"],
+Cell["Grid Structure", "Title"],
 
 Cell["\<\
-The computational domain of a Cactus simulation may be a complicated \
-combination of maps and refinement levels. SimulationTools can be used to \
-access and visualize this information in a straightforward way.\
+The computational domain of a simulation may be a complicated combination of \
+maps (coordinate patches) and refinement levels with different grid spacings. \
+SimulationTools can be used to access and visualize this information in a \
+straightforward way.\
 \>", "Text"],
-
-Cell[CellGroupData[{
-
-Cell["Grid structure", "Section"],
-
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input",
- CellLabel->"In[1]:="],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"$SimulationPath", "=", 
    RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
   ";"}]], "Input",
- CellLabel->"In[2]:="],
+ CellLabel->"In[1]:="],
 
 Cell[CellGroupData[{
 
-Cell["Accessing grid structure information", "Subsection"],
+Cell["Accessing grid structure information", "Section"],
 
 Cell[BoxData[GridBox[{
    {"ReadGridSpacings", Cell["ReadTimeStep", "TableText"]},
@@ -85,22 +78,23 @@ Cell["Determining grid structure information.", "Caption",
  CellChangeTimes->{{3.5836505827251883`*^9, 3.583650594875369*^9}}],
 
 Cell["\<\
-Read grid spacing (by default, refinement level 0 is assumed)\
+Read grid spacing in the x, y and z directions (by default, refinement level \
+0 is assumed):\
 \>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadGridSpacings", "[", "\"\<bbh\>\"", "]"}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[2]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"2.`", ",", "2.`", ",", "2.`"}], "}"}]], "Output",
- CellLabel->"Out[3]="]
+ CellLabel->"Out[2]="]
 }, Open  ]],
 
-Cell["Read grid spacing on a specifinement level", "Text"],
+Cell["Read grid spacing on a specific refinement level:", "Text"],
 
 Cell[CellGroupData[{
 
@@ -108,27 +102,27 @@ Cell[BoxData[
  RowBox[{"ReadGridSpacings", "[", 
   RowBox[{"\"\<bbh\>\"", ",", 
    RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[3]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"0.03125`", ",", "0.03125`", ",", "0.03125`"}], "}"}]], "Output",
- CellLabel->"Out[4]="]
+ CellLabel->"Out[3]="]
 }, Open  ]],
 
-Cell["Read the time step on refinement level 0", "Text"],
+Cell["Read the time step on refinement level 0:", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadTimeStep", "[", "\"\<bbh\>\"", "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[4]:="],
 
 Cell[BoxData["0.5`"], "Output",
- CellLabel->"Out[5]="]
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
-Cell["and on other refinement levels", "Text"],
+Cell["and on other refinement levels:", "Text"],
 
 Cell[CellGroupData[{
 
@@ -136,42 +130,69 @@ Cell[BoxData[
  RowBox[{"ReadTimeStep", "[", 
   RowBox[{"\"\<bbh\>\"", ",", 
    RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData["0.015625`"], "Output",
- CellLabel->"Out[6]="]
+ CellLabel->"Out[5]="]
 }, Open  ]],
 
 Cell["\<\
-Read the coordinate time range over which simulation data is available\
+Read the coordinate time range over which simulation data is available:\
 \>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadTimeRange", "[", "\"\<bbh\>\"", "]"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"0", ",", "300"}], "}"}]], "Output",
- CellLabel->"Out[7]="]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell["\<\
-Find the maximum number of refinement levels in the simulation\
+Find the maximum number of refinement levels in the simulation:\
 \>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}]], "Input",
- CellLabel->"In[8]:="],
+ CellLabel->"In[7]:="],
 
 Cell[BoxData["7"], "Output",
+ CellLabel->"Out[7]="]
+}, Open  ]],
+
+Cell["\<\
+To determine the coordinate time interval corresponding to a single \
+iteration, \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"dt", "=", 
+  RowBox[{"ReadTimeStep", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", 
+    RowBox[{"RefinementLevel", "\[Rule]", 
+     RowBox[{
+      RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}], "-", 
+      "1"}]}]}], "]"}]}]], "Input",
+ CellLabel->"In[8]:="],
+
+Cell[BoxData["0.015625`"], "Output",
  CellLabel->"Out[8]="]
-}, Open  ]]
-}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Note that these functions rely on certain information being present in the \
+simulation, for example the parameter file.  If there is not enough \
+simulation output to determine the above quantities, the functions will fail.\
+\
+\>", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{

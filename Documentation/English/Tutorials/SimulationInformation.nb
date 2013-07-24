@@ -51,16 +51,17 @@ Cell[CellGroupData[{
 
 Cell["Simulation Information", "Title"],
 
-Cell["\<\
-SimulationTools provied functions for accessing information about a \
+Cell[TextData[{
+ "SimulationTools provides functions for accessing information about a \
 simulation. This currently works best with Cactus simulations. For full \
 functionality, certain output must have been enabled for the simulation. See \
-the Supported Codes and Data Formats tutorial for more information.\
-\>", "Text"],
-
-Cell[CellGroupData[{
-
-Cell["Working with DataRegions", "Section"],
+the ",
+ ButtonBox["Supported Codes and Data Formats",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:SimulationTools/tutorial/SupportedCodesAndDataFormats"],
+ " tutorial for more information."
+}], "Text"],
 
 Cell[BoxData[
  RowBox[{"<<", "SimulationTools`"}]], "Input",
@@ -75,11 +76,9 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Getting an overview of a simulation", "Subsection"],
+Cell["Getting an overview of a simulation", "Section"],
 
-Cell[BoxData[GridBox[{
-   {"SimulationOverview", "\[Placeholder]"}
-  }]], "DefinitionBox"],
+Cell[BoxData["SimulationOverview"], "DefinitionBox"],
 
 Cell["Simulation overview.", "Caption"],
 
@@ -1678,19 +1677,17 @@ S16sNVhqqvo/QhJSlw==
 
 Cell[CellGroupData[{
 
-Cell["Accessing individual simulation statistics", "Subsection"],
+Cell["Accessing individual simulation statistics", "Section"],
 
 Cell[BoxData[GridBox[{
-   {"ReadSimulationRunTime", "ReadSimulationSpeed", "ReadSimulationCoreCount"},
-   {"ReadSimulationCost", "\[Placeholder]", "\[Placeholder]"},
-   {"\[Placeholder]", "\[Placeholder]", "\[Placeholder]"},
-   {"\[Placeholder]", "\[Placeholder]", "\[Placeholder]"}
+   {"ReadSimulationRunTime", "ReadSimulationSpeed"},
+   {"ReadSimulationCost", "ReadSimulationCoreCount"}
   }]], "DefinitionBox3Col"],
 
 Cell["Accessing statistics on a simulation.", "Caption"],
 
 Cell["\<\
-We can compute the total number hours the simulation has run for\
+We can compute the total number of hours the simulation has run for,\
 \>", "Text"],
 
 Cell[CellGroupData[{
@@ -1950,8 +1947,12 @@ Cell[BoxData[
 
 Cell[BoxData["62.58975958983116`"], "Output",
  CellLabel->"Out[9]="]
-}, Open  ]]
-}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Much of this information is available only if the simulation was run using \
+SimFactory.  Support for alternative systems can be added as required.\
+\>", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
