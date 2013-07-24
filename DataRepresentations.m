@@ -656,7 +656,7 @@ SyntaxInformation[ToListOfData] =
 SyntaxInformation[WithResampling] =
  {"ArgumentsPattern" -> {_, ___}};
 
-SetAttributes[WithResampling, HoldRest];
+SetAttributes[WithResampling, HoldAll];
 WithResampling[method_, expr_] :=
  Block[{$ResamplingMethod = method}, expr];
 
