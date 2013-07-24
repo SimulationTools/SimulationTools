@@ -16,14 +16,14 @@
 
 BeginPackage["SimulationTools`CoordinateTransformations`"];
 
-(* Exported symbols *)
-RadialToTortoise::usage = "RadialToTortoise[r, M] gives the value of the Schwarzschild tortoise coordinate corresponding to the radial coordinate, r.";
-TortoiseToRadial::usage = "TortoiseToRadial[rstar_, M] gives the value of the radial coordinate corresponding to the Schwarzschild tortoise coordinate, rstar.";
+(* Experimental *)
+RadialToTortoise(*::usage = "RadialToTortoise[r, M] gives the value of the Schwarzschild tortoise coordinate corresponding to the radial coordinate, r."*);
+TortoiseToRadial(*::usage = "TortoiseToRadial[rstar_, M] gives the value of the radial coordinate corresponding to the Schwarzschild tortoise coordinate, rstar."*);
 
-ThornburgToCartesian::usage = "ThornburgToCartesian[{\[Theta], \[Phi], r}, patch] gives the cartesian coordinates in terms of Thornburg 04 coordinates on the specified patch.";
-CartesianToThornburg::usage = "CartesianToThornburg[{x, y, z}, patch] gives the Thornburg 04 coordinates on the specified patch in terms of cartesian coordinates.";
+ThornburgToCartesian(*::usage = "ThornburgToCartesian[{\[Theta], \[Phi], r}, patch] gives the cartesian coordinates in terms of Thornburg 04 coordinates on the specified patch."*);
+CartesianToThornburg(*::usage = "CartesianToThornburg[{x, y, z}, patch] gives the Thornburg 04 coordinates on the specified patch in terms of cartesian coordinates."*);
 
-KerrAxialTortoise::usage = "KerrAxialTortoise[a, M, r0, rmax] returns a function representing the Kerr tortoise coordinate as a function of the radial coordinate. The arguments M, a, r0 and rmax are optional and may be omitted."
+KerrAxialTortoise(*::usage = "KerrAxialTortoise[a, M, r0, rmax] returns a function representing the Kerr tortoise coordinate as a function of the radial coordinate. The arguments M, a, r0 and rmax are optional and may be omitted."*);
 
 IsotropicToSchwarzschild;
 IsotropicToTortoise;
