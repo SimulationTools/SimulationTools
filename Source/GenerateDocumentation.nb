@@ -5,6 +5,14 @@ Cell[BoxData[
    RowBox[{"ParentDirectory", "[", 
     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "]"}], ";"}]], "Input"],
 
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{"$FrontEndSession", ",", 
+   RowBox[{"MessageOptions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<InsufficientVersionWarning\>\"", "\[Rule]", "False"}], 
+     "}"}]}]}], "]"}]], "Input"],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[
@@ -18,8 +26,8 @@ Cell[BoxData[
        RowBox[{"-", "2"}]}], "]"}], ",", "\"\<Documentation\>\""}], "}"}], 
    "]"}]}]], "Input"],
 
-Cell[BoxData["\<\"/Users/barry/Library/Mathematica/Applications/\
-SimulationTools/Documentation\"\>"], "Output"]
+Cell[BoxData["\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation\"\>"], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -40,16 +48,16 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   RowBox[{"{", 
-   RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+   RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
 Documentation/English/Guides/Data Representations.nb\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
 Documentation/English/Guides/Numerical Relativity.nb\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
 Documentation/English/Guides/Overview.nb\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "110", "\[RightSkeleton]"}], 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/NumericalRelativity.nb\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+    RowBox[{"\[LeftSkeleton]", "112", "\[RightSkeleton]"}], 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Tutorials/SimulationToolsContents.nb\"\>", 
+    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
 Documentation/English/Tutorials/SimulationToolsIntroduction.nb\"\>"}], "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
@@ -99,20 +107,6 @@ Cell[BoxData[
 
 Cell[BoxData["\<\"RichardsonExtrapolant\"\>"], "Print"],
 
-Cell[BoxData["\<\"CartesianToThornburg\"\>"], "Print"],
-
-Cell[BoxData["\<\"KerrAxialTortoise\"\>"], "Print"],
-
-Cell[BoxData["\<\"RadialToTortoise\"\>"], "Print"],
-
-Cell[BoxData["\<\"ThornburgToCartesian\"\>"], "Print"],
-
-Cell[BoxData["\<\"TortoiseToRadial\"\>"], "Print"],
-
-Cell[BoxData["\<\"SolarMassInSeconds\"\>"], "Print"],
-
-Cell[BoxData["\<\"WaveformMatch\"\>"], "Print"],
-
 Cell[BoxData["\<\"DataRegion\"\>"], "Print"],
 
 Cell[BoxData[
@@ -124,6 +118,8 @@ Cell[BoxData[
   SequenceForm["Removing ", {"d", "d2", "d3", "f"}],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"MergedDataRegion\"\>"], "Print"],
+
 Cell[BoxData["\<\"ToDataRegion\"\>"], "Print"],
 
 Cell[BoxData[
@@ -134,8 +130,6 @@ Cell[BoxData[
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"VariableName\"\>"], "Print"],
-
-Cell[BoxData["\<\"Add\"\>"], "Print"],
 
 Cell[BoxData["\<\"Coordinate\"\>"], "Print"],
 
@@ -155,17 +149,7 @@ Cell[BoxData["\<\"CoordinateSpacings\"\>"], "Print"],
 
 Cell[BoxData["\<\"DataRepresentationQ\"\>"], "Print"],
 
-Cell[BoxData["\<\"Div\"\>"], "Print"],
-
-Cell[BoxData["\<\"Downsampled\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"d\"\>", ",", "\<\"d2\"\>"}], "}"}]}],
-  SequenceForm["Removing ", {"d", "d2"}],
-  Editable->False]], "Print"],
+Cell[BoxData["\<\"Downsample\"\>"], "Print"],
 
 Cell[BoxData["\<\"Frequency\"\>"], "Print"],
 
@@ -190,8 +174,6 @@ Cell[BoxData["\<\"MinCoordinate\"\>"], "Print"],
 
 Cell[BoxData["\<\"MinCoordinates\"\>"], "Print"],
 
-Cell[BoxData["\<\"Mul\"\>"], "Print"],
-
 Cell[BoxData["\<\"NDerivative\"\>"], "Print"],
 
 Cell[BoxData["\<\"Phase\"\>"], "Print"],
@@ -203,8 +185,6 @@ Cell[BoxData["\<\"SameGridQ\"\>"], "Print"],
 Cell[BoxData["\<\"Shifted\"\>"], "Print"],
 
 Cell[BoxData["\<\"Slab\"\>"], "Print"],
-
-Cell[BoxData["\<\"Sub\"\>"], "Print"],
 
 Cell[BoxData["\<\"ToList\"\>"], "Print"],
 
@@ -234,6 +214,8 @@ Cell[BoxData[
   SequenceForm["Removing ", {"dr", "dt"}],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"WithResampling\"\>"], "Print"],
+
 Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
 
 Cell[BoxData["\<\"CoordinateAtInterpolatedMax\"\>"], "Print"],
@@ -252,11 +234,11 @@ Cell[BoxData["\<\"InterpolatedMax\"\>"], "Print"],
 
 Cell[BoxData["\<\"InterpolatedWhere\"\>"], "Print"],
 
+Cell[BoxData["\<\"MaxCoordinateSpacing\"\>"], "Print"],
+
 Cell[BoxData["\<\"MinCoordinateSpacing\"\>"], "Print"],
 
 Cell[BoxData["\<\"RestrictedToCommonInterval\"\>"], "Print"],
-
-Cell[BoxData["\<\"RestrictedToInterval\"\>"], "Print"],
 
 Cell[BoxData["\<\"ToDataTable\"\>"], "Print"],
 
@@ -291,15 +273,14 @@ Cell[BoxData["\<\"ReadTimeRange\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadTimeStep\"\>"], "Print"],
 
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"RefinementLevel\"\>", "}"}]}],
+  SequenceForm["Removing ", {"RefinementLevel"}],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"ReadADMMass\"\>"], "Print"],
-
-Cell[BoxData["\<\"ReadKick\"\>"], "Print"],
-
-Cell[BoxData["\<\"ReadKickVector\"\>"], "Print"],
-
-Cell[BoxData["\<\"ReadLinearMomentumFlux\"\>"], "Print"],
-
-Cell[BoxData["\<\"ReadLinearMomentumRadiated\"\>"], "Print"],
 
 Cell[BoxData["\<\"ClearAllMemos\"\>"], "Print"],
 
@@ -317,21 +298,56 @@ Cell[BoxData["\<\"ReadSimulationParameter\"\>"], "Print"],
 
 Cell[BoxData["\<\"FindSimulationFiles\"\>"], "Print"],
 
+Cell[BoxData["\<\"SimulationNames\"\>"], "Print"],
+
+Cell[BoxData[
+ StyleBox["\<\"Documented options {} do not match actual options {FullPath} \
+for SimulationNames\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0, 0],
+  FrontFaceColor->RGBColor[1, 0, 0],
+  BackFaceColor->RGBColor[1, 0, 0],
+  GraphicsColor->RGBColor[1, 0, 0],
+  FontColor->RGBColor[1, 0, 0]]], "Print"],
+
 Cell[BoxData["\<\"ReadSimulationCoreCount\"\>"], "Print"],
-
-Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
-
-Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
 
-Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
+Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationSpeed\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"speed\"\>", "}"}]}],
+  SequenceForm["Removing ", {"speed"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"mem\"\>", "}"}]}],
+  SequenceForm["Removing ", {"mem"}],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
 
 Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"phase1\"\>", ",", "\<\"phase1a\"\>", ",", "\<\"phase2\"\>", 
+     ",", "\<\"phase2a\"\>"}], "}"}]}],
+  SequenceForm["Removing ", {"phase1", "phase1a", "phase2", "phase2a"}],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ExportWaveform\"\>"], "Print"],
 
@@ -339,9 +355,13 @@ Cell[BoxData["\<\"ImportWaveform\"\>"], "Print"],
 
 Cell[BoxData["\<\"Psi4ToStrain\"\>"], "Print"],
 
-Cell[BoxData["\<\"ReadExtrapolatedPsi4\"\>"], "Print"],
-
-Cell[BoxData["\<\"ReadExtrapolatedStrain\"\>"], "Print"],
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"h\"\>", ",", "\<\"psi4\"\>"}], "}"}]}],
+  SequenceForm["Removing ", {"h", "psi4"}],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadPsi4\"\>"], "Print"],
 
@@ -349,11 +369,135 @@ Cell[BoxData["\<\"ReadPsi4Modes\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadPsi4Radii\"\>"], "Print"],
 
+Cell[BoxData["\<\"ReadRadiallyExtrapolatedPsi4\"\>"], "Print"],
+
+Cell[BoxData[
+ StyleBox["\<\"Documented options {} do not match actual options {AbsPhase, \
+DiscretePhaseAlignmentTime, PerturbativeAdjustment, \
+RadialCoordinateTransformation, Radii, RadiusRange} for \
+ReadRadiallyExtrapolatedPsi4\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0, 0],
+  FrontFaceColor->RGBColor[1, 0, 0],
+  BackFaceColor->RGBColor[1, 0, 0],
+  GraphicsColor->RGBColor[1, 0, 0],
+  FontColor->RGBColor[1, 0, 0]]], "Print"],
+
+Cell[BoxData["\<\"ReadRadiallyExtrapolatedStrain\"\>"], "Print"],
+
+Cell[BoxData[
+ StyleBox["\<\"Documented options {} do not match actual options {AbsPhase, \
+DiscretePhaseAlignmentTime, PerturbativeAdjustment, \
+RadialCoordinateTransformation, Radii, RadiusRange} for \
+ReadRadiallyExtrapolatedStrain\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0, 0],
+  FrontFaceColor->RGBColor[1, 0, 0],
+  BackFaceColor->RGBColor[1, 0, 0],
+  GraphicsColor->RGBColor[1, 0, 0],
+  FontColor->RGBColor[1, 0, 0]]], "Print"],
+
 Cell[BoxData["\<\"ReadWaveformCycles\"\>"], "Print"],
 
 Cell[BoxData["\<\"WaveformCycles\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Building guide \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides/Data Representations.nb\"\>"}],
+  SequenceForm[
+  "Building guide ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides/Data Representations.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Creating \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides\"\>"}],
+  SequenceForm[
+  "Creating ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Building guide \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides/Numerical Relativity.nb\"\>"}],
+  SequenceForm[
+  "Building guide ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides/Numerical Relativity.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Creating \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides\"\>"}],
+  SequenceForm[
+  "Creating ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Building guide \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides/Overview.nb\"\>"}],
+  SequenceForm[
+  "Building guide ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides/Overview.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Creating \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides\"\>"}],
+  SequenceForm[
+  "Creating ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Building guide \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides/SimulationTools.nb\"\>"}],
+  SequenceForm[
+  "Building guide ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides/SimulationTools.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Creating \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Guides\"\>"}],
+  SequenceForm[
+  "Creating ", 
+   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
+English/Guides"],
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
 
@@ -368,14 +512,15 @@ Cell[BoxData[
      ",", "\<\"pos\"\>", ",", "\<\"r\"\>", ",", "\<\"result\"\>", 
      ",", "\<\"run\"\>", ",", "\<\"t\"\>", ",", "\<\"t$\"\>", 
      ",", "\<\"x1\"\>", ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", 
-     ",", "\<\"xFn$9875\"\>", ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", 
-     ",", "\<\"yFn\"\>", ",", "\<\"yFn$9875\"\>", ",", "\<\"z1\"\>", 
-     ",", "\<\"z2\"\>", ",", "\<\"zFn\"\>", ",", "\<\"zFn$9875\"\>"}], "}"}]}],
+     ",", "\<\"xFn$15627\"\>", ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", 
+     ",", "\<\"yFn\"\>", ",", "\<\"yFn$15627\"\>", ",", "\<\"z1\"\>", 
+     ",", "\<\"z2\"\>", ",", "\<\"zFn\"\>", ",", "\<\"zFn$15627\"\>"}], 
+    "}"}]}],
   SequenceForm[
   "Removing ", {
    "path1", "path2", "phi", "pos", "r", "result", "run", "t", "t$", "x1", 
-    "x2", "xFn", "xFn$9875", "y1", "y2", "yFn", "yFn$9875", "z1", "z2", "zFn",
-     "zFn$9875"}],
+    "x2", "xFn", "xFn$15627", "y1", "y2", "yFn", "yFn$15627", "z1", "z2", 
+    "zFn", "zFn$15627"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
@@ -399,6 +544,22 @@ Cell[BoxData[
     "spin2z", "spin3", "spin3x", "spin3y", "spin3z"}],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/ConvergenceTesting.\
+md\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"cm\"\>", ",", "\<\"f1\"\>", ",", "\<\"f2\"\>", 
+     ",", "\<\"f3\"\>", ",", "\<\"fErr\"\>", ",", "\<\"fExt\"\>", 
+     ",", "\<\"h1\"\>", ",", "\<\"h2\"\>", ",", "\<\"h3\"\>", 
+     ",", "\<\"result\"\>", ",", "\<\"t\"\>"}], "}"}]}],
+  SequenceForm[
+  "Removing ", {
+   "cm", "f1", "f2", "f3", "fErr", "fExt", "h1", "h2", "h3", "result", "t"}],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataRegion.md\"\>"], \
 "Print"],
 
@@ -411,6 +572,24 @@ Cell[BoxData[
      ",", "\<\"t\"\>", ",", "\<\"x\"\>", ",", "\<\"y\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {"d", "d2", "d3", "data", "f", "result", "t", "x", "y"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataRepresentations.\
+md\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"cost\"\>", ",", "\<\"d\"\>", ",", "\<\"d2\"\>", 
+     ",", "\<\"d3\"\>", ",", "\<\"data\"\>", ",", "\<\"f\"\>", 
+     ",", "\<\"list\"\>", ",", "\<\"result\"\>", ",", "\<\"sint\"\>", 
+     ",", "\<\"sumSquared\"\>", ",", "\<\"t\"\>", ",", "\<\"tData\"\>", 
+     ",", "\<\"x\"\>", ",", "\<\"y\"\>"}], "}"}]}],
+  SequenceForm[
+  "Removing ", {
+   "cost", "d", "d2", "d3", "data", "f", "list", "result", "sint", 
+    "sumSquared", "t", "tData", "x", "y"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataTable.md\"\>"], \
@@ -438,8 +617,19 @@ Cell[BoxData[
   SequenceForm["Removing ", {"Iteration", "phi", "RefinementLevel", "result"}],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Kicks.md\"\>"], \
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Grids.md\"\>"], \
 "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"RefinementLevel\"\>", ",", "\<\"result\"\>"}], "}"}]}],
+  SequenceForm["Removing ", {"RefinementLevel", "result"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/ImportingData.md\"\>\
+"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -466,6 +656,67 @@ Cell[BoxData[
     "sn", "spin", "t", "traj0", "traj1"}],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Parameters.md\"\>"], \
+"Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"dx\"\>", ",", "\<\"result\"\>"}], "}"}]}],
+  SequenceForm["Removing ", {"dx", "result"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Plotting.md\"\>"], \
+"Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"arrayPlot\"\>", ",", "\<\"bhLine\"\>", ",", "\<\"dRdt\"\>", 
+     ",", "\<\"Iteration\"\>", ",", "\<\"ph\"\>", ",", "\<\"phi\"\>", 
+     ",", "\<\"phi3D\"\>", ",", "\<\"phi3DFn\"\>", ",", "\<\"phiFn\"\>", 
+     ",", "\<\"R\"\>", ",", "\<\"RefinementLevel\"\>", ",", "\<\"result\"\>", 
+     ",", "\<\"t\"\>", ",", "\<\"t0\"\>", ",", "\<\"th\"\>", 
+     ",", "\<\"x0\"\>", ",", "\<\"x1\"\>", ",", "\<\"x2\"\>"}], "}"}]}],
+  SequenceForm[
+  "Removing ", {
+   "arrayPlot", "bhLine", "dRdt", "Iteration", "ph", "phi", "phi3D", 
+    "phi3DFn", "phiFn", "R", "RefinementLevel", "result", "t", "t0", "th", 
+    "x0", "x1", "x2"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/\
+SimulationInformation.md\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"result\"\>", "}"}]}],
+  SequenceForm["Removing ", {"result"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Simulations.md\"\>"],\
+ "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"result\"\>", "}"}]}],
+  SequenceForm["Removing ", {"result"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/\
+SimulationToolsContents.md\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"result\"\>", "}"}]}],
+  SequenceForm["Removing ", {"result"}],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/\
 SimulationToolsIntroduction.md\"\>"], "Print"],
 
@@ -474,6 +725,37 @@ Cell[BoxData[
   RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
    RowBox[{"{", "\<\"result\"\>", "}"}]}],
   SequenceForm["Removing ", {"result"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/\
+SupportedCodesAndDataFormats.md\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"result\"\>", "}"}]}],
+  SequenceForm["Removing ", {"result"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"Source/Documentation/English/Tutorials/Waveforms.md\"\>"], \
+"Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"extrapolationorder\"\>", ",", "\<\"file\"\>", 
+     ",", "\<\"h\"\>", ",", "\<\"hFFI\"\>", ",", "\<\"hTD\"\>", 
+     ",", "\<\"h\[Infinity]\"\>", ",", "\<\"l\"\>", ",", "\<\"m\"\>", 
+     ",", "\<\"r\"\>", ",", "\<\"result\"\>", ",", "\<\"\[Psi]4\"\>", 
+     ",", "\<\"\[Psi]4r100\"\>", ",", "\<\"\[Psi]4r30\"\>", 
+     ",", "\<\"\[Psi]4r50\"\>", ",", "\<\"\[Psi]4r80\"\>", 
+     ",", "\<\"\[Psi]4\[Infinity]\"\>", ",", "\<\"\[Omega]0\"\>"}], "}"}]}],
+  SequenceForm[
+  "Removing ", {
+   "extrapolationorder", "file", "h", "hFFI", "hTD", "h\[Infinity]", "l", "m",
+     "r", "result", "\[Psi]4", "\[Psi]4r100", "\[Psi]4r30", "\[Psi]4r50", 
+    "\[Psi]4r80", "\[Psi]4\[Infinity]", "\[Omega]0"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Indexing Documentation\"\>"], "Print"],
@@ -502,17 +784,17 @@ GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
 \\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
 True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
 FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
-FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275]]]]], \
+FrontEndObject[LinkObject[\\\"xfk_shm\\\", 1, 1]], 1654]]]]], \
 Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
 \\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
-\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"275\\\", \
-\\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
-Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"1654\\\", \\\"\\\\\
+\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
+Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
 Function[Annotation[Slot[1], \
 \\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
 Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
 Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
-NotebookObject[FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275], \
+NotebookObject[FrontEndObject[LinkObject[\\\"xfk_shm\\\", 1, 1]], 1654], \
 Rule[Editable, False]]\\)\[NoBreak]) \
 (\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
 "Message", "MSG"],
@@ -537,17 +819,17 @@ GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
 \\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
 True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
 FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
-FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275]]]]], \
+FrontEndObject[LinkObject[\\\"xfk_shm\\\", 1, 1]], 1654]]]]], \
 Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
 \\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
-\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"275\\\", \
-\\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
-Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"1654\\\", \\\"\\\\\
+\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
+Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
 Function[Annotation[Slot[1], \
 \\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
 Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
 Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
-NotebookObject[FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275], \
+NotebookObject[FrontEndObject[LinkObject[\\\"xfk_shm\\\", 1, 1]], 1654], \
 Rule[Editable, False]]\\)\[NoBreak]) \
 (\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
 "Message", "MSG"],
@@ -555,8 +837,8 @@ Rule[Editable, False]]\\)\[NoBreak]) \
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", 
-   "\[InvisibleSpace]", "\<\"DataRegion.nb\"\>"}],
-  SequenceForm["  Exporting ", "DataRegion.nb"],
+   "\[InvisibleSpace]", "\<\"ConvergenceTesting.nb\"\>"}],
+  SequenceForm["  Exporting ", "ConvergenceTesting.nb"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -572,17 +854,17 @@ GridBox[{{TooltipBox[ButtonBox[StyleBox[DynamicBox[FEPrivate`FrontEndResource[\
 \\\"FEBitmaps\\\", \\\"ManipulatePasteIcon\\\"]], Rule[DynamicUpdating, \
 True]], Rule[ButtonFrame, None], RuleDelayed[ButtonFunction, \
 FrontEndExecute[List[FrontEnd`SetSelectedNotebook[NotebookObject[\
-FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275]]]]], \
+FrontEndObject[LinkObject[\\\"xfk_shm\\\", 1, 1]], 1654]]]]], \
 Rule[ButtonEvaluator, None], Rule[BaseStyle, List[]], Rule[Method, \\\"Queued\
 \\\"]], DynamicBox[FEPrivate`FrontEndResource[\\\"FEStrings\\\", \
-\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"275\\\", \
-\\\"\\\\\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/\
-Wolfram/Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
+\\\"NotebookObjectToTheFront\\\"]]], TagBox[TooltipBox[\\\"1654\\\", \\\"\\\\\
+\\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
+Reference.nb\\\\\\\"\\\", Rule[LabelStyle, \\\"TextStyling\\\"]], \
 Function[Annotation[Slot[1], \
 \\\"/Applications/Mathematica.app/SystemFiles/FrontEnd/StyleSheets/Wolfram/\
 Reference.nb\\\", \\\"Tooltip\\\"]]]}}, ColumnAlignments -> Left], \
 Rule[FrameMargins, List[List[4, 5], List[4, 4]]]]\\)\\)]\\), \
-NotebookObject[FrontEndObject[LinkObject[\\\"p58_shm\\\", 1, 1]], 275], \
+NotebookObject[FrontEndObject[LinkObject[\\\"xfk_shm\\\", 1, 1]], 1654], \
 Rule[Editable, False]]\\)\[NoBreak]) \
 (\[NoBreak]\\!\\(StyleData[\\\"PointerEvent\\\"]\\)\[NoBreak])\"\>"}]], \
 "Message", "MSG"],
@@ -605,6 +887,20 @@ Cell[CellGroupData[{
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"DataRegion.nb\"\>"}],
+  SequenceForm["  Exporting ", "DataRegion.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"DataRepresentations.nb\"\>"}],
+  SequenceForm["  Exporting ", "DataRepresentations.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"DataTable.nb\"\>"}],
   SequenceForm["  Exporting ", "DataTable.nb"],
   Editable->False]], "Print"],
@@ -618,8 +914,15 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"  Exporting \"\>", "\[InvisibleSpace]", "\<\"Kicks.nb\"\>"}],
-  SequenceForm["  Exporting ", "Kicks.nb"],
+  RowBox[{"\<\"  Exporting \"\>", "\[InvisibleSpace]", "\<\"Grids.nb\"\>"}],
+  SequenceForm["  Exporting ", "Grids.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"ImportingData.nb\"\>"}],
+  SequenceForm["  Exporting ", "ImportingData.nb"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -632,8 +935,56 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"Parameters.nb\"\>"}],
+  SequenceForm["  Exporting ", "Parameters.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", "\[InvisibleSpace]", "\<\"Plotting.nb\"\>"}],
+  SequenceForm["  Exporting ", "Plotting.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"SimulationInformation.nb\"\>"}],
+  SequenceForm["  Exporting ", "SimulationInformation.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"Simulations.nb\"\>"}],
+  SequenceForm["  Exporting ", "Simulations.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"SimulationToolsContents.nb\"\>"}],
+  SequenceForm["  Exporting ", "SimulationToolsContents.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"SimulationToolsIntroduction.nb\"\>"}],
   SequenceForm["  Exporting ", "SimulationToolsIntroduction.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"SupportedCodesAndDataFormats.nb\"\>"}],
+  SequenceForm["  Exporting ", "SupportedCodesAndDataFormats.nb"],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  Exporting \"\>", 
+   "\[InvisibleSpace]", "\<\"Waveforms.nb\"\>"}],
+  SequenceForm["  Exporting ", "Waveforms.nb"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Exporting tutorial index\"\>"], "Print"],
@@ -740,62 +1091,67 @@ Cell[BoxData[
      ",", "\<\"DefaultFrameTicksStyle\"\>", 
      ",", "\<\"DefaultGridLinesStyle\"\>", ",", "\<\"DefaultTicksStyle\"\>", 
      ",", "\<\"dest\"\>", ",", "\<\"destGuides\"\>", 
-     ",", "\<\"destGuides$721\"\>", ",", "\<\"dest$\"\>", 
-     ",", "\<\"dest$27477\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>",
-      ",", "\<\"docDir$27477\"\>", ",", "\<\"docFiles\"\>", 
-     ",", "\<\"docLink\"\>", ",", "\<\"docLink$721\"\>", 
-     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$721\"\>", 
+     ",", "\<\"destGuides$914\"\>", ",", "\<\"dest$\"\>", 
+     ",", "\<\"dest$49687\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>",
+      ",", "\<\"docDir$49687\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"docLink\"\>", ",", "\<\"docLink$914\"\>", 
+     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$914\"\>", 
      ",", "\<\"docSymbols\"\>", ",", "\<\"docSymbols$\"\>", 
-     ",", "\<\"docSymbols$372463\"\>", ",", "\<\"DrawBackFaces\"\>", 
+     ",", "\<\"docSymbols$804515\"\>", ",", "\<\"DrawBackFaces\"\>", 
      ",", "\<\"Ex\"\>", ",", "\<\"exportGuides\"\>", 
-     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$27477\"\>", 
+     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$49687\"\>", 
      ",", "\<\"exportNotebook\"\>", ",", "\<\"exportNotebook$\"\>", 
-     ",", "\<\"exportNotebook$27477\"\>", ",", "\<\"exportSymbols\"\>", 
-     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$27477\"\>", 
+     ",", "\<\"exportNotebook$49687\"\>", ",", "\<\"exportSymbols\"\>", 
+     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$49687\"\>", 
      ",", "\<\"exportTutorials\"\>", ",", "\<\"exportTutorials$\"\>", 
-     ",", "\<\"exportTutorials$27477\"\>", ",", "\<\"formatType\"\>", 
+     ",", "\<\"exportTutorials$49687\"\>", ",", "\<\"formatType\"\>", 
      ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
       ",", "\<\"FrontFaceSpecularExponent\"\>", ",", "\<\"g\"\>", 
      ",", "\<\"GenerateAnnotationDialog\"\>", 
      ",", "\<\"GeneratedCellStyles\"\>", ",", "\<\"GenerateDocumentation\"\>",
       ",", "\<\"generateHTMLDocumentation\"\>", 
-     ",", "\<\"generateHTMLDocumentation$721\"\>", 
+     ",", "\<\"generateHTMLDocumentation$914\"\>", 
      ",", "\<\"GhostCellInEmptyNotebook\"\>", ",", "\<\"GreekStyle\"\>", 
      ",", "\<\"guideNames\"\>", ",", "\<\"guideNames$\"\>", 
      ",", "\<\"HistoryData\"\>", ",", "\<\"LineHeight\"\>", 
-     ",", "\<\"LowerCaseStyle\"\>", ",", "\<\"n2\"\>", ",", "\<\"n2$\"\>", 
-     ",", "\<\"nb\"\>", ",", "\<\"nbf\"\>", ",", "\<\"nbf$\"\>", 
-     ",", "\<\"nb$\"\>", ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", 
-     ",", "\<\"nn$\"\>", ",", "\<\"package\"\>", ",", "\<\"package100\"\>", 
-     ",", "\<\"package101\"\>", ",", "\<\"package103\"\>", 
-     ",", "\<\"package104\"\>", ",", "\<\"package105\"\>", 
-     ",", "\<\"package106\"\>", ",", "\<\"package107\"\>", 
-     ",", "\<\"package108\"\>", ",", "\<\"package109\"\>", 
-     ",", "\<\"package110\"\>", ",", "\<\"package112\"\>", 
-     ",", "\<\"package113\"\>", ",", "\<\"package114\"\>", 
-     ",", "\<\"package115\"\>", ",", "\<\"package116\"\>", 
-     ",", "\<\"package117\"\>", ",", "\<\"package118\"\>", 
-     ",", "\<\"package119\"\>", ",", "\<\"package120\"\>", 
-     ",", "\<\"package121\"\>", ",", "\<\"package122\"\>", 
-     ",", "\<\"package123\"\>", ",", "\<\"package124\"\>", 
-     ",", "\<\"package125\"\>", ",", "\<\"package127\"\>", 
-     ",", "\<\"package128\"\>", ",", "\<\"package129\"\>", 
-     ",", "\<\"package130\"\>", ",", "\<\"package131\"\>", 
-     ",", "\<\"package132\"\>", ",", "\<\"package99\"\>", 
+     ",", "\<\"LowerCaseStyle\"\>", ",", "\<\"MenuAnchor\"\>", 
+     ",", "\<\"n2\"\>", ",", "\<\"n2$\"\>", ",", "\<\"nb\"\>", 
+     ",", "\<\"nbf\"\>", ",", "\<\"nbf$\"\>", ",", "\<\"nb$\"\>", 
+     ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", ",", "\<\"nn$\"\>", 
+     ",", "\<\"package\"\>", ",", "\<\"package100\"\>", 
+     ",", "\<\"package101\"\>", ",", "\<\"package102\"\>", 
+     ",", "\<\"package103\"\>", ",", "\<\"package104\"\>", 
+     ",", "\<\"package105\"\>", ",", "\<\"package106\"\>", 
+     ",", "\<\"package107\"\>", ",", "\<\"package108\"\>", 
+     ",", "\<\"package109\"\>", ",", "\<\"package110\"\>", 
+     ",", "\<\"package111\"\>", ",", "\<\"package113\"\>", 
+     ",", "\<\"package114\"\>", ",", "\<\"package115\"\>", 
+     ",", "\<\"package116\"\>", ",", "\<\"package117\"\>", 
+     ",", "\<\"package118\"\>", ",", "\<\"package87\"\>", 
+     ",", "\<\"package88\"\>", ",", "\<\"package89\"\>", 
+     ",", "\<\"package91\"\>", ",", "\<\"package92\"\>", 
+     ",", "\<\"package93\"\>", ",", "\<\"package94\"\>", 
+     ",", "\<\"package95\"\>", ",", "\<\"package96\"\>", 
+     ",", "\<\"package98\"\>", ",", "\<\"package99\"\>", 
      ",", "\<\"packages\"\>", ",", "\<\"packageSymbols\"\>", 
-     ",", "\<\"packageSymbols$721\"\>", ",", "\<\"packages$721\"\>", 
+     ",", "\<\"packageSymbols$914\"\>", ",", "\<\"packages$914\"\>", 
      ",", "\<\"package$\"\>", ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
      ",", "\<\"PasteAutoQuoteCharacters\"\>", ",", "\<\"ps\"\>", 
+     ",", "\<\"Quantity\"\>", ",", "\<\"RawInputForm\"\>", 
      ",", "\<\"ReturnCreatesNewCell\"\>", ",", "\<\"s\"\>", 
      ",", "\<\"sections\"\>", ",", "\<\"sections2\"\>", 
-     ",", "\<\"source10\"\>", ",", "\<\"source102\"\>", 
-     ",", "\<\"source11\"\>", ",", "\<\"source111\"\>", 
-     ",", "\<\"source12\"\>", ",", "\<\"source126\"\>", 
-     ",", "\<\"source13\"\>", ",", "\<\"source133\"\>", 
+     ",", "\<\"source10\"\>", ",", "\<\"source11\"\>", 
+     ",", "\<\"source112\"\>", ",", "\<\"source119\"\>", 
+     ",", "\<\"source12\"\>", ",", "\<\"source120\"\>", 
+     ",", "\<\"source121\"\>", ",", "\<\"source122\"\>", 
+     ",", "\<\"source123\"\>", ",", "\<\"source124\"\>", 
+     ",", "\<\"source125\"\>", ",", "\<\"source126\"\>", 
+     ",", "\<\"source127\"\>", ",", "\<\"source128\"\>", 
+     ",", "\<\"source129\"\>", ",", "\<\"source13\"\>", 
+     ",", "\<\"source130\"\>", ",", "\<\"source131\"\>", 
+     ",", "\<\"source132\"\>", ",", "\<\"source133\"\>", 
      ",", "\<\"source134\"\>", ",", "\<\"source135\"\>", 
-     ",", "\<\"source136\"\>", ",", "\<\"source137\"\>", 
-     ",", "\<\"source138\"\>", ",", "\<\"source139\"\>", 
-     ",", "\<\"source14\"\>", ",", "\<\"source140\"\>", 
+     ",", "\<\"source136\"\>", ",", "\<\"source14\"\>", 
      ",", "\<\"source15\"\>", ",", "\<\"source16\"\>", 
      ",", "\<\"source17\"\>", ",", "\<\"source18\"\>", 
      ",", "\<\"source19\"\>", ",", "\<\"source20\"\>", 
@@ -831,27 +1187,22 @@ Cell[BoxData[
      ",", "\<\"source79\"\>", ",", "\<\"source8\"\>", ",", "\<\"source80\"\>",
       ",", "\<\"source81\"\>", ",", "\<\"source82\"\>", 
      ",", "\<\"source83\"\>", ",", "\<\"source84\"\>", 
-     ",", "\<\"source85\"\>", ",", "\<\"source86\"\>", 
-     ",", "\<\"source87\"\>", ",", "\<\"source88\"\>", 
-     ",", "\<\"source89\"\>", ",", "\<\"source9\"\>", ",", "\<\"source90\"\>",
-      ",", "\<\"source91\"\>", ",", "\<\"source92\"\>", 
-     ",", "\<\"source93\"\>", ",", "\<\"source94\"\>", 
-     ",", "\<\"source95\"\>", ",", "\<\"source96\"\>", 
-     ",", "\<\"source97\"\>", ",", "\<\"source98\"\>", 
-     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$721\"\>", 
+     ",", "\<\"source85\"\>", ",", "\<\"source86\"\>", ",", "\<\"source9\"\>",
+      ",", "\<\"source90\"\>", ",", "\<\"source97\"\>", 
+     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$914\"\>", 
      ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
-     ",", "\<\"srcDir$372463\"\>", ",", "\<\"ss\"\>", ",", "\<\"ss$\"\>", 
+     ",", "\<\"srcDir$804515\"\>", ",", "\<\"ss\"\>", ",", "\<\"ss$\"\>", 
      ",", "\<\"StripStyleOnPaste\"\>", ",", "\<\"StyleDefintions\"\>", 
      ",", "\<\"symbols\"\>", ",", "\<\"symbolsSrcDir\"\>", 
-     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$372463\"\>", 
+     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$804515\"\>", 
      ",", "\<\"symbols$\"\>", ",", "\<\"s$\"\>", 
      ",", "\<\"TrackCellChangeTimes\"\>", ",", "\<\"tutorialDest\"\>", 
      ",", "\<\"tutorialDest$\"\>", ",", "\<\"tutorialHTMLNames\"\>", 
      ",", "\<\"tutorialHTMLNames$\"\>", ",", "\<\"tutorials\"\>", 
-     ",", "\<\"tutorialSources\"\>", ",", "\<\"tutorialSources$721\"\>", 
+     ",", "\<\"tutorialSources\"\>", ",", "\<\"tutorialSources$914\"\>", 
      ",", "\<\"tutorials$\"\>", ",", "\<\"tutorialTitles\"\>", 
      ",", "\<\"tutorialTitles$\"\>", ",", "\<\"undocumentedSymbols\"\>", 
-     ",", "\<\"undocumentedSymbols$721\"\>", ",", "\<\"url\"\>", 
+     ",", "\<\"undocumentedSymbols$914\"\>", ",", "\<\"url\"\>", 
      ",", "\<\"url$\"\>", ",", "\<\"$HTMLDestination\"\>", 
      ",", "\<\"$PackageSymbols\"\>"}], "}"}]}],
   SequenceForm[
@@ -861,55 +1212,55 @@ Cell[BoxData[
     "Beveled", "CellInsertionPointCell", "collect", "Color", "content", 
     "content$", "CreateCellID", "DefaultFaceGridsStyle", 
     "DefaultFrameTicksStyle", "DefaultGridLinesStyle", "DefaultTicksStyle", 
-    "dest", "destGuides", "destGuides$721", "dest$", "dest$27477", "docDir", 
-    "docDir$", "docDir$27477", "docFiles", "docLink", "docLink$721", 
-    "docPackage", "docPackage$721", "docSymbols", "docSymbols$", 
-    "docSymbols$372463", "DrawBackFaces", "Ex", "exportGuides", 
-    "exportGuides$", "exportGuides$27477", "exportNotebook", 
-    "exportNotebook$", "exportNotebook$27477", "exportSymbols", 
-    "exportSymbols$", "exportSymbols$27477", "exportTutorials", 
-    "exportTutorials$", "exportTutorials$27477", "formatType", 
+    "dest", "destGuides", "destGuides$914", "dest$", "dest$49687", "docDir", 
+    "docDir$", "docDir$49687", "docFiles", "docLink", "docLink$914", 
+    "docPackage", "docPackage$914", "docSymbols", "docSymbols$", 
+    "docSymbols$804515", "DrawBackFaces", "Ex", "exportGuides", 
+    "exportGuides$", "exportGuides$49687", "exportNotebook", 
+    "exportNotebook$", "exportNotebook$49687", "exportSymbols", 
+    "exportSymbols$", "exportSymbols$49687", "exportTutorials", 
+    "exportTutorials$", "exportTutorials$49687", "formatType", 
     "FrontFaceGlowColor", "FrontFaceSpecularColor", 
     "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
     "GeneratedCellStyles", "GenerateDocumentation", 
-    "generateHTMLDocumentation", "generateHTMLDocumentation$721", 
+    "generateHTMLDocumentation", "generateHTMLDocumentation$914", 
     "GhostCellInEmptyNotebook", "GreekStyle", "guideNames", "guideNames$", 
-    "HistoryData", "LineHeight", "LowerCaseStyle", "n2", "n2$", "nb", "nbf", 
-    "nbf$", "nb$", "newSyms", "nn", "nn$", "package", "package100", 
-    "package101", "package103", "package104", "package105", "package106", 
-    "package107", "package108", "package109", "package110", "package112", 
-    "package113", "package114", "package115", "package116", "package117", 
-    "package118", "package119", "package120", "package121", "package122", 
-    "package123", "package124", "package125", "package127", "package128", 
-    "package129", "package130", "package131", "package132", "package99", 
-    "packages", "packageSymbols", "packageSymbols$721", "packages$721", 
-    "package$", "paclet", "paclet$", "PasteAutoQuoteCharacters", "ps", 
-    "ReturnCreatesNewCell", "s", "sections", "sections2", "source10", 
-    "source102", "source11", "source111", "source12", "source126", "source13",
-     "source133", "source134", "source135", "source136", "source137", 
-    "source138", "source139", "source14", "source140", "source15", "source16",
-     "source17", "source18", "source19", "source20", "source21", "source22", 
-    "source23", "source24", "source25", "source26", "source27", "source28", 
-    "source29", "source3", "source30", "source31", "source32", "source33", 
-    "source34", "source35", "source36", "source37", "source38", "source39", 
-    "source4", "source40", "source41", "source42", "source43", "source44", 
-    "source45", "source46", "source47", "source48", "source49", "source5", 
-    "source50", "source51", "source52", "source53", "source54", "source55", 
-    "source56", "source57", "source58", "source59", "source6", "source60", 
-    "source61", "source62", "source63", "source64", "source65", "source66", 
-    "source67", "source68", "source69", "source7", "source70", "source71", 
-    "source72", "source73", "source74", "source75", "source76", "source77", 
-    "source78", "source79", "source8", "source80", "source81", "source82", 
-    "source83", "source84", "source85", "source86", "source87", "source88", 
-    "source89", "source9", "source90", "source91", "source92", "source93", 
-    "source94", "source95", "source96", "source97", "source98", 
-    "sourceGuides", "sourceGuides$721", "srcDir", "srcDir$", "srcDir$372463", 
+    "HistoryData", "LineHeight", "LowerCaseStyle", "MenuAnchor", "n2", "n2$", 
+    "nb", "nbf", "nbf$", "nb$", "newSyms", "nn", "nn$", "package", 
+    "package100", "package101", "package102", "package103", "package104", 
+    "package105", "package106", "package107", "package108", "package109", 
+    "package110", "package111", "package113", "package114", "package115", 
+    "package116", "package117", "package118", "package87", "package88", 
+    "package89", "package91", "package92", "package93", "package94", 
+    "package95", "package96", "package98", "package99", "packages", 
+    "packageSymbols", "packageSymbols$914", "packages$914", "package$", 
+    "paclet", "paclet$", "PasteAutoQuoteCharacters", "ps", "Quantity", 
+    "RawInputForm", "ReturnCreatesNewCell", "s", "sections", "sections2", 
+    "source10", "source11", "source112", "source119", "source12", "source120",
+     "source121", "source122", "source123", "source124", "source125", 
+    "source126", "source127", "source128", "source129", "source13", 
+    "source130", "source131", "source132", "source133", "source134", 
+    "source135", "source136", "source14", "source15", "source16", "source17", 
+    "source18", "source19", "source20", "source21", "source22", "source23", 
+    "source24", "source25", "source26", "source27", "source28", "source29", 
+    "source3", "source30", "source31", "source32", "source33", "source34", 
+    "source35", "source36", "source37", "source38", "source39", "source4", 
+    "source40", "source41", "source42", "source43", "source44", "source45", 
+    "source46", "source47", "source48", "source49", "source5", "source50", 
+    "source51", "source52", "source53", "source54", "source55", "source56", 
+    "source57", "source58", "source59", "source6", "source60", "source61", 
+    "source62", "source63", "source64", "source65", "source66", "source67", 
+    "source68", "source69", "source7", "source70", "source71", "source72", 
+    "source73", "source74", "source75", "source76", "source77", "source78", 
+    "source79", "source8", "source80", "source81", "source82", "source83", 
+    "source84", "source85", "source86", "source9", "source90", "source97", 
+    "sourceGuides", "sourceGuides$914", "srcDir", "srcDir$", "srcDir$804515", 
     "ss", "ss$", "StripStyleOnPaste", "StyleDefintions", "symbols", 
-    "symbolsSrcDir", "symbolsSrcDir$", "symbolsSrcDir$372463", "symbols$", 
+    "symbolsSrcDir", "symbolsSrcDir$", "symbolsSrcDir$804515", "symbols$", 
     "s$", "TrackCellChangeTimes", "tutorialDest", "tutorialDest$", 
     "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", "tutorialSources",
-     "tutorialSources$721", "tutorials$", "tutorialTitles", "tutorialTitles$",
-     "undocumentedSymbols", "undocumentedSymbols$721", "url", "url$", 
+     "tutorialSources$914", "tutorials$", "tutorialTitles", "tutorialTitles$",
+     "undocumentedSymbols", "undocumentedSymbols$914", "url", "url$", 
     "$HTMLDestination", "$PackageSymbols"}],
   Editable->False]], "Print"],
 
@@ -982,104 +1333,6 @@ RichardsonExtrapolant.xml\"\>"}],
 RichardsonExtrapolant.xml"],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"CartesianToThornburg\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-CartesianToThornburg.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-CartesianToThornburg.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"KerrAxialTortoise\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-KerrAxialTortoise.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-KerrAxialTortoise.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"RadialToTortoise\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-RadialToTortoise.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-RadialToTortoise.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ThornburgToCartesian\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ThornburgToCartesian.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ThornburgToCartesian.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"TortoiseToRadial\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-TortoiseToRadial.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-TortoiseToRadial.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"SolarMassInSeconds\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-SolarMassInSeconds.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-SolarMassInSeconds.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"WaveformMatch\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-WaveformMatch.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-WaveformMatch.xml"],
-  Editable->False]], "Print"],
-
 Cell[BoxData["\<\"DataRegion\"\>"], "Print"],
 
 Cell[BoxData[
@@ -1101,6 +1354,20 @@ DataRegion.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 DataRegion.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"MergedDataRegion\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+MergedDataRegion.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+MergedDataRegion.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToDataRegion\"\>"], "Print"],
@@ -1136,20 +1403,6 @@ VariableName.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 VariableName.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"Add\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Add.\
-xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Add.\
-xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Coordinate\"\>"], "Print"],
@@ -1278,40 +1531,18 @@ DataRepresentationQ.xml\"\>"}],
 DataRepresentationQ.xml"],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Div\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Div.\
-xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Div.\
-xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"Downsampled\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"d\"\>", ",", "\<\"d2\"\>"}], "}"}]}],
-  SequenceForm["Removing ", {"d", "d2"}],
-  Editable->False]], "Print"],
+Cell[BoxData["\<\"Downsample\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
 "\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-Downsampled.xml\"\>"}],
+Downsample.xml\"\>"}],
   SequenceForm[
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-Downsampled.xml"],
+Downsample.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Frequency\"\>"], "Print"],
@@ -1421,20 +1652,6 @@ MinCoordinates.xml\"\>"}],
 MinCoordinates.xml"],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Mul\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Mul.\
-xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Mul.\
-xml"],
-  Editable->False]], "Print"],
-
 Cell[BoxData["\<\"NDerivative\"\>"], "Print"],
 
 Cell[BoxData[
@@ -1519,20 +1736,6 @@ Slab.xml\"\>"}],
 xml"],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Sub\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Sub.\
-xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/Sub.\
-xml"],
-  Editable->False]], "Print"],
-
 Cell[BoxData["\<\"ToList\"\>"], "Print"],
 
 Cell[BoxData[
@@ -1595,6 +1798,20 @@ ToListOfData.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 ToListOfData.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"WithResampling\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+WithResampling.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+WithResampling.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
@@ -1675,6 +1892,20 @@ InterpolatedWhere.xml\"\>"}],
 InterpolatedWhere.xml"],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"MaxCoordinateSpacing\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+MaxCoordinateSpacing.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+MaxCoordinateSpacing.xml"],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"MinCoordinateSpacing\"\>"], "Print"],
 
 Cell[BoxData[
@@ -1701,20 +1932,6 @@ RestrictedToCommonInterval.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 RestrictedToCommonInterval.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"RestrictedToInterval\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-RestrictedToInterval.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-RestrictedToInterval.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToDataTable\"\>"], "Print"],
@@ -1896,6 +2113,13 @@ Cell[BoxData["\<\"ReadTimeStep\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"RefinementLevel\"\>", "}"}]}],
+  SequenceForm["Removing ", {"RefinementLevel"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
 "\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
@@ -1918,62 +2142,6 @@ ReadADMMass.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 ReadADMMass.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadKick\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadKick.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadKick.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadKickVector\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadKickVector.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadKickVector.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadLinearMomentumFlux\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadLinearMomentumFlux.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadLinearMomentumFlux.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadLinearMomentumRadiated\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadLinearMomentumRadiated.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadLinearMomentumRadiated.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ClearAllMemos\"\>"], "Print"],
@@ -2088,6 +2256,20 @@ FindSimulationFiles.xml\"\>"}],
 FindSimulationFiles.xml"],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"SimulationNames\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+SimulationNames.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+SimulationNames.xml"],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"ReadSimulationCoreCount\"\>"], "Print"],
 
 Cell[BoxData[
@@ -2100,34 +2282,6 @@ ReadSimulationCoreCount.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 ReadSimulationCoreCount.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadSimulationRunTime.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadSimulationRunTime.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-SimulationOverview.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-SimulationOverview.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
@@ -2144,21 +2298,28 @@ ReadSimulationCost.xml\"\>"}],
 ReadSimulationCost.xml"],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
+Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
 "\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadSimulationMemoryUsage.xml\"\>"}],
+ReadSimulationRunTime.xml\"\>"}],
   SequenceForm[
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadSimulationMemoryUsage.xml"],
+ReadSimulationRunTime.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationSpeed\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"speed\"\>", "}"}]}],
+  SequenceForm["Removing ", {"speed"}],
+  Editable->False]], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2170,6 +2331,41 @@ ReadSimulationSpeed.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 ReadSimulationSpeed.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+SimulationOverview.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+SimulationOverview.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"mem\"\>", "}"}]}],
+  SequenceForm["Removing ", {"mem"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+ReadSimulationMemoryUsage.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+ReadSimulationMemoryUsage.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
@@ -2187,6 +2383,15 @@ ReadSimulationSwapUsage.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"phase1\"\>", ",", "\<\"phase1a\"\>", ",", "\<\"phase2\"\>", 
+     ",", "\<\"phase2a\"\>"}], "}"}]}],
+  SequenceForm["Removing ", {"phase1", "phase1a", "phase2", "phase2a"}],
+  Editable->False]], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2232,6 +2437,14 @@ Cell[BoxData["\<\"Psi4ToStrain\"\>"], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
+  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"\<\"h\"\>", ",", "\<\"psi4\"\>"}], "}"}]}],
+  SequenceForm["Removing ", {"h", "psi4"}],
+  Editable->False]], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
 "\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
@@ -2240,34 +2453,6 @@ Psi4ToStrain.xml\"\>"}],
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
 Psi4ToStrain.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadExtrapolatedPsi4\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadExtrapolatedPsi4.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadExtrapolatedPsi4.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ReadExtrapolatedStrain\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadExtrapolatedStrain.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
-ReadExtrapolatedStrain.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadPsi4\"\>"], "Print"],
@@ -2312,6 +2497,34 @@ ReadPsi4Radii.xml\"\>"}],
 ReadPsi4Radii.xml"],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"ReadRadiallyExtrapolatedPsi4\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedPsi4.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedPsi4.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"ReadRadiallyExtrapolatedStrain\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedStrain.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "~/Sites/SimulationTools/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedStrain.xml"],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"ReadWaveformCycles\"\>"], "Print"],
 
 Cell[BoxData[
@@ -2344,8 +2557,8 @@ Cell[BoxData["\<\"Done\"\>"], "Print"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{740, 867},
-WindowMargins->{{Automatic, 306}, {Automatic, 26}},
+WindowSize->{740, 756},
+WindowMargins->{{Automatic, 83}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
