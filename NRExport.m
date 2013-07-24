@@ -117,9 +117,11 @@ ExportAllExtrapolatedWaveforms[run_String, file_String, mass_, excludeModes_:Non
  Module[{dir, modes, files, excludeRun, excludePattern},
   dir = DirectoryName[file];
   modes = ReadPsi4Modes[run];
-  {excludeRun, excludePattern} = excludeModes;
-  If[run === excludeRun,
-     modes = Select[modes, (!MatchQ[#,excludePattern]) &]];
+  If[excludeModes =!= None,
+    {excludeRun, excludePattern} = excludeModes;
+    If[run === excludeRun,
+      modes = Select[modes, (!MatchQ[#,excludePattern]) &]];
+  ];
 
   Switch[fileExtension[file],
   "asc"|"asc.gz",
