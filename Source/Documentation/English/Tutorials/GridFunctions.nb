@@ -4,12 +4,9 @@ Cell[CellGroupData[{
 Cell["GridFunctions", "Title"],
 
 Cell[TextData[{
- "The GridFunctions ",
- StyleBox["Mathematica",
-  FontSlant->"Italic"],
- " package provides a simple interface to grid data from numerical \
-simulations.  It is currently capable of reading HDF5 and ASCII files \
-produced by Carpet and returns variables as ",
+ "SimulationTools provides an interface to grid-based data from numerical \
+simulations.  It is currently capable of reading HDF5 files produced by \
+Carpet and returns variables as ",
  ButtonBox["DataRegion",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/DataRegion"],
@@ -21,10 +18,10 @@ Cell[CellGroupData[{
 Cell["Common Arguments", "Section"],
 
 Cell[TextData[{
- "Most of the functions in this package take at least two arguments: ",
- StyleBox["run",
+ "Most of the functions in this package take at least three arguments: ",
+ StyleBox["sim,",
   FontSlant->"Italic"],
- " and ",
+ " ",
  StyleBox["var",
   FontSlant->"Italic"],
  " and ",
@@ -33,48 +30,48 @@ Cell[TextData[{
  "."
 }], "Text"],
 
-Cell[TextData[{
- StyleBox["run",
-  FontSlant->"Italic"],
- ": The name of the run directory containing the simulation files."
-}], "Text"],
+Cell[BoxData[GridBox[{
+   {"sim", Cell[
+    "The name of the simulation containing the data to read", "TableText"]},
+   {"var", Cell["The name of the grid variable", "TableText"]},
+   {"dims", Cell["\<\
+The dimensions to be read.These can be given either as a list of numbers of \
+coordinate names ({1,2,3} or \
+{\[OpenCurlyDoubleQuote]x\[CloseCurlyDoubleQuote],\[CloseCurlyDoubleQuote]y\
+\[CloseCurlyDoubleQuote],\[CloseCurlyDoubleQuote]z\[CloseCurlyDoubleQuote]}) \
+or asa combined string \[OpenCurlyDoubleQuote]xyz\[CloseCurlyDoubleQuote].\
+\>", "TableText"]}
+  }]], "DefinitionBox"],
 
-Cell["var: The name of the grid variable to be read.", "Text"],
-
-Cell[TextData[{
- StyleBox["dims:",
-  FontSlant->"Italic"],
- " The dimensions to be read. These can be given either as a list of numbers \
-of coordinate names ({1,2,3} or {\[OpenCurlyDoubleQuote]x\
-\[CloseCurlyDoubleQuote],\[CloseCurlyDoubleQuote]y\[CloseCurlyDoubleQuote],\
-\[CloseCurlyDoubleQuote]z\[CloseCurlyDoubleQuote]}) or asa combined string \
-\[OpenCurlyDoubleQuote]xyz\[CloseCurlyDoubleQuote]."
-}], "Text"],
+Cell["Common arguments to gridfunction functions.", "Caption"],
 
 Cell["The following options can be given:", "Text"],
 
-Cell[TextData[{
- StyleBox["Option\t\t\tDefault\t\t\tDescription",
-  FontWeight->"Bold",
-  FontSlant->"Italic"],
- "\nIteration\t\t0\t\t\tThe iteration to read.\nMap\t\t\tNone\t\t\tThe map to \
-read (use None for single map data, or an integer for multi-map)\n\
-RefinementLevel\t0\t\t\tThe refinement level to read.\nTimeLevel\t\t0\t\t\t\
-The time level to read.\nVariable\t\tFirst in file\t\tThe variable to read"
-}], "Text"]
+Cell[BoxData[GridBox[{
+   {"Iteration", "0", Cell["The iteration to read", "TableText"]},
+   {"Map", "None", Cell["\<\
+The map to read (use None for single map data, or an integer for multi-map)\
+\>", "TableText"]},
+   {"RefinementLevel", "0", Cell[
+    "The refinement level to read.", "TableText"]},
+   {"TimeLevel", "0", Cell["The time level to read", "TableText"]},
+   {"Variable", 
+    RowBox[{"First", " ", "in", " ", "file"}], Cell[
+    "The variable to read", "TableText"]}
+  }]], "DefinitionBox3Col"],
+
+Cell["Common options to gridfunction functions.", "Caption"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Functions", "Section"],
 
-Cell["Functions provided by GridFunctions.", "Caption"],
-
 Cell[CellGroupData[{
 
 Cell[TextData[{
  "ReadGridFunction[",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  ", ",
  StyleBox["var",
@@ -93,7 +90,7 @@ Cell[TextData[{
  StyleBox["dims",
   FontSlant->"Italic"],
  " in ",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  " and return it as a DataRegion."
 }], "Text"],
@@ -106,33 +103,33 @@ multi-file set, all the files will be used to read the variable.\
 \>", "Text"],
 
 Cell["\<\
-If there is more than one component, the components will all be read and \
-joined together into a single rectangular DataRegion.  If the union of the \
-components is not rectangular, the smallest rectangular region surrounding \
-all components will be used, and points not in any component will take the \
-value None.\
+If there is more than one component (i.e. the data is split into separate \
+parts corresponding to different processors), the components will all be read \
+and joined together into a single rectangular DataRegion.  If the union of \
+the components is not rectangular, the smallest rectangular region \
+surrounding all components will be used, and points not in any component will \
+take the value None.\
 \>", "Text"],
 
 Cell["\<\
-If the file appears in more than one segment, the correct segment for the \
-given iteration will be located automatically.
-In addition to the common options listed above, the following options can be \
+If the file appears in more than one segment of a multi-segment simulation, \
+the correct segment for the given iteration will be located automatically.  \
+In addition to the common options listed above, the following option can be \
 given:\
 \>", "Text"],
 
-Cell[TextData[{
- StyleBox["Option\t\t\tDefault\t\t\tDescription\n",
-  FontWeight->"Bold",
-  FontSlant->"Italic"],
- "StripGhostZones\tTrue\t\t\tRemove the ghost zones from the data"
-}], "Text"]
+Cell[BoxData[GridBox[{
+   {"StripGhostZones", "True", Cell["\<\
+Remove inter-processor ghost zones from the data\
+\>", "TableText"]}
+  }]], "DefinitionBox3Col"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[TextData[{
  "ReadIterations[",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  ", ",
  StyleBox["var",
@@ -145,7 +142,7 @@ Cell[TextData[{
 
 Cell[TextData[{
  "Read the iteration numbers present in ",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  " for ",
  StyleBox["var",
@@ -159,7 +156,7 @@ Cell[CellGroupData[{
 
 Cell[TextData[{
  "ReadMaps[",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  ", ",
  StyleBox["var",
@@ -172,12 +169,12 @@ Cell[TextData[{
 
 Cell[TextData[{
  "Read the maps present in ",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  " for ",
  StyleBox["var",
   FontSlant->"Italic"],
- ". If the options Iteration, RefinementLevel, TimeLevel or Variable are \
+ ".  If the options Iteration, RefinementLevel, TimeLevel or Variable are \
 specified, then only iterations corresponding to those will be included."
 }], "Text"]
 }, Open  ]],
@@ -186,7 +183,7 @@ Cell[CellGroupData[{
 
 Cell[TextData[{
  "ReadRefinementLevels[",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  ", ",
  StyleBox["var",
@@ -199,7 +196,7 @@ Cell[TextData[{
 
 Cell[TextData[{
  "Read the refinement levels present in ",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  " for ",
  StyleBox["var",
@@ -213,7 +210,7 @@ Cell[CellGroupData[{
 
 Cell[TextData[{
  "ReadTimeLevels[",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  ", ",
  StyleBox["var",
@@ -226,7 +223,7 @@ Cell[TextData[{
 
 Cell[TextData[{
  "Read the timelevels present in ",
- StyleBox["run",
+ StyleBox["sim",
   FontSlant->"Italic"],
  " for ",
  StyleBox["var",
@@ -234,15 +231,40 @@ Cell[TextData[{
  ". If the options Iteration, Map, RefinementLevel or Variable are specified, \
 then only iterations corresponding to those will be included."
 }], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "FindGridFunctions[",
+ StyleBox["sim",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell["\<\
+Read the names of variables for which gridfunction data is available in sim.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "ReadGridFunctionDimensions[",
+ StyleBox["sim",
+  FontSlant->"Italic"],
+ "]"
+}], "Subsection"],
+
+Cell["\<\
+Read the available dimensions of a gridfunction in sim.\
+\>", "Text"]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["Example", "Section"],
-
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input"],
 
 Cell[TextData[{
  "Examine the variable ",
@@ -283,13 +305,13 @@ Cell[BoxData[
     RowBox[{"RefinementLevel", "\[Rule]", "3"}]}], "]"}]}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"PresentationArrayPlot", "[", "phi", "]"}]], "Input"]
+ RowBox[{"ArrayPlot", "[", "phi", "]"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 },
 Saveable->True,
-WindowSize->{725, 750},
-WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+WindowSize->{833, 756},
+WindowMargins->{{86, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
