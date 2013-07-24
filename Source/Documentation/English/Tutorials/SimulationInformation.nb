@@ -1,0 +1,125 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Simulation Information", "Title"],
+
+Cell["\<\
+SimulationTools provied functions for accessing information about a \
+simulation. This currently works best with Cactus simulations. For full \
+functionality, certain output must have been enabled for the simulation. See \
+the Supported Codes and Data Formats tutorial for more information.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Working with DataRegions", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Getting an overview of a simulation\
+\>", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"SimulationOverview", "\[Placeholder]"}
+  }]], "DefinitionBox"],
+
+Cell["Simulation overview.", "Caption"],
+
+Cell["\<\
+SimulationOverview can be used for a quick, at a glance overview of the \
+status of a simulation, including the run speed, memory usage, trajectories, \
+waveforms and run time. Its current focus is on binary black hole simulations \
+using Cactus, but it has an extensible interface which will allow it to \
+support other simulation types in the future.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"SimulationOverview", "[", "\"\<bbh\>\"", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Accessing individual simulation statistics\
+\>", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"ReadSimulationRunTime", "ReadSimulationSpeed", "ReadSimulationCoreCount"},
+   {"ReadSimulationCost", "\[Placeholder]", "\[Placeholder]"},
+   {"\[Placeholder]", "\[Placeholder]", "\[Placeholder]"},
+   {"\[Placeholder]", "\[Placeholder]", "\[Placeholder]"}
+  }]], "DefinitionBox3Col"],
+
+Cell["\<\
+Accessing statistics on a simulation.\
+\>", "Caption"],
+
+Cell["\<\
+We can compute the total number hours the simulation has run for\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ReadSimulationRunTime", "[", "\"\<bbh\>\"", "]"}], "/", 
+  "3600"}]], "Input"],
+
+Cell["\<\
+the speed of the evolution (evolved coordinate time per hour as a function of \
+the simulation coordinate time)\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"ReadSimulationSpeed", "[", "\"\<bbh\>\"", "]"}], "]"}]], "Input"],
+
+Cell["memory usage", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"ReadSimulationMemoryUsage", "[", "\"\<bbh\>\"", "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
+
+Cell["swap usage", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"ReadSimulationSwapUsage", "[", "\"\<bbh\>\"", "]"}], 
+  "]"}]], "Input"],
+
+Cell["the number of CPU cores used", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ReadSimulationCoreCount", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+
+Cell["\<\
+and the total computational cost of the simulation in CPU hours\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{"ReadSimulationCost", "[", "\"\<bbh\>\"", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{679, 756},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+
