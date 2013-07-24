@@ -1,0 +1,132 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Grids", "Title"],
+
+Cell["\<\
+The computational domain of a Cactus simulation may be a complicated \
+combination of maps and refinement levels. SimulationTools can be used to \
+access and visualize this information in a straightforward way.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Grid structure", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Accessing grid structure information\
+\>", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"ReadGridSpacings", Cell["ReadTimeStep", "TableText"]},
+   {"ReadTimeRange", Cell["ReadMaxRefinementLevels", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["Determining grid structure information.", "Caption",
+ CellChangeTimes->{{3.5836505827251883`*^9, 3.583650594875369*^9}}],
+
+Cell["\<\
+Read grid spacing (by default, refinement level 0 is assumed)\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridSpacings", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2.`", ",", "2.`", ",", "2.`"}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Read grid spacing on a specifinement level\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridSpacings", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", 
+   RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.03125`", ",", "0.03125`", ",", "0.03125`"}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Read the time step on refinement level 0\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeStep", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+
+Cell[BoxData["0.5`"], "Output"]
+}, Open  ]],
+
+Cell["and on other refinement levels", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeStep", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", 
+   RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input"],
+
+Cell[BoxData["0.015625`"], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Read the coordinate time range over which simulation data is available\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeRange", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "300"}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Find the maximum number of refinement levels in the simulation\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+
+Cell[BoxData["7"], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Saveable->True,
+WindowSize->{629, 756},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+
