@@ -77,7 +77,7 @@ Paclet[
 
     {"Documentation",
      Language -> "English", 
-     MainPage -> "Guides/SimulationTools",
+     MainPage -> "Tutorials/SimulationToolsContents",
      Resources -> 
      	{"Guides/SimulationTools"}
     }
