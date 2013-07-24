@@ -5,26 +5,505 @@ Cell["Convergence Testing", "Title"],
 
 Cell["\<\
 Many simulations involve the solution of partial differential equations using \
-finite difference methods.  Several simulations, identical apart from the \
-mesh spacing, are then compared to see how the numerical solution changes \
-with the grid spacing.  This is done both to show that the solution converges \
-to an exact solution, and to assess the numerical error.\
+finite difference methods on a coordinate grid.  Several simulations, \
+identical apart from the grid spacing, are then compared to see how the \
+numerical solution changes with the grid spacing.  This is done both to show \
+that the solution converges to an exact solution, and to assess the numerical \
+error.\
 \>", "Text"],
 
 Cell["\<\
 SimulationTools contains several functions to help in this process.\
 \>", "Text"],
 
-Cell["ConvergenceRate", "Subsection"],
+Cell["\<\
+In the examples below, we will use a set of three DataTables constructed to \
+simulate a second-order accurate numerical solution to some partial \
+differential equation.\
+\>", "Text"],
 
-Cell["ConvergenceMultiplier", "Subsection"],
+Cell["The grid spacings are", "Text"],
 
-Cell["RichardsonExtrapolant", "Subsection"]
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"h1", "=", 
+   RowBox[{"1.", "/", "10"}]}], ";", 
+  RowBox[{"h2", "=", 
+   RowBox[{"1.", "/", "12"}]}], ";", 
+  RowBox[{"h3", "=", 
+   RowBox[{"1.", "/", "20"}]}], ";"}]], "Input"],
+
+Cell["The \[OpenCurlyDoubleQuote]numerical solutions\[CloseCurlyDoubleQuote] \
+are", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f1", "=", 
+  RowBox[{"ToDataTable", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", 
+       RowBox[{
+        RowBox[{"Sin", "[", 
+         RowBox[{"2", "Pi", " ", "t"}], "]"}], "+", 
+        RowBox[{
+         RowBox[{"Cos", "[", 
+          RowBox[{"2", "Pi", " ", "t"}], "]"}], "  ", 
+         RowBox[{"h1", "^", "2"}]}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "1", ",", "h1"}], "}"}]}], "]"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f2", "=", 
+  RowBox[{"ToDataTable", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", 
+       RowBox[{
+        RowBox[{"Sin", "[", 
+         RowBox[{"2", "Pi", " ", "t"}], "]"}], "+", 
+        RowBox[{
+         RowBox[{"Cos", "[", 
+          RowBox[{"2", "Pi", " ", "t"}], "]"}], " ", 
+         RowBox[{"h2", "^", "2"}]}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "1", ",", "h2"}], "}"}]}], "]"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "13", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 13, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"f3", "=", 
+  RowBox[{"ToDataTable", "[", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", 
+       RowBox[{
+        RowBox[{"Sin", "[", 
+         RowBox[{"2", "Pi", " ", "t"}], "]"}], "+", 
+        RowBox[{
+         RowBox[{"Cos", "[", 
+          RowBox[{"2", "Pi", " ", "t"}], "]"}], " ", 
+         RowBox[{"h3", "^", "2"}]}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "1", ",", "h3"}], "}"}]}], "]"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "21", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 21, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output"]
+}, Open  ]],
+
+Cell["We can plot the DataTables directly:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{"{", 
+   RowBox[{"f1", ",", "f2", ",", "f3"}], "}"}], "]"}]], "Input"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{0., 0.010000000000000002`}, {0.1, 0.5958754222362226}, {0.2, 
+     0.954146686238903}, {0.30000000000000004`, 0.9479663463514041}, {0.4, 
+     0.5796950823487238}, {0.5, -0.009999999999999879}, {
+     0.6000000000000001, -0.5958754222362228}, {
+     0.7000000000000001, -0.954146686238903}, {0.8, -0.9479663463514042}, {
+     0.9, -0.5796950823487238}, {1., 0.009999999999999757}}]}, 
+   {Hue[0.9060679774997897, 0.6, 0.6], 
+    LineBox[{{0., 0.006944444444444444}, {0.08333333333333333, 
+     0.5060140653040586}, {0.16666666666666666`, 0.8694976260066608}, {0.25, 
+     1.}, {0.3333333333333333, 0.8625531815622166}, {0.41666666666666663`, 
+     0.4939859346959417}, {0.5, -0.006944444444444322}, {
+     0.5833333333333333, -0.506014065304058}, {
+     0.6666666666666666, -0.8694976260066606}, {0.75, -1.}, {
+     0.8333333333333333, -0.8625531815622168}, {
+     0.9166666666666666, -0.4939859346959418}, {1., 
+     0.0069444444444441995`}}]}, 
+   {Hue[0.1421359549995791, 0.6, 0.6], LineBox[CompressedData["
+1:eJxTTMoPSmViYGAQBWIQDQM1IuvcH1al2M+aCQIr7eviRY88fnsZyt9pz/9z
+/Ywt9x/ZmxiDwGF7+fOzvBvfv4TKn7RfJnPbLKn0nT3EtAtQ+gNU/WX7iN61
+73dmvLNPTwOBa/aGUlNf516H6b9pv263VcHEfY/sz54BgTv2SsVeq37Nvww1
+54F9kjDYffsh6h/at0Dctx9i/mN7QYj79kP0P7GXg7hvP8S+ZzD37YeY9wLm
+Pqh5L+0jIe6DmvfaXhfiPqh5b2Dug5r3zl4F4r79MH+6C0HCDwDwmKBu
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 1.}, {-1., 1.}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Ratio between solution differences", "Subsection"],
+
+Cell[TextData[{
+ "Assuming convergence of the numerical solutions at a given order, the ratio \
+between the differences of numerical solutions, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", "1"], "-", 
+    SubscriptBox["f", "2"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", "2"], "-", 
+    SubscriptBox["f", "3"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " is given by"
+}], "Text"],
+
+Cell[TextData[{
+ "\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["f", "1"], "-", 
+     SubscriptBox["f", "2"]}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SubscriptBox["f", "2"], "-", 
+        SubscriptBox["f", "3"]}], ")"}], "\[Times]", " ", 
+      RowBox[{"ConvergenceMultiplier", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox["h", "1"], ",", 
+          SubscriptBox["h", "2"], ",", 
+          SubscriptBox["h", "3"]}], "}"}], ",", "p"}], "]"}]}], "+", 
+     RowBox[{"O", "(", 
+      SuperscriptBox["h", 
+       RowBox[{"p", "+", "1"}]], ")"}]}]}], TraditionalForm]]]
+}], "Text"],
+
+Cell[TextData[{
+ "This is accurate to order ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"p", "+", "1"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ".  "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ConvergenceMultiplier", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"h1", ",", "h2", ",", "h3"}], "}"}], ",", "2"}], "]"}]], "Input"],
+
+Cell[BoxData["0.6875000000000007`"], "Output"]
+}, Open  ]],
+
+Cell["\<\
+For the example above, we can confirm that the data satisfies this property \
+by plotting the two differences, with the second one rescaled by the \
+convergence multiplier:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"cm", "=", 
+  RowBox[{"ConvergenceMultiplier", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"h1", ",", "h2", ",", "h3"}], "}"}], ",", "2"}], 
+   "]"}]}]], "Input"],
+
+Cell[BoxData["0.6875000000000007`"], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"f1", "-", "f2"}], ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"f2", "-", "f3"}], ")"}], "cm"}]}], "}"}], "]"}], "//", 
+  "WithResampling"}]], "Input"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{0., 0.003055555555555589}, {0.1, 0.0024739450123651974`}, {0.2, 
+     0.0009432069170726143}, {0.30000000000000004`, -0.0009435523969062443}, {
+     0.4, -0.0024712857007223032`}, {0.5, -0.003055555555555557}, {
+     0.6000000000000001, -0.002471498237280212}, {
+     0.7000000000000001, -0.0009448681600200404}, {0.8, 
+     0.0009452007735323287}, {0.9, 0.0024701151547218414`}, {1., 
+     0.003055555555555558}}]}, 
+   {Hue[0.9060679774997897, 0.6, 0.6], 
+    LineBox[{{0., 0.00305555555555554}, {0.08333333333333333, 
+     0.0026461771458494874`}, {0.16666666666666666`, 
+     0.0015277746316808367`}, {0.25, 0.}, {
+     0.3333333333333333, -0.0015277725775191765`}, {
+     0.41666666666666663`, -0.0026461796289113998`}, {
+     0.5, -0.003055555555555558}, {
+     0.5833333333333333, -0.002646181454194779}, {
+     0.6666666666666666, -0.0015277746316808367`}, {0.75, 0.}, {
+     0.8333333333333333, 0.0015277809693594131`}, {0.9166666666666666, 
+     0.0026462004644681658`}, {1., 0.003055555555555558}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 1.}, {-0.003055555555555558, 0.003055555555555589}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+The two curves lie on top of each other, since the convergence is exactly 2nd \
+order in this case.\
+\>", "Text"],
+
+Cell["\<\
+The WithResampling function is necessary in order for subtraction of \
+DataTables on different coordinate grids to use interpolation automatically \
+(the interpolation is 8th order by default).\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Convergence rate", "Subsection"],
+
+Cell["You can also measure the convergence rate:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"ConvergenceRate", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"f1", ",", "f2", ",", "f3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"h1", ",", "h2", ",", "h3"}], "}"}]}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "4"}], "}"}]}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{0., 2.000000000000054}, {0.04999999999999993, 
+     2.092620104065744}, {0.09999999999999987, 2.004300106064747}, {
+     0.1499999999999998, 1.9649016633040304`}, {0.19999999999999973`, 
+     1.9941552860958074`}}], 
+    LineBox[{{0.2999999999999996, 1.9961512091207045`}, {0.34999999999999953`,
+      2.0080507289858387`}, {0.39999999999999947`, 1.998431750424234}, {
+     0.4499999999999994, 2.0054502706770383`}, {0.49999999999999933`, 
+     1.9999999999999978`}, {0.5499999999999993, 2.0044441557579877`}, {
+     0.5999999999999992, 1.9989007582727298`}, {0.6499999999999991, 
+     1.9884100580589312`}, {0.6999999999999991, 2.003752718175239}}], 
+    LineBox[{{0.7999999999999989, 2.0056743200149847`}, {0.8499999999999989, 
+     2.0341122661671758`}, {0.8999999999999988, 1.995848689573349}, {
+     0.9499999999999987, 1.9067503632198193`}, {0.9999999999999987, 
+     1.9999999999999916`}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 0.9999999999999987}, {0, 4}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Note that the convergence rate cannot be determined at the points where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["f", "1"], "-", 
+     SubscriptBox["f", "2"]}], "=", 
+    RowBox[{
+     SubscriptBox["f", "2"], "-", 
+     SubscriptBox["f", "3"]}]}], TraditionalForm]],
+  FormatType->"TraditionalForm"]
+}], "Text"],
+
+Cell[TextData[{
+ "For general ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["h", "1"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["h", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["h", "3"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", the convergence rate cannot be solved for exactly; ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "\[CloseCurlyQuote] FindRoot function is used to solve the algebraic \
+equation.  As such, in certain cases a solution might not be found."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RichardsonExtrapolant", "Subsection"],
+
+Cell[TextData[{
+ "Assuming a given order of convergence, you can use two of the solutions to \
+estimate a higher-order approximation of the exact solution.  This is called ",
+ StyleBox["Richardson Extrapolation",
+  FontSlant->"Italic"],
+ " and is useful for providing an error estimate in one of the numerical \
+solutions.  The RichardsonExtrapolant function gives this estimate:"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fExt", "=", 
+  RowBox[{"RichardsonExtrapolant", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"f2", ",", "f3"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"h2", ",", "h3"}], "}"}], ",", "2"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "21", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 21, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.9999999999999987`"}], "}"}], "}"}]}], 
+  "]"}]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+An error estimate (accurate to 3rd order) for f3 can be determined by \
+subtracting the Richardson extrapolant:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fErr", "=", 
+  RowBox[{"WithResampling", "[", 
+   RowBox[{"f3", "-", "fExt"}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "21", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 21, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.9999999999999987`"}], "}"}], "}"}]}], 
+  "]"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "fErr", "]"}]], "Input"],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxTTMoPSmViYGAQBWIQDQMNIuvcH1al2E+YCQIr7RuKapgXNCdD+TvtGUqj
+D7n3J9jrGIPAYXuGDyeXswpGQOVP2jOcWJ8dEupp/+U/CJy3h5kLUX/ZnoEj
+UGJzsOf+uDQQuGbPsOvWSwfRiP0Q/TeB+nVuZE1K2H/oDAjcsW8QEJv8tTp5
+P8S8+/Y1EPftnwxW/9CeYd6tteuA8hDzH9szeEiu1ALqPwrW/8SeoYvrQ6RI
+BNS+Z/YMIVe21Pp67v8ONu853H0Q+1/aMxwxffPa29NeE2zea3sGGxHf5aIR
+9hD3vLFnWJ0admZygn002Lx39g2zq867FyZD/fvevgoafgD2O58E
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 0.9999999999999987}, {-0.0025000000000000005`, 
+   0.0025000000000000022`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output"]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]]
 },
 Saveable->True,
-WindowSize->{629, 756},
-WindowMargins->{{Automatic, 124}, {Automatic, 0}},
+WindowSize->{691, 1048},
+WindowMargins->{{Automatic, 62}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
