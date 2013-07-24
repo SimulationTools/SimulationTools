@@ -35,6 +35,14 @@ Cell[CellGroupData[{
 
 Cell["SimulationTools Documentation", "Title"],
 
+Cell["Preamble", "Section"],
+
+Cell[TextData[ButtonBox["Introduction",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationToolsIntroduction"]], \
+"TOCChapter"],
+
 Cell["Basic Concepts", "Section"],
 
 Cell[TextData[ButtonBox["Simulations",

@@ -1,0 +1,237 @@
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Grids",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/tutorial/Grids"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["GRIDS TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"Parameters":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/Parameters"], 
+       "SupportedCodesAndDataFormats":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SupportedCodesAndDataFormats"], 
+       "SimulationInformation":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SimulationInformation"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[None], None}]}], 
+       Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["Grids", "Title"],
+
+Cell["\<\
+The computational domain of a Cactus simulation may be a complicated \
+combination of maps and refinement levels. SimulationTools can be used to \
+access and visualize this information in a straightforward way.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Grid structure", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[2]:="],
+
+Cell[CellGroupData[{
+
+Cell["Accessing grid structure information", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"ReadGridSpacings", Cell["ReadTimeStep", "TableText"]},
+   {"ReadTimeRange", Cell["ReadMaxRefinementLevels", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["Determining grid structure information.", "Caption",
+ CellChangeTimes->{{3.5836505827251883`*^9, 3.583650594875369*^9}}],
+
+Cell["\<\
+Read grid spacing (by default, refinement level 0 is assumed)\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridSpacings", "[", "\"\<bbh\>\"", "]"}]], "Input",
+ CellLabel->"In[3]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2.`", ",", "2.`", ",", "2.`"}], "}"}]], "Output",
+ CellLabel->"Out[3]="]
+}, Open  ]],
+
+Cell["Read grid spacing on a specifinement level", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadGridSpacings", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", 
+   RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input",
+ CellLabel->"In[4]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.03125`", ",", "0.03125`", ",", "0.03125`"}], "}"}]], "Output",
+ CellLabel->"Out[4]="]
+}, Open  ]],
+
+Cell["Read the time step on refinement level 0", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeStep", "[", "\"\<bbh\>\"", "]"}]], "Input",
+ CellLabel->"In[5]:="],
+
+Cell[BoxData["0.5`"], "Output",
+ CellLabel->"Out[5]="]
+}, Open  ]],
+
+Cell["and on other refinement levels", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeStep", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", 
+   RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input",
+ CellLabel->"In[6]:="],
+
+Cell[BoxData["0.015625`"], "Output",
+ CellLabel->"Out[6]="]
+}, Open  ]],
+
+Cell["\<\
+Read the coordinate time range over which simulation data is available\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadTimeRange", "[", "\"\<bbh\>\"", "]"}]], "Input",
+ CellLabel->"In[7]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "300"}], "}"}]], "Output",
+ CellLabel->"Out[7]="]
+}, Open  ]],
+
+Cell["\<\
+Find the maximum number of refinement levels in the simulation\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}]], "Input",
+ CellLabel->"In[8]:="],
+
+Cell[BoxData["7"], "Output",
+ CellLabel->"Out[8]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedTutorialsSection",
+ WholeCellGroupOpener->True],
+
+Cell[TextData[ButtonBox["Parameters",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/Parameters"]], "RelatedTutorials"],
+
+Cell[TextData[ButtonBox["SupportedCodesAndDataFormats",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SupportedCodesAndDataFormats"]], \
+"RelatedTutorials"],
+
+Cell[TextData[ButtonBox["SimulationInformation",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationInformation"]], \
+"RelatedTutorials"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Grids",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "Grids", "status" -> "None", "summary" -> 
+    "Tutorial accessing grid information.", "synonyms" -> {}, "title" -> 
+    "Grids", "windowTitle" -> "Grids", "type" -> "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/Grids"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

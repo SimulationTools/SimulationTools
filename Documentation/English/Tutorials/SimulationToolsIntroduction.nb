@@ -78,10 +78,7 @@ to a standard uniform format.  \
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Essential Concepts (much moved into Simulations tutorial, probably want a \
-quick example tutorial here instead)\
-\>", "Section"],
+Cell["Essential Concepts", "Section"],
 
 Cell[CellGroupData[{
 
@@ -89,73 +86,7 @@ Cell["Loading the package", "Subsection"],
 
 Cell["Load the package", "MathCaption"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input",
- CellLabel->"In[1]:="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Finding simulation directories (delete)", "Subsection"],
-
-Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["SimulationTools",
-   BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
-  "InlineFormula"],
- " has an interface for accessing \"simulations\" which are directories \
-containing simulation output.  The name of the simulation is the name of the \
-directory.  You can either specify a simulation by a full path, or by the \
-simulation name.  For the latter, SimulationTools needs to know which \
-directory to look in.  You can set the variable ",
- Cell[BoxData[
-  ButtonBox["$SimulationPath",
-   BaseStyle->"Link",
-   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
- " to this directory and ",
- "SimulationTools",
- " will then know where to find your simulations. For example, in your init.m \
-file you can set if you have your simulations in that directory."
-}], "Text"],
-
-Cell[TextData[{
- "Set the ",
- Cell[BoxData[
-  ButtonBox["$SimulationPath",
-   BaseStyle->"Link",
-   ButtonData->"paclet:Global/ref/$SimulationPath"]], "InlineFormula"],
- " variable to the directory containing your simulations"
-}], "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"(*", 
-  RowBox[{
-   RowBox[{"$SimulationPath", "=", 
-    RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}], 
-  "*)"}]], "Input",
- CellLabel->"In[2]:="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Chunking (delete)", "Subsection"],
-
-Cell[TextData[{
- "Simulations usually take more than one job on a supercomputer, and the \
-output is spread across many different output directories (\"chunks\").  ",
- Cell[BoxData[
-  ButtonBox["SimulationTools",
-   BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
-  "InlineFormula"],
- " supports the SimFactory chunking mechanism and almost all the file reading \
-functions go through a layer which automatically merges the files in these \
-chunks together, taking care to eliminate any duplicate data.  As such, you \
-should never have to worry about merging chunks of data together, and in fact \
-you can probably forget about the fact that the simulation data is split into \
-chunks."
-}], "Text"]
+Cell["<< SimulationTools`", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -182,31 +113,6 @@ Cell[TextData[{
 also look at the documentation for those package to familiarise yourself with \
 the concepts."
 }], "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Memoisation", "Subsection"],
-
-Cell[TextData[{
- "Some functions use \"memoisation\".  In other words, the first time a \
-particular quantity is accessed, for example a waveform, it is cached in \
-memory so that later calls to the function do not have to read the data off \
-the disk again.  When using very long simulations this can save a significant \
-amount of time.  However, beware that if the run data on the disk changes, \
-the copy in memory will not be.  To clear the cache, use the function ",
- Cell[BoxData[
-  ButtonBox["ClearAllMemos",
-   BaseStyle->"Link",
-   ButtonData->"paclet:Memo/ref/ClearAllMemos"]], "InlineFormula"],
- "."
-}], "Text"],
-
-Cell["Clear data cache", "MathCaption"],
-
-Cell[BoxData[
- RowBox[{"ClearAllMemos", "[", "]"}]], "Input",
- CellLabel->"In[3]:="]
 }, Open  ]]
 }, Open  ]],
 

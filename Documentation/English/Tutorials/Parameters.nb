@@ -1,0 +1,234 @@
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Parameters",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/tutorial/Parameters"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["PARAMETERS TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"SupportedCodesAndDataFormats":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SupportedCodesAndDataFormats"], 
+       "SimulationInformation":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SimulationInformation"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[None], None}]}], 
+       Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["Parameters", "Title"],
+
+Cell["\<\
+SimulationTools currently supports parameter files in the format used by \
+Cactus. It can list all parameters specified for a simulation, search for \
+parameters based on a pattern, or read the value of a specific parameters\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Accessing simulation parameters", "Section"],
+
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[2]:="],
+
+Cell[CellGroupData[{
+
+Cell["Reading parameters", "Subsection"],
+
+Cell[BoxData[GridBox[{
+   {"FindSimulationParameters", Cell["ReadSimulationParameter", "TableText"]}
+  }]], "DefinitionBox"],
+
+Cell["Functions for accessing parameters.", "Caption"],
+
+Cell["\<\
+The FindSimulationParameters function can be used to list all parameters set \
+in a simulation\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"FindSimulationParameters", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}], "//", "Short"}]], "Input",
+ CellLabel->"In[3]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{"\<\"cactus::cctk_run_title\"\>", ",", "\<\"cartgrid3d::type\"\>", 
+    ",", 
+    RowBox[{"\[LeftSkeleton]", "263", "\[RightSkeleton]"}], 
+    ",", "\<\"cactus::cctk_final_time\"\>"}], "}"}],
+  Short]], "Output",
+ CellLabel->"Out[3]//Short="]
+}, Open  ]],
+
+Cell["or it can be used to list only a subset of parameters", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FindSimulationParameters", "[", 
+  RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase*\>\""}], "]"}]], "Input",
+ CellLabel->"In[4]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"coordbase::domainsize\"\>", ",", "\<\"coordbase::xmin\"\>", 
+   ",", "\<\"coordbase::ymin\"\>", ",", "\<\"coordbase::zmin\"\>", 
+   ",", "\<\"coordbase::xmax\"\>", ",", "\<\"coordbase::ymax\"\>", 
+   ",", "\<\"coordbase::zmax\"\>", ",", "\<\"coordbase::dx\"\>", 
+   ",", "\<\"coordbase::dy\"\>", ",", "\<\"coordbase::dz\"\>", 
+   ",", "\<\"coordbase::boundary_size_x_lower\"\>", 
+   ",", "\<\"coordbase::boundary_size_y_lower\"\>", 
+   ",", "\<\"coordbase::boundary_size_z_lower\"\>", 
+   ",", "\<\"coordbase::boundary_size_x_upper\"\>", 
+   ",", "\<\"coordbase::boundary_size_y_upper\"\>", 
+   ",", "\<\"coordbase::boundary_size_z_upper\"\>", 
+   ",", "\<\"coordbase::boundary_shiftout_x_lower\"\>", 
+   ",", "\<\"coordbase::boundary_shiftout_z_lower\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[4]="]
+}, Open  ]],
+
+Cell["\<\
+If you already know the parameter name, then you can just request the value \
+of that parameter using ReadSimulationParameter\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"dx", "=", 
+  RowBox[{"ReadSimulationParameter", "[", 
+   RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase::dx\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[5]:="],
+
+Cell[BoxData["\<\"2.00\"\>"], "Output",
+ CellLabel->"Out[5]="]
+}, Open  ]],
+
+Cell["\<\
+All parameter values are returned as strings which can then be converted to \
+the appropriate type\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"dx", "//", "InputForm"}]], "Input",
+ CellLabel->"In[6]:="],
+
+Cell["\"2.00\"", "Output",
+ CellLabel->"Out[6]//InputForm="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ToExpression", "[", "dx", "]"}]], "Input",
+ CellLabel->"In[7]:="],
+
+Cell[BoxData["2.`"], "Output",
+ CellLabel->"Out[7]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedTutorialsSection",
+ WholeCellGroupOpener->True],
+
+Cell[TextData[ButtonBox["SupportedCodesAndDataFormats",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SupportedCodesAndDataFormats"]], \
+"RelatedTutorials"],
+
+Cell[TextData[ButtonBox["SimulationInformation",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationInformation"]], \
+"RelatedTutorials"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Parameters",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "Parameters", "status" -> "None", "summary" -> 
+    "Tutorial on accessing simulation parameters.", "synonyms" -> {}, "title" -> 
+    "Parameters", "windowTitle" -> "Parameters", "type" -> "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/Parameters"}, "SearchTextTranslated" -> "", 
+  "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

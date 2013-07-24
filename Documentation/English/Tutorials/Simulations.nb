@@ -72,8 +72,10 @@ Cell[TextData[{
 Cell[BoxData[
  RowBox[{
   RowBox[{"SimulationTools`$SimulationPath", "=", 
-   RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], ";"}]], "Input",
- CellLabel->"In[1]:="],
+   RowBox[{"{", 
+    RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ Evaluatable->False],
 
 Cell[TextData[{
  "You can add the above line to the ",
@@ -104,19 +106,12 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"SimulationNames", "[", "]"}]], "Input",
- CellLabel->"In[2]:="],
+ CellLabel->"In[1]:="],
 
 Cell[BoxData[
- InterpretationBox["\<\"Invalid $SimulationPath; it should be a list of \
-strings, but it is currently \\\"/Users/ian/Simulations\\\"\"\>",
-  StringForm[
-  "Invalid $SimulationPath; it should be a list of strings, but it is \
-currently \"/Users/ian/Simulations\""],
-  Editable->False]], "Print",
- CellLabel->"During evaluation of In[2]:="],
-
-Cell[BoxData["$Aborted"], "Output",
- CellLabel->"Out[2]="]
+ RowBox[{"{", 
+  RowBox[{"\<\"bbh\"\>", ",", "\<\"test7patch\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[1]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -149,20 +144,24 @@ Cell["Finding files in a simulation", "Subsection"],
 Cell["\<\
 Given the name of a simulation, and the name of an output file, you can \
 obtain full paths to all the instances of that file across all segments of \
-the simulation:\
+the simulation.  For example, to find all instances of a file called \
+mp_psi4.h5 in a simulation called bbh which exists on your $SimulationPath:\
 \>", "Text"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
+ RowBox[{"FindSimulationFiles", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<mp_psi4.h5\>\""}], "]"}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[2]:="],
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
-  RowBox[{"\<\"bbh\"\>", ",", "\<\"mp_psi4.h5\"\>"}], "]"}]], "Output",
- CellLabel->"Out[3]="]
+ RowBox[{"{", 
+  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[2]="]
 }, Open  ]],
 
 Cell["\<\
@@ -173,14 +172,33 @@ available HDF5 files:\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
+ RowBox[{"FindSimulationFiles", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<*.h5\>\""}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[3]:="],
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
-  RowBox[{"\<\"bbh\"\>", ",", "\<\"*.h5\"\>"}], "]"}]], "Output",
- CellLabel->"Out[4]="]
+ RowBox[{"{", 
+  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[3]="]
 }, Open  ]],
 
 Cell["or all the available files:", "Text"],
@@ -188,18 +206,121 @@ Cell["or all the available files:", "Text"],
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
+ RowBox[{"FindSimulationFiles", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[4]:="],
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
-  RowBox[{"\<\"bbh\"\>", ",", "\<\"*\"\>"}], "]"}]], "Output",
- CellLabel->"Out[5]="]
+ RowBox[{"{", 
+  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/AllTimers.csv\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/AllTimers.tsv\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/AllTimers.txt\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/bbh.par\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/BH_diagnostics.ah1.gp\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/BH_diagnostics.ah2.gp\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/carpet-grid.asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/carpet::timing..asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/formaline-build-sim-login-damiana.damiana.\
+admin-barry-2012.03.28-18.17.23-3129\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/formaline-config-sim-login-damiana.damiana.\
+admin-home-barry-Cactus-EinsteinToolkit_Maxwell\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/formaline-jar.txt\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/formaline-run-bbh-kop153.datura.admin-barry-\
+2012.03.28-23.44.55-22431\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/puncturetracker::pt_loc..asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/quasilocalmeasures::qlm_scalars..asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.average.\
+asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.maximum.\
+asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.minimum.\
+asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0000/bbh/TwoPunctures.bbh\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/AllTimers.csv\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/AllTimers.tsv\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/AllTimers.txt\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/bbh.par\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/BH_diagnostics.ah1.gp\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/BH_diagnostics.ah2.gp\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/BH_diagnostics.ah3.gp\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/carpet-grid.asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/carpet::timing..asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/formaline-build-sim-login-damiana.damiana.\
+admin-barry-2012.03.28-18.17.23-3129\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/formaline-config-sim-login-damiana.damiana.\
+admin-home-barry-Cactus-EinsteinToolkit_Maxwell\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/formaline-jar.txt\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/formaline-run-bbh-kop122.datura.admin-barry-\
+2012.03.29-00.04.46-28796\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/puncturetracker::pt_loc..asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/quasilocalmeasures::qlm_scalars..asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.average.\
+asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.maximum.\
+asc\"\>", 
+   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
+Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.minimum.\
+asc\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell["\<\
-The output of FindSimulationFile is always a list of filenames.\
+The output of FindSimulationFiles is always a list of filenames.\
 \>", "Text"]
 }, Open  ]]
 }, Open  ]],

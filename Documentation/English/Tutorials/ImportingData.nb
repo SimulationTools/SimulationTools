@@ -48,7 +48,7 @@ Cell[CellGroupData[{
 Cell["ASCII multi-column data", "Subsection"],
 
 Cell[TextData[{
- "It is very common for simulation data to be stores as numeric columns of \
+ "It is very common for simulation data to be stored as numeric columns of \
 ASCII data.  ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
@@ -57,8 +57,6 @@ resulting lists of numbers can be converted to DataTables."
 }], "Text"],
 
 Cell["Import numeric ASCII column data:", "MathCaption"],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ToDataTable", "[", 
@@ -69,42 +67,7 @@ Cell[BoxData[
     RowBox[{"All", ",", 
      RowBox[{"{", 
       RowBox[{"1", ",", "5"}], "}"}]}], "]"}], "]"}], "]"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Import", "::", "nffil"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"File not found during \[NoBreak]\\!\\(Import\\)\[NoBreak]. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/Import/nffil\\\", \
-ButtonNote -> \\\"Import::nffil\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Symbol", "::", "argx"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"\[NoBreak]\\!\\(Symbol\\)\[NoBreak] called with \[NoBreak]\
-\\!\\(0\\)\[NoBreak] arguments; 1 argument is expected. \\!\\(\\*ButtonBox[\\\
-\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/argx\\\", ButtonNote -> \
-\\\"Symbol::argx\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[1]:="],
-
-Cell[BoxData[
- InterpretationBox["\<\"Invalid arguments to ToDataTable\\nCalled as \
-ToDataTable[Symbol[]]\"\>",
-  StringForm[
-  "Invalid arguments to ToDataTable\nCalled as ToDataTable[Symbol[]]"],
-  Editable->False]], "Print",
- CellLabel->"During evaluation of In[1]:="],
-
-Cell[BoxData["$Aborted"], "Output",
- CellLabel->"Out[1]="]
-}, Open  ]]
+ Evaluatable->False]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -113,8 +76,6 @@ Cell["HDF5 data", "Subsection"],
 
 Cell["Import multi-dimensional numeric HDF5 data:", "MathCaption"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"ToDataRegion", "[", 
   RowBox[{"ImportHDF5", "[", 
@@ -122,30 +83,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"\"\<Datasets\>\"", ",", "\"\<mydataset\>\""}], "}"}]}], "]"}], 
   "]"}]], "Input",
- CellLabel->"In[2]:="],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"ImportHDF5", "::", "nffil"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"File not found during import. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/nffil\\\", ButtonNote -> \
-\\\"h5mma`ImportHDF5::nffil\\\"]\\)\"\>"}]], "Message", "MSG",
- CellLabel->"During evaluation of In[2]:="],
-
-Cell[BoxData[
- InterpretationBox["\<\"Invalid arguments to ToDataRegion\\nCalled as \
-ToDataRegion[$Failed]\"\>",
-  StringForm[
-  "Invalid arguments to ToDataRegion\nCalled as ToDataRegion[$Failed]"],
-  Editable->False]], "Print",
- CellLabel->"During evaluation of In[2]:="],
-
-Cell[BoxData["$Aborted"], "Output",
- CellLabel->"Out[2]="]
-}, Open  ]]
+ Evaluatable->False]
 }, Open  ]]
 }, Open  ]],
 

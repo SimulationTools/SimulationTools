@@ -35,32 +35,61 @@ Cell[CellGroupData[{
 
 Cell["Data Representations", "Title"],
 
+Cell["\<\
+SimulationTools uses two different representations of numerical data. \
+\>", "Text"],
+
 Cell[TextData[{
- "SimulationTools uses two different representations of numerical data. \n\n\
-The ",
+ "The ",
  StyleBox["DataTable",
   FontSlant->"Italic"],
  " is designed for time-series data, and consists of a \
 monotonically-increasing time coordinate and corresponding data values, which \
 can be of any type.  The time coordinate does not have to be regularly \
-spaced.  \n\nThe ",
+spaced.  "
+}], "Text"],
+
+Cell[TextData[{
+ "The ",
  StyleBox["DataRegion",
   FontSlant->"Italic"],
  " represents an N-dimensional block of data on a uniform grid.  The data \
 must consist of real or complex numbers, or the quantities None or Missing[]. \
  The data is stored efficiently in memory. Each point has an associated set \
 of coordinates, and these are specified by giving the origin and spacing of \
-the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  \n\nCollectively, \
-DataTables and DataRegions are known in SimulationTools as ",
+the DataRegion as {ox, oy, ... oz} and {dx, dy, ..., dz}.  "
+}], "Text"],
+
+Cell[TextData[{
+ "Collectively, DataTables and DataRegions are known in SimulationTools as ",
  StyleBox["Data Representations.  ",
   FontSlant->"Italic"],
  "There are many functions for manipulating data representations.  Some only \
 make sense for DataTables or DataRegions respectively, but many are defined \
-to work on both types of object.\n\nMany commonly-used Mathematica functions \
-are defined on compatible DataTables and DataRegions (those with the same \
-coordinates), for example Plus (+), Minus (-), Times (*), Divide (/), Sqrt, \
-Power (d^a), Sin, Cos, Tan etc. "
+to work on both types of object."
 }], "Text"],
+
+Cell["\<\
+Many commonly-used Mathematica functions are defined on compatible DataTables \
+and DataRegions (those with the same coordinates), for example Plus (+), \
+Minus (-), Times (*), Divide (/), Sqrt, Power (d^a), Sin, Cos, Tan etc. \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Reasons to use Data Representations instead of lists", "Section"],
+
+Cell["\<\
+Data Representations contain coordinate information as well as data; it is \
+frequently desirable to keep the coordinates along with the data.\
+\>", "Text"],
+
+Cell["\<\
+Mathematical operations defined on Data Representations operate only on the \
+data, as opposed to the data and coordinates, which would be the case if you \
+used a list containing data and coordinates.\
+\>", "Text"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -212,9 +241,9 @@ given by the lists ",
 convention adopted by ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
- ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C\
-\[CloseCurlyDoubleQuote] order, not \[OpenCurlyDoubleQuote]Fortran\
-\[CloseCurlyDoubleQuote] order."
+ ".  Note that this corresponds to \[OpenCurlyDoubleQuote]C order\
+\[CloseCurlyDoubleQuote], not \[OpenCurlyDoubleQuote]Fortran order\
+\[CloseCurlyDoubleQuote]."
 }], "Text"],
 
 Cell[CellGroupData[{
@@ -344,29 +373,42 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"sint", "=", 
-  RowBox[{"Sin", "[", "tData", "]"}]}]], "Input",
+ RowBox[{"ToList", "[", "tData", "]"}]], "Input",
  CellLabel->"In[6]:="],
 
 Cell[BoxData[
- RowBox[{"DataTable", "[", 
+ RowBox[{"{", 
   RowBox[{
-   InterpretationBox[
-    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "11", 
-     "\[InvisibleSpace]", "\<\">\"\>"}],
-    SequenceForm["<", 11, ">"],
-    Editable->False], ",", 
    RowBox[{"{", 
-    RowBox[{"{", 
-     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output",
+    RowBox[{"0.`", ",", "0.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.1`", ",", "0.1`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.2`", ",", "0.2`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.30000000000000004`", ",", "0.30000000000000004`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.4`", ",", "0.4`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5`", ",", "0.5`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.6000000000000001`", ",", "0.6000000000000001`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.7000000000000001`", ",", "0.7000000000000001`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.8`", ",", "0.8`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.9`", ",", "0.9`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.`", ",", "1.`"}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"cost", "=", 
-  RowBox[{"Cos", "[", "tData", "]"}]}]], "Input",
+ RowBox[{"sint", "=", 
+  RowBox[{"Sin", "[", "tData", "]"}]}]], "Input",
  CellLabel->"In[7]:="],
 
 Cell[BoxData[
@@ -386,10 +428,8 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"sumSquared", "=", 
-  RowBox[{
-   RowBox[{"sint", "^", "2"}], "+", 
-   RowBox[{"cost", "^", "2"}]}]}]], "Input",
+ RowBox[{"cost", "=", 
+  RowBox[{"Cos", "[", "tData", "]"}]}]], "Input",
  CellLabel->"In[8]:="],
 
 Cell[BoxData[
@@ -409,15 +449,38 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ToListOfData", "[", "sumSquared", "]"}]], "Input",
+ RowBox[{"sumSquared", "=", 
+  RowBox[{
+   RowBox[{"sint", "^", "2"}], "+", 
+   RowBox[{"cost", "^", "2"}]}]}]], "Input",
  CellLabel->"In[9]:="],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output",
+ CellLabel->"Out[9]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ToListOfData", "[", "sumSquared", "]"}]], "Input",
+ CellLabel->"In[10]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
   "1.`", ",", "1.`", ",", "1.`", ",", "1.`", ",", "1.`", ",", "1.`", ",", 
    "1.`", ",", "1.`", ",", "1.`", ",", "1.`", ",", "1.`"}], "}"}]], "Output",
- CellLabel->"Out[9]="]
+ CellLabel->"Out[10]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -456,30 +519,6 @@ Cell[BoxData[
      RowBox[{"0", ",", "0"}], "}"}], ",", 
     RowBox[{"{", 
      RowBox[{"0.2", ",", "0.6"}], "}"}]}], "]"}]}]], "Input",
- CellLabel->"In[10]:="],
-
-Cell[BoxData[
- RowBox[{"DataRegion", "[", 
-  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
-   InterpretationBox[
-    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
-     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
-     "\[InvisibleSpace]", "\<\">\"\>"}],
-    SequenceForm["<", 6, ",", 11, ">"],
-    Editable->False], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[10]="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"d", "+", "d3"}]], "Input",
  CellLabel->"In[11]:="],
 
 Cell[BoxData[
@@ -503,7 +542,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"d", "-", "d3"}]], "Input",
+ RowBox[{"d", "+", "d3"}]], "Input",
  CellLabel->"In[12]:="],
 
 Cell[BoxData[
@@ -527,7 +566,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"3.0", "*", "d"}]], "Input",
+ RowBox[{"d", "-", "d3"}]], "Input",
  CellLabel->"In[13]:="],
 
 Cell[BoxData[
@@ -551,7 +590,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Sin", "[", "d", "]"}]], "Input",
+ RowBox[{"3.0", "*", "d"}]], "Input",
  CellLabel->"In[14]:="],
 
 Cell[BoxData[
@@ -575,7 +614,7 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Log10", "[", "d", "]"}]], "Input",
+ RowBox[{"Sin", "[", "d", "]"}]], "Input",
  CellLabel->"In[15]:="],
 
 Cell[BoxData[
@@ -594,6 +633,30 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[15]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Log10", "[", "d", "]"}]], "Input",
+ CellLabel->"In[16]:="],
+
+Cell[BoxData[
+ RowBox[{"DataRegion", "[", 
+  RowBox[{"\<\"<<unnamed>>\"\>", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "6", 
+     "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "11", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 6, ",", 11, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
+ CellLabel->"Out[16]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -603,15 +666,22 @@ Cell["Converting between 1D DataRegions and DataTables", "Subsection"],
 
 Cell[TextData[{
  "A 1D DataRegion can be converted to a DataTable object using ",
- ButtonBox["ToDataTable[dr].",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/ToDataTable"]
+ Cell[BoxData[
+  FormBox[
+   ButtonBox["ToDataTable",
+    BaseStyle->"Link",
+    ButtonData->"paclet:SimulationTools/ref/ToDataTable"], 
+   TraditionalForm]]],
+ "[dr]."
 }], "Text"],
 
-Cell["\<\
-A DataTable can be converted to a 1D DataRegion using ToDataRegion[dt].  Note \
-that the DataTable should have a uniform spacing.\
-\>", "Text"]
+Cell[TextData[{
+ "A DataTable can be converted to a 1D DataRegion using ",
+ ButtonBox["ToDataRegion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/ToDataRegion"],
+ "[dt].  Note that the DataTable should have a uniform spacing."
+}], "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -629,7 +699,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ToListOfData", "[", "d", "]"}]], "Input",
- CellLabel->"In[16]:="],
+ CellLabel->"In[17]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -667,7 +737,7 @@ Cell[BoxData[
     "1.`", ",", "1.6`", ",", "2.2`", ",", "2.8`", ",", "3.4`", ",", "4.`", 
      ",", "4.6`", ",", "5.2`", ",", "5.8`", ",", "6.3999999999999995`", ",", 
      "7.`"}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[16]="]
+ CellLabel->"Out[17]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -681,7 +751,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ToListOfCoordinates", "[", "d", "]"}]], "Input",
- CellLabel->"In[17]:="],
+ CellLabel->"In[18]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -830,7 +900,7 @@ Cell[BoxData[
       RowBox[{"1.`", ",", "5.3999999999999995`"}], "}"}], ",", 
      RowBox[{"{", 
       RowBox[{"1.`", ",", "6.`"}], "}"}]}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[17]="]
+ CellLabel->"Out[18]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -845,7 +915,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ToList", "[", "d", "]"}]], "Input",
- CellLabel->"In[18]:="],
+ CellLabel->"In[19]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1028,7 +1098,7 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"1.`", ",", "6.`", ",", "7.`"}], "}"}]}], "}"}]}], 
   "}"}]], "Output",
- CellLabel->"Out[18]="]
+ CellLabel->"Out[19]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1051,12 +1121,12 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"Dimensions", "[", "d", "]"}]], "Input",
- CellLabel->"In[19]:="],
+ CellLabel->"In[20]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"6", ",", "11"}], "}"}]], "Output",
- CellLabel->"Out[19]="]
+ CellLabel->"Out[20]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1070,12 +1140,12 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"MinCoordinates", "[", "d", "]"}]], "Input",
- CellLabel->"In[20]:="],
+ CellLabel->"In[21]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"0.`", ",", "0.`"}], "}"}]], "Output",
- CellLabel->"Out[20]="]
+ CellLabel->"Out[21]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1089,12 +1159,12 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"MaxCoordinates", "[", "d", "]"}]], "Input",
- CellLabel->"In[21]:="],
+ CellLabel->"In[22]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"1.`", ",", "6.`"}], "}"}]], "Output",
- CellLabel->"Out[21]="]
+ CellLabel->"Out[22]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1126,7 +1196,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"CoordinateRanges", "[", "d", "]"}]], "Input",
- CellLabel->"In[22]:="],
+ CellLabel->"In[23]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -1135,7 +1205,7 @@ Cell[BoxData[
     RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[22]="]
+ CellLabel->"Out[23]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1150,12 +1220,12 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"CoordinateSpacings", "[", "d", "]"}]], "Input",
- CellLabel->"In[23]:="],
+ CellLabel->"In[24]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"0.2`", ",", "0.6`"}], "}"}]], "Output",
- CellLabel->"Out[23]="]
+ CellLabel->"Out[24]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1169,10 +1239,10 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ArrayDepth", "[", "d", "]"}]], "Input",
- CellLabel->"In[24]:="],
+ CellLabel->"In[25]:="],
 
 Cell[BoxData["2"], "Output",
- CellLabel->"Out[24]="]
+ CellLabel->"Out[25]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1186,7 +1256,7 @@ ToDataRegion."
 
 Cell[BoxData[
  RowBox[{"VariableName", "[", "d", "]"}]], "Input",
- CellLabel->"In[25]:="]
+ CellLabel->"In[26]:="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1213,7 +1283,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"f", "=", 
   RowBox[{"Interpolation", "[", "d", "]"}]}]], "Input",
- CellLabel->"In[26]:="],
+ CellLabel->"In[27]:="],
 
 Cell[BoxData[
  TagBox[
@@ -1227,7 +1297,7 @@ Cell[BoxData[
        RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}], ",", "\<\"<>\"\>"}], "]"}],
   False,
   Editable->False]], "Output",
- CellLabel->"Out[26]="]
+ CellLabel->"Out[27]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1235,10 +1305,10 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"f", "[", 
   RowBox[{"0.12222", ",", "5.78"}], "]"}]], "Input",
- CellLabel->"In[27]:="],
+ CellLabel->"In[28]:="],
 
 Cell[BoxData["5.7949377284`"], "Output",
- CellLabel->"Out[27]="]
+ CellLabel->"Out[28]="]
 }, Open  ]],
 
 Cell["Perform a line integral using the interpolating function:", "Text"],
@@ -1253,10 +1323,10 @@ Cell[BoxData[
      RowBox[{"t", "^", "2"}]}], "]"}], ",", 
    RowBox[{"{", 
     RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}]], "Input",
- CellLabel->"In[28]:="],
+ CellLabel->"In[29]:="],
 
 Cell[BoxData["0.6666666666666674`"], "Output",
- CellLabel->"Out[28]="]
+ CellLabel->"Out[29]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -1291,7 +1361,7 @@ d[[All,All,3.5]].  You can also specify coordinate ranges:  d[[-2.0;;+2.0, \
 Cell[CellGroupData[{
 
 Cell[BoxData["d"], "Input",
- CellLabel->"In[29]:="],
+ CellLabel->"In[30]:="],
 
 Cell[BoxData[
  RowBox[{"DataRegion", "[", 
@@ -1308,7 +1378,7 @@ Cell[BoxData[
       RowBox[{"0.`", ",", "1.`"}], "}"}], ",", 
      RowBox[{"{", 
       RowBox[{"0.`", ",", "6.`"}], "}"}]}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[29]="]
+ CellLabel->"Out[30]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1317,7 +1387,7 @@ Cell[BoxData[
  RowBox[{"d2", "=", 
   RowBox[{"Slab", "[", 
    RowBox[{"d", ",", "All", ",", "3.0"}], "]"}]}]], "Input",
- CellLabel->"In[30]:="],
+ CellLabel->"In[31]:="],
 
 Cell[BoxData[
  RowBox[{"DataRegion", "[", 
@@ -1330,7 +1400,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0.`", ",", "1.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[30]="]
+ CellLabel->"Out[31]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -1343,9 +1413,16 @@ Cell[TextData[{
  ButtonBox["DataRegions",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/DataRegions"],
- " d1, d2, ... can be merged into a single enclosing one using \
-ToDataRegion[{d1, d2, ...}];\n\nThis is not yet supported for DataTables."
-}], "Text"]
+ " d1, d2, ... can be merged into a single enclosing one using "
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{"ToDataRegion", "[", 
+  RowBox[{"{", 
+   RowBox[{"d1", ",", " ", "d2", ",", " ", "..."}], "}"}], "]"}]], "Input",
+ Evaluatable->False],
+
+Cell["This is not yet supported for DataTables.", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1377,7 +1454,7 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "d2", "]"}]], "Input",
- CellLabel->"In[31]:="],
+ CellLabel->"In[32]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {}, 
@@ -1392,7 +1469,7 @@ Cell[BoxData[
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[31]="]
+ CellLabel->"Out[32]="]
 }, Open  ]],
 
 Cell["\<\
@@ -1407,7 +1484,7 @@ Cell[BoxData[
  RowBox[{"ArrayPlot", "[", 
   RowBox[{"d", ",", 
    RowBox[{"FrameTicks", "\[Rule]", "True"}]}], "]"}]], "Input",
- CellLabel->"In[32]:="],
+ CellLabel->"In[33]:="],
 
 Cell[BoxData[
  GraphicsBox[RasterBox[CompressedData["
@@ -1442,14 +1519,14 @@ tqh/ELfHm0TK77jHkxxzwEcx7uFl+if8AqsM09Q=
        FormBox["0.`", TraditionalForm]}, {1., 
        FormBox["1.`", TraditionalForm]}}}},
   PlotRangeClipping->True]], "Output",
- CellLabel->"Out[32]="]
+ CellLabel->"Out[33]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListPlot3D", "[", "d", "]"}]], "Input",
- CellLabel->"In[33]:="],
+ CellLabel->"In[34]:="],
 
 Cell[BoxData[
  Graphics3DBox[GraphicsComplex3DBox[CompressedData["
@@ -1905,7 +1982,7 @@ pg6av6iVXhCcBo04/sU/Jr6P+z85/mxf
     Scaled[0.02], 
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[33]="]
+ CellLabel->"Out[34]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1914,7 +1991,7 @@ Cell[BoxData[
  RowBox[{"ListDensityPlot", "[", 
   RowBox[{"d", ",", 
    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}]], "Input",
- CellLabel->"In[34]:="],
+ CellLabel->"In[35]:="],
 
 Cell[BoxData[
  GraphicsBox[GraphicsComplexBox[CompressedData["
@@ -1987,7 +2064,7 @@ aHyZBP8BJ9YoZQ==
   PlotRangePadding->{
     Scaled[0.02], 
     Scaled[0.02]}]], "Output",
- CellLabel->"Out[34]="]
+ CellLabel->"Out[35]="]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
