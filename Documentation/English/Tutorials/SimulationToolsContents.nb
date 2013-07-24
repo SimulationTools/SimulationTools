@@ -149,6 +149,14 @@ Cell[TextData[ButtonBox["Plotting",
  BaseStyle->"Link",
  ButtonData->"paclet:SimulationTools/tutorial/Plotting"]], "TOCChapter"],
 
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  ButtonBox[
+   RowBox[{"Advanced", " ", "analysis"}],
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/tutorial/AdvancedAnalysis"], 
+  TraditionalForm]]]], "TOCChapter"],
+
 Cell[TextData[ButtonBox["Convergence testing",
  BaseStyle->"Link",
  ButtonData->
