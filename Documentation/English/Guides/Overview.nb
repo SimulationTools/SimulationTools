@@ -69,50 +69,6 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell["CoordinateTransformations", "GuideFunctionsSubsection"],
-
-Cell[TextData[{
- Cell[TextData[ButtonBox["CartesianToThornburg",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/CartesianToThornburg"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["KerrAxialTortoise",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/KerrAxialTortoise"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["RadialToTortoise",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/RadialToTortoise"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["ThornburgToCartesian",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/ThornburgToCartesian"]], 
-  "InlineFunctionSans"],
- "\[NonBreakingSpace]",
- StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
-  "InlineSeparator"],
- " ",
- Cell[TextData[ButtonBox["TortoiseToRadial",
-  BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/TortoiseToRadial"]], 
-  "InlineFunctionSans"]
-}], "InlineGuideFunctionListing"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell["DataRegion", "GuideFunctionsSubsection"],
 
 Cell[TextData[{

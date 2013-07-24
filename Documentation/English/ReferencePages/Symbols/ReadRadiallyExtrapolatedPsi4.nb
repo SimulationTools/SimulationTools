@@ -29,10 +29,10 @@ Cell[BoxData[GridBox[{
         ButtonData->
          "paclet:SimulationTools/ref/ReadRadiallyExtrapolatedPsi4"], "[", 
        StyleBox[
-        RowBox[{"sim", ",", " ", "l", ",", " ", "m"}], "TI"], "]"}]], 
-      "InlineFormula"],
+        RowBox[{"sim", ",", " ", "l", ",", " ", "m", ",", " ", "order"}], 
+        "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]extrapolates the (l, m) mode of Psi4 from the \
-simulation to infinite radius."
+simulation to infinite radius using a particular extrapolation order."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -105,8 +105,9 @@ TaggingRules->{
       "readradiallyextrapolatedpsi4"}, "index" -> True, "label" -> 
     "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
     "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
-    "ReadRadiallyExtrapolatedPsi4[sim, l, m] extrapolates the (l, m) mode of \
-Psi4 from the simulation to infinite radius.", 
+    "ReadRadiallyExtrapolatedPsi4[sim, l, m, order] extrapolates the (l, m) \
+mode of Psi4 from the simulation to infinite radius using a particular \
+extrapolation order.", 
     "synonyms" -> {
      "ReadRadiallyExtrapolatedPsi4", "READRADIALLYEXTRAPOLATEDPSI4", 
       "readradiallyextrapolatedpsi4"}, "title" -> 

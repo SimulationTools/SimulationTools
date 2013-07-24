@@ -29,11 +29,12 @@ Cell[BoxData[GridBox[{
         ButtonData->
          "paclet:SimulationTools/ref/ReadRadiallyExtrapolatedStrain"], "[", 
        StyleBox[
-        RowBox[{"sim", ",", " ", "l", ",", " ", "m", ",", " ", "om0"}], "TI"],
-        "]"}]], "InlineFormula"],
+        RowBox[{
+        "sim", ",", " ", "l", ",", " ", "m", ",", " ", "om0", ",", " ", 
+         "order"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]reads the (l, m) mode of Psi4 at various radii from a \
 simulation, converts them to strain using Psi4ToStrain, and extrapolates the \
-result to infinite radius."
+result to infinite radius using a particular extrapolation order."
     }]]}
   }]], "Usage"]
 }, Open  ]],
@@ -106,9 +107,10 @@ TaggingRules->{
       "readradiallyextrapolatedstrain"}, "index" -> True, "label" -> 
     "SimulationTools/SimulationTools`Waveforms Symbol", "language" -> "en", 
     "paclet" -> "SimulationTools`Waveforms", "status" -> "None", "summary" -> 
-    "ReadRadiallyExtrapolatedStrain[sim, l, m, om0] reads the (l, m) mode of \
-Psi4 at various radii from a simulation, converts them to strain using \
-Psi4ToStrain, and extrapolates the result to infinite radius.", 
+    "ReadRadiallyExtrapolatedStrain[sim, l, m, om0, order] reads the (l, m) \
+mode of Psi4 at various radii from a simulation, converts them to strain \
+using Psi4ToStrain, and extrapolates the result to infinite radius using a \
+particular extrapolation order.", 
     "synonyms" -> {
      "ReadRadiallyExtrapolatedStrain", "READRADIALLYEXTRAPOLATEDSTRAIN", 
       "readradiallyextrapolatedstrain"}, "title" -> 

@@ -1,0 +1,239 @@
+Notebook[{
+Cell[" ", "TutorialColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["Supported Codes and Data Formats",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->
+   "paclet:SimulationTools/tutorial/Supported Codes and Data Formats"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["SUPPORTEDCODES TUTORIAL", "PacletNameCell"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"SimulationInformation":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SimulationInformation"], 
+       "GridFunctions":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/GridFunctions"], "Grids":>
+       Documentation`HelpLookup["paclet:SimulationTools/tutorial/Grids"], 
+       "Parameters":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/Parameters"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[None], None}]}], 
+       Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid"],
+
+Cell[CellGroupData[{
+
+Cell["Supported Codes and Data Formats", "Title"],
+
+Cell["\<\
+SimulationTools has built-in support for several codes and data formats. In \
+particular, it has support for reading data produced by components of the \
+Einstein Toolkit and also for reading data in the Numerical Relativity Data \
+Format. It is also designed in a modular way, so that support for new codes \
+can be easily added.\
+\>", "Text"],
+
+Cell["\<\
+This tutorial lists the currently supported formats and advises on which \
+simulation parameters should be set to gain the maximum support in \
+SimulationTools.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Structure of a simulation", "Section"],
+
+Cell["\<\
+When SimulationTools needs data from a particular simulation, it will look \
+for a directory which is a subdirectory of any of those listed in \
+$SimulationPath. The most basic definition of a \
+\[OpenCurlyDoubleQuote]simulation\[CloseCurlyDoubleQuote] understood by \
+SimulationTools is therefore just a single directory containing all files \
+pertaining to that simulation.
+
+However, SimulationTools goes beyond this simple concept by adding support \
+for transparently merging chunks from multiple possible restarts, determining \
+filenames based on the type of data requested, etc.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["SimFactory", "Subsection"],
+
+Cell["\<\
+Simulations run with the the Einstein toolkit can make use of SimFactory to \
+manage the running of jobs on clusters, job chaining, etc. SimulationTools \
+understands the directory structure produced by simulations run with \
+SimFactory and can read data from them while transparently joining together \
+data from multiple restarts.\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["EinsteinToolkit/Cactus simulation data", "Section"],
+
+Cell["\<\
+SimulationTools has support for reading in data from a large number of codes \
+included in the Einstein Toolkit. Each of these codes has parameters which \
+control the output format. While it is designed to be as flexible as \
+possible, SimulationTools users will benefit from setting certain parameters \
+to values recommended in this section. In addition to the parameters given \
+here, the parameter file for the included example binary black hole \
+simulation can be used as a starting point for other simulations.\
+\>", "Text"],
+
+Cell["Grid functions (CarpetIOHDF5)", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["Waveform extraction (Multipole)", "Subsection"],
+
+Cell["\<\
+The Multipole thorn produces output for the spherical harmonic modes of \
+arbitrary Cactus grid functions at specified radii.\
+\>", "Text"],
+
+Cell["\<\
+While SimulationTools supports both HDF5 and ASCII output formats from the \
+Multipole thorn, it is highly recommended to use HDF5 for performance and \
+disk space reasons. This may be controlled by setting the following parameter \
+values:
+
+\tMultipole::output_hdf5  = yes
+\tMultipole::output_ascii = no\
+\>", "Text"],
+
+Cell["\<\
+Another option provided by the Multipole thorn is to specify the name to use \
+for the output variable. By default, SimulationTools assumes this variable is \
+named \[OpenCurlyQuote]psi4\[CloseCurlyQuote]. To ensure this is the case, it \
+is recommended to set the \[OpenCurlyQuote]name\[CloseCurlyQuote] part of the \
+variables parameter to \[OpenCurlyQuote]psi4\[CloseCurlyQuote]. For example, \
+when extracting waveforms using the WeylScal4 thorn one would use
+
+\tMultipole::variables=\[CloseCurlyDoubleQuote]
+\t\tWeylScal4::Psi4r{sw=-2 cmplx=\[CloseCurlyQuote]WeylScal4::Psi4i\
+\[CloseCurlyQuote] name=\[CloseCurlyQuote]psi4\[CloseCurlyQuote]}
+\t\[OpenCurlyDoubleQuote]\
+\>", "Text"],
+
+Cell["\<\
+SimulationTools can be made to use another variable name by setting a \
+different value for $MultipolePsi4Variable, e.g.\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$MultipolePsi4Variable", "=", "\"\<psi0\>\""}], ";"}]], "Input",
+ CellLabel->"In[1]:="]
+}, Open  ]],
+
+Cell["Run information (SystemStatistics)", "Subsection"],
+
+Cell["Grid structure (Carpet)", "Subsection"],
+
+Cell["Trajectories (PunctureTracker)", "Subsection"],
+
+Cell["Spins and masses (QuasilocalMeasures)", "Subsection"],
+
+Cell["Black hole horizons (AHFinderDirect)", "Subsection"]
+}, Open  ]],
+
+Cell["Numerical relativity data format (NRDF)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedTutorialsSection",
+ WholeCellGroupOpener->True],
+
+Cell[TextData[ButtonBox["SimulationInformation",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationInformation"]], \
+"RelatedTutorials"],
+
+Cell[TextData[ButtonBox["GridFunctions",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/GridFunctions"]], "RelatedTutorials"],
+
+Cell[TextData[ButtonBox["Grids",
+ BaseStyle->"Link",
+ ButtonData->"paclet:SimulationTools/tutorial/Grids"]], "RelatedTutorials"],
+
+Cell[TextData[ButtonBox["Parameters",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/Parameters"]], "RelatedTutorials"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Supported Codes and Data Formats",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
+    "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
+    "SupportedCodes", "status" -> "None", "summary" -> 
+    "Tutorial on supported codes and data formats.", "synonyms" -> {}, 
+    "title" -> "Supported Codes and Data Formats", "windowTitle" -> 
+    "Supported Codes and Data Formats", "type" -> "Tutorial", "uri" -> 
+    "SimulationTools/tutorial/Supported Codes and Data Formats"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+
