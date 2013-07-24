@@ -5,6 +5,17 @@ Cell["SimulationTools Documentation", "Title"],
 
 Cell[CellGroupData[{
 
+Cell["Preamble", "Section"],
+
+Cell[TextData[ButtonBox["Introduction",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationToolsIntroduction"]], \
+"TOCChapter"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["Basic Concepts", "Section"],
 
 Cell[TextData[ButtonBox["Simulations",
@@ -13,7 +24,8 @@ Cell[TextData[ButtonBox["Simulations",
 
 Cell[TextData[ButtonBox["Data Representations",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/DataRepresentations"]], "TOCChapter"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/DataRepresentations"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Importing Data",
  BaseStyle->"Link",
@@ -30,7 +42,8 @@ Cell[TextData[ButtonBox["Supported codes and data formats",
 
 Cell[TextData[ButtonBox["Simulation information",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/SimulationInformation"]], "TOCChapter"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationInformation"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Grid functions",
  BaseStyle->"Link",
@@ -55,7 +68,8 @@ Cell[TextData[ButtonBox["Plotting",
 
 Cell[TextData[ButtonBox["Convergence testing",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/ConvergenceTesting"]], "TOCChapter"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/ConvergenceTesting"]], "TOCChapter"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -64,7 +78,8 @@ Cell["Numerical Relativity", "Section"],
 
 Cell[TextData[ButtonBox["Gravitational waves",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/GravitationalWaves"]], "TOCChapter"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/GravitationalWaves"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Black holes",
  BaseStyle->"Link",
@@ -80,17 +95,20 @@ Cell[TextData[ButtonBox["Trackers",
 
 Cell[TextData[ButtonBox["Coordinate transformations",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/CoordinateTransformations"]], "TOCChapter"],
+ ButtonData->
+  "paclet:SimulationTools/tutorial/CoordinateTransformations"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Numerical Relativity Data Format",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/NumericalRelativityDataFormat"]], "TOCChapter"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/NumericalRelativityDataFormat"]], \
+"TOCChapter"]
 }, Open  ]]
 }, Open  ]]
 },
 Saveable->True,
 WindowSize->{725, 750},
-WindowMargins->{{Automatic, 12}, {Automatic, 0}},
+WindowMargins->{{Automatic, 81}, {70, Automatic}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
