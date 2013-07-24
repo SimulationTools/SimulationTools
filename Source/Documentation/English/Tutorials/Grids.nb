@@ -24,9 +24,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Accessing grid structure information\
-\>", "Subsection"],
+Cell["Accessing grid structure information", "Subsection"],
 
 Cell[BoxData[GridBox[{
    {"ReadGridSpacings", Cell["ReadTimeStep", "TableText"]},
@@ -40,81 +38,41 @@ Cell["\<\
 Read grid spacing (by default, refinement level 0 is assumed)\
 \>", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"ReadGridSpacings", "[", "\"\<bbh\>\"", "]"}]], "Input"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"2.`", ",", "2.`", ",", "2.`"}], "}"}]], "Output"]
-}, Open  ]],
-
-Cell["\<\
-Read grid spacing on a specifinement level\
-\>", "Text"],
-
-Cell[CellGroupData[{
+Cell["Read grid spacing on a specifinement level", "Text"],
 
 Cell[BoxData[
  RowBox[{"ReadGridSpacings", "[", 
   RowBox[{"\"\<bbh\>\"", ",", 
    RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"0.03125`", ",", "0.03125`", ",", "0.03125`"}], "}"}]], "Output"]
-}, Open  ]],
-
-Cell["\<\
-Read the time step on refinement level 0\
-\>", "Text"],
-
-Cell[CellGroupData[{
+Cell["Read the time step on refinement level 0", "Text"],
 
 Cell[BoxData[
  RowBox[{"ReadTimeStep", "[", "\"\<bbh\>\"", "]"}]], "Input"],
 
-Cell[BoxData["0.5`"], "Output"]
-}, Open  ]],
-
 Cell["and on other refinement levels", "Text"],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadTimeStep", "[", 
   RowBox[{"\"\<bbh\>\"", ",", 
    RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input"],
 
-Cell[BoxData["0.015625`"], "Output"]
-}, Open  ]],
-
 Cell["\<\
 Read the coordinate time range over which simulation data is available\
 \>", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"ReadTimeRange", "[", "\"\<bbh\>\"", "]"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"0", ",", "300"}], "}"}]], "Output"]
-}, Open  ]],
 
 Cell["\<\
 Find the maximum number of refinement levels in the simulation\
 \>", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}]], "Input"],
-
-Cell[BoxData["7"], "Output"]
-}, Open  ]]
+ RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
