@@ -26,7 +26,7 @@ BeginPackage["SimulationTools`SimView`",
 
 (* Supported *)
 SimulationOverview::usage = "SimulationOverview[sim] gives a quick overview of the simulation sim.
-SimView[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....";
+SimulationOverview[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....";
 
 (* Deprecated *)
 SimView;
