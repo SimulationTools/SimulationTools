@@ -16,7 +16,7 @@ Cell[CellGroupData[{
 Cell["ASCII multi-column data", "Subsection"],
 
 Cell[TextData[{
- "It is very common for simulation data to be stores as numeric columns of \
+ "It is very common for simulation data to be stored as numeric columns of \
 ASCII data.  ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
@@ -24,9 +24,7 @@ ASCII data.  ",
 resulting lists of numbers can be converted to DataTables."
 }], "Text"],
 
-Cell["\<\
-Import numeric ASCII column data:\
-\>", "MathCaption"],
+Cell["Import numeric ASCII column data:", "MathCaption"],
 
 Cell[BoxData[
  RowBox[{"ToDataTable", "[", 
@@ -36,16 +34,15 @@ Cell[BoxData[
    RowBox[{"[", 
     RowBox[{"All", ",", 
      RowBox[{"{", 
-      RowBox[{"1", ",", "5"}], "}"}]}], "]"}], "]"}], "]"}]], "Input"]
+      RowBox[{"1", ",", "5"}], "}"}]}], "]"}], "]"}], "]"}]], "Input",
+ Evaluatable->False]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell["HDF5 data", "Subsection"],
 
-Cell["\<\
-Import multi-dimensional numeric HDF5 data:\
-\>", "MathCaption"],
+Cell["Import multi-dimensional numeric HDF5 data:", "MathCaption"],
 
 Cell[BoxData[
  RowBox[{"ToDataRegion", "[", 
@@ -53,7 +50,8 @@ Cell[BoxData[
    RowBox[{"\"\</path/to/data.h5\>\"", ",", 
     RowBox[{"{", 
      RowBox[{"\"\<Datasets\>\"", ",", "\"\<mydataset\>\""}], "}"}]}], "]"}], 
-  "]"}]], "Input"]
+  "]"}]], "Input",
+ Evaluatable->False]
 }, Open  ]]
 }, Open  ]]
 },
