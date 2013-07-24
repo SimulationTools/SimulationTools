@@ -40,8 +40,10 @@ Cell[TextData[{
 Cell[BoxData[
  RowBox[{
   RowBox[{"SimulationTools`$SimulationPath", "=", 
-   RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}]}], 
-  ";"}]], "Input"],
+   RowBox[{"{", 
+    RowBox[{"$HomeDirectory", "<>", "\"\</Simulations\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ Evaluatable->False],
 
 Cell[TextData[{
  "You can add the above line to the ",
@@ -101,11 +103,12 @@ Cell["Finding files in a simulation", "Subsection"],
 Cell["\<\
 Given the name of a simulation, and the name of an output file, you can \
 obtain full paths to all the instances of that file across all segments of \
-the simulation:\
+the simulation.  For example, to find all instances of a file called \
+mp_psi4.h5 in a simulation called bbh which exists on your $SimulationPath:\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
+ RowBox[{"FindSimulationFiles", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<mp_psi4.h5\>\""}], "]"}]], "Input"],
 
 Cell["\<\
@@ -114,17 +117,17 @@ available HDF5 files:\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
+ RowBox[{"FindSimulationFiles", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<*.h5\>\""}], "]"}]], "Input"],
 
 Cell["or all the available files:", "Text"],
 
 Cell[BoxData[
- RowBox[{"FindSimulationFile", "[", 
+ RowBox[{"FindSimulationFiles", "[", 
   RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}]], "Input"],
 
 Cell["\<\
-The output of FindSimulationFile is always a list of filenames.\
+The output of FindSimulationFiles is always a list of filenames.\
 \>", "Text"]
 }, Open  ]]
 }, Open  ]]
