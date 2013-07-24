@@ -210,20 +210,17 @@ SimulationTools obtains binary system information (in order of preference) \
 from any of the following sources:\
 \>", "Text"],
 
-Cell[CellGroupData[{
+Cell["PunctureTracker Cactus output", "BulletedText"],
 
-Cell["PunctureTracker Cactus output", "Item"],
+Cell["AHFinderDirect Cactus output", "BulletedText"],
 
-Cell["AHFinderDirect Cactus output", "Item"],
+Cell["MinTracker Cactus output", "BulletedText"],
 
-Cell["MinTracker Cactus output", "Item"],
-
-Cell["ShiftTracker Cactus output", "Item"],
+Cell["ShiftTracker Cactus output", "BulletedText"],
 
 Cell["\<\
 Numerical Relativity Data Format (NRDF) output files [not yet implemented]\
-\>", "Item"]
-}, Open  ]],
+\>", "BulletedText"],
 
 Cell["\<\
 In all cases, the binary members are numbered in the same sequence as the \
