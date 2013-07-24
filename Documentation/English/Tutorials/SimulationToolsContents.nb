@@ -110,7 +110,19 @@ Cell[TextData[ButtonBox["Binaries",
 
 Cell[TextData[ButtonBox["Trackers",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/Trackers"]], "TOCChapter"]
+ ButtonData->"paclet:SimulationTools/tutorial/Trackers"]], "TOCChapter"],
+
+Cell["Reference", "Section"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  ButtonBox[
+   RowBox[{
+   "All", " ", "SimulationTools", " ", "functions", " ", "and", " ", 
+    "symbols"}],
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/guide/Overview"], 
+  TraditionalForm]]]], "TOCChapter"]
 }, Open  ]],
 
 Cell[" ", "FooterCell"]
