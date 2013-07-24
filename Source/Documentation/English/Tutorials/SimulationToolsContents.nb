@@ -38,7 +38,7 @@ Cell["Simulation Data", "Section"],
 
 Cell[TextData[ButtonBox["Supported codes and data formats",
  BaseStyle->"Link",
- ButtonData->"paclet:tutorial:Supported Codes"]], "TOCChapter"],
+ ButtonData->"paclet:SimulationTools/tutorial/SupportedCodesAndDataFormats"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Simulation information",
  BaseStyle->"Link",
@@ -79,7 +79,7 @@ Cell["Numerical Relativity", "Section"],
 Cell[TextData[ButtonBox["Gravitational waves",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:SimulationTools/tutorial/GravitationalWaves"]], "TOCChapter"],
+  "paclet:SimulationTools/tutorial/Waveforms"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Black holes",
  BaseStyle->"Link",
@@ -91,18 +91,8 @@ Cell[TextData[ButtonBox["Binaries",
 
 Cell[TextData[ButtonBox["Trackers",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/tutorial/Trackers"]], "TOCChapter"],
+ ButtonData->"paclet:SimulationTools/tutorial/Trackers"]], "TOCChapter"]
 
-Cell[TextData[ButtonBox["Coordinate transformations",
- BaseStyle->"Link",
- ButtonData->
-  "paclet:SimulationTools/tutorial/CoordinateTransformations"]], "TOCChapter"],
-
-Cell[TextData[ButtonBox["Numerical Relativity Data Format",
- BaseStyle->"Link",
- ButtonData->
-  "paclet:SimulationTools/tutorial/NumericalRelativityDataFormat"]], \
-"TOCChapter"]
 }, Open  ]]
 }, Open  ]]
 },
