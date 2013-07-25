@@ -60,9 +60,9 @@ Cell[BoxData[
    RowBox[{"ToList", "[", "r", "]"}], ",", "10"}], "]"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"PresentationListLinePlot", "[", 
+ RowBox[{"ListLinePlot", "[", 
   RowBox[{"r", ",", 
-   RowBox[{"FrameLabel", "\[Rule]", 
+   RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"\"\<t\>\"", ",", "\"\<D\>\""}], "}"}]}]}], "]"}]], "Input"]
 }, Open  ]],
@@ -82,9 +82,9 @@ Cell[BoxData[
   RowBox[{"ReadBinaryPhase", "[", "run", "]"}]}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"PresentationListLinePlot", "[", 
+ RowBox[{"ListLinePlot", "[", 
   RowBox[{"phi", ",", 
-   RowBox[{"FrameLabel", "\[Rule]", 
+   RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{
      "\"\<t\>\"", ",", "\"\<\!\(\*SubscriptBox[\(\[Phi]\), \(orb\)]\)\>\""}], 
@@ -117,12 +117,12 @@ Cell[BoxData[
     RowBox[{"run", ",", "2"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"PresentationListLinePlot", "[", 
+ RowBox[{"ListLinePlot", "[", 
   RowBox[{
    RowBox[{"{", 
     RowBox[{"x1", ",", "x2"}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
-   RowBox[{"FrameLabel", "\[Rule]", 
+   RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"\"\<t\>\"", ",", "\"\<x\>\""}], "}"}]}]}], "]"}]], "Input"],
 
