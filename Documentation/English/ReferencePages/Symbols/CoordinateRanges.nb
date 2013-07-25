@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinateRanges"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinateRanges", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the coordinates of the edges of d. This is a list \
 of {min,max} pairs, each corresponding to one dimension of d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

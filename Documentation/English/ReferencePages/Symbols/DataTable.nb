@@ -43,9 +43,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["DataTable", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -71,8 +71,7 @@ variables, xi, should be monotonically increasing real numbers and may have a \
 variable increment.  The dependent variables, fi, can be of any type for \
 which the basic mathematical operations (+, -, *, /) make sense."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -108,6 +107,7 @@ Cell["\<\
 MapThread[f,{d1,d2,...}] produces a DataTable with f mapped over the data \
 parts of the DataTables d1, d2, ... in the same way as for MapThread on lists.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

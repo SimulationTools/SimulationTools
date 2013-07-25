@@ -45,9 +45,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadPsi4", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -62,8 +62,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns a DataTable of the l,m mode of Psi4 at radius r \
 from sim."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -94,6 +93,7 @@ Cell["\<\
 The alias chosen for Psi4 in Multipole can be chosen by setting \
 $MultipolePsi4Variable (the default is \"psi4\")\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -154,13 +154,7 @@ Cell[BoxData[
        RowBox[{"-", "4.76982968622533`*^-10"}], "+", 
        RowBox[{"3.968952260113716`*^-8", " ", "\[ImaginaryI]"}]}]}], "}"}], 
     ",", 
-    RowBox[{"{", 
-     RowBox[{"0.5`", ",", 
-      RowBox[{
-       RowBox[{"-", 
-        RowBox[{"\[LeftSkeleton]", "23", "\[RightSkeleton]"}]}], "+", 
-       RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}]}], "}"}], ",", 
-    RowBox[{"\[LeftSkeleton]", "598", "\[RightSkeleton]"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "599", "\[RightSkeleton]"}], ",", 
     RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}]}], "}"}],
   Short]], "Output",
  CellLabel->"Out[1]:= "]
@@ -173,8 +167,8 @@ Cell["ListLinePlot[Re[ReadPsi4[\"bbh\",2,2,100]], PlotRange -> All]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
 1:eJw1mXlYjOsbxyei7FmiUkwlJGlP0vItaRHapL2mfdpnhojjZAqlg0SEI0e2
 RGhDSZgKJUqJcmSZsiQtkopTll+/a+7xR67Pdb/3ez/3+j7PM8oBMc7BoxgM
 hsfIn///L/537XD3woxAxm0RCc075eP3VCmKude8d7eUifDi71si/m7+h5x1
@@ -316,10 +310,12 @@ M2rofMXD9wK2j/Xqcso/D4Xnru2WyaDfRzg8FM29FqdllCRaf9zI+4fydujc
 LaL9Jw/6qkHttZLk724ezMoVLT/6iu+jeDDcPWwYdeUB9T8PT//L5YW9rqH+
 H4mHvbIqewxxDg99Hefvs1hVdF/FA9P+88prqypFXMLD6Hv7OyzZZZR/Hq4t
 0Vjpo1Fw+3/Ag4Uz
-     "]]}},
+      "]]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
-  AxesOrigin->{0, 0},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.},
+  Method->{},
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
@@ -335,8 +331,8 @@ ListLinePlot[Map[Re[ReadPsi4[\"bbh\",2,2,#]] &, ReadPsi4Radii[\"bbh\"]],
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
 1:eJw1mXlYjOsbxyei7FmiUkwlJGlP0vItaRHapL2mfdpnhojjZAqlg0SEI0e2
 RGhDSZgKJUqJcmSZsiQtkopTll+/a+7xR67Pdb/3ez/3+j7PM8oBMc7BoxgM
 hsfIn///L/537XD3woxAxm0RCc075eP3VCmKude8d7eUifDi71si/m7+h5x1
@@ -478,8 +474,8 @@ M2rofMXD9wK2j/Xqcso/D4Xnru2WyaDfRzg8FM29FqdllCRaf9zI+4fydujc
 LaL9Jw/6qkHttZLk724ezMoVLT/6iu+jeDDcPWwYdeUB9T8PT//L5YW9rqH+
 H4mHvbIqewxxDg99Hefvs1hVdF/FA9P+88prqypFXMLD6Hv7OyzZZZR/Hq4t
 0Vjpo1Fw+3/Ag4Uz
-     "]]}, 
-   {Hue[0.9060679774997897, 0.6, 0.6], LineBox[CompressedData["
+      "]]}, 
+    {RGBColor[0.6, 0.24, 0.4428931686004542], LineBox[CompressedData["
 1:eJw1mnk8lO0XxkflJaEiLSpLiVDIFlpcdhHGvkTGjH2dGWnTMpWkRVFRaZtQ
 0YuQdmratJcWkohKK0qK5FX9+n3mzPtH7+f7Oc95zn3u67rvuZ/noclO8ooY
 wmAwAv/+8///S/4bp3R21duuo5fE1Gbt1rHP+cdtCXdbJ0f3rC04IeF+66tB
@@ -622,8 +618,8 @@ vikbQeuFxYd8vLPm7HG0HqP5eFzj4XlyD8W5fOirJmzjFZ0g/fkIrly8MOLi
 cdKfj/H8b2nqGwpJfz7srTZ2frpIv39ZfEideK5cdPsw6f+3/wvRyRbKtD8I
 +dCtj1c8v4L6KeKDr27bfD5Xoj8fRZ9qnlhq5ZH+fIwb+D59fS75UcRHVSbb
 rOHo9vn/A2DjicM=
-     "]]}, 
-   {Hue[0.1421359549995791, 0.6, 0.6], LineBox[CompressedData["
+      "]]}, 
+    {RGBColor[0.6, 0.5470136627990908, 0.24], LineBox[CompressedData["
 1:eJw1mXlczN0Xx0eRJC2WtFiGItHTopIs9dFCpX3f1LTOtM8kJGGSkmijSERC
 2YVK8khPhCItkuJRg0KPLYls8ev3mjP+yOv9OnPuued+zj3f773fWQHRTsFi
 DAbDc+TP//8X/SvwnjHQHhFSLSSByfRPYx8csBJxv8nH53njrs8V8TcT7fC3
@@ -766,8 +762,8 @@ r5+hlhN6WMicGHBatqssTTxKz5sYSPwtH3FVlvpdXAyKa1qKnlQR82Ngn/n+
 zqFo4tQYJLdIh67Up/2QFYNRD2crP1IvJP1jYFIyRv3253zSPwabhyd8d7pO
 9XJyZHznp8VrJu4m/WMwSTJu+8KtCaT/yPq56mG39V+kfwxihxbeyqzYaPw/
 XaibRg==
-     "]]}, 
-   {Hue[0.37820393249936934`, 0.6, 0.6], LineBox[CompressedData["
+      "]]}, 
+    {RGBColor[0.24, 0.6, 0.33692049419863584`], LineBox[CompressedData["
 1:eJw1mXk8lN8Xx4dSISIJRUYUyV6k1YcsSfbs21gGY52ZNi1Cq3xbJLSHpCQV
 pVKoSUVKaNGqGmkvURJp8ev3mjP9odf7dZ7znHvv+Zzz3HtHKyzRgy3JYDD8
 /v35///if0u7GlYmB026LCKh1UmnQ71SBmLutjLvcFadM6BD3G9lpq90zblO
@@ -909,10 +905,12 @@ RfnnY81AvaBlmQfln4+x2suCR4/ZQfXPx9rpbzUEUw9R/fNh7OJ0Kvb9Eap/
 PmSde3cqvqXf57h8BLEuMt8LS0ScxIdrwMKQ7EfEqXyYSP+1WdhDz6fzkVv8
 ePmCVHH+/81vUPF22Kt8yj8f59ckCTtG7ab88+Gom7pqz/LNlH8+4httZim4
 W1P+/9kfTTRiX15P9c/HRL3VvByJXVT/fDyvkZGTWrPv8v8A9WN2iQ==
-     "]]}},
+      "]]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
-  AxesOrigin->{0, 0},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.},
+  Method->{},
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",

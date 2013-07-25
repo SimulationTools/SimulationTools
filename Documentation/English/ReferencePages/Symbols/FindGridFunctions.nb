@@ -45,9 +45,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["FindGridFunctions", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -60,8 +60,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the names of gridfunctions with data available in \
 a simulation."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -87,6 +86,7 @@ Cell["\<\
 Currently, only HDF5 data is supported, and this data must exist either in \
 the simulation directory or one level down.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

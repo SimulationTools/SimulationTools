@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinatesAtMax"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinatesAtMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]finds a list of the coordinates at which the maximum \
 occurs in d. This is guaranteed to coincide with a data point."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

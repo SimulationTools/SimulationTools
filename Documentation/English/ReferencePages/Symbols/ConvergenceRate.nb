@@ -43,8 +43,6 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ConvergenceRate", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -65,8 +63,7 @@ Cell[BoxData[GridBox[{
 = O[h^p].  f1, f2 and f3 can either be real numbers or DataTables, and the \
 returned value will be of the same type."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -107,50 +104,51 @@ ListLinePlot[ConvergenceRate[{f[h1], f[h2], f[h3]}, {h1, h2, h3}], PlotRange \
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
 1:eJxTTMoPSmViYGBQBWIQDQOH/v0HAn6HapF17g+rWuxDc4s5ztoIQPlT7M8n
 C1fpFAs47JBrfR24Y579IeO14aVLYPJL7M/FMDCsuyjgMGsmCKy07z39f/fi
 3zD16+zrbttt+KUk6PAmECSy0b7td/BXCw9BqP4t9jK7+NrOZQs6cF1fXGDL
 td3+xs1sIek+Qah5O+3Nz/5PK1ov6KAZ03/oq8Ye+3U/uu/JXxCEmr/P/sif
-Xv3MD4IOS4C6ry8+YP/mQ+LFCQJCUPsO2ufw2qrfMBByMAaDw/Y329RnNAYK
-Qe0/Yv+p6uqOS0VCDoe/agBtOGr/bn3SOrGpQlD3HLfPeP7y+4IdQg5BYAtP
-2F935L514a4Q1H0n7YutwveKsgo7PKwCGXjK/qX8589f9ISh7j1jn/n882TB
-GGGHQpDzCs7aV5UsLTTvFYa6/5z9pQtej7IOCztAYuOCvSuYFoH654L9Fql/
-fPtcRBw8wBZctD+W72wsPkUE6r+L9u82Tpzf/FHEAWRbTP8l+xwXyyeySaJQ
-/162/1eb77LvragD2DvXL9v/trWQVlwoBvX/Ffs7+sLs5ZPEHeRBzpG7ar/m
-d1GK9xsJaHhctV+9V2piII+0Q3oaCFyz52443nn3i5zDM9VP07/9uGYPcbeK
-AwA6GA17
-     "]], LineBox[CompressedData["
-1:eJwtkmtIU2Ecxk9BKlPnuWwqjmZKoEKoYNCs9P+nJEfLD7PID+1Ly4wS70g4
-lxTlImJe0qICK9G+1ZRIMkQrJaLLQosyL1vbnLsqaNNaTrKds/eBw/vp/M77
-PL+Tpq0pPbudoqic8MOf9+/xmYGc194VRVMACkXTfbUFs+AJJvVEvdqGdp3E
-VGyfBZ+bSc9iorDVrx6Wt86BUfn2pcEcg1ma9vH1zHlYDuWeZIdEaP7EZx44
-/dDXGXkc1hXwQAu4bIpfiYp4lIZpOokVRltA/yRFjGFYmGiFpQNdomvfxSjg
-ND+hJlb1PNCYgJQQG4Bw0lgqvGCD6qqGGPNBGvtr+Q/YoPcMp9vTQOPvTJ5g
-g4S9T8sa+2lURgrAiVMUZZqiMdLXDsEPWyN9IRqX+Dp+O1BzhYMb6QxG+jvg
-euj4ukLJoHCddgdEj4gNnysZsocDOmcqWVkbg3lCFkBv3qqoH2DIPgtwOXjT
-mjrJIE8TTS9A/qYx5/wKQ/ZywvvV01MdNIvNPE7nhJ74gowfuSzZzwklhoy7
-V9QspgrARSjWfRv+Us+SPRfhzoDWlHibxQn+euOL8MDt/fNomCX7uuDSodjZ
-SQuL5yr4uMC+v2xUuoMje7tAuSsQWMvmUKgrckOZO9DFaDiyvxvoxsd1+4wc
-CjiTG0qmjjouTHDEhwecW3w44sMD+bJ/4rEiCfHhgTfVh/OSuiXEhweSn3U+
-vLoqIT68UH4k37lTKyU+vFDVUlM0tiwlPrywCQpZWm8i8eGDY9lc9MVbSdgh
-+PBB20Z9uWopmfjwQdOLlE51nIz48EN3y7sbljU5fmT/qpr1/sjvQ+3G/0f0
-Waw=
-     "]], 
-    LineBox[{{0.9, 1.217095318858807}, {0.91, 2.2182743332798216`}, {0.92, 
-     2.7583792363847532`}, {0.93, 3.100354625065906}, {0.9400000000000001, 
-     3.338413880701214}, {0.9500000000000001, 3.5150639095073393`}, {0.96, 
-     3.6523875163657564`}, {0.97, 3.7630243021851686`}, {0.98, 
-     3.8547440363101813`}, {0.99, 3.932593735256546}, {1., 
-     3.999999999999859}}]}},
+Xv3MD4IOS4C6ry8+YP/mQ+LFCQJCUPsO2ufw2qrfMBByMAaDw/by7eozGgOF
+oPYfsf9UdXXHpSIhh8NfNYA2HLV/tz5pndhUIah7jttnPH/5fcEOIYcgsIUn
+7K87ct+6cFcI6r6T9sVW4XtFWYUdHlaBDDxl/1L+8+cvesJQ956xz3z+ebJg
+jLBDIch5BWftq0qWFpr3CkPdf87+0gWvR1mHhR0gsXHB3hVMi0D9c8F+i9Q/
+vn0uIg4eYAsu2h/LdzYWnyIC9d9F+3cbJ85v/ijiALItpv+SfY6L5RPZJFGo
+fy/b/6vNd9n3VtQB7J3rl+1/21pIKy4Ug/r/iv0dfWH28kniDvIg58hdtV/z
+uyjF+40ENDyu2q/eKzUxkEfaIT0NBK7Zczcc77z7Rc7hmeqn6d9+XLOHuFvF
+AQBBcAzC
+      "]], LineBox[CompressedData["
+1:eJwtkmtIU2Ecxk9BKlPnuWwqjjQlUCFUMHCr9P+nJEfLD1rkh/alZUaJt8kI
+55KiNCLmJS0qsBLtW02JpIVkpUR0WWhR5rXdrwratMxJtnP2PnB4P53feZ/n
+d9I1deVntlMUlRt++PPeXT7TkPvatyxvCkKRaKq/vnAGvOtJvVGvtqFNLzGV
+2GbA72EyspkobA2UmVNbZ8GofPuizRKD2eqOsbWsOVgK5Z1gh0Vo+cRnDjjD
+8Nfp1DhsKOSB8+C2yn8lyuNRGqbpJQtQ0AKGxyliDMPCxAVY3N8tuvpdjAJO
+/RPqYlXPgroEpIRYAYSTxnLhBSvU1jTGWA7QOFDPf8AKfac5/Z5GGn9n8QQr
+JOx9UqEboFEZKQDHT1KUaZLGSF8brH/YGukP0bjI1wnYgJotGtrIYDDS3w7X
+QsfW5EoGhet02CF6RNz2uZohe9iha7qalbUzmC/EAQbLVpV2kCH7OODS+o2F
+tAkGeZpoygGKTWPuuWWG7OWE9yunJjtpFpt5nN4JvfGFmT/yWLKfE0rbMu9c
+LmMxTQC6oET/zfxFy5I9XXB7UGNKvMXiOH+9MRfc9/j+PDSzZF83XDwYOzMx
+z+LZKj5usO2reCndwZG93aDcFQyu5nAo1BV5oMIT7GbUHNnfA7TuUUOBkUMB
+Z/JA6eQR+/lxjvjwgnOLD0d8eEEh+yceLZYQH154U3soP6lHQnx4Iflp14Mr
+KxLiwweVhxXOnRop8eGDmpa64tElKfHhg02Qy9L7EokPPxzN4aIv3EzCTsGH
+H9o3tJWqxWTiww9Nz1O6yuJkxEcAelreXZ9fTcWP7F9VsyEQ+X2o3fgf/QZZ
+Jg==
+      "]], 
+     LineBox[{{0.9, 1.217095318858807}, {0.91, 2.2182743332798216`}, {0.92, 
+      2.7583792363847532`}, {0.93, 3.100354625065906}, {0.9400000000000001, 
+      3.338413880701214}, {0.9500000000000001, 3.5150639095073393`}, {0.96, 
+      3.6523875163657564`}, {0.97, 3.7630243021851686`}, {0.98, 
+      3.8547440363101813`}, {0.99, 3.932593735256546}, {1., 
+      3.999999999999859}}]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
+  AxesLabel->{None, None},
   AxesOrigin->{0, 0},
-  PlotRange->{{0., 1.}, {0, 10}},
+  Method->{},
+  PlotRange->{{0, 1.}, {0, 10}},
   PlotRangeClipping->True,
-  PlotRangePadding->{
-    Scaled[0.02], Automatic}]], "Output",
+  PlotRangePadding->{{0.02, 0.02}, {0., 0.}}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

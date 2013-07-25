@@ -46,9 +46,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ToList", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -60,8 +60,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns the contents of d as a List."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -99,6 +98,7 @@ greater than one will produce a flattened list of values.\
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
    "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

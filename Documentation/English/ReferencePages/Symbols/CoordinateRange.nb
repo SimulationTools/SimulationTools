@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinateRange"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinateRange", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the coordinates of the first and last points of d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

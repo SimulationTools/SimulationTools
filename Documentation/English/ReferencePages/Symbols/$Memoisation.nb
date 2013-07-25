@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/$Memoisation"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["$Memoisation", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -29,8 +27,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator] is a variable which controls whether expensive \
 functions are memoised or not."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -45,8 +45,6 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadGridFunctionDimensions", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -62,8 +60,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the available dimensions of a gridfunction in a \
 simulation."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

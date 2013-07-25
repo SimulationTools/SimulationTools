@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/SameGridQ"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["SameGridQ", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -33,8 +31,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns True if d1 and d2 are defined on the same \
 coordinate grid."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

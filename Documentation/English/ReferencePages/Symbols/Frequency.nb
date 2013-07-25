@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/Frequency"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["Frequency", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns the first derivative of the complex phase of \
 d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

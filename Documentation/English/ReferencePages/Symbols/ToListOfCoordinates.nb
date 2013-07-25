@@ -49,9 +49,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ToListOfCoordinates", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -63,8 +63,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]a List of the coordinates part of d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -102,6 +101,7 @@ dimension greater than one will produce a flattened list of values.\
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
    "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

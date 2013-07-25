@@ -44,9 +44,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["AlignedPhases", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -63,8 +63,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]aligns the DataTables {d1, ...} at time t, either \
 exactly or to within multiples of 2 \[Pi]."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -110,6 +109,7 @@ Cell[BoxData[GridBox[{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
    "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -217,8 +217,8 @@ Cell["ListLinePlot[{phase1a, phase2a}]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
 1:eJw92Hk41O3bBnBtQpTksaUaS8mafWcu+84Y+z7GYCxFhKg0j7SrKKW0Tdol
 acFTSnelfaGSStJokxYpila/3td1548cn+Occy7XHEfc31uNm8aOHy0mJhb2
 55//+z7yFUhuvZUWJhZ9Y/4/RQFE74HSmM41aBJAulLLz4esRgsDyHqH/e03
@@ -351,8 +351,8 @@ z3wx951vgtHCZLj31uOsTza6JhmeDO8+/XQrmiTD+pO/GvY2oluSIdB9rL3E
 a7QoGdLVtwYXSHvg/slgOVNuk6UhWiwF9IzGbOxgoWVTQFZqTZhzGpqRAtvc
 FyYdL0IbpkD62d8WoZVoSAEjtaZP066jWSlw/Y1ZeEIPmpMCqctLDnyU8sT9
 /7zeICb7uR5akAKT7R7zjH09yf8A/KdNOw==
-     "]]}, 
-   {Hue[0.9060679774997897, 0.6, 0.6], LineBox[CompressedData["
+      "]]}, 
+    {RGBColor[0.6, 0.24, 0.4428931686004542], LineBox[CompressedData["
 1:eJxF2Xk4FGrYBvBJOy2SZIsJISL7luWx74wZxs5YBuXUQSWh0+QIFR1KRVom
 bZJzkkqbeNtoUUmhRTUpoVSiRKU+3+d5+/qjrt/1zD33PNOFeV/zI/9k88UY
 DEbg6F//++/Yn0Cyanewle4dKfJ/FAWQjxnrvROpSQAZuTqkeppaGECqd7kY
@@ -484,15 +484,16 @@ iANd1TydF21oyThgzX+QducbmhkH14pHNpF59rh/HKw9m30sF9AQB79O2q9V
 jEKz4oBRUmebvhHNiwP94sul94+iE+Ig1PnKBadbaEEcyDfC0s+96Pw4aPyu
 O7V1pgPuHwcJMcIFjQboyjgILF41ocIPTeJAVdu5kZ2CbooDTsKuiVW70aI4
 OJjEl75fg+6LA2W/aTb1z9GMpdCeYLiqguFI/gcFQyzQ
-     "]]}},
+      "]]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
-  AxesOrigin->{0, 0},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0.},
+  Method->{},
   PlotRange->{{-100., 220.}, {-52.610912900994784`, 22.178229337462806`}},
   PlotRangeClipping->True,
-  PlotRangePadding->{
-    Scaled[0.02], 
-    Scaled[0.02]}]], "Output",
+  PlotRangePadding->{{6.4, 6.4}, {1.4957828447691517`, 
+   1.4957828447691517`}}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

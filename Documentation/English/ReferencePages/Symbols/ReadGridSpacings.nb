@@ -16,9 +16,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ReadGridSpacings"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["ReadGridSpacings", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -31,8 +31,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns a list of the grid spacing in each direction in \
 sim."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -70,6 +69,7 @@ Cell[BoxData[GridBox[{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
    "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

@@ -16,9 +16,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ReadRadiallyExtrapolatedStrain"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["ReadRadiallyExtrapolatedStrain", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -36,8 +36,7 @@ Cell[BoxData[GridBox[{
 simulation, converts them to strain using Psi4ToStrain, and extrapolates the \
 result to infinite radius using a particular extrapolation order."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -82,6 +81,7 @@ Cell[BoxData[GridBox[{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
    "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

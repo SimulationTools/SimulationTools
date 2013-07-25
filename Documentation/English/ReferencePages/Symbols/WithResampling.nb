@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/WithResampling"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["WithResampling", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -33,8 +31,7 @@ Cell[BoxData[GridBox[{
      
      "\[LineSeparator]evaluates expr with automatic resampling enabled."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

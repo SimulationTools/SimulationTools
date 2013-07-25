@@ -97,9 +97,8 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   RowBox[{"{", 
-   RowBox[{"\<\"cactus::cctk_run_title\"\>", ",", "\<\"cartgrid3d::type\"\>", 
-    ",", 
-    RowBox[{"\[LeftSkeleton]", "263", "\[RightSkeleton]"}], 
+   RowBox[{"\<\"cactus::cctk_run_title\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "264", "\[RightSkeleton]"}], 
     ",", "\<\"cactus::cctk_final_time\"\>"}], "}"}],
   Short]], "Output",
  CellLabel->"Out[3]//Short="]

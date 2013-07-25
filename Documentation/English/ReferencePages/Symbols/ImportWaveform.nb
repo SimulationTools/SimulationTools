@@ -44,9 +44,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ImportWaveform", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -59,8 +59,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]imports an ASCII waveform file with columns time, real \
 part and imaginary part and returns it as a DataTable."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -90,6 +89,7 @@ GZIP format, and is automatically uncompressed.\
 Cell["\<\
 HDF5 files are not currently supported; see ReadHDF5 instead.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

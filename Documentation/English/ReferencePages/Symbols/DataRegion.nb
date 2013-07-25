@@ -43,9 +43,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["DataRegion", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -58,8 +58,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]is a representation of an N-dimensional array of \
 numbers on a regular grid."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -96,6 +95,7 @@ MapThread[f,{d1,d2,...}] produces a DataRegion with f mapped over the data \
 parts of the DataRegions d1, d2, ... in the same way as for MapThread on \
 lists.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

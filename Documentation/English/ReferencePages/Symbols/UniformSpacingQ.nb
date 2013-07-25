@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/UniformSpacingQ"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["UniformSpacingQ", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
 spacing and False if the grid spacing is variable.  The grid spacings are \
 considered uniform if they are equal up to a tolerance of 1e-5."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

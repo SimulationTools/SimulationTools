@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["GridFunctions",
+ ButtonBox["Grid Functions",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/tutorial/GridFunctions"]
+  ButtonData->"paclet:SimulationTools/tutorial/Grid Functions"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -47,7 +47,7 @@ Cell[BoxData[GridBox[{
 
 Cell[CellGroupData[{
 
-Cell["GridFunctions", "Title"],
+Cell["Grid Functions", "Title"],
 
 Cell[TextData[{
  "SimulationTools provides an interface to grid-based data from numerical \
@@ -333,10 +333,9 @@ Cell[BoxData[
   RowBox[{"{", 
    RowBox[{
    "0", ",", "1024", ",", "2048", ",", "3072", ",", "4096", ",", "5120", ",", 
-    "6144", ",", 
-    RowBox[{"\[LeftSkeleton]", "5", "\[RightSkeleton]"}], ",", "12288", ",", 
-    "13312", ",", "14336", ",", "15360", ",", "16384", ",", "17408", ",", 
-    "18432"}], "}"}],
+    
+    RowBox[{"\[LeftSkeleton]", "7", "\[RightSkeleton]"}], ",", "13312", ",", 
+    "14336", ",", "15360", ",", "16384", ",", "17408", ",", "18432"}], "}"}],
   Short]], "Output",
  CellLabel->"Out[1]//Short="]
 }, Open  ]],
@@ -1111,7 +1110,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"GridFunctions",
+WindowTitle->"Grid Functions",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -1120,9 +1119,9 @@ TaggingRules->{
    "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
     "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
     "GridFunctions", "status" -> "None", "summary" -> 
-    "Tutorial for the GridFunctions package.", "synonyms" -> {}, "title" -> 
-    "GridFunctions", "windowTitle" -> "GridFunctions", "type" -> "Tutorial", 
-    "uri" -> "SimulationTools/tutorial/GridFunctions"}, 
+    "Tutorial on working with grid function data.", "synonyms" -> {}, "title" -> 
+    "Grid Functions", "windowTitle" -> "Grid Functions", "type" -> "Tutorial",
+     "uri" -> "SimulationTools/tutorial/Grid Functions"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

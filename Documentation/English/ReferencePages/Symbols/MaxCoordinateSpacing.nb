@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/MaxCoordinateSpacing"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["MaxCoordinateSpacing", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -30,8 +28,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]gives the largest spacing of the coordinates in d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ReadTimeRange"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["ReadTimeRange", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]reads the range of times at which data is available for \
 sim."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/VariableName"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["VariableName", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -30,8 +28,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns the variable name in DataRegion d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

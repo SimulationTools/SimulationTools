@@ -43,9 +43,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ClearAllMemos", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -58,8 +58,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]wipes the cache of functions that have been memoised \
 using DefineMemoFunction."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -85,6 +84,7 @@ Cell["\<\
 Memoisation is disabled by default (as it can be confusing if not expected) \
 and can be enabled by setting $Memoisation = True.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

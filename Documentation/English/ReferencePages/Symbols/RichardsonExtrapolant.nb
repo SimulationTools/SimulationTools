@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/RichardsonExtrapolant"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["RichardsonExtrapolant", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -39,8 +37,7 @@ Cell[BoxData[GridBox[{
 at h = 0 assuming that f[h] = O[h^p]. f1 and f2 can either be real numbers or \
 DataTables, and the returned value will be of the same type."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinateAtInterpolatedMax"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinateAtInterpolatedMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -33,8 +31,7 @@ Cell[BoxData[GridBox[{
 of the DataTable d. This time is interpolated and may not coincide with a \
 data point in the DataTable."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

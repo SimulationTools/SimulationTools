@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ExportWaveform"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["ExportWaveform", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]exports a complex DataTable as an ASCII file with \
 columns time, real part and imaginary part."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

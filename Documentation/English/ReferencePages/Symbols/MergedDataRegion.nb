@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/MergedDataRegion"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["MergedDataRegion", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -34,8 +32,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]creates a DataRegion object by combining each of the \
 DataRegions dr1, dr2, ..., drn."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

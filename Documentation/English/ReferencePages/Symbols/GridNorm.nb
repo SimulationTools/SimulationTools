@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/GridNorm"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["GridNorm", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns the L2,dx norm of d. This is the discrete \
 approximation to the L2 norm."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -43,9 +43,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadPsi4Modes", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -58,8 +58,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns a list of the modes of Psi4 that are available \
 in sim."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -90,6 +89,7 @@ Cell["\<\
 The alias chosen for Psi4 in Multipole can be chosen by setting \
 $MultipolePsi4Variable (the default is \"psi4\")\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

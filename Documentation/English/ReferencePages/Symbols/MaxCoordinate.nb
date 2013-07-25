@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/MaxCoordinate"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["MaxCoordinate", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns the coordinate of the last point in in d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -43,9 +43,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadSimulationParameter", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -60,8 +60,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]reads the value of the named parameter from the \
 simulation."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -96,6 +95,7 @@ Cell["\<\
 Parameter values are always returned as strings; it is up to the caller to \
 convert it to another type if required.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

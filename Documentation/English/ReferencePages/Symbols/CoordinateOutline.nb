@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinateOutline"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinateOutline", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]generates a graphical representation of the outline of d"
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

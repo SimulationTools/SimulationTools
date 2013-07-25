@@ -46,17 +46,16 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadSimulationRunTime", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell["\<\
 ReadSimulationRuntime[sim] gives the real time in seconds elapsed during the \
 execution of a simulation.\
 \>"]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -86,6 +85,7 @@ IOASCII::out0D_vars = \"Carpet::timing\"\
 Cell["\<\
 The total elapsed time from all segments of the simulation is summed\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

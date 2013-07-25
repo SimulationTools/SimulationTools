@@ -110,7 +110,8 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"bbh\"\>", ",", "\<\"test7patch\"\>"}], "}"}]], "Output",
+  RowBox[{"\<\"bbh\"\>", ",", "\<\"bbh-nrdf\"\>", ",", "\<\"test7patch\"\>"}],
+   "}"}]], "Output",
  CellLabel->"Out[1]="]
 }, Open  ]]
 }, Open  ]],
@@ -157,10 +158,10 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+  RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>"}], "}"}]], "Output",
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>"}], "}"}]], "Output",
  CellLabel->"Out[2]="]
 }, Open  ]],
 
@@ -178,26 +179,26 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+  RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
  CellLabel->"Out[3]="]
 }, Open  ]],
 
@@ -212,110 +213,110 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+  RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Data/Simulations/bbh/output-0000/bbh/AllTimers.csv\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/AllTimers.tsv\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/AllTimers.txt\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/bbh.par\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/BH_diagnostics.ah1.gp\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/BH_diagnostics.ah2.gp\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/carpet-grid.asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/carpet::timing..asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/formaline-build-sim-login-damiana.damiana.\
-admin-barry-2012.03.28-18.17.23-3129\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/formaline-config-sim-login-damiana.damiana.\
-admin-home-barry-Cactus-EinsteinToolkit_Maxwell\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/formaline-jar.txt\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/formaline-run-bbh-kop153.datura.admin-barry-\
-2012.03.28-23.44.55-22431\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/puncturetracker::pt_loc..asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/quasilocalmeasures::qlm_scalars..asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.average.\
-asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.maximum.\
-asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.minimum.\
-asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/TwoPunctures.bbh\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/AllTimers.csv\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/AllTimers.tsv\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/AllTimers.txt\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/bbh.par\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/BH_diagnostics.ah1.gp\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/BH_diagnostics.ah2.gp\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/BH_diagnostics.ah3.gp\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/carpet-grid.asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/carpet::timing..asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/formaline-build-sim-login-damiana.damiana.\
-admin-barry-2012.03.28-18.17.23-3129\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/formaline-config-sim-login-damiana.damiana.\
-admin-home-barry-Cactus-EinsteinToolkit_Maxwell\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/formaline-jar.txt\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/formaline-run-bbh-kop122.datura.admin-barry-\
-2012.03.29-00.04.46-28796\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/puncturetracker::pt_loc..asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/quasilocalmeasures::qlm_scalars..asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.average.\
-asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.maximum.\
-asc\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.minimum.\
-asc\"\>"}], "}"}]], "Output",
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/AllTimers.tsv\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/AllTimers.txt\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/bbh.par\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/BH_diagnostics.ah1.gp\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/BH_diagnostics.ah2.gp\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/carpet-grid.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/carpet::timing..asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/formaline-build-sim-login-damiana.\
+damiana.admin-barry-2012.03.28-18.17.23-3129\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/formaline-config-sim-login-damiana.\
+damiana.admin-home-barry-Cactus-EinsteinToolkit_Maxwell\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/formaline-jar.txt\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/formaline-run-bbh-kop153.datura.admin-\
+barry-2012.03.28-23.44.55-22431\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/puncturetracker::pt_loc..asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/quasilocalmeasures::qlm_scalars..asc\"\>\
+", ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.\
+average.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.\
+maximum.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/systemstatistics::process_memory_mb.\
+minimum.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/TwoPunctures.bbh\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/AllTimers.csv\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/AllTimers.tsv\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/AllTimers.txt\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/bbh.par\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/BH_diagnostics.ah1.gp\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/BH_diagnostics.ah2.gp\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/BH_diagnostics.ah3.gp\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/carpet-grid.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/carpet::timing..asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/formaline-build-sim-login-damiana.\
+damiana.admin-barry-2012.03.28-18.17.23-3129\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/formaline-config-sim-login-damiana.\
+damiana.admin-home-barry-Cactus-EinsteinToolkit_Maxwell\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/formaline-jar.txt\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/formaline-run-bbh-kop122.datura.admin-\
+barry-2012.03.29-00.04.46-28796\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/puncturetracker::pt_loc..asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/quasilocalmeasures::qlm_scalars..asc\"\>\
+", ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.\
+average.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.\
+maximum.asc\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/systemstatistics::process_memory_mb.\
+minimum.asc\"\>"}], "}"}]], "Output",
  CellLabel->"Out[4]="]
 }, Open  ]],
 

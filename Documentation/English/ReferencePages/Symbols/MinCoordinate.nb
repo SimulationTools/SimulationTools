@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/MinCoordinate"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["MinCoordinate", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ Cell[BoxData[GridBox[{
        StyleBox["d", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]returns the coordinate of the first point in in d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

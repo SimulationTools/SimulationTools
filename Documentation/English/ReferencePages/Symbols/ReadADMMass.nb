@@ -32,9 +32,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadADMMass", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -47,8 +47,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]reads the ADM mass of the spacetime from the initial \
 data slice"
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -75,6 +74,7 @@ The ADM mass can be obtained from: 1. The TwoPunctures.bbh metadata file \
 written by the TwoPunctures thorn, or 2. The metadata file of a simulation in \
 NRDF format\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

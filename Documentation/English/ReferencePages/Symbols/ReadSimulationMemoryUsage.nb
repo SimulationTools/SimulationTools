@@ -45,9 +45,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadSimulationMemoryUsage", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -61,8 +61,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the memory usage of a simulation in MB as a \
 DataTable as a function of coordinate time."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -99,6 +98,7 @@ The memory usage is the maximum across all processes in the simulation\
 Cell["\<\
 The memory usage is the 'resident set size' measured in bytes\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -150,37 +150,38 @@ Cell["ListLinePlot[mem]", "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], 
-    LineBox[{{23.865546218487395`, 2074.}, {24., 2082.}, {24.808988764044944`,
-      2118.}}], 
-    LineBox[{{29.542857142857144`, 2118.}, {30., 2102.}, {32., 2102.}, {34., 
-     2103.}, {34.270270270270274`, 2118.}}], 
-    LineBox[{{51.6, 2118.}, {52., 2092.}, {54., 2093.}, {56., 2094.}, {56.25, 
-     2118.}}], 
-    LineBox[{{71.44285714285714, 2118.}, {72., 2079.}, {74., 2081.}, {76., 
-     2082.}, {76.3076923076923, 2118.}}], 
-    LineBox[{{85.36, 2118.}, {86., 2102.}, {88., 2102.}, {90., 2103.}, {
-     90.29411764705883, 2118.}}], 
-    LineBox[{{93.47457627118644, 2118.}, {94., 2087.}, {94.91176470588235, 
-     2118.}}], LineBox[CompressedData["
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+     LineBox[{{23.932773109243698`, 2078.}, {24., 2082.}, {
+      24.808988764044944`, 2118.}}], 
+     LineBox[{{29.542857142857144`, 2118.}, {30., 2102.}, {32., 2102.}, {34., 
+      2103.}, {34.270270270270274`, 2118.}}], 
+     LineBox[{{51.6, 2118.}, {52., 2092.}, {54., 2093.}, {56., 2094.}, {56.25,
+       2118.}}], 
+     LineBox[{{71.44285714285714, 2118.}, {72., 2079.}, {74., 2081.}, {76., 
+      2082.}, {76.3076923076923, 2118.}}], 
+     LineBox[{{85.36, 2118.}, {86., 2102.}, {88., 2102.}, {90., 2103.}, {
+      90.29411764705883, 2118.}}], 
+     LineBox[{{93.47457627118644, 2118.}, {94., 2087.}, {94.91176470588235, 
+      2118.}}], LineBox[CompressedData["
 1:eJxdzc1Nw1AQRtERK7oAOvGOfYRQCAFMIIT/AGsWUwBFuJShk5RACRDZFsqx
 ZH06Gl29o8V6styLiNXfv939g8+f7+NpE9vvq+s3B08Gx9muE8es35PxjuO8
 39PxjmPe73S847jodzbecVxyx3HFHUfb73xwgxMXjmt6nLhwLOhx4sJxQ48T
 F45bepy4cCzpceLCcUePExeOFT1OXDju6XHiwvFAjxMXjkd6nLhwPNHjxIXj
 mR4nLhwv9Dhx4Xilx4kLx5oeJy4cb7s+xA1uceIOF97geOd93OAWJ+5w4Q2O
 D97HDW5x4g7Xv38Bw6Hs1A==
-     "]], 
-    LineBox[{{15.233082706766917`, 2074.}, {15.894736842105264`, 2118.}}], 
-    LineBox[{{20.89679715302491, 2118.}, {21.209964412811388`, 2074.}}]}},
+      "]], 
+     LineBox[{{15.293233082706767`, 2078.}, {15.894736842105264`, 2118.}}], 
+     LineBox[{{20.89679715302491, 2118.}, {21.181494661921707`, 
+      2078.}}]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
-  AxesOrigin->{0, 2074.},
-  PlotRange->{{0., 300.}, {2074., 2118.}},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 2078.},
+  Method->{},
+  PlotRange->{{0, 300.}, {2078., 2118.}},
   PlotRangeClipping->True,
-  PlotRangePadding->{
-    Scaled[0.02], 
-    Scaled[0.02]}]], "Output",
+  PlotRangePadding->{{6., 6.}, {0.8, 0.8}}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

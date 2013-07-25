@@ -16,9 +16,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ExportNumericalRelativitySimulation"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["ExportNumericalRelativitySimulation", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -38,8 +38,7 @@ Numerical Relativity Data Format (NRDF) including waveforms, local quantities \
 (black hole masses, spins and coordinates) and metadata.  mass is the ADM \
 mass of the system."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -85,6 +84,7 @@ supported formats.\
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
    "Rows" -> {None, None, {None}}, "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True, True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

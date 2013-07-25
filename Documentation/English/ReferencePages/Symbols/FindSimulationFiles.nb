@@ -32,9 +32,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["FindSimulationFiles", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -50,8 +50,7 @@ Cell[BoxData[GridBox[{
 segments of a simulation.  filename can be a string, a string expression or a \
 regular expression.  This function always returns full pathnames."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -88,6 +87,7 @@ most one filename will be returned.\
 Cell["\<\
 Multiple segments in the format supported by SimFactory are supported.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -121,26 +121,26 @@ Cell["FindSimulationFiles[\"bbh\",\"*.h5\"]", "Input",
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+  RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

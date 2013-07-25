@@ -42,8 +42,6 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ConvergenceMultiplier", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -62,8 +60,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]computes the expected ratio (f[h1]-f[h2])/(f[h2]-f[h3]) \
 when f[h] has a Taylor expansion f[h] = O[h^p]."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -104,33 +101,33 @@ ListLinePlot[{(f[h1] - f[h2])/cr4, f[h2] - f[h3]}]\
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], LineBox[CompressedData["
 1:eJw1lQ1M1HUYx6H3qJUXar4QIs2FjMR8aa0Xvpuw0BLXoVOcpyR5GEoJHFCd
-kvJyV234UgMUY80SB2zFNPDlsPhBKJlyl0J2hJxycAeHdxwyIoicxv/3PP/f
-drv97+7//J7n+/l9/jc/ZVei/oGAgAD91Et5V1fgpLgXczYPu6fXxjuNReh+
-tHXrpGUvX5egJHh/4DrbPpwLNXm1577BqmMrnjtZm8/fV+Lzlw32RXkFOFqu
-rBo8WxFy6P4rhfz7WpQ0fGne5iyET6t8cgoNmxeX1+UU8f318M+KG1k/VoQg
-+/GMN4LOYk7V+0etySauZ4Gjo/2h7+tNWKg7+MtYxE+I0N7NrBg1cf1GPFEd
-93ZyiBmVU3fbjzfB0BKdcmWRmfdrxuGowDm2SDOWytWCHO8Xxp3TzLz/BWzQ
-zIxqvGVCy1jE1A4XkRP0qW78iIn7+RXL3bn7t7xuQqLc8BIWtK1drb1cxP39
-hqer8ztWxBbBaVQKXkZYekjZ+apC7rcNNTXBZ5ImCpCptJdhhelkmv7K8gLu
-34aJyheXdr6bD6JxFe/o3XHrjft4nqs4cCF5UvfIXqyUG1xDwjPjYacn9vB8
-1/Cja4/mktUIZTfdwXaczt2S1frZxzxvB/yhc9+8G5ELOY69AzdmvVRuqzPw
-/H8gNbpxpiUyE/OUdkKvY/Tx4icPh33AeVxH/O8JO9bYtmN7qrL+RPRIfcXE
-eymcjx3z718sDrFthFJteq0dT+16K2ZndgLn1YnYrFNN6eej8I9SbqwTP2vb
-tw69FiMov78wY1pQUvMPiSJGFuzCSOm62GrLZkF5dkEzPlrYsnabkO2ZbmBT
-ZGrOwjNpgvLtxibf4qTSex8Ka5uyutFVV5raGZwlKG8HXihbUBxeli1myAZv
-wpH21ZJjD34kKP+b0DdrDI6NnwhZTncLBu0JV17ZbkE8enCA/BA0Tw/CH5N+
-COLTgwzyQ9B8PUgnPwTxcqp+8LxO/P219EMQPyfWkB88f6/qhyCevVg2W/rB
-efSqfgji26f6wfn04WHyQxCePniqpB+clwsO8kMQfxcayA/Oz4VE8kPQeXCr
-fnCebmjJD0Hnw40k8oPz7cdK8kPQeenHEvKD8+5HLPkh6PwMwEx+cP4Dqh+C
-ztMA5p6QfjAPj+oH8/AgnvxgHh40aaQfzMODf8kP5jGI/8gP5jGIZfOkH8xj
-EOGzpR/M47bqhzgkeUxdkx/M4za+tUo/mIcX392RfjAPL14NaFX8YB5eZBuk
-H8zDp/rBPHzYkCD9APHwqX6wn0OqH/w8GVL9YF+H4CE/QDz8qh/srx8l5Ac/
-f/yqH+zzMJ7fIf0A8RhGKPnBfg/DQn7w8+oO1P+P/wGhIhcz
-     "]]}, 
-   {Hue[0.9060679774997897, 0.6, 0.6], LineBox[CompressedData["
+kgJ3V234UuNFjDVLHLAV08CXg+IHoWTKXQrZEYJywMHhHYeMCCKn8f89z/+3
+3W7/u/s/v+f5fn6f/y1M2hOvf8DPz08//VLe1eU/Je5FncvB3pnVsU6jCV2P
+tmyfsu7n60IUBh7032A/gPPBZo/2/DdYc3zVc6eqc/n7cnz+ssGxJCcPx0qV
+VYVny4KO3H8ln39fjcK6Ly07nPnwapVPTqNu69LSmiwT318L35yY0Y3jJgQ4
+TqS9EXAO8yreP2ZLNHM9K7rb2x76vtaMxbrDv4yH/YQw7d30sjEz12/AE5Ux
+bycGWVA+fbfjRCMMzZFJV5ZYeL8mlET4z7OHW7BcrmbUe74w7p5h4f0vYJNm
+dkTDLTOax8Omd7iIrIBPdRNHzdzPr1jpyj647XUz4uWGl7Codf1a7WUT9/cb
+nq7MbV8VbYLTqBS8jJDUoOL6inzutxVVVYFnEybzkK60l2aD+VSK/srKPO7f
+jsnyF5d3vJsLonEV7+hdMRuNB3ieqzh0IXFK98h+rJYbXEPcMxMhZyb38XzX
+8GP/Ps0lmxHKbrrDbTiTvS2j5bOPed52+ILnv3k3LBtyHEc7bsx5qdReY+D5
+/0ByZMNsa3g6FijtBF/H2OMFT5aEfMB5XEfs73G71tl3Ymeysv5E5Ght2eR7
+SZyPAwvvXywIsm+GUm1mtQNP7XkrandmHOfVgeiM042p9RH4Ryk33oGftW3b
+h1+LEpTfX5g1IyCh6Yd4ESULdmK0aEN0pXWroDw7oZkYy29ev0PI9sw3sCU8
+OWvx2RRB+XZhi3dpQtG9D4WtVVld6KwpSu4IzBCUdzdeKF5UEFqcKWbJBm+i
+JOWrZccf/EhQ/jehb9IYujd/ImQ53S0YtCf7c4r3CuLRg0Pkh6B5ehD6mPRD
+EJ8epJEfgubrQSr5IYiXU/WD53Xi76+lH4L4ObGO/OD5e1U/BPHsxYq50g/O
+o1f1QxDfPtUPzqcPD5MfgvD0wV0h/eC8+tFNfgji34868oPz60c8+SHoPLhU
+PzhPF7Tkh6Dz4UIC+cH5DmA1+SHovAxgGfnBeQ8gmvwQdH4GYSE/OP9B1Q9B
+52kQ809KP5iHW/WDebgRS34wDzcaNdIP5uHGv+QH8xjCf+QH8xjCigXSD+Yx
+hNC50g/mcVv1QxyRPKavyQ/mcRvf2qQfzMOD7+5IP5iHB6/6tSh+MA8PMg3S
+D+bhVf1gHl5sipN+gHh4VT/Yz2HVD36eDKt+sK/DcJMfIB4+1Q/214dC8oOf
+Pz7VD/Z5BM/vkn6AeIwgmPxgv0dgJT/4eXUH6v/H/y0xFzM=
+      "]]}, 
+    {RGBColor[0.6, 0.24, 0.4428931686004542], LineBox[CompressedData["
 1:eJw9lWts01UYxo+TaLhoiGxEVGaGw+BI+CCXDHV76iXivhi2LCZjXWJYBsEY
 NiB2N8DTCwaNpAsyLzWiEdBMl00TyIZZPB1sTLAbTAeVyaXtaO3cHPChJqKZ
 nv/7vvUkTfP0377nfZ/n/E4LNtdX1OUopersy3n/f/1tZkt79qA1t2tDvCUA
@@ -154,15 +151,16 @@ DRIfksckdBPxIXnY5weID8njd6jVxIdpozys/pj4kDysLiI+JI8pqEvEh+Rh
 9X7iQ/Kw+hbxIffDNNQh4kN4tDpEfIDzsHqQ+BA+/4B6kfiQ+8TqRuJDeLV6
 G/EBzmMGepj4EH5noGqID7l/ZrJ8CM83oSeJD3AeVjMfwrfVHuJD7qtbyP5/
 /AdgAQLk
-     "]]}},
+      "]]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
-  AxesOrigin->{0, 0},
-  PlotRange->{{0., 1.}, {-0.010831440862576197`, 0.010831440862576014`}},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0.},
+  Method->{},
+  PlotRange->{{0, 1.}, {-0.010831440862576197`, 0.010831440862576014`}},
   PlotRangeClipping->True,
-  PlotRangePadding->{
-    Scaled[0.02], 
-    Scaled[0.02]}]], "Output",
+  PlotRangePadding->{{0.02, 0.02}, {0.0004332576345030442, 
+   0.0004332576345030442}}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

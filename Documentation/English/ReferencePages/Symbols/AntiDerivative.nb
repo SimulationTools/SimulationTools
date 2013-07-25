@@ -16,9 +16,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/AntiDerivative"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["AntiDerivative", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -35,8 +35,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns the first integral, I, of the DataTable d, with \
 the integration constant chosen such that I[x] = f."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -72,6 +71,7 @@ Cell[BoxData[GridBox[{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
    "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

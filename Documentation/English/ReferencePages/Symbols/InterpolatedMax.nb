@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/InterpolatedMax"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["InterpolatedMax", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns the maximum value of the interpolant of a \
 DataTable d"
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

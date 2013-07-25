@@ -45,8 +45,6 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ToDataTable", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -81,8 +79,7 @@ sense."
        StyleBox["dr", "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]converts a 1-dimensional DataRegion into a DataTable."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

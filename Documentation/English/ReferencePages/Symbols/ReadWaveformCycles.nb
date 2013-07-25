@@ -16,9 +16,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/ReadWaveformCycles"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["ReadWaveformCycles", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -32,8 +32,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the number of gravitational wave cycles in Psi4 \
 for simulation sim."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -68,6 +67,7 @@ ReadWaveformCycles[sim, start] is equivalent to WaveformCycles[ReadPsi4[sim, \
 Cell["\<\
 The lowest extraction radius is used to compute the number of cycles.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

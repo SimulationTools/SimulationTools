@@ -47,9 +47,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadSimulationSwapUsage", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -63,8 +63,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the swap memory usage of a simulation in MB as a \
 DataTable as a function of coordinate time."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -99,6 +98,7 @@ The swap memory usage is the maximum across all processes in the simulation\
 \>", "Notes"],
 
 Cell["The memory is measured in bytes", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

@@ -47,8 +47,6 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["MapList", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -62,8 +60,7 @@ Cell[BoxData[GridBox[{
         RowBox[{"f", ",", " ", "d"}], "TI"], "]"}]], "InlineFormula"],
      "\[LineSeparator]maps f over the coordinates and values in d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

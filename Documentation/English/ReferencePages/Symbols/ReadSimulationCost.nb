@@ -46,9 +46,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadSimulationCost", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -61,8 +61,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives the total number of core-hours used by all \
 processes and segments in a simulation."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -93,6 +92,7 @@ Cell["\<\
 This function currently assumes that the number of cores used for each \
 segment is the same.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

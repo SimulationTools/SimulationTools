@@ -17,9 +17,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/Resampled"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["Resampled", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -78,8 +78,7 @@ constant spacing dx, dy, ...."
      "\[LineSeparator]returns a list of resampled data representations all \
 onto the coordinate grid specified by grid."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -115,6 +114,7 @@ Cell[BoxData[GridBox[{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
    "RowsIndexed" -> {}},
  GridBoxDividers->{"Rows" -> {{True, True}}}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

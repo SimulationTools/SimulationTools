@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinateSpacings"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinateSpacings", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -32,8 +30,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives a List of the spacing of the coordinates in each \
 dimension of d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

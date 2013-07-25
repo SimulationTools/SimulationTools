@@ -16,9 +16,9 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/$MultipolePsi4Variable"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["$MultipolePsi4Variable", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -29,8 +29,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator] specifies the name of the variable used to store Psi4 \
 by the Multipole thorn."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -56,6 +55,7 @@ Cell["\<\
 The value of $MultipolePsi4Variable should be the same as is set in the \
 'name' section of the 'variable' parameter for the Multipole thorn.\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

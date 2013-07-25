@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/DefineMemoFunction"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["DefineMemoFunction", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -31,8 +29,7 @@ args and body body such that the result of the function is remembered after \
 the first time it is called.  This is used to cache data that is expensive to \
 read or compute.  See ClearAllMemos for flushing this cache."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

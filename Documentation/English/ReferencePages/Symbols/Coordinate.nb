@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/Coordinate"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["Coordinate", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -33,8 +31,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns a data representation of the same shape as d \
 whose data is the i coordinate of d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/NDerivative"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["NDerivative", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -30,8 +28,7 @@ Cell[BoxData[GridBox[{
 derivs argument should be of the same form as in the first argument of \
 Derivative."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

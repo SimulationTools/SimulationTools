@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/CoordinateSpacing"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["CoordinateSpacing", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -29,8 +27,7 @@ Cell[BoxData[GridBox[{
       "InlineFormula"],
      "\[LineSeparator]s[d] gives the spacing of the coordinates in d."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

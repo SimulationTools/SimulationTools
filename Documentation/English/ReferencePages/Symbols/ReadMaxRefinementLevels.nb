@@ -42,9 +42,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["ReadMaxRefinementLevels", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -58,8 +58,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns the maximum number of refinement levels present \
 in sim."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -82,6 +81,7 @@ Cell[TextData[Cell[BoxData[
  CellGroupingRules->{"SectionGrouping", 50}],
 
 Cell["This information is read from the simulation parameter file", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

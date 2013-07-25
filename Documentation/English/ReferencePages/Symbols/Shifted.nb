@@ -17,8 +17,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/Shifted"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["Shifted", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -33,8 +31,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]returns a copy of d with the coordinates shifted by \
 delta."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

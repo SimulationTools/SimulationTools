@@ -43,9 +43,9 @@ Cell[BoxData[GridBox[{
     }], "AnchorBar"]}
   }]], "AnchorBarGrid"],
 
-Cell[CellGroupData[{
-
 Cell["FindSimulationParameters", "ObjectName"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[GridBox[{
    {"", Cell[TextData[{
@@ -61,8 +61,7 @@ Cell[BoxData[GridBox[{
      "\[LineSeparator]gives a list of the names of all the parameters which \
 match pattern which were set in the simulation."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 
@@ -97,6 +96,7 @@ simple wildcarded string, a StringExpression, or a RegularExpression.\
 Cell["\<\
 Parameter names are returned as strings in the form \"<thorn>::<param>\".\
 \>", "Notes"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{

@@ -16,8 +16,6 @@ Cell[TextData[{
   ButtonData->"paclet:SimulationTools/ref/RestrictedToCommonInterval"]
 }], "LinkTrail"],
 
-Cell[CellGroupData[{
-
 Cell["RestrictedToCommonInterval", "ObjectName"],
 
 Cell[BoxData[GridBox[{
@@ -36,8 +34,7 @@ Cell[BoxData[GridBox[{
 restricted to having their independent variables within the same range, which \
 is the intersection of the ranges of the inputs."
     }]]}
-  }]], "Usage"]
-}, Open  ]],
+  }]], "Usage"],
 
 Cell[CellGroupData[{
 

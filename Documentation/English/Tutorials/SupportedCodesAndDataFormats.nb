@@ -55,11 +55,27 @@ Cell[CellGroupData[{
 Cell["Supported Codes and Data Formats", "Title"],
 
 Cell["\<\
-SimulationTools has built-in support for several codes and data formats. In \
-particular, it has support for reading data produced by components of the \
-Einstein Toolkit and also for reading data in the Numerical Relativity Data \
-Format. It is also designed in a modular way, so that support for new codes \
-can be easily added.\
+SimulationTools has built-in support for reading the output data from many \
+simulation codes and data formats. In particular, it has support for reading \
+data produced by components of the Einstein Toolkit and also for reading data \
+in the Numerical Relativity Data Format.\
+\>", "Text"],
+
+Cell["\<\
+It is also designed in a modular way, so that support for new codes can be \
+easily added. Typically, SimulationTools provides a low-level interface for \
+reading the output data from a code, handling file-name and parsing issues, \
+as well as a high-level interface in the domain-language of the user. Where \
+several codes generate equivalent data (for example PunctureTracker and \
+MinTracker), an abstraction has often been built on top (Trackers) so that \
+codes can be written which work with simulations utilising any of the \
+underlying codes without having to support each explicitly.\
+\>", "Text"],
+
+Cell["\<\
+Since ASCII and HDF5 output from grid functions is also supported, any code \
+which deals with grid function data can also have this data read into \
+SimulationTools.\
 \>", "Text"],
 
 Cell["\<\
@@ -73,13 +89,15 @@ Cell[CellGroupData[{
 Cell["Structure of a simulation", "Section"],
 
 Cell["\<\
-When SimulationTools needs data from a particular simulation, it will look \
-for a directory which is a subdirectory of any of those listed in \
+When SimulationTools searches for data from a particular simulation, it will \
+look for the simulation directory under the directories listed in \
 $SimulationPath. The most basic definition of a \
 \[OpenCurlyDoubleQuote]simulation\[CloseCurlyDoubleQuote] understood by \
 SimulationTools is therefore just a single directory containing all files \
-pertaining to that simulation.
+pertaining to that simulation.\
+\>", "Text"],
 
+Cell["\<\
 However, SimulationTools goes beyond this simple concept by adding support \
 for transparently merging chunks from multiple possible restarts, determining \
 filenames based on the type of data requested, etc.\
@@ -94,7 +112,8 @@ Simulations run with the the Einstein toolkit can make use of SimFactory to \
 manage the running of jobs on clusters, job chaining, etc. SimulationTools \
 understands the directory structure produced by simulations run with \
 SimFactory and can read data from them while transparently joining together \
-data from multiple restarts.\
+data from multiple restarts. It can also read simulation properties such as \
+the number of cores used for a simulation from SimFactory output.\
 \>", "Text"]
 }, Open  ]]
 }, Open  ]],
@@ -104,16 +123,70 @@ Cell[CellGroupData[{
 Cell["EinsteinToolkit/Cactus simulation data", "Section"],
 
 Cell["\<\
-SimulationTools has support for reading in data from a large number of codes \
-included in the Einstein Toolkit. Each of these codes has parameters which \
-control the output format. While it is designed to be as flexible as \
+SimulationTools has support for reading data produced by a large number of \
+codes included in the Einstein Toolkit. Each of these codes has parameters \
+which control the output format. While it is designed to be as flexible as \
 possible, SimulationTools users will benefit from setting certain parameters \
 to values recommended in this section. In addition to the parameters given \
 here, the parameter file for the included example binary black hole \
-simulation can be used as a starting point for other simulations.\
+simulation includes many more convenient parameter values and can be used as \
+a starting point for other simulations.\
 \>", "Text"],
 
-Cell["Grid functions (CarpetIOHDF5)", "Subsection"],
+Cell[CellGroupData[{
+
+Cell["Cactus parameters", "Subsection"],
+
+Cell["\<\
+SimulationTools has support for reading and parsing Cactus parameter files. \
+Parameter values can be read using the parameter name. In order for this \
+parsing to be possible, the parameter file must be contained inside the \
+simulation directory and must have the \
+\[OpenCurlyQuote].par\[CloseCurlyQuote] file extension.\
+\>", "Text"],
+
+Cell["\<\
+Additionally, SimulationTools provides a functional interface to some \
+parameters. For example e.g. SimulationFinalTime[\[OpenCurlyDoubleQuote]mysim\
+\[CloseCurlyDoubleQuote]] reads the value of the Cactus::cctk_final_time \
+parameter.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Grid functions (CarpetIOHDF5, CarpetIOASCII)", "Subsection"],
+
+Cell["\<\
+SimulationTools can read grid function data output by the Cactus IO \
+mechanism. The optimal format to use is that produced by the CarpetIOHDF5 \
+thorn.  1D, 2D and 3D data can be read, with automatic merging of output from \
+different processes, including support for refinement levels and multiblock \
+data.\
+\>", "Text"],
+
+Cell["\<\
+For best results, it is recommended that the following parameter values are \
+set:
+
+\tIO::out_dir = $parfile
+\tIOScalar::one_file_per_group = yes
+\tIOASCII::one_file_per_group  = yes\
+\>", "Text"],
+
+Cell["\<\
+It also currently supports mesh-refined 1D CarpetIOASCII output files, \
+automatically combining data from different processes. However, it should be \
+noted that HDF5 is highly recommended over ASCII for performance and \
+storage-size reasons.\
+\>", "Text"],
+
+Cell["\<\
+For grid function data to be available, grid function output should be \
+enabled using the IOHDF5::out1D_vars, IOHDF5::out2D_vars and IOHDF5::out_vars \
+parameters.\
+\>", "Text"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -125,7 +198,9 @@ arbitrary Cactus grid functions at specified radii.\
 \>", "Text"],
 
 Cell["\<\
-While SimulationTools supports both HDF5 and ASCII output formats from the \
+SimulationTools enables access to this data through its \
+\[OpenCurlyDoubleQuote]Waveforms\[CloseCurlyDoubleQuote] interface. While \
+SimulationTools supports both HDF5 and ASCII output formats from the \
 Multipole thorn, it is highly recommended to use HDF5 for performance and \
 disk space reasons. This may be controlled by setting the following parameter \
 values:
@@ -159,18 +234,166 @@ Cell[BoxData[
  CellLabel->"In[1]:="]
 }, Open  ]],
 
-Cell["Run information (SystemStatistics)", "Subsection"],
+Cell[CellGroupData[{
 
-Cell["Grid structure (Carpet)", "Subsection"],
+Cell["\<\
+Run information (SystemStatistics, Cactus, Carpet, TimerReport)\
+\>", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["SystemStatistics", "Subsubsection"],
+
+Cell["\<\
+The SystemStatistics thorn produces output files for simulation statistics \
+such as memory and swap usage, among others. In order for this information to \
+be available, the following parameter values should be set, where <out_every> \
+reflects the frequency in iterations at which output will be available:
+
+\tIOScalar::outScalar_every = <out_every>
+\tIOScalar::outScalar_vars = \
+\[OpenCurlyDoubleQuote]SystemStatistics::process_memory_mb\
+\[CloseCurlyDoubleQuote]\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["TimerReport", "Subsubsection"],
+
+Cell["\<\
+Data on Cactus timing statistics can be read from the output of the \
+TimerReport thorn. For best results, it is recommended that the following \
+parameter values be set:\
+\>", "Text"],
+
+Cell["\<\
+Cactus::cctk_timer_output = full
+TimerReport::output_all_timers_together = yes
+TimerReport::output_schedule_timers = no\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Carpet timers", "Subsubsection"],
+
+Cell["\<\
+Timing statistics from the timers included with Carpet can also be read. For \
+best results, it is recommended that the following parameter value is set:\
+\>", "Text"],
+
+Cell["\<\
+IOASCII::out0D_vars  = \[OpenCurlyDoubleQuote]Carpet::timing\
+\[OpenCurlyDoubleQuote]\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Grid structure (Carpet, CarpetRegrid2, CoordBase, Coordinates, Time)\
+\>", "Subsection"],
+
+Cell["\<\
+The grid structure of a simulation is obtained by reading the parameters for \
+the Carpet, CarpetRegrid2, CoordBase, Coordinates and Time thorns. For best \
+results, it is recommended to set the following parameter value:
+
+\tCarpet::grid_coordinates_filename = \[OpenCurlyDoubleQuote]carpet-grid.asc\
+\[CloseCurlyDoubleQuote]\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Initial data (TwoPunctures)", "Subsection"],
+
+Cell["\<\
+For binary black hole systems, SimulationTools obtains information about \
+initial data (ADM mass, separation, etc.) from the TwoPunctures metadata \
+file, from the TwoPunctures parameters set in the Cactus parameter file, and \
+from the simulation\[CloseCurlyQuote]s standard output. The most convenient \
+of these is the metadata file; to ensure this is created by the simulation, a \
+version of the TwoPunctures thorn more recent than September 25, 2011 should \
+be used.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["Trajectories (PunctureTracker)", "Subsection"],
 
-Cell["Spins and masses (QuasilocalMeasures)", "Subsection"],
+Cell["\<\
+SimulationTools has support for PunctureTracker output files and makes the \
+data available through the \[OpenCurlyDoubleQuote]Tracker\
+\[CloseCurlyDoubleQuote] and \[OpenCurlyDoubleQuote]Binary\
+\[CloseCurlyDoubleQuote] interfaces. In order for this data to be available, \
+the following parameter should be set:\
+\>", "Text"],
 
-Cell["Black hole horizons (AHFinderDirect)", "Subsection"]
+Cell["\<\
+\tIOASCII::out0D_vars  = \[OpenCurlyDoubleQuote]PunctureTracker::pt_loc\
+\[OpenCurlyDoubleQuote]\
+\>", "Text"]
 }, Open  ]],
 
+Cell[CellGroupData[{
+
+Cell["\<\
+Black hole horizons, spins and masses (QuasilocalMeasures,AHFinderDirect)\
+\>", "Subsection"],
+
+Cell["\<\
+The black hole horizon data computed by the AHFinderDirect thorn is used \
+throughout SimulationTools where it is required (exposed, for example, \
+through the \[OpenCurlyDoubleQuote]Black Hole\[CloseCurlyDoubleQuote] \
+interface). In order for this data to be available, AHFinderDirect must be \
+enabled in the simulation.\
+\>", "Text"],
+
+Cell["\<\
+The black hole spin data computed by the QuasiLocalMeasures thorn is used \
+throughout SimulationTools where it is required (exposed, for example, \
+through the \[OpenCurlyDoubleQuote]Black Hole\[CloseCurlyDoubleQuote] \
+interface). In order for this data to be available, the following parameter \
+should be set:
+
+\tIOASCII::out0D_vars  = \
+\[OpenCurlyDoubleQuote]QuasiLocalMeasures::qlm_scalars\[OpenCurlyDoubleQuote]\
+\
+\>", "Text"],
+
+Cell[TextData[{
+ "In addition, for binary black hole simulations, SimulationTools makes \
+assumptions about the indexing of the quasilocal surfaces. For example, it \
+assumes that suface ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " corresponds to the apparent horizon ",
+ StyleBox["n+1. ",
+  FontSlant->"Italic"],
+ "For more details and example parameter settings, the the parameter file in \
+the included ",
+ StyleBox["bbh",
+  FontSlant->"Italic"],
+ " simulation."
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["Numerical relativity data format (NRDF)", "Section"],
+
+Cell["\<\
+SimulationTools has support for reading data from simulations in the \
+Numerical Relativity Data Format, a standard for interchanging data between \
+numerical relativity codes, using the same functional interface as data from \
+other simulation formats.\
+\>", "Text"]
+}, Open  ]],
 
 Cell[CellGroupData[{
 

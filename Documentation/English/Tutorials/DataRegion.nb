@@ -1003,18 +1003,18 @@ Cell[BoxData[
  CellLabel->"In[18]:="],
 
 Cell[BoxData[
- GraphicsBox[{{}, {}, 
-   {Hue[0.67, 0.6, 0.6], 
-    LineBox[{{0., 3.}, {0.2, 3.04}, {0.4, 3.16}, {0.6, 3.3600000000000003`}, {
-     0.8, 3.64}, {1., 4.}}]}},
+ GraphicsBox[{{}, {{}, {}, 
+    {RGBColor[0.24720000000000014`, 0.24, 0.6], 
+     LineBox[{{0., 3.}, {0.2, 3.04}, {0.4, 3.16}, {0.6000000000000001, 
+      3.3600000000000003`}, {0.8, 3.64}, {1., 4.}}]}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->True,
-  AxesOrigin->{0, 2.9000000000000004`},
-  PlotRange->{{0., 1.}, {2.9000000000000004`, 4.}},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 3.},
+  Method->{},
+  PlotRange->{{0, 1.}, {3., 4.}},
   PlotRangeClipping->True,
-  PlotRangePadding->{
-    Scaled[0.02], 
-    Scaled[0.02]}]], "Output",
+  PlotRangePadding->{{0.02, 0.02}, {0.02, 0.02}}]], "Output",
  CellLabel->"Out[18]="]
 }, Open  ]],
 
@@ -1521,6 +1521,7 @@ iRzZiH2LOim81HBeuWDAhFIlnOXIqi33jRyh0cLpMROal25UwAmOrIG+u0Vo
 pg6av6iVXhCcBo04/sU/Jr6P+z85/mxf
     "]],
   Axes->True,
+  AxesLabel->{None, None, None},
   BoxRatios->{1, 1, 0.4},
   Method->{"RotationControl" -> "Globe"},
   PlotRange->{{0., 1.}, {0., 6.}, {0., 7.}},
@@ -1605,6 +1606,8 @@ mbYxjMCSnSsXRdtTkC6+tk6vikRqu7r4sg6BtC+xRgZ0Ka5md03tkadQUfDd
 aHyZBP8BJ9YoZQ==
     "]],
   Frame->True,
+  FrameLabel->{None, None},
+  Method->{},
   PlotRange->{{0., 1.}, {0., 6.}},
   PlotRangeClipping->True,
   PlotRangePadding->{
