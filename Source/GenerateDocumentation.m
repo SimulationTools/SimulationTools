@@ -135,7 +135,7 @@ Module[{doc = docRoot[from]},
     "Tutorials/" <> StringReplace[ss," "->""] <> ".html",
    
    "paclet:SimulationTools/guide/" ~~ ss__ :>
-    "Guides/" <> StringReplace[ss," "->""] <> ".html"}];
+    "Guides/" <> StringReplace[ss," "->""] <> ".xml"}];
 
   (* s2 is the link target relative to Documentation/English.  subPath
      is the link host notebook path relative to Documentation/English. *)
