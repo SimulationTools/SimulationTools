@@ -1,6 +1,6 @@
 {
  "Application" -> "SimulationTools",
- "Title" -> "Waveforms",
+ "Title" -> "Gravitational Waves",
  "Related Tutorials" -> {"NumericalRelativity", "Binaries", "BlackHoles", "Trackers"},
  "Keywords" -> {},
  "Label" -> "SimulationTools Tutorial",

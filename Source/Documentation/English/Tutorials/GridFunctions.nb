@@ -1,7 +1,7 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["GridFunctions", "Title"],
+Cell["Grid Functions", "Title"],
 
 Cell[TextData[{
  "SimulationTools provides an interface to grid-based data from numerical \
@@ -119,9 +119,8 @@ given:\
 \>", "Text"],
 
 Cell[BoxData[GridBox[{
-   {"StripGhostZones", "True", Cell["\<\
-Remove inter-processor ghost zones from the data\
-\>", "TableText"]}
+   {"StripGhostZones", "True", Cell[
+    "Remove inter-processor ghost zones from the data", "TableText"]}
   }]], "DefinitionBox3Col"]
 }, Open  ]],
 
@@ -256,9 +255,7 @@ Cell[TextData[{
  "]"
 }], "Subsection"],
 
-Cell["\<\
-Read the available dimensions of a gridfunction in sim.\
-\>", "Text"]
+Cell["Read the available dimensions of a gridfunction in sim.", "Text"]
 }, Open  ]]
 }, Open  ]],
 
@@ -314,8 +311,8 @@ WindowSize->{833, 756},
 WindowMargins->{{86, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->"Default.nb"
 ]
 
