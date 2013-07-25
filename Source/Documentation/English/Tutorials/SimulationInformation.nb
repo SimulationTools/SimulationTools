@@ -15,15 +15,6 @@ the ",
  " tutorial for more information."
 }], "Text"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$SimulationPath", "=", 
-   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
-  ";"}]], "Input"],
-
 Cell[CellGroupData[{
 
 Cell["Getting an overview of a simulation", "Section"],
@@ -41,7 +32,8 @@ support other simulation types in the future.\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"SimulationOverview", "[", "\"\<bbh\>\"", "]"}]], "Input"]
+ RowBox[{"SimulationOverview", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -61,7 +53,8 @@ We can compute the total number of hours the simulation has run for,\
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ReadSimulationRunTime", "[", "\"\<bbh\>\"", "]"}], "/", 
+  RowBox[{
+  "ReadSimulationRunTime", "[", "$SimulationToolsTestSimulation", "]"}], "/", 
   "3600"}]], "Input"],
 
 Cell["\<\
@@ -71,34 +64,40 @@ the simulation coordinate time)\
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
-  RowBox[{"ReadSimulationSpeed", "[", "\"\<bbh\>\"", "]"}], "]"}]], "Input"],
+  RowBox[{"ReadSimulationSpeed", "[", "$SimulationToolsTestSimulation", "]"}],
+   "]"}]], "Input"],
 
 Cell["memory usage", "Text"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{
-   RowBox[{"ReadSimulationMemoryUsage", "[", "\"\<bbh\>\"", "]"}], ",", 
+   RowBox[{
+   "ReadSimulationMemoryUsage", "[", "$SimulationToolsTestSimulation", "]"}], 
+   ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input"],
 
 Cell["swap usage", "Text"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
-  RowBox[{"ReadSimulationSwapUsage", "[", "\"\<bbh\>\"", "]"}], 
+  RowBox[{
+  "ReadSimulationSwapUsage", "[", "$SimulationToolsTestSimulation", "]"}], 
   "]"}]], "Input"],
 
 Cell["the number of CPU cores used", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadSimulationCoreCount", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadSimulationCoreCount", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell["\<\
 and the total computational cost of the simulation in CPU hours\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadSimulationCost", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadSimulationCost", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell["\<\
 Much of this information is available only if the simulation was run using \
@@ -113,8 +112,8 @@ WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->"Default.nb"
 ]
 

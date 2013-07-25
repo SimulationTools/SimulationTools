@@ -13,15 +13,6 @@ Cell[CellGroupData[{
 
 Cell["Accessing simulation parameters", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$SimulationPath", "=", 
-   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
-  ";"}]], "Input"],
-
 Cell[CellGroupData[{
 
 Cell["Reading parameters", "Subsection"],
@@ -40,16 +31,15 @@ in a simulation\
 Cell[BoxData[
  RowBox[{
   RowBox[{"FindSimulationParameters", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}], "//", 
+   RowBox[{"$SimulationToolsTestSimulation", ",", "\"\<*\>\""}], "]"}], "//", 
   "Short"}]], "Input"],
 
-Cell["\<\
-or it can be used to list only a subset of parameters\
-\>", "Text"],
+Cell["or it can be used to list only a subset of parameters", "Text"],
 
 Cell[BoxData[
  RowBox[{"FindSimulationParameters", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase*\>\""}], "]"}]], "Input"],
+  RowBox[{"$SimulationToolsTestSimulation", ",", "\"\<coordbase*\>\""}], 
+  "]"}]], "Input"],
 
 Cell["\<\
 If you already know the parameter name, then you can just request the value \
@@ -59,7 +49,8 @@ of that parameter using ReadSimulationParameter\
 Cell[BoxData[
  RowBox[{"dx", "=", 
   RowBox[{"ReadSimulationParameter", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase::dx\>\""}], "]"}]}]], "Input"],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "\"\<coordbase::dx\>\""}], 
+   "]"}]}]], "Input"],
 
 Cell["\<\
 All parameter values are returned as strings which can then be converted to \

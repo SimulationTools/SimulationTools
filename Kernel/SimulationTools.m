@@ -118,7 +118,7 @@ packages = {
 
 $SimulationToolsInstallationDirectory = FileNameDrop[FindFile["SimulationTools`"], -2];
 $SimulationToolsTestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"], -2], "Data","Simulations"}];
-$SimulationToolsTestSimulation = "bbh";
+$SimulationToolsTestSimulation = FileNameJoin[{$SimulationToolsTestSimulationDirectory, "bbh"}];
 
 $SimulationToolsVersionNumber        = 1.0;
 $SimulationToolsReleaseNumber        = 0;

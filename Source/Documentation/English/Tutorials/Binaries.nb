@@ -23,17 +23,6 @@ Cell[CellGroupData[{
 
 Cell["Working with binary systems", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{"$SimulationPath", "=", 
-  RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
-
 Cell[BoxData[GridBox[{
    {"ReadBinarySeparation", Cell["ReadBinaryPhase", "TableText"]},
    {"ReadBinaryCoordinates", "ToListOfPoints"}
@@ -52,7 +41,9 @@ of the binary as a function of time.\
 
 Cell[BoxData[
  RowBox[{"r", "=", 
-  RowBox[{"ReadBinarySeparation", "[", "run", "]"}]}]], "Input"],
+  RowBox[{
+  "ReadBinarySeparation", "[", "$SimulationToolsTestSimulation", 
+   "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"Take", "[", 
@@ -79,7 +70,8 @@ joining the two members of the binary).\
 
 Cell[BoxData[
  RowBox[{"phi", "=", 
-  RowBox[{"ReadBinaryPhase", "[", "run", "]"}]}]], "Input"],
+  RowBox[{
+  "ReadBinaryPhase", "[", "$SimulationToolsTestSimulation", "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
@@ -106,7 +98,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"x1", ",", "y1", ",", "z1"}], "}"}], "=", 
    RowBox[{"ReadBinaryCoordinates", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"path2", "=", 
@@ -114,7 +106,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"x2", ",", "y2", ",", "z2"}], "}"}], "=", 
    RowBox[{"ReadBinaryCoordinates", "[", 
-    RowBox[{"run", ",", "2"}], "]"}]}]}]], "Input"],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "2"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
@@ -238,8 +230,8 @@ WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->"Default.nb"
 ]
 

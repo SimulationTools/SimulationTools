@@ -276,28 +276,34 @@ Cell[TextData[{
 Cell[BoxData[
  RowBox[{
   RowBox[{"ReadIterations", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], "]"}], "//",
-   "Short"}]], "Input"],
+   RowBox[{
+   "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+   "]"}], "//", "Short"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadRefinementLevels", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  RowBox[{
+  "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadMaps", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  RowBox[{
+  "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ReadTimeLevels", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  RowBox[{
+  "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"phi", "=", 
   RowBox[{"ReadGridFunction", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
+   RowBox[{
+   "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", 
+    ",", 
     RowBox[{"Iteration", "->", "4096"}], ",", 
     RowBox[{"RefinementLevel", "\[Rule]", "3"}]}], "]"}]}]], "Input"],
 
@@ -308,7 +314,7 @@ Cell[BoxData[
 },
 Saveable->True,
 WindowSize->{833, 756},
-WindowMargins->{{86, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 53}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
 FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \

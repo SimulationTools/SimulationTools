@@ -12,13 +12,6 @@ Cell[CellGroupData[{
 
 Cell["Working with black holes", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input"],
-
 Cell[BoxData[GridBox[{
    {"ReadBlackHoleMass", Cell["ReadBlackHoleSpin", "TableText"]},
    {"ReadBlackHoleIrreducibleMass", "\[Placeholder]"}
@@ -39,7 +32,7 @@ spin contribution.  \
 Cell[BoxData[
  RowBox[{"mass1", "=", 
   RowBox[{"ReadBlackHoleMass", "[", 
-   RowBox[{"run", ",", "1"}], "]"}]}]], "Input"],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
@@ -53,12 +46,12 @@ conventionally taken to be 1 and 2, and the final merged black hole is 3.\
 Cell[BoxData[
  RowBox[{"mass2", "=", 
   RowBox[{"ReadBlackHoleMass", "[", 
-   RowBox[{"run", ",", "2"}], "]"}]}]], "Input"],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "2"}], "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"mass3", "=", 
   RowBox[{"ReadBlackHoleMass", "[", 
-   RowBox[{"run", ",", "3"}], "]"}]}]], "Input"],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "3"}], "]"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
@@ -87,7 +80,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"spin1x", ",", "spin1y", ",", "spin1z"}], "}"}], "=", 
    RowBox[{"ReadBlackHoleSpin", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"spin2", "=", 
@@ -95,7 +88,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"spin2x", ",", "spin2y", ",", "spin2z"}], "}"}], "=", 
    RowBox[{"ReadBlackHoleSpin", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input"],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"spin3", "=", 
@@ -103,7 +96,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"spin3x", ",", "spin3y", ",", "spin3z"}], "}"}], "=", 
    RowBox[{"ReadBlackHoleSpin", "[", 
-    RowBox[{"run", ",", "3"}], "]"}]}]}]], "Input"],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "3"}], "]"}]}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
@@ -154,7 +147,7 @@ negligible, then the irreducible mass can be used as a mass measurement.\
 Cell[BoxData[
  RowBox[{"massIrr1", "=", 
   RowBox[{"ReadBlackHoleIrreducibleMass", "[", 
-   RowBox[{"run", ",", "1"}], "]"}]}]], "Input"]
+   RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]], "Input"]
 }, Open  ]]
 }, Open  ]],
 
@@ -185,8 +178,8 @@ WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->"Default.nb"
 ]
 

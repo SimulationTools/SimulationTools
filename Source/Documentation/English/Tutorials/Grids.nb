@@ -10,12 +10,6 @@ SimulationTools can be used to access and visualize this information in a \
 straightforward way.\
 \>", "Text"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$SimulationPath", "=", 
-   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
-  ";"}]], "Input"],
-
 Cell[CellGroupData[{
 
 Cell["Accessing grid structure information", "Section"],
@@ -34,25 +28,27 @@ Read grid spacing in the x, y and z directions (by default, refinement level \
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadGridSpacings", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadGridSpacings", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell["Read grid spacing on a specific refinement level:", "Text"],
 
 Cell[BoxData[
  RowBox[{"ReadGridSpacings", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", 
+  RowBox[{"$SimulationToolsTestSimulation", ",", 
    RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input"],
 
 Cell["Read the time step on refinement level 0:", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadTimeStep", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadTimeStep", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell["and on other refinement levels:", "Text"],
 
 Cell[BoxData[
  RowBox[{"ReadTimeStep", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", 
+  RowBox[{"$SimulationToolsTestSimulation", ",", 
    RowBox[{"RefinementLevel", "\[Rule]", "6"}]}], "]"}]], "Input"],
 
 Cell["\<\
@@ -60,14 +56,16 @@ Read the coordinate time range over which simulation data is available:\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadTimeRange", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadTimeRange", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell["\<\
 Find the maximum number of refinement levels in the simulation:\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadMaxRefinementLevels", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell["\<\
 To determine the coordinate time interval corresponding to a single \
@@ -79,11 +77,12 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"dt", "=", 
   RowBox[{"ReadTimeStep", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", 
+   RowBox[{"$SimulationToolsTestSimulation", ",", 
     RowBox[{"RefinementLevel", "\[Rule]", 
      RowBox[{
-      RowBox[{"ReadMaxRefinementLevels", "[", "\"\<bbh\>\"", "]"}], "-", 
-      "1"}]}]}], "]"}]}]], "Input"],
+      RowBox[{
+      "ReadMaxRefinementLevels", "[", "$SimulationToolsTestSimulation", "]"}],
+       "-", "1"}]}]}], "]"}]}]], "Input"],
 
 Cell[BoxData["0.015625`"], "Output"]
 }, Open  ]],
@@ -103,8 +102,8 @@ WindowMargins->{{0, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->"Default.nb"
 ]
 

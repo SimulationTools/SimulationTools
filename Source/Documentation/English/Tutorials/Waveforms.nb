@@ -13,15 +13,6 @@ Cell[CellGroupData[{
 
 Cell["Reading and exporting waveforms", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$SimulationPath", "=", 
-   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
-  ";"}]], "Input"],
-
 Cell["\<\
 SimulationTools supports a plug-in interface for reading waveform data. The \
 format of choice is HDF5 data using the naming conventions of the Multipole \
@@ -61,7 +52,8 @@ Cell[BoxData[{
 Cell[BoxData[
  RowBox[{"\[Psi]4", "=", 
   RowBox[{"ReadPsi4", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "r"}], "]"}]}]], "Input"],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", "r"}], 
+   "]"}]}]], "Input"],
 
 Cell["\<\
 It is possible to specify the name of the output file produced by the \
@@ -88,7 +80,8 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"\[Psi]4", "=", 
   RowBox[{"ReadPsi4", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "r"}], "]"}]}]], "Input"],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", "r"}], 
+   "]"}]}]], "Input"],
 
 Cell["\<\
 Waveforms can be produced for multiple (l,m) modes and multiple extraction \
@@ -96,11 +89,13 @@ radii. The list of available modes and radii are both easily accessed\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"ReadPsi4Modes", "[", "\"\<bbh\>\"", "]"}]], "Input"],
+ RowBox[{"ReadPsi4Modes", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ReadPsi4Radii", "[", "\"\<bbh\>\"", "]"}], "//", "Sort"}]], "Input"]
+  RowBox[{"ReadPsi4Radii", "[", "$SimulationToolsTestSimulation", "]"}], "//",
+   "Sort"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -120,8 +115,8 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{
      "$SimulationToolsTestSimulationDirectory", ",", 
-      "\"\<bbh-nrdf/bbh-nrdf_10/psi4_l2_m2_r100.00.asc.gz\>\""}], "}"}], 
-    "]"}]}], ";"}]], "Input"],
+      "\"\<bbh-nrdf/psi4_l2_m2_r100.00.asc.gz\>\""}], "}"}], "]"}]}], 
+  ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"\[Psi]4", "=", 
@@ -199,7 +194,7 @@ without having to go through the step of reading ",
 
 Cell[BoxData[
  RowBox[{"ReadWaveformCycles", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "140"}], "]"}]], "Input"]
+  RowBox[{"$SimulationToolsTestSimulation", ",", "140"}], "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -229,7 +224,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"30", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "30"}], "]"}]}], ",", 
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "30"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "30"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Psi]4r50", "=", 
@@ -237,7 +234,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"50", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "50"}], "]"}]}], ",", 
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "50"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "50"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Psi]4r80", "=", 
@@ -245,7 +244,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"80", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "80"}], "]"}]}], ",", 
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "80"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "80"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Psi]4r100", "=", 
@@ -253,8 +254,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"100", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "100"}], "]"}]}], ",", 
-     
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "100"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "100"}]}], "]"}]}], ";"}]}], "Input"],
 
 Cell[BoxData[
@@ -376,8 +378,9 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"\[Psi]4\[Infinity]", "=", 
   RowBox[{"ReadRadiallyExtrapolatedPsi4", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "extrapolationorder"}], 
-   "]"}]}]], "Input"],
+   RowBox[{
+   "$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", 
+    "extrapolationorder"}], "]"}]}]], "Input"],
 
 Cell["\<\
 We can compare this extrapolated waveform to the one extracted at r=100M\
@@ -405,8 +408,8 @@ Cell[BoxData[
   RowBox[{"h\[Infinity]", "=", 
    RowBox[{"ReadRadiallyExtrapolatedStrain", "[", 
     RowBox[{
-    "\"\<bbh\>\"", ",", "l", ",", "m", ",", "\[Omega]0", ",", 
-     "extrapolationorder"}], "]"}]}], ";"}]], "Input"],
+    "$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", "\[Omega]0", 
+     ",", "extrapolationorder"}], "]"}]}], ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
