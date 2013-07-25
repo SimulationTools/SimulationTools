@@ -134,7 +134,8 @@ You can also compute the dimensionless spin by dividing by the mass squared:\
 Cell[BoxData[
  RowBox[{"j1", "=", 
   RowBox[{
-   RowBox[{"spin1Norm", "~", "Div", "~", "mass1"}], "^", "2"}]}]], "Input"],
+   RowBox[{"spin1Norm", "/", 
+    RowBox[{"mass1", "^", "2"}]}], "//", "WithResampling"}]}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "j1", "]"}]], "Input"]
