@@ -1,0 +1,27 @@
+Prepare the files
+=================
+
+rsync -avh --filter="merge filter.rules" ../../ SimulationTools/
+
+date +"%Y.%m.%d-%H.%M" > SimulationTools/BUILD_ID
+git rev-parse HEAD > SimulationTools/GIT_REVISION
+
+Prepare h5mma files
+===================
+
+Compile and copy binary for other supported architectures
+
+make h5mma.tar.gz
+mkdir h5mma
+tar zxvf h5mma.tar.gz -C h5mma
+
+Create tarball
+==============
+
+tar -czf SimulationTools-1.0.tar.gz SimulationTools h5mma
+
+Clean up
+========
+
+rm -rf SimulationTools h5mma
+rm SimulationTools-1.0.tar.gz

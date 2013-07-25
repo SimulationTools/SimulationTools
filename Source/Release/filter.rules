@@ -1,7 +1,8 @@
 exclude *.git
 exclude Tests
 exclude Source
-exclude Data
+exclude Data/TestReference
+exclude Data/Simulations/test7patch
 exclude piraha-src.jar
 exclude .MathematicaResources
 exclude .gitignore	
