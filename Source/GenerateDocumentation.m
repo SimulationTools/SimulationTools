@@ -98,6 +98,17 @@ Print["Building tutorials"];
 tutorialSources = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "English", "Tutorials"}], Infinity];
 Map[(Print[#]; BuildTutorial[FileNameJoin[{Directory[], #}]])&, tutorialSources];
 
+Print["Changing FrontEnd version to 8.0"];
+fixupVersion[nbfile_] :=
+  Export[nbfile,
+    StringReplace[Import[nbfile, "String"],
+      "FrontEndVersion->\"" ~~ __ ~~ "\\\n" ~~ DigitCharacter .. ~~ ")\"," ->
+      "FrontEndVersion->\"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \\\n2011)\","],
+    "String"
+  ];
+notebooks = FileNames["*.nb", FileNameJoin[{"Documentation"}], Infinity];
+fixupVersion /@ notebooks;
+
 Print["Indexing Documentation"];
 BuildIndex["SimulationTools"];
 
