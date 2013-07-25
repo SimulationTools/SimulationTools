@@ -118,17 +118,29 @@ BuildIndex["SimulationTools"];
 
 Print["Exporting HTML Documentation"];
 
-docLink[s_String] :=
- StringReplace[s,
+(* Return the path of the Documentation directory in the passed filename *)
+docRoot[nb_String] :=
+  StringReplace[nb, "/Documentation/*" -> "/Documentation"];
+
+docLink[s_String, from_String] :=
+Module[{doc = docRoot[from]},
+ subPath = StringReplace[from, __~~"/Documentation/English/" -> ""];
+
+ s2 = StringReplace[s,
   {"paclet:SimulationTools/ref/" ~~ ss__ :> 
-    "/Documentation/English/ReferencePages/Symbols/" <> ss <> 
+    "ReferencePages/Symbols/" <> ss <> 
      ".xml",
    
    "paclet:SimulationTools/tutorial/" ~~ ss__ :> 
-    "/Documentation/English/Tutorials/" <> StringReplace[ss," "->""] <> ".html",
+    "Tutorials/" <> StringReplace[ss," "->""] <> ".html",
    
    "paclet:SimulationTools/guide/" ~~ ss__ :>
-    "/Documentation/English/Guides/" <> StringReplace[ss," "->""] <> ".html"}];
+    "Guides/" <> StringReplace[ss," "->""] <> ".html"}];
+
+  (* s2 is the link target relative to Documentation/English.  subPath
+     is the link host notebook path relative to Documentation/English. *)
+
+  StringJoin[ConstantArray["../", FileNameDepth[subPath]]]<>s2];
 
 generateHTMLDocumentation[] := Module[
   {exportNotebook, docDir,dest, exportTutorials, exportGuides, exportSymbols},
@@ -147,7 +159,7 @@ generateHTMLDocumentation[] := Module[
                    ButtonData -> 
                    paclet_?(StringMatchQ[#, 
                                          StartOfString ~~ "paclet:" ~~ __] &)] :> 
-         Module[{url = docLink[paclet]},
+         Module[{url = docLink[paclet, dest]},
                 ButtonBox[content, BaseStyle -> "Hyperlink",
                           ButtonData -> {URL[url], None}, ButtonNote -> url]];
 
