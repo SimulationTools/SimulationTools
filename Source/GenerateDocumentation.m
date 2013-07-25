@@ -142,11 +142,36 @@ Module[{doc = docRoot[from]},
 
   StringJoin[ConstantArray["../", FileNameDepth[subPath]]]<>s2];
 
+skipTargetQ[src_, dest_] :=
+    If[FileType[dest] =!= None,
+       Module[
+         {diff = DateDifference[FileDate[src], FileDate[dest]]},
+         (* Print["src = ", src]; *)
+         (* Print["dest = ", dest]; *)
+         (* Print["diff = ", diff]; *)
+         Return[diff > 0]],
+       False];
+
 generateHTMLDocumentation[] := Module[
   {exportNotebook, docDir,dest, exportTutorials, exportGuides, exportSymbols},
 
   exportNotebook[dest_String, nbf_String] :=
-  Module[{nb, nn, n2},
+  Module[{nb, nn, n2, destName},
+         destName = dest<>"/" <> 
+                StringReplace[FileNameTake[nbf, -1], ".nb" -> ".html"];
+
+         If[skipTargetQ[nbf, destName],
+            Print["Skipping ", FileNameTake[nbf,-1]];
+            Return[]];
+
+         (* If[FileType[destName] =!= None, *)
+         (*    Module[ *)
+         (*      {diff = DateDifference[FileDate[nbf], FileDate[destName]]}, *)
+         (*      Print[diff]; *)
+         (*      If[diff > 0, *)
+         (*         Print["Skipping ", FileNameTake[nbf,-1]]; *)
+         (*         Return[]]]]; *)
+
          Print["  Exporting ", FileNameTake[nbf,-1]];
          nb = NotebookOpen[nbf];
          nn = NotebookGet[nb]; (* Get expression content from pointer object *)
@@ -163,8 +188,7 @@ generateHTMLDocumentation[] := Module[
                 ButtonBox[content, BaseStyle -> "Hyperlink",
                           ButtonData -> {URL[url], None}, ButtonNote -> url]];
 
-         Export[dest<>"/" <> 
-                StringReplace[FileNameTake[nbf, -1], ".nb" -> ".html"], n2];
+         Export[destName, n2];
          NotebookClose[nb]];
 
   docDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Documentation"}];
