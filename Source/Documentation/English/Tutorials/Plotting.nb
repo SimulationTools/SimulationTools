@@ -115,38 +115,40 @@ Cell[BoxData[
        RowBox[{"Iteration", "\[Rule]", "0"}], ",", 
        RowBox[{"RefinementLevel", "\[Rule]", "5"}]}], "]"}]}], ";", 
     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-    RowBox[{"Graphics3D", "[", 
-     RowBox[{
-      RowBox[{"Raster3D", "[", 
-       RowBox[{
-        RowBox[{"Transpose", "[", 
-         RowBox[{
-          RowBox[{"ToListOfData", "[", "phi3D", "]"}], ",", 
-          RowBox[{"{", 
-           RowBox[{"3", ",", "2", ",", "1"}], "}"}]}], "]"}], ",", 
-        RowBox[{"Transpose", "@", 
-         RowBox[{"GetDataRange", "[", "phi3D", "]"}]}], ",", 
-        RowBox[{"ColorFunction", "\[Rule]", 
-         RowBox[{"Function", "[", 
-          RowBox[{
-           RowBox[{"{", "z", "}"}], ",", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"Opacity", "[", 
-              RowBox[{"0.1", 
-               RowBox[{"(", 
-                RowBox[{"1", "-", "z"}], ")"}]}], "]"}], ",", 
-             RowBox[{"Hue", "[", "z", "]"}]}], "}"}]}], "]"}]}]}], "]"}], ",", 
-      RowBox[{"Background", "\[Rule]", "Black"}], ",", 
-      RowBox[{"SphericalRegion", "\[Rule]", "True"}], ",", 
-      RowBox[{"ViewPoint", "\[Rule]", 
-       RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{
+       RowBox[{"Raster3D", "[", 
         RowBox[{
-         RowBox[{"-", "Pi"}], ",", 
+         RowBox[{"Transpose", "[", 
+          RowBox[{
+           RowBox[{"ToListOfData", "[", "phi3D", "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"3", ",", "2", ",", "1"}], "}"}]}], "]"}], ",", 
+         RowBox[{"Transpose", "@", 
+          RowBox[{"GetDataRange", "[", "phi3D", "]"}]}], ",", 
+         RowBox[{"ColorFunction", "\[Rule]", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", "z", "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Opacity", "[", 
+               RowBox[{"0.1", 
+                RowBox[{"(", 
+                 RowBox[{"1", "-", "z"}], ")"}]}], "]"}], ",", 
+              RowBox[{"Hue", "[", "z", "]"}]}], "}"}]}], "]"}]}]}], "]"}], 
+       ",", 
+       RowBox[{"Background", "\[Rule]", "Black"}], ",", 
+       RowBox[{"SphericalRegion", "\[Rule]", "True"}], ",", 
+       RowBox[{"ViewPoint", "\[Rule]", 
+        RowBox[{"{", 
          RowBox[{
-          RowBox[{"-", "Pi"}], "/", "2"}], ",", 
-         RowBox[{"-", "2"}]}], "}"}]}]}], "]"}]}]}], "\[IndentingNewLine]", 
-  "]"}]], "Input"]
+          RowBox[{"-", "Pi"}], ",", 
+          RowBox[{
+           RowBox[{"-", "Pi"}], "/", "2"}], ",", 
+          RowBox[{"-", "2"}]}], "}"}]}]}], "]"}], "//", "Rasterize"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input"]
 }, Open  ]]
 }, Open  ]]
 },
