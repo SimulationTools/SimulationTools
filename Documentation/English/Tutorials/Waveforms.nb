@@ -62,17 +62,6 @@ Cell[CellGroupData[{
 
 Cell["Reading and exporting waveforms", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$SimulationPath", "=", 
-   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
-  ";"}]], "Input",
- CellLabel->"In[2]:="],
-
 Cell["\<\
 SimulationTools supports a plug-in interface for reading waveform data. The \
 format of choice is HDF5 data using the naming conventions of the Multipole \
@@ -108,28 +97,30 @@ Cell[BoxData[{
   RowBox[{"m", "=", "2"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"r", "=", "100"}], ";"}]}], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[1]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[Psi]4", "=", 
   RowBox[{"ReadPsi4", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "r"}], "]"}]}]], "Input",
- CellLabel->"In[6]:="],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", "r"}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[4]:="],
 
 Cell[BoxData[
- RowBox[{"DataTable", "[", 
-  RowBox[{
-   InterpretationBox[
-    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
-     "\[InvisibleSpace]", "\<\">\"\>"}],
-    SequenceForm["<", 601, ">"],
-    Editable->False], ",", 
-   RowBox[{"{", 
-    RowBox[{"{", 
-     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[6]="]
+ InterpretationBox["\<\"No data for \
+Waveforms`ReadPsi4RadiiStrings[\\\"/Users/barry/Library/Mathematica/\
+Applications/SimulationTools/Data/Simulations/bbh\\\"]\"\>",
+  StringForm[
+  "No data for `1`", 
+   "Waveforms`ReadPsi4RadiiStrings[\"/Users/barry/Library/Mathematica/\
+Applications/SimulationTools/Data/Simulations/bbh\"]"],
+  Editable->False]], "Print",
+ CellLabel->"During evaluation of In[4]:="],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell["\<\
@@ -153,15 +144,16 @@ $MultipolePsi4Variable\
 Cell[BoxData[
  RowBox[{
   RowBox[{"$MultipolePsi4Variable", "=", "\"\<psi4\>\""}], ";"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[5]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[Psi]4", "=", 
   RowBox[{"ReadPsi4", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "r"}], "]"}]}]], "Input",
- CellLabel->"In[8]:="],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", "r"}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -174,7 +166,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[8]="]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell["\<\
@@ -185,8 +177,9 @@ radii. The list of available modes and radii are both easily accessed\
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"ReadPsi4Modes", "[", "\"\<bbh\>\"", "]"}]], "Input",
- CellLabel->"In[9]:="],
+ RowBox[{"ReadPsi4Modes", "[", "$SimulationToolsTestSimulation", 
+  "]"}]], "Input",
+ CellLabel->"In[7]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -380,20 +373,21 @@ Cell[BoxData[
     RowBox[{"8", ",", "7"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"8", ",", "8"}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[9]="]
+ CellLabel->"Out[7]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"ReadPsi4Radii", "[", "\"\<bbh\>\"", "]"}], "//", "Sort"}]], "Input",
- CellLabel->"In[10]:="],
+  RowBox[{"ReadPsi4Radii", "[", "$SimulationToolsTestSimulation", "]"}], "//",
+   "Sort"}]], "Input",
+ CellLabel->"In[8]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"30.`", ",", "50.`", ",", "80.`", ",", "100.`"}], "}"}]], "Output",
- CellLabel->"Out[10]="]
+ CellLabel->"Out[8]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -414,16 +408,16 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{
      "$SimulationToolsTestSimulationDirectory", ",", 
-      "\"\<bbh-nrdf/bbh-nrdf_10/psi4_l2_m2_r100.00.asc.gz\>\""}], "}"}], 
-    "]"}]}], ";"}]], "Input",
- CellLabel->"In[11]:="],
+      "\"\<bbh-nrdf/psi4_l2_m2_r100.00.asc.gz\>\""}], "}"}], "]"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[9]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[Psi]4", "=", 
   RowBox[{"ImportWaveform", "[", "file", "]"}]}]], "Input",
- CellLabel->"In[12]:="],
+ CellLabel->"In[10]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -436,7 +430,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[12]="]
+ CellLabel->"Out[10]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -452,10 +446,10 @@ Cell[BoxData[
  RowBox[{"ExportWaveform", "[", 
   RowBox[{"\"\</tmp/psi4_l2_m2_r100.00.asc.gz\>\"", ",", "\[Psi]4"}], 
   "]"}]], "Input",
- CellLabel->"In[13]:="],
+ CellLabel->"In[11]:="],
 
 Cell[BoxData["\<\"/tmp/psi4_l2_m2_r100.00.asc.gz\"\>"], "Output",
- CellLabel->"Out[13]="]
+ CellLabel->"Out[11]="]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -483,7 +477,7 @@ Cell[BoxData[
      RowBox[{"Im", "[", "\[Psi]4", "]"}], ",", 
      RowBox[{"Abs", "[", "\[Psi]4", "]"}]}], "}"}], ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
- CellLabel->"In[14]:="],
+ CellLabel->"In[12]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -919,7 +913,7 @@ le3/AIQF1hQ=
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[14]="]
+ CellLabel->"Out[12]="]
 }, Open  ]],
 
 Cell["Plot the phase of the complex waveform", "Text"],
@@ -929,7 +923,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"Phase", "[", "\[Psi]4", "]"}], "]"}]], "Input",
- CellLabel->"In[15]:="],
+ CellLabel->"In[13]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -1077,7 +1071,7 @@ d54Ep0a+zk8yIxdKIC05LxzpQz4kQcUrld2SNHKFBJw3raVb8sjVEvxxa1Xz
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {1.2834412333276732`, 
    1.2834412333276732`}}]], "Output",
- CellLabel->"Out[15]="]
+ CellLabel->"Out[13]="]
 }, Open  ]],
 
 Cell["and plot the frequency", "Text"],
@@ -1087,7 +1081,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"Frequency", "[", "\[Psi]4", "]"}], "]"}]], "Input",
- CellLabel->"In[16]:="],
+ CellLabel->"In[14]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -1252,7 +1246,7 @@ YSFpL7U5uHw0rT85j1OjN/TpS+tP9vOoskpI77eW9B81IFRO/F/w7uyv
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.04295585367023704, 
    0.04295585367023704}}]], "Output",
- CellLabel->"Out[16]="]
+ CellLabel->"Out[14]="]
 }, Open  ]],
 
 Cell["\<\
@@ -1269,10 +1263,10 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"WaveformCycles", "[", 
   RowBox[{"\[Psi]4", ",", "140"}], "]"}]], "Input",
- CellLabel->"In[17]:="],
+ CellLabel->"In[15]:="],
 
 Cell[BoxData["2.9735505640951336`"], "Output",
- CellLabel->"Out[17]="]
+ CellLabel->"Out[15]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1288,11 +1282,11 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadWaveformCycles", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "140"}], "]"}]], "Input",
- CellLabel->"In[18]:="],
+  RowBox[{"$SimulationToolsTestSimulation", ",", "140"}], "]"}]], "Input",
+ CellLabel->"In[16]:="],
 
 Cell[BoxData["2.9735505640951336`"], "Output",
- CellLabel->"Out[18]="]
+ CellLabel->"Out[16]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -1323,7 +1317,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"30", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "30"}], "]"}]}], ",", 
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "30"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "30"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Psi]4r50", "=", 
@@ -1331,7 +1327,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"50", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "50"}], "]"}]}], ",", 
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "50"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "50"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Psi]4r80", "=", 
@@ -1339,7 +1337,9 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"80", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "80"}], "]"}]}], ",", 
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "80"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "80"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"\[Psi]4r100", "=", 
@@ -1347,10 +1347,11 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"100", 
       RowBox[{"ReadPsi4", "[", 
-       RowBox[{"\"\<bbh\>\"", ",", "2", ",", "2", ",", "100"}], "]"}]}], ",", 
-     
+       RowBox[{
+       "$SimulationToolsTestSimulation", ",", "2", ",", "2", ",", "100"}], 
+       "]"}]}], ",", 
      RowBox[{"-", "100"}]}], "]"}]}], ";"}]}], "Input",
- CellLabel->"In[19]:="],
+ CellLabel->"In[17]:="],
 
 Cell[CellGroupData[{
 
@@ -1363,7 +1364,7 @@ Cell[BoxData[
       RowBox[{
       "\[Psi]4r30", ",", "\[Psi]4r50", ",", "\[Psi]4r80", ",", 
        "\[Psi]4r100"}], "}"}]}], ",", "70"}], "]"}], "]"}]], "Input",
- CellLabel->"In[23]:="],
+ CellLabel->"In[21]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -1910,7 +1911,7 @@ sButXwRbpH95ZU0ld4hAtvlISpozmTcPrg+4d3b+Ijf8H7A3+Vc=
   PlotRangeClipping->True,
   PlotRangePadding->{{7.4, 7.4}, {1.9721668700035029`, 
    1.9721668700035029`}}]], "Output",
- CellLabel->"Out[23]="]
+ CellLabel->"Out[21]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -1954,7 +1955,7 @@ Cell[BoxData[{
   RowBox[{"hFFI", "=", 
    RowBox[{"Psi4ToStrain", "[", 
     RowBox[{"\[Psi]4", ",", "\[Omega]0"}], "]"}]}], ";"}]}], "Input",
- CellLabel->"In[24]:="],
+ CellLabel->"In[22]:="],
 
 Cell[TextData[{
  "Convert ",
@@ -1975,7 +1976,7 @@ Cell[BoxData[
     RowBox[{"\[Psi]4", ",", 
      RowBox[{"{", 
       RowBox[{"0", ",", "280"}], "}"}]}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[26]:="],
+ CellLabel->"In[24]:="],
 
 Cell["Compare the two integration schemes", "Text"],
 
@@ -1986,7 +1987,7 @@ Cell[BoxData[
   RowBox[{"Abs", "[", 
    RowBox[{"{", 
     RowBox[{"hFFI", ",", "hTD"}], "}"}], "]"}], "]"}]], "Input",
- CellLabel->"In[27]:="],
+ CellLabel->"In[25]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -2271,7 +2272,7 @@ PrW/t9ZpnN3/ADrGows=
   PlotRangeClipping->True,
   PlotRangePadding->{{6.000000000000006, 6.000000000000006}, {
    0.00008410492103967708, 0.00008410492103967708}}]], "Output",
- CellLabel->"Out[27]="]
+ CellLabel->"Out[25]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -2309,16 +2310,17 @@ been extrapolated to infinite radius"
 Cell[BoxData[
  RowBox[{
   RowBox[{"extrapolationorder", "=", "2"}], ";"}]], "Input",
- CellLabel->"In[28]:="],
+ CellLabel->"In[26]:="],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[Psi]4\[Infinity]", "=", 
   RowBox[{"ReadRadiallyExtrapolatedPsi4", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "l", ",", "m", ",", "extrapolationorder"}], 
-   "]"}]}]], "Input",
- CellLabel->"In[29]:="],
+   RowBox[{
+   "$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", 
+    "extrapolationorder"}], "]"}]}]], "Input",
+ CellLabel->"In[27]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -2333,7 +2335,7 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"-", "30.`"}], ",", "200.`"}], "}"}], "}"}]}], "]"}]], "Output",
  
- CellLabel->"Out[29]="]
+ CellLabel->"Out[27]="]
 }, Open  ]],
 
 Cell["\<\
@@ -2348,7 +2350,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\[Psi]4r100", ",", "\[Psi]4\[Infinity]"}], "}"}], "]"}], 
   "]"}]], "Input",
- CellLabel->"In[30]:="],
+ CellLabel->"In[28]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -2607,7 +2609,7 @@ gktARvOhQKdT9uR/Aozf+T3Rb6P7ZGUCnlStmtvabEv+J6Dsa80o3/025H8i
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.0014060327275746173`, 
    0.0014060327275746173`}}]], "Output",
- CellLabel->"Out[30]="]
+ CellLabel->"Out[28]="]
 }, Open  ]],
 
 Cell[TextData[{
@@ -2625,9 +2627,9 @@ Cell[BoxData[
   RowBox[{"h\[Infinity]", "=", 
    RowBox[{"ReadRadiallyExtrapolatedStrain", "[", 
     RowBox[{
-    "\"\<bbh\>\"", ",", "l", ",", "m", ",", "\[Omega]0", ",", 
-     "extrapolationorder"}], "]"}]}], ";"}]], "Input",
- CellLabel->"In[31]:="],
+    "$SimulationToolsTestSimulation", ",", "l", ",", "m", ",", "\[Omega]0", 
+     ",", "extrapolationorder"}], "]"}]}], ";"}]], "Input",
+ CellLabel->"In[29]:="],
 
 Cell[CellGroupData[{
 
@@ -2641,7 +2643,7 @@ Cell[BoxData[
        RowBox[{"hFFI", ",", 
         RowBox[{"-", "100"}]}], "]"}]}], ",", "h\[Infinity]"}], "}"}], "]"}], 
   "]"}]], "Input",
- CellLabel->"In[32]:="],
+ CellLabel->"In[30]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -2898,7 +2900,7 @@ W4B59e3/GlceFPwfnoNJ/w==
   PlotRangeClipping->True,
   PlotRangePadding->{{6.000000000000006, 6.000000000000006}, {
    0.008410492103967708, 0.008410492103967708}}]], "Output",
- CellLabel->"Out[32]="]
+ CellLabel->"Out[30]="]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -2906,19 +2908,47 @@ W4B59e3/GlceFPwfnoNJ/w==
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["RELATED TUTORIALS",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "RelatedTutorialsSection",
- WholeCellGroupOpener->True],
+Cell["", "RelatedTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellFrameLabels->{{
+    FEPrivate`If[
+     FEPrivate`Or[
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
+     Cell[
+      TextData[
+       ButtonBox[
+       "RELATED TUTORIALS", BaseStyle -> None, 
+        Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
+        "Preemptive", ButtonFunction :> (FrontEndExecute[{
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], All, ButtonCell], 
+           FrontEndToken["OpenCloseGroup"], 
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
+      "RelatedTutorialsSection"], 
+     TextData[
+      ButtonBox[
+       Cell[
+        TextData[{
+          Cell[
+           BoxData[
+            InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
+               Baseline], "CacheGraphics" -> False], 
+             Spacer[24]]]], "Related Tutorials"}], "RelatedTutorialsSection"],
+        BaseStyle -> None, Appearance -> {Automatic, None}, Evaluator -> None,
+        Method -> "Preemptive", ButtonFunction :> (FrontEndExecute[{
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], All, ButtonCell], 
+          FrontEndToken["OpenCloseGroup"], 
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], After, CellContents]}]& )]]], None}, {
+   None, None}},
+ CellFrameLabelMargins->0],
 
 Cell[TextData[ButtonBox["NumericalRelativity",
  BaseStyle->"Link",

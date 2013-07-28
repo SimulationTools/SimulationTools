@@ -49,16 +49,14 @@ Cell[BoxData[
  TagBox[
   RowBox[{"{", 
    RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides/Data Representations.nb\"\>", 
+Documentation/English/ReferencePages/Symbols/ConvergenceMultiplier.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides/Numerical Relativity.nb\"\>", 
+Documentation/English/ReferencePages/Symbols/ConvergenceRate.nb\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "17", "\[RightSkeleton]"}], 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides/Overview.nb\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "111", "\[RightSkeleton]"}], 
+Documentation/English/ReferencePages/Symbols/ToDataRegion.nb\"\>", 
     ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/SupportedCodesAndDataFormats.nb\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/Waveforms.nb\"\>"}], "}"}],
+Documentation/English/ReferencePages/Symbols/VariableName.nb\"\>"}], "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
 
@@ -462,17 +460,16 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\<\"path1\"\>", ",", "\<\"path2\"\>", ",", "\<\"phi\"\>", 
      ",", "\<\"pos\"\>", ",", "\<\"r\"\>", ",", "\<\"result\"\>", 
-     ",", "\<\"run\"\>", ",", "\<\"t\"\>", ",", "\<\"t$\"\>", 
-     ",", "\<\"x1\"\>", ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", 
-     ",", "\<\"xFn$41656\"\>", ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", 
-     ",", "\<\"yFn\"\>", ",", "\<\"yFn$41656\"\>", ",", "\<\"z1\"\>", 
-     ",", "\<\"z2\"\>", ",", "\<\"zFn\"\>", ",", "\<\"zFn$41656\"\>"}], 
-    "}"}]}],
+     ",", "\<\"t\"\>", ",", "\<\"t$\"\>", ",", "\<\"x1\"\>", 
+     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$33998\"\>", 
+     ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", ",", "\<\"yFn\"\>", 
+     ",", "\<\"yFn$33998\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
+     ",", "\<\"zFn\"\>", ",", "\<\"zFn$33998\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
-   "path1", "path2", "phi", "pos", "r", "result", "run", "t", "t$", "x1", 
-    "x2", "xFn", "xFn$41656", "y1", "y2", "yFn", "yFn$41656", "z1", "z2", 
-    "zFn", "zFn$41656"}],
+   "path1", "path2", "phi", "pos", "r", "result", "t", "t$", "x1", "x2", 
+    "xFn", "xFn$33998", "y1", "y2", "yFn", "yFn$33998", "z1", "z2", "zFn", 
+    "zFn$33998"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
@@ -484,14 +481,14 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"\<\"j1\"\>", ",", "\<\"mass1\"\>", ",", "\<\"mass2\"\>", 
      ",", "\<\"mass3\"\>", ",", "\<\"massIrr1\"\>", ",", "\<\"result\"\>", 
-     ",", "\<\"run\"\>", ",", "\<\"spin1\"\>", ",", "\<\"spin1Norm\"\>", 
-     ",", "\<\"spin1x\"\>", ",", "\<\"spin1y\"\>", ",", "\<\"spin1z\"\>", 
-     ",", "\<\"spin2\"\>", ",", "\<\"spin2x\"\>", ",", "\<\"spin2y\"\>", 
-     ",", "\<\"spin2z\"\>", ",", "\<\"spin3\"\>", ",", "\<\"spin3x\"\>", 
-     ",", "\<\"spin3y\"\>", ",", "\<\"spin3z\"\>"}], "}"}]}],
+     ",", "\<\"spin1\"\>", ",", "\<\"spin1Norm\"\>", ",", "\<\"spin1x\"\>", 
+     ",", "\<\"spin1y\"\>", ",", "\<\"spin1z\"\>", ",", "\<\"spin2\"\>", 
+     ",", "\<\"spin2x\"\>", ",", "\<\"spin2y\"\>", ",", "\<\"spin2z\"\>", 
+     ",", "\<\"spin3\"\>", ",", "\<\"spin3x\"\>", ",", "\<\"spin3y\"\>", 
+     ",", "\<\"spin3z\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
-   "j1", "mass1", "mass2", "mass3", "massIrr1", "result", "run", "spin1", 
+   "j1", "mass1", "mass2", "mass3", "massIrr1", "result", "spin1", 
     "spin1Norm", "spin1x", "spin1y", "spin1z", "spin2", "spin2x", "spin2y", 
     "spin2z", "spin3", "spin3x", "spin3y", "spin3z"}],
   Editable->False]], "Print"],
@@ -512,20 +509,6 @@ Cell[BoxData[
    "cm", "f1", "f2", "f3", "fErr", "fExt", "h1", "h2", "h3", "result", "t"}],
   Editable->False]], "Print"],
 
-Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataRegion.md\"\>"], \
-"Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"d\"\>", ",", "\<\"d2\"\>", ",", "\<\"d3\"\>", 
-     ",", "\<\"data\"\>", ",", "\<\"f\"\>", ",", "\<\"result\"\>", 
-     ",", "\<\"t\"\>", ",", "\<\"x\"\>", ",", "\<\"y\"\>"}], "}"}]}],
-  SequenceForm[
-  "Removing ", {"d", "d2", "d3", "data", "f", "result", "t", "x", "y"}],
-  Editable->False]], "Print"],
-
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataRepresentations.\
 md\"\>"], "Print"],
 
@@ -542,19 +525,6 @@ Cell[BoxData[
   "Removing ", {
    "cost", "d", "d2", "d3", "data", "f", "list", "result", "sint", 
     "sumSquared", "t", "tData", "x", "y"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"Source/Documentation/English/Tutorials/DataTable.md\"\>"], \
-"Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"d\"\>", ",", "\<\"d1\"\>", ",", "\<\"d2\"\>", 
-     ",", "\<\"d3\"\>", ",", "\<\"l\"\>", ",", "\<\"result\"\>", 
-     ",", "\<\"x\"\>"}], "}"}]}],
-  SequenceForm["Removing ", {"d", "d1", "d2", "d3", "l", "result", "x"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/GridFunctions.md\"\>\
@@ -649,16 +619,6 @@ Cell[BoxData[
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/\
-SimulationToolsIntroduction.md\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"result\"\>", "}"}]}],
-  SequenceForm["Removing ", {"result"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"Source/Documentation/English/Tutorials/\
 SupportedCodesAndDataFormats.md\"\>"], "Print"],
 
 Cell[BoxData[
@@ -727,22 +687,8 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", 
-   "\[InvisibleSpace]", "\<\"DataRegion.nb\"\>"}],
-  SequenceForm["  Exporting ", "DataRegion.nb"],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"DataRepresentations.nb\"\>"}],
   SequenceForm["  Exporting ", "DataRepresentations.nb"],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"  Exporting \"\>", 
-   "\[InvisibleSpace]", "\<\"DataTable.nb\"\>"}],
-  SequenceForm["  Exporting ", "DataTable.nb"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -802,13 +748,6 @@ Cell[BoxData[
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"  Exporting \"\>", 
-   "\[InvisibleSpace]", "\<\"SimulationToolsIntroduction.nb\"\>"}],
-  SequenceForm["  Exporting ", "SimulationToolsIntroduction.nb"],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"SupportedCodesAndDataFormats.nb\"\>"}],
   SequenceForm["  Exporting ", "SupportedCodesAndDataFormats.nb"],
   Editable->False]], "Print"],
@@ -821,48 +760,6 @@ Cell[BoxData[
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Exporting tutorial index\"\>"], "Print"],
-
-Cell[BoxData["\<\"Data Representations\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Temp names: \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "}"}]}],
-  SequenceForm["Temp names: ", {}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/Guides/Data \
-Representations.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/Guides/Data \
-Representations.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"Numerical Relativity\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Temp names: \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "}"}]}],
-  SequenceForm["Temp names: ", {}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/Guides/Numerical \
-Relativity.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/Guides/Numerical \
-Relativity.xml"],
-  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Overview\"\>"], "Print"],
 
@@ -882,26 +779,6 @@ Cell[BoxData[
   SequenceForm[
   "Writing ", 
    "~/Sites/SimulationTools/Documentation/English/Guides/Overview.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"SimulationTools\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Temp names: \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "}"}]}],
-  SequenceForm["Temp names: ", {}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"~/Sites/SimulationTools/Documentation/English/Guides/SimulationTools.xml\
-\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "~/Sites/SimulationTools/Documentation/English/Guides/SimulationTools.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -924,22 +801,25 @@ Cell[BoxData[
      ",", "\<\"content\"\>", ",", "\<\"content$\"\>", 
      ",", "\<\"CreateCellID\"\>", ",", "\<\"dest\"\>", 
      ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$8817\"\>", 
-     ",", "\<\"dest$\"\>", ",", "\<\"dest$109027\"\>", ",", "\<\"docDir\"\>", 
-     ",", "\<\"docDir$\"\>", ",", "\<\"docDir$109027\"\>", 
-     ",", "\<\"docFiles\"\>", ",", "\<\"docLink\"\>", 
-     ",", "\<\"docLink$8817\"\>", ",", "\<\"docPackage\"\>", 
-     ",", "\<\"docPackage$8817\"\>", ",", "\<\"docSymbols\"\>", 
-     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$986855\"\>", 
-     ",", "\<\"DrawBackFaces\"\>", ",", "\<\"exportGuides\"\>", 
-     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$109027\"\>", 
-     ",", "\<\"exportNotebook\"\>", ",", "\<\"exportNotebook$\"\>", 
-     ",", "\<\"exportNotebook$109027\"\>", ",", "\<\"exportSymbols\"\>", 
-     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$109027\"\>", 
-     ",", "\<\"exportTutorials\"\>", ",", "\<\"exportTutorials$\"\>", 
-     ",", "\<\"exportTutorials$109027\"\>", ",", "\<\"fixupVersion\"\>", 
-     ",", "\<\"formatType\"\>", ",", "\<\"FrontFaceGlowColor\"\>", 
-     ",", "\<\"FrontFaceSpecularColor\"\>", 
-     ",", "\<\"FrontFaceSpecularExponent\"\>", ",", "\<\"g\"\>", 
+     ",", "\<\"destName\"\>", ",", "\<\"destName$\"\>", ",", "\<\"dest$\"\>", 
+     ",", "\<\"dest$65160\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
+     ",", "\<\"doc\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>", 
+     ",", "\<\"docDir$65160\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"docLink\"\>", ",", "\<\"docLink$8817\"\>", 
+     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$8817\"\>", 
+     ",", "\<\"docRoot\"\>", ",", "\<\"docSymbols\"\>", 
+     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$787535\"\>", 
+     ",", "\<\"doc$\"\>", ",", "\<\"DrawBackFaces\"\>", 
+     ",", "\<\"exportGuides\"\>", ",", "\<\"exportGuides$\"\>", 
+     ",", "\<\"exportGuides$65160\"\>", ",", "\<\"exportNotebook\"\>", 
+     ",", "\<\"exportNotebook$\"\>", ",", "\<\"exportNotebook$65160\"\>", 
+     ",", "\<\"exportSymbols\"\>", ",", "\<\"exportSymbols$\"\>", 
+     ",", "\<\"exportSymbols$65160\"\>", ",", "\<\"exportTutorials\"\>", 
+     ",", "\<\"exportTutorials$\"\>", ",", "\<\"exportTutorials$65160\"\>", 
+     ",", "\<\"fixupVersion\"\>", ",", "\<\"formatType\"\>", 
+     ",", "\<\"from\"\>", ",", "\<\"from$\"\>", 
+     ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
+      ",", "\<\"FrontFaceSpecularExponent\"\>", ",", "\<\"g\"\>", 
      ",", "\<\"GenerateAnnotationDialog\"\>", 
      ",", "\<\"GeneratedCellStyles\"\>", ",", "\<\"GenerateDocumentation\"\>",
       ",", "\<\"generateHTMLDocumentation\"\>", 
@@ -955,40 +835,31 @@ Cell[BoxData[
      ",", "\<\"nbfile\"\>", ",", "\<\"nbfile$\"\>", ",", "\<\"nbf$\"\>", 
      ",", "\<\"nb$\"\>", ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", 
      ",", "\<\"nn$\"\>", ",", "\<\"notebooks\"\>", ",", "\<\"package\"\>", 
-     ",", "\<\"package100\"\>", ",", "\<\"package101\"\>", 
-     ",", "\<\"package102\"\>", ",", "\<\"package103\"\>", 
-     ",", "\<\"package104\"\>", ",", "\<\"package105\"\>", 
-     ",", "\<\"package106\"\>", ",", "\<\"package107\"\>", 
-     ",", "\<\"package108\"\>", ",", "\<\"package109\"\>", 
-     ",", "\<\"package110\"\>", ",", "\<\"package112\"\>", 
-     ",", "\<\"package113\"\>", ",", "\<\"package114\"\>", 
-     ",", "\<\"package115\"\>", ",", "\<\"package116\"\>", 
-     ",", "\<\"package117\"\>", ",", "\<\"package86\"\>", 
-     ",", "\<\"package87\"\>", ",", "\<\"package88\"\>", 
+     ",", "\<\"package86\"\>", ",", "\<\"package87\"\>", 
+     ",", "\<\"package88\"\>", ",", "\<\"package89\"\>", 
      ",", "\<\"package90\"\>", ",", "\<\"package91\"\>", 
      ",", "\<\"package92\"\>", ",", "\<\"package93\"\>", 
      ",", "\<\"package94\"\>", ",", "\<\"package95\"\>", 
-     ",", "\<\"package97\"\>", ",", "\<\"package98\"\>", 
-     ",", "\<\"package99\"\>", ",", "\<\"packages\"\>", 
-     ",", "\<\"packageSymbols\"\>", ",", "\<\"packageSymbols$8817\"\>", 
-     ",", "\<\"packages$8817\"\>", ",", "\<\"package$\"\>", 
-     ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
+     ",", "\<\"package96\"\>", ",", "\<\"package97\"\>", 
+     ",", "\<\"package98\"\>", ",", "\<\"package99\"\>", 
+     ",", "\<\"packages\"\>", ",", "\<\"packageSymbols\"\>", 
+     ",", "\<\"packageSymbols$8817\"\>", ",", "\<\"packages$8817\"\>", 
+     ",", "\<\"package$\"\>", ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
      ",", "\<\"PasteAutoQuoteCharacters\"\>", ",", "\<\"ps\"\>", 
      ",", "\<\"RawInputForm\"\>", ",", "\<\"ReturnCreatesNewCell\"\>", 
-     ",", "\<\"s\"\>", ",", "\<\"sections\"\>", ",", "\<\"sections2\"\>", 
-     ",", "\<\"Shift\"\>", ",", "\<\"ShowCodeAssist\"\>", 
-     ",", "\<\"source10\"\>", ",", "\<\"source11\"\>", 
-     ",", "\<\"source111\"\>", ",", "\<\"source118\"\>", 
-     ",", "\<\"source119\"\>", ",", "\<\"source12\"\>", 
-     ",", "\<\"source120\"\>", ",", "\<\"source121\"\>", 
-     ",", "\<\"source122\"\>", ",", "\<\"source123\"\>", 
-     ",", "\<\"source124\"\>", ",", "\<\"source125\"\>", 
-     ",", "\<\"source126\"\>", ",", "\<\"source127\"\>", 
-     ",", "\<\"source128\"\>", ",", "\<\"source129\"\>", 
-     ",", "\<\"source13\"\>", ",", "\<\"source130\"\>", 
-     ",", "\<\"source131\"\>", ",", "\<\"source132\"\>", 
-     ",", "\<\"source133\"\>", ",", "\<\"source134\"\>", 
-     ",", "\<\"source135\"\>", ",", "\<\"source14\"\>", 
+     ",", "\<\"s\"\>", ",", "\<\"s2\"\>", ",", "\<\"sections\"\>", 
+     ",", "\<\"sections2\"\>", ",", "\<\"Shift\"\>", 
+     ",", "\<\"ShowCodeAssist\"\>", ",", "\<\"skipTargetQ\"\>", 
+     ",", "\<\"source10\"\>", ",", "\<\"source100\"\>", 
+     ",", "\<\"source101\"\>", ",", "\<\"source102\"\>", 
+     ",", "\<\"source103\"\>", ",", "\<\"source104\"\>", 
+     ",", "\<\"source105\"\>", ",", "\<\"source106\"\>", 
+     ",", "\<\"source107\"\>", ",", "\<\"source108\"\>", 
+     ",", "\<\"source109\"\>", ",", "\<\"source11\"\>", 
+     ",", "\<\"source110\"\>", ",", "\<\"source111\"\>", 
+     ",", "\<\"source112\"\>", ",", "\<\"source113\"\>", 
+     ",", "\<\"source114\"\>", ",", "\<\"source12\"\>", 
+     ",", "\<\"source13\"\>", ",", "\<\"source14\"\>", 
      ",", "\<\"source15\"\>", ",", "\<\"source16\"\>", 
      ",", "\<\"source17\"\>", ",", "\<\"source18\"\>", 
      ",", "\<\"source19\"\>", ",", "\<\"source20\"\>", 
@@ -1024,20 +895,21 @@ Cell[BoxData[
      ",", "\<\"source79\"\>", ",", "\<\"source8\"\>", ",", "\<\"source80\"\>",
       ",", "\<\"source81\"\>", ",", "\<\"source82\"\>", 
      ",", "\<\"source83\"\>", ",", "\<\"source84\"\>", 
-     ",", "\<\"source85\"\>", ",", "\<\"source89\"\>", ",", "\<\"source9\"\>",
-      ",", "\<\"source96\"\>", ",", "\<\"sourceGuides\"\>", 
-     ",", "\<\"sourceGuides$8817\"\>", ",", "\<\"srcDir\"\>", 
-     ",", "\<\"srcDir$\"\>", ",", "\<\"srcDir$986855\"\>", ",", "\<\"ss\"\>", 
+     ",", "\<\"source85\"\>", ",", "\<\"source9\"\>", 
+     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$8817\"\>", 
+     ",", "\<\"src\"\>", ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
+     ",", "\<\"srcDir$787535\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
      ",", "\<\"ss$\"\>", ",", "\<\"StripStyleOnPaste\"\>", 
-     ",", "\<\"symbols\"\>", ",", "\<\"symbolsSrcDir\"\>", 
-     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$986855\"\>", 
-     ",", "\<\"symbols$\"\>", ",", "\<\"s$\"\>", 
-     ",", "\<\"TrackCellChangeTimes\"\>", ",", "\<\"tutorialDest\"\>", 
-     ",", "\<\"tutorialDest$\"\>", ",", "\<\"tutorialHTMLNames\"\>", 
-     ",", "\<\"tutorialHTMLNames$\"\>", ",", "\<\"tutorials\"\>", 
-     ",", "\<\"tutorialSources\"\>", ",", "\<\"tutorialSources$8817\"\>", 
-     ",", "\<\"tutorials$\"\>", ",", "\<\"tutorialTitles\"\>", 
-     ",", "\<\"tutorialTitles$\"\>", ",", "\<\"undocumentedSymbols\"\>", 
+     ",", "\<\"subPath\"\>", ",", "\<\"symbols\"\>", 
+     ",", "\<\"symbolsSrcDir\"\>", ",", "\<\"symbolsSrcDir$\"\>", 
+     ",", "\<\"symbolsSrcDir$787535\"\>", ",", "\<\"symbols$\"\>", 
+     ",", "\<\"s$\"\>", ",", "\<\"TrackCellChangeTimes\"\>", 
+     ",", "\<\"tutorialDest\"\>", ",", "\<\"tutorialDest$\"\>", 
+     ",", "\<\"tutorialHTMLNames\"\>", ",", "\<\"tutorialHTMLNames$\"\>", 
+     ",", "\<\"tutorials\"\>", ",", "\<\"tutorialSources\"\>", 
+     ",", "\<\"tutorialSources$8817\"\>", ",", "\<\"tutorials$\"\>", 
+     ",", "\<\"tutorialTitles\"\>", ",", "\<\"tutorialTitles$\"\>", 
+     ",", "\<\"undocumentedSymbols\"\>", 
      ",", "\<\"undocumentedSymbols$8817\"\>", ",", "\<\"url\"\>", 
      ",", "\<\"url$\"\>", ",", "\<\"$HTMLDestination\"\>", 
      ",", "\<\"$PackageSymbols\"\>"}], "}"}]}],
@@ -1047,15 +919,16 @@ Cell[BoxData[
     "BackFaceOpacity", "BackFaceSpecularColor", "BackFaceSpecularExponent", 
     "Beveled", "CellInsertionPointCell", "CodeAssistMenuBorderColor", 
     "CodeAssistOptions", "collect", "content", "content$", "CreateCellID", 
-    "dest", "destGuides", "destGuides$8817", "dest$", "dest$109027", "docDir",
-     "docDir$", "docDir$109027", "docFiles", "docLink", "docLink$8817", 
-    "docPackage", "docPackage$8817", "docSymbols", "docSymbols$", 
-    "docSymbols$986855", "DrawBackFaces", "exportGuides", "exportGuides$", 
-    "exportGuides$109027", "exportNotebook", "exportNotebook$", 
-    "exportNotebook$109027", "exportSymbols", "exportSymbols$", 
-    "exportSymbols$109027", "exportTutorials", "exportTutorials$", 
-    "exportTutorials$109027", "fixupVersion", "formatType", 
-    "FrontFaceGlowColor", "FrontFaceSpecularColor", 
+    "dest", "destGuides", "destGuides$8817", "destName", "destName$", "dest$",
+     "dest$65160", "diff", "diff$", "doc", "docDir", "docDir$", 
+    "docDir$65160", "docFiles", "docLink", "docLink$8817", "docPackage", 
+    "docPackage$8817", "docRoot", "docSymbols", "docSymbols$", 
+    "docSymbols$787535", "doc$", "DrawBackFaces", "exportGuides", 
+    "exportGuides$", "exportGuides$65160", "exportNotebook", 
+    "exportNotebook$", "exportNotebook$65160", "exportSymbols", 
+    "exportSymbols$", "exportSymbols$65160", "exportTutorials", 
+    "exportTutorials$", "exportTutorials$65160", "fixupVersion", "formatType",
+     "from", "from$", "FrontFaceGlowColor", "FrontFaceSpecularColor", 
     "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
     "GeneratedCellStyles", "GenerateDocumentation", 
     "generateHTMLDocumentation", "generateHTMLDocumentation$8817", 
@@ -1064,40 +937,37 @@ Cell[BoxData[
     "guideNames$", "HistoryData", "ImageEditMode", "KeyEvent", "LineHeight", 
     "LowerCaseStyle", "MenuAnchor", "Modifiers", "n2", "n2$", "nb", "nbf", 
     "nbfile", "nbfile$", "nbf$", "nb$", "newSyms", "nn", "nn$", "notebooks", 
-    "package", "package100", "package101", "package102", "package103", 
-    "package104", "package105", "package106", "package107", "package108", 
-    "package109", "package110", "package112", "package113", "package114", 
-    "package115", "package116", "package117", "package86", "package87", 
-    "package88", "package90", "package91", "package92", "package93", 
-    "package94", "package95", "package97", "package98", "package99", 
+    "package", "package86", "package87", "package88", "package89", 
+    "package90", "package91", "package92", "package93", "package94", 
+    "package95", "package96", "package97", "package98", "package99", 
     "packages", "packageSymbols", "packageSymbols$8817", "packages$8817", 
     "package$", "paclet", "paclet$", "PasteAutoQuoteCharacters", "ps", 
-    "RawInputForm", "ReturnCreatesNewCell", "s", "sections", "sections2", 
-    "Shift", "ShowCodeAssist", "source10", "source11", "source111", 
-    "source118", "source119", "source12", "source120", "source121", 
-    "source122", "source123", "source124", "source125", "source126", 
-    "source127", "source128", "source129", "source13", "source130", 
-    "source131", "source132", "source133", "source134", "source135", 
-    "source14", "source15", "source16", "source17", "source18", "source19", 
-    "source20", "source21", "source22", "source23", "source24", "source25", 
-    "source26", "source27", "source28", "source29", "source3", "source30", 
-    "source31", "source32", "source33", "source34", "source35", "source36", 
-    "source37", "source38", "source39", "source4", "source40", "source41", 
-    "source42", "source43", "source44", "source45", "source46", "source47", 
-    "source48", "source49", "source5", "source50", "source51", "source52", 
-    "source53", "source54", "source55", "source56", "source57", "source58", 
-    "source59", "source6", "source60", "source61", "source62", "source63", 
-    "source64", "source65", "source66", "source67", "source68", "source69", 
-    "source7", "source70", "source71", "source72", "source73", "source74", 
-    "source75", "source76", "source77", "source78", "source79", "source8", 
-    "source80", "source81", "source82", "source83", "source84", "source85", 
-    "source89", "source9", "source96", "sourceGuides", "sourceGuides$8817", 
-    "srcDir", "srcDir$", "srcDir$986855", "ss", "ss$", "StripStyleOnPaste", 
-    "symbols", "symbolsSrcDir", "symbolsSrcDir$", "symbolsSrcDir$986855", 
-    "symbols$", "s$", "TrackCellChangeTimes", "tutorialDest", "tutorialDest$",
-     "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", 
-    "tutorialSources", "tutorialSources$8817", "tutorials$", "tutorialTitles",
-     "tutorialTitles$", "undocumentedSymbols", "undocumentedSymbols$8817", 
+    "RawInputForm", "ReturnCreatesNewCell", "s", "s2", "sections", 
+    "sections2", "Shift", "ShowCodeAssist", "skipTargetQ", "source10", 
+    "source100", "source101", "source102", "source103", "source104", 
+    "source105", "source106", "source107", "source108", "source109", 
+    "source11", "source110", "source111", "source112", "source113", 
+    "source114", "source12", "source13", "source14", "source15", "source16", 
+    "source17", "source18", "source19", "source20", "source21", "source22", 
+    "source23", "source24", "source25", "source26", "source27", "source28", 
+    "source29", "source3", "source30", "source31", "source32", "source33", 
+    "source34", "source35", "source36", "source37", "source38", "source39", 
+    "source4", "source40", "source41", "source42", "source43", "source44", 
+    "source45", "source46", "source47", "source48", "source49", "source5", 
+    "source50", "source51", "source52", "source53", "source54", "source55", 
+    "source56", "source57", "source58", "source59", "source6", "source60", 
+    "source61", "source62", "source63", "source64", "source65", "source66", 
+    "source67", "source68", "source69", "source7", "source70", "source71", 
+    "source72", "source73", "source74", "source75", "source76", "source77", 
+    "source78", "source79", "source8", "source80", "source81", "source82", 
+    "source83", "source84", "source85", "source9", "sourceGuides", 
+    "sourceGuides$8817", "src", "srcDir", "srcDir$", "srcDir$787535", "src$", 
+    "ss", "ss$", "StripStyleOnPaste", "subPath", "symbols", "symbolsSrcDir", 
+    "symbolsSrcDir$", "symbolsSrcDir$787535", "symbols$", "s$", 
+    "TrackCellChangeTimes", "tutorialDest", "tutorialDest$", 
+    "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", "tutorialSources",
+     "tutorialSources$8817", "tutorials$", "tutorialTitles", 
+    "tutorialTitles$", "undocumentedSymbols", "undocumentedSymbols$8817", 
     "url", "url$", "$HTMLDestination", "$PackageSymbols"}],
   Editable->False]], "Print"],
 

@@ -70,29 +70,6 @@ Cell[CellGroupData[{
 
 Cell["Working with binary systems", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"$SimulationPath", "=", 
-  RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}]], "Input",
- CellLabel->"In[2]:="],
-
-Cell[BoxData[
- RowBox[{"{", \
-"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations\"\>", "}"}]], "Output",
- CellLabel->"Out[2]="]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input",
- CellLabel->"In[3]:="],
-
 Cell[BoxData[GridBox[{
    {"ReadBinarySeparation", Cell["ReadBinaryPhase", "TableText"]},
    {"ReadBinaryCoordinates", "ToListOfPoints"}
@@ -113,8 +90,10 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"r", "=", 
-  RowBox[{"ReadBinarySeparation", "[", "run", "]"}]}]], "Input",
- CellLabel->"In[4]:="],
+  RowBox[{
+  "ReadBinarySeparation", "[", "$SimulationToolsTestSimulation", 
+   "]"}]}]], "Input",
+ CellLabel->"In[1]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -127,7 +106,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[4]="]
+ CellLabel->"Out[1]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -136,7 +115,7 @@ Cell[BoxData[
  RowBox[{"Take", "[", 
   RowBox[{
    RowBox[{"ToList", "[", "r", "]"}], ",", "10"}], "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[2]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -161,7 +140,7 @@ Cell[BoxData[
     RowBox[{"4", ",", "5.997603990593922`"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"4.5`", ",", "6.0033731727999875`"}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[5]="]
+ CellLabel->"Out[2]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -172,7 +151,7 @@ Cell[BoxData[
    RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"\"\<t\>\"", ",", "\"\<D\>\""}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[3]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -324,7 +303,7 @@ X9/6MZdt2H0WicC/E5bzbjzxJREG5Can7ZEhFovwNHQRz/JP+sL/A+ux7MI=
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.12085907147169249`, 
    0.12085907147169249`}}]], "Output",
- CellLabel->"Out[6]="]
+ CellLabel->"Out[3]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -342,8 +321,10 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"phi", "=", 
-  RowBox[{"ReadBinaryPhase", "[", "run", "]"}]}]], "Input",
- CellLabel->"In[7]:="],
+  RowBox[{
+  "ReadBinaryPhase", "[", "$SimulationToolsTestSimulation", "]"}]}]], "Input",
+ 
+ CellLabel->"In[4]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -356,7 +337,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[7]="]
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -369,7 +350,7 @@ Cell[BoxData[
      RowBox[{
      "\"\<t\>\"", ",", "\"\<\!\(\*SubscriptBox[\(\[Phi]\), \(orb\)]\)\>\""}], 
      "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[8]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -516,7 +497,7 @@ e53z/wFv4XuZ
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {1.284604635779769, 
    1.284604635779769}}]], "Output",
- CellLabel->"Out[8]="]
+ CellLabel->"Out[5]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -537,8 +518,9 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"x1", ",", "y1", ",", "z1"}], "}"}], "=", 
    RowBox[{"ReadBinaryCoordinates", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input",
- CellLabel->"In[9]:="],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]}]], "Input",
+ 
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -573,7 +555,7 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"{", 
        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
- CellLabel->"Out[9]="]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -584,8 +566,9 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"x2", ",", "y2", ",", "z2"}], "}"}], "=", 
    RowBox[{"ReadBinaryCoordinates", "[", 
-    RowBox[{"run", ",", "2"}], "]"}]}]}]], "Input",
- CellLabel->"In[10]:="],
+    RowBox[{"$SimulationToolsTestSimulation", ",", "2"}], "]"}]}]}]], "Input",
+ 
+ CellLabel->"In[7]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -620,7 +603,7 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"{", 
        RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
- CellLabel->"Out[10]="]
+ CellLabel->"Out[7]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -634,7 +617,7 @@ Cell[BoxData[
    RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
      RowBox[{"\"\<t\>\"", ",", "\"\<x\>\""}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[11]:="],
+ CellLabel->"In[8]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -930,7 +913,7 @@ J4Vj/8PLvKH76fr0cFwwPtIYu4LyrHCEW2SbHrMgPhkO5ZYLGy2tiCXhwLHg
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[11]="]
+ CellLabel->"Out[8]="]
 }, Open  ]],
 
 Cell["\<\
@@ -948,7 +931,7 @@ Cell[BoxData[
  RowBox[{"Take", "[", 
   RowBox[{
    RowBox[{"ToListOfPoints", "[", "path1", "]"}], ",", "10"}], "]"}]], "Input",
- CellLabel->"In[12]:="],
+ CellLabel->"In[9]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -990,7 +973,7 @@ Cell[BoxData[
     RowBox[{
     "2.945171234278`", ",", "0.57973163080433`", ",", 
      "2.54702936666884`*^-19"}], "}"}]}], "}"}]], "Output",
- CellLabel->"Out[12]="]
+ CellLabel->"Out[9]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1017,7 +1000,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}]}], 
   "]"}]], "Input",
- CellLabel->"In[13]:="],
+ CellLabel->"In[10]:="],
 
 Cell[BoxData[
  Graphics3DBox[{
@@ -2304,7 +2287,7 @@ Cell[BoxData[
     FormBox["\"y\"", TraditionalForm], 
     FormBox["\"z\"", TraditionalForm]},
   PlotRange->{All, All, {-1, 1}}]], "Output",
- CellLabel->"Out[13]="]
+ CellLabel->"Out[10]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -2341,31 +2324,31 @@ Cell[BoxData[
         RowBox[{"yFn", "[", "t", "]"}], ",", 
         RowBox[{"zFn", "[", "t", "]"}]}], "}"}]}], "]"}]}], "]"}]}]], "Input",
  
- CellLabel->"In[14]:="],
+ CellLabel->"In[11]:="],
 
 Cell[BoxData[
  RowBox[{"Function", "[", 
   RowBox[{"t$", ",", 
    RowBox[{"{", 
     RowBox[{
-     RowBox[{"xFn$41656", "[", "t$", "]"}], ",", 
-     RowBox[{"yFn$41656", "[", "t$", "]"}], ",", 
-     RowBox[{"zFn$41656", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[14]="]
+     RowBox[{"xFn$33998", "[", "t$", "]"}], ",", 
+     RowBox[{"yFn$33998", "[", "t$", "]"}], ",", 
+     RowBox[{"zFn$33998", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
+ CellLabel->"Out[11]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"pos", "[", "3.5", "]"}]], "Input",
- CellLabel->"In[15]:="],
+ CellLabel->"In[12]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
   "2.965421035475`", ",", "0.43071827900241`", ",", "4.9739355051697`*^-20"}],
    "}"}]], "Output",
- CellLabel->"Out[15]="]
+ CellLabel->"Out[12]="]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -2405,19 +2388,47 @@ mapping between tracker index and binary member is one to one.\
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["RELATED TUTORIALS",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "RelatedTutorialsSection",
- WholeCellGroupOpener->True],
+Cell["", "RelatedTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellFrameLabels->{{
+    FEPrivate`If[
+     FEPrivate`Or[
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
+     Cell[
+      TextData[
+       ButtonBox[
+       "RELATED TUTORIALS", BaseStyle -> None, 
+        Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
+        "Preemptive", ButtonFunction :> (FrontEndExecute[{
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], All, ButtonCell], 
+           FrontEndToken["OpenCloseGroup"], 
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
+      "RelatedTutorialsSection"], 
+     TextData[
+      ButtonBox[
+       Cell[
+        TextData[{
+          Cell[
+           BoxData[
+            InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
+               Baseline], "CacheGraphics" -> False], 
+             Spacer[24]]]], "Related Tutorials"}], "RelatedTutorialsSection"],
+        BaseStyle -> None, Appearance -> {Automatic, None}, Evaluator -> None,
+        Method -> "Preemptive", ButtonFunction :> (FrontEndExecute[{
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], All, ButtonCell], 
+          FrontEndToken["OpenCloseGroup"], 
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], After, CellContents]}]& )]]], None}, {
+   None, None}},
+ CellFrameLabelMargins->0],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",

@@ -60,17 +60,6 @@ Cell[CellGroupData[{
 
 Cell["Accessing simulation parameters", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$SimulationPath", "=", 
-   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
-  ";"}]], "Input",
- CellLabel->"In[2]:="],
-
 Cell[CellGroupData[{
 
 Cell["Reading parameters", "Subsection"],
@@ -91,8 +80,9 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{
   RowBox[{"FindSimulationParameters", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<*\>\""}], "]"}], "//", "Short"}]], "Input",
- CellLabel->"In[3]:="],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "\"\<*\>\""}], "]"}], "//", 
+  "Short"}]], "Input",
+ CellLabel->"In[1]:="],
 
 Cell[BoxData[
  TagBox[
@@ -101,7 +91,7 @@ Cell[BoxData[
     RowBox[{"\[LeftSkeleton]", "264", "\[RightSkeleton]"}], 
     ",", "\<\"cactus::cctk_final_time\"\>"}], "}"}],
   Short]], "Output",
- CellLabel->"Out[3]//Short="]
+ CellLabel->"Out[1]//Short="]
 }, Open  ]],
 
 Cell["or it can be used to list only a subset of parameters", "Text"],
@@ -110,8 +100,9 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"FindSimulationParameters", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase*\>\""}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+  RowBox[{"$SimulationToolsTestSimulation", ",", "\"\<coordbase*\>\""}], 
+  "]"}]], "Input",
+ CellLabel->"In[2]:="],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -128,7 +119,7 @@ Cell[BoxData[
    ",", "\<\"coordbase::boundary_size_z_upper\"\>", 
    ",", "\<\"coordbase::boundary_shiftout_x_lower\"\>", 
    ",", "\<\"coordbase::boundary_shiftout_z_lower\"\>"}], "}"}]], "Output",
- CellLabel->"Out[4]="]
+ CellLabel->"Out[2]="]
 }, Open  ]],
 
 Cell["\<\
@@ -141,11 +132,12 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"dx", "=", 
   RowBox[{"ReadSimulationParameter", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<coordbase::dx\>\""}], "]"}]}]], "Input",
- CellLabel->"In[5]:="],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "\"\<coordbase::dx\>\""}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[3]:="],
 
 Cell[BoxData["\<\"2.00\"\>"], "Output",
- CellLabel->"Out[5]="]
+ CellLabel->"Out[3]="]
 }, Open  ]],
 
 Cell["\<\
@@ -157,39 +149,67 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"dx", "//", "InputForm"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[4]:="],
 
 Cell["\"2.00\"", "Output",
- CellLabel->"Out[6]//InputForm="]
+ CellLabel->"Out[4]//InputForm="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ToExpression", "[", "dx", "]"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData["2.`"], "Output",
- CellLabel->"Out[7]="]
+ CellLabel->"Out[5]="]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["RELATED TUTORIALS",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "RelatedTutorialsSection",
- WholeCellGroupOpener->True],
+Cell["", "RelatedTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellFrameLabels->{{
+    FEPrivate`If[
+     FEPrivate`Or[
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
+     Cell[
+      TextData[
+       ButtonBox[
+       "RELATED TUTORIALS", BaseStyle -> None, 
+        Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
+        "Preemptive", ButtonFunction :> (FrontEndExecute[{
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], All, ButtonCell], 
+           FrontEndToken["OpenCloseGroup"], 
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
+      "RelatedTutorialsSection"], 
+     TextData[
+      ButtonBox[
+       Cell[
+        TextData[{
+          Cell[
+           BoxData[
+            InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
+               Baseline], "CacheGraphics" -> False], 
+             Spacer[24]]]], "Related Tutorials"}], "RelatedTutorialsSection"],
+        BaseStyle -> None, Appearance -> {Automatic, None}, Evaluator -> None,
+        Method -> "Preemptive", ButtonFunction :> (FrontEndExecute[{
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], All, ButtonCell], 
+          FrontEndToken["OpenCloseGroup"], 
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], After, CellContents]}]& )]]], None}, {
+   None, None}},
+ CellFrameLabelMargins->0],
 
 Cell[TextData[ButtonBox["SupportedCodesAndDataFormats",
  BaseStyle->"Link",

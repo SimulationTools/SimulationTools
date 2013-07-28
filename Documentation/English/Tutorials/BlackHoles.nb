@@ -58,15 +58,6 @@ Cell[CellGroupData[{
 
 Cell["Working with black holes", "Section"],
 
-Cell[BoxData[
- RowBox[{"<<", "SimulationTools`"}]], "Input",
- CellLabel->"In[1]:="],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"run", "=", "\"\<bbh\>\""}], ";"}]], "Input",
- CellLabel->"In[2]:="],
-
 Cell[BoxData[GridBox[{
    {"ReadBlackHoleMass", Cell["ReadBlackHoleSpin", "TableText"]},
    {"ReadBlackHoleIrreducibleMass", "\[Placeholder]"}
@@ -89,7 +80,54 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"mass1", "=", 
   RowBox[{"ReadBlackHoleMass", "[", 
-   RowBox[{"run", ",", "1"}], "]"}]}]], "Input",
+   RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]], "Input",
+ CellLabel->"In[1]:="],
+
+Cell[BoxData[
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 151, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
+ CellLabel->"Out[1]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ToList", "[", "mass1", "]"}], "//", "Short"}]], "Input",
+ CellLabel->"In[2]:="],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "0.5000039216000015`"}], "}"}], ",", 
+    RowBox[{"\[LeftSkeleton]", "149", "\[RightSkeleton]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"300.`", ",", "0.952048382458761`"}], "}"}]}], "}"}],
+  Short]], "Output",
+ CellLabel->"Out[2]//Short="]
+}, Open  ]],
+
+Cell["\<\
+When simulating binary systems, the inspiralling black holes are \
+conventionally taken to be 1 and 2, and the final merged black hole is 3.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"mass2", "=", 
+  RowBox[{"ReadBlackHoleMass", "[", 
+   RowBox[{"$SimulationToolsTestSimulation", ",", "2"}], "]"}]}]], "Input",
  CellLabel->"In[3]:="],
 
 Cell[BoxData[
@@ -109,57 +147,10 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{
-  RowBox[{"ToList", "[", "mass1", "]"}], "//", "Short"}]], "Input",
- CellLabel->"In[4]:="],
-
-Cell[BoxData[
- TagBox[
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0.`", ",", "0.5000039216000015`"}], "}"}], ",", 
-    RowBox[{"\[LeftSkeleton]", "149", "\[RightSkeleton]"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"300.`", ",", "0.952048382458761`"}], "}"}]}], "}"}],
-  Short]], "Output",
- CellLabel->"Out[4]//Short="]
-}, Open  ]],
-
-Cell["\<\
-When simulating binary systems, the inspiralling black holes are \
-conventionally taken to be 1 and 2, and the final merged black hole is 3.\
-\>", "Text"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"mass2", "=", 
-  RowBox[{"ReadBlackHoleMass", "[", 
-   RowBox[{"run", ",", "2"}], "]"}]}]], "Input",
- CellLabel->"In[5]:="],
-
-Cell[BoxData[
- RowBox[{"DataTable", "[", 
-  RowBox[{
-   InterpretationBox[
-    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-     "\[InvisibleSpace]", "\<\">\"\>"}],
-    SequenceForm["<", 151, ">"],
-    Editable->False], ",", 
-   RowBox[{"{", 
-    RowBox[{"{", 
-     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[5]="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
  RowBox[{"mass3", "=", 
   RowBox[{"ReadBlackHoleMass", "[", 
-   RowBox[{"run", ",", "3"}], "]"}]}]], "Input",
- CellLabel->"In[6]:="],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "3"}], "]"}]}]], "Input",
+ CellLabel->"In[4]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -172,7 +163,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"108.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[6]="]
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -181,7 +172,7 @@ Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"{", 
    RowBox[{"mass1", ",", "mass2", ",", "mass3"}], "}"}], "]"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -280,7 +271,7 @@ jq0PLGDdJELTv8eRwNoroq2vKDFpsv8Bj2Lvfw==
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.009041187088448753, 
    0.009041187088448753}}]], "Output",
- CellLabel->"Out[7]="]
+ CellLabel->"Out[5]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -307,7 +298,104 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"spin1x", ",", "spin1y", ",", "spin1z"}], "}"}], "=", 
    RowBox[{"ReadBlackHoleSpin", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input",
+    RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]}]], "Input",
+ 
+ CellLabel->"In[6]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
+ CellLabel->"Out[6]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"spin2", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin2x", ",", "spin2y", ",", "spin2z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]}]], "Input",
+ 
+ CellLabel->"In[7]:="],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
+   RowBox[{"DataTable", "[", 
+    RowBox[{
+     InterpretationBox[
+      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
+       "\[InvisibleSpace]", "\<\">\"\>"}],
+      SequenceForm["<", 151, ">"],
+      Editable->False], ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
+ CellLabel->"Out[7]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"spin3", "=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"spin3x", ",", "spin3y", ",", "spin3z"}], "}"}], "=", 
+   RowBox[{"ReadBlackHoleSpin", "[", 
+    RowBox[{"$SimulationToolsTestSimulation", ",", "3"}], "]"}]}]}]], "Input",
+ 
  CellLabel->"In[8]:="],
 
 Cell[BoxData[
@@ -349,100 +437,6 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"spin2", "=", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"spin2x", ",", "spin2y", ",", "spin2z"}], "}"}], "=", 
-   RowBox[{"ReadBlackHoleSpin", "[", 
-    RowBox[{"run", ",", "1"}], "]"}]}]}]], "Input",
- CellLabel->"In[9]:="],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"DataTable", "[", 
-    RowBox[{
-     InterpretationBox[
-      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-       "\[InvisibleSpace]", "\<\">\"\>"}],
-      SequenceForm["<", 151, ">"],
-      Editable->False], ",", 
-     RowBox[{"{", 
-      RowBox[{"{", 
-       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
-   RowBox[{"DataTable", "[", 
-    RowBox[{
-     InterpretationBox[
-      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-       "\[InvisibleSpace]", "\<\">\"\>"}],
-      SequenceForm["<", 151, ">"],
-      Editable->False], ",", 
-     RowBox[{"{", 
-      RowBox[{"{", 
-       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
-   RowBox[{"DataTable", "[", 
-    RowBox[{
-     InterpretationBox[
-      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-       "\[InvisibleSpace]", "\<\">\"\>"}],
-      SequenceForm["<", 151, ">"],
-      Editable->False], ",", 
-     RowBox[{"{", 
-      RowBox[{"{", 
-       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
- CellLabel->"Out[9]="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"spin3", "=", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"spin3x", ",", "spin3y", ",", "spin3z"}], "}"}], "=", 
-   RowBox[{"ReadBlackHoleSpin", "[", 
-    RowBox[{"run", ",", "3"}], "]"}]}]}]], "Input",
- CellLabel->"In[10]:="],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"DataTable", "[", 
-    RowBox[{
-     InterpretationBox[
-      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-       "\[InvisibleSpace]", "\<\">\"\>"}],
-      SequenceForm["<", 151, ">"],
-      Editable->False], ",", 
-     RowBox[{"{", 
-      RowBox[{"{", 
-       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
-   RowBox[{"DataTable", "[", 
-    RowBox[{
-     InterpretationBox[
-      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-       "\[InvisibleSpace]", "\<\">\"\>"}],
-      SequenceForm["<", 151, ">"],
-      Editable->False], ",", 
-     RowBox[{"{", 
-      RowBox[{"{", 
-       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}], ",", 
-   RowBox[{"DataTable", "[", 
-    RowBox[{
-     InterpretationBox[
-      RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "151", 
-       "\[InvisibleSpace]", "\<\">\"\>"}],
-      SequenceForm["<", 151, ">"],
-      Editable->False], ",", 
-     RowBox[{"{", 
-      RowBox[{"{", 
-       RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]}], "}"}]], "Output",
- CellLabel->"Out[10]="]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{
    RowBox[{"{", 
@@ -451,7 +445,7 @@ Cell[BoxData[
     RowBox[{"{", 
      RowBox[{
       RowBox[{"-", "0.1"}], ",", "1"}], "}"}]}]}], "]"}]], "Input",
- CellLabel->"In[11]:="],
+ CellLabel->"In[9]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -526,7 +520,7 @@ rFyrzWTfiMvCt8zajPHAfwBxhAhe
   PlotRange->{{0, 300.}, {-0.1, 1}},
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0., 0.}}]], "Output",
- CellLabel->"Out[11]="]
+ CellLabel->"Out[9]="]
 }, Open  ]],
 
 Cell["\<\
@@ -539,7 +533,7 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"spin1Norm", "=", 
   RowBox[{"Norm", "[", "spin1", "]"}]}]], "Input",
- CellLabel->"In[12]:="],
+ CellLabel->"In[10]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -552,14 +546,14 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[12]="]
+ CellLabel->"Out[10]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "spin1Norm", "]"}]], "Input",
- CellLabel->"In[13]:="],
+ CellLabel->"In[11]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -608,7 +602,7 @@ PuMfrQDMRA==
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.012462945016100799`, 
    0.012462945016100799`}}]], "Output",
- CellLabel->"Out[13]="]
+ CellLabel->"Out[11]="]
 }, Open  ]],
 
 Cell["\<\
@@ -622,7 +616,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"spin1Norm", "/", 
     RowBox[{"mass1", "^", "2"}]}], "//", "WithResampling"}]}]], "Input",
- CellLabel->"In[14]:="],
+ CellLabel->"In[12]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -635,14 +629,14 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0", ",", "300"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[14]="]
+ CellLabel->"Out[12]="]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ListLinePlot", "[", "j1", "]"}]], "Input",
- CellLabel->"In[15]:="],
+ CellLabel->"In[13]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -691,7 +685,7 @@ k+4LMXnPzijlU3RfiAONFzKbTtB9IcrC5cuuZdB9IXYausfFptN9EdxNCj9x
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.013773799551704324`, 
    0.013773799551704324`}}]], "Output",
- CellLabel->"Out[15]="]
+ CellLabel->"Out[13]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -710,8 +704,8 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"massIrr1", "=", 
   RowBox[{"ReadBlackHoleIrreducibleMass", "[", 
-   RowBox[{"run", ",", "1"}], "]"}]}]], "Input",
- CellLabel->"In[16]:="],
+   RowBox[{"$SimulationToolsTestSimulation", ",", "1"}], "]"}]}]], "Input",
+ CellLabel->"In[14]:="],
 
 Cell[BoxData[
  RowBox[{"DataTable", "[", 
@@ -724,7 +718,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"{", 
      RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[16]="]
+ CellLabel->"Out[14]="]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -754,19 +748,47 @@ horizon 0), or NRDF body 1 from the metadata file.\
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["RELATED TUTORIALS",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "RelatedTutorialsSection",
- WholeCellGroupOpener->True],
+Cell["", "RelatedTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellFrameLabels->{{
+    FEPrivate`If[
+     FEPrivate`Or[
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
+     Cell[
+      TextData[
+       ButtonBox[
+       "RELATED TUTORIALS", BaseStyle -> None, 
+        Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
+        "Preemptive", ButtonFunction :> (FrontEndExecute[{
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], All, ButtonCell], 
+           FrontEndToken["OpenCloseGroup"], 
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
+      "RelatedTutorialsSection"], 
+     TextData[
+      ButtonBox[
+       Cell[
+        TextData[{
+          Cell[
+           BoxData[
+            InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
+               Baseline], "CacheGraphics" -> False], 
+             Spacer[24]]]], "Related Tutorials"}], "RelatedTutorialsSection"],
+        BaseStyle -> None, Appearance -> {Automatic, None}, Evaluator -> None,
+        Method -> "Preemptive", ButtonFunction :> (FrontEndExecute[{
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], All, ButtonCell], 
+          FrontEndToken["OpenCloseGroup"], 
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], After, CellContents]}]& )]]], None}, {
+   None, None}},
+ CellFrameLabelMargins->0],
 
 Cell[TextData[ButtonBox["DataTable",
  BaseStyle->"Link",

@@ -324,8 +324,9 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{
   RowBox[{"ReadIterations", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], "]"}], "//",
-   "Short"}]], "Input",
+   RowBox[{
+   "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+   "]"}], "//", "Short"}]], "Input",
  CellLabel->"In[1]:="],
 
 Cell[BoxData[
@@ -344,7 +345,8 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadRefinementLevels", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  RowBox[{
+  "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input",
  CellLabel->"In[2]:="],
 
@@ -359,7 +361,8 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadMaps", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  RowBox[{
+  "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input",
  CellLabel->"In[3]:="],
 
@@ -372,7 +375,8 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"ReadTimeLevels", "[", 
-  RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
+  RowBox[{
+  "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\""}], 
   "]"}]], "Input",
  CellLabel->"In[4]:="],
 
@@ -386,7 +390,9 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"phi", "=", 
   RowBox[{"ReadGridFunction", "[", 
-   RowBox[{"\"\<bbh\>\"", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", ",", 
+   RowBox[{
+   "$SimulationToolsTestSimulation", ",", "\"\<phi\>\"", ",", "\"\<xy\>\"", 
+    ",", 
     RowBox[{"Iteration", "->", "4096"}], ",", 
     RowBox[{"RefinementLevel", "\[Rule]", "3"}]}], "]"}]}]], "Input",
  CellLabel->"In[5]:="],
@@ -1077,19 +1083,47 @@ AbG6KYQ=
 
 Cell[CellGroupData[{
 
-Cell[TextData[ButtonBox["RELATED TUTORIALS",
- BaseStyle->None,
- Appearance->{Automatic, None},
- Evaluator->None,
- Method->"Preemptive",
- ButtonFunction:>(FrontEndExecute[{
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], All, ButtonCell], 
-    FrontEndToken["OpenCloseGroup"], 
-    FrontEnd`SelectionMove[
-     FrontEnd`SelectedNotebook[], After, 
-     CellContents]}]& )]], "RelatedTutorialsSection",
- WholeCellGroupOpener->True],
+Cell["", "RelatedTutorialsSection",
+ WholeCellGroupOpener->True,
+ CellFrameLabels->{{
+    FEPrivate`If[
+     FEPrivate`Or[
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
+     Cell[
+      TextData[
+       ButtonBox[
+       "RELATED TUTORIALS", BaseStyle -> None, 
+        Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
+        "Preemptive", ButtonFunction :> (FrontEndExecute[{
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], All, ButtonCell], 
+           FrontEndToken["OpenCloseGroup"], 
+           FrontEnd`SelectionMove[
+            FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
+      "RelatedTutorialsSection"], 
+     TextData[
+      ButtonBox[
+       Cell[
+        TextData[{
+          Cell[
+           BoxData[
+            InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
+               Baseline], "CacheGraphics" -> False], 
+             Spacer[24]]]], "Related Tutorials"}], "RelatedTutorialsSection"],
+        BaseStyle -> None, Appearance -> {Automatic, None}, Evaluator -> None,
+        Method -> "Preemptive", ButtonFunction :> (FrontEndExecute[{
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], All, ButtonCell], 
+          FrontEndToken["OpenCloseGroup"], 
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], After, CellContents]}]& )]]], None}, {
+   None, None}},
+ CellFrameLabelMargins->0],
 
 Cell[TextData[ButtonBox["DataRegion",
  BaseStyle->"Link",
