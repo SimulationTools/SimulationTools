@@ -197,7 +197,7 @@ generateHTMLDocumentation[] := Module[
 
   exportTutorials[] :=
   Module[
-    {tutorials, tutorialHTMLNames, tutorialTitles, tutorialDest},
+    {tutorials, tutorialHTMLNames, tutorialTitles, tutorialDest, srcDir},
 
     tutorials = 
     Select[FileNames["*", FileNameJoin[{docDir, "English/Tutorials"}], 
@@ -211,6 +211,14 @@ generateHTMLDocumentation[] := Module[
     tutorialHTMLNames =
     Map[StringReplace[FileNameTake[#, -1], ".nb" -> ".html"] &,
         tutorials];
+
+    (* Fixup tutorial CSS *)
+    Map[Export[#, StringReplace[Import[#, "String"], 
+        "\"HTMLFiles/" ~~ LetterCharacter .. ~~ ".css\"" -> "\"tutorial.css\""], "String"] &, 
+      FileNameJoin[{tutorialDest, #}] & /@ tutorialHTMLNames];
+    srcDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Source"}];
+    DeleteFile[FileNameJoin[{tutorialDest, "tutorial.css"}]];
+    CopyFile[FileNameJoin[{srcDir, "tutorial.css"}], FileNameJoin[{tutorialDest, "tutorial.css"}]];
 
     tutorialTitles = {
       "BlackHoles.html" -> "Black holes",
