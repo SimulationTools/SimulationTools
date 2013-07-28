@@ -1,0 +1,206 @@
+body {
+  padding-left: 25px;
+}
+
+.Input {
+  font-weight: bold;
+}
+
+.Output img, .Input img {
+  margin: 0;
+  padding: 0;
+}
+
+.Input, .Output {
+  display: inline;
+  margin: 0 100% 0 0;
+  padding: 8px;
+}
+
+.CellLabel {
+  font-size: 8pt;
+  font-family: Verdana;
+  color: #454F99;
+  margin: 0 0 0 0;
+  display: inline;
+  padding: 8px;
+}
+
+.AnchorBarGrid {
+  display: none;
+}
+
+.Title {
+  font-size: 26px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #232323;
+  margin: 7px 27px 0px 0px;
+  padding: 8px;
+}
+
+.TutorialColorBar, .TutorialColorBarInline {
+  font-size: 2px;
+  border-left: 0;
+  border-right: 0;
+  border-top: 3px;
+  border-bottom: 0;
+  border-color: #A33910;
+  border-style: solid;
+  margin: 0 0 0 -33px;
+  padding: 2px;
+}
+
+.LinkTrail, .LinkTrailInline {
+  font-size: 9px;
+  font-family: Verdana;
+  font-weight: normal;
+  color: #858693;
+  background-color: #F2F2F2;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px;
+  border-color: #C4C4C4;
+  border-style: solid;
+  margin: 0 0 0 -33px;
+  padding: 3px 0 3px 24px;
+}
+
+.Section, .SectionInline {
+  font-size: 18px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #000;
+  border-left: 0;
+  border-right: 0;
+  border-top: 1px;
+  border-bottom: 0;
+  border-color: #B2B2B2;
+  border-style: solid;
+  margin: 12px 27px 0px 0px;
+  padding: 8px;
+}
+
+.Subsection, .SubsectionInline{
+  font-size: 16px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #4E4E4E;
+  border: 0;
+  border-color: #B2B2B2;
+  border-style: solid;
+  margin: 12px 27px 0px 0px;
+  padding: 8px;
+}
+
+.Subsubsection, .SubsubsectionInline {
+  font-size:12px;
+  font-family:Arial;
+  font-weight:bold;
+  color:#4E4E4E;
+  border:0;
+  border-color:#B2B2B2;
+  border-style:solid;
+  margin: 0px 27px 0px 0px;
+  padding:8px;
+}
+
+.Text,.TextInline,.Reference,.ReferenceInline,.DataSourceSummary,.DataSourceSummaryInline,
+.DataSourceSection,.DataSourceSectionInline,.DataSourceContact,.DataSourceContactInline,
+.FeaturedExampleDetail,.FeaturedExampleDetailInline {
+  font-size: 12px;
+  font-family: Verdana;
+  font-style: normal;
+  font-weight: normal;
+  color: #494949;
+  line-height: 1.33333;
+  margin: 0px 36px 0px 0px;
+  padding: 8px;
+}
+
+.TOC
+a {
+  color: #A33910;
+  text-decoration:none;
+}
+
+.Message, .MessageInline {
+  font-size: 11px;
+  font-family: Helvetica;
+  margin: 2px 4px 4px 0px;
+  padding: 8px
+}
+
+.DefinitionBox, .DefinitionBoxInline, .DefinitionBox1Col, .DefinitionBox1ColInline,
+.DefinitionBox3Col, .DefinitionBox3ColInline, .DefinitionBox4Col, .DefinitionBox4ColInline,
+.PrecedenceTable, .PrecedenceTableInline, .DefinitionBox5Col, .DefinitionBox5ColInline,
+.DefinitionBox6Col, .DefinitionBox6ColInline {
+  font-size:12px;
+  font-family:Verdana;
+  font-style:normal;
+  font-weight:normal;
+  text-decoration:none;
+  color:#585858;
+  background-color:#F9F9F9;
+  border-left:0;
+  border-right:0;
+  border-top:2px;
+  border-bottom:0;
+  border-color:#DBA079;
+  border-style:solid;
+  margin:8px 27px 0 0px;
+  padding:16px;
+}
+
+.Caption, .CaptionInline {
+  font-size:11px;
+  font-family:Verdana;
+  color:#8C6347;
+  margin:6px 36px 12px 0px;
+  padding:8px;
+}
+
+.MathCaption {
+  font-size: 9pt;
+  color: #000000;
+  margin: 0;
+  padding: 8px;
+}
+
+.Print {
+  padding: 8px;
+}
+
+.Item, .ItemInline, .BulletedText, .BulletedTextInline {
+  font-size:12px;
+  font-family:Verdana;
+  font-style:normal;
+  font-weight:normal;
+  color:#494949;
+  margin:0px 0px 0px 30px;
+  padding:4px;
+}
+
+.Tutorials, .TutorialCollection, .RelatedLinks, .LegacyMaterial, .ApplicationNotes,
+.DesignDiscussion, .Extensions, .MoreAbout, .RelatedDemonstrations, .GuideRelatedLinks,
+.GuideTutorialCollection, .GuideMoreAbout, .GuideMoreAboutSub, .GuideMoreAboutSubsection,
+.RelatedTutorials,.TutorialMoreAbout,.TutorialRelatedLinks,.FeaturedExampleMoreAbout,
+.FeaturedExampleSeeAlso,.FeaturedExampleRelatedFunctions,.FeaturedExampleRelatedLinks {
+  font-size:11px;
+  font-family:Verdana;
+  display:list-item;
+  list-style-type:square;
+  margin:2px 12px 2px 40px;
+  padding:8px;
+}
+
+.TOCChapter, .TOCChapterInline {
+  font-size:14px;
+  font-family:Verdana;
+  font-weight:bold;
+  text-decoration: none;
+  color:#A33910;
+  margin:0px 27px 0px 12px;
+  padding:8px;
+}
