@@ -77,6 +77,8 @@ packages =
 
 packageSymbols = Map[# -> DocumentedSymbols["SimulationTools", #] &, packages];
 
+appSymbols = DocumentedSymbols["SimulationTools"];
+
 $PackageSymbols = packageSymbols; (* Used in the Overview.md file *)
 
 undocumentedSymbols = Map[# -> UndocumentedSymbols["SimulationTools", #] &, packages] /. (_ -> {}) -> Sequence[];
@@ -86,6 +88,7 @@ Print["Building symbol reference pages"];
 docPackage[package_ -> symbols_] :=
   Map[(Print[#]; BuildSymbolReference["SimulationTools", #, "Source"]) &, symbols];
 Scan[docPackage, packageSymbols];
+docPackage["SimulationTools" -> appSymbols];
 
 Print["Building guides"];
 sourceGuides = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "English", "Guides"}], Infinity];
