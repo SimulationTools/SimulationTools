@@ -2,18 +2,18 @@ body {
   padding-left: 25px;
 }
 
+* {
+  clear: both;
+}
+
 .Input {
   font-weight: bold;
 }
 
-.Output img, .Input img {
-  margin: 0;
-  padding: 0;
-}
-
 .Input, .Output {
-  display: inline;
-  margin: 0 100% 0 0;
+  float: left;
+  clear: right;
+  margin: 0;
   padding: 8px;
 }
 
@@ -21,8 +21,9 @@ body {
   font-size: 8pt;
   font-family: Verdana;
   color: #454F99;
-  margin: 0 0 0 0;
-  display: inline;
+  margin: 0;
+  float: left;
+  clear: left;
   padding: 8px;
 }
 
@@ -129,7 +130,7 @@ a {
   font-size: 11px;
   font-family: Helvetica;
   margin: 2px 4px 4px 0px;
-  padding: 8px
+  padding: 8px;
 }
 
 .DefinitionBox, .DefinitionBoxInline, .DefinitionBox1Col, .DefinitionBox1ColInline,
