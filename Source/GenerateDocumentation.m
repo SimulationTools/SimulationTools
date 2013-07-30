@@ -159,7 +159,7 @@ generateHTMLDocumentation[] := Module[
   {exportNotebook, docDir,dest, exportTutorials, exportGuides, exportSymbols},
 
   exportNotebook[dest_String, nbf_String] :=
-  Module[{nb, nn, n2, destName},
+  Module[{nb, nn, n2, n3, destName},
          destName = dest<>"/" <> 
                 StringReplace[FileNameTake[nbf, -1], ".nb" -> ".html"];
 
@@ -191,7 +191,11 @@ generateHTMLDocumentation[] := Module[
                 ButtonBox[content, BaseStyle -> "Hyperlink",
                           ButtonData -> {URL[url], None}, ButtonNote -> url]];
 
-         Export[destName, n2];
+         (* Fixme: This should be done in a more generic way *)
+         n3 = n2 /. (Cell[___, CellFrameLabels -> {{FEPrivate`If[_, _, _], _}, _}, ___]) :>
+           Cell[TextData["RelatedTutorials"], "RelatedTutorialsSection"];
+
+         Export[destName, n3];
          NotebookClose[nb]];
 
   docDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Documentation"}];
@@ -224,7 +228,7 @@ generateHTMLDocumentation[] := Module[
         "\"HTMLFiles/" ~~ LetterCharacter .. ~~ ".css\"" -> "\"tutorial.css\""], "String"] &, 
       FileNameJoin[{tutorialDest, #}] & /@ tutorialHTMLNames];
     srcDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Source"}];
-    DeleteFile[FileNameJoin[{tutorialDest, "tutorial.css"}]];
+    Quiet[DeleteFile[FileNameJoin[{tutorialDest, "tutorial.css"}]];, DeleteFile::nffil];
     CopyFile[FileNameJoin[{srcDir, "tutorial.css"}], FileNameJoin[{tutorialDest, "tutorial.css"}]];
 
     tutorialTitles = {
