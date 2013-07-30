@@ -1,79 +1,19 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["SimulationTools Documentation", "Title"],
-
-Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["SimulationTools",
-   BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
-  "InlineFormula"],
- " is a suite of ",
- StyleBox["Mathematica",
-  FontSlant->"Italic"],
- " packages for analysing data from numerical simulations.  It has been \
-designed for use with common output formats used by the ",
- ButtonBox["Cactus",
-  BaseStyle->"Hyperlink",
-  ButtonData->{
-    URL["http://cactuscode.org"], None},
-  ButtonNote->"http://cactuscode.org"],
- " code, with a focus on the field of Numerical Relativity and the ",
- ButtonBox["Einstein Toolkit",
-  BaseStyle->"Hyperlink",
-  ButtonData->{
-    URL["http://einsteintoolkit.org"], None},
-  ButtonNote->"http://einsteintoolkit.org"],
- ", but is general enough to be useful also in other contexts."
-}], "Text"],
-
-Cell[CellGroupData[{
-
-Cell["Loading SimulationTools", "Subsection"],
-
-Cell[TextData[{
- "Once SimulationTools has been installed in the ",
- StyleBox["Mathematica",
-  FontSlant->"Italic"],
- " Applications directory, it can be loaded like any other application:"
-}], "Text"],
-
-Cell[BoxData[
- RowBox[{"<<", " ", "SimulationTools`"}]], "Input",
- Evaluatable->False],
-
-Cell["\<\
-Typically, this would be among the first few lines of any notebook in which \
-SimulationTools is used.\
-\>", "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Licence", "Subsection"],
-
-Cell["\<\
-SimulationTools is copyright Ian Hinder and Barry Wardell, and is distributed \
-as free software under the GNU General Public Licence version 2.\
-\>", "Text"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Acknowledgment", "Subsection"],
-
-Cell["\<\
-We request that you acknowledge the use of SimulationTools in any scientific \
-publication, for example with the phrase \[OpenCurlyDoubleQuote]We thank Ian \
-Hinder and Barry Wardell for the SimulationTools analysis package\
-\[CloseCurlyDoubleQuote].  \
-\>", "Text"]
-}, Open  ]],
+Cell["SimulationTools", "Title"],
 
 Cell[CellGroupData[{
 
 Cell["Basic Concepts", "Section"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  ButtonBox["Introduction",
+   BaseStyle->"Link",
+   ButtonData->"paclet:SimulationTools/tutorial/Introduction"], 
+  TraditionalForm]],
+ FormatType->"TraditionalForm"]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Simulations",
  BaseStyle->"Link",
@@ -131,8 +71,7 @@ Cell[TextData[Cell[BoxData[
    RowBox[{"Advanced", " ", "analysis"}],
    BaseStyle->"Link",
    ButtonData->"paclet:SimulationTools/tutorial/AdvancedAnalysis"], 
-  TraditionalForm]],
- FormatType->"TraditionalForm"]], "TOCChapter"],
+  TraditionalForm]]]], "TOCChapter"],
 
 Cell[TextData[ButtonBox["Convergence testing",
  BaseStyle->"Link",
@@ -178,8 +117,8 @@ WindowSize->{725, 750},
 WindowMargins->{{238, Automatic}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->Notebook[{
    Cell[
     StyleData[StyleDefinitions -> "Default.nb"]], 
@@ -187,7 +126,7 @@ StyleDefinitions->Notebook[{
     StyleData["TOCChapter"], MenuSortingValue -> 10000], 
    Cell[
     StyleData["Section"]]}, Visible -> False, FrontEndVersion -> 
-  "8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, 2011)", 
+  "9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, 2013)", 
   StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
 ]
 
