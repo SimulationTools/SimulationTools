@@ -27,7 +27,7 @@ Cell["Reading data in Multipole format", "Subsection"],
 
 Cell[BoxData[GridBox[{
    {"ReadPsi4", "ReadPsi4Modes", "ReadPsi4Radii"},
-   {"$MultipolePsi4Variable", "\[Placeholder]", "\[Placeholder]"}
+   {"$MultipolePsi4Variable", "", ""}
   }]], "DefinitionBox3Col"],
 
 Cell["Reading data produced using the Multipole Cactus thorn.", "Caption"],

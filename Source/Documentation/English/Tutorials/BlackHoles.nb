@@ -14,7 +14,7 @@ Cell["Working with black holes", "Section"],
 
 Cell[BoxData[GridBox[{
    {"ReadBlackHoleMass", Cell["ReadBlackHoleSpin", "TableText"]},
-   {"ReadBlackHoleIrreducibleMass", "\[Placeholder]"}
+   {"ReadBlackHoleIrreducibleMass", ""}
   }]], "DefinitionBox"],
 
 Cell["Functions for reading black hole information.", "Caption"],
