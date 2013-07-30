@@ -196,7 +196,11 @@ generateHTMLDocumentation[] := Module[
 
   docDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Documentation"}];
 
-  dest = If[StringQ[$HTMLDestination], $HTMLDestination, "~/Sites/SimulationTools/Documentation"];
+  dest = If[StringQ[$HTMLDestination],
+            $HTMLDestination,
+            FileNameJoin[{$SimulationToolsInstallationDirectory, "Source","HTMLDoc/Documentation"}]];
+
+  Quiet[CreateDirectory[dest, CreateIntermediateDirectories -> True],CreateDirectory::filex];
 
   exportTutorials[] :=
   Module[
