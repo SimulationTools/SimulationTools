@@ -8,16 +8,11 @@ Cell[CellGroupData[{
 Cell["Finding simulation directories", "Subsection"],
 
 Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["SimulationTools",
-   BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
-  "InlineFormula"],
- " has an interface for accessing \"simulations\" which are directories \
-containing simulation output.  The name of the simulation is the name of the \
-directory.  You can either specify a simulation by a full path, or by the \
-simulation name.  For the latter, SimulationTools needs to know which \
-directory to look in.  You can add this directory to the ",
+ "SimulationTools has an interface for accessing \"simulations\" which are \
+directories containing simulation output.  The name of the simulation is the \
+name of the directory.  You can either specify a simulation by a full path, \
+or by the simulation name.  For the latter, SimulationTools needs to know \
+which directory to look in.  You can add this directory to the ",
  Cell[BoxData[
   ButtonBox["$SimulationPath",
    BaseStyle->"Link",
@@ -78,22 +73,16 @@ Cell[CellGroupData[{
 
 Cell["Segments", "Subsection"],
 
-Cell[TextData[{
- "Simulations usually take more than one job on a supercomputer, and the \
-output is spread across many different output directories, known as  \
-\"segments\" of the simulation.  ",
- Cell[BoxData[
-  ButtonBox["SimulationTools",
-   BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
-  "InlineFormula"],
- " supports the SimFactory segmenting mechanism and almost all the file \
-reading functions go through a layer which automatically merges the files in \
-these chunks together, taking care to eliminate any duplicate data.  As such, \
-you should never have to worry about merging data from different segments \
-together, and in fact you can probably forget about the fact that the \
-simulation data is split into segments."
-}], "Text"]
+Cell["\<\
+Simulations usually take more than one job on a supercomputer, and the output \
+is spread across many different output directories, known as  \"segments\" of \
+the simulation. SimulationTools supports the SimFactory segmenting mechanism \
+and almost all the file reading functions go through a layer which \
+automatically merges the files in these chunks together, taking care to \
+eliminate any duplicate data.  As such, you should never have to worry about \
+merging data from different segments together, and in fact you can probably \
+forget about the fact that the simulation data is split into segments.\
+\>", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
