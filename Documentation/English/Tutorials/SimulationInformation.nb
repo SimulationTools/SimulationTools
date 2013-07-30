@@ -91,14 +91,14 @@ Cell[BoxData[
     {
      InterpretationBox[Cell[BoxData[
        FormBox[
-        StyleBox["\<\"/Users/barry/Library/Mathematica/Applications/\
+        StyleBox["\<\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"\>",
          StripOnInput->False,
          FontSize->24,
          FontWeight->Bold], TextForm]], "InlineText"],
       Text[
        Style[
-       "/Users/barry/Library/Mathematica/Applications/SimulationTools/Data/\
+       "/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
 Simulations/bbh", Bold, 24]]], "\[SpanFromLeft]"},
     {
      GraphicsBox[{{}, {{}, {}, 
@@ -252,11 +252,11 @@ rBclatl9o/yFMC1JeXWnh/IXolnzYrbeL8pfCE27bJOWPyvxPz5iqlE=
                 Cell[
                  BoxData[
                   FormBox[
-                  "\"/Users/barry/Library/Mathematica/Applications/\
+                  "\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
                 Text[
-                "/Users/barry/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -330,11 +330,11 @@ n+lx4cb5Qo8LN85Xely4cb7R48KN850eF26cE3pcuHF+0OPCjXNKjws3zs+x
                 Cell[
                  BoxData[
                   FormBox[
-                  "\"/Users/barry/Library/Mathematica/Applications/\
+                  "\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
                 Text[
-                "/Users/barry/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -963,11 +963,11 @@ X9/6MZdt2H0WicC/E5bzbjzxJREG5Can7ZEhFovwNHQRz/JP+sL/A+ux7MI=
                 Cell[
                  BoxData[
                   FormBox[
-                  "\"/Users/barry/Library/Mathematica/Applications/\
+                  "\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
                 Text[
-                "/Users/barry/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -1348,11 +1348,11 @@ rOHo9vn/A2DjicM=
                 Cell[
                  BoxData[
                   FormBox[
-                  "\"/Users/barry/Library/Mathematica/Applications/\
+                  "\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
                 Text[
-                "/Users/barry/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -1525,11 +1525,11 @@ S16sNVhqqvo/QhJSlw==
                 Cell[
                  BoxData[
                   FormBox[
-                  "\"/Users/barry/Library/Mathematica/Applications/\
+                  "\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
                 Text[
-                "/Users/barry/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -1615,7 +1615,7 @@ SimulationTools/Data/Simulations/bbh"]], Medium, StripOnInput -> False]}},
           StripOnInput->False,
           FontWeight->Bold]},
         {
-         ItemBox["\<\"/Users/barry/Library/Mathematica/Applications/\
+         ItemBox["\<\"/Users/ian/Library/Mathematica/Applications/\
 SimulationTools/Data/Simulations/bbh\"\>",
           Alignment->Right,
           StripOnInput->False], 
@@ -1649,7 +1649,7 @@ SimulationTools/Data/Simulations/bbh\"\>",
          StyleBox["\<\"Segments\"\>",
           StripOnInput->False,
           FontWeight->Bold]},
-        {"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+        {"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
 Data/Simulations/bbh\"\>", 
          TagBox[GridBox[{
             {
@@ -1665,9 +1665,9 @@ Data/Simulations/bbh\"\>",
              StyleBox["\<\"t2\"\>",
               StripOnInput->False,
               FontSlant->Italic]},
-            {"\<\"0000\"\>", "\<\"Thu 25 Apr 2013 11:17:34\"\>", "0", 
+            {"\<\"0000\"\>", "\<\"Fri 30 Mar 2012 14:24:13\"\>", "0", 
              "6.5`"},
-            {"\<\"0001\"\>", "\<\"Thu 25 Apr 2013 11:17:34\"\>", "7", "300"}
+            {"\<\"0001\"\>", "\<\"Fri 30 Mar 2012 14:24:16\"\>", "7", "300"}
            },
            AutoDelete->False,
            GridBoxAlignment->{"Columns" -> {{Left}}},

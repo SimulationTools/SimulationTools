@@ -110,11 +110,11 @@ Cell[BoxData[
 
 Cell[BoxData[
  InterpretationBox["\<\"No data for \
-Waveforms`ReadPsi4RadiiStrings[\\\"/Users/barry/Library/Mathematica/\
+Waveforms`ReadPsi4RadiiStrings[\\\"/Users/ian/Library/Mathematica/\
 Applications/SimulationTools/Data/Simulations/bbh\\\"]\"\>",
   StringForm[
   "No data for `1`", 
-   "Waveforms`ReadPsi4RadiiStrings[\"/Users/barry/Library/Mathematica/\
+   "Waveforms`ReadPsi4RadiiStrings[\"/Users/ian/Library/Mathematica/\
 Applications/SimulationTools/Data/Simulations/bbh\"]"],
   Editable->False]], "Print",
  CellLabel->"During evaluation of In[4]:="],
