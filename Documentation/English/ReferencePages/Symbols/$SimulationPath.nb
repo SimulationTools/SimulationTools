@@ -1,0 +1,124 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["$SimulationPath",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/ref/$SimulationPath"]
+}], "LinkTrail"],
+
+Cell["$SimulationPath", "ObjectName"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[TextData[ButtonBox["$SimulationPath",
+      BaseStyle->"Link",
+      ButtonData->"paclet:SimulationTools/ref/$SimulationPath"]], 
+      "InlineFormula"],
+     "\[LineSeparator] is a variable which specifies where SimulationTools \
+should look for simulations."
+    }]]}
+  }]], "Usage"],
+
+Cell[CellGroupData[{
+
+Cell["", "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellFrameLabels->{{
+    FEPrivate`If[
+     FEPrivate`Or[
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
+      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
+     Cell[
+      TextData[
+       Cell[
+        BoxData[
+         ButtonBox[
+          FrameBox[
+           StyleBox[
+            RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"], 
+           StripOnInput -> False], Appearance -> {Automatic, None}, BaseStyle -> 
+          None, ButtonFunction :> (FrontEndExecute[{
+             FrontEnd`SelectionMove[
+              FrontEnd`SelectedNotebook[], All, ButtonCell], 
+             FrontEndToken["OpenCloseGroup"], 
+             FrontEnd`SelectionMove[
+              FrontEnd`SelectedNotebook[], After, CellContents]}]& ), 
+          Evaluator -> None, Method -> "Preemptive"]]]], "NotesSection"], 
+     TextData[
+      ButtonBox[
+       Cell[
+        TextData[{
+          Cell[
+           BoxData[
+            InterpretationBox[
+             StyleBox[
+              
+              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
+               Baseline], "CacheGraphics" -> False], 
+             Spacer[24]]]], "Details and Options"}], "NotesSection"], 
+       Appearance -> {Automatic, None}, BaseStyle -> None, 
+       ButtonFunction :> (FrontEndExecute[{
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], All, ButtonCell], 
+          FrontEndToken["OpenCloseGroup"], 
+          FrontEnd`SelectionMove[
+           FrontEnd`SelectedNotebook[], After, CellContents]}]& ), Evaluator -> 
+       None, Method -> "Preemptive"]]], None}, {None, None}},
+ CellFrameLabelMargins->0,
+ "WholeCelGroupOpener" -> True],
+
+Cell["\<\
+SimulationTools will look for simulations in $SimulationPath and in \
+subdirectories one level down.\
+\>", "Notes"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"$SimulationPath",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", 
+    "keywords" -> {"$SimulationPath", "$SIMULATIONPATH", "$simulationpath"}, 
+    "index" -> True, "label" -> "SimulationTools/SimulationTools Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools", "status" -> "None", 
+    "summary" -> 
+    "$SimulationPath is a variable which specifies where SimulationTools \
+should look for simulations.", 
+    "synonyms" -> {"$SimulationPath", "$SIMULATIONPATH", "$simulationpath"}, 
+    "title" -> "$SimulationPath", "windowTitle" -> "$SimulationPath", "type" -> 
+    "Symbol", "uri" -> "SimulationTools/ref/$SimulationPath"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

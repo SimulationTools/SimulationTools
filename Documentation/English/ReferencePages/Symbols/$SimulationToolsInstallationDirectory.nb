@@ -1,0 +1,74 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["$SimulationToolsInstallationDirectory",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->
+   "paclet:SimulationTools/ref/$SimulationToolsInstallationDirectory"]
+}], "LinkTrail"],
+
+Cell["$SimulationToolsInstallationDirectory", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[TextData[ButtonBox["$SimulationToolsInstallationDirectory",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:SimulationTools/ref/$SimulationToolsInstallationDirectory"]], 
+      "InlineFormula"],
+     "\[LineSeparator] gives the top-level directory in which SimulationTools \
+is installed."
+    }]]}
+  }]], "Usage"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"$SimulationToolsInstallationDirectory",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", 
+    "keywords" -> {
+     "$SimulationToolsInstallationDirectory", 
+      "$SIMULATIONTOOLSINSTALLATIONDIRECTORY", 
+      "$simulationtoolsinstallationdirectory"}, "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools Symbol", "language" -> "en", "paclet" -> 
+    "SimulationTools", "status" -> "None", "summary" -> 
+    "$SimulationToolsInstallationDirectory gives the top-level directory in \
+which SimulationTools is installed.", 
+    "synonyms" -> {
+     "$SimulationToolsInstallationDirectory", 
+      "$SIMULATIONTOOLSINSTALLATIONDIRECTORY", 
+      "$simulationtoolsinstallationdirectory"}, "title" -> 
+    "$SimulationToolsInstallationDirectory", "windowTitle" -> 
+    "$SimulationToolsInstallationDirectory", "type" -> "Symbol", "uri" -> 
+    "SimulationTools/ref/$SimulationToolsInstallationDirectory"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

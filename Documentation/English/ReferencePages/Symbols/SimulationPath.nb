@@ -1,0 +1,72 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationPath",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/ref/SimulationPath"]
+}], "LinkTrail"],
+
+Cell["SimulationPath", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["SimulationPath",
+        BaseStyle->"Link",
+        ButtonData->"paclet:SimulationTools/ref/SimulationPath"], "[", "]"}]],
+       "InlineFormula"],
+     "\[LineSeparator]gives the list of directories which SimulationTools \
+will search for simulations.  It contains those directories listed in \
+$SimulationPath as well as (for backward compatibility) the value of \
+RunDirectory if it exists."
+    }]]}
+  }]], "Usage"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"SimulationPath",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", 
+    "keywords" -> {"SimulationPath", "SIMULATIONPATH", "simulationpath"}, 
+    "index" -> True, "label" -> "SimulationTools/SimulationTools Symbol", 
+    "language" -> "en", "paclet" -> "SimulationTools", "status" -> "None", 
+    "summary" -> 
+    "SimulationPath[] gives the list of directories which SimulationTools \
+will search for simulations.  It contains those directories listed in \
+$SimulationPath as well as (for backward compatibility) the value of \
+RunDirectory if it exists.", 
+    "synonyms" -> {"SimulationPath", "SIMULATIONPATH", "simulationpath"}, 
+    "title" -> "SimulationPath", "windowTitle" -> "SimulationPath", "type" -> 
+    "Symbol", "uri" -> "SimulationTools/ref/SimulationPath"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+

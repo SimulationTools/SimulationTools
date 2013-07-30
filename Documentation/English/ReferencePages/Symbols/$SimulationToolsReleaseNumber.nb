@@ -1,0 +1,71 @@
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["SimulationTools",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
+ StyleBox[" > ", "LinkTrailSeparator"],
+ ButtonBox["$SimulationToolsReleaseNumber",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:SimulationTools/ref/$SimulationToolsReleaseNumber"]
+}], "LinkTrail"],
+
+Cell["$SimulationToolsReleaseNumber", "ObjectName"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[TextData[ButtonBox["$SimulationToolsReleaseNumber",
+      BaseStyle->"Link",
+      ButtonData->
+       "paclet:SimulationTools/ref/$SimulationToolsReleaseNumber"]], 
+      "InlineFormula"],
+     "\[LineSeparator] is an integer which gives the current SimulationTools \
+release number."
+    }]]}
+  }]], "Usage"],
+
+Cell[CellGroupData[{
+
+Cell[" ", "FooterCell"],
+
+Cell[BoxData[""]]
+}, Open  ]]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"$SimulationToolsReleaseNumber",
+Visible->True,
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "SimulationTools`", 
+    "keywords" -> {
+     "$SimulationToolsReleaseNumber", "$SIMULATIONTOOLSRELEASENUMBER", 
+      "$simulationtoolsreleasenumber"}, "index" -> True, "label" -> 
+    "SimulationTools/SimulationTools Symbol", "language" -> "en", "paclet" -> 
+    "SimulationTools", "status" -> "None", "summary" -> 
+    "$SimulationToolsReleaseNumber is an integer which gives the current \
+SimulationTools release number.", 
+    "synonyms" -> {
+     "$SimulationToolsReleaseNumber", "$SIMULATIONTOOLSRELEASENUMBER", 
+      "$simulationtoolsreleasenumber"}, "title" -> 
+    "$SimulationToolsReleaseNumber", "windowTitle" -> 
+    "$SimulationToolsReleaseNumber", "type" -> "Symbol", "uri" -> 
+    "SimulationTools/ref/$SimulationToolsReleaseNumber"}, 
+  "SearchTextTranslated" -> "", "LinkTrails" -> ""},
+TrackCellChangeTimes->False,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+
