@@ -1,17 +1,10 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["\<\
-Introduction to SimulationTools\
-\>", "Title"],
+Cell["Introduction to SimulationTools", "Title"],
 
 Cell[TextData[{
- Cell[BoxData[
-  ButtonBox["SimulationTools",
-   BaseStyle->"Link",
-   ButtonData->"paclet:SimulationTools/ref/SimulationTools"]], 
-  "InlineFormula"],
- " is a suite of ",
+ "SimulationTools is a suite of ",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
  " packages for analysing data from numerical simulations.  It has been \
