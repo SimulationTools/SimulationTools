@@ -223,7 +223,7 @@ Cell[BoxData[
    RowBox[{"cost", "^", "2"}]}]}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"ToListOfData", "[", "sumSquared", "]"}]], "Input"],
+ RowBox[{"ToList", "[", "sumSquared", "]"}]], "Input"],
 
 Cell[TextData[{
  "Here we have created a DataTable for a t coordinate, applied Sin and Cos to \
@@ -328,8 +328,8 @@ Cell[TextData[{
  ButtonBox["ToList",
   BaseStyle->"Link",
   ButtonData->"paclet:SimulationTools/ref/ToList"],
- " returns a list containing all the data and all the coordinates from the Data \
-Representation."
+ " returns a list containing all the data and all the coordinates from the \
+Data Representation."
 }], "Text"],
 
 Cell[BoxData[
@@ -588,8 +588,8 @@ WindowMargins->{{Automatic, 124}, {Automatic, 0}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
-2011)",
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
 StyleDefinitions->"Default.nb"
 ]
 
