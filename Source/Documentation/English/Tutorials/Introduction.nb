@@ -67,7 +67,7 @@ Cell["Licence", "Subsection"],
 
 Cell["\<\
 SimulationTools is copyright Ian Hinder and Barry Wardell, and is distributed \
-as free software under the GNU General Public Licence version 2.\
+as free software under the GNU General Public Licence version 3.\
 \>", "Text"]
 }, Open  ]],
 
