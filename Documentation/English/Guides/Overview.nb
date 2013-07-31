@@ -644,6 +644,76 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
+Cell["SimulationTools", "GuideFunctionsSubsection"],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["SimulationPath",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/SimulationPath"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationPath",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/$SimulationPath"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationToolsCompatibilityVersion",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:SimulationTools/ref/$SimulationToolsCompatibilityVersion"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationToolsInformation",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/$SimulationToolsInformation"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationToolsInstallationDirectory",
+  BaseStyle->"Link",
+  ButtonData->
+   "paclet:SimulationTools/ref/$SimulationToolsInstallationDirectory"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationToolsReleaseNumber",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/$SimulationToolsReleaseNumber"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationToolsVersion",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/$SimulationToolsVersion"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["$SimulationToolsVersionNumber",
+  BaseStyle->"Link",
+  ButtonData->"paclet:SimulationTools/ref/$SimulationToolsVersionNumber"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["Numerical Relativity", "GuideFunctionsSubsection"],
 
 Cell[TextData[{

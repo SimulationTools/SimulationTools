@@ -692,10 +692,10 @@ Cell[CellGroupData[{
 Cell["Properties and data of Data Representations", "Subsection"],
 
 Cell[TextData[{
- ButtonBox["ToListOfData r",
+ ButtonBox["ToListOfData",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetData"],
- "eturns the data in the Data Representation as a nested list."
+  ButtonData->"paclet:SimulationTools/ref/ToListOfData"],
+ " returns the data in the Data Representation as a nested list."
 }], "Text"],
 
 Cell[CellGroupData[{
@@ -744,10 +744,10 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell[TextData[{
- ButtonBox["ToListOfCoordinates r",
+ ButtonBox["ToListOfCoordinates",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetData"],
- "eturns the coordinates of all the points in the Data Representation"
+  ButtonData->"paclet:SimulationTools/ref/ToListOfCoordinates"],
+ " returns the coordinates of all the points in the Data Representation"
 }], "Text"],
 
 Cell[CellGroupData[{
@@ -907,11 +907,11 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell[TextData[{
- ButtonBox["ToList r",
+ ButtonBox["ToList",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetData"],
- "eturns a list containing all the data and all the coordinates from the Data \
-Representation."
+  ButtonData->"paclet:SimulationTools/ref/ToList"],
+ " returns a list containing all the data and all the coordinates from the \
+Data Representation."
 }], "Text"],
 
 Cell[CellGroupData[{
@@ -1107,7 +1107,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["Dimensions",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetDimensions"],
+  ButtonData->"paclet:SimulationTools/ref/Dimensions"],
  " returns a list {",
  StyleBox["nx",
   FontSlant->"Italic"],
@@ -1135,7 +1135,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["MinCoordinates ",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
+  ButtonData->"paclet:SimulationTools/ref/MinCoordinates"],
  "returns the minimum coordinates of the Data Representation."
 }], "Text"],
 
@@ -1154,7 +1154,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["MaxCoordinates ",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetOrigin"],
+  ButtonData->"paclet:SimulationTools/ref/MaxCoordinates"],
  "returns the maximum coordinates of the Data Representation"
 }], "Text"],
 
@@ -1173,7 +1173,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["CoordinateRanges",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetDataRange"],
+  ButtonData->"paclet:SimulationTools/ref/CoordinateRanges"],
  " returns a list of the form {{",
  StyleBox["xmin",
   FontSlant->"Italic"],
@@ -1214,7 +1214,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["CoordinateSpacings",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetSpacing"],
+  ButtonData->"paclet:SimulationTools/ref/CoordinateSpacings"],
  " returns the spacing between points in the Data Representation in each \
 direction."
 }], "Text"],
@@ -1232,10 +1232,10 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell[TextData[{
- ButtonBox["ArrayDepth ",
+ ButtonBox["ArrayDepth",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetNumDimensions"],
- "returns an integer corresponding to the dimensionality of the data."
+  ButtonData->"paclet:ref/ArrayDepth"],
+ " returns an integer corresponding to the dimensionality of the data."
 }], "Text"],
 
 Cell[CellGroupData[{
@@ -1251,7 +1251,7 @@ Cell[BoxData["2"], "Output",
 Cell[TextData[{
  ButtonBox["VariableName",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/GetVariableName"],
+  ButtonData->"paclet:SimulationTools/ref/VariableName"],
  " returns a string containing the name of the DataRegion (DataTables do not \
 have an associated name).  This name can be set using the Variable option of \
 ToDataRegion."
@@ -1341,7 +1341,7 @@ Cell[TextData[{
  "The ",
  ButtonBox["Part",
   BaseStyle->"Link",
-  ButtonData->"paclet:ref/Interpolation"],
+  ButtonData->"paclet:ref/Part"],
  " function, i.e. d[[2]] etc, has been overloaded to work on Data \
 Representation objects. You can extract a single value, for example \
 d[[3,8,1]], or a lower-dimensional DataRegion, d[[All,All,12]].  You can also \
@@ -1413,10 +1413,10 @@ Cell["Merging DataRegions", "Subsection"],
 
 Cell[TextData[{
  "Multiple ",
- ButtonBox["DataRegions",
+ ButtonBox["DataRegion",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/DataRegions"],
- " d1, d2, ... can be merged into a single enclosing one using "
+  ButtonData->"paclet:SimulationTools/ref/DataRegion"],
+ "s d1, d2, ... can be merged into a single enclosing one using "
 }], "Text"],
 
 Cell[BoxData[

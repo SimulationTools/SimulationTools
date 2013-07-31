@@ -7,9 +7,9 @@ Cell[TextData[{
   BaseStyle->{"Link", "LinkTrail"},
   ButtonData->"paclet:SimulationTools/guide/SimulationTools"],
  StyleBox[" > ", "LinkTrailSeparator"],
- ButtonBox["SimulationToolsContents",
+ ButtonBox["SimulationTools",
   BaseStyle->{"Link", "LinkTrail"},
-  ButtonData->"paclet:SimulationTools/tutorial/SimulationToolsContents"]
+  ButtonData->"paclet:SimulationTools/tutorial/SimulationTools"]
 }], "LinkTrail"],
 
 Cell[BoxData[GridBox[{
@@ -134,7 +134,7 @@ Saveable->False,
 ScreenStyleEnvironment->"Working",
 WindowSize->{725, 750},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-WindowTitle->"SimulationToolsContents",
+WindowTitle->"SimulationTools",
 Visible->True,
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 TaggingRules->{
@@ -143,10 +143,9 @@ TaggingRules->{
    "context" -> "SimulationTools`", "keywords" -> {}, "index" -> True, 
     "label" -> "SimulationTools Tutorial", "language" -> "en", "paclet" -> 
     "SimulationTools", "status" -> "None", "summary" -> 
-    "Documentation Contents for SimulationTools", "synonyms" -> {}, "title" -> 
-    "SimulationToolsContents", "windowTitle" -> "SimulationToolsContents", 
-    "type" -> "Tutorial", "uri" -> 
-    "SimulationTools/tutorial/SimulationToolsContents"}, 
+    "SimulationTools Tutorial", "synonyms" -> {}, "title" -> 
+    "SimulationTools", "windowTitle" -> "SimulationTools", "type" -> 
+    "Tutorial", "uri" -> "SimulationTools/tutorial/SimulationTools"}, 
   "SearchTextTranslated" -> "", "LinkTrails" -> ""},
 TrackCellChangeTimes->False,
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \

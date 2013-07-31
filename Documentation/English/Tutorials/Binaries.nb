@@ -2301,41 +2301,29 @@ You can use Interpolation on DataTables to create a function containing the \
 coordinates:\
 \>", "Text"],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
- RowBox[{"pos", "=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"xFn", "=", 
-       RowBox[{"Interpolation", "[", "x1", "]"}]}], ",", 
-      RowBox[{"yFn", "=", 
-       RowBox[{"Interpolation", "[", "y1", "]"}]}], ",", 
-      RowBox[{"zFn", "=", 
-       RowBox[{"Interpolation", "[", "z1", "]"}]}]}], "}"}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Function", "[", 
-     RowBox[{"t", ",", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"xFn", "[", "t", "]"}], ",", 
-        RowBox[{"yFn", "[", "t", "]"}], ",", 
-        RowBox[{"zFn", "[", "t", "]"}]}], "}"}]}], "]"}]}], "]"}]}]], "Input",
- 
- CellLabel->"In[11]:="],
-
-Cell[BoxData[
- RowBox[{"Function", "[", 
-  RowBox[{"t$", ",", 
-   RowBox[{"{", 
+ RowBox[{
+  RowBox[{"pos", "=", 
+   RowBox[{"Module", "[", 
     RowBox[{
-     RowBox[{"xFn$34900", "[", "t$", "]"}], ",", 
-     RowBox[{"yFn$34900", "[", "t$", "]"}], ",", 
-     RowBox[{"zFn$34900", "[", "t$", "]"}]}], "}"}]}], "]"}]], "Output",
- CellLabel->"Out[11]="]
-}, Open  ]],
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"xFn", "=", 
+        RowBox[{"Interpolation", "[", "x1", "]"}]}], ",", 
+       RowBox[{"yFn", "=", 
+        RowBox[{"Interpolation", "[", "y1", "]"}]}], ",", 
+       RowBox[{"zFn", "=", 
+        RowBox[{"Interpolation", "[", "z1", "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Function", "[", 
+      RowBox[{"t", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"xFn", "[", "t", "]"}], ",", 
+         RowBox[{"yFn", "[", "t", "]"}], ",", 
+         RowBox[{"zFn", "[", "t", "]"}]}], "}"}]}], "]"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[11]:="],
 
 Cell[CellGroupData[{
 
