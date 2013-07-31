@@ -79,7 +79,7 @@ packageSymbols = Map[# -> DocumentedSymbols["SimulationTools", #] &, packages];
 
 appSymbols = "SimulationTools" -> DocumentedSymbols["SimulationTools"];
 
-$PackageSymbols = packageSymbols; (* Used in the Overview.md file *)
+$PackageSymbols = Join[packageSymbols, {appSymbols}]; (* Used in the Overview.md file *)
 
 undocumentedSymbols = Map[# -> UndocumentedSymbols["SimulationTools", #] &, packages] /. (_ -> {}) -> Sequence[];
 (* Map[Print["Undocumented symbols for package "<>#[[1]]<>" skipped:\n", #[[2]]]&, undocumentedSymbols]; *)
