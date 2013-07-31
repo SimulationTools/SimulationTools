@@ -1,7 +1,7 @@
 {
  "Application" -> "SimulationTools",
  "Title" -> "Black Holes",
- "Related Tutorials" -> {"DataTable", "NumericalRelativity"},
+ "Related Tutorials" -> {"DataRepresentations", "SimulationTools"},
  "Keywords" -> {},
  "Label" -> "Black Holes Tutorial",
  "Package" -> "BlackHoles",

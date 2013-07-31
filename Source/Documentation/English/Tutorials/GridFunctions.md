@@ -1,7 +1,7 @@
 {
  "Application" -> "SimulationTools",
  "Title" -> "Grid Functions",
- "Related Tutorials" -> {"DataRegion", "NumericalRelativity"},
+ "Related Tutorials" -> {"DataRepresentations", "SimulationTools"},
  "Keywords" -> {},
  "Label" -> "SimulationTools Tutorial",
  "Package" -> "GridFunctions",

@@ -1,7 +1,7 @@
 {
  "Application" -> "SimulationTools",
  "Title" -> "Binary systems",
- "Related Tutorials" -> {"DataTable", "NumericalRelativity", "BlackHoles"},
+ "Related Tutorials" -> {"DataRepresentations", "SimulationTools", "BlackHoles"},
  "Keywords" -> {},
  "Label" -> "Binary Systems Tutorial",
  "Package" -> "Binary",
