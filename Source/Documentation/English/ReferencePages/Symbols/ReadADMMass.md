@@ -7,5 +7,5 @@
   "Basic Examples" -> {
     "ReadADMMass[\"bbh\"]"
     },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

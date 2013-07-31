@@ -10,5 +10,5 @@
   "See Also" -> {
     "DefineMemoFunction", "$Memoisation"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

@@ -1,16 +1,15 @@
 {
  "Summary" -> "produce a quick overview of a simulation",
- "URL" -> "http://bitbucket.org/ianhinder/SimulationTools",
- "Tutorials" -> {"NumericalRelativity"},
+ "URL" -> "http://simulationtools.org",
+ "Tutorials" -> {"SimulationInformation"},
  "See Also" -> {
-   "ReadCores",
-   "ReadCPUHours",
-   "ReadMemory",
-   "ReadRunSpeed",
-   "ReadSwap",
-   "ReadWalltime"
+   "ReadSimulationCoreCount",
+   "ReadSimulationCost",
+   "ReadSimulationMemoryUsage",
+   "ReadSimulationRunTime",
+   "ReadSimulationSpeed",
+   "ReadSimulationSwapUsage"
    },
-  "More About" -> {"SimulationTools"},
   "More Information" -> {
     "A list of run names may be given, in which case data from all the runs will be displayed on the same plots.",
     "SimulationOverview produces plots and tables of useful information which show an overview of the simulation.  Different components of SimulationTools can provide plots for SimulationOverview to use.  For example, it can show waveforms and trajectories of binary simulations, and run speed, memory usage, simulation chunks, start times and end times of each segment, for all simulations, if this data is available in the simulation output.",
@@ -21,3 +20,4 @@
     "SimulationOverview[\"bbh\"]"
   }
 }
+    

@@ -10,5 +10,5 @@
   "See Also" -> {
     "ReadGridFunction", "ReadGridFunctionDimensions"
    },
-  "More About" -> {"SimulationTools", "GridFunctions"}
+  "Tutorials" -> {"SimulationTools", "GridFunctions"}
 }

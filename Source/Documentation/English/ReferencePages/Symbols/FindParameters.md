@@ -3,6 +3,6 @@
   {
    "FindParameters[\"bbh\", \"Carpet::*\"]"
   },
- "See Also" -> {"LookupParameter"},
- "More About" -> {"SimulationTools"}
+ "See Also" -> {"ReadSimulationParameter"},
+ "Tutorials" -> {"SimulationTools"}
 }

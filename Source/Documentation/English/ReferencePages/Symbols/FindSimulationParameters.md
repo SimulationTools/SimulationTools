@@ -12,5 +12,5 @@
   "See Also" -> {
     "ReadSimulationParameter"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

@@ -6,7 +6,7 @@
    },
 
   "See Also" -> {
-    "ReadHDF5", "ExportWaveform"
+    "ExportWaveform"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

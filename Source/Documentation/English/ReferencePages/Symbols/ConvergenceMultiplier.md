@@ -10,5 +10,5 @@
     "ListLinePlot[{(f[h1] - f[h2])/cr4, f[h2] - f[h3]}]"
    },
   "See Also" -> {"ConvergenceRate"},
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

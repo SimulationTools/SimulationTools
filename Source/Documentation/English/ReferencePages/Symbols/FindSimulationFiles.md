@@ -9,5 +9,5 @@
   "Basic Examples" -> {
     "FindSimulationFiles[\"bbh\",\"*.h5\"]"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

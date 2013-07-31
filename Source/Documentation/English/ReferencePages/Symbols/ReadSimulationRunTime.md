@@ -11,5 +11,5 @@
   "See Also" -> {
     "ReadSimulationMemoryUsage", "ReadSimulationCoreCount"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

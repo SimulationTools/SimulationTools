@@ -16,5 +16,5 @@ IOScalar::outScalar_vars = \"SystemStatistics::process_memory_mb\"",
   "See Also" -> {
     "ReadSimulationCoreCount", "ReadSimulationRunTime", "ReadSimulationMemoryUsage"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

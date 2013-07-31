@@ -15,5 +15,5 @@
     },
   "See Also" -> 
     Names["DataTable`*"],
-  "More About" -> {"SimulationTools", "Data Representations"}
+  "Tutorials" -> {"SimulationTools", "DataRepresentations"}
 }

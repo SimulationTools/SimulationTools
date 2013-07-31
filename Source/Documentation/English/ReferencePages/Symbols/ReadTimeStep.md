@@ -13,5 +13,5 @@
   "See Also" -> {
     "ReadMaxRefinementLevels", "ReadGridSpacings"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

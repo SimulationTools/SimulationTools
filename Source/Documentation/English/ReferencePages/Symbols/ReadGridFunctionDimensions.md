@@ -5,5 +5,5 @@
   "See Also" -> {
     "ReadGridFunction", "FindGridFunctions"
    },
-  "More About" -> {"SimulationTools", "GridFunctions"}
+  "Tutorials" -> {"SimulationTools", "GridFunctions"}
 }

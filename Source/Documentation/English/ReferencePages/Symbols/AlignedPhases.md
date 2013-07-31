@@ -13,5 +13,5 @@
   "See Also" -> {
     "Phase", "ReadPsi4"
    },
-  "More About" -> {"SimulationTools", "GridFunctions"}
+  "Tutorials" -> {"SimulationTools", "GridFunctions"}
 }

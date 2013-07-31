@@ -10,5 +10,5 @@
   "See Also" -> {
     "ReadGridSpacings"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

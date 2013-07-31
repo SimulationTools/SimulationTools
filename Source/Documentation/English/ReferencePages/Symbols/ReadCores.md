@@ -6,12 +6,13 @@
     "ReadCores[\"bbh\"]"
     },
   "See Also" -> {
-   "ReadCPUHours",
-   "ReadMemory",
-   "ReadRunSpeed",
-   "ReadSwap",
-   "ReadWalltime",
+   "ReadSimulationCoreCount",
+   "ReadSimulationCost",
+   "ReadSimulationMemoryUsage",
+   "ReadSimulationRunTime",
+   "ReadSimulationSpeed",
+   "ReadSimulationSwapUsage",
    "SimulationOverview"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }

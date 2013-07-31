@@ -6,5 +6,5 @@
   "See Also" -> {
     "ToList", "DataTable"
    },
-  "More About" -> {"SimulationTools", "Data Representations"}
+  "Tutorials" -> {"SimulationTools", "DataRepresentations"}
 }

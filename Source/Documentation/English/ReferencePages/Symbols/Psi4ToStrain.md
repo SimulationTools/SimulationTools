@@ -12,5 +12,5 @@
   "See Also" -> {
     "ReadPsi4"
    },
-  "More About" -> {"SimulationTools"}
+  "Tutorials" -> {"SimulationTools"}
 }
