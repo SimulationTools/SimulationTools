@@ -1805,9 +1805,9 @@ S16sNVhqqvo/QhJSlw==
              StyleBox["\<\"t2\"\>",
               StripOnInput->False,
               FontSlant->Italic]},
-            {"\<\"0000\"\>", "\<\"Fri 30 Mar 2012 14:24:13\"\>", "0", 
+            {"\<\"0000\"\>", "\<\"Thu 25 Apr 2013 11:17:34\"\>", "0", 
              "6.5`"},
-            {"\<\"0001\"\>", "\<\"Fri 30 Mar 2012 14:24:16\"\>", "7", "300"}
+            {"\<\"0001\"\>", "\<\"Thu 25 Apr 2013 11:17:34\"\>", "7", "300"}
            },
            AutoDelete->False,
            GridBoxAlignment->{"Columns" -> {{Left}}},

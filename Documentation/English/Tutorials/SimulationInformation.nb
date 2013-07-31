@@ -79,27 +79,30 @@ using Cactus, but it has an extensible interface which will allow it to \
 support other simulation types in the future.\
 \>", "Text"],
 
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[1]:="],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"SimulationOverview", "[", "$SimulationToolsTestSimulation", 
-  "]"}]], "Input",
- CellLabel->"In[1]:="],
+ RowBox[{"SimulationOverview", "[", "\"\<bbh\>\"", "]"}]], "Input",
+ CellLabel->"In[2]:="],
 
 Cell[BoxData[
  TagBox[GridBox[{
     {
      InterpretationBox[Cell[BoxData[
        FormBox[
-        StyleBox["\<\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"\>",
+        StyleBox["\<\"bbh\"\>",
          StripOnInput->False,
          FontSize->24,
          FontWeight->Bold], TextForm]], "InlineText"],
       Text[
-       Style[
-       "/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh", Bold, 24]]], "\[SpanFromLeft]"},
+       Style["bbh", Bold, 24]]], "\[SpanFromLeft]"},
     {
      GraphicsBox[{{}, {{}, {}, 
         {GrayLevel[0], AbsoluteThickness[1], LineBox[CompressedData["
@@ -251,12 +254,8 @@ rBclatl9o/yFMC1JeXWnh/IXolnzYrbeL8pfCE27bJOWPyvxPz5iqlE=
                InterpretationBox[
                 Cell[
                  BoxData[
-                  FormBox[
-                  "\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
-                Text[
-                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                  FormBox["\"bbh\"", TextForm]], "InlineText"], 
+                Text["bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -329,12 +328,8 @@ n+lx4cb5Qo8LN85Xely4cb7R48KN850eF26cE3pcuHF+0OPCjXNKjws3zs+x
                InterpretationBox[
                 Cell[
                  BoxData[
-                  FormBox[
-                  "\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
-                Text[
-                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                  FormBox["\"bbh\"", TextForm]], "InlineText"], 
+                Text["bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -962,12 +957,8 @@ X9/6MZdt2H0WicC/E5bzbjzxJREG5Can7ZEhFovwNHQRz/JP+sL/A+ux7MI=
                InterpretationBox[
                 Cell[
                  BoxData[
-                  FormBox[
-                  "\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
-                Text[
-                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                  FormBox["\"bbh\"", TextForm]], "InlineText"], 
+                Text["bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -1347,12 +1338,8 @@ rOHo9vn/A2DjicM=
                InterpretationBox[
                 Cell[
                  BoxData[
-                  FormBox[
-                  "\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
-                Text[
-                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                  FormBox["\"bbh\"", TextForm]], "InlineText"], 
+                Text["bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -1524,12 +1511,8 @@ S16sNVhqqvo/QhJSlw==
                InterpretationBox[
                 Cell[
                  BoxData[
-                  FormBox[
-                  "\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"", TextForm]], "InlineText"], 
-                Text[
-                "/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Data/Simulations/bbh"]], Medium, StripOnInput -> False]}}, 
+                  FormBox["\"bbh\"", TextForm]], "InlineText"], 
+                Text["bbh"]], Medium, StripOnInput -> False]}}, 
             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Center}}},
              AutoDelete -> False, 
             GridBoxBackground -> {"Columns" -> {{None}}}, 
@@ -1615,8 +1598,7 @@ Data/Simulations/bbh"]], Medium, StripOnInput -> False]}},
           StripOnInput->False,
           FontWeight->Bold]},
         {
-         ItemBox["\<\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Data/Simulations/bbh\"\>",
+         ItemBox["\<\"bbh\"\>",
           Alignment->Right,
           StripOnInput->False], 
          ItemBox["12",
@@ -1649,8 +1631,7 @@ SimulationTools/Data/Simulations/bbh\"\>",
          StyleBox["\<\"Segments\"\>",
           StripOnInput->False,
           FontWeight->Bold]},
-        {"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Data/Simulations/bbh\"\>", 
+        {"\<\"bbh\"\>", 
          TagBox[GridBox[{
             {
              StyleBox["\<\"Segment\"\>",
@@ -1665,9 +1646,9 @@ Data/Simulations/bbh\"\>",
              StyleBox["\<\"t2\"\>",
               StripOnInput->False,
               FontSlant->Italic]},
-            {"\<\"0000\"\>", "\<\"Fri 30 Mar 2012 14:24:13\"\>", "0", 
+            {"\<\"0000\"\>", "\<\"Thu 25 Apr 2013 11:17:34\"\>", "0", 
              "6.5`"},
-            {"\<\"0001\"\>", "\<\"Fri 30 Mar 2012 14:24:16\"\>", "7", "300"}
+            {"\<\"0001\"\>", "\<\"Thu 25 Apr 2013 11:17:34\"\>", "7", "300"}
            },
            AutoDelete->False,
            GridBoxAlignment->{"Columns" -> {{Left}}},
@@ -1685,7 +1666,7 @@ Data/Simulations/bbh\"\>",
    GridBoxItemSize->{"Columns" -> {All}, "Rows" -> {{Automatic}}},
    GridBoxSpacings->{"Columns" -> {{0}}, "Rows" -> {{1}}}],
   "Grid"]], "Output",
- CellLabel->"Out[1]="]
+ CellLabel->"Out[2]="]
 }, Open  ]]
 }, Open  ]],
 
@@ -1711,10 +1692,10 @@ Cell[BoxData[
   RowBox[{
   "ReadSimulationRunTime", "[", "$SimulationToolsTestSimulation", "]"}], "/", 
   "3600"}]], "Input",
- CellLabel->"In[2]:="],
+ CellLabel->"In[3]:="],
 
 Cell[BoxData["5.215813299152597`"], "Output",
- CellLabel->"Out[2]="]
+ CellLabel->"Out[3]="]
 }, Open  ]],
 
 Cell["\<\
@@ -1728,7 +1709,7 @@ Cell[BoxData[
  RowBox[{"ListLinePlot", "[", 
   RowBox[{"ReadSimulationSpeed", "[", "$SimulationToolsTestSimulation", "]"}],
    "]"}]], "Input",
- CellLabel->"In[3]:="],
+ CellLabel->"In[4]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -1870,7 +1851,7 @@ rBclatl9o/yFMC1JeXWnh/IXolnzYrbeL8pfCE27bJOWPyvxPz5iqlE=
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {1.159979406877508, 
    1.159979406877508}}]], "Output",
- CellLabel->"Out[3]="]
+ CellLabel->"Out[4]="]
 }, Open  ]],
 
 Cell["memory usage", "Text"],
@@ -1884,7 +1865,7 @@ Cell[BoxData[
    "ReadSimulationMemoryUsage", "[", "$SimulationToolsTestSimulation", "]"}], 
    ",", 
    RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]], "Input",
- CellLabel->"In[4]:="],
+ CellLabel->"In[5]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -1909,7 +1890,7 @@ cAMPYIdbOOBN2J7i+XADD2CHWzj++w/BskYm
   PlotRange->{All, All},
   PlotRangeClipping->True,
   PlotRangePadding->{Automatic, Automatic}]], "Output",
- CellLabel->"Out[4]="]
+ CellLabel->"Out[5]="]
 }, Open  ]],
 
 Cell["swap usage", "Text"],
@@ -1921,7 +1902,7 @@ Cell[BoxData[
   RowBox[{
   "ReadSimulationSwapUsage", "[", "$SimulationToolsTestSimulation", "]"}], 
   "]"}]], "Input",
- CellLabel->"In[5]:="],
+ CellLabel->"In[6]:="],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, {}, 
@@ -1942,7 +1923,7 @@ n+lx4cb5Qo8LN85Xely4cb7R48KN850eF26cE3pcuHF+0OPCjXNKjws3zs+x
   PlotRange->{{0, 300.}, {0, 20.}},
   PlotRangeClipping->True,
   PlotRangePadding->{{6., 6.}, {0.4, 0.4}}]], "Output",
- CellLabel->"Out[5]="]
+ CellLabel->"Out[6]="]
 }, Open  ]],
 
 Cell["the number of CPU cores used", "Text"],
@@ -1952,10 +1933,10 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ReadSimulationCoreCount", "[", "$SimulationToolsTestSimulation", 
   "]"}]], "Input",
- CellLabel->"In[6]:="],
+ CellLabel->"In[7]:="],
 
 Cell[BoxData["12"], "Output",
- CellLabel->"Out[6]="]
+ CellLabel->"Out[7]="]
 }, Open  ]],
 
 Cell["\<\
@@ -1967,10 +1948,10 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"ReadSimulationCost", "[", "$SimulationToolsTestSimulation", 
   "]"}]], "Input",
- CellLabel->"In[7]:="],
+ CellLabel->"In[8]:="],
 
 Cell[BoxData["62.58975958983116`"], "Output",
- CellLabel->"Out[7]="]
+ CellLabel->"Out[8]="]
 }, Open  ]],
 
 Cell["\<\

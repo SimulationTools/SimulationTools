@@ -26,8 +26,8 @@ Cell[BoxData[
        RowBox[{"-", "2"}]}], "]"}], ",", "\"\<Documentation\>\""}], "}"}], 
    "]"}]}]], "Input"],
 
-Cell[BoxData["\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Documentation\"\>"], "Output"]
+Cell[BoxData["\<\"/Users/barry/Library/Mathematica/Applications/\
+SimulationTools/Documentation\"\>"], "Output"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -48,17 +48,17 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   RowBox[{"{", 
-   RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+   RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Documentation/English/Guides/Overview.nb\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Index/_a.cfs\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Index/segments.gen\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "92", "\[RightSkeleton]"}], 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/SpellIndex/segments_f\"\>", 
-    ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/SpellIndex/segments.gen\"\>"}], "}"}],
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/ReferencePages/Symbols/AlignedPhases.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/ReferencePages/Symbols/AntiDerivative.nb\"\>", ",", 
+    RowBox[{"\[LeftSkeleton]", "97", "\[RightSkeleton]"}], 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Tutorials/Parameters.nb\"\>", 
+    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/Tutorials/Plotting.nb\"\>"}], "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
 
@@ -66,12 +66,21 @@ Cell[BoxData[
  RowBox[{"DeleteFile", "[", "docFiles", "]"}]], "Input"],
 
 Cell[BoxData[
- RowBox[{"DeleteDirectory", "[", 
-  RowBox[{"FileNameJoin", "[", 
-   RowBox[{"{", 
-    RowBox[{
-    "$SimulationToolsInstallationDirectory", ",", "\"\<Source\>\"", ",", 
-     "\"\<HTMLDoc\>\""}], "}"}], "]"}], "]"}]], "Input"],
+ RowBox[{"Quiet", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"DeleteDirectory", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FileNameDrop", "[", 
+          RowBox[{
+           RowBox[{"FindFile", "[", "\"\<SimulationTools`\>\"", "]"}], ",", 
+           RowBox[{"-", "2"}]}], "]"}], ",", "\"\<Source\>\"", ",", 
+         "\"\<HTMLDoc\>\""}], "}"}], "]"}], ",", 
+      RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}], ";"}], ",", 
+   RowBox[{"DeleteDirectory", "::", "nodir"}]}], "]"}]], "Input"],
 
 Cell[CellGroupData[{
 
@@ -80,25 +89,6 @@ Cell[BoxData[
   RowBox[{"<<", "\"\<Source/GenerateDocumentation.m\>\""}], "]"}]], "Input"],
 
 Cell[CellGroupData[{
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"appSymbols = \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"\<\"SimulationPath\"\>", ",", "\<\"$SimulationPath\"\>", 
-     ",", "\<\"$SimulationToolsCompatibilityVersion\"\>", 
-     ",", "\<\"$SimulationToolsInformation\"\>", 
-     ",", "\<\"$SimulationToolsInstallationDirectory\"\>", 
-     ",", "\<\"$SimulationToolsReleaseNumber\"\>", 
-     ",", "\<\"$SimulationToolsVersion\"\>", 
-     ",", "\<\"$SimulationToolsVersionNumber\"\>"}], "}"}]}],
-  SequenceForm[
-  "appSymbols = ", {
-   "SimulationPath", "$SimulationPath", 
-    "$SimulationToolsCompatibilityVersion", "$SimulationToolsInformation", 
-    "$SimulationToolsInstallationDirectory", "$SimulationToolsReleaseNumber", 
-    "$SimulationToolsVersion", "$SimulationToolsVersionNumber"}],
-  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Building symbol reference pages\"\>"], "Print"],
 
@@ -206,6 +196,16 @@ Cell[BoxData["\<\"Phase\"\>"], "Print"],
 
 Cell[BoxData["\<\"Resampled\"\>"], "Print"],
 
+Cell[BoxData[
+ StyleBox["\<\"Documented options {InterpolationOrder} do not match actual \
+options {InterpolationOrder} for Resampled\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0, 0],
+  FrontFaceColor->RGBColor[1, 0, 0],
+  BackFaceColor->RGBColor[1, 0, 0],
+  GraphicsColor->RGBColor[1, 0, 0],
+  FontColor->RGBColor[1, 0, 0]]], "Print"],
+
 Cell[BoxData["\<\"SameGridQ\"\>"], "Print"],
 
 Cell[BoxData["\<\"Shifted\"\>"], "Print"],
@@ -243,6 +243,16 @@ Cell[BoxData[
 Cell[BoxData["\<\"WithResampling\"\>"], "Print"],
 
 Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
+
+Cell[BoxData[
+ StyleBox["\<\"Documented options {InterpolationOrder} do not match actual \
+options {InterpolationOrder} for AntiDerivative\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0, 0],
+  FrontFaceColor->RGBColor[1, 0, 0],
+  BackFaceColor->RGBColor[1, 0, 0],
+  GraphicsColor->RGBColor[1, 0, 0],
+  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"CoordinateAtInterpolatedMax\"\>"], "Print"],
 
@@ -367,6 +377,16 @@ Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
 Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
 
 Cell[BoxData[
+ StyleBox["\<\"Documented options {Continuous} do not match actual options \
+{Continuous} for AlignedPhases\"\>",
+  StripOnInput->False,
+  LineColor->RGBColor[1, 0, 0],
+  FrontFaceColor->RGBColor[1, 0, 0],
+  BackFaceColor->RGBColor[1, 0, 0],
+  GraphicsColor->RGBColor[1, 0, 0],
+  FontColor->RGBColor[1, 0, 0]]], "Print"],
+
+Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
    RowBox[{"{", 
@@ -456,18 +476,6 @@ Cell[BoxData["\<\"$SimulationToolsVersionNumber\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
 
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Creating \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides\"\>"}],
-  SequenceForm[
-  "Creating ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Documentation/\
-English/Guides"],
-  Editable->False]], "Print"],
-
 Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/AdvancedAnalysis.md\"\
@@ -500,15 +508,15 @@ Cell[BoxData[
     RowBox[{"\<\"path1\"\>", ",", "\<\"path2\"\>", ",", "\<\"phi\"\>", 
      ",", "\<\"pos\"\>", ",", "\<\"r\"\>", ",", "\<\"result\"\>", 
      ",", "\<\"t\"\>", ",", "\<\"t$\"\>", ",", "\<\"x1\"\>", 
-     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$36058\"\>", 
+     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$34900\"\>", 
      ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", ",", "\<\"yFn\"\>", 
-     ",", "\<\"yFn$36058\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
-     ",", "\<\"zFn\"\>", ",", "\<\"zFn$36058\"\>"}], "}"}]}],
+     ",", "\<\"yFn$34900\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
+     ",", "\<\"zFn\"\>", ",", "\<\"zFn$34900\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
    "path1", "path2", "phi", "pos", "r", "result", "t", "t$", "x1", "x2", 
-    "xFn", "xFn$36058", "y1", "y2", "yFn", "yFn$36058", "z1", "z2", "zFn", 
-    "zFn$36058"}],
+    "xFn", "xFn$34900", "y1", "y2", "yFn", "yFn$34900", "z1", "z2", "zFn", 
+    "zFn$34900"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
@@ -813,23 +821,7 @@ Cell[BoxData[
   RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"Waveforms.nb\"\>"}],
   SequenceForm["  Exporting ", "Waveforms.nb"],
-  Editable->False]], "Print"]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"DeleteFile", "::", "nffil"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"File not found during \
-\[NoBreak]\\!\\(DeleteFile[\\\"/Users/ian/Library/Mathematica/Applications/\
-SimulationTools/Source/HTMLDoc/English/Tutorials/tutorial.css\\\"]\\)\
-\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/General/nffil\\\", ButtonNote -> \
-\\\"DeleteFile::nffil\\\"]\\)\"\>"}]], "Message", "MSG"],
-
-Cell[CellGroupData[{
+  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Exporting tutorial index\"\>"], "Print"],
 
@@ -846,12 +838,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/Guides/Overview.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/Guides/Overview.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/Guides/Overview.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/Guides/Overview.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData[
@@ -873,22 +865,22 @@ Cell[BoxData[
      ",", "\<\"CodeAssistOptions\"\>", ",", "\<\"collect\"\>", 
      ",", "\<\"content\"\>", ",", "\<\"content$\"\>", 
      ",", "\<\"CreateCellID\"\>", ",", "\<\"dest\"\>", 
-     ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$9366\"\>", 
+     ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$8954\"\>", 
      ",", "\<\"destName\"\>", ",", "\<\"destName$\"\>", ",", "\<\"dest$\"\>", 
-     ",", "\<\"dest$68679\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
+     ",", "\<\"dest$67694\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
      ",", "\<\"doc\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>", 
-     ",", "\<\"docDir$68679\"\>", ",", "\<\"docFiles\"\>", 
-     ",", "\<\"docLink\"\>", ",", "\<\"docLink$9366\"\>", 
-     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$9366\"\>", 
+     ",", "\<\"docDir$67694\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"docLink\"\>", ",", "\<\"docLink$8954\"\>", 
+     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$8954\"\>", 
      ",", "\<\"docRoot\"\>", ",", "\<\"docSymbols\"\>", 
-     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$834308\"\>", 
+     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$832544\"\>", 
      ",", "\<\"doc$\"\>", ",", "\<\"DrawBackFaces\"\>", 
      ",", "\<\"exportGuides\"\>", ",", "\<\"exportGuides$\"\>", 
-     ",", "\<\"exportGuides$68679\"\>", ",", "\<\"exportNotebook\"\>", 
-     ",", "\<\"exportNotebook$\"\>", ",", "\<\"exportNotebook$68679\"\>", 
+     ",", "\<\"exportGuides$67694\"\>", ",", "\<\"exportNotebook\"\>", 
+     ",", "\<\"exportNotebook$\"\>", ",", "\<\"exportNotebook$67694\"\>", 
      ",", "\<\"exportSymbols\"\>", ",", "\<\"exportSymbols$\"\>", 
-     ",", "\<\"exportSymbols$68679\"\>", ",", "\<\"exportTutorials\"\>", 
-     ",", "\<\"exportTutorials$\"\>", ",", "\<\"exportTutorials$68679\"\>", 
+     ",", "\<\"exportSymbols$67694\"\>", ",", "\<\"exportTutorials\"\>", 
+     ",", "\<\"exportTutorials$\"\>", ",", "\<\"exportTutorials$67694\"\>", 
      ",", "\<\"fixupVersion\"\>", ",", "\<\"formatType\"\>", 
      ",", "\<\"from\"\>", ",", "\<\"from$\"\>", 
      ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
@@ -896,7 +888,7 @@ Cell[BoxData[
      ",", "\<\"GenerateAnnotationDialog\"\>", 
      ",", "\<\"GeneratedCellStyles\"\>", ",", "\<\"GenerateDocumentation\"\>",
       ",", "\<\"generateHTMLDocumentation\"\>", 
-     ",", "\<\"generateHTMLDocumentation$9366\"\>", 
+     ",", "\<\"generateHTMLDocumentation$8954\"\>", 
      ",", "\<\"GhostCellInEmptyNotebook\"\>", ",", "\<\"GreekStyle\"\>", 
      ",", "\<\"GroupOpenerColor\"\>", ",", "\<\"GroupOpenerInsideFrame\"\>", 
      ",", "\<\"GroupTogetherGrouping\"\>", ",", "\<\"guideNames\"\>", 
@@ -904,10 +896,11 @@ Cell[BoxData[
      ",", "\<\"ImageEditMode\"\>", ",", "\<\"KeyEvent\"\>", 
      ",", "\<\"LineHeight\"\>", ",", "\<\"LowerCaseStyle\"\>", 
      ",", "\<\"MenuAnchor\"\>", ",", "\<\"Modifiers\"\>", ",", "\<\"n2\"\>", 
-     ",", "\<\"n2$\"\>", ",", "\<\"nb\"\>", ",", "\<\"nbf\"\>", 
-     ",", "\<\"nbfile\"\>", ",", "\<\"nbfile$\"\>", ",", "\<\"nbf$\"\>", 
-     ",", "\<\"nb$\"\>", ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", 
-     ",", "\<\"nn$\"\>", ",", "\<\"notebooks\"\>", ",", "\<\"package\"\>", 
+     ",", "\<\"n2$\"\>", ",", "\<\"n3\"\>", ",", "\<\"n3$\"\>", 
+     ",", "\<\"nb\"\>", ",", "\<\"nbf\"\>", ",", "\<\"nbfile\"\>", 
+     ",", "\<\"nbfile$\"\>", ",", "\<\"nbf$\"\>", ",", "\<\"nb$\"\>", 
+     ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", ",", "\<\"nn$\"\>", 
+     ",", "\<\"notebooks\"\>", ",", "\<\"package\"\>", 
      ",", "\<\"package100\"\>", ",", "\<\"package101\"\>", 
      ",", "\<\"package102\"\>", ",", "\<\"package103\"\>", 
      ",", "\<\"package104\"\>", ",", "\<\"package105\"\>", 
@@ -916,7 +909,7 @@ Cell[BoxData[
      ",", "\<\"package96\"\>", ",", "\<\"package97\"\>", 
      ",", "\<\"package98\"\>", ",", "\<\"package99\"\>", 
      ",", "\<\"packages\"\>", ",", "\<\"packageSymbols\"\>", 
-     ",", "\<\"packageSymbols$9366\"\>", ",", "\<\"packages$9366\"\>", 
+     ",", "\<\"packageSymbols$8954\"\>", ",", "\<\"packages$8954\"\>", 
      ",", "\<\"package$\"\>", ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
      ",", "\<\"PasteAutoQuoteCharacters\"\>", ",", "\<\"ps\"\>", 
      ",", "\<\"RawInputForm\"\>", ",", "\<\"ReturnCreatesNewCell\"\>", 
@@ -973,21 +966,21 @@ Cell[BoxData[
      ",", "\<\"source88\"\>", ",", "\<\"source89\"\>", ",", "\<\"source9\"\>",
       ",", "\<\"source90\"\>", ",", "\<\"source91\"\>", 
      ",", "\<\"source92\"\>", ",", "\<\"source93\"\>", 
-     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$9366\"\>", 
+     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$8954\"\>", 
      ",", "\<\"src\"\>", ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
-     ",", "\<\"srcDir$834308\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
+     ",", "\<\"srcDir$832544\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
      ",", "\<\"ss$\"\>", ",", "\<\"StripStyleOnPaste\"\>", 
      ",", "\<\"subPath\"\>", ",", "\<\"symbols\"\>", 
      ",", "\<\"symbolsSrcDir\"\>", ",", "\<\"symbolsSrcDir$\"\>", 
-     ",", "\<\"symbolsSrcDir$834308\"\>", ",", "\<\"symbols$\"\>", 
+     ",", "\<\"symbolsSrcDir$832544\"\>", ",", "\<\"symbols$\"\>", 
      ",", "\<\"s$\"\>", ",", "\<\"TrackCellChangeTimes\"\>", 
      ",", "\<\"tutorialDest\"\>", ",", "\<\"tutorialDest$\"\>", 
      ",", "\<\"tutorialHTMLNames\"\>", ",", "\<\"tutorialHTMLNames$\"\>", 
      ",", "\<\"tutorials\"\>", ",", "\<\"tutorialSources\"\>", 
-     ",", "\<\"tutorialSources$9366\"\>", ",", "\<\"tutorials$\"\>", 
+     ",", "\<\"tutorialSources$8954\"\>", ",", "\<\"tutorials$\"\>", 
      ",", "\<\"tutorialTitles\"\>", ",", "\<\"tutorialTitles$\"\>", 
      ",", "\<\"undocumentedSymbols\"\>", 
-     ",", "\<\"undocumentedSymbols$9366\"\>", ",", "\<\"url\"\>", 
+     ",", "\<\"undocumentedSymbols$8954\"\>", ",", "\<\"url\"\>", 
      ",", "\<\"url$\"\>", ",", "\<\"$HTMLDestination\"\>", 
      ",", "\<\"$PackageSymbols\"\>"}], "}"}]}],
   SequenceForm[
@@ -996,58 +989,58 @@ Cell[BoxData[
     "BackFaceOpacity", "BackFaceSpecularColor", "BackFaceSpecularExponent", 
     "Beveled", "CellInsertionPointCell", "CodeAssistMenuBorderColor", 
     "CodeAssistOptions", "collect", "content", "content$", "CreateCellID", 
-    "dest", "destGuides", "destGuides$9366", "destName", "destName$", "dest$",
-     "dest$68679", "diff", "diff$", "doc", "docDir", "docDir$", 
-    "docDir$68679", "docFiles", "docLink", "docLink$9366", "docPackage", 
-    "docPackage$9366", "docRoot", "docSymbols", "docSymbols$", 
-    "docSymbols$834308", "doc$", "DrawBackFaces", "exportGuides", 
-    "exportGuides$", "exportGuides$68679", "exportNotebook", 
-    "exportNotebook$", "exportNotebook$68679", "exportSymbols", 
-    "exportSymbols$", "exportSymbols$68679", "exportTutorials", 
-    "exportTutorials$", "exportTutorials$68679", "fixupVersion", "formatType",
+    "dest", "destGuides", "destGuides$8954", "destName", "destName$", "dest$",
+     "dest$67694", "diff", "diff$", "doc", "docDir", "docDir$", 
+    "docDir$67694", "docFiles", "docLink", "docLink$8954", "docPackage", 
+    "docPackage$8954", "docRoot", "docSymbols", "docSymbols$", 
+    "docSymbols$832544", "doc$", "DrawBackFaces", "exportGuides", 
+    "exportGuides$", "exportGuides$67694", "exportNotebook", 
+    "exportNotebook$", "exportNotebook$67694", "exportSymbols", 
+    "exportSymbols$", "exportSymbols$67694", "exportTutorials", 
+    "exportTutorials$", "exportTutorials$67694", "fixupVersion", "formatType",
      "from", "from$", "FrontFaceGlowColor", "FrontFaceSpecularColor", 
     "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
     "GeneratedCellStyles", "GenerateDocumentation", 
-    "generateHTMLDocumentation", "generateHTMLDocumentation$9366", 
+    "generateHTMLDocumentation", "generateHTMLDocumentation$8954", 
     "GhostCellInEmptyNotebook", "GreekStyle", "GroupOpenerColor", 
     "GroupOpenerInsideFrame", "GroupTogetherGrouping", "guideNames", 
     "guideNames$", "HistoryData", "ImageEditMode", "KeyEvent", "LineHeight", 
-    "LowerCaseStyle", "MenuAnchor", "Modifiers", "n2", "n2$", "nb", "nbf", 
-    "nbfile", "nbfile$", "nbf$", "nb$", "newSyms", "nn", "nn$", "notebooks", 
-    "package", "package100", "package101", "package102", "package103", 
-    "package104", "package105", "package106", "package107", "package94", 
-    "package95", "package96", "package97", "package98", "package99", 
-    "packages", "packageSymbols", "packageSymbols$9366", "packages$9366", 
-    "package$", "paclet", "paclet$", "PasteAutoQuoteCharacters", "ps", 
-    "RawInputForm", "ReturnCreatesNewCell", "s", "s2", "sections", 
-    "sections2", "Shift", "ShowCodeAssist", "skipTargetQ", "source10", 
-    "source108", "source109", "source11", "source110", "source111", 
-    "source112", "source113", "source114", "source115", "source116", 
-    "source117", "source118", "source119", "source12", "source120", 
-    "source121", "source122", "source123", "source13", "source14", "source15",
-     "source16", "source17", "source18", "source19", "source20", "source21", 
-    "source22", "source23", "source24", "source25", "source26", "source27", 
-    "source28", "source29", "source3", "source30", "source31", "source32", 
-    "source33", "source34", "source35", "source36", "source37", "source38", 
-    "source39", "source4", "source40", "source41", "source42", "source43", 
-    "source44", "source45", "source46", "source47", "source48", "source49", 
-    "source5", "source50", "source51", "source52", "source53", "source54", 
-    "source55", "source56", "source57", "source58", "source59", "source6", 
-    "source60", "source61", "source62", "source63", "source64", "source65", 
-    "source66", "source67", "source68", "source69", "source7", "source70", 
-    "source71", "source72", "source73", "source74", "source75", "source76", 
-    "source77", "source78", "source79", "source8", "source80", "source81", 
-    "source82", "source83", "source84", "source85", "source86", "source87", 
-    "source88", "source89", "source9", "source90", "source91", "source92", 
-    "source93", "sourceGuides", "sourceGuides$9366", "src", "srcDir", 
-    "srcDir$", "srcDir$834308", "src$", "ss", "ss$", "StripStyleOnPaste", 
-    "subPath", "symbols", "symbolsSrcDir", "symbolsSrcDir$", 
-    "symbolsSrcDir$834308", "symbols$", "s$", "TrackCellChangeTimes", 
-    "tutorialDest", "tutorialDest$", "tutorialHTMLNames", 
-    "tutorialHTMLNames$", "tutorials", "tutorialSources", 
-    "tutorialSources$9366", "tutorials$", "tutorialTitles", "tutorialTitles$",
-     "undocumentedSymbols", "undocumentedSymbols$9366", "url", "url$", 
-    "$HTMLDestination", "$PackageSymbols"}],
+    "LowerCaseStyle", "MenuAnchor", "Modifiers", "n2", "n2$", "n3", "n3$", 
+    "nb", "nbf", "nbfile", "nbfile$", "nbf$", "nb$", "newSyms", "nn", "nn$", 
+    "notebooks", "package", "package100", "package101", "package102", 
+    "package103", "package104", "package105", "package106", "package107", 
+    "package94", "package95", "package96", "package97", "package98", 
+    "package99", "packages", "packageSymbols", "packageSymbols$8954", 
+    "packages$8954", "package$", "paclet", "paclet$", 
+    "PasteAutoQuoteCharacters", "ps", "RawInputForm", "ReturnCreatesNewCell", 
+    "s", "s2", "sections", "sections2", "Shift", "ShowCodeAssist", 
+    "skipTargetQ", "source10", "source108", "source109", "source11", 
+    "source110", "source111", "source112", "source113", "source114", 
+    "source115", "source116", "source117", "source118", "source119", 
+    "source12", "source120", "source121", "source122", "source123", 
+    "source13", "source14", "source15", "source16", "source17", "source18", 
+    "source19", "source20", "source21", "source22", "source23", "source24", 
+    "source25", "source26", "source27", "source28", "source29", "source3", 
+    "source30", "source31", "source32", "source33", "source34", "source35", 
+    "source36", "source37", "source38", "source39", "source4", "source40", 
+    "source41", "source42", "source43", "source44", "source45", "source46", 
+    "source47", "source48", "source49", "source5", "source50", "source51", 
+    "source52", "source53", "source54", "source55", "source56", "source57", 
+    "source58", "source59", "source6", "source60", "source61", "source62", 
+    "source63", "source64", "source65", "source66", "source67", "source68", 
+    "source69", "source7", "source70", "source71", "source72", "source73", 
+    "source74", "source75", "source76", "source77", "source78", "source79", 
+    "source8", "source80", "source81", "source82", "source83", "source84", 
+    "source85", "source86", "source87", "source88", "source89", "source9", 
+    "source90", "source91", "source92", "source93", "sourceGuides", 
+    "sourceGuides$8954", "src", "srcDir", "srcDir$", "srcDir$832544", "src$", 
+    "ss", "ss$", "StripStyleOnPaste", "subPath", "symbols", "symbolsSrcDir", 
+    "symbolsSrcDir$", "symbolsSrcDir$832544", "symbols$", "s$", 
+    "TrackCellChangeTimes", "tutorialDest", "tutorialDest$", 
+    "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", "tutorialSources",
+     "tutorialSources$8954", "tutorials$", "tutorialTitles", 
+    "tutorialTitles$", "undocumentedSymbols", "undocumentedSymbols$8954", 
+    "url", "url$", "$HTMLDestination", "$PackageSymbols"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ConvergenceMultiplier\"\>"], "Print"],
@@ -1070,12 +1063,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ConvergenceMultiplier.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ConvergenceMultiplier.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ConvergenceMultiplier.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ConvergenceMultiplier.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ConvergenceRate\"\>"], "Print"],
@@ -1097,12 +1092,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ConvergenceRate.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ConvergenceRate.xml\"\>"}\
+],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ConvergenceRate.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ConvergenceRate.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"RichardsonExtrapolant\"\>"], "Print"],
@@ -1111,12 +1107,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/RichardsonExtrapolant.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/RichardsonExtrapolant.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/RichardsonExtrapolant.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/RichardsonExtrapolant.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"DataRegion\"\>"], "Print"],
@@ -1134,12 +1132,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DataRegion.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DataRegion.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DataRegion.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DataRegion.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MergedDataRegion\"\>"], "Print"],
@@ -1148,12 +1146,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MergedDataRegion.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MergedDataRegion.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MergedDataRegion.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MergedDataRegion.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToDataRegion\"\>"], "Print"],
@@ -1169,12 +1168,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToDataRegion.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToDataRegion.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToDataRegion.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToDataRegion.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"VariableName\"\>"], "Print"],
@@ -1183,12 +1182,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/VariableName.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/VariableName.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/VariableName.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/VariableName.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Coordinate\"\>"], "Print"],
@@ -1197,12 +1196,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Coordinate.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Coordinate.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Coordinate.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Coordinate.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateAtMax\"\>"], "Print"],
@@ -1211,12 +1210,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateAtMax.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateAtMax.xml\"\>"}\
+],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateAtMax.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateAtMax.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateOutline\"\>"], "Print"],
@@ -1225,12 +1225,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateOutline.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateOutline.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateOutline.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateOutline.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateRange\"\>"], "Print"],
@@ -1239,12 +1240,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateRange.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateRange.xml\"\>"}\
+],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateRange.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateRange.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateRanges\"\>"], "Print"],
@@ -1253,12 +1255,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateRanges.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateRanges.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateRanges.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateRanges.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinatesAtMax\"\>"], "Print"],
@@ -1267,12 +1270,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinatesAtMax.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinatesAtMax.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinatesAtMax.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinatesAtMax.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateSpacing\"\>"], "Print"],
@@ -1281,12 +1285,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateSpacing.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateSpacing.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateSpacing.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateSpacing.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateSpacings\"\>"], "Print"],
@@ -1295,12 +1300,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateSpacings.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateSpacings.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateSpacings.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/CoordinateSpacings.xml"],
+  
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"DataRepresentationQ\"\>"], "Print"],
@@ -1309,12 +1316,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DataRepresentationQ.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DataRepresentationQ.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DataRepresentationQ.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DataRepresentationQ.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Frequency\"\>"], "Print"],
@@ -1323,12 +1331,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Frequency.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Frequency.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Frequency.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Frequency.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"GridNorm\"\>"], "Print"],
@@ -1337,12 +1345,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/GridNorm.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/GridNorm.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/GridNorm.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/GridNorm.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MapList\"\>"], "Print"],
@@ -1360,12 +1368,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MapList.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MapList.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MapList.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MapList.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MaxCoordinate\"\>"], "Print"],
@@ -1374,12 +1382,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MaxCoordinate.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MaxCoordinate.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MaxCoordinate.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MaxCoordinate.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MaxCoordinates\"\>"], "Print"],
@@ -1388,12 +1397,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MaxCoordinates.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MaxCoordinates.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MaxCoordinates.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MaxCoordinates.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MinCoordinate\"\>"], "Print"],
@@ -1402,12 +1411,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MinCoordinate.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MinCoordinate.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MinCoordinate.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MinCoordinate.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MinCoordinates\"\>"], "Print"],
@@ -1416,12 +1426,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MinCoordinates.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MinCoordinates.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MinCoordinates.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MinCoordinates.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"NDerivative\"\>"], "Print"],
@@ -1430,12 +1440,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/NDerivative.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/NDerivative.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/NDerivative.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/NDerivative.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Phase\"\>"], "Print"],
@@ -1444,12 +1454,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Phase.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Phase.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Phase.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Phase.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Resampled\"\>"], "Print"],
@@ -1458,12 +1468,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Resampled.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Resampled.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Resampled.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Resampled.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"SameGridQ\"\>"], "Print"],
@@ -1472,12 +1482,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/SameGridQ.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SameGridQ.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/SameGridQ.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SameGridQ.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Shifted\"\>"], "Print"],
@@ -1486,12 +1496,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Shifted.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Shifted.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Shifted.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Shifted.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Slab\"\>"], "Print"],
@@ -1500,12 +1510,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Slab.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Slab.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Slab.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Slab.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToList\"\>"], "Print"],
@@ -1521,12 +1531,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToList.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToList.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToList.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToList.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToListOfCoordinates\"\>"], "Print"],
@@ -1542,12 +1552,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToListOfCoordinates.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToListOfCoordinates.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToListOfCoordinates.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToListOfCoordinates.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToListOfData\"\>"], "Print"],
@@ -1564,12 +1575,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToListOfData.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToListOfData.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToListOfData.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToListOfData.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"WithResampling\"\>"], "Print"],
@@ -1578,12 +1589,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/WithResampling.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/WithResampling.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/WithResampling.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/WithResampling.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
@@ -1592,12 +1603,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/AntiDerivative.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/AntiDerivative.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/AntiDerivative.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/AntiDerivative.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"CoordinateAtInterpolatedMax\"\>"], "Print"],
@@ -1606,13 +1617,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateAtInterpolatedMax.xml\"\>"}],
-  
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+CoordinateAtInterpolatedMax.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/CoordinateAtInterpolatedMax.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+CoordinateAtInterpolatedMax.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"DataTable\"\>"], "Print"],
@@ -1629,12 +1641,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DataTable.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DataTable.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DataTable.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DataTable.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"InterpolatedMax\"\>"], "Print"],
@@ -1643,12 +1655,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/InterpolatedMax.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/InterpolatedMax.xml\"\>"}\
+],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/InterpolatedMax.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/InterpolatedMax.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"InterpolatedWhere\"\>"], "Print"],
@@ -1657,12 +1670,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/InterpolatedWhere.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/InterpolatedWhere.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/InterpolatedWhere.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/InterpolatedWhere.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MaxCoordinateSpacing\"\>"], "Print"],
@@ -1671,12 +1685,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MaxCoordinateSpacing.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MaxCoordinateSpacing.xml\
+\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MaxCoordinateSpacing.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MaxCoordinateSpacing.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"MinCoordinateSpacing\"\>"], "Print"],
@@ -1685,12 +1701,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MinCoordinateSpacing.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MinCoordinateSpacing.xml\
+\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/MinCoordinateSpacing.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/MinCoordinateSpacing.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"RestrictedToCommonInterval\"\>"], "Print"],
@@ -1699,12 +1717,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/RestrictedToCommonInterval.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+RestrictedToCommonInterval.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/RestrictedToCommonInterval.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+RestrictedToCommonInterval.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToDataTable\"\>"], "Print"],
@@ -1720,12 +1740,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToDataTable.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToDataTable.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ToDataTable.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ToDataTable.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"UniformSpacingQ\"\>"], "Print"],
@@ -1734,12 +1754,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/UniformSpacingQ.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/UniformSpacingQ.xml\"\>"}\
+],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/UniformSpacingQ.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/UniformSpacingQ.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"FindGridFunctions\"\>"], "Print"],
@@ -1748,12 +1769,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/FindGridFunctions.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/FindGridFunctions.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/FindGridFunctions.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/FindGridFunctions.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadGridFunction\"\>"], "Print"],
@@ -1762,12 +1784,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadGridFunction.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadGridFunction.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadGridFunction.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadGridFunction.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadGridFunctionDimensions\"\>"], "Print"],
@@ -1776,12 +1799,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadGridFunctionDimensions.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadGridFunctionDimensions.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadGridFunctionDimensions.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadGridFunctionDimensions.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadIterations\"\>"], "Print"],
@@ -1790,12 +1815,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadIterations.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadIterations.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadIterations.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadIterations.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadMaps\"\>"], "Print"],
@@ -1804,12 +1829,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadMaps.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadMaps.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadMaps.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadMaps.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadRefinementLevels\"\>"], "Print"],
@@ -1818,12 +1843,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadRefinementLevels.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadRefinementLevels.xml\
+\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadRefinementLevels.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadRefinementLevels.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadTimeLevels\"\>"], "Print"],
@@ -1832,12 +1859,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadTimeLevels.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadTimeLevels.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadTimeLevels.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadTimeLevels.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadGridSpacings\"\>"], "Print"],
@@ -1846,12 +1873,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadGridSpacings.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadGridSpacings.xml\"\>\
+"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadGridSpacings.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadGridSpacings.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadMaxRefinementLevels\"\>"], "Print"],
@@ -1860,12 +1888,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadMaxRefinementLevels.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadMaxRefinementLevels.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadMaxRefinementLevels.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadMaxRefinementLevels.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadTimeRange\"\>"], "Print"],
@@ -1874,12 +1904,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadTimeRange.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadTimeRange.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadTimeRange.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadTimeRange.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadTimeStep\"\>"], "Print"],
@@ -1895,12 +1926,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadTimeStep.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadTimeStep.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadTimeStep.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadTimeStep.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadADMMass\"\>"], "Print"],
@@ -1909,12 +1940,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadADMMass.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadADMMass.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadADMMass.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadADMMass.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ClearAllMemos\"\>"], "Print"],
@@ -1923,12 +1954,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ClearAllMemos.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ClearAllMemos.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ClearAllMemos.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ClearAllMemos.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"DefineMemoFunction\"\>"], "Print"],
@@ -1937,12 +1969,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DefineMemoFunction.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DefineMemoFunction.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/DefineMemoFunction.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/DefineMemoFunction.xml"],
+  
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"$Memoisation\"\>"], "Print"],
@@ -1951,12 +1985,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/$Memoisation.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$Memoisation.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/$Memoisation.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$Memoisation.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"$MultipolePsi4Variable\"\>"], "Print"],
@@ -1965,12 +1999,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/$MultipolePsi4Variable.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$MultipolePsi4Variable.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/$MultipolePsi4Variable.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$MultipolePsi4Variable.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ExportNumericalRelativitySimulation\"\>"], "Print"],
@@ -1979,14 +2015,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ExportNumericalRelativitySimulation.\
-xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ExportNumericalRelativitySimulation.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ExportNumericalRelativitySimulation.\
-xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ExportNumericalRelativitySimulation.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"FindSimulationParameters\"\>"], "Print"],
@@ -1995,12 +2031,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/FindSimulationParameters.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/FindSimulationParameters.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/FindSimulationParameters.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/FindSimulationParameters.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationParameter\"\>"], "Print"],
@@ -2009,12 +2047,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationParameter.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationParameter.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationParameter.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationParameter.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"FindSimulationFiles\"\>"], "Print"],
@@ -2023,12 +2063,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/FindSimulationFiles.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/FindSimulationFiles.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/FindSimulationFiles.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/FindSimulationFiles.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"SimulationNames\"\>"], "Print"],
@@ -2037,12 +2078,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/SimulationNames.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SimulationNames.xml\"\>"}\
+],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/SimulationNames.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SimulationNames.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationCoreCount\"\>"], "Print"],
@@ -2051,12 +2093,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationCoreCount.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationCoreCount.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationCoreCount.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationCoreCount.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
@@ -2065,12 +2109,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationCost.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationCost.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationCost.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationCost.xml"],
+  
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationRunTime\"\>"], "Print"],
@@ -2079,12 +2125,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationRunTime.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationRunTime.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationRunTime.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationRunTime.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationSpeed\"\>"], "Print"],
@@ -2100,12 +2148,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationSpeed.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationSpeed.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationSpeed.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationSpeed.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"SimulationOverview\"\>"], "Print"],
@@ -2114,12 +2163,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/SimulationOverview.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SimulationOverview.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/SimulationOverview.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SimulationOverview.xml"],
+  
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationMemoryUsage\"\>"], "Print"],
@@ -2135,12 +2186,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationMemoryUsage.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadSimulationMemoryUsage.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationMemoryUsage.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadSimulationMemoryUsage.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
@@ -2149,12 +2202,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationSwapUsage.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationSwapUsage.\
+xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadSimulationSwapUsage.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadSimulationSwapUsage.\
+xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
@@ -2172,12 +2227,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/AlignedPhases.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/AlignedPhases.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/AlignedPhases.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/AlignedPhases.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ExportWaveform\"\>"], "Print"],
@@ -2186,12 +2242,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ExportWaveform.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ExportWaveform.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ExportWaveform.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ExportWaveform.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ImportWaveform\"\>"], "Print"],
@@ -2200,12 +2256,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ImportWaveform.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ImportWaveform.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ImportWaveform.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ImportWaveform.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Psi4ToStrain\"\>"], "Print"],
@@ -2222,12 +2278,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Psi4ToStrain.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Psi4ToStrain.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/Psi4ToStrain.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/Psi4ToStrain.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadPsi4\"\>"], "Print"],
@@ -2236,12 +2292,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadPsi4.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadPsi4.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadPsi4.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadPsi4.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadPsi4Modes\"\>"], "Print"],
@@ -2250,12 +2306,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadPsi4Modes.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadPsi4Modes.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadPsi4Modes.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadPsi4Modes.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadPsi4Radii\"\>"], "Print"],
@@ -2264,12 +2321,13 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadPsi4Radii.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadPsi4Radii.xml\"\>"}],
+  
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadPsi4Radii.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadPsi4Radii.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadRadiallyExtrapolatedPsi4\"\>"], "Print"],
@@ -2278,12 +2336,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadRadiallyExtrapolatedPsi4.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedPsi4.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadRadiallyExtrapolatedPsi4.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedPsi4.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadRadiallyExtrapolatedStrain\"\>"], "Print"],
@@ -2292,13 +2352,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadRadiallyExtrapolatedStrain.xml\"\>\
-"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedStrain.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadRadiallyExtrapolatedStrain.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/\
+ReadRadiallyExtrapolatedStrain.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ReadWaveformCycles\"\>"], "Print"],
@@ -2307,12 +2368,14 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadWaveformCycles.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadWaveformCycles.xml\"\
+\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/ReadWaveformCycles.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/ReadWaveformCycles.xml"],
+  
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"WaveformCycles\"\>"], "Print"],
@@ -2321,12 +2384,12 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Writing \"\>", 
    "\[InvisibleSpace]", \
-"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/WaveformCycles.xml\"\>"}],
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/WaveformCycles.xml\"\>"}],
   SequenceForm[
   "Writing ", 
-   "/Users/ian/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/English/ReferencePages/Symbols/WaveformCycles.xml"],
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/WaveformCycles.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Done\"\>"], "Print"]
@@ -2335,12 +2398,12 @@ Cell[BoxData["\<\"Done\"\>"], "Print"]
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-  "995.08621200000004591856850311160087585449`9.018460621938825", ",", 
-   "Null"}], "}"}]], "Output"]
+  "427.1791539999999827159626875072717666626`8.65120996459492", ",", "Null"}],
+   "}"}]], "Output"]
 }, Open  ]]
 },
 WindowSize->{740, 756},
-WindowMargins->{{176, Automatic}, {Automatic, 0}},
+WindowMargins->{{Automatic, 231}, {Automatic, 10}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,

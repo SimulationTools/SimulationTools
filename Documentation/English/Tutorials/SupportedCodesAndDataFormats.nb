@@ -225,13 +225,10 @@ when extracting waveforms using the WeylScal4 thorn one would use
 
 Cell["\<\
 SimulationTools can be made to use another variable name by setting a \
-different value for $MultipolePsi4Variable, e.g.\
-\>", "Text"],
+different value for $MultipolePsi4Variable, e.g.
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$MultipolePsi4Variable", "=", "\"\<psi0\>\""}], ";"}]], "Input",
- CellLabel->"In[1]:="]
+$MultipolePsi4Variable=\[CloseCurlyDoubleQuote]psi0\[CloseCurlyDoubleQuote];\
+\>", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{

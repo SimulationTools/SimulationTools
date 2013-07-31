@@ -76,7 +76,7 @@ Cell["Reading data in Multipole format", "Subsection"],
 
 Cell[BoxData[GridBox[{
    {"ReadPsi4", "ReadPsi4Modes", "ReadPsi4Radii"},
-   {"$MultipolePsi4Variable", "\[Placeholder]", "\[Placeholder]"}
+   {"$MultipolePsi4Variable", "", ""}
   }]], "DefinitionBox3Col"],
 
 Cell["Reading data produced using the Multipole Cactus thorn.", "Caption"],
@@ -109,17 +109,16 @@ Cell[BoxData[
  CellLabel->"In[4]:="],
 
 Cell[BoxData[
- InterpretationBox["\<\"No data for \
-Waveforms`ReadPsi4RadiiStrings[\\\"/Users/ian/Library/Mathematica/\
-Applications/SimulationTools/Data/Simulations/bbh\\\"]\"\>",
-  StringForm[
-  "No data for `1`", 
-   "Waveforms`ReadPsi4RadiiStrings[\"/Users/ian/Library/Mathematica/\
-Applications/SimulationTools/Data/Simulations/bbh\"]"],
-  Editable->False]], "Print",
- CellLabel->"During evaluation of In[4]:="],
-
-Cell[BoxData["$Aborted"], "Output",
+ RowBox[{"DataTable", "[", 
+  RowBox[{
+   InterpretationBox[
+    RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "601", 
+     "\[InvisibleSpace]", "\<\">\"\>"}],
+    SequenceForm["<", 601, ">"],
+    Editable->False], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0.`", ",", "300.`"}], "}"}], "}"}]}], "]"}]], "Output",
  CellLabel->"Out[4]="]
 }, Open  ]],
 
