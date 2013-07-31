@@ -6,7 +6,7 @@ $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 GenerateDocumentation[] :=
   Module[
     {packages,packageSymbols,undocumentedSymbols,docPackage,
-     sourceGuides,
+     sourceGuides,appSymbols,
      destGuides,tutorialSources,docLink,generateHTMLDocumentation},
 
 packages =
@@ -77,7 +77,7 @@ packages =
 
 packageSymbols = Map[# -> DocumentedSymbols["SimulationTools", #] &, packages];
 
-appSymbols = DocumentedSymbols["SimulationTools"];
+appSymbols = "SimulationTools" -> DocumentedSymbols["SimulationTools"];
 
 $PackageSymbols = packageSymbols; (* Used in the Overview.md file *)
 
@@ -88,7 +88,7 @@ Print["Building symbol reference pages"];
 docPackage[package_ -> symbols_] :=
   Map[(Print[#]; BuildSymbolReference["SimulationTools", #, "Source"]) &, symbols];
 Scan[docPackage, packageSymbols];
-docPackage["SimulationTools" -> appSymbols];
+docPackage[appSymbols];
 
 Print["Building guides"];
 sourceGuides = FileNames["*.md", FileNameJoin[{"Source", "Documentation", "English", "Guides"}], Infinity];
@@ -277,7 +277,7 @@ generateHTMLDocumentation[] := Module[
     {srcDir, docSymbols, symbolsSrcDir},
 
     srcDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Source"}];
-    docSymbols = ToString/@Flatten[Map[Last,packageSymbols],1];
+    docSymbols = ToString/@Flatten[Map[Last,Join[packageSymbols,{appSymbols}]],1];
     symbolsSrcDir = FileNameJoin[{srcDir}];
 
     Print["$Context = ", $Context];
