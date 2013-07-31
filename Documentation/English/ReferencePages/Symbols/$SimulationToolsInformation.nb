@@ -98,9 +98,9 @@ Cell[BoxData[GridBox[{
     RowBox[{"1.0", ".0", " ", 
      RowBox[{"(", 
       RowBox[{"git", " ", 
-       RowBox[{
-       "revision", ":", " ", "bac36e4f9acb5ac47a596bdf9500e10f6d07d18c"}]}], 
-      ")"}]}], Cell["", "TableText"]},
+       RowBox[{"revision", ":", " ", 
+        RowBox[{"103", "de9d5e110880abbe1584c24a32d9b27ab4530"}]}]}], ")"}]}],
+     Cell["", "TableText"]},
    {Cell["      ", "TableRowIcon"], "VersionNumber", "1.", Cell[
     "", "TableText"]}
   },

@@ -22,9 +22,9 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"NumericalRelativity":>
+        StripOnInput->False], {"SimulationInformation":>
        Documentation`HelpLookup[
-       "paclet:SimulationTools/tutorial/NumericalRelativity"]},
+       "paclet:SimulationTools/tutorial/SimulationInformation"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -33,25 +33,19 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"See Also \[RightGuillemet]\"\>",
-        StripOnInput->False], {"ReadCores":>Documentation`HelpLookup[
-       "paclet:SimulationTools/ref/ReadCores"], "ReadCPUHours":>
-       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadCPUHours"], 
-       "ReadMemory":>Documentation`HelpLookup[
-       "paclet:SimulationTools/ref/ReadMemory"], "ReadRunSpeed":>
-       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadRunSpeed"], 
-       "ReadSwap":>Documentation`HelpLookup[
-       "paclet:SimulationTools/ref/ReadSwap"], "ReadWalltime":>
-       Documentation`HelpLookup["paclet:SimulationTools/ref/ReadWalltime"]},
-       Appearance->None,
-       MenuAppearance->Automatic]],
-      LineSpacing->{1.4, 0}],
-     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
-\[ThickSpace]",
-     Cell[BoxData[
-      ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
-        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
-       "paclet:SimulationTools/guide/SimulationTools"]},
+        StripOnInput->False], {"ReadSimulationCoreCount":>
+       Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationCoreCount"], 
+       "ReadSimulationCost":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationCost"], 
+       "ReadSimulationMemoryUsage":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationMemoryUsage"], 
+       "ReadSimulationRunTime":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationRunTime"], 
+       "ReadSimulationSpeed":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationSpeed"], 
+       "ReadSimulationSwapUsage":>Documentation`HelpLookup[
+       "paclet:SimulationTools/ref/ReadSimulationSwapUsage"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -63,7 +57,7 @@ Cell[BoxData[GridBox[{
         StripOnInput->False], {"\<\"Go to SimulationTools website\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
-           URL["http://bitbucket.org/ianhinder/SimulationTools"], None}]}], 
+           URL["http://simulationtools.org"], None}]}], 
        Delimiter, "\<\"Go to wolfram Mathematica website\"\>":>
        FrontEndExecute[{
          NotebookLocate[{
@@ -1876,9 +1870,9 @@ Cell["", "SeeAlsoSection",
 Cell[TextData[{
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ReadCores",
+   ButtonBox["ReadSimulationCoreCount",
     BaseStyle->"Link",
-    ButtonData->"paclet:SimulationTools/ref/ReadCores"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationCoreCount"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1886,9 +1880,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ReadCPUHours",
+   ButtonBox["ReadSimulationCost",
     BaseStyle->"Link",
-    ButtonData->"paclet:SimulationTools/ref/ReadCPUHours"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationCost"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1896,9 +1890,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ReadMemory",
+   ButtonBox["ReadSimulationMemoryUsage",
     BaseStyle->"Link",
-    ButtonData->"paclet:SimulationTools/ref/ReadMemory"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationMemoryUsage"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1906,9 +1900,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ReadRunSpeed",
+   ButtonBox["ReadSimulationRunTime",
     BaseStyle->"Link",
-    ButtonData->"paclet:SimulationTools/ref/ReadRunSpeed"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationRunTime"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1916,9 +1910,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ReadSwap",
+   ButtonBox["ReadSimulationSpeed",
     BaseStyle->"Link",
-    ButtonData->"paclet:SimulationTools/ref/ReadSwap"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationSpeed"],
    FontFamily->"Verdana"]], "InlineFormula"],
  "\[NonBreakingSpace]",
  StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
@@ -1926,9 +1920,9 @@ Cell[TextData[{
  " ",
  Cell[BoxData[
   StyleBox[
-   ButtonBox["ReadWalltime",
+   ButtonBox["ReadSimulationSwapUsage",
     BaseStyle->"Link",
-    ButtonData->"paclet:SimulationTools/ref/ReadWalltime"],
+    ButtonData->"paclet:SimulationTools/ref/ReadSimulationSwapUsage"],
    FontFamily->"Verdana"]], "InlineFormula"]
 }], "SeeAlso"]
 }, Open  ]],
@@ -1977,58 +1971,10 @@ Cell["", "TutorialsSection",
    None, None}},
  CellFrameLabelMargins->0],
 
-Cell[TextData[ButtonBox["NumericalRelativity",
+Cell[TextData[ButtonBox["SimulationInformation",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:SimulationTools/tutorial/NumericalRelativity"]], "Tutorials"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["", "MoreAboutSection",
- CellFrameLabels->{{
-    FEPrivate`If[
-     FEPrivate`Or[
-      FEPrivate`SameQ[FEPrivate`$ProductVersion, "6.0"], 
-      FEPrivate`SameQ[FEPrivate`$ProductVersion, "7.0"], 
-      FEPrivate`SameQ[FEPrivate`$ProductVersion, "8.0"]], 
-     Cell[
-      TextData[
-       ButtonBox[
-       "MORE ABOUT", BaseStyle -> None, Appearance -> {Automatic, None}, 
-        Evaluator -> None, Method -> "Preemptive", 
-        ButtonFunction :> (FrontEndExecute[{
-           FrontEnd`SelectionMove[
-            FrontEnd`SelectedNotebook[], All, ButtonCell], 
-           FrontEndToken["OpenCloseGroup"], 
-           FrontEnd`SelectionMove[
-            FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
-      "MoreAboutSection"], 
-     TextData[
-      ButtonBox[
-       Cell[
-        TextData[{
-          Cell[
-           BoxData[
-            InterpretationBox[
-             StyleBox[
-              
-              GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
-               Baseline], "CacheGraphics" -> False], 
-             Spacer[24]]]], "More About"}], "MoreAboutSection"], BaseStyle -> 
-       None, Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
-       "Preemptive", ButtonFunction :> (FrontEndExecute[{
-          FrontEnd`SelectionMove[
-           FrontEnd`SelectedNotebook[], All, ButtonCell], 
-          FrontEndToken["OpenCloseGroup"], 
-          FrontEnd`SelectionMove[
-           FrontEnd`SelectedNotebook[], After, CellContents]}]& )]]], None}, {
-   None, None}},
- CellFrameLabelMargins->0],
-
-Cell[TextData[ButtonBox["SimulationTools",
- BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"]
+  "paclet:SimulationTools/tutorial/SimulationInformation"]], "Tutorials"]
 }, Open  ]],
 
 Cell[CellGroupData[{

@@ -47,18 +47,10 @@ Cell[BoxData[
 
 Cell[BoxData[
  TagBox[
-  RowBox[{"{", 
-   RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Guides/Overview.nb\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Index/_c.cfs\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Index/segments.gen\"\>", ",", 
-    RowBox[{"\[LeftSkeleton]", "108", "\[RightSkeleton]"}], 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/SupportedCodesAndDataFormats.nb\"\>", 
-    ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
-Documentation/English/Tutorials/Waveforms.nb\"\>"}], "}"}],
+  RowBox[{
+  "{", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Documentation/English/ReferencePages/Symbols/ConvergenceMultiplier.nb\"\>", 
+   "}"}],
   Short[#, 10]& ]], "Output"]
 }, Open  ]],
 
@@ -508,15 +500,15 @@ Cell[BoxData[
     RowBox[{"\<\"path1\"\>", ",", "\<\"path2\"\>", ",", "\<\"phi\"\>", 
      ",", "\<\"pos\"\>", ",", "\<\"r\"\>", ",", "\<\"result\"\>", 
      ",", "\<\"t\"\>", ",", "\<\"t$\"\>", ",", "\<\"x1\"\>", 
-     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$34851\"\>", 
+     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$34858\"\>", 
      ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", ",", "\<\"yFn\"\>", 
-     ",", "\<\"yFn$34851\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
-     ",", "\<\"zFn\"\>", ",", "\<\"zFn$34851\"\>"}], "}"}]}],
+     ",", "\<\"yFn$34858\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
+     ",", "\<\"zFn\"\>", ",", "\<\"zFn$34858\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
    "path1", "path2", "phi", "pos", "r", "result", "t", "t$", "x1", "x2", 
-    "xFn", "xFn$34851", "y1", "y2", "yFn", "yFn$34851", "z1", "z2", "zFn", 
-    "zFn$34851"}],
+    "xFn", "xFn$34858", "y1", "y2", "yFn", "yFn$34858", "z1", "z2", "zFn", 
+    "zFn$34858"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
@@ -856,31 +848,32 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Global`* contains \"\>", "\[InvisibleSpace]", 
    RowBox[{"{", 
-    RowBox[{"\<\"appSymbols\"\>", ",", "\<\"AutoQuoteCharacters\"\>", 
-     ",", "\<\"BackFaceColor\"\>", ",", "\<\"BackFaceGlowColor\"\>", 
-     ",", "\<\"BackFaceOpacity\"\>", ",", "\<\"BackFaceSpecularColor\"\>", 
+    RowBox[{"\<\"appSymbols\"\>", ",", "\<\"appSymbols$8908\"\>", 
+     ",", "\<\"AutoQuoteCharacters\"\>", ",", "\<\"BackFaceColor\"\>", 
+     ",", "\<\"BackFaceGlowColor\"\>", ",", "\<\"BackFaceOpacity\"\>", 
+     ",", "\<\"BackFaceSpecularColor\"\>", 
      ",", "\<\"BackFaceSpecularExponent\"\>", ",", "\<\"Beveled\"\>", 
      ",", "\<\"CellInsertionPointCell\"\>", 
      ",", "\<\"CodeAssistMenuBorderColor\"\>", 
      ",", "\<\"CodeAssistOptions\"\>", ",", "\<\"collect\"\>", 
      ",", "\<\"content\"\>", ",", "\<\"content$\"\>", 
      ",", "\<\"CreateCellID\"\>", ",", "\<\"dest\"\>", 
-     ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$8904\"\>", 
+     ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$8908\"\>", 
      ",", "\<\"destName\"\>", ",", "\<\"destName$\"\>", ",", "\<\"dest$\"\>", 
-     ",", "\<\"dest$67645\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
+     ",", "\<\"dest$67652\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
      ",", "\<\"doc\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>", 
-     ",", "\<\"docDir$67645\"\>", ",", "\<\"docFiles\"\>", 
-     ",", "\<\"docLink\"\>", ",", "\<\"docLink$8904\"\>", 
-     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$8904\"\>", 
+     ",", "\<\"docDir$67652\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"docLink\"\>", ",", "\<\"docLink$8908\"\>", 
+     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$8908\"\>", 
      ",", "\<\"docRoot\"\>", ",", "\<\"docSymbols\"\>", 
-     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$832336\"\>", 
+     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$832353\"\>", 
      ",", "\<\"doc$\"\>", ",", "\<\"DrawBackFaces\"\>", 
      ",", "\<\"exportGuides\"\>", ",", "\<\"exportGuides$\"\>", 
-     ",", "\<\"exportGuides$67645\"\>", ",", "\<\"exportNotebook\"\>", 
-     ",", "\<\"exportNotebook$\"\>", ",", "\<\"exportNotebook$67645\"\>", 
+     ",", "\<\"exportGuides$67652\"\>", ",", "\<\"exportNotebook\"\>", 
+     ",", "\<\"exportNotebook$\"\>", ",", "\<\"exportNotebook$67652\"\>", 
      ",", "\<\"exportSymbols\"\>", ",", "\<\"exportSymbols$\"\>", 
-     ",", "\<\"exportSymbols$67645\"\>", ",", "\<\"exportTutorials\"\>", 
-     ",", "\<\"exportTutorials$\"\>", ",", "\<\"exportTutorials$67645\"\>", 
+     ",", "\<\"exportSymbols$67652\"\>", ",", "\<\"exportTutorials\"\>", 
+     ",", "\<\"exportTutorials$\"\>", ",", "\<\"exportTutorials$67652\"\>", 
      ",", "\<\"fixupVersion\"\>", ",", "\<\"formatType\"\>", 
      ",", "\<\"from\"\>", ",", "\<\"from$\"\>", 
      ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
@@ -888,7 +881,7 @@ Cell[BoxData[
      ",", "\<\"GenerateAnnotationDialog\"\>", 
      ",", "\<\"GeneratedCellStyles\"\>", ",", "\<\"GenerateDocumentation\"\>",
       ",", "\<\"generateHTMLDocumentation\"\>", 
-     ",", "\<\"generateHTMLDocumentation$8904\"\>", 
+     ",", "\<\"generateHTMLDocumentation$8908\"\>", 
      ",", "\<\"GhostCellInEmptyNotebook\"\>", ",", "\<\"GreekStyle\"\>", 
      ",", "\<\"GroupOpenerColor\"\>", ",", "\<\"GroupOpenerInsideFrame\"\>", 
      ",", "\<\"GroupTogetherGrouping\"\>", ",", "\<\"guideNames\"\>", 
@@ -905,27 +898,28 @@ Cell[BoxData[
      ",", "\<\"package102\"\>", ",", "\<\"package103\"\>", 
      ",", "\<\"package104\"\>", ",", "\<\"package105\"\>", 
      ",", "\<\"package106\"\>", ",", "\<\"package107\"\>", 
-     ",", "\<\"package94\"\>", ",", "\<\"package95\"\>", 
-     ",", "\<\"package96\"\>", ",", "\<\"package97\"\>", 
-     ",", "\<\"package98\"\>", ",", "\<\"package99\"\>", 
-     ",", "\<\"packages\"\>", ",", "\<\"packageSymbols\"\>", 
-     ",", "\<\"packageSymbols$8904\"\>", ",", "\<\"packages$8904\"\>", 
-     ",", "\<\"package$\"\>", ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
+     ",", "\<\"package108\"\>", ",", "\<\"package94\"\>", 
+     ",", "\<\"package95\"\>", ",", "\<\"package96\"\>", 
+     ",", "\<\"package97\"\>", ",", "\<\"package98\"\>", 
+     ",", "\<\"package99\"\>", ",", "\<\"packages\"\>", 
+     ",", "\<\"packageSymbols\"\>", ",", "\<\"packageSymbols$8908\"\>", 
+     ",", "\<\"packages$8908\"\>", ",", "\<\"package$\"\>", 
+     ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
      ",", "\<\"PasteAutoQuoteCharacters\"\>", ",", "\<\"ps\"\>", 
      ",", "\<\"RawInputForm\"\>", ",", "\<\"ReturnCreatesNewCell\"\>", 
      ",", "\<\"s\"\>", ",", "\<\"s2\"\>", ",", "\<\"sections\"\>", 
      ",", "\<\"sections2\"\>", ",", "\<\"Shift\"\>", 
      ",", "\<\"ShowCodeAssist\"\>", ",", "\<\"skipTargetQ\"\>", 
-     ",", "\<\"source10\"\>", ",", "\<\"source108\"\>", 
-     ",", "\<\"source109\"\>", ",", "\<\"source11\"\>", 
-     ",", "\<\"source110\"\>", ",", "\<\"source111\"\>", 
-     ",", "\<\"source112\"\>", ",", "\<\"source113\"\>", 
-     ",", "\<\"source114\"\>", ",", "\<\"source115\"\>", 
-     ",", "\<\"source116\"\>", ",", "\<\"source117\"\>", 
-     ",", "\<\"source118\"\>", ",", "\<\"source119\"\>", 
-     ",", "\<\"source12\"\>", ",", "\<\"source120\"\>", 
-     ",", "\<\"source121\"\>", ",", "\<\"source122\"\>", 
-     ",", "\<\"source123\"\>", ",", "\<\"source13\"\>", 
+     ",", "\<\"source10\"\>", ",", "\<\"source109\"\>", 
+     ",", "\<\"source11\"\>", ",", "\<\"source110\"\>", 
+     ",", "\<\"source111\"\>", ",", "\<\"source112\"\>", 
+     ",", "\<\"source113\"\>", ",", "\<\"source114\"\>", 
+     ",", "\<\"source115\"\>", ",", "\<\"source116\"\>", 
+     ",", "\<\"source117\"\>", ",", "\<\"source118\"\>", 
+     ",", "\<\"source119\"\>", ",", "\<\"source12\"\>", 
+     ",", "\<\"source120\"\>", ",", "\<\"source121\"\>", 
+     ",", "\<\"source122\"\>", ",", "\<\"source123\"\>", 
+     ",", "\<\"source124\"\>", ",", "\<\"source13\"\>", 
      ",", "\<\"source14\"\>", ",", "\<\"source15\"\>", 
      ",", "\<\"source16\"\>", ",", "\<\"source17\"\>", 
      ",", "\<\"source18\"\>", ",", "\<\"source19\"\>", 
@@ -966,42 +960,42 @@ Cell[BoxData[
      ",", "\<\"source88\"\>", ",", "\<\"source89\"\>", ",", "\<\"source9\"\>",
       ",", "\<\"source90\"\>", ",", "\<\"source91\"\>", 
      ",", "\<\"source92\"\>", ",", "\<\"source93\"\>", 
-     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$8904\"\>", 
+     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$8908\"\>", 
      ",", "\<\"src\"\>", ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
-     ",", "\<\"srcDir$832336\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
+     ",", "\<\"srcDir$832353\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
      ",", "\<\"ss$\"\>", ",", "\<\"StripStyleOnPaste\"\>", 
      ",", "\<\"subPath\"\>", ",", "\<\"symbols\"\>", 
      ",", "\<\"symbolsSrcDir\"\>", ",", "\<\"symbolsSrcDir$\"\>", 
-     ",", "\<\"symbolsSrcDir$832336\"\>", ",", "\<\"symbols$\"\>", 
+     ",", "\<\"symbolsSrcDir$832353\"\>", ",", "\<\"symbols$\"\>", 
      ",", "\<\"s$\"\>", ",", "\<\"TrackCellChangeTimes\"\>", 
      ",", "\<\"tutorialDest\"\>", ",", "\<\"tutorialDest$\"\>", 
      ",", "\<\"tutorialHTMLNames\"\>", ",", "\<\"tutorialHTMLNames$\"\>", 
      ",", "\<\"tutorials\"\>", ",", "\<\"tutorialSources\"\>", 
-     ",", "\<\"tutorialSources$8904\"\>", ",", "\<\"tutorials$\"\>", 
+     ",", "\<\"tutorialSources$8908\"\>", ",", "\<\"tutorials$\"\>", 
      ",", "\<\"tutorialTitles\"\>", ",", "\<\"tutorialTitles$\"\>", 
      ",", "\<\"undocumentedSymbols\"\>", 
-     ",", "\<\"undocumentedSymbols$8904\"\>", ",", "\<\"url\"\>", 
+     ",", "\<\"undocumentedSymbols$8908\"\>", ",", "\<\"url\"\>", 
      ",", "\<\"url$\"\>", ",", "\<\"$HTMLDestination\"\>", 
      ",", "\<\"$PackageSymbols\"\>"}], "}"}]}],
   SequenceForm[
   "Global`* contains ", {
-   "appSymbols", "AutoQuoteCharacters", "BackFaceColor", "BackFaceGlowColor", 
-    "BackFaceOpacity", "BackFaceSpecularColor", "BackFaceSpecularExponent", 
-    "Beveled", "CellInsertionPointCell", "CodeAssistMenuBorderColor", 
-    "CodeAssistOptions", "collect", "content", "content$", "CreateCellID", 
-    "dest", "destGuides", "destGuides$8904", "destName", "destName$", "dest$",
-     "dest$67645", "diff", "diff$", "doc", "docDir", "docDir$", 
-    "docDir$67645", "docFiles", "docLink", "docLink$8904", "docPackage", 
-    "docPackage$8904", "docRoot", "docSymbols", "docSymbols$", 
-    "docSymbols$832336", "doc$", "DrawBackFaces", "exportGuides", 
-    "exportGuides$", "exportGuides$67645", "exportNotebook", 
-    "exportNotebook$", "exportNotebook$67645", "exportSymbols", 
-    "exportSymbols$", "exportSymbols$67645", "exportTutorials", 
-    "exportTutorials$", "exportTutorials$67645", "fixupVersion", "formatType",
+   "appSymbols", "appSymbols$8908", "AutoQuoteCharacters", "BackFaceColor", 
+    "BackFaceGlowColor", "BackFaceOpacity", "BackFaceSpecularColor", 
+    "BackFaceSpecularExponent", "Beveled", "CellInsertionPointCell", 
+    "CodeAssistMenuBorderColor", "CodeAssistOptions", "collect", "content", 
+    "content$", "CreateCellID", "dest", "destGuides", "destGuides$8908", 
+    "destName", "destName$", "dest$", "dest$67652", "diff", "diff$", "doc", 
+    "docDir", "docDir$", "docDir$67652", "docFiles", "docLink", 
+    "docLink$8908", "docPackage", "docPackage$8908", "docRoot", "docSymbols", 
+    "docSymbols$", "docSymbols$832353", "doc$", "DrawBackFaces", 
+    "exportGuides", "exportGuides$", "exportGuides$67652", "exportNotebook", 
+    "exportNotebook$", "exportNotebook$67652", "exportSymbols", 
+    "exportSymbols$", "exportSymbols$67652", "exportTutorials", 
+    "exportTutorials$", "exportTutorials$67652", "fixupVersion", "formatType",
      "from", "from$", "FrontFaceGlowColor", "FrontFaceSpecularColor", 
     "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
     "GeneratedCellStyles", "GenerateDocumentation", 
-    "generateHTMLDocumentation", "generateHTMLDocumentation$8904", 
+    "generateHTMLDocumentation", "generateHTMLDocumentation$8908", 
     "GhostCellInEmptyNotebook", "GreekStyle", "GroupOpenerColor", 
     "GroupOpenerInsideFrame", "GroupTogetherGrouping", "guideNames", 
     "guideNames$", "HistoryData", "ImageEditMode", "KeyEvent", "LineHeight", 
@@ -1009,15 +1003,15 @@ Cell[BoxData[
     "nb", "nbf", "nbfile", "nbfile$", "nbf$", "nb$", "newSyms", "nn", "nn$", 
     "notebooks", "package", "package100", "package101", "package102", 
     "package103", "package104", "package105", "package106", "package107", 
-    "package94", "package95", "package96", "package97", "package98", 
-    "package99", "packages", "packageSymbols", "packageSymbols$8904", 
-    "packages$8904", "package$", "paclet", "paclet$", 
+    "package108", "package94", "package95", "package96", "package97", 
+    "package98", "package99", "packages", "packageSymbols", 
+    "packageSymbols$8908", "packages$8908", "package$", "paclet", "paclet$", 
     "PasteAutoQuoteCharacters", "ps", "RawInputForm", "ReturnCreatesNewCell", 
     "s", "s2", "sections", "sections2", "Shift", "ShowCodeAssist", 
-    "skipTargetQ", "source10", "source108", "source109", "source11", 
-    "source110", "source111", "source112", "source113", "source114", 
-    "source115", "source116", "source117", "source118", "source119", 
-    "source12", "source120", "source121", "source122", "source123", 
+    "skipTargetQ", "source10", "source109", "source11", "source110", 
+    "source111", "source112", "source113", "source114", "source115", 
+    "source116", "source117", "source118", "source119", "source12", 
+    "source120", "source121", "source122", "source123", "source124", 
     "source13", "source14", "source15", "source16", "source17", "source18", 
     "source19", "source20", "source21", "source22", "source23", "source24", 
     "source25", "source26", "source27", "source28", "source29", "source3", 
@@ -1033,13 +1027,13 @@ Cell[BoxData[
     "source8", "source80", "source81", "source82", "source83", "source84", 
     "source85", "source86", "source87", "source88", "source89", "source9", 
     "source90", "source91", "source92", "source93", "sourceGuides", 
-    "sourceGuides$8904", "src", "srcDir", "srcDir$", "srcDir$832336", "src$", 
+    "sourceGuides$8908", "src", "srcDir", "srcDir$", "srcDir$832353", "src$", 
     "ss", "ss$", "StripStyleOnPaste", "subPath", "symbols", "symbolsSrcDir", 
-    "symbolsSrcDir$", "symbolsSrcDir$832336", "symbols$", "s$", 
+    "symbolsSrcDir$", "symbolsSrcDir$832353", "symbols$", "s$", 
     "TrackCellChangeTimes", "tutorialDest", "tutorialDest$", 
     "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", "tutorialSources",
-     "tutorialSources$8904", "tutorials$", "tutorialTitles", 
-    "tutorialTitles$", "undocumentedSymbols", "undocumentedSymbols$8904", 
+     "tutorialSources$8908", "tutorials$", "tutorialTitles", 
+    "tutorialTitles$", "undocumentedSymbols", "undocumentedSymbols$8908", 
     "url", "url$", "$HTMLDestination", "$PackageSymbols"}],
   Editable->False]], "Print"],
 
@@ -2392,13 +2386,138 @@ HTMLDoc/Documentation/English/ReferencePages/Symbols/WaveformCycles.xml\"\>"}],
 HTMLDoc/Documentation/English/ReferencePages/Symbols/WaveformCycles.xml"],
   Editable->False]], "Print"],
 
+Cell[BoxData["\<\"SimulationPath\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SimulationPath.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/SimulationPath.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationPath\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$SimulationPath.xml\"\>"}\
+],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$SimulationPath.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationToolsCompatibilityVersion\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsCompatibilityVersion.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsCompatibilityVersion.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationToolsInformation\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsInformation.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsInformation.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationToolsInstallationDirectory\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsInstallationDirectory.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsInstallationDirectory.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationToolsReleaseNumber\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsReleaseNumber.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsReleaseNumber.xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationToolsVersion\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$SimulationToolsVersion.\
+xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$SimulationToolsVersion.\
+xml"],
+  Editable->False]], "Print"],
+
+Cell[BoxData["\<\"$SimulationToolsVersionNumber\"\>"], "Print"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Writing \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsVersionNumber.xml\"\>"}],
+  SequenceForm[
+  "Writing ", 
+   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
+HTMLDoc/Documentation/English/ReferencePages/Symbols/$\
+SimulationToolsVersionNumber.xml"],
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"Done\"\>"], "Print"]
 }, Open  ]],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
-  "433.46430700000001934313331730663776397705`8.657553255204563", ",", 
+  "449.86596500000001697117113508284091949463`8.673683050762106", ",", 
    "Null"}], "}"}]], "Output"]
 }, Open  ]]
 },

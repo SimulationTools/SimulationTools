@@ -21,9 +21,9 @@ Cell[BoxData[GridBox[{
     TextData[{
      Cell[BoxData[
       ActionMenuBox[
-       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
         StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
-       "paclet:SimulationTools/guide/SimulationTools"]},
+       "paclet:SimulationTools/tutorial/SimulationTools"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -206,7 +206,8 @@ Data/Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
 
 Cell[CellGroupData[{
 
-Cell["", "MoreAboutSection",
+Cell["", "TutorialsSection",
+ WholeCellGroupOpener->True,
  CellFrameLabels->{{
     FEPrivate`If[
      FEPrivate`Or[
@@ -216,7 +217,7 @@ Cell["", "MoreAboutSection",
      Cell[
       TextData[
        ButtonBox[
-       "MORE ABOUT", BaseStyle -> None, Appearance -> {Automatic, None}, 
+       "TUTORIALS", BaseStyle -> None, Appearance -> {Automatic, None}, 
         Evaluator -> None, Method -> "Preemptive", 
         ButtonFunction :> (FrontEndExecute[{
            FrontEnd`SelectionMove[
@@ -224,7 +225,7 @@ Cell["", "MoreAboutSection",
            FrontEndToken["OpenCloseGroup"], 
            FrontEnd`SelectionMove[
             FrontEnd`SelectedNotebook[], After, CellContents]}]& )]], 
-      "MoreAboutSection"], 
+      "TutorialsSection"], 
      TextData[
       ButtonBox[
        Cell[
@@ -236,7 +237,7 @@ Cell["", "MoreAboutSection",
               
               GraphicsBox[{}, ImageSize -> {24, 0}, BaselinePosition -> 
                Baseline], "CacheGraphics" -> False], 
-             Spacer[24]]]], "More About"}], "MoreAboutSection"], BaseStyle -> 
+             Spacer[24]]]], "Tutorials"}], "TutorialsSection"], BaseStyle -> 
        None, Appearance -> {Automatic, None}, Evaluator -> None, Method -> 
        "Preemptive", ButtonFunction :> (FrontEndExecute[{
           FrontEnd`SelectionMove[
@@ -249,7 +250,8 @@ Cell["", "MoreAboutSection",
 
 Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
- ButtonData->"paclet:SimulationTools/guide/SimulationTools"]], "MoreAbout"]
+ ButtonData->
+  "paclet:SimulationTools/tutorial/SimulationTools"]], "Tutorials"]
 }, Open  ]],
 
 Cell[CellGroupData[{
