@@ -225,7 +225,8 @@ generateHTMLDocumentation[] := Module[
 
     (* Fixup tutorial CSS *)
     Map[Export[#, StringReplace[Import[#, "String"], 
-        "\"HTMLFiles/" ~~ LetterCharacter .. ~~ ".css\"" -> "\"tutorial.css\""], "String"] &, 
+        {"\"HTMLFiles/" ~~ LetterCharacter .. ~~ ".css\"" -> "\"tutorial.css\"",
+         "HTMLFiles/xhtml-math11-f.dtd" -> "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd"}], "String"] &, 
       FileNameJoin[{tutorialDest, #}] & /@ tutorialHTMLNames];
     srcDir = FileNameJoin[{$SimulationToolsInstallationDirectory, "Source"}];
     Quiet[DeleteFile[FileNameJoin[{tutorialDest, "tutorial.css"}]];, DeleteFile::nffil];
