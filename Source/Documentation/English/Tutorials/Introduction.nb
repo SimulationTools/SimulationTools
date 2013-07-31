@@ -36,7 +36,11 @@ be placed in ~/Library/",
  "/Applications on Mac OS, and ~/.",
  StyleBox["Mathematica",
   FontSlant->"Italic"],
- "/Applications on Linux."
+ "/Applications on Linux.  The h5mma HDF5 reader is also required; the h5mma \
+directory should also be placed in the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " Applications directory."
 }], "Text"]
 }, Open  ]],
 
