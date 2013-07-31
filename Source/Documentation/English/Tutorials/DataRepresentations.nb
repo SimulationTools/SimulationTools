@@ -338,7 +338,7 @@ Cell[BoxData[
 Cell[TextData[{
  ButtonBox["Dimensions",
   BaseStyle->"Link",
-  ButtonData->"paclet:SimulationTools/ref/Dimensions"],
+  ButtonData->"paclet:ref/Dimensions"],
  " returns a list {",
  StyleBox["nx",
   FontSlant->"Italic"],
