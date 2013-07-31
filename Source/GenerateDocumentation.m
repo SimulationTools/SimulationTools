@@ -133,7 +133,11 @@ Module[{doc = docRoot[from]},
   {"paclet:SimulationTools/ref/" ~~ ss__ :> 
     "ReferencePages/Symbols/" <> ss <> 
      ".xml",
-   
+
+   "paclet:ref/" ~~ ss__ :> 
+    "http://reference.wolfram.com/mathematica/ref/" <> ss <> 
+     ".html",
+      
    "paclet:SimulationTools/tutorial/" ~~ ss__ :> 
     "Tutorials/" <> StringReplace[ss," "->""] <> ".html",
    
@@ -143,7 +147,9 @@ Module[{doc = docRoot[from]},
   (* s2 is the link target relative to Documentation/English.  subPath
      is the link host notebook path relative to Documentation/English. *)
 
-  StringJoin[ConstantArray["../", FileNameDepth[subPath]]]<>s2];
+  If[StringMatchQ[s2, "http://"~~__], 
+     s2,
+     StringJoin[ConstantArray["../", FileNameDepth[subPath]]]<>s2]];
 
 skipTargetQ[src_, dest_] :=
     If[FileType[dest] =!= None,
