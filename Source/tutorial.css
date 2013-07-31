@@ -3,6 +3,16 @@ body {
   margin: 0;
 }
 
+a {
+  color: #142899;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  color: #da6525;
+}
+
 * {
   clear: both;
 }
