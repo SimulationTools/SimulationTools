@@ -1,10 +1,10 @@
 {
  "Application" -> "SimulationTools",
- "Title" -> "SimulationToolsContents",
+ "Title" -> "SimulationTools",
  (* "Related Tutorials" -> {"DataRegion", "NumericalRelativity"}, *)
  "Keywords" -> {},
  "Label" -> "SimulationTools Tutorial",
  "Package" -> "SimulationTools",
- "Summary" -> "Documentation Contents for SimulationTools",
+ "Summary" -> "SimulationTools Tutorial",
  "Synonyms" -> {}
  }
