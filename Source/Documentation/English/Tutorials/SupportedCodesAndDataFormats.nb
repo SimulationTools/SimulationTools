@@ -1,9 +1,7 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell["\<\
-Supported Codes and Data Formats\
-\>", "Title"],
+Cell["Supported Codes and Data Formats", "Title"],
 
 Cell["\<\
 SimulationTools has built-in support for reading the output data from many \
@@ -71,9 +69,7 @@ the number of cores used for a simulation from SimFactory output.\
 
 Cell[CellGroupData[{
 
-Cell["\<\
-EinsteinToolkit/Cactus simulation data\
-\>", "Section"],
+Cell["EinsteinToolkit/Cactus simulation data", "Section"],
 
 Cell["\<\
 SimulationTools has support for reading data produced by a large number of \
@@ -108,9 +104,7 @@ parameter.\
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Grid functions (CarpetIOHDF5, CarpetIOASCII)\
-\>", "Subsection"],
+Cell["Grid functions (CarpetIOHDF5, CarpetIOASCII)", "Subsection"],
 
 Cell["\<\
 SimulationTools can read grid function data output by the Cactus IO \
@@ -145,9 +139,7 @@ parameters.\
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Waveform extraction (Multipole)\
-\>", "Subsection"],
+Cell["Waveform extraction (Multipole)", "Subsection"],
 
 Cell["\<\
 The Multipole thorn produces output for the spherical harmonic modes of \
@@ -182,12 +174,10 @@ when extracting waveforms using the WeylScal4 thorn one would use
 
 Cell["\<\
 SimulationTools can be made to use another variable name by setting a \
-different value for $MultipolePsi4Variable, e.g.\
-\>", "Text"],
+different value for $MultipolePsi4Variable, e.g.
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$MultipolePsi4Variable", "=", "\"\<psi0\>\""}], ";"}]], "Input"]
+$MultipolePsi4Variable=\[CloseCurlyDoubleQuote]psi0\[CloseCurlyDoubleQuote];\
+\>", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -341,9 +331,7 @@ the included ",
 
 Cell[CellGroupData[{
 
-Cell["\<\
-Numerical relativity data format (NRDF)\
-\>", "Section"],
+Cell["Numerical relativity data format (NRDF)", "Section"],
 
 Cell["\<\
 SimulationTools has support for reading data from simulations in the \
