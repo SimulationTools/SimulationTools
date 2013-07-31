@@ -17,10 +17,11 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"DataTable":>Documentation`HelpLookup[
-       "paclet:SimulationTools/tutorial/DataTable"], "NumericalRelativity":>
+        StripOnInput->False], {"DataRepresentations":>
        Documentation`HelpLookup[
-       "paclet:SimulationTools/tutorial/NumericalRelativity"], "BlackHoles":>
+       "paclet:SimulationTools/tutorial/DataRepresentations"], 
+       "SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SimulationTools"], "BlackHoles":>
        Documentation`HelpLookup["paclet:SimulationTools/tutorial/BlackHoles"]},
        Appearance->None,
        MenuAppearance->Automatic]],
@@ -2418,15 +2419,15 @@ Cell["", "RelatedTutorialsSection",
    None, None}},
  CellFrameLabelMargins->0],
 
-Cell[TextData[ButtonBox["DataTable",
+Cell[TextData[ButtonBox["DataRepresentations",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:SimulationTools/tutorial/DataTable"]], "RelatedTutorials"],
+  "paclet:SimulationTools/tutorial/DataRepresentations"]], "RelatedTutorials"],
 
-Cell[TextData[ButtonBox["NumericalRelativity",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:SimulationTools/tutorial/NumericalRelativity"]], "RelatedTutorials"],
+  "paclet:SimulationTools/tutorial/SimulationTools"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["BlackHoles",
  BaseStyle->"Link",

@@ -17,13 +17,11 @@ Cell[BoxData[GridBox[{
      Cell[BoxData[
       ActionMenuBox[
        FrameBox["\<\"Related Tutorials \[RightGuillemet]\"\>",
-        StripOnInput->False], {"NumericalRelativity":>
-       Documentation`HelpLookup[
-       "paclet:SimulationTools/tutorial/NumericalRelativity"], "Binaries":>
+        StripOnInput->False], {"SimulationTools":>Documentation`HelpLookup[
+       "paclet:SimulationTools/tutorial/SimulationTools"], "Binaries":>
        Documentation`HelpLookup["paclet:SimulationTools/tutorial/Binaries"], 
        "BlackHoles":>Documentation`HelpLookup[
-       "paclet:SimulationTools/tutorial/BlackHoles"], "Trackers":>
-       Documentation`HelpLookup["paclet:SimulationTools/tutorial/Trackers"]},
+       "paclet:SimulationTools/tutorial/BlackHoles"]},
        Appearance->None,
        MenuAppearance->Automatic]],
       LineSpacing->{1.4, 0}],
@@ -2949,10 +2947,10 @@ Cell["", "RelatedTutorialsSection",
    None, None}},
  CellFrameLabelMargins->0],
 
-Cell[TextData[ButtonBox["NumericalRelativity",
+Cell[TextData[ButtonBox["SimulationTools",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:SimulationTools/tutorial/NumericalRelativity"]], "RelatedTutorials"],
+  "paclet:SimulationTools/tutorial/SimulationTools"]], "RelatedTutorials"],
 
 Cell[TextData[ButtonBox["Binaries",
  BaseStyle->"Link",
@@ -2961,12 +2959,7 @@ Cell[TextData[ButtonBox["Binaries",
 Cell[TextData[ButtonBox["BlackHoles",
  BaseStyle->"Link",
  ButtonData->
-  "paclet:SimulationTools/tutorial/BlackHoles"]], "RelatedTutorials"],
-
-Cell[TextData[ButtonBox["Trackers",
- BaseStyle->"Link",
- ButtonData->
-  "paclet:SimulationTools/tutorial/Trackers"]], "RelatedTutorials"]
+  "paclet:SimulationTools/tutorial/BlackHoles"]], "RelatedTutorials"]
 }, Open  ]]
 }, Open  ]],
 
