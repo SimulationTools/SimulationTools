@@ -89,7 +89,7 @@ Cell[BoxData[GridBox[{
       RowBox[{
        RowBox[{
         RowBox[{
-         RowBox[{"/", "Users"}], "/", "barry"}], "/", "Library"}], "/", 
+         RowBox[{"/", "Users"}], "/", "ian"}], "/", "Library"}], "/", 
        "Mathematica"}], "/", "Applications"}], "/", "SimulationTools"}], Cell[
     "", "TableText"]},
    {Cell["      ", "TableRowIcon"], "ReleaseNumber", "0", Cell[
@@ -99,8 +99,7 @@ Cell[BoxData[GridBox[{
      RowBox[{"(", 
       RowBox[{"git", " ", 
        RowBox[{"revision", ":", " ", 
-        RowBox[{"90", "aa478a11bad3a6b707fbdf224a01aabebba04e"}]}]}], ")"}]}],
-     Cell["", "TableText"]},
+        RowBox[{"<", "unknown", ">"}]}]}], ")"}]}], Cell["", "TableText"]},
    {Cell["      ", "TableRowIcon"], "VersionNumber", "1.", Cell[
     "", "TableText"]}
   },
