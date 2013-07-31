@@ -32,8 +32,13 @@ support other simulation types in the future.\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"SimulationOverview", "[", "$SimulationToolsTestSimulation", 
-  "]"}]], "Input"]
+ RowBox[{
+  RowBox[{"$SimulationPath", "=", 
+   RowBox[{"{", "$SimulationToolsTestSimulationDirectory", "}"}]}], 
+  ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"SimulationOverview", "[", "\"\<bbh\>\"", "]"}]], "Input"]
 }, Open  ]],
 
 Cell[CellGroupData[{
