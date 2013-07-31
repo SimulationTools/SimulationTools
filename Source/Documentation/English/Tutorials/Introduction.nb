@@ -75,12 +75,17 @@ Cell[CellGroupData[{
 
 Cell["Acknowledgment", "Subsection"],
 
-Cell["\<\
-We request that you acknowledge the use of SimulationTools in any scientific \
-publication, for example with the phrase \[OpenCurlyDoubleQuote]We thank Ian \
-Hinder and Barry Wardell for the SimulationTools analysis package\
-\[CloseCurlyDoubleQuote].  \
-\>", "Text"]
+Cell[TextData[{
+ "We request that you acknowledge the use of SimulationTools in any \
+scientific publication, for example with the phrase \[OpenCurlyDoubleQuote]We \
+thank Ian Hinder and Barry Wardell for the SimulationTools analysis package\
+\[CloseCurlyDoubleQuote], as well as a citation to the webpage ",
+ ButtonBox["http://simulationtools.org/.",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://simulationtools.org/"], None},
+  ButtonNote->"http://simulationtools.org/"]
+}], "Text"]
 }, Open  ]]
 }, Open  ]]
 },
