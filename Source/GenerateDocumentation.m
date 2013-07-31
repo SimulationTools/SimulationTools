@@ -193,7 +193,7 @@ generateHTMLDocumentation[] := Module[
 
          (* Fixme: This should be done in a more generic way *)
          n3 = n2 /. (Cell[___, CellFrameLabels -> {{FEPrivate`If[_, _, _], _}, _}, ___]) :>
-           Cell[TextData["RelatedTutorials"], "RelatedTutorialsSection"];
+           Cell[TextData["Related Tutorials"], "RelatedTutorialsSection"];
 
          Export[destName, n3];
          NotebookClose[nb]];
