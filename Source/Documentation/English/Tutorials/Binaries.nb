@@ -168,25 +168,27 @@ coordinates:\
 \>", "Text"],
 
 Cell[BoxData[
- RowBox[{"pos", "=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"xFn", "=", 
-       RowBox[{"Interpolation", "[", "x1", "]"}]}], ",", 
-      RowBox[{"yFn", "=", 
-       RowBox[{"Interpolation", "[", "y1", "]"}]}], ",", 
-      RowBox[{"zFn", "=", 
-       RowBox[{"Interpolation", "[", "z1", "]"}]}]}], "}"}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Function", "[", 
-     RowBox[{"t", ",", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"xFn", "[", "t", "]"}], ",", 
-        RowBox[{"yFn", "[", "t", "]"}], ",", 
-        RowBox[{"zFn", "[", "t", "]"}]}], "}"}]}], "]"}]}], "]"}]}]], "Input"],
+ RowBox[{
+  RowBox[{"pos", "=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"xFn", "=", 
+        RowBox[{"Interpolation", "[", "x1", "]"}]}], ",", 
+       RowBox[{"yFn", "=", 
+        RowBox[{"Interpolation", "[", "y1", "]"}]}], ",", 
+       RowBox[{"zFn", "=", 
+        RowBox[{"Interpolation", "[", "z1", "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Function", "[", 
+      RowBox[{"t", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"xFn", "[", "t", "]"}], ",", 
+         RowBox[{"yFn", "[", "t", "]"}], ",", 
+         RowBox[{"zFn", "[", "t", "]"}]}], "}"}]}], "]"}]}], "]"}]}], 
+  ";"}]], "Input"],
 
 Cell[BoxData[
  RowBox[{"pos", "[", "3.5", "]"}]], "Input"]
