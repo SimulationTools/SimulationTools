@@ -176,7 +176,7 @@ SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
    var__ ~~ 
     "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
       "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
-  h5Files = FindSimulationFiles["bbh", pattern];
+  h5Files = FindSimulationFiles[sim, pattern];
   leafnames = FileNameTake[#, -1] & /@ h5Files;
   varnames = Union[First[StringSplit[#, "."]] & /@ leafnames]];
 
@@ -191,7 +191,7 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadGridFunctionDimensions[sim_String
    varName ~~ 
     "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
       "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
-  h5Files = FindSimulationFiles["bbh", pattern];
+  h5Files = FindSimulationFiles[sim, pattern];
   leafnames = FileNameTake[#, -1] & /@ h5Files;
   dimStrings = StringSplit[#, "."][[2]] & /@ leafnames;
   dimRules =
