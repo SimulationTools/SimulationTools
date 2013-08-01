@@ -146,9 +146,9 @@ $SimulationToolsVersion :=
     gitrev = First[gitrev];
   ];
 
-  If[!StringQ[gitrev], gitrev = "<unknown>"];
+  If[!StringQ[gitrev], gitrev = "", gitrev = " (" <> gitrev <> ")"];
 
-  version <> "." <> release <> buildid <> " (git revision: " <> gitrev <>")"
+  version <> "." <> release <> buildid <> gitrev
 ]
 
 $SimulationToolsInformation :=
