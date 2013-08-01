@@ -2,6 +2,7 @@
 
 TestSuite[
 	{
+		"General.mt",
 		"BHCoordinates.mt",
 		"CarpetHDF5.mt",
 		"DataAnalysis.mt",

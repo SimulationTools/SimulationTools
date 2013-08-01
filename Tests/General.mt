@@ -1,0 +1,1 @@
+Print["Mathematica Version: "<>$Version];
