@@ -9,8 +9,7 @@ Prepare the files
 
 rsync -avh --filter="merge filter.rules" ../../ SimulationTools/
 
-date +"%Y.%m.%d-%H.%M" > SimulationTools/BUILD_ID
-git rev-parse HEAD > SimulationTools/GIT_REVISION
+date +"%B %d, %Y" > SimulationTools/BUILD_ID
 
 Create tarball
 ==============
