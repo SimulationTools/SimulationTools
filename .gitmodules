@@ -1,3 +1,4 @@
 [submodule "Data"]
 	path = Data
-	url = git@bitbucket.org:SimulationTools/SimulationToolsTestData.git
+	url = https://bitbucket.org/SimulationTools/SimulationToolsTestData.git
+        pushurl = git@bitbucket.org:SimulationTools/SimulationToolsTestData.git
