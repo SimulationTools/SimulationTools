@@ -93,9 +93,11 @@ ReadIsolatedHorizonSpin[runName_, hn_, dir_] :=
     FindRunFile[runName,"quasilocalmeasures::qlm_scalars..asc"] =!= {},
        MakeDataTable@ReadColumnFile[runName, "quasilocalmeasures::qlm_scalars..asc",
          {"time", "qlm_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]"}],
-    True,
+    FindRunFile[runName,"ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]..asc"] =!= {},
        MakeDataTable@ReadColumnFile[runName, 
-         "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]..asc", {9, 13}]]];
+         "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]..asc", {9, 13}],
+    True,
+      Error["ReadIsolatedHorizonSpin: Cannot find isolated horizon data in: "<> runName]]];
 
 ReadIsolatedHorizonSpin[runName_, hn_] :=
   Module[{spins},
