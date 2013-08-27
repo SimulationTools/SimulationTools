@@ -15,6 +15,12 @@ data5 = Table[{i, -(i - 11/2)^2}, {i, 10}];
 data5[[5, 2]] = 1000;
 dt5 = ToDataTable[data5];
 
+withinRoundoff[a_?NumericQ, b_?NumericQ] :=
+  If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-14];
+withinRoundoff[a_List, b_List] :=
+  And @@ Flatten[MapThread[withinRoundoff, {a, b}, 2]];
+withinRoundoff[a_DataTable, b_DataTable] := withinRoundoff[ToList[a], ToList[b]];
+
 (****************************************************************)
 (* Built-in functions *)
 (****************************************************************)
@@ -346,6 +352,7 @@ Test[
     ,
     DataTable[{{0, (2*Pi)/9, (4*Pi)/9, (2*Pi)/3, (8*Pi)/9, (10*Pi)/9, (4*Pi)/3, (14*Pi)/9, (16*Pi)/9, 2*Pi}, {15.5, 2.0180180604866425, 0, 0.21615105455192296, 0, 0.07071067811865477, 0, 0.028592689035501988, 0, 0.008017936114802292}}]
     ,
+    EquivalenceFunction -> withinRoundoff,
     TestID->"FourierDCT"
 ]
 
