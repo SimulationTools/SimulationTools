@@ -229,7 +229,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     {"bbh", "bbh-nrdf", "test7patch"}
   ,
     TestID -> "SimulationNames-1"
-  ]
+  ];
 
   Test[
     SimulationNames["b*"]
@@ -237,7 +237,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     {"bbh", "bbh-nrdf"}
   ,
     TestID -> "SimulationNames-2"
-  ]
+  ];
 
   Test[
     SimulationNames["bbh"]
@@ -245,7 +245,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     {"bbh"}
   ,
     TestID -> "SimulationNames-3"
-  ]
+  ];
 
   Test[
     SimulationNames["invalid"]
@@ -253,5 +253,5 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     {}
   ,
     TestID -> "SimulationNames-4"
-  ]
+  ];
 ]
