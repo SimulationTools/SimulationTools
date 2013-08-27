@@ -8,6 +8,12 @@ testDirectory = FileNameJoin[{$TemporaryDirectory,"SimulationTools-unit-tests","
 DeleteDirectory[testDirectory,DeleteContents->True];
 CreateDirectory[testDirectory];
 
+withinRoundoff[a_?NumericQ, b_?NumericQ] :=
+  If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-13];
+withinRoundoff[a_List, b_List] :=
+  And @@ Flatten[MapThread[withinRoundoff, {a, b}, 2]];
+withinRoundoff[a_DataTable, b_DataTable] := withinRoundoff[ToList[a], ToList[b]];
+
 (****************************************************************)
 (* WaveformCycles                                               *)
 (****************************************************************)
@@ -114,6 +120,7 @@ Test[
   ,
   {{0, 19.73214285714284}, {5, 24.732142857142843}, {10, 29.73214285714284}}
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"ExtrapolateDataTables-2"
     ]
 
@@ -188,6 +195,7 @@ ToList[ExtrapolateRadiatedQuantity[
   {{-2, 18.000000000000007}, {3, 23.00000000000001}, {8, 28.00000000000001}, {13, 33.00000000000002}, 
    {18, 38.000000000000014}, {23, 43.00000000000001}, {28, 48.000000000000014}, {33, 53.000000000000014}, 
    {38, 58.00000000000004}, {43, 63.000000000000036}, {48, 68.00000000000001}},
+  EquivalenceFunction -> withinRoundoff,
   TestID->"ExtrapolateRadiatedQuantity"
     ]
 
@@ -204,6 +212,7 @@ ToList[RadiallyExtrapolatedWave[
   {{-2, 18.000000000000007}, {3, 23.00000000000001}, {8, 28.00000000000001}, {13, 33.00000000000002}, 
    {18, 38.000000000000014}, {23, 43.00000000000001}, {28, 48.000000000000014}, {33, 53.000000000000014}, 
    {38, 58.00000000000004}, {43, 63.000000000000036}, {48, 68.00000000000001}},
+  EquivalenceFunction -> withinRoundoff,
   TestID->"RadiallyExtrapolatedWave"
     ]
 
@@ -267,13 +276,9 @@ Test[
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-1.m"}]]
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"Psi4ToStrain-1"
     ]
-
-withinRoundoff[a_?NumericQ, b_?NumericQ] := 
-  If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-13];
-withinRoundoff[a_List, b_List] := 
-  And @@ Flatten[MapThread[withinRoundoff, {a, b}, 2]];
 
 Test[
   ToList[Psi4ToStrain[ReadPsi4[$SimulationToolsTestSimulation,2,2,100],0.02]][[{1,2,200,-1}]]
