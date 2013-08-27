@@ -1,1 +1,1 @@
-Print["Mathematica Version: "<>$Version<>"."<>$ReleaseNumber];
+Print["Mathematica Version: "<>$Version<>"."<>ToString[$ReleaseNumber]];
