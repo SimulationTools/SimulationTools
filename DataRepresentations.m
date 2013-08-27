@@ -513,7 +513,7 @@ Resampled[d_?DataRepresentationQ, grid:{{_?NumericQ, _?NumericQ, _?NumericQ}...}
 
 If[!ValueQ[$ResamplingMethod], $ResamplingMethod = None];
 Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/@ds] :=
- Module[{onto, x1, x2, dx},
+ Module[{onto},
   Switch[$ResamplingMethod,
    None,
     Return[$Failed];

@@ -170,7 +170,7 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPat
 (****************************************************************)
 
 SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
- Module[{pattern, h5Files, vars, leafnames, basenames, varnames, 
+ Module[{pattern, h5Files, leafnames, varnames, 
    var},
   pattern = 
    var__ ~~ 
@@ -185,7 +185,7 @@ SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
 (****************************************************************)
 
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadGridFunctionDimensions[sim_String, varName_String] :=
-  Module[{pattern, h5Files, leafnames, dimensions, dimStrings, 
+  Module[{pattern, h5Files, leafnames, dimStrings, 
    dimRules, x},
   pattern = 
    varName ~~ 

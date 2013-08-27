@@ -439,7 +439,7 @@ ExportMetadata[file_String, run_String, mass_, ecc_, OptionsPattern[]] :=
 ];
 
 ExportMetadata[file_String, md_List] :=
- Module[{tJunk},
+ Module[{},
   Export[file, makeMetadataFile[md], "Text"];
 ];
 

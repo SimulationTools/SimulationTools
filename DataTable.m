@@ -362,7 +362,7 @@ $DataTableFunctions =
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  MemberQ[$DataTableFunctions, f] ||
  (MemberQ[Attributes[f], NumericFunction] && MemberQ[Attributes[f], Listable]) :=
- Module[{args, ds, rds, attrs},
+ Module[{args, ds, rds},
   ds = Cases[{x, d, y}, _DataTable];
   Assert[Apply[And,validQ /@ ds]];
   (* TODO: using SameGridQ is very strict; it requires that the grids are
@@ -752,7 +752,7 @@ RestrictedToCommonInterval[ds:{(_DataTable)...}] :=
 (**********************************************************)
 
 CommonInterval[ds:{(_DataTable)...}] :=
-  Module[{ranges, mins, maxs, min, max, ds2},
+  Module[{ranges, mins, maxs, min, max},
     ranges = Map[CoordinateRange, ds];
     mins = Map[First, ranges];
     maxs = Map[Last, ranges];
@@ -1039,7 +1039,7 @@ ApplyToList[f_, d_DataTable] :=
   ToDataTable[f[ToList[d]]];
 
 MapThreadData[f_, ds:List[DataTable[__]..]] :=
-  Module[{lists, vals, xs, fOfVals, lengths, tb, attrs},
+  Module[{lists, vals, xs, fOfVals, lengths, tb},
     lists = Map[ToList, ds];
     lengths = Map[Length, lists];
 

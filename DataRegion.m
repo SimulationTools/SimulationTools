@@ -114,7 +114,7 @@ Format[d:DataRegion[attrs_List, l_List]] :=
 (**********************************************************)
 
 CommonInterval[ds:{(_DataRegion)...}] :=
- Module[{ranges, mins, maxs, min, max, ds2},
+ Module[{mins, maxs},
   mins = Max /@ Transpose[MinCoordinates /@ ds];
   maxs = Min /@ Transpose[MaxCoordinates /@ ds];
   Transpose[{mins, maxs}]
@@ -231,7 +231,7 @@ ToDataRegion[data_List, origin_List, spacing_List, opts:OptionsPattern[]] :=
 ];
 
 ToDataRegion[d_SimulationTools`DataTable`DataTable] :=
- Module[{ndims, xmin, xmax, spacing, data},
+ Module[{origin, spacing, data},
   origin = MinCoordinates[d];
   spacing = CoordinateSpacings[d];
   data = ToListOfData[d];

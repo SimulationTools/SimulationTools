@@ -126,7 +126,7 @@ docRoot[nb_String] :=
   StringReplace[nb, "/Documentation/*" -> "/Documentation"];
 
 docLink[s_String, from_String] :=
-Module[{doc = docRoot[from]},
+Module[{},
  subPath = StringReplace[from, __~~"/Documentation/English/" -> ""];
 
  s2 = StringReplace[s,

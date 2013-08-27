@@ -83,7 +83,7 @@ Options[EncodeMovieFrameFiles] = {"FFMPEG" -> "ffmpeg",
 
 EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[]] :=
   Module[
-    {cmd, cmdString, ffmpeg},
+    {cmd},
 
     cmd = {findFfmpeg[],
            "-y", 

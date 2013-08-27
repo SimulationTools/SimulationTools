@@ -727,7 +727,7 @@ RadialExtrapolation[{rs_List, fs_List}, order_Integer] :=
 
 RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
   Module[
-    {t, ds, rds, de, result},
+    {t, ds, rds, de},
 
     (* Print["order = ", order]; *)
     (* Print["rs = ", Short[rs]]; *)
@@ -791,7 +791,7 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
                          rStarOfr : (_?notOptionQ) : Identity, 
                          opts:OptionsPattern[]] :=
   Module[
-    {ret,ext,tAlign,temp,orders,resampled},
+    {ret,ext,tAlign,orders,resampled},
 
     resampled =
     If[$UniformGridExtrapolation === True,
