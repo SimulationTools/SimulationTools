@@ -545,6 +545,27 @@ Test[
 
 
 (****************************************************************)
+(* PackedArrayQ                                                 *)
+(****************************************************************)
+
+Test[
+    Developer`PackedArrayQ[DataTable[{{1, 2, 3}, {4., 5., 6.}}]]
+    ,
+    False
+    ,
+    TestID->"PackedArrayQ-False"
+]
+
+Test[
+    Developer`PackedArrayQ[ToDataTable[{1, 2, 3}, {4., 5., 6.}]]
+    ,
+    True
+    ,
+    TestID->"PackedArrayQ-True"
+]
+
+
+(****************************************************************)
 (* PadLeft                                                      *)
 (****************************************************************)
 Test[
@@ -860,6 +881,19 @@ Test[
     Take[data, {1, 3, 2}]
     ,
     TestID->"Take5"
+]
+
+
+(****************************************************************)
+(* ToPackedArray                                                *)
+(****************************************************************)
+
+Test[
+    Developer`PackedArrayQ[Developer`ToPackedArray[DataTable[{{1, 2, 3}, {4., 5., 6.}}]]]
+    ,
+    True
+    ,
+    TestID->"ToPackedArray"
 ]
 
 

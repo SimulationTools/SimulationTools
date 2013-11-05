@@ -482,6 +482,13 @@ NDerivative[d_DataTable] :=
   Return[MakeDataTable[deriv]];
 ];
 
+(****************************************************************)
+(* PackedArrayQ                                                 *)
+(****************************************************************)
+
+DataTable /: Developer`PackedArrayQ[dt_DataTable] :=
+  And[Developer`PackedArrayQ[ToListOfData[dt]],
+      Developer`PackedArrayQ[ToListOfCoordinates[dt]]];
 
 (****************************************************************)
 (* Part                                                         *)
@@ -567,6 +574,19 @@ DataTable /: Take[d_DataTable, args__] :=
   ToDataTable[coord, data]
 ];
 
+
+(****************************************************************)
+(* ToPackedArray                                                *)
+(****************************************************************)
+
+DataTable /: Developer`ToPackedArray[dt_DataTable] :=
+  If[Developer`PackedArrayQ[dt],
+    dt,
+    AddAttributes[
+      ToDataTable[Developer`ToPackedArray[ToListOfCoordinates[dt]],
+                  Developer`ToPackedArray[ToListOfData[dt]]],
+      ListAttributes[dt]]
+  ];
 
 (****************************************************************)
 (****************************************************************)
