@@ -30,6 +30,7 @@ ReadSimulationRunTime::usage = "ReadSimulationRuntime[sim] gives the real time i
 ReadSimulationCoreCount::usage    = "ReadSimulationCoreCount[simname] gives the number of cores used by a simulation.";
 ReadSimulationSpeed::usage = "ReadSimulationSpeed[sim] gives the execution speed of a simulation (simulation coordinate time per real time elapsed) as a DataTable as a function of simulation coordinate time.";
 ReadSimulationCost::usage = "ReadSimulationCost[sim] gives the total number of core-hours used by all processes and segments in a simulation.";
+ReadSimulationProcessCount;
 
 CPUHours;
 WallTimeDays;
@@ -51,6 +52,7 @@ SimulationSpeedPlot;
 
 (* Exceptions *)
 NoSimulationCoreCountAvailable;
+NoSimulationProcessCountAvailable;
 NoSimulationRunTimeAvailable;
 
 Begin["`Private`"];
@@ -73,6 +75,11 @@ ReadSimulationCoreCount[run_] :=
   If[HaveData["RunFiles", FindRunDir[run]],
     CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
     Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""]];
+
+ReadSimulationProcessCount[run_] :=
+  If[HaveData["RunFiles", FindRunDir[run]],
+    CallProvidedFunction["RunFiles","ReadProcesses",{FindRunDir[run],run}],
+    Error[NoSimulationProcessCountAvailable, "Simulation process count not available in \""<>run<>"\""]];
 
 StandardOutputOfRun[runName_String] :=
   Module[{segments, files1, files2},
