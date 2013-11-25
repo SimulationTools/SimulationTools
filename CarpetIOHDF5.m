@@ -395,6 +395,12 @@ datasetAttributesTable[h5filename_String] :=
     (* Convert dataset name strings into rules *)
     datasets = Profile["Datasets", Datasets[h5filename]];
 
+    (* Remove datasets which are not data; performance of this has not
+       been tested, but not doing this leads to None entries in the
+       table, which are incorrectly interpreted *)
+    (* datasets = Flatten[StringCases[datasets, ___~~"="~~___]]; *)
+    datasets = Select[datasets, StringMatchQ[#, "*=*"] &];
+
     Profile["datasetAttributesTable/StringCases",
      attributeRules = StringCases[datasets,
      {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
