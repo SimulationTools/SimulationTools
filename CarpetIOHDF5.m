@@ -116,9 +116,20 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps[file_String, opts:OptionsPat
 Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels] =
   FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["RefinementLevel"]];
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels[file_String, opts:OptionsPattern[]] :=
-  datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels]]]
-  ],4];
+  Module[
+    {attrs, attrNames, datasets, rls},
+
+    (* Don't restrict to iteration 0, map None, and timelevel 0 when
+       searching for refinement levels *)
+    attrs = DeleteCases[
+      FilterRules[{opts},
+                  Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadRefinementLevels]], 
+      ("Iteration"|"Map"|"TimeLevel") -> _];
+
+    attrNames = attributeNamesToNumbers[attrs];
+    datasets = datasetsWith[file, attrNames];
+    rls = datasetAttribute[datasets,4];
+    rls];
 
 (****************************************************************)
 (* ReadTimeLevels *)
