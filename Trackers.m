@@ -62,7 +62,7 @@ ReadTrackerInclination[run_String, tracker:trackerPattern] :=
     R = {x,y,z} = ReadTrackerCoordinates[run, tracker];
     (* In BHCoordinates, we avoided infinities at the origin:
        MapData[If[Norm[#] > 10^-4, ArcCos[#[[3]]/Norm[#]], 0.0] &, rp]; *)
-    ArcCos[z]/Norm[R]];
+    ArcCos[z/Norm[R]]]; (* FIXME: shouldn't this be ArcCos[z/Norm[R]]? *)
 
 ReadTrackerInclination[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
   Module[{R,x,y,z},
