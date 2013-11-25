@@ -71,6 +71,21 @@ SimulationTools`SimFactory`RunFiles`ReadCores[dir_, runName_] :=
        ToExpression@IniVariable[FindRunSegments[runName][[1]]<>"/../SIMFACTORY/properties.ini", "procs"],
        ReadList[file, Number][[1]]]];
 
+(* TODO: refactor with above function *)
+SimulationTools`SimFactory`RunFiles`ReadProcesses[dir_, runName_] :=
+  Module[
+    {files, file},
+    files = Select[{FileNameJoin[{dir, "SIMFACTORY", "PROCS"}],
+                    FileNameJoin[{dir, "PROCS"}],
+                    FileNameJoin[{dir, "SIMFACTORY/properties.ini"}]},
+                   FileExistsQ];
+    If[Length[files] === 0,
+       Error[NoSimulationCoreCountAvailable, "Simulation process count not available in \""<>runName<>"\""]];
+    file = First[files];
+    If[FileNameTake[file,-1] === "properties.ini",
+       ToExpression@IniVariable[FindRunSegments[runName][[1]]<>"/../SIMFACTORY/properties.ini", "numprocs"],
+       ReadList[file, Number][[1]]]];
+
 End[];
 
 EndPackage[];
