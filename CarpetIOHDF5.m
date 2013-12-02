@@ -105,9 +105,22 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations[file_String, opts:Opti
 Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps] =
   FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["Map"]];
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps[file_String, opts:OptionsPattern[]] :=
-  datasetAttribute[datasetsWith[file,
-    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps]]]
-  ],6];
+  Module[
+    {attrs, maps},
+    attrs = DeleteCases[
+      FilterRules[{opts},
+                  Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps]], 
+      ("Iteration"|"Map"|"TimeLevel"|"RefinementLevel") -> _];
+    maps = datasetAttribute[datasetsWith[file, attributeNamesToNumbers[attrs]],6];
+    
+    If[StringMatchQ[file,"*.file_0.h5"],
+       Module[
+         {allFiles = DeleteCases[
+           FileNames[StringReplace[file,"file_0.h5"->"file_*.h5"]], file]},
+         
+         maps = Union[maps, Flatten[Map[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps[#, opts] &, allFiles]]]]];
+
+    maps];
 
 (****************************************************************)
 (* ReadRefinementLevels *)
