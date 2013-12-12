@@ -154,7 +154,7 @@ DefineMemoFunction[FindRunFilesFromPattern[runName_String, filePattern:(_String|
     segments = FindRunSegments[runName];
     If[segments === {}, Return[{}]];
     nToDrop = If[OptionValue[FullFilenames], 0, Length[FileNameSplit[segments[[1]]]]];
-    names = Union[Map[FileNameDrop[#, nToDrop] &, Flatten[Map[FileNames[filePattern, #, Infinity] &, segments], 1]]];
+    names = Union[Map[FileNameDrop[#, nToDrop] &, Flatten[Map[FileNames[filePattern, #, Infinity, IgnoreCase -> False] &, segments], 1]]];
     If[OptionValue[LeafNamesOnly],
       names = Map[FileNameTake[#,-1]&, names]];
     names
