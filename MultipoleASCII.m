@@ -19,7 +19,8 @@ BeginPackage["SimulationTools`MultipoleASCII`",
   "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
   "SimulationTools`MultipoleHDF5`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "SimulationTools`Error`"
  }];
 
 Begin["`Private`"];
@@ -49,9 +50,14 @@ SimulationTools`MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{names, radiusFromFileName, radii},
     names = getFiles[runName];
     radiusFromFileName[name_] :=
-      StringReplace[name,
-        "mp_"<>$MultipolePsi4Variable<>"_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
-        ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
+      Module[
+        {rad},
+        rad = StringReplace[name,
+                            StartOfString~~"mp_"<>$MultipolePsi4Variable<>"_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+                            ~~ x : (NumberString|"inf") ~~ ".asc" ~~EndOfString -> x];
+        If[rad === name, Error["Could not determine the waveform radius from filename "<>name]];
+        rad];
+
     radii = Sort[Union[Map[radiusFromFileName, names]]]];
 
 SimulationTools`MultipoleASCII`Waveforms`ReadPsi4Modes[runName_] :=
