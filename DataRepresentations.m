@@ -17,12 +17,15 @@
 BeginPackage["SimulationTools`DataRepresentations`",
  {
   "SimulationTools`Error`",
-  "SimulationTools`"
+  "SimulationTools`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 DataRepresentationQ::usage = "DataRepresentationQ[d] returns True if d is a DataRepresentation type.";
 
-ToList::usage = "ToList[d] returns the contents of d as a List.";
+If[$VersionNumber < 10,
+  ToList::usage = "ToList[d] returns the contents of d as a List.";
+];
 ToListOfData::usage = "ToListOfData[d] returns a List of the data part of d.";
 ToListOfCoordinates::usage = "ToListOfCoordinates[d] a List of the coordinates part of d.";
 

@@ -20,7 +20,8 @@ BeginPackage["SimulationTools`DataRegion`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Profile`",
-  "SimulationTools`Utils`"
+  "SimulationTools`Utils`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 DataRegion::usage = "DataRegion[...] is a representation of an N-dimensional array of numbers on a regular grid.";

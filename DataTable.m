@@ -18,7 +18,8 @@ BeginPackage["SimulationTools`DataTable`",
  {
   "SimulationTools`DataRepresentations`",
   "SimulationTools`Error`",
-  "SimulationTools`Utils`"
+  "SimulationTools`Utils`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 DataTable::usage = "DataTable[{{x1,f1},{x2,f2},...,{xn,fn}}] is a one-dimensional table of data (fi) with an associated coordinate (xi).  DataTable objects print as DataTable[...] to avoid printing the potentially large data content.  The independent variables, xi, should be monotonically increasing real numbers and may have a variable increment.  The dependent variables, fi, can be of any type for which the basic mathematical operations (+, -, *, /) make sense."; (* TODO: this last part is too vague *)
@@ -187,7 +188,7 @@ ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
 (* ToList *)
 (****************************************************************)
 
-ToList[DataTable[l_, ___]] := Transpose[l];
+DataTable /: ToList[DataTable[l_, ___]] := Transpose[l];
 
 (****************************************************************)
 (* ToListOfData *)
