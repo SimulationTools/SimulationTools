@@ -94,9 +94,11 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|Al
 Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations] =
   FilterRules[Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData], Except["Iteration"]];
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations[file_String, opts:OptionsPattern[]] :=
+  Module[{attrs},
+  attrs = DeleteCases[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations]],
+      ("Map"|"TimeLevel"|"RefinementLevel") -> _];
   Union@Flatten[Table[datasetAttribute[datasetsWith[f,
-    attributeNamesToNumbers[FilterRules[{opts},Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadIterations]]]
-  ],2], {f, FileNames[StringReplace[file,".file_0.h5"->".file_*.h5"]]}],1];
+    attributeNamesToNumbers[attrs]],2], {f, FileNames[StringReplace[file,".file_0.h5"->".file_*.h5"]]}],1]];
 
 (****************************************************************)
 (* ReadMaps *)
@@ -107,10 +109,11 @@ Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps] =
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps[file_String, opts:OptionsPattern[]] :=
   Module[
     {attrs, maps},
-    attrs = DeleteCases[
-      FilterRules[{opts},
-                  Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps]], 
-      ("Iteration"|"Map"|"TimeLevel"|"RefinementLevel") -> _];
+    attrs = FilterRules[{opts},
+                  Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadMaps]];
+    (* Print["attrs = ",attrs]; *)
+    (* attrs = DeleteCases[attrs,  *)
+    (*   ("Iteration"|"Map"|"TimeLevel"|"RefinementLevel") -> _]; *)
     maps = datasetAttribute[datasetsWith[file, attributeNamesToNumbers[attrs]],6];
     
     If[StringMatchQ[file,"*.file_0.h5"],
