@@ -180,13 +180,16 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadTime[file_String, opts:OptionsPat
 (* FindGridFunctions *)
 (****************************************************************)
 
+filePattern=
+  Repeated[("." ~~ (DigitCharacter ..)), {0, 1}] ~~
+  Repeated["." ~~ ("x" | "y" | "z" | "xy" | "xz" | "yz" |
+           ("file_" ~~ (DigitCharacter ..))), {0, 1}] ~~
+  ".h5";
+
 SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
  Module[{pattern, h5Files, leafnames, varnames, 
    var},
-  pattern = 
-   var__ ~~ 
-    "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
-      "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
+  pattern = var__ ~~ filePattern;
   h5Files = FindSimulationFiles[sim, pattern];
   leafnames = FileNameTake[#, -1] & /@ h5Files;
   varnames = Union[First[StringSplit[#, "."]] & /@ leafnames]];
@@ -198,11 +201,7 @@ SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadGridFunctionDimensions[sim_String, varName_String] :=
   Module[{pattern, h5Files, leafnames, dimStrings, 
    dimRules, x},
-  pattern = 
-   varName ~~ 
-   (("." ~~ (DigitCharacter..)) | "") ~~
-    "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
-      "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
+  pattern = varName ~~ filePattern;
   h5Files = FindSimulationFiles[sim, pattern];
   leafnames = FileNameTake[#, -1] & /@ h5Files;
   dimStrings = StringSplit[#, "."][[-2]] & /@ leafnames;
