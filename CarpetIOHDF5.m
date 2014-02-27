@@ -200,11 +200,12 @@ SimulationTools`CarpetIOHDF5`GridFunctions`ReadGridFunctionDimensions[sim_String
    dimRules, x},
   pattern = 
    varName ~~ 
+   (("." ~~ (DigitCharacter..)) | "") ~~
     "." ~~ ("x" | "y" | "z" | "xy" | "xz" | 
       "yz" | ("file_" ~~ (DigitCharacter ..))) ~~ ".h5";
   h5Files = FindSimulationFiles[sim, pattern];
   leafnames = FileNameTake[#, -1] & /@ h5Files;
-  dimStrings = StringSplit[#, "."][[2]] & /@ leafnames;
+  dimStrings = StringSplit[#, "."][[-2]] & /@ leafnames;
   dimRules =
    {(x_String /; StringMatchQ[x, "file_" ~~ (DigitCharacter ..)]) -> 
      "xyz"};
