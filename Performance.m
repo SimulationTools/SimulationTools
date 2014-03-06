@@ -27,6 +27,7 @@ TimerTreeString;
 ReadTimerTrees;
 CollectedTimers;
 CombinedTimerTrees;
+ReadSimulationTimer;
 
 Begin["`Private`"];
 
@@ -50,6 +51,9 @@ ReadTimerTree[run_, n_: 0] :=
       attrs_, _] :> 
      Sequence[],
     XMLObject[_][_, d_, _] :> d};
+
+ReadSimulationTimer[run_String, timerPath_List, n:_Integer:0] :=
+ subtree[ReadTimerTree[run, n], timerPath][[2]]
 
 (* TimerTreeView[t : Timer[n_, v_, c_], all_] := *)
 (*  Module[{node}, *)
