@@ -22,6 +22,8 @@ BeginPackage["SimulationTools`SimFactory`",
   "SimulationTools`SimulationProperties`"
  }];
 
+ReadSimFactoryMetadata;
+
 Begin["`Private`"];
 
 SimulationTools`SimFactory`RunFiles`HaveData[runDir_,___] :=
@@ -85,6 +87,12 @@ SimulationTools`SimFactory`RunFiles`ReadProcesses[dir_, runName_] :=
     If[FileNameTake[file,-1] === "properties.ini",
        ToExpression@IniVariable[FindRunSegments[runName][[1]]<>"/../SIMFACTORY/properties.ini", "numprocs"],
        ReadList[file, Number][[1]]]];
+
+SimulationTools`SimFactory`RunFiles`ReadSimulationMachine[dir_String, runName_String] :=
+  ReadSimFactoryMetadata[runName, "machine"];
+
+ReadSimFactoryMetadata[simName_, key_] :=
+  IniVariable[FindRunSegments[simName][[1]]<>"/../SIMFACTORY/properties.ini", key];
 
 End[];
 

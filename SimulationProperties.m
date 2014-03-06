@@ -49,6 +49,7 @@ ReadCPUHours = ReadSimulationCost;
 (* Experimental *)
 StandardOutputOfRun;
 SimulationSpeedPlot;
+ReadSimulationMachine;
 
 (* Exceptions *)
 NoSimulationCoreCountAvailable;
@@ -136,6 +137,9 @@ SimulationSpeedPlot[runNames1_] :=
        SimulationTools`Plotting`PresentationListLinePlot[Map[ReadSimulationSpeed, runNames],
                                 PlotRange -> {0, All}, PlotLabel -> "Speed",
                                 SimulationTools`Plotting`PlotLegend -> runNames, SimulationTools`Plotting`LegendPosition -> {Left, Bottom}]]];
+
+ReadSimulationMachine[sim_String] :=
+  CallProvidedFunction["RunFiles","ReadSimulationMachine",{FindRunDir[sim],sim}];  
 
 End[];
 EndPackage[];
