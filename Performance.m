@@ -27,6 +27,7 @@ TimerTreeString;
 ReadTimerTrees;
 CollectedTimers;
 CombinedTimerTrees;
+ReadSimulationEvolutionTime;
 ReadSimulationTimer;
 
 Begin["`Private`"];
@@ -268,6 +269,13 @@ CombinedTimerTrees[timers_List, f_: Automatic] :=
      f];
   timer[names[[1]], fn[vals], 
    CombinedTimerTrees[#, f] & /@ Transpose[childrens]]];
+
+ReadSimulationEvolutionTime[run_] := 
+ ToExpression[
+  Cases[Import[FindSimulationFiles[run, "timertree.0.xml"][[1]]],
+    XMLElement["timer", {"name" -> "Evolve"}, {value_, ___}] :> value,
+     Infinity][[1]]];
+
 
 End[];
 
