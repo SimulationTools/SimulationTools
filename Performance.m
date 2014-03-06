@@ -28,6 +28,7 @@ ReadTimerTrees;
 CollectedTimers;
 CombinedTimerTrees;
 ReadSimulationEvolutionTime;
+TimerSubtree;
 ReadSimulationTimer;
 
 Begin["`Private`"];
@@ -120,6 +121,8 @@ timerTreeViewList[t : Timer[n_, v_, c_], all_, depth_:0] :=
   (*  OpenerView[{Row[{N[100 v/all],"% ",v, " ", n}], *)
   (*    Column[TimerTreeView[#,all] & /@ c]}, True]]]; *)
 
+
+TimerSubtree = subtree;
 
 subtree[t : Timer[n_, v_, c_], elems_List] :=
  If[Length[elems] === 0, t,
