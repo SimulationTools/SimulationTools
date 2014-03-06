@@ -43,9 +43,12 @@ ReadTimerTrees[run_] :=
 
 ReadTimerTree[run_, n_: 0] :=
   Import[FindFirstRunFile[run, 
-     "timertree." <> ToString[n] <> ".xml"]] //. {XMLElement[x_, 
+     "timertree." <> ToString[n] <> ".xml"]] //. {XMLElement["timer", 
       attrs_, {t_, children___}] :> 
-     Timer["name" /. attrs, Internal`StringToDouble[t], {children}],
+     (Timer["name" /. attrs, Internal`StringToDouble[t], {children}]),
+    XMLElement["value", 
+      attrs_, _] :> 
+     Sequence[],
     XMLObject[_][_, d_, _] :> d};
 
 (* TimerTreeView[t : Timer[n_, v_, c_], all_] := *)
