@@ -169,6 +169,14 @@ ToDataTable[l_List] :=
   ToDataTable[l[[All, 1]], l[[All, 2]]]
 ];
 
+ToDataTable[t_DataTable, f_DataTable] :=
+ Module[{},
+ If[!SameGridQ[t,f],
+   Error["ToDataTable: Cannot create a DataTable from two DataTables defined on different grids."];
+ ];
+ ToDataTable[ToListOfData[t], ToListOfData[f]]
+];
+
 ToDataTable[d_SimulationTools`DataRegion`DataRegion] :=
  Module[{ndims, xmin, xmax, spacing, data},
   ndims = ArrayDepth[d];
