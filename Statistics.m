@@ -21,11 +21,18 @@ BeginPackage["SimulationTools`Statistics`",
   "SimulationTools`Error`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
-  "SimulationTools`SimulationProperties`"
+  "SimulationTools`SimulationProperties`",
+  "SimulationTools`Utils`"
  }];
 
 (* Experimental *)
 FinishTime(*::usage = "FinishTime[sim] returns a date list corresponding to the estimated time at which the simulation will finish if it runs continuously."*);
+LastOutputCoordinateTime;
+FinalCoordinateTime;
+TailStandardOutputOfSimulation;
+TailStandardErrorOfSimulation;
+SimulationStatus;
+SimulationErrorReason;
 
 Begin["`Private`"];
 
@@ -119,12 +126,17 @@ cost[run_] :=
    WithExceptions[ReadSimulationCoreCount[run]*24,         NoSimulationCoreCountAvailable -> "-"],
    FinishTimeString[run]};
 
+formatStatus[x_] := x;
+formatStatus[x_String[y_String]] := x <> " (" <> y <> ")";
+
 SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
   Module[
-    {costTable, segments},
+    {costTable, segments, statusTable},
 
     segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
+
+    statusTable = Grid[Map[{#,formatStatus[SimulationStatus[#]]}&, runNames]];
 
     costTable = {{Grid[{{Style["Simulation",Bold],
                        Style["Cores",Bold],
@@ -134,7 +146,51 @@ SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
                        Style["Estimated finish", Bold]}}
                      ~Join~
                      Map[cost, runNames], Spacings->{2,0.5}], SpanFromLeft},
+                {statusTable, SpanFromLeft},
                 {Grid[segments], SpanFromLeft}}];
+
+TailStandardOutputOfSimulation[sim_String, n_Integer] :=
+ Module[{outFiles},
+  outFiles = StandardOutputOfRun[sim];
+  If[Length[outFiles] === 0, 
+   Error["No standard output available in simulation " <> sim]];
+  TailFile[Last[outFiles], n]];
+
+TailStandardErrorOfSimulation[sim_String, n_Integer] :=
+ Module[{outFiles},
+  outFiles = StandardErrorOfRun[sim];
+  If[Length[outFiles] === 0, 
+   Error["No standard error available in simulation " <> sim]];
+  TailFile[Last[outFiles], n]];
+
+SimulationErrorReason[stdout_String, stderr_String] :=
+ Module[{warnings, exceptions},
+  warnings = 
+   StringCases[stdout, 
+    "WARNING level 0" ~~ Shortest[__] ~~ EndOfLine ~~ Shortest[__] ~~ 
+      EndOfLine ~~ msg : Shortest[__] ~~ EndOfLine :> msg];
+  If[Length[warnings] > 0, warnings[[-1]],
+   exceptions = 
+    StringCases[stderr, 
+     msg : ("terminate called after throwing an instance of" ~~ 
+          Shortest[__]) ~~ EndOfLine :> msg];
+   If[Length[exceptions] > 0, exceptions[[-1]],
+    "Unknown error"]]];
+
+SimulationStatus[sim_String] :=
+ Module[{tCurrent = LastOutputCoordinateTime[sim], 
+   tFinal = FinalCoordinateTime[sim], 
+   stdout = TailStandardOutputOfSimulation[sim, 1024], 
+   stderr = TailStandardErrorOfSimulation[sim, 1024]},
+  Which[
+   tCurrent == tFinal, "Finished",
+   StringMatchQ[
+    stdout, __ ~~ StartOfLine ~~ "Done." ~~ EndOfLine ~~ __], 
+   "Unfinished",
+   StringMatchQ[
+    stdout, __ ~~ StartOfLine ~~ "Simfactory Done at date" ~~ __], 
+   "Error"[SimulationErrorReason[stdout, stderr]],
+   True, "Running"[N[tCurrent/tFinal]]]];
 
 End[];
 EndPackage[];
