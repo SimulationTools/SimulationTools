@@ -48,6 +48,7 @@ ReadCPUHours = ReadSimulationCost;
 
 (* Experimental *)
 StandardOutputOfRun;
+StandardErrorOfRun;
 SimulationSpeedPlot;
 ReadSimulationMachine;
 
@@ -86,6 +87,12 @@ StandardOutputOfRun[runName_String] :=
   Module[{segments, files1, files2},
     segments = FindRunSegments[runName];
     files1 = Map[FileNameJoin[{#, "../"<>Last@FileNameSplit@runName<>".out"}] &, segments];
+    files2 = Select[files1, FileType[#] =!= None &]];
+
+StandardErrorOfRun[runName_String] :=
+  Module[{segments, files1, files2},
+    segments = FindRunSegments[runName];
+    files1 = Map[FileNameJoin[{#, "../"<>Last@FileNameSplit@runName<>".err"}] &, segments];
     files2 = Select[files1, FileType[#] =!= None &]];
 
 ReadSimulationSpeed[runName_] := 
