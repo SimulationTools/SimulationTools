@@ -573,6 +573,12 @@ slab[d_?DataRepresentationQ, s__]:=
     Error["Coordinate ranges must be specified using either Span[x1, x2] "<>
      "(equivalently x1;;x2), All, a single coordinate or a single element list."];
   ];
+  (* Untested *)
+  (* slabSpec = MapThread[Replace[#1, *)
+  (*   {All :> #2;;#3, *)
+  (*     All;;x_ :> #2;;x, *)
+  (*     x_;;All :> x;;#3, *)
+  (*     All;;All :> #2;;#3}] &, {slabSpec,origin,endpoints}]; *)
 
   (* Convert coordinate range to index range *)
   indexrange = MapThread[(#1 /.{x_?NumericQ :> Round[(x-#2)/#3] + 1})&, {slabSpec, origin, spacing}]; (* FIXME: Add conversion from Span[..,All] *)
@@ -582,15 +588,22 @@ slab[d_?DataRepresentationQ, s__]:=
 ];
 
 slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable`UniformSpacingQ[d] :=
- Module[{t, spacings, tleft, tright},
+ Module[{t, spacings, tleft, tright, t1, t2, s2},
   t = ToListOfCoordinates[d]; (* FIXME: Add conversion from Span[..,All] *)
-
+  t1 = Min[t];
+  t2 = Max[t];
   (* We allow a tolerance of half the local grid spacing *)
   spacings = 0.5 Differences[t];
   tright = t - ArrayPad[spacings, {1, 0}, spacings[[1]]];
   tleft = t + ArrayPad[spacings, {0, 1}, spacings[[-1]]];
 
-  Pick[d, Sign[tleft - s[[1]]] + Sign[s[[2]] - tright], 2]
+   s2 = Replace[s,
+     {All      :> t1;;t2,
+      All;;x_  :> t1;;x,
+      x_;;All  :> x;;t2,
+      All;;All :> t1;;t2}];
+
+  Pick[d, Sign[tleft - s2[[1]]] + Sign[s2[[2]] - tright], 2]
 ];
 
 
