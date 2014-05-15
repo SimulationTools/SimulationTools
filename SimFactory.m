@@ -54,7 +54,7 @@ SimulationTools`SimFactory`RunFiles`FindRunDirSegments[dir_String] :=
     restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*/output-*-*"] &];
     merged = FileNames["merged", dir];
     dataSubDir = getDataSubDir[restarts[[1]]];
-    If[dataSubDir === None, Error["Unable to locate data directories in simulation."<>dir]];
+    If[dataSubDir === None, Error["Unable to locate data directories in simulation "<>dir]];
     dataDirs = FileNameJoin[{#, dataSubDir}] & /@ restarts;
     dataDirs = Join[merged, dataDirs];
     segments = Select[dataDirs, DirectoryQ]
