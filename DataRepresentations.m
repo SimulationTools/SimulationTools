@@ -430,7 +430,11 @@ unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
   Join[data[[{1}]], data[[2 ;; -1]] + cumulcorr]
  ], CompilationTarget -> "C", RuntimeOptions -> "Speed"];
 
-UnwrapPhaseVector[data_List] := unwrapPhaseVector[data];
+UnwrapPhaseVector[data_List] :=
+  Switch[Length[data],
+    0, {},
+    1, {ArcTan[data[[1]]]},
+    _, unwrapPhaseVector[data]];
 
 
 (**********************************************************)
