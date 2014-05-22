@@ -391,6 +391,10 @@ Redefine[ListLinePlot[d:DataTable[___], args___],
 Redefine[ListLinePlot[ds:List[DataTable[___]..], args___],
    ListLinePlot[Map[ToList,ds], args]];
 
+(* Work around a bug where Unprotect[ListLogPlot] doesn't work unless
+   ListLogPlot has been called first.  Bug is present in v8 and v9. *)
+ListLogPlot[{1}];
+
 Redefine[ListLogPlot[d:DataTable[___], args___],
    ListLogPlot[ToList[d], args]];
 
