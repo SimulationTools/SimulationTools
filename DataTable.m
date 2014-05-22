@@ -362,8 +362,9 @@ Frequency[d:DataTable[__]] :=
 
 (*    MakeDataTable[Phase[ToList[d]]];*)
 
+If[$VersionNumber < 9,
 Downsample[l_List, n_Integer] :=
-  Take[l, {1, Length[l], n}];
+  Take[l, {1, Length[l], n}]];
 
 MakeInterpolatingDataTable[d:DataTable[__], dt_] :=
   Module[{l, t1, t2, f, l2},
