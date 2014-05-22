@@ -13,7 +13,6 @@ MapData::usage = "MapData[f, d] maps f over the data (dependent variable) of the
 MapIndVar::usage = "MapIndVar[f, d] maps f over the independent variable of the DataTable d";
 ApplyToList::usage = "ApplyToList[f, d] maps f over the elements of the underlying list in DataTable d."
 MapThreadData::usage = "MapThreadData[f, {d, ...}] threads f over the independent variables in the DataTable objects d, much like MapThread for lists.";
-Downsample::usage = "Downsample[d, n] returns a version of DataTable d with only every nth element.";
 MakeInterpolatingDataTable::usage = "MakeInterpolatingDataTable[d, dt] returns a resampled version of DataTable d which has been interpolated to have a spacing dt.  Deprecated: use ResampleDataTable instead.";
 Phase::usage = "Phase[d] gives the phase of the complex variable in DataTable d.  The resulting phase will be continuous for smooth enough input data.";
 AddAttribute::usage = "AddAttribute[d, attrname -> attrval] returns a copy of d with a new attribute added.";
@@ -332,7 +331,7 @@ ReadAttribute[d:DataTable[l_, attrs___], name_] :=
 ListAttributes[d:DataTable[l_, attrs___]] :=
   {attrs};
 
-Downsample[d_DataTable, n_Integer] :=
+DataTable /: Downsample[d_DataTable, n_Integer] :=
   ApplyToList[Downsample[#, n] &, d];
 
 Phase[tb:List[{_, _}...]] :=
