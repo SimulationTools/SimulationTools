@@ -172,8 +172,25 @@ stringToReal[s_String] :=
 ReadColumnFile[fileName_String] :=
   ReadColumnFileWithFileName[fileName];
 
+(* Import a gzipped file by copying it to a randomly-named file in the
+   temp directory.  This avoids the problem that the gzip reader
+   creates temporary files named after the original file, which causes
+   problems when a number of such processes are running in parallel
+   with similarly-named files. *)
+SafeImportGzip[file_String, as_] :=
+  Module[
+    {id,tempfile,data},
+    id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz";
+    tempfile = FileNameJoin[{$TemporaryDirectory,id}];
+    CopyFile[file, tempfile];
+    data = Import[tempfile,as];
+    DeleteFile[tempfile];
+    data];
+
 ImportGzip[file_String, as_] :=
-  ImportString[ReadGzipFile[file],as];
+  If[Context[ReadGzipFile] === "h5mma`",
+    ImportString[ReadGzipFile[file],as],
+    SafeImportGzip[file,as]];
 
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
   Module[{list, list2, isComment, file2, data},
@@ -184,7 +201,7 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
     If[FileExtension[fileName] === "gz",
        (* Print["Importing gzip"]; *)
        (* Print[fileName]; *)
-       list = StringSplit[ReadGzipFile[fileName],"\n"],
+       list = StringSplit[ImportGzip[fileName, "String"],"\n"],
        list = ReadList[fileName, String]; (* Blank lines omitted *)];
 
     isComment[x_] :=
