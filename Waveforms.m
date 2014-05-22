@@ -543,18 +543,25 @@ AlignMaximaOfAbs[ds_List] :=
    maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
-(* ImportGzip[file_String, as_] := *)
-(*   Module[ *)
-(*     {id,tempfile,data}, *)
-(*     id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz"; *)
-(*     tempfile = FileNameJoin[{$TemporaryDirectory,id}]; *)
-(*     CopyFile[file, tempfile]; *)
-(*     data = Import[tempfile,as]; *)
-(*     DeleteFile[tempfile]; *)
-(*     data]; *)
+(* Import a gzipped file by copying it to a randomly-named file in the
+   temp directory.  This avoids the problem that the gzip reader
+   creates temporary files named after the original file, which causes
+   problems when a number of such processes are running in parallel
+   with similarly-named files. *)
+SafeImportGzip[file_String, as_] :=
+  Module[
+    {id,tempfile,data},
+    id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz";
+    tempfile = FileNameJoin[{$TemporaryDirectory,id}];
+    CopyFile[file, tempfile];
+    data = Import[tempfile,as];
+    DeleteFile[tempfile];
+    data];
 
 ImportGzip[file_String, as_] :=
-  ImportString[ReadGzipFile[file],as];
+  If[Context[ReadGzipFile] === "h5mma`",
+    ImportString[ReadGzipFile[file],as],
+    SafeImportGzip[file,as]];
 
 ReadWaveformFile[file_] :=
   Module[
