@@ -385,8 +385,8 @@ Redefine[ListPlot[ds:List[DataTable[___]..], args___],
 DataTableListLinePlot[d:DataTable[___], args___] :=
   ListLinePlot[ToList[d], args];
 
-Redefine[ListLinePlot[d:DataTable[___], args___],
-   ListLinePlot[ToList[d], args]];
+DataTable /: ListLinePlot[d:DataTable[___], args___] :=
+  ListLinePlot[ToList[d], args];
 
 Redefine[ListLinePlot[ds:List[DataTable[___]..], args___],
    ListLinePlot[Map[ToList,ds], args]];
