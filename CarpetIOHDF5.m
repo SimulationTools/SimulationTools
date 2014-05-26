@@ -199,11 +199,15 @@ filePattern=
            ("file_" ~~ (DigitCharacter ..))), {0, 1}] ~~
   ".h5";
 
+(* Warning: this could be slow for large simulations *)
+carpetIOHDF5FileQ[filename_String] :=
+  MemberQ[ReadHDF5[filename, {"Datasets"}], "/Parameters and Global Attributes/All Parameters"];
+
 SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
  Module[{pattern, h5Files, leafnames, varnames, 
    var},
   pattern = var__ ~~ filePattern;
-  h5Files = FindSimulationFiles[sim, pattern];
+  h5Files = Select[FindSimulationFiles[sim, pattern], carpetIOHDF5FileQ];
   leafnames = FileNameTake[#, -1] & /@ h5Files;
   varnames = Union[First[StringSplit[#, "."]] & /@ leafnames]];
 
