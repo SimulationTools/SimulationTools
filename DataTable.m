@@ -126,7 +126,7 @@ check[d_DataTable, where_:None] :=
 validQ[d_DataTable] :=
   MatchQ[d, DataTable[{{__?NumericQ}, {__?NumericQ}}, ___]] ||
   MatchQ[d, DataTable[{{__?NumericQ}, {__List}}, ___]] || 
-  (!Developer`PackedArrayQ[ToListOfData[d]] &&
+  (MatchQ[d, DataTable[{_,_}, ___]] && !Developer`PackedArrayQ[ToListOfData[d]] &&
    MatchQ[d, DataTable[{{__?NumericQ}, {__}}, ___]] && 
    MatchQ[ToListOfData[d], {(_?NumericQ | Indeterminate | ComplexInfinity | Infinity | -Infinity)..}]);
 
@@ -134,7 +134,11 @@ SetAttributes[DataTable, {ReadProtected}];
 
 (* DataTables are formatted like SparseArrays *)
 Format[d:DataTable[l_ /; (Head[l]=!=SequenceForm), ___]] :=
-  If[!validQ[d], 
+  (* Abort[] called from within a Format evaluation does not abort the
+     higher level evaluation.  Therefore, we detect any such abort
+     (e.g. from validQ/ToListOfData) and simply display the DataTable as
+     invalid. *)
+  If[!CheckAbort[validQ[d],False],
    DataTable[SequenceForm@@{"<", "invalid", ">"}],
    DataTable[SequenceForm@@{"<", Length[l[[1]]], ">"}, {{l[[1, 1]], l[[1, -1]]}}]];
 
@@ -203,7 +207,10 @@ DataTable /: ToList[DataTable[l_, ___]] := Transpose[l];
 (* ToListOfData *)
 (****************************************************************)
 
-ToListOfData[DataTable[l_, ___]] := l[[2]];
+ToListOfData[d:DataTable[l_, ___]] := 
+  If[Length[l] =!= 2,
+    Error["DataTable is invalid in ToListOfData"],
+    l[[2]]];
 
 (****************************************************************)
 (* ToListOfCoordinates *)
