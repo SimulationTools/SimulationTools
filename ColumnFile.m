@@ -18,8 +18,7 @@ BeginPackage["SimulationTools`ColumnFile`",
  {"SimulationTools`Error`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
-  "SimulationTools`RunFiles`",
-  "h5mma`"
+  "SimulationTools`RunFiles`"
  }];
 
 ReadColumnFile;
@@ -32,6 +31,8 @@ MergeFiles;
 UnknownColumns;
 
 Begin["`Private`"];
+
+$h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
 
 ReadColumnFile[fileName_String] :=
   ReadColumnFileWithFileName[fileName];
