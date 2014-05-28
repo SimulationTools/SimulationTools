@@ -32,7 +32,7 @@ $allowedMessages = {};
 
 messageHandler[x_] :=
   If[Last[x] && !MemberQ[$allowedMessages,x[[1,1]]],
-     x /. HoldPattern[_[Message[id_, args___], _]] :> Error[id, args]; Abort[]];
+     x /. HoldPattern[_[Message[id_, args___], _]] :> Error["Aborting due to message"]; Abort[]];
 
 (****************************************************************)
 (* WithCaughtMessages *)
