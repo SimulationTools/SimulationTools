@@ -29,8 +29,8 @@ cleanArg[arg_] :=
 
 forStringForm[s_String] := StringReplace[s,"`"->"`.`"];
 
-SetAttributes[WithArgumentChecking, HoldFirst];
-WithArgumentChecking[expr_] :=
+SetAttributes[WithArgumentChecking, HoldAll];
+WithArgumentChecking[symbolPattern_, expr_] :=
   Module[
     {expr1, inCheck},
     expr1 := expr;
@@ -38,7 +38,7 @@ WithArgumentChecking[expr_] :=
       {SetDelayed},
 
       Unprotect[SetDelayed];
-      SetDelayed[(fn_Symbol /; (StringMatchQ[Context[fn], "SimulationTools`" ~~ __] && StandardDefinition[fn] =!= True))[args___], rhs_] /; !TrueQ[inCheck] :=
+      SetDelayed[(fn_Symbol /; (StringMatchQ[Context[fn], symbolPattern] && StandardDefinition[fn] =!= True))[args___], rhs_] /; !TrueQ[inCheck] :=
         Block[
           {inCheck = True},
           (* Print["Defining ", fn, "[", StringJoin@Riffle[ToString/@{args},","],"]"]; *)

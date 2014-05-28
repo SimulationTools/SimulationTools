@@ -41,5 +41,5 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
   $Packages = Complement[$Packages, SimulationTools`Private`packages];
   Protect[$Packages];
 
-  WithArgumentChecking[Scan[Needs, SimulationTools`Private`packages]];
+  WithArgumentChecking["SimulationTools`*", Scan[Needs, SimulationTools`Private`packages]];
 ]
