@@ -1,4 +1,10 @@
 AppendTo[$Path, "/Applications/Wolfram Workbench.app/configuration/org.eclipse.osgi/bundles/13/1/.cp/MathematicaSourceVersioned/Head"];
+(* This script should be run from the SimulationTools/Tests directory like this:
+
+     math -run '<<RunTests.m' </dev/null
+
+*)
+
 
 SetOptions["stdout", PageWidth -> Infinity];
 
