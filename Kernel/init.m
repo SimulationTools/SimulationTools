@@ -32,6 +32,8 @@ If[$Input === "nrmma.m",
    Print["nrmma has been renamed to SimulationTools.  Please rename "<>$UserBaseDirectory<>"/Applications/nrmma as "<>$UserBaseDirectory<>"/Applications/SimulationTools and load the package using <<SimulationTools`"];
    Abort[]];
 
+Get[FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"],-2],"Stack.m"}]];
+Get[FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"],-2],"StackTrace.m"}]];
 Get["SimulationTools`Kernel`SimulationTools`"];
 Get["SimulationTools`ArgumentChecker`"];
 Get["SimulationTools`Error`"];
@@ -41,5 +43,7 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
   $Packages = Complement[$Packages, SimulationTools`Private`packages];
   Protect[$Packages];
 
-  WithArgumentChecking["SimulationTools`*", Scan[Needs, SimulationTools`Private`packages]];
+  WithStackTrace["SimulationTools`*",
+    WithArgumentChecking["SimulationTools`*",
+      Scan[Needs, SimulationTools`Private`packages]]];
 ]

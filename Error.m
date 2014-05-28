@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimulationTools`Error`"];
+BeginPackage["SimulationTools`Error`", {"StackTrace`"}];
 
 Error(*::usage = "Error[message, arg1, arg2, ...] reports an error to the user."*);
 WithExceptions;
@@ -40,6 +40,7 @@ Error[s_String, args___] :=
         mechanism for the symbol version of this function as well. *)
     If[$MessageOnError,Message[Error::error, ToString[StringForm[s,args]]]];
     Print[StringForm[s,args]];
+    Print["in ", Sequence@@Riffle[CurrentStackTrace[],"/\n   "]];
     Assert[False]; (* Allow this to be caught by the debugger *)
     Abort[]];
 
