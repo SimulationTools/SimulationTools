@@ -20,6 +20,7 @@ BeginPackage["SimulationTools`ReadHDF5`",
  }];
 
 ReadHDF5(*::usage = "ReadHDF5[file] provides a wrapper around ImportHDF5 if h5mma is available and falls back to the built-in Import otherwise."*); 
+$EnableBuiltInHDF5Reader;
 
 Begin["`Private`"];
 
@@ -29,11 +30,11 @@ If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 ReadHDF5[file_String, opts_:"Datasets"] :=
 Module[{result},
-  If[!$h5mma,
+  If[!$h5mma && !($EnableBuiltInHDF5Reader === True),
     Error["The required h5mma package has not been loaded. Make sure it is installed and functioning correctly."];
   ];
 
-  result = ImportHDF5[file, opts];
+  result = If[$EnableBuiltInHDF5Reader===True, Import[file,opts], ImportHDF5[file, opts]];
   If[result == $Failed,
     Error["Error importing " <> ToString[opts]<>" from "<>file]];
 
