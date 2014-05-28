@@ -201,6 +201,8 @@ RichardsonExtrapolant[ds:{d1_DataTable, d2_DataTable}, p_] :=
 
 RichardsonExtrapolant[ds:{d1_DataTable, d2_DataTable}, hs:{h1_, h2_}, p_] :=
   Module[{dts, ranges, ds2},
+    If[h1 <= h2,
+       Error["Grid spacings (and data) in RichardsonExtrapolate should be given in order of increasing resolution"]];
     dts = Map[Spacing, ds];
     ranges = Map[DataTableRange, ds];
     If[!Apply[Equal, dts] || !Apply[Equal,ranges],

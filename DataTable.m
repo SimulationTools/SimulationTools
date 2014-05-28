@@ -75,6 +75,7 @@ ApplyToList;
 MapThreadData;
 Spacing;
 DataTableRange;
+DivideDataTables(*::usage = "DivideDataTables[d1, d2] returns a DataTable corresponding to d1 / d2, where the dependent variables in d1 and d2 have been divided.  The DataTables are resampled and intersected in order to give a useful result if the ranges or spacings do not match.  Useful as the infix form; i.e. d1 ~DivideDataTables~ d2"*);
 DataTableNormL2;
 MakeInterpolatingDataTable;
 ResampleDataTable;
@@ -406,6 +407,15 @@ DataTable /: Interpolation[d_DataTable, args___] :=
 DataTable /: Interpolation[d_DataTable, args___] /; !MonotonicQ[d]:=
    Error["Can not interpolate a non-monotonic DataTable."];
 
+
+(**********************************************************)
+(* DivideDataTables                                       *)
+(**********************************************************)
+
+DivideDataTables[d1_DataTable, d2_DataTable] :=
+  Apply[Divide, ResampleDataTables[{d1, d2}]];
+
+
 (****************************************************************)
 (* Map *)
 (****************************************************************)
@@ -449,7 +459,6 @@ MapThread[f_, ds:List[DataTable[__]...]] :=
 
 Protect[MapThread];
 
-
 (**********************************************************)
 (* MaxCoordinates                                         *)
 (**********************************************************)
@@ -462,7 +471,6 @@ MaxCoordinates[d_DataTable] := {Last[ToListOfCoordinates[d]]};
 (**********************************************************)
 
 MinCoordinates[d_DataTable] := {First[ToListOfCoordinates[d]]};
-
 
 (****************************************************************)
 (* NDerivative                                                  *)

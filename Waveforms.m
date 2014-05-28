@@ -93,8 +93,10 @@ ToComplex;
 ReadRadiallyExtrapolatedWave;  (* TODO *)
 RadiallyExtrapolatedWave;  (* TODO *)
 Psi4PerturbativeCorrection;
+Psi4ToStrain;
 
 $UniformGridExtrapolation;
+ffiDataTable;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -620,15 +622,20 @@ AlignMaximaOfAbs[ds_List] :=
    maxima = Map[LocateMaximum, Abs /@ ds];
    MapThread[ShiftDataTable[-#1, #2] &, {maxima, ds}]];
 
-(* ImportGzip[file_String, as_] := *)
-(*   Module[ *)
-(*     {id,tempfile,data}, *)
-(*     id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz"; *)
-(*     tempfile = FileNameJoin[{$TemporaryDirectory,id}]; *)
-(*     CopyFile[file, tempfile]; *)
-(*     data = Import[tempfile,as]; *)
-(*     DeleteFile[tempfile]; *)
-(*     data]; *)
+(* Import a gzipped file by copying it to a randomly-named file in the
+   temp directory.  This avoids the problem that the gzip reader
+   creates temporary files named after the original file, which causes
+   problems when a number of such processes are running in parallel
+   with similarly-named files. *)
+SafeImportGzip[file_String, as_] :=
+  Module[
+    {id,tempfile,data},
+    id = IntegerString[RandomInteger[{1, 10^64}], 16]<>".gz";
+    tempfile = FileNameJoin[{$TemporaryDirectory,id}];
+    CopyFile[file, tempfile];
+    data = Import[tempfile,as];
+    DeleteFile[tempfile];
+    data];
 
 ImportGzip[file_String, as_] :=
   (* ICH: My version of h5mma contains a GZIP file reader because the
@@ -638,7 +645,7 @@ ImportGzip[file_String, as_] :=
      work as long as usage is light. *)
   If[$h5mma && ValueQ[ReadGzipFile],
      ImportString[ReadGzipFile[file],as],
-     Import[file, as]];
+     SafeImportGzip[file, as]];
 
 ImportWaveform[file_] :=
   Module[
@@ -740,7 +747,7 @@ RadialExtrapolation[{rs_List, fs:{_DataTable...}}, order_Integer] :=
        Return[fs[[Ordering[rs][[-1]]]]]];
 
     (* These checks do not seem to affect performance *)
-    If[!SameGridQ[fs],
+    If[!SameGridQ@@fs,
        Error["RadialExtrapolation: Input DataTables are not defined on the same grid"]];
     If[!And@@Map[NumberQ,rs],
        Error["RadialExtrapolation: Input radii are not numeric"]];
@@ -775,7 +782,7 @@ ToComplex[{a_DataTable,phi_DataTable}] :=
 ToRetardedTime[r_, f_DataTable, rStarOfr_:Identity] :=
   Shifted[f, -rStarOfr[r]];
 
-ToRetardedTime[{rs_List, fs:{_DataTable...}}, rStarOfr_:Identity] :=
+ToRetardedTime[{rs:{_?NumericQ...}, fs:{_DataTable...}}, rStarOfr_:Identity] :=
   MapThread[ToRetardedTime[#1,#2,rStarOfr] &, {rs,fs}];
 
 resampleDataTables[ds:{DataTable[__]...}] :=
@@ -814,7 +821,6 @@ RadiallyExtrapolatedWave[{rs_List, fs:{_DataTable...}},
        ToComplex[MapThread[ext, {resampled/@ToAbsPhase[ret,tAlign], orders}]],
        (* else *)
        If[ListQ[order], Error["Can only specify a list of extrapolation orders when AbsPhase is True"]];
-
        ext[resampled[ret],order]]];
 
 (* ReadRadiallyExtrapolatedWave *)

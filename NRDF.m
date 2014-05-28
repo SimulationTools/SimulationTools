@@ -41,6 +41,17 @@ ReadMassRatio;
 ReadTotalMass;
 NameEmailList;
 EmailList;
+ReadInitialBHPosition;
+ReadInitialBHMomentum;
+ReadInitialBHVelocity;
+HaveInitialBHMomentum;
+HaveInitialBHVelocity;
+ReadInitialBHSpin;
+ReadInitialBHMassParameter;
+ReadBHSpin;
+ReadBHMass;
+ReadBHCoordinatesNRDF;
+ReadBHUsefulSpin;
 
 Begin["`Private`"];
 
@@ -160,8 +171,6 @@ SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, ra
 
     (* Print["data = ", data]; *)
 
-    Check[Interpolation[data], Print["Warning: Duplicate points in "<>runName<>"/"<>tmp], Interpolation::inddp];
-
     Module[
       {tol = 10.^-5},
       If[!MonotonicQ[data, tol],
@@ -173,6 +182,8 @@ SimulationTools`NRDF`Waveforms`ReadPsi4Data[runName_, l_?NumberQ, m_?NumberQ, ra
            data = MakeDataTable[Delete[ToList@data, posns]];
            Print["Warning: Data in "<>runName<>"/"<>ToString[tmp,InputForm]<>" is not monotonic (tolerance "<>
                  ToString[tol,InputForm]<>", index "<>ToString[pos+1]<>", t = "<>ToString[IndVar[data][[pos+1]]]<>")"]]]];
+
+    Check[Interpolation[data], Print["Warning: Duplicate points in "<>runName<>"/"<>tmp], Interpolation::inddp];
 
     If[rad=!="inf",
        Module[
@@ -275,6 +286,37 @@ ReadMassRatio[run_String] :=
 ReadTotalMass[run_String] :=
   Plus@@ReadMasses[run];
 
+ReadInitialBHPosition[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-position"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadInitialBHMomentum[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-momentum"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadInitialBHVelocity[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-velocity"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadInitialBHSpin[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"initial-bh-spin"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+ReadBHUsefulSpin[run_String, i:(1|2)] :=
+  Table[ReadMetadataKey[run,"after-junkradiation-spin"<>ToString[i]<>d], {d,{"x","y","z"}}];
+
+HaveInitialBHMomentum[run_String] :=
+  HaveMetadataKey[run, "initial-bh-momentum1x"];
+
+HaveInitialBHVelocity[run_String] :=
+  HaveMetadataKey[run, "initial-bh-velocity1x"];
+
+ReadInitialBHMassParameter[run_String,i:(1|2)] :=
+  ReadMetadataKey[run, "initial-bh-mass-parameter"<>ToString[i]];
+
+ReadBHSpin[run_String, i:(1|2)] :=
+  Module[{base,file,data},
+    base = ReadMetadataKey[run, "body-data", "spin"<>ToString[i]];
+    file = FileNameJoin[{FindRunDir[run], base}];
+    data = readColumnData[file];
+    Table[MakeDataTable[data[[All,{1,d+1}]]], {d,1,3}]];
+
 readColumnData[file_String] :=
   Module[
     {tmp},
@@ -290,8 +332,20 @@ SimulationTools`NRDF`Trackers`ReadCoordinates[run_String, i_Integer] :=
     data = readColumnData[file];
     Table[MakeDataTable[data[[All,{1,d+1}]]], {d,1,3}]];
 
+ReadBHCoordinatesNRDF = SimulationTools`NRDF`Trackers`ReadCoordinates;
+
 SimulationTools`NRDF`BHCoordinates`HaveData[run_String, tracker_Integer] :=
   haveMetadataFile[FindRunDir[run]] && HaveMetadataKey[run, "body-data", "trajectory"<>ToString[tracker]];
+
+ReadBHMass[run_String, i_Integer] :=
+  Module[{base,file,data},
+    base = ReadMetadataKey[run, "body-data", "horizon-mass"<>ToString[i]];
+    file = FileNameJoin[{FindRunDir[run], base}];
+    data = readColumnData[file];
+    MakeDataTable[data[[All,{1,2}]]]];
+
+HaveBHCoordinatesNRDF[run_String, tracker_Integer] :=
+  HaveMetadataKey[run, "body-data", "trajectory"<>ToString[tracker]];
 
 End[];
 
