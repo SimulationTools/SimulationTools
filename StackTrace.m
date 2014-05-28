@@ -44,7 +44,7 @@ WithStackTrace[symbolPattern_, expr_] :=
              temporary with Module which causes a big performance hit. *)
           fn[args] :=
           {StackPush[$stack,fn],
-            Catch[rhs, _, (StackPop[$stack]; Throw[#1,#2]) &],
+            CheckAbort[Catch[rhs, _, (StackPop[$stack]; Throw[#1,#2]) &], StackPop[$stack];Abort[]],
             StackPop[$stack]}[[2]]];
 
       Protect[SetDelayed];
