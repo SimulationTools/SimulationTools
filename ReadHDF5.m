@@ -25,7 +25,7 @@ $EnableBuiltInHDF5Reader;
 Begin["`Private`"];
 
 (* If the h5mma is not found, then just use Mathematica's built-in HDF5 support *)
-$h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
+$h5mma = If[Quiet[Needs["h5mma`"], {Needs::nocont, Get::noopen}]===$Failed, False, True];
 If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
 ReadHDF5[file_String, opts_:"Datasets"] :=

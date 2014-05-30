@@ -117,7 +117,7 @@ Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
 
-$h5mma = If[Quiet[Get["h5mma`"], {Get::noopen}]===$Failed, False, True];
+$h5mma = If[Quiet[Needs["h5mma`"], {Needs::nocont, Get::noopen}]===$Failed, False, True];
 
 (**********************************************************)
 (* WaveformCycles                                         *)
