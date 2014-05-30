@@ -643,9 +643,9 @@ ImportGzip[file_String, as_] :=
      and should eventually move into another package.  Fall back to
      using Import if the h5mma function is not available.  This should
      work as long as usage is light. *)
-  If[$h5mma && ValueQ[ReadGzipFile],
-     ImportString[ReadGzipFile[file],as],
-     SafeImportGzip[file, as]];
+  If[Context[ReadGzipFile] === "h5mma`",
+    ImportString[ReadGzipFile[file],as],
+    SafeImportGzip[file,as]];
 
 ImportWaveform[file_] :=
   Module[
