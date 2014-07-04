@@ -95,7 +95,7 @@ MakePlotLegend[labels_List, style1_List : plotStyles, labelStyle_ : Automatic,
                    {Graphics[{
                               withStyle[l, sty]},
                           ImageSize -> OptionValue[LegendLineSize], AspectRatio -> 1/3],
-                 Style[Text[lab], If[labelStyle === Automatic, {},labelStyle]]}],
+                 Style[lab, If[labelStyle === Automatic, {},labelStyle]]}],
                 {labels, Take[style, Length[labels]]}],If[hor,1,0]]],
       Alignment -> {Left,Center},
       Spacings-> {{0,Automatic}~Join~Flatten[Table[{1,Automatic},{i,Length[labels]}],1]},
