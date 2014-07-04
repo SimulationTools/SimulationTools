@@ -39,6 +39,7 @@ RichardsonRelativeError;
 RescaledDifferences;
 
 RichardsonExtrapolate = RichardsonExtrapolant;
+ConvergenceOrder;
 
 Begin["`Private`"];
 
@@ -259,6 +260,42 @@ RichardsonError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
 
 RichardsonRelativeError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
   RichardsonError[fs,hs,p]/f2;
+
+
+ConvergenceOrder[{f1_?NumberQ, f2_?NumberQ, 
+   f3_?NumberQ}, {h1_?NumberQ, h2_?NumberQ, h3_?NumberQ}] :=
+  If[! (h1 > h2 > h3), 
+  Error["ConvergenceOrder: Grid spacings must be monotonically increasing"],
+  If[f1 == f2 == f3, 0.,
+   If[(f1 - f2) (f3 - f2) >= 0,(* Non-monotonic input values *) None,
+    Module[{p},
+     Replace[
+      Quiet[Check[FindRoot[(f1 - f2)/(f2 - f3) == ((h1/h2)^p - 
+           1)/(1 - (h2/h3)^-p), {p, 1}], None, {FindRoot::lstol}],FindRoot::lstol],
+      {{p -> p0_} :> p0,
+       None :> None,
+       x_ :> 
+        Error["Could not determine convergence order: " <> 
+          ToString[x]]}]]]]];
+
+ConvergenceOrder[{d1_DataTable, d2_DataTable, d3_DataTable}, {h1_, h2_, h3_}] :=
+ MapThread[ConvergenceOrder[{##}, {h1, h2, h3}] &, {d1, d2, d3}];
+
+ConvergenceOrder[{d12_?NumberQ, d23_?NumberQ}, {h1_?NumberQ, h2_?NumberQ, h3_?NumberQ}] :=
+  If[! (h1 > h2 > h3), 
+  Error["ConvergenceOrder: Grid spacings must be monotonically increasing"],
+  If[d12 == d23 == 0., 0.,
+   If[-d12 d23 >= 0,(* Non-monotonic input values *) None,
+    Module[{p},
+     Replace[
+      Quiet[Check[FindRoot[d12/d23 == ((h1/h2)^p - 
+           1)/(1 - (h2/h3)^-p), {p, 1}], None, {FindRoot::lstol}],FindRoot::lstol],
+      {{p -> p0_} :> p0,
+       None :> None,
+       x_ :> 
+        Error["Could not determine convergence order: " <> 
+          ToString[x]]}]]]]];
+
 
 End[];
 
