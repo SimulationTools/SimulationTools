@@ -20,7 +20,7 @@ BeginPackage["SimulationTools`MessageCatcher`",
  }];
 
 WithCaughtMessages::usage = "WithCaughtMessages[expr] evaluates expr, converting any generated messages into exceptions";
-AbortOnMessages::usage = "AbortOnMessages[abort] causes any subsequent messages to generate a call to Abort.  This prevents cascading errors.  Aborts can be caught using CheckAbort.";
+AbortOnMessagesST::usage = "AbortOnMessagesST[abort] causes any subsequent messages to generate a call to Abort.  This prevents cascading errors.  Aborts can be caught using CheckAbort.";
 
 Begin["`Private`"];
 
@@ -43,7 +43,7 @@ WithCaughtMessages[expr_] :=
   Internal`HandlerBlock[{"Message", messageHandler},
                         (expr)];
 
-AbortOnMessages[abort:(True|False)] :=
+AbortOnMessagesST[abort:(True|False)] :=
   If[abort, Internal`AddHandler["Message", messageHandler],
      Internal`RemoveHandler["Message", messageHandler]];
 
