@@ -70,7 +70,7 @@ SimulationTools`NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {FindRunDir[dir]};
 
 DefineMemoFunction[ParseMetadataFile[run_String],
-  CleanParseTree[Parse["nrdfmd.peg","file",findMetadataFile[run]]]];
+  CleanParseTree[ParsePEG["nrdfmd.peg","file",findMetadataFile[run]]]];
 
 processMetadata[md_] :=
   md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],

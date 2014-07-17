@@ -4,7 +4,7 @@
 
 BeginPackage["Piraha`", {"JLink`"}];
 
-Parse::usage = "Parse[grammarfile, pattern, inputfile] parses a file named inputfile using a grammar stored in a file named grammarfile using pattern as the root pattern.  The parse tree is returned as Symbolic XML.";
+ParsePEG::usage = "ParsePEG[grammarfile, pattern, inputfile] parses a file named inputfile using a grammar stored in a file named grammarfile using pattern as the root pattern.  The parse tree is returned as Symbolic XML.";
 CleanParseTree;
 
 EnsureJava;
@@ -31,7 +31,7 @@ absPath[s_String] :=
 SimulationToolsDir = FileNameDrop[FindFile["SimulationTools`"],-2];
 
 DefFn[
-  Parse[grammarFileName_String, pattern_String, inputFileName_String] :=
+  ParsePEG[grammarFileName_String, pattern_String, inputFileName_String] :=
   Module[
     {gf,g,m,c,sw,dout,xmlString,xml},
 
