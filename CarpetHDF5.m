@@ -395,7 +395,10 @@ SimulationTools`GridFunctions`ReadGridFunction[run_String, var_String, it_Intege
 
 (* Options[ReadIterations] = {}; *)
 SimulationTools`GridFunctions`ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
-  Union@@Map[CarpetHDF5Iterations[#,getRL[run, var, rl]] &, FindRunFile[run, var]];
+  If[rl == All,
+  	Union@@Map[CarpetHDF5Iterations, FindRunFile[run, var]],
+  	Union@@Map[CarpetHDF5Iterations[#, getRL[run, var, rl]]&, FindRunFile[run, var]]
+  ]
 
 (* Options[ReadMaps] = {}; *)
 SimulationTools`GridFunctions`ReadMaps[run_, var_, opts:OptionsPattern[]] :=
