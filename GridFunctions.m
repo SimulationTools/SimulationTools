@@ -22,7 +22,7 @@ BeginPackage["SimulationTools`GridFunctions`",
   "SimulationTools`"
  }];
 
-ReadGridFunction::usage = "ReadGridFunction[sim, var, dims] reads variable var from sim and returns it as a DataRegion object.  dims is a list of the dimensions to read, and these dimensions must correspond to available output.  Dimensions in dims can be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
+ReadGridFunction::usage = "ReadGridFunction[sim, var, dims] reads variable var from sim and returns it as a DataRegion object. dims is a list of the dimensions to read, and these dimensions must correspond to available output. Dimensions in dims can be given either as coordinate names (x, y, z) or as numbers (1, 2, 3).  The order of dims is not important.  Optional arguments: Map -> Automatic | mapnum specifies the map for multipatch data files, StripGhostZones -> True|False determines whether the ghost zones are removed from the variable before it is returned.";
 ReadIterations::usage = "ReadIterations[sim, var, dims] reads the iterations present for the grid function var in sim.";
 ReadMaps::usage = "ReadMaps[sim, var, dims] reads the multipatch maps present  for the grid function var in sim.";
 ReadRefinementLevels::usage = "ReadRefinementLevels[sim, var, dims] reads the refinement levels present for the grid function var in sim.";
