@@ -60,6 +60,7 @@ packages = {
     "SimulationTools`CarpetHDF5`",
   (*"SimulationTools`CarpetHDF5Plot`",*)
     "SimulationTools`CarpetIOHDF5`",
+    "SimulationTools`CarpetIOScalar`",
   (*"SimulationTools`CarpetVTK`",*)
   (*"SimulationTools`CircularPN`",*)
     "SimulationTools`ColumnFile`",
