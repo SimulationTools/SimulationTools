@@ -516,7 +516,7 @@ DataRegion /: SameGridQ[drs:DataRegion[__]..] :=
   spacings = CoordinateSpacings /@ {drs};
   dims     = Dimensions /@ {drs};
 
-  (SameQ@@Rationalize@origins) && (SameQ@@Rationalize@spacings) && (SameQ@@dims)
+  (SameQ@@Rationalize[Chop@origins,10^-8]) && (SameQ@@Rationalize[Chop@spacings,10^-8]) && (SameQ@@dims)
 ];
 
 
