@@ -38,6 +38,7 @@ VariableName::usage = "VariableName[d] returns the variable name in DataRegion d
 
 TimeDerivative;
 CommonPoints;
+StripNone;
 
 (****************************************************************)
 (* Deprecated *)
@@ -1239,6 +1240,31 @@ CommonPoints[ds : {_DataRegion ..}] :=
   (* Construct a DataRegion with the points common to all *)
   minimal = Fold[commonPoints[{#1, #2}][[1]] &, First[ds], Rest[ds]];
   Map[commonPoints[{minimal, #}][[2]] &, ds]];
+
+(**********************************************************)
+(* StripNone                                              *)
+(**********************************************************)
+
+StripNone[d_DataRegion, dim_Integer, pos_List] :=
+ Module[{origin, delta, ns, parts, data, nPos, nBefore, nAfter, 
+   newParts},
+  origin = MinCoordinates[d];
+  delta = CoordinateSpacings[d];
+  ns = Round[(pos - origin)/delta] + 1;
+  parts = ReplacePart[ns, dim -> All];
+  data = ToListOfData[d][[Sequence @@ parts]];
+  nPos = ns[[dim]];
+  If[data[[nPos]] === None, Error["None at given position"]];
+  nBefore = 
+   LengthWhile[Reverse[data[[1 ;; nPos - 1]]], # =!= None &];
+  nAfter = LengthWhile[data[[nPos + 1 ;; All]], # =!= None &];
+  newParts = 
+   ReplacePart[ConstantArray[All, ArrayDepth[d]], 
+    dim -> (nPos - nBefore ;; nPos + nAfter)];
+  d[[Sequence @@ newParts]]];
+
+StripNone[d_DataRegion, pos_List] :=
+ Fold[StripNone[#1, #2, pos] &, d, Range[1, ArrayDepth[d]]];
 
 End[];
 
