@@ -23,6 +23,7 @@ BeginPackage["SimulationTools`SimFactory`",
  }];
 
 ReadSimFactoryMetadata;
+ReadSimulationJobIdentifiers;
 
 Begin["`Private`"];
 
@@ -93,6 +94,11 @@ SimulationTools`SimFactory`RunFiles`ReadSimulationMachine[dir_String, runName_St
 
 ReadSimFactoryMetadata[simName_, key_] :=
   IniVariable[FindRunSegments[simName][[1]]<>"/../SIMFACTORY/properties.ini", key];
+
+
+ReadSimulationJobIdentifiers[sim_String] :=
+ IniVariable[#, "jobid"] & /@ 
+  FindSimulationFiles[sim, "../SIMFACTORY/properties.ini"];
 
 End[];
 
