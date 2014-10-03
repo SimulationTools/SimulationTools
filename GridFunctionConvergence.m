@@ -127,6 +127,13 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:Optio
       rho = hs[[2]]/hs[[3]]},
      d[[3]] - (rho^p d[[3]] - d[[2]])/(rho^p-1)];
 
+  s["richardson-relative-error", it_, p_, int_] :=
+   Module[
+     {d = If[int, s["resampled-data", it], s["common-data",it]],
+      rho = hs[[2]]/hs[[3]]},
+     (d[[3]] - (rho^p d[[3]] - d[[2]])/(rho^p-1))/d[[3]]];
+
+
   s["richardson-error-norm", it_, p_, int_, coordRange_:All] :=
    Module[
      {nDims, slab, d = s["richardson-error", it, p, int]},
