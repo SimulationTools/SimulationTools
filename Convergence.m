@@ -36,6 +36,7 @@ ResName;
 NPoints;
 RichardsonError;
 RichardsonRelativeError;
+RescaledDifferences;
 
 RichardsonExtrapolate = RichardsonExtrapolant;
 
@@ -112,6 +113,10 @@ RescaledErrors[p_, ds:List[DataTable[__]..]] :=
     cm = ConvergenceMultiplier[hs, p];
     Return[{d12/cm, d23}];
   ];
+
+RescaledDifferences[fs_, hs_, p_] :=
+ {fs[[1]]~Sub~
+   fs[[2]], (fs[[2]]~Sub~fs[[3]]) ConvergenceMultiplier[hs, p]}
 
 ConvergenceRateEquations = Table[CRF[i] == CRf0 + CRf1 CRh[i]^CRp, {i, 1, 3}];
 ConvergenceRatePEquation = Eliminate[ConvergenceRateEquations, {CRf0, CRf1}];
