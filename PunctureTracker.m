@@ -22,6 +22,7 @@ BeginPackage["SimulationTools`PunctureTracker`",
  }];
 
 ReadPunctureVelocity;
+ReadPuncturePosition;
 
 Begin["`Private`"];
 
@@ -49,6 +50,14 @@ ReadPunctureVelocity[runName_, i_] :=
   nTrackers = 10;
   Table[ToDataTable[{#[[1]], #[[dir+1]]} & /@ 
     ReadColumnFile[runName, "puncturetracker::pt_vel..asc",
+                   {9, 13 + nTrackers*1 + i, 
+      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]], {dir, 1, 3}]];
+
+ReadPuncturePosition[runName_, i_] :=
+ Module[{nTrackers},
+  nTrackers = 10;
+  Table[ToDataTable[{#[[1]], #[[dir+1]]} & /@ 
+    ReadColumnFile[runName, fileName,
                    {9, 13 + nTrackers*1 + i, 
       13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]], {dir, 1, 3}]];
 
