@@ -101,6 +101,7 @@ packages = {
     "SimulationTools`Segments`",
     "SimulationTools`ShiftTracker`",
     "SimulationTools`SimFactory`",
+    "SimulationTools`SimulationCompare`",
     "SimulationTools`SimulationProperties`",
     "SimulationTools`SimView`",
     "SimulationTools`SimViewRRMHD`",
