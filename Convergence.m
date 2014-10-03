@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`Convergence`",
   "SimulationTools`ArgumentChecker`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
+  "SimulationTools`DataRegion`",
   "SimulationTools`Error`"
  }];
 
@@ -280,6 +281,9 @@ ConvergenceOrder[{f1_?NumberQ, f2_?NumberQ,
 
 ConvergenceOrder[{d1_DataTable, d2_DataTable, d3_DataTable}, {h1_, h2_, h3_}] :=
  MapThread[ConvergenceOrder[{##}, {h1, h2, h3}] &, {d1, d2, d3}];
+
+ConvergenceOrder[{d1_DataRegion, d2_DataRegion, d3_DataRegion}, {h1_, h2_, h3_}] :=
+ MapThread[ConvergenceOrder[{##}, {h1, h2, h3}] &, {d1, d2, d3}/.None->0.];
 
 ConvergenceOrder[{d12_?NumberQ, d23_?NumberQ}, {h1_?NumberQ, h2_?NumberQ, h3_?NumberQ}] :=
   If[! (h1 > h2 > h3), 
