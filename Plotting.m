@@ -32,6 +32,12 @@ PresentationArrayPlot(*::usage = "PresentationArrayPlot[d] plots a 2-dimensional
 PresentationArrayPlot2;
 
 (****************************************************************)
+(* Experimental                                                 *)
+(****************************************************************)
+
+PadGraphics;
+
+(****************************************************************)
 (* Deprecated                                                   *)
 (****************************************************************)
 
@@ -563,6 +569,21 @@ RasterizeManipulate[expr_, {var_, start_, end_, inc_, opts___}] :=
    Uncompress[frames[[1 + Round[(var - start)/inc]]]], {var, start, 
     end, inc, opts}, SaveDefinitions -> True]];
 
+(* See http://mathematica.stackexchange.com/questions/8645/how-do-i-make-framed-plots-the-same-size/8660#8660 *)
+
+graphicsPadding[g_Graphics] :=
+ BorderDimensions[
+  Image[Show[g, LabelStyle -> White, Background -> White]]];
+
+graphicsPadding[gs : {__Graphics}] :=
+ MapThread[Max, Map[graphicsPadding, gs], 2];
+
+PadGraphics[gs_List] :=
+ With[{padding = graphicsPadding[gs]},
+  Map[Append[#, ImagePadding -> padding] &, gs]];
+
+(* TODO: allow this to be applied to a nested list, e.g. for a
+   GraphicsGrid *)
 
 End[];
 
