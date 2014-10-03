@@ -72,7 +72,8 @@ packages = {
     "SimulationTools`DataTable`",
   (*"SimulationTools`Empty`",*)
   (*"SimulationTools`Error`",*)
-    "SimulationTools`FieldLines`",
+    "SimulationTools`FieldLines`", 
+    "SimulationTools`Geodesics`",
     "SimulationTools`GridFunctions`",
     "SimulationTools`GridFunctionConvergence`",
     "SimulationTools`Grids`",
