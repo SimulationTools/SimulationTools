@@ -25,6 +25,18 @@ ExportMovie;
 EncodeMovieFrameFiles;
 ExportMovieFrames;
 
+CreateFrameSet;
+RenderFrames;
+ManipulateFrames;
+SaveFrameSet;
+LoadFrameSet;
+ClearFrameData;
+ClearFrame;
+ListFrames;
+ReadFrameData;
+RenderFrame;
+ExportFrameSetMovie;
+
 Begin["`Private`"];
 
 PadIndex[i_, n_] :=
@@ -117,6 +129,86 @@ ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
 (* TODO: given a base name, create the movie in a temporary location,
    and return the full path to it, or reveal it in the finder, so it
    can be dragged into an email, or uploaded somewhere. *)
+
+
+(* Frame sets *)
+
+CreateFrameSet[sym_Symbol, listFramesFn_, readFrameDataFn_, 
+  renderFrameFn_] :=
+ Module[{},
+  sym /: ListFrames[sym] := listFramesFn[];
+  sym /: ReadFrameData[sym, frameID_] := 
+   sym /: ReadFrameData[sym, frameID] = 
+    With[{r = readFrameDataFn[frameID]}, (sym /: 
+       haveFrameData[sym, frameID] = True); r];
+  sym /: RenderFrame[sym, frameID_] := 
+   sym /: RenderFrame[sym, frameID] = 
+    With[{r = renderFrameFn[ReadFrameData[sym, frameID]]}, (sym /: 
+       haveFrame[sym, frameID] = True); r];
+  sym /: frameFunctions[sym] = {listFramesFn, readFrameDataFn, 
+    renderFrameFn};
+  sym /: haveFrameData[sym, _] = False;
+  sym /: haveFrame[sym, _] = False;
+  ]
+
+RenderFrames[sym_, range_: All] :=
+ MapMonitored[RenderFrame[sym, #] &, ListFrames[sym][[range]]]
+
+frameSequence[is_List] :=
+ If[And @@ Map[IntegerQ, is] && 
+   Length[Union[Drop[is - RotateLeft[is], -1]]] === 1,
+  {is[[1]], is[[-1]], is[[2]] - is[[1]]},
+  {is}]
+
+ManipulateFrames[sym_, range_: All] :=
+ Module[{frames = RenderFrames[sym, range]},
+  Manipulate[
+   RenderFrame[sym, i], {i, 
+    Sequence @@ frameSequence[ListFrames[sym][[range]]], 
+    ControlType -> Manipulator}]]
+
+SaveFrameSet[sym_Symbol, dir_String] :=
+ Module[{},
+  If[FileType[dir] =!= Directory, CreateDirectory[dir]];
+  Do[If[haveFrameData[sym, i],
+    Put[ReadFrameData[sym, i], 
+     FileNameJoin[{dir, "data." <> ToString[i] <> ".m"}]]], {i, 
+    ListFrames[sym]}];
+  Do[If[haveFrame[sym, i],
+    Put[RenderFrame[sym, i], 
+     FileNameJoin[{dir, "frame." <> ToString[i] <> ".m"}]]], {i, 
+    ListFrames[sym]}];
+  ]
+
+LoadFrameSet[sym_Symbol, dir_String] :=
+ Module[{},
+  If[FileType[dir] =!= Directory, 
+   Error["Frame set directory not found"]];
+  Do[With[{f = FileNameJoin[{dir, "data." <> ToString[i] <> ".m"}]},
+    If[FileExistsQ[f], sym /: ReadFrameData[sym, i] = Get[f]; 
+     sym /: haveFrameData[sym, i] = True]], {i, ListFrames[sym]}];
+  
+  (*Do[With[{f=FileNameJoin[{dir,"frame."<>ToString[i]<>".m"}]},
+  If[FileExistsQ[f],sym/:RenderFrame[sym,i]=Get[f];sym/:haveFrame[sym,
+  i]=True]],{i,ListFrames[sym]}];*)
+  ]
+
+ClearFrameData[sym_Symbol, frameID_] :=
+ Module[{},
+  Print["Clearing data for ", sym, " frame ", frameID];
+  sym /: ReadFrameData[sym, frameID] =.;
+  sym /: haveFrameData[sym, frameID] = False]
+
+ClearFrame[sym_Symbol, frameID_] :=
+ Module[{},
+  Print["Clearing frame for ", sym, " frame ", frameID];
+  sym /: RenderFrame[sym, frameID] =.;
+  sym /: haveFrame[sym, frameID] = False];
+
+Options[ExportFrameSetMovie] = Options[ExportMovie]
+ExportFrameSetMovie[sym_Symbol, movieFile_String, range_: All, 
+  opts : OptionsPattern[]] :=
+ ExportMovie[movieFile, RenderFrames[sym, range], opts]
 
 End[];
 
