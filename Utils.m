@@ -86,5 +86,12 @@ TailFile[filename_String, n_Integer] :=
   Close[handle];
   StringJoin[Riffle[lines, "\n"]]];
 
+(* http://mathematica.stackexchange.com/questions/2230/mathematica-debuggability *)
+SetAttributes[ShowIt, HoldAll];
+ShowIt[code_] := 
+   Module[{y}, 
+      Print[ToString[Unevaluated[code]], " = ", y = code]; 
+      y]
+
 End[];
 EndPackage[];
