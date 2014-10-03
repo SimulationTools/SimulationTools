@@ -565,7 +565,8 @@ Slab[d_SimulationTools`DataTable`DataTable, s__] :=
 Slab[d_SimulationTools`DataRegion`DataRegion, s__] := slab[d, s];
 
 slab[d_?DataRepresentationQ, s__]:=
- Module[{slabSpec, valid, spacing, origin, endpoints, indexrange,indexrange2},
+ Module[{slabSpec, valid, spacing, origin, endpoints, indexrange, replaceAlls, coordinateToIndex,
+         slabSpecToIndexRange},
   spacing   = CoordinateSpacings[d];
   origin    = MinCoordinates[d];
   endpoints = MaxCoordinates[d];
@@ -576,20 +577,29 @@ slab[d_?DataRepresentationQ, s__]:=
     Error["Coordinate ranges must be specified using either Span[x1, x2] "<>
      "(equivalently x1;;x2), All, a single coordinate or a single element list."];
   ];
-  (* Untested *)
-  (* slabSpec = MapThread[Replace[#1, *)
-  (*   {All :> #2;;#3, *)
-  (*     All;;x_ :> #2;;x, *)
-  (*     x_;;All :> x;;#3, *)
-  (*     All;;All :> #2;;#3}] &, {slabSpec,origin,endpoints}]; *)
 
-  (* Convert coordinate range to index range *)
-  indexrange = MapThread[(#1 /.{x_?NumericQ :> Round[(x-#2)/#3] + 1})&, {slabSpec, origin, spacing}]; (* FIXME: Add conversion from Span[..,All] *)
+  replaceAlls[spec_, origin_, spacing_, dim_] :=
+    With[{xMin = origin, xMax = origin+(dim-1)*spacing},
+      ReplaceRepeated[spec,
+        {All        :> All  ;; All,
+         All ;; x_  :> xMin ;; x,
+         x_  ;; All :> x    ;; xMax}]];
 
-  indexrange2= MapThread[If[#1[[2]]===All||#1[[2]]>#2,#1[[1]];;#2,#1] &, {indexrange,Dimensions[d]}];
+  coordinateToIndex[x_, origin_, spacing_, dim_] :=
+    With[{i=Round[(x-origin)/spacing] + 1},
+      (*i*)
+      Min[Max[i,1], dim]];
+
+  slabSpecToIndexRange[spec_, origin_, spacing_, dim_] :=
+    Replace[replaceAlls[spec, origin, spacing, dim],
+      {x_?NumericQ :> coordinateToIndex[x, origin, spacing, dim],
+       x_?NumericQ;;y_?NumericQ :> coordinateToIndex[x, origin, spacing, dim];;coordinateToIndex[y, origin, spacing, dim],
+      _ :> Error["Invalid slab specification"]}];
+
+  indexrange = MapThread[slabSpecToIndexRange, {slabSpec, origin, spacing, Dimensions[d]}];
 
   (* Get the relevant part of the data *)
-  Part[d, Sequence@@indexrange2]
+  Part[d, Sequence@@indexrange]
 ];
 
 slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable`UniformSpacingQ[d] :=
