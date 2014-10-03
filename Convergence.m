@@ -25,7 +25,7 @@ BeginPackage["SimulationTools`Convergence`",
 ConvergenceMultiplier::usage = "ConvergenceMultiplier[{h1,h2,h3},p] computes the expected ratio (f[h1]-f[h2])/(f[h2]-f[h3]) when f[h] has a Taylor expansion f[h] = O[h^p].";
 ConvergenceRate::usage = "ConvergenceRate[{f1,f2,f3}, {h1,h2,h3}] computes the convergence rate, p, of f[h] assuming f[h] = O[h^p].  f1, f2 and f3 can either be real numbers or DataTables, and the returned value will be of the same type.";
 RichardsonExtrapolant::usage = "RichardsonExtrapolant[{f1, f2}, {h1, h2}, p] gives the order p Richardson extrapolant of f1 and f2 at h = 0 assuming that f[h] = O[h^p]. f1 and f2 can either be real numbers or DataTables, and the returned value will be of the same type.";
-
+ConvergenceRateConstantRatio;
 
 LoadConvergenceSeries;
 RescaledErrors;
@@ -171,6 +171,17 @@ ConvergenceRate[ds:{DataTable[__]..}, hs_List] :=
       ds2 = ResampleDataTables[ds],
       ds2 = ds];
     MapThreadData[ConvergenceRate[{#1, #2, #3}, hs] &, ds2]];
+
+ConvergenceRateConstantRatio[{d1_, d2_, d3_}, {h1_, h2_, h3_}] := 
+  (* TODO: give an error or make it work if h1/h2 != h2/h3 *)
+  Module[
+    {rho = h2/h1}, 
+    Quiet[
+      Log[(d2-d3)/(d1-d2)]/Log[rho] /.
+      {_Complex -> None, 
+       Indeterminate -> None, Infinity -> None},
+      {Power::infy, 
+       Infinity::indet}]];
 
 StandardDefinition[RichardsonExtrapolate] = True;
 
