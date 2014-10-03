@@ -100,11 +100,14 @@ EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[
     If[ret =!= 0, Error["Failed to encode movie frame files to "<>movieFile<>". \n"<>err]];
     ];
 
+Options[ExportMovie] = {"FFMPEG" -> "ffmpeg",
+  "FrameRate" -> 1};
+
 ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
   Module[
     {base = FileNameJoin[{FileNameDrop[movieFile,-1],FileBaseName[movieFile]}]},
-    ExportMovieFrames[base, frames];
-    EncodeMovieFrameFiles[movieFile, base <> ".%5d.png"]];
+    ExportMovieFrames[base, frames, opts];
+    EncodeMovieFrameFiles[movieFile, base <> ".%5d.png", opts]];
 
 (* TODO: given a base name, create the movie in a temporary location,
    and return the full path to it, or reveal it in the finder, so it
