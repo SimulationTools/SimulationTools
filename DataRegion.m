@@ -248,17 +248,18 @@ SyntaxInformation[MergedDataRegion] =
  {"ArgumentsPattern" -> {_}};
 
 MergedDataRegion[ds:List[DataRegion[___]..]] :=
- Module[{x1, x2, dx, n, data, offsets, attrs},
+ Module[{x1, x2, dx, n, data, offsets, attrs, spacings},
   (* Find the shape of the bounding-box DataRegion *)
   x1 = Min /@ Transpose[MinCoordinates /@ ds];
   x2 = Max /@ Transpose[MaxCoordinates /@ ds];
 
   (* We allow the spacings to differ by a very small amount, close to roundoff *)
-  dx = DeleteDuplicates[CoordinateSpacings /@ ds, (Max[Abs[1-#1/#2]]<10^-13)&];
+  spacings = CoordinateSpacings /@ ds;
+  dx = DeleteDuplicates[spacings, (Max[Abs[1-#1[[1]]/#2[[1]]]]<10^-13)&];
 
   (* TODO: Check that all origins are separated by multiples of their spacing. *)
   If[Length[dx] =!= 1,
-    Error["MergedDataRegion only supports merging DataRegions with the same grid spacing."];
+    Error["MergedDataRegion only supports merging DataRegions with the same grid spacing: "<>ToString[NumberForm[spacings,{15,15}]]];
   ,
     dx = First[dx];
   ];
