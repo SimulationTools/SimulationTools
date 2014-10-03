@@ -105,7 +105,12 @@ Options[ExportMovie] = {"FFMPEG" -> "ffmpeg",
 
 ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
   Module[
-    {base = FileNameJoin[{FileNameDrop[movieFile,-1],FileBaseName[movieFile]}]},
+    {framesDir = FileNameJoin[{$TemporaryDirectory,FileBaseName[movieFile]}],
+     base},
+
+    If[!DirectoryQ[framesDir], CreateDirectory[framesDir]];
+    base = FileNameJoin[{framesDir,"frame"}];
+    (* TODO: what about extra files from previous longer movies? *)
     ExportMovieFrames[base, frames, opts];
     EncodeMovieFrameFiles[movieFile, base <> ".%5d.png", opts]];
 
