@@ -185,13 +185,13 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:Optio
   
   s["function-of-t"][f_, timeRange_:All] :=
     Module[
-      {allIts, allTimes, its},
+      {allIts, allTimes, its, ds=If[Length[timeRange] === 3, timeRange[[3]], 1]},
       allIts = s["iterations"];
       allTimes = Map[s["time", #] &, allIts];
       its = If[timeRange === All, allIts,
                Pick[allIts, Map[timeRange[[1]] <= # <= timeRange[[2]] &, allTimes]]];
       Monitor[Table[{N@s["time", it], f[it]},
-                    {it, its}],ProgressIndicator[(it-First[its])/(Last[its] - First[its])]]];
+                    {it, Downsample[its,ds]}],ProgressIndicator[(it-First[its])/(Last[its] - First[its])]]];
 
   Format[s] = "<convergence-set>";
 
