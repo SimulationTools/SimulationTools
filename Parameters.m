@@ -23,7 +23,6 @@ BeginPackage["SimulationTools`Parameters`",
 
 FindSimulationParameters::usage  = "FindSimulationParameters[sim, pattern] gives a list of the names of all the parameters which match pattern which were set in the simulation.";
 ReadSimulationParameter::usage = "ReadSimulationParameter[sim, pname] reads the value of the named parameter from the simulation.";
-ParseParameterFile;
 
 LookupParameter = ReadSimulationParameter;
 FindParameters = FindSimulationParameters;
@@ -45,33 +44,25 @@ unbreakBrokenStrings[lines2_List] :=
       Reverse[pairs]];
     Return[lines]];
 
-haveParameterFile[from_String] :=
-  findParameterFile[from] =!= None;
+findParameterFile[sim_String] :=
+  Module[{fileNames, fileName},
+    fileNames = FindSimulationFiles[sim, "*.par"];
+    If[fileNames === {},
+      Error["Cannot find parameter file in simulation "<>sim]];
+    fileName = First[fileNames]];
 
-findParameterFile[from_String] :=
-Module[{fileNames, fileName},
-  If[StringMatchQ[from, __ ~~ ".par"],
-    (* Is "from" a full parameter file name? *)
-    fileNames = {from},
-    (* Is "from" a run name? *)
-    fileNames = FindRunFilesFromPattern[from, "*.par"];
-    If[Length[fileNames] == 0,
-      fileNames = FindRunFile[from, from <> "-1.par"];
-      If[Length[fileNames] == 0,
-        Return[None]],
-      fileNames = FindRunFile[from, fileNames[[1]]]]];
+parseParameterFile[fileName_String] :=
+  parseParameterFile[fileName, FileDate[fileName]];
 
-  fileName = First[fileNames]];
+SetAttributes[profile, HoldFirst];
+profile[x_] :=
+  Module[{r,t},
+    {t,r} = AbsoluteTiming[x];
+    r];
 
-DefineMemoFunction[ParseParameterFile[from_String],
- Module[{lines, parseLine, strip, fileName},
-
-  fileName = findParameterFile[from];
-
-  If[fileName === None,
-     Error["Cannot find parameter file in " <> ToString[from]]];
-
-  lines = ReadList[fileName, String];
+parseParameterFile[fileName_String, fileDate_List] := parseParameterFile[fileName, fileDate] =
+Module[{lines, parseLine, strip},
+  profile[lines = ReadList[fileName, String];
   lines = unbreakBrokenStrings[lines];
 
   strip[t_] :=
@@ -86,17 +77,15 @@ DefineMemoFunction[ParseParameterFile[from_String],
     ActiveThorns[StringSplit[StringCases[s, "\"" ~~ thorns__ ~~ "\"" -> thorns][[1]]]],
    StringMatchQ[s, RegularExpression[".*::.*=.*"]],
     ParameterSetting[
-        ToLowerCase[strip[StringCases[s, param__ ~~ "=" ~~ val__ -> param][[1]]]],
-        strip[StringCases[s, param__ ~~ "=" ~~ val__ -> val][[1]]]],
+        StringReplace[ToLowerCase[strip[StringCases[s, (Shortest[param__] ~~ "=" ~~ val__ ~~ EndOfString) -> param][[1]]]]," "->""],
+        strip[StringCases[s, Shortest[param__] ~~ "=" ~~ val__ ~~ EndOfString -> val][[1]]]],
    True,
     Error["Unrecognized line in parameter file: " <> s]
    ];
 
-  Map[parseLine, lines]
- ]
-];
+  Map[parseLine, lines]]];
 
-ReadSimulationParameter[parFile_List, name_, default_:None] :=
+getParameterValue[parFile_List, name_, default_] :=
  Module[{l},
   l = Cases[parFile, ParameterSetting[ToLowerCase[name], x_] -> x];
   If[l === {} && default =!= None, Return[default]];
@@ -106,19 +95,20 @@ ReadSimulationParameter[parFile_List, name_, default_:None] :=
 DocumentationBuilder`SymbolDescription["ReadSimulationParameter"] =
   "read the value of a specified parameter from a simulation";
 
-ReadSimulationParameter[from_String, name_, default_:None] :=
-  Module[{},
-    (* Assume the parameter file is named after the run *)
-    LookupParameter[ParseParameterFile[from], name, default]
-  ];
+ReadSimulationParameter[sim_String, parName_String, default_:None] :=
+  readSimulationParameter[sim, parName, default, FileDate[findParameterFile[sim]]];
+
+readSimulationParameter[sim_String, parName_String, default_, fileDate_] := readSimulationParameter[sim, parName, default, fileDate] =
+      getParameterValue[parseParameterFile[findParameterFile[sim]], parName, default];
+
 
 DocumentationBuilder`SymbolDescription["FindSimulationParameters"] =
   "search for available parameters";
 
-FindSimulationParameters[parFile_String, pattern_] :=
-  If[haveParameterFile[parFile], FindParameters[ParseParameterFile[parFile], pattern], {}];
+FindSimulationParameters[sim_String, pattern_] :=
+  findParameters[parseParameterFile[findParameterFile[sim]], pattern];
 
-FindSimulationParameters[parFile_List, pattern_] :=
+findParameters[parFile_List, pattern_] :=
   Module[{parameters},
     parameters = Cases[parFile, ParameterSetting[name_,value_] -> name];
     Select[parameters, StringMatchQ[#, pattern, IgnoreCase->True] &]];
