@@ -1236,6 +1236,10 @@ IntegrateDataTable = AntiDerivative;
 IntersectDataTables = RestrictedToCommonInterval;
 InvertDataTable = FunctionInverse;
 
+DataTable /: MovingAverage[d_DataTable, n_] := 
+ ToDataTable[Drop[ToListOfCoordinates[d], n - 1], 
+  MovingAverage[ToListOfData[d], n]];
+
 End[];
 
 EndPackage[];
