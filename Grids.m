@@ -156,19 +156,14 @@ ReadGridSpacings[run_, OptionsPattern[]] :=
   	Error["Refinement level " <> ToString[rl] <> " does not exist."];
   ];
 
-  h0 = ToExpression[LookupParameter[run, "Coordinates::h_cartesian", $Failed]];
-
-  If[h0 =!= $Failed,
-    h0 = {h0, h0, h0};
-  ,
-    h0 = ToExpression /@
+  h0 = If[multipatchQ[run],
+    ConstantArray[ToExpression[LookupParameter[run, "Coordinates::h_cartesian", $Failed]],3],
+    ToExpression /@
     	 {LookupParameter[run, "CoordBase::dx", $Failed],
           LookupParameter[run, "CoordBase::dy", $Failed],
-          LookupParameter[run, "CoordBase::dz", $Failed]};
-  ];
+          LookupParameter[run, "CoordBase::dz", $Failed]}];
 
-  h0 / 2^rl
-];
+  h0 / 2^rl];
 
 
 (**********************************************************)
@@ -468,25 +463,30 @@ PlotCarpetGrids2D[run_String, t_?NumberQ] :=
 
 GridSpacingOnLevel[runName_, l_] :=
   Module[{h0},
-    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
-      LookupParameter[runName, "Coordinates::h_cartesian"]]];
-    h0 / 2^l
-  ];
+    h0 =
+    If[!multipatchQ[runName],
+      ToExpression[LookupParameter[runName, "CoordBase::dx"]],
+      ToExpression[LookupParameter[runName, "Coordinates::h_cartesian"]]];
+    h0 / 2^l];
 
 ReadCoarseGridSpacing[runName_] :=
   Module[{h0},
-    h0 = ToExpression[LookupParameter[runName, "CoordBase::dx",
-      LookupParameter[runName, "Coordinates::h_cartesian", $Failed]]]
-  ];
+    h0 = If[!multipatchQ[runName],
+      ToExpression[LookupParameter[runName, "CoordBase::dx"]],
+      ToExpression[LookupParameter[runName, "Coordinates::h_cartesian"]]]];
 
 FinestGridSpacing[runName_] :=
   GridSpacingOnLevel[runName, Max[RefinementLevels[runName]]];
 
+multipatchQ[sim_String] :=
+  LookupParameter[sim, "CartGrid3D::type"] === "multipatch";
+
 BoxRadiiOnLevel[runName_, l_] :=
   Module[{params, coarseRadius},
     If[l == 0,
-      coarseRadius = LookupParameter[runName, "CoordBase::xmax",
-            {ReadInnerBoundary[runName], ReadOuterBoundary[runName]}];
+      coarseRadius = If[multipatchQ[runName],
+            {ReadInnerBoundary[runName], ReadOuterBoundary[runName]},
+            ToExpression@LookupParameter[runName, "CoordBase::xmax"]],
       If[Head[coarseRadius != List], coarseRadius = {coarseRadius}];
       Return[coarseRadius]
     ];
