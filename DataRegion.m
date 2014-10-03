@@ -37,6 +37,7 @@ VariableName::usage = "VariableName[d] returns the variable name in DataRegion d
 (* TODO: Add Metadata function and user-defined metadata *)
 
 TimeDerivative;
+CommonPoints;
 
 (****************************************************************)
 (* Deprecated *)
@@ -1166,6 +1167,78 @@ resampled[ds:{DataRegion[__]...}, p_:3] :=
 
     Map[Resampled[#, grid, InterpolationOrder -> p] &, ds]
 ];
+
+(**********************************************************)
+(* dropWhile                                              *)
+(**********************************************************)
+
+dropWhile[l_, crit_] :=
+ Drop[l, LengthWhile[l, crit]]
+
+(**********************************************************)
+(* commonPoints                                           *)
+(**********************************************************)
+
+(* TODO: add checks to this function to abort in case of problems *)
+
+commonPoints[{d1_DataRegion, d2_DataRegion}, dim_] :=
+ Module[{ox1, ox2, dx1, dx2, rho, m1, m2, eq, soln, nn1, nn2, n1, n2, 
+   dims, result, resDims, nPoints1, nPoints2, nPoints},
+  dims = Length[Dimensions[d1]];
+  ox1 = MinCoordinates[d1][[dim]];
+  ox2 = MinCoordinates[d2][[dim]];
+  dx1 = CoordinateSpacings[d1][[dim]];
+  dx2 = CoordinateSpacings[d2][[dim]];
+  rho = Rationalize[dx1/dx2,10^-8.];
+  If[! MatchQ[Head[rho], Integer | Rational], 
+   Print["rho = ",rho];
+   Error["Cannot rationalize grid spacings " <> ToString[dx1] <> 
+     " and " <> ToString[dx2]]];
+  m1 = Denominator[rho];
+  m2 = Numerator[rho];
+  eq = Rationalize[(ox1 - ox2)/dx2, 10^-8] == n2 - n1 rho;
+  soln = Solve[{eq, n1 >= 0, n2 >= 0}, {n1, n2}, Integers];
+  If[Length[soln] === 0, Print["ox1=", ox1]; Print["ox2=", ox2]; 
+   Print["dx1=", dx1]; Print["dx2=", dx2]; Print["rho=", rho]; 
+   Print["eq=", eq]; Error["No solution"]];
+  {nn1, nn2} = {n1, n2} /. 
+    First[dropWhile[First[soln] /. Table[{C[1] -> i}, {i, -20, 20}], 
+      Cases[#, Undefined, Infinity] =!= {} &]];
+  nPoints1 = Floor[(Dimensions[d1][[dim]] - nn1)/m1];
+  nPoints2 = Floor[(Dimensions[d2][[dim]] - nn2)/m2];
+  nPoints = Min[nPoints1, nPoints2];
+  result = {Downsample[
+     d1[[Sequence @@ ConstantArray[All, dim - 1], 
+       nn1 + 1 ;; (nn1 + nPoints m1), 
+       Sequence @@ ConstantArray[All, dims - dim]]], {Sequence @@ 
+       ConstantArray[1, dim - 1], m1, 
+      Sequence @@ ConstantArray[1, dims - dim]}],
+    Downsample[
+     d2[[Sequence @@ ConstantArray[All, dim - 1], 
+       nn2 + 1 ;; (nn2 + nPoints m2), 
+       Sequence @@ ConstantArray[All, dims - dim]]], {Sequence @@ 
+       ConstantArray[1, dim - 1], m2, 
+      Sequence @@ ConstantArray[1, dims - dim]}]};
+  resDims = Dimensions[#][[dim]] & /@ result;
+  If[! SameQ @@ resDims,
+   Print["m1=", m1];
+   Print["m2=", m2];
+   Print["nn1=", nn1];
+   Print["nn2=", nn2];
+   Print["origins=", MinCoordinates[#][[dim]] & /@ result];
+   Print[resDims];
+   $debug = result;
+   Error["Results of commonPoints do not have a common grid"]];
+  result];
+
+commonPoints[{d1_DataRegion, d2_DataRegion}] :=
+ Fold[commonPoints, {d1, d2}, Range[1, Length[Dimensions[d1]]]];
+
+CommonPoints[ds : {_DataRegion ..}] :=
+ Module[{minimal},
+  (* Construct a DataRegion with the points common to all *)
+  minimal = Fold[commonPoints[{#1, #2}][[1]] &, First[ds], Rest[ds]];
+  Map[commonPoints[{minimal, #}][[2]] &, ds]];
 
 End[];
 
