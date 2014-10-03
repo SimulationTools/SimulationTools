@@ -42,15 +42,14 @@ readTime[sim_, it_, rl_] :=
 
 $bndPat = {{_Integer,_Integer}..};
 
-Options[GridFunctionConvergenceSet] = {Iteration -> 0, RefinementLevel -> 0};
+Options[GridFunctionConvergenceSet] = {Iteration -> 0, RefinementLevel -> 0, Map -> None};
 GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:OptionsPattern[]] :=
  Module[{s, hs, itss, ks, rhos, commonIts, slider, checkIt, dtdis, dtdi},
 
   hs = ReadGridSpacings[#, RefinementLevel -> OptionValue[RefinementLevel]][[1]] & /@ runs;
-
   (* k is the time step on this refinement level -- UNUSED *)
   ks = ReadTimeStep[#, RefinementLevel -> OptionValue[RefinementLevel]] & /@ runs;
-  itss = ReadIterations[#, var, dims, RefinementLevel -> OptionValue[RefinementLevel]] & /@ runs;
+  itss = Map[(Print[#]; ReadIterations[#, var, dims, RefinementLevel -> OptionValue[RefinementLevel], Map -> OptionValue[Map]]) &, runs];
   rhos = Rationalize[hs[[1]]/hs];
   commonIts = Intersection @@ (itss/rhos);
   dtdis = Map[ReadTimeStep[#, RefinementLevel -> ReadMaxRefinementLevels[#] - 1] &, runs];
