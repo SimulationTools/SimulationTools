@@ -516,13 +516,16 @@ Resampled[d_?DataRepresentationQ, grid:{{_?NumericQ, _?NumericQ, _?NumericQ}...}
 
 If[!ValueQ[$ResamplingMethod], $ResamplingMethod = None];
 Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/@ds] :=
- Module[{onto},
+ Module[{onto,localOpts={},order=Automatic},
   Switch[$ResamplingMethod,
    None,
     Return[$Failed];
     Error["Operation requires automatic resampling but a resampling method is not set"];,
    _?DataRepresentationQ,
     onto = Slab[$ResamplingMethod, Sequence@@(Span@@@CommonInterval[ds])];,
+   {_?DataRepresentationQ,_Integer},
+    AppendTo[localOpts, InterpolationOrder->$ResamplingMethod[[2]]];
+    onto = Slab[$ResamplingMethod[[1]], Sequence@@(Span@@@CommonInterval[ds])];,
    "First",
     onto = Slab[First[ds], Sequence@@(Span@@@CommonInterval[ds])];,
    "Last",
@@ -533,7 +536,7 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
     onto = $ResamplingMethod[ds];
   ];
 
-  Resampled[ds, onto, opts]
+  Resampled[ds, onto, Sequence@@localOpts, opts]
 ];
 
 
