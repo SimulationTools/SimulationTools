@@ -35,6 +35,7 @@ ReadAHRadius(*::usage = "ReadAHRadius[sim, idx] returns the coordinate radius of
 ReadAHMinRadius;
 ReadAHMaxRadius;
 ReadAHCentroid(*::usage = "ReadAHCentroid[sim, idx] returns the coordinate centroid of apparent horizon with index idx in sim.  This requires output from the AHFinderDirect thorn."*);
+ReadAHCentre;
 ReadAHCentroidCoord;
 ReadAHColumn;
 ReadAHColumns;
@@ -180,6 +181,16 @@ DefineMemoFunction[ReadAHCentroidCoord[runName_, hn_, dir_],
  Module[{list},
    list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,2+dir}];
    Return[MakeDataTable[list, {RunName -> runName}]]]];
+
+DefineMemoFunction[ReadAHCentre[runName_, hn_],
+ Module[{list, t, min, max, cen},
+   list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp",
+     {2,Sequence@@Range[15,20]}];
+   t = list[[All,1]];
+   min = list[[All,{2,4,6}]];
+   max = list[[All,{3,5,7}]];
+   cen = 1/2(min+max);
+   Map[ToDataTable[t, #] &, Transpose[cen]]]];
 
 HaveChristodoulouMassData[run_, ahn_, ihn_] :=
   HaveHorizonData[run,ahn] && HaveIsolatedHorizonSpinData[run,ihn];
