@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`Utils`"];
 FilterNaNs(*::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data."*);
 NaNQ(*::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data."*);
 RunSubprocess;
+MapMonitored;
 
 Begin["`Private`"];
 
@@ -67,6 +68,11 @@ RunSubprocess[{cmd_, args___}] :=
     DeleteFile[stdoutFile];
     DeleteFile[stderrFile];
     {retCode, stdout, stderr}];
+
+MapMonitored[f_, args_List] :=
+ Module[{x = 0},
+  Monitor[MapIndexed[(x = #2[[1]]; f[#1]) &, args], 
+   ProgressIndicator[x/Length[args]]]];
 
 End[];
 EndPackage[];
