@@ -101,9 +101,11 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:Optio
     Resampled[d, Last[d]]];
 
   s["common-data", it_] :=
-   MapThread[
-     Downsample[Take[#1, Sequence @@ Transpose[Transpose[bnd + 1] {1, -1}]], #2] &, {s["data", it], 
-                                                   s["rhos"]}];
+   If[!MemberQ[commonIts, it],
+      Error["Iteration "<>ToString[it]<>" is not available in this convergence set"],
+      MapThread[
+        Downsample[Take[#1, Sequence @@ Transpose[Transpose[bnd+1] {1, -1}]], #2] &,
+        {s["data", it], 4 s["rhos"] }]];
 
   s["rescaled-errors", it_, p_, int_] :=
    Module[{d = If[int, s["resampled-data", it], s["common-data",it]],
