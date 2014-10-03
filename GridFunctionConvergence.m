@@ -96,6 +96,9 @@ GridFunctionConvergenceSet[runs_List, var_String, dims_, bnd:$bndPat, opts:Optio
     ReadGridFunction[runs[[i]], var, dims, Iteration -> rhos[[i]] it, 
      opts]);
   
+  s["floor-iteration", it_] :=
+    Last[TakeWhile[commonIts, # <= it &]];
+
   s["resampled-data", it_] :=
    Module[{d = s["data", it]},
     Resampled[d, Last[d]]];
