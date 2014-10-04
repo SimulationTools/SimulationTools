@@ -22,7 +22,8 @@ BeginPackage["SimulationTools`CarpetHDF5`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
   "SimulationTools`ReadHDF5`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "StackTrace`"
  }];
 
 (****************************************************************)
@@ -343,6 +344,13 @@ CarpetHDF5Manipulate[file_, opts___]:= Module[{var, rl, maps, map},
 
   CarpetHDF5Manipulate[file, var, rl, map, opts]
 ];
+
+(* I think there is some bad interaction between returning an
+unevaluated Sequence[] and the stack code, but I don't understand what
+it is.  Protect getRL from the stack checking code. Without this, the
+ReadIterations test fails. *)
+
+StandardStackDefinition[getRL] = True;
 
 getRL[run_, var_, rl_] :=
   Switch[rl,
