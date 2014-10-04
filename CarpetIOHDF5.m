@@ -201,7 +201,7 @@ filePattern=
 
 (* Warning: this could be slow for large simulations *)
 carpetIOHDF5FileQ[filename_String] :=
-  MemberQ[ReadHDF5[filename, {"Datasets"}], "/Parameters and Global Attributes/All Parameters"];
+  Or@@StringMatchQ[ReadHDF5[filename, {"Datasets"}],"/Parameters and Global Attributes"];
 
 SimulationTools`CarpetIOHDF5`GridFunctions`FindGridFunctions[sim_String] :=
  Module[{pattern, h5Files, leafnames, varnames, 
