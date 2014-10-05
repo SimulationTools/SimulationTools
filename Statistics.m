@@ -163,6 +163,9 @@ TailStandardErrorOfSimulation[sim_String, n_Integer] :=
    Error["No standard error available in simulation " <> sim]];
   TailFile[Last[outFiles], n]];
 
+SimulationErrorReason[sim_String] :=
+  SimulationErrorReason[TailStandardOutputOfSimulation[sim,10240], TailStandardErrorOfSimulation[sim,10240]];
+
 SimulationErrorReason[stdout_String, stderr_String] :=
  Module[{warnings, exceptions},
   warnings = 
