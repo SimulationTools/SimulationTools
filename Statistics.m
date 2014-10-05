@@ -22,6 +22,7 @@ BeginPackage["SimulationTools`Statistics`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
   "SimulationTools`SimulationProperties`",
+  "SimulationTools`SystemStatistics`",
   "SimulationTools`Utils`"
  }];
 
@@ -33,6 +34,7 @@ TailStandardOutputOfSimulation;
 TailStandardErrorOfSimulation;
 SimulationStatus;
 SimulationErrorReason;
+SimulationPerformancePanel;
 
 Begin["`Private`"];
 
@@ -127,7 +129,7 @@ cost[run_] :=
    FinishTimeString[run]};
 
 formatStatus[x_] := x;
-formatStatus[x_String[y_String]] := x <> " (" <> y <> ")";
+formatStatus[x_String[y_String]] := Pane[x <> " (" <> y <> ")", 700];
 
 SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
   Module[
@@ -147,6 +149,7 @@ SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
                      ~Join~
                      Map[cost, runNames], Spacings->{2,0.5}], SpanFromLeft},
                 {statusTable, SpanFromLeft},
+                {SimulationPerformancePanel[runNames]},
                 {Grid[segments], SpanFromLeft}}];
 
 TailStandardOutputOfSimulation[sim_String, n_Integer] :=
@@ -194,6 +197,14 @@ SimulationStatus[sim_String] :=
     stdout, __ ~~ StartOfLine ~~ "Simfactory Done at date" ~~ __], 
    "Error"[SimulationErrorReason[stdout, stderr]],
    True, "Running"[N[tCurrent/tFinal]]]];
+
+SimulationPerformancePanel[sims_List] :=
+ Grid[Join[{Style[#,Bold]&/@{"Simulation","Speed","Memory/GB","Swap/MB","Cores"}},
+   Table[
+     {sim, NumberForm[Last[ReadSimulationSpeed[sim]],{2,1}], 
+       NumberForm[Last[ReadSimulationMemoryUsage[sim]]/1024.,{2,1}],
+       Last[ReadSimulationSwapUsage[sim]],
+       ReadSimulationCoreCount[sim]}, {sim, sims}]],Alignment->{{Left,".",Right,Right,Right}}];  
 
 End[];
 EndPackage[];
