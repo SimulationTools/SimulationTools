@@ -169,9 +169,9 @@ SimulationErrorReason[sim_String] :=
 SimulationErrorReason[stdout_String, stderr_String] :=
  Module[{warnings, exceptions},
   warnings = 
-   StringCases[stdout, 
-    "WARNING level 0" ~~ Shortest[__] ~~ EndOfLine ~~ Shortest[__] ~~ 
-      EndOfLine ~~ msg : Shortest[__] ~~ EndOfLine :> msg];
+   StringCases[stdout<>"\n"<>stderr, 
+    ("WARNING level 0"|"ERROR in thorn") ~~ Shortest[__] ~~ EndOfLine ~~ Shortest[__] ~~ 
+      EndOfLine ~~ (Whitespace ~~ "->" ~~Whitespace ~~ msg : Shortest[__]) ~~ EndOfLine :> msg];
   If[Length[warnings] > 0, warnings[[-1]],
    exceptions = 
     StringCases[stderr, 
