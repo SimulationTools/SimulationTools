@@ -446,19 +446,19 @@ PlotCarpetGrids2D[grids_List, dtFine_?NumberQ, t_?NumberQ] :=
   Module[{},
    plotIteration2D[Last[Select[grids, #[[1]] <= t/dtFine &]]]]
 
-PlotCarpetGrids2D[run_String] :=
+PlotCarpetGrids2D[run_String, opts:(_Rule...)] :=
   Module[{grids, dt, tRange},
   grids = ReadCarpetGrids[run];
   dt = ReadFineTimeStep[run];
   tRange = ReadTimeRange[run];
-  Manipulate[Graphics[PlotCarpetGrids2D[grids, dt, t]], {{t, tRange[[1]], "t"}, tRange[[1]], tRange[[2]]}]];
+  Manipulate[Graphics[PlotCarpetGrids2D[grids, dt, t],opts], {{t, tRange[[1]], "t"}, tRange[[1]], tRange[[2]]}]];
 
-PlotCarpetGrids2D[run_String, t_?NumberQ] :=
+PlotCarpetGrids2D[run_String, t_?NumberQ, opts:(_Rule...)] :=
   Module[{grids, dt, tRange},
   grids = ReadCarpetGrids[run];
   dt = ReadFineTimeStep[run];
   tRange = ReadTimeRange[run];
-  Graphics[PlotCarpetGrids2D[grids, dt, t]]];
+  Graphics[PlotCarpetGrids2D[grids, dt, t]], opts];
 
 
 GridSpacingOnLevel[runName_, l_] :=
