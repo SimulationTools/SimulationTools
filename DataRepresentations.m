@@ -565,13 +565,12 @@ Slab[d_SimulationTools`DataTable`DataTable, s__] :=
 Slab[d_SimulationTools`DataRegion`DataRegion, s__] := slab[d, s];
 
 slab[d_?DataRepresentationQ, s__]:=
- Module[{slabSpec, valid, spacing, origin, endpoints, indexrange},
+ Module[{slabSpec, valid, spacing, origin, endpoints, indexrange,indexrange2},
   spacing   = CoordinateSpacings[d];
   origin    = MinCoordinates[d];
   endpoints = MaxCoordinates[d];
 
   slabSpec = PadRight[{s}, ArrayDepth[d], All];
-
   valid = Apply[And, Map[((#===All)||(Head[#]===Span)||(NumericQ[#])||MatchQ[#, {_?NumericQ}])&, slabSpec]];
   If[!valid,
     Error["Coordinate ranges must be specified using either Span[x1, x2] "<>
@@ -587,8 +586,10 @@ slab[d_?DataRepresentationQ, s__]:=
   (* Convert coordinate range to index range *)
   indexrange = MapThread[(#1 /.{x_?NumericQ :> Round[(x-#2)/#3] + 1})&, {slabSpec, origin, spacing}]; (* FIXME: Add conversion from Span[..,All] *)
 
+  indexrange2= MapThread[If[#1[[2]]===All||#1[[2]]>#2,#1[[1]];;#2,#1] &, {indexrange,Dimensions[d]}];
+
   (* Get the relevant part of the data *)
-  Part[d, Sequence@@indexrange]
+  Part[d, Sequence@@indexrange2]
 ];
 
 slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable`UniformSpacingQ[d] :=
@@ -606,6 +607,8 @@ slabnu[d_SimulationTools`DataTable`DataTable, s__] /; !SimulationTools`DataTable
       All;;x_  :> t1;;x,
       x_;;All  :> x;;t2,
       All;;All :> t1;;t2}];
+
+  If[s2[[2]]>t2,s2[[2]]=t2];
 
   Pick[d, Sign[tleft - s2[[1]]] + Sign[s2[[2]] - tright], 2]
 ];
