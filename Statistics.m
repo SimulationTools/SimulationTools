@@ -183,8 +183,8 @@ SimulationErrorReason[stdout_String, stderr_String] :=
 SimulationStatus[sim_String] :=
  Module[{tCurrent = LastOutputCoordinateTime[sim], 
    tFinal = FinalCoordinateTime[sim], 
-   stdout = TailStandardOutputOfSimulation[sim, 1024], 
-   stderr = TailStandardErrorOfSimulation[sim, 1024]},
+   stdout = TailStandardOutputOfSimulation[sim, 10240], 
+   stderr = TailStandardErrorOfSimulation[sim, 10240]},
   Which[
    tCurrent == tFinal, "Finished",
    StringMatchQ[
