@@ -181,7 +181,11 @@ SimulationErrorReason[stdout_String, stderr_String] :=
      msg : ("terminate called after throwing an instance of" ~~ 
           Shortest[__]) ~~ EndOfLine :> msg];
    If[Length[exceptions] > 0, exceptions[[-1]],
-    "Unknown error"]]];
+     With[{mpiErrs =
+     StringCases[stderr,
+       "The InfiniBand retry count between two MPI processes has been"]},
+     If[Length[mpiErrs] > 0, "Infiniband retry count exceeded to host "<>StringCases[stderr, "Peer host:"~~Whitespace~~Shortest[h__]~~EndOfLine:>h][[1]],
+    "Unknown error"]]]]];
 
 SimulationStatus[sim_String] :=
  Module[{tCurrent = LastOutputCoordinateTime[sim], 
