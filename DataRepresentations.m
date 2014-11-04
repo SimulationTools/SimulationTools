@@ -694,9 +694,9 @@ SyntaxInformation[WithResampling] =
 
 SetAttributes[WithResampling, HoldAll];
 WithResampling[method_, expr_] :=
- Block[{$ResamplingMethod = method}, expr];
+  Block[{$ResamplingMethod = method}, expr];
 
- WithResampling[expr_] :=
+WithResampling[expr_] :=
   Block[{$ResamplingMethod = "First"}, expr];
 
 
