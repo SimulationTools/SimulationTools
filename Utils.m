@@ -24,6 +24,7 @@ RunSubprocess;
 MapMonitored;
 TailFile;
 ShowIt;
+MapSuccessive;
 
 Begin["`Private`"];
 
@@ -77,6 +78,10 @@ MapMonitored[f_, args_List] :=
  Module[{x = 0},
   Monitor[MapIndexed[(x = #2[[1]]; f[#1]) &, args], 
    ProgressIndicator[x/Length[args]]]];
+
+MapSuccessive[f_, l_List] :=
+ MapThread[f, Drop[#, -1] & /@ {l, RotateLeft[l]}]
+
 
 TailFile[filename_String, n_Integer] :=
  Module[{size, handle, lines},
