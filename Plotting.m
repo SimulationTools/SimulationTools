@@ -578,9 +578,9 @@ graphicsPadding[g_Graphics] :=
 graphicsPadding[gs : {__Graphics}] :=
  MapThread[Max, Map[graphicsPadding, gs], 2];
 
-PadGraphics[gs_List] :=
- With[{padding = graphicsPadding[gs]},
-  Map[Append[#, ImagePadding -> padding] &, gs]];
+PadGraphics[gs_List, depth_:1] :=
+ With[{padding = graphicsPadding[Flatten[gs,depth]]},
+  Map[Append[#, ImagePadding -> padding] &, gs, {depth}]];
 
 (* TODO: allow this to be applied to a nested list, e.g. for a
    GraphicsGrid *)
