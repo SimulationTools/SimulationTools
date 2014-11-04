@@ -60,7 +60,7 @@ profile[x_] :=
     {t,r} = AbsoluteTiming[x];
     r];
 
-parseParameterFile[fileName_String, fileDate_List] := parseParameterFile[fileName, fileDate] =
+parseParameterFile[fileName_String, fileDate:(_List|_DateObject)] := parseParameterFile[fileName, fileDate] =
 Module[{lines, parseLine, strip},
   profile[lines = ReadList[fileName, String];
   lines = unbreakBrokenStrings[lines];
