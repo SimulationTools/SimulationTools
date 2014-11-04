@@ -23,6 +23,7 @@ RunSubprocess;
 (* Experimental *)
 MapMonitored;
 TailFile;
+ShowIt;
 
 Begin["`Private`"];
 
