@@ -534,6 +534,10 @@ Resampled[ds:{(_?DataRepresentationQ)...}, opts:OptionsPattern[]] /; SameQ[Head/
     onto = Slab[First[ds], Sequence@@(Span@@@CommonInterval[ds])];,
    "Last",
     onto = Slab[Last[ds], Sequence@@(Span@@@CommonInterval[ds])];,
+   "Common",
+    (* TODO: implement this for general DataRepresentations *)
+    If[Head[ds[[1]]] =!= SimulationTools`DataTable`DataTable, Error["Resampling method Common only implemented for DataTables"]];
+    onto = First[SimulationTools`DataTable`RestrictedToCommonInterval[ds]],
    _String,
     Error["Unknown resampling method: "<>$ResamplingMethod];,
    _,
