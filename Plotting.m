@@ -146,7 +146,7 @@ ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
 
 Options[PresentationListLinePlot] = Options[ListLinePlotWithLegend];
 PresentationListLinePlot[args___, opts:OptionsPattern[]] :=
-  ListLinePlotWithLegend[args,opts,LabelStyle->12,Frame->True];
+  ListLinePlotWithLegend[args,opts,LabelStyle->"Medium",Frame->True];
 
 (*
 Options[ListLogLinearPlotWithLegend] = 
