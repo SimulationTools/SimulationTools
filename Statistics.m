@@ -190,8 +190,7 @@ SimulationErrorReason[stdout_String, stderr_String] :=
 SimulationStatus[sim_String] :=
  Module[{tCurrent = LastOutputCoordinateTime[sim], 
    tFinal = FinalCoordinateTime[sim], 
-   stdout = TailStandardOutputOfSimulation[sim, 10240], 
-   stderr = TailStandardErrorOfSimulation[sim, 10240]},
+   stdout = TailStandardOutputOfSimulation[sim, 10240]},
   Which[
    tCurrent == tFinal, "Finished",
    StringMatchQ[
@@ -199,7 +198,7 @@ SimulationStatus[sim_String] :=
    "Unfinished",
    StringMatchQ[
     stdout, __ ~~ StartOfLine ~~ "Simfactory Done at date" ~~ __], 
-   "Error"[SimulationErrorReason[stdout, stderr]],
+   "Error"[SimulationErrorReason[stdout, TailStandardErrorOfSimulation[sim, 10240]]],
    True, "Running"[N[tCurrent/tFinal]]]];
 
 SimulationPerformancePanel[sims_List] :=
