@@ -374,7 +374,7 @@ $NonDataTableFunctions =
   {ArrayDepth, Dimensions, Total, Mean, Position, Extract};
 
 $DataTableFunctions =
-  {FilterNaNs, UnwrapPhaseVector};
+  {Accumulate, FilterNaNs, UnwrapPhaseVector};
 
 DataTable /: f_Symbol[x___, d_DataTable, y___] /;
  MemberQ[$DataTableFunctions, f] ||
