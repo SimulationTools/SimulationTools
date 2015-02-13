@@ -356,6 +356,7 @@ Test[
       1.9999999999999998, 2.000000000000001, 2., 2., 2.000000000000001, 1.9999999999999996, 
       1.9999999999999998, 2.000000000000001, 2.0000000000000018, 1.999999999999993}]
 	,
+    EquivalenceFunction -> withinRoundoff,
 	TestID->"Frequency"
 ]
 
@@ -517,6 +518,7 @@ Test[
     ,
     N@ConstantArray[10/3, {2, 3, 4}]
     ,
+    EquivalenceFunction -> withinRoundoff,
     TestID->"NDerivative1"
 ]
 

@@ -112,6 +112,7 @@ Test[
   ,
   {{0, 19.46294218585005}, {5, 24.46294218585005}, {10, 29.462942185850054}}
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"ExtrapolateDataTables-1"
     ]
 
@@ -156,6 +157,7 @@ Test[
   ,
   {{0, 19.46294218585005}, {5, 24.46294218585005}, {10, 29.462942185850054}}
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"RadialExtrapolationDataTable-1"
     ]
 
