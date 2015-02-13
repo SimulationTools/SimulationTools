@@ -23,7 +23,8 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`InitialData`",
   "SimulationTools`Memo`",
   "SimulationTools`Plotting`",
-  "SimulationTools`Providers`"
+  "SimulationTools`Providers`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 (* Public *)

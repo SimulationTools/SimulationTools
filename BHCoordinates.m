@@ -20,7 +20,8 @@ BeginPackage["SimulationTools`BHCoordinates`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
-  "SimulationTools`Providers`"
+  "SimulationTools`Providers`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 (* This package is deprecated.  Please use the Binary package instead. *)
