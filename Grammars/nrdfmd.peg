@@ -1,4 +1,4 @@
-skipper = \b([ \t\n\r]+|#.*)*
+skipper = (\b((\n-+)|[ \t\n\r]+|#.*)*)
 end = ([ \t]+|#.*)*\r*(\n|$)
 name = [A-Za-z][A-Za-z0-9]*
 keyword = [A-Za-z][A-Za-z0-9\-]*
