@@ -1,3 +1,5 @@
+Get[FileNameJoin[{$SimulationToolsInstallationDirectory,"Tests","Common.m"}]];
+
 (* Mathematica Test File *)
 
 data = Table[{i, 10 + i}, {i, 10}];

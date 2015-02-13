@@ -1,3 +1,5 @@
+Get[FileNameJoin[{$SimulationToolsInstallationDirectory,"Tests","Common.m"}]];
+
 (* Mathematica Test File *)
 
 testDirectory = FileNameJoin[{$TemporaryDirectory,"SimulationTools-unit-tests","RunFiles"}];
