@@ -513,9 +513,9 @@ Test[
 (* NDerivative                                                  *)
 (****************************************************************)
 Test[
-    Quiet[DeleteDuplicates[Flatten[ToListOfData[NDerivative[dr, 3]]]], NDSolve`FiniteDifferenceDerivative::ordred]
+    Quiet[ToListOfData[NDerivative[dr, 3]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
-    {3.3333333333333854, 3.333333333333364, 3.3333333333333286, 3.3333333333333712, 3.333333333333428, 3.3333333333333997, 3.3333333333332575, 3.3333333333333144, 3.333333333333485, 3.333333333333286, 3.33333333333303}
+    N@ConstantArray[10/3, {2, 3, 4}]
     ,
     TestID->"NDerivative1"
 ]
