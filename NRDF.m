@@ -71,7 +71,9 @@ SimulationTools`NRDF`RunFiles`FindRunDirSegments[dir_] :=
   {FindRunDir[dir]};
 
 DefineMemoFunction[ParseMetadataFile[run_String],
-  CleanParseTree[ParsePEG["nrdfmd.peg","file",findMetadataFile[run]]]];
+  Module[{mdFile},
+    mdFile = If[FileType[run] === File, run, findMetadataFile[run]];
+    CleanParseTree[ParsePEG["nrdfmd.peg","file",mdFile]]]];
 
 ParseMetadataFileFromName[fileName_String] :=
   CleanParseTree[ParsePEG["nrdfmd.peg","file",fileName]];
