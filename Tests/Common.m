@@ -4,4 +4,7 @@
 If[MUnit`Information`$VersionNumber >= 1.4,
   MUnit`EquivalenceFunction = SameTest];
 
-withinRoundoff[a_, b_] := 2 Abs[(a-b)/(a+b)] < 10^-12;
+withinRoundoff[a_, b_] :=
+  (* Ignore the last N machine digits *)
+  Block[{Internal`$SameQTolerance = 4},
+    SameQ[a,b]];
