@@ -7,11 +7,8 @@ $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 Module[
  {wf1 = Psi4ToStrain[Shifted[30 ReadPsi4[$SimulationToolsTestSimulation, 2, 2, 30], -TortoiseCoordinate[30, ReadADMMass[$SimulationToolsTestSimulation]]], 0.1],
   wf2 = Psi4ToStrain[Shifted[100 ReadPsi4[$SimulationToolsTestSimulation, 2, 2, 100], -TortoiseCoordinate[100, ReadADMMass[$SimulationToolsTestSimulation]]], 0.1],
-  sn  = ToDataTable[Table[{f, 125/100 + f/5 - f^2}, {f, -1, 1, 0.01}]],
-  withinRoundoff
+  sn  = ToDataTable[Table[{f, 125/100 + f/5 - f^2}, {f, -1, 1, 0.01}]]
  },
-
-withinRoundoff[a_, b_] := 2 Abs[(a-b)/(a+b)] < 10^-12;
 
 Test[
     WaveformMatch[{wf1, wf1}, sn]
