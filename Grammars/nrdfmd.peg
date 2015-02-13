@@ -26,5 +26,5 @@ element = {key}[ \t]*\=[ \t]*({value}{-end}|{string}{-end}|{-end})
 
 elements = {element}?( {element})*
 section_name = \[{keyword}\]{-end}
-section = {section_name}{elements}
+section = {section_name}?{elements}
 file = ^( ({section} )+)$
