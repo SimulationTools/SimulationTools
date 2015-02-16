@@ -286,18 +286,28 @@ FindSpECLevels[sim_String] :=
     (* Print[FileNameJoin[{simBase,"Ev"}]]; *)
     ToExpression/@Union[Map[StringReplace[StringSplit[FileNameTake[#,-1],"_"][[1]],"Lev"->""] &, FileNames["Lev"~~__~~"_"~~_~~_, FileNameJoin[{simBase,"Ev"}]]]]];
 
-ReadSpECEccentricity[sim_String, joinDir_String : "JoinedForEcc"] :=
-  Module[{eccFile, eMeasured, simPath},
+ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
+  Module[{simPath, dirNames, eccFiles, eccFile, eMeasured, eMeasuredSS},
 
     simPath = FindSpECSimulation[sim];
 
-    eccFile = FileNameJoin[{simPath, "Ev", joinDir, "Fit_F1cos1.dat"}];
-    If[FileType[eccFile] === None,
-      Print["Cannot find file ", eccFile];
+    If[joinDirArg === Automatic,
+      dirNames = {"JoinedForEcc", "JoinedForEcc_Lev*"},
+      dirNames = {joinDirArg}];
+
+    eccFiles = FileNames["Fit_F1cos1.dat", FileNameJoin[{simPath, "Ev", #}] & /@ dirNames];
+
+
+    If[Length[eccFiles] === 0,
+      Print["Cannot find eccentricity reduction file"];
       Return[None]];
 
+    eccFile = First[eccFiles];
+
     eMeasured = Import[eccFile,"Table"][[-1,-1]];
-    eMeasured];
+    eMeasuredSS = Import[StringReplace[eccFile,"Fit_F1cos1.dat"->"Fit_F1cos1_SS.dat"],"Table"][[-1,-1]];
+
+    If[eMeasuredSS > 0.01, eMeasured, eMeasuredSS]];
 
 (* Input file parsing *)
 
