@@ -278,7 +278,7 @@ ReadSpECADMEnergyIterations[sim_String] :=
     ReadColumnFile[idDir,"PhysValues.dat", {1,13}][[All,2]]];
 
 FindSpECEccentricityReductionSimulations[sim_String] :=
-  FileNames["Ecc*", FileNameJoin[{getSimsDir[], sim}]];
+  FileNames["Ecc"~~NumberString, FileNameJoin[{getSimsDir[], sim}]];
 
 FindSpECLevels[sim_String] :=
   Module[{simBase},
