@@ -148,12 +148,22 @@ ReadSpECWallTime[sim_String] :=
       (* else *)
       ToDataTable[inspiral]]];
 
+(**********************************)
+(* Memory usage                   *)
+(**********************************)
+
 (* TODO: make this work when the number of processes changes between segments *)
+(* Make this call the below functions to give a single total number *)
 ReadSpECMemoryUsage[sim_String] :=
   Module[{memoryTable = readSpECASCIIData[sim,"MemoryInfo.dat"],
     nFields = 7, offset = 5, virtual = 1, resident = 2, total = 4},
     ToDataTable[Map[{#[[1]], Max[#[[offset+resident;;All;;nFields]]]/(#[[offset+total]]/12)} &,
       memoryTable]]];
+
+
+(**********************************)
+(* Misc                           *)
+(**********************************)
 
 HaveSpECEvolution[sim_String] :=
   Module[{runFiles},
