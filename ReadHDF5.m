@@ -35,7 +35,7 @@ Module[{result},
   ];
 
   result = If[$EnableBuiltInHDF5Reader===True, Import[file,opts], ImportHDF5[file, opts]];
-  (* If[result == $Failed, *)
+  (* If[result === $Failed, *)
   (*   Error["Error importing " <> ToString[opts]<>" from "<>file]]; *)
 
   result
