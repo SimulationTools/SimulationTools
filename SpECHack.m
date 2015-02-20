@@ -54,6 +54,7 @@ ReadSpECADMEnergyIterations;
 ReadSpECInitialDataParameter;
 FindSpECInitialDataSimulations;
 ReadSpECInitialDataIteration;
+ReadSpECHorizonAngularMomentum;
 
 Begin["`Private`"];
 
@@ -260,6 +261,32 @@ ReadSpECHorizonSpin[runName_String, hn_Integer] :=
     Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, 3}];
   Return[data2]];
 
+ReadSpECHorizonAngularMomentum[runName_String, hn_Integer] :=
+ Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
+   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+
+   runFiles = Flatten[findSpECFiles[runName, "ApparentHorizons/Horizons.h5"]];
+
+   If[runFiles === {}, Return[ConstantArray[ToDataTable[{}],3]] (*Error["Cannot find apparent horizon information in "<>runName]*)];
+
+  hnLetter = 
+   If[hn === 1, "A", 
+    If[hn === 2, "B", 
+      If[hn === 3, "C", 
+     Error["Unknown horizon index " <> ToString[hn]]]]];
+  datasetName = "/Ah" <> hnLetter <> ".dir/DimensionfulInertialSpin.dat";
+  
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
+
+  print["\n"];
+  data = Join@@files;
+  If[! And @@ Positive[Differences[data[[All, 1]]]], 
+   data = monotonisePreferLastCompiled[data]];
+  data2 = 
+   ToDataTable /@ 
+    Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, 3}];
+  Return[data2]];
 
 
 
