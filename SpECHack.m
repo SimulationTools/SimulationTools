@@ -21,6 +21,8 @@ BeginPackage["SimulationTools`SpECHack`",
    "SimulationTools`DataTable`",
    "SimulationTools`DataRepresentations`",
    "SimulationTools`Error`",
+   "SimulationTools`FileMemo`",
+   "SimulationTools`FileDependencies`",
    "Piraha`",
    "SimulationTools`Utils`",
    "h5mma`"
