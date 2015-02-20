@@ -35,6 +35,8 @@ ReadSpECSimulationProgress;
 ReadSpECWallTime;
 ReadSpECMemoryUsage;
 ReadSpECMaxNodeMemoryUsage;
+ReadSpECMinEffectiveFreeMemory;
+ReadSpECMaxEffectiveUsedMemoryFraction;
 ReadSpECPsi4;
 ReadSpECPsi4Radii;
 ReadSpECStrain;
@@ -185,6 +187,12 @@ memoryField[memoryTable_List, field_String] :=
     memoryTable[[All, offset + fieldNumber ;; All ;; nFields]];
     Map[ToDataTable[time, #] &, Transpose[data]]];
 
+memoryField[memoryTable_List, "SystemEffectiveMemUsed"] :=
+  memoryField[memoryTable, "SystemTotalRam"] - memoryField[memoryTable, "SystemEffectiveMemFree"];
+
+memoryField[memoryTable_List, "SystemEffectiveMemUsedFraction"] :=
+  1 - memoryField[memoryTable, "SystemEffectiveMemFree"]/memoryField[memoryTable, "SystemTotalRam"];
+
 (* Return a list (one per segment) of lists (one per process) of
    DataTables with the memory usage as a function of time *)
 ReadSpECProcessMemoryUsage[sim_String, field_String : "ResidentMemory"] :=
@@ -206,6 +214,21 @@ ReadSpECMaxNodeMemoryUsage[sim_String] :=
    procMemsSegs = ReadSpECProcessMemoryUsage[sim];
    maxNodeMemss = Map[maxNodeMemoryUsage, procMemsSegs];
    ToDataTable[mergeDataLists[ToList/@maxNodeMemss]]];
+
+mergeDataTables[ds_List] :=
+  ToDataTable[mergeDataLists[ToList/@ds]];
+
+ReadSpECMinEffectiveFreeMemory[sim_String] :=
+  mergeDataTables[Map[MapThread[Min, #] &, 
+    ReadSpECProcessMemoryUsage[sim, "SystemEffectiveMemFree"]]];
+
+ReadSpECMaxEffectiveUsedMemory[sim_String] :=
+  mergeDataTables[Map[MapThread[Max, #] &, 
+    ReadSpECProcessMemoryUsage[sim, "SystemEffectiveMemUsed"]]];
+
+ReadSpECMaxEffectiveUsedMemoryFraction[sim_String] :=
+  mergeDataTables[Map[MapThread[Max, #] &, 
+    ReadSpECProcessMemoryUsage[sim, "SystemEffectiveMemUsedFraction"]]];
 
 (**********************************)
 (* Misc                           *)
