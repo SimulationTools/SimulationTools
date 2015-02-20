@@ -34,6 +34,7 @@ ReadSpECSimulationSpeed;
 ReadSpECSimulationProgress;
 ReadSpECWallTime;
 ReadSpECMemoryUsage;
+ReadSpECMaxNodeMemoryUsage;
 ReadSpECPsi4;
 ReadSpECPsi4Radii;
 ReadSpECStrain;
@@ -160,6 +161,42 @@ ReadSpECMemoryUsage[sim_String] :=
     ToDataTable[Map[{#[[1]], Max[#[[offset+resident;;All;;nFields]]]/(#[[offset+total]]/12)} &,
       memoryTable]]];
 
+(* Return a list (one per segment) of lists (one per process) of
+   DataTables with the memory usage as a function of time *)
+ReadSpECProcessMemoryUsage[sim_String] :=
+ Module[{memoryTables},
+
+   (* We need to treat each segment separately because it might have a
+      different number of processes, and hence a table of different
+      dimensions *)
+   memoryTables = readSpECASCIIData[sim, "MemoryInfo.dat", SeparateSegments -> True];
+
+   (* List (one per process) of DataTables with the memory usage as a
+      function of time *)
+   residentMemory[memoryTable_List] :=
+   Module[{nFields = 7, offset = 5, virtual = 1, 
+   residentCol = 2, total = 4, timeCol = 1, nProcs, time, resident},
+     (* TODO: get number of processes and column format from file header; this
+        is not very robust at the moment *)
+     nProcs = (Dimensions[memoryTable][[2]] - offset)/nFields;
+     time = memoryTable[[All, timeCol]];
+     resident = 
+     memoryTable[[All, offset + residentCol ;; All ;; nFields]];
+     Map[ToDataTable[time, #] &, Transpose[resident]]];
+
+   Map[residentMemory, memoryTables]];
+
+maxNodeMemoryUsage[procMems_List] :=
+ Module[{nodeMems, maxNodeMems, coresPerNode = 12},
+  (* TODO: Get number of processes per node from some simulation metadata *)
+  nodeMems = Map[Total, Partition[procMems, coresPerNode]];
+  maxNodeMems = MapThread[Max, nodeMems]];
+
+ReadSpECMaxNodeMemoryUsage[sim_String] :=
+ Module[{procMems, nodeMems, maxNodeMems, coresPerNode = 12},
+   procMemsSegs = ReadSpECProcessMemoryUsage[sim];
+   maxNodeMemss = Map[maxNodeMemoryUsage, procMemsSegs];
+   ToDataTable[mergeDataLists[ToList/@maxNodeMemss]]];
 
 (**********************************)
 (* Misc                           *)
