@@ -187,13 +187,13 @@ memoryField[memoryTable_List, field_String] :=
 
 (* Return a list (one per segment) of lists (one per process) of
    DataTables with the memory usage as a function of time *)
-ReadSpECProcessMemoryUsage[sim_String] :=
+ReadSpECProcessMemoryUsage[sim_String, field_String : "ResidentMemory"] :=
  Module[{memoryTables},
    (* We need to treat each segment separately because it might have a
       different number of processes, and hence a table of different
       dimensions *)
    memoryTables = readSpECASCIIData[sim, "MemoryInfo.dat", SeparateSegments -> True];
-   Map[memoryField[#, "ResidentMemory"] &, memoryTables]];
+   Map[memoryField[#, field] &, memoryTables]];
 
 maxNodeMemoryUsage[procMems_List] :=
  Module[{nodeMems, maxNodeMems, coresPerNode = 12},
