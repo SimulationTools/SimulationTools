@@ -1,0 +1,19 @@
+skipper = \b([ \t\n\r]+|#.*)*
+end = ([ \t]+|#.*)*\r*(\n|$)
+keyword = [A-Za-z][A-Za-z0-9\-]*
+
+string = [a-zA-Z0-9/:+\-=. _*{}"@]+
+
+null = \(\)
+
+# keywordvalue = {keyword} \( {assignment} (; {assignment})* (;)? \)
+keywordvalue = {keyword} \( {assignmentsequence} \)
+
+assignmentsequence = ({assignment} ( ; {assignment} )* ;? )?
+
+value = {keywordvalue}|( \( {assignmentsequence} \) )|{-string}|{null}
+valuesequence = {value} (, {value})* ,?
+key = [A-Za-z0-9][A-Za-z0-9\-:]*
+assignment = {key}[ \t]*\= ({valuesequence}|(\({valuesequence}\)))?
+
+file = ^ {assignmentsequence} $
