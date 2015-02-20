@@ -237,14 +237,15 @@ ReadSpECHorizonSpin[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
    filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
 
-   runFiles = findSpECFiles[runName, "ApparentHorizons/Horizons.h5"][[1]];
+   runFiles = Flatten[findSpECFiles[runName, "ApparentHorizons/Horizons.h5"]];
 
    If[runFiles === {}, Return[ConstantArray[ToDataTable[{}],3]] (*Error["Cannot find apparent horizon information in "<>runName]*)];
 
   hnLetter = 
    If[hn === 1, "A", 
     If[hn === 2, "B", 
-     Error["Unknown horizon index " <> ToString[hn]]]];
+      If[hn === 3, "C", 
+     Error["Unknown horizon index " <> ToString[hn]]]]];
   datasetName = "/Ah" <> hnLetter <> ".dir/chiInertial.dat";
   
   files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
