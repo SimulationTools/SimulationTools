@@ -51,10 +51,15 @@ ReadSpECFinalTime;
 ReadSpECADMEnergy;
 ReadSpECADMEnergyError;
 ReadSpECADMEnergyIterations;
+ReadSpECADMAngularMomentum;
+ReadSpECInitialADMEnergy;
 ReadSpECInitialDataParameter;
 FindSpECInitialDataSimulations;
 ReadSpECInitialDataIteration;
+ReadSpECInitialBindingEnergy;
 ReadSpECHorizonMass;
+ReadSpECInitialOrbitalFrequency;
+ReadSpECInitialSeparation;
 ReadSpECHorizonAngularMomentum;
 
 Begin["`Private`"];
@@ -539,6 +544,23 @@ ReadSpECInitialDataIteration[sim_String] :=
     FileNameJoin[{FindSpECSimulation[sim], "private"}], 
     "Errors.dat"];
   errs[[-1, 1]]];
+
+ReadSpECInitialADMEnergy[sim_] :=
+ ReadSpECInitialDataParameter[sim, "Eadm"];
+
+ReadSpECInitialBindingEnergy[sim_] :=
+ ReadSpECInitialDataParameter[sim, 
+   "Eadm"] - (ReadSpECInitialDataParameter[sim, "MA"] + 
+    ReadSpECInitialDataParameter[sim, "MB"]);
+
+ReadSpECInitialSeparation[sim_] :=
+ ReadSpECInitialDataParameter[sim, "d"];
+
+ReadSpECADMAngularMomentum[sim_] :=
+ ReadSpECInitialDataParameter[sim, "Jadm"];
+
+ReadSpECInitialOrbitalFrequency[sim_] :=
+ ReadSpECInitialDataParameter[sim, "Omega0"];
 
 
 End[];
