@@ -115,38 +115,33 @@ Options[ListLinePlotWithLegend] =
   Join[Options[ListLinePlot], {"PlotLegend" -> {}, "LegendPosition" -> {Left, Top},
                                "LegendBackground" -> None}, Options[MakePlotLegend]];
 
-ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
-  Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single},
-    dims = Dimensions@First[{args}];
-    single = (Length[dims] == 2 || (Length[dims] === 3 && dims[[1]] === 1));
-(*    style = styleInListLinePlot[
-      ListLinePlot[args, FilterRules[{opts}, Options[ListLinePlot]]]]; *)
-
-    If[MatchQ[First[{args}], DataTable[{}]],
-       Error["Cannot plot an empty DataTable"]];
-
-    If[OptionValue[PlotStyle] === Automatic,
-      style = PresentationPlotStyles,
-      style = OptionValue[PlotStyle]];
-    If[single, style = First[style]];
+ListLinePlotWithLegend[data_, opts:OptionsPattern[]] :=
+  Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single, nLines},
+    style = OptionValue[PlotStyle];
+    nLines = Replace[data,
+      {{_DataTable..} :> Length[data],
+        _DataTable :> 1,
+        _ :> All}];
     pos = OptionValue[LegendPosition];
     {posx, posy} = pos;
     f = 0.05;
     offset = 10 {Switch[posx, Right, -1, Left, 1, Center, 0, _, Error["Unknown position"]], If[posy === Top, -1, 1]};
     scale = {Switch[posx, Right, 1-f, Left, f, Center, 1, _, Error["Unknown position"]], If[posy === Bottom, f, 1-f]};
-
     labelStyle = OptionValue[LabelStyle];
-    ListLinePlot[args, PlotStyle -> style,
+    ListLinePlot[data,
       FilterRules[{opts}, Options[ListLinePlot]],
       Epilog -> 
         Inset[
-          MakePlotLegend[OptionValue[PlotLegend], If[single, {style}, style],labelStyle,
+          MakePlotLegend[Take[OptionValue[PlotLegend], If[nLines=!=All,Min[Length[OptionValue[PlotLegend]],nLines],All]], Take[If[!ListQ[style], {style}, style], nLines], labelStyle,
           FilterRules[{opts}, Options[MakePlotLegend]]],
           Scaled[scale], pos]]];
 
 Options[PresentationListLinePlot] = Options[ListLinePlotWithLegend];
-PresentationListLinePlot[args___, opts:OptionsPattern[]] :=
-  ListLinePlotWithLegend[args,opts,LabelStyle->12,Frame->True];
+PresentationListLinePlot[data_, opts:OptionsPattern[]] :=
+    Module[{data2},
+      data2 = If[$VersionNumber < 10 && data === {}, {Undefined[]}, data];
+      ListLinePlotWithLegend[data2, opts,
+        PlotStyle -> PresentationPlotStyles, LabelStyle->12, Frame->True]];
 
 (*
 Options[ListLogLinearPlotWithLegend] = 
