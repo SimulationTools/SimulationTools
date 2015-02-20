@@ -32,6 +32,7 @@ ReadSpECWallTime;
 ReadSpECMemoryUsage;
 ReadSpECPsi4;
 ReadSpECPsi4Radii;
+ReadSpECStrain;
 ReadSpECHorizonCentroid;
 ReadSpECHorizonSeparation;
 ReadSpECHorizonDisplacement;
@@ -166,6 +167,28 @@ If[runFiles==={},Error["No Psi4 data found in "<>runName]];
 
   files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
+
+  print["\n"];
+
+   data = Join@@files;
+   If[! And @@ Positive[Differences[data[[All, 1]]]], 
+    data = monotonisePreferLastCompiled[data]];
+   psi4 = Map[{#[[1]], #[[2]] + I #[[3]]} &, data];
+   Return[MakeDataTable[psi4]]];
+
+ReadSpECStrain[runName_String, l_?NumberQ, m_?NumberQ, rad_String] :=
+  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
+    filePattern2, runBase, res, runFiles2, simBase},
+   runFiles = Flatten[findSpECFiles[runName, "GW2/rh_FiniteRadii_CodeUnits.h5"],1];
+If[runFiles==={},Error["No Psi4 data found in "<>runName]];
+   datasetName = 
+    "/R" <> rad <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
+      ".dat";
+
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
+
+If[files === {}, Error["No strain data found in " <> runName <> " (no datasets named "<>datasetName<>")"]];
 
   print["\n"];
 
