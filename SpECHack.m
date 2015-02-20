@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`SpECHack`",
  {
+   "SimulationTools`",
    "SimulationTools`ColumnFile`",
    "SimulationTools`ReadHDF5`",
    "SimulationTools`DataTable`",
@@ -25,7 +26,8 @@ BeginPackage["SimulationTools`SpECHack`",
    "SimulationTools`FileDependencies`",
    "Piraha`",
    "SimulationTools`Utils`",
-   "h5mma`"
+   "h5mma`",
+   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 ReadSpECSimulationSpeed;
@@ -63,6 +65,7 @@ ReadSpECHorizonMass;
 ReadSpECInitialOrbitalFrequency;
 ReadSpECInitialSeparation;
 ReadSpECHorizonAngularMomentum;
+ReadSpECSubdomains;
 
 Begin["`Private`"];
 
@@ -564,6 +567,57 @@ ReadSpECADMAngularMomentum[sim_] :=
 ReadSpECInitialOrbitalFrequency[sim_] :=
  ReadSpECInitialDataParameter[sim, "Omega0"];
 
+(* Domain Info *)
+
+WithFileMemo[
+ReadSpECSegmentDomainInfo[segmentPath_String] := 
+ (* ReadSpECSegmentDomainInfo[segmentPath] = *)
+  Module[{info, rows, fileName},
+
+    fileName = FileNameJoin[{segmentPath, "Run", "Hist-Domain.txt"}];
+    DeclareFileDependency[fileName];
+
+   If[! FileExistsQ[fileName],
+    Return[{}]];
+Print[{FileNameJoin[{$SimulationToolsInstallationDirectory, "spec-domain-info"}], 
+       segmentPath}];
+
+   info = 
+    RunSubprocess[{FileNameJoin[{$SimulationToolsInstallationDirectory, "spec-domain-info"}], 
+       segmentPath}][[2]];
+   rows = DeleteCases[info, s_ /; StringMatchQ[s, "#" ~~ ___]];
+   (*Return[rows];*)
+   Map[ImportString[#, "Table"][[1]] &, rows]]];
+
+combineDomainInfos[segInfos_List] :=
+ Module[{domainInfo},
+  domainInfo = segInfos;
+  domainInfo = DeleteCases[domainInfo, {}];
+  domainInfo = 
+   Join[{domainInfo[[1]]}, Map[Rest, domainInfo[[2 ;; All]]]];
+  domainInfo = Reverse[Flatten[domainInfo, 1]];
+  domainInfo = 
+   Reverse[DeleteDuplicates[domainInfo, #1[[1]] === #2[[1]] &]];
+  domainInfo];
+
+ReadSpECDomainInfo[sim_String] :=
+ Module[{segments},
+  segments = 
+   Flatten[findSpECSegments[sim], 1];
+  combineDomainInfos[
+   Map[ReadSpECSegmentDomainInfo, segments]]];
+
+ReadSpECSubdomains[sim_String] :=
+ Module[{domainInfo},
+  domainInfo = ReadSpECDomainInfo[sim];
+  ToDataTable[domainInfo[[All, 1]], Map[Length[#] - 2 &, domainInfo]]];
+
+ReadSpECPointDistribution[sim_String] :=
+ Module[{domainInfo, f},
+  domainInfo = ReadSpECDomainInfo[sim];
+  Table[ToDataTable[domainInfo[[All, 1]], 
+    Map[f[Drop[#, 2]] &, domainInfo]], {f, {Mean, Min, Max, 
+     StandardDeviation}}]];
 
 End[];
 EndPackage[];
