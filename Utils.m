@@ -61,6 +61,7 @@ If[$VersionNumber < 9.,
      name]];
 
 Options[RunSubprocess] = {"Exceptions" -> False};
+(* TODO: implement Exceptions -> False *)
 RunSubprocess[cmdlist:{cmd_, args___}, opts:OptionsPattern[]] :=
   Module[
     {stdoutFile, stderrFile, cmdString, retCode, stdout, stderr},
