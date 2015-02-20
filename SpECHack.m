@@ -87,8 +87,15 @@ print[args___] :=
   If[verbosePrint[],WriteString["stdout", StringJoin[ToString/@{args}]]];
 
 withDot[f_] := Function[g, If[verbosePrint[], WriteString["stdout","."]]; f[g]];
+
+mergeDataLists[datas_List] :=
+  Module[{merged},
+    merged = Join@@datas;
+    If[! And @@ Positive[Differences[merged[[All, 1]]]],
+      monotonisePreferLastCompiled[merged],
+      merged]];
   
-Options[readSpECASCIIData] = {"SeparateRingdown" -> False};
+Options[readSpECASCIIData] = {"SeparateRingdown" -> False, "SeparateSegments" -> False};
 readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASCIIData[sim,file,opts] =
  Module[{runBase, res, filePattern1, simBase, filePattern2, runFiles, 
    dataSegments, merge},
@@ -98,16 +105,12 @@ readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASC
   dataSegments = Map[withDot@ReadColumnFile, runFiles, {2}];
   print["\n"];
 
-  merge[datas_List] :=
-   Module[{merged},
-     merged = Join@@datas;
-     If[! And @@ Positive[Differences[merged[[All, 1]]]],
-       monotonisePreferLastCompiled[merged],
-       merged]];
-
   If[!OptionValue[SeparateRingdown],
-    merge[Join@@dataSegments],
-    Map[merge, dataSegments]]];
+    If[OptionValue[SeparateSegments],
+      Join@@dataSegments,
+      (* else *)
+      mergeDataLists[Join@@dataSegments]],
+    Map[mergeDataLists, dataSegments]]];
 
 readSpECTimeInfo[sim_String] := 
   readSpECASCIIData[sim, "TimeInfo.dat"];
