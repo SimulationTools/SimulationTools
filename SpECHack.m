@@ -386,7 +386,7 @@ ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
       dirNames = {"JoinedForEcc", "JoinedForEcc_Lev*"},
       dirNames = {joinDirArg}];
 
-    eccFiles = FileNames["Fit_F1cos1.dat", FileNameJoin[{simPath, "Ev", #}] & /@ dirNames];
+    eccFiles = FileNames["Fit_F2cos2.dat", FileNameJoin[{simPath, "Ev", #}] & /@ dirNames];
 
 
     If[Length[eccFiles] === 0,
@@ -396,7 +396,7 @@ ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
     eccFile = First[eccFiles];
 
     eMeasured = Import[eccFile,"Table"][[-1,-1]];
-    eMeasuredSS = Import[StringReplace[eccFile,"Fit_F1cos1.dat"->"Fit_F1cos1_SS.dat"],"Table"][[-1,-1]];
+    eMeasuredSS = Import[StringReplace[eccFile,"Fit_F2cos2.dat"->"Fit_F2cos2_SS.dat"],"Table"][[-1,-1]];
 
     If[eMeasuredSS > 0.01, eMeasured, eMeasuredSS]];
 
