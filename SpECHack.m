@@ -163,16 +163,27 @@ ReadSpECMemoryUsage[sim_String] :=
 
 (* List (one per process) of DataTables with the memory usage as a
    function of time *)
-residentMemory[memoryTable_List] :=
-  Module[{nFields = 7, offset = 5, virtual = 1, 
-    residentCol = 2, total = 4, timeCol = 1, nProcs, time, resident},
+memoryField[memoryTable_List, field_String] :=
+  Module[{fieldNumber, nProcs, time, data, nFields = 7, offset = 5,
+    timeCol = 1},
+
     (* TODO: get number of processes and column format from file header; this
        is not very robust at the moment *)
+    fieldNumber = Replace[field,
+      { "VirtualMemory" -> 1,
+        "ResidentMemory" -> 2,
+        "PeakResidentMemory" -> 3,
+        "SystemTotalRam" -> 4,
+        "SystemEffectiveMemFree" -> 5,
+        "SystemCommitted" -> 6,
+        "SystemCommitLimit" -> 7,
+        _ :> Error["Unrecognised memory field "<>field]}];
+
     nProcs = (Dimensions[memoryTable][[2]] - offset)/nFields;
     time = memoryTable[[All, timeCol]];
-    resident = 
-    memoryTable[[All, offset + residentCol ;; All ;; nFields]];
-    Map[ToDataTable[time, #] &, Transpose[resident]]];
+    data = 
+    memoryTable[[All, offset + fieldNumber ;; All ;; nFields]];
+    Map[ToDataTable[time, #] &, Transpose[data]]];
 
 (* Return a list (one per segment) of lists (one per process) of
    DataTables with the memory usage as a function of time *)
@@ -182,7 +193,7 @@ ReadSpECProcessMemoryUsage[sim_String] :=
       different number of processes, and hence a table of different
       dimensions *)
    memoryTables = readSpECASCIIData[sim, "MemoryInfo.dat", SeparateSegments -> True];
-   Map[residentMemory, memoryTables]];
+   Map[memoryField[#, "ResidentMemory"] &, memoryTables]];
 
 maxNodeMemoryUsage[procMems_List] :=
  Module[{nodeMems, maxNodeMems, coresPerNode = 12},
