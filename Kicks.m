@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`Kicks`",
  {
+  "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
@@ -28,6 +29,8 @@ ReadLinearMomentumRadiated(*::usage = "LinearMomentumRadiated[sim, dir, r, lMax]
 ReadLinearMomentumFlux(*::usage = "LinearMomentumFlux[sim, dir, r, lMax] computes the linear momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable.  The result is the derivative of the result of LinearMomentumRadiated."*);
 AngularMomentumFlux(*::usage = "WARNING: THIS FUNCTION IS IN DEVELOPMENT AND HAS NOT BEEN TESTED. AngularMomentumFlux[sim, dir, r, lMax] computes the angular momentum flux as a function of time from the multipolar decomposition of Psi4 on a sphere at radius r in direction dir (an integer from 1 to 3) using modes up to l = lMax.  It returns a DataTable."*);
 (* SpinWeightedSphericalHarmonic::usage = "SpinWeightedSphericalHarmonic[s, l, m, \[Theta], \[Phi]] gives the spin weighted spherical harmonic."; *)
+EnergyFlux;
+AngularMomentumFluxZ;
 
 Kick = ReadKick;
 KickVector = ReadKickVector;
@@ -253,6 +256,16 @@ AngularMomentumFlux[psi4Reader_, 3, r_, lMax_] :=
     r^2/(4.0 Pi) Sum[m *
       Im[Conjugate[integratePsi4Twice[psi4Reader,l,m,r]] * 
                    integratePsi4[psi4Reader,l,m,r]], {l,2,lMax}, {m,-l,l}]];
+
+AngularMomentumFluxZ[hReader_, lMax_, r_] :=
+  1/(16 Pi) Im[Sum[m r^2 With[{h=hReader[l,m]}, h Conjugate[NDerivative[1][h]]],{l,2,lMax},{m,-l,l}]];
+
+(************************************************************************************)
+(* Energy *)
+(************************************************************************************)
+
+EnergyFlux[hReader_, lMax_, r_] :=
+  1/(16 Pi) Sum[Abs[r NDerivative[1][hReader[l,m]]]^2,{l,2,lMax},{m,-l,l}];
 
 End[];
 
