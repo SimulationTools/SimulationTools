@@ -83,7 +83,8 @@ ApplyDefaults[run_String, var_String, opts_List] :=
       "Iteration"       -> CallProvidedFunction["GridFunctions","DefaultIteration", {{}}],
       "Map"             -> CallProvidedFunction["GridFunctions","DefaultMap", {{}}],
       "RefinementLevel" -> CallProvidedFunction["GridFunctions","DefaultRefinementLevel", {run,var}],
-      "TimeLevel"       -> CallProvidedFunction["GridFunctions","DefaultTimeLevel", {run,var}]};
+      "TimeLevel"       -> CallProvidedFunction["GridFunctions","DefaultTimeLevel", {run,var}],
+      "FileName"        -> Null};
 
     options = Map[(#[[1]] -> If[OptionValue[ReadGridFunction, opts, #[[1]]] === Automatic,
                                 #[[1]] /. providerOptions,
@@ -99,7 +100,8 @@ Options[ReadGridFunction] = {
     "RefinementLevel" -> Automatic,
     "TimeLevel"       -> Automatic,
     "StripGhostZones" :> If[$SimulationToolsCompatibilityVersion < 1, True, False],
-    "Variable"        -> Automatic (* Only used by old interface *)
+    "Variable"        -> Automatic (* Only used by old interface *),
+    "FileName"        -> Automatic
   };
 
 DocumentationBuilder`OptionDescriptions["ReadGridFunction"] = {
@@ -117,9 +119,10 @@ DocumentationBuilder`SymbolDescription["ReadGridFunction"] =
 
 ReadGridFunction[run_String, var_String, dims1:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {options, fileName, dims = parseDims[dims1]},
+    {options, fileName, leafName, dims = parseDims[dims1]},
     options = ApplyDefaults[run, var, {opts}];
-    fileName = getFileOfIt[run, getLeafName[var, dims, options], OptionValue[ReadGridFunction, options, Iteration], options];
+    leafName = getLeafName[var, dims, options];
+    fileName = getFileOfIt[run, leafName, OptionValue[ReadGridFunction, options, Iteration], options];
     If[fileName === None,
        notFound[run,var,dims,options]];
     CallProvidedFunction["GridFunctions", "ReadData", {fileName, "Variable" -> var, options}]

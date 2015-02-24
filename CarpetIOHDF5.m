@@ -41,7 +41,8 @@ Options[SimulationTools`CarpetIOHDF5`GridFunctions`ReadData] = {
     "RefinementLevel" -> Null,
     "TimeLevel"       -> Null,
     "Variable"        -> Null,
-    "StripGhostZones" -> True
+    "StripGhostZones" -> True,
+    "FileName"        -> Null
   };
 
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadData[file_String, opts:OptionsPattern[]] :=
@@ -64,6 +65,7 @@ Options[SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName] =
 SimulationTools`CarpetIOHDF5`GridFunctions`ToFileName[var_String, dims:(_List|All), opts:OptionsPattern[]] :=
   Module[
     {filename, map, pattern},
+    If[OptionValue[FileName] =!= Null, Return[OptionValue[FileName]]];
     map = Switch[OptionValue[Map],
 		 _Integer, "."<>ToString[OptionValue[Map]],
 		 None, "",
