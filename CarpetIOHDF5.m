@@ -330,7 +330,7 @@ Options[ReadCarpetIOHDF5Components] = {"StripGhostZones" -> True};
 
 ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer, map_, opts:OptionsPattern[]] :=
   Module[{fileNames, datasets, pattern, components, names, varNames, varName, directory, leaf,
-          leafPrefix, haveComp},
+          leafPrefix, haveComp, possibleVarNames},
     If[FileType[file] === None,
       Error["File " <> file <> " not found in ReadCarpetIOHDF5Components"]];
 
@@ -352,7 +352,13 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
     varNames = Flatten[Table[SimulationTools`CarpetIOHDF5`GridFunctions`ReadVariables[f,
       "Iteration" -> it, "Map"-> map, "RefinementLevel" -> rl, "TimeLevel" -> tl], {f, fileNames}]];
 
-    varName = First[Select[varNames, StringMatchQ[#, ___ ~~ var ~~ ___] &]];
+    (* Choose a variable from the file whose name is a superstring of the passed variable name *)
+    (* TODO: why is it done like this? *)
+    possibleVarNames = Select[varNames, StringMatchQ[#, ___ ~~ var ~~ ___] &];
+    If[possibleVarNames === {},
+      Error["Cannot find a variable named "<>var<>" in files "<>ToString[fileNames]<>
+        "; variables found are "<>ToString[varNames]]];
+    varName = First[possibleVarNames];
     haveComp = Map[# =!= {} &, components];
 
     (* Construct a list of dataset names *)
