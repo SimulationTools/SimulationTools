@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimulationTools`SpECHack`",
+BeginPackage["SimulationTools`SpEC`",
  {
    "SimulationTools`",
    "SimulationTools`ColumnFile`",

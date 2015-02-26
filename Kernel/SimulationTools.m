@@ -108,7 +108,7 @@ packages = {
     "SimulationTools`SimulationProperties`",
     "SimulationTools`SimView`",
     "SimulationTools`SimViewRRMHD`",
-    "SimulationTools`SpECHack`",
+    "SimulationTools`SpEC`",
   (*"SimulationTools`Stack`",*)
     "SimulationTools`Statistics`",
     "SimulationTools`SystemStatistics`",
