@@ -25,6 +25,7 @@ MapMonitored;
 TailFile;
 ShowIt;
 MapSuccessive;
+ErrorForm;
 
 Begin["`Private`"];
 
@@ -98,6 +99,11 @@ ShowIt[code_] :=
    Module[{y}, 
       Print[ToString[Unevaluated[code]], " = ", y = code]; 
       y]
+
+ErrorForm[v_, e_] := 
+  ToString[NumberForm[
+     v, {Ceiling[-Log10[e]] + 1, Ceiling[-Log10[e]]}]] <> "(" <> 
+   ToString[Round[10^Ceiling[-Log10[e]]*e]] <> ")";
 
 End[];
 EndPackage[];
