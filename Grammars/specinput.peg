@@ -1,8 +1,8 @@
 skipper = \b([ \t\n\r]+|#.*)*
 end = ([ \t]+|#.*)*\r*(\n|$)
-keyword = [A-Za-z][A-Za-z0-9\-]*
+keyword = [A-Za-z][A-Za-z0-9\-\*]*
 
-string = [a-zA-Z0-9/:+\-=. _*{}"@]+
+string = [a-zA-Z0-9/:+\-=. _*{}"@\(\)]+
 
 null = \(\)
 
