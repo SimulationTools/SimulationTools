@@ -573,7 +573,7 @@ RasterizeManipulate[expr_, {var_, start_, end_, inc_, opts___}] :=
 
 graphicsPadding[g_] :=
  BorderDimensions[
-  Image[Rasterize@Show[g, LabelStyle -> White, Background -> White]]];
+  Image[Rasterize@Show[g/.(PlotLabel->_)->Sequence[], LabelStyle -> White, Background -> White]]];
 
 graphicsPadding[gs_List] :=
  MapThread[Max, Map[graphicsPadding, gs], 2];
