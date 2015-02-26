@@ -301,6 +301,12 @@ ReadSpECMaxEffectiveUsedMemoryFraction[sim_String] :=
 (* Waveforms *)
 (****************************************************************)
 
+radiusString[r_Integer] :=
+  IntegerString[r, 10, 4];
+
+radiusString[r_String] :=
+  r;
+
 ReadSpECPsi4Radii[runName_String] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
     filePattern2, runBase, res, runFiles2, simBase},
@@ -309,13 +315,14 @@ ReadSpECPsi4Radii[runName_String] :=
       {},
       StringReplace[#,"/R"~~x__~~".dir"->x]&/@ReadHDF5[runFiles[[1]]]]];
 
-ReadSpECPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_String] :=
+ReadSpECPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-    filePattern2, runBase, res, runFiles2, simBase},
+    filePattern2, runBase, res, runFiles2, simBase, radStr},
+  radStr = radiusString[rad];
    runFiles = Flatten[findSpECFiles[runName, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
 If[runFiles==={},Error["No Psi4 data found in "<>runName]];
    datasetName = 
-    "/R" <> rad <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
+    "/R" <> radStr <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
       ".dat";
 
   files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
@@ -329,13 +336,15 @@ If[runFiles==={},Error["No Psi4 data found in "<>runName]];
    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]} &, data];
    Return[MakeDataTable[psi4]]];
 
-ReadSpECStrain[runName_String, l_?NumberQ, m_?NumberQ, rad_String] :=
+(* TODO: Eliminate duplication with ReadSpECPsi4 *)
+ReadSpECStrain[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-    filePattern2, runBase, res, runFiles2, simBase},
+    filePattern2, runBase, res, runFiles2, simBase, radStr},
+  radStr = radiusString[rad];
    runFiles = Flatten[findSpECFiles[runName, "GW2/rh_FiniteRadii_CodeUnits.h5"],1];
-If[runFiles==={},Error["No Psi4 data found in "<>runName]];
+If[runFiles==={},Error["No strain data found in "<>runName]];
    datasetName = 
-    "/R" <> rad <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
+    "/R" <> radStr <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
       ".dat";
 
   files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
@@ -358,6 +367,7 @@ firstOrFail[l_List, msg_String] :=
 (* Horizons *)
 (****************************************************************)
 
+(* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonCentroid[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
    filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
@@ -390,6 +400,7 @@ ReadSpECHorizonDisplacement[sim_String] :=
 ReadSpECHorizonSeparation[sim_String] :=
   Norm[ReadSpECHorizonDisplacement[sim]];
 
+(* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonSpin[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
    filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
@@ -417,6 +428,7 @@ ReadSpECHorizonSpin[runName_String, hn_Integer] :=
     Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, 3}];
   Return[data2]];
 
+(* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonAngularMomentum[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
    filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
@@ -444,6 +456,7 @@ ReadSpECHorizonAngularMomentum[runName_String, hn_Integer] :=
     Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, 3}];
   Return[data2]];
 
+(* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonMass[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
    filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
