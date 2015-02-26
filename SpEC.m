@@ -306,13 +306,18 @@ radiusString[r_Integer] :=
 radiusString[r_String] :=
   r;
 
+radiusOfDatasetName[dsName_String] :=
+  Replace[StringCases[dsName, "/R"~~x__~~".dir"->x],
+    {{s_String} :> s,
+      s_ :> Error["Cannot determine radius from dataset name "<>dsName]}];
+
 ReadSpECPsi4Radii[runName_String] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
     filePattern2, runBase, res, runFiles2, simBase},
     runFiles = Flatten[findSpECFiles[runName, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
     If[runFiles === {},
       {},
-      StringReplace[#,"/R"~~x__~~".dir"->x]&/@ReadHDF5[runFiles[[1]]]]];
+      ToExpression/@Union[radiusOfDatasetName/@ReadHDF5[runFiles[[1]]]]]];
 
 ReadSpECPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
