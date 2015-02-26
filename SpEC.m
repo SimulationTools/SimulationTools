@@ -45,6 +45,7 @@ ReadSpECHorizonDisplacement;
 ReadSpECInitialDataErrors;
 $SpECSimulationsDirectory;
 $SpECVerbosePrint;
+$ReadSpECPsi4Progress;
 FindSpECLevels;
 FindSpECEccentricityReductionSimulations;
 HaveSpECEvolution;
@@ -329,9 +330,11 @@ If[runFiles==={},Error["No Psi4 data found in "<>runName]];
     "/R" <> radStr <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
       ".dat";
 
-  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  (* TODO: This progress variable doesn't work due to the interaction
+     with withDot.  Unify this system. *)
+  files = MapIndexed[withDot[$ReadSpECPsi4Progress=N[#2[[1]]/Length[runFiles]]; Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
-
+  $ReadSpECPsi4Progress=.;
   print["\n"];
 
    data = Join@@files;
