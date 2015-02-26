@@ -69,6 +69,12 @@ ReadSpECInitialOrbitalFrequency;
 ReadSpECInitialSeparation;
 ReadSpECHorizonAngularMomentum;
 ReadSpECSubdomains;
+ReadSpECDomainInfo;
+ReadSpECChunkSize;
+ReadSpECDampingTime;
+ReadSpECAMRTriggerChunkInterval;
+ReadSpECAMRTriggerTimes;
+ReadSpECGridPoints;
 
 Begin["`Private`"];
 
@@ -542,6 +548,39 @@ ReadSpECFinalTime[sim_String] :=
    Error["Simulation " <> sim <> " has a final time of " <> 
      finalTime <> " which is not a number"]]]
 
+(* TODO: this doesn't work on all input files yet, so can't be used *)
+ReadSpECAMRTriggerChunkInterval[sim_String] :=
+ Module[{inputFile, input, triggerInterval, amrDriver, changeSpectralGrid},
+  inputFile = 
+   Last[Flatten[
+     findSpECFiles[sim, 
+      "AmrDriver.input"]]];
+
+  input = 
+   CleanParseTree@
+    ParsePEG[
+     "specinput.peg", 
+     "file", inputFile];
+
+  (* Print["input = ", input]; *)
+
+  (* Print["processed = ", process[input[[1]]]]; *)
+
+  amrDriver = lookup[process[input[[1]]], "AmrDriver"];
+  (* Print["amrDriver = ", amrDriver]; *)
+
+  changeSpectralGrid = lookup[amrDriver, "ChangeSpectralGrid"];
+  (* Print["changeSpectralGrid = ", changeSpectralGrid]; *)
+
+  triggerInterval = lookup[changeSpectralGrid, "TriggerEveryNChunks"];
+  (* Print["triggerInterval = ", triggerInterval]; *)
+
+  If[StringMatchQ[triggerInterval[[1]], NumberString], ToExpression[triggerInterval[[1]]], 
+   Error["Simulation " <> sim <> " has a trigger chunk interval of " <> 
+     triggerInterval[[1]] <> " which is not a number"]]]
+
+
+
 (**********************************)
 (* New simulation file access API *)
 (**********************************)
@@ -691,12 +730,36 @@ ReadSpECSubdomains[sim_String] :=
   domainInfo = ReadSpECDomainInfo[sim];
   ToDataTable[domainInfo[[All, 1]], Map[Length[#] - 2 &, domainInfo]]];
 
+ReadSpECGridPoints[sim_String] :=
+ Module[{domainInfo},
+  domainInfo = ReadSpECDomainInfo[sim];
+  ToDataTable[domainInfo[[All, 1]], domainInfo[[All,2]]]];
+
+
 ReadSpECPointDistribution[sim_String] :=
  Module[{domainInfo, f},
   domainInfo = ReadSpECDomainInfo[sim];
   Table[ToDataTable[domainInfo[[All, 1]], 
     Map[f[Drop[#, 2]] &, domainInfo]], {f, {Mean, Min, Max, 
      StandardDeviation}}]];
+
+ReadSpECChunkSize[sim_String] :=
+  ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat"][[All,{1,3}]]];
+
+ReadSpECDampingTime[sim_String, i_Integer] :=
+  ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat", SeparateRingdown->True][[1]][[All,{1,4+i}]]];
+
+triggerTimesFromFile[fileName_String] :=
+  Module[{s},
+    s = Import[fileName, "String"];
+    StringCases[s, "ChangeSpectralGrid Called at t="~~Shortest[t__]~~"," :> t]];
+
+ReadSpECAMRTriggerTimes[sim_String] :=
+  Union[
+    ToExpression/@
+    Flatten[
+      triggerTimesFromFile /@ Flatten[
+        findSpECFiles[sim, "ChangeSpectralGrid.log"]]]];
 
 End[];
 EndPackage[];
