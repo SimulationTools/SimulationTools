@@ -579,7 +579,7 @@ graphicsPadding[gs_List] :=
  MapThread[Max, Map[graphicsPadding, gs], 2];
 
 PadGraphics[gs_List, depth_:1] :=
- With[{padding = 1.2 graphicsPadding[Flatten[gs,depth]]},
+ With[{padding = 4 {{1,1},{1,1}} + graphicsPadding[Flatten[gs,depth]]},
   Map[Show[#, ImagePadding -> padding] &, gs, {depth}]];
 
 End[];
