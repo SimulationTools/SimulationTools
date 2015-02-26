@@ -20,6 +20,9 @@ BeginPackage["SimulationTools`SpECHack`",
    "SimulationTools`ReadHDF5`",
    "SimulationTools`DataTable`",
    "SimulationTools`DataRepresentations`",
+   "SimulationTools`Error`",
+   "Piraha`",
+   "SimulationTools`Utils`",
    "h5mma`"
  }];
 
@@ -29,20 +32,43 @@ ReadSpECWallTime;
 ReadSpECMemoryUsage;
 ReadSpECPsi4;
 ReadSpECHorizonCentroid;
+ReadSpECHorizonSeparation;
+ReadSpECHorizonDisplacement;
+ReadSpECInitialDataErrors;
 $SpECSimulationsDirectory;
 $SpECVerbosePrint;
+FindSpECLevels;
+FindSpECEccentricityReductionSimulations;
+HaveSpECEvolution;
+ReadSpECEccentricity;
+FindSpECSimulation;
+FindSpECSubSimulations;
+ReadSpECHorizonSpin;
+ReadSpECCoreCount;
+ReadSpECFinalTime;
+ReadSpECADMEnergy;
+ReadSpECADMEnergyError;
+ReadSpECADMEnergyIterations;
+ReadSpECInitialDataParameter;
+FindSpECInitialDataSimulations;
+ReadSpECInitialDataIteration;
 
 Begin["`Private`"];
 
 getSimsDir[] :=
   If[ValueQ[$SpECSimulationsDirectory],
     $SpECSimulationsDirectory,
-    "~/simulations/spectesting"];
+    "/lustre/datura/ianhin/simulations/spectesting"];
+
+(* Given a simulation name or path, return a simulation path *)
+FindSpECSimulation[sim_String] :=
+  If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim,
+    FileNameJoin[{getSimsDir[], sim}]];
 
 findSpECSegments[sim_String] :=
   Module[{runBase,res,simBase,segPatterns},
-    {runBase, res} = StringSplit[sim, ":"];
-    simBase = FileNameJoin[{getSimsDir[], runBase, "Ev"}];
+    {runBase, res} = Replace[StringSplit[sim, ":"], {a:{_,_} :> a, _ :> Error["Cannot parse simulation name "<>sim<>" into <sim>:<res>"]}];
+    simBase = If[StringMatchQ[runBase,StartOfString~~("/"|"~")~~__], FileNameJoin[{runBase,"Ev"}], FileNameJoin[{getSimsDir[], runBase, "Ev"}]];
     segPatterns = {"Lev"~~res~~"_"~~_~~_, 
       "Lev"~~res~~"_Ringdown/Lev"~~res~~"_"~~_~~_}[[1;;2]];
     Map[FileNames[#, simBase] &, segPatterns]];
@@ -63,7 +89,7 @@ print[args___] :=
 withDot[f_] := Function[g, If[verbosePrint[], WriteString["stdout","."]]; f[g]];
   
 Options[readSpECASCIIData] = {"SeparateRingdown" -> False};
-readSpECASCIIData[sim_String, file_String, OptionsPattern[]] := readSpECASCIIData[sim,file] =
+readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASCIIData[sim,file,opts] =
  Module[{runBase, res, filePattern1, simBase, filePattern2, runFiles, 
    dataSegments, merge},
 
@@ -89,6 +115,9 @@ readSpECTimeInfo[sim_String] :=
 ReadSpECSimulationSpeed[sim_String] :=
   ToDataTable[readSpECTimeInfo[sim][[All,{1,8}]]];
 
+ReadSpECCoreCount[sim_String] :=
+  ToDataTable[readSpECTimeInfo[sim][[All,{1,3}]]];
+
 ReadSpECSimulationProgress[sim_String] :=
   ToDataTable[readSpECTimeInfo[sim][[All,{2,1}]]];
 
@@ -102,17 +131,23 @@ ReadSpECWallTime[sim_String] :=
       (* else *)
       ToDataTable[inspiral]]];
 
+(* TODO: make this work when the number of processes changes between segments *)
 ReadSpECMemoryUsage[sim_String] :=
   Module[{memoryTable = readSpECASCIIData[sim,"MemoryInfo.dat"],
     nFields = 7, offset = 5, virtual = 1, resident = 2, total = 4},
     ToDataTable[Map[{#[[1]], Max[#[[offset+resident;;All;;nFields]]]/(#[[offset+total]]/12)} &,
       memoryTable]]];
 
+HaveSpECEvolution[sim_String] :=
+  Module[{runFiles},
+   runFiles = Flatten[findSpECFiles[sim, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
+    runFiles=!={}];
+
 ReadSpECPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_String] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
     filePattern2, runBase, res, runFiles2, simBase},
    runFiles = Flatten[findSpECFiles[runName, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
-
+If[runFiles==={},Error["No Psi4 data found in "<>runName]];
    datasetName = 
     "/R" <> rad <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
       ".dat";
@@ -128,11 +163,16 @@ ReadSpECPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_String] :=
    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]} &, data];
    Return[MakeDataTable[psi4]]];
 
+firstOrFail[l_List, msg_String] :=
+  If[Length[l] === 0, Error[msg], First[l]];
+
 ReadSpECHorizonCentroid[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
    filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
 
    runFiles = findSpECFiles[runName, "ApparentHorizons/Horizons.h5"][[1]];
+
+   If[runFiles === {}, Return[ConstantArray[ToDataTable[{}],3]] (*Error["Cannot find apparent horizon information in "<>runName]*)];
 
   hnLetter = 
    If[hn === 1, "A", 
@@ -152,6 +192,41 @@ ReadSpECHorizonCentroid[runName_String, hn_Integer] :=
     Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, 3}];
   Return[data2]];
 
+ReadSpECHorizonDisplacement[sim_String] :=
+  Subtract@@Table[ReadSpECHorizonCentroid[sim, h], {h,1,2}];
+
+ReadSpECHorizonSeparation[sim_String] :=
+  Norm[ReadSpECHorizonDisplacement[sim]];
+
+ReadSpECHorizonSpin[runName_String, hn_Integer] :=
+ Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
+   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+
+   runFiles = findSpECFiles[runName, "ApparentHorizons/Horizons.h5"][[1]];
+
+   If[runFiles === {}, Return[ConstantArray[ToDataTable[{}],3]] (*Error["Cannot find apparent horizon information in "<>runName]*)];
+
+  hnLetter = 
+   If[hn === 1, "A", 
+    If[hn === 2, "B", 
+     Error["Unknown horizon index " <> ToString[hn]]]];
+  datasetName = "/Ah" <> hnLetter <> ".dir/chiInertial.dat";
+  
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
+
+  print["\n"];
+  data = Join@@files;
+  If[! And @@ Positive[Differences[data[[All, 1]]]], 
+   data = monotonisePreferLastCompiled[data]];
+  data2 = 
+   ToDataTable /@ 
+    Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, 3}];
+  Return[data2]];
+
+
+
+
 monotonisePreferLastCompiled =
  Compile[{{l1, _Real, 2}},
   Module[{l = Reverse[l1], output, j, i, n},
@@ -166,6 +241,204 @@ monotonisePreferLastCompiled =
      j = j + 1]];
    Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
   RuntimeOptions -> "Speed"];
+
+
+findSpECInitialDataDir[sim_String] :=
+  If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__],
+    FileNameJoin[{sim,"ID"}],
+    FileNameJoin[{getSimsDir[], sim, "ID"}]];
+
+ReadSpECInitialDataErrors[sim_String] :=
+  Module[{idDir = findSpECInitialDataDir[sim]},
+    ToDataTable@
+    Map[{#[[1]], Norm[#[[3 ;; All ;; 2]]]} &, 
+      ReadColumnFile[idDir, "Errors.dat"]]];
+
+ReadSpECADMEnergy[sim_String] :=
+  Module[{idDir = findSpECInitialDataDir[sim]},
+    ReadColumnFile[idDir,"PhysValues.dat", {1,13}][[-1,2]]];
+
+ReadSpECADMEnergyError[sim_String] :=
+  Module[{idDir = findSpECInitialDataDir[sim], eADMs, levels, lowRes, highRes},
+    eADMs = Flatten[ReadColumnFile[idDir,"PhysValues.dat", {13}]];
+    levels = Flatten[ReadColumnFile[idDir,"Errors.dat", {2}]];
+
+    lowRes = -(LengthWhile[Reverse@levels, (# === levels[[-1]]) &] + 1);
+    highRes = -1;
+
+    Norm[Differences[eADMs[[lowRes;;highRes]]]]];
+
+    (* Print[lowRes]; *)
+    (* Abs[eADMs[[highRes]] - eADMs[[lowRes]]]]; *)
+
+    (* Abs[Subtract@@(ReadColumnFile[idDir,"PhysValues.dat", {1,13}][[-2;;-1,2]])]]; *)
+
+ReadSpECADMEnergyIterations[sim_String] :=
+  Module[{idDir = findSpECInitialDataDir[sim]},
+    ReadColumnFile[idDir,"PhysValues.dat", {1,13}][[All,2]]];
+
+FindSpECEccentricityReductionSimulations[sim_String] :=
+  FileNames["Ecc*", FileNameJoin[{getSimsDir[], sim}]];
+
+FindSpECLevels[sim_String] :=
+  Module[{simBase},
+    simBase = If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim, FileNameJoin[{getSimsDir[], sim}]];
+    (* Print[FileNameJoin[{simBase,"Ev"}]]; *)
+    ToExpression/@Union[Map[StringReplace[StringSplit[FileNameTake[#,-1],"_"][[1]],"Lev"->""] &, FileNames["Lev"~~__~~"_"~~_~~_, FileNameJoin[{simBase,"Ev"}]]]]];
+
+ReadSpECEccentricity[sim_String, joinDir_String : "JoinedForEcc"] :=
+  Module[{eccFile, eMeasured, simPath},
+
+    simPath = FindSpECSimulation[sim];
+
+    eccFile = FileNameJoin[{simPath, "Ev", joinDir, "Fit_F1cos1.dat"}];
+    If[FileType[eccFile] === None,
+      Print["Cannot find file ", eccFile];
+      Return[None]];
+
+    eMeasured = Import[eccFile,"Table"][[-1,-1]];
+    eMeasured];
+
+(* Input file parsing *)
+
+process["assignmentsequence"[as___]] :=
+ Map[process, {as}];
+
+process["assignment"["key"[key_], "valuesequence"[values__]]] :=
+  key -> process /@ {values};
+
+process[s_String] := s;
+
+process["value"[v_]] := process[v];
+
+process["keywordvalue"["keyword"[k_], 
+   a : "assignmentsequence"[___]]] :=
+ k[process[a]];
+
+process["keywordvalue"["keyword"[k_], 
+   a : "assignmentsequence"[___]]] :=
+ k[process[a]];
+
+process["null"["()"]] := Null;
+
+process[x_] := Error["Do not know how to process " <> ToString[x]];
+
+process[x_] := x;
+
+lookup[assoc_List, key_String] :=
+ Replace[Cases[assoc, ((key -> value_) | key[value_]) :> value],
+  {{x_} :> x,
+   _ :> Error["Cannot find key " <> key]}];
+
+(* Final time -- currently only works for eccentricity reduction simulations *)
+
+ReadSpECFinalTime[sim_String] :=
+ Module[{evolutionInputFile, evolutionInput, finalTime},
+  evolutionInputFile = 
+   Last[Flatten[
+     findSpECFiles[sim, 
+      "Evolution.input"]]];
+  evolutionInput = 
+   CleanParseTree@
+    ParsePEG[
+     (*"/home/ianhin/projects/SimulationTools/Grammars/specinput.peg"*) "specinput.peg", 
+     "file", evolutionInputFile];
+  finalTime = 
+   lookup[lookup[
+      lookup[lookup[process[evolutionInput[[1]]], "Terminator"][[1]], 
+       "TerminationCriteria"], "EccentricityReduction"], 
+     "FinalTime"][[1]];
+  If[StringMatchQ[finalTime, NumberString], ToExpression[finalTime], 
+   Error["Simulation " <> sim <> " has a final time of " <> 
+     finalTime <> " which is not a number"]]]
+
+(**********************************)
+(* New simulation file access API *)
+(**********************************)
+
+(* FindSpECSimulation already implemented above *)
+
+(* This is fairly trivial; it might be redundant *)
+FindSpECSimulationFile[sim_String, name_String] :=
+  With[{f=FileNameJoin[{FindSpECSimulation[sim], name}]},
+    If[FileExistsQ[f], f, Error["File "<>name<>" not found in simulation "<>sim]]];
+
+FindSpECSubSimulations[sim_String, pat_:"*"] :=
+  Module[{simPath = FindSpECSimulation[sim], subs1, subs2, subs3},
+
+    (* If this is a top-level simulation *)
+    subs1 = Flatten[Map[FileNames[#, simPath] &, {"ID","Ecc*","Ev"}],1];
+
+    (* If this is an Ev or Ringdown simulation *)
+    subs2 = FileNames["Lev*_AA", simPath];
+
+    (* If this is a LevN simulation *)
+    subs3 = FileNames["Lev*_AA", simPath<>"_Ringdown"];
+
+    Join[subs1, subs2, subs3]]
+
+(*
+FindSpECSimulationFiles[sim_String, name_String] :=
+
+*)
+
+ReadSpECInitialDataParameter[sim_String, paramName_String] :=
+ 
+ Module[{path, paramsFile, paramsString, matches, parseScalar, 
+   parseArray},
+  path = StringSplit[FindSpECSimulation[sim], ":"][[1]];
+  paramsFile = FileNameJoin[{path, "ID/EvID/ID_Params.perl"}];
+  If[! FileExistsQ[paramsFile], 
+   Error["Cannot find initial data parameter file " <> paramsFile <> 
+     " for simulation " <> sim]];
+  paramsString = Import[paramsFile, "String"];
+  
+  matches = 
+   StringCases[paramsString, 
+    StartOfLine ~~ Whitespace ... ~~ (type : ("$" | "@")) ~~ 
+      "ID_" ~~ paramName ~~ Whitespace ... ~~ "=" ~~ Whitespace ... ~~ 
+      Shortest[val___ ~~ Whitespace ... ~~ ";"] :> {type, val}];
+  
+  parseScalar[s_String] :=
+   If[StringMatchQ[s, "\"" ~~ x__],
+    s,
+    ImportString[s, "List"][[1]]];
+  
+  parseArray[s_String] :=
+   
+   Replace[StringCases[s, "(" ~~ x__ ~~ ")" :> x],
+    {{x_} :> 
+      parseScalar /@ 
+       StringSplit[x, Whitespace ... ~~ "," ~~ Whitespace ...],
+     _ :> 
+      Error["Array parse error when reading initial data parameter " <>
+         paramName <> " from simulation " <> sim]}];
+  
+  Replace[matches,
+   {{{"$", val_}} :> parseScalar[val],
+    {{"@", val_}} :> parseArray[val],
+    {} :> 
+     Error["Initial data parameter " <> paramName <> 
+       " not found in simulation " <> sim],
+    (l : {{_, _}}) /; Length[l] > 1 :> 
+     Error["Initial data parameter " <> paramName <> 
+       " found more than once in simulation " <> sim],
+    _ :> Error[
+      "Parse error when reading initial data parameter " <> 
+       paramName <> " from simulation " <> sim]}]]  
+
+FindSpECInitialDataSimulations[sim_String] :=
+ Module[{path, idSimPaths},
+  path = FindSpECSimulation[sim];
+  idSimPaths = FileNames["ID", path, Infinity]];
+
+ReadSpECInitialDataIteration[sim_String] :=
+ Module[{errs, truncs, diffs, ratios, maxRatios},
+  errs = ReadColumnFile[
+    FileNameJoin[{FindSpECSimulation[sim], "private"}], 
+    "Errors.dat"];
+  errs[[-1, 1]]];
+
 
 End[];
 EndPackage[];
