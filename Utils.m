@@ -14,7 +14,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-BeginPackage["SimulationTools`Utils`"];
+BeginPackage["SimulationTools`Utils`", {"SimulationTools`Error`"}];
 
 FilterNaNs(*::usage = "FilterNaNs[d] replaces any NaN (Not a Number) values in the DataRegion d with Missing[], which is Mathematica's notation for missing data."*);
 NaNQ(*::usage = "NaNQ[x] returns True if x is a NaN (Not a Number) value and False if it is not.  Mathematica deals strangely with NaN values imported from other programs.  This function was developed for use with the h5mma package for reading HDF5 data."*);
@@ -25,6 +25,7 @@ MapMonitored;
 TailFile;
 ShowIt;
 MapSuccessive;
+ErrorForm;
 
 Begin["`Private`"];
 
@@ -59,12 +60,15 @@ If[$VersionNumber < 9.,
      Close[OpenWrite[name]];
      name]];
 
-RunSubprocess[{cmd_, args___}] :=
+Options[RunSubprocess] = {"Exceptions" -> False};
+(* TODO: implement Exceptions -> False *)
+RunSubprocess[cmdlist:{cmd_, args___}, opts:OptionsPattern[]] :=
   Module[
     {stdoutFile, stderrFile, cmdString, retCode, stdout, stderr},
     stdoutFile = CreateTemporary[];
     stderrFile = CreateTemporary[];
     (* TODO: handle quoting *)
+    If[! And@@Map[StringQ, cmdlist], Error["RunSubprocess: Input arguments are not all strings"]];
     cmdString = StringJoin[Riffle[{cmd, args}, " "]];
     (* Run executes the cmdString using a shell *)
     retCode = Run[cmdString <> ">"<>stdoutFile<>" 2>"<>stderrFile];
@@ -72,6 +76,8 @@ RunSubprocess[{cmd_, args___}] :=
     stderr = ReadList[stderrFile, String, NullRecords -> True];
     DeleteFile[stdoutFile];
     DeleteFile[stderrFile];
+    If[retCode =!= 0 && OptionValue[Exceptions]===True,
+      Error["Error when running command "<>StringJoin[Riffle[cmdlist," "]]<>"\n"<>stderr]];
     {retCode, stdout, stderr}];
 
 MapMonitored[f_, args_List] :=
@@ -98,6 +104,11 @@ ShowIt[code_] :=
    Module[{y}, 
       Print[ToString[Unevaluated[code]], " = ", y = code]; 
       y]
+
+ErrorForm[v_, e_] := 
+  ToString[NumberForm[
+     v, {Ceiling[-Log10[e]] + 1, Ceiling[-Log10[e]]}]] <> "(" <> 
+   ToString[Round[10^Ceiling[-Log10[e]]*e]] <> ")";
 
 End[];
 EndPackage[];

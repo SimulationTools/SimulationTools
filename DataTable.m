@@ -168,7 +168,7 @@ ToDataTable[l_List, attrRules:{(_ -> _)..}] :=
 ToDataTable[l_List] :=
  Module[{dims},
   dims = Dimensions[l];
-  If[!MatchQ[dims, {_, 2}],
+  If[l =!= {} && !MatchQ[dims, {_, 2}],
     Error["ToDataTable: Data is not a list of {t, f[t]} elements."];
   ];
   ToDataTable[l[[All, 1]], l[[All, 2]]]
@@ -470,7 +470,11 @@ Protect[MapThread];
 (* MaxCoordinates                                         *)
 (**********************************************************)
 
-MaxCoordinates[d_DataTable] := {Last[ToListOfCoordinates[d]]};
+MaxCoordinates[d_DataTable] := 
+  With[{coords = ToListOfCoordinates[d]},
+    If[Length[coords] > 0,
+      {Last[coords]},
+      Error["Cannot get the maximum coordinate of an empty DataTable"]]];
 
 
 (**********************************************************)

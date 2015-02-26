@@ -2,12 +2,15 @@
 (*  Copyright 2012 Ian Hinder
 *)
 
-BeginPackage["Piraha`", {"JLink`"}];
+BeginPackage["Piraha`", {"JLink`", "SimulationTools`Error`"}];
 
 ParsePEG::usage = "ParsePEG[grammarfile, pattern, inputfile] parses a file named inputfile using a grammar stored in a file named grammarfile using pattern as the root pattern.  The parse tree is returned as Symbolic XML.";
 CleanParseTree;
 
 EnsureJava;
+
+$PirahaParseTree;
+$PirahaUnparsedText;
 
 Begin["`Private`"];
 
@@ -33,9 +36,11 @@ SimulationToolsDir = FileNameDrop[FindFile["SimulationTools`"],-2];
 DefFn[
   ParsePEG[grammarFileName_String, pattern_String, inputFileName_String] :=
   Module[
-    {gf,g,m,c,sw,dout,xmlString,xml},
-
+    {gf,g,m,c,sw,dout,xmlString,xml,textPos,matched,nearText},
     EnsureJava[];
+
+    $PirahaParseTree = .;
+    $PirahaUnparsedText = .;
 
     If[FileExistsQ[grammarFileName],
        gf = grammarFileName,
@@ -50,7 +55,18 @@ DefFn[
 
     m = g@matcher[pattern, c];
 
-    If[!m@match[0], Error["Failed to parse input file: "<>inputFileName<>" " <> m@near[]@toString[]]];
+    matched = m@match[0];
+
+    nearText = m@near[]@toString[];
+
+    textPos = m@getTextPos[];
+(* Print["textPos = ", textPos]; *)
+(* Print["file size = ", FileByteCount[inputFileName]]; *)
+(* Print["matched = ", matched]; *)
+
+    If[textPos < FileByteCount[inputFileName],
+      matched = False];
+(* Print["matched = ", matched]; *)
 
     sw = JavaNew["java.io.StringWriter"];
     dout = JavaNew["edu.lsu.cct.piraha.DebugOutput", JavaNew["java.io.PrintWriter", sw]];
@@ -59,6 +75,13 @@ DefFn[
     xmlString = sw@toString[];
     xml = ImportString[xmlString, "XML"];
     Scan[ReleaseJavaObject, {g, m, sw, dout}];
+
+    If[!matched,
+      $PirahaParseTree = xml;
+      $PirahaUnparsedText = StringDrop[Import[inputFileName,"String"], textPos];
+
+      Error["Failed to parse input file: "<>inputFileName<>" " <> nearText]];
+
     xml]];
 
 (* Structure functions *)

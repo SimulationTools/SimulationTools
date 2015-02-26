@@ -73,6 +73,8 @@ packages = {
   (*"SimulationTools`Empty`",*)
   (*"SimulationTools`Error`",*)
     "SimulationTools`FieldLines`", 
+    "SimulationTools`FileDependencies`",
+    "SimulationTools`FileMemo`",
     "SimulationTools`Geodesics`",
     "SimulationTools`GridFunctions`",
     "SimulationTools`GridFunctionConvergence`",
@@ -106,6 +108,7 @@ packages = {
     "SimulationTools`SimulationProperties`",
     "SimulationTools`SimView`",
     "SimulationTools`SimViewRRMHD`",
+    "SimulationTools`SpEC`",
   (*"SimulationTools`Stack`",*)
     "SimulationTools`Statistics`",
     "SimulationTools`SystemStatistics`",

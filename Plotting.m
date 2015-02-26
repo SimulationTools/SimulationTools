@@ -115,38 +115,33 @@ Options[ListLinePlotWithLegend] =
   Join[Options[ListLinePlot], {"PlotLegend" -> {}, "LegendPosition" -> {Left, Top},
                                "LegendBackground" -> None}, Options[MakePlotLegend]];
 
-ListLinePlotWithLegend[args___, opts:OptionsPattern[]] :=
-  Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single},
-    dims = Dimensions@First[{args}];
-    single = (Length[dims] == 2 || (Length[dims] === 3 && dims[[1]] === 1));
-(*    style = styleInListLinePlot[
-      ListLinePlot[args, FilterRules[{opts}, Options[ListLinePlot]]]]; *)
-
-    If[MatchQ[First[{args}], DataTable[{}]],
-       Error["Cannot plot an empty DataTable"]];
-
-    If[OptionValue[PlotStyle] === Automatic,
-      style = PresentationPlotStyles,
-      style = OptionValue[PlotStyle]];
-    If[single, style = First[style]];
+ListLinePlotWithLegend[data_, opts:OptionsPattern[]] :=
+  Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single, nLines},
+    style = OptionValue[PlotStyle];
+    nLines = Replace[data,
+      {{_DataTable..} :> Length[data],
+        _DataTable :> 1,
+        _ :> All}];
     pos = OptionValue[LegendPosition];
     {posx, posy} = pos;
     f = 0.05;
     offset = 10 {Switch[posx, Right, -1, Left, 1, Center, 0, _, Error["Unknown position"]], If[posy === Top, -1, 1]};
     scale = {Switch[posx, Right, 1-f, Left, f, Center, 1, _, Error["Unknown position"]], If[posy === Bottom, f, 1-f]};
-
     labelStyle = OptionValue[LabelStyle];
-    ListLinePlot[args, PlotStyle -> style,
+    ListLinePlot[data,
       FilterRules[{opts}, Options[ListLinePlot]],
       Epilog -> 
         Inset[
-          MakePlotLegend[OptionValue[PlotLegend], If[single, {style}, style],labelStyle,
+          MakePlotLegend[Take[OptionValue[PlotLegend], If[nLines=!=All,Min[Length[OptionValue[PlotLegend]],nLines],All]], Take[If[!ListQ[style], {style}, style], nLines], labelStyle,
           FilterRules[{opts}, Options[MakePlotLegend]]],
           Scaled[scale], pos]]];
 
 Options[PresentationListLinePlot] = Options[ListLinePlotWithLegend];
-PresentationListLinePlot[args___, opts:OptionsPattern[]] :=
-  ListLinePlotWithLegend[args,opts,LabelStyle->"Medium",Frame->True];
+PresentationListLinePlot[data_, opts:OptionsPattern[]] :=
+    Module[{data2},
+      data2 = If[$VersionNumber < 10 && data === {}, {Undefined[]}, data];
+      ListLinePlotWithLegend[data2, opts,
+        PlotStyle -> PresentationPlotStyles, LabelStyle->"Medium", Frame->True]];
 
 (*
 Options[ListLogLinearPlotWithLegend] = 
@@ -571,19 +566,16 @@ RasterizeManipulate[expr_, {var_, start_, end_, inc_, opts___}] :=
 
 (* See http://mathematica.stackexchange.com/questions/8645/how-do-i-make-framed-plots-the-same-size/8660#8660 *)
 
-graphicsPadding[g_Graphics] :=
+graphicsPadding[g_] :=
  BorderDimensions[
-  Image[Show[g, LabelStyle -> White, Background -> White]]];
+  Image[Rasterize@Show[g/.(PlotLabel->_)->Sequence[], LabelStyle -> White, Background -> White]]];
 
-graphicsPadding[gs : {__Graphics}] :=
+graphicsPadding[gs_List] :=
  MapThread[Max, Map[graphicsPadding, gs], 2];
 
 PadGraphics[gs_List, depth_:1] :=
- With[{padding = 1.2 graphicsPadding[Flatten[gs,depth]]},
-  Map[Append[#, ImagePadding -> padding] &, gs, {depth}]];
-
-(* TODO: allow this to be applied to a nested list, e.g. for a
-   GraphicsGrid *)
+ With[{padding = 4 {{1,1},{1,1}} + graphicsPadding[Flatten[gs,depth]]},
+  Map[Show[#, ImagePadding -> padding] &, gs, {depth}]];
 
 End[];
 
