@@ -3,4 +3,15 @@
 segment_dir=$1
 module load mpi/openmpi/1.7.2-intel13
 cd $segment_dir/Run
-../bin/DomainInfo -NpointsVsTime -Subdomains
+#../../Lev0_AA/bin/DomainInfo -NpointsVsTime -Subdomains
+
+for domain_info in ../bin/DomainInfo ../../Lev*_AA/bin/DomainInfo ../../../Lev*_AA/bin/DomainInfo; do
+    if [ -r $domain_info ]; then
+        $domain_info -NpointsVsTime -Subdomains
+        exit 0
+    fi
+done
+
+echo "Could not find DomainInfo" >&2
+exit 1
+
