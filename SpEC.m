@@ -78,6 +78,44 @@ ReadSpECGridPoints;
 
 Begin["`Private`"];
 
+(****************************************************************)
+(* Misc *)
+(****************************************************************)
+
+verbosePrint[] := $SpECVerbosePrint === True;
+
+SetAttributes[dot, HoldFirst];
+dot[expr_] :=
+  (If[verbosePrint[],WriteString["stdout","."]];
+    expr);
+
+print[args___] :=
+  If[verbosePrint[],WriteString["stdout", StringJoin[ToString/@{args}]]];
+
+withDot[f_] := Function[g, If[verbosePrint[], WriteString["stdout","."]]; f[g]];
+
+mergeDataTables[ds_List] :=
+  ToDataTable[mergeDataLists[ToList/@ds]];
+
+monotonisePreferLastCompiled =
+ Compile[{{l1, _Real, 2}},
+  Module[{l = Reverse[l1], output, j, i, n},
+   If[Length[l] < 2, Return[Reverse[l]]];
+   n = Length[l[[1]]];
+   output = ConstantArray[ConstantArray[0., n], Length[l]];
+   output[[1]] = l[[1]]; j = 2;
+   For[i = 2, i <= Length[l], i = i + 1,
+    
+    If[l[[i, 1]] < output[[j - 1, 1]],
+     output[[j]] = l[[i]];
+     j = j + 1]];
+   Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
+  RuntimeOptions -> "Speed"];
+
+(****************************************************************)
+(* Finding simulations *)
+(****************************************************************)
+
 getSimsDir[] :=
   If[ValueQ[$SpECSimulationsDirectory],
     $SpECSimulationsDirectory,
@@ -99,17 +137,39 @@ findSpECSegments[sim_String] :=
 findSpECFiles[sim_String, file_String] :=
   Map[Flatten, Map[FileNames[FileNameJoin[{"Run",file}], #] &, findSpECSegments[sim], {2}]];
 
-verbosePrint[] := $SpECVerbosePrint === True;
+HaveSpECEvolution[sim_String] :=
+  Module[{runFiles},
+   runFiles = Flatten[findSpECFiles[sim, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
+    runFiles=!={}];
 
-SetAttributes[dot, HoldFirst];
-dot[expr_] :=
-  (If[verbosePrint[],WriteString["stdout","."]];
-    expr);
+FindSpECLevels[sim_String] :=
+  Module[{simBase},
+    simBase = If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim, FileNameJoin[{getSimsDir[], sim}]];
+    (* Print[FileNameJoin[{simBase,"Ev"}]]; *)
+    ToExpression/@Union[Map[StringReplace[StringSplit[FileNameTake[#,-1],"_"][[1]],"Lev"->""] &, FileNames["Lev"~~__~~"_"~~_~~_, FileNameJoin[{simBase,"Ev"}]]]]];
 
-print[args___] :=
-  If[verbosePrint[],WriteString["stdout", StringJoin[ToString/@{args}]]];
+(* This is fairly trivial; it might be redundant *)
+FindSpECSimulationFile[sim_String, name_String] :=
+  With[{f=FileNameJoin[{FindSpECSimulation[sim], name}]},
+    If[FileExistsQ[f], f, Error["File "<>name<>" not found in simulation "<>sim]]];
 
-withDot[f_] := Function[g, If[verbosePrint[], WriteString["stdout","."]]; f[g]];
+FindSpECSubSimulations[sim_String, pat_:"*"] :=
+  Module[{simPath = FindSpECSimulation[sim], subs1, subs2, subs3},
+
+    (* If this is a top-level simulation *)
+    subs1 = Flatten[Map[FileNames[#, simPath] &, {"ID","Ecc*","Ev"}],1];
+
+    (* If this is an Ev or Ringdown simulation *)
+    subs2 = FileNames["Lev*_AA", simPath];
+
+    (* If this is a LevN simulation *)
+    subs3 = FileNames["Lev*_AA", simPath<>"_Ringdown"];
+
+    Join[subs1, subs2, subs3]]
+
+(****************************************************************)
+(* Reading data files *)
+(****************************************************************)
 
 mergeDataLists[datas_List] :=
   Module[{merged},
@@ -135,6 +195,10 @@ readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASC
       mergeDataLists[Join@@dataSegments]],
     Map[mergeDataLists, dataSegments]]];
 
+(****************************************************************)
+(* Simulation performance information *)
+(****************************************************************)
+
 readSpECTimeInfo[sim_String] := 
   readSpECASCIIData[sim, "TimeInfo.dat"];
 
@@ -157,9 +221,9 @@ ReadSpECWallTime[sim_String] :=
       (* else *)
       ToDataTable[inspiral]]];
 
-(**********************************)
-(* Memory usage                   *)
-(**********************************)
+(****************************************************************)
+(* Simulation memory usage *)
+(****************************************************************)
 
 (* TODO: make this work when the number of processes changes between segments *)
 (* Make this call the below functions to give a single total number *)
@@ -221,9 +285,6 @@ ReadSpECMaxNodeMemoryUsage[sim_String] :=
    maxNodeMemss = Map[maxNodeMemoryUsage, procMemsSegs];
    ToDataTable[mergeDataLists[ToList/@maxNodeMemss]]];
 
-mergeDataTables[ds_List] :=
-  ToDataTable[mergeDataLists[ToList/@ds]];
-
 ReadSpECMinEffectiveFreeMemory[sim_String] :=
   mergeDataTables[Map[MapThread[Min, #] &, 
     ReadSpECProcessMemoryUsage[sim, "SystemEffectiveMemFree"]]];
@@ -236,14 +297,9 @@ ReadSpECMaxEffectiveUsedMemoryFraction[sim_String] :=
   mergeDataTables[Map[MapThread[Max, #] &, 
     ReadSpECProcessMemoryUsage[sim, "SystemEffectiveMemUsedFraction"]]];
 
-(**********************************)
-(* Misc                           *)
-(**********************************)
-
-HaveSpECEvolution[sim_String] :=
-  Module[{runFiles},
-   runFiles = Flatten[findSpECFiles[sim, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
-    runFiles=!={}];
+(****************************************************************)
+(* Waveforms *)
+(****************************************************************)
 
 ReadSpECPsi4Radii[runName_String] :=
   Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
@@ -297,6 +353,10 @@ If[files === {}, Error["No strain data found in " <> runName <> " (no datasets n
 
 firstOrFail[l_List, msg_String] :=
   If[Length[l] === 0, Error[msg], First[l]];
+
+(****************************************************************)
+(* Horizons *)
+(****************************************************************)
 
 ReadSpECHorizonCentroid[runName_String, hn_Integer] :=
  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
@@ -413,21 +473,9 @@ ReadSpECHorizonMass[runName_String, hn_Integer] :=
    ToDataTable[data];
   Return[data2]];
 
-monotonisePreferLastCompiled =
- Compile[{{l1, _Real, 2}},
-  Module[{l = Reverse[l1], output, j, i, n},
-   If[Length[l] < 2, Return[Reverse[l]]];
-   n = Length[l[[1]]];
-   output = ConstantArray[ConstantArray[0., n], Length[l]];
-   output[[1]] = l[[1]]; j = 2;
-   For[i = 2, i <= Length[l], i = i + 1,
-    
-    If[l[[i, 1]] < output[[j - 1, 1]],
-     output[[j]] = l[[i]];
-     j = j + 1]];
-   Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
-  RuntimeOptions -> "Speed"];
-
+(****************************************************************)
+(* Initial data *)
+(****************************************************************)
 
 findSpECInitialDataDir[sim_String] :=
   If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__],
@@ -462,154 +510,6 @@ ReadSpECADMEnergyError[sim_String] :=
 ReadSpECADMEnergyIterations[sim_String] :=
   Module[{idDir = findSpECInitialDataDir[sim]},
     ReadColumnFile[idDir,"PhysValues.dat", {1,13}][[All,2]]];
-
-FindSpECEccentricityReductionSimulations[sim_String] :=
-  FileNames["Ecc"~~NumberString, FileNameJoin[{getSimsDir[], sim}]];
-
-FindSpECLevels[sim_String] :=
-  Module[{simBase},
-    simBase = If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim, FileNameJoin[{getSimsDir[], sim}]];
-    (* Print[FileNameJoin[{simBase,"Ev"}]]; *)
-    ToExpression/@Union[Map[StringReplace[StringSplit[FileNameTake[#,-1],"_"][[1]],"Lev"->""] &, FileNames["Lev"~~__~~"_"~~_~~_, FileNameJoin[{simBase,"Ev"}]]]]];
-
-ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
-  Module[{simPath, dirNames, eccFiles, eccFile, eMeasured, eMeasuredSS},
-
-    simPath = FindSpECSimulation[sim];
-
-    If[joinDirArg === Automatic,
-      dirNames = {"JoinedForEcc", "JoinedForEcc_Lev*"},
-      dirNames = {joinDirArg}];
-
-    eccFiles = FileNames["Fit_F2cos2.dat", FileNameJoin[{simPath, "Ev", #}] & /@ dirNames];
-
-
-    If[Length[eccFiles] === 0,
-      Print["Cannot find eccentricity reduction file"];
-      Return[None]];
-
-    eccFile = First[eccFiles];
-
-    eMeasured = Import[eccFile,"Table"][[-1,-1]];
-    eMeasuredSS = Import[StringReplace[eccFile,"Fit_F2cos2.dat"->"Fit_F2cos2_SS.dat"],"Table"][[-1,-1]];
-
-    If[eMeasuredSS > 0.01, eMeasured, eMeasuredSS]];
-
-(* Input file parsing *)
-
-process["assignmentsequence"[as___]] :=
- Map[process, {as}];
-
-process["assignment"["key"[key_], "valuesequence"[values__]]] :=
-  key -> process /@ {values};
-
-process[s_String] := s;
-
-process["value"[v_]] := process[v];
-
-process["keywordvalue"["keyword"[k_], 
-   a : "assignmentsequence"[___]]] :=
- k[process[a]];
-
-process["keywordvalue"["keyword"[k_], 
-   a : "assignmentsequence"[___]]] :=
- k[process[a]];
-
-process["null"["()"]] := Null;
-
-process[x_] := Error["Do not know how to process " <> ToString[x]];
-
-process[x_] := x;
-
-lookup[assoc_List, key_String] :=
- Replace[Cases[assoc, ((key -> value_) | key[value_]) :> value],
-  {{x_} :> x,
-   _ :> Error["Cannot find key " <> key]}];
-
-(* Final time -- currently only works for eccentricity reduction simulations *)
-
-ReadSpECFinalTime[sim_String] :=
- Module[{evolutionInputFile, evolutionInput, finalTime},
-  evolutionInputFile = 
-   Last[Flatten[
-     findSpECFiles[sim, 
-      "Evolution.input"]]];
-  evolutionInput = 
-   CleanParseTree@
-    ParsePEG[
-     (*"/home/ianhin/projects/SimulationTools/Grammars/specinput.peg"*) "specinput.peg", 
-     "file", evolutionInputFile];
-  finalTime = 
-   lookup[lookup[
-      lookup[lookup[process[evolutionInput[[1]]], "Terminator"][[1]], 
-       "TerminationCriteria"], "EccentricityReduction"], 
-     "FinalTime"][[1]];
-  If[StringMatchQ[finalTime, NumberString], ToExpression[finalTime], 
-   Error["Simulation " <> sim <> " has a final time of " <> 
-     finalTime <> " which is not a number"]]]
-
-(* TODO: this doesn't work on all input files yet, so can't be used *)
-ReadSpECAMRTriggerChunkInterval[sim_String] :=
- Module[{inputFile, input, triggerInterval, amrDriver, changeSpectralGrid},
-  inputFile = 
-   Last[Flatten[
-     findSpECFiles[sim, 
-      "AmrDriver.input"]]];
-
-  input = 
-   CleanParseTree@
-    ParsePEG[
-     "specinput.peg", 
-     "file", inputFile];
-
-  (* Print["input = ", input]; *)
-
-  (* Print["processed = ", process[input[[1]]]]; *)
-
-  amrDriver = lookup[process[input[[1]]], "AmrDriver"];
-  (* Print["amrDriver = ", amrDriver]; *)
-
-  changeSpectralGrid = lookup[amrDriver, "ChangeSpectralGrid"];
-  (* Print["changeSpectralGrid = ", changeSpectralGrid]; *)
-
-  triggerInterval = lookup[changeSpectralGrid, "TriggerEveryNChunks"];
-  (* Print["triggerInterval = ", triggerInterval]; *)
-
-  If[StringMatchQ[triggerInterval[[1]], NumberString], ToExpression[triggerInterval[[1]]], 
-   Error["Simulation " <> sim <> " has a trigger chunk interval of " <> 
-     triggerInterval[[1]] <> " which is not a number"]]]
-
-
-
-(**********************************)
-(* New simulation file access API *)
-(**********************************)
-
-(* FindSpECSimulation already implemented above *)
-
-(* This is fairly trivial; it might be redundant *)
-FindSpECSimulationFile[sim_String, name_String] :=
-  With[{f=FileNameJoin[{FindSpECSimulation[sim], name}]},
-    If[FileExistsQ[f], f, Error["File "<>name<>" not found in simulation "<>sim]]];
-
-FindSpECSubSimulations[sim_String, pat_:"*"] :=
-  Module[{simPath = FindSpECSimulation[sim], subs1, subs2, subs3},
-
-    (* If this is a top-level simulation *)
-    subs1 = Flatten[Map[FileNames[#, simPath] &, {"ID","Ecc*","Ev"}],1];
-
-    (* If this is an Ev or Ringdown simulation *)
-    subs2 = FileNames["Lev*_AA", simPath];
-
-    (* If this is a LevN simulation *)
-    subs3 = FileNames["Lev*_AA", simPath<>"_Ringdown"];
-
-    Join[subs1, subs2, subs3]]
-
-(*
-FindSpECSimulationFiles[sim_String, name_String] :=
-
-*)
 
 ReadSpECInitialDataParameter[sim_String, paramName_String] :=
  
@@ -685,6 +585,130 @@ ReadSpECADMAngularMomentum[sim_] :=
 ReadSpECInitialOrbitalFrequency[sim_] :=
  ReadSpECInitialDataParameter[sim, "Omega0"];
 
+(****************************************************************)
+(* Eccentricity reduction *)
+(****************************************************************)
+
+FindSpECEccentricityReductionSimulations[sim_String] :=
+  FileNames["Ecc"~~NumberString, FileNameJoin[{getSimsDir[], sim}]];
+
+ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
+  Module[{simPath, dirNames, eccFiles, eccFile, eMeasured, eMeasuredSS},
+
+    simPath = FindSpECSimulation[sim];
+
+    If[joinDirArg === Automatic,
+      dirNames = {"JoinedForEcc", "JoinedForEcc_Lev*"},
+      dirNames = {joinDirArg}];
+
+    eccFiles = FileNames["Fit_F2cos2.dat", FileNameJoin[{simPath, "Ev", #}] & /@ dirNames];
+
+
+    If[Length[eccFiles] === 0,
+      Print["Cannot find eccentricity reduction file"];
+      Return[None]];
+
+    eccFile = First[eccFiles];
+
+    eMeasured = Import[eccFile,"Table"][[-1,-1]];
+    eMeasuredSS = Import[StringReplace[eccFile,"Fit_F2cos2.dat"->"Fit_F2cos2_SS.dat"],"Table"][[-1,-1]];
+
+    If[eMeasuredSS > 0.01, eMeasured, eMeasuredSS]];
+
+(****************************************************************)
+(* Misc simulation properties *)
+(****************************************************************)
+
+(* Final time -- currently only works for eccentricity reduction simulations *)
+
+ReadSpECFinalTime[sim_String] :=
+ Module[{evolutionInputFile, evolutionInput, finalTime},
+  evolutionInputFile = 
+   Last[Flatten[
+     findSpECFiles[sim, 
+      "Evolution.input"]]];
+  evolutionInput = 
+   CleanParseTree@
+    ParsePEG[
+     (*"/home/ianhin/projects/SimulationTools/Grammars/specinput.peg"*) "specinput.peg", 
+     "file", evolutionInputFile];
+  finalTime = 
+   lookup[lookup[
+      lookup[lookup[process[evolutionInput[[1]]], "Terminator"][[1]], 
+       "TerminationCriteria"], "EccentricityReduction"], 
+     "FinalTime"][[1]];
+  If[StringMatchQ[finalTime, NumberString], ToExpression[finalTime], 
+   Error["Simulation " <> sim <> " has a final time of " <> 
+     finalTime <> " which is not a number"]]]
+
+(****************************************************************)
+(* Input files *)
+(****************************************************************)
+
+process["assignmentsequence"[as___]] :=
+ Map[process, {as}];
+
+process["assignment"["key"[key_], "valuesequence"[values__]]] :=
+  key -> process /@ {values};
+
+process[s_String] := s;
+
+process["value"[v_]] := process[v];
+
+process["keywordvalue"["keyword"[k_], 
+   a : "assignmentsequence"[___]]] :=
+ k[process[a]];
+
+process["keywordvalue"["keyword"[k_], 
+   a : "assignmentsequence"[___]]] :=
+ k[process[a]];
+
+process["null"["()"]] := Null;
+
+process[x_] := Error["Do not know how to process " <> ToString[x]];
+
+process[x_] := x;
+
+lookup[assoc_List, key_String] :=
+ Replace[Cases[assoc, ((key -> value_) | key[value_]) :> value],
+  {{x_} :> x,
+   _ :> Error["Cannot find key " <> key]}];
+
+(****************************************************************)
+(* Grid structure *)
+(****************************************************************)
+
+(* TODO: this doesn't work on all input files yet, so can't be used *)
+ReadSpECAMRTriggerChunkInterval[sim_String] :=
+ Module[{inputFile, input, triggerInterval, amrDriver, changeSpectralGrid},
+  inputFile = 
+   Last[Flatten[
+     findSpECFiles[sim, 
+      "AmrDriver.input"]]];
+
+  input = 
+   CleanParseTree@
+    ParsePEG[
+     "specinput.peg", 
+     "file", inputFile];
+
+  (* Print["input = ", input]; *)
+
+  (* Print["processed = ", process[input[[1]]]]; *)
+
+  amrDriver = lookup[process[input[[1]]], "AmrDriver"];
+  (* Print["amrDriver = ", amrDriver]; *)
+
+  changeSpectralGrid = lookup[amrDriver, "ChangeSpectralGrid"];
+  (* Print["changeSpectralGrid = ", changeSpectralGrid]; *)
+
+  triggerInterval = lookup[changeSpectralGrid, "TriggerEveryNChunks"];
+  (* Print["triggerInterval = ", triggerInterval]; *)
+
+  If[StringMatchQ[triggerInterval[[1]], NumberString], ToExpression[triggerInterval[[1]]], 
+   Error["Simulation " <> sim <> " has a trigger chunk interval of " <> 
+     triggerInterval[[1]] <> " which is not a number"]]]
+
 (* Domain Info *)
 
 WithFileMemo[
@@ -735,7 +759,6 @@ ReadSpECGridPoints[sim_String] :=
   domainInfo = ReadSpECDomainInfo[sim];
   ToDataTable[domainInfo[[All, 1]], domainInfo[[All,2]]]];
 
-
 ReadSpECPointDistribution[sim_String] :=
  Module[{domainInfo, f},
   domainInfo = ReadSpECDomainInfo[sim];
@@ -745,9 +768,6 @@ ReadSpECPointDistribution[sim_String] :=
 
 ReadSpECChunkSize[sim_String] :=
   ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat"][[All,{1,3}]]];
-
-ReadSpECDampingTime[sim_String, i_Integer] :=
-  ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat", SeparateRingdown->True][[1]][[All,{1,4+i}]]];
 
 triggerTimesFromFile[fileName_String] :=
   Module[{s},
@@ -760,6 +780,13 @@ ReadSpECAMRTriggerTimes[sim_String] :=
     Flatten[
       triggerTimesFromFile /@ Flatten[
         findSpECFiles[sim, "ChangeSpectralGrid.log"]]]];
+
+(****************************************************************)
+(* Control system *)
+(****************************************************************)
+
+ReadSpECDampingTime[sim_String, i_Integer] :=
+  ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat", SeparateRingdown->True][[1]][[All,{1,4+i}]]];
 
 End[];
 EndPackage[];
