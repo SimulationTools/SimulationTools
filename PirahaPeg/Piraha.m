@@ -39,6 +39,9 @@ DefFn[
     {gf,g,m,c,sw,dout,xmlString,xml,textPos,matched,nearText},
     EnsureJava[];
 
+    $PirahaParseTree = .;
+    $PirahaUnparsedText = .;
+
     If[FileExistsQ[grammarFileName],
        gf = grammarFileName,
        If[FileExistsQ[FileNameJoin[{SimulationToolsDir, "Grammars", grammarFileName}]],
