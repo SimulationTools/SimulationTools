@@ -75,6 +75,7 @@ ReadSpECDampingTime;
 ReadSpECAMRTriggerChunkInterval;
 ReadSpECAMRTriggerTimes;
 ReadSpECGridPoints;
+FindSpECSegments;
 
 Begin["`Private`"];
 
@@ -126,7 +127,9 @@ FindSpECSimulation[sim_String] :=
   If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim,
     FileNameJoin[{getSimsDir[], sim}]];
 
-findSpECSegments[sim_String] :=
+findSpECSegments=FindSpECSegments;
+
+FindSpECSegments[sim_String] :=
   Module[{runBase,res,simBase,segPatterns},
     {runBase, res} = Replace[StringSplit[sim, ":"], {a:{_,_} :> a, _ :> Error["Cannot parse simulation name "<>sim<>" into <sim>:<res>"]}];
     simBase = If[StringMatchQ[runBase,StartOfString~~("/"|"~")~~__], FileNameJoin[{runBase,"Ev"}], FileNameJoin[{getSimsDir[], runBase, "Ev"}]];
