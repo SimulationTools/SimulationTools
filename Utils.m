@@ -71,7 +71,7 @@ RunSubprocess[cmdlist:{cmd_, args___}, opts:OptionsPattern[]] :=
     If[! And@@Map[StringQ, cmdlist], Error["RunSubprocess: Input arguments are not all strings"]];
     cmdString = StringJoin[Riffle[{cmd, args}, " "]];
     (* Run executes the cmdString using a shell *)
-    retCode = Run[cmdString <> ">"<>stdoutFile<>" 2>"<>stderrFile];
+    retCode = Run[cmdString <> " >"<>stdoutFile<>" 2>"<>stderrFile];
     stdout = ReadList[stdoutFile, String, NullRecords -> True];
     stderr = ReadList[stderrFile, String, NullRecords -> True];
     DeleteFile[stdoutFile];
