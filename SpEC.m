@@ -140,6 +140,9 @@ FindSpECSegments[sim_String] :=
 findSpECFiles[sim_String, file_String] :=
   Map[Flatten, Map[FileNames[FileNameJoin[{"Run",file}], #] &, findSpECSegments[sim], {2}]];
 
+haveSpECFile[sim_String, file_String] :=
+  Flatten[findSpECFiles[sim, file],1] =!= {};
+
 HaveSpECEvolution[sim_String] :=
   Module[{runFiles},
    runFiles = Flatten[findSpECFiles[sim, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
@@ -204,6 +207,12 @@ readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASC
 
 readSpECTimeInfo[sim_String] := 
   readSpECASCIIData[sim, "TimeInfo.dat"];
+
+readSpECChangeNP[sim_String] := 
+  readSpECASCIIData[sim, "ChangeNp.dat"];
+
+haveChangeNP[sim_String] :=
+  haveSpECFile[sim, "ChangeNp.dat"];
 
 ReadSpECSimulationSpeed[sim_String] :=
   ToDataTable[readSpECTimeInfo[sim][[All,{1,8}]]];
@@ -778,9 +787,11 @@ ReadSpECSubdomains[sim_String] :=
   ToDataTable[domainInfo[[All, 1]], Map[Length[#] - 2 &, domainInfo]]];
 
 ReadSpECGridPoints[sim_String] :=
- Module[{domainInfo},
-  domainInfo = ReadSpECDomainInfo[sim];
-  ToDataTable[domainInfo[[All, 1]], domainInfo[[All,2]]]];
+  If[haveChangeNP[sim],
+    1000 ToDataTable[readSpECChangeNP[sim][[All,{1,4}]]],
+    Module[{domainInfo},
+      domainInfo = ReadSpECDomainInfo[sim];
+      ToDataTable[domainInfo[[All, 1]], domainInfo[[All,2]]]]];
 
 ReadSpECPointDistribution[sim_String] :=
  Module[{domainInfo, f},
