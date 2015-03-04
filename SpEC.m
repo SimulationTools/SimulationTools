@@ -782,9 +782,11 @@ ReadSpECDomainInfo[sim_String] :=
    Map[ReadSpECSegmentDomainInfo, segments]]];
 
 ReadSpECSubdomains[sim_String] :=
- Module[{domainInfo},
-  domainInfo = ReadSpECDomainInfo[sim];
-  ToDataTable[domainInfo[[All, 1]], Map[Length[#] - 2 &, domainInfo]]];
+  If[haveChangeNP[sim],
+    ToDataTable[readSpECChangeNP[sim][[All,{1,3}]]],
+    Module[{domainInfo},
+      domainInfo = ReadSpECDomainInfo[sim];
+      ToDataTable[domainInfo[[All, 1]], Map[Length[#] - 2 &, domainInfo]]]];
 
 ReadSpECGridPoints[sim_String] :=
   If[haveChangeNP[sim],
