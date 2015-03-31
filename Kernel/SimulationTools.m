@@ -57,6 +57,7 @@ packages = {
     "SimulationTools`Binary`",
     "SimulationTools`BlackHole`",
   (*"SimulationTools`CactusTimers`",*)
+    "SimulationTools`CarpetGrids`",
     "SimulationTools`CarpetHDF5`",
   (*"SimulationTools`CarpetHDF5Plot`",*)
     "SimulationTools`CarpetIOHDF5`",
