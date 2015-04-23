@@ -272,7 +272,7 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
      SetStatus["Warning: Horizon mass data not found for BH "<>ToString[i]<>" in "<>run];
      Return[]];
 
-  If[what === Spin && !HaveIsolatedHorizonSpinData[run,i-1],
+  If[what === Spin && (!HaveIsolatedHorizonSpinData[run,i-1] || !HaveHorizonData[run,i]),
      SetStatus["Warning: Spin data not found for BH "<>ToString[i]<>" in "<>run];
      Return[]];
 
