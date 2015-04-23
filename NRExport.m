@@ -358,7 +358,9 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
    (* "amplitude-error-relative" -> "", *)
    "after-junkradiation-time" -> tJunk,
    Sequence @@ Table["mass" <> ToString[i] ->
-      Interpolation[ChristodoulouMass[run, i, i-1]][tJunk], {i, 1, 2}],
+      If[HaveChristodoulouMassData[run, i, i-1],
+        Interpolation[ChristodoulouMass[run, i, i-1]][tJunk],
+        "unknown"], {i, 1, 2}],
 
    Sequence @@ Flatten@Table[
       "initial-bh-position" <> ToString[i+1] <> coord[d] ->
@@ -375,7 +377,8 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
       "initial-bh-spin" <> ToString[i+1] <> coord[d] ->
        ReadPunctureSpinParameters[run, i][[d]],
         {i, 0, 1}, {d, 1, 3}],
-   "final-bh-mass" -> Last[ChristodoulouMass[run, 3, 2]],
+   "final-bh-mass" -> If[HaveChristodoulouMassData[run, 3, 2],
+                         Last[ChristodoulouMass[run, 3, 2]], "unknown"],
    Sequence @@ Flatten@Table[
       "final-bh-spin" <> coord[d] ->
        Last[ReadIsolatedHorizonSpin[run, 2, d]], {d, 1, 3}],
