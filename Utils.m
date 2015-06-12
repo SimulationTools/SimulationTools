@@ -78,7 +78,7 @@ RunSubprocess[cmdlist:{cmd_, args___}, opts:OptionsPattern[]] :=
     DeleteFile[stdoutFile];
     DeleteFile[stderrFile];
     If[retCode =!= 0 && OptionValue[Exceptions]===True,
-      Error["Error when running command "<>StringJoin[Riffle[cmdlist," "]]<>"\n"<>stderr]];
+      Error["Error when running command "<>StringJoin[Riffle[cmdlist," "]]<>"\n"<>StringJoin@Riffle[stderr,"\n"]]];
     {retCode, stdout, stderr}];
 
 MapMonitored[f_, args_List] :=
