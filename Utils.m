@@ -26,6 +26,7 @@ TailFile;
 ShowIt;
 MapSuccessive;
 ErrorForm;
+DescribeGitRepository;
 
 Begin["`Private`"];
 
@@ -109,6 +110,12 @@ ErrorForm[v_, e_] :=
   ToString[NumberForm[
      v, {Ceiling[-Log10[e]] + 1, Ceiling[-Log10[e]]}]] <> "(" <> 
    ToString[Round[10^Ceiling[-Log10[e]]*e]] <> ")";
+
+DescribeGitRepository[path_String] :=
+  Module[{code,out,err},
+    {code, out, err} = 
+    RunSubprocess[{"(cd "<>path<>"; git describe --always --dirty)"}, Exceptions->True];
+    out[[1]]];
 
 End[];
 EndPackage[];
