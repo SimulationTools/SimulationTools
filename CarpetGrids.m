@@ -24,6 +24,9 @@ BeginPackage["SimulationTools`CarpetGrids`",
 
 ReadCarpetGridStructure;
 BBox;
+SymmetricBBoxDifference;
+CheckIdenticalGrids;
+ReadCarpetGridBBoxes;
 
 Begin["`Private`"];
 
@@ -167,6 +170,8 @@ bboxesEqual[bs1_List,
   bs2_List] :=
  (Length[symmetricBBoxDifference[bs1, bs2]] === 0);
 
+SymmetricBBoxDifference = symmetricBBoxDifference;
+
 symmetricBBoxDifference[bs1_List, bs2_List] :=
  Module[{enc1, enc2},
   enc1 = enlargeBBox[enclosingBBox[bs1], 1];
@@ -263,7 +268,7 @@ toXYPlaneInt[bs : {_BBox ...}, iOriginZ_Integer] :=
 
 (* Checking identical *)
 
-checkIdenticalGrids[sims : {_String ...}, 
+CheckIdenticalGrids[sims : {_String ...}, 
   gridFileName_: "carpet-grid.asc"] :=
 
  (* TODO: add an option to control clipping of symmetry
