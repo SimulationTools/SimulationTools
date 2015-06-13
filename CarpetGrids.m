@@ -19,7 +19,8 @@ BeginPackage["SimulationTools`CarpetGrids`",
   "SimulationTools`Error`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
-  "SimulationTools`Segments`"
+  "SimulationTools`Segments`",
+  "SimulationTools`Grids`"
  }];
 
 ReadCarpetGridStructure;
