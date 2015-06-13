@@ -281,7 +281,7 @@ CheckIdenticalGrids[sims : {_String ...},
  (* TODO: add an option to control clipping of symmetry
     boundaries. Currently z-reflection is assumed *)
  
- Module[{grids, its, rls, dt, buffers = readBufferSize[sims[[1]]]},
+ Module[{grids, its, rls, dt, buffers = readBufferSize/@sims},
   grids = Map[readGridStructure[#, gridFileName] &, sims];
   (*Print[grids[[1,1]]];*)
   its = Min[Length /@ grids];
@@ -291,9 +291,9 @@ CheckIdenticalGrids[sims : {_String ...},
   Do[
    (* Print[{i, rl}]; *)
    Module[{gs = 
-      Map[normalise[
-         shrinkBBoxes[#, buffers, True, True, True (* FIXME: 
-          assuming octant *)]] &, grids[[All, i, 2, rl, 2]]], equal},
+      MapThread[normalise[
+         shrinkBBoxes[#1, #2, True, False, False (* FIXME: 
+          assuming bitant *)]] &, {grids[[All, i, 2, rl, 2]],buffers}], equal},
     (* Print[gs]; *)
     (*Print[
     i];*)
