@@ -269,6 +269,10 @@ toXYPlaneInt[bs : {_BBox ...}, iOriginZ_Integer] :=
     bs[[1, 3]]],
    bs];
 
+readIterationTimeStep[sim_String] :=
+ ReadTimeStep[sim, 
+  RefinementLevel -> ReadMaxRefinementLevels[sim] - 1];
+
 (* Checking identical *)
 
 CheckIdenticalGrids[sims : {_String ...}, 
