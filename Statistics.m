@@ -190,12 +190,18 @@ SimulationErrorReason[stdout_String, stderr_String] :=
 SimulationStatus[sim_String] :=
  Module[{tCurrent = LastOutputCoordinateTime[sim], 
    tFinal = FinalCoordinateTime[sim], 
-   stdout = TailStandardOutputOfSimulation[sim, 10240]},
+   stdout = TailStandardOutputOfSimulation[sim, 20240]},
   Which[
    tCurrent == tFinal, "Finished",
    StringMatchQ[
     stdout, __ ~~ StartOfLine ~~ "Done." ~~ EndOfLine ~~ __], 
-   "Unfinished",
+   Which[StringMatchQ[stdout, __ ~~ StartOfLine ~~ "INFO (TerminationTrigger): Remaining wallclock time for your job is " ~~ Shortest[__] ~~ " minutes.  Triggering termination..." ~~ EndOfLine ~~ __],
+     "Unfinished[Walltime]",
+     StringMatchQ[stdout, __ ~~ StartOfLine ~~ "INFO (SystemStatistics): Process resident set size "  ~~ Shortest[__] ~~ " is over the threshold of " ~~ Shortest[__] ~~ " set in termination_rss_threshold_mb.  Triggering termination..." ~~ EndOfLine ~~ __],
+     "Unfinished[Memory]",
+     StringMatchQ[stdout, __ ~~ StartOfLine ~~ "INFO (SystemStatistics): System swap usage "  ~~ Shortest[__] ~~ " is over the threshold of " ~~ Shortest[__] ~~ " set in termination_swap_threshold_mb.  Triggering termination..." ~~ EndOfLine ~~ __],
+     "Unfinished[Memory]",
+     True, "Unfinished"],
    StringMatchQ[
     stdout, __ ~~ StartOfLine ~~ "Simfactory Done at date" ~~ __], 
    "Error"[SimulationErrorReason[stdout, TailStandardErrorOfSimulation[sim, 10240]]],
