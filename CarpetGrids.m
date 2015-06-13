@@ -287,7 +287,7 @@ CheckIdenticalGrids[sims : {_String ...},
   its = Min[Length /@ grids];
   rls = Length[grids[[1, 1, 2]]];
   dt = 0(*readIterationTimeStep[sims[[1]]]*) (* FIXME -- return this *);
-  $unequalBBoxes = {};
+  $UnequalBBoxes = {};
   Do[
    Print[{i, rl}];
    Module[{gs = 
@@ -297,13 +297,13 @@ CheckIdenticalGrids[sims : {_String ...},
     Print[gs];
     (*Print[
     i];*)
-    $gridTime = FullForm[(grids[[1, i, 1]] - (If[i == 1, 0, 1])) dt];
+    $GridTime = FullForm[(grids[[1, i, 1]] - (If[i == 1, 0, 1])) dt];
     equal = Map[bboxesEqual[First[gs], #] &, Rest[gs]];
     (*Print[equal];*)
     If[! And @@ equal,
-     Print["Grid equality check failed at t = ", $gridTime, 
+     Print["Grid equality check failed at t = ", $GridTime, 
       " on refinement level ", rl - 1];
-     AppendTo[$unequalBBoxes, gs];
+     AppendTo[$UnequalBBoxes, gs];
      Print[MatrixForm[Outer[bboxesEqual, gs, gs, 1]]];
      ]],
    {i, 1, its}, {rl, rls, 2, -1}];];
