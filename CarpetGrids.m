@@ -27,6 +27,9 @@ BBox;
 SymmetricBBoxDifference;
 CheckIdenticalGrids;
 ReadCarpetGridBBoxes;
+$UnequalBBoxes;
+$GridTime;
+$BBoxTolerance;
 
 Begin["`Private`"];
 
