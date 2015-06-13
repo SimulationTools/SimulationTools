@@ -286,7 +286,7 @@ CheckIdenticalGrids[sims : {_String ...},
   (*Print[grids[[1,1]]];*)
   its = Min[Length /@ grids];
   rls = Length[grids[[1, 1, 2]]];
-  dt = 0(*readIterationTimeStep[sims[[1]]]*) (* FIXME -- return this *);
+  dt = readIterationTimeStep[sims[[1]]];
   $UnequalBBoxes = {};
   Do[
    Print[{i, rl}];
