@@ -28,6 +28,8 @@ BBox;
 SymmetricBBoxDifference;
 CheckIdenticalGrids;
 ReadCarpetGridBBoxes;
+RegriddingIterations;
+
 $UnequalBBoxes;
 $GridTime;
 $BBoxTolerance;
@@ -342,6 +344,9 @@ CheckIdenticalGrids[sims : {_String ...},
      Print[MatrixForm[Outer[bboxesEqual, gs, gs, 1]]];
      ]],
    {i, 1, its}, {rl, rls, 2, -1}];];
+
+RegriddingIterations[gs_List, regridEvery_] :=
+  Select[gs[[All,1]], Mod[#, regridEvery] === 1 &]-1;
 
 ReadCarpetGridBBoxes[sim_String, t_, rl_, removeBuffers_: True] :=
  Module[{grids, dt, it, indices, i, buffers = readBufferSize[sim], fullBBoxes},
