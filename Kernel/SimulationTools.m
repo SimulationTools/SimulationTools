@@ -76,6 +76,7 @@ packages = {
     "SimulationTools`FieldLines`", 
     "SimulationTools`FileDependencies`",
     "SimulationTools`FileMemo`",
+    "SimulationTools`Formaline`",
     "SimulationTools`Geodesics`",
     "SimulationTools`GridFunctions`",
     "SimulationTools`GridFunctionConvergence`",

@@ -1,0 +1,35 @@
+
+skipper=
+
+#element = [^\n]*
+
+key=[^\n=]+
+
+#stringvalue="[^"]*"
+
+quotedchar = \\[^]
+
+stringfragment = {quotedchar}|[^\\"]+
+
+quote = \"
+stringvalue = {quote}{stringfragment}*{quote}
+
+# TODO: find out why making quote a non-capturing group causes "" to
+# appear in the XML content
+
+int = (-)?[0-9]+
+fformat = (-)?[0-9]*.[0-9]+
+eformat = {-fformat}|{-int}e{-int}
+
+real = {-eformat}|{-fformat}
+
+number = {real}|{int}
+
+symbol = [A-Za-z][A-Za-z0-9\-]*
+
+value = {stringvalue}|{symbol}|{-number}
+
+element = {key}={value}
+
+file = ^({element}\n)*$
+
