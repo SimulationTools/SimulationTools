@@ -348,13 +348,27 @@ ReadCarpetGridBBoxes[sim_String, t_, rl_, removeBuffers_: True] :=
   grids = readGridStructure[sim];
   dt = readIterationTimeStep[sim];
   it = Round[t/dt];
-  indices = Position[grids[[All, 1]], If[it == 0, it, it + 1]];
-  If[indices === {},
-   Error["No grid information for t = " <> ToString[t] <> " in " <> sim]];
-  i = indices[[1, 1]];
-  fullBBoxes = grids[[i, 2, rl + 1, 2]];
-  If[removeBuffers, normalise[shrinkBBoxes[fullBBoxes, buffers, True]],
-   normalise[fullBBoxes]]];
+  its = grids[[All,1]];
+
+  (* NB: using t = regrid_every * dt will give you the grid structure
+     BEFORE regridding at that time, because regridding happens at the
+     start of the following iteration. *)
+  i = LengthWhile[its, # <= it &];
+
+  gridsIt = grids[[i, 2]];
+  (* Print["Grid structure at iteration ", grids[[i,1]]]; *)
+  rls = gridsIt[[All,1]];
+  If[rls =!= Range[0,Length[rls]-1],
+    Error["Unexpected refinement levels: "<>ToString[rls]]];
+
+  If[rl+1 > Length[rls], 
+    (* TODO: decide whether asking for an RL which doesn't exist should
+       raise an error *)
+    {},
+    (* Print["rl = ", gridsIt[[rl + 1, 1]]]; *)
+    fullBBoxes = gridsIt[[rl + 1, 2]];
+    If[removeBuffers, normalise[shrinkBBoxes[fullBBoxes, buffers, True]],
+      normalise[fullBBoxes]]]];
 
 End[];
 EndPackage[];
