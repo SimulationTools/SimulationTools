@@ -78,18 +78,54 @@ parseGridTable[table_] :=
    Table[table[[
      iterationPositions[[i]] ;; iterationPositions[[i + 1]] - 1]], {i, 1, 
      Length[iterationPositions] - 1}];
-  Reverse[DeleteDuplicates[
-    Reverse[parseIterationTable /@ itTable], #1[[1]] == #2[[1]] &]]];
+    parseIterationTable /@ itTable];
 
 ReadCarpetGridStructure = readGridStructure;
 
+ReadCarpetGridStructure::usage = "ReadCarpetGridStructure[sim] returns the grid structure from simulation sim.  The format is {{it1, {{rl1, bboxes}, {rl2, bboxes}, ...}}, {it2, {{rl1, bboxes}, ...}}, ...}.  The grid structure is output only for iteration 0, recovery iterations, and iterations when it changed.  A general iteration i has the grid structure of the largest reported iteration less than or equal to i."
+
 readGridStructure[sim_String, fileName_: "carpet-grid.asc"] :=
- Module[{files, table},
+ Module[{files, tables, gss, gs, decIt, fixIterations},
   files = FindSimulationFiles[sim, fileName];
-  If[Length[files] > 1, 
-   Print["WARNING: readGridStructure only reads the first segment of multi-segment simulations"]];
-  table = Import[files[[1]], "Table"];
-  parseGridTable[table]];
+  (* If[Length[files] > 1,  *)
+  (*  Print["WARNING: readGridStructure only reads the first segment of multi-segment simulations"]]; *)
+  tables = Import[#, "Table"] & /@ files;
+
+  gss = parseGridTable/@tables;
+
+  (* Carpet outputs the grid structure for level 0 and calls it
+     iteration 0 at the start of each segment. Drop this output. TODO:
+     check that it is iteration 0 with only one refinement level, in
+     case this is fixed in Carpet in future. *)
+  gss = Map[Drop[#,1]&, gss];
+
+  (* Carpet regrids at the start of an iteration.  This means the
+     regridding iterations are always regrid_every * i + 1.  The
+     initial iteration, either from initial data or recovery, is also
+     output in the grid structure file.  This was discussed in email
+     thread "Re: Carpet::grid_coordinates_filename bug", private
+     communication between Erik Schnetter, Seth Hopper and Ian Hinder,
+     May 2014, and also
+     https://trac.einsteintoolkit.org/ticket/1234. *)
+
+  (* IH now believes that Carpet's output is correct, and decrementing
+     the iteration numbers is inconsistent. *)
+
+  (* decIt[singleIt_] := {singleIt[[1]]-1, singleIt[[2]]}; *)
+  (* fixIterations[itGss_List] := *)
+  (*   Join[{itGss[[1]]}, decIt/@Rest[itGss]]; *)
+
+  (* gss = fixIterations/@gss; *)
+
+  (* The grid structure returned here associated with iteration i is
+     the grid structure which was set at the beginning of iteration i.
+     If there is output of grid variables at iteration i, that output
+     will have the grid structure returned here. Suppose we have grid
+     structure output for iterations i1 and 12.  The i1 grid
+     structure is valid for iterations i1 <= i < i2. *)
+
+  gs = Flatten[gss,1];
+  gs];
 
 readGhostSize[sim_String] :=
  ToExpression[ReadSimulationParameter[sim, "Driver::ghost_size"]];
