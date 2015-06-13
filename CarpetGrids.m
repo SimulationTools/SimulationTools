@@ -87,8 +87,6 @@ ReadCarpetGridStructure::usage = "ReadCarpetGridStructure[sim] returns the grid 
 readGridStructure[sim_String, fileName_: "carpet-grid.asc"] :=
  Module[{files, tables, gss, gs, decIt, fixIterations},
   files = FindSimulationFiles[sim, fileName];
-  (* If[Length[files] > 1,  *)
-  (*  Print["WARNING: readGridStructure only reads the first segment of multi-segment simulations"]]; *)
   tables = Import[#, "Table"] & /@ files;
 
   gss = parseGridTable/@tables;
