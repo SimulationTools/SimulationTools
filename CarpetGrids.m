@@ -29,6 +29,7 @@ SymmetricBBoxDifference;
 CheckIdenticalGrids;
 ReadCarpetGridBBoxes;
 RegriddingIterations;
+CheckIdenticalRegridding;
 
 $UnequalBBoxes;
 $GridTime;
@@ -347,6 +348,86 @@ CheckIdenticalGrids[sims : {_String ...},
 
 RegriddingIterations[gs_List, regridEvery_] :=
   Select[gs[[All,1]], Mod[#, regridEvery] === 1 &]-1;
+
+readRegriddingIterationInterval[sim_String] :=
+ ToExpression[ReadSimulationParameter[sim, "CarpetRegrid2::regrid_every"]];
+
+CheckIdenticalRegridding[sims : {_String ...}, 
+  gridFileName_: "carpet-grid.asc"] :=
+
+ (* TODO: add an option to control clipping of symmetry
+    boundaries. Currently z-reflection is assumed *)
+ 
+ Module[{grids, dts, regEvs, regIts, regTimes1, regTimes, regAnyTimes, regNewIts,
+   buffers = readBufferSize/@sims, maxRL, gridsAt, checkIdenticalGrids,
+   checkIdenticalGridsAtTime},
+
+  grids = Map[readGridStructure[#, gridFileName] &, sims];
+
+  (* maxRL = Max[Flatten[grids[[All,All,2,All,1]]]]; *)
+
+  maxRL = 8; (* TODO: fix this *)
+
+  dts = readIterationTimeStep/@sims;
+
+  regEvs = readRegriddingIterationInterval/@sims;
+
+  (* Print[regEvs]; *)
+
+  regIts = MapThread[RegriddingIterations, {grids, regEvs}];
+
+  (* All the times that each of the simulations regrid *)
+  regTimes1 = regIts dts;
+
+  (* Eliminate small variations *)
+  regTimes = Rationalize[regTimes1 / regTimes1[[1,1]]] regTimes1[[1,1]];
+
+  (* All the times that any of the simulations regrid *)
+  regAnyTimes = Union@@regTimes;
+
+  $UnequalBBoxes = {};
+
+  gridsAt[gs_List, it_Integer, rl_Integer] :=
+   Module[{is,i},
+     (* Print["gridsAt"]; *)
+     is = Position[gs[[All,1]], it];
+     If[is==={}, {},
+       i=is[[1,1]];
+     (* Print["i=",i]; *)
+       If[gs[[i,1]] =!= it, Error["Error in finding grid"]];
+       gs[[i, 2, rl+1, 2]]]];
+
+  checkIdenticalGrids[bboxLists_List, {t_, rl_Integer}] :=
+   Module[{gs = 
+     MapThread[
+       normalise[shrinkBBoxes[#1, #2, True, False, False (* FIXME: assuming bitant *)]] &,
+       {bboxLists,buffers}],
+     equal},
+     equal = Map[bboxesEqual[First[gs], #] &, Rest[gs]];
+     If[! And @@ equal,
+       Print["Grid equality check failed at t = ", t, 
+         " on refinement level ", rl];
+       AppendTo[$UnequalBBoxes, {t,rl,gs}];
+       Print[MatrixForm[Outer[bboxesEqual, gs, gs, 1]]];
+       ]];
+
+  checkIdenticalGridsAtTime[t_] :=
+   Module[{newIts, rl},
+     newIts = Round[t/dts]+1;
+     Do[
+       (* Print["Checking rl ", rl, " at time ", t]; *)
+       Global`$status = StringJoin[ToString/@{"Checking rl ", rl, " at time ", t}];
+       checkIdenticalGrids[MapThread[gridsAt[#1,#2,rl] &, {grids, newIts}], {t, rl}],
+       {rl, 1 (* TODO: include RL0, but don't remove buffer zones *), maxRL}]];
+
+  Print["Checking up to t = ", regAnyTimes[[-1]]];
+
+  checkIdenticalGridsAtTime /@ regAnyTimes;
+
+       ];
+
+
+
 
 ReadCarpetGridBBoxes[sim_String, t_, rl_, removeBuffers_: True] :=
  Module[{grids, dt, it, indices, i, buffers = readBufferSize[sim], fullBBoxes},
