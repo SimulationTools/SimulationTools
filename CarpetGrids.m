@@ -289,12 +289,12 @@ CheckIdenticalGrids[sims : {_String ...},
   dt = readIterationTimeStep[sims[[1]]];
   $UnequalBBoxes = {};
   Do[
-   Print[{i, rl}];
+   (* Print[{i, rl}]; *)
    Module[{gs = 
       Map[normalise[
          shrinkBBoxes[#, buffers, True, True, True (* FIXME: 
           assuming octant *)]] &, grids[[All, i, 2, rl, 2]]], equal},
-    Print[gs];
+    (* Print[gs]; *)
     (*Print[
     i];*)
     $GridTime = FullForm[(grids[[1, i, 1]] - (If[i == 1, 0, 1])) dt];
