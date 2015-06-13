@@ -73,8 +73,8 @@ plotStyles =
   {Black, Blue, Darker[Magenta], Darker[Green], Orange, Gray, 
    Darker[Red], Darker[Yellow]};
 
-PresentationPlotColors = {Black, Blue, Darker[Magenta], Darker[Green], Orange, Gray, 
-   Darker[Red], Darker[Yellow], Darker[Blue], Darker[Gray]};
+PresentationPlotColors = Flatten[ConstantArray[{Black, Blue, Darker[Magenta], Darker[Green], Orange, Gray, 
+   Darker[Red], Darker[Yellow], Darker[Blue], Darker[Gray]},10],1];
 
 PresentationPlotStyles = Map[Directive[#,AbsoluteThickness[1]]&,PresentationPlotColors];
 
