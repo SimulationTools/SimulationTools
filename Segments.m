@@ -49,9 +49,16 @@ RunDutyCycle[run_] :=
 
 SegmentCoordinateTimeInterval[segdir_] :=
  Module[{times},
+
+   formalineFile = FileNameJoin[{segdir,"formaline-jar.txt"}];
+   If[FileExistsQ[formalineFile],
+     StringCases[Import[formalineFile, "String"], 
+       StartOfLine ~~ "cctk_time=" ~~ n : Shortest[__] ~~ EndOfLine :> 
+       ToExpression@n][[{1, -1}]],
+  (* else *)
   times =
      Catch[First /@ ReadColumnFile[segdir, "carpet::timing..asc", {"time"}]];
-  If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]];
+  If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]]];
 
 SegmentStartTimes[run_] :=
  Module[{segs = FindRunSegments[run]},
