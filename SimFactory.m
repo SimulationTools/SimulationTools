@@ -43,6 +43,7 @@ getDataSubDir[output_String] :=
 
     (* If this fails, look for the directory containing the parfile *)
     parFiles = FileNames["*/*.par", {output}, 2];
+    parFiles = Select[parFiles, !StringMatchQ[#, __~~"SIMFACTORY"~~__] &];
     If[Length[parFiles] === 0, Return[None]];
     If[Length[parFiles] =!= 1, Error["Found more than one */*.par in " <> output]];
     FileNameTake[parFiles[[1]], {-2}]
