@@ -111,7 +111,8 @@ SimulationStateFractions[sim_String] :=
   Module[{segs, queueDates, queueTimes, startDates, endDates, 
     simStartDate, simEndDate, simDuration, totalRunTime, 
     totalQueueTime, totalStoppedTime},
-    segs = FindRunSegments[sim];
+    segs = Select[FindRunSegments[sim], 
+      FindRunFile[#, "carpet::timing..asc"] =!= {} &];
     queueDates = AbsoluteTime /@ SegmentQueueDate /@ segs;
     queueTimes = SegmentQueueTime /@ segs;
     startDates = AbsoluteTime /@ SegmentStartDate /@ segs;
