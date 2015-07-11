@@ -52,6 +52,7 @@ StandardErrorOfRun;
 SimulationSpeedPlot;
 ReadSimulationMachine;
 ReadSimulationRunTimeFunction;
+SimulationProgressPlot;
 
 (* Exceptions *)
 NoSimulationCoreCountAvailable;
@@ -152,6 +153,20 @@ SimulationSpeedPlot[runNames1_] :=
 
 ReadSimulationMachine[sim_String] :=
   CallProvidedFunction["RunFiles","ReadSimulationMachine",{FindRunDir[sim],sim}];  
+
+SimulationProgressPlot[sim_String, style_: PresentationPlotStyles[[1]]] :=
+  Module[{progresses, markers},
+  progresses = ReadSimulationSegmentProgress[sim];
+  markers = ToList[#][[{1, -1}]] & /@ progresses;
+  Show[DateListPlot[ToList /@ progresses, Frame -> True, 
+    LabelStyle -> "Medium", PlotStyle -> style, PlotLegends -> {sim}, 
+    FrameLabel -> {None, "t"}], Graphics[{Point /@ markers}]]];
+
+SimulationProgressPlot[sims_List, opts___] :=
+  Module[{styles},
+    styles = Take[PresentationPlotStyles, Length[sims]];
+    Show[Sequence @@ MapThread[progressPlotOfSim, {sims, styles}], 
+      opts]];
 
 End[];
 EndPackage[];
