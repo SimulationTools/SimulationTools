@@ -17,12 +17,15 @@
 BeginPackage["SimulationTools`SimulationProperties`",
  {
   "SimulationTools`ColumnFile`",
+  "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
   "SimulationTools`RunFiles`",
-  "SimulationTools`"
+  "SimulationTools`Segments`",
+  "SimulationTools`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 (* Supported *)
