@@ -27,6 +27,12 @@ RunDutyCycle;
 SegmentCoordinateTimeInterval;
 SegmentStartTimes;
 ReadSimulationSegmentCoordinateTimeIntervals;
+SegmentProgress;
+ReadSegmentProgress;
+ReadSimulationSegmentProgress;
+SegmentQueueDate;
+SegmentQueueTime;
+SimulationStateFractions;
 
 Begin["`Private`"];
 
@@ -77,6 +83,48 @@ SegmentStartTimes[run_] :=
  Module[{segs = FindRunSegments[run]},
   First /@
    Select[SegmentCoordinateTimeInterval /@ segs, # =!= None &]];
+
+ReadSegmentProgress[seg_String] :=
+  Module[{start, end, runtime, progress},
+    If[FindRunFile[seg, "carpet::timing..asc"] === {}, 
+      Return[ToDataTable[{}]]];
+    start = AbsoluteTime[SegmentStartDate[seg]];
+    end = AbsoluteTime[SegmentEndDate[seg]];
+    runtime = 
+    start + ToDataTable@
+    ReadColumnFile[seg, 
+      "carpet::timing..asc", {"time", "time_total"}];
+    ToDataTable[ToListOfData[runtime], ToListOfCoordinates[runtime]]];
+
+ReadSimulationSegmentProgress[sim_String] :=
+  Select[ReadSegmentProgress /@ FindRunSegments[sim], Length[#] > 0 &];
+
+SegmentQueueDate[seg_String] :=
+  FileDate[FileNameJoin[{seg, "/../runscript.sh"}]];
+
+SegmentQueueTime[seg_String] :=
+  QuantityMagnitude[
+    DateDifference[SegmentQueueDate[seg], SegmentStartDate[seg], 
+      "Second"]];
+
+SimulationStateFractions[sim_String] :=
+  Module[{segs, queueDates, queueTimes, startDates, endDates, 
+    simStartDate, simEndDate, simDuration, totalRunTime, 
+    totalQueueTime, totalStoppedTime},
+    segs = FindRunSegments[sim];
+    queueDates = AbsoluteTime /@ SegmentQueueDate /@ segs;
+    queueTimes = SegmentQueueTime /@ segs;
+    startDates = AbsoluteTime /@ SegmentStartDate /@ segs;
+    endDates = AbsoluteTime /@ SegmentEndDate /@ segs;
+    simStartDate = First[queueDates];
+    simEndDate = Last[endDates];
+    simDuration = simEndDate - simStartDate;
+    totalRunTime = Total[endDates - startDates];
+    totalQueueTime = Total[queueTimes];
+    totalStoppedTime = simDuration - totalQueueTime - totalRunTime;
+    <|"Running" -> N[totalRunTime/simDuration],
+    "Queued" -> N[totalQueueTime/simDuration],
+    "Stopped" -> N[totalStoppedTime/simDuration]|>];
 
 End[];
 EndPackage[];
