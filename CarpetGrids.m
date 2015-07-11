@@ -219,6 +219,8 @@ SymmetricBBoxDifference = symmetricBBoxDifference;
 
 symmetricBBoxDifference[bs1_List, bs2_List] :=
  Module[{enc1, enc2},
+  If[bs1 === {}, Return[bs2]];
+  If[bs2 === {}, Return[bs1]];
   enc1 = enlargeBBox[enclosingBBox[bs1], 1];
   enc2 = enlargeBBox[enclosingBBox[bs2], 1];
   Join[normalise@intersection[complement[enc1, bs1], bs2], 
