@@ -27,6 +27,7 @@ ShowIt;
 MapSuccessive;
 ErrorForm;
 DescribeGitRepository;
+PartitionComplete;
 
 Begin["`Private`"];
 
@@ -116,6 +117,15 @@ DescribeGitRepository[path_String] :=
     {code, out, err} = 
     RunSubprocess[{"(cd "<>path<>"; git describe --always --dirty)"}, Exceptions->True];
     out[[1]]];
+
+(* Partition a list into sublists of length n where possible, and
+   where not possible, a shorter list.  The result contains all
+   elements. See
+   http://mathematica.stackexchange.com/questions/7722/using-partition-to-allow-sublists-of-different-lengths.
+   See also ArrayReshape (v9) and MultiColumn (v10)*)
+
+PartitionComplete[l_, n_] :=
+  Partition[l, n, n, 1, {}];
 
 End[];
 EndPackage[];
