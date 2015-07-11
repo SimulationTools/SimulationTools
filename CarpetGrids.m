@@ -253,6 +253,7 @@ dropLastBBoxDim[BBox[x1_, x2_, dx_]] :=
 
 shrinkBBoxes[bboxes_, n_, clipz_: False, clipx_: False, clipy_: False] :=
  Module[{enc},
+  If[bboxes==={}, Return[{}]]; (* Not sure why this isn't handled correctly below *)
   enc = enlargeBBox[enclosingBBox[bboxes], 2 n];
   If[clipz, enc = clipZ[enc]];
   If[clipy, enc = clipY[enc]];
