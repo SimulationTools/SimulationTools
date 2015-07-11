@@ -170,6 +170,10 @@ intersection[b_BBox, bs : {_BBox ...}] :=
 intersection[bs1 : {_BBox ...}, bs2 : {_BBox ...}] :=
  normalise@Flatten[Map[intersection[#, bs2] &, bs1], 1];
 
+intersection[{}] := {};
+
+intersection[{bboxes}] := bboxes;
+
 intersection[bboxess_List] :=
  normalise@Fold[intersection, First[bboxess], Rest[bboxess]];
 
