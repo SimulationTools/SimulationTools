@@ -17,7 +17,10 @@
 BeginPackage["SimulationTools`Segments`",
  {
   "SimulationTools`ColumnFile`",
-  "SimulationTools`RunFiles`"
+  "SimulationTools`RunFiles`",
+  "SimulationTools`DataRepresentations`",
+  "SimulationTools`DataTable`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 SegmentStartDate;
