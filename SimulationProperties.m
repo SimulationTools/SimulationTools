@@ -165,7 +165,7 @@ SimulationProgressPlot[sim_String, style_: PresentationPlotStyles[[1]]] :=
 SimulationProgressPlot[sims_List, opts___] :=
   Module[{styles},
     styles = Take[PresentationPlotStyles, Length[sims]];
-    Show[Sequence @@ MapThread[progressPlotOfSim, {sims, styles}], 
+    Show[Sequence @@ MapThread[SimulationProgressPlot, {sims, styles}], 
       opts]];
 
 End[];
