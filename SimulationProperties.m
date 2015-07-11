@@ -51,6 +51,7 @@ StandardOutputOfRun;
 StandardErrorOfRun;
 SimulationSpeedPlot;
 ReadSimulationMachine;
+ReadSimulationRunTimeFunction;
 
 (* Exceptions *)
 NoSimulationCoreCountAvailable;
@@ -65,6 +66,10 @@ ReadSimulationRunTime[runName_] :=
       (ReadColumnFile[file, {"time", "time_total"}][[-1,2]]);
     files = FindRunFile[runName, "carpet::timing..asc"];
     Plus@@(segmentTime /@ files)];
+
+ReadSimulationRunTimeFunction[sim_String] :=
+ ToDataTable[
+  ReadColumnFile[sim, "carpet::timing..asc", {"time", "time_total"}]];
 
 ReadWalltimeHours[runName_] := 
   If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
