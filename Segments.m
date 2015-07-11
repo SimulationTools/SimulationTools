@@ -26,6 +26,7 @@ SegmentDuration;
 RunDutyCycle;
 SegmentCoordinateTimeInterval;
 SegmentStartTimes;
+ReadSimulationSegmentCoordinateTimeIntervals;
 
 Begin["`Private`"];
 
@@ -47,18 +48,30 @@ RunDutyCycle[run_] :=
                                       SegmentEndDate[Last[segs]], "Second"][[1]];
     totalRunTime / totalElapsedTime //N];
 
-SegmentCoordinateTimeInterval[segdir_] :=
- Module[{times},
+ReadSimulationSegmentCoordinateTimeIntervals[sim_String] :=
+  Module[{segs},
+    segs = FindRunSegments[sim];
+    DeleteCases[SegmentCoordinateTimeInterval/@segs, None]];
 
+SegmentCoordinateTimeInterval[segdir_] :=
+ Module[{times, formalineFile},
    formalineFile = FileNameJoin[{segdir,"formaline-jar.txt"}];
    If[FileExistsQ[formalineFile],
-     StringCases[Import[formalineFile, "String"], 
+     Replace[StringCases[Import[formalineFile, "String"], 
        StartOfLine ~~ "cctk_time=" ~~ n : Shortest[__] ~~ EndOfLine :> 
-       ToExpression@n][[{1, -1}]],
-  (* else *)
-  times =
+       ToExpression@n], {
+         l:{__} :> {First[l], Last[l]},
+         {} :> None,
+         x_ :> Error["Unrecognised segment times: "<>ToString[x]]}],
+     (* else *)
+     times =
      Catch[First /@ ReadColumnFile[segdir, "carpet::timing..asc", {"time"}]];
-  If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]]];
+     If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]]];
+
+SegmentStartTimes[run_] :=
+ Module[{segs = FindRunSegments[run]},
+  First /@
+   Select[SegmentCoordinateTimeInterval /@ segs, # =!= None &]];
 
 SegmentStartTimes[run_] :=
  Module[{segs = FindRunSegments[run]},
