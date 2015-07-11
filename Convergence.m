@@ -266,7 +266,7 @@ RichardsonRelativeError[fs:{f1_,f2_}, hs:{h1_, h2_}, p_] :=
 ConvergenceOrder[{f1_?NumberQ, f2_?NumberQ, 
    f3_?NumberQ}, {h1_?NumberQ, h2_?NumberQ, h3_?NumberQ}] :=
   If[! (h1 > h2 > h3), 
-  Error["ConvergenceOrder: Grid spacings must be monotonically increasing"],
+  Error["ConvergenceOrder: Grid spacings ("<>ToString[{h1,h2,h3}]<>") must be monotonically increasing"],
   If[f1 == f2 == f3, 0.,
    If[(f1 - f2) (f3 - f2) >= 0,(* Non-monotonic input values *) None,
     Module[{p},
