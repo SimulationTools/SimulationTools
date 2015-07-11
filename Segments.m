@@ -29,16 +29,16 @@ SegmentStartTimes;
 
 Begin["`Private`"];
 
-SegmentStartDate[dir_] :=
+SegmentEndDate[dir_] :=
   FileDate[FileNameJoin[{dir, "/carpet::timing..asc"}]];
 
-SegmentEndDate[dir_] :=
+SegmentStartDate[dir_] :=
   Module[{parFile},
     parFile = First[FileNames["*.par", dir]];
     FileDate[parFile]];
 
 SegmentDuration[dir_] :=
-  DateDifference[SegmentEndDate[dir], SegmentStartDate[dir], "Second"][[1]];
+  DateDifference[SegmentStartDate[dir], SegmentEndDate[dir], "Second"][[1]];
 
 RunDutyCycle[run_] :=
   Module[{segs = FindRunSegments[run], totalRunTime, totalElapsedTime},
