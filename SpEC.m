@@ -78,6 +78,7 @@ ReadSpECGridPoints;
 FindSpECSegments;
 ReadSXSStrain;
 ReadSXSLevels;
+ReadSpECHDF5Data;
 
 Begin["`Private`"];
 
@@ -201,6 +202,27 @@ readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASC
       (* else *)
       mergeDataLists[Join@@dataSegments]],
     Map[mergeDataLists, dataSegments]]];
+
+ReadSpECHDF5Data[runName_String, filename_String, datasetName_String] :=
+ Module[{runFiles, files, data, psi4, filePattern1, 
+   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+
+   (* TODO: combine inspiral and ringdown *)
+   runFiles = findSpECFiles[runName, filename][[1]];
+
+   If[runFiles === {}, Return[{}(*ConstantArray[ToDataTable[{}],3]*)] (*Error["Cannot find apparent horizon information in "<>runName]*)];
+  
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
+
+  print["\n"];
+  data = Join@@files;
+  If[! And @@ Positive[Differences[data[[All, 1]]]], 
+   data = monotonisePreferLastCompiled[data]];
+  (* data2 =  *)
+  (*  ToDataTable /@  *)
+  (*   Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, Length[data[[1]]]}]; *)
+  Return[data]];
 
 (****************************************************************)
 (* Simulation performance information *)
