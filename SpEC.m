@@ -80,6 +80,8 @@ ReadSXSStrain;
 ReadSXSLevels;
 FindSpECSimulationFiles;
 ReadSpECHDF5Data;
+ReadSpECOrbitalOmega;
+ReadSpECOrbitalPhase;
 
 Begin["`Private`"];
 
@@ -225,6 +227,19 @@ ReadSpECHDF5Data[runName_String, filename_String, datasetName_String] :=
   (*  ToDataTable /@  *)
   (*   Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, Length[data[[1]]]}]; *)
   Return[data]];
+
+ReadSpECOrbitalOmega[sim_String] :=
+  Module[{data},
+    data = ReadSpECHDF5Data[sim, "OrbitDiagnostics.h5", "OmegaVector.dat"];
+    {t, omx, omy, omz} = Transpose[data];
+    ToDataTable[t, #] & /@ {omx, omy, omz}];
+
+ReadSpECOrbitalPhase[sim_String] :=
+  Module[{data},
+    data = ReadSpECHDF5Data[sim, "OrbitDiagnostics.h5", "OrbitalPhase.dat"];
+    {t, phi} = Transpose[data];
+    ToDataTable[t, phi]];
+
 
 (****************************************************************)
 (* Simulation performance information *)
