@@ -78,6 +78,7 @@ ReadSpECGridPoints;
 FindSpECSegments;
 ReadSXSStrain;
 ReadSXSLevels;
+FindSpECSimulationFiles;
 ReadSpECHDF5Data;
 
 Begin["`Private`"];
@@ -140,6 +141,7 @@ FindSpECSegments[sim_String] :=
       "Lev"~~res~~"_Ringdown/Lev"~~res~~"_"~~_~~_}[[1;;2]];
     Map[FileNames[#, simBase] &, segPatterns]];
 
+FindSpECSimulationFiles = findSpECFiles;
 findSpECFiles[sim_String, file_String] :=
   Map[Flatten, Map[FileNames[FileNameJoin[{"Run",file}], #] &, findSpECSegments[sim], {2}]];
 
