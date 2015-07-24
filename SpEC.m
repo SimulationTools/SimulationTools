@@ -237,7 +237,6 @@ ReadSpECHDF5Data[runName_String, filename_String, datasetName_String] :=
   (*   Table[Map[{#[[1]], #[[1 + i]]} &, data], {i, 1, Length[data[[1]]]}]; *)
   Return[data]];
 
-<<<<<<< HEAD
 ReadSpECOrbitalOmega[sim_String] :=
   Module[{data},
     data = ReadSpECHDF5Data[sim, "OrbitDiagnostics.h5", "OmegaVector.dat"];
@@ -250,9 +249,6 @@ ReadSpECOrbitalPhase[sim_String] :=
     {t, phi} = Transpose[data];
     ToDataTable[t, phi]];
 
-
-=======
->>>>>>> SpEC.m: Add ReadSpECHDF5Data
 (****************************************************************)
 (* Simulation performance information *)
 (****************************************************************)
