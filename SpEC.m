@@ -24,6 +24,7 @@ BeginPackage["SimulationTools`SpEC`",
    "SimulationTools`Error`",
    "SimulationTools`FileMemo`",
    "SimulationTools`FileDependencies`",
+   "h5mma`",
    "Piraha`",
    "SimulationTools`Utils`",
    If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
