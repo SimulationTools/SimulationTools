@@ -825,20 +825,6 @@ ReadSpECDomainInfo[sim_String] :=
   combineDomainInfos[
    Map[ReadSpECSegmentDomainInfo, segments]]];
 
-ReadSpECSubdomains[sim_String] :=
-  If[haveChangeNP[sim],
-    ToDataTable[readSpECChangeNP[sim][[All,{1,3}]]],
-    Module[{domainInfo},
-      domainInfo = ReadSpECDomainInfo[sim];
-      ToDataTable[domainInfo[[All, 1]], Map[Length[#] - 2 &, domainInfo]]]];
-
-ReadSpECGridPoints[sim_String] :=
-  If[haveChangeNP[sim],
-    1000 ToDataTable[readSpECChangeNP[sim][[All,{1,4}]]],
-    Module[{domainInfo},
-      domainInfo = ReadSpECDomainInfo[sim];
-      ToDataTable[domainInfo[[All, 1]], domainInfo[[All,2]]]]];
-
 ReadSpECPointDistribution[sim_String] :=
  Module[{domainInfo, f},
   domainInfo = ReadSpECDomainInfo[sim];
@@ -861,6 +847,71 @@ ReadSpECAMRTriggerTimes[sim_String] :=
     Flatten[
       triggerTimesFromFile /@ Flatten[
         findSpECFiles[sim, "ChangeSpectralGrid.log"]]]];
+
+(****************************************************************)
+(* Grid structure (new implementation) *)
+(****************************************************************)
+
+gridFiles[sim_String] :=
+ Flatten[FindSpECSimulationFiles[sim, "AdjustGridExtents.h5"][[1]]];
+
+extentDataset[sd_] :=
+ StringJoin[sd, "/Extents.dat"];
+
+gridPointsInSubdomain[gridFile_, sdname_] :=
+ Module[{datasets},
+  (*Print["segfile=",segfile];
+  Print["extendDataset = ",extentDataset[sdname]];*)
+  datasets = 
+   ImportHDF5[gridFile, {"Datasets", extentDataset[sdname]}];
+  ToDataTable@Map[{#[[1]], Times @@ #[[{2, 3, 4}]]} &, datasets]];
+
+readSpECGridPointsInFile[gridFile_, sdPattern_: "*"] :=
+ Module[{sds, gpsInsds},
+  (*Print["gridFile=",gridFile];*)
+  sds = subdomainsInFile[gridFile, sdPattern];
+  (* Print[sds]; *)
+  gpsInsds = gridPointsInSubdomain[gridFile, #] & /@ sds;
+  If[Length[sds] === 0,
+    ToDataTable[{},{}],
+    Total[gpsInsds]]];
+
+subdomainsInFile[gridFile_String, sdPattern_: "*.dir"] :=
+ Select[ImportHDF5[gridFile, "Datasets"], StringMatchQ[#, sdPattern] &];
+
+ReadSpECGridPoints[sim_String, sdPattern_: "*.dir"] :=
+ Module[{segpoints},
+  segpoints = 
+   readSpECGridPointsInFile[#, sdPattern] & /@ gridFiles[sim];
+  (*Print["segpoints=",segpoints];*)
+  
+  ToDataTable[
+   SimulationTools`SpEC`Private`monotonisePreferLastCompiled[
+    Join[Sequence @@ (ToList /@ segpoints)]]]];
+
+ReadSpECSubdomains[sim_String, sdPattern_: "*.dir"] :=
+ Module[{subdomains, segpoints, subdomainCounts, subdomainsList},
+  segpoints = 
+   readSpECGridPointsInFile[#, sdPattern] & /@ gridFiles[sim];
+  Print["segpoints = ", segpoints];
+  subdomainCounts = 
+   Length[subdomainsInFile[#, sdPattern]] & /@ gridFiles[sim];
+  Print["subdomainCounts = ", subdomainCounts];
+  subdomains = subdomainCounts + 0*segpoints;
+  Print["subdomains = ", subdomains];
+
+  (*Print["segpoints=",segpoints];*)
+  
+  Print["ReadSpECSubdomains: subdomains = ", subdomains];
+
+  subdomainsList = ToList /@ subdomains;
+
+  If[MatchQ[subdomainsList, {_List...}] === False,
+    Error["ReadSpECSubdomains: subdomainsList is not a list of lists.  Instead it is "<>ToString[subdomainsList]]];
+
+  ToDataTable[
+   SimulationTools`SpEC`Private`monotonisePreferLastCompiled[
+    Join[Sequence @@ (subdomainsList)]]]];
 
 (****************************************************************)
 (* Control system *)
