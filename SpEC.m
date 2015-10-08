@@ -852,7 +852,8 @@ ReadSpECChunkSize[sim_String] :=
 triggerTimesFromFile[fileName_String] :=
   Module[{s},
     s = Import[fileName, "String"];
-    StringCases[s, "ChangeSpectralGrid Called at t="~~Shortest[t__]~~"," :> t]];
+    StringCases[s, "ChangeSpectralGrid Called at t="~~Shortest[t__]~~"," :> t,
+      IgnoreCase -> True]];
 
 ReadSpECAMRTriggerTimes[sim_String] :=
   Union[
