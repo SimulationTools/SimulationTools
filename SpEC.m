@@ -83,6 +83,8 @@ FindSpECSimulationFiles;
 ReadSpECHDF5Data;
 ReadSpECOrbitalOmega;
 ReadSpECOrbitalPhase;
+ReadSpECSimulationProfileSummary;
+DataNotFound;
 
 Begin["`Private`"];
 
@@ -407,7 +409,7 @@ ReadSpECStrain[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4, radStr},
   radStr = radiusString[rad];
    runFiles = Flatten[findSpECFiles[runName, "GW2/rh_FiniteRadii_CodeUnits.h5"],1];
-If[runFiles==={},Error["No strain data found in "<>runName]];
+If[runFiles==={},Error[DataNotFound, "No strain data found in "<>runName]];
    datasetName = 
     "/R" <> radStr <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
       ".dat";
@@ -415,7 +417,7 @@ If[runFiles==={},Error["No strain data found in "<>runName]];
   files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
 
-If[files === {}, Error["No strain data found in " <> runName <> " (no datasets named "<>datasetName<>")"]];
+If[files === {}, Print["No strain data found in " <> runName <> " (no datasets named "<>datasetName<>")"]; Error[DataNotFound, "No strain data found in " <> runName <> " (no datasets named "<>datasetName<>")"]];
 
   print["\n"];
 
