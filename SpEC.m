@@ -265,7 +265,12 @@ ReadSpECCoreCount[sim_String] :=
   ToDataTable[readSpECTimeInfo[sim][[All,{1,3}]]];
 
 ReadSpECSimulationProgress[sim_String] :=
-  ToDataTable[readSpECTimeInfo[sim][[All,{2,1}]]];
+  Module[{prog},
+    prog = readSpECTimeInfo[sim][[All,{2,1}]];
+    (* Filter out any times which are less than the start time.  This
+       indicates a problem with the clock on the compute node. *)
+    prog = Select[prog, #[[1]] >= prog[[1,1]] &];
+    ToDataTable[prog]];
 
 ReadSpECWallTime[sim_String] :=
   Module[{inspiral,ringdown},
