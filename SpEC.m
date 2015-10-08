@@ -666,7 +666,7 @@ ReadSpECInitialOrbitalFrequency[sim_] :=
 (****************************************************************)
 
 FindSpECEccentricityReductionSimulations[sim_String] :=
-  FileNames["Ecc"~~NumberString, FileNameJoin[{getSimsDir[], sim}]];
+  FileNames["Ecc"~~NumberString, FindSpECSimulation[sim]];
 
 ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
   Module[{simPath, dirNames, eccFiles, eccFile, eMeasured, eMeasuredSS},
