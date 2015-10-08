@@ -78,7 +78,7 @@ plotStyles =
 PresentationPlotColors = Flatten[ConstantArray[{Black, Blue, Darker[Magenta], Darker[Green], Orange, Gray, 
    Darker[Red], Darker[Yellow], Darker[Blue], Darker[Gray]},10],1];
 
-PresentationPlotStyles = Map[Directive[#,AbsoluteThickness[1]]&,PresentationPlotColors];
+PresentationPlotStyles = Flatten[ConstantArray[Map[Directive[#,AbsoluteThickness[1]]&,PresentationPlotColors],10],1];
 
 withStyle[elem_, style_List] :=
   Append[style, elem];
