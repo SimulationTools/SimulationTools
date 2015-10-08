@@ -120,6 +120,9 @@ monotonisePreferLastCompiled =
    Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
   RuntimeOptions -> "Speed"];
 
+monoPreferFirst[d_DataTable] :=
+  ToDataTable[monotonisePreferLastCompiled[Reverse[ToList[d]]]];
+
 (****************************************************************)
 (* Finding simulations *)
 (****************************************************************)
