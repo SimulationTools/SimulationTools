@@ -945,3 +945,18 @@ ReadSXSLevels[sim_String] :=
 
 End[];
 EndPackage[];
+
+(****************************************************************)
+(* Profile *)
+(****************************************************************)
+
+ReadSpECSimulationProfileSummary[sim_String] :=
+ Module[{profileFiles, summaryDatasets, dsFile, steps, summaryQ},
+  summaryQ[s_String] := StringMatchQ[s, "/Step*.dir/Summary.txt"];
+  profileFiles = 
+   FindSpECSimulationFiles[sims[[1]], "IncProfiler.h5"];
+  summaryDatasets = 
+   Flatten[Map[{#, Select[Import[#], summaryQ]} &, profileFiles, {2}],
+     1];
+  {dsFile, steps} = Last[summaryDatasets];
+  ImportHDF5[dsFile, {"Datasets", Last[steps]}]];
