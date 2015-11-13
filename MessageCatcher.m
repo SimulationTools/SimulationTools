@@ -22,6 +22,7 @@ BeginPackage["SimulationTools`MessageCatcher`",
 WithCaughtMessages::usage = "WithCaughtMessages[expr] evaluates expr, converting any generated messages into exceptions";
 AbortOnMessagesST::usage = "AbortOnMessagesST[abort] causes any subsequent messages to generate a call to Abort.  This prevents cascading errors.  Aborts can be caught using CheckAbort.";
 CaughtMessageException;
+WithCaughtMessagesArgs;
 
 Begin["`Private`"];
 
@@ -35,6 +36,9 @@ messageHandler[x_] :=
   If[Last[x] && !MemberQ[$allowedMessages,x[[1,1]]],
      x /. HoldPattern[_[Message[id_, args___], _]] :> Error[CaughtMessageException, "Aborting due to message"]; Abort[]];
 
+messageHandlerArgs[x_] :=
+  If[Last[x] && !MemberQ[$allowedMessages,x[[1,1]]],
+     x /. HoldPattern[_[Message[id_, args___], _]] :> Error[CaughtMessageException, ToString@StringForm[id,args], {}]; Abort[]];
 
 (****************************************************************)
 (* WithCaughtMessages *)
@@ -43,6 +47,11 @@ messageHandler[x_] :=
 SetAttributes[WithCaughtMessages, HoldFirst];
 WithCaughtMessages[expr_] :=
   Internal`HandlerBlock[{"Message", messageHandler},
+                        (expr)];
+
+SetAttributes[WithCaughtMessagesArgs, HoldFirst];
+WithCaughtMessagesArgs[expr_] :=
+  Internal`HandlerBlock[{"Message", messageHandlerArgs},
                         (expr)];
 
 AbortOnMessagesST[abort:(True|False)] :=
