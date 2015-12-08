@@ -30,6 +30,8 @@ CheckIdenticalGrids;
 ReadCarpetGridBBoxes;
 RegriddingIterations;
 CheckIdenticalRegridding;
+PlotCarpetBBoxes;
+PlotCarpetBBoxes2D;
 
 $UnequalBBoxes;
 $GridTime;
@@ -299,9 +301,18 @@ plotBBoxPoints[b_BBox] :=
  Table[Point[{x, y}], {x, b[[1, 1]], b[[2, 1]], b[[3, 1]]}, {y, b[[1, 2]], 
    b[[2, 2]], b[[3, 2]]}];
 
-plotBBoxes[bs : {_BBox ...}, opts___] :=
- Graphics[{Opacity[0.1], plotBBox /@ bs}, opts, AspectRatio -> Automatic, 
-  Axes -> True, ImageSize -> 400];
+plotBBoxes = PlotCarpetBBoxes;
+
+Options[PlotCarpetBBoxes] = Join[Options[Graphics], {"PreDirectives" -> {}}];
+PlotCarpetBBoxes[bs : {_BBox ...}, opts:OptionsPattern[]] :=
+  Module[{pre=OptionValue[PreDirectives]},
+ Graphics[{Opacity[0.1], pre , plotBBox /@ bs}, FilterRules[{opts}, Options[Graphics]],
+   AspectRatio -> Automatic, 
+   Axes -> True, ImageSize -> 400]];
+
+Options[PlotCarpetBBoxes2D] = Options[PlotCarpetBBoxes];
+PlotCarpetBBoxes2D[bs : {_BBox ...}, opts:OptionsPattern[]] :=
+  PlotCarpetBBoxes[toXYPlane[bs], opts];
 
 toXYPlane[bs : {_BBox ...}] :=
  dropLastBBoxDim /@ intersection[
