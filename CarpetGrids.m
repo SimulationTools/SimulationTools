@@ -39,31 +39,33 @@ $BBoxTolerance;
 
 Begin["`Private`"];
 
+numberString = NumberString | (NumberString ~~ "e" ~~ NumberString);
+
+coordVec3 = 
+  "[" ~~ StringExpression @@ Riffle[ConstantArray[numberString, 3], ","] ~~ 
+   "]";
+
+compStringPatternRule = 
+  "(" ~~ x1 : coordVec3 ~~ ":" ~~ x2 : coordVec3 ~~ ":" ~~ dx : coordVec3 ~~ 
+    "/" ~~ i1 : coordVec3 ~~ ":" ~~ i2 : coordVec3 ~~ "/" ~~ i3 : coordVec3 ~~
+     "/" ~~ n : numberString ~~ ")" :> {x1, x2, dx, i1, i2, i3, n};
+
+compStringPattern = 
+  "(" ~~ coordVec3 ~~ ":" ~~ coordVec3 ~~ ":" ~~ coordVec3 ~~ "/" ~~ 
+   coordVec3 ~~ ":" ~~ coordVec3 ~~ "/" ~~ coordVec3 ~~ "/" ~~ numberString ~~
+    ")";
+
+coordVec3PatternRule = 
+  "[" ~~ x1 : numberString ~~ "," ~~ x2 : numberString ~~ "," ~~ 
+    x3 : numberString ~~ "]" :> ToExpression /@ {x1, x2, x3};
+
 bboxOfString[s_] :=
  Module[{x1, x2, dx},
   BBox @@ (parseCoordVec3 /@ 
      StringCases[s, compStringPatternRule][[1, 1 ;; 3]])];
 
-compStringPatternRule = 
-  "(" ~~ x1 : coordVec3 ~~ ":" ~~ x2 : coordVec3 ~~ ":" ~~ dx : coordVec3 ~~ 
-    "/" ~~ i1 : coordVec3 ~~ ":" ~~ i2 : coordVec3 ~~ "/" ~~ i3 : coordVec3 ~~
-     "/" ~~ n : NumberString ~~ ")" :> {x1, x2, dx, i1, i2, i3, n};
-
-compStringPattern = 
-  "(" ~~ coordVec3 ~~ ":" ~~ coordVec3 ~~ ":" ~~ coordVec3 ~~ "/" ~~ 
-   coordVec3 ~~ ":" ~~ coordVec3 ~~ "/" ~~ coordVec3 ~~ "/" ~~ NumberString ~~
-    ")";
-
 parseCoordVec3[s_String] :=
  StringCases[s, coordVec3PatternRule][[1]]
-
-coordVec3 = 
-  "[" ~~ StringExpression @@ Riffle[ConstantArray[NumberString, 3], ","] ~~ 
-   "]";
-
-coordVec3PatternRule = 
-  "[" ~~ x1 : NumberString ~~ "," ~~ x2 : NumberString ~~ "," ~~ 
-    x3 : NumberString ~~ "]" :> ToExpression /@ {x1, x2, x3};
 
 parseIterationTable[itTable_] :=
  Module[{itData, levels},
