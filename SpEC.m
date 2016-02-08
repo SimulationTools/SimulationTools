@@ -1027,5 +1027,73 @@ accumulatedPhase[om_] :=
 ReadSXSAccumulatedPhase[sim_String] :=
  accumulatedPhase[ReadSXSOrbitalOmega[sim]];
 
+(****************************************************************)
+(* Waveform rotation (provided by Andrea Taracchini)            *)
+(****************************************************************)
+
+SmalldWignerArun[\[ScriptL]_, mp_, m_, \[Beta]_] := 
+  Module[{k}, 
+   If[IntegerQ[\[ScriptL]] && IntegerQ[m] && IntegerQ[mp] && \[ScriptL] >= 0 &&
+      m >= -\[ScriptL] && m <= \[ScriptL] && mp >= -\[ScriptL] && 
+     mp <= \[ScriptL],
+    
+    \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(k = 
+       Max[{0, m - mp}]\), \(Min[{\[ScriptL] + m, \[ScriptL] - mp}]\)]\(
+\*FractionBox[
+SuperscriptBox[\((\(-1\))\), \(k\)], \(k!\)] 
+\*FractionBox[
+SqrtBox[\(\(\((\[ScriptL] + m)\)!\) \(\((\[ScriptL] - 
+            m)\)!\) \(\((\[ScriptL] + mp)\)!\) \(\((\[ScriptL] - 
+            mp)\)!\)\)], \(\(\((k - m + mp)\)!\) \(\((\[ScriptL] + m - 
+           k)\)!\) \(\((\[ScriptL] - mp - k)\)!\)\)] 
+\*SuperscriptBox[\(Cos[
+\*FractionBox[\(\[Beta]\), \(2\)]]\), \(2  \[ScriptL] + m - mp - 2  k\)] 
+\*SuperscriptBox[\(Sin[
+\*FractionBox[\(\[Beta]\), \(2\)]]\), \(2  k - m + mp\)]\)\), 
+    Print["Wrong indices"]]];
+SmalldWignerArun[\[ScriptL]_, mp_, m_, 0] := 
+  Limit[SmalldWignerArun[\[ScriptL], mp, m, x], x -> 0];
+SmalldWignerArun[\[ScriptL]_, mp_, m_, \[Pi]] := 
+  Limit[SmalldWignerArun[\[ScriptL], mp, m, x], x -> \[Pi]];
+
+LandauDWigner[\[ScriptL]_, mp_, m_, \[Alpha]_, \[Beta]_, \[Gamma]_] := 
+  If[IntegerQ[\[ScriptL]] && IntegerQ[m] && IntegerQ[mp] && \[ScriptL] >= 0 &&
+     m >= -\[ScriptL] && m <= \[ScriptL] && mp >= -\[ScriptL] && 
+    mp <= \[ScriptL], 
+   Exp[I mp \[Gamma]] SmalldWignerArun[\[ScriptL], mp, m, \[Beta]] Exp[
+     I m \[Alpha]], Print["Wrong indices"]];
+
+(* Routine to find Euler angles to go from initial direction to final direction *)
+
+EulerAngles[frameA_, frameB_] :=
+ Module[{\[Alpha], \[Beta], \[Gamma], X1, X2, X3, Y1, Y2, Y3, Z1, Z2, Z3, 
+   normframeA, normframeB},
+  normframeA = 
+   Transpose[#/Sqrt[#[[1]]^2 + #[[2]]^2 + #[[3]]^2] & /@ Transpose[frameA]];
+  normframeB = 
+   Transpose[#/Sqrt[#[[1]]^2 + #[[2]]^2 + #[[3]]^2] & /@ Transpose[frameB]];
+  {{X1, X2, X3}, {Y1, Y2, Y3}, {Z1, Z2, Z3}} = 
+   Transpose[normframeB].normframeA // Chop;
+  If[Z1 == 0 && Z2 == 0,
+   If[Z3 > 0,
+    {\[Alpha], \[Beta], \[Gamma]} = {0, 0, ArcTan[X1, X2]},
+    {\[Alpha], \[Beta], \[Gamma]} = {0, \[Pi], ArcTan[-X1, X2]}],
+   {\[Alpha], \[Beta], \[Gamma]} = {ArcTan[Z1, Z2], ArcCos[Z3], 
+     ArcTan[-X3, Y3]}
+   ];
+  (*Print[{\[Alpha],\[Beta],\[Gamma],X1,X2,X3,Y1,Y2,Y3,Z1,Z2,
+  Z3}];*)
+  {\[Alpha], \[Beta], \[Gamma]}
+  ]
+
+(* Subscript[h, lm] transformation (using Landau's def of the D-matrix) *)
+hprime[h_, {\[ScriptL]_, 
+    mp_}, {\[CapitalAlpha]_, \[CapitalBeta]_, \[CapitalGamma]_}] := Module[{m},
+   Sum[Conjugate[
+      LandauDWigner[\[ScriptL], m, 
+       mp, \[CapitalAlpha], \[CapitalBeta], \[CapitalGamma]]] h[\[ScriptL], 
+      m], {m, -\[ScriptL], \[ScriptL]}]];
+
 End[];
 EndPackage[];
