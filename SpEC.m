@@ -88,6 +88,7 @@ DataNotFound;
 ReadSXSHorizonDisplacement;
 ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
+RotateWaveform;
 
 Begin["`Private`"];
 
@@ -1094,6 +1095,9 @@ hprime[h_, {\[ScriptL]_,
       LandauDWigner[\[ScriptL], m, 
        mp, \[CapitalAlpha], \[CapitalBeta], \[CapitalGamma]]] h[\[ScriptL], 
       m], {m, -\[ScriptL], \[ScriptL]}]];
+
+RotateWaveform[h_, {l_, m_}, {alpha_, beta_, gamma_}] :=
+  hprime[h,{l,m},{alpha,beta,gamma}];
 
 End[];
 EndPackage[];
