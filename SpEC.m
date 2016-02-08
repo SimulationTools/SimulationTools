@@ -89,6 +89,7 @@ ReadSXSHorizonDisplacement;
 ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
 RotateWaveform;
+EulerAngles;
 
 Begin["`Private`"];
 
