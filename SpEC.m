@@ -85,6 +85,9 @@ ReadSpECOrbitalOmega;
 ReadSpECOrbitalPhase;
 ReadSpECSimulationProfileSummary;
 DataNotFound;
+ReadSXSHorizonDisplacement;
+ReadSXSOrbitalOmega;
+ReadSXSAccumulatedPhase;
 
 Begin["`Private`"];
 
@@ -960,3 +963,70 @@ ReadSpECSimulationProfileSummary[sim_String] :=
      1];
   {dsFile, steps} = Last[summaryDatasets];
   ImportHDF5[dsFile, {"Datasets", Last[steps]}]];
+
+(****************************************************************)
+(* SXS data format *)
+(****************************************************************)
+
+Options[ReadSXSStrain] = {"FileName" -> "rhOverM_Asymptotic_GeometricUnits.h5"};
+ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] := 
+ ReadSXSStrain[sim, l, m, ord] =
+  Module[{file = sim <> "/"<>OptionValue[FileName]},
+   Block[{$status = {sim, l, m, ord}},
+    If[! FileExistsQ[file], Error["Cannot find " <> file]];
+    ToDataTable @@ ({#1, #2 + I #3} &) @@ 
+      Transpose[
+       ImportHDF5[
+        file, {"Datasets", 
+         "/Extrapolated_N" <> ToString[ord] <> ".dir/Y_l" <> 
+          ToString[l] <> "_m" <> ToString[m] <> ".dat"}]]]];
+
+ReadSXSSpin[sim_, hn_Integer] :=
+ Module[{t, sx, sy, sz, hnAlpha = {"A", "B"}[[hn]]},
+  {t, sx, sy, sz} = 
+   Transpose[
+    ImportHDF5[
+     sim <> "/Horizons.h5", {"Datasets", 
+      "/Ah" <> hnAlpha <> ".dir/DimensionfulInertialSpin.dat"}]];
+  ToDataTable[t, #] & /@ {sx, sy, sz}];
+
+ReadSXSLevels[sim_String] :=
+  Sort[FileNames["Lev*", sim]];
+
+ahCode[i_Integer] :=
+ If[1 <= i <= 3, {"A", "B", "C"}[[i]], 
+  Error["Invalid AH: " <> ToString[i]]]
+
+ReadSpECHorizonCentroidFromFile[file_String, ah_Integer] :=
+ Module[{data},
+  If[! FileExistsQ[file], Error["File " <> file <> " does not exist"]];
+  data = Transpose@
+    Import[file, {"Datasets", 
+      "Ah" <> ahCode[ah] <> ".dir/CoordCenterInertial.dat"}];
+  Table[ToDataTable[data[[1]], data[[i]]], {i, 2, 4}]];
+
+ReadSXSHorizonDisplacement[run_String] :=
+ Module[{file = FileNameJoin[{run, "Horizons.h5"}]},
+  readSpECHorizonCentroidFromFile[file, 1] - 
+   readSpECHorizonCentroidFromFile[file, 2]];
+
+toAngularVelocity[sep_List] :=
+ Cross[sep, NDerivative[1] /@ sep]/Norm[sep]^2;
+
+ReadSXSOrbitalOmega[sim_String] :=
+ toAngularVelocity[ReadSXSHorizonDisplacement[sim]];
+
+accumulatedPhase[om_] :=
+ Module[{omNormFn, phi, phiFn},
+  omNormFn = Interpolation[Norm[om]];
+  phiFn = 
+   phi /. NDSolve[{phi'[t] == omNormFn[t], phi[0] == 0}, 
+      phi, {t, MinCoordinate[om[[1]]], MaxCoordinate[om[[1]]]}][[1]];
+  ToDataTable[ToListOfCoordinates[om[[1]]], 
+   phiFn /@ ToListOfCoordinates[om[[1]]]]];
+
+ReadSXSAccumulatedPhase[sim_String] :=
+ accumulatedPhase[ReadSXSOrbitalOmega[sim]];
+
+End[];
+EndPackage[];
