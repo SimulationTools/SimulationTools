@@ -70,6 +70,9 @@ SimulationMemoryPlot[runNames1_] :=
          mems = Catch[Catch[Map[ReadSimulationMemoryUsage, runNames],UnknownColumns],_];
          If[StringQ[mems], mems = {{0,0}}];
          
+         MapThread[Sow[<|"SimulationName" -> #1, "Memory" -> #2|>, SimulationTools`SimView`Statistic] &, 
+           {runNames, Last/@mems}];
+
          Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
               PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
               PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory"]]]];
