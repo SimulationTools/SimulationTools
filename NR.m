@@ -62,12 +62,14 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
     squareDiff[params__?NumberQ] :=
       Module[{fSoln, diffs, sqDiff, interval},
 (*        FitFunctionParamPath = Append[FitFunctionParamPath, {it, params}];*)
+        (* Print["squareDiff: ", {params}]; *)
         fSoln = f[params];
         If[fSoln === Indeterminate, Return[100]];
         interval = Last[d][[1]] - First[d][[1]];
         diffs = Map[#[[2]] - fSoln[#[[1]]] &, d];
         Map[If[!NumberQ[#], Return[100]] &, diffs];
         sqDiff = Sqrt[diffs . diffs / Length[diffs]];
+        (* Print["sqDiff = ", sqDiff]; *)
 (*        sqDiff = (diffs . diffs / Length[diffs]);*)
         If[SessionTime[] - lastFitMessageTime > 5,
           lastFitMessageTime = SessionTime[]; 
