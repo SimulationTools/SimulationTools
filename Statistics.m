@@ -133,12 +133,16 @@ formatStatus[x_String[y_String]] := Pane[x <> " (" <> y <> ")", 700];
 
 SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
   Module[
-    {costTable, segments, statusTable},
+    {costTable, segments, statusTable, statuses},
 
     segments = {{Style["Simulation", Bold], Style["Segments", Bold]}}~
     Join~Map[{#, segmentSummary[#]} &, runNames];
 
-    statusTable = Grid[Map[{#,formatStatus[SimulationStatus[#]]}&, runNames]];
+    statuses = SimulationStatus /@ runNames;
+
+    MapThread[Sow[<|"SimulationName" -> #1, "Status" -> #2|>, SimulationTools`SimView`Statistic] &, {runNames, statuses}]; 
+
+    statusTable = Grid[MapThread[{#1,formatStatus[#2]}&, {runNames, statuses}]];
 
     costTable = {{Grid[{{Style["Simulation",Bold],
                        Style["Cores",Bold],
@@ -210,10 +214,12 @@ SimulationStatus[sim_String] :=
 SimulationPerformancePanel[sims_List] :=
  Grid[Join[{Style[#,Bold]&/@{"Simulation","Speed","Memory/GB","Swap/MB","Cores"}},
    Table[
-     {sim, NumberForm[Last[ReadSimulationSpeed[sim]],{2,1}], 
+   Module[{speed = Last[ReadSimulationSpeed[sim]], cores = ReadSimulationCoreCount[sim]},
+     Sow[<|"SimulationName" -> sim, "Speed" -> speed, "Cores" -> cores|>, SimulationTools`SimView`Statistic];
+     {sim, NumberForm[speed,{2,1}], 
        NumberForm[Last[ReadSimulationMemoryUsage[sim]]/1024.,{2,1}],
        Last[ReadSimulationSwapUsage[sim]],
-       ReadSimulationCoreCount[sim]}, {sim, sims}]],Alignment->{{Left,".",Right,Right,Right}}];  
+       cores}], {sim, sims}]],Alignment->{{Left,".",Right,Right,Right}}];  
 
 End[];
 EndPackage[];
