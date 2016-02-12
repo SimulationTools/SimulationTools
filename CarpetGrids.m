@@ -69,6 +69,7 @@ parseCoordVec3[s_String] :=
 
 parseIterationTable[itTable_] :=
  Module[{itData, levels},
+  (* Only do map 0 for now *)
   itData = Select[itTable, Length[#] === 5 && NumberQ[#[[4]]] &];
   levels = SplitBy[itData, #[[3]] &];
   {itTable[[1, 2]], parseLevelTable /@ levels}];
@@ -85,7 +86,7 @@ parseGridTable[table_] :=
    Table[table[[
      iterationPositions[[i]] ;; iterationPositions[[i + 1]] - 1]], {i, 1, 
      Length[iterationPositions] - 1}];
-    parseIterationTable /@ itTable];
+    parseIterationTable /@ Select[itTable,#[[3,1]]===0&]];
 
 ReadCarpetGridStructure = readGridStructure;
 
