@@ -74,7 +74,7 @@ SimulationMemoryPlot[runNames1_] :=
            {runNames, Last/@mems}];
 
          Show[PresentationListLinePlot[mems, PlotLegend -> runNames, LegendPosition -> {Left, Bottom}],
-              PresentationListLinePlot[swaps, PlotStyle->{Dashed}],
+              PresentationListLinePlot[swaps, PlotStyle->Map[Directive[Dashed,#]&, PresentationPlotStyles]],
               PlotRange -> {0, All}, AxesOrigin->{0,0}, PlotLabel -> "Memory"]]]];
 
 End[];
