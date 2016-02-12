@@ -186,6 +186,8 @@ Options[SimulationNames] = {"FullPath" -> False};
 
 SimulationNames[form_, OptionsPattern[]] :=
  Module[{dirs},
+  If[StringQ[form] && StringTake[form,1] === "/",
+    Return[FileNames[form]]]; (* TODO: detect absolute paths when form is a pattern *)
   If[SameQ[SimulationPath[], {}], Return[{}] ];
   dirs = Select[FileNames[form, SimulationPath[]], DirectoryQ];
   Switch[OptionValue["FullPath"],
