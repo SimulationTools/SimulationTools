@@ -52,6 +52,7 @@ ReadBHSpin;
 ReadBHMass;
 ReadBHCoordinatesNRDF;
 ReadBHUsefulSpin;
+ParseMetadataFileFromName;
 
 Begin["`Private`"];
 
@@ -71,6 +72,10 @@ SimulationTools`NRDF`RunFiles`FindRunDirSegments[dir_] :=
 
 DefineMemoFunction[ParseMetadataFile[run_String],
   CleanParseTree[ParsePEG["nrdfmd.peg","file",findMetadataFile[run]]]];
+
+ParseMetadataFileFromName[fileName_String] :=
+  CleanParseTree[ParsePEG["nrdfmd.peg","file",fileName]];
+
 
 processMetadata[md_] :=
   md /. {"keyword"[k_String] :> "keyword"[ToLowerCase[k]],
