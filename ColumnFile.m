@@ -72,11 +72,11 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
     list2 = Select[list, !isComment[#] &];
     file2 = StringJoin[Riffle[list2, "\n"]];
     data = Profile["ReadColumnFile:ImportString", ImportString[file2,"Table"]];
-    If[!ArrayQ[data],
-      Error["File "<>fileName<>" missing data."];
-    ,
+    (* If[!ArrayQ[data], *)
+    (*   Error["File "<>fileName<>" missing data."]; *)
+    (* , *)
       Return[data];
-    ];
+    (* ]; *)
   ]
   ]
 ];
