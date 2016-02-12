@@ -17,6 +17,7 @@
 BeginPackage["SimulationTools`Waveforms`",
  {
   "SimulationTools`CoordinateTransformations`",
+  "SimulationTools`ColumnFile`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
@@ -95,6 +96,7 @@ ReadRadiallyExtrapolatedWave;  (* TODO *)
 RadiallyExtrapolatedWave;  (* TODO *)
 Psi4PerturbativeCorrection;
 Psi4ToStrain;
+ReadStrainCPM;
 
 $UniformGridExtrapolation;
 ffiDataTable;
@@ -902,6 +904,22 @@ DefineMemoFunction[ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integ
 
 Psi4PerturbativeCorrection[rpsi4_DataTable, l_Integer, r_?NumberQ, om0_?NumberQ] :=
   rpsi4 - 1/2 (l - 1) (l + 2) FixedFrequencyIntegrate[rpsi4/r, om0];
+
+(****************************************************************)
+(* ReadStrainCPM                                                *)
+(****************************************************************)
+
+ReadStrainCPM[sim_String, l_, m_, r_] :=
+ Module[{components, psiEvenRe, psiEvenIm, psiOddRe, psiOddIm},
+  components = 
+   Table["Psi_" <> x <> "_Detector_Radius_" <> ToString[r] <> 
+     ".00_l" <> ToString[l] <> "_m" <> ToString[m] <> 
+     ".asc", {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
+  {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
+   ToDataTable[ReadColumnFile[sim, #]] & /@ components;
+  1/(2 r) Sqrt[
+    Factorial[l + 2]/Factorial[l - 2]] (psiEvenRe + I psiEvenIm + 
+     I (psiOddRe + I psiOddIm))];
 
 End[];
 
