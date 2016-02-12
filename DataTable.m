@@ -1032,6 +1032,8 @@ DataTable /: FourierDCT[d_DataTable,args___] :=
 
 DataTable /: Fourier[d_DataTable,args___] :=
  Module[{amp, l, n, T, freq},
+  If[!UniformSpacingQ[d],
+    Error["Cannot Fourier transform a non-uniform DataTable"]];
   amp = Fourier[DepVar[d],args];
   l = Length[d];
   n = Floor[l/2];
