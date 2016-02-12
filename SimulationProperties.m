@@ -157,18 +157,21 @@ SimulationSpeedPlot[runNames1_] :=
 ReadSimulationMachine[sim_String] :=
   CallProvidedFunction["RunFiles","ReadSimulationMachine",{FindRunDir[sim],sim}];  
 
-SimulationProgressPlot[sim_String, style_: PresentationPlotStyles[[1]]] :=
-  Module[{progresses, markers},
+SimulationProgressPlot[sim_String, style_: PresentationPlotStyles[[1]], opts___] :=
+  Module[{progresses, markers, ranges, t1, t2},
   progresses = ReadSimulationSegmentProgress[sim];
   markers = ToList[#][[{1, -1}]] & /@ progresses;
-  Show[DateListPlot[ToList /@ progresses, Frame -> True, 
+  ranges = CoordinateRange/@progresses;
+  t1 = Min[ranges[[All,1]]];
+  t2 = Max[ranges[[All,2]]];
+  Show[DateListPlot[ToList /@ progresses, opts, Frame -> True, PlotRange->{{t1,t2},All},
     LabelStyle -> "Medium", PlotStyle -> style, PlotLegends -> {sim}, 
     FrameLabel -> {None, "t"}], Graphics[{Point /@ markers}]]];
 
 SimulationProgressPlot[sims_List, opts___] :=
   Module[{styles},
     styles = Take[PresentationPlotStyles, Length[sims]];
-    Show[Sequence @@ MapThread[SimulationProgressPlot, {sims, styles}], 
+    Show[Sequence @@ MapThread[SimulationProgressPlot[#1,#2,opts] &, {sims, styles}], 
       opts]];
 
 End[];
