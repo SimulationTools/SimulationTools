@@ -28,6 +28,8 @@ BeginPackage["SimulationTools`SimView`",
 SimulationOverview::usage = "SimulationOverview[sim] gives a quick overview of the simulation sim.
 SimulationOverview[{sim1, sim2, ...}] gives a quick overview of the simulations sim1, sim2, ....";
 
+SimulationTools`SimView`Statistic;
+
 (* Deprecated *)
 SimView;
 
