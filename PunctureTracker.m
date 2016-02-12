@@ -23,6 +23,7 @@ BeginPackage["SimulationTools`PunctureTracker`",
 
 ReadPunctureVelocity;
 ReadPuncturePosition;
+$PunctureTrackerDataFileName;
 
 Begin["`Private`"];
 
