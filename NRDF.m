@@ -129,7 +129,7 @@ haveMetadataFile[dir_String] :=
 
 findMetadataFile[run_String] :=
       Module[{files},
-             files = FileNames["*.bbh", FindRunDir[run],1];
+             files = FileNames["metadata.txt" | (__ ~~ ".bbh"), FindRunDir[run],1];
              If[Length[files] =!= 1, Error["Failed to find exactly one metadata file in run "<>
                                            run<>" in directory "<>FindRunDir[run]]];
              files[[1]]];
