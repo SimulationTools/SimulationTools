@@ -1039,8 +1039,8 @@ DataTable /: Fourier[d_DataTable,args___] :=
   n = Floor[l/2];
   amp = RotateRight[amp, n];
   T = Spacing[d]*l;
-  freq = Range[-n, l - 1 - n]/T;
-  Return[MakeDataTable[Transpose[{freq, amp}]]];
+  freq = Range[N[-n], l - 1 - n]/T;
+  ToDataTable[freq,amp]
 ];
 
 (****************************************************************)
