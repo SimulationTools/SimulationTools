@@ -50,15 +50,17 @@ Begin["`Private`"];
   Model fitting
   --------------------------------------------------------------------*)
 
-FitFunction[d_, f_, paramSpecs_] :=
-  FitFunction[d, f, paramSpecs, FindMinimum, Automatic];
+Clear[FitFunction];
+
+FitFunction[d_, f_, paramSpecs_, opts:OptionsPattern[]] :=
+  FitFunction[d, f, paramSpecs, FindMinimum, Automatic, opts];
 
 (* Take a table d of data from a simulation and work out values of a set
    of parameters ps which cause the data to match best to a given
    function f over a given interval tMin to tMax. *)
-
-FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
-  Module[{squareDiff,lastFitMessageTime, it, pList, pList2, p2, p3, paramSpecs2, fit, fit2},
+Options[FitFunction] = {"NMinimizeOptions" -> {}};
+FitFunction[d_List, f_, paramSpecs_, method_, subMethod_, OptionsPattern[]] :=
+  Module[{squareDiff,lastFitMessageTime, it, pList, pList2, p2, p3, paramSpecs2, fit, fit2, bestSqDiff=Infinity, bestParams={}, bestFn = Function[t, 0], paramHistory = {}, sqDiffHistory = {}},
     squareDiff[params__?NumberQ] :=
       Module[{fSoln, diffs, sqDiff, interval},
 (*        FitFunctionParamPath = Append[FitFunctionParamPath, {it, params}];*)
@@ -71,9 +73,30 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
         sqDiff = Sqrt[diffs . diffs / Length[diffs]];
         (* Print["sqDiff = ", sqDiff]; *)
 (*        sqDiff = (diffs . diffs / Length[diffs]);*)
-        If[SessionTime[] - lastFitMessageTime > 5,
+        paramHistory = Append[paramHistory, {params}];
+        sqDiffHistory = Append[sqDiffHistory, sqDiff];
+        (* TODO: don't use a global variable here *)
+        Global`$FitHistory = Thread[{paramHistory, sqDiffHistory}];
+        If[sqDiff < bestSqDiff,
+          bestSqDiff = sqDiff;
+          bestParams = {params};
+          bestFn = fSoln;
+          Global`$BestFit = {bestSqDiff, bestParams, bestFn}];
+
+        If[SessionTime[] - lastFitMessageTime > 2,
+          (* Print["Updating plot"]; *)
+          Global`$FitStatusPlot = Show[
+            ListLinePlot[d,Frame->True,PlotRange->{{d[[1,1]],d[[-1,1]]},{Min[d[[All,2]]],Max[d[[All,2]]]}}, PlotStyle->Directive[Gray,Thickness[0.002]],PlotLabel->Style[bestParams->bestSqDiff,Blue]],
+            Plot[{bestFn[t],fSoln[t]},{t,d[[1,1]],d[[-1,1]]}, PlotStyle->{Directive[Dashed,Blue,Thickness[0.002]], Directive[Dashed,Darker@Green,Thickness[0.002]]}]];
+
+          (* Global`$FitParamPlot = ListPointPlot3D[paramHistory, PlotRange -> All, *)
+          (*   AxesLabel ->Map[First,paramSpecs], Filling -> Bottom]; *)
+
+          (* Global`$FitParamPlot = Graphics3D[Map[{ColorData["TemperatureMap"][Log10[1/#[[2]]]], Point[#[[1]]]} &, Thread[{paramHistory, sqDiffHistory}]],PlotRange -> All, *)
+          (*   AxesLabel ->Map[First,paramSpecs]]; *)
+
           lastFitMessageTime = SessionTime[]; 
-          Print[ToString[it]<> " "<>ToString[sqDiff,CForm]<>" "<>ToString[Map[ToString[#,CForm] &, {params}]]]];
+          (* Print[ToString[it]<> " "<>ToString[sqDiff,CForm]<>" "<>ToString[Map[ToString[#,CForm] &, {params}]]] *)];
         it++;
         Return[sqDiff]];
 
@@ -94,7 +117,7 @@ FitFunction[d_List, f_, paramSpecs_, method_, subMethod_] :=
       fit = FindMinimum[Apply[squareDiff, pList2], paramSpecs2, 
                (* AccuracyGoal -> 2,  PrecisionGoal->2, *)  Method-> PrincipalAxis   ],
       fit = Quiet[NMinimize[Apply[squareDiff, pList2], paramSpecs2, 
-                  (* AccuracyGoal -> Infinity, PrecisionGoal->3,*)   Method->subMethod], {NMinimize::cvmit}]
+                  (* AccuracyGoal -> Infinity, PrecisionGoal->3,*)   Method->subMethod, OptionValue[NMinimizeOptions]], {NMinimize::cvmit}]
     ];
 
     If[Head[fit] === FindMinimum,
