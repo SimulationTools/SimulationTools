@@ -94,6 +94,7 @@ ReadGeodesicKretschmann[sim_, i_] :=
     {t,f} = Transpose[fTable];
     Map[16 ToDataTable[t, #] &, {f}][[1]]];
 
+(* TODO: This is only giving the 0 component *)
 ReadGeodesicContravariantTangent[sim_, i_] :=
   Module[
     {alpTable, t, alp},
