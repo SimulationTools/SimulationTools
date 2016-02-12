@@ -390,16 +390,16 @@ CheckIdenticalRegridding[sims : {_String ...},
   maxRL = 8; (* TODO: fix this *)
 
   dts = readIterationTimeStep/@sims;
-
+(* Print["dts = ", dts]; *)
   regEvs = readRegriddingIterationInterval/@sims;
-
+(* Print["regEvs = ", regEvs]; *)
   (* Print[regEvs]; *)
 
   regIts = MapThread[RegriddingIterations, {grids, regEvs}];
-
+(* Print["regIts = ", regIts]; *)
   (* All the times that each of the simulations regrid *)
   regTimes1 = regIts dts;
-
+(* Print["regTimes1 = ", regTimes1]; *)
   (* Eliminate small variations *)
   regTimes = Rationalize[regTimes1 / regTimes1[[1,1]]] regTimes1[[1,1]];
 
