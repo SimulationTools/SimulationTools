@@ -18,6 +18,7 @@ BeginPackage["SimulationTools`Error`", {"StackTrace`"}];
 
 Error(*::usage = "Error[message, arg1, arg2, ...] reports an error to the user."*);
 WithExceptions;
+WithExceptionsFn;
 Error::error = "An error has been detected: `1`";
 
 (* TODO: this should not be set on package load as it will override the user's choice *)
@@ -62,6 +63,16 @@ WithExceptions[expr_, exception_ -> result_] :=
     Catch[Block[{$ExceptionsActive = Append[$ExceptionsActive, exception]}, expr1],
           exception,
           result &]];
+
+SetAttributes[WithExceptionsFn, HoldAll];
+WithExceptionsFn[expr_, exception_ -> resultFn_] :=
+  (* Only support a single exception at a time for the moment *)
+  Module[
+    {expr1},
+    expr1 := expr; (* Ensure that if Return is called in expr, we return to the correct place *)
+    Catch[Block[{$ExceptionsActive = Append[$ExceptionsActive, exception]}, expr1],
+          exception,
+          resultFn]];
 
 WithExceptions[___] :=
   Error["Invalid arguments to WithExceptions"];
