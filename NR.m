@@ -24,7 +24,8 @@ BeginPackage["SimulationTools`NR`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",
-  "SimulationTools`TwoPunctures`"
+  "SimulationTools`TwoPunctures`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 ReadHamiltonianConstraintNorm(*::usage = "ReadHamiltonianConstraintNorm[sim] reads the norm of the Hamiltonian constraint in sim."*);
@@ -41,6 +42,7 @@ FitParameters;
 ToFixedWidth;
 LRange;
 InitialDimensionlessSpin;
+BinaryEccentricityFromSeparation;
 
 Begin["`Private`"];
 
@@ -152,6 +154,26 @@ FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
    FitParameters, eccFit,
    _, Error["Unknown option given to FitEcc"]]
   ];
+
+BinaryEccentricityFromSeparation[sep_DataTable] :=
+  Module[{model, a, f, t, e, n, l0, params, tStart, tLength, tInterval,
+    plot, guessData, fit, fittedData},
+    model = a (1 + f t) (1 + e Cos[n t + l0]); 
+    params = {{a, 15}, {e, 0.2}, {n, 
+      2 Pi/420}, {l0, -1.8}, {f, -0.00001}};
+    tStart = 400; 
+    tLength = 1000; tInterval = tStart ;; tStart + tLength;
+    guessData = 
+    model /. Apply[Rule, params, 1] /. t -> Coordinate[sep];
+    fit = FindFit[ToList[Slab[sep, tInterval]], model, params, t];
+    fittedData = model /. fit /. t -> Coordinate[sep];
+    plot = PresentationListLinePlot[{sep, fittedData}, 
+      PlotLegend -> {"NR", "Fit"}, LegendPosition -> {Left, Bottom}, 
+      GridLines -> {List @@ tInterval, None}];
+    Association[
+      "FitParameters" -> (fit /. {e -> "e", a -> "a", n -> "n", 
+        l0 -> "l0", f -> "f"}), "Plot" -> plot, 
+      "Eccentricity" -> Abs[e /. fit]]];
 
 ToFixedWidth[n_Integer, width_Integer] :=
   StringJoin[PadLeft[Characters[ToString[n]], width, "0"]];
