@@ -430,6 +430,15 @@ makeEntry[key_ -> val_, pad_:0] :=
 makeEntry[val_] :=
  If[StringQ[val], val, ToString[val, CForm]];
 
+makeEntry[val_String] :=
+ val;
+
+makeEntry[val_] :=
+  ToString[val, CForm];
+
+makeEntry[vals_List] :=
+  StringJoin@@Riffle[Map[makeEntry,vals],", "];
+
 (* ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\"."; *)
 
 Options[ExportMetadata] = {"JunkTime" -> None, "ExportSimFormat" -> "ASCII"};
