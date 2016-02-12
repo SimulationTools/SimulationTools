@@ -20,7 +20,8 @@ BeginPackage["SimulationTools`CarpetGrids`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
   "SimulationTools`Segments`",
-  "SimulationTools`Grids`"
+  "SimulationTools`Grids`",
+  "SimulationTools`Utils`"
  }];
 
 ReadCarpetGridStructure;
@@ -381,14 +382,14 @@ CheckIdenticalRegridding[sims : {_String ...},
  
  Module[{grids, dts, regEvs, regIts, regTimes1, regTimes, regAnyTimes, regNewIts,
    buffers = readBufferSize/@sims, maxRL, gridsAt, checkIdenticalGrids,
-   checkIdenticalGridsAtTime},
+   checkIdenticalGridsAtTime, diffs, tRef},
 
   grids = Map[readGridStructure[#, gridFileName] &, sims];
 
   (* maxRL = Max[Flatten[grids[[All,All,2,All,1]]]]; *)
 
-  maxRL = 8; (* TODO: fix this *)
-
+  maxRL = 9; (* TODO: fix this *)
+Print["WARNING: maxRL = 9"];
   dts = readIterationTimeStep/@sims;
 (* Print["dts = ", dts]; *)
   regEvs = readRegriddingIterationInterval/@sims;
@@ -401,7 +402,11 @@ CheckIdenticalRegridding[sims : {_String ...},
   regTimes1 = regIts dts;
 (* Print["regTimes1 = ", regTimes1]; *)
   (* Eliminate small variations *)
-  regTimes = Rationalize[regTimes1 / regTimes1[[1,1]]] regTimes1[[1,1]];
+
+  tRef = regTimes1[[1,1]];
+  If[Rationalize[tRef] === 0, Print["Adjusting"]; tRef = regTimes1[[1,2]]];
+(* Print["tRef = ", tRef]; *)
+  regTimes = Rationalize[regTimes1 / tRef] tRef;
 
   (* All the times that any of the simulations regrid *)
   regAnyTimes = Union@@regTimes;
@@ -419,17 +424,22 @@ CheckIdenticalRegridding[sims : {_String ...},
        gs[[i, 2, rl+1, 2]]]];
 
   checkIdenticalGrids[bboxLists_List, {t_, rl_Integer}] :=
-   Module[{gs = 
-     MapThread[
+   Module[{gs, equal, matrix},
+     (* Print["t = ", t]; *)
+     gs = MapThread[
        normalise[shrinkBBoxes[#1, #2, True, False, False (* FIXME: assuming bitant *)]] &,
-       {bboxLists,buffers}],
-     equal},
+       {bboxLists,buffers}];
+     (* Print[1]; *)
      equal = Map[bboxesEqual[First[gs], #] &, Rest[gs]];
+     (* Print[2]; *)
      If[! And @@ equal,
-       Print["Grid equality check failed at t = ", t, 
+       (* Print[3]; *)
+       matrix = Outer[bboxesEqual, gs, gs, 1];
+       Sow[{t, rl, matrix, gs}, CheckIdenticalRegridding];
+       Print["Grid equality check failed at t = ", N@t, 
          " on refinement level ", rl];
-       AppendTo[$UnequalBBoxes, {t,rl,gs}];
-       Print[MatrixForm[Outer[bboxesEqual, gs, gs, 1]]];
+       AppendTo[$UnequalBBoxes, {N@t,rl,gs}];
+       Print[MatrixForm[matrix]];
        ]];
 
   checkIdenticalGridsAtTime[t_] :=
@@ -437,15 +447,20 @@ CheckIdenticalRegridding[sims : {_String ...},
      newIts = Round[t/dts]+1;
      Do[
        (* Print["Checking rl ", rl, " at time ", t]; *)
-       Global`$status = StringJoin[ToString/@{"Checking rl ", rl, " at time ", t}];
+       Global`$status = StringJoin[ToString/@{"Checking rl ", rl, " at time ", N@t}];
        checkIdenticalGrids[MapThread[gridsAt[#1,#2,rl] &, {grids, newIts}], {t, rl}],
-       {rl, 1 (* TODO: include RL0, but don't remove buffer zones *), maxRL}]];
+       {rl, 2 (* TODO: include RL0, but don't remove buffer zones *), maxRL}]];
 
-  Print["Checking up to t = ", regAnyTimes[[-1]]];
+  (* range = 300;;-1;;1; *)
+  range = All;
 
-  checkIdenticalGridsAtTime /@ regAnyTimes;
+  Print["Checking up to t = ", regAnyTimes[[range]][[-1]]];
 
-       ];
+  reaped = Reap[checkIdenticalGridsAtTime /@ regAnyTimes[[range]], CheckIdenticalRegridding];
+
+  diffs = reaped[[2,1]];
+(* Print["after Reap"]; *)
+  {regAnyTimes[[range]], diffs}];
 
 
 
