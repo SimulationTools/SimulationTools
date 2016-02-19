@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`ColumnFile`",
  {"SimulationTools`Error`",
+  "SimulationTools`FileDependencies`",
   "SimulationTools`Memo`",
   "SimulationTools`Profile`",
   "SimulationTools`RunFiles`"
@@ -61,6 +62,8 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
   Module[{list, list2, isComment, file2, data},
   Profile["ReadColumnFile[" <> fileName <> "]",
     If[FileType[fileName] === None, Error["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
+
+    DeclareFileDependency[fileName];
 
     If[FileExtension[fileName] === "gz",
        (* Print["Importing gzip"]; *)
