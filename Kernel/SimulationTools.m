@@ -172,7 +172,7 @@ SimulationPath[] :=
              Error["Invalid $SimulationPath; it should be a list of strings, but it is currently "<>
                    ToString[$SimulationPath,InputForm]]],
           {}],
-       If[MemberQ[Names["Global`*"], "RunDirectory"],
+       If[MemberQ[Names["Global`RunDirectory"], "RunDirectory"],
           If[MatchQ[ToExpression["Global`RunDirectory"], _String],
              {ToExpression["Global`RunDirectory"]},
              Error["Invalid RunDirectory; it should be a atring, but it is currently "<>
