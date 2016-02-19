@@ -1026,8 +1026,8 @@ ReadSpECHorizonCentroidFromFile[file_String, ah_Integer] :=
 
 ReadSXSHorizonDisplacement[run_String] :=
  Module[{file = FileNameJoin[{run, "Horizons.h5"}]},
-  readSpECHorizonCentroidFromFile[file, 1] - 
-   readSpECHorizonCentroidFromFile[file, 2]];
+  ReadSpECHorizonCentroidFromFile[file, 1] - 
+   ReadSpECHorizonCentroidFromFile[file, 2]];
 
 toAngularVelocity[sep_List] :=
  Cross[sep, NDerivative[1] /@ sep]/Norm[sep]^2;
