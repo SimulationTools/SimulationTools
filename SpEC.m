@@ -85,6 +85,14 @@ ReadSpECOrbitalOmega;
 ReadSpECOrbitalPhase;
 ReadSpECSimulationProfileSummary;
 DataNotFound;
+ReadSXSStrain;
+ReadSpECColumnFile;
+ReadSpECColumnHeader;
+ReadSpECInitialDimensionlessSpin;
+ReadSpECInitialMass;
+ReadSpECInitialMassRatio;
+HaveSpECInitialDataParameters;
+ReadSpECASCIIData;
 ReadSXSHorizonDisplacement;
 ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
@@ -665,6 +673,15 @@ ReadSpECADMAngularMomentum[sim_] :=
 
 ReadSpECInitialOrbitalFrequency[sim_] :=
  ReadSpECInitialDataParameter[sim, "Omega0"];
+
+ReadSpECInitialDimensionlessSpin[sim_, i_] :=
+ ReadSpECInitialDataParameter[sim, {"chiA","chiB"}[[i]]];
+
+ReadSpECInitialMass[sim_, i_] :=
+ ReadSpECInitialDataParameter[sim, {"MA","MB"}[[i]]];
+
+ReadSpECInitialMassRatio[sim_] :=
+  ReadSpECInitialMass[sim,1] / ReadSpECInitialMass[sim,2];
 
 (****************************************************************)
 (* Eccentricity reduction *)
