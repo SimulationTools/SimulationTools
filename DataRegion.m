@@ -576,7 +576,7 @@ Protect[MapThread];
 
 $1DPlotFunctions = {ListPlot, ListLinePlot, ListLogPlot, ListLogLogPlot};
 $2DPlotFunctions = {ListDensityPlot, ArrayPlot, ListPlot3D, ListContourPlot};
-$3DPlotFunctions = {ListContourPlot3D};
+$3DPlotFunctions = {ListContourPlot3D, ListDensityPlot3D, ListSliceContourPlot3D, ListSliceDensityPlot3D};
 
 DataRegion /: f_Symbol[d_DataRegion, args___] :=
  plotWrapper[f, 1, d, args] /; MemberQ[$1DPlotFunctions, f];
