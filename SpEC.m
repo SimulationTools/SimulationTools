@@ -242,6 +242,7 @@ ReadSpECHDF5Data[runName_String, filename_String, datasetName_String] :=
 ReadSpECOrbitalOmega[sim_String] :=
   Module[{data},
     data = ReadSpECHDF5Data[sim, "OrbitDiagnostics.h5", "OmegaVector.dat"];
+    If[Length[data] === 0, Error["No orbital omega data in "<>sim]];
     {t, omx, omy, omz} = Transpose[data];
     ToDataTable[t, #] & /@ {omx, omy, omz}];
 
