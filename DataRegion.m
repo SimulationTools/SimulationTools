@@ -601,6 +601,9 @@ plotWrapper[plotFunction_, plotDims_, d_DataRegion, args___] :=
   (* We need to Transpose 2D data *)
   If[ndims == 2, data = Transpose[data]];
 
+  (* We need to Transpose 3D data *)
+  If[ndims == 3, data = Transpose[data, {3, 2, 1}]];
+
   (* ArrayPlot is backwards! *)
   If[plotFunction === ArrayPlot, data = Reverse[data]];
 
