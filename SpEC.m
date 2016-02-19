@@ -52,6 +52,7 @@ FindSpECEccentricityReductionSimulations;
 HaveSpECEvolution;
 ReadSpECEccentricity;
 FindSpECSimulation;
+FindSpECSimulationFile;
 FindSpECSubSimulations;
 ReadSpECHorizonSpin;
 ReadSpECCoreCount;
