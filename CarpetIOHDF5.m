@@ -18,7 +18,7 @@ BeginPackage["SimulationTools`CarpetIOHDF5`",
  {
   "SimulationTools`DataRegion`",
   "SimulationTools`Error`",
-  "SimulationTools`Profile`",
+  "SimulationTools`ProfileCall`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`RunFiles`"
  }];
@@ -279,7 +279,7 @@ Options[ReadCarpetIOHDF5Datasets] = {"StripGhostZones" -> True};
 (* Read a list of datasets into DataRegions *)
 ReadCarpetIOHDF5Datasets[file_String, {}, opts:OptionsPattern[]] := {};
 ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
- Profile["ReadCarpetIOHDF5Datasets",
+ ProfileCall["ReadCarpetIOHDF5Datasets",
  Module[{data, annots, dims, order, origin, spacing, name, dr, ghosts, time},
   If[Apply[Or,Map[(!StringQ[#])&, ds]],
     Error["ReadCarpetIOHDF5Datasets: expected a string dataset name, but instead got " <>ToString[ds]]];
@@ -320,7 +320,7 @@ ReadCarpetIOHDF5Datasets[file_String, ds_List, opts:OptionsPattern[]] :=
 
 (* Get a list of all components in a file *)
 CarpetIOHDF5Components[file_, it_, rl_, map_] := 
-  Profile["CarpetIOHDF5Components",
+  ProfileCall["CarpetIOHDF5Components",
   datasetAttribute[datasetsWith[file, {2 -> it, 4 -> rl, 6 -> map}], 5]];
 
 (****************************************************************)
@@ -342,7 +342,7 @@ ReadCarpetIOHDF5Components[file_String, var_String, it_Integer, rl_, tl_Integer,
       leaf = FileNameTake[file];
       leafPrefix = StringReplace[leaf, ".file_0.h5" -> ""];
       pattern = leafPrefix ~~ ".file_" ~~ DigitCharacter.. ~~ ".h5";
-      fileNames = Profile["FileNames", FileNames[pattern, {directory}]];
+      fileNames = ProfileCall["FileNames", FileNames[pattern, {directory}]];
     ,
       fileNames = {file};
     ];
@@ -438,10 +438,10 @@ datasetAttributesTable[h5filename_String] :=
       Return[cache[h5filename]["data"]];
     ];
 
-    Profile["datasetAttributesTable[file]",
+    ProfileCall["datasetAttributesTable[file]",
 
     (* Convert dataset name strings into rules *)
-    datasets = Profile["Datasets", Datasets[h5filename]];
+    datasets = ProfileCall["Datasets", Datasets[h5filename]];
 
     (* Remove datasets which are not data; performance of this has not
        been tested, but not doing this leads to None entries in the
@@ -449,7 +449,7 @@ datasetAttributesTable[h5filename_String] :=
     (* datasets = Flatten[StringCases[datasets, ___~~"="~~___]]; *)
     datasets = Select[datasets, StringMatchQ[#, "*=*"] &];
 
-    Profile["datasetAttributesTable/StringCases",
+    ProfileCall["datasetAttributesTable/StringCases",
      attributeRules = StringCases[datasets,
      {"it=" ~~ x : NumberString :> ("it" -> ToExpression[x]),
       "tl=" ~~ x : NumberString :> ("tl" -> ToExpression[x]),
@@ -459,11 +459,11 @@ datasetAttributesTable[h5filename_String] :=
       StartOfString ~~ "/" ~~ Shortest[x : __] ~~ " it=" :> ("var" -> x)},
       Overlaps -> True]];
 
-    Profile["datasetAttributesTable/Replace1",
+    ProfileCall["datasetAttributesTable/Replace1",
     dsattrs = {"var", "it", "tl", "rl", "c", "m"} /. attributeRules];
 
     (* If an attribute isn't found for a dataset, set it to None *)
-    Profile["datasetAttributesTable/Replace2",
+    ProfileCall["datasetAttributesTable/Replace2",
     dsattrs = dsattrs /. {"var" -> None, "it" -> None, "tl" -> None,
                           "rl" -> None, "c" -> None, "m" -> None}];
 
@@ -534,7 +534,7 @@ Datasets[h5filename_] :=
    The lists of attributes are in the same order as the dataset names
    in Datasets[file]. *)
 Annotations[h5filename_String, datasetName:(_String|_List)] :=
-  Profile["Annotations",
+  ProfileCall["Annotations",
     ReadHDF5[h5filename, {"Annotations", datasetName}]];
 
 (* Return the dimensions of the dataset with the given name; a list such as {nx, ny, nz} *)
@@ -543,7 +543,7 @@ Dims[h5filename_String, datasetName:(_String|_List)] :=
 
 (* Return the data of the dataset with the given name or list of names *)
 HDF5Data[h5filename_String, datasetName:(_String|_List)] :=
-  Profile["HDF5Data", ReadHDF5[h5filename, {"Datasets", datasetName}]];
+  ProfileCall["HDF5Data", ReadHDF5[h5filename, {"Datasets", datasetName}]];
 
 End[];
 

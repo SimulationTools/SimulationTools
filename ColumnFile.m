@@ -18,7 +18,7 @@ BeginPackage["SimulationTools`ColumnFile`",
  {"SimulationTools`Error`",
   "SimulationTools`FileDependencies`",
   "SimulationTools`Memo`",
-  "SimulationTools`Profile`",
+  "SimulationTools`ProfileCall`",
   "SimulationTools`RunFiles`"
  }];
 
@@ -60,7 +60,7 @@ ImportGzip[file_String, as_] :=
 
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
   Module[{list, list2, isComment, file2, data},
-  Profile["ReadColumnFile[" <> fileName <> "]",
+  ProfileCall["ReadColumnFile[" <> fileName <> "]",
     If[FileType[fileName] === None, Error["File " <> fileName <> " not found (ReadColumnFileWithFileName)"]];
 
     DeclareFileDependency[fileName];
@@ -74,7 +74,7 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
       StringQ[x] && StringMatchQ[x, "#" ~~ ___];
     list2 = Select[list, !isComment[#] &];
     file2 = StringJoin[Riffle[list2, "\n"]];
-    data = Profile["ReadColumnFile:ImportString", ImportString[file2,"Table"]];
+    data = ProfileCall["ReadColumnFile:ImportString", ImportString[file2,"Table"]];
     (* If[!ArrayQ[data], *)
     (*   Error["File "<>fileName<>" missing data."]; *)
     (* , *)

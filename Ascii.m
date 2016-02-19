@@ -18,7 +18,7 @@ BeginPackage["SimulationTools`Ascii`",
  {
   "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
-  "SimulationTools`Profile`"
+  "SimulationTools`ProfileCall`"
  }];
 
 (* This should be handled through some sort of abstract "simulation
@@ -32,10 +32,10 @@ ReadCarpetASCIIScalar[run_,fileName_] :=
  Module[{coltime, coldata, data},
 (*  lines = ReadList[fileName, String, NullRecords -> True];*)
   (*If[FileType[fileName] === None, Error["ReadCarpetASCIIScalar: File "<>fileName<>" not found"]];*)
-  Profile["ReadCarpetASCIIScalar: Check if we want to plot scalar output or 0D output. They have different formats.",
+  ProfileCall["ReadCarpetASCIIScalar: Check if we want to plot scalar output or 0D output. They have different formats.",
     If[StringLength[StringSplit[FileNameTake[fileName],"."][[2]]]<= 2,coltime=9;coldata=13;,coltime=2;coldata=3;]];
-  Profile["ReadCarpetASCIIScalar: " <> fileName,
-  Profile["ReadCarpetASCIIScalar: Reading file", 
+  ProfileCall["ReadCarpetASCIIScalar: " <> fileName,
+  ProfileCall["ReadCarpetASCIIScalar: Reading file", 
     data = MakeDataTable[ReadColumnFile[run,fileName,{coltime,coldata}]]]]];
 End[];
 

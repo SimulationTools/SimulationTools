@@ -33,7 +33,7 @@ ReadSimulationTimer;
 
 Begin["`Private`"];
 
-(* Timer exists in Profile as well.  Probably with the same format.
+(* Timer exists in ProfileCall as well.  Probably with the same format.
    Should merge these. *)
 Timer = timer;
 

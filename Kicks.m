@@ -19,7 +19,7 @@ BeginPackage["SimulationTools`Kicks`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Memo`",
-  "SimulationTools`Profile`",
+  "SimulationTools`ProfileCall`",
   "SimulationTools`Waveforms`"
  }];
 
@@ -75,7 +75,7 @@ integratePsi4[run_, l_, m_, r_] :=
   integratePsi4[Function[{lp,mp,rp}, ReadPsi4[run, lp, mp, rp]], l, m, r];
 
 integratePsi4[psi4Reader_, l_, m_, r_] :=
- Profile["integratePsi4", IntegrateDataTableZeroEnd[Profile["ReadPsi4", psi4Reader[l, m, r]]]];
+ ProfileCall["integratePsi4", IntegrateDataTableZeroEnd[ProfileCall["ReadPsi4", psi4Reader[l, m, r]]]];
 
 integratePsi4Twice[psi4Reader_,l_,m_,r_] :=
  IntegrateDataTableZeroEnd[integratePsi4[psi4Reader,l,m,r]];
@@ -110,7 +110,7 @@ tabulateModes[f_, lMax_] :=
    flux. This should produce identical results to harmonicOverlap, but
    it is much slower.  Used in code checking. *)
 harmonicOverlapDirect[{l_, m_, lp_, mp_}, dir_] := 
- Profile["harmonicOverlapDirect",
+ ProfileCall["harmonicOverlapDirect",
  Integrate[unitVectorComponent[dir, th, ph] *
            spinWeightedSphericalHarmonic[-2, l, m, th, ph] *
            Conjugate[spinWeightedSphericalHarmonic[-2, lp, mp, th, ph] ] *
@@ -146,21 +146,21 @@ harmonicOverlapThree[{l1_,m1_,s1_},{l2_,m2_,s2_},{l3_,m3_,s3_}] :=
 (* Compute \int{ _{-2}Y_{lm} _{-2} Y_{l'm'}^* nx dOm}
    with nx = Sin[th] Cos[ph] = -(_0Y_{1-1} - _0Y_{11}) Sqrt[2Pi/3] *)
 harmonicOverlap[{l_, m_, lp_, mp_}, 1] := 
- Profile["harmonicOverlap",
+ ProfileCall["harmonicOverlap",
     - (-1)^(mp-2) Sqrt[2Pi/3] (harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,-1,0}] - 
                              harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,+1,0}])];
 
 (* Compute \int{ _{-2}Y_{lm} _{-2} Y_{l'm'}^* ny dOm}
    with ny = Sin[th] Sin[ph] = -I (_0Y_{1-1} - _0Y_{11}) Sqrt[2Pi/3] *)
 harmonicOverlap[{l_, m_, lp_, mp_}, 2] := 
- Profile["harmonicOverlap",
+ ProfileCall["harmonicOverlap",
     -I (-1)^(mp-2) Sqrt[2Pi/3] (harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,-1,0}] + 
                                harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,+1,0}])];
 
 (* Compute \int{ _{-2}Y_{lm} _{-2} Y_{l'm'}^* nz dOm}
    with nz = \cos(th) = 2 Sqrt[Pi/3] _0Y_{10} *)
 harmonicOverlap[{l_, m_, lp_, mp_}, 3] := 
- Profile["harmonicOverlap",
+ ProfileCall["harmonicOverlap",
     (-1)^(mp-2) 2 Sqrt[Pi/3] harmonicOverlapThree[{l,m,-2},{lp,-mp,2},{1,0,0} ]];
 
 (************************************************************************************)
@@ -223,13 +223,13 @@ LinearMomentumFlux[psi4Reader_, dir_, r_, lMax_] :=
       lMax];
 
     fluxTerm[{{l_, m_, lp_, mp_},o_}] :=
-      Profile["fluxComp", 
+      ProfileCall["fluxComp", 
         (mon={run, dir, r, "Computing flux", l,m,lp,mp};
          intPsi4Cache[{l,m}] * Conjugate[intPsi4Cache[{lp,mp}]] * N[o])];
 
     terms = Map[fluxTerm, nonZeroOverlaps];
     mon = {run, dir, r, "Adding terms..."};
-    sum = Profile["addTerms",
+    sum = ProfileCall["addTerms",
             MakeDataTable[MapThread[List, {Take[IndVar[integratePsi4[psi4Reader,2,2,r]],nElems],
                                            Apply[Plus, terms]}]]];
     mon = {run, dir, r, "Real part..."};

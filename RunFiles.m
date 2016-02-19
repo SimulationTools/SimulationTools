@@ -18,7 +18,7 @@ BeginPackage["SimulationTools`RunFiles`",
  {
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
-  "SimulationTools`Profile`",
+  "SimulationTools`ProfileCall`",
   "SimulationTools`Providers`",
   "SimulationTools`"
  }];
@@ -142,7 +142,7 @@ FindRunFile[runName_String, fileName_String] :=
   ];
 
 DefineMemoFunction[FindFirstRunFile[runName_String, fileName_String],
-  Profile["FindFirstRunFile",
+  ProfileCall["FindFirstRunFile",
   Module[{files},
     files = FindRunFile[runName, fileName];
     If[files === {}, Error["File " <> fileName <> " not found in run " <> runName]];
@@ -161,7 +161,7 @@ DefineMemoFunction[FindRunFilesFromPattern[runName_String, filePattern:(_String|
 ]];
 
 stringToReal[s_String] :=
-  Profile["stringToReal",
+  ProfileCall["stringToReal",
  Module[{p, n, mantissa, exponent},
   p = StringPosition[s, "e", 1];
   If[Length[p] == 0,

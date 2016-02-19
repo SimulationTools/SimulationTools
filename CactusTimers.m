@@ -17,7 +17,7 @@
 BeginPackage["SimulationTools`CactusTimers`",
  {
   "SimulationTools`Error`",
-  "SimulationTools`Profile`"
+  "SimulationTools`ProfileCall`"
  }];
 
 ChartTimers(*::usage = "ChartTimers[timers] gives a pie chart of the timers.  Note that it only makes sense if the timers are independent.\nChartTimers[filename, n] gives a pie chart of the top n independent timers in file 'filename'.  If omitted, n defaults to 15."*);
@@ -39,7 +39,7 @@ ParseTimersTogetherFile;
 
 Begin["`Private`"];
 
-If[EnableProfiling =!= True, profile[_, x_] := x, profile=Profile];
+If[EnableProfiling =!= True, profile[_, x_] := x, profile=ProfileCall];
 
 (* Internal functions *)
 

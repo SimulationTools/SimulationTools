@@ -19,7 +19,7 @@ BeginPackage["SimulationTools`DataRegion`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
-  "SimulationTools`Profile`",
+  "SimulationTools`ProfileCall`",
   "SimulationTools`Utils`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
@@ -1126,7 +1126,7 @@ chunkOffset[d_DataRegion, origin_, spacing_] :=
   Round[(GetOrigin[d] - origin)/spacing]];
 
 MergeDataRegions[regions_List] :=
- Profile["MergeDataRegions",
+ ProfileCall["MergeDataRegions",
  Module[{ndims, origins, dims, spacings, spacing, spacingDiffs,
     X1, X2s, X2, n, dat},
   If[Length[regions] === 0, Return[{}]];

@@ -51,7 +51,7 @@ packages =
   "Parameters",
   (*"Performance",*)
   "Plotting",
-  "Profile",
+  "ProfileCall",
   "Providers",
   "PunctureTracker",
   "Quasinormal",

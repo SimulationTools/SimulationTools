@@ -19,7 +19,7 @@ BeginPackage["SimulationTools`Ascii1D`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Memo`",
-  "SimulationTools`Profile`",
+  "SimulationTools`ProfileCall`",
   "SimulationTools`RunFiles`"
  }];
 
@@ -81,7 +81,7 @@ AsciiTimeOfIndex[data_, index_] :=
   data[[index]][[1]];
 
 (* fixData[d_] :=
-  Profile["ReadCarpetASCII1D: Fixing data",
+  ProfileCall["ReadCarpetASCII1D: Fixing data",
     DeleteDuplicates[Sort[d, #1[[1]] < #2[[1]] &], 
                      (Abs[#1[[1]]-#2[[1]]] < 10^-10) &]]; *)
 
@@ -90,21 +90,21 @@ cmp =
     Abs[x1[[1]] - x2[[1]]] < 10.^-10];
 
 fixData[d_] :=
-  Profile["ReadCarpetASCII1D: Fixing data",
+  ProfileCall["ReadCarpetASCII1D: Fixing data",
     DeleteDuplicates[d, 
                      (Abs[#1[[1]]-#2[[1]]] < 10.^-10) &]];
 
 (*fixData[d_] :=
-  Profile["ReadCarpetASCII1D: Fixing data",
+  ProfileCall["ReadCarpetASCII1D: Fixing data",
     DeleteDuplicates[d, cmp]];*)
 
 (*fixData[d_] :=
-  Profile["ReadCarpetASCII1D: Fixing data",
+  ProfileCall["ReadCarpetASCII1D: Fixing data",
     DeleteDuplicates[d, 
                      #1[[1]] != #2[[1]] &]];*)
 
 takeCols[it_List, c1_, c2_] := 
-  Profile["ReadCarpetASCII1D: takeCols", 
+  ProfileCall["ReadCarpetASCII1D: takeCols", 
     Map[{#[[c1]], #[[c2]]} &, it]];
 
 DefineMemoFunction[tableImport[fn_],
@@ -114,12 +114,12 @@ ReadCarpetASCII1D[fileName_, dir_:1] :=
  Module[{levels, levelsPresent, data, data2, rls, processLevel, prls},
 (*  lines = ReadList[fileName, String, NullRecords -> True];*)
   If[FileType[fileName] === None, Error["ReadCarpetASCII1D: File "<>fileName<>" not found"]];
-  Profile["ReadCarpetASCII1D: " <> fileName,
-  Profile["ReadCarpetASCII1D: Reading file", 
+  ProfileCall["ReadCarpetASCII1D: " <> fileName,
+  ProfileCall["ReadCarpetASCII1D: Reading file", 
     data = tableImport[fileName]];
-  Profile["ReadCarpetASCII1D: Eliminating white space", 
+  ProfileCall["ReadCarpetASCII1D: Eliminating white space", 
     data2 = Select[data, Length[#] != 0 && #[[1]] != "#" &]];
-  Profile["ReadCarpetASCII1D: Determining levels present",
+  ProfileCall["ReadCarpetASCII1D: Determining levels present",
     levelsPresent = Union[Map[#[[3]] &, data2]]];
 
   levels = GatherBy[data2, #[[3]]&];
@@ -128,10 +128,10 @@ ReadCarpetASCII1D[fileName_, dir_:1] :=
   processLevel[data3_] :=
     Module[{data4, data5, times, dataWithTimes},
 (*      Print["rl" <> ToString[data3[[1,3]]]];*)
-      Profile["ReadCarpetASCII1D: Splitting by iteration", 
+      ProfileCall["ReadCarpetASCII1D: Splitting by iteration", 
         data4 = N[SplitBy[data3, #[[1]] &]]];
       data5 = Map[MakeDataTable@fixData[takeCols[#, 10+dir-1, 13]] &, data4];
-      Profile["ReadCarpetASCII1D: Extracting times",
+      ProfileCall["ReadCarpetASCII1D: Extracting times",
         times = Map[#[[1]][[9]] &, data4]];
       dataWithTimes = MapThread[List, {times, data5}]];
 
