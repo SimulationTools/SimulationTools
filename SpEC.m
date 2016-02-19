@@ -542,7 +542,7 @@ ReadSpECHorizonMass[runName_String, hn_Integer] :=
 
    runFiles = Flatten[runFiles];
 
-   If[runFiles === {}, Return[ConstantArray[ToDataTable[{}],3]] (*Error["Cannot find apparent horizon information in "<>runName]*)];
+   If[runFiles === {}, Return[ToDataTable[{}]] (*Error["Cannot find apparent horizon information in "<>runName]*)];
 
   hnLetter = 
    If[hn === 1, "A", 
