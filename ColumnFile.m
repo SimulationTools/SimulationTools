@@ -125,7 +125,7 @@ ReadColumnFile[fileNames_List, cols_List] :=
   extractColumns[ReadColumnFile[fileNames], cols];
 
 ReadColumnFile[runName_String, fileName_String] :=
-  Module[{files = FindRunFile[runName, fileName]},
+  Module[{files = FindSimulationFiles[runName, fileName]},
     If[files === {}, Error["Cannot find file " <> fileName <> " in run " <> runName]];
   ReadColumnFile[files]];
 
@@ -165,13 +165,13 @@ CarpetASCIIColumns[fileName_String] :=
    colDescs];
 
 CarpetASCIIColumns[run_String, fileName_String] :=
-  Module[{files = FindRunFile[run, fileName]},
+  Module[{files = FindSimulationFiles[run, fileName]},
     If[files === {},
       Error["Cannot find file " <> fileName <> " in run " <> run]];
     CarpetASCIIColumns[First@files]];
 
 ColumnNumbers[run_String, fileName_String, colIDs_] :=
-  ColumnNumbers[First[FindRunFile[run, fileName]], colIDs];
+  ColumnNumbers[First[FindSimulationFiles[run, fileName]], colIDs];
 
 ColumnNumbers[fileName_String, colIDs_] :=
  Module[{colMap, result},

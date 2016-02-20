@@ -89,7 +89,7 @@ SegmentStartTimes[run_] :=
 
 ReadSegmentProgress[seg_String] :=
   Module[{start, end, runtime, progress},
-    If[FindRunFile[seg, "carpet::timing..asc"] === {}, 
+    If[FindSimulationFiles[seg, "carpet::timing..asc"] === {}, 
       Return[ToDataTable[{}]]];
     start = AbsoluteTime[SegmentStartDate[seg]];
     end = AbsoluteTime[SegmentEndDate[seg]];
@@ -115,7 +115,7 @@ SimulationStateFractions[sim_String] :=
     simStartDate, simEndDate, simDuration, totalRunTime, 
     totalQueueTime, totalStoppedTime},
     segs = Select[FindRunSegments[sim], 
-      FindRunFile[#, "carpet::timing..asc"] =!= {} &];
+      FindSimulationFiles[#, "carpet::timing..asc"] =!= {} &];
     queueDates = AbsoluteTime /@ SegmentQueueDate /@ segs;
     queueTimes = SegmentQueueTime /@ segs;
     startDates = AbsoluteTime /@ SegmentStartDate /@ segs;

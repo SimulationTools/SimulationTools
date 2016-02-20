@@ -97,7 +97,7 @@ SimViewRRMHD[runNames_(*, r_*)] :=
 
   restmass = Catch[
    DynamicListLinePlot[
-      Map[If[FindRunFile[#,"total_rest_mass_normalised..asc"]!= {},ReadCarpetASCIIScalar[#,"total_rest_mass_normalised..asc"],ReadCarpetASCIIScalar[#,"total_rest_mass_normalised.maximum.asc"]]&, runNames], 
+      Map[If[FindSimulationFiles[#,"total_rest_mass_normalised..asc"]!= {},ReadCarpetASCIIScalar[#,"total_rest_mass_normalised..asc"],ReadCarpetASCIIScalar[#,"total_rest_mass_normalised.maximum.asc"]]&, runNames], 
     PlotRange->All, PlotLabel -> "Total Rest Mass", 
     ImageSize -> size]];
 (*  restmass = Catch[

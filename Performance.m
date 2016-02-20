@@ -40,7 +40,7 @@ Timer = timer;
 ReadTimerTrees[run_] :=
   Module[
     {files,procs},
-    files = FindRunFilesFromPattern[run,"timertree.*.xml"];
+    files = FindSimulationFiles[run,"timertree.*.xml"];
     procs = (StringCases[#,"timertree."~~n__~~".xml":>ToExpression[n]][[1]]) & /@ files;
     Table[ReadTimerTree[run,p],{p,procs}]];
 
@@ -236,12 +236,12 @@ ReadCommunicationSpeed[run_, proc_] :=
  Module[{files, file, fullFile, data, pos, data2, commTime, sentBytes,
     receivedBytes},
   files = 
-   FindRunFilesFromPattern[run, "carpetlib-timing-statistics.*.txt"];
+   FindSimulationFiles[run, "carpetlib-timing-statistics.*.txt"];
   file = Select[
      files, (StringCases[#, 
           "carpetlib-timing-statistics." ~~ n__ ~~ ".txt" :> 
            ToExpression[n]][[1]] === proc) &][[1]];
-  fullFile = FindRunFile[run, file][[1]];
+  fullFile = FindSimulationFiles[run, file][[1]];
   data = Import[fullFile, "Table"];
   pos = Last[
      Position[

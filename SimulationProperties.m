@@ -68,7 +68,7 @@ ReadSimulationRunTime[runName_] :=
   Module[{segmentTime, files},
     segmentTime[file_] :=
       (ReadColumnFile[file, {"time", "time_total"}][[-1,2]]);
-    files = FindRunFile[runName, "carpet::timing..asc"];
+    files = FindSimulationFiles[runName, "carpet::timing..asc"];
     Plus@@(segmentTime /@ files)];
 
 ReadSimulationRunTimeFunction[sim_String] :=
@@ -76,7 +76,7 @@ ReadSimulationRunTimeFunction[sim_String] :=
   ReadColumnFile[sim, "carpet::timing..asc", {"time", "time_total"}]];
 
 ReadWalltimeHours[runName_] := 
-  If[FindRunFile[runName, "carpet::timing..asc"] =!= {},
+  If[FindSimulationFiles[runName, "carpet::timing..asc"] =!= {},
     ReadWalltime[runName]/3600,
     (* else *)
     Error[NoSimulationRunTimeAvailable,
@@ -105,7 +105,7 @@ StandardErrorOfRun[runName_String] :=
     files2 = Select[files1, FileType[#] =!= None &]];
 
 ReadSimulationSpeed[runName_] := 
-  If[FindRunFile[runName, "runstats.asc"] =!= {},
+  If[FindSimulationFiles[runName, "runstats.asc"] =!= {},
      MakeDataTable[ReadColumnFile[runName, "runstats.asc", {2, 4}]],
      ReadCarpetSpeed[runName]];
 

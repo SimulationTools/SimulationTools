@@ -42,12 +42,12 @@ Begin["`Private`"];
 
 SimulationTools`TwoPunctures`InitialData`HaveData[run_String, ___] :=
   HaveRunDir[run] && (
-    FindRunFile[run, "ADM_mass_tot.asc"] =!= {} ||
+    FindSimulationFiles[run, "ADM_mass_tot.asc"] =!= {} ||
     StandardOutputOfRun[run] =!= {});
 
 SimulationTools`TwoPunctures`InitialData`ReadADMMass[runName_String] :=
   Module[{massMDFiles, output, lines},
-    massMDFiles = FindRunFile[runName, "ADM_mass_tot.asc"];
+    massMDFiles = FindSimulationFiles[runName, "ADM_mass_tot.asc"];
     If[massMDFiles =!= {},
       Return[ReadList[massMDFiles[[1]], Real][[1]]],
       (* Else *)

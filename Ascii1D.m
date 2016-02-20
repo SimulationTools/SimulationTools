@@ -141,7 +141,7 @@ ReadCarpetASCII1D[fileName_, dir_:1] :=
 
 (* This function is untested *)
 ReadCarpetASCII1DFromRun[run_, fileName_, rl_:0, dir_:1] :=
-  Flatten[Map[ReadCarpetASCII1D[#, dir][[rl+1]] &, FindRunFile[run, fileName]], 1];
+  Flatten[Map[ReadCarpetASCII1D[#, dir][[rl+1]] &, FindSimulationFiles[run, fileName]], 1];
 
 MGraph[data__] :=
   Manipulate[

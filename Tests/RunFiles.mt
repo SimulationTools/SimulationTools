@@ -111,7 +111,7 @@ Module[{runDir,runName="testrun9",testFile="MyFile.asc",testFilePath},
 	testFilePath = FileNameJoin[{runDir,testFile}];
 	Export[testFilePath,"Test","Text"];
 	Test[
-		FindRunFile[runName,testFile]
+		FindSimulationFiles[runName,testFile]
 	,
 		{testFilePath}
 	,
@@ -126,7 +126,7 @@ Module[{runDir,runName="testrun9.1",testFile="MyFile.asc",testFilePath},
 	testFilePath = FileNameJoin[{runDir,"intermediate",testFile}];
 	Export[testFilePath,"Test","Text"];
 	Test[
-		FindRunFile[runName,testFile]
+		FindSimulationFiles[runName,testFile]
 	,
 		{testFilePath}
 	,
@@ -141,7 +141,7 @@ Module[{runDir,runName="testrun10",testFile="MyFile.asc",testFilePaths},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
 	Test[
-		FindRunFile[runName,testFile]
+		FindSimulationFiles[runName,testFile]
 	,
 		testFilePaths
 	,

@@ -125,7 +125,7 @@ firstOrNone[l_List] :=
 (* Metadata *)
 
 CarpetHDF5Iterations[run_String, var_String, args___] :=
-  CarpetHDF5Iterations[FindRunFile[run, var][[1]], args];
+  CarpetHDF5Iterations[FindSimulationFiles[run, var][[1]], args];
 
 CarpetHDF5Iterations[file_String] := datasetAttribute[file, 2];
 
@@ -307,7 +307,7 @@ ReadCarpetHDF5Variable[file_String, opts:OptionsPattern[]]:=
 
 ReadCarpetHDF5VariableFromRun[run_String, var_String, opts:OptionsPattern[]] :=
   Module[{},
-    ReadCarpetHDF5Variable[Module[{files = FindRunFile[run, var]}, 
+    ReadCarpetHDF5Variable[Module[{files = FindSimulationFiles[run, var]}, 
       If[files==={},Error["File "<>var<>" not found in run "<>run]]; files[[1]]], opts]];
 
 (* Data manipulation *)
@@ -367,7 +367,7 @@ DefineMemoFunction[getFileIts[file_],
 
 getFileOfIt[run_, var_, it_] :=
   Module[{files, itss, haveIts},
-    files = FindRunFile[run, var];
+    files = FindSimulationFiles[run, var];
     itss = Map[{#, getFileIts[#]} &, files];
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
     If[Length[haveIts] === 0, Error["Iteration " <> ToString[it] <> " not found in " <> var <> " in run " <> run]];
@@ -388,8 +388,8 @@ SimulationTools`GridFunctions`ReadGridFunction[run_String, var_String, it_Intege
 (* Options[ReadIterations] = {}; *)
 SimulationTools`GridFunctions`ReadIterations[run_, var_, rl_:All, opts:OptionsPattern[]] :=
   If[rl === All,
-  	Union@@Map[CarpetHDF5Iterations, FindRunFile[run, var]],
-  	Union@@Map[CarpetHDF5Iterations[#, getRL[run, var, rl]]&, FindRunFile[run, var]]
+  	Union@@Map[CarpetHDF5Iterations, FindSimulationFiles[run, var]],
+  	Union@@Map[CarpetHDF5Iterations[#, getRL[run, var, rl]]&, FindSimulationFiles[run, var]]
   ]
 
 (* Options[ReadMaps] = {}; *)

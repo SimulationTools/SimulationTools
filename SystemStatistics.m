@@ -37,12 +37,12 @@ SimulationMemoryPlot;
 Begin["`Private`"];
 
 ReadSimulationMemoryUsage[runName_] :=
-  If[FindRunFile[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
+  If[FindSimulationFiles[runName, "systemstatistics::process_memory_mb.maximum.asc"] =!= {},
      ToDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.maximum.asc", {"time", "maxrss_mb"}]],
      ToDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
 ReadSimulationMinMemoryUsage[runName_] :=
-  If[FindRunFile[runName, "systemstatistics::process_memory_mb.minimum.asc"] =!= {},
+  If[FindSimulationFiles[runName, "systemstatistics::process_memory_mb.minimum.asc"] =!= {},
      ToDataTable[ReadColumnFile[runName, "systemstatistics::process_memory_mb.minimum.asc", {"time", "maxrss_mb"}]],
      ToDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 

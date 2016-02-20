@@ -48,7 +48,7 @@ varsInRun[run_String] :=
   Map[StringReplace[#, ".x.h5" -> ""] &, files]];
 
 fileOfRunVar[run_String, var_String] :=
- FindRunFile[run, var <> ".x.h5"][[1]];
+ FindSimulationFiles[run, var <> ".x.h5"][[1]];
 
 rlsInRunVar[run_String, var_String] :=
  CarpetHDF5RefinementLevels[fileOfRunVar[run, var]];

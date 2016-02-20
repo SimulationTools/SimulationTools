@@ -50,7 +50,7 @@ CTGEvolution_ApplyRadiativeBC",
 Begin["`Private`"];
 
 TimersFile[runName_] :=
- FindRunFile[runName, "AllTimers.000000.txt"][[1]];
+ FindSimulationFiles[runName, "AllTimers.000000.txt"][[1]];
 
 TimersFilesInRun[runName_] :=
   Module[{files},
@@ -65,7 +65,7 @@ padInteger[i_, n_] :=
 TimersFile[runName_, i_, segment_:1] :=
   Module[{segments, fileName},
     fileName = "AllTimers."<> padInteger[i, 6] <> ".txt";
-    segments = FindRunFile[runName, fileName];
+    segments = FindSimulationFiles[runName, fileName];
     If[Length[segments] === 0, Error["Cannot find timers file " <> fileName <> " in run " <> runName]];
     If[segment > Length[segments], Error["Cannot find " <> ToString[segment] <> " segments in run " <> runName]];
     segments[[segment]]];
@@ -123,7 +123,7 @@ CollectTimers[timers_, cols_List] :=
 
 DefineMemoFunction[ReadAllTimers[run_, it_: Automatic],
  Module[{timerTable, columnHeadings, lastData, lastTimers, collect},
-  timerTable = Import[FindRunFile[run, "AllTimers.tsv"][[1]]];
+  timerTable = Import[FindSimulationFiles[run, "AllTimers.tsv"][[1]]];
   columnHeadings = Last@Select[timerTable, First[#] === "iteration" &];
   lastData = 
    If[it === Automatic, Last[timerTable], 
@@ -139,7 +139,7 @@ DefineMemoFunction[ReadAllTimers[run_, it_: Automatic],
 
 DefineMemoFunction[ReadAllTimerIterations[run_, it_: Automatic],
  Module[{timerTable, data},
-  timerTable = Import[FindRunFile[run, "AllTimers.tsv"][[1]]];
+  timerTable = Import[FindSimulationFiles[run, "AllTimers.tsv"][[1]]];
   data = Select[timerTable, NumberQ[First[#]] &];
   Map[First, data]]];
 

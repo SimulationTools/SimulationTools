@@ -39,9 +39,9 @@ getFiles[runName_] :=
   Module[{runFiles},
   If[FileType[runName]===File,
       runFiles = {runName},
-      runFiles = FindRunFile[runName, "mp_"<>$MultipolePsi4Variable<>".h5"];
+      runFiles = FindSimulationFiles[runName, "mp_"<>$MultipolePsi4Variable<>".h5"];
       If[runFiles === {},
-        runFiles = FindRunFile[runName, $MultipolePsi4Variable<>".h5"];
+        runFiles = FindSimulationFiles[runName, $MultipolePsi4Variable<>".h5"];
       ];
   ];
 

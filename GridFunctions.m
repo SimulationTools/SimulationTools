@@ -143,7 +143,7 @@ notFound[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
 Options[fileUnion] = Options[ReadGridFunction];
 fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   Module[
-    {files = FindRunFiles[run, getLeafName[var, dims, opts]]},
+    {files = FindSimulationFiles[run, getLeafName[var, dims, opts]]},
     If[files === {},
        notFound[run,var,dims,opts]];
     Union@@Map[CallProvidedFunction["GridFunctions", fn, {#, "Variable" -> var, opts}] &,
@@ -221,7 +221,7 @@ ReadGridFunctionDimensions[sim_String, varName_String] :=
 Options[getFileOfIt] = Options[ReadGridFunction];
 getFileOfIt[run_String, leafName:(_String|_RegularExpression), it_Integer, opts:OptionsPattern[]] :=
   Module[{files, itss, haveIts},
-    files = FindRunFiles[run, leafName];
+    files = FindSimulationFiles[run, leafName];
     itss = Select[Map[{#, getFileIts[#,opts]} &, files], Length[#[[2]]] > 0 &];
     haveIts = Select[itss, it >= First[#[[2]]] && it <= Last[#[[2]]] &];
     If[Length[haveIts] === 0,
