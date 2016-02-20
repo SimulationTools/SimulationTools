@@ -94,6 +94,7 @@ Test[
   ,
   19.99999999999999
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"ExtrapolateScalar-1"
     ]
 
@@ -102,6 +103,7 @@ Test[
   ,
   19.46294218585005
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"ExtrapolateScalar-2"
     ]
 
@@ -137,6 +139,7 @@ Test[
   ,
   19.99999999999999
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"RadialExtrapolation-1"
     ]
 
@@ -146,6 +149,7 @@ Test[
   ,
   19.46294218585005
   ,
+  EquivalenceFunction -> withinRoundoff,
   TestID->"RadialExtrapolation-2"
     ]
 
@@ -268,7 +272,7 @@ Test[
     RadialCoordinateTransformation->RadialToTortoise]],
   ExtrapolatePsi4[$SimulationToolsTestSimulation, 2, 2,
                   ExtrapolationOrder -> 1],
-  EquivalenceFunction -> ((Norm[ToListOfCoordinates[#1] - ToListOfCoordinates[#2]] < 10.^-16 && Abs[GridNorm[#1-#2]] < 10.^-16) &),
+  EquivalenceFunction -> ((EquivalenceFunction -> withinRoundoff[ToListOfCoordinates[#1], ToListOfCoordinates[#2]] && EquivalenceFunction -> withinRoundoff[GridNorm[#1],GridNorm[#2]]) &),
   TestID -> "ReadRadiallyExtrapolatedPsi4"]
 
 (****************************************************************)

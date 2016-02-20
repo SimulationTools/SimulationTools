@@ -527,6 +527,7 @@ Test[
     ,
     {50.00000000000023, 50.00000000000017, 50.00000000000006, 50.000000000000114, 50., 50.000000000000455, 49.99999999999977}
     ,
+    EquivalenceFunction -> withinRoundoff,
     TestID->"NDerivative2"
 ]
 
@@ -535,6 +536,7 @@ Test[
     ,
     {1000.0000000000034, 1000.0000000000036, 1000.0000000000039}
     ,
+    EquivalenceFunction -> withinRoundoff,
     TestID->"NDerivative3"
 ]
 
