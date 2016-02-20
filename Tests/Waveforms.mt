@@ -265,6 +265,7 @@ Test[ToRetardedTime[30., ToDataTable[{{0.0, 1.}, {2.0, 2.0}}],
    the highest resolution version instead of constructing a new
    uniform grid.  This preserves nonuniform DataTables. Test that the
    results are the same when the compatibility variable is set *)
+ReadRadiallyExtrapolatedPsi4SameQ[new_,old_] := (withinRoundoff[Norm[ToListOfCoordinates[new]], Norm[ToListOfCoordinates[old]]] && withinRoundoff[GridNorm[new],GridNorm[old]]);
 
 Test[
    Block[{$UniformGridExtrapolation = True},  ReadRadiallyExtrapolatedPsi4[
@@ -272,7 +273,7 @@ Test[
     RadialCoordinateTransformation->RadialToTortoise]],
   ExtrapolatePsi4[$SimulationToolsTestSimulation, 2, 2,
                   ExtrapolationOrder -> 1],
-  EquivalenceFunction -> ((EquivalenceFunction -> withinRoundoff[ToListOfCoordinates[#1], ToListOfCoordinates[#2]] && EquivalenceFunction -> withinRoundoff[GridNorm[#1],GridNorm[#2]]) &),
+  EquivalenceFunction -> ReadRadiallyExtrapolatedPsi4SameQ,
   TestID -> "ReadRadiallyExtrapolatedPsi4"]
 
 (****************************************************************)
