@@ -173,7 +173,7 @@ stringToReal[s_String] :=
   ]];
 
 FileIsInRun[run_, file_] :=
-  FindRunFile[run, file] =!= {};
+  FindRunFiles[run, file] =!= {};
 
 (**********************************************************)
 (* SimulationNames                                        *)
