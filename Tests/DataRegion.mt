@@ -523,9 +523,9 @@ Test[
 ]
 
 Test[
-    Quiet[DeleteDuplicates[Flatten[ToListOfData[NDerivative[dr, 2]]]], NDSolve`FiniteDifferenceDerivative::ordred]
+    Quiet[ToListOfData[NDerivative[dr, 2]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
-    {50.00000000000023, 50.00000000000017, 50.00000000000006, 50.000000000000114, 50., 50.000000000000455, 49.99999999999977}
+    N@ConstantArray[50, {2, 3, 4}]
     ,
     EquivalenceFunction -> withinRoundoff,
     TestID->"NDerivative2"
