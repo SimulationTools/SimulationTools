@@ -57,8 +57,9 @@ SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ,
     datasetName = "l" <> ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad];
     files = Map[ReadHDF5[#,{"Datasets", datasetName}] &, runFiles];
     data = MergeFiles[files];
-    psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, data];
-    Return[MakeDataTable[psi4]]];
+    psi4 = ToDataTable[data[[All, 1]], Complex @@@ data[[All, 2]]];
+    psi4
+  ];
 
 SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName_] :=
   Module[{datasets, radii},
