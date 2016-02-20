@@ -43,6 +43,9 @@ segmentInfo[dirName_] :=
   mtFile = FileNameJoin[{dirName, "/runstats.asc"}];
   col=2;
   If[FileType[mtFile] === None,
+  mtFile =  FileNameJoin[{dirName, "/carpet-timing..asc"}];
+  col=9];
+  If[FileType[mtFile] === None,
   mtFile =  FileNameJoin[{dirName, "/carpet::timing..asc"}];
   col=9];
 

@@ -560,7 +560,7 @@ LevelExistsEvery[runName_String, level_Integer] :=
 ReadFineTimeStep[run_] :=
  Module[{pairs, it1, it2, t1, t2, dtFine},
   pairs = 
-   Take[ReadColumnFile[run, "puncturetracker::pt_loc..asc", {1, 9}], 
+   Take[ReadColumnFile[run, "puncturetracker"~~("-"|"::")~~"pt_loc..asc", {1, 9}], 
     2];
   {{it1, t1}, {it2, t2}} = pairs;
   dtFine = (t2 - t1)/(it2 - it1)];

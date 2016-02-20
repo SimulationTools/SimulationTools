@@ -40,7 +40,12 @@ SimulationStateFractions;
 Begin["`Private`"];
 
 SegmentEndDate[dir_] :=
-  FileDate[FileNameJoin[{dir, "/carpet::timing..asc"}]];
+ Module[{file},
+  file = FileNameJoin[{dir, "/carpet-timing..asc"}];
+  If[FileType[file] === None,
+    file = FileNameJoin[{dir, "/carpet::timing..asc"}]];
+  FileDate[file]
+ ];
 
 SegmentStartDate[dir_] :=
   Module[{parFile},
@@ -74,7 +79,7 @@ SegmentCoordinateTimeInterval[segdir_] :=
          x_ :> Error["Unrecognised segment times: "<>ToString[x]]}],
      (* else *)
      times =
-     Catch[First /@ ReadColumnFile[segdir, "carpet::timing..asc", {"time"}]];
+     Catch[First /@ ReadColumnFile[segdir, "carpet"~~("-"|"::")~~"timing..asc", {"time"}]];
      If[! ListQ[times], Return[None], Return[{times[[1]], times[[-1]]}]]]];
 
 SegmentStartTimes[run_] :=
@@ -89,14 +94,14 @@ SegmentStartTimes[run_] :=
 
 ReadSegmentProgress[seg_String] :=
   Module[{start, end, runtime, progress},
-    If[FindSimulationFiles[seg, "carpet::timing..asc"] === {}, 
+    If[FindSimulationFiles[seg, "carpet"~~("-"|"::")~~"timing..asc"] === {}, 
       Return[ToDataTable[{}]]];
     start = AbsoluteTime[SegmentStartDate[seg]];
     end = AbsoluteTime[SegmentEndDate[seg]];
     runtime = 
     start + ToDataTable@
     ReadColumnFile[seg, 
-      "carpet::timing..asc", {"time", "time_total"}];
+      "carpet"~~("-"|"::")~~"timing..asc", {"time", "time_total"}];
     ToDataTable[ToListOfData[runtime], ToListOfCoordinates[runtime]]];
 
 ReadSimulationSegmentProgress[sim_String] :=
@@ -115,7 +120,7 @@ SimulationStateFractions[sim_String] :=
     simStartDate, simEndDate, simDuration, totalRunTime, 
     totalQueueTime, totalStoppedTime},
     segs = Select[FindRunSegments[sim], 
-      FindSimulationFiles[#, "carpet::timing..asc"] =!= {} &];
+      FindSimulationFiles[#, "carpet"~~("-"|"::")~~"timing..asc"] =!= {} &];
     queueDates = AbsoluteTime /@ SegmentQueueDate /@ segs;
     queueTimes = SegmentQueueTime /@ segs;
     startDates = AbsoluteTime /@ SegmentStartDate /@ segs;

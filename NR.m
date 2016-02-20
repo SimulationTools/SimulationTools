@@ -142,7 +142,7 @@ PercentageDifference[ap_,bp_] :=
     100 Abs[a-b]/a];
 
 ReadHamiltonianConstraintNorm[run_] :=
-  ReadColumnFile[run, "ctgconstraints::hamiltonian_constraint.norm2.asc", {2,3}];
+  ReadColumnFile[run, "ctgconstraints"~~("-"|"::")~~"hamiltonian_constraint.norm2.asc", {2,3}];
 
 Options[FitEcc] = {"ReturnValue" -> FittedFunction};
 

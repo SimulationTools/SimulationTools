@@ -88,11 +88,11 @@ coordString[dir_] := {"x", "y", "z"}[[dir]];
 ReadIsolatedHorizonSpin[runName_, hn_, dir_] :=
   Module[{},
     Which[
-    FindSimulationFiles[runName,"isolatedhorizon::ih_scalars..asc"] =!= {},
-       MakeDataTable@ReadColumnFile[runName, "isolatedhorizon::ih_scalars..asc", 
+    FindSimulationFiles[runName,"isolatedhorizon"~~("-"|"::")~~"ih_scalars..asc"] =!= {},
+       MakeDataTable@ReadColumnFile[runName, "isolatedhorizon"~~("-"|"::")~~"ih_scalars..asc",
          {"time", "ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]"}],
-    FindSimulationFiles[runName,"quasilocalmeasures::qlm_scalars..asc"] =!= {},
-       MakeDataTable@ReadColumnFile[runName, "quasilocalmeasures::qlm_scalars..asc",
+    FindSimulationFiles[runName,"quasilocalmeasures"~~("-"|"::")~~"qlm_scalars..asc"] =!= {},
+       MakeDataTable@ReadColumnFile[runName, "quasilocalmeasures"~~("-"|"::")~~"qlm_scalars..asc",
          {"time", "qlm_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]"}],
     FindSimulationFiles[runName,"ih_coordspin"<>coordString[dir]<>"["<>ToString[hn]<>"]..asc"] =!= {},
        MakeDataTable@ReadColumnFile[runName, 
@@ -244,7 +244,7 @@ HaveHorizonData[run_, i_] :=
   FileIsInRun[run, "BH_diagnostics.ah"<>ToString[i]<>".gp"];
 
 HaveIsolatedHorizonSpinData[run_, i_] :=
-  FileIsInRun[run, "quasilocalmeasures::qlm_scalars..asc"] || FileIsInRun[run, "isolatedhorizon::ih_scalars..asc"];
+  FileIsInRun[run, "quasilocalmeasures"~~("-"|"::")~~"qlm_scalars..asc"] || FileIsInRun[run, "isolatedhorizon"~~("-"|"::")~~"ih_scalars..asc"];
 
 End[];
 

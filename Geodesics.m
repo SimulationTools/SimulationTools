@@ -38,7 +38,7 @@ Begin["`Private`"];
 
 readGeodesic[sim_, i_] :=
  ReadColumnFile[sim, 
-  "geodesic::gd_position..asc", {"time", 
+  "geodesic"~~("-"|"::")~~"gd_position..asc", {"time", 
    Sequence @@ 
     Table["gd_pos_" <> d <> "[" <> ToString[i] <> 
       "]", {d, {"x", "y", "z"}}]}];
@@ -50,11 +50,11 @@ readGeodesicCoordinates[sim_, i_] :=
 
 ReadGeodesicParameter[sim_, i_] :=
  ToDataTable[ReadColumnFile[sim, 
-  "geodesic::gd_param..asc", {"time", "gd_tau[" <> ToString[i] <> "]"}]];
+  "geodesic"~~("-"|"::")~~"gd_param..asc", {"time", "gd_tau[" <> ToString[i] <> "]"}]];
 
 ReadGeodesicParameterRHS[sim_, i_] :=
  ToDataTable[ReadColumnFile[sim, 
-  "geodesic::gd_param_rhs..asc", {"time", "gd_tau_rhs[" <> ToString[i] <> "]"}]];
+  "geodesic"~~("-"|"::")~~"gd_param_rhs..asc", {"time", "gd_tau_rhs[" <> ToString[i] <> "]"}]];
 
 SimulationTools`Geodesics`Trackers`ReadCoordinates[sim_, i_] :=
   readGeodesicCoordinates[sim, i];
@@ -63,7 +63,7 @@ ReadGeodesicCovariantTangent[sim_, i_] :=
   Module[
     {pTable, t, pt, px, py, pz},
     pTable = ReadColumnFile[
-      sim, "geodesic::gd_momentum..asc",
+      sim, "geodesic"~~("-"|"::")~~"gd_momentum..asc",
       {"time", 
        Sequence @@ 
        Table["gd_mom_" <> d <> "[" <> ToString[i] <> 
@@ -76,7 +76,7 @@ ReadGeodesicLapse[sim_, i_] :=
   Module[
     {alpTable, t, alp},
     alpTable = ReadColumnFile[
-      sim, "geodesic::gd_metric..asc",
+      sim, "geodesic"~~("-"|"::")~~"gd_metric..asc",
       {"time", 
        "gd_alpha[" <> ToString[i] <> "]"}];
 
@@ -87,7 +87,7 @@ ReadGeodesicKretschmann[sim_, i_] :=
   Module[
     {fTable, t, alp},
     fTable = ReadColumnFile[
-      sim, "geodesic::gd_invariants..asc",
+      sim, "geodesic"~~("-"|"::")~~"gd_invariants..asc",
       {"time", 
        "gd_CurvIr[" <> ToString[i] <> "]"}];
 
@@ -99,7 +99,7 @@ ReadGeodesicContravariantTangent[sim_, i_] :=
   Module[
     {alpTable, t, alp},
     alpTable = ReadColumnFile[
-      sim, "geodesic::gd_momentum_con..asc",
+      sim, "geodesic"~~("-"|"::")~~"gd_momentum_con..asc",
       {"time", 
        "gd_mom_con_t[" <> ToString[i] <> "]"}];
 
@@ -110,7 +110,7 @@ ReadGeodesicShift[sim_, i_] :=
   Module[
     {betaTable, betax, betay, betaz},
     betaTable = ReadColumnFile[
-      sim, "geodesic::gd_metric..asc",
+      sim, "geodesic"~~("-"|"::")~~"gd_metric..asc",
       {"time", 
        Sequence @@ 
        Table["gd_beta" <> d <> "[" <> ToString[i] <> 
@@ -123,7 +123,7 @@ ReadGeodesicMetric[sim_, i_] :=
   Module[
     {table, gxx, gxy, gxz, gyy, gyz, gzz},
     table = ReadColumnFile[
-      sim, "geodesic::gd_metric..asc",
+      sim, "geodesic"~~("-"|"::")~~"gd_metric..asc",
       {"time", 
        Sequence @@ 
        Table["gd_g" <> d <> "[" <> ToString[i] <> 
@@ -151,14 +151,14 @@ ReadGeodesicFourMetric[sim_String, g_Integer] :=
 ReadGeodesicCoordinatesRHS[sim_, i_] := 
  Table[ToDataTable@
    ReadColumnFile[sim, 
-    "geodesic::gd_position_rhs..asc", {"time", 
+    "geodesic"~~("-"|"::")~~"gd_position_rhs..asc", {"time", 
      "gd_pos_rhs_" <> d <> "[" <> ToString[i] <> "]"}], {d, {"x", "y",
      "z"}}];
 
 ReadGeodesicCovariantTangentRHS[sim_, i_] := 
  Table[ToDataTable@
    ReadColumnFile[sim, 
-    "geodesic::gd_momentum_rhs..asc", {"time", 
+    "geodesic"~~("-"|"::")~~"gd_momentum_rhs..asc", {"time", 
      "gd_mom_rhs_" <> d <> "[" <> ToString[i] <> "]"}], {d, {"x", "y",
      "z"}}];
 

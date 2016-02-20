@@ -30,7 +30,7 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
   If[FileType[runName]===File,
       runFiles = {runName},
       runFiles = Map[FileNameTake[#,-1]&, FindSimulationFiles[runName,
-        "Ylm_WEYLSCAL4::"<>YlmDecompPsi4Variable<>"r_l"<>ToString[l]<>
+        "Ylm_WEYLSCAL4"~~("-"|"::")~~YlmDecompPsi4Variable<>"r_l"<>ToString[l]<>
                                          "_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"]];
   ];
 
@@ -42,7 +42,7 @@ SimulationTools`YlmDecomp`Waveforms`HaveData[runName_, args___] :=
 
 SimulationTools`YlmDecomp`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{fileName, threeCols, psi4},
-    fileName = "Ylm_WEYLSCAL4::"<>YlmDecompPsi4Variable<>"r_l" <>
+    fileName = "Ylm_WEYLSCAL4"~~("-"|"::")~~YlmDecompPsi4Variable<>"r_l" <>
              ToString[l] <> "_m" <> ToString[m] <> "_r" <> ToString[rad] <> ".asc";
     threeCols = ReadColumnFile[runName, fileName, {1,2,3}];
     psi4 = Map[{#[[1]], #[[2]] + I #[[3]]}&, threeCols];
@@ -53,7 +53,7 @@ SimulationTools`YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName_] :=
     names = getFiles[runName];
     radiusFromFileName[name_] :=
       StringReplace[name,
-        "Ylm_WEYLSCAL4::"<>YlmDecompPsi4Variable<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
+        "Ylm_WEYLSCAL4"~~("-"|"::")~~YlmDecompPsi4Variable<>"r_l" ~~ __ ~~ "m" ~~ __ ~~ "r"
         ~~ x : (NumberString|"inf") ~~ ".asc" -> x];
     radii = Sort[Union[Map[radiusFromFileName, names]]]];
 
