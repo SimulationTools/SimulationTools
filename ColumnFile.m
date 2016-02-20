@@ -98,7 +98,7 @@ MergeFiles[files_List] :=
     file1 = First[files];
 
     (* The first column of the files will be taken to be an
-    index. Usually this will be an interation number or a coordinate
+    index. Usually this will be an iteration number or a coordinate
     time. *)
     fileEndIndex = First[Last[file1]];
     rest = MergeFiles[Rest[files]];
