@@ -193,7 +193,8 @@ DefineMemoFunction[
   Module[{radii, radString},
 
   (* Get a list of radii available in the form expr -> "exprstring" *)
-  radii = Thread[ReadPsi4Radii[runName] -> ReadPsi4RadiiStrings[runName]];
+  radii = ReadPsi4RadiiStrings[runName];
+  radii = Thread[radiiStringsToExpressions[radii] -> radii];
 
   If[radii == Null,
     Error["No \!\(\*SubscriptBox[\(\[Psi]\), \(4\)]\) data found."];
@@ -216,7 +217,8 @@ DefineMemoFunction[
   AddAttribute[ReadPsi4Data[runName, l, m, radString],RunName -> runName]]];
 
 (* Return a list of radii available *)
-ReadPsi4Radii[runName_] := ToExpression /@ (ReadPsi4RadiiStrings[runName] /. "inf" -> "Infinity");
+radiiStringsToExpressions[radii_] := ToExpression /@ (radii /. "inf" -> "Infinity");
+ReadPsi4Radii[runName_] := radiiStringsToExpressions[ReadPsi4RadiiStrings[runName]];
 
 ReadPsi4Phase[run_, l_: 2, m_: 2, r_: 100, threshold_: 10.0^-3] :=
  Module[{psi4, rAmp, rAmpTb, t2, phase},
