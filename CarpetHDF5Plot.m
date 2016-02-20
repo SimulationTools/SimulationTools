@@ -44,7 +44,7 @@ Begin["`Private`"];
 varsInRun[run_String] :=
  Module[{files},
   files = 
-   FindRunFilesFromPattern[run, "*.x.h5", LeafNamesOnly -> True];
+   Map[FileNameTake[#,-1]&, FindSimulationFiles[run, "*.x.h5"]];
   Map[StringReplace[#, ".x.h5" -> ""] &, files]];
 
 fileOfRunVar[run_String, var_String] :=

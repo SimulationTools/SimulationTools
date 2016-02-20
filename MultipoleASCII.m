@@ -29,8 +29,8 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
   Module[{runFiles},
    If[FileType[runName]===File,
       runFiles = {runName},
-      runFiles = FindRunFilesFromPattern[runName,
-        "mp_"<>$MultipolePsi4Variable<>"_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"]];
+      runFiles = Map[FileNameTake[#,-1]&, FindSimulationFiles[runName,
+        "mp_"<>$MultipolePsi4Variable<>"_l"<>ToString[l]<>"_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"]]];
 
   runFiles
 ];

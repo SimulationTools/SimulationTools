@@ -29,9 +29,9 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
   Module[{runFiles},
   If[FileType[runName]===File,
       runFiles = {runName},
-      runFiles = FindRunFilesFromPattern[runName,
+      runFiles = Map[FileNameTake[#,-1]&, FindSimulationFiles[runName,
         "Ylm_WEYLSCAL4::"<>YlmDecompPsi4Variable<>"r_l"<>ToString[l]<>
-                                         "_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"];
+                                         "_m"<>ToString[m]<>"_r"<>ToString[r]<>".asc"]];
   ];
 
   runFiles
