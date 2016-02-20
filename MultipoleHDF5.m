@@ -49,7 +49,7 @@ getFiles[runName_] :=
 ];
 
 SimulationTools`MultipoleHDF5`Waveforms`HaveData[runName_, args___] :=
-  HaveRunDir[runName] && SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+  HaveRunDir[runName] && getFiles[runName] =!= {};
 
 SimulationTools`MultipoleHDF5`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{datasetName, runFiles, files, data, psi4},

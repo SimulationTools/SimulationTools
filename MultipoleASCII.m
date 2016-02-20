@@ -36,7 +36,7 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
 ];
 
 SimulationTools`MultipoleASCII`Waveforms`HaveData[runName_, args___] :=
-  HaveRunDir[runName] && SimulationTools`MultipoleASCII`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+  HaveRunDir[runName] && getFiles[runName] =!= {};
 
 SimulationTools`MultipoleASCII`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{fileName, threeCols, psi4},

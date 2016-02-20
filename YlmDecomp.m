@@ -38,7 +38,7 @@ getFiles[runName_, l_:"*", m_:"*", r_:"*"] :=
 ];
 
 SimulationTools`YlmDecomp`Waveforms`HaveData[runName_, args___] :=
-  !StringMatchQ[Catch[FindRunDir[runName]], "Cannot*"] && SimulationTools`YlmDecomp`Waveforms`ReadPsi4RadiiStrings[runName] =!= {};
+  !StringMatchQ[Catch[FindRunDir[runName]], "Cannot*"] && getFiles[runName] =!= {};
 
 SimulationTools`YlmDecomp`Waveforms`ReadPsi4Data[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
   Module[{fileName, threeCols, psi4},
