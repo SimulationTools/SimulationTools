@@ -52,11 +52,6 @@ Begin["`Private`"];
 TimersFile[runName_] :=
  FindSimulationFiles[runName, "AllTimers.000000.txt"][[1]];
 
-TimersFilesInRun[runName_] :=
-  Module[{files},
-    files = FindRunFilesFromPattern[runName, "AllTimers.*.txt"]
-  ];
-
 padInteger[i_, n_] :=
   Module[{str},
    str = ToString[i];
