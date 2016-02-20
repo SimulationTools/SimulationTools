@@ -124,12 +124,12 @@ ReadColumnFile[fileNames_List] :=
 ReadColumnFile[fileNames_List, cols_List] :=
   extractColumns[ReadColumnFile[fileNames], cols];
 
-ReadColumnFile[runName_String, fileName_String] :=
+ReadColumnFile[runName_String, fileName:(_String|_StringExpression|_RegularExpression)] :=
   Module[{files = FindSimulationFiles[runName, fileName]},
     If[files === {}, Error["Cannot find file " <> fileName <> " in run " <> runName]];
   ReadColumnFile[files]];
 
-ReadColumnFile[runName_String, fileName_String, cols_List] :=
+ReadColumnFile[runName_String, fileName:(_String|_StringExpression|_RegularExpression), cols_List] :=
   Module[{cols2},
     If[Or@@(StringQ /@ cols),
       cols2 = ColumnNumbers[runName, fileName, cols],
@@ -170,7 +170,7 @@ CarpetASCIIColumns[run_String, fileName_String] :=
       Error["Cannot find file " <> fileName <> " in run " <> run]];
     CarpetASCIIColumns[First@files]];
 
-ColumnNumbers[run_String, fileName_String, colIDs_] :=
+ColumnNumbers[run_String, fileName:(_String|_StringExpression|_RegularExpression), colIDs_] :=
   ColumnNumbers[First[FindSimulationFiles[run, fileName]], colIDs];
 
 ColumnNumbers[fileName_String, colIDs_] :=
