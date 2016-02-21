@@ -33,36 +33,31 @@ dataFileName[] :=
     "puncturetracker"~~("-"|"::")~~"pt_loc..asc"];
 
 SimulationTools`PunctureTracker`BHCoordinates`ReadBHCoordinates[runName_, i_] :=
- Module[{nTrackers},
+ Module[{nTrackers, data},
   nTrackers = 10;
-  MakeDataTable[{#[[1]], {#[[2]], #[[3]], #[[4]]}} & /@ 
-    ReadColumnFile[runName, dataFileName[],
-                   {9, 13 + nTrackers*1 + i, 
-      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]]];
+  data = ReadColumnFile[runName, dataFileName[],
+    {9, 13 + nTrackers*1 + i, 13 + nTrackers*2 + i, 13 + nTrackers*3 + i}];
+  ToDataTable[data[[All, 1]], data[[All, {2, 3, 4}]]]
+];
 
 SimulationTools`PunctureTracker`Trackers`ReadCoordinates[runName_, i_] :=
- Module[{nTrackers},
-  nTrackers = 10;
-  Table[ToDataTable[{#[[1]], #[[dir+1]]} & /@ 
-    ReadColumnFile[runName, dataFileName[],
-                   {9, 13 + nTrackers*1 + i, 
-      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]], {dir, 1, 3}]];
+ ReadPuncturePosition[runName, i];
 
 ReadPunctureVelocity[runName_, i_] :=
- Module[{nTrackers},
+ Module[{nTrackers, data},
   nTrackers = 10;
-  Table[ToDataTable[{#[[1]], #[[dir+1]]} & /@ 
-    ReadColumnFile[runName, "puncturetracker"~~("-"|"::")~~"pt_vel..asc",
-                   {9, 13 + nTrackers*1 + i, 
-      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]], {dir, 1, 3}]];
+  data = ReadColumnFile[runName, "puncturetracker"~~("-"|"::")~~"pt_vel..asc",
+    {9, 13 + nTrackers*1 + i, 13 + nTrackers*2 + i, 13 + nTrackers*3 + i}];
+  Table[ToDataTable[data[[All, 1]],  data[[All, dir+1]]], {dir, 1, 3}]
+];
 
 ReadPuncturePosition[runName_, i_] :=
- Module[{nTrackers},
+ Module[{nTrackers, data},
   nTrackers = 10;
-  Table[ToDataTable[{#[[1]], #[[dir+1]]} & /@ 
-    ReadColumnFile[runName, dataFileName[],
-                   {9, 13 + nTrackers*1 + i, 
-      13 + nTrackers*2 + i, 13 + nTrackers*3 + i}]], {dir, 1, 3}]];
+  data = ReadColumnFile[runName, dataFileName[],
+    {9, 13 + nTrackers*1 + i, 13 + nTrackers*2 + i, 13 + nTrackers*3 + i}];
+  Table[ToDataTable[data[[All, 1]], data[[All, dir+1]]], {dir, 1, 3}]
+];
 
 SimulationTools`PunctureTracker`BHCoordinates`HaveData[runName_String, tracker_Integer] :=
   FileIsInRun[runName, dataFileName[]];
