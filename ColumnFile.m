@@ -126,7 +126,7 @@ ReadColumnFile[fileNames_List, cols_List] :=
 
 ReadColumnFile[runName_String, fileName:(_String|_StringExpression|_RegularExpression)] :=
   Module[{files = FindSimulationFiles[runName, fileName]},
-    If[files === {}, Error["Cannot find file " <> fileName <> " in run " <> runName]];
+    If[files === {}, Error["Cannot find file " <> ToString[fileName] <> " in run " <> runName]];
   ReadColumnFile[files]];
 
 ReadColumnFile[runName_String, fileName:(_String|_StringExpression|_RegularExpression), cols_List] :=
