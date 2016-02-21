@@ -32,31 +32,44 @@ dataFileName[] :=
     $PunctureTrackerDataFileName,
     "puncturetracker"~~("-"|"::")~~"pt_loc..asc"];
 
-SimulationTools`PunctureTracker`BHCoordinates`ReadBHCoordinates[runName_, i_] :=
+SimulationTools`PunctureTracker`BHCoordinates`ReadBHCoordinates[sim_, i_] :=
+ readPunctureVector[sim, dataFileName[], i];
+
+SimulationTools`PunctureTracker`Trackers`ReadCoordinates[sim_, i_] :=
+ readPunctureScalar[sim, dataFileName[], i];
+
+ReadPuncturePosition[sim_, i_] :=
+  readPunctureScalar[sim, dataFileName[], i];
+
+ReadPunctureVelocity[sim_, i_] :=
+  readPunctureScalar[sim, "puncturetracker"~~("-"|"::")~~"pt_vel..asc", i];
+
+(* Read data as a list of scalar-valued DataTables *)
+readPunctureScalar[sim_, filename_, i_Integer] :=
+  First[readPunctureScalar[sim, filename, {i}]];
+
+readPunctureScalar[sim_, filename_, is_List] :=
  Module[{nTrackers, data},
-  nTrackers = 10;
-  data = ReadColumnFile[runName, dataFileName[],
-    {9, 13 + nTrackers*1 + i, 13 + nTrackers*2 + i, 13 + nTrackers*3 + i}];
-  ToDataTable[data[[All, 1]], data[[All, {2, 3, 4}]]]
+  data = readPunctureData[sim, filename, is];
+  Table[ToDataTable[data[[All, 1]], data[[All, 3(i-1)+dir+1]]], {i, Length[is]}, {dir, 1, 3}]
 ];
 
-SimulationTools`PunctureTracker`Trackers`ReadCoordinates[runName_, i_] :=
- ReadPuncturePosition[runName, i];
-
-ReadPunctureVelocity[runName_, i_] :=
+(* Read data as a list of vector-valued DataTables *)
+readPunctureVector[sim_, filename_, i_Integer] :=
+  First[readPunctureVector[sim, filename, {i}]];
+readPunctureVector[sim_, filename_, is_List] :=
  Module[{nTrackers, data},
-  nTrackers = 10;
-  data = ReadColumnFile[runName, "puncturetracker"~~("-"|"::")~~"pt_vel..asc",
-    {9, 13 + nTrackers*1 + i, 13 + nTrackers*2 + i, 13 + nTrackers*3 + i}];
-  Table[ToDataTable[data[[All, 1]],  data[[All, dir+1]]], {dir, 1, 3}]
+  data = readPunctureData[sim, filename, is];
+  Table[ToDataTable[data[[All, 1]], data[[All, 3(i-1)+1+{1,2,3}]]], {i, Length[is]}]
 ];
 
-ReadPuncturePosition[runName_, i_] :=
+(* Load data *)
+readPunctureData[sim_, filename_, is_List] :=
  Module[{nTrackers, data},
   nTrackers = 10;
-  data = ReadColumnFile[runName, dataFileName[],
-    {9, 13 + nTrackers*1 + i, 13 + nTrackers*2 + i, 13 + nTrackers*3 + i}];
-  Table[ToDataTable[data[[All, 1]], data[[All, dir+1]]], {dir, 1, 3}]
+  data = ReadColumnFile[sim, filename,
+    Flatten[{9, Transpose[{13 + nTrackers*1 + is, 13 + nTrackers*2 + is, 13 + nTrackers*3 + is}]}]];
+  data
 ];
 
 SimulationTools`PunctureTracker`BHCoordinates`HaveData[runName_String, tracker_Integer] :=
