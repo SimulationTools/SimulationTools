@@ -330,6 +330,9 @@ readColumnData[file_String] :=
        ReadColumnFile[file],
        ReadHDF5[tmp[[1,1]], {"Datasets", tmp[[1,2]]}]]];
 
+SimulationTools`MinTracker`Trackers`ReadCoordinates[runName_String, trackers_List] :=
+  Table[SimulationTools`MinTracker`Trackers`ReadCoordinates[runName, t], {t, trackers}];
+
 SimulationTools`NRDF`Trackers`ReadCoordinates[run_String, i_Integer] :=
   Module[{base,file,data},
     base = ReadMetadataKey[run, "body-data", "trajectory"<>ToString[i]];
