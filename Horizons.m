@@ -177,7 +177,7 @@ ReadAHQuadrupoleZZ[runName_, hn_] :=
   ReadAHColumn[runName, hn, 14];
 
 DefineMemoFunction[ReadAHCentroid[runName_, hn_],
- Module[{data, list2},
+ Module[{data},
   data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
   AddAttribute[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
 ]];
