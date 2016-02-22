@@ -217,7 +217,8 @@ SimulationStatus[sim_String] :=
 SimulationPerformancePanel[sims_List] :=
  Grid[Join[{Style[#,Bold]&/@{"Simulation","Speed","Memory/GB","Swap/MB","Cores"}},
    Table[
-   Module[{speed = Last[ReadSimulationSpeed[sim]], cores = ReadSimulationCoreCount[sim]},
+   Module[{speed = Last[ReadSimulationSpeed[sim]],
+           cores = WithExceptions[ReadSimulationCoreCount[sim], NoSimulationCoreCountAvailable -> "-"]},
      Sow[<|"SimulationName" -> sim, "Speed" -> speed, "Cores" -> cores|>, SimulationTools`SimView`Statistic];
      {sim, NumberForm[speed,{2,1}], 
        NumberForm[Last[ReadSimulationMemoryUsage[sim]]/1024.,{2,1}],
