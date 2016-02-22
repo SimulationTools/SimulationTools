@@ -36,17 +36,20 @@ ReadGeodesicParameterRHS;
 
 Begin["`Private`"];
 
-readGeodesic[sim_, i_] :=
+readGeodesicData[sim_, is_List] :=
  ReadColumnFile[sim, 
   "geodesic"~~("-"|"::")~~"gd_position..asc", {"time", 
-   Sequence @@ 
-    Table["gd_pos_" <> d <> "[" <> ToString[i] <> 
-      "]", {d, {"x", "y", "z"}}]}];
+   Sequence @@ Flatten[Table[
+     "gd_pos_" <> d <> "[" <> ToString[i] <> "]", {i, is}, {d, {"x", "y", "z"}}]]}];
 
-readGeodesicCoordinates[sim_, i_] :=
- Module[{g = readGeodesic[sim, i], t, x, y, z},
-  {t, x, y, z} = Transpose[g];
-  Map[ToDataTable[t, #] &, {x, y, z}]];
+readGeodesicCoordinates[sim_, i_Integer] :=
+  First[readGeodesicCoordinates[sim, {i}]];
+
+readGeodesicCoordinates[sim_, is_List] :=
+ Module[{data},
+  data = readGeodesicData[sim, is];
+  Table[ToDataTable[data[[All, 1]], data[[All, 3(i-1)+dir+1]]], {i, Length[is]}, {dir, 1, 3}]
+];
 
 ReadGeodesicParameter[sim_, i_] :=
  ToDataTable[ReadColumnFile[sim, 
