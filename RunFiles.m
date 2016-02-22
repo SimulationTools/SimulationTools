@@ -37,7 +37,7 @@ FindRunFilesFromPattern;
 FindFirstRunFile;
 FileIsInRun;
 
-(* TODO: Convert these to strings and make them options to FindRunFiles *)
+(* TODO: Convert these to strings and make them options to FindSimulationFiles *)
 FullFilenames;
 LeafNamesOnly;
 
@@ -125,8 +125,8 @@ FindRunDirSegments[runDir_] :=
 DocumentationBuilder`SymbolDescription["FindSimulationFiles"] =
   "find instances of a specific file across all segments of a simulation";
 
-FindRunFiles[run_String, filename_String] := FindRunFile[run, filename];
-FindRunFiles[run_String, filename:(_StringExpression|_RegularExpression)] :=
+FindSimulationFiles[run_String, filename_String] := FindRunFile[run, filename];
+FindSimulationFiles[run_String, filename:(_StringExpression|_RegularExpression)] :=
   FindRunFilesFromPattern[run, filename, FullFilenames -> True];
 
 FindRunFile[runName_String, fileName_String] :=
@@ -173,7 +173,7 @@ stringToReal[s_String] :=
   ]];
 
 FileIsInRun[run_, file_] :=
-  FindRunFiles[run, file] =!= {};
+  FindSimulationFiles[run, file] =!= {};
 
 (**********************************************************)
 (* SimulationNames                                        *)
