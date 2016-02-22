@@ -42,7 +42,7 @@ ToListOfPoints::usage = "ToListOfPoints[{x, y, ...}] takes DataTables representi
 Begin["`Private`"];
 
 Options[binaryTracker] = {"Trackers" -> Automatic};
-binaryTracker[run_String, i:(1|2), opts:OptionsPattern[]] :=
+binaryTracker[run_String, i:(1|2|{1,2}), opts:OptionsPattern[]] :=
   Module[
     {b},
     b = binaryTrackerNoFail[run,i,opts];
@@ -52,7 +52,7 @@ binaryTracker[run_String, i:(1|2), opts:OptionsPattern[]] :=
 
 (* We assume that there is only one binary in a simulation *)
 Options[binaryTrackerNoFail] = Options[binaryTracker];
-binaryTrackerNoFail[run_String, i:(1|2), opts:OptionsPattern[]] :=
+binaryTrackerNoFail[run_String, i:(1|2|{1,2}), opts:OptionsPattern[]] :=
   Which[
     OptionValue[Trackers] =!= Automatic,
     If[!MatchQ[OptionValue[Trackers], {{_String, _Integer}, {_String, _Integer}}],
@@ -100,7 +100,7 @@ DocumentationBuilder`SymbolDescription["ReadBinaryCoordinates"] =
   "read coordinate locations of members of a binary system";
 
 Evaluate[binaryFn][run_, opts:OptionsPattern[]] :=
-    Evaluate[trackerFn][run, Sequence@@Table[binaryTracker[run,i,opts],{i,1,2}]]],
+    Evaluate[trackerFn][run, binaryTracker[run,{1,2},opts]]],
 
   {fn, {ReadBinaryCoordinates -> ReadTrackerCoordinates,
         ReadBinaryVelocity -> ReadTrackerVelocity,
@@ -119,28 +119,30 @@ ReadBinaryPhase[run_, opts:OptionsPattern[]] :=
 ToListOfPoints[ds:{_DataTable...}] :=
   Transpose[ToListOfData/@ds];
 
-tracks2D[run_, i_] :=
-  ToListOfPoints[Take[ReadBinaryCoordinates[run,i],2]];
+tracks2D[{{x1_,y1_,z1_},{x2_,y2_,z2_}}] :=
+  {ToListOfPoints[{x1,y1}], ToListOfPoints[{x2,y2}]};
 
-tracks2D[run_] :=
-  {tracks2D[run,1],tracks2D[run,2]};
+xyToAzimuth = SimulationTools`Trackers`Private`xyToAzimuth;
+inclination = SimulationTools`Trackers`Private`inclination;
 
 SimulationTools`Binary`SimulationOverview`Plots[runNames1_] :=
-  Module[{runNames},
+  Module[{runNames, coords, plots},
     runNames = Select[runNames1, (binaryTrackerNoFail[#,1] =!= None && binaryTrackerNoFail[#,2] =!= None) &];
-    If[runNames === {},
+    coords = Table[ReadBinaryCoordinates[run, {1,2}], {run, runNames}];
+    plots = If[runNames === {},
        None,
-
        {{PresentationListLinePlot[
-         Flatten[tracks2D/@runNames,1],
+         Flatten[tracks2D/@coords,1],
            AspectRatio -> Automatic, PlotLabel -> "Trajectories", PlotRange -> All]},
         {PresentationListLinePlot[
-          Map[ReadBinarySeparation, runNames],
+          Map[Norm[Subtract @@ #]&, coords],
           PlotRange -> {0, All}, PlotLabel -> "Separation",
           PlotLegend -> runNames, LegendPosition -> {Right, Top}],
          PresentationListLinePlot[
-           Map[NDerivative[ReadBinaryAzimuth[#]]&, runNames],
-           PlotRange -> {0, Automatic}, PlotLabel -> "Frequency"]}}]];
+           Map[NDerivative[xyToAzimuth[Subtract @@ #]]&, coords[[All, All, {1,2}]]],
+           PlotRange -> {0, Automatic}, PlotLabel -> "Frequency"]}}];
+    plots
+];
 
 End[];
 EndPackage[];
