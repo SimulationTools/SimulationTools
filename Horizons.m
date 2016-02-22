@@ -67,26 +67,34 @@ SimulationTools`Horizons`Trackers`ReadCoordinates[runName_, hn_] :=
 ];
 
 ReadIHSpin[runName_, hn_] :=
- MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+ Module[{data},
+  data = ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"];
+  ToDataTable[data[[All,1]], data[[All,{2,3,4}]]]
+];
 
 ReadIHSpin[runName_, hn_, dir_] :=
- MakeDataTable[Map[{#[[1]], #[[dir+1]]} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+ Module[{data},
+  data = ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"];
+  ToDataTable[data[[All,1]], data[[All,dir+1]]]
+];
 
 ReadIHSpinX[runName_, hn_] :=
- MakeDataTable[Map[{#[[1]], #[[2]]} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+ Module[{data},
+  data = ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"];
+  ToDataTable[data[[All,1]], data[[All,2]]]
+];
 
 ReadIHSpinY[runName_, hn_] :=
- MakeDataTable[Map[{#[[1]], #[[3]]} &, 
-  ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"]]];
+ Module[{data},
+  data = ReadColumnFile[runName, "ihspin_hn_" <> ToString[hn] <> ".asc"];
+  ToDataTable[data[[All,1]], data[[All,3]]]
+];
 
 ReadIHSpinPhase[runName_, hn_] :=
  Module[{spin, sx, sy},
-  spin = ReadIHSpin[runName, hn];
-  sx = MakeDataTable[Map[{#[[1]], #[[2]][[1]]} &, ToList[spin]]];
-  sy = MakeDataTable[Map[{#[[1]], #[[2]][[2]]} &, ToList[spin]]];
+  spin = ToList[ReadIHSpin[runName, hn]];
+  sx = ToDataTable[spin[[All,1]], spin[[All,2,1]]];
+  sx = ToDataTable[spin[[All,1]], spin[[All,2,2]]];
   Phase[sx + I sy]];
 
 coordString[dir_] := {"x", "y", "z"}[[dir]];
@@ -145,10 +153,10 @@ DefineMemoFunction[ReadAHColumn[runName_, hn_, col_],
 
 (* TODO: this assumes the length of cols is 3 *)
 DefineMemoFunction[ReadAHColumns[runName_, hn_, cols_List],
- Module[{list, list2},
-   list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", Prepend[cols,2]];
-   list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-   Return[MakeDataTable[list2, {RunName -> runName}]]]];
+ Module[{data},
+  data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", Prepend[cols,2]];
+  AddAttribute[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
+]];
 
 ReadAHQuadrupoleXX[runName_, hn_] :=
   ReadAHColumn[runName, hn, 9];
@@ -169,10 +177,10 @@ ReadAHQuadrupoleZZ[runName_, hn_] :=
   ReadAHColumn[runName, hn, 14];
 
 DefineMemoFunction[ReadAHCentroid[runName_, hn_],
- Module[{list, list2},
-   list = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
-   list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
-   Return[MakeDataTable[list2, {RunName -> runName}]]]];
+ Module[{data, list2},
+  data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
+  AddAttribute[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
+]];
 
 ReadAHSeparation[runName_String] :=
   Module[{x0, x1, rad, l},
