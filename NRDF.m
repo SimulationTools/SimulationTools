@@ -120,9 +120,10 @@ DefineMemoFunction[NRDF`Waveforms`ReadPsi4Modes[runName_],
     Union[modes]]];
 
 readPsi4HDF5Data[file_String, dataset_String] :=
-  MakeDataTable[
-    Map[{#[[1]], #[[2]] + I #[[3]]} &,
-        ReadHDF5[file, {"Datasets", dataset}]]];
+ Module[{data},
+  data = ReadHDF5[file, {"Datasets", dataset}];
+  ToDataTable[data[[All, 1]], Complex @@@ data[[All, 2;;3]]]
+];
 
 haveMetadataFile[dir_String] :=
   FileNames["*.bbh", dir] =!= {};
