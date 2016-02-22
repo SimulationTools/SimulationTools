@@ -97,7 +97,6 @@ packages = {
     "SimulationTools`Parameters`",
     "SimulationTools`Performance`",
     "SimulationTools`Plotting`",
-    "SimulationTools`ProfileCall`",
     "SimulationTools`Providers`",
     "SimulationTools`PunctureTracker`",
   (*"SimulationTools`Quasinormal`",*)

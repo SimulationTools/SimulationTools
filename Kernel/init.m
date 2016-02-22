@@ -37,6 +37,7 @@ Get[FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"],-2],"StackTrace.m"}]
 Get["SimulationTools`Kernel`SimulationTools`"];
 Get["SimulationTools`ArgumentChecker`"];
 Get["SimulationTools`Error`"];
+Get["SimulationTools`ProfileCall`"];
 
 Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/PirahaPeg"]},
   Unprotect[$Packages];
@@ -45,5 +46,6 @@ Block[{$Path = Prepend[$Path, FileNameDrop[FindFile["SimulationTools`"], -2]<>"/
 
   WithStackTrace["SimulationTools`*",
     WithArgumentChecking["SimulationTools`*",
-      Scan[Needs, SimulationTools`Private`packages]]];
-]
+      WithProfiling["SimulationTools`*",
+        Scan[Needs, SimulationTools`Private`packages]]]];
+];
