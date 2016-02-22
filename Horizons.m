@@ -57,8 +57,14 @@ HaveChristodoulouMassData;
 
 Begin["`Private`"];
 
-SimulationTools`Horizons`Trackers`ReadCoordinates[runName_, i_] :=
-  Table[ReadAHCentroidCoord[runName, i, dir], {dir, 1, 3}];
+SimulationTools`Horizons`Trackers`ReadCoordinates[runName_String, trackers_List] :=
+  Table[SimulationTools`Horizons`Trackers`ReadCoordinates[runName, t], {t, trackers}];
+
+SimulationTools`Horizons`Trackers`ReadCoordinates[runName_, hn_] :=
+ Module[{data},
+  data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
+  Table[AddAttribute[ToDataTable[data[[All,1]], data[[All,dir+1]]], {RunName -> runName}], {dir,3}]
+];
 
 ReadIHSpin[runName_, hn_] :=
  MakeDataTable[Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, 
