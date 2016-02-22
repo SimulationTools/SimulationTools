@@ -25,15 +25,19 @@ Begin["`Private`"];
 
 fileName[tracker_] := "MinTracker"<>ToString[tracker]<>".asc";
 
-SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName_String,
-                                                   tracker_Integer] :=
+SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName_String, trackers_List] :=
+  Table[SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName, t], {t, trackers}];
+
+SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName_String, tracker_Integer] :=
   Module[{list, list2},
     list = ReadColumnFile[runName, fileName[tracker], {2,3,4,5}];
     list2 = Map[{#[[1]], {#[[2]], #[[3]], #[[4]]}} &, list];
     Return[MakeDataTable[list2, {RunName -> runName}]]];
 
-SimulationTools`MinTracker`Trackers`ReadCoordinates[runName_String, 
-                                      tracker_Integer] :=
+SimulationTools`MinTracker`Trackers`ReadCoordinates[runName_String, trackers_List] :=
+  Table[SimulationTools`MinTracker`Trackers`ReadCoordinates[runName, t], {t, trackers}];
+
+SimulationTools`MinTracker`Trackers`ReadCoordinates[runName_String, tracker_Integer] :=
   Module[{list},
     list = ReadColumnFile[runName, fileName[tracker], {2,3,4,5}];
     Return[Table[ToDataTable[list[[All,{1,dir+1}]]], {dir, 1, 3}]]];
