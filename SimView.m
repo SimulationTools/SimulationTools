@@ -105,7 +105,7 @@ SimView[runNames_List] :=
 
 SimView[runNames_List, r_] :=
   Module[
-    {grid, plots, providers},
+    {grid, plots, providers, aborted},
 
   (* spinNorms = Catch[ *)
   (*  PresentationListLinePlot[ *)
@@ -125,14 +125,18 @@ SimView[runNames_List, r_] :=
     (* This does not give the ordering that we like *)
     (* providers = Map[StringSplit[#,"`"][[2]] &, Names["SimulationTools`*`SimulationOverview`Plots"]]; *)
 
+    aborted[p_] := {{Graphics[Text["Aborted in "<>ToString[p]],AspectRatio->1/5],SpanFromLeft}};
+
     plots = Join@@DeleteCases[
-      Table[Symbol["SimulationTools`"<>p<>"`SimulationOverview`Plots"][runNames], {p, providers}], None|{None}];
+      Table[CheckAbort[
+        Symbol["SimulationTools`"<>p<>"`SimulationOverview`Plots"][runNames],
+        aborted[p]], {p, providers}], None|{None}];
 
     grid = Grid[Join[{{Text[Style[StringJoin[Riffle[runNames,", "]], Bold, 24]], SpanFromLeft}},
                 plots],
                 Spacings -> {0, 1}, ItemSize->{{All},Automatic}];
     grid = Replace[grid, g_Graphics :> Show[g,ImageSize->250], {3}];
-    padding = graphicsPadding[Cases[grid,_Graphics,{3}]];
+    padding = graphicsPadding[Cases[grid,g_Graphics /; Head[First[g]] =!= Text ,{3}]];
     grid = Replace[grid, g_Graphics :> Show[g,ImagePadding->padding], {3}];
 
     Return[grid]];
