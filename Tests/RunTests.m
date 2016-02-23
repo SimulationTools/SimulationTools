@@ -17,7 +17,7 @@ SetOptions["stdout", PageWidth -> Infinity];
 << MUnit`
 << SimulationTools`
 
-tests = Map[FileBaseName[#] &, FileNames["*.mt"]];
+tests = Map[FileBaseName[#] &, DeleteCases[FileNames["*.mt"],"SimulationTools.mt"]];
 
 results = (Print["\n"]; TestRun[#<>".mt", Loggers -> {VerbosePrintLogger[]}, TestRunTitle -> #]) & /@ tests;
 Print[];
