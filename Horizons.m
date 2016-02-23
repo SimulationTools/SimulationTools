@@ -63,7 +63,7 @@ SimulationTools`Horizons`Trackers`ReadCoordinates[runName_String, trackers_List]
 SimulationTools`Horizons`Trackers`ReadCoordinates[runName_, hn_] :=
  Module[{data},
   data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
-  Table[AddAttribute[ToDataTable[data[[All,1]], data[[All,dir+1]]], {RunName -> runName}], {dir,3}]
+  Table[AddAttributes[ToDataTable[data[[All,1]], data[[All,dir+1]]], {RunName -> runName}], {dir,3}]
 ];
 
 ReadIHSpin[runName_, hn_] :=
@@ -155,7 +155,7 @@ DefineMemoFunction[ReadAHColumn[runName_, hn_, col_],
 DefineMemoFunction[ReadAHColumns[runName_, hn_, cols_List],
  Module[{data},
   data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", Prepend[cols,2]];
-  AddAttribute[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
+  AddAttributes[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
 ]];
 
 ReadAHQuadrupoleXX[runName_, hn_] :=
@@ -179,7 +179,7 @@ ReadAHQuadrupoleZZ[runName_, hn_] :=
 DefineMemoFunction[ReadAHCentroid[runName_, hn_],
  Module[{data},
   data = ReadColumnFile[runName, "BH_diagnostics.ah"<>ToString[hn]<>".gp", {2,3,4,5}];
-  AddAttribute[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
+  AddAttributes[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
 ]];
 
 ReadAHSeparation[runName_String] :=

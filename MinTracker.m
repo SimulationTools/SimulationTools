@@ -31,7 +31,7 @@ SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName_String, track
 SimulationTools`MinTracker`BHCoordinates`ReadBHCoordinates[runName_String, tracker_Integer] :=
  Module[{data},
   data = ReadColumnFile[runName, fileName[tracker], {2,3,4,5}];
-  AddAttribute[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
+  AddAttributes[ToDataTable[data[[All, 1]], data[[All, {2,3,4}]]], {RunName -> runName}]
 ];
 
 SimulationTools`MinTracker`Trackers`ReadCoordinates[runName_String, trackers_List] :=
