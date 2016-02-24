@@ -433,7 +433,7 @@ unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
 UnwrapPhaseVector[data_List] :=
   Switch[Length[data],
     0, {},
-    1, {ArcTan[data[[1]]]},
+    1, data,
     _, unwrapPhaseVector[data]];
 
 
