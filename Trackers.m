@@ -28,13 +28,27 @@ ReadTrackerInclination::usage = "ReadTrackerInclination[sim, tracker] gives the 
 
 Begin["`Private`"];
 
-trackerPattern = {_String, (_Integer|_List)};
+trackerPattern = {_String, (_Integer|List[_Integer..])};
+singleTrackerPattern = {_String, _Integer};
 
 ReadTrackerCoordinates[run_String, tracker:trackerPattern] :=
   Symbol["SimulationTools`"<>tracker[[1]]<>"`Trackers`ReadCoordinates"][run, tracker[[2]]];
 
-ReadTrackerCoordinates[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
-  ReadTrackerCoordinates[run, tracker1] - ReadTrackerCoordinates[run, tracker2];
+ReadTrackerCoordinates[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
+ Module[{allcoords, alltrackers, coords1, coords2, relcoords},
+  If[First[tracker1] === First[tracker2],
+    (* If the two trackers are of the same type read them together for better performance *)
+    alltrackers = Flatten[Join[tracker1[[{2}]], tracker2[[{2}]]]];
+    allcoords = ReadTrackerCoordinates[run, {First[tracker1], alltrackers}];
+    coords1 = If[Head[tracker1[[2]]]===List, Most[allcoords], First[allcoords]];
+    coords2 = Last[allcoords];
+  ,
+    coords1 = ReadTrackerCoordinates[run, tracker1];
+    coords2 = ReadTrackerCoordinates[run, tracker2];
+  ];
+  (* Need to specify the level here so both cases for tracker1 (integer or list) are handled *)
+  Map[# - coords2 &, coords1, {ArrayDepth[coords1] - 1}]
+];
 
 ReadTrackerVelocity[run_String, tracker:trackerPattern] :=
  Module[{coords},
@@ -42,7 +56,7 @@ ReadTrackerVelocity[run_String, tracker:trackerPattern] :=
   Map[NDerivative[1], coords, {ArrayDepth[coords]}]
 ];
 
-ReadTrackerVelocity[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
+ReadTrackerVelocity[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
  Module[{coords},
   coords = ReadTrackerCoordinates[run, tracker1, tracker2];
   Map[NDerivative[1], coords, {ArrayDepth[coords]}]
@@ -54,7 +68,7 @@ ReadTrackerRadius[run_String, tracker:trackerPattern] :=
   Map[Norm, coords, {ArrayDepth[coords]-1}]
 ];
 
-ReadTrackerRadius[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
+ReadTrackerRadius[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
  Module[{coords},
   coords = ReadTrackerCoordinates[run, tracker1, tracker2];
   Map[Norm, coords, {ArrayDepth[coords]-1}]
@@ -69,7 +83,7 @@ ReadTrackerAzimuth[run_String, tracker:trackerPattern] :=
   Map[xyToAzimuth[#[[{1,2}]]]&, coords, {ArrayDepth[coords]-1}]
 ];
 
-ReadTrackerAzimuth[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
+ReadTrackerAzimuth[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
  Module[{coords},
   coords = ReadTrackerCoordinates[run, tracker1, tracker2];
   Map[xyToAzimuth[#[[{1,2}]]]&, coords, {ArrayDepth[coords]-1}]
@@ -89,7 +103,7 @@ ReadTrackerInclination[run_String, tracker:trackerPattern] :=
   Map[inclination, coords, {ArrayDepth[coords]-1}]
 ];
 
-ReadTrackerInclination[run_String, tracker1:trackerPattern, tracker2:trackerPattern] :=
+ReadTrackerInclination[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
  Module[{coorda},
   coords = ReadTrackerCoordinates[run, tracker1, tracker2];
   Map[inclination, coords, {ArrayDepth[coords]-1}]
