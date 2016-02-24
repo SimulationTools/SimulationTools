@@ -100,7 +100,7 @@ DocumentationBuilder`SymbolDescription["ReadBinaryCoordinates"] =
   "read coordinate locations of members of a binary system";
 
 Evaluate[binaryFn][run_, opts:OptionsPattern[]] :=
-    Evaluate[trackerFn][run, binaryTracker[run,{1,2},opts]]],
+    Evaluate[trackerFn][run, binaryTracker[run,1,opts], binaryTracker[run,2,opts]]],
 
   {fn, {ReadBinaryCoordinates -> ReadTrackerCoordinates,
         ReadBinaryVelocity -> ReadTrackerVelocity,
