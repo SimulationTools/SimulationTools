@@ -29,7 +29,19 @@ Begin["`Private`"];
 $h5mma = If[Quiet[Needs["h5mma`"], {Needs::nocont, Get::noopen}]===$Failed, False, True];
 If[$h5mma, SetOptions[ImportHDF5, Turbo->True]];
 
-ReadHDF5[file_String, opts_:"Datasets"] :=
+ReadHDF5[file_String] := ReadHDF5[file, "Datasets"];
+
+ReadHDF5[file_String, "Datasets"] :=
+ Module[{lastModified},
+  lastModified = FileDate[file];
+  If[!MatchQ[dsCache[file],{_,_}] || dsCache[file][[1]] =!= lastModified,
+    dsCache[file] = {lastModified, readHDF5[file, "Datasets"]}];
+  dsCache[file][[2]]
+];
+
+ReadHDF5[file_String, opts_] := readHDF5[file, opts];
+
+readHDF5[file_String, opts_] :=
 Module[{result},
   If[!$h5mma && !($EnableBuiltInHDF5Reader === True),
     Error["The required h5mma package has not been loaded. Make sure it is installed and functioning correctly."];
