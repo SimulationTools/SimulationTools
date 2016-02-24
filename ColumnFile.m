@@ -65,6 +65,10 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
 
     DeclareFileDependency[fileName];
 
+    lastModified = FileDate[fileName];
+    If[MatchQ[cfCache[fileName],{_,_}] && cfCache[fileName][[1]] === lastModified,
+      Return[cfCache[fileName][[2]]]];
+
     If[FileExtension[fileName] === "gz",
        (* Print["Importing gzip"]; *)
        (* Print[fileName]; *)
@@ -78,7 +82,8 @@ DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
     (* If[!ArrayQ[data], *)
     (*   Error["File "<>fileName<>" missing data."]; *)
     (* , *)
-      Return[data];
+    cfCache[fileName] = {lastModified,data};
+    Return[data];
     (* ]; *)
   ]
   ]
