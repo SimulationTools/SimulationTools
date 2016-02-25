@@ -99,6 +99,12 @@ ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
 RotateWaveform;
 EulerAngles;
+SpECEstimatedInspiralSpeed;
+SpECEstimatedMergerTime;
+SpECEstimatedRemainingWalltime;
+ReadSpECSimulationTerminationReason;
+ReadSpECFractionComplete;
+PlotSpECSimulationsRemainingTime;
 
 Begin["`Private`"];
 
@@ -1118,6 +1124,126 @@ hprime[h_, {\[ScriptL]_,
 
 RotateWaveform[h_, {l_, m_}, {alpha_, beta_, gamma_}] :=
   hprime[h,{l,m},{alpha,beta,gamma}];
+
+(****************************************************************)
+(* Performance prediction                                       *)
+(****************************************************************)
+
+SpECEstimatedInspiralSpeed[sim_String] :=
+ Module[{speed, tMax, speedChunk},
+  speed = ReadSpECSimulationSpeed[sim];
+  tMax = MaxCoordinate[speed];
+  speedChunk = Slab[speed, 200 ;; Min[tMax, 1000]];
+  (*Print[speedChunk];*)
+  If[Length[speedChunk] === 0,
+   (* TODO: estimate as 4/5 of speed of previous level, if it exists *)
+      None,
+   Mean[speedChunk]]];
+
+SpECEstimatedMergerTime[sim_String] :=
+ Module[{simBase, simLev, mass3, levs, lowerLevs},
+  (*Print["Estimating from "<>sim];*)
+  mass3 = ReadSpECHorizonMass[sim, 3];
+  If[Length[mass3] > 0,
+    (* Print["Have AhC"]; *)
+   MinCoordinate[mass3],
+   (* else *)
+  (* Print["Looking for lower levs"]; *)
+   {simBase, simLev} = StringSplit[sim, ":"];
+   simLev = ToExpression[simLev];
+   levs = ToExpression /@ FindSpECLevels[simBase];
+   lowerLevs = Select[levs, # < simLev &];
+   If[Length[lowerLevs] === 0,
+    (* TODO: run PN code to estimate merger time *)
+    None,
+    SpECEstimatedMergerTime[simBase <> ":" <> ToString[Last[lowerLevs]]]]]];
+
+SpECEstimatedRemainingWalltime[sim_String] :=
+ Module[{term, ringdownTime = 800, speedData, tc, speed1, t, speed2},
+  (* TODO: check to see if simulation has finished, 
+  in which case return 0 *)
+  term = ReadSpECSimulationTerminationReason[sim];
+  If[term === "FinalTime", Return[0]];
+  speedData = ReadSpECSimulationSpeed[sim];
+  tc = SpECEstimatedMergerTime[sim];
+(* Print["tc = ", tc]; *)
+  If[tc === None, Return[None]];
+  speed1 = SpECEstimatedInspiralSpeed[sim];
+  (* Print["speed1 = ",speed1]; *)
+  If[speed1 === None, Return[None]];
+  speed2 = speed1/2;
+  t = MaxCoordinate[speedData];
+  (* Print["t = ",t]; *)
+  If[t < tc,
+    (* Print["Before tc"]; *)
+   (tc - t)/speed1 + ringdownTime/speed2,
+    (* Print["After tc"]; *)
+   (tc + ringdownTime - t)/speed2]];
+
+ReadSpECSimulationTerminationReason[sim_String] :=
+ Module[{termFiles, termFile, termString, matches},
+  termFiles = 
+   Flatten[FindSpECSimulationFiles[sim, "TerminationReason.txt"]];
+  If[termFiles === {}, "None",
+   termFile = Last[termFiles];
+   termString = StringSplit[Import[termFile, "Text"], "\n"][[1]];
+   matches = 
+    StringCases[termString, 
+     StartOfString ~~ "Termination condition " ~~ cond__ ~~ 
+       EndOfString :> cond];
+   If[Length[matches] === 1,
+    matches[[1]],
+    Print[
+     "Could not parse termination condition from \"" <> termString <> 
+      "\" in " <> sim];
+    "Unknown"]]]
+
+ReadSpECFractionComplete[sim_String] :=
+ Module[{walltime, completeHours, remainingHours},
+  completeHours = Last[ReadSpECWallTime[sim]];
+  remainingHours = SpECEstimatedRemainingWalltime[sim];
+  If[remainingHours === None,
+   None,
+   completeHours/(completeHours + remainingHours)]];
+
+PlotSpECSimulationsRemainingTime[sims_List] :=
+  Module[{remainingHours, fractionComplete, simNames, completeLabels,
+    unfinished, chartRemainingDays, maxDays},
+
+    remainingHours = Map[(Module[{T = SpECEstimatedRemainingWalltime[#]},
+      (*Print[#, ": ", 
+        If[T =!= None, ToString[T/24] <> " days", "unknown"]];*) T]) &, 
+      sims];
+
+    fractionComplete = Map[(Module[{f = ReadSpECFractionComplete[#]},
+      (*Print[#, ": ", 
+        If[f =!= None, ToString[Round[100 f]] <> "%", "unknown"]];*) 
+      f]) &, sims];
+
+    simNames = 
+    StringReplace[#, $SpECSimulationsDirectory <> "/" -> ""] & /@ 
+    sims;
+
+    unfinished = Map[# =!= 0 &, remainingHours];
+
+    completeLabels = 
+    Pick[fractionComplete, unfinished] /. {None :> "", 
+      x_?NumberQ :> ToString[Round[100 x]] <> "%"};
+
+    chartRemainingDays = Pick[remainingHours, unfinished]/24;
+
+    maxDays = Max[Select[chartRemainingDays, FreeQ[#, None] &]];
+
+    Show[BarChart[Reverse[chartRemainingDays], BarOrigin -> Left, 
+      ChartLabels -> Reverse@Pick[simNames, unfinished], 
+      ImageSize -> {400, Length[simNames]*5}, AspectRatio -> Full, 
+      Frame -> True, FrameLabel -> {None, "Time remaining (days)"}, 
+      GridLines -> Automatic, ChartStyle -> LightBlue, 
+      PlotRange -> {{0, maxDays + 2}, All}(*, PlotLabel->"Walltime remaining"*)],
+      Graphics[
+        MapThread[
+          Text[#1, {maxDays + 1, #2}, {-1, 0}] &, {Reverse@completeLabels, 
+            Range[1, Length[completeLabels]]}]]]];
 
 End[];
 EndPackage[];
