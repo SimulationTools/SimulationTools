@@ -48,6 +48,7 @@ ReadAHQuadrupoleZZ;
 ChristodoulouMass;
 ReadAHSeparation(*::usage = "ReadAHSeparation[sim] returns the coordinate distance between the centroids of apparent horizons with indices 1 and 2 in sim.  This requires output from the AHFinderDirect thorn."*);
 ReadAHPhase;
+ReadApparentHorizonPhase;
 InitialSpin;
 SpinAngle;
 InitialSpinAngle;
@@ -227,6 +228,14 @@ ReadAHPhase[runName_String] :=
     xyTrans = MapThreadData[Take[#1-#2,2] &, {Take[x0,l], Take[x1,l]}]; (* Project into xy plane *)
     Return[Phase[xyTrans]];
   ];
+
+ReadApparentHorizonPhase[sim_String, ah_Integer] :=
+ Module[{data, x, y},
+  data = ReadColumnFile[sim,
+    "BH_diagnostics.ah" <> ToString[ah] <> ".gp", {2, 3, 4}];
+  x = ToDataTable[data[[All, {1, 2}]]];
+  y = ToDataTable[data[[All, {1, 3}]]];
+  SimulationTools`Trackers`Private`xyToAzimuth[{x, y}]];
 
 (* TODO: This doesn't look right *)
 InitialSpin[run_, i_] :=
