@@ -131,9 +131,9 @@ SimulationStateFractions[sim_String] :=
     totalRunTime = Total[endDates - startDates];
     totalQueueTime = Total[queueTimes];
     totalStoppedTime = simDuration - totalQueueTime - totalRunTime;
-    <|"Running" -> N[totalRunTime/simDuration],
+    Association["Running" -> N[totalRunTime/simDuration],
     "Queued" -> N[totalQueueTime/simDuration],
-    "Stopped" -> N[totalStoppedTime/simDuration]|>];
+    "Stopped" -> N[totalStoppedTime/simDuration]]];
 
 End[];
 EndPackage[];

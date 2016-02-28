@@ -143,7 +143,7 @@ SimulationTools`Statistics`SimulationOverview`Plots[runNames_] :=
 
     statuses = SimulationStatus /@ runNames;
 
-    MapThread[Sow[<|"SimulationName" -> #1, "Status" -> #2|>, SimulationTools`SimView`Statistic] &, {runNames, statuses}]; 
+    MapThread[Sow[Association["SimulationName" -> #1, "Status" -> #2], SimulationTools`SimView`Statistic] &, {runNames, statuses}]; 
 
     statusTable = Grid[MapThread[{#1,formatStatus[#2]}&, {runNames, statuses}]];
 
@@ -219,7 +219,7 @@ SimulationPerformancePanel[sims_List] :=
    Table[
    Module[{speed = Last[ReadSimulationSpeed[sim]],
            cores = WithExceptions[ReadSimulationCoreCount[sim], NoSimulationCoreCountAvailable -> "-"]},
-     Sow[<|"SimulationName" -> sim, "Speed" -> speed, "Cores" -> cores|>, SimulationTools`SimView`Statistic];
+     Sow[Association["SimulationName" -> sim, "Speed" -> speed, "Cores" -> cores], SimulationTools`SimView`Statistic];
      {sim, NumberForm[speed,{2,1}], 
        NumberForm[Last[ReadSimulationMemoryUsage[sim]]/1024.,{2,1}],
        Last[ReadSimulationSwapUsage[sim]],
