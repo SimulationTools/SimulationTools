@@ -97,6 +97,7 @@ ReadSpECASCIIData;
 ReadSXSHorizonDisplacement;
 ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
+ReadSXSMetadataFile;
 RotateWaveform;
 EulerAngles;
 SpECEstimatedInspiralSpeed;
@@ -1053,6 +1054,58 @@ accumulatedPhase[om_] :=
 
 ReadSXSAccumulatedPhase[sim_String] :=
  accumulatedPhase[ReadSXSOrbitalOmega[sim]];
+
+(****************************************************************)
+(* SXS metadata format *)
+(****************************************************************)
+
+ReadSXSMetadataFile[name_String] :=
+ Module[{keyValues, md1, md},
+  keyValues = 
+   Cases[ParseMetadataFile[name], 
+    "element"["key"[k_], v_] :> (k -> v), Infinity];
+  md1 = Association[
+    Map[#[[1]] -> processValue[#[[2]]] &, keyValues]];
+  md = computeExtraMetadata[md1]];
+
+processValue["string"[s_]] := s;
+
+processValue["value"[v_]] := processValue[v];
+
+processValue[
+  es : "email_list"["email"[_] ...]] :=
+ (List @@ Map[First, es]);
+
+processValue[nel : "name_email_list"[__]] :=
+ List @@ Map[{#[[1, 1]], #[[2, 1]]} &, nel];
+
+processValue["number"[x_]] := ImportString[x, "List"][[1]];
+
+processValue[x_] := Error["Don't know how to process " <> ToString[x]]
+
+processValue["keyword"[x_]] := x
+
+nv[s_] :=
+ ImportString[StringReplace[s, "," -> " "], "Table"][[1]];
+
+computeExtraMetadata[a_] :=
+ Module[{a1, a2},
+  a1 = Join[a,
+    <|"relaxed-mass-ratio" -> a["relaxed-mass1"]/a["relaxed-mass2"],
+     "relaxed-chi1" -> nv[a["relaxed-spin1"]]/a["relaxed-mass1"]^2,
+     "relaxed-chi2" -> 
+      nv[a["relaxed-spin2"]]/a["relaxed-mass2"]^2|>];
+  a2 = Join[a1,
+    <|"in-plane-chi1" -> 
+      Norm[Cross[Normal[a1["relaxed-chi1"]], 
+        Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]],
+     "in-plane-chi2" -> 
+      Norm[
+       Cross[Normal[a1["relaxed-chi2"]], 
+        Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]]|>]];
+
+
+
 
 (****************************************************************)
 (* Waveform rotation (provided by Andrea Taracchini)            *)
