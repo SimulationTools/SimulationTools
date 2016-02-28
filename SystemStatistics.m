@@ -26,6 +26,7 @@ BeginPackage["SimulationTools`SystemStatistics`",
 ReadSimulationMemoryUsage::usage   = "ReadSimulationMemoryUsage[sim] gives the memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
 ReadSimulationSwapUsage::usage   = "ReadSimulationSwapUsage[sim] gives the swap memory usage of a simulation in MB as a DataTable as a function of coordinate time.";
 ReadSimulationMinMemoryUsage;
+ReadSimulationAverageMemoryUsage;
 
 (* Old names *)
 ReadMemory = ReadSimulationMemoryUsage;
@@ -46,6 +47,10 @@ ReadSimulationMinMemoryUsage[runName_] :=
      ToDataTable[ReadColumnFile[runName, "systemstatistics"~~("-"|"::")~~"process_memory_mb.minimum.asc", {"time", "maxrss_mb"}]],
      ToDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
+ReadSimulationAverageMemoryUsage[runName_] :=
+  If[FindSimulationFiles[runName, "systemstatistics"~~("-"|"::")~~"process_memory_mb.average.asc"] =!= {},
+     ToDataTable[ReadColumnFile[runName, "systemstatistics"~~("-"|"::")~~"process_memory_mb.average.asc", {"time", "maxrss_mb"}]],
+     ToDataTable[ReadColumnFile[runName, "MemStats0000.asc", {1, 2}]]];
 
 ReadSimulationSwapUsage[runName_] :=
   ToDataTable[ReadColumnFile[
