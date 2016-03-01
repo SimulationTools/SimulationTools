@@ -24,6 +24,7 @@ BeginPackage["SimulationTools`SimulationProperties`",
   "SimulationTools`Providers`",
   "SimulationTools`RunFiles`",
   "SimulationTools`Segments`",
+  "SimulationTools`Utils`",
   "SimulationTools`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
@@ -84,8 +85,24 @@ ReadWalltimeHours[runName_] :=
 
 ReadSimulationCoreCount[run_] :=
   If[HaveData["RunFiles", FindRunDir[run]],
-    CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
+    WithExceptions[
+      CallProvidedFunction["RunFiles","ReadCores",{FindRunDir[run],run}],
+      NoSimulationCoreCountAvailable -> readSimulationCoreCountStdout[run]],
     Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""]];
+
+readSimulationCoreCountStdout[run_String] :=
+  Module[{outFiles,outFile,s},
+    outFiles = StandardOutputOfRun[run];
+    If[Length[outFiles] == 0, Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""]];
+    outFile = First[outFiles];
+    s = StringSplit[HeadFile[outFile, 10000], "\n"];
+    matches = Flatten@Map[StringCases[#,
+      "INFO (Carpet): There are " ~~ n : NumberString ~~ 
+      " threads in total" :> n] &, s];
+    Replace[matches,
+      {{} :> Error[NoSimulationCoreCountAvailable, "Simulation core count not available in \""<>run<>"\""],
+        {n_} :> ToExpression[n],
+        x_ :> Error["Unrecognised core count "<>ToString[x]]}]];
 
 ReadSimulationProcessCount[run_] :=
   If[HaveData["RunFiles", FindRunDir[run]],
