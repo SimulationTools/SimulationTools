@@ -23,6 +23,7 @@ RunSubprocess;
 (* Experimental *)
 MapMonitored;
 TailFile;
+HeadFile;
 ShowIt;
 MapSuccessive;
 ErrorForm;
@@ -97,6 +98,14 @@ TailFile[filename_String, n_Integer] :=
   handle = OpenRead[filename];
   SetStreamPosition[handle, Max[size - n, 0]];
   lines = ReadList[handle, String];
+  Close[handle];
+  StringJoin[Riffle[lines, "\n"]]];
+
+(* Note asymmetry with TailFile; n here is a number of lines *)
+HeadFile[filename_String, n_Integer] :=
+ Module[{size, handle, lines},
+  handle = OpenRead[filename];
+  lines = ReadList[handle, String, n];
   Close[handle];
   StringJoin[Riffle[lines, "\n"]]];
 
