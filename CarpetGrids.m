@@ -58,9 +58,20 @@ compStringPattern =
    coordVec3 ~~ ":" ~~ coordVec3 ~~ "/" ~~ coordVec3 ~~ "/" ~~ numberString ~~
     ")";
 
+stringToDouble[s_] :=
+  (* (  Print["stringToDouble: ", s]; *)
+  (*   Abort[]; *)
+  (* Carpet writes one too many digit for this to work. You get $Failed(bignum). *)
+    (* Internal`StringToDouble[s]; *)
+  If[StringMatchQ[s,NumberString],
+    ToExpression[s],
+    (* This is much slower than StringToDouble *)
+    ImportString[s,"List"][[1]]];
+
+
 coordVec3PatternRule = 
   "[" ~~ x1 : numberString ~~ "," ~~ x2 : numberString ~~ "," ~~ 
-    x3 : numberString ~~ "]" :> ToExpression /@ {x1, x2, x3};
+    x3 : numberString ~~ "]" :> stringToDouble /@ {x1, x2, x3};
 
 bboxOfString[s_] :=
  Module[{x1, x2, dx},
@@ -68,7 +79,7 @@ bboxOfString[s_] :=
      StringCases[s, compStringPatternRule][[1, 1 ;; 3]])];
 
 parseCoordVec3[s_String] :=
- StringCases[s, coordVec3PatternRule][[1]]
+ StringCases[s, coordVec3PatternRule][[1]];
 
 parseIterationTable[itTable_] :=
  Module[{itData, levels},
