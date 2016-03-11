@@ -322,9 +322,10 @@ PlotCarpetBBoxes2D[bs : {_BBox ...}, opts:OptionsPattern[]] :=
   PlotCarpetBBoxes[toXYPlane[bs], opts];
 
 toXYPlane[bs : {_BBox ...}] :=
+ If[bs === {}, {},
  dropLastBBoxDim /@ intersection[
    BBox[{-100000., -100000., 0.}, {100000., 100000., 0.}, bs[[1, 3]]],
-   bs];
+   bs]];
 
 toXYPlaneInt[bs : {_BBox ...}, iOriginZ_Integer] :=
  dropLastBBoxDim /@ intersection[
