@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`CarpetGrids`",
   "SimulationTools`Error`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
+  "SimulationTools`Plotting`",
   "SimulationTools`Segments`",
   "SimulationTools`Grids`",
   "SimulationTools`Utils`"
@@ -33,6 +34,7 @@ RegriddingIterations;
 CheckIdenticalRegridding;
 PlotCarpetBBoxes;
 PlotCarpetBBoxes2D;
+GridPlot2D;
 
 $UnequalBBoxes;
 $GridTime;
@@ -258,6 +260,7 @@ dropLastBBoxDim[BBox[x1_, x2_, dx_]] :=
 (* Shrinking *)
 
 shrinkBBoxes[bboxes_, n_, clipz_: False, clipx_: False, clipy_: False] :=
+ (* TODO: For clipping, these bboxes must currently be 3D *)
  Module[{enc},
   If[bboxes==={}, Return[{}]]; (* Not sure why this isn't handled correctly below *)
   enc = enlargeBBox[enclosingBBox[bboxes], 2 n];
@@ -491,6 +494,70 @@ ReadCarpetGridBBoxes[sim_String, t_, rl_, removeBuffers_: True] :=
     fullBBoxes = gridsIt[[rl + 1, 2]];
     If[removeBuffers, normalise[shrinkBBoxes[fullBBoxes, buffers, True]],
       normalise[fullBBoxes]]]];
+
+(****************************************************************)
+(* Plotting 2D grids *)
+(****************************************************************)
+
+Options[GridPlot2D] = 
+  Join[Options[Graphics], {"RefinementLevelRange" -> All, "BufferSize" -> Automatic,
+    "RefinementLevelLegend" -> False}];
+
+(* readGrids *)
+
+readGrids[sim_] := 
+  (* To do: add file dependency tracking *)
+ readGrids[sim] = 
+  ReadCarpetGridStructure[sim];
+
+(* processBBoxes *)
+
+processBBoxes[bboxes_List, bufferSize_] :=
+  (* TODO: currently assumes z reflection symmetry *)
+ normalise[toXYPlane[shrinkBBoxes[bboxes, bufferSize, True]]];
+
+(* plotRL *)
+
+Options[plotRL] = Options[GridPlot2D];
+plotRL[{rl_Integer, bboxes_List}, opts:OptionsPattern[]] :=
+ plotBBoxPoints /@ 
+  processBBoxes[bboxes, OptionValue[BufferSize]];
+
+(* plotIteration *)
+
+Options[plotIteration] = Options[GridPlot2D];
+
+plotIteration[{it_Integer, rls_List}, opts:OptionsPattern[]] :=
+  Module[{rlRange = OptionValue[RefinementLevelRange]},
+    Thread[{Take[PresentationPlotStyles[[rlRange]], 
+      Length[rls[[rlRange]]]], plotRL[#,opts] & /@ rls[[rlRange]]}]];
+
+(* refinementLevelLegend *)
+
+Options[refinementLevelLegend] = Options[GridPlot2D];
+refinementLevelLegend[grids_, opts:OptionsPattern[]] :=
+  PointLegend[PresentationPlotStyles, 
+    Map["RL " <> ToString[#] &, grids[[2, All, 1]][[OptionValue[RefinementLevelRange]]]]];
+
+(* GridPlot2D *)
+
+GridPlot2D[grids_List, opts : OptionsPattern[]] :=
+  If[OptionValue[RefinementLevelLegend],
+    Legended[#, refinementLevelLegend[grids,opts]] &,
+    Identity] @ Graphics[{AbsolutePointSize[0.5], plotIteration[grids, opts]},
+      FilterRules[{opts}, Options[Graphics]],
+      Frame -> True, FrameLabel -> {"x", "y"}, LabelStyle -> "Medium"];
+
+GridPlot2D[sim_String, t_, opts : OptionsPattern[]] :=
+ Module[{grids, dt, it, indices, i,
+   buffers = readBufferSize[sim], 
+   fullBBoxes, its, gridsIt},
+  grids = readGrids[sim];
+  dt = readIterationTimeStep[sim];
+  it = Round[t/dt];
+  its = grids[[All, 1]];
+  i = LengthWhile[its, # <= it &];
+  GridPlot2D[grids[[i]], opts, BufferSize->buffers]];
 
 End[];
 EndPackage[];
