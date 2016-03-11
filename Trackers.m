@@ -80,8 +80,8 @@ xyToAzimuth[{x1_DataTable, y1_DataTable}] :=
  Module[{azimuth},
   Quiet[
     azimuth = UnwrapPhaseVector[ArcTan@@RestrictedToCommonInterval[{x1,y1}]];
-    If[MemberQ[$MessageList, HoldForm[ArcTan::indet]],
-      Message[ReadTrackerAzimuth::indet]];
+    (* If[MemberQ[$MessageList, HoldForm[ArcTan::indet]], *)
+    (*   Message[ReadTrackerAzimuth::indet]]; *)
   , {ArcTan::indet, CompiledFunction::cfta}];
   azimuth
 ];
