@@ -32,6 +32,7 @@ PartitionComplete;
 MovingAverageOperator;
 UserEmailDisplayName;
 LeadingTerm;
+ParseCommandLine;
 
 $SimulationToolsEmail;
 
@@ -166,6 +167,29 @@ UserEmailDisplayName[] :=
 
 LeadingTerm[sd_SeriesData] :=
   sd[[3, 1]] (sd[[1]] - sd[[2]])^(sd[[4]]/sd[[6]]);
+
+(*********************************************************************
+  Parse command line
+ *********************************************************************)
+
+(* Return a pair {opts, args}, where opts is an association of
+   options, and args is a list of arguments *)
+
+ParseCommandLine[x_, defaults_Association : Association[]] :=
+  Module[{opts,args,unknownOpts},
+    {opts,args} = parseCommandLine[x, defaults, {}];
+    unknownOpts = Complement[Keys[opts], Keys[defaults]];
+    If[unknownOpts =!= {},
+      Error["Unrecognised options: "<>ToString[unknownOpts]]];
+    {opts,args}];
+
+parseCommandLine[{}, opts_, args_] := {opts, args};
+
+parseCommandLine[{x_ /; StringMatchQ[x, StartOfString~~"--"~~__], y_, zs___}, opts_, args_] :=
+  parseCommandLine[{zs}, Join[opts,Association[x->y]], args];
+
+parseCommandLine[{x_, zs___}, opts_, args_] :=
+  parseCommandLine[{zs}, opts, Append[args,x]];
 
 End[];
 EndPackage[];
