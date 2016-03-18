@@ -27,6 +27,7 @@ SegmentStartDate;
 SegmentEndDate;
 SegmentDuration;
 RunDutyCycle;
+ReadSimulationMeanWaitTime;
 SegmentCoordinateTimeInterval;
 SegmentStartTimes;
 ReadSimulationSegmentCoordinateTimeIntervals;
@@ -57,6 +58,13 @@ SegmentDuration[dir_] :=
 
 RunDutyCycle[run_] :=
   Module[{segs = FindRunSegments[run], totalRunTime, totalElapsedTime},
+    totalRunTime = Plus@@(SegmentDuration /@ segs);
+    totalElapsedTime = DateDifference[SegmentStartDate[First[segs]],
+                                      SegmentEndDate[Last[segs]], "Second"][[1]];
+    totalRunTime / totalElapsedTime //N];
+
+ReadSimulationMeanWaitTime[sim_String] :=
+  Module[{segs = FindRunSegments[sim], totalRunTime, totalElapsedTime},
     totalRunTime = Plus@@(SegmentDuration /@ segs);
     totalElapsedTime = DateDifference[SegmentStartDate[First[segs]],
                                       SegmentEndDate[Last[segs]], "Second"][[1]];
