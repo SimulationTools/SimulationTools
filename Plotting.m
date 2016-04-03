@@ -64,6 +64,7 @@ ScaledColorFunction;
 ColorMapLegend;
 QuickSlicePlot;
 RasterizeManipulate;
+FindFitPlot;
 
 Begin["`Private`"];
 
@@ -576,6 +577,40 @@ graphicsPadding[gs_List] :=
 PadGraphics[gs_List, depth_:1] :=
  With[{padding = 4 {{1,1},{1,1}} + graphicsPadding[Flatten[gs,depth]]},
   Map[Show[#, ImagePadding -> padding] &, gs, {depth}]];
+
+
+(****************************************************************)
+(* FindFitPlot                                                  *)
+(****************************************************************)
+
+Options[FindFitPlot] = 
+ Join[Options[PresentationListLinePlot], 
+  Options[Plot], {"FitFunctionRange" -> Automatic}];
+
+FindFitPlot[data_, model_, params_List, var_, 
+  opts : OptionsPattern[]] :=
+  findFitPlot[data, {{model, params}}, var, opts];
+
+FindFitPlot[data_, modelParamsList : {{_, _List} ..}, var_, 
+  opts : OptionsPattern[]] :=
+  Module[{fits, fitFns, ffRange},
+    fits = FindFit[data, Sequence @@ #, var] & /@ modelParamsList;
+    fitFns = MapThread[ReplaceAll, {modelParamsList[[All, 1]], fits}];
+    ffRange =
+    Replace[OptionValue[FitFunctionRange],
+      {Automatic :> Sort@Replace[Head[data],
+        {DataTable :> CoordinateRange[data],
+          List :> data[[{1, -1}, 1]],
+          h_ :> 
+          Error["findFitPlot: Unrecognised data type: " <> 
+            ToString[h]]}],
+        r_ :> r}];
+    Show[PresentationListLinePlot[data, 
+      FilterRules[{opts}, Options[PresentationListLinePlot]], 
+      Joined -> False, PlotMarkers -> Automatic],
+      Plot[fitFns, {var, ffRange[[1]], ffRange[[2]]}, 
+        Evaluate[FilterRules[{opts}, Options[Plot]]], 
+        PlotStyle -> PresentationPlotStyles]]];
 
 End[];
 
