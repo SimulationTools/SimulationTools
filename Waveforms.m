@@ -924,7 +924,9 @@ ReadStrainCPM[sim_String, l_, m_, r_] :=
      ".asc", {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
   {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
    ToDataTable[ReadColumnFile[sim, #]] & /@ components;
-  1/(2 r) Sqrt[
+
+  (* TODO: This -1/4 seems necessary to make it agree with int int psi4 *)
+  -1/4 1/(2 r) Sqrt[
     Factorial[l + 2]/Factorial[l - 2]] (psiEvenRe + I psiEvenIm + 
      I (psiOddRe + I psiOddIm))];
 
