@@ -18,6 +18,7 @@ BeginPackage["SimulationTools`Waveforms`",
  {
   "SimulationTools`CoordinateTransformations`",
   "SimulationTools`ColumnFile`",
+  "SimulationTools`RunFiles`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
@@ -97,6 +98,10 @@ RadiallyExtrapolatedWave;  (* TODO *)
 Psi4PerturbativeCorrection;
 Psi4ToStrain;
 ReadStrainCPM;
+ReadStrainWaveExtract;
+ReadSchwarzschildRadius;
+ToSchwarzschildRetardedTime;
+ReadWaveExtractRadii;
 
 $UniformGridExtrapolation;
 ffiDataTable;
@@ -922,6 +927,37 @@ ReadStrainCPM[sim_String, l_, m_, r_] :=
   1/(2 r) Sqrt[
     Factorial[l + 2]/Factorial[l - 2]] (psiEvenRe + I psiEvenIm + 
      I (psiOddRe + I psiOddIm))];
+
+ReadStrainWaveExtract[sim_String, l_, m_, r_] :=
+ Module[{components, QEvenRe, QEvenIm, QOddRe, QOddIm, intQOdd, Qs, 
+   times},
+  components = 
+   Table["Q" <> x <> "_Detector_Radius_" <> ToString[NumberForm[r,{Infinity,2}]] <> "_l" <> 
+     ToString[l] <> "_m" <> ToString[m] <> 
+     ".asc", {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
+  Qs = {QEvenRe, QEvenIm, QOddRe, QOddIm} = 
+    ToDataTable[ReadColumnFile[sim, #]] & /@ components;
+  (*times=ToListOfCoordinates[QEvenRe];
+  Scan[(#=ToDataTable[times,ToListOfData[#]])&,Qs];*)
+  
+  intQOdd = 
+   AntiDerivative[QOddRe + I QOddIm, {MinCoordinate[QOddRe], 0}, 
+    UseInputGrid -> True];
+  (*This -1 seems necessary to make it agree with int int psi4 *)
+  -1/(Sqrt[2] r) (QEvenRe + I QEvenIm - I intQOdd )];
+
+ReadSchwarzschildRadius[sim_String, r_] :=
+ Module[{},
+  ToDataTable[
+   ReadColumnFile[sim, 
+    "Schwarzschild_Radius_Detector_Radius_" <> ToString[NumberForm[r,{Infinity,2}]] <> ".asc"]]];
+
+ToSchwarzschildRetardedTime[rSch_DataTable, f_DataTable, MADM_] :=
+  ToDataTable[Coordinate[f] - RadialToTortoise[rSch, MADM], f];
+
+ReadWaveExtractRadii[sim_String] :=
+  Module[{},
+    Union[ToExpression[StringSplit[FileNameTake[#,-1],"_"][[5]]] & /@ FindSimulationFiles[sim,"Qeven_Re_Detector_Radius_*_l*_m*.asc"]]]
 
 End[];
 
