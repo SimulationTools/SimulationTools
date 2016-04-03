@@ -18,6 +18,7 @@ BeginPackage["SimulationTools`TwoPunctures`",
  {
   "SimulationTools`DataRegion`",
   "SimulationTools`Error`",
+  "SimulationTools`IniFile`",
   "SimulationTools`Memo`",
   "SimulationTools`Parameters`",
   "SimulationTools`RunFiles`",
@@ -42,11 +43,17 @@ Begin["`Private`"];
 
 SimulationTools`TwoPunctures`InitialData`HaveData[run_String, ___] :=
   HaveRunDir[run] && (
+    FindSimulationFiles[run, "TwoPunctures.bbh"] =!= {} ||
     FindSimulationFiles[run, "ADM_mass_tot.asc"] =!= {} ||
     StandardOutputOfRun[run] =!= {});
 
 SimulationTools`TwoPunctures`InitialData`ReadADMMass[runName_String] :=
   Module[{massMDFiles, output, lines},
+
+    massMDFiles = FindSimulationFiles[runName, "TwoPunctures.bbh"];
+    If[massMDFiles =!= {},
+      Return[ToExpression@IniVariable[massMDFiles[[1]], "initial-ADM-energy"]]];
+    
     massMDFiles = FindSimulationFiles[runName, "ADM_mass_tot.asc"];
     If[massMDFiles =!= {},
       Return[ReadList[massMDFiles[[1]], Real][[1]]],
