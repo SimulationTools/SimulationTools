@@ -29,6 +29,7 @@ MapSuccessive;
 ErrorForm;
 DescribeGitRepository;
 PartitionComplete;
+MovingAverageOperator;
 
 Begin["`Private`"];
 
@@ -135,6 +136,9 @@ DescribeGitRepository[path_String] :=
 
 PartitionComplete[l_, n_] :=
   Partition[l, n, n, 1, {}];
+
+MovingAverageOperator[n_] :=
+  Function[d, MovingAverage[d, n]];
 
 End[];
 EndPackage[];
