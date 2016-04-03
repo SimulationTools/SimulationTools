@@ -629,7 +629,7 @@ DataTable /: Developer`ToPackedArray[dt_DataTable] :=
 SyntaxInformation[AntiDerivative] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
-Options[AntiDerivative] = {"InterpolationOrder"->3};
+Options[AntiDerivative] = {"InterpolationOrder"->3, "UseInputGrid" -> False};
 
 DocumentationBuilder`OptionDescriptions["AntiDerivative"] = {
   InterpolationOrder -> "The order of interpolation to use. This may be take value "<>
@@ -642,11 +642,14 @@ AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
   If[tbc < tMin || tbc > tMax,
    Error["AntiDerivative: boundary condition is not within range of DataTable"]];
   dt = First[CoordinateSpacings[d]];
-	dFn = Interpolation[d, InterpolationOrder -> OptionValue[InterpolationOrder]];
+  dFn = Interpolation[d, InterpolationOrder -> OptionValue[InterpolationOrder]];
   gFn = g /.
     NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
-     1]];
-  gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}]]];
+      1]];
+
+   If[!OptionValue[UseInputGrid],
+     gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}]],
+     gTb = ToDataTable[ToListOfCoordinates[d], gFn/@ToListOfCoordinates[d]]]];
 
 
 (**********************************************************)
