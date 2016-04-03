@@ -954,7 +954,7 @@ ReadSchwarzschildRadius[sim_String, r_] :=
    ReadColumnFile[sim, 
     "Schwarzschild_Radius_Detector_Radius_" <> ToString[NumberForm[r,{Infinity,2}]] <> ".asc"]]];
 
-ToSchwarzschildRetardedTime[rSch_DataTable, f_DataTable, MADM_] :=
+ToSchwarzschildRetardedTime[rSch:(_DataTable|_?NumberQ), f_DataTable, MADM_] :=
   ToDataTable[Coordinate[f] - RadialToTortoise[rSch, MADM], f];
 
 ReadWaveExtractRadii[sim_String] :=
