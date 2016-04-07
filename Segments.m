@@ -37,6 +37,8 @@ ReadSimulationSegmentProgress;
 SegmentQueueDate;
 SegmentQueueTime;
 SimulationStateFractions;
+ReadSegmentQueueTime;
+ReadSimulationSegmentQueueTimes;
 
 Begin["`Private`"];
 
@@ -69,6 +71,18 @@ ReadSimulationMeanWaitTime[sim_String] :=
     totalElapsedTime = DateDifference[SegmentStartDate[First[segs]],
                                       SegmentEndDate[Last[segs]], "Second"][[1]];
     totalRunTime / totalElapsedTime //N];
+
+ReadSimulationSegmentQueueTimes[sim_String] :=
+  ReadSegmentQueueTime /@ FindRunSegments[sim];
+
+ReadSegmentQueueTime[segment_String] :=
+  Module[{outputDir, queueDate, runDate},
+    (* This should really be in SimFactory.m *)
+    (* This will only work with SimFactory 2, not SimFactory 3 *)
+    outputDir = FileNameDrop[segment,-1];
+    queueDate = FileDate[FileNameJoin[{outputDir, "SIMFACTORY", "SubmitScript"}]];
+    runDate = FileDate[FileNameJoin[{outputDir, "SIMFACTORY", "RunScript"}]];
+    DateDifference[queueDate,runDate, "Hour"]]
 
 ReadSimulationSegmentCoordinateTimeIntervals[sim_String] :=
   Module[{segs},
