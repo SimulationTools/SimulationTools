@@ -533,7 +533,7 @@ processBBoxes[bboxes_List, bufferSize_] :=
 Options[plotRL] = Options[GridPlot2D];
 plotRL[{rl_Integer, bboxes_List}, opts:OptionsPattern[]] :=
  plotBBoxPoints /@ 
-  processBBoxes[bboxes, OptionValue[BufferSize]];
+  processBBoxes[bboxes, If[rl===0,0,OptionValue[BufferSize]]];
 
 (* plotIteration *)
 
