@@ -118,6 +118,7 @@ packages = {
     "SimulationTools`Tracks`",
     "SimulationTools`TwoPunctures`",
     "SimulationTools`Utils`",
+    "SimulationTools`WaveformExtrapolation`",
     "SimulationTools`Waveforms`",
     If[$VersionNumber >= 8, "SimulationTools`Wavelets`", Sequence[]],
     "SimulationTools`YlmDecomp`"
