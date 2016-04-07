@@ -26,6 +26,7 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`Memo`",
   "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
+  "SimulationTools`ReadHDF5`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -102,6 +103,7 @@ ReadStrainWaveExtract;
 ReadSchwarzschildRadius;
 ToSchwarzschildRetardedTime;
 ReadWaveExtractRadii;
+ReadStrainCPMHDF5;
 
 $UniformGridExtrapolation;
 ffiDataTable;
@@ -924,6 +926,27 @@ ReadStrainCPM[sim_String, l_, m_, r_] :=
      ".asc", {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
   {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
    ToDataTable[ReadColumnFile[sim, #]] & /@ components;
+
+  (* TODO: This -1/4 seems necessary to make it agree with int int psi4 *)
+  -1/4 1/(2 r) Sqrt[
+    Factorial[l + 2]/Factorial[l - 2]] (psiEvenRe + I psiEvenIm + 
+     I (psiOddRe + I psiOddIm))];
+
+readHDF5Table[sim_String, file_String, dataset_String] :=
+  Module[{files,dataSegments,data},
+    files = FindSimulationFiles[sim, file];
+    If[files === {}, Error["File "<>file<>" not found in simulation "<>sim]];
+    dataSegments = Map[ReadHDF5[#,{"Datasets", dataset}] &, files];
+    data = MergeFiles[dataSegments]];
+
+ReadStrainCPMHDF5[sim_String, l_, m_, r_] :=
+ Module[{components, psiEvenRe, psiEvenIm, psiOddRe, psiOddIm},
+  components = 
+   Table["Psi_" <> x <> "_Detector_Radius_" <> ToString[r] <> 
+     ".00_l" <> ToString[l] <> "_m" <> ToString[m],
+     {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
+  {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
+   ToDataTable[readHDF5Table[sim, "wavextractcpm.h5", #]] & /@ components;
 
   (* TODO: This -1/4 seems necessary to make it agree with int int psi4 *)
   -1/4 1/(2 r) Sqrt[
