@@ -19,7 +19,8 @@ BeginPackage["SimulationTools`Plotting`",
   "SimulationTools`DataRegion`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
-  "SimulationTools`Error`"
+  "SimulationTools`Error`",
+  If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
 (****************************************************************)
@@ -585,17 +586,16 @@ PadGraphics[gs_List, depth_:1] :=
 
 Options[FindFitPlot] = 
  Join[Options[PresentationListLinePlot], 
-  Options[Plot], {"FitFunctionRange" -> Automatic}];
+  Options[Plot], {"FitFunctionRange" -> Automatic, "FitRange" -> Automatic}];
 
 FindFitPlot[data_, model_, params_List, var_, 
   opts : OptionsPattern[]] :=
-  findFitPlot[data, {{model, params}}, var, opts];
+  FindFitPlot[data, {{model, params}}, var, opts];
 
-FindFitPlot[data_, modelParamsList : {{_, _List} ..}, var_, 
+FindFitPlot[datap_, modelParamsList : {{_, _List} ..}, var_, 
   opts : OptionsPattern[]] :=
-  Module[{fits, fitFns, ffRange},
-    fits = FindFit[data, Sequence @@ #, var] & /@ modelParamsList;
-    fitFns = MapThread[ReplaceAll, {modelParamsList[[All, 1]], fits}];
+  Module[{fits, fitFns, ffRange, fitRange, data},
+    data = If[Head[datap] === List, ToDataTable[datap], datap];
     ffRange =
     Replace[OptionValue[FitFunctionRange],
       {Automatic :> Sort@Replace[Head[data],
@@ -605,9 +605,16 @@ FindFitPlot[data_, modelParamsList : {{_, _List} ..}, var_,
           Error["findFitPlot: Unrecognised data type: " <> 
             ToString[h]]}],
         r_ :> r}];
+
+    fitRange = Replace[OptionValue[FitRange],
+      {Automatic :> ffRange,
+        {a_,b_} :> {a,b}}];
+    fits = FindFit[ToList@Slab[data,Span@@fitRange], Sequence @@ #, var] & /@ modelParamsList;
+    fitFns = MapThread[ReplaceAll, {modelParamsList[[All, 1]], fits}];
+    
     Show[PresentationListLinePlot[data, 
       FilterRules[{opts}, Options[PresentationListLinePlot]], 
-      Joined -> False, PlotMarkers -> Automatic],
+      Joined -> False(*, PlotMarkers -> Automatic*)],
       Plot[fitFns, {var, ffRange[[1]], ffRange[[2]]}, 
         Evaluate[FilterRules[{opts}, Options[Plot]]], 
         PlotStyle -> PresentationPlotStyles]]];
