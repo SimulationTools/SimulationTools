@@ -26,8 +26,6 @@ ReadTrackerRadius::usage = "ReadTrackerRadius[sim, tracker] gives the spherical 
 ReadTrackerAzimuth::usage = "ReadTrackerAzimuth[sim, tracker] gives the spherical polar azimuthal coordinate (phi) of a tracker as a DataTable as a function of time.\nReadTrackerAzimuth[sim, tracker1, tracker2] gives the azimuthal angle of the vector joining the two trackers.";
 ReadTrackerInclination::usage = "ReadTrackerInclination[sim, tracker] gives the spherical polar inclination coordinate (theta) of a tracker as a DataTable as a function of time.\nReadTrackerInclination[sim, tracker1, tracker2] gives the inclination angle of the vector joining the two trackers.";
 
-ReadTrackerAzimuth::indet = "Indeterminate value encountered in computing azimuth";
-
 Begin["`Private`"];
 
 trackerPattern = {_String, (_Integer|List[_Integer..])};
@@ -80,8 +78,6 @@ xyToAzimuth[{x1_DataTable, y1_DataTable}] :=
  Module[{azimuth},
   Quiet[
     azimuth = UnwrapPhaseVector[ArcTan@@RestrictedToCommonInterval[{x1,y1}]];
-    (* If[MemberQ[$MessageList, HoldForm[ArcTan::indet]], *)
-    (*   Message[ReadTrackerAzimuth::indet]]; *)
   , {ArcTan::indet, CompiledFunction::cfta}];
   azimuth
 ];
