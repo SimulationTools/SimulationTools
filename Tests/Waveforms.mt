@@ -57,6 +57,15 @@ Module[
 	,
 	TestID->"ReadPsi4_mp_asc"]]
 
+
+Test[
+  ToList[ReadPsi4["nan",2,2,100]]
+  ,
+  {{0., Indeterminate}, {0., 0. + 0. I}}
+  ,
+  TestID->"ReadPsi4 with NaNs"
+    ]
+
 Test[
   ToList[ReadPsi4[$SimulationToolsTestSimulation,2,2,100]][[{1,2,200,-1}]]
   ,
