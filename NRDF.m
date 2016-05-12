@@ -122,7 +122,8 @@ DefineMemoFunction[NRDF`Waveforms`ReadPsi4Modes[runName_],
 readPsi4HDF5Data[file_String, dataset_String] :=
  Module[{data},
   data = ReadHDF5[file, {"Datasets", dataset}];
-  ToDataTable[data[[All, 1]], Complex @@@ data[[All, 2;;3]]]
+  ToDataTable[data[[All, 1]], Complex @@@ data[[All, 2;;3]] /.
+      {(Complex[Indeterminate,_]|Complex[_,Indeterminate]) -> Indeterminate}]
 ];
 
 haveMetadataFile[dir_String] :=
