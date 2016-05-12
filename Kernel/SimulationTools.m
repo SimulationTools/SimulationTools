@@ -135,7 +135,7 @@ If[!ValueQ[$SimulationToolsCompatibilityVersion],
 ];
 
 $SimulationToolsVersion :=
- Module[{path, version, release, buildid, gitrev},
+ Module[{path, version, release, buildid, gitrev, gitdir},
   path = $SimulationToolsInstallationDirectory;
   version = ToString[NumberForm[$SimulationToolsVersionNumber, {Infinity, 1}]];
   release = ToString[$SimulationToolsReleaseNumber];
@@ -147,14 +147,22 @@ $SimulationToolsVersion :=
     buildid = " (" <> First[buildid] <> ")";
   ];
 
+  (* First, check for a GIT_REVISION file. If it exists, use its contents as the revision. *)
   gitrev = Quiet@ReadList[FileNameJoin[{path, "GIT_REVISION"}],"String"];
+
+  (* Otherwise, try to determine the git revision directly *)
   If[SameQ[gitrev, $Failed],
-    gitrev = Quiet@First@ReadList["!git --git-dir "<>FileNameJoin[{path, ".git"}]<>" rev-parse HEAD", String];
-  ,
-    gitrev = First[gitrev];
+    gitdir = FileNameJoin[{path, ".git"}];
+    If[FileType[gitdir] === Directory,
+      gitrev = Quiet@ReadList["!git --git-dir "<>gitdir<>" rev-parse HEAD", String];
+    ];
   ];
 
-  If[!StringQ[gitrev], gitrev = "", gitrev = " (" <> gitrev <> ")"];
+  (* If it worked, ReadList returns a list but we just want the first element (line) *)
+  If[Head[gitrev] === List, gitrev = First[gitrev]];
+
+  (* Check we have a git revision and otherwise give up trying *)
+  If[StringMatchQ[gitrev, RegularExpression["[0-9a-f]{5,40}"]], gitrev = " (" <> gitrev <> ")", gitrev = ""];
 
   version <> "." <> release <> buildid <> gitrev
 ]
