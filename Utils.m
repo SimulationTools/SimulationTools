@@ -95,9 +95,8 @@ MapSuccessive[f_, l_List] :=
 
 TailFile[filename_String, n_Integer] :=
  Module[{size, handle, lines},
-  size = FileByteCount[filename];
   handle = OpenRead[filename];
-  SetStreamPosition[handle, Max[size - n, 0]];
+  SetStreamPosition[handle, -n];
   lines = ReadList[handle, String];
   Close[handle];
   StringJoin[Riffle[lines, "\n"]]];
