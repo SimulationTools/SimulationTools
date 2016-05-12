@@ -45,7 +45,7 @@ ParseFormalineMetadataFile[file_String] :=
       "element"["key"[k__], "value"[v__]] :> (k -> processValue[v])]];
 
 ReadFormalineMetadata[sim_String] :=
-  Module[{files, file, elements, parameterElements, keys, values},
+  Module[{files, file},
     files = FindSimulationFiles[sim, "formaline-jar.txt"];
     file = First[files];
     ParseFormalineMetadataFile[file]];

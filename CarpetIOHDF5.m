@@ -230,8 +230,7 @@ parseDimensionsFromFileName[fileName_String] :=
 ]
 
 SimulationTools`CarpetIOHDF5`GridFunctions`ReadGridFunctionDimensions[sim_String, varName_String] :=
-  Module[{pattern, h5Files, leafnames, dimStrings, 
-   dimRules, x},
+  Module[{pattern, h5Files, leafnames, dimStrings, dimRules},
   pattern = varName ~~ filePattern;
   h5Files = FindSimulationFiles[sim, pattern];
   leafnames = FileNameTake[#, -1] & /@ h5Files;

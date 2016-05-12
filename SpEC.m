@@ -189,8 +189,7 @@ mergeDataLists[datas_List] :=
   
 Options[readSpECASCIIData] = {"SeparateRingdown" -> False, "SeparateSegments" -> False};
 readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASCIIData[sim,file,opts] =
- Module[{runBase, res, filePattern1, simBase, filePattern2, runFiles, 
-   dataSegments, merge},
+ Module[{runFiles, dataSegments},
 
   runFiles = findSpECFiles[sim, file];
 
@@ -244,7 +243,7 @@ ReadSpECWallTime[sim_String] :=
 (* Make this call the below functions to give a single total number *)
 ReadSpECMemoryUsage[sim_String] :=
   Module[{memoryTable = readSpECASCIIData[sim,"MemoryInfo.dat"],
-    nFields = 7, offset = 5, virtual = 1, resident = 2, total = 4},
+    nFields = 7, offset = 5, (*virtual = 1, *)resident = 2, total = 4},
     ToDataTable[Map[{#[[1]], Max[#[[offset+resident;;All;;nFields]]]/(#[[offset+total]]/12)} &,
       memoryTable]]];
 
@@ -295,7 +294,7 @@ maxNodeMemoryUsage[procMems_List] :=
   maxNodeMems = MapThread[Max, nodeMems]];
 
 ReadSpECMaxNodeMemoryUsage[sim_String] :=
- Module[{procMems, nodeMems, maxNodeMems, coresPerNode = 12},
+ Module[{},
    procMemsSegs = ReadSpECProcessMemoryUsage[sim];
    maxNodeMemss = Map[maxNodeMemoryUsage, procMemsSegs];
    ToDataTable[mergeDataLists[ToList/@maxNodeMemss]]];
@@ -328,16 +327,14 @@ radiusOfDatasetName[dsName_String] :=
       s_ :> Error["Cannot determine radius from dataset name "<>dsName]}];
 
 ReadSpECPsi4Radii[runName_String] :=
-  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-    filePattern2, runBase, res, runFiles2, simBase},
+  Module[{runFiles},
     runFiles = Flatten[findSpECFiles[runName, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
     If[runFiles === {},
       {},
       ToExpression/@Union[radiusOfDatasetName/@ReadHDF5[runFiles[[1]]]]]];
 
 ReadSpECPsi4[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
-  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-    filePattern2, runBase, res, runFiles2, simBase, radStr},
+  Module[{datasetName, runFiles, files, data, psi4, radStr},
   radStr = radiusString[rad];
    runFiles = Flatten[findSpECFiles[runName, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
 If[runFiles==={},Error["No Psi4 data found in "<>runName]];
@@ -360,8 +357,7 @@ If[runFiles==={},Error["No Psi4 data found in "<>runName]];
 
 (* TODO: Eliminate duplication with ReadSpECPsi4 *)
 ReadSpECStrain[runName_String, l_?NumberQ, m_?NumberQ, rad_] :=
-  Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-    filePattern2, runBase, res, runFiles2, simBase, radStr},
+  Module[{datasetName, runFiles, files, data, psi4, radStr},
   radStr = radiusString[rad];
    runFiles = Flatten[findSpECFiles[runName, "GW2/rh_FiniteRadii_CodeUnits.h5"],1];
 If[runFiles==={},Error["No strain data found in "<>runName]];
@@ -391,8 +387,7 @@ firstOrFail[l_List, msg_String] :=
 
 (* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonCentroid[runName_String, hn_Integer] :=
- Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+ Module[{datasetName, runFiles, files, data, hnLetter, data2},
 
    runFiles = findSpECFiles[runName, "ApparentHorizons/Horizons.h5"][[1]];
 
@@ -424,8 +419,7 @@ ReadSpECHorizonSeparation[sim_String] :=
 
 (* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonSpin[runName_String, hn_Integer] :=
- Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+ Module[{datasetName, runFiles, files, data, hnLetter, data2},
 
    runFiles = Flatten[findSpECFiles[runName, "ApparentHorizons/Horizons.h5"]];
 
@@ -452,8 +446,7 @@ ReadSpECHorizonSpin[runName_String, hn_Integer] :=
 
 (* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonAngularMomentum[runName_String, hn_Integer] :=
- Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+ Module[{datasetName, runFiles, files, data, hnLetter, data2},
 
    runFiles = Flatten[findSpECFiles[runName, "ApparentHorizons/Horizons.h5"]];
 
@@ -480,8 +473,7 @@ ReadSpECHorizonAngularMomentum[runName_String, hn_Integer] :=
 
 (* TODO: Eliminate HDF5 file reading/merging duplication *)
 ReadSpECHorizonMass[runName_String, hn_Integer] :=
- Module[{datasetName, runFiles, files, data, psi4, filePattern1, 
-   filePattern2, runBase, res, runFiles2, simBase, hnLetter, data2},
+ Module[{datasetName, runFiles, files, data, hnLetter, data2},
 
    runFiles = findSpECFiles[runName, "ApparentHorizons/Horizons.h5"];
 (* Print["runFiles = ", runFiles]; *)
@@ -597,7 +589,7 @@ FindSpECInitialDataSimulations[sim_String] :=
   idSimPaths = FileNames["ID", path, Infinity]];
 
 ReadSpECInitialDataIteration[sim_String] :=
- Module[{errs, truncs, diffs, ratios, maxRatios},
+ Module[{errs},
   errs = ReadColumnFile[
     FileNameJoin[{FindSpECSimulation[sim], "private"}], 
     "Errors.dat"];

@@ -163,7 +163,8 @@ frameSequence[is_List] :=
   {is}]
 
 ManipulateFrames[sym_, range_: All] :=
- Module[{frames = RenderFrames[sym, range]},
+ Module[{},
+  RenderFrames[sym, range];
   Manipulate[
    RenderFrame[sym, i], {i, 
     Sequence @@ frameSequence[ListFrames[sym][[range]]], 

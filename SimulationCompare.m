@@ -54,7 +54,7 @@ compareData[sim1_String, sim2_String, var_String, dims_, opts___] :=
     Return[False]]]];
 
 CompareSimulations[sim1_String, sim2_String] :=
-  Module[{vars, maps, levels},
+  Module[{vars},
    vars = FindGridFunctions[sim1];
    (*Print["vars = ",vars];
    *)Table[compareSimulationVariable[sim1, sim2, var], {var, vars}]];
@@ -75,7 +75,7 @@ compareSimulationLevel[sim1_, sim2_, var_, level_] :=
     maps}]];
 
 compareSimulationMap[sim1_, sim2_, var_, level_, map_] :=
- Module[{maps, its},
+ Module[{its},
   its = ReadIterations[sim1, var, All, RefinementLevel -> level, 
     Map -> map];
   Table[

@@ -115,7 +115,7 @@ SegmentStartTimes[run_] :=
    Select[SegmentCoordinateTimeInterval /@ segs, # =!= None &]];
 
 ReadSegmentProgress[seg_String] :=
-  Module[{start, end, runtime, progress},
+  Module[{start, end, runtime},
     If[FindSimulationFiles[seg, "carpet"~~("-"|"::")~~"timing..asc"] === {}, 
       Return[ToDataTable[{}]]];
     start = AbsoluteTime[SegmentStartDate[seg]];

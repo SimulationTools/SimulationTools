@@ -94,7 +94,7 @@ MapSuccessive[f_, l_List] :=
 
 
 TailFile[filename_String, n_Integer] :=
- Module[{size, handle, lines},
+ Module[{handle, lines},
   handle = OpenRead[filename];
   SetStreamPosition[handle, -n];
   lines = ReadList[handle, String];
@@ -103,7 +103,7 @@ TailFile[filename_String, n_Integer] :=
 
 (* Note asymmetry with TailFile; n here is a number of lines *)
 HeadFile[filename_String, n_Integer] :=
- Module[{size, handle, lines},
+ Module[{handle, lines},
   handle = OpenRead[filename];
   lines = ReadList[handle, String, n];
   Close[handle];

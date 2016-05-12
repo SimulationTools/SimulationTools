@@ -116,7 +116,7 @@ ClearAutoProfile[] :=
 SetAttributes[AutoProfile, HoldAll];
 SimulationTools`NoProfile[AutoProfile] = True;
 AutoProfile[name_, code_] :=
-   Module[{time, result, name2, result2, subTimers},
+   Module[{time, result, name2(*, result2, subTimers*)},
     name2 = Evaluate[name];
     (* {result2,subTimers} = Reap[{time, result} = AbsoluteTiming[ReleaseHold[code]]]; *)
     {time, result} = AbsoluteTiming[ReleaseHold[code]];

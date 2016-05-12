@@ -88,7 +88,7 @@ ReadGeodesicLapse[sim_, i_] :=
 
 ReadGeodesicKretschmann[sim_, i_] :=
   Module[
-    {fTable, t, alp},
+    {fTable, t},
     fTable = ReadColumnFile[
       sim, "geodesic"~~("-"|"::")~~"gd_invariants..asc",
       {"time", 

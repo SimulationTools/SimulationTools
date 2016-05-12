@@ -954,16 +954,13 @@ ReadStrainCPMHDF5[sim_String, l_, m_, r_] :=
      I (psiOddRe + I psiOddIm))];
 
 ReadStrainWaveExtract[sim_String, l_, m_, r_] :=
- Module[{components, QEvenRe, QEvenIm, QOddRe, QOddIm, intQOdd, Qs, 
-   times},
+ Module[{components, QEvenRe, QEvenIm, QOddRe, QOddIm, intQOdd, Qs},
   components = 
    Table["Q" <> x <> "_Detector_Radius_" <> ToString[NumberForm[r,{Infinity,2}]] <> "_l" <> 
      ToString[l] <> "_m" <> ToString[m] <> 
      ".asc", {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
   Qs = {QEvenRe, QEvenIm, QOddRe, QOddIm} = 
     ToDataTable[ReadColumnFile[sim, #]] & /@ components;
-  (*times=ToListOfCoordinates[QEvenRe];
-  Scan[(#=ToDataTable[times,ToListOfData[#]])&,Qs];*)
   
   intQOdd = 
    AntiDerivative[QOddRe + I QOddIm, {MinCoordinate[QOddRe], 0}, 

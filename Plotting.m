@@ -118,7 +118,7 @@ Options[ListLinePlotWithLegend] =
                                "LegendBackground" -> None}, Options[MakePlotLegend]];
 
 ListLinePlotWithLegend[data_, opts:OptionsPattern[]] :=
-  Module[{dims, style, pos, posx, posy, offset, scale, labelStyle, f, single, nLines},
+  Module[{style, pos, posx, posy, offset, scale, labelStyle, f, nLines},
     style = OptionValue[PlotStyle];
     nLines = Replace[data,
       {{_DataTable..} :> Length[data],

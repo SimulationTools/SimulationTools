@@ -74,7 +74,7 @@ coordVec3PatternRule =
     x3 : numberString ~~ "]" :> stringToDouble /@ {x1, x2, x3};
 
 bboxOfString[s_] :=
- Module[{x1, x2, dx},
+ Module[{},
   BBox @@ (parseCoordVec3 /@ 
      StringCases[s, compStringPatternRule][[1, 1 ;; 3]])];
 
@@ -107,7 +107,7 @@ ReadCarpetGridStructure = readGridStructure;
 ReadCarpetGridStructure::usage = "ReadCarpetGridStructure[sim] returns the grid structure from simulation sim.  The format is {{it1, {{rl1, bboxes}, {rl2, bboxes}, ...}}, {it2, {{rl1, bboxes}, ...}}, ...}.  The grid structure is output only for iteration 0, recovery iterations, and iterations when it changed.  A general iteration i has the grid structure of the largest reported iteration less than or equal to i."
 
 readGridStructure[sim_String, fileName_: "carpet-grid.asc"] :=
- Module[{files, tables, gss, gs, decIt, fixIterations},
+ Module[{files, tables, gss, gs(*, decIt, fixIterations*)},
   files = FindSimulationFiles[sim, fileName];
   tables = Import[#, "Table"] & /@ files;
 
@@ -357,7 +357,7 @@ CheckIdenticalGrids[sims : {_String ...},
  (* TODO: add an option to control clipping of symmetry
     boundaries. Currently z-reflection is assumed *)
  
- Module[{grids, its, rls, dt, buffers = readBufferSize/@sims, equal, i, rl},
+ Module[{grids, its, rls, dt, buffers = readBufferSize/@sims, i, rl},
   grids = Map[readGridStructure[#, gridFileName] &, sims];
   (*Print[grids[[1,1]]];*)
   its = Min[Length /@ grids];
@@ -396,7 +396,7 @@ CheckIdenticalRegridding[sims : {_String ...},
  (* TODO: add an option to control clipping of symmetry
     boundaries. Currently z-reflection is assumed *)
  
- Module[{grids, dts, regEvs, regIts, regTimes1, regTimes, regAnyTimes, regNewIts,
+ Module[{grids, dts, regEvs, regIts, regTimes1, regTimes, regAnyTimes,
    buffers = readBufferSize/@sims, maxRL, gridsAt, checkIdenticalGrids,
    checkIdenticalGridsAtTime, diffs, tRef},
 
@@ -482,7 +482,7 @@ Print["WARNING: maxRL = 9"];
 
 
 ReadCarpetGridBBoxes[sim_String, t_, rl_, removeBuffers_: True] :=
- Module[{grids, dt, it, indices, i, buffers = readBufferSize[sim], fullBBoxes},
+ Module[{grids, dt, it, i, buffers = readBufferSize[sim], fullBBoxes},
   grids = readGridStructure[sim];
   dt = readIterationTimeStep[sim];
   it = Round[t/dt];
@@ -562,9 +562,9 @@ GridPlot2D[grids_List, opts : OptionsPattern[]] :=
       Frame -> True, FrameLabel -> {"x", "y"}, LabelStyle -> "Medium"];
 
 GridPlot2D[sim_String, t_, opts : OptionsPattern[]] :=
- Module[{grids, dt, it, indices, i,
+ Module[{grids, dt, it, i,
    buffers = readBufferSize[sim], 
-   fullBBoxes, its, gridsIt},
+   its},
   grids = readGrids[sim];
   dt = readIterationTimeStep[sim];
   it = Round[t/dt];

@@ -35,7 +35,7 @@ ReadTrackerCoordinates[run_String, tracker:trackerPattern] :=
   Symbol["SimulationTools`"<>tracker[[1]]<>"`Trackers`ReadCoordinates"][run, tracker[[2]]];
 
 ReadTrackerCoordinates[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
- Module[{allcoords, alltrackers, coords1, coords2, relcoords},
+ Module[{allcoords, alltrackers, coords1, coords2},
   If[First[tracker1] === First[tracker2],
     (* If the two trackers are of the same type read them together for better performance *)
     alltrackers = Flatten[Join[tracker1[[{2}]], tracker2[[{2}]]]];

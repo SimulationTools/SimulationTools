@@ -395,7 +395,7 @@ Shifted[d_DataRegion, delta_List] :=
 (**********************************************************)
 
 DataRegion /: Part[d_DataRegion, s__] :=
- Module[{dims, n, partSpec, dimensionExists, makeExplicit, start, stride, data, origin, spacing, result, attrs},
+ Module[{dims, dimensionExists, makeExplicit, data, origin, spacing, result, attrs},
 
   (* Any dimensions not explicitly mentioned are assumed to be All *)
   partSpec = PadRight[{s}, ArrayDepth[d], All];

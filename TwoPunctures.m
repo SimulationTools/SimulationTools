@@ -97,7 +97,7 @@ DefineMemoFunction[ReadPunctureADMMassParameters[run_String],
    LookupParameter[run, "TwoPunctures::target_M_minus"]}];
 
 DefineMemoFunction[ReadPunctureBareMassParameters[run_String],
- Module[{masses, stdout, lines, mp, mm},
+ Module[{masses, stdout, lines},
 
   If[LookupParameter[run, "TwoPunctures::give_bare_mass"] != "no",
     (* First try the parameter file *)

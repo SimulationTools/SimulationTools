@@ -49,7 +49,7 @@ readPunctureScalar[sim_, filename_, i_Integer] :=
   First[readPunctureScalar[sim, filename, {i}]];
 
 readPunctureScalar[sim_, filename_, is_List] :=
- Module[{nTrackers, data},
+ Module[{data},
   data = readPunctureData[sim, filename, is];
   Table[ToDataTable[data[[All, 1]], data[[All, 3(i-1)+dir+1]]], {i, Length[is]}, {dir, 1, 3}]
 ];
@@ -58,7 +58,7 @@ readPunctureScalar[sim_, filename_, is_List] :=
 readPunctureVector[sim_, filename_, i_Integer] :=
   First[readPunctureVector[sim, filename, {i}]];
 readPunctureVector[sim_, filename_, is_List] :=
- Module[{nTrackers, data},
+ Module[{data},
   data = readPunctureData[sim, filename, is];
   Table[ToDataTable[data[[All, 1]], data[[All, 3(i-1)+1+{1,2,3}]]], {i, Length[is]}]
 ];
