@@ -103,13 +103,13 @@ inclination[{x_DataTable, y_DataTable, z_DataTable}] :=
 ];
 
 ReadTrackerInclination[run_String, tracker:trackerPattern] :=
- Module[{coorda},
+ Module[{coords},
   coords = ReadTrackerCoordinates[run, tracker];
   Map[inclination, coords, {ArrayDepth[coords]-1}]
 ];
 
 ReadTrackerInclination[run_String, tracker1:trackerPattern, tracker2:singleTrackerPattern] :=
- Module[{coorda},
+ Module[{coords},
   coords = ReadTrackerCoordinates[run, tracker1, tracker2];
   Map[inclination, coords, {ArrayDepth[coords]-1}]
 ];
