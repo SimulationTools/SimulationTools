@@ -127,8 +127,6 @@ Options[ExtrapolatePsi4Phase] = Options[ExtrapolateRadiatedQuantity];
 
 Begin["`Private`"];
 
-$h5mma = If[Quiet[Needs["h5mma`"], {Needs::nocont, Get::noopen}]===$Failed, False, True];
-
 (**********************************************************)
 (* WaveformCycles                                         *)
 (**********************************************************)
@@ -655,8 +653,8 @@ ImportGzip[file_String, as_] :=
      and should eventually move into another package.  Fall back to
      using Import if the h5mma function is not available.  This should
      work as long as usage is light. *)
-  If[Context[ReadGzipFile] === "h5mma`",
-    ImportString[ReadGzipFile[file],as],
+  If[DownValues[h5mma`ReadGzipFile] =!= {},
+    ImportString[h5mma`ReadGzipFile[file], as],
     SafeImportGzip[file,as]];
 
 ImportWaveform[file_] :=
