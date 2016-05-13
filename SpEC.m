@@ -24,7 +24,6 @@ BeginPackage["SimulationTools`SpEC`",
    "SimulationTools`Error`",
    "SimulationTools`FileMemo`",
    "SimulationTools`FileDependencies`",
-   "h5mma`",
    "Piraha`",
    "SimulationTools`Utils`",
    If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
@@ -344,7 +343,7 @@ If[runFiles==={},Error["No Psi4 data found in "<>runName]];
 
   (* TODO: This progress variable doesn't work due to the interaction
      with withDot.  Unify this system. *)
-  files = MapIndexed[withDot[$ReadSpECPsi4Progress=N[#2[[1]]/Length[runFiles]]; Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = MapIndexed[withDot[$ReadSpECPsi4Progress=N[#2[[1]]/Length[runFiles]]; Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
   $ReadSpECPsi4Progress=.;
   print["\n"];
@@ -365,7 +364,7 @@ If[runFiles==={},Error["No strain data found in "<>runName]];
     "/R" <> radStr <> ".dir/Y_l" <> ToString[l] <> "_m" <> ToString[m] <>
       ".dat";
 
-  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
 
 If[files === {}, Error["No strain data found in " <> runName <> " (no datasets named "<>datasetName<>")"]];
@@ -399,7 +398,7 @@ ReadSpECHorizonCentroid[runName_String, hn_Integer] :=
      Error["Unknown horizon index " <> ToString[hn]]]];
   datasetName = "/Ah" <> hnLetter <> ".dir/CoordCenterInertial.dat";
   
-  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
 
   print["\n"];
@@ -432,7 +431,7 @@ ReadSpECHorizonSpin[runName_String, hn_Integer] :=
      Error["Unknown horizon index " <> ToString[hn]]]]];
   datasetName = "/Ah" <> hnLetter <> ".dir/chiInertial.dat";
   
-  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
 
   print["\n"];
@@ -459,7 +458,7 @@ ReadSpECHorizonAngularMomentum[runName_String, hn_Integer] :=
      Error["Unknown horizon index " <> ToString[hn]]]]];
   datasetName = "/Ah" <> hnLetter <> ".dir/DimensionfulInertialSpin.dat";
   
-  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
 
   print["\n"];
@@ -489,7 +488,7 @@ ReadSpECHorizonMass[runName_String, hn_Integer] :=
         Error["Unknown horizon index " <> ToString[hn]]]]];
   datasetName = "/Ah" <> hnLetter <> ".dir/ChristodoulouMass.dat";
   
-  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma::mlink],h5mma::mlink] &], runFiles];
+  files = Map[withDot[Quiet[Check[ReadHDF5[#, {"Datasets", datasetName}],$Failed,h5mma`h5mma::mlink],h5mma`h5mma::mlink] &], runFiles];
   files = DeleteCases[files, $Failed];  (* TODO: We should distinguish between "dataset not found" and other errors *)
 
   print["\n"];
@@ -834,7 +833,7 @@ ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern
     If[! FileExistsQ[file], Error["Cannot find " <> file]];
     ToDataTable @@ ({#1, #2 + I #3} &) @@ 
       Transpose[
-       ImportHDF5[
+       ReadHDF5[
         file, {"Datasets", 
          "/Extrapolated_N" <> ToString[ord] <> ".dir/Y_l" <> 
           ToString[l] <> "_m" <> ToString[m] <> ".dat"}]]]];
