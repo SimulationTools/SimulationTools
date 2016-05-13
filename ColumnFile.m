@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`ColumnFile`",
   "SimulationTools`FileDependencies`",
   "SimulationTools`Memo`",
   "SimulationTools`ProfileCall`",
+  "SimulationTools`ReadHDF5`",
   "SimulationTools`RunFiles`"
  }];
 
@@ -32,8 +33,6 @@ MergeFiles;
 UnknownColumns;
 
 Begin["`Private`"];
-
-$h5mma = If[Quiet[Needs["h5mma`"], {Needs::nocont,Get::noopen}]===$Failed, False, True];
 
 ReadColumnFile[fileName_String] :=
   ReadColumnFileWithFileName[fileName];
@@ -54,8 +53,8 @@ SafeImportGzip[file_String, as_] :=
     data];
 
 ImportGzip[file_String, as_] :=
-  If[Context[ReadGzipFile] === "h5mma`",
-    ImportString[ReadGzipFile[file],as],
+  If[DownValues[h5mma`ReadGzipFile] =!= {},
+    ImportString[h5mma`ReadGzipFile[file], as],
     SafeImportGzip[file,as]];
 
 DefineMemoFunction[ReadColumnFileWithFileName[fileName_String],
