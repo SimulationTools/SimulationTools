@@ -641,13 +641,13 @@ AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
   {tMin, tMax} = CoordinateRange[d];
   If[tbc < tMin || tbc > tMax,
    Error["AntiDerivative: boundary condition is not within range of DataTable"]];
-  dt = First[CoordinateSpacings[d]];
   dFn = Interpolation[d, InterpolationOrder -> OptionValue[InterpolationOrder]];
   gFn = g /.
     NDSolve[{D[g[t], t] == dFn[t], g[tbc] == fbc}, {g}, {t, tMin, tMax}, MaxSteps -> 1000000][[
       1]];
 
    If[!OptionValue[UseInputGrid],
+     dt = First[CoordinateSpacings[d]];
      gTb = ToDataTable[Table[{t, gFn[t]}, {t, tMin, tMax, dt}]],
      gTb = ToDataTable[ToListOfCoordinates[d], gFn/@ToListOfCoordinates[d]]]];
 
