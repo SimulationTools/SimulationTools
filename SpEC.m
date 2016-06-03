@@ -106,6 +106,8 @@ SpECEstimatedRemainingWalltime;
 ReadSpECSimulationTerminationReason;
 ReadSpECFractionComplete;
 PlotSpECSimulationsRemainingTime;
+ReadSpECNormalizedConstraintNorm;
+ReadSpECConstraintNorm;
 
 Begin["`Private`"];
 
@@ -1297,6 +1299,17 @@ PlotSpECSimulationsRemainingTime[sims_List] :=
         MapThread[
           Text[#1, {maxDays + 1, #2}, {-1, 0}] &, {Reverse@completeLabels, 
             Range[1, Length[completeLabels]]}]]]];
+
+
+ReadSpECConstraintNorm[sim_String] :=
+ ToDataTable[
+  ReadSpECASCIIData[sim, "ConstraintNorms/GhCe_Norms.dat", 
+    SeparateRingdown -> False][[All, {1, 3}]]];
+
+ReadSpECNormalizedConstraintNorm[sim_String] :=
+ ToDataTable[
+  ReadSpECASCIIData[sim, "ConstraintNorms/NormalizedGhCe_Norms.dat", 
+    SeparateRingdown -> False][[All, {1, 3}]]];
 
 End[];
 EndPackage[];
