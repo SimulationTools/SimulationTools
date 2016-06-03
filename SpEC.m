@@ -1000,8 +1000,10 @@ ReadSXSStrain[sim_String] :=
   ReadSXSStrain[sim, 2, 2, 2];
 
 Options[ReadSXSStrain] = {"FileName" -> "rhOverM_Asymptotic_GeometricUnits.h5"};
-ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] := 
-  Module[{file = sim <> "/"<>OptionValue[FileName]},
+ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] :=
+  Module[{simDir},
+    simDir = FindSXSSimulation[sim];
+    file = FileNameJoin[{simDir, OptionValue[FileName]}];
    Block[{$status = {sim, l, m, ord}},
     If[! FileExistsQ[file], Error["Cannot find " <> file]];
     ToDataTable @@ ({#1, #2 + I #3} &) @@ 
