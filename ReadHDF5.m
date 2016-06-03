@@ -52,7 +52,7 @@ Module[{result, linkClosed, x, count},
 
     ensureh5mma[];
     count = 0;
-    While[MatchQ[x = CheckAbort[Check[ImportHDF5[file, opts, If[!FreeQ[Options[ImportHDF5], AbortOnMessages], AbortOnMessages -> False, {}]],
+    While[MatchQ[x = CheckAbort[Check[ImportHDF5[file, opts, If[!FreeQ[Options[ImportHDF5], AbortOnMessages], AbortOnMessages -> False, Unevaluated[Sequence[]]]],
       linkClosed,
       {LinkObject::linkn,LinkObject::linkd}], $Aborted], linkClosed|$Aborted],
       Print["x = ", x];
