@@ -1140,6 +1140,8 @@ LandauDWigner[\[ScriptL]_, mp_, m_, \[Alpha]_, \[Beta]_, \[Gamma]_] :=
 
 (* Routine to find Euler angles to go from initial direction to final direction *)
 
+If[Context["EulerAngles"] =!= "System`",
+
 EulerAngles[frameA_, frameB_] :=
  Module[{\[Alpha], \[Beta], \[Gamma], X1, X2, X3, Y1, Y2, Y3, Z1, Z2, Z3, 
    normframeA, normframeB},
@@ -1160,6 +1162,7 @@ EulerAngles[frameA_, frameB_] :=
   Z3}];*)
   {\[Alpha], \[Beta], \[Gamma]}
   ]
+  ];
 
 (* Subscript[h, lm] transformation (using Landau's def of the D-matrix) *)
 hprime[h_, {\[ScriptL]_, 
