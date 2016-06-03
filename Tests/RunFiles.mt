@@ -228,7 +228,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
   Test[
     SimulationNames[]
   ,
-    {"bbh", "bbh-nrdf", "test7patch"}
+    {"bbh", "bbh-nrdf", "nan", "test7patch"}
   ,
     TestID -> "SimulationNames-1"
   ];
