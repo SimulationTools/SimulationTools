@@ -64,7 +64,7 @@ If[$VersionNumber < 9.,
      Close[OpenWrite[name]];
      name]];
 
-Options[RunSubprocess] = {"Exceptions" -> False};
+Options[RunSubprocess] = {"Exceptions" -> False, "StringLists" -> True};
 (* TODO: implement Exceptions -> False *)
 RunSubprocess[cmdlist:{cmd_, args___}, opts:OptionsPattern[]] :=
   Module[
@@ -82,6 +82,11 @@ RunSubprocess[cmdlist:{cmd_, args___}, opts:OptionsPattern[]] :=
     DeleteFile[stderrFile];
     If[retCode =!= 0 && OptionValue[Exceptions]===True,
       Error["Error when running command "<>StringJoin[Riffle[cmdlist," "]]<>"\n"<>StringJoin@Riffle[stderr,"\n"]]];
+
+    If[OptionValue[StringLists] === False,
+      stdout = StringJoin@@Riffle[stdout,"\n"];
+      stderr = StringJoin@@Riffle[stderr,"\n"]];
+
     {retCode, stdout, stderr}];
 
 MapMonitored[f_, args_List] :=
