@@ -177,6 +177,7 @@ FitEccOm[om_, int : {t1_, t2_}, opts : OptionsPattern[]] :=
    Eccentricity, e /. eccFit,
    FittedFunction, Function[tp,Evaluate[eccSepFitted/.t->tp]],
    FitParameters, eccFit,
+   "Association", Association["Eccentricity" -> e/.eccFit, "FittedFunction" -> Function[tp,Evaluate[eccSepFitted/.t->tp]], "Parameters" -> Thread[{"a","b","e","n","phi"} -> eccFit[[All,2]]]],
    _, Error["Unknown option given to FitEcc"]]
   ];
 
