@@ -129,7 +129,7 @@ readPsi4HDF5Data[file_String, dataset_String] :=
 ];
 
 haveMetadataFile[dir_String] :=
-  FileNames["*.bbh", dir] =!= {};
+  FileNames["metadata.txt" | (__ ~~ ".bbh"), dir] =!= {};
 
 findMetadataFile[run_String] :=
       Module[{files},
