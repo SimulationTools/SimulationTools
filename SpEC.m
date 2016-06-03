@@ -1102,18 +1102,20 @@ nv[s_] :=
 computeExtraMetadata[a_] :=
  Module[{a1, a2},
   a1 = Join[a,
-    <|"relaxed-mass-ratio" -> a["relaxed-mass1"]/a["relaxed-mass2"],
+    Association[
+     "relaxed-mass-ratio" -> a["relaxed-mass1"]/a["relaxed-mass2"],
      "relaxed-chi1" -> nv[a["relaxed-spin1"]]/a["relaxed-mass1"]^2,
      "relaxed-chi2" -> 
-      nv[a["relaxed-spin2"]]/a["relaxed-mass2"]^2|>];
+      nv[a["relaxed-spin2"]]/a["relaxed-mass2"]^2]];
   a2 = Join[a1,
-    <|"in-plane-chi1" -> 
+    Association[
+     "in-plane-chi1" ->
       Norm[Cross[Normal[a1["relaxed-chi1"]], 
         Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]],
      "in-plane-chi2" -> 
       Norm[
        Cross[Normal[a1["relaxed-chi2"]], 
-        Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]]|>]];
+        Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]]]]];
 
 
 
