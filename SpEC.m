@@ -166,12 +166,13 @@ FindSpECSimulation[sim_String] :=
 findSpECSegments=FindSpECSegments;
 
 FindSpECSegments[sim_String] :=
-  Module[{runBase,res,simBase,segPatterns},
+  Module[{runBase,res,simPath,segPatterns, evPath},
     {runBase, res} = Replace[StringSplit[sim, ":"], {a:{_,_} :> a, _ :> Error["Cannot parse simulation name "<>sim<>" into <sim>:<res>"]}];
-    simBase = If[StringMatchQ[runBase,StartOfString~~("/"|"~")~~__], FileNameJoin[{runBase,"Ev"}], FileNameJoin[{getSimsDir[], runBase, "Ev"}]];
+    simPath = FindSpECSimulation[runBase];
+    evPath = If[FileExistsQ[simPath<>"/Ev"], simPath<>"/Ev", simPath];
     segPatterns = {"Lev"~~res~~"_"~~_~~_, 
       "Lev"~~res~~"_Ringdown/Lev"~~res~~"_"~~_~~_}[[1;;2]];
-    Map[FileNames[#, simBase] &, segPatterns]];
+    Map[FileNames[#, evPath] &, segPatterns]];
 
 FindSpECSimulationFiles = findSpECFiles;
 findSpECFiles[sim_String, file_String] :=
