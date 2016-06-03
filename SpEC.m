@@ -108,6 +108,7 @@ PlotSpECSimulationsRemainingTime;
 FindSpECLevelSimulations;
 ReadSpECNormalizedConstraintNorm;
 ReadSpECConstraintNorm;
+FindSXSSimulation;
 
 Begin["`Private`"];
 
@@ -984,6 +985,16 @@ ReadSpECSimulationProfileSummary[sim_String] :=
 (****************************************************************)
 (* SXS data format *)
 (****************************************************************)
+
+FindSXSSimulation[sim_String] :=
+  Module[{candidates},
+    candidates =
+    If[StringTake[sim,1] === "/" && DirectoryQ[sim],
+      {sim},
+      FileNames[sim, $SimulationPath]];
+    If[candidates === {},
+      Error["Simulation "<>sim<>" not found"],
+      First[candidates]]];
 
 ReadSXSStrain[sim_String] :=
   ReadSXSStrain[sim, 2, 2, 2];
