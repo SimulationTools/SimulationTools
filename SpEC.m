@@ -987,9 +987,6 @@ ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern
 ReadSXSLevels[sim_String] :=
   Sort[FileNames["Lev*", sim]];
 
-End[];
-EndPackage[];
-
 (****************************************************************)
 (* Profile *)
 (****************************************************************)
