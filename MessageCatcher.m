@@ -55,8 +55,8 @@ WithCaughtMessagesArgs[expr_] :=
                         (expr)];
 
 AbortOnMessagesST[abort:(True|False)] :=
-  If[abort, Internal`AddHandler["Message", messageHandler],
-     Internal`RemoveHandler["Message", messageHandler]];
+  If[abort, Internal`AddHandler["Message", messageHandlerArgs],
+     Internal`RemoveHandler["Message", messageHandlerArgs]];
 
 End[];
 

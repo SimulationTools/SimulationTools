@@ -24,6 +24,7 @@ BeginPackage["SimulationTools`SpEC`",
    "SimulationTools`Error`",
    "SimulationTools`FileMemo`",
    "SimulationTools`FileDependencies`",
+   "SimulationTools`NRDF`",
    "h5mma`",
    "Piraha`",
    "SimulationTools`Utils`",
@@ -107,6 +108,7 @@ ReadSpECSimulationTerminationReason;
 ReadSpECFractionComplete;
 PlotSpECSimulationsRemainingTime;
 FindSpECLevelSimulations;
+ReadSpECHDF5Data;
 ReadSpECNormalizedConstraintNorm;
 ReadSpECConstraintNorm;
 
@@ -231,13 +233,92 @@ mergeDataLists[datas_List] :=
     If[! And @@ Positive[Differences[merged[[All, 1]]]],
       monotonisePreferLastCompiled[merged],
       merged]];
-  
+
+ReadSpECColumnHeader = readSpECASCIIColumnNames;
+
+readSpECASCIIColumnNames[file_String] := readSpECASCIIColumnNames[file] =
+ Module[{handle, line, map = {}},
+  handle = OpenRead[file];
+  While[
+   line = Read[handle, String]; 
+   StringMatchQ[line, StartOfString ~~ "#" ~~ ___],
+   Module[{map1},
+    map1 = 
+     StringCases[line, 
+      "# [" ~~ num__ ~~ "] = " ~~ name__ :> {num, name}];
+    If[map1 === {}, Continue[]];
+    AppendTo[map, Reverse[map1[[1, All]]]]]];
+  Close[handle];
+  Apply[Rule, map, {1}]];
+
+findFirstSpECSimulationFile[sim_String, file_String] :=
+  Module[{runFiles, f, handle, line, map = {}},
+    runFiles = Flatten@FindSpECSimulationFiles[sim, file];
+    If[runFiles === {}, 
+      Error["No files found in " <> sim <> " called " <> file]];
+    f = First[runFiles];
+    f];
+
+
+(* readSpECASCIIColumnNames[sim_String, file_String] := *)
+(*   Module[{runFiles, f, handle, line, map = {}}, *)
+(*     runFiles = Flatten@FindSpECSimulationFiles[sim, file]; *)
+(*     If[runFiles === {},  *)
+(*       Error["No files found in " <> sim <> " called " <> file]]; *)
+    
+(*     f = First[runFiles]; *)
+(*     readSpECASCIIColumnNames[f]]; *)
+
+readSpECAsciiColumnNumber[file_String, name_String] :=
+  Module[{number},
+   number = name /. readSpECASCIIColumnNames[file];
+   If[number === name,
+    Error["Column " <> name <> " not found in " <> file]];
+   If[! StringMatchQ[number, DigitCharacter__],
+    Error["Column number " <> number <> " is not a number"]];
+   ToExpression[number]];
+
+readSpECAsciiColumnNumber[sim_String, file_String, name_String] :=
+  readSpECAsciiColumnNumber[findFirstSpECSimulationFile[sim,file], name];
+
+
+(*   Module[{runFiles, f, handle, line, map = {}}, *)
+(*     runFiles = Flatten@FindSpECSimulationFiles[sim, file]; *)
+(*     If[runFiles === {},  *)
+(*       Error["No files found in " <> sim <> " called " <> file]]; *)
+    
+(*     f = First[runFiles]; *)
+(*     readSpECASCIIColumnNames[f]]; *)
+
+
+
+(*   Module[{number}, *)
+(*    number = name /. readSpECASCIIColumnNames[sim, file]; *)
+(*    If[number === name,  *)
+(*     Error["Column " <> name <> " not found in simulation " <> sim <>  *)
+(*       " file " <> file]]; *)
+(*    If[! StringMatchQ[number, DigitCharacter__],  *)
+(*     Error["Column number " <> number <> " is not a number"]]; *)
+(*    ToExpression[number]]; *)
+
+ReadSpECColumnFile[file_String, cols_List] :=
+  Module[{colNumbers},
+    colNumbers = Map[Replace[#, 
+      {x_Integer :> x,
+        x_String :> readSpECAsciiColumnNumber[file,x],
+        x_ :> Error["Unrecognised column "<>ToString[x]]}] &, cols];
+  ReadColumnFile[file][[All,colNumbers]]];
+
+(* ReadSpECColumnFile[sim_String, file_String, cols_List] := *)
+(*   ReadSpECColumnFile[findFirstSpECSimulationFile[sim,file], cols]; *)
+
+ReadSpECASCIIData = readSpECASCIIData;
+
 Options[readSpECASCIIData] = {"SeparateRingdown" -> False, "SeparateSegments" -> False};
 readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASCIIData[sim,file,opts] =
  Module[{runFiles, dataSegments},
 
   runFiles = findSpECFiles[sim, file];
-
   dataSegments = Map[withDot@ReadColumnFile, runFiles, {2}];
   print["\n"];
 
@@ -270,7 +351,7 @@ ReadSpECHDF5Data[runName_String, filename_String, datasetName_String] :=
   Return[data]];
 
 ReadSpECOrbitalOmega[sim_String] :=
-  Module[{data},
+  Module[{data, t, omx, omy, omz},
     data = ReadSpECHDF5Data[sim, "OrbitDiagnostics.h5", "OmegaVector.dat"];
     If[Length[data] === 0, Error["No orbital omega data in "<>sim]];
     {t, omx, omy, omz} = Transpose[data];
@@ -286,8 +367,15 @@ ReadSpECOrbitalPhase[sim_String] :=
 (* Simulation performance information *)
 (****************************************************************)
 
+HaveSpECData;
+
+haveSpECTimeInfo[sim_String] :=
+  Module[{runFiles},
+   runFiles = Flatten[findSpECFiles[sim, "TimeInfo.dat"],1];
+    runFiles=!={}];
+
 readSpECTimeInfo[sim_String] := 
-  readSpECASCIIData[sim, "TimeInfo.dat"];
+  If[haveSpECTimeInfo[sim], readSpECASCIIData[sim, "TimeInfo.dat"], {}];
 
 readSpECChangeNP[sim_String] := 
   readSpECASCIIData[sim, "ChangeNp.dat"];
@@ -296,14 +384,15 @@ haveChangeNP[sim_String] :=
   haveSpECFile[sim, "ChangeNp.dat"];
 
 ReadSpECSimulationSpeed[sim_String] :=
-  ToDataTable[readSpECTimeInfo[sim][[All,{1,8}]]];
+  If[haveSpECTimeInfo[sim], ToDataTable[readSpECTimeInfo[sim][[All,{1,readSpECAsciiColumnNumber[sim,"TimeInfo.dat","dt/dT"]}]]], ToDataTable[{}]];
 
 ReadSpECCoreCount[sim_String] :=
   ToDataTable[readSpECTimeInfo[sim][[All,{1,3}]]];
 
 ReadSpECSimulationProgress[sim_String] :=
   Module[{prog},
-    prog = readSpECTimeInfo[sim][[All,{2,1}]];
+    If[!haveSpECTimeInfo[sim], Return[ToDataTable[{}]]];
+    prog = readSpECTimeInfo[sim][[All,{readSpECAsciiColumnNumber[sim,"TimeInfo.dat","DayOfYear"],readSpECAsciiColumnNumber[sim,"TimeInfo.dat","t"]}]];
     (* Filter out any times which are less than the start time.  This
        indicates a problem with the clock on the compute node. *)
     prog = Select[prog, #[[1]] >= prog[[1,1]] &];
@@ -311,7 +400,8 @@ ReadSpECSimulationProgress[sim_String] :=
 
 ReadSpECWallTime[sim_String] :=
   Module[{inspiral,ringdown},
-    {inspiral,ringdown} = readSpECASCIIData[sim,"TimeInfo.dat",SeparateRingdown->True][[All,All,{1,4}]];
+    If[!haveSpECTimeInfo[sim], Return[ToDataTable[{}]]];
+    {inspiral,ringdown} = readSpECASCIIData[sim,"TimeInfo.dat",SeparateRingdown->True][[All,All,{readSpECAsciiColumnNumber[sim,"TimeInfo.dat","t"],readSpECAsciiColumnNumber[sim,"TimeInfo.dat","T [hours]"]}]];
 
     If[Length[ringdown] > 0,
       {inspiral,ringdown} = ToDataTable/@{inspiral,ringdown};
@@ -589,15 +679,38 @@ ReadSpECHorizonMass[runName_String, hn_Integer] :=
 (****************************************************************)
 
 findSpECInitialDataDir[sim_String] :=
-  If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__],
-    FileNameJoin[{sim,"ID"}],
-    FileNameJoin[{getSimsDir[], sim, "ID"}]];
+  Module[{simPath},
+    simPath = FindSpECSimulation[sim];
+    FileNameJoin[{simPath, "ID"}]];
+
+  (* If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], *)
+  (*   FileNameJoin[{sim,"ID"}], *)
+  (*   FileNameJoin[{getSimsDir[], sim, "ID"}]]; *)
 
 ReadSpECInitialDataErrors[sim_String] :=
   Module[{idDir = findSpECInitialDataDir[sim]},
-    ToDataTable@
-    Map[{#[[1]], Norm[#[[3 ;; All ;; 2]]]} &, 
-      ReadColumnFile[idDir, "Errors.dat"]]];
+    ReadSpECInitialDataErrorsFromFile[FileNameJoin[{idDir,"private/Errors.dat"}]]];
+
+ReadSpECInitialDataErrorsFromFile[file_String] :=
+ Module[{header, data},
+  If[!FileExistsQ[file], Return[ToDataTable[{}]]];
+  header = ReadSpECColumnHeader[file];
+  data = Which[
+    MemberQ[header, "est. AMR trunc. error" -> _],
+    ReadSpECColumnFile[file, {"its", "est. AMR trunc. error"}],
+    
+    MemberQ[header, "trunc-massA" -> _],
+    With[{all = 
+       ReadSpECColumnFile[
+        file, {"its", "trunc-massA", "trunc-massB", "trunc-chiA", 
+         "trunc-chiB", "trunc-Padm"}]},
+     Thread[{all[[All, 1]], Norm /@ all[[All, 2 ;; All]]}]],
+    
+    True,
+    Error[
+     "Unrecognised initial data errors file format with columns " <> 
+      ToString[header]]];
+  ToDataTable[data]];
 
 ReadSpECADMEnergy[sim_String] :=
   Module[{idDir = findSpECInitialDataDir[sim]},
@@ -622,15 +735,28 @@ ReadSpECADMEnergyIterations[sim_String] :=
   Module[{idDir = findSpECInitialDataDir[sim]},
     ReadColumnFile[idDir,"PhysValues.dat", {1,13}][[All,2]]];
 
+HaveSpECInitialDataParameters[sim_String] :=
+ Module[{path, paramsFile},
+  path = StringSplit[FindSpECSimulation[sim], ":"][[1]];
+  paramsFile = FileNameJoin[{path, "ID/EvID/ID_Params.perl"}];
+  FileExistsQ[paramsFile]];
+
 ReadSpECInitialDataParameter[sim_String, paramName_String] :=
  
  Module[{path, paramsFile, paramsString, matches, parseScalar, 
    parseArray},
-  path = StringSplit[FindSpECSimulation[sim], ":"][[1]];
+
+
+   path = FindSpECSimulation[StringSplit[sim, ":"][[1]]];
   paramsFile = FileNameJoin[{path, "ID/EvID/ID_Params.perl"}];
-  If[! FileExistsQ[paramsFile], 
+   If[! FileExistsQ[paramsFile],
+
+  paramsFile = FileNameJoin[{path, "EvID/ID_Params.perl"}];
+   If[! FileExistsQ[paramsFile],
+
+     
    Error["Cannot find initial data parameter file " <> paramsFile <> 
-     " for simulation " <> sim]];
+     " for simulation " <> sim]]];
   paramsString = Import[paramsFile, "String"];
   
   matches = 
@@ -670,7 +796,7 @@ ReadSpECInitialDataParameter[sim_String, paramName_String] :=
 FindSpECInitialDataSimulations[sim_String] :=
  Module[{path, idSimPaths},
   path = FindSpECSimulation[sim];
-  idSimPaths = FileNames["ID", path, Infinity]];
+  idSimPaths = FileNames["ID", path, (*Infinity*) 1]]; (* Not sure why this was Infinity *)
 
 ReadSpECInitialDataIteration[sim_String] :=
  Module[{errs},
@@ -712,9 +838,12 @@ ReadSpECInitialMassRatio[sim_] :=
 FindSpECEccentricityReductionSimulations[sim_String] :=
   FileNames["Ecc"~~NumberString, FindSpECSimulation[sim]];
 
-ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
-  Module[{simPath, dirNames, eccFiles, eccFile, eMeasured, eMeasuredSS},
+SetAttributes[CheckQuiet, HoldFirst];
+CheckQuiet[x_, result_, msgs_]:=
+  Quiet[Check[x,result,msgs],msgs];
 
+ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
+  Module[{simPath, dirNames, eccFiles, eccFile, eccFileSS, eMeasured, eMeasuredSS},
     simPath = FindSpECSimulation[sim];
 
     If[joinDirArg === Automatic,
@@ -725,15 +854,15 @@ ReadSpECEccentricity[sim_String, joinDirArg_ : Automatic] :=
 
 
     If[Length[eccFiles] === 0,
-      Print["Cannot find eccentricity reduction file"];
+      (* Print["Cannot find eccentricity reduction file"]; *)
       Return[None]];
 
     eccFile = First[eccFiles];
-
-    eMeasured = Import[eccFile,"Table"][[-1,-1]];
-    eMeasuredSS = Import[StringReplace[eccFile,"Fit_F2cos2.dat"->"Fit_F2cos2_SS.dat"],"Table"][[-1,-1]];
-
-    If[eMeasuredSS > 0.01, eMeasured, eMeasuredSS]];
+    eccFileSS = StringReplace[eccFile,"Fit_F2cos2.dat"->"Fit_F2cos2_SS.dat"];
+    
+    eMeasured = If[FileExistsQ[eccFile], Import[eccFile,"Table"][[-1,-1]], None];
+    eMeasuredSS = If[FileExistsQ[eccFileSS], Import[eccFileSS,"Table"][[-1,-1]], None];
+    If[eMeasuredSS =!= None && eMeasuredSS <= 0.01, eMeasuredSS, eMeasured]];
 
 (****************************************************************)
 (* Misc simulation properties *)
@@ -937,16 +1066,16 @@ ReadSpECSubdomains[sim_String, sdPattern_: "*.dir"] :=
  Module[{subdomains, segpoints, subdomainCounts, subdomainsList},
   segpoints = 
    readSpECGridPointsInFile[#, sdPattern] & /@ gridFiles[sim];
-  Print["segpoints = ", segpoints];
+  (* Print["segpoints = ", segpoints]; *)
   subdomainCounts = 
    Length[subdomainsInFile[#, sdPattern]] & /@ gridFiles[sim];
-  Print["subdomainCounts = ", subdomainCounts];
+  (* Print["subdomainCounts = ", subdomainCounts]; *)
   subdomains = subdomainCounts + 0*segpoints;
-  Print["subdomains = ", subdomains];
+  (* Print["subdomains = ", subdomains]; *)
 
   (*Print["segpoints=",segpoints];*)
   
-  Print["ReadSpECSubdomains: subdomains = ", subdomains];
+  (* Print["ReadSpECSubdomains: subdomains = ", subdomains]; *)
 
   subdomainsList = ToList /@ subdomains;
 
@@ -1033,6 +1162,74 @@ ReadSXSSpin[sim_, hn_Integer] :=
 
 ReadSXSLevels[sim_String] :=
   Sort[FileNames["Lev*", sim]];
+
+(****************************************************************)
+(* Waveform rotation (provided by Andrea Taracchini)            *)
+(****************************************************************)
+
+SmalldWignerArun[\[ScriptL]_, mp_, m_, \[Beta]_] := 
+  Module[{k}, 
+   If[IntegerQ[\[ScriptL]] && IntegerQ[m] && IntegerQ[mp] && \[ScriptL] >= 0 &&
+      m >= -\[ScriptL] && m <= \[ScriptL] && mp >= -\[ScriptL] && 
+     mp <= \[ScriptL],
+    
+    \!\(
+\*UnderoverscriptBox[\(\[Sum]\), \(k = 
+       Max[{0, m - mp}]\), \(Min[{\[ScriptL] + m, \[ScriptL] - mp}]\)]\(
+\*FractionBox[
+SuperscriptBox[\((\(-1\))\), \(k\)], \(k!\)] 
+\*FractionBox[
+SqrtBox[\(\(\((\[ScriptL] + m)\)!\) \(\((\[ScriptL] - 
+            m)\)!\) \(\((\[ScriptL] + mp)\)!\) \(\((\[ScriptL] - 
+            mp)\)!\)\)], \(\(\((k - m + mp)\)!\) \(\((\[ScriptL] + m - 
+           k)\)!\) \(\((\[ScriptL] - mp - k)\)!\)\)] 
+\*SuperscriptBox[\(Cos[
+\*FractionBox[\(\[Beta]\), \(2\)]]\), \(2  \[ScriptL] + m - mp - 2  k\)] 
+\*SuperscriptBox[\(Sin[
+\*FractionBox[\(\[Beta]\), \(2\)]]\), \(2  k - m + mp\)]\)\), 
+    Print["Wrong indices"]]];
+SmalldWignerArun[\[ScriptL]_, mp_, m_, 0] := 
+  Limit[SmalldWignerArun[\[ScriptL], mp, m, x], x -> 0];
+SmalldWignerArun[\[ScriptL]_, mp_, m_, \[Pi]] := 
+  Limit[SmalldWignerArun[\[ScriptL], mp, m, x], x -> \[Pi]];
+
+LandauDWigner[\[ScriptL]_, mp_, m_, \[Alpha]_, \[Beta]_, \[Gamma]_] := 
+  If[IntegerQ[\[ScriptL]] && IntegerQ[m] && IntegerQ[mp] && \[ScriptL] >= 0 &&
+     m >= -\[ScriptL] && m <= \[ScriptL] && mp >= -\[ScriptL] && 
+    mp <= \[ScriptL], 
+   Exp[I mp \[Gamma]] SmalldWignerArun[\[ScriptL], mp, m, \[Beta]] Exp[
+     I m \[Alpha]], Print["Wrong indices"]];
+
+(* Routine to find Euler angles to go from initial direction to final direction *)
+
+EulerAngles[frameA_, frameB_] :=
+ Module[{\[Alpha], \[Beta], \[Gamma], X1, X2, X3, Y1, Y2, Y3, Z1, Z2, Z3, 
+   normframeA, normframeB},
+  normframeA = 
+   Transpose[#/Sqrt[#[[1]]^2 + #[[2]]^2 + #[[3]]^2] & /@ Transpose[frameA]];
+  normframeB = 
+   Transpose[#/Sqrt[#[[1]]^2 + #[[2]]^2 + #[[3]]^2] & /@ Transpose[frameB]];
+  {{X1, X2, X3}, {Y1, Y2, Y3}, {Z1, Z2, Z3}} = 
+   Transpose[normframeB].normframeA // Chop;
+  If[Z1 == 0 && Z2 == 0,
+   If[Z3 > 0,
+    {\[Alpha], \[Beta], \[Gamma]} = {0, 0, ArcTan[X1, X2]},
+    {\[Alpha], \[Beta], \[Gamma]} = {0, \[Pi], ArcTan[-X1, X2]}],
+   {\[Alpha], \[Beta], \[Gamma]} = {ArcTan[Z1, Z2], ArcCos[Z3], 
+     ArcTan[-X3, Y3]}
+   ];
+  (*Print[{\[Alpha],\[Beta],\[Gamma],X1,X2,X3,Y1,Y2,Y3,Z1,Z2,
+  Z3}];*)
+  {\[Alpha], \[Beta], \[Gamma]}
+  ]
+
+(* Subscript[h, lm] transformation (using Landau's def of the D-matrix) *)
+hprime[h_, {\[ScriptL]_, 
+    mp_}, {\[CapitalAlpha]_, \[CapitalBeta]_, \[CapitalGamma]_}] := Module[{m},
+   Sum[Conjugate[
+      LandauDWigner[\[ScriptL], m, 
+       mp, \[CapitalAlpha], \[CapitalBeta], \[CapitalGamma]]] h[\[ScriptL], 
+      m], {m, -\[ScriptL], \[ScriptL]}]];
 
 ahCode[i_Integer] :=
  If[1 <= i <= 3, {"A", "B", "C"}[[i]], 
@@ -1160,7 +1357,7 @@ LandauDWigner[\[ScriptL]_, mp_, m_, \[Alpha]_, \[Beta]_, \[Gamma]_] :=
 
 (* Routine to find Euler angles to go from initial direction to final direction *)
 
-EulerAngles[frameA_, frameB_] :=
+eulerAngles[frameA_, frameB_] :=
  Module[{\[Alpha], \[Beta], \[Gamma], X1, X2, X3, Y1, Y2, Y3, Z1, Z2, Z3, 
    normframeA, normframeB},
   normframeA = 
@@ -1179,7 +1376,7 @@ EulerAngles[frameA_, frameB_] :=
   (*Print[{\[Alpha],\[Beta],\[Gamma],X1,X2,X3,Y1,Y2,Y3,Z1,Z2,
   Z3}];*)
   {\[Alpha], \[Beta], \[Gamma]}
-  ]
+  ];
 
 (* Subscript[h, lm] transformation (using Landau's def of the D-matrix) *)
 hprime[h_, {\[ScriptL]_, 
@@ -1225,13 +1422,13 @@ SpECEstimatedMergerTime[sim_String] :=
     None,
     SpECEstimatedMergerTime[simBase <> ":" <> ToString[Last[lowerLevs]]]]]];
 
-SpECEstimatedRemainingWalltime[sim_String] :=
+SpECEstimatedRemainingWalltime[sim_String, debug_ : False] :=
  Module[{term, ringdownTime = 800, speedData, tc, speed1, t, speed2},
   (* TODO: check to see if simulation has finished, 
   in which case return 0 *)
   term = ReadSpECSimulationTerminationReason[sim];
-  If[term === "FinalTime", Return[0]];
   speedData = ReadSpECSimulationSpeed[sim];
+  speedDataSmooth = MovingAverage[speedData,16];
   tc = SpECEstimatedMergerTime[sim];
 (* Print["tc = ", tc]; *)
   If[tc === None, Return[None]];
@@ -1240,7 +1437,20 @@ SpECEstimatedRemainingWalltime[sim_String] :=
   If[speed1 === None, Return[None]];
   speed2 = speed1/2;
   t = MaxCoordinate[speedData];
-  (* Print["t = ",t]; *)
+   (* Print["t = ",t]; *)
+
+   If[debug,
+     Print[Show[ListLinePlot[{speedData,speedDataSmooth}, PlotRange->{0,All}, ImageSize -> 300],
+       Plot[Piecewise[{{speed1, t < tc}, {speed2, t >= tc}}], {t, 0, tc+ringdownTime}]]];
+     walltime = AntiDerivative[1/(speedDataSmooth+10.^-6), {MinCoordinate[speedDataSmooth],0}, UseInputGrid -> True];
+     
+     Print[Show[ListLinePlot[walltime, PlotRange->{{0,All},{0,200}}, ImageSize -> 300],
+       Plot[Piecewise[{{1/speed1 t, t < tc}, {tc/speed1 + 1/speed2 (t-tc), t >= tc}}], {t, 0, tc+ringdownTime}]]];
+
+
+     ];
+  If[term === "FinalTime", Return[0]];
+   
   If[t < tc,
     (* Print["Before tc"]; *)
    (tc - t)/speed1 + ringdownTime/speed2,
@@ -1263,7 +1473,7 @@ ReadSpECSimulationTerminationReason[sim_String] :=
     Print[
      "Could not parse termination condition from \"" <> termString <> 
       "\" in " <> sim];
-    "Unknown"]]]
+    "Unknown"]]];
 
 ReadSpECFractionComplete[sim_String] :=
  Module[{walltime, completeHours, remainingHours},

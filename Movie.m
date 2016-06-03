@@ -83,7 +83,7 @@ ExportMovieFrames[fileBase_String, frames_List, opts:OptionsPattern[]] :=
     $ExportMovieProgress = N[i/Length[frames]];
     $ExportMovieFramesStatus = N[i/Length[frames]];
     Export[fileBase<>"."<>PadIndex[i-1,5]<>".png",
-           frames[[i]]],
+           frames[[i]](*, ImageSize->{720,440}*), ImageResolution -> 200],
     {i,1,Length[frames]}];
 
 findFfmpeg[] := 
@@ -94,8 +94,11 @@ findFfmpeg[] :=
     If[ret =!= 0, Error["Cannot find ffmpeg"]];
     Last[out]];
 
-Options[EncodeMovieFrameFiles] = {"FFMPEG" -> "ffmpeg",
-                                  "FrameRate" -> 1};
+Options[ExportMovie] = {"FFMPEG" -> "ffmpeg",
+  "FrameRate" -> 1,
+  "BitRate" -> "10000"};
+
+Options[EncodeMovieFrameFiles] = Options[ExportMovie];
 
 EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[]] :=
   Module[
@@ -106,8 +109,8 @@ EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[
            "-f", "image2",
            "-r", ToString[N@OptionValue["FrameRate"],CForm],
            "-i", frameFilePattern,
-           "-b:v", "20M",
            "-pix_fmt", "yuv420p",
+           "-b "<>ToString[OptionValue[BitRate]],
            movieFile};
     Print[cmd];
     {ret, out, err} = RunSubprocess[cmd];
@@ -115,9 +118,6 @@ EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[
     Print[err];
     If[ret =!= 0, Error["Failed to encode movie frame files to "<>movieFile<>". \n"<>err]];
     ];
-
-Options[ExportMovie] = {"FFMPEG" -> "ffmpeg",
-  "FrameRate" -> 1};
 
 ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
   Module[

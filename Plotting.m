@@ -568,15 +568,32 @@ RasterizeManipulate[expr_, {var_, start_, end_, inc_, opts___}] :=
 
 (* See http://mathematica.stackexchange.com/questions/8645/how-do-i-make-framed-plots-the-same-size/8660#8660 *)
 
+$ImageCounter = 0;
 graphicsPadding[g_] :=
- BorderDimensions[
-  Image[Rasterize@Show[g/.(PlotLabel->_)->Sequence[], LabelStyle -> White, Background -> White]]];
+  Module[{img, g2},
+    If[Head[g] =!= Graphics,
+      Error["graphicPadding expecting a Graphics object but got an object with head "<>ToString[Head[g]]]];
+    (* gOpts = List@@Drop[g, 1]; *)
+    (* gDirectives = First[g]; *)
+    (* Print["gOpts = ", gOpts]; *)
+    (* g2 = Graphics[gDirectives, Sequence@@gOpts, LabelStyle -> White, Background -> White]; *)
+    g2 = Show[g/.(PlotLabel->_)->Sequence[], LabelStyle -> White, Background -> White];
+    (* Export["graphics."<>ToString[$ImageCounter]<>".png", g2]; *)
+    (* Put[g2, "graphics."<>ToString[$ImageCounter]<>".m"]; *)
+
+    (* Print["gOpts2 = ", List@@Drop[g2, 1]]; *)
+    (* img = Image[Rasterize@Show[g/.(PlotLabel->_)->Sequence[], LabelStyle -> White, Background -> White]]; *)
+    img = Image[Rasterize@g2];
+    (* Export["img."<>ToString[$ImageCounter]<>".png", img]; *)
+    (* $ImageCounter = $ImageCounter + 1; *)
+    BorderDimensions[img]];
 
 graphicsPadding[gs_List] :=
  MapThread[Max, Map[graphicsPadding, gs], 2];
 
 PadGraphics[gs_List, depth_:1] :=
  With[{padding = 4 {{1,1},{1,1}} + graphicsPadding[Flatten[gs,depth]]},
+   (* Print["padding = ", padding]; *)
   Map[Show[#, ImagePadding -> padding] &, gs, {depth}]];
 
 
