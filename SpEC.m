@@ -106,6 +106,7 @@ SpECEstimatedRemainingWalltime;
 ReadSpECSimulationTerminationReason;
 ReadSpECFractionComplete;
 PlotSpECSimulationsRemainingTime;
+FindSpECLevelSimulations;
 ReadSpECNormalizedConstraintNorm;
 ReadSpECConstraintNorm;
 
@@ -191,6 +192,9 @@ FindSpECLevels[sim_String] :=
     simBase = If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim, FileNameJoin[{getSimsDir[], sim}]];
     (* Print[FileNameJoin[{simBase,"Ev"}]]; *)
     ToExpression/@Union[Map[StringReplace[StringSplit[FileNameTake[#,-1],"_"][[1]],"Lev"->""] &, FileNames["Lev"~~__~~"_"~~_~~_, FileNameJoin[{simBase,"Ev"}]]]]];
+
+FindSpECLevelSimulations[sim_String] :=
+  sim<>":"<>ToString[#] & /@ FindSpECLevels[sim];
 
 (* This is fairly trivial; it might be redundant *)
 FindSpECSimulationFile[sim_String, name_String] :=
