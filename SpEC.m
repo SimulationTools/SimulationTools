@@ -189,8 +189,7 @@ HaveSpECEvolution[sim_String] :=
 
 FindSpECLevels[sim_String] :=
   Module[{simBase},
-    simBase = If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim, FileNameJoin[{getSimsDir[], sim}]];
-    (* Print[FileNameJoin[{simBase,"Ev"}]]; *)
+    simBase = FindSpECSimulation[sim];
     ToExpression/@Union[Map[StringReplace[StringSplit[FileNameTake[#,-1],"_"][[1]],"Lev"->""] &, FileNames["Lev"~~__~~"_"~~_~~_, FileNameJoin[{simBase,"Ev"}]]]]];
 
 FindSpECLevelSimulations[sim_String] :=
