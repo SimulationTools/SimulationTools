@@ -86,7 +86,6 @@ ReadSpECOrbitalOmega;
 ReadSpECOrbitalPhase;
 ReadSpECSimulationProfileSummary;
 DataNotFound;
-ReadSXSStrain;
 ReadSpECColumnFile;
 ReadSpECColumnHeader;
 ReadSpECInitialDimensionlessSpin;
@@ -964,26 +963,6 @@ ReadSpECSubdomains[sim_String, sdPattern_: "*.dir"] :=
 ReadSpECDampingTime[sim_String, i_Integer] :=
   ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat", SeparateRingdown->True][[1]][[All,{1,4+i}]]];
 
-ReadSXSStrain[sim_String] :=
- ToDataTable[{#[[1]], #[[2]] + I #[[3]]} & /@ 
-   Import[
-    FileNameJoin[{sim, 
-      "rhOverM_Asymptotic_GeometricUnits.h5"}], {"Datasets", 
-     "/Extrapolated_N2.dir/Y_l2_m2.dat"}]];
-
-Options[ReadSXSStrain] = {"FileName" -> "rhOverM_Asymptotic_GeometricUnits.h5"};
-ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] := 
- (* ReadSXSStrain[sim, l, m, ord] = *)
-  Module[{file = sim <> "/"<>OptionValue[FileName]},
-   Block[{$status = {sim, l, m, ord}},
-    If[! FileExistsQ[file], Error["Cannot find " <> file]];
-    ToDataTable @@ ({#1, #2 + I #3} &) @@ 
-      Transpose[
-       ReadHDF5[
-        file, {"Datasets", 
-         "/Extrapolated_N" <> ToString[ord] <> ".dir/Y_l" <> 
-          ToString[l] <> "_m" <> ToString[m] <> ".dat"}]]]];
-
 ReadSXSLevels[sim_String] :=
   Sort[FileNames["Lev*", sim]];
 
@@ -1006,15 +985,17 @@ ReadSpECSimulationProfileSummary[sim_String] :=
 (* SXS data format *)
 (****************************************************************)
 
+ReadSXSStrain[sim_String] :=
+  ReadSXSStrain[sim, 2, 2, 2];
+
 Options[ReadSXSStrain] = {"FileName" -> "rhOverM_Asymptotic_GeometricUnits.h5"};
 ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] := 
- ReadSXSStrain[sim, l, m, ord] =
   Module[{file = sim <> "/"<>OptionValue[FileName]},
    Block[{$status = {sim, l, m, ord}},
     If[! FileExistsQ[file], Error["Cannot find " <> file]];
     ToDataTable @@ ({#1, #2 + I #3} &) @@ 
       Transpose[
-       ImportHDF5[
+       ReadHDF5[
         file, {"Datasets", 
          "/Extrapolated_N" <> ToString[ord] <> ".dir/Y_l" <> 
           ToString[l] <> "_m" <> ToString[m] <> ".dat"}]]]];
