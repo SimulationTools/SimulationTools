@@ -47,7 +47,7 @@ Error[s_String, args___] :=
 
 Error[e_Symbol, s_String, args___] :=
   If[!MemberQ[$ExceptionsActive, e],
-     Error[s <> " ("<>ToString[e]<>")",args],
+     Error[StringReplace[s <> " ("<>ToString[e]<>")","`"->"`.`"],args],
      Throw[If[{args}==={}, s, {s,args,CurrentStackTrace[]}], e]];
 
 (****************************************************************)
