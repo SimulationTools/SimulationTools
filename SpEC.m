@@ -159,8 +159,9 @@ getSimsDir[] :=
 
 (* Given a simulation name or path, return a simulation path *)
 FindSpECSimulation[sim_String] :=
-  If[StringMatchQ[sim,StartOfString~~("/"|"~")~~__], sim,
-    FileNameJoin[{getSimsDir[], sim}]];
+  If[DirectoryQ[sim], sim,
+    With[{path = FileNameJoin[{getSimsDir[], sim}]},
+      If[DirectoryQ[path], path, Error["Cannot find simulation "<>sim]]]];
 
 findSpECSegments=FindSpECSegments;
 
