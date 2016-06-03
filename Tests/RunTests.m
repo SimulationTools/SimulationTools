@@ -5,25 +5,39 @@
 
 *)
 
-workbenchLocations = {"/Applications/Workbench.app/configuration/org.eclipse.osgi/bundles/13/1/.cp/MathematicaSourceVersioned/Head", "/Applications/Wolfram Workbench.app/configuration/org.eclipse.osgi/bundles/13/1/.cp/MathematicaSourceVersioned/Head"};
-
-AppendTo[$Path,
-  Replace[Select[workbenchLocations, DirectoryQ],
-    {{}    :> (Print["Wolfram Workbench not found"]; Abort[]),
-      {x_, ___} :> x}]];
-
 SetOptions["stdout", PageWidth -> Infinity];
+
+If[FindFile["MUnitRunner`"] =!= $Failed,
+   Get["MUnitRunner`"],
+   (* else *)
+   workbenchLocations = {"/Applications/Workbench.app/configuration/org.eclipse.osgi/bundles/13/1/.cp/MathematicaSourceVersioned/Head", "/Applications/Wolfram Workbench.app/configuration/org.eclipse.osgi/bundles/13/1/.cp/MathematicaSourceVersioned/Head"};
+   AppendTo[$Path,
+            Replace[Select[workbenchLocations, DirectoryQ],
+                    {{}    :> (Print["Wolfram Workbench not found"]; Abort[]),
+                     {x_, ___} :> x}]]];
 
 << MUnit`
 << SimulationTools`
 
-tests = Map[FileBaseName[#] &, DeleteCases[FileNames["*.mt"],"SimulationTools.mt"]];
+tests = If[Length[$ScriptCommandLine] > 1,
+           Drop[$ScriptCommandLine,1],
+           Map[FileBaseName[#] &, DeleteCases[FileNames["*.mt"],"SimulationTools.mt"]]];
 
-results = (Print["\n"]; TestRun[#<>".mt", Loggers -> {VerbosePrintLogger[]}, TestRunTitle -> #]) & /@ tests;
+Print["tests = ",tests];
+
+results = (Print["\n"]; TestRun[#<>".mt",
+                                Loggers -> {VerbosePrintLogger[]},
+                                TestRunTitle -> #]) & /@ tests;
 Print[];
 
 pass = Pick[tests, results];
 fail = Pick[tests, Map[Not,results]];
-
-Print["Passing packages: ", pass];
-Print["Failing packages: ", fail];
+Print[];
+Print["Passing packages: ", StringJoin[Riffle[pass," "]]];
+Print["Failing packages: ", StringJoin[Riffle[fail," "]]];
+Print[];
+If[Length[fail] === 0 && Length[pass] > 0,
+   Print["All tests passed"];
+   Quit[0],
+   Print[Length[fail], " tests failed"];
+  Quit[1]];
