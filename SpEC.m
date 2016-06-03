@@ -206,6 +206,13 @@ FindSpECSubSimulations[sim_String, pat_:"*"] :=
     (* If this is a top-level simulation *)
     subs1 = Flatten[Map[FileNames[#, simPath] &, {"ID","Ecc*","Ev"}],1];
 
+    (* Ignore Ecc0 subdirectories which are symlinks to the Ev
+       directory.  These are created by EccReduce.pm. *)
+    If[MemberQ[FileNameTake[#,-1]&/@subs1, "Ecc0"] &&
+      (FileInformation[FileNameJoin[{simPath, "Ecc0"}], "AbsoluteFileName"] ===
+        FileInformation[simPath, "AbsoluteFileName"]),
+      subs1 = DeleteCases[subs1, x_ /; StringMatchQ[x, __~~"Ecc0"]]];
+
     (* If this is an Ev or Ringdown simulation *)
     subs2 = FileNames["Lev*_AA", simPath];
 
