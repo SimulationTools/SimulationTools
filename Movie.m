@@ -37,6 +37,7 @@ ReadFrameData;
 RenderFrame;
 ExportFrameSetMovie;
 $ExportMovieProgress;
+$ExportMovieFramesStatus;
 
 Begin["`Private`"];
 
@@ -80,6 +81,7 @@ ExportMovieFrames[fileBase_String, frames_List, opts:OptionsPattern[]] :=
        match the pattern. Maybe put them in a new temporary
        directory. *)
     $ExportMovieProgress = N[i/Length[frames]];
+    $ExportMovieFramesStatus = N[i/Length[frames]];
     Export[fileBase<>"."<>PadIndex[i-1,5]<>".png",
            frames[[i]]],
     {i,1,Length[frames]}];
