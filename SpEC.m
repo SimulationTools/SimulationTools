@@ -184,7 +184,7 @@ haveSpECFile[sim_String, file_String] :=
 
 HaveSpECEvolution[sim_String] :=
   Module[{runFiles},
-   runFiles = Flatten[findSpECFiles[sim, "GW2/rPsi4_FiniteRadii_CodeUnits.h5"],1];
+   runFiles = Flatten[findSpECFiles[sim, "TimeInfo.dat"],1];
     runFiles=!={}];
 
 FindSpECLevels[sim_String] :=
