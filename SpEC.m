@@ -98,7 +98,6 @@ ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
 ReadSXSMetadataFile;
 RotateWaveform;
-EulerAngles;
 SpECEstimatedInspiralSpeed;
 SpECEstimatedMergerTime;
 SpECEstimatedRemainingWalltime;
@@ -1153,9 +1152,7 @@ LandauDWigner[\[ScriptL]_, mp_, m_, \[Alpha]_, \[Beta]_, \[Gamma]_] :=
 
 (* Routine to find Euler angles to go from initial direction to final direction *)
 
-If[Context["EulerAngles"] =!= "System`",
-
-EulerAngles[frameA_, frameB_] :=
+eulerAngles[frameA_, frameB_] :=
  Module[{\[Alpha], \[Beta], \[Gamma], X1, X2, X3, Y1, Y2, Y3, Z1, Z2, Z3, 
    normframeA, normframeB},
   normframeA = 
