@@ -100,7 +100,6 @@ ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
 ReadSXSMetadataFile;
 RotateWaveform;
-EulerAngles;
 SpECEstimatedInspiralSpeed;
 SpECEstimatedMergerTime;
 SpECEstimatedRemainingWalltime;
