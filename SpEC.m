@@ -1064,10 +1064,11 @@ ReadSXSAccumulatedPhase[sim_String] :=
 (****************************************************************)
 
 ReadSXSMetadataFile[name_String] :=
- Module[{keyValues, md1, md},
+  Module[{keyValues, md1, md},
   keyValues = 
    Cases[ParseMetadataFile[name], 
-    "element"["key"[k_], v_] :> (k -> v), Infinity];
+     "element"["key"[k_], v_] :> (k -> v), Infinity];
+   If[keyValues === {}, Error["ReadSXSMetadataFile: No metadata found for " <> name]];
   md1 = Association[
     Map[#[[1]] -> processValue[#[[2]]] &, keyValues]];
   md = computeExtraMetadata[md1]];
