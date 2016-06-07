@@ -27,6 +27,7 @@ BeginPackage["SimulationTools`SpEC`",
    "h5mma`",
    "Piraha`",
    "SimulationTools`Utils`",
+   "SimulationTools`NRDF`",
    If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
