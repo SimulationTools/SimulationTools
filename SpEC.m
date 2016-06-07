@@ -1097,6 +1097,7 @@ computeExtraMetadata[a_] :=
  Module[{a1, a2},
   a1 = Join[a,
     Association[
+     "initial-mass-ratio" -> a["initial-mass1"]/a["initial-mass2"],
      "relaxed-mass-ratio" -> a["relaxed-mass1"]/a["relaxed-mass2"],
      "relaxed-chi1" -> nv[a["relaxed-spin1"]]/a["relaxed-mass1"]^2,
      "relaxed-chi2" -> 
