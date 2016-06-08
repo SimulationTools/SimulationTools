@@ -1038,7 +1038,7 @@ gridPointsInSubdomain[gridFile_, sdname_] :=
    ImportHDF5[gridFile, {"Datasets", extentDataset[sdname]}];
   ToDataTable@Map[{#[[1]], Times @@ #[[{2, 3, 4}]]} &, datasets]];
 
-readSpECGridPointsInFile[gridFile_, sdPattern_: "*"] :=
+readSpECGridPointsInFile[gridFile_String, sdPattern_: "*"] :=
  Module[{sds, gpsInsds},
   (*Print["gridFile=",gridFile];*)
   sds = subdomainsInFile[gridFile, sdPattern];
@@ -1049,13 +1049,21 @@ readSpECGridPointsInFile[gridFile_, sdPattern_: "*"] :=
     Total[gpsInsds]]];
 
 subdomainsInFile[gridFile_String, sdPattern_: "*.dir"] :=
- Select[ImportHDF5[gridFile, "Datasets"], StringMatchQ[#, sdPattern] &];
+  Module[{datasets,result},
+    (* Print["subdomainsInFile: gridFile = ", gridFile]; *)
+    (* Print[FindFile["h5mma`"]]; *)
+    datasets = ImportHDF5[gridFile, "Datasets"];
+    (* Print["datasets = ", datasets//FullForm]; *)
+    (* Print["sdPattern = ", sdPattern//FullForm]; *)
+    result = Select[datasets, StringMatchQ[#, sdPattern] &];
+    (* Print["result = ", result]; *)
+    result];
 
 ReadSpECGridPoints[sim_String, sdPattern_: "*.dir"] :=
  Module[{segpoints},
   segpoints = 
    readSpECGridPointsInFile[#, sdPattern] & /@ gridFiles[sim];
-  (*Print["segpoints=",segpoints];*)
+  Print["segpoints=",segpoints];
   
   ToDataTable[
    SimulationTools`SpEC`Private`monotonisePreferLastCompiled[
@@ -1114,9 +1122,6 @@ ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern
 
 ReadSXSLevels[sim_String] :=
   Sort[FileNames["Lev*", sim]];
-
-End[];
-EndPackage[];
 
 (****************************************************************)
 (* Profile *)
@@ -1201,7 +1206,7 @@ LandauDWigner[\[ScriptL]_, mp_, m_, \[Alpha]_, \[Beta]_, \[Gamma]_] :=
 
 (* Routine to find Euler angles to go from initial direction to final direction *)
 
-EulerAngles[frameA_, frameB_] :=
+eulerAngles[frameA_, frameB_] :=
  Module[{\[Alpha], \[Beta], \[Gamma], X1, X2, X3, Y1, Y2, Y3, Z1, Z2, Z3, 
    normframeA, normframeB},
   normframeA = 
