@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`DataTable`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`Error`",
   "SimulationTools`Utils`",
+  "SimulationTools`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -629,7 +630,10 @@ DataTable /: Developer`ToPackedArray[dt_DataTable] :=
 SyntaxInformation[AntiDerivative] =
  {"ArgumentsPattern" -> {_, {_, _}, OptionsPattern[]}};
 
-Options[AntiDerivative] = {"InterpolationOrder"->3, "UseInputGrid" -> False};
+Options[AntiDerivative] = 
+  {"InterpolationOrder"->3,
+   "UseInputGrid" -> If[$SimulationToolsCompatibilityVersion < 1.1, False, True]
+  };
 
 DocumentationBuilder`OptionDescriptions["AntiDerivative"] = {
   InterpolationOrder -> "The order of interpolation to use. This may be take value "<>
