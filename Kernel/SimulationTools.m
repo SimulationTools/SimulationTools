@@ -128,7 +128,7 @@ $SimulationToolsInstallationDirectory = FileNameDrop[FindFile["SimulationTools`"
 $SimulationToolsTestSimulationDirectory = FileNameJoin[{FileNameDrop[FindFile["SimulationTools`"], -2], "Data","Simulations"}];
 $SimulationToolsTestSimulation = FileNameJoin[{$SimulationToolsTestSimulationDirectory, "bbh"}];
 
-$SimulationToolsVersionNumber        = 1.0;
+$SimulationToolsVersionNumber        = 1.1;
 $SimulationToolsReleaseNumber        = 0;
 If[!ValueQ[$SimulationToolsCompatibilityVersion],
   $SimulationToolsCompatibilityVersion = $SimulationToolsVersionNumber;
