@@ -280,10 +280,8 @@ Timing statistics from the timers included with Carpet can also be read. For \
 best results, it is recommended that the following parameter value is set:\
 \>", "Text"],
 
-Cell["\<\
-IOASCII::out0D_vars  = \[OpenCurlyDoubleQuote]Carpet::timing\
-\[OpenCurlyDoubleQuote]\
-\>", "Text"]
+Cell["IOASCII::out0D_vars  = \[OpenCurlyDoubleQuote]Carpet::timing\
+\[OpenCurlyDoubleQuote]", "Text"]
 }, Open  ]]
 }, Open  ]],
 
@@ -330,10 +328,8 @@ data available through the \[OpenCurlyDoubleQuote]Tracker\
 the following parameter should be set:\
 \>", "Text"],
 
-Cell["\<\
-\tIOASCII::out0D_vars  = \[OpenCurlyDoubleQuote]PunctureTracker::pt_loc\
-\[OpenCurlyDoubleQuote]\
-\>", "Text"]
+Cell["\tIOASCII::out0D_vars  = \[OpenCurlyDoubleQuote]PunctureTracker::pt_loc\
+\[OpenCurlyDoubleQuote]", "Text"]
 }, Open  ]],
 
 Cell[CellGroupData[{

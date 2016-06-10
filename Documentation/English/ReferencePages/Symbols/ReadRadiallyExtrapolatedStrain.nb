@@ -90,17 +90,27 @@ Cell["", "NotesSection",
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "AbsPhase", "True", Cell["", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "AbsPhase", "True", Cell[
+    "Whether to separately extrapolate magnitude and phase.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "DiscretePhaseAlignmentTime", "Automatic",
-     Cell["", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "PerturbativeAdjustment", "False", Cell[
-    "", "TableText"]},
+     Cell["Time at which to align phases before doing extrapolation.", 
+     "TableText"]},
+   {Cell["      ", "TableRowIcon"], "PerturbativeAdjustment", "False", 
+    Cell["\<\
+Whether to include a perturbative correction during extrapolation.\
+\>", "TableText"]},
    {Cell["      ", "TableRowIcon"], "RadialCoordinateTransformation", "None", 
-    Cell["", "TableText"]},
+    Cell["\<\
+Coordinate transformation to apply to radius used in extrapolation. Possible \
+choices are None (equivalent to Identity), RadialToTortoise or \
+IsotropicToTortoise\
+\>", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Radii", "Automatic", Cell[
-    "", "TableText"]},
-   {Cell["      ", "TableRowIcon"], "RadiusRange", "Automatic", Cell[
-    "", "TableText"]}
+    "List of radii to use in extrapolation.", "TableText"]},
+   {Cell["      ", "TableRowIcon"], "RadiusRange", "Automatic", Cell["\<\
+Range of radii to use in extrapolation given as a list of the form {rmin, \
+rmax}.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 

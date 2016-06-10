@@ -62,13 +62,13 @@ Cell[BoxData[GridBox[{
         RowBox[{"sim", ",", " ", "var", ",", " ", "dims"}], "TI"], "]"}]], 
       "InlineFormula"],
      "\[LineSeparator]reads variable var from sim and returns it as a \
-DataRegion object.  dims is a list of the dimensions to read, and these \
-dimensions must correspond to available output.  Dimensions in dims can be \
-given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, 2, \
-3).  The order of dims is not important.  Optional arguments: Map -> \
-Automatic | mapnum specifies the map for multipatch data files, \
-StripGhostZones -> True|False determines whether the ghost zones are removed \
-from the variable before it is returned."
+DataRegion object. dims is a list of the dimensions to read, and these \
+dimensions must correspond to available output. Dimensions in dims can be \
+given either as coordinate names (x, y, z) or as numbers (1, 2, 3).  The \
+order of dims is not important.  Optional arguments: Map -> Automatic | \
+mapnum specifies the map for multipatch data files, StripGhostZones -> \
+True|False determines whether the ghost zones are removed from the variable \
+before it is returned."
     }]]}
   }]], "Usage"],
 
@@ -129,6 +129,8 @@ either in the simulation directory or one level down.\
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "FileName", "Automatic", Cell[
+    "The name of the file where the grid function is stored.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
     "The iteration to read from.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell[
@@ -148,8 +150,10 @@ Cell[BoxData[GridBox[{
  GridBoxOptions->{
  GridBoxBackground->{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
-   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
+   "Rows" -> {None, None, None, None, None, None, {None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{
+  "Rows" -> {{True, True, True, True, True, True, True, True}}}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -213,7 +217,7 @@ Cell["ReadGridFunction[\"bbh\", \"phi\",\"xy\"]", "Input",
 
 Cell[BoxData[
  RowBox[{"DataRegion", "[", 
-  RowBox[{"\<\"ML_BSSN::phi\.01\"\>", ",", 
+  RowBox[{"\<\"ML_BSSN::phi\"\>", ",", 
    InterpretationBox[
     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "66", 
      "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "125", 
@@ -374,13 +378,13 @@ TaggingRules->{
     "language" -> "en", "paclet" -> "SimulationTools`GridFunctions", "status" -> 
     "None", "summary" -> 
     "ReadGridFunction[sim, var, dims] reads variable var from sim and returns \
-it as a DataRegion object.  dims is a list of the dimensions to read, and \
-these dimensions must correspond to available output.  Dimensions in dims can \
-be given either as coordinate names (\"x\", \"y\", \"z\") or as numbers (1, \
-2, 3).  The order of dims is not important.  Optional arguments: Map -> \
-Automatic | mapnum specifies the map for multipatch data files, \
-StripGhostZones -> True|False determines whether the ghost zones are removed \
-from the variable before it is returned.", 
+it as a DataRegion object. dims is a list of the dimensions to read, and \
+these dimensions must correspond to available output. Dimensions in dims can \
+be given either as coordinate names (x, y, z) or as numbers (1, 2, 3).  The \
+order of dims is not important.  Optional arguments: Map -> Automatic | \
+mapnum specifies the map for multipatch data files, StripGhostZones -> \
+True|False determines whether the ghost zones are removed from the variable \
+before it is returned.", 
     "synonyms" -> {
      "ReadGridFunction", "READGRIDFUNCTION", "readgridfunction"}, "title" -> 
     "ReadGridFunction", "windowTitle" -> "ReadGridFunction", "type" -> 

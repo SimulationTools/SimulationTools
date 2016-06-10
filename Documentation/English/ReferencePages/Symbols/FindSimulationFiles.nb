@@ -179,26 +179,26 @@ Cell["FindSimulationFiles[\"bbh\",\"*.h5\"]", "Input",
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/\
+  RowBox[{"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
 Data/Simulations/bbh/output-0000/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
-   ",", "\<\"/Users/ian/Library/Mathematica/Applications/SimulationTools/Data/\
-Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0000/bbh/phi.xy.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/mp_psi4.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_0.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.file_1.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.x.h5\"\>", 
+   ",", "\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/\
+Data/Simulations/bbh/output-0001/bbh/phi.xy.h5\"\>"}], "}"}]], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

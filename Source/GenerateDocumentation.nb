@@ -196,30 +196,11 @@ Cell[BoxData["\<\"Phase\"\>"], "Print"],
 
 Cell[BoxData["\<\"Resampled\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {InterpolationOrder} do not match actual \
-options {InterpolationOrder} for Resampled\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"SameGridQ\"\>"], "Print"],
 
 Cell[BoxData["\<\"Shifted\"\>"], "Print"],
 
 Cell[BoxData["\<\"Slab\"\>"], "Print"],
-
-Cell[BoxData["\<\"ToList\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"d\"\>", "}"}]}],
-  SequenceForm["Removing ", {"d"}],
-  Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToListOfCoordinates\"\>"], "Print"],
 
@@ -245,8 +226,9 @@ Cell[BoxData["\<\"WithResampling\"\>"], "Print"],
 Cell[BoxData["\<\"AntiDerivative\"\>"], "Print"],
 
 Cell[BoxData[
- StyleBox["\<\"Documented options {InterpolationOrder} do not match actual \
-options {InterpolationOrder} for AntiDerivative\"\>",
+ StyleBox["\<\"Documented options {InterpolationOrder, \
+SimulationTools`DataTable`Private`UseInputGrid} do not match actual options \
+{InterpolationOrder, UseInputGrid} for AntiDerivative\"\>",
   StripOnInput->False,
   LineColor->RGBColor[1, 0, 0],
   FrontFaceColor->RGBColor[1, 0, 0],
@@ -336,16 +318,6 @@ Cell[BoxData["\<\"FindSimulationFiles\"\>"], "Print"],
 
 Cell[BoxData["\<\"SimulationNames\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {FullPath} \
-for SimulationNames\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadSimulationCoreCount\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadSimulationCost\"\>"], "Print"],
@@ -375,16 +347,6 @@ Cell[BoxData[
 Cell[BoxData["\<\"ReadSimulationSwapUsage\"\>"], "Print"],
 
 Cell[BoxData["\<\"AlignedPhases\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {Continuous} do not match actual options \
-{Continuous} for AlignedPhases\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -417,31 +379,7 @@ Cell[BoxData["\<\"ReadPsi4Radii\"\>"], "Print"],
 
 Cell[BoxData["\<\"ReadRadiallyExtrapolatedPsi4\"\>"], "Print"],
 
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {AbsPhase, \
-DiscretePhaseAlignmentTime, PerturbativeAdjustment, \
-RadialCoordinateTransformation, Radii, RadiusRange} for \
-ReadRadiallyExtrapolatedPsi4\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
-
 Cell[BoxData["\<\"ReadRadiallyExtrapolatedStrain\"\>"], "Print"],
-
-Cell[BoxData[
- StyleBox["\<\"Documented options {} do not match actual options {AbsPhase, \
-DiscretePhaseAlignmentTime, PerturbativeAdjustment, \
-RadialCoordinateTransformation, Radii, RadiusRange} for \
-ReadRadiallyExtrapolatedStrain\"\>",
-  StripOnInput->False,
-  LineColor->RGBColor[1, 0, 0],
-  FrontFaceColor->RGBColor[1, 0, 0],
-  BackFaceColor->RGBColor[1, 0, 0],
-  GraphicsColor->RGBColor[1, 0, 0],
-  FontColor->RGBColor[1, 0, 0]]], "Print"],
 
 Cell[BoxData["\<\"ReadWaveformCycles\"\>"], "Print"],
 
@@ -476,6 +414,18 @@ Cell[BoxData["\<\"$SimulationToolsVersionNumber\"\>"], "Print"],
 
 Cell[BoxData["\<\"Building guides\"\>"], "Print"],
 
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Creating \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"/Users/barry/Research/Code/SimulationTools/Documentation/English/Guides\"\
+\>"}],
+  SequenceForm[
+  "Creating ", 
+   "/Users/barry/Research/Code/SimulationTools/Documentation/English/Guides"],
+  
+  Editable->False]], "Print"],
+
 Cell[BoxData["\<\"Building tutorials\"\>"], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/AdvancedAnalysis.md\"\
@@ -508,15 +458,15 @@ Cell[BoxData[
     RowBox[{"\<\"path1\"\>", ",", "\<\"path2\"\>", ",", "\<\"phi\"\>", 
      ",", "\<\"pos\"\>", ",", "\<\"r\"\>", ",", "\<\"result\"\>", 
      ",", "\<\"t\"\>", ",", "\<\"t$\"\>", ",", "\<\"x1\"\>", 
-     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$34856\"\>", 
+     ",", "\<\"x2\"\>", ",", "\<\"xFn\"\>", ",", "\<\"xFn$16255\"\>", 
      ",", "\<\"y1\"\>", ",", "\<\"y2\"\>", ",", "\<\"yFn\"\>", 
-     ",", "\<\"yFn$34856\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
-     ",", "\<\"zFn\"\>", ",", "\<\"zFn$34856\"\>"}], "}"}]}],
+     ",", "\<\"yFn$16255\"\>", ",", "\<\"z1\"\>", ",", "\<\"z2\"\>", 
+     ",", "\<\"zFn\"\>", ",", "\<\"zFn$16255\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
    "path1", "path2", "phi", "pos", "r", "result", "t", "t$", "x1", "x2", 
-    "xFn", "xFn$34856", "y1", "y2", "yFn", "yFn$34856", "z1", "z2", "zFn", 
-    "zFn$34856"}],
+    "xFn", "xFn$16255", "y1", "y2", "yFn", "yFn$16255", "z1", "z2", "zFn", 
+    "zFn$16255"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Source/Documentation/English/Tutorials/BlackHoles.md\"\>"], \
@@ -695,15 +645,17 @@ Cell[BoxData[
     RowBox[{"\<\"extrapolationorder\"\>", ",", "\<\"file\"\>", 
      ",", "\<\"hFFI\"\>", ",", "\<\"hTD\"\>", ",", "\<\"h\[Infinity]\"\>", 
      ",", "\<\"l\"\>", ",", "\<\"m\"\>", ",", "\<\"r\"\>", 
-     ",", "\<\"result\"\>", ",", "\<\"\[Psi]4\"\>", 
+     ",", "\<\"result\"\>", ",", "\<\"x129\"\>", ",", "\<\"x129$\"\>", 
+     ",", "\<\"x132\"\>", ",", "\<\"x132$\"\>", ",", "\<\"\[Psi]4\"\>", 
      ",", "\<\"\[Psi]4r100\"\>", ",", "\<\"\[Psi]4r30\"\>", 
      ",", "\<\"\[Psi]4r50\"\>", ",", "\<\"\[Psi]4r80\"\>", 
      ",", "\<\"\[Psi]4\[Infinity]\"\>", ",", "\<\"\[Omega]0\"\>"}], "}"}]}],
   SequenceForm[
   "Removing ", {
    "extrapolationorder", "file", "hFFI", "hTD", "h\[Infinity]", "l", "m", "r",
-     "result", "\[Psi]4", "\[Psi]4r100", "\[Psi]4r30", "\[Psi]4r50", 
-    "\[Psi]4r80", "\[Psi]4\[Infinity]", "\[Omega]0"}],
+     "result", "x129", "x129$", "x132", "x132$", "\[Psi]4", "\[Psi]4r100", 
+    "\[Psi]4r30", "\[Psi]4r50", "\[Psi]4r80", "\[Psi]4\[Infinity]", 
+    "\[Omega]0"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"Changing FrontEnd version to 8.0\"\>"], "Print"],
@@ -821,7 +773,23 @@ Cell[BoxData[
   RowBox[{"\<\"  Exporting \"\>", 
    "\[InvisibleSpace]", "\<\"Waveforms.nb\"\>"}],
   SequenceForm["  Exporting ", "Waveforms.nb"],
-  Editable->False]], "Print"],
+  Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"DeleteFile", "::", "fdnfnd"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Directory or file \
+\[NoBreak]\\!\\(\\*RowBox[{\\\"\\\\\\\"/Users/barry/Library/Mathematica/\
+Applications/SimulationTools/Source/HTMLDoc/Documentation/English/Tutorials/\
+tutorial.css\\\\\\\"\\\"}]\\)\[NoBreak] not found. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/DeleteFile\\\", ButtonNote -> \
+\\\"DeleteFile::fdnfnd\\\"]\\)\"\>"}]], "Message", "MSG"],
+
+Cell[CellGroupData[{
 
 Cell[BoxData["\<\"Exporting tutorial index\"\>"], "Print"],
 
@@ -856,78 +824,74 @@ Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Global`* contains \"\>", "\[InvisibleSpace]", 
    RowBox[{"{", 
-    RowBox[{"\<\"appSymbols\"\>", ",", "\<\"appSymbols$8906\"\>", 
+    RowBox[{"\<\"appSymbols\"\>", ",", "\<\"appSymbols$3432\"\>", 
      ",", "\<\"AutoQuoteCharacters\"\>", ",", "\<\"BackFaceColor\"\>", 
      ",", "\<\"BackFaceGlowColor\"\>", ",", "\<\"BackFaceOpacity\"\>", 
      ",", "\<\"BackFaceSpecularColor\"\>", 
      ",", "\<\"BackFaceSpecularExponent\"\>", ",", "\<\"Beveled\"\>", 
-     ",", "\<\"CellInsertionPointCell\"\>", 
-     ",", "\<\"CodeAssistMenuBorderColor\"\>", 
-     ",", "\<\"CodeAssistOptions\"\>", ",", "\<\"collect\"\>", 
-     ",", "\<\"content\"\>", ",", "\<\"content$\"\>", 
-     ",", "\<\"CreateCellID\"\>", ",", "\<\"dest\"\>", 
-     ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$8906\"\>", 
+     ",", "\<\"CellInsertionPointCell\"\>", ",", "\<\"CellLabelStyle\"\>", 
+     ",", "\<\"CodeAssistMenuBorderColor\"\>", ",", "\<\"collect\"\>", 
+     ",", "\<\"content\"\>", ",", "\<\"content$\"\>", ",", "\<\"dest\"\>", 
+     ",", "\<\"destGuides\"\>", ",", "\<\"destGuides$3432\"\>", 
      ",", "\<\"destName\"\>", ",", "\<\"destName$\"\>", ",", "\<\"dest$\"\>", 
-     ",", "\<\"dest$67650\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
-     ",", "\<\"doc\"\>", ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>", 
-     ",", "\<\"docDir$67650\"\>", ",", "\<\"docFiles\"\>", 
-     ",", "\<\"docLink\"\>", ",", "\<\"docLink$8906\"\>", 
-     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$8906\"\>", 
+     ",", "\<\"dest$44033\"\>", ",", "\<\"diff\"\>", ",", "\<\"diff$\"\>", 
+     ",", "\<\"docDir\"\>", ",", "\<\"docDir$\"\>", 
+     ",", "\<\"docDir$44033\"\>", ",", "\<\"docFiles\"\>", 
+     ",", "\<\"docLink\"\>", ",", "\<\"docLink$3432\"\>", 
+     ",", "\<\"docPackage\"\>", ",", "\<\"docPackage$3432\"\>", 
      ",", "\<\"docRoot\"\>", ",", "\<\"docSymbols\"\>", 
-     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$832351\"\>", 
-     ",", "\<\"doc$\"\>", ",", "\<\"DrawBackFaces\"\>", 
-     ",", "\<\"exportGuides\"\>", ",", "\<\"exportGuides$\"\>", 
-     ",", "\<\"exportGuides$67650\"\>", ",", "\<\"exportNotebook\"\>", 
-     ",", "\<\"exportNotebook$\"\>", ",", "\<\"exportNotebook$67650\"\>", 
-     ",", "\<\"exportSymbols\"\>", ",", "\<\"exportSymbols$\"\>", 
-     ",", "\<\"exportSymbols$67650\"\>", ",", "\<\"exportTutorials\"\>", 
-     ",", "\<\"exportTutorials$\"\>", ",", "\<\"exportTutorials$67650\"\>", 
-     ",", "\<\"fixupVersion\"\>", ",", "\<\"formatType\"\>", 
-     ",", "\<\"from\"\>", ",", "\<\"from$\"\>", 
+     ",", "\<\"docSymbols$\"\>", ",", "\<\"docSymbols$920412\"\>", 
+     ",", "\<\"DrawBackFaces\"\>", ",", "\<\"exportGuides\"\>", 
+     ",", "\<\"exportGuides$\"\>", ",", "\<\"exportGuides$44033\"\>", 
+     ",", "\<\"exportNotebook\"\>", ",", "\<\"exportNotebook$\"\>", 
+     ",", "\<\"exportNotebook$44033\"\>", ",", "\<\"exportSymbols\"\>", 
+     ",", "\<\"exportSymbols$\"\>", ",", "\<\"exportSymbols$44033\"\>", 
+     ",", "\<\"exportTutorials\"\>", ",", "\<\"exportTutorials$\"\>", 
+     ",", "\<\"exportTutorials$44033\"\>", ",", "\<\"fixupVersion\"\>", 
+     ",", "\<\"formatType\"\>", ",", "\<\"from\"\>", ",", "\<\"from$\"\>", 
      ",", "\<\"FrontFaceGlowColor\"\>", ",", "\<\"FrontFaceSpecularColor\"\>",
       ",", "\<\"FrontFaceSpecularExponent\"\>", ",", "\<\"g\"\>", 
      ",", "\<\"GenerateAnnotationDialog\"\>", 
      ",", "\<\"GeneratedCellStyles\"\>", ",", "\<\"GenerateDocumentation\"\>",
       ",", "\<\"generateHTMLDocumentation\"\>", 
-     ",", "\<\"generateHTMLDocumentation$8906\"\>", 
+     ",", "\<\"generateHTMLDocumentation$3432\"\>", 
      ",", "\<\"GhostCellInEmptyNotebook\"\>", ",", "\<\"GreekStyle\"\>", 
      ",", "\<\"GroupOpenerColor\"\>", ",", "\<\"GroupOpenerInsideFrame\"\>", 
-     ",", "\<\"GroupTogetherGrouping\"\>", ",", "\<\"guideNames\"\>", 
-     ",", "\<\"guideNames$\"\>", ",", "\<\"HistoryData\"\>", 
-     ",", "\<\"ImageEditMode\"\>", ",", "\<\"KeyEvent\"\>", 
-     ",", "\<\"LineHeight\"\>", ",", "\<\"LowerCaseStyle\"\>", 
-     ",", "\<\"MenuAnchor\"\>", ",", "\<\"Modifiers\"\>", ",", "\<\"n2\"\>", 
-     ",", "\<\"n2$\"\>", ",", "\<\"n3\"\>", ",", "\<\"n3$\"\>", 
-     ",", "\<\"nb\"\>", ",", "\<\"nbf\"\>", ",", "\<\"nbfile\"\>", 
-     ",", "\<\"nbfile$\"\>", ",", "\<\"nbf$\"\>", ",", "\<\"nb$\"\>", 
-     ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", ",", "\<\"nn$\"\>", 
-     ",", "\<\"notebooks\"\>", ",", "\<\"package\"\>", 
+     ",", "\<\"guideNames\"\>", ",", "\<\"guideNames$\"\>", 
+     ",", "\<\"HistoryData\"\>", ",", "\<\"ImageEditMode\"\>", 
+     ",", "\<\"KeyEvent\"\>", ",", "\<\"LineHeight\"\>", 
+     ",", "\<\"LowerCaseStyle\"\>", ",", "\<\"Modifiers\"\>", 
+     ",", "\<\"n2\"\>", ",", "\<\"n2$\"\>", ",", "\<\"n3\"\>", 
+     ",", "\<\"n3$\"\>", ",", "\<\"nb\"\>", ",", "\<\"nbf\"\>", 
+     ",", "\<\"nbfile\"\>", ",", "\<\"nbfile$\"\>", ",", "\<\"nbf$\"\>", 
+     ",", "\<\"nb$\"\>", ",", "\<\"newSyms\"\>", ",", "\<\"nn\"\>", 
+     ",", "\<\"nn$\"\>", ",", "\<\"notebooks\"\>", ",", "\<\"package\"\>", 
      ",", "\<\"package100\"\>", ",", "\<\"package101\"\>", 
      ",", "\<\"package102\"\>", ",", "\<\"package103\"\>", 
      ",", "\<\"package104\"\>", ",", "\<\"package105\"\>", 
      ",", "\<\"package106\"\>", ",", "\<\"package107\"\>", 
-     ",", "\<\"package108\"\>", ",", "\<\"package94\"\>", 
+     ",", "\<\"package93\"\>", ",", "\<\"package94\"\>", 
      ",", "\<\"package95\"\>", ",", "\<\"package96\"\>", 
      ",", "\<\"package97\"\>", ",", "\<\"package98\"\>", 
      ",", "\<\"package99\"\>", ",", "\<\"packages\"\>", 
-     ",", "\<\"packageSymbols\"\>", ",", "\<\"packageSymbols$8906\"\>", 
-     ",", "\<\"packages$8906\"\>", ",", "\<\"package$\"\>", 
+     ",", "\<\"packageSymbols\"\>", ",", "\<\"packageSymbols$3432\"\>", 
+     ",", "\<\"packages$3432\"\>", ",", "\<\"package$\"\>", 
      ",", "\<\"paclet\"\>", ",", "\<\"paclet$\"\>", 
      ",", "\<\"PasteAutoQuoteCharacters\"\>", ",", "\<\"ps\"\>", 
-     ",", "\<\"RawInputForm\"\>", ",", "\<\"ReturnCreatesNewCell\"\>", 
-     ",", "\<\"s\"\>", ",", "\<\"s2\"\>", ",", "\<\"sections\"\>", 
-     ",", "\<\"sections2\"\>", ",", "\<\"Shift\"\>", 
-     ",", "\<\"ShowCodeAssist\"\>", ",", "\<\"skipTargetQ\"\>", 
-     ",", "\<\"source10\"\>", ",", "\<\"source109\"\>", 
-     ",", "\<\"source11\"\>", ",", "\<\"source110\"\>", 
-     ",", "\<\"source111\"\>", ",", "\<\"source112\"\>", 
+     ",", "\<\"ReturnCreatesNewCell\"\>", ",", "\<\"s\"\>", ",", "\<\"s2\"\>",
+      ",", "\<\"sections\"\>", ",", "\<\"sections2\"\>", ",", "\<\"Shift\"\>",
+      ",", "\<\"ShowAutoConvert\"\>", ",", "\<\"ShowCodeAssist\"\>", 
+     ",", "\<\"ShowMissingStyles\"\>", ",", "\<\"skipTargetQ\"\>", 
+     ",", "\<\"source10\"\>", ",", "\<\"source108\"\>", 
+     ",", "\<\"source11\"\>", ",", "\<\"source112\"\>", 
      ",", "\<\"source113\"\>", ",", "\<\"source114\"\>", 
-     ",", "\<\"source115\"\>", ",", "\<\"source116\"\>", 
-     ",", "\<\"source117\"\>", ",", "\<\"source118\"\>", 
-     ",", "\<\"source119\"\>", ",", "\<\"source12\"\>", 
-     ",", "\<\"source120\"\>", ",", "\<\"source121\"\>", 
-     ",", "\<\"source122\"\>", ",", "\<\"source123\"\>", 
-     ",", "\<\"source124\"\>", ",", "\<\"source13\"\>", 
+     ",", "\<\"source115\"\>", ",", "\<\"source117\"\>", 
+     ",", "\<\"source118\"\>", ",", "\<\"source119\"\>", 
+     ",", "\<\"source12\"\>", ",", "\<\"source120\"\>", 
+     ",", "\<\"source121\"\>", ",", "\<\"source122\"\>", 
+     ",", "\<\"source124\"\>", ",", "\<\"source125\"\>", 
+     ",", "\<\"source126\"\>", ",", "\<\"source127\"\>", 
+     ",", "\<\"source128\"\>", ",", "\<\"source13\"\>", 
      ",", "\<\"source14\"\>", ",", "\<\"source15\"\>", 
      ",", "\<\"source16\"\>", ",", "\<\"source17\"\>", 
      ",", "\<\"source18\"\>", ",", "\<\"source19\"\>", 
@@ -967,82 +931,84 @@ Cell[BoxData[
      ",", "\<\"source86\"\>", ",", "\<\"source87\"\>", 
      ",", "\<\"source88\"\>", ",", "\<\"source89\"\>", ",", "\<\"source9\"\>",
       ",", "\<\"source90\"\>", ",", "\<\"source91\"\>", 
-     ",", "\<\"source92\"\>", ",", "\<\"source93\"\>", 
-     ",", "\<\"sourceGuides\"\>", ",", "\<\"sourceGuides$8906\"\>", 
-     ",", "\<\"src\"\>", ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
-     ",", "\<\"srcDir$832351\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
-     ",", "\<\"ss$\"\>", ",", "\<\"StripStyleOnPaste\"\>", 
-     ",", "\<\"subPath\"\>", ",", "\<\"symbols\"\>", 
-     ",", "\<\"symbolsSrcDir\"\>", ",", "\<\"symbolsSrcDir$\"\>", 
-     ",", "\<\"symbolsSrcDir$832351\"\>", ",", "\<\"symbols$\"\>", 
-     ",", "\<\"s$\"\>", ",", "\<\"TrackCellChangeTimes\"\>", 
+     ",", "\<\"source92\"\>", ",", "\<\"sourceGuides\"\>", 
+     ",", "\<\"sourceGuides$3432\"\>", ",", "\<\"src\"\>", 
+     ",", "\<\"srcDir\"\>", ",", "\<\"srcDir$\"\>", 
+     ",", "\<\"srcDir$920412\"\>", ",", "\<\"src$\"\>", ",", "\<\"ss\"\>", 
+     ",", "\<\"StripStyleOnPaste\"\>", ",", "\<\"subPath\"\>", 
+     ",", "\<\"symbols\"\>", ",", "\<\"symbolsSrcDir\"\>", 
+     ",", "\<\"symbolsSrcDir$\"\>", ",", "\<\"symbolsSrcDir$920412\"\>", 
+     ",", "\<\"symbols$\"\>", ",", "\<\"s$\"\>", 
+     ",", "\<\"TrackCellChangeTimes\"\>", ",", "\<\"TrapEnterKey\"\>", 
      ",", "\<\"tutorialDest\"\>", ",", "\<\"tutorialDest$\"\>", 
      ",", "\<\"tutorialHTMLNames\"\>", ",", "\<\"tutorialHTMLNames$\"\>", 
      ",", "\<\"tutorials\"\>", ",", "\<\"tutorialSources\"\>", 
-     ",", "\<\"tutorialSources$8906\"\>", ",", "\<\"tutorials$\"\>", 
+     ",", "\<\"tutorialSources$3432\"\>", ",", "\<\"tutorials$\"\>", 
      ",", "\<\"tutorialTitles\"\>", ",", "\<\"tutorialTitles$\"\>", 
      ",", "\<\"undocumentedSymbols\"\>", 
-     ",", "\<\"undocumentedSymbols$8906\"\>", ",", "\<\"url\"\>", 
-     ",", "\<\"url$\"\>", ",", "\<\"$HTMLDestination\"\>", 
-     ",", "\<\"$PackageSymbols\"\>"}], "}"}]}],
+     ",", "\<\"undocumentedSymbols$3432\"\>", ",", "\<\"url\"\>", 
+     ",", "\<\"url$\"\>", ",", "\<\"$BestFit\"\>", ",", "\<\"$FitHistory\"\>",
+      ",", "\<\"$FitStatusPlot\"\>", ",", "\<\"$HTMLDestination\"\>", 
+     ",", "\<\"$PackageSymbols\"\>", ",", "\<\"$status\"\>"}], "}"}]}],
   SequenceForm[
   "Global`* contains ", {
-   "appSymbols", "appSymbols$8906", "AutoQuoteCharacters", "BackFaceColor", 
+   "appSymbols", "appSymbols$3432", "AutoQuoteCharacters", "BackFaceColor", 
     "BackFaceGlowColor", "BackFaceOpacity", "BackFaceSpecularColor", 
     "BackFaceSpecularExponent", "Beveled", "CellInsertionPointCell", 
-    "CodeAssistMenuBorderColor", "CodeAssistOptions", "collect", "content", 
-    "content$", "CreateCellID", "dest", "destGuides", "destGuides$8906", 
-    "destName", "destName$", "dest$", "dest$67650", "diff", "diff$", "doc", 
-    "docDir", "docDir$", "docDir$67650", "docFiles", "docLink", 
-    "docLink$8906", "docPackage", "docPackage$8906", "docRoot", "docSymbols", 
-    "docSymbols$", "docSymbols$832351", "doc$", "DrawBackFaces", 
-    "exportGuides", "exportGuides$", "exportGuides$67650", "exportNotebook", 
-    "exportNotebook$", "exportNotebook$67650", "exportSymbols", 
-    "exportSymbols$", "exportSymbols$67650", "exportTutorials", 
-    "exportTutorials$", "exportTutorials$67650", "fixupVersion", "formatType",
-     "from", "from$", "FrontFaceGlowColor", "FrontFaceSpecularColor", 
+    "CellLabelStyle", "CodeAssistMenuBorderColor", "collect", "content", 
+    "content$", "dest", "destGuides", "destGuides$3432", "destName", 
+    "destName$", "dest$", "dest$44033", "diff", "diff$", "docDir", "docDir$", 
+    "docDir$44033", "docFiles", "docLink", "docLink$3432", "docPackage", 
+    "docPackage$3432", "docRoot", "docSymbols", "docSymbols$", 
+    "docSymbols$920412", "DrawBackFaces", "exportGuides", "exportGuides$", 
+    "exportGuides$44033", "exportNotebook", "exportNotebook$", 
+    "exportNotebook$44033", "exportSymbols", "exportSymbols$", 
+    "exportSymbols$44033", "exportTutorials", "exportTutorials$", 
+    "exportTutorials$44033", "fixupVersion", "formatType", "from", "from$", 
+    "FrontFaceGlowColor", "FrontFaceSpecularColor", 
     "FrontFaceSpecularExponent", "g", "GenerateAnnotationDialog", 
     "GeneratedCellStyles", "GenerateDocumentation", 
-    "generateHTMLDocumentation", "generateHTMLDocumentation$8906", 
+    "generateHTMLDocumentation", "generateHTMLDocumentation$3432", 
     "GhostCellInEmptyNotebook", "GreekStyle", "GroupOpenerColor", 
-    "GroupOpenerInsideFrame", "GroupTogetherGrouping", "guideNames", 
-    "guideNames$", "HistoryData", "ImageEditMode", "KeyEvent", "LineHeight", 
-    "LowerCaseStyle", "MenuAnchor", "Modifiers", "n2", "n2$", "n3", "n3$", 
-    "nb", "nbf", "nbfile", "nbfile$", "nbf$", "nb$", "newSyms", "nn", "nn$", 
-    "notebooks", "package", "package100", "package101", "package102", 
-    "package103", "package104", "package105", "package106", "package107", 
-    "package108", "package94", "package95", "package96", "package97", 
-    "package98", "package99", "packages", "packageSymbols", 
-    "packageSymbols$8906", "packages$8906", "package$", "paclet", "paclet$", 
-    "PasteAutoQuoteCharacters", "ps", "RawInputForm", "ReturnCreatesNewCell", 
-    "s", "s2", "sections", "sections2", "Shift", "ShowCodeAssist", 
-    "skipTargetQ", "source10", "source109", "source11", "source110", 
-    "source111", "source112", "source113", "source114", "source115", 
-    "source116", "source117", "source118", "source119", "source12", 
-    "source120", "source121", "source122", "source123", "source124", 
-    "source13", "source14", "source15", "source16", "source17", "source18", 
-    "source19", "source20", "source21", "source22", "source23", "source24", 
-    "source25", "source26", "source27", "source28", "source29", "source3", 
-    "source30", "source31", "source32", "source33", "source34", "source35", 
-    "source36", "source37", "source38", "source39", "source4", "source40", 
-    "source41", "source42", "source43", "source44", "source45", "source46", 
-    "source47", "source48", "source49", "source5", "source50", "source51", 
-    "source52", "source53", "source54", "source55", "source56", "source57", 
-    "source58", "source59", "source6", "source60", "source61", "source62", 
-    "source63", "source64", "source65", "source66", "source67", "source68", 
-    "source69", "source7", "source70", "source71", "source72", "source73", 
-    "source74", "source75", "source76", "source77", "source78", "source79", 
-    "source8", "source80", "source81", "source82", "source83", "source84", 
-    "source85", "source86", "source87", "source88", "source89", "source9", 
-    "source90", "source91", "source92", "source93", "sourceGuides", 
-    "sourceGuides$8906", "src", "srcDir", "srcDir$", "srcDir$832351", "src$", 
-    "ss", "ss$", "StripStyleOnPaste", "subPath", "symbols", "symbolsSrcDir", 
-    "symbolsSrcDir$", "symbolsSrcDir$832351", "symbols$", "s$", 
-    "TrackCellChangeTimes", "tutorialDest", "tutorialDest$", 
-    "tutorialHTMLNames", "tutorialHTMLNames$", "tutorials", "tutorialSources",
-     "tutorialSources$8906", "tutorials$", "tutorialTitles", 
-    "tutorialTitles$", "undocumentedSymbols", "undocumentedSymbols$8906", 
-    "url", "url$", "$HTMLDestination", "$PackageSymbols"}],
+    "GroupOpenerInsideFrame", "guideNames", "guideNames$", "HistoryData", 
+    "ImageEditMode", "KeyEvent", "LineHeight", "LowerCaseStyle", "Modifiers", 
+    "n2", "n2$", "n3", "n3$", "nb", "nbf", "nbfile", "nbfile$", "nbf$", "nb$",
+     "newSyms", "nn", "nn$", "notebooks", "package", "package100", 
+    "package101", "package102", "package103", "package104", "package105", 
+    "package106", "package107", "package93", "package94", "package95", 
+    "package96", "package97", "package98", "package99", "packages", 
+    "packageSymbols", "packageSymbols$3432", "packages$3432", "package$", 
+    "paclet", "paclet$", "PasteAutoQuoteCharacters", "ps", 
+    "ReturnCreatesNewCell", "s", "s2", "sections", "sections2", "Shift", 
+    "ShowAutoConvert", "ShowCodeAssist", "ShowMissingStyles", "skipTargetQ", 
+    "source10", "source108", "source11", "source112", "source113", 
+    "source114", "source115", "source117", "source118", "source119", 
+    "source12", "source120", "source121", "source122", "source124", 
+    "source125", "source126", "source127", "source128", "source13", 
+    "source14", "source15", "source16", "source17", "source18", "source19", 
+    "source20", "source21", "source22", "source23", "source24", "source25", 
+    "source26", "source27", "source28", "source29", "source3", "source30", 
+    "source31", "source32", "source33", "source34", "source35", "source36", 
+    "source37", "source38", "source39", "source4", "source40", "source41", 
+    "source42", "source43", "source44", "source45", "source46", "source47", 
+    "source48", "source49", "source5", "source50", "source51", "source52", 
+    "source53", "source54", "source55", "source56", "source57", "source58", 
+    "source59", "source6", "source60", "source61", "source62", "source63", 
+    "source64", "source65", "source66", "source67", "source68", "source69", 
+    "source7", "source70", "source71", "source72", "source73", "source74", 
+    "source75", "source76", "source77", "source78", "source79", "source8", 
+    "source80", "source81", "source82", "source83", "source84", "source85", 
+    "source86", "source87", "source88", "source89", "source9", "source90", 
+    "source91", "source92", "sourceGuides", "sourceGuides$3432", "src", 
+    "srcDir", "srcDir$", "srcDir$920412", "src$", "ss", "StripStyleOnPaste", 
+    "subPath", "symbols", "symbolsSrcDir", "symbolsSrcDir$", 
+    "symbolsSrcDir$920412", "symbols$", "s$", "TrackCellChangeTimes", 
+    "TrapEnterKey", "tutorialDest", "tutorialDest$", "tutorialHTMLNames", 
+    "tutorialHTMLNames$", "tutorials", "tutorialSources", 
+    "tutorialSources$3432", "tutorials$", "tutorialTitles", "tutorialTitles$",
+     "undocumentedSymbols", "undocumentedSymbols$3432", "url", "url$", 
+    "$BestFit", "$FitHistory", "$FitStatusPlot", "$HTMLDestination", 
+    "$PackageSymbols", "$status"}],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ConvergenceMultiplier\"\>"], "Print"],
@@ -1518,27 +1484,6 @@ HTMLDoc/Documentation/English/ReferencePages/Symbols/Slab.xml\"\>"}],
   "Writing ", 
    "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
 HTMLDoc/Documentation/English/ReferencePages/Symbols/Slab.xml"],
-  Editable->False]], "Print"],
-
-Cell[BoxData["\<\"ToList\"\>"], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Removing \"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "\<\"d\"\>", "}"}]}],
-  SequenceForm["Removing ", {"d"}],
-  Editable->False]], "Print"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Writing \"\>", 
-   "\[InvisibleSpace]", \
-"\<\"/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/Documentation/English/ReferencePages/Symbols/ToList.xml\"\>"}],
-  SequenceForm[
-  "Writing ", 
-   "/Users/barry/Library/Mathematica/Applications/SimulationTools/Source/\
-HTMLDoc/Documentation/English/ReferencePages/Symbols/ToList.xml"],
   Editable->False]], "Print"],
 
 Cell[BoxData["\<\"ToListOfCoordinates\"\>"], "Print"],
@@ -2524,9 +2469,7 @@ Cell[BoxData["\<\"Done\"\>"], "Print"]
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{
-  "455.92092600000000857107806950807571411133`8.67948943932182", ",", 
-   "Null"}], "}"}]], "Output"]
+  RowBox[{"460.794198`", ",", "Null"}], "}"}]], "Output"]
 }, Open  ]]
 },
 WindowSize->{740, 756},
@@ -2534,8 +2477,8 @@ WindowMargins->{{Automatic, 231}, {Automatic, 10}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 ShowSelection->True,
 TrackCellChangeTimes->False,
-FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
-2013)",
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
 StyleDefinitions->"Default.nb"
 ]
 

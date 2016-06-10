@@ -164,7 +164,7 @@ Cell[CellGroupData[{
 Cell["ReadADMMass[\"bbh\"]", "Input",
  CellLabel->"In[1]:="],
 
-Cell[BoxData["0.984746`"], "Output",
+Cell[BoxData["0.9847455467406162066`18.99332402550012"], "Output",
  CellLabel->"Out[1]:= "]
 }, Open  ]]
 }, Open  ]]

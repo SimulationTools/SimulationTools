@@ -400,7 +400,7 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{"DataRegion", "[", 
-  RowBox[{"\<\"ML_BSSN::phi\.01\"\>", ",", 
+  RowBox[{"\<\"ML_BSSN::phi\"\>", ",", 
    InterpretationBox[
     RowBox[{"\<\"<\"\>", "\[InvisibleSpace]", "47", 
      "\[InvisibleSpace]", "\<\",\"\>", "\[InvisibleSpace]", "87", 
@@ -1077,6 +1077,10 @@ AbG6KYQ=
   Frame->Automatic,
   FrameLabel->{None, None},
   FrameTicks->{{None, None}, {None, None}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, "DefaultPlotStyle" -> Automatic},
   PlotRangeClipping->True]], "Output",
  CellLabel->"Out[6]="]
 }, Open  ]]

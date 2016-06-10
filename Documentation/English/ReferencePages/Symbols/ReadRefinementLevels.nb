@@ -125,6 +125,8 @@ either in the simulation directory or one level down.\
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], "FileName", "Automatic", Cell[
+    "The name of the file where the grid function is stored.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Iteration", "Automatic", Cell[
     "The iteration to read from.", "TableText"]},
    {Cell["      ", "TableRowIcon"], "Map", "Automatic", Cell[
@@ -142,8 +144,8 @@ Cell[BoxData[GridBox[{
  GridBoxOptions->{
  GridBoxBackground->{
   "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
-   "Rows" -> {None, None, None, None, {None}}, "RowsIndexed" -> {}},
- GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True}}}}]
+   "Rows" -> {None, None, None, None, None, {None}}, "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True, True, True, True}}}}]
 }, Open  ]]
 }, Open  ]],
 

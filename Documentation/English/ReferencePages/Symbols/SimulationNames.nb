@@ -85,7 +85,10 @@ Cell["", "NotesSection",
 Cell["The following options can be given: ", "Notes"],
 
 Cell[BoxData[GridBox[{
-   {Cell["      ", "TableRowIcon"], "FullPath", "False", Cell["", "TableText"]}
+   {Cell["      ", "TableRowIcon"], "FullPath", "False", Cell["\<\
+Whether to return the full path to the simulation directory or just the name \
+of the simulation.\
+\>", "TableText"]}
   },
   GridBoxAlignment->{
    "Columns" -> {Left, Left, {Left}}, "ColumnsIndexed" -> {}, 
