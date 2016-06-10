@@ -260,6 +260,10 @@ AngularMomentumFlux[psi4Reader_, 3, r_, lMax_] :=
 AngularMomentumFluxZ[hReader_, lMax_, r_] :=
   1/(16 Pi) Im[Sum[m r^2 With[{h=hReader[l,m]}, h Conjugate[NDerivative[1][h]]],{l,2,lMax},{m,-l,l}]];
 
+AngularMomentumFluxZ[hReader_, {l_,m_}, r_] :=
+  1/(16 Pi) Im[m r^2 With[{h=hReader[l,m]}, h Conjugate[NDerivative[1][h]]]];
+
+
 (************************************************************************************)
 (* Energy *)
 (************************************************************************************)
