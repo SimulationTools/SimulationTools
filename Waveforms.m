@@ -105,6 +105,7 @@ ToSchwarzschildRetardedTime;
 ReadWaveExtractRadii;
 ReadStrainCPMHDF5;
 ReadStrainCPMHDF5Direct;
+ReadStrain;
 
 $UniformGridExtrapolation;
 ffiDataTable;
@@ -1001,6 +1002,11 @@ ReadStrainWaveExtract[sim_String, l_, m_, r_] :=
     UseInputGrid -> True];
   (*This -1 seems necessary to make it agree with int int psi4 *)
   -1/(Sqrt[2] r) (QEvenRe + I QEvenIm - I intQOdd )];
+
+(* Generic interface to reading strain data from a simulation.
+   Currently only supports WaveExtractCPM HDF5 format. *)
+ReadStrain[sim_String, l_, m_, r_] :=
+  ReadStrainCPMHDF5Direct[sim, l, m, r];
 
 ReadSchwarzschildRadius[sim_String, r_] :=
  Module[{},
