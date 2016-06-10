@@ -950,14 +950,20 @@ readHDF5Table[sim_String, file_String, dataset_String] :=
     data = MergeFiles[dataSegments]];
 
 ReadStrainCPMHDF5[sim_String, l_, m_, r_] :=
- Module[{components, psiEvenRe, psiEvenIm, psiOddRe, psiOddIm},
+  Module[{components, psiEvenRe, psiEvenIm, psiOddRe, psiOddIm, data,filename},
+    filename = If[FindSimulationFiles[sim,"wavextractcpm.h5"] =!= {},
+      "wavextractcpm.h5",
+      "waveextractcpm.h5"];
+      
   components = 
-   Table["Psi_" <> x <> "_Detector_Radius_" <> ToString[r] <> 
-     ".00_l" <> ToString[l] <> "_m" <> ToString[m],
+   Table["Psi_" <> x <> "_Detector_Radius_" <> ToString[NumberForm[r,{Infinity,2}]] <> 
+     "_l" <> ToString[l] <> "_m" <> ToString[m],
      {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
-  {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
-   ToDataTable[readHDF5Table[sim, "wavextractcpm.h5", #]] & /@ components;
-
+   data = {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
+   Check[ToDataTable[readHDF5Table[sim, filename, #]],
+     Error["Failed to read dataset "<>#<>" from " <> filename <> " in simulation "<>sim],
+     {h5mma::mlink}] & /@ components;
+   
   (* TODO: This -1/4 seems necessary to make it agree with int int psi4 *)
   -1/4 1/(2 r) Sqrt[
     Factorial[l + 2]/Factorial[l - 2]] (psiEvenRe + I psiEvenIm + 
