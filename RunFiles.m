@@ -44,6 +44,9 @@ LeafNamesOnly;
 (* Old names *)
 FindRunFiles = FindSimulationFiles;
 
+(* Experimental *)
+DropSimulationPath;
+
 Begin["`Private`"];
 
 If[Head[FileNameJoin[{"a","b"}]] === FileNameJoin,
@@ -205,6 +208,17 @@ SimulationNames[form_, OptionsPattern[]] :=
 ];
 
 SimulationNames[OptionsPattern[]] := SimulationNames[Except["."] ~~ "*"]
+
+DropSimulationPath[sim_String, path: _List : $SimulationPath] :=
+ FileNameJoin[stripPath[FileNameSplit[sim], path]];
+
+stripPath[sim_List, paths_List] :=
+ If[Length[paths] >= 1,
+  With[{path = FileNameSplit@First[paths]},
+   If[Take[sim, Length[path]] === path,
+    Drop[sim, Length[path]],
+    stripPath[sim, Rest[paths]]]],
+  sim]
 
 End[];
 
