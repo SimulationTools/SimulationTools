@@ -106,6 +106,7 @@ ReadWaveExtractRadii;
 ReadStrainCPMHDF5;
 ReadStrainCPMHDF5Direct;
 ReadStrain;
+ReadStrainRadii;
 
 $UniformGridExtrapolation;
 ffiDataTable;
@@ -951,6 +952,13 @@ readHDF5Table[sim_String, file_String, dataset_String] :=
     dataSegments = Map[ReadHDF5[#,{"Datasets", dataset}] &, files];
     data = MergeFiles[dataSegments]];
 
+readHDF5Datasets[sim_String, file_String] :=
+  Module[{files,dataSegments,data},
+    files = FindSimulationFiles[sim, file];
+    If[files === {}, Error["File "<>file<>" not found in simulation "<>sim]];
+    dataSegments = Map[ReadHDF5[#,{"Datasets"}] &, files[[1;;1]]];
+    data = MergeFiles[dataSegments]];
+
 ReadStrainCPMHDF5[sim_String, l_, m_, r_] :=
   Module[{components, psiEvenRe, psiEvenIm, psiOddRe, psiOddIm, data,filename},
     filename = If[FindSimulationFiles[sim,"wavextractcpm.h5"] =!= {},
@@ -988,6 +996,12 @@ ReadStrainCPMHDF5Direct[sim_String, l_, m_, r_] :=
      {h5mma::mlink}] & /@ components;
    
     1/r(hRe + I hIm)];
+
+ReadStrainRadiiWaveExtractCPMHDF5[sim_String] :=
+  Module[{x, datasets},
+    datasets = readHDF5Datasets[sim, "waveextractcpm.h5"];
+    radii = Sort[(Union@@StringCases[datasets, "_Detector_Radius_" ~~ x : (NumberString|"inf") :> ToExpression@x])]];
+
 ReadStrainWaveExtract[sim_String, l_, m_, r_] :=
  Module[{components, QEvenRe, QEvenIm, QOddRe, QOddIm, intQOdd, Qs},
   components = 
@@ -1007,6 +1021,9 @@ ReadStrainWaveExtract[sim_String, l_, m_, r_] :=
    Currently only supports WaveExtractCPM HDF5 format. *)
 ReadStrain[sim_String, l_, m_, r_] :=
   ReadStrainCPMHDF5Direct[sim, l, m, r];
+
+ReadStrainRadii[sim_String] :=
+  ReadStrainRadiiWaveExtractCPMHDF5[sim];
 
 ReadSchwarzschildRadius[sim_String, r_] :=
  Module[{},
