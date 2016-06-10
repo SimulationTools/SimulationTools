@@ -1179,11 +1179,13 @@ PhaseOfFrequency[psi4_] :=
      Map[DepVar, IntersectDataTables[{freq1, phase1}]]]
   ];
 
-IntegrateDataTableZeroStart[d_DataTable] := 
-  IntegrateDataTable[d, {DataTableRange[d][[1]], 0}];
+Options[IntegrateDataTableZeroEnd] = Options[IntegrateDataTable];
+IntegrateDataTableZeroStart[d_DataTable, opts:OptionsPattern[]] :=
+  IntegrateDataTable[d, {DataTableRange[d][[1]], 0}, opts];
 
-IntegrateDataTableZeroEnd[d_DataTable] := 
-  IntegrateDataTable[d, {DataTableRange[d][[2]], 0}];
+Options[IntegrateDataTableZeroStart] = Options[IntegrateDataTable];
+IntegrateDataTableZeroEnd[d_DataTable, opts:OptionsPattern[]] :=
+  IntegrateDataTable[d, {DataTableRange[d][[2]], 0}, opts];
 
 MakeUniform[d_DataTable] :=
   ResampleDataTable[d, Spacing[d], 8];
