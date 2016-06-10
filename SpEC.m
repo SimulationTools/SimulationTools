@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`SpEC`",
    "SimulationTools`",
    "SimulationTools`ColumnFile`",
    "SimulationTools`ReadHDF5`",
+   "SimulationTools`RunFiles`",
    "SimulationTools`DataTable`",
    "SimulationTools`DataRepresentations`",
    "SimulationTools`Error`",
@@ -965,7 +966,7 @@ ReadSpECDampingTime[sim_String, i_Integer] :=
   ToDataTable[readSpECASCIIData[sim, "AdjustSubChunksToDampingTimes.dat", SeparateRingdown->True][[1]][[All,{1,4+i}]]];
 
 ReadSXSLevels[sim_String] :=
-  Sort[FileNames["Lev*", sim]];
+  DropSimulationPath/@Sort[FileNames["Lev*", FindSXSSimulation[sim]]];
 
 (****************************************************************)
 (* Profile *)
