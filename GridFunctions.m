@@ -105,6 +105,7 @@ Options[ReadGridFunction] = {
   };
 
 DocumentationBuilder`OptionDescriptions["ReadGridFunction"] = {
+    "FileName"        -> "The name of the file where the grid function is stored.",
     "Iteration"       -> "The iteration to read from.",
     "Map"             -> "The map to read from.",
     "RefinementLevel" -> "The refinement level to read from.",
@@ -150,25 +151,16 @@ fileUnion[fn_String, run_String, var_String, dims:DimsPattern, opts:OptionsPatte
                files]];
 
 Options[ReadIterations] = FilterRules[Options[ReadGridFunction], Except["Iteration"]];
-DocumentationBuilder`OptionDescriptions["ReadIterations"] = {
-    "Map"             -> "The map to read from.",
-    "RefinementLevel" -> "The refinement level to read from.",
-    "TimeLevel"       -> "The time level to read from.",
-    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
-    "Variable"        -> "The variable to read. This option is no longer used."
-  };
+DocumentationBuilder`OptionDescriptions["ReadIterations"] =
+  Cases[DocumentationBuilder`OptionDescriptions["ReadGridFunction"], Except["Iteration" -> _]];
+
 ReadIterations[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadIterations", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                           "Iteration" -> _]];
 
 Options[ReadMaps] = FilterRules[Options[ReadGridFunction], Except["Map"]];
-DocumentationBuilder`OptionDescriptions["ReadMaps"] = {
-    "Iteration"       -> "The iteration to read from.",
-    "RefinementLevel" -> "The refinement level to read from.",
-    "TimeLevel"       -> "The time level to read from.",
-    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
-    "Variable"        -> "The variable to read. This option is no longer used."
-  };
+DocumentationBuilder`OptionDescriptions["ReadMaps"] =
+  Cases[DocumentationBuilder`OptionDescriptions["ReadGridFunction"], Except["Map" -> _]];
 
 ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadMaps", run, var, parseDims[dims], 
@@ -176,26 +168,16 @@ ReadMaps[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
                    "Map" -> All]];
 
 Options[ReadRefinementLevels] = FilterRules[Options[ReadGridFunction], Except["RefinementLevel"]];
-DocumentationBuilder`OptionDescriptions["ReadRefinementLevels"] = {
-    "Iteration"       -> "The iteration to read from.",
-    "Map"             -> "The map to read from.",
-    "TimeLevel"       -> "The time level to read from.",
-    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
-    "Variable"        -> "The variable to read. This option is no longer used."
-  };
+DocumentationBuilder`OptionDescriptions["ReadRefinementLevels"] =
+  Cases[DocumentationBuilder`OptionDescriptions["ReadGridFunction"], Except["RefinementLevel" -> _]];
 
 ReadRefinementLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadRefinementLevels", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],
                                                                 "RefinementLevel" -> _]];
 
 Options[ReadTimeLevels] = FilterRules[Options[ReadGridFunction], Except["TimeLevel"]];
-DocumentationBuilder`OptionDescriptions["ReadTimeLevels"] = {
-    "Iteration"       -> "The iteration to read from.",
-    "Map"             -> "The map to read from.",
-    "RefinementLevel" -> "The refinement level to read from.",
-    "StripGhostZones" -> "Whether to remove ghost zones from the data.",
-    "Variable"        -> "The variable to read. This option is no longer used."
-  };
+DocumentationBuilder`OptionDescriptions["ReadTimeLevels"] =
+  Cases[DocumentationBuilder`OptionDescriptions["ReadGridFunction"], Except["TimeLevel" -> _]];
 
 ReadTimeLevels[run_String, var_String, dims:DimsPattern, opts:OptionsPattern[]] :=
   fileUnion["ReadTimeLevels", run, var, parseDims[dims], DeleteCases[ApplyDefaults[run, var, {opts}],

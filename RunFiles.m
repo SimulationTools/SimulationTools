@@ -183,6 +183,9 @@ SyntaxInformation[SimulationNames] =
  {"ArgumentsPattern" -> {_., OptionsPattern[]}};
 
 Options[SimulationNames] = {"FullPath" -> False};
+DocumentationBuilder`OptionDescriptions["SimulationNames"] = {
+  "FullPath"        -> "Whether to return the full path to the simulation directory or just the name of the simulation."
+};
 
 SimulationNames[form_, OptionsPattern[]] :=
  Module[{dirs},

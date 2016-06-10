@@ -872,6 +872,16 @@ Options[ReadRadiallyExtrapolatedPsi4] =
        {"RadiusRange" -> Automatic,
         "Radii" -> Automatic,
         "PerturbativeAdjustment" -> False}];
+DocumentationBuilder`OptionDescriptions["ReadRadiallyExtrapolatedPsi4"] = {
+  "AbsPhase" -> "Whether to separately extrapolate magnitude and phase.",
+  "DiscretePhaseAlignmentTime" -> "Time at which to align phases before doing extrapolation.",
+  "PerturbativeAdjustment" -> "Whether to include a perturbative correction during extrapolation.",
+  "RadialCoordinateTransformation" -> "Coordinate transformation to apply to radius used in "<>
+    "extrapolation. Possible choices are None (equivalent to Identity), RadialToTortoise "<>
+    "or IsotropicToTortoise",
+  "Radii" -> "List of radii to use in extrapolation.",
+  "RadiusRange" -> "Range of radii to use in extrapolation given as a list of the form {rmin, rmax}."
+};
 
 DefineMemoFunction[ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer,
                                                 order : extrapOrderPattern, opts:OptionsPattern[]],
@@ -894,6 +904,8 @@ DefineMemoFunction[ReadRadiallyExtrapolatedPsi4[run_String, l_Integer, m_Integer
 *)
 
 Options[ReadRadiallyExtrapolatedStrain] = Options[ReadRadiallyExtrapolatedPsi4];
+DocumentationBuilder`OptionDescriptions["ReadRadiallyExtrapolatedStrain"] =
+  DocumentationBuilder`OptionDescriptions["ReadRadiallyExtrapolatedPsi4"];
 DefineMemoFunction[ReadRadiallyExtrapolatedStrain[run_String, l_Integer, m_Integer, om0_,
                                order : extrapOrderPattern, opts:OptionsPattern[]],
   ReadRadiallyExtrapolatedWave[

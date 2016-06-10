@@ -637,7 +637,9 @@ Options[AntiDerivative] =
 
 DocumentationBuilder`OptionDescriptions["AntiDerivative"] = {
   InterpolationOrder -> "The order of interpolation to use. This may be take value "<>
-    "supported by the Interpolation function."
+    "supported by the Interpolation function.",
+  UseInputGrid -> "Whether to produce a result on the same coordinate grid as the "<>
+    "input, or on a uniformly spaced grid."
 };
 
 AntiDerivative[d_DataTable, {tbc_, fbc_}, opts:OptionsPattern[]] :=
