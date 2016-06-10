@@ -989,7 +989,7 @@ ReadSpECSimulationProfileSummary[sim_String] :=
 FindSXSSimulation[sim_String] :=
   Module[{candidates},
     candidates =
-    If[StringTake[sim,1] === "/" && DirectoryQ[sim],
+    If[DirectoryQ[sim],
       {sim},
       FileNames[sim, $SimulationPath]];
     If[candidates === {},
