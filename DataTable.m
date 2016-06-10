@@ -57,6 +57,7 @@ FilterDCT;
 (* TODO: Decide if non-monotonic DataTables are allowed/checked *)
 (* TODO: Implement a Monotonic[d] to make a non-monotonic DataTable monotonic?  Or maybe this happens as an option to ToDataTable? *)
 MonotonicQ;
+Monotonize;
 FunctionInverse;
 Composition;
 ReplaceCoordinate;
@@ -972,6 +973,31 @@ MonotonicQ[d_DataTable, tol_] :=
 ];
 
 MonotonicQ[d_DataTable] := Abs[Plus @@ Sign[Differences[ToListOfCoordinates[d]]]] == (Length[d]-1);
+
+(**********************************************************)
+(* Monotonize                                             *)
+(**********************************************************)
+
+monotonisePreferLastCompiled =
+ Compile[{{l1, _Real, 2}},
+  Module[{l = Reverse[l1], output, j, i, n},
+   If[Length[l] < 2, Return[Reverse[l]]];
+   n = Length[l[[1]]];
+    output = ConstantArray[ConstantArray[0., n], Length[l]];
+   output[[1]] = l[[1]]; j = 2;
+   For[i = 2, i <= Length[l], i = i + 1,
+    
+    If[l[[i, 1]] < output[[j - 1, 1]],
+     output[[j]] = l[[i]];
+     j = j + 1]];
+   Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
+  RuntimeOptions -> "Speed"];
+
+monoPreferLast[d_DataTable] :=
+  ToDataTable[monotonisePreferLastCompiled[ToList[d]]];
+
+Monotonize[d_DataTable] :=
+  monoPreferLast[Re@d] + I monoPreferLast[Im@d];
 
 (****************************************************************)
 (* Dot                                                          *)
