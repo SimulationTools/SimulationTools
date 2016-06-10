@@ -99,6 +99,8 @@ ReadSXSHorizonDisplacement;
 ReadSXSOrbitalOmega;
 ReadSXSAccumulatedPhase;
 ReadSXSMetadataFile;
+ReadSXSMetadata;
+ReadSXSMetadataKeys;
 RotateWaveform;
 SpECEstimatedInspiralSpeed;
 SpECEstimatedMergerTime;
@@ -1111,8 +1113,11 @@ computeExtraMetadata[a_] :=
        Cross[Normal[a1["relaxed-chi2"]], 
         Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]]]]];
 
+ReadSXSMetadataKeys[sim_String] :=
+  Keys[ReadSXSMetadataFile[sim]];
 
-
+ReadSXSMetadata[sim_String, key_String] :=
+  ReadSXSMetadataFile[sim][key];
 
 (****************************************************************)
 (* Waveform rotation (provided by Andrea Taracchini)            *)
