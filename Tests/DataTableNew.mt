@@ -17,6 +17,12 @@ data5 = Table[{i, -(i - 11/2)^2}, {i, 10}];
 data5[[5, 2]] = 1000;
 dt5 = ToDataTable[data5];
 
+(* Variable-step size DataTable *)
+
+coordsVar = Table[x + 1/2 Sin[x]^2, {x, 0, 3, .1}];
+dtCosVar = ToDataTable@Table[{x, Cos[x]}, {x, coordsVar}];
+dtSinVar = ToDataTable@Table[{x, Sin[x]}, {x, coordsVar}];
+
 withinRoundoff[a_?NumericQ, b_?NumericQ] :=
   If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-14];
 withinRoundoff[a_List, b_List] :=
@@ -89,6 +95,21 @@ Test[
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {10., 21.500000010432387, 34.00000001043239, 47.50000001043239, 62.00000001043239, 77.50000001043239, 94.00000001043239, 111.5000000104324, 130.00000001043242, 149.50000001043242}}]
     ,
     TestID->"AntiDerivative"
+]
+
+
+(****************************************************************)
+(* AntiDerivative with variable step                            *)
+(****************************************************************)
+
+Test[
+    AntiDerivative[dtCosVar, {0, 0}]
+    ,
+    dtSinVar
+    ,
+    TestID->"AntiDerivative with variable grid spacing"
+    ,
+    EquivalenceFunction -> ((Max@Abs[#1-#2] < 2*10^-5) &)
 ]
 
 
