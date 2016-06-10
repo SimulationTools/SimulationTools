@@ -7,6 +7,8 @@
 
 SetOptions["stdout", PageWidth -> Infinity];
 
+If[FindFile["MUnit`"] === $Failed,
+
 If[FindFile["MUnitRunner`"] =!= $Failed,
    Get["MUnitRunner`"],
    (* else *)
@@ -15,6 +17,7 @@ If[FindFile["MUnitRunner`"] =!= $Failed,
             Replace[Select[workbenchLocations, DirectoryQ],
                     {{}    :> (Print["Wolfram Workbench not found"]; Abort[]),
                      {x_, ___} :> x}]]];
+  ];
 
 << MUnit`
 << SimulationTools`
