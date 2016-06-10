@@ -1022,9 +1022,6 @@ ReadSXSSpin[sim_, hn_Integer] :=
       "/Ah" <> hnAlpha <> ".dir/DimensionfulInertialSpin.dat"}]];
   ToDataTable[t, #] & /@ {sx, sy, sz}];
 
-ReadSXSLevels[sim_String] :=
-  Sort[FileNames["Lev*", sim]];
-
 ahCode[i_Integer] :=
  If[1 <= i <= 3, {"A", "B", "C"}[[i]], 
   Error["Invalid AH: " <> ToString[i]]]
