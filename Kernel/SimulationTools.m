@@ -155,6 +155,7 @@ $SimulationToolsVersion :=
     gitdir = FileNameJoin[{path, ".git"}];
     If[FileType[gitdir] === Directory,
       gitrev = Quiet@ReadList["!git --git-dir "<>gitdir<>" rev-parse HEAD", String];
+      If[gitrev === {}, gitrev = $Failed];
     ];
   ];
 
@@ -162,7 +163,7 @@ $SimulationToolsVersion :=
   If[Head[gitrev] === List, gitrev = First[gitrev]];
 
   (* Check we have a git revision and otherwise give up trying *)
-  If[StringMatchQ[gitrev, RegularExpression["[0-9a-f]{5,40}"]], gitrev = " (" <> gitrev <> ")", gitrev = ""];
+  If[Head[gitrev] === String && StringMatchQ[gitrev, RegularExpression["[0-9a-f]{5,40}"]], gitrev = " (" <> gitrev <> ")", gitrev = ""];
 
   version <> "." <> release <> buildid <> gitrev
 ]
