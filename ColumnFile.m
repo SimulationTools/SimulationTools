@@ -170,7 +170,9 @@ CarpetASCIIColumns[run_String, fileName_String] :=
     CarpetASCIIColumns[First@files]];
 
 ColumnNumbers[run_String, fileName:(_String|_StringExpression|_RegularExpression), colIDs_] :=
-  ColumnNumbers[First[FindSimulationFiles[run, fileName]], colIDs];
+  Module[{files = FindSimulationFiles[run, fileName]},
+    If[files === {}, Error["Cannot find file "<>ToString@fileName<>" in simulation "<>run]];
+    ColumnNumbers[First[files], colIDs]];
 
 ColumnNumbers[fileName_String, colIDs_] :=
  Module[{colMap, result},
