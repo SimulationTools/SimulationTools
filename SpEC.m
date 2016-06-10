@@ -1174,7 +1174,6 @@ eulerAngles[frameA_, frameB_] :=
   (*Print[{\[Alpha],\[Beta],\[Gamma],X1,X2,X3,Y1,Y2,Y3,Z1,Z2,
   Z3}];*)
   {\[Alpha], \[Beta], \[Gamma]}
-  ]
   ];
 
 (* Subscript[h, lm] transformation (using Landau's def of the D-matrix) *)
