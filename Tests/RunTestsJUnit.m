@@ -33,7 +33,7 @@ Print["Running tests for SimulationTools found at ", FindFile["SimulationTools`"
 << MUnitRunner`
 << SimulationTools`
 
-tests = Map[FileBaseName[#] &, FileNames["*.mt"]];
+tests = Map[FileBaseName[#] &, FileNames["*.mt", "Workbench"]];
 
 
 myLogger[] :=
@@ -76,7 +76,7 @@ myLogger[] :=
 (* MUnit should deal with messages while the tests are running *)
 Internal`RemoveHandler["Message", testMessageHandlerArgs];
 
-fullResults = (Print["\n"]; Reap[TestRun[#<>".mt", Loggers -> {VerbosePrintLogger[], myLogger[]}, TestRunTitle -> #], TestLog]) & /@ tests;
+fullResults = (Print["\n"]; Reap[TestRun[FileNameJoin[{"Workbench",#<>".mt"}], Loggers -> {VerbosePrintLogger[], myLogger[]}, TestRunTitle -> #], TestLog]) & /@ tests;
 
 (* Restore our handler *)
 Internal`AddHandler["Message", testMessageHandlerArgs];

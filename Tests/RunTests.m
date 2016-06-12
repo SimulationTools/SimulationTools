@@ -24,11 +24,11 @@ If[FindFile["MUnitRunner`"] =!= $Failed,
 
 tests = If[Length[$ScriptCommandLine] > 1,
            Drop[$ScriptCommandLine,1],
-           Map[FileBaseName[#] &, Get["AllTests.mt"][[1]]]];
+           Map[FileBaseName[#] &, Get[FileNameJoin[{"Workbench","AllTests.mt"}]][[1]]]];
 
 Print["tests = ",tests];
 
-results = (Print["\n"]; TestRun[#<>".mt",
+results = (Print["\n"]; TestRun[FileNameJoin[{"Workbench", #<>".mt"}],
                                 Loggers -> {VerbosePrintLogger[]},
                                 TestRunTitle -> #]) & /@ tests;
 Print[];
