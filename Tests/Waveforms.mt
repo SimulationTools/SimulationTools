@@ -283,12 +283,12 @@ Test[
 (* StrainFromPsi4 *)
 (****************************************************************)
 
+Block[{Internal`$SameQTolerance = 5},
 Test[
   Psi4ToStrain[ToDataTable[{{0.0,1+3I},{0.1,5+0.2I}}],0.1]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-1.m"}]]
   ,
-  EquivalenceFunction -> withinRoundoff,
   TestID->"Psi4ToStrain-1"
     ]
 
@@ -297,10 +297,9 @@ Test[
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"StrainFromPsi4-2.m"}]]
   ,
-  EquivalenceFunction -> withinRoundoff,
   TestID->"Psi4ToStrain-2"
     ]
-
+]
 
 (****************************************************************)
 (* ImportWaveform and ExportWaveform *)
