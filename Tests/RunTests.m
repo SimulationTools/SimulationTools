@@ -24,7 +24,7 @@ If[FindFile["MUnitRunner`"] =!= $Failed,
 
 tests = If[Length[$ScriptCommandLine] > 1,
            Drop[$ScriptCommandLine,1],
-           Map[FileBaseName[#] &, Get["SimulationTools.mt"][[1]]]];
+           Map[FileBaseName[#] &, Get["AllTests.mt"][[1]]]];
 
 Print["tests = ",tests];
 
