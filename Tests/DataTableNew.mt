@@ -23,12 +23,6 @@ coordsVar = Table[x + 1/2 Sin[x]^2, {x, 0, 3, .1}];
 dtCosVar = ToDataTable@Table[{x, Cos[x]}, {x, coordsVar}];
 dtSinVar = ToDataTable@Table[{x, Sin[x]}, {x, coordsVar}];
 
-withinRoundoff[a_?NumericQ, b_?NumericQ] :=
-  If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-14];
-withinRoundoff[a_List, b_List] :=
-  And @@ Flatten[MapThread[withinRoundoff, {a, b}, 2]];
-withinRoundoff[a_DataTable, b_DataTable] := withinRoundoff[ToList[a], ToList[b]];
-
 (****************************************************************)
 (* Built-in functions *)
 (****************************************************************)

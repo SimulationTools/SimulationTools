@@ -10,12 +10,6 @@ testDirectory = FileNameJoin[{$TemporaryDirectory,"SimulationTools-unit-tests","
 DeleteDirectory[testDirectory,DeleteContents->True];
 CreateDirectory[testDirectory];
 
-withinRoundoff[a_?NumericQ, b_?NumericQ] :=
-  If[a == b, True, 2 Abs[(a - b)/(a + b)] < 10^-13];
-withinRoundoff[a_List, b_List] :=
-  And @@ Flatten[MapThread[withinRoundoff, {a, b}, 2]];
-withinRoundoff[a_DataTable, b_DataTable] := withinRoundoff[ToList[a], ToList[b]];
-
 (****************************************************************)
 (* WaveformCycles                                               *)
 (****************************************************************)
