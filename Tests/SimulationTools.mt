@@ -1,10 +1,8 @@
-Get[FileNameJoin[{$SimulationToolsInstallationDirectory,"Tests","Common.m"}]];
-
 (* Mathematica Test File *)
+Print["Mathematica Version: "<>$Version];
 
 TestSuite[
 	{
-		"General.mt",
 		"BHCoordinates.mt",
 		"CarpetHDF5.mt",
 		"DataAnalysis.mt",
