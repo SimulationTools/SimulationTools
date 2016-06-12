@@ -4,9 +4,11 @@
    function VerificationTest in place of Test.
 *)
 If[$VersionNumber < 10,
-  SetAttributes[VerificationTest, HoldAll];
-  VerificationTest[test_, result_, opts___] :=
-    Test[test, result, opts /. SameTest -> EquivalenceFunction]
+  SetAttributes[VerificationTest, HoldAllComplete];
+  VerificationTest[test_, result_, Shortest[expectedMsgs_:{}], opts___] :=
+    Test[test, result, expectedMsgs,opts];
+  VerificationTest[test_, result_, Shortest[expectedMsgs_:{}], opts1___, SameTest -> fn_, opts2___] :=
+    Test[test, result, expectedMsgs,opts1, EquivalenceFunction -> fn, opts2];
 ];
 
 withinRoundoff[a_, b_] :=
