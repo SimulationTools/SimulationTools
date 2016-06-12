@@ -6,7 +6,7 @@ Get[FileNameJoin[{$SimulationToolsInstallationDirectory,"Tests","Common.m"}]];
 (* MakeDataTable *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	MakeDataTable[{{1,10},{2,11},{3,12}}]
 	,
 	DataTable[{{1, 2, 3}, {10, 11, 12}}]
@@ -18,7 +18,7 @@ Test[
 (* ToDataTable *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ToDataTable[{{1,10},{2,11},{3,12}}]
 	,
 	DataTable[{{1, 2, 3}, {10, 11, 12}}]
@@ -30,7 +30,7 @@ Test[
 (* ToList *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ToList[DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	{{1,10},{2,11},{3,12}}
@@ -42,7 +42,7 @@ Test[
 (* IndVar *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	IndVar[DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	{1,2,3}
@@ -54,7 +54,7 @@ Test[
 (* DepVar *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	DepVar[DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	{10,11,12}
@@ -66,7 +66,7 @@ Test[
 (* ToListOfData *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ToListOfData[DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	{10,11,12}
@@ -78,7 +78,7 @@ Test[
 (* ToListOfCoordinates *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ToListOfCoordinates[DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	{1,2,3}
@@ -92,7 +92,7 @@ Test[
 
 Module[{d1 = MakeDataTable[Table[{t^3, Sin[t]}, {t, 0, 1, 0.1}]],
         d2 = MakeDataTable[Table[{t, Cos[t]}, {t, 0, 1, 0.1}]]},
-  Test[
+  VerificationTest[
 	IndVar[ResampleDataTable[d2, d1]]
 	,
         IndVar[d1]
@@ -104,7 +104,7 @@ Module[{d1 = MakeDataTable[Table[{t^3, Sin[t]}, {t, 0, 1, 0.1}]],
 (* UniformGridQ *)
 (****************************************************************)
 
-Test[
+VerificationTest[
   UniformGridQ[MakeDataTable[Table[{t, Cos[t]}, {t, -0.02, 0.9, 0.1}]]]
   ,
   True
@@ -112,7 +112,7 @@ Test[
   TestID->"ResampleDataTables-UniformGridQ1"
 ]
 
-Test[
+VerificationTest[
   UniformGridQ[MakeDataTable[Table[{t^3, Sin[t]}, {t, 0, 1, 0.1}]]]
   ,
   False
@@ -124,7 +124,7 @@ Test[
 (* MakeUniform *)
 (****************************************************************)
 
-Test[
+VerificationTest[
   UniformGridQ[MakeUniform[MakeDataTable[Table[{t^3, Sin[t]}, {t, 0, 1, 0.1}]]]]
   ,
   True
@@ -136,7 +136,7 @@ Test[
 (* MapData *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	MapData[f,DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	DataTable[{{1,2,3}, {f[10],f[11],f[12]}}]
@@ -148,7 +148,7 @@ Test[
 (* Map *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	Map[f,DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	DataTable[{{1,2,3},{f[10],f[11],f[12]}}]
@@ -160,7 +160,7 @@ Test[
 (* MapIndVar *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	MapIndVar[f,DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	DataTable[{{1,2,3},{f[1],f[2],f[3]}}]
@@ -172,7 +172,7 @@ Test[
 (* ApplyToList *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ApplyToList[Part[#,{1,3}]&,DataTable[{{1, 2, 3}, {10, 11, 12}}]]
 	,
 	DataTable[{{1, 3}, {10, 12}}]
@@ -184,7 +184,7 @@ Test[
 (* MapThreadData *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	MapThreadData[f, {
           DataTable[{{1,2,3},{10,11,12}}],
           DataTable[{{1,2,3},{20,21,22}}],
@@ -199,7 +199,7 @@ Test[
 (* MapThread *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	MapThread[f, {
           DataTable[{{1,2,3},{10,11,12}}],
           DataTable[{{1,2,3},{20,21,22}}],
@@ -214,7 +214,7 @@ Test[
 (* MapList *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	MapList[(#[[1]]^2+#[[2]]^2) &,DataTable[{{1,2,3},{10,11,12}}]]
 	,
 	DataTable[{{1,2,3},{101,125,153}}]
@@ -226,7 +226,7 @@ Test[
 (* Downsample *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	Downsample[DataTable[{{1,2,3,4},{10,11,12,13}}],2]
 	,
 	DataTable[{{1,3},{10,12}}]
@@ -238,7 +238,7 @@ Test[
 (* Downsampled *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	Downsampled[DataTable[{{1,2,3,4},{10,11,12,13}}],2]
 	,
 	DataTable[{{1,3},{10,12}}]
@@ -250,7 +250,7 @@ Test[
 (* DataTableInterval *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	DataTableInterval[DataTable[{{1,2,3,4},{10,11,12,13}}],{2,3}]
 	,
 	DataTable[{{2,3},{11,12}}]
@@ -262,7 +262,7 @@ Test[
 (* IntersectDataTables *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         IntersectDataTables[{DataTable[{{1, 2, 3}, {10, 11, 12}}], 
                              DataTable[{{2, 3, 4}, {2, 100, 13}}]}]
 	,
@@ -275,7 +275,7 @@ Test[
 (* LocateMaximumPoint *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         LocateMaximumPoint[DataTable[{{1, 2, 3}, {10, 11, 3}}]]
 	,
         2
@@ -287,33 +287,33 @@ Test[
 (* LocateMaximum *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         LocateMaximum[MakeDataTable[N@Table[{t, t^2 - t^3}, {t, 0, 1, 0.1}]]]
         ,        
         0.6666666689068567`
 	,
 	TestID->"LocateMaximum",
-	EquivalenceFunction -> ((Abs[#1-#2] < 3*10^-6) &)
+	SameTest -> ((Abs[#1-#2] < 3*10^-6) &)
 ]
 
 (****************************************************************)
 (* MaximumValue *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         MaximumValue[MakeDataTable[N@Table[{t, t^2 - t^3}, {t, 0, 1, 0.1}]]]
         ,        
         0.14814814814814817`
 	,
 	TestID->"MaximumValue",
-	EquivalenceFunction -> ((Abs[#1-#2] < 9*10^-12) &)
+	SameTest -> ((Abs[#1-#2] < 9*10^-12) &)
 ]
 
 (****************************************************************)
 (* InvertDataTable *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         InvertDataTable[DataTable[{{1,2,3,4},{10,11,12,15}}]]
         ,        
         DataTable[{{10,11,12,15},{1,2,3,4}}]
@@ -325,7 +325,7 @@ Test[
 (* MonotonicQ *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         MonotonicQ[DataTable[{{1,2,3,4},{10,11,12,15}}]]
         ,        
         True
@@ -333,7 +333,7 @@ Test[
 	TestID->"MonotonicQ-1"
 ]
 
-Test[
+VerificationTest[
         MonotonicQ[DataTable[{{1,3,2,4},{10,11,12,15}}]]
         ,        
         False
@@ -345,7 +345,7 @@ Test[
 (* PartitionTable *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 
         SimulationTools`DataTable`Private`partitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
                        {2.5, 4.5}]
@@ -355,7 +355,7 @@ Test[
 	TestID->"partitionTable-1"
 ]
 
-Test[
+VerificationTest[
 
         SimulationTools`DataTable`Private`partitionTable[{{1, 10}, {2, 11}, {3, 12}, {4, 15}, {5, 2}, {6,3}},
                        {2, 4}]
@@ -369,7 +369,7 @@ Test[
 (* ShiftDataTable *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         ShiftDataTable[2, DataTable[{{1,2,3,4},{10,11,12,15}}]]
         ,
         DataTable[{{3,4,5,6},{10,11,12,15}}]
@@ -381,7 +381,7 @@ Test[
 (* Spacing *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         Spacing[DataTable[{{1,2,3,4},{10,11,12,15}}]]
         ,
         1
@@ -393,7 +393,7 @@ Test[
 (* DataTableRange *)
 (****************************************************************)
 
-Test[
+VerificationTest[
         DataTableRange[DataTable[{{1,2,3,4},{10,11,12,15}}]]
         ,
         {1,4}

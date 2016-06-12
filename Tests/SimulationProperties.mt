@@ -6,7 +6,7 @@ $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 
 (* ReadSimulationCoreCount *)
 
-Test[
+VerificationTest[
   ReadSimulationCoreCount[$SimulationToolsTestSimulation]
   ,
   12
@@ -18,7 +18,7 @@ Test[
 
 (* ReadSimulationRunTime *)
 
-Test[
+VerificationTest[
   ReadSimulationRunTime[$SimulationToolsTestSimulation]
   ,
   18776.927876949347

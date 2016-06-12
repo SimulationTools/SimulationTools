@@ -27,7 +27,7 @@ dtSinVar = ToDataTable@Table[{x, Sin[x]}, {x, coordsVar}];
 (* Built-in functions *)
 (****************************************************************)
 test[f_] := 
- Test[
+ VerificationTest[
    {ToListOfData[f[dt]], CoordinateRanges[f[dt]]}
    ,
    {f[data[[All,2]]], CoordinateRanges[dt]}
@@ -44,7 +44,7 @@ Scan[test, {Abs, Sqrt, Re, Im, Conjugate, Log, Log[3, #] &, Log2, Log10,
      Plus[3, #] &, Plus[#, #] &, Plus[#, 3] &, Mod[3, #] &, Mod[#, #] &, Mod[#, 3] &}]
 
 test2[f_] :=
- Test[
+ VerificationTest[
    f[dt]
    ,
    f[data[[All,2]]]
@@ -55,7 +55,7 @@ test2[f_] :=
 Scan[test2, {Total, Max, Min, Mean}]
 
 test3[f_] :=
- Test[
+ VerificationTest[
    f[dt]
    ,
    f[data]
@@ -70,7 +70,7 @@ Scan[test3, DataTable`Private`$1DPlotFunctions]
 (* Add                                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Add[dt, dt2]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {22, 1052/45, 5189/210, 26, 1717/63, 598/21, 2077/70, 1388/45, 32, 232/7}}]
@@ -83,7 +83,7 @@ Test[
 (* AntiDerivative                                               *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     AntiDerivative[dt, {1, 10}]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {10., 21.500000010432387, 34.00000001043239, 47.50000001043239, 62.00000001043239, 77.50000001043239, 94.00000001043239, 111.5000000104324, 130.00000001043242, 149.50000001043242}}]
@@ -96,21 +96,21 @@ Test[
 (* AntiDerivative with variable step                            *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     AntiDerivative[dtCosVar, {0, 0}]
     ,
     dtSinVar
     ,
     TestID->"AntiDerivative with variable grid spacing"
     ,
-    EquivalenceFunction -> ((Max@Abs[#1-#2] < 2*10^-5) &)
+    SameTest -> ((Max@Abs[#1-#2] < 2*10^-5) &)
 ]
 
 
 (****************************************************************)
 (* ArrayDepth                                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     ArrayDepth[dt]
     ,
     1
@@ -122,7 +122,7 @@ Test[
 (****************************************************************)
 (* Coordinate                                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     Coordinate[dt2]
     ,
     DataTable[{{1, 4, 9, 16, 25, 36, 49, 64, 81, 100}, {1, 4, 9, 16, 25, 36, 49, 64, 81, 100}}]
@@ -135,13 +135,13 @@ Test[
 (* CoordinateAtInterpolatedMax                                  *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinateAtInterpolatedMax[dt4]
     ,
     5.499999999909634
     ,
     TestID->"CoordinateAtInterpolatedMax",
-	EquivalenceFunction -> ((Abs[#1-#2] < 2*10^-5) &)
+	SameTest -> ((Abs[#1-#2] < 2*10^-5) &)
 ]
 
 
@@ -149,7 +149,7 @@ Test[
 (* CoordinateAtMax                                              *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinateAtMax[dt]
     ,
     10
@@ -162,7 +162,7 @@ Test[
 (* CoordinatesAtMax                                              *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinatesAtMax[dt4]
     ,
     {5, 6}
@@ -174,7 +174,7 @@ Test[
 (****************************************************************)
 (* CoordinateOutline                                            *)
 (****************************************************************)
-Test[
+VerificationTest[
     CoordinateOutline[dt]
     ,
     Line[{{0, 1}, {0, 10}}]
@@ -186,7 +186,7 @@ Test[
 (****************************************************************)
 (* CoordinateRange                                              *)
 (****************************************************************)
-Test[
+VerificationTest[
     CoordinateRange[dt]
     ,
     {1, 10}
@@ -199,7 +199,7 @@ Test[
 (* CoordinateRanges                                             *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinateRanges[dt]
     ,
     {{1,10}}
@@ -212,7 +212,7 @@ Test[
 (* CoordinateSpacing                                            *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinateSpacing[dt]
     ,
     1
@@ -220,7 +220,7 @@ Test[
     TestID->"CoordinateSpacing-uniform"
 ]
 
-Test[
+VerificationTest[
     WithExceptions[CoordinateSpacing[dt2], CoordinateSpacingNonUniform -> e]
     ,
     e
@@ -233,7 +233,7 @@ Test[
 (* CoordinateSpacings                                           *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinateSpacings[dt]
     ,
     {1}
@@ -246,7 +246,7 @@ Test[
 (* DataRepresentationQ                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     DataRepresentationQ[dt]
     ,
     True
@@ -258,7 +258,7 @@ Test[
 (****************************************************************)
 (* Dimensions                                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     Dimensions[dt]
     ,
     {10}
@@ -272,7 +272,7 @@ Test[
 (****************************************************************)
 
 If[$VersionNumber < 9,
-Test[
+VerificationTest[
     Div[dt, dt2]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {1, 135/128, 2730/2459, 7/6, 945/772, 168/131, 1190/887, 405/289, 19/13, 35/23}}]
@@ -284,7 +284,7 @@ Test[
 (****************************************************************)
 (* Drop                                                         *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToList[Drop[dt, 2]]
     ,
     Drop[data, 2]
@@ -292,7 +292,7 @@ Test[
     TestID->"Drop1"
 ]
 
-Test[
+VerificationTest[
     ToList[Drop[dt, -2]]
     ,
     Drop[data, -2]
@@ -304,7 +304,7 @@ Test[
 (****************************************************************)
 (* Extract                                                      *)
 (****************************************************************)
-Test[
+VerificationTest[
     Extract[dt, {5}]
     ,
     Extract[data[[All, 2]], {5}]
@@ -317,7 +317,7 @@ Test[
 (* First                                                        *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     First[dt]
     ,
     11
@@ -330,7 +330,7 @@ Test[
 (* Fourier                                                      *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Fourier[dt]
     ,
     DataTable[{{-0.5, -0.4, -0.30000000000000004, -0.2, -0.1, 0., 0.1, 0.2, 0.30000000000000004, 0.4}, {-1.5811388300841898 + 0.*I, -1.5811388300841875 + 0.5137431483730079*I, -1.5811388300841898 + 1.1487646027368057*I, -1.5811388300841875 + 2.1762508994828216*I, -1.5811388300841898 + 4.866244947338651*I, 49.01530373260988 + 0.*I, -1.5811388300841898 - 4.866244947338651*I, -1.5811388300841875 - 2.1762508994828216*I, -1.5811388300841898 - 1.1487646027368057*I, -1.5811388300841875 - 0.5137431483730079*I}}]
@@ -343,16 +343,16 @@ Test[
 (* Frequency                                                    *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Frequency[dt3]
     ,
     DataTable[{{0., 0.6283185307179586, 1.2566370614359172, 1.8849555921538759, 2.5132741228718345, 3.141592653589793, 3.7699111843077517, 4.39822971502571, 5.026548245743669, 5.654866776461628, 6.283185307179586}, {1.9999999999999991, 1.9999999999999996, 1.9999999999999996, 1.9999999999999998, 2., 1.9999999999999996, 1.9999999999999998, 2., 1.9999999999999996, 2., 2.}}]
 	,
-        EquivalenceFunction -> withinRoundoff,
+        SameTest -> withinRoundoff,
 	TestID->"Frequency"
 ]
 
-Test[
+VerificationTest[
     Block[{$SimulationToolsCompatibilityVersion = 0.0}, Frequency[dt3]]
     ,
     DataTable[{{0., 0.6283185307179586, 1.2566370614359172, 1.8849555921538759, 2.5132741228718345, 3.141592653589793, 3.7699111843077517, 4.39822971502571, 5.026548245743669, 5.654866776461628}, {2., 2., 2., 2., 2., 2., 2., 2., 2., 2.}}]
@@ -365,12 +365,12 @@ Test[
 (* FourierDCT                                                   *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Chop[FourierDCT[dt]]
     ,
     DataTable[{{0, (2*Pi)/9, (4*Pi)/9, (2*Pi)/3, (8*Pi)/9, (10*Pi)/9, (4*Pi)/3, (14*Pi)/9, (16*Pi)/9, 2*Pi}, {15.5, 2.0180180604866425, 0, 0.21615105455192296, 0, 0.07071067811865477, 0, 0.028592689035501988, 0, 0.008017936114802292}}]
     ,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
     TestID->"FourierDCT"
 ]
 
@@ -379,7 +379,7 @@ Test[
 (* GridNorm                                                     *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     GridNorm[dt]
     ,
     Sqrt[2485]
@@ -392,20 +392,20 @@ Test[
 (* InterpolatedMax                                              *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     InterpolatedMax[dt4]
     ,
     0.
     ,
     TestID->"InterpolatedMax",
-	EquivalenceFunction -> ((Abs[#1-#2] < 3*10^-10) &)
+	SameTest -> ((Abs[#1-#2] < 3*10^-10) &)
 ]
 
 
 (****************************************************************)
 (* InterpolatedWhere                                            *)
 (****************************************************************)
-Test[
+VerificationTest[
     InterpolatedWhere[dt5, #[[2]] > 10 &]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {-81/4, -49/4, -25/4, -9/4, -1/4, -1/4, -9/4, -25/4, -49/4, -81/4}}]
@@ -418,7 +418,7 @@ Test[
 (* Interpolation                                                *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Interpolation[dt][3.5]
     ,
     13.5
@@ -431,7 +431,7 @@ Test[
 (* InverseFourier                                               *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     InverseFourier[dt]
     ,
     DataTable[{{0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9}, 
@@ -450,7 +450,7 @@ Test[
 (* Last                                                         *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Last[dt]
     ,
     20
@@ -463,7 +463,7 @@ Test[
 (* MaxCoordinate                                                *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     MaxCoordinate[dt]
     ,
     10
@@ -476,7 +476,7 @@ Test[
 (* MaxCoordinates                                               *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     MaxCoordinates[dt]
     ,
     {10}
@@ -488,7 +488,7 @@ Test[
 (****************************************************************)
 (* Mean                                                         *)
 (****************************************************************)
-Test[
+VerificationTest[
     Mean[dt]
     ,
     31/2
@@ -501,7 +501,7 @@ Test[
 (* MinCoordinate                                                *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     MinCoordinate[dt]
     ,
     1
@@ -514,7 +514,7 @@ Test[
 (* MinCoordinates                                               *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     MinCoordinates[dt]
     ,
     {1}
@@ -527,7 +527,7 @@ Test[
 (* MinCoordinateSpacing                                         *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     MinCoordinateSpacing[dt2]
     ,
     3
@@ -540,7 +540,7 @@ Test[
 (* Mul                                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Mul[dt, dt2]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {121, 2048/15, 31967/210, 168, 3860/21, 4192/21, 15079/70, 1156/5, 247, 1840/7}}]
@@ -553,7 +553,7 @@ Test[
 (* NDerivative                                                  *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     NDerivative[1][dt2]
     ,
     DataTable[{{1, 4, 9, 16, 25, 36, 49, 64, 81, 100}, {1039/2520, 1343/5040, 3541/22680, 3407/27720, 35807/360360, 134737/1621620, 97089/1361360, 1321499/21162960, 392503/7054320, 1050893/21162960}}]
@@ -566,7 +566,7 @@ Test[
 (* PackedArrayQ                                                 *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Developer`PackedArrayQ[DataTable[{{1, 2, 3}, {4., 5., 6.}}]]
     ,
     False
@@ -574,7 +574,7 @@ Test[
     TestID->"PackedArrayQ-False"
 ]
 
-Test[
+VerificationTest[
     Developer`PackedArrayQ[ToDataTable[{1, 2, 3}, {4., 5., 6.}]]
     ,
     True
@@ -586,7 +586,7 @@ Test[
 (****************************************************************)
 (* PadLeft                                                      *)
 (****************************************************************)
-Test[
+VerificationTest[
     PadLeft[dt, 13]
     ,
     DataTable[{{-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {0, 0, 0, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}]
@@ -594,7 +594,7 @@ Test[
     TestID->"PadLeft[dt, 13]"
 ]
 
-Test[
+VerificationTest[
     PadLeft[dt, 13, 5]
     ,
     DataTable[{{-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {5, 5, 5, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}]
@@ -606,7 +606,7 @@ Test[
 (****************************************************************)
 (* PadRight                                                     *)
 (****************************************************************)
-Test[
+VerificationTest[
     PadRight[dt, 13]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 0, 0, 0}}]
@@ -614,7 +614,7 @@ Test[
     TestID->"PadRight[dt, 13]"
 ]
 
-Test[
+VerificationTest[
     PadRight[dt, 13, 5]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 5, 5, 5}}]
@@ -638,7 +638,7 @@ parts = {
 };
 
 partTest[p_] :=
- Test[
+ VerificationTest[
     ToList[dt[[p]]]
     ,
     data[[p]]
@@ -648,7 +648,7 @@ partTest[p_] :=
 
 Scan[partTest, parts];
 
-Test[
+VerificationTest[
     dt[[2]]
     ,
     12
@@ -656,7 +656,7 @@ Test[
     TestID->"Part 2"
 ];
 
-Test[
+VerificationTest[
     dt[[-2]]
     ,
     19
@@ -668,7 +668,7 @@ Test[
 (****************************************************************)
 (* Phase *)
 (****************************************************************)
-Test[
+VerificationTest[
     DepVar[Phase[dt3]] == 2 IndVar[Phase[dt3]]
     ,
     True
@@ -680,7 +680,7 @@ Test[
 (****************************************************************)
 (* Pick *)
 (****************************************************************)
-Test[
+VerificationTest[
     Pick[dt, {True, False, True, True, False, True, True, True, True, True}]
     ,
     DataTable[{{1, 3, 4, 6, 7, 8, 9, 10}, {11, 13, 14, 16, 17, 18, 19, 20}}]
@@ -692,7 +692,7 @@ Test[
 (****************************************************************)
 (* Position                                                     *)
 (****************************************************************)
-Test[
+VerificationTest[
     Position[dt, 15]
     ,
     Position[data[[All,2]], 15]
@@ -704,7 +704,7 @@ Test[
 (****************************************************************)
 (* Resampled                                                    *)
 (****************************************************************)
-Test[
+VerificationTest[
     Resampled[dt2, {{1, 100, 10}}]
     ,
     DataTable[{{1, 11, 21, 31, 41, 51, 61, 71, 81, 91}, {11, 731959247/54991872, 8413225/576576, 172438869/11088896, 475922563/28945917, 842006687/49116672, 5223521/293216, 28849999835/1567268352, 19, 22821873/1157632}}]
@@ -712,7 +712,7 @@ Test[
     TestID->"Resampled 1"
 ]
 
-Test[
+VerificationTest[
     Resampled[dt2, {10}]
     ,
     Resampled[dt2, {{1, 100, 10}}]
@@ -720,7 +720,7 @@ Test[
     TestID->"Resampled 2"
 ]
 
-Test[
+VerificationTest[
     SimulationTools`DataTable`Private`resampled[{dt, dt2}]
     ,
     {DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}],
@@ -733,7 +733,7 @@ Test[
 (****************************************************************)
 (* RestrictedToCommonInterval                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     RestrictedToCommonInterval[{dt, dt2}]
     ,
     {DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}],
@@ -746,7 +746,7 @@ Test[
 (****************************************************************)
 (* RestrictedToInterval                                         *)
 (****************************************************************)
-Test[
+VerificationTest[
     RestrictedToInterval[dt2, {3, 50}]
     ,
     DataTable[{{4, 9, 16, 25, 36, 49}, {12, 13, 14, 15, 16, 17}}]
@@ -759,7 +759,7 @@ Test[
 (* SameGridQ                                                    *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     SameGridQ[dt, dt2]
     ,
     False
@@ -767,7 +767,7 @@ Test[
     TestID->"SameGridQ False"
 ]
 
-Test[
+VerificationTest[
     SameGridQ[dt, dt]
     ,
     True
@@ -775,7 +775,7 @@ Test[
     TestID->"SameGridQ True"
 ]
 
-Test[
+VerificationTest[
     SameGridQ[dt, dt, dt2]
     ,
     False
@@ -783,7 +783,7 @@ Test[
     TestID->"SameGridQ multiple False"
 ]
 
-Test[
+VerificationTest[
     SameGridQ[dt, dt, dt]
     ,
     True
@@ -795,7 +795,7 @@ Test[
 (****************************************************************)
 (* Shifted                                                      *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToListOfCoordinates[Shifted[dt2, 10]]
     ,
     {11, 14, 19, 26, 35, 46, 59, 74, 91, 110}
@@ -826,7 +826,7 @@ slabs = {
 };
 
 slabTest[p_, s_] :=
- Test[
+ VerificationTest[
     Slab[dt, s]
     ,
     dt[[p]]
@@ -836,7 +836,7 @@ slabTest[p_, s_] :=
 
 MapThread[slabTest, {parts, slabs}];
 
-Test[
+VerificationTest[
     Slab[dt2, 9 ;; 13]
     ,
     DataTable[{{9, 16}, {13, 14}}]
@@ -849,7 +849,7 @@ Test[
 (* Sub                                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Sub[dt, dt2]
     ,
     DataTable[{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, {0, 28/45, 271/210, 2, 173/63, 74/21, 303/70, 232/45, 6, 48/7}}]
@@ -861,7 +861,7 @@ Test[
 (****************************************************************)
 (* Take                                                         *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToList[Take[dt, 2]]
     ,
     Take[data, 2]
@@ -869,7 +869,7 @@ Test[
     TestID->"Take"
 ]
 
-Test[
+VerificationTest[
     ToList[Take[dt, 3]]
     ,
     Take[data, 3]
@@ -877,7 +877,7 @@ Test[
     TestID->"Take2"
 ]
 
-Test[
+VerificationTest[
     WithExceptions[Take[dt, {3}], DataTableSingle -> e]
     ,
     e
@@ -885,7 +885,7 @@ Test[
     TestID->"Take3"
 ]
 
-Test[
+VerificationTest[
     ToList[Take[dt, {2, 3}]]
     ,
     Take[data, {2, 3}]
@@ -893,7 +893,7 @@ Test[
     TestID->"Take4"
 ]
 
-Test[
+VerificationTest[
     ToList[Take[dt, {1, 3, 2}]]
     ,
     Take[data, {1, 3, 2}]
@@ -906,7 +906,7 @@ Test[
 (* ToPackedArray                                                *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Developer`PackedArrayQ[Developer`ToPackedArray[DataTable[{{1, 2, 3}, {4., 5., 6.}}]]]
     ,
     True
@@ -918,7 +918,7 @@ Test[
 (****************************************************************)
 (* Total                                                        *)
 (****************************************************************)
-Test[
+VerificationTest[
     Total[dt]
     ,
     155
@@ -930,7 +930,7 @@ Test[
 (****************************************************************)
 (* UniformSpacingQ                                              *)
 (****************************************************************)
-Test[
+VerificationTest[
     UniformSpacingQ[dt]
     ,
     True
@@ -938,7 +938,7 @@ Test[
     TestID->"UniformSpacingQ True"
 ]
 
-Test[
+VerificationTest[
     UniformSpacingQ[dt2]
     ,
     False
@@ -951,7 +951,7 @@ Test[
 (* WithResampling                                               *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     WithResampling["First", Resampled[{dt, dt2}]]
     ,
     Resampled[{dt, dt2}, dt]
@@ -959,7 +959,7 @@ Test[
     TestID->"WithResampling First"
 ]
 
-Test[
+VerificationTest[
     WithResampling["Last", Resampled[{dt2, dt}]]
     ,
     Resampled[{dt2, dt}, dt]

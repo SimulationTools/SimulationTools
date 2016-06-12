@@ -16,7 +16,7 @@ dims3D = {"x","y","z"};
 (* ReadGridFunction (pre 1.0) *)
 
 Module[{data},
-    Test[
+    VerificationTest[
         data = GetData[Block[{$SimulationToolsCompatibilityVersion = 0}, ReadGridFunction[$SimulationToolsTestSimulation, var, {"x"},Iteration -> 256]]];
         Part[data, {36, 59, 35, 35, 53, 13, 22, 57, 14, 58}]
     ,
@@ -27,7 +27,7 @@ Module[{data},
 ]
 
 Module[{data},
-    Test[
+    VerificationTest[
         data = GetData[Block[{$SimulationToolsCompatibilityVersion = 0}, ReadGridFunction[$SimulationToolsTestSimulation, var, {"x","y"}, Iteration -> 1024]]];
         Map[Part[data, Sequence @@ #] &,
             {{16, 39}, {4, 17}, {28, 58}, {96, 12}, {32, 38},
@@ -41,7 +41,7 @@ Module[{data},
 ]
 
 Module[{data},
-	Test[
+	VerificationTest[
         data = GetData[Block[{$SimulationToolsCompatibilityVersion = 0}, ReadGridFunction[$SimulationToolsTestSimulation, var, {"x","y","z"}]]];
         Map[Part[data, Sequence @@ #] &,
             {{49, 1, 4}, {1, 59, 41}, {15, 36, 52}, {14, 20, 38}, {41, 71, 2},
@@ -57,7 +57,7 @@ Module[{data},
 
 (* ReadIterations *)
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
@@ -65,7 +65,7 @@ Test[
     TestID->"ReadIterations-1D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
@@ -73,7 +73,7 @@ Test[
     TestID->"ReadIterations-2D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
@@ -83,7 +83,7 @@ Test[
 
 (* Dimensions specifications *)
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, {1}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
@@ -91,7 +91,7 @@ Test[
     TestID->"ReadIterations-dims-1D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, {1,2}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
@@ -99,7 +99,7 @@ Test[
     TestID->"ReadIterations-dims-2D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, {1,2,3}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
@@ -107,7 +107,7 @@ Test[
     TestID->"ReadIterations-dims-3D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, "x"]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
@@ -115,7 +115,7 @@ Test[
     TestID->"ReadIterations-dimsstrings-1D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, "xy"]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
@@ -123,7 +123,7 @@ Test[
     TestID->"ReadIterations-dimsstrings-2D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var, "xyz"]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
@@ -134,7 +134,7 @@ Test[
 
 (* ReadMaps *)
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     {None}
@@ -142,7 +142,7 @@ Test[
     TestID->"ReadMaps-1D"
 ]
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     {None}
@@ -150,7 +150,7 @@ Test[
     TestID->"ReadMaps-2D"
 ]
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     {None}
@@ -160,7 +160,7 @@ Test[
 
 (* ReadRefinementLevels *)
 
-Test[
+VerificationTest[
     ReadRefinementLevels[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-1D.m"}]]
@@ -168,7 +168,7 @@ Test[
     TestID->"ReadRefinementLevels-1D"
 ]
 
-Test[
+VerificationTest[
     ReadRefinementLevels[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-2D.m"}]]
@@ -176,7 +176,7 @@ Test[
     TestID->"ReadRefinementLevels-2D"
 ]
 
-Test[
+VerificationTest[
     ReadRefinementLevels[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-3D.m"}]]
@@ -187,7 +187,7 @@ Test[
 
 (* ReadTime *)
 
-Test[
+VerificationTest[
     ReadTime[$SimulationToolsTestSimulation, var, {"x"}, Iteration -> 256, RefinementLevel -> 5]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-1D.m"}]]
@@ -195,7 +195,7 @@ Test[
     TestID->"ReadTime-1D"
 ]
 
-Test[
+VerificationTest[
     ReadTime[$SimulationToolsTestSimulation, var, {"x","y"}, Iteration -> 1024, RefinementLevel -> 2]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-2D.m"}]]
@@ -203,7 +203,7 @@ Test[
     TestID->"ReadTime-2D"
 ]
 
-Test[
+VerificationTest[
     ReadTime[$SimulationToolsTestSimulation, var, {"x","y","z"}, Iteration -> 8192, RefinementLevel -> 0]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-3D.m"}]]
@@ -213,7 +213,7 @@ Test[
 
 (* ReadTimeLevels *)
 
-Test[
+VerificationTest[
     ReadTimeLevels[$SimulationToolsTestSimulation, var, {"x"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-1D.m"}]]
@@ -221,7 +221,7 @@ Test[
     TestID->"ReadTimeLevels-1D"
 ]
 
-Test[
+VerificationTest[
     ReadTimeLevels[$SimulationToolsTestSimulation, var, {"x","y"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-2D.m"}]]
@@ -229,7 +229,7 @@ Test[
     TestID->"ReadTimeLevels-2D"
 ]
 
-Test[
+VerificationTest[
     ReadTimeLevels[$SimulationToolsTestSimulation, var, {"x","y","z"}]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-3D.m"}]]
@@ -237,7 +237,7 @@ Test[
     TestID->"ReadTimeLevels-3D"
 ]
 
-Test[
+VerificationTest[
     FindGridFunctions[$SimulationToolsTestSimulation]
 ,
     {"phi"}
@@ -245,7 +245,7 @@ Test[
     TestID->"FindGridFunctions"
 ]
 
-Test[
+VerificationTest[
     ReadGridFunctionDimensions[$SimulationToolsTestSimulation, "phi"]
 ,
     {"x", "xy", "xyz"}
@@ -258,7 +258,7 @@ Test[
 (****************************************************************)
 
 Module[{data},
-    Test[
+    VerificationTest[
         data = ToListOfData[ReadGridFunction[$SimulationToolsMPTestSimulation, "x", {"z"},Iteration -> 0, Map -> 0]]
     ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-1D-mp-map0.m"}]]
@@ -268,7 +268,7 @@ Module[{data},
 ]
 
 Module[{data},
-    Test[
+    VerificationTest[
         data = ToListOfData[ReadGridFunction[$SimulationToolsMPTestSimulation, "x", {"z"},Iteration -> 0, Map -> 1]]
     ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadGridFunction-1D-mp-map1.m"}]]
@@ -277,7 +277,7 @@ Module[{data},
     ]
 ]
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsMPTestSimulation, "x", {"z"}]
 ,
     {0, 1, 2, 3, 4, 5, 6}

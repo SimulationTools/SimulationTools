@@ -8,7 +8,7 @@ TestReferenceDirectory = FileNameJoin[{$SimulationToolsInstallationDirectory,"Da
 
 (* ReadBHCoordinates *)
 
-Test[
+VerificationTest[
   ToList[ReadBHCoordinates[$SimulationToolsTestSimulation, 0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHCoordinates-0.m"}]]
@@ -16,7 +16,7 @@ Test[
   TestID->"ReadBHCoordinates-0"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHCoordinates[$SimulationToolsTestSimulation, 1]][[{1,2,-1}]]
   ,
   {{0, {-3, 0, 0}},
@@ -26,7 +26,7 @@ Test[
   TestID->"ReadBHCoordinates-1"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHCoordinate[$SimulationToolsTestSimulation, 0, 1]][[{1,2,-1}]]
   ,
   {{0, 3}, {0.5, 2.99948598445407}, 
@@ -34,7 +34,7 @@ Test[
   TestID->"ReadBHCoordinate"
     ]
 
-Test[
+VerificationTest[
   ReadBHTrajectory[$SimulationToolsTestSimulation, 0][[{1,2,-1}]]
   ,
   {{3, 0}, {2.99948598445407, 0.0115049097956219}, 
@@ -42,7 +42,7 @@ Test[
   TestID->"ReadBHTrajectory"
     ]
 
-Test[
+VerificationTest[
   ReadBHTrajectories[$SimulationToolsTestSimulation][[All,{1,2,-1}]]
   ,
   {{{3, 0}, {2.99948598445407, 0.0115049097956219}, 
@@ -52,7 +52,7 @@ Test[
   TestID->"ReadBHTrajectories"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHSeparation[$SimulationToolsTestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHSeparation.m"}]]
@@ -60,7 +60,7 @@ Test[
   TestID->"ReadBHSeparation"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHRadius[$SimulationToolsTestSimulation,0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHRadius.m"}]]
@@ -68,7 +68,7 @@ Test[
   TestID->"ReadBHRadius"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHPhase[$SimulationToolsTestSimulation,0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhase-0.m"}]]
@@ -76,7 +76,7 @@ Test[
   TestID->"ReadBHPhase-0"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHInclination[$SimulationToolsTestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHInclination.m"}]]
@@ -84,7 +84,7 @@ Test[
   TestID->"ReadBHInclination"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHPhase[$SimulationToolsTestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhase.m"}]]
@@ -92,7 +92,7 @@ Test[
   TestID->"ReadBHPhase"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHPhaseOfFrequency[$SimulationToolsTestSimulation]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHPhaseOfFrequency.m"}]]
@@ -100,7 +100,7 @@ Test[
   TestID->"ReadBHPhaseOfFrequency"
     ]
 
-Test[
+VerificationTest[
   ToList[ReadBHSpeed[$SimulationToolsTestSimulation,0]][[{1,2,-1}]]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"ReadBHSpeed.m"}]]
@@ -108,7 +108,7 @@ Test[
   TestID->"ReadBHSpeed"
     ]
 
-Test[
+VerificationTest[
   BHCoordinateMergerTime[$SimulationToolsTestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"BHCoordinateMergerTime.m"}]]
@@ -116,7 +116,7 @@ Test[
   TestID->"BHCoordinateMergerTime"
     ]
 
-Test[
+VerificationTest[
   InitialSeparation[$SimulationToolsTestSimulation]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"InitialSeparation.m"}]]
@@ -124,7 +124,7 @@ Test[
   TestID->"InitialSeparation"
     ]
 
-Test[
+VerificationTest[
   InitialPosition[$SimulationToolsTestSimulation,0]
   ,
   Get[FileNameJoin[{TestReferenceDirectory,"InitialPosition.m"}]]

@@ -20,7 +20,7 @@ dr5 = ToDataRegion[Module[{om = 2}, N@Table[t^2 Exp[I om t], {t, 0, 2 Pi, 2 Pi/1
 (* Built-in functions                                           *)
 (****************************************************************)
 test[f_] :=
- Test[
+ VerificationTest[
    {f[data], CoordinateRanges[f[dr]]}
    ,
    {ToListOfData[f[dr]], CoordinateRanges[dr]}
@@ -37,7 +37,7 @@ Scan[test, {Abs, Sqrt, Re, Im, Conjugate, Log, Log[3, #] &, Log2, Log10,
      Plus[3, #] &, Plus[#, #] &, Plus[#, 3] &, Mod[3, #] &, Mod[#, #] &, Mod[#, 3] &}]
 
 test2[f_] :=
- Test[
+ VerificationTest[
    f[data]
    ,
    f[dr]
@@ -48,7 +48,7 @@ test2[f_] :=
 Scan[test2, {Total, Max, Min, Mean}]
 
 test3[f_] :=
- Test[
+ VerificationTest[
    f[data[[1, 2]], DataRange -> CoordinateRanges[dr[[1, 2]]][[1]]]
    ,
    f[dr[[1, 2]]]
@@ -60,7 +60,7 @@ Scan[test3, SimulationTools`DataRegion`Private`$1DPlotFunctions]
 
 
 test4[f_] :=
- Test[
+ VerificationTest[
    f[dr[[1]]]
    ,
    If[f===ArrayPlot,
@@ -79,7 +79,7 @@ Scan[test4, SimulationTools`DataRegion`Private`$2DPlotFunctions]
 (* Add                                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Quiet[Add[dr2, dr4], ListInterpolation::inhr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.3}, "Spacing" -> {0.1, 0.2, 0.3}}, {{{335., 338., 341.00000000000006}, {365., 368., 371.00000000000006}, {395., 398., 401.}}, {{635., 638., 641.}, {665., 668., 671.}, {695., 698., 701.}}}]
@@ -91,7 +91,7 @@ Test[
 (****************************************************************)
 (* ArrayDepth                                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     ArrayDepth[dr]
     ,
     3
@@ -103,7 +103,7 @@ Test[
 (****************************************************************)
 (* Coordinate                                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToListOfData[Coordinate[dr, 1]][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
     ,
     {10.`, 10.1`, 10.`, 10.`, 10.1`, 10.1`, 10.`, 10.1`}
@@ -111,7 +111,7 @@ Test[
     TestID->"Coordinate1"
 ]
 
-Test[
+VerificationTest[
     ToListOfData[Coordinate[dr, 2]][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
     ,
     {20.`, 20.`, 20.2`, 20.`, 20.2`, 20.`, 20.2`, 20.2`}
@@ -119,7 +119,7 @@ Test[
     TestID->"Coordinate2"
 ]
 
-Test[
+VerificationTest[
     ToListOfData[Coordinate[dr, 3]][[Sequence @@ #]] & /@ {{1, 1, 1}, {2, 1, 1}, {1, 2, 1}, {1, 1, 2}, {2, 2, 1}, {2, 1, 2}, {1, 2, 2}, {2, 2, 2}}
     ,
     {30.`, 30.`, 30.`, 30.3`, 30.`, 30.3`, 30.3`, 30.3`}
@@ -132,7 +132,7 @@ Test[
 (* CoordinateAtMax                                              *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinateAtMax[dr]
     ,
     {10.1, 20.4, 30.9}
@@ -145,7 +145,7 @@ Test[
 (* CoordinatesAtMax                                              *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     CoordinatesAtMax[dr]
     ,
     {{10.1, 20.4, 30.9}}
@@ -157,7 +157,7 @@ Test[
 (****************************************************************)
 (* CoordinateOutline                                            *)
 (****************************************************************)
-Test[
+VerificationTest[
     CoordinateOutline[dr[[1,2]]]
     ,
     Line[{{0, 30.`}, {0, 30.9`}}]
@@ -165,7 +165,7 @@ Test[
     TestID->"CoordinateOutline1D"
 ]
 
-Test[
+VerificationTest[
     CoordinateOutline[dr[[1]]]
     ,
     Rectangle[{20.`, 30.`}, {20.4`, 30.9`}]
@@ -173,7 +173,7 @@ Test[
     TestID->"CoordinateOutline2D"
 ]
 
-Test[
+VerificationTest[
     CoordinateOutline[dr]
     ,
     Cuboid[{10.`, 20.`, 30.`}, {10.1`, 20.4`, 30.9`}]
@@ -185,7 +185,7 @@ Test[
 (****************************************************************)
 (* CoordinateRange                                              *)
 (****************************************************************)
-Test[
+VerificationTest[
     WithExceptions[CoordinateRange[dr], CoordinateRangeDimensions -> e]
     ,
     e
@@ -193,7 +193,7 @@ Test[
     TestID->"CoordinateRange n-dimensional"
 ]
 
-Test[
+VerificationTest[
     CoordinateRange[dr[[1,1]]]
     ,
     {30., 30.9}
@@ -205,7 +205,7 @@ Test[
 (****************************************************************)
 (* CoordinateRanges                                             *)
 (****************************************************************)
-Test[
+VerificationTest[
     CoordinateRanges[dr]
     ,
     {{10.`, 10.1`}, {20.`, 20.4`}, {30.`, 30.9`}}
@@ -217,7 +217,7 @@ Test[
 (****************************************************************)
 (* CoordinateSpacing                                            *)
 (****************************************************************)
-Test[
+VerificationTest[
     WithExceptions[CoordinateSpacing[dr], CoordinateSpacingDimensions -> e]
     ,
     e
@@ -225,7 +225,7 @@ Test[
     TestID->"CoordinateSpacing n-dimensional"
 ]
 
-Test[
+VerificationTest[
     CoordinateSpacing[dr[[1,1]]]
     ,
     0.3
@@ -237,7 +237,7 @@ Test[
 (****************************************************************)
 (* CoordinateSpacings                                           *)
 (****************************************************************)
-Test[
+VerificationTest[
     CoordinateSpacings[dr]
     ,
     {0.1`, 0.2`, 0.3`}
@@ -250,7 +250,7 @@ Test[
 (* DataRepresentationQ                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     DataRepresentationQ[dr]
     ,
     True
@@ -262,7 +262,7 @@ Test[
 (****************************************************************)
 (* Dimensions                                                   *)
 (****************************************************************)
-Test[
+VerificationTest[
     Dimensions[dr]
     ,
     {2,3,4}
@@ -275,7 +275,7 @@ Test[
 (* Div                                                          *)
 (****************************************************************)
 If[$VersionNumber < 9,
-Test[
+VerificationTest[
     Quiet[Div[dr2, dr4],ListInterpolation::inhr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.3}, "Spacing" -> {0.1, 0.2, 0.3}}, {{{2.018018018018018, 2.0178571428571432, 2.017699115044248}, {2.0165289256198347, 2.016393442622951, 2.016260162601626}, {2.015267175572519, 2.015151515151515, 2.0150375939849625}}, {{2.009478672985782, 2.009433962264151, 2.0093896713615025}, {2.009049773755656, 2.009009009009009, 2.008968609865471}, {2.0086580086580086, 2.0086206896551726, 2.0085836909871246}}}]
@@ -287,7 +287,7 @@ Test[
 (****************************************************************)
 (* Downsampled                                                  *)
 (****************************************************************)
-Test[
+VerificationTest[
     Downsampled[dr, {2, 2, 2}]
     ,
     DataRegion[{"VariableName" -> "test region",
@@ -302,7 +302,7 @@ Test[
 (****************************************************************)
 (* Drop                                                         *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToListOfData[Drop[dr, None, 2]]
     ,
     Drop[data, None, 2]
@@ -310,7 +310,7 @@ Test[
     TestID->"Drop1"
 ]
 
-Test[
+VerificationTest[
     ToList[Drop[dr, None, -2]]
     ,
     Drop[ToList[dr], None, -2]
@@ -322,7 +322,7 @@ Test[
 (****************************************************************)
 (* Extract                                                      *)
 (****************************************************************)
-Test[
+VerificationTest[
     Extract[dr, {{1, 2, 3}}]
     ,
     Extract[data, {{1, 2, 3}}]
@@ -335,7 +335,7 @@ Test[
 (* First                                                        *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     First[dr[[1,1]]]
     ,
     111
@@ -348,7 +348,7 @@ Test[
 (* Frequency                                                    *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Frequency[dr5]
     ,
     DataRegion[{"VariableName" -> Null, "Origin" -> {0}, 
@@ -356,14 +356,14 @@ Test[
       1.9999999999999998, 2.000000000000001, 2., 2., 2.000000000000001, 1.9999999999999996, 
       1.9999999999999998, 2.000000000000001, 2.0000000000000018, 1.999999999999993}]
 	,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
 	TestID->"Frequency"
 ]
 
 (****************************************************************)
 (* GridNorm                                                     *)
 (****************************************************************)
-Test[
+VerificationTest[
     GridNorm[dr]
     ,
     68.22521527998282`
@@ -375,7 +375,7 @@ Test[
 (****************************************************************)
 (* Interpolation                                                *)
 (****************************************************************)
-Test[
+VerificationTest[
     Quiet[Interpolation[dr][10.05, 20.3, 30.7], ListInterpolation::inhr]
     ,
     178.3333333333343`
@@ -387,7 +387,7 @@ Test[
 (****************************************************************)
 (* Length                                                       *)
 (****************************************************************)
-Test[
+VerificationTest[
     Length[dr[[1,1]]]
     ,
     4
@@ -399,7 +399,7 @@ Test[
 (****************************************************************)
 (* Map                                                          *)
 (****************************************************************)
-Test[
+VerificationTest[
     Map[f, dr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.},
@@ -415,7 +415,7 @@ Test[
 (****************************************************************)
 (* MapList                                                      *)
 (****************************************************************)
-Test[
+VerificationTest[
     MapList[f, dr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.}, "Spacing" -> {0.1, 0.2, 0.3}, 
@@ -434,7 +434,7 @@ Test[
 (****************************************************************)
 (* MapThread                                                    *)
 (****************************************************************)
-Test[
+VerificationTest[
     MapThread[f, {dr,dr2}]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.},
@@ -452,7 +452,7 @@ Test[
 (****************************************************************)
 (* MaxCoordinate                                                *)
 (****************************************************************)
-Test[
+VerificationTest[
     MaxCoordinate[dr[[1,1]]]
     ,
     30.9`
@@ -464,7 +464,7 @@ Test[
 (****************************************************************)
 (* MaxCoordinates                                               *)
 (****************************************************************)
-Test[
+VerificationTest[
     MaxCoordinates[dr]
     ,
     {10.1`, 20.4`, 30.9`}
@@ -476,7 +476,7 @@ Test[
 (****************************************************************)
 (* MinCoordinate                                                *)
 (****************************************************************)
-Test[
+VerificationTest[
     MinCoordinate[dr[[1,1]]]
     ,
     30.`
@@ -488,7 +488,7 @@ Test[
 (****************************************************************)
 (* MinCoordinates                                               *)
 (****************************************************************)
-Test[
+VerificationTest[
     MinCoordinates[dr]
     ,
     {10.`, 20.`, 30.`}
@@ -501,7 +501,7 @@ Test[
 (* Mul                                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Quiet[Mul[dr2, dr4],ListInterpolation::inhr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.3}, "Spacing" -> {0.1, 0.2, 0.3}}, {{{24864., 25312.000000000004, 25764.000000000007}, {29524., 30012.000000000004, 30504.000000000007}, {34584., 35112., 35644.}}, {{89464., 90312., 91164.}, {98124., 99012., 99904.}, {107184., 108112., 109044.}}}]
@@ -513,30 +513,30 @@ Test[
 (****************************************************************)
 (* NDerivative                                                  *)
 (****************************************************************)
-Test[
+VerificationTest[
     Quiet[ToListOfData[NDerivative[dr, 3]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
     N@ConstantArray[10/3, {2, 3, 4}]
     ,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
     TestID->"NDerivative1"
 ]
 
-Test[
+VerificationTest[
     Quiet[ToListOfData[NDerivative[dr, 2]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
     N@ConstantArray[50, {2, 3, 4}]
     ,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
     TestID->"NDerivative2"
 ]
 
-Test[
+VerificationTest[
     Quiet[DeleteDuplicates[Flatten[ToListOfData[NDerivative[dr, 1]]]], NDSolve`FiniteDifferenceDerivative::ordred]
     ,
     {1000.0000000000034, 1000.0000000000036, 1000.0000000000039}
     ,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
     TestID->"NDerivative3"
 ]
 
@@ -558,7 +558,7 @@ parts = {
 };
 
 partTest[p_] :=
- Test[
+ VerificationTest[
     ToListOfData[dr[[p /. List -> Sequence]]]
     ,
     data[[p /. List -> Sequence]]
@@ -572,7 +572,7 @@ Scan[partTest, parts];
 (****************************************************************)
 (* Phase *)
 (****************************************************************)
-Test[
+VerificationTest[
     N[Phase[dr5]]
     ,
     N[2 Coordinate[dr5]]
@@ -584,7 +584,7 @@ Test[
 (****************************************************************)
 (* Position                                                     *)
 (****************************************************************)
-Test[
+VerificationTest[
     Position[dr, 123]
     ,
     Position[data, 123]
@@ -598,7 +598,7 @@ Test[
 (****************************************************************)
 grid = {{10.`, 10.05`, 0.05}, {20.`, 20.3`, 0.1}, {30.`, 30.9`, 0.4}};
 
-Test[
+VerificationTest[
     Quiet[Resampled[dr, grid], ListInterpolation::inhr]
     ,
     DataRegion[{
@@ -614,7 +614,7 @@ Test[
     TestID->"Resampled"
 ];
 
-Test[
+VerificationTest[
     Quiet[SimulationTools`DataRegion`Private`resampled[{dr, dr4}], ListInterpolation::inhr]
     ,
     {
@@ -629,7 +629,7 @@ Test[
 (****************************************************************)
 (* SameGridQ                                                    *)
 (****************************************************************)
-Test[
+VerificationTest[
     SameGridQ[dr, dr3]
     ,
     False
@@ -637,7 +637,7 @@ Test[
     TestID->"SameGridQ False"
 ]
 
-Test[
+VerificationTest[
     SameGridQ[dr, dr2]
     ,
     True
@@ -646,7 +646,7 @@ Test[
 ]
 
 
-Test[
+VerificationTest[
     SameGridQ[dr, dr2, dr3]
     ,
     False
@@ -654,7 +654,7 @@ Test[
     TestID->"SameGridQ multiple False"
 ]
 
-Test[
+VerificationTest[
     SameGridQ[dr, dr2, dr2]
     ,
     True
@@ -666,7 +666,7 @@ Test[
 (****************************************************************)
 (* Shifted                                                      *)
 (****************************************************************)
-Test[
+VerificationTest[
     MinCoordinates[Shifted[dr, {1,2,3}]]
     ,
     {11., 22., 33.}
@@ -689,7 +689,7 @@ slabs = {
 };
 
 slabTest[p_, s_] :=
- Test[
+ VerificationTest[
     Slab[dr, s /. List -> Sequence]
     ,
     dr[[p /. List -> Sequence]]
@@ -704,7 +704,7 @@ MapThread[slabTest, {parts[[1;;5]], slabs}];
 (* Sub                                                          *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Quiet[Sub[dr2, dr4], ListInterpolation::inhr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.3}, "Spacing" -> {0.1, 0.2, 0.3}}, {{{113., 114.00000000000003, 115.00000000000001}, {123., 124.00000000000003, 125.00000000000001}, {133., 134., 135.}}, {{213., 214., 215.}, {223., 224., 225.}, {233., 234., 235.}}}]
@@ -716,7 +716,7 @@ Test[
 (****************************************************************)
 (* Take                                                         *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToListOfData[Take[dr, 2]]
     ,
     Take[data, 2]
@@ -724,7 +724,7 @@ Test[
     TestID->"Take"
 ]
 
-Test[
+VerificationTest[
     ToListOfData[Take[dr, All, 3]]
     ,
     Take[data, All, 3]
@@ -732,7 +732,7 @@ Test[
     TestID->"Take2"
 ]
 
-Test[
+VerificationTest[
     ToListOfData[Take[dr, All, {3}]]
     ,
     Take[data, All, {3}]
@@ -740,7 +740,7 @@ Test[
     TestID->"Take3"
 ]
 
-Test[
+VerificationTest[
     ToListOfData[Take[dr, All, {2, 3}]]
     ,
     Take[data, All, {2, 3}]
@@ -748,7 +748,7 @@ Test[
     TestID->"Take4"
 ]
 
-Test[
+VerificationTest[
     ToListOfData[Take[dr, All, {1, 3, 2}]]
     ,
     Take[data, All, {1, 3, 2}]
@@ -760,7 +760,7 @@ Test[
 (****************************************************************)
 (* ToDataRegion                                                 *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToDataRegion[data, {10, 20, 30}, {0.1, 0.2, 0.3},
     	"VariableName" -> "test region", "Attributes" -> {"Time" -> 42}]
     ,
@@ -776,7 +776,7 @@ Test[
 (* MergedDataRegion                                             *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     MergedDataRegion[{dr, dr3}]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {9.9, 20., 30.}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42},
@@ -791,7 +791,7 @@ Test[
 (****************************************************************)
 (* ToList                                                       *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToList[dr, Flatten -> False][[1, 2, 3]]
     ,
     {10.`, 20.2`, 30.6`, 123}
@@ -799,7 +799,7 @@ Test[
     TestID->"ToListNoFlatten"
 ]
 
-Test[
+VerificationTest[
     ToList[dr, Flatten -> True][[7]]
     ,
     {10.`, 20.2`, 30.6`, 123}
@@ -811,7 +811,7 @@ Test[
 (****************************************************************)
 (* ToListOfCoordinates                                          *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToListOfCoordinates[dr, Flatten -> False][[1, 2, 3]]
     ,
     {10.`, 20.2`, 30.6`}
@@ -819,7 +819,7 @@ Test[
     TestID->"ToListOfCoordinatesNoFlatten"
 ]
 
-Test[
+VerificationTest[
     ToListOfCoordinates[dr, Flatten -> True][[7]]
     ,
     {10.`, 20.2`, 30.6`}
@@ -831,7 +831,7 @@ Test[
 (****************************************************************)
 (* ToListOfData                                                 *)
 (****************************************************************)
-Test[
+VerificationTest[
     ToListOfData[dr]
     ,
     data
@@ -843,7 +843,7 @@ Test[
 (****************************************************************)
 (* VariableName                                                 *)
 (****************************************************************)
-Test[
+VerificationTest[
     VariableName[dr]
     ,
     "test region"
@@ -862,7 +862,7 @@ Test[
 (****************************************************************)
 (* TimeDerivative                                               *)
 (****************************************************************)
-Test[
+VerificationTest[
     TimeDerivative[{dr, dr2}]
     ,
     DataRegion[{"VariableName" -> "dt_test region",

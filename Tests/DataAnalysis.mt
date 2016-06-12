@@ -12,21 +12,21 @@ Module[
   sn  = ToDataTable[Table[{f, 125/100 + f/5 - f^2}, {f, -1, 1, 0.01}]]
  },
 
-Test[
+VerificationTest[
     WaveformMatch[{wf1, wf1}, sn]
     ,
     1.
     ,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
     TestID->"WaveformMatch with the same waveform"
 ];
 
-Test[
+VerificationTest[
     WaveformMatch[{wf1, wf2}, sn]
     ,
     0.9901663128717905
     ,
-    EquivalenceFunction -> withinRoundoff,
+    SameTest -> withinRoundoff,
     TestID->"WaveformMatch with different waveforms"
 ];
 ]

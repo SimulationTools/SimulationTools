@@ -12,7 +12,7 @@ var3D = "phi.file_0.h5";
 (* ReadGridFunction *)
 
 Module[{data},
-    Test[
+    VerificationTest[
         data = GetData[ReadGridFunction[$SimulationToolsTestSimulation, var1D, 256]];
         Part[data, {36, 59, 35, 35, 53, 13, 22, 57, 14, 58}]
     ,
@@ -23,7 +23,7 @@ Module[{data},
 ]
 
 Module[{data},
-    Test[
+    VerificationTest[
         data = GetData[ReadGridFunction[$SimulationToolsTestSimulation, var2D, 1024]];
         Map[Part[data, Sequence @@ #] &,
             {{16, 39}, {4, 17}, {28, 58}, {96, 12}, {32, 38},
@@ -37,7 +37,7 @@ Module[{data},
 ]
 
 Module[{data},
-	Test[
+	VerificationTest[
         data = GetData[ReadGridFunction[$SimulationToolsTestSimulation, var3D, 0]];
         Map[Part[data, Sequence @@ #] &,
             {{49, 1, 4}, {1, 59, 41}, {15, 36, 52}, {14, 20, 38}, {41, 71, 2},
@@ -53,7 +53,7 @@ Module[{data},
 
 (* ReadIterations *)
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var1D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-1D.m"}]]
@@ -61,7 +61,7 @@ Test[
     TestID->"ReadIterations-1D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var2D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-2D.m"}]]
@@ -69,7 +69,7 @@ Test[
     TestID->"ReadIterations-2D"
 ]
 
-Test[
+VerificationTest[
     ReadIterations[$SimulationToolsTestSimulation, var3D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadIterations-3D.m"}]]
@@ -79,7 +79,7 @@ Test[
 
 (* ReadMaps *)
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsTestSimulation, var1D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-1D.m"}]]
@@ -87,7 +87,7 @@ Test[
     TestID->"ReadMaps-1D"
 ]
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsTestSimulation, var2D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-2D.m"}]]
@@ -95,7 +95,7 @@ Test[
     TestID->"ReadMaps-2D"
 ]
 
-Test[
+VerificationTest[
     ReadMaps[$SimulationToolsTestSimulation, var3D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadMaps-3D.m"}]]
@@ -105,7 +105,7 @@ Test[
 
 (* ReadRefinementLevels *)
 
-Test[
+VerificationTest[
     ReadRefinementLevels[$SimulationToolsTestSimulation, var1D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-1D.m"}]]
@@ -113,7 +113,7 @@ Test[
     TestID->"ReadRefinementLevels-1D"
 ]
 
-Test[
+VerificationTest[
     ReadRefinementLevels[$SimulationToolsTestSimulation, var2D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-2D.m"}]]
@@ -121,7 +121,7 @@ Test[
     TestID->"ReadRefinementLevels-2D"
 ]
 
-Test[
+VerificationTest[
     ReadRefinementLevels[$SimulationToolsTestSimulation, var3D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadRefinementLevels-3D.m"}]]
@@ -132,7 +132,7 @@ Test[
 
 (* ReadTime *)
 
-Test[
+VerificationTest[
     ReadTime[$SimulationToolsTestSimulation, var1D, 256, 5]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-1D.m"}]]
@@ -140,7 +140,7 @@ Test[
     TestID->"ReadTime-1D"
 ]
 
-Test[
+VerificationTest[
     ReadTime[$SimulationToolsTestSimulation, var2D, 1024, 2]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-2D.m"}]]
@@ -148,7 +148,7 @@ Test[
     TestID->"ReadTime-2D"
 ]
 
-Test[
+VerificationTest[
     ReadTime[$SimulationToolsTestSimulation, var3D, 8192, 0]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTime-3D.m"}]]
@@ -158,7 +158,7 @@ Test[
 
 (* ReadTimeLevels *)
 
-Test[
+VerificationTest[
     ReadTimeLevels[$SimulationToolsTestSimulation, var1D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-1D.m"}]]
@@ -166,7 +166,7 @@ Test[
     TestID->"ReadTimeLevels-1D"
 ]
 
-Test[
+VerificationTest[
     ReadTimeLevels[$SimulationToolsTestSimulation, var2D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-2D.m"}]]
@@ -174,7 +174,7 @@ Test[
     TestID->"ReadTimeLevels-2D"
 ]
 
-Test[
+VerificationTest[
     ReadTimeLevels[$SimulationToolsTestSimulation, var3D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadTimeLevels-3D.m"}]]
@@ -184,7 +184,7 @@ Test[
 
 (* ReadVariables *)
 
-Test[
+VerificationTest[
     ReadVariables[$SimulationToolsTestSimulation, var1D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadVariables-1D.m"}]]
@@ -192,7 +192,7 @@ Test[
     TestID->"ReadVariabless-1D"
 ]
 
-Test[
+VerificationTest[
     ReadVariables[$SimulationToolsTestSimulation, var2D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadVariables-2D.m"}]]
@@ -200,7 +200,7 @@ Test[
     TestID->"ReadVariables-2D"
 ]
 
-Test[
+VerificationTest[
     ReadVariables[$SimulationToolsTestSimulation, var3D]
 ,
     Get[FileNameJoin[{TestReferenceDirectory,"ReadVariables-3D.m"}]]

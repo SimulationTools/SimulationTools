@@ -8,7 +8,7 @@ $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 (* ReadTimeStep                                                 *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ReadTimeStep[$SimulationToolsTestSimulation]
 	,
 	0.5
@@ -16,7 +16,7 @@ Test[
 	TestID->"ReadTimeStep"
 ]
 
-Test[
+VerificationTest[
 	ReadTimeStep[$SimulationToolsTestSimulation, RefinementLevel -> 3]
 	,
 	0.125
@@ -29,7 +29,7 @@ Test[
 (* ReadGridSpacings                                             *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ReadGridSpacings[$SimulationToolsTestSimulation]
 	,
 	{2., 2., 2.}
@@ -37,7 +37,7 @@ Test[
 	TestID->"ReadGridSpacings"
 ]
 
-Test[
+VerificationTest[
 	ReadGridSpacings[$SimulationToolsTestSimulation, RefinementLevel -> 3]
 	,
 	{0.25, 0.25, 0.25}
@@ -50,7 +50,7 @@ Test[
 (* ReadTimeRange                                                *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ReadTimeRange[$SimulationToolsTestSimulation]
 	,
 	{0, 300}
@@ -63,7 +63,7 @@ Test[
 (* ReadMaxRefinementLevels                                      *)
 (****************************************************************)
 
-Test[
+VerificationTest[
 	ReadMaxRefinementLevels[$SimulationToolsTestSimulation]
 	,
 	7

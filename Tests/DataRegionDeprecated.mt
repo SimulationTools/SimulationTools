@@ -18,7 +18,7 @@ dataregion3 = MakeDataRegion[data2, "test region", Reverse[Dimensions[data]], {9
 (****************************************************************)
 (* DataRegionPart *)
 (****************************************************************)
-Test[
+VerificationTest[
     DataRegionPart[dataregion, {10 ;; 10.2, All, 30 ;; 30.9}]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10., 20., 30.}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42},
@@ -31,7 +31,7 @@ Test[
 (****************************************************************)
 (* EvaluateOnDataRegion *)
 (****************************************************************)
-Test[
+VerificationTest[
     EvaluateOnDataRegion[x + y + z + t, {t, x, y, z}, dataregion]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10, 20, 30}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42}, 
@@ -45,7 +45,7 @@ Test[
 (****************************************************************)
 (* GetAttributes *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetAttributes[dataregion]
     ,
     {"VariableName" -> "test region", "Origin" -> {10, 20, 30}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42}
@@ -57,7 +57,7 @@ Test[
 (****************************************************************)
 (* GetCoordinate *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetCoordinate[dataregion, 3]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10, 20, 30}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42}, 
@@ -70,7 +70,7 @@ Test[
 (****************************************************************)
 (* GetData *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetData[dataregion]
     ,
     data
@@ -82,7 +82,7 @@ Test[
 (****************************************************************)
 (* GetDataRange *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetDataRange[dataregion]
     ,
     {{10, 10.3}, {20, 20.4}, {30, 30.3}}
@@ -94,7 +94,7 @@ Test[
 (****************************************************************)
 (* GetDimensions *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetDimensions[dataregion]
     ,
     {4, 3, 2}
@@ -106,7 +106,7 @@ Test[
 (****************************************************************)
 (* GetNumDimensions *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetNumDimensions[dataregion]
     ,
     3
@@ -118,7 +118,7 @@ Test[
 (****************************************************************)
 (* GetOrigin *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetOrigin[dataregion]
     ,
     {10, 20, 30}
@@ -130,7 +130,7 @@ Test[
 (****************************************************************)
 (* GetSpacing *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetSpacing[dataregion]
     ,
     {0.1, 0.2, 0.3}
@@ -142,7 +142,7 @@ Test[
 (****************************************************************)
 (* GetTime *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetTime[dataregion]
     ,
     42
@@ -154,7 +154,7 @@ Test[
 (****************************************************************)
 (* GetVariableName *)
 (****************************************************************)
-Test[
+VerificationTest[
     GetVariableName[dataregion]
     ,
     "test region"
@@ -166,7 +166,7 @@ Test[
 (****************************************************************)
 (* MakeDataRegion *)
 (****************************************************************)
-Test[
+VerificationTest[
     MakeDataRegion[data, "test region", {4, 3, 2}, {10, 20, 30}, {0.1, 0.2, 0.3}, 42]
     ,
     DataRegion[{"VariableName" -> "test region",
@@ -181,7 +181,7 @@ Test[
 (****************************************************************)
 (* MapDataRegion *)
 (****************************************************************)
-Test[
+VerificationTest[
     MapDataRegion[2 # &, dataregion]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10, 20, 30}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42}, 
@@ -194,7 +194,7 @@ Test[
 (****************************************************************)
 (* MapThreadDataRegion *)
 (****************************************************************)
-Test[
+VerificationTest[
     MapThreadDataRegion[2 #1 - #2 &, {dataregion, dataregion2}]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10, 20, 30}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42}, 
@@ -207,7 +207,7 @@ Test[
 (****************************************************************)
 (* MergeDataRegions *)
 (****************************************************************)
-Test[
+VerificationTest[
     MergeDataRegions[{dataregion, dataregion3}]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {9.9, 20, 30}, "Spacing" -> {0.1, 0.2, 0.3}, "Time" -> 42}, 
@@ -220,7 +220,7 @@ Test[
 (****************************************************************)
 (* NormL2 *)
 (****************************************************************)
-Test[
+VerificationTest[
     NormL2[dataregion]
     ,
     68.22521527998282
@@ -232,7 +232,7 @@ Test[
 (****************************************************************)
 (* Outline *)
 (****************************************************************)
-Test[
+VerificationTest[
     Outline[dataregion]
     ,
     Cuboid[{10, 20, 30}, {10.3, 20.4, 30.3}]
@@ -244,7 +244,7 @@ Test[
 (****************************************************************)
 (* ResampleDataRegion *)
 (****************************************************************)
-Test[
+VerificationTest[
     Quiet[ResampleDataRegion[SliceData[dataregion, 2, 20], {{10.1, 30}, {10.3, 30.2}, {0.05, 0.15}}, 2], ListInterpolation::inhr]
     ,
     DataRegion[{"VariableName" -> "test region", "Origin" -> {10.1, 30}, "Spacing" -> {0.05, 0.15}, "Time" -> 42}, 
@@ -258,7 +258,7 @@ Test[
 (****************************************************************)
 (* ResampleDataRegions *)
 (****************************************************************)
-Test[
+VerificationTest[
     Quiet[ResampleDataRegions[{SliceData[dataregion, 2, 20], SliceData[dataregion3, 2, 20]}], ListInterpolation::inhr]
     ,
     {DataRegion[{"VariableName" -> "test region",
@@ -279,7 +279,7 @@ Test[
 (****************************************************************)
 (* SliceData *)
 (****************************************************************)
-Test[
+VerificationTest[
     SliceData[dataregion, 1, 10.1]
     ,
     DataRegion[{"VariableName" -> "test region",
@@ -294,7 +294,7 @@ Test[
 (****************************************************************)
 (* Strip *)
 (****************************************************************)
-Test[
+VerificationTest[
     Strip[dataregion, {1, 0, 0}]
     ,
     DataRegion[{"VariableName" -> "test region",
@@ -310,7 +310,7 @@ Test[
 (****************************************************************)
 (* TableToDataRegion *)
 (****************************************************************)
-Test[
+VerificationTest[
     TableToDataRegion[{{10, 20, 1}, {12, 20, 2}, {10, 23, 3}, {12, 23, 4}}]
     ,
     DataRegion[{

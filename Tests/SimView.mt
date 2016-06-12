@@ -8,7 +8,7 @@ $SimulationPath = {$SimulationToolsTestSimulationDirectory};
 (* SimulationOverview                                           *)
 (****************************************************************)
 
-Test[
+VerificationTest[
     Head[SimulationOverview[$SimulationToolsTestSimulation]]
     ,
     Grid

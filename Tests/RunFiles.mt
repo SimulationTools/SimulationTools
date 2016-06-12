@@ -13,7 +13,7 @@ $SimulationPath = {simulationPath};
 Module[{runDir,runName="testrun"},
 	runDir = FileNameJoin[{simulationPath,runName}];
 	CreateDirectory[runDir];
-	Test[
+	VerificationTest[
 		FindRunDir[runName]
 	,
 		runDir
@@ -24,7 +24,7 @@ Module[{runDir,runName="testrun"},
 Module[{runDir,runName="testrunall"},
 	runDir = FileNameJoin[{simulationPath,runName<>"-all"}];
 	CreateDirectory[runDir];
-	Test[
+	VerificationTest[
 		FindRunDir[runName]
 	,
 		runDir
@@ -35,7 +35,7 @@ Module[{runDir,runName="testrunall"},
 Module[{runDir,runName="testrun3"},
 	runDir = FileNameJoin[{testDirectory,runName}];
 	CreateDirectory[runDir];
-	Test[
+	VerificationTest[
 		FindRunDir[runDir]
 	,
 		runDir
@@ -49,7 +49,7 @@ Module[{runDir,runName="testrun3"},
 Module[{runDir,runName="testrun5"},
 	runDir = FileNameJoin[{simulationPath,runName}];
 	CreateDirectory[runDir];
-	Test[
+	VerificationTest[
 		FindRunSegments[runName]
 	,
 		{runDir}
@@ -64,7 +64,7 @@ Module[{runDir,runName="testrun6",testDirPaths},
 	testDirPaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		f],{i,0,3}];
-	Test[
+	VerificationTest[
 		FindRunSegments[runName]
 	,
 		testDirPaths
@@ -79,7 +79,7 @@ Module[{runDir,runName="testrun7",testDirPaths},
 	testDirPaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		f],{i,0,3}];
-	Test[
+	VerificationTest[
 		FindRunSegments[runName]
 	,
 		testDirPaths
@@ -95,7 +95,7 @@ Module[{runDir,runName="testrun8",testDirPaths},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Export[FileNameJoin[{f,"diff.par"}],"Test","Text"];
 		f],{i,0,3}];
-	Test[
+	VerificationTest[
 		FindRunSegments[runName]
 	,
 		testDirPaths
@@ -110,7 +110,7 @@ Module[{runDir,runName="testrun9",testFile="MyFile.asc",testFilePath},
 	CreateDirectory[runDir];
 	testFilePath = FileNameJoin[{runDir,testFile}];
 	Export[testFilePath,"Test","Text"];
-	Test[
+	VerificationTest[
 		FindSimulationFiles[runName,testFile]
 	,
 		{testFilePath}
@@ -125,7 +125,7 @@ Module[{runDir,runName="testrun9.1",testFile="MyFile.asc",testFilePath},
 	CreateDirectory[FileNameJoin[{runDir,"intermediate"}]];
 	testFilePath = FileNameJoin[{runDir,"intermediate",testFile}];
 	Export[testFilePath,"Test","Text"];
-	Test[
+	VerificationTest[
 		FindSimulationFiles[runName,testFile]
 	,
 		{testFilePath}
@@ -140,7 +140,7 @@ Module[{runDir,runName="testrun10",testFile="MyFile.asc",testFilePaths},
 	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
-	Test[
+	VerificationTest[
 		FindSimulationFiles[runName,testFile]
 	,
 		testFilePaths
@@ -157,7 +157,7 @@ Module[{runDir,runName="testrun11",testFiles={"MyFile.asc","MyOtherFile.asc"}},
 	Do[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Map[Export[FileNameJoin[{f,#}],"Test","Text"] &,testFiles]],{i,0,3}];
-	Test[
+	VerificationTest[
 		FindRunFilesFromPattern[runName,"*.asc"]
 	,
 		testFiles
@@ -174,7 +174,7 @@ Module[{runDir,runName="testrun12",testFile="MyFile.asc",testFilePaths},
 	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
 		CreateDirectory[f,CreateIntermediateDirectories->True];
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
-	Test[
+	VerificationTest[
 		FindFirstRunFile[runName,testFile]
 	,
 		First[testFilePaths]
@@ -195,7 +195,7 @@ Module[{runDir,runName="testrun12.1",testDirPaths,testFile="MyFile.asc",testFile
 	testFilePaths = Table[Module[{f=FileNameJoin[{runDir,"output-000"<>ToString[i],runName}]},
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
 
-	Test[
+	VerificationTest[
 		FindSimulationFiles[runName,testFile]
 	,
 		testFilePaths
@@ -215,7 +215,7 @@ Module[{runDir,runName="testrun13",otherRunName="mysim",testDirPaths,testFile="M
 		Export[FileNameJoin[{f,"anything.par"}],"Test","Text"];
 		Export[FileNameJoin[{f,testFile}],"Test","Text"]],{i,0,3}];
 
-	Test[
+	VerificationTest[
 		FindSimulationFiles[runName,testFile]
 	,
 		testFilePaths
@@ -225,7 +225,7 @@ Module[{runDir,runName="testrun13",otherRunName="mysim",testDirPaths,testFile="M
 
 (* SimultionNames *)
 Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
-  Test[
+  VerificationTest[
     SimulationNames[]
   ,
     {"bbh", "bbh-nrdf", "nan", "test7patch"}
@@ -233,7 +233,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     TestID -> "SimulationNames-1"
   ];
 
-  Test[
+  VerificationTest[
     SimulationNames["b*"]
   ,
     {"bbh", "bbh-nrdf"}
@@ -241,7 +241,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     TestID -> "SimulationNames-2"
   ];
 
-  Test[
+  VerificationTest[
     SimulationNames["bbh"]
   ,
     {"bbh"}
@@ -249,7 +249,7 @@ Block[{$SimulationPath = {$SimulationToolsTestSimulationDirectory}},
     TestID -> "SimulationNames-3"
   ];
 
-  Test[
+  VerificationTest[
     SimulationNames["invalid"]
   ,
     {}
