@@ -1,0 +1,153 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4311,        145]
+NotebookOptionsPosition[      3625,        116]
+NotebookOutlinePosition[      3981,        132]
+CellTagsIndexPosition[      3938,        129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"<<", "SimulationTools`"}]], "Input",
+ CellChangeTimes->{{3.674642261141947*^9, 3.674642264359633*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"testfiles", "=", 
+   RowBox[{"FileNames", "[", 
+    RowBox[{"\"\<*.wlt\>\"", ",", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "$SimulationToolsInstallationDirectory", ",", "\"\<Tests\>\""}], "}"}],
+       "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6746562662227573`*^9, 3.6746562921804333`*^9}, {
+   3.6746563471009417`*^9, 3.674656350051837*^9}, 3.674729002104097*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"reports", "=", 
+   RowBox[{"TestReport", "/@", "testfiles"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6746411733732433`*^9, 3.6746412123002663`*^9}, {
+   3.674642164180612*^9, 3.674642189185828*^9}, {3.67464238606258*^9, 
+   3.674642405837298*^9}, {3.674656297750287*^9, 3.6746563175172157`*^9}, 
+   3.674729009074017*^9}],
+
+Cell[BoxData[
+ RowBox[{"ColumnForm", "[", "reports", "]"}]], "Input",
+ CellChangeTimes->{{3.674729436416963*^9, 3.674729446570063*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<Tests passed: \>\"", ",", 
+   RowBox[{"Total", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "[", "\"\<TestsSucceededCount\>\"", "]"}], "&"}], "/@", 
+     "reports"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6746881514141693`*^9, 3.674688202128994*^9}, {
+  3.674729545623226*^9, 3.674729559573057*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Tests passed: \"\>", "\[InvisibleSpace]", "464"}],
+  SequenceForm["Tests passed: ", 464],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.67472955996974*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<Tests failed: \>\"", ",", 
+   RowBox[{"Total", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "[", "\"\<TestsFailedCount\>\"", "]"}], "&"}], "/@", 
+     "reports"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6746881514141693`*^9, 3.674688202128994*^9}, {
+  3.674729545623226*^9, 3.6747295699009953`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Tests failed: \"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm["Tests failed: ", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.674729565147744*^9, 3.674729570366802*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"(", 
+  RowBox[{
+   RowBox[{"And", "@@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"#", "[", "\"\<AllTestsSucceeded\>\"", "]"}], "&"}], "/@", 
+      "reports"}], ")"}]}], "/.", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"True", "\[Rule]", "\"\<Passed\>\""}], ",", 
+     RowBox[{"False", "\[Rule]", "\"\<Failed\>\""}]}], "}"}]}], 
+  ")"}]], "Input",
+ CellChangeTimes->{{3.674688251504571*^9, 3.67468826298319*^9}, {
+  3.674729483816738*^9, 3.674729532845632*^9}}],
+
+Cell[BoxData["\<\"Passed\"\>"], "Output",
+ CellChangeTimes->{{3.674688254896229*^9, 3.674688263636983*^9}, 
+   3.6747294984224977`*^9, 3.674729533409293*^9, 3.674729587171814*^9}]
+}, Open  ]]
+},
+WindowSize->{1246, 691},
+WindowMargins->{{44, Automatic}, {Automatic, 38}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 126, 2, 28, "Input"],
+Cell[687, 24, 453, 11, 28, "Input"],
+Cell[1143, 37, 358, 7, 28, "Input"],
+Cell[1504, 46, 135, 2, 28, "Input"],
+Cell[CellGroupData[{
+Cell[1664, 52, 369, 9, 28, "Input"],
+Cell[2036, 63, 209, 5, 22, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2282, 73, 368, 9, 28, "Input"],
+Cell[2653, 84, 230, 5, 21, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2920, 94, 507, 15, 28, "Input"],
+Cell[3430, 111, 179, 2, 28, "Output"]
+}, Open  ]]
+}
+]
+*)
+
