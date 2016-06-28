@@ -28,6 +28,7 @@ BeginPackage["SimulationTools`SpEC`",
    "h5mma`",
    "Piraha`",
    "SimulationTools`Utils`",
+   "SimulationTools`Plotting`",
    If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -110,6 +111,7 @@ FindSpECLevelSimulations;
 ReadSpECHDF5Data;
 ReadSpECNormalizedConstraintNorm;
 ReadSpECConstraintNorm;
+PlotState5Diagnostics;
 
 Begin["`Private`"];
 
@@ -1536,6 +1538,14 @@ ReadSpECNormalizedConstraintNorm[sim_String] :=
  ToDataTable[
   ReadSpECASCIIData[sim, "ConstraintNorms/NormalizedGhCe_Norms.dat", 
     SeparateRingdown -> False][[All, {1, 3}]]];
+
+PlotState5Diagnostics[sim_String] :=
+  Module[{diag, datas},
+    diag = ReadSpECASCIIData[sim, "DiagAhSpeedB.dat"];
+    datas = Table[ToDataTable[diag[[All, 1]], diag[[All, i]]], {i, {21, 2, 10}}];
+    PresentationListLinePlot[datas,
+      PlotLegend -> {"MinRelDeltaR0", "Activation state", "TDamp"}, 
+      PlotRange -> {{MaxCoordinate[datas[[1]]] - 100, All}, All}]];
 
 End[];
 EndPackage[];
