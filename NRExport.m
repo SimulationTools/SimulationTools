@@ -145,7 +145,11 @@ ExportExtrapolatedStrain[run_String, file_String, mass_, l_Integer, m_Integer, o
 
   (* TODO: don't hard code 200 here *)
   extrap    = ExtrapolatePsi4[run, l, m, AlignPhaseAt->200, MassADM->mass, ExtrapolationOrder->3];
-  strain    = StrainFromPsi4[extrap, om];
+  (* Use time-domain integration for the m=0 modes *)
+  strain    = If[m =!= 0,
+    StrainFromPsi4[extrap, om],
+    StrainFromPsi4[extrap, CoordinateRange[extrap]]];
+
   junkTime  = OptionValue[JunkTime];
   If[!SameQ[junkTime, None],
     afterjunk = DataTableInterval[strain, {junkTime + First[DataTableRange[strain]], All}];,
