@@ -306,7 +306,11 @@ ExportLocalQuantity[run_String, what_, i_, file_String] :=
 coord[d_] :=
  {"x", "y", "z"}[[d]];
 
-runMetadata[run_, mass_, ecc_, tJunk_] :=
+overrideMetadata[md_, addMD_] :=
+  (* TODO: Support versions of Mathematica without associations *)
+  Normal[Join[Association[md],Association[addMD]]];
+
+runMetadata[run_, mass_, ecc_, tJunk_, addMD_] :=
  Module[{code, evolution, eta, bibtex},
   evolution = LookupParameter[run, "ADMBase::evolution_method"];
   Which[
@@ -323,7 +327,7 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
   ];
 
   (* TODO: Don't hardcode any of these *)
-  {(* "comments" -> "", *)
+  overrideMetadata[{(* "comments" -> "", *)
    (* "documentation" -> "", *)
    (* "simulation-bibtex-keys" -> "", *)
    "submitter-email" -> "ian.hinder@aei.mpg.de",
@@ -383,10 +387,10 @@ runMetadata[run_, mass_, ecc_, tJunk_] :=
       "final-bh-spin" <> coord[d] ->
        Last[ReadIsolatedHorizonSpin[run, 2, d]], {d, 1, 3}],
    "data-type" -> "NR"
-   }
+   }, addMD]
   ];
 
-runAllData[run_String, mass_, ecc_, tJunk_, format_String] :=  Module[{modes, radii, ext},
+runAllData[run_String, mass_, ecc_, tJunk_, format_String, addMD_] :=  Module[{modes, radii, ext},
  ext = Switch[format, "HDF5", "h5", "ASCII", "asc.gz", _, Error["Unrecognised format: "<>ToString@format]];
  modes = ReadPsi4Modes[run];
  radii = ReadPsi4RadiiStrings[run];
@@ -402,7 +406,7 @@ runAllData[run_String, mass_, ecc_, tJunk_, format_String] :=  Module[{modes, ra
  horMassFileName[i_, "ASCII"] := "horizon_mass"<>ToString[i]<>"."<>ext;
  horMassFileName[i_, "HDF5"] := "horizon_mass"<>ToString[i]<>"."<>ext<>":horizon_mass"<>ToString[i];
 
- {"metadata" -> runMetadata[run, mass, ecc, tJunk],
+ {"metadata" -> runMetadata[run, mass, ecc, tJunk, addMD],
   "body-data" ->
    {Sequence @@ Table["spin" <> ToString[i] ->
       spinFileName[i,format], {i, 1, 3}],
@@ -442,12 +446,12 @@ makeEntry[vals_List] :=
 (* ExportSimFormat::usage = "ExportSimFormat is an option for ExportSim which specifies the format to use. Possible choices are \"ASCII\" and \"HDF5\"."; *)
 
 Options[ExportMetadata] = {"JunkTime" -> None, "ExportSimFormat" -> "ASCII"};
-ExportMetadata[file_String, run_String, mass_, ecc_, OptionsPattern[]] :=
+ExportMetadata[file_String, run_String, mass_?NumericQ, ecc_?NumericQ, addMD_:{}, OptionsPattern[]] :=
  Module[{tJunk},
   tJunk  = OptionValue[JunkTime];
   If[SameQ[tJunk, None], tJunk = 0;];
 
-  Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk, OptionValue[ExportSimFormat]]], "Text"];
+  Export[file, makeMetadataFile[runAllData[run, mass, ecc, tJunk, OptionValue[ExportSimFormat], addMD]], "Text"];
 ];
 
 ExportMetadata[file_String, md_List] :=
@@ -458,7 +462,7 @@ ExportMetadata[file_String, md_List] :=
 
 (* Full run *)
 
-Options[ExportNumericalRelativitySimulation] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None, "GuessResolutionSuffix" -> True};
+Options[ExportNumericalRelativitySimulation] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None, "GuessResolutionSuffix" -> True, "AdditionalMetadata" -> {}};
 DocumentationBuilder`OptionDescriptions["ExportNumericalRelativitySimulation"] = {
   "ExportSimFormat" -> "Data format for exported simulation. \"ASCII\" and \"HDF5\" are "<>
     "the currently supported formats.",
@@ -506,7 +510,7 @@ ExportNumericalRelativitySimulation[run_String, niceName_, outputDirectory_, mas
                            ExportLocalQuantity[run, HorizonMass, 2, dir <> "/horizon_mass2"<>ext];
                            Catch[ExportLocalQuantity[run, HorizonMass, 3, dir <> "/horizon_mass3"<>ext], _ErrorString],
       "Metadata",          ExportMetadata[dir<>"/"<>niceName<>If[OptionValue[GuessResolutionSuffix],"_"<>ToString[n],""]<>".bbh", run, mass,
-                                          ecc],
+                                          ecc, OptionValue[AdditionalMetadata]],
       _, Error["Error"]], {item, export}];
   ];
 
