@@ -179,8 +179,9 @@ ExportAllExtrapolatedStrain[run_String, file_String, mass_, om_] :=
   "asc"|"asc.gz",
     files=(dir<>fileBaseName[file]<>"_l"<>ToString[#[[1]]]<>"_m"<>ToString[#[[2]]]<>"_rinf."<>fileExtension[file] &) /@ modes;
     MapThread[ExportExtrapolatedStrain[run, #1, mass, Sequence@@#2, om #2[[2]]/2]&, {files, modes}];,
-  "h5",
-    (ExportExtrapolatedStrain[run, file, mass, Sequence@@#, om #[[2]]/2]&) /@ modes;,
+    "h5",
+    
+    (ExportExtrapolatedStrain[run, file, mass, Sequence@@#, om Abs[#[[2]]]/2]&) /@ modes;,
   _,
     Error["Unsupported file format: "<>fileExtension[file]];
   ];
