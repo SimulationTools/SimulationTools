@@ -458,7 +458,7 @@ ExportMetadata[file_String, md_List] :=
 
 (* Full run *)
 
-Options[ExportNumericalRelativitySimulation] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None};
+Options[ExportNumericalRelativitySimulation] = {"ExportSimFormat" -> "ASCII", "ExportOnly" -> All, "ExcludeModes" -> None, "GuessResolutionSuffix" -> True};
 DocumentationBuilder`OptionDescriptions["ExportNumericalRelativitySimulation"] = {
   "ExportSimFormat" -> "Data format for exported simulation. \"ASCII\" and \"HDF5\" are "<>
     "the currently supported formats.",
@@ -473,7 +473,9 @@ ExportNumericalRelativitySimulation[run_String, niceName_, outputDirectory_, mas
 
     h = ReadCoarseGridSpacing[run];
     n = Round[0.6/(h/2^5)];
-    dir = FileNameJoin[{outputDirectory, niceName, niceName<>"_"<>ToString[n]}];
+    dir = If[OptionValue[GuessResolutionSuffix],
+      FileNameJoin[{outputDirectory, niceName, niceName <> "_"<>ToString[n]}],
+      FileNameJoin[{outputDirectory, niceName}]];
 
     Print[run <> " -> " <> dir];
     If[FileType[dir] === None, CreateDirectory[dir]];
