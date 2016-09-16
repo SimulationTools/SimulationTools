@@ -74,6 +74,7 @@ packages = {
   (*"SimulationTools`Empty`",*)
   (*"SimulationTools`Error`",*)
     "SimulationTools`FieldLines`", 
+    "SimulationTools`EccentricityReduction`", 
     "SimulationTools`FileDependencies`",
     "SimulationTools`FileMemo`",
     "SimulationTools`Formaline`",
