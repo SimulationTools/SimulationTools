@@ -155,14 +155,17 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
 
 Options[BinaryEccentricityFromSeparationDerivative] =
   {"AdditionalOscillations" -> False, "FixEccentricFrequency" -> False,
-    "UpdateTime" -> 0};
+    "UpdateTime" -> 0,
+    "QuadraticInspiral" -> False,
+    "Inspiral" -> "Polynomial",
+    "CorrectedSemiMajorAxis" -> False};
 
 BinaryEccentricityFromSeparationDerivative[sep_DataTable, 
   window : {t1_, t2_}, opts : OptionsPattern[]] := 
  Module[{model, a, a1, f, t, ae, n, l0, c, params, tStart, tLength, 
    tInterval, plot, guessData, fit, fittedData, sepDot, flip, e, 
    deltaD0, deltapr, mu, sepModel, sepFit, sepParams, aFit, n2, psi, 
-   n3, residual, ecc, residualNorm, fittedP, completePeriod},
+   n3, residual, ecc, residualNorm, fittedP, completePeriod, circData},
 
   (* Notation:
 
@@ -203,14 +206,31 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
        rDot = a1 + f t - a e n sin(n t + l0).
 
      *)
-  model = a1 + f t - ae n Sin[n t + l0];
 
+
+   model = - ae n Sin[n t + l0];
+
+  (* Choose initial guesses for the fit parameters *)
+  params = {{l0, -4.5 + Pi}, {ae, -0.1}, {n, 
+     0.021112225715565695`}};
+
+   Replace[OptionValue[Inspiral],
+     {"Polynomial" :>
+       (model = model + a1 + f t;
+         params = Join[params, {{f, -0.00}, {a1, 0}}];
+       If[OptionValue[QuadraticInspiral],
+         model = model + f2 t^2;
+         params = Join[params, {f2, 0}]]),
+       "PN" :>
+       (If[!OptionValue[CorrectedSemiMajorAxis],
+         Error["Inspiral -> PN requires CorrectedSemiMajorAxis -> True"]];
+         model = model + a1 (tc-t)^(-3/4) + f(tc-t)^(-9/8);
+         params = Join[params, {{f,0}, {a1,0},{tc,600*2}}]),
+       _ :> Error["Unrecognised value for option Inspiral in BinaryEccentricityFromSeparationDerivative"]}];
+   
  (* Note: a e appears as a single parameter in the model, so we
     cannot determine them independently from rDot. *)
 
-  (* Choose initial guesses for the fit parameters *)
-  params = {{l0, -4.5 + Pi}, {ae, -0.1}, {f, -0.00}, {a1, 0}, {n, 
-     0.021112225715565695`}};
 
   (* TODO: allow these initial fit guesses to be passed in as options to the function.*)
 
@@ -256,6 +276,8 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
   Slab[sepDot, tInterval];
   residualNorm = GridNorm[residual]/-Subtract@@CoordinateRange[residual];
 
+  circData = (model /. ae->0) /. fit /. t -> Coordinate[sepDot];
+   
   (* For convenience, make the eccentricity positive and adjust the
      mean anomaly to compensate *)
   flip = (ae /. fit) < 0;
@@ -265,13 +287,19 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
   
   (* The rDot model only determines a e, but we want to know e itself.
      So now we fit to r to determine a, and use that to measure e. *)
-  sepModel = Chop[Integrate[model /. fit, t] + a];
-  sepParams = {{a, 0}};
+  sepModel = Chop[Integrate[model /. fit, t] + const];
+  sepParams = {{const, 0}};
   sepFit = 
    FindFit[ToList[Slab[sep, tInterval]], sepModel, sepParams, t];
 
   (* Determine the eccentricity from ae and the separation fit for a *)
-  aFit = a /. sepFit;
+
+   If[OptionValue[CorrectedSemiMajorAxis],
+     sepCircModel = Chop[Integrate[model /. Join[{ae->0},fit], t] + const];
+     aFit = sepCircModel /. Join[sepFit, {t->0}],
+     (* else *)
+     aFit = const /. sepFit];
+
   ecc = ae/aFit /. fit;
 
   (* Due to dynamics in the slicing, "t=0" in the model might not
@@ -304,10 +332,10 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     (*      3 mu om^2 r^3 + (m - 3 mu) r rDot^2) *)
 
   (* Generate a diagnostic plot of the fit *)
-  plot = PresentationListLinePlot[{sepDot, fittedData, guessData}, 
+  plot = PresentationListLinePlot[{sepDot, fittedData, guessData, circData}, 
     PlotLegend -> {"NR", 
       SequenceForm["Fit (e=", ScientificForm[ecc, 2], ")"], 
-      "Initial fit guess"}, LegendPosition -> {Left, Bottom}, 
+      "Initial fit guess", "Circular fit"}, LegendPosition -> {Left, Bottom}, 
     GridLines -> {List @@ tInterval, None}];
 
   (* Fitted period *)
