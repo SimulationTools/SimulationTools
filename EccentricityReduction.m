@@ -159,7 +159,10 @@ Options[BinaryEccentricityFromSeparationDerivative] =
     "UpdateTime" -> 0,
     "QuadraticInspiral" -> False,
     "Inspiral" -> "Polynomial",
-    "CorrectedSemiMajorAxis" -> False};
+    "CorrectedSemiMajorAxis" -> False,
+    "MeanMotionGuess" -> 0.021112225715565695`,
+    "SemiMajorAxisGuess" -> 10,
+    "EccentricityGuess" -> -0.01};
 
 BinaryEccentricityFromSeparationDerivative[sep_DataTable, 
   window : {t1_, t2_}, opts : OptionsPattern[]] := 
@@ -212,8 +215,7 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
    model = - ae n Sin[n t + l0];
 
   (* Choose initial guesses for the fit parameters *)
-  params = {{l0, -4.5 + Pi}, {ae, -0.1}, {n, 
-     0.021112225715565695`}};
+   params = {{l0, -4.5 + Pi}, {ae, OptionValue[SemiMajorAxisGuess] OptionValue[EccentricityGuess]},{n,OptionValue[MeanMotionGuess]}};
 
    Replace[OptionValue[Inspiral],
      {"Polynomial" :>
