@@ -35,6 +35,7 @@ QuasiCircularParametersFromPostNewtonian;
 EccentricityReductionParameters;
 ReduceEccentricity;
 BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSeparationDerivative[sep, {t1, t2}] returns an association containing information about the eccentricity of a binary with separation sep.";
+EccentricityParameterSpacePlot;
 
 Begin["`Private`"];
 
@@ -364,6 +365,25 @@ ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
   mu = SymmetricMassRatio[sim] TotalMass[sim];
   deltax = Values[newEcc[[{"DeltaD0", "DeltaPr"}]]] /. "mu" -> mu;
   x0 + deltax];
+
+EccentricityParameterSpacePlot[params_List, es_List] :=
+ Module[{Ds, prs, eData, eModel, fit, fitFn, e0, d2edpr2, pr, pr0, 
+   d2edd2, d, d0, d2edprdd},
+  Ds = params[[All, 1]];
+  prs = params[[All, 2]];
+  eData = Thread[{Ds, prs, es^2}];
+  eModel = 
+   e0 + d2edpr2 (pr - pr0)^2 + d2edd2 (d - d0)^2 + 
+    d2edprdd (pr - pr0) (d - d0);
+  fit = FindFit[eData[[1 ;; All]], 
+    eModel, {{pr0, prs[[-1]]}, {d0, Ds[[-1]]}, {d2edpr2, 0}, {d2edd2, 
+      0}, {d2edprdd, 0}, {e0, 0}}, {d, pr}];
+  fitFn = eModel /. fit;
+  Show[ContourPlot[
+    Log10[Sqrt[Abs@fitFn]], {d, Min[Ds] - 0.1, Max[Ds] + 0.1}, {pr, 
+     Min[prs] - 0.0001, Max[prs] + 0.0001}, 
+    Contours -> Range[-4, 1, 0.1], PlotLegends -> Automatic], 
+   ListPlot[params, PlotStyle -> Black]]];
 
 End[];
 
