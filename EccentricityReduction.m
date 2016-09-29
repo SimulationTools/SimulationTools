@@ -170,6 +170,7 @@ Options[BinaryEccentricityFromSeparationDerivative] =
     "Inspiral" -> "Polynomial",
     "CorrectedSemiMajorAxis" -> False,
     "MeanMotionGuess" -> 0.021112225715565695`,
+    "OrbitalFrequency" -> None,
     "SemiMajorAxisGuess" -> 10,
     "EccentricityGuess" -> -0.01};
 
@@ -357,7 +358,10 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
       Print["Warning: fitted radial period ", fittedP, " is shorter than fit window of length ", t2-t1]; False,
       (* else *)
       True];
-  
+
+   If[OptionValue[OrbitalFrequency] =!= None && (n/.fit) > OptionValue[OrbitalFrequency],
+     Error["Fitted mean motion is greater than the orbital frequency; probably fitted gauge oscillations.  Try providing a fixed mean motion from a higher eccentricity simulation"]];
+   
   Association[
     "FitParameters" -> (fit /. {ae -> "ae", a -> "a", n -> "n", 
       l0 -> "l0", f -> "f", a1 -> "a1"}), "Plot" -> plot, "Eccentricity" -> ecc, 
