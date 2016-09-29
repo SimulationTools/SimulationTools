@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* Copyright 2010-2016 Ian Hinder and Barry Wardell
 
    This program is free software: you can redistribute it and/or modify
@@ -61,7 +63,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   Module[{eta, m1, m2, S1, S2, 
    S\[ScriptL], \[CapitalSigma]\[ScriptL], \[Delta]M, mu, en, 
    l, \[CapitalDelta], x, nu, enNum, lNum, xRule, rNum, rExpr, rDotExpr, 
-   rDotNum, r, rp0, \[Gamma], rDot, prExpr, prNum},
+   rDotNum, r, rp0, \[Gamma], rDot, a1, a2, a3, a4, a5, e4, e5, rax, j4, j5, Vsq, prExpr1, prExpr2, prExpr3, prExpr, prNum},
   (* TODO: the m-dependence of the expressions below is only correct for m=
   1 *)
   (* TODO: replace these symbols (\[CapitalSigma] etc) with names like "Sigma" *)
@@ -77,13 +79,23 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   \[CapitalSigma]\[ScriptL] = S2/m2 - S1/m1;
   \[Delta]M = m1 - m2;
   mu = eta;
+  e4 = 153.8803;
+  e5 = -55.13;
+  j4 = -5 e4/7 + 64/35;
+  j5 = -2 e5/3 - 4988/945 - 656 eta/135;
+  a1 = -2.18522;
+  a2 = 1.05185;
+  a3 = -2.43395;
+  a4 = 0.400665;
+  a5 = -5.9991;
   
-  (* Energy *)
+  (* Energy EAH: this new version now includes corrections up to 5PN order in the QC sector*)
   en = -((mu x)/
        2) (1 + x (-(3/4) - 1/12 eta) + 
         x^2 (-(27/8) + 19/8 eta - 1/24 eta^2) + 
         x^3 (-(675/64) + (34445/576 - 205/96 \[Pi]^2) eta - 
-           155/96 eta^2 - 35/5184 eta^3) + 
+           155/96 eta^2 - 35/5184 eta^3) + x^4 (-3969/128 + eta e4 + 448 eta Log[x]/15) +
+            x^5 (-45927/128 + eta e5 + (-4988/35 - 656 eta/5)eta Log[x]) + 
         x^(3/2) (14/3 S\[ScriptL] + 2 \[Delta]M \[CapitalSigma]\[ScriptL]) + 
         x^(5/2) ((11 - 61/9 eta) S\[ScriptL] + \[Delta]M (3 - 
               10/3 eta) \[CapitalSigma]\[ScriptL]) + 
@@ -102,12 +114,14 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
            18) x^3) /. nu -> eta /. \[CapitalDelta] -> Sqrt[
      1 - 4 eta];
 
-  (* Angular momentum (not divided by mu) *)
+  (* Angular momentum (not divided by mu) EAH: this version include corrections up to 5PN order *)
   l = eta/x^(
       1/2) (1 + x (3/2 + 1/6 eta) + 
         x^2 (27/8 - 19/8 eta + 1/24 eta^2) + 
         x^3 (135/16 + (-6889/144 + 41/24 \[Pi]^2) eta + 31/24 eta^2 + 
            7/1296 eta^3) + 
+           x^4 (2835/128 + eta j4 -64 eta Log[x]/3)+ 
+           x^5 (15309/256 + eta j5 + (9976/105 + 1312 eta/15)eta Log[x])+
         x^(3/2) (-(35/6) S\[ScriptL] - 
            5/2 \[Delta]M \[CapitalSigma]\[ScriptL]) + 
         x^(5/2) ((-(77/8) + 427/72 eta) S\[ScriptL] + \[Delta]M (-(21/8) + 
@@ -126,12 +140,14 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
            14 nu^2 chi2^2)/
            9) x^3) /. nu -> eta /. \[CapitalDelta] -> Sqrt[1 - 4 eta];
   
-  (* Based on Blanchet Eq.193 *)
+  (* Based on Blanchet Eq.193. EAH: new version below is from SF, arXiv 1111.5610 *)
+  rax = -1+(-1+4 x)/Sqrt[1-3 x]-(x (-5+12 x))/(2 (1-3 x)^(3/2))+(2 Sqrt[1-3 x] x (a1+2 a2 x))/(1+a3 x+a4 x^2+a5 x^3)+(2 Sqrt[1-3 x] (1+a1 x+a2 x^2))/(1+a3 x+a4 x^2+a5 x^3)-(3 x (1+a1 x+a2 x^2))/(Sqrt[1-3 x] (1+a3 x+a4 x^2+a5 x^3))-(2 Sqrt[1-3 x] x (1+a1 x+a2 x^2) (a3+x (2 a4+3 a5 x)))/(1+a3 x+a4 x^2+a5 x^3)^2;
+  rExpr = m/(x + eta(x/6 rax + 2/3 x((1 - 2 x)/Sqrt[1 - 3 x]-1)));
   
-  rExpr = m/x + 1/3 m (-3 + nu) + 1/36 m nu (171 + 4 nu) x + 
+  (*rExpr = m/x + 1/3 m (-3 + nu) + 1/36 m nu (171 + 4 nu) x + 
      m (-((37 nu^2)/12) + (2 nu^3)/
         81 + nu (-(24257/2520) + (41 Pi^2)/192) + 
-        22/3 nu Log[r/rp0]) x^2 /. {nu -> eta, rp0 -> r};
+        22/3 nu Log[r/rp0]) x^2 /. {nu -> eta, rp0 -> r};*)
   (* TODO: Not sure what to do with r,rp0 here *)
 
   (* TODO: add spin effects to this.  We can get these from Blanchet,
@@ -144,10 +160,13 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   (* Derived myself (ICH) in notebook "ETBBH 11 - Eccentricity
      reduction 2" from the Lagrangian in Blanchet.  This should be in
      ADMTT coordinates, and I'm not sure to what PN order it is.
-     Go back and checked. *)
+     Go back and checked. EAH: the below expression now goes to order 1/c^6*)
 
-  prExpr = mu rDot + 1/(2 m r) mu rDot (6 m^2 + 4 m mu + m om^2 r^3 - 
-       3 mu om^2 r^3 + (m - 3 mu) r rDot^2);
+  Vsq = rDot^2 + (om*r)^2;
+  prExpr1 = 1 + 1/2 (1 - 3 eta)Vsq + m/r (3+2 eta);
+  prExpr2 = (3/8-(21 eta)/8+(39 eta^2)/8)Vsq Vsq + m/r (-(1/2)Vsq(-7 + 10 eta + 14 eta^2)-(-1+eta)eta rDot^2)+(m/r)^2 (4 + eta + 4 eta^2);
+  prExpr3 = (5/16-(59 eta)/16+(119 eta^2)/8-(323 eta^3)/16)Vsq Vsq Vsq + m/r (1/8 (Vsq Vsq (33 - 160 eta + 129 eta^2 + 270 eta^3) + 2 Vsq eta (8 - 39 eta + 42 eta^2) rDot^2+9 (1 - 2 eta) eta^2 rDot^4)) + (m/r)^2 (1/24 (-3 Vsq (-94+81 eta + 108 eta^2 + 180 eta^3)+ eta (77 - 38 eta - 132 eta^2) rDot^2)) + (m/r)^3 (13/4-(89 eta)/12+(\[Pi]^2 eta)/16+(5 eta^2)/4+8 eta^3);
+  prExpr = mu rDot (prExpr1 + prExpr2 + prExpr3);
   
   xRule = {x -> (om^(2/3))};
   enNum = en /. xRule;
@@ -242,7 +261,7 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
        "PN" :>
        (If[!OptionValue[CorrectedSemiMajorAxis],
          Error["Inspiral -> PN requires CorrectedSemiMajorAxis -> True"]];
-         model = model + a1 (tc-t)^(-3/4) + f(tc-t)^(-9/8);
+         model = model + a1 (tc-t)^(-3/4) + f (tc-t)^(-9/8);
          params = Join[params, {{f,0}, {a1,0},{tc,600*2}}]),
        _ :> Error["Unrecognised value for option Inspiral in BinaryEccentricityFromSeparationDerivative"]}];
    
