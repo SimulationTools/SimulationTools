@@ -23,9 +23,11 @@ BeginPackage["SimulationTools`EccentricityReduction`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
+  "SimulationTools`IniFile`",
   "SimulationTools`Memo`",
   "SimulationTools`Parameters`",
   "SimulationTools`Plotting`",
+  "SimulationTools`RunFiles`",
   "SimulationTools`TwoPunctures`",
   "SimulationTools`ArgumentChecker`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
@@ -38,6 +40,13 @@ BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSepar
 EccentricityParameterSpacePlot;
 
 Begin["`Private`"];
+
+(* EccentricityReductionParameters[sim_String] := *)
+(*   Module[{mdFiles}, *)
+(*     mdFiles = FindSimulationFiles[sim, "TwoPunctures.bbh"]; *)
+(*     Association@Thread[{"Separation", "RadialMomentum", "TangentialMomentum"} -> *)
+(*       (ToExpression@IniVariable[mdFiles[[1]], #] & /@ *)
+(*       {"initial-separation", "initial-bh-momentum1x", "initial-bh-momentum1y"})]]; *)
 
 EccentricityReductionParameters[sim_String] :=
   Module[{b, pr, pPhi},
