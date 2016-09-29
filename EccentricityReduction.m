@@ -344,11 +344,11 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     (*      3 mu om^2 r^3 + (m - 3 mu) r rDot^2) *)
 
   (* Generate a diagnostic plot of the fit *)
-  plot = PresentationListLinePlot[{sepDot, fittedData, guessData, circData}, 
+  plot = PresentationListLinePlot[{sepDot, fittedData, (*guessData, *)circData}, 
     PlotLegend -> {"NR", 
       SequenceForm["Fit (e=", ScientificForm[ecc, 2], ")"], 
-      "Initial fit guess", "Circular fit"}, LegendPosition -> {Left, Bottom}, 
-    GridLines -> {List @@ tInterval, None}];
+      (*"Initial fit guess",*) "Circular fit"}, LegendPosition -> {Left, Bottom}, 
+    GridLines -> {List @@ tInterval, None}, PlotRange -> All(*{{0,1.2 t2}, #[Slab[sepDot,t1;;t2]] & /@ {Min,Max}}*)];
 
   (* Fitted period *)
   fittedP = 2Pi/(n/.fit);
