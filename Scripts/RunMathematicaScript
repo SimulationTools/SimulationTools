@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# This script works around the problem that
+# i) A Mathematica script's shebang line cannot just be
+#    #!/path/to/MathematicaScript -script
+#    because this is not portable to different installation locations, and;
+# ii) #!/usr/bin/env MathematicaScript -script does not work on Linux, because you can only
+#    pass a single argument this way.
+
+exec MathematicaScript -script "${@}"
