@@ -63,7 +63,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   Module[{eta, m1, m2, S1, S2, 
    S\[ScriptL], \[CapitalSigma]\[ScriptL], \[Delta]M, mu, en, 
    l, \[CapitalDelta], x, nu, enNum, lNum, xRule, rNum, rExpr, rDotExpr, 
-   rDotNum, r, rp0, raxder, \[Gamma], \[Gamma]ammaE, rDot, drdx, dEdt, dEdx, a1, a2, a3, a4, a5, e4, e5, rax, j4, j5, V, prExpr1, prExpr2, prExpr3, prExpr, prNum},
+   rDotNum, r, rp0, raxder, \[Gamma], \[Gamma]ammaE, rDot, drdx, dEdt, dEdx, a1, a2, a3, a4, a5, e4, e5, rax, j4, j5, V, prExpr1, prExpr2, prExpr3, prExpr, prNum, \[Nu]},
   (* TODO: the m-dependence of the expressions below is only correct for m=
   1 *)
   (* TODO: replace these symbols (\[CapitalSigma] etc) with names like "Sigma" *)
@@ -79,6 +79,8 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   \[CapitalSigma]\[ScriptL] = S2/m2 - S1/m1;
   \[Delta]M = m1 - m2;
   mu = eta;
+  \[Nu] = eta;
+  nu = eta;
   e4 = -(123671/5760)+(9037 \[Pi]^2)/1536+(896 \[Gamma]ammaE)/15+(-(498449/3456)+(3157 \[Pi]^2)/576) \[Nu]+(301 \[Nu]^2)/1728+(77 \[Nu]^3)/31104+(1792 Log[2])/15;
   e5 = -55.13;
   j4 = -(5/7)e4+64/35;
@@ -204,12 +206,12 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   lNum = l /. xRule;
   rNum = rExpr /. xRule;
   rDotNum = rDotExpr /. {r -> rNum, \[Gamma] -> 1/rNum};
-  prNum = prExpr /. {rDot -> rDotNum, r -> rNum};
+  prNum = prExpr /. {rDot -> rDotNum, r -> rNum} //. xRule;
   
   Association["Energy" -> enNum, "OrbitalAngularMomentum" -> lNum,
    "Separation" -> rNum, "TotalAngularMomentum" -> lNum + S1 + S2,
    "RadialVelocity" -> rDotNum,
-   "RadialMomentum" -> prNum]];
+   "RadialMomentum" -> prNum]/.{rp0->2,r->10}];
 
 
 (**********************************************************)
