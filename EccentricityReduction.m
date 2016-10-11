@@ -63,7 +63,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   Module[{eta, m1, m2, S1, S2, 
    S\[ScriptL], \[CapitalSigma]\[ScriptL], \[Delta]M, mu, en, 
    l, \[CapitalDelta], x, nu, enNum, lNum, xRule, rNum, rExpr, rDotExpr, 
-   rDotNum, r, rp0, raxder, \[Gamma], \[Gamma]ammaE, rDot, drdx, dEdt, dEdx, a1, a2, a3, a4, a5, e4, e5, rax, j4, j5, V, prExpr1, prExpr2, prExpr3, prExpr, prNum, \[Nu]},
+   rDotNum, r, rp0, raxder, \[Gamma], \[Gamma]ammaE, rDot, drdx, dEdt, dEdx, a1, a2, a3, a4, a5, e4, e5, rax, j4, j5, V, prExpr1, prExpr2, prExpr3, prExpr, prNum, \[Nu], omDotExpr},
   (* TODO: the m-dependence of the expressions below is only correct for m=
   1 *)
   (* TODO: replace these symbols (\[CapitalSigma] etc) with names like "Sigma" *)
@@ -187,6 +187,8 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   x^3 (6643739519/69854400-(94403 eta^2)/3024-(775 eta^3)/324+(16 \[Pi]^2)/3+eta (-(134543/7776)+(41 \[Pi]^2)/48)-(1712 \[Gamma]ammaE)/105-856/105 Log[16 x]));
   rDotExpr = -(32/5)*nu*x^5*(drdx*dEdt/dEdx);
   
+  xDotExpr = -1/(dEdx) dEdt;
+
   (* Derived myself (ICH) in notebook "ETBBH 11 - Eccentricity
      reduction 2" from the Lagrangian in Blanchet.  This should be in
      ADMTT coordinates, and I'm not sure to what PN order it is.
@@ -207,11 +209,14 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   rNum = rExpr /. xRule;
   rDotNum = rDotExpr /. {r -> rNum, \[Gamma] -> 1/rNum};
   prNum = prExpr /. {rDot -> rDotNum, r -> rNum} //. xRule;
+  omDotExpr = (D[x^(3/2),x] xDotExpr) /. xRule;
   
   Association["Energy" -> enNum, "OrbitalAngularMomentum" -> lNum,
    "Separation" -> rNum, "TotalAngularMomentum" -> lNum + S1 + S2,
    "RadialVelocity" -> rDotNum,
-   "RadialMomentum" -> prNum]/.{rp0->2,r->10}];
+   "RadialMomentum" -> prNum,
+   "OmegaDot" -> omDotExpr]/.{rp0->2,r->10}
+];
 
 
 (**********************************************************)
