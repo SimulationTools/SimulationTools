@@ -187,7 +187,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   x^3 (6643739519/69854400-(94403 eta^2)/3024-(775 eta^3)/324+(16 \[Pi]^2)/3+eta (-(134543/7776)+(41 \[Pi]^2)/48)-(1712 \[Gamma]ammaE)/105-856/105 Log[16 x]));
   rDotExpr = -(32/5)*nu*x^5*(drdx*dEdt/dEdx);
   
-  xDotExpr = -1/(dEdx) dEdt;
+  xDotExpr = -1/(dEdx) (32/5 nu x^5) dEdt;
 
   (* Derived myself (ICH) in notebook "ETBBH 11 - Eccentricity
      reduction 2" from the Lagrangian in Blanchet.  This should be in
