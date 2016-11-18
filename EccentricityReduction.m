@@ -179,7 +179,9 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
  Module[{model, a, a1, f, t, ae, n, l0, c, params, tStart, tLength, 
    tInterval, plot, guessData, fit, fittedData, sepDot, flip, e, 
    deltaD0, deltapr, mu, sepModel, sepFit, sepParams, aFit, n2, psi, 
-   n3, residual, ecc, residualNorm, fittedP, completePeriod, circData},
+   n3, residual, ecc, residualNorm, fittedP, completePeriod, circData,
+   fitOptions = {PrecisionGoal -> 6, AccuracyGoal -> 6, MaxIterations -> 100},
+   convFail, meanMotion, norm},
 
   (* Notation:
 
@@ -277,11 +279,12 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
   guessData = 
    model /. Apply[Rule, params, 1] /. t -> Coordinate[sepDot];
 
+   norm[d_DataTable] :=
+     d/Mean[d];
+   
   (* Fit the numerical rDot to the model *)
-  fit = FindFit[ToList[Slab[sepDot, tInterval]], model, params, t];
-
-  (* TODO: detect messages about inability to find a good fit, and
-     return an error *)
+   convFail = Quiet[Check[fit = FindFit[ToList[Slab[sepDot, tInterval]], model, params, t,
+     fitOptions], FindFit::cvmit, FindFit::cvmit],FindFit::cvmit] === FindFit::cvmit;
 
   fittedData = model /. fit /. t -> Coordinate[sepDot];
   residual = (model /. fit /. 
@@ -301,9 +304,10 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
   (* The rDot model only determines a e, but we want to know e itself.
      So now we fit to r to determine a, and use that to measure e. *)
   sepModel = Chop[Integrate[model /. fit, t] + const];
-  sepParams = {{const, 0}};
-  sepFit = 
-   FindFit[ToList[Slab[sep, tInterval]], sepModel, sepParams, t];
+   sepParams = {{const, 0}};
+   sepFit = 
+   FindFit[ToList[Slab[sep, tInterval]], sepModel, sepParams, t,
+     fitOptions];
 
   (* Determine the eccentricity from ae and the separation fit for a *)
 
@@ -351,23 +355,33 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
       (*"Initial fit guess",*) "Circular fit"}, LegendPosition -> {Left, Bottom}, 
     GridLines -> {List @@ tInterval, None}, PlotRange -> All(*{{0,1.2 t2}, #[Slab[sepDot,t1;;t2]] & /@ {Min,Max}}*)];
 
+   meanMotion = If[OptionValue[FixEccentricFrequency] =!= False,
+     OptionValue[FixEccentricFrequency],
+     n/.fit];
+
   (* Fitted period *)
-  fittedP = 2Pi/(n/.fit);
+  fittedP = 2Pi/(meanMotion/.fit);
   completePeriod =
     If[t2-t1 < fittedP,
-      Print["Warning: fitted radial period ", fittedP, " is shorter than fit window of length ", t2-t1]; False,
+      Print["Warning: fitted radial period ", fittedP, " is longer than fit window of length ", t2-t1]; False,
       (* else *)
       True];
-
+   failed=False;
+   radPeriodTooShort = False;
    If[OptionValue[OrbitalFrequency] =!= None && (n/.fit) > OptionValue[OrbitalFrequency],
-     Error["Fitted mean motion is greater than the orbital frequency; probably fitted gauge oscillations.  Try providing a fixed mean motion from a higher eccentricity simulation"]];
+     Print["WARNING: Fitted mean motion is greater than the orbital frequency; probably fitted gauge oscillations."];
+     radPeriodTooShort = True;
+     failed = True];
    
   Association[
     "FitParameters" -> (fit /. {ae -> "ae", a -> "a", n -> "n", 
-      l0 -> "l0", f -> "f", a1 -> "a1"}), "Plot" -> plot, "Eccentricity" -> ecc, 
+      l0 -> "l0", f -> "f", a1 -> "a1", tc -> "tc"}), "Plot" -> plot, "Eccentricity" -> ecc, 
     "DeltaD0" -> deltaD0, "DeltaPr" -> deltapr, 
     "Residual" -> residual, "ResidualNorm" -> residualNorm,
-    "PericentreTime" -> (-l0/n) /.fit, "CompletePeriod" -> completePeriod]];
+    "PericentreTime" -> (-l0/meanMotion) /.fit, "CompletePeriod" -> completePeriod,
+    "OrbitalFrequency"->OptionValue[OrbitalFrequency],
+    "Failed" -> failed, "RadialPeriodTooShort" ->radPeriodTooShort,
+    "ConvergenceFailure" ->convFail, "MeanMotion" -> meanMotion, "Separation" -> sep]];
 
 Options[ReduceEccentricity] = {};
 ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
