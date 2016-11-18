@@ -28,17 +28,45 @@ outfile = $ScriptCommandLine[[3]];
 
 If[SimulationNames[sim] === {},
   Error["Cannot find simulation "<>sim]];
+  $SimulationPath = {FileNameDrop[sim,-1]};
   
-sep = ReadBinarySeparation[sim];
-om0 = InitialOrbitalFrequency[sim];
-D0 = BinaryBlackHoleParameters[sim]["D"];
-params = EccentricityReductionParameters[sim];
-ecc = BinaryEccentricityFromSeparationDerivative[sep, {150, 600}, 
-  Inspiral -> "PN", 
-  CorrectedSemiMajorAxis -> True,
-  MeanMotionGuess -> om0,
-  SemiMajorAxisGuess -> D0];
+  (* Find all the simulations in the eccentricity reduction series *)
+  sims =  Replace[StringCases[sim, (a__~~"_e"~~(it:NumberString)~~"_"~~b__) :> {a,it,b}],
+    { {} :> (Print["Simulation name ", sim, " is not of the form *_e<int>_*"]; Quit[1]),
+      {{a_,it_,b_}} :> (pattern = FileNameTake[a,-1]~~"_e"~~NumberString~~"_"~~b;
+        Print["pattern = ", pattern];
+        (* For some reason, SimulationNames doesn't work with full paths containing patterns *)
+        SimulationNames[pattern]),
+      a_ :> Print["Unrecognised match: ", a]}];
 
+  Print["sims = ", sims];
+
+  simName = FileNameTake[sim,-1];
+  nSims = LengthWhile[sims, (# =!= simName) &] + 1;
+  If[nSims > Length[sims],
+    Print["Cannot find current simulation ", FileNameTake[sim,-1],
+      " in the list of simulations ", sims];
+    Quit[1]];
+
+  sims = Take[sims, nSims];
+
+  Print["Analysing ", sims];
+  Print["$SimulationPath = ", $SimulationPath];
+  
+  Print["PunctureTracker files: ", FindSimulationFiles[sims[[-1]], 
+    "puncturetracker" ~~ ("-" | "::") ~~ "pt_loc..asc"]];
+  
+  (* Analyse all the simulations, to get information from the previous
+     ones to help at low eccentricity when the fit is difficult *)
+
+  (* NB: cannot use simulation basename as there is a directory of
+     that name in the current directory which is found
+     preferentially. *)
+  eccs = SimulationEccentricityAnalysis[FileNameJoin[{$SimulationPath[[1]],#}] & /@ sims];
+
+  Print[eccs[[All, {"Eccentricity", "ResidualNorm", "RadialPeriod", "OrbitalPeriod"}]]];
+  ecc = Last[eccs];
+  
   f = OpenWrite[outfile];
   WriteLine[f, "Eccentricity="<>ToString[ecc["Eccentricity"], CForm]];
 
@@ -47,4 +75,4 @@ ecc = BinaryEccentricityFromSeparationDerivative[sep, {150, 600},
   WriteLine[f, "NextD="<>ToString[nextD,CForm]];
   WriteLine[f, "NextPr="<>ToString[nextPr,CForm]];
   Close[f];
-, Quit[1]];
+  , Quit[1]];
