@@ -19,6 +19,8 @@
 BeginPackage["SimulationTools`EccentricityReduction`",
  {
   "SimulationTools`ColumnFile`",
+  "SimulationTools`Binary`",
+  "SimulationTools`BHCoordinates`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
@@ -38,6 +40,7 @@ EccentricityReductionParameters;
 ReduceEccentricity;
 BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSeparationDerivative[sep, {t1, t2}] returns an association containing information about the eccentricity of a binary with separation sep.";
 EccentricityParameterSpacePlot;
+SimulationEccentricityAnalysis;
 
 Begin["`Private`"];
 
@@ -382,6 +385,68 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     "OrbitalFrequency"->OptionValue[OrbitalFrequency],
     "Failed" -> failed, "RadialPeriodTooShort" ->radPeriodTooShort,
     "ConvergenceFailure" ->convFail, "MeanMotion" -> meanMotion, "Separation" -> sep]];
+
+(* Analyse an eccentricity reduction series.  Each result is passed to
+   the next analysis so that the mean motion can be used in case it
+   cannot be determined automatically. *)
+SimulationEccentricityAnalysis[sims_List] :=
+  Drop[FoldList[SimulationEccentricityAnalysis[#2, #1] &, None, sims],1];
+
+(* Analyse the eccentricity of a simulation *)
+SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
+ Module[{sep, om0, D0, params, ecc, eccMeasured, nextD, nextPr, ecc2, 
+   result, eccFitWindow, eps, calcEcc},
+   
+  (* Any unhandled message leads to a failure report *)
+  result = Check[
+    (* This is a simple way to remove high frequency noise which
+       sometimes causes the fit to fail to converge *)
+    sep = Resampled[ReadBinarySeparation[sim], {5.0}];
+    om0 = InitialOrbitalFrequency[sim]; 
+    D0 = BinaryBlackHoleParameters[sim]["D"]; 
+    params = EccentricityReductionParameters[sim];
+    
+    eccFitWindow = 150 + {0, 2*2 Pi/om0};
+    eps = 5; 
+    If[MaxCoordinate[sep] + eps < eccFitWindow[[2]], 
+     Print["WARNING: Simulation ", sim, " too short (", 
+      MaxCoordinate[sep], 
+      ") for fitting in " <> ToString[eccFitWindow]]];
+    
+    calcEcc[opts_List] :=
+     Module[{e},
+      e = 
+       BinaryEccentricityFromSeparationDerivative[sep, eccFitWindow, 
+        opts, Inspiral -> "PN", CorrectedSemiMajorAxis -> True, 
+        MeanMotionGuess -> om0, SemiMajorAxisGuess -> D0, 
+        OrbitalFrequency -> om0];
+      If[e["RadialPeriodTooShort"] ,
+       Print["Radial period too short"];
+       If[ ! MemberQ[opts[[All, 1]], "FixEccentricFrequency"] && 
+         prevEcc =!= None,
+        Print["Using previous mean motion"];
+        calcEcc[
+         Join[{FixEccentricFrequency -> prevEcc["MeanMotion"]}, opts]],
+        Print["No previous mean motion, or it didn't help"];
+        Join[e, <|"Failed" -> True|>]],
+       If[e["ConvergenceFailure"],
+        Print["Convergence failure"];
+        If[! MemberQ[opts, Inspiral -> "Polynomial"],
+         Print["Using linear inspiral"];
+         calcEcc[Join[{Inspiral -> "Polynomial"}, opts]],
+         Print["Linear inspiral didn't help"];
+         Join[e, <|"Failed" -> True|>]],
+        e]]];
+    
+    ecc = calcEcc[{}];
+    eccMeasured = ecc["Eccentricity"];
+    {nextD, nextPr} = ReduceEccentricity[sim, ecc];
+    ecc2 = 
+     Join[ecc, <|"NextD" -> nextD, "NextPr" -> nextPr, 
+       "RadialPeriod" -> (2 Pi/ecc["MeanMotion"]), 
+       "OrbitalPeriod" -> 2 Pi/om0, 
+       "Simulation" -> sim|>];, $Failed];
+  Join[ecc2, <|"Failed" -> (result === $Failed || ecc2["Failed"])|>]];
 
 Options[ReduceEccentricity] = {};
 ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
