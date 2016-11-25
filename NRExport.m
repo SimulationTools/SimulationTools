@@ -52,6 +52,7 @@ ExportStatus(*::usage = "ExportStatus is a variable which reports the current st
 
 ExportSim = ExportNumericalRelativitySimulation;
 ExportSXSSimulation;
+ExportSXSSimulationResolutions;
 BinaryBlackHoleRelaxedTime;
 HDF5FilesDiffer;
 
@@ -572,6 +573,18 @@ extrapolatedWaveform[sim_String] :=
 
     extrapStrain["ExtrapolatedWaveform"]];
 
+configName[sim_String] := 
+ StringReplace[sim, x__ ~~ "_" ~~ NumberString ~~ EndOfString :> x];
+
+resolutionCode[sim_String] := 
+ StringReplace[sim, 
+  x__ ~~ "_" ~~ n : NumberString ~~ EndOfString :> n];
+
+ExportSXSSimulationResolutions[sims_List, outDir_, opts___] :=
+  Do[
+    ExportSXSSimulation[sim, 
+      FileNameJoin[{outDir, configName[sim], resolutionCode[sim]}], opts],
+    {sim, sims}];
 
 Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None, "h22" -> Automatic};
 
