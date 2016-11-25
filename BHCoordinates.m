@@ -39,6 +39,8 @@ ReadBHSpeed(*::usage = "ReadBHSpeed[sim, i] returns a DataTable of the coordinat
 BHCoordinateMergerTime(*::usage = "BHCoordinateMergerTime[sim,eps] returns the time at which the BHs in sim reach a separation of eps (eps defaults to 0.01 if omitted)."*);
 InitialSeparation;
 InitialPosition(*::usage = "InitialPosition[sim, bh] returns a vector containing the initial coordinate position of BH numbered bh"*);
+InitialOrbitalFrequency;
+RelaxedOrbitalFrequency;
 
 Begin["`Private`"];
 
@@ -138,6 +140,20 @@ DefineMemoFunction[InitialSeparation[run_],
 
 DefineMemoFunction[InitialPosition[run_, bh_],
   First@DepVar@ReadBHCoordinates[run, bh]];
+
+InitialOrbitalFrequency[sim_String] :=
+  Module[{omOrb,fit},
+    omOrb = NDerivative[1][ReadBHPhase[sim]];
+    fit = LinearModelFit[ToList[Slab[omOrb, 50 ;; 75]], {1, t}, t];
+    fit[0]];
+
+RelaxedOrbitalFrequency[sim_String, tRelaxed_?NumberQ] :=
+  RelaxedOrbitalFrequency[NDerivative[1][ReadBHPhase[sim]], tRelaxed];
+
+RelaxedOrbitalFrequency[omOrb_DataTable, tRelaxed_?NumberQ] :=
+  Module[{fit},
+    fit = LinearModelFit[ToList[Slab[omOrb, (tRelaxed-30) ;; (tRelaxed+30)]], {1, t}, t];
+    Abs[fit[0]]];
 
 End[];
 
