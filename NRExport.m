@@ -17,6 +17,7 @@
 BeginPackage["SimulationTools`NRExport`",
  {
   "SimulationTools`BHCoordinates`",
+  "SimulationTools`BlackHole`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
@@ -48,6 +49,7 @@ ExportConfig(*::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory
 ExportStatus(*::usage = "ExportStatus is a variable which reports the current status of an export."*);
 
 ExportSim = ExportNumericalRelativitySimulation;
+BinaryBlackHoleRelaxedTime;
 HDF5FilesDiffer;
 
 Begin["`Private`"];
@@ -535,6 +537,10 @@ HDF5FilesDiffer[f1_String, f2_String] :=
 
 (* TODO: check on Linux whether exit codes from Run are multiplied by
    256. Also find out why they are on Mac OS.*)
+
+BinaryBlackHoleRelaxedTime[sim_String] :=
+  200;
+
 End[];
 
 EndPackage[];
