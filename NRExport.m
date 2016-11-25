@@ -535,7 +535,6 @@ HDF5FilesDiffer[f1_String, f2_String] :=
   Module[{code,out,err},
     {code,out,err} = RunSubprocess[{"/opt/local/bin/h5diff", "-q", f1, f2}, 
       Exceptions -> False, "StringLists" -> False];
-    Print[{code,out,err}];
     If[code === 2*256, Error["Error when running h5diff: "<>ToString[err]]];
     code === 1*256];
 
