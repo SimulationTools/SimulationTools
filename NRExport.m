@@ -25,6 +25,7 @@ BeginPackage["SimulationTools`NRExport`",
   "SimulationTools`Parameters`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`TwoPunctures`",
+  "SimulationTools`Utils`",
   "SimulationTools`Waveforms`"
  }];
 
@@ -47,6 +48,7 @@ ExportConfig(*::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory
 ExportStatus(*::usage = "ExportStatus is a variable which reports the current status of an export."*);
 
 ExportSim = ExportNumericalRelativitySimulation;
+HDF5FilesDiffer;
 
 Begin["`Private`"];
 
@@ -523,6 +525,16 @@ Options[ExportConfig] = Options[ExportSim];
 ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPattern[]] :=
   Scan[ExportNumericalRelativitySimulation[#, name, outputDirectory, Madm, ecc, opts] &, sims];
 
+HDF5FilesDiffer[f1_String, f2_String] :=
+  Module[{code,out,err},
+    {code,out,err} = RunSubprocess[{"/opt/local/bin/h5diff", "-q", f1, f2}, 
+      Exceptions -> False, "StringLists" -> False];
+    Print[{code,out,err}];
+    If[code === 2*256, Error["Error when running h5diff: "<>ToString[err]]];
+    code === 1*256];
+
+(* TODO: check on Linux whether exit codes from Run are multiplied by
+   256. Also find out why they are on Mac OS.*)
 End[];
 
 EndPackage[];
