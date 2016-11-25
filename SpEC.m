@@ -1096,9 +1096,8 @@ nv[s_] :=
 
 computeExtraMetadata[a_] :=
  Module[{a1, a2, requiredKeys, missingKeys},
-
   requiredKeys = {"relaxed-mass1", "relaxed-mass2", "relaxed-spin1",
-    "relaxed-spin2", "relaxed-orbital-frequency"};
+    "relaxed-spin2", "relaxed-orbital-frequency", "initial-mass1", "initial-mass2"};
    missingKeys = Complement[requiredKeys, Keys[a]];
    If[missingKeys =!= {},
      Error["Keys "<>ToString[missingKeys]<>" not found in metadata"]];
