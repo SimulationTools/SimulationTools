@@ -49,6 +49,7 @@ ExportConfig(*::usage = "ExportConfig[name -> {mass, sims, ecc}, outputDirectory
 ExportStatus(*::usage = "ExportStatus is a variable which reports the current status of an export."*);
 
 ExportSim = ExportNumericalRelativitySimulation;
+ExportSXSSimulation;
 BinaryBlackHoleRelaxedTime;
 HDF5FilesDiffer;
 
@@ -540,6 +541,75 @@ HDF5FilesDiffer[f1_String, f2_String] :=
 
 BinaryBlackHoleRelaxedTime[sim_String] :=
   200;
+
+Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None};
+ExportSXSSimulation[sim_String, dir_, h22_DataTable, opts:OptionsPattern[]] :=
+  Module[{waveformFile, mdFile, tRelaxed, masses, spins, md, mdText, i, coord, tPeak,
+         ecc, tmpFile},
+  waveformFile = dir <> "/rhOverM_Asymptotic_GeometricUnits.h5";
+  mdFile = dir <> "/metadata.txt";
+  If[! FileExistsQ[dir], 
+    CreateDirectory[dir, CreateIntermediateDirectories -> True]];
+
+  tmpFile = waveformFile<>".tmp";  
+    Export[tmpFile, {Map[{#[[1]], Re[#[[2]]], Im[#[[2]]]} &,
+      ToList[h22]]}, {"HDF5", "Datasets", {"Extrapolated_N2.dir/Y_l2_m2.dat"}}];
+    
+    (* Print[{FileExistsQ[waveformFile],HDF5FilesDiffer[tmpFile, waveformFile]}]; *)
+    If[!FileExistsQ[waveformFile] || HDF5FilesDiffer[tmpFile, waveformFile],
+      Print["Updating ", waveformFile];
+      If[FileExistsQ[waveformFile], DeleteFile[waveformFile]];
+      RenameFile[tmpFile, waveformFile],
+      Print["Skipping empty update of ", waveformFile];
+      DeleteFile[tmpFile]];
+
+  (* TODO: handle relaxed time for short waveforms *)
+   tRelaxed = Replace[OptionValue[RelaxedTime],{
+     Automatic :> BinaryBlackHoleRelaxedTime[sim],
+     t_ :> t}];
+
+  masses = Table[ReadBlackHoleMass[sim, i], {i, 1, 3}];
+  spins = Table[ReadBlackHoleSpin[sim, i], {i, 1, 3}];
+  coord[d_] := {"x", "y", "z"}[[d]];
+  tPeak = LocateMaximum[Abs[h22]];
+   
+  md = {"metadata" ->
+    {
+      "point-of-contact-email" -> UserEmailDisplayName[],
+
+      "relaxed-measurement-time" -> tRelaxed,
+      "relaxed-mass1" -> Interpolation[masses[[1]], tRelaxed], 
+      "relaxed-mass2" -> Interpolation[masses[[2]], tRelaxed], 
+      "relaxed-spin1" -> (Interpolation[#, tRelaxed] & /@ spins[[1]]),
+      "relaxed-spin2" -> (Interpolation[#, tRelaxed] & /@ 
+         spins[[2]]), 
+      "remnant-mass" -> 
+       Interpolation[masses[[3]], MaxCoordinate[masses[[3]]]],
+      "remnant-spin" -> (Interpolation[#, 
+           MaxCoordinate[spins[[3, 1]]]] & /@ spins[[3]]),
+       "initial-separation" -> First[ReadBHSeparation[sim]],
+       "number-of-orbits-to-h-peak" -> WaveformCycles[h22, tRelaxed]/2,
+       "relaxed-orbital-frequency" -> RelaxedOrbitalFrequency[sim, tRelaxed],
+       
+       (* Initial data parameters (Bowen York) *)
+       Sequence @@ 
+       Table["initial-bh-mass-parameter" <> ToString[i] -> 
+         ReadPunctureBareMassParameters[sim][[i]], {i, 1, 2}], Sequence @@ 
+       Flatten@Table[
+         "initial-bh-position" <> ToString[i + 1] -> 
+         InitialPosition[sim, i], {i, 0, 1}], Sequence @@ 
+       Flatten@Table[
+         "initial-bh-momentum" <> ToString[i + 1] -> 
+         InitialLinearMomentum[sim, i], {i, 0, 1}],
+       Sequence @@ 
+       Flatten@Table[
+         "initial-bh-spin" <> ToString[i + 1] -> 
+         ReadPunctureSpinParameters[sim, i], {i, 0, 1}],
+       If[OptionValue[Eccentricity] =!= None, Sequence["relaxed-eccentricity" -> OptionValue[Eccentricity]],Sequence[]]
+       
+      }};
+  mdText = SimulationTools`NRExport`Private`makeMetadataFile[md];
+  Export[mdFile, mdText, "Text"]];
 
 End[];
 
