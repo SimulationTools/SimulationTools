@@ -30,6 +30,7 @@ ErrorForm;
 DescribeGitRepository;
 PartitionComplete;
 MovingAverageOperator;
+UserEmailDisplayName;
 
 Begin["`Private`"];
 
@@ -143,6 +144,19 @@ PartitionComplete[l_, n_] :=
 
 MovingAverageOperator[n_] :=
   Function[d, MovingAverage[d, n]];
+
+UserEmailDisplayName[] :=
+ Module[{userName, userEmail},
+  (* TODO: catch exception or look at exit code, 
+  and return None or Missing *)
+  
+  userName = 
+   RunSubprocess[{"git", "config", "--get", "user.name"}, 
+     Exceptions -> True, "StringLists" -> False][[2]];
+  userEmail = 
+   RunSubprocess[{"git", "config", "--get", "user.email"}, 
+     Exceptions -> True, "StringLists" -> False][[2]];
+   userName <> " <" <> userEmail <> ">"];
 
 End[];
 EndPackage[];
