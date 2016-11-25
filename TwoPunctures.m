@@ -88,7 +88,13 @@ ReadPunctureADMMassesFromFiles[files_List] :=
     ];
 
 DefineMemoFunction[ReadPunctureADMMasses[run_String],
-  Module[{stdoutFiles},
+  Module[{stdoutFiles, mdFiles},
+
+    mdFiles = FindSimulationFiles[run, "TwoPunctures.bbh"];
+    If[mdFiles =!= {},
+      Return[ToExpression@IniVariable[mdFiles[[1]], #] & /@
+        {"initial-bh-puncture-adm-mass1", "initial-bh-puncture-adm-mass2"}]];
+
     stdoutFiles = StandardOutputOfRun[run];
     ReadPunctureADMMassesFromFiles[stdoutFiles]]];
 
