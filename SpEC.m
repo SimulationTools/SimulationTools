@@ -1095,7 +1095,14 @@ nv[s_] :=
  ImportString[StringReplace[s, "," -> " "], "Table"][[1]];
 
 computeExtraMetadata[a_] :=
- Module[{a1, a2},
+ Module[{a1, a2, requiredKeys, missingKeys},
+
+  requiredKeys = {"relaxed-mass1", "relaxed-mass2", "relaxed-spin1",
+    "relaxed-spin2", "relaxed-orbital-frequency"};
+   missingKeys = Complement[requiredKeys, Keys[a]];
+   If[missingKeys =!= {},
+     Error["Keys "<>ToString[missingKeys]<>" not found in metadata"]];
+
   a1 = Join[a,
     Association[
      "initial-mass-ratio" -> a["initial-mass1"]/a["initial-mass2"],
