@@ -24,9 +24,11 @@ BeginPackage["SimulationTools`NRExport`",
   "SimulationTools`Grids`",
   "SimulationTools`Horizons`",
   "SimulationTools`Parameters`",
+  "SimulationTools`InitialData`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`TwoPunctures`",
   "SimulationTools`Utils`",
+  "SimulationTools`WaveformExtrapolation`",
   "SimulationTools`Waveforms`"
  }];
 
@@ -542,10 +544,49 @@ HDF5FilesDiffer[f1_String, f2_String] :=
 BinaryBlackHoleRelaxedTime[sim_String] :=
   200;
 
-Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None};
+
+extrapolatedWaveform[sim_String] :=
+  Module[{rads, freq22, freqFit, ominit, omCutoff, tJunkCactus, extrapStrain, tFreqFit},
+    rads = ReadPsi4Radii[sim];
+
+    tFreqFit = {100, 200};
+
+    freq22 = -Frequency[100 Shifted[ReadPsi4[sim, 2, 2, 100], -100]];
+    freqFit = Module[{model, t, fit, a0, a1, a2, tFit = tFreqFit},
+      model = a0 + a1 t;
+      fit = FindFit[ToList[Slab[freq22, Span @@ tFit]], model, {a0, a1}, 
+        t];
+      <|(*"Plot" -> 
+      Show[PresentationListLinePlot[Slab[freq22, 0 ;; tFit[[2]] + 100], 
+        GridLines -> {tFit, None}], Plot[model /. fit, {t, 0, 200}]],*)
+      "Freq0" -> a0 /. fit|>];
+
+    omInit = freqFit["Freq0"];
+    omCutoff = 0.75*freqFit["Freq0"];
+    tJunkCactus = If[tMerger < 500, 50, 200];
+
+    extrapStrain = 
+      WaveformExtrapolationAnalysis[rads, 
+        StrainFromPsi4[ReadPsi4[sim, 2, 2, #], omCutoff] & /@ rads, rads,
+        ReadADMMass[sim]];
+
+    extrapStrain["ExtrapolatedWaveform"]];
+
+
+Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None, "h22" -> Automatic};
+
 ExportSXSSimulation[sim_String, dir_, h22_DataTable, opts:OptionsPattern[]] :=
+  ExportSXSSimulation[sim, dir, "h22" -> h22, opts];
+
+ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   Module[{waveformFile, mdFile, tRelaxed, masses, spins, md, mdText, i, coord, tPeak,
-         ecc, tmpFile},
+         ecc, tmpFile, h22},
+
+    h22 = Replace[OptionValue["h22"],
+      {d_DataTable :> d,
+        Automatic :> extrapolatedWaveform[sim],
+        _ :> Error["Unrecognised option value"]}];
+
   waveformFile = dir <> "/rhOverM_Asymptotic_GeometricUnits.h5";
   mdFile = dir <> "/metadata.txt";
   If[! FileExistsQ[dir], 
