@@ -613,9 +613,8 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   spins = Table[ReadBlackHoleSpin[sim, i], {i, 1, 3}];
   coord[d_] := {"x", "y", "z"}[[d]];
   tPeak = LocateMaximum[Abs[h22]];
-   
   md = {"metadata" ->
-    {
+    DeleteCases[{
       "point-of-contact-email" -> UserEmailDisplayName[],
 
       "relaxed-measurement-time" -> tRelaxed,
@@ -648,8 +647,8 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
          ReadPunctureSpinParameters[sim, i], {i, 0, 1}],
        If[OptionValue[Eccentricity] =!= None, Sequence["relaxed-eccentricity" -> OptionValue[Eccentricity]],Sequence[]]
        
-      }};
-  mdText = SimulationTools`NRExport`Private`makeMetadataFile[md];
+      },Null]};
+  mdText = makeMetadataFile[md];
   Export[mdFile, mdText, "Text"]];
 
 End[];
