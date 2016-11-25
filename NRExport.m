@@ -593,7 +593,7 @@ ExportSXSSimulation[sim_String, dir_, h22_DataTable, opts:OptionsPattern[]] :=
 
 ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   Module[{waveformFile, mdFile, tRelaxed, masses, spins, md, mdText, i, coord, tPeak,
-         ecc, tmpFile, h22},
+         ecc, tmpFile, h22, initialPunctureADMMasses},
 
     h22 = Replace[OptionValue["h22"],
       {d_DataTable :> d,
@@ -626,9 +626,15 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   spins = Table[ReadBlackHoleSpin[sim, i], {i, 1, 3}];
   coord[d_] := {"x", "y", "z"}[[d]];
   tPeak = LocateMaximum[Abs[h22]];
+
+  initialPunctureADMMasses = ReadPunctureADMMassParameters[sim];
+
   md = {"metadata" ->
     DeleteCases[{
       "point-of-contact-email" -> UserEmailDisplayName[],
+
+      "initial-mass1" -> initialPunctureADMMasses[[1]],
+      "initial-mass2" -> initialPunctureADMMasses[[2]],
 
       "relaxed-measurement-time" -> tRelaxed,
       "relaxed-mass1" -> Interpolation[masses[[1]], tRelaxed], 
