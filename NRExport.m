@@ -598,7 +598,7 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
     
     (* Print[{FileExistsQ[waveformFile],HDF5FilesDiffer[tmpFile, waveformFile]}]; *)
     If[!FileExistsQ[waveformFile] || HDF5FilesDiffer[tmpFile, waveformFile],
-      Print["Updating ", waveformFile];
+      Print["Writing ", waveformFile];
       If[FileExistsQ[waveformFile], DeleteFile[waveformFile]];
       RenameFile[tmpFile, waveformFile],
       Print["Skipping empty update of ", waveformFile];
