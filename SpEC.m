@@ -1091,8 +1091,13 @@ processValue[x_] := Error["Don't know how to process " <> ToString[x]]
 
 processValue["keyword"[x_]] := x
 
-nv[s_] :=
- ImportString[StringReplace[s, "," -> " "], "Table"][[1]];
+nv[s_String] :=
+  If[StringCases[s, ","] =!= {},
+    ImportString[StringReplace[s, "," -> " "], "Table"][[1]],
+    {0.,0.,ImportString[s, "Table"][[1,1]]}];
+
+nv[x_?NumberQ] :=
+  {0.,0.,x};
 
 computeExtraMetadata[a_] :=
  Module[{a1, a2, requiredKeys, missingKeys},
