@@ -507,7 +507,7 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
       Return[<|"Simulation" -> sim, "NoDataInFitWindow" -> True|>]];
 
     om0 = InitialOrbitalFrequency[sim]; 
-    D0 = BinaryBlackHoleParameters[sim]["D"]; 
+    D0 = InitialSeparation[sim];
     params = EccentricityReductionParameters[sim];
 
     If[MaxCoordinate[sep] + eps < eccFitWindow[[2]], 
