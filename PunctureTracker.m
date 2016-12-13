@@ -68,7 +68,9 @@ readPunctureData[sim_, filename_, is_List] :=
  Module[{nTrackers, data},
   nTrackers = 10;
   data = ReadColumnFile[sim, filename,
-    Flatten[{9, Transpose[{13 + nTrackers*1 + is, 13 + nTrackers*2 + is, 13 + nTrackers*3 + is}]}]];
+    Flatten[{"time", {"pt_loc_x[" <> ToString[#] <> "]",
+     "pt_loc_y[" <> ToString[#] <> "]",
+     "pt_loc_z[" <> ToString[#] <> "]"} & /@ is}]];
   data
 ];
 
