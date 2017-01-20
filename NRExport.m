@@ -21,6 +21,7 @@ BeginPackage["SimulationTools`NRExport`",
   "SimulationTools`Binary`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
+  "SimulationTools`EccentricityReduction`",
   "SimulationTools`Error`",
   "SimulationTools`Grids`",
   "SimulationTools`Horizons`",
@@ -640,6 +641,9 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
 
   initialPunctureADMMasses = ReadPunctureADMMassParameters[sim];
 
+  (* Analyse eccentricity *)
+  ecc = SimulationEccentricityAnalysis[{sim}];
+
   md = {"metadata" ->
     DeleteCases[{
       "point-of-contact-email" -> UserEmailDisplayName[],
@@ -677,7 +681,10 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
        Flatten@Table[
          "initial-bh-spin" <> ToString[i + 1] -> 
          ReadPunctureSpinParameters[sim, i], {i, 0, 1}],
-       If[OptionValue[Eccentricity] =!= None, Sequence["relaxed-eccentricity" -> OptionValue[Eccentricity]],Sequence[]]
+      Sequence@@Flatten[If[OptionValue[Eccentricity] =!= None,
+         "relaxed-eccentricity" -> OptionValue[Eccentricity],
+         {"relaxed-eccentricity" -> ecc[[1, "Eccentricity"]],
+          "relaxed-mean-anomaly" -> ("l0"+"n" tRelaxed) /. ecc[[1, "FitParameters"]]}]]
        
       },Null]};
   mdText = makeMetadataFile[md];
