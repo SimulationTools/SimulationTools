@@ -39,6 +39,9 @@ MassRatio;
 SymmetricMassRatio;
 ReadTwoPuncturesData(*::usage = "ReadTwoPuncturesData[file, col] reads a data file output by the standalone TwoPunctures code by Marcus Ansorg and returns a DataRegion containing the data in column col. col can be 1, 2 or 3 for the coordinates or >= 4 for the data."*);
 
+BinaryBlackHoleLabel;
+BinaryBlackHoleParameters;
+
 Begin["`Private`"];
 
 SimulationTools`TwoPunctures`InitialData`HaveData[run_String, ___] :=
@@ -205,6 +208,31 @@ SymmetricMassRatio[run_] :=
  Module[{q = MassRatio[run]},
   q/(1 + q)^2];
 
+BinaryBlackHoleLabel[params_Association] :=
+ SequenceForm["q=", params["q"], 
+  ", \!\(\*SubscriptBox[\(\[Chi]\), \(1\)]\)=", params["chi1"], 
+  ", \!\(\*SubscriptBox[\(\[Chi]\), \(2\)]\)=", params["chi2"]];
+
+BinaryBlackHoleLabel[sim_String] :=
+ BinaryBlackHoleLabel[BinaryBlackHoleParameters[sim]];
+
+BinaryBlackHoleParameters[sim_String] :=
+ Module[{eps, m1, m2, q, S1, S2, chi1, chi2, d},
+  m1 = ToExpression[
+    ReadSimulationParameter[sim, "TwoPunctures::target_M_plus"]];
+  m2 = ToExpression[
+    ReadSimulationParameter[sim, "TwoPunctures::target_M_minus"]];
+  q = m1/m2;
+  eps = 10^-5;
+  If[IntegerQ[Rationalize[q, eps]], q = Rationalize[q, eps]];
+  S1 = ToExpression[
+    ReadSimulationParameter[sim, "TwoPunctures::par_S_plus[2]"]];
+  S2 = ToExpression[
+    ReadSimulationParameter[sim, "TwoPunctures::par_S_minus[2]"]];
+  chi1 = S1/m1^2;
+   chi2 = S2/m2^2;
+   d = 2ToExpression[ReadSimulationParameter[sim, "TwoPunctures::par_b"]];
+  Association["q" -> q, "chi1" -> chi1, "chi2" -> chi2, "D" -> d]];
 
 End[];
 
