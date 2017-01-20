@@ -18,6 +18,7 @@ BeginPackage["SimulationTools`NRExport`",
  {
   "SimulationTools`BHCoordinates`",
   "SimulationTools`BlackHole`",
+  "SimulationTools`Binary`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
@@ -544,6 +545,12 @@ HDF5FilesDiffer[f1_String, f2_String] :=
 BinaryBlackHoleRelaxedTime[sim_String] :=
   200;
 
+relaxedOrbitalFrequencyVector[sim_String, tRelaxed_] :=
+  Module[{pos,vel,om},
+    pos = ReadBinaryCoordinates[sim];
+    vel = ReadBinaryVelocity[sim];
+    om = Cross[pos, vel]/Norm[pos]^2;
+    Map[Interpolation[#,tRelaxed] &, om]];
 
 extrapolatedWaveform[sim_String] :=
   Module[{rads, freq22, freqFit, ominit, omCutoff, tJunkCactus, extrapStrain, tFreqFit},
@@ -647,7 +654,7 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
            MaxCoordinate[spins[[3, 1]]]] & /@ spins[[3]]),
        "initial-separation" -> First[ReadBHSeparation[sim]],
        "number-of-orbits-to-h-peak" -> WaveformCycles[h22, tRelaxed]/2,
-       "relaxed-orbital-frequency" -> RelaxedOrbitalFrequency[sim, tRelaxed],
+       "relaxed-orbital-frequency" -> relaxedOrbitalFrequencyVector[sim, tRelaxed],
        
        (* Initial data parameters (Bowen York) *)
        Sequence @@ 
