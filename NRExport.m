@@ -552,6 +552,11 @@ relaxedOrbitalFrequencyVector[sim_String, tRelaxed_] :=
     om = Cross[pos, vel]/Norm[pos]^2;
     Map[Interpolation[#,tRelaxed] &, om]];
 
+relaxedPosition[sim_, i_, tRelaxed_] :=
+  Module[{pos,vel,om},
+    pos = ReadBinaryCoordinates[sim, i];
+    Map[Interpolation[#,tRelaxed] &, pos]];
+
 extrapolatedWaveform[sim_String] :=
   Module[{rads, freq22, freqFit, ominit, omCutoff, tJunkCactus, extrapStrain, tFreqFit},
     rads = ReadPsi4Radii[sim];
@@ -648,6 +653,8 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
       "relaxed-spin1" -> (Interpolation[#, tRelaxed] & /@ spins[[1]]),
       "relaxed-spin2" -> (Interpolation[#, tRelaxed] & /@ 
          spins[[2]]), 
+      "relaxed-position1" -> relaxedPosition[sim, 1, tRelaxed], 
+      "relaxed-position2" -> relaxedPosition[sim, 2, tRelaxed], 
       "remnant-mass" -> 
        Interpolation[masses[[3]], MaxCoordinate[masses[[3]]]],
       "remnant-spin" -> (Interpolation[#, 
