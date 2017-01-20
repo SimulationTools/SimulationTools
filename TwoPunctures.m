@@ -153,8 +153,10 @@ ReadTwoPuncturesData[file_String, col_] :=
 TotalMass[run_] :=
  Plus @@ ReadPunctureADMMassParameters[run];
 
+(* TODO: make this 1-based to conform to Mathematica conventions *)
 ReadPunctureSpinParameters[run_, idx_] := Module[{suffix},
-  suffix = If[idx == 0, "plus", "minus"];
+  suffix = Replace[idx, {0 :> "plus", 1 :> "minus",
+    _ :> Error["Puncture "<>ToString[idx]<> " does not exist; index must be 0 or 1"]}];
   Table[
     ToExpression@
       LookupParameter[run, "TwoPunctures::par_s_"<>suffix<>"[" <> ToString[i] <> "]", "0"],
