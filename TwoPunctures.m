@@ -106,7 +106,12 @@ DefineMemoFunction[ReadPunctureADMMassParameters[run_String],
    LookupParameter[run, "TwoPunctures::target_M_minus"]}];
 
 DefineMemoFunction[ReadPunctureBareMassParameters[run_String],
- Module[{masses, stdout, lines},
+ Module[{mdFiles, masses, stdout, lines},
+
+    mdFiles = FindSimulationFiles[run, "TwoPunctures.bbh"];
+    If[mdFiles =!= {},
+      Return[ToExpression@IniVariable[mdFiles[[1]], #] & /@
+        {"initial-bh-puncture-bare-mass1", "initial-bh-puncture-bare-mass2"}]];
 
   If[LookupParameter[run, "TwoPunctures::give_bare_mass"] != "no",
     (* First try the parameter file *)
