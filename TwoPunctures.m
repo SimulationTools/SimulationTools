@@ -222,7 +222,8 @@ BinaryBlackHoleLabel[sim_String] :=
  BinaryBlackHoleLabel[BinaryBlackHoleParameters[sim]];
 
 BinaryBlackHoleParameters[sim_String] :=
- Module[{eps, m1, m2, q, S1, S2, chi1, chi2, d},
+ Module[{eps, m, m1, m2, q, S1, S2, chi1, chi2, d},
+  m = TotalMass[sim];
   m1 = ToExpression[
     ReadSimulationParameter[sim, "TwoPunctures::target_M_plus"]];
   m2 = ToExpression[
@@ -237,7 +238,7 @@ BinaryBlackHoleParameters[sim_String] :=
   chi1 = S1/m1^2;
    chi2 = S2/m2^2;
    d = 2ToExpression[ReadSimulationParameter[sim, "TwoPunctures::par_b"]];
-  Association["q" -> q, "chi1" -> chi1, "chi2" -> chi2, "D" -> d]];
+  Association["M" -> m, "q" -> q, "chi1" -> chi1, "chi2" -> chi2, "D" -> d]];
 
 End[];
 
