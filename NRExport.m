@@ -565,6 +565,21 @@ relaxedPosition[sim_, i_, tRelaxed_] :=
     pos = ReadBinaryCoordinates[sim, i];
     Map[Interpolation[#,tRelaxed] &, pos]];
 
+ffiCutoffFrequency[sim_String] :=
+  Module[{params, LInitNR, om, omGuess, LInitOfOm, omOrbPN, omGWPN, omCutoff},
+    (* See https://arxiv.org/abs/1508.07250 (though note ambiguity wrt
+       'orbital' vs 'gravitational wave') *)
+    params = BinaryBlackHoleParameters[sim];
+    LInitNR = InitialOrbitalAngularMomentum[sim][[3]];
+    LInitOfOm = 
+    QuasiCircularParametersFromPostNewtonian[
+      {params["M"], params["q"], params["chi1"], params["chi2"], om}]["OrbitalAngularMomentum"];
+    omGuess = om /. Solve[LInitNR == LeadingTerm[Series[LInitOfOm,{om,0,10}]], om][[1]];
+    omOrbPN = om /. FindRoot[LInitOfOm == LInitNR, {om, omGuess}];
+    omGWPN = 2 omOrbPN;
+    omCutoff = 0.75 omGWPN;
+    omCutoff];
+
 extrapolatedWaveform[sim_String] :=
   Module[{rads, freq22, freqFit, ominit, omCutoff, tJunkCactus, extrapStrain, tFreqFit},
     rads = ReadPsi4Radii[sim];
