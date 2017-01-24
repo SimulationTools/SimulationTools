@@ -535,10 +535,17 @@ ExportConfig[name_ -> {Madm_, sims_, ecc_},  outputDirectory_, opts:OptionsPatte
 
 HDF5FilesDiffer[f1_String, f2_String] :=
   Module[{code,out,err},
-    {code,out,err} = RunSubprocess[{"/opt/local/bin/h5diff", "-q", f1, f2}, 
+    {code,out,err} = RunSubprocess[{"/opt/local/bin/h5diff", "-qc", f1, f2}, 
       Exceptions -> False, "StringLists" -> False];
+
+    (* Note: h5diff returns 0 if there are objects which are not
+       comparable!  So getting 0 from h5diff is NOT a guarantee that
+       the hdf5 files are "the same" in any sense.  -c outputs the
+       names of datasets which are not comparable, so we require this
+       output to be blank. *)
+
     If[code === 2*256, Error["Error when running h5diff: "<>ToString[err]]];
-    code === 1*256];
+    code === 1*256 || out =!= ""];
 
 (* TODO: check on Linux whether exit codes from Run are multiplied by
    256. Also find out why they are on Mac OS.*)
