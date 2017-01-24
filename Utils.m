@@ -31,6 +31,7 @@ DescribeGitRepository;
 PartitionComplete;
 MovingAverageOperator;
 UserEmailDisplayName;
+LeadingTerm;
 
 Begin["`Private`"];
 
@@ -157,6 +158,9 @@ UserEmailDisplayName[] :=
    RunSubprocess[{"git", "config", "--get", "user.email"}, 
      Exceptions -> True, "StringLists" -> False][[2]];
    userName <> " <" <> userEmail <> ">"];
+
+LeadingTerm[sd_SeriesData] :=
+  sd[[3, 1]] (sd[[1]] - sd[[2]])^(sd[[4]]/sd[[6]]);
 
 End[];
 EndPackage[];
