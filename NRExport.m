@@ -581,30 +581,13 @@ ffiCutoffFrequency[sim_String] :=
     omCutoff];
 
 extrapolatedWaveform[sim_String] :=
-  Module[{rads, freq22, freqFit, ominit, omCutoff, tJunkCactus, extrapStrain, tFreqFit},
+  Module[{rads, extrapStrain, omCutoff},
     rads = ReadPsi4Radii[sim];
-
-    tFreqFit = {100, 200};
-
-    freq22 = -Frequency[100 Shifted[ReadPsi4[sim, 2, 2, 100], -100]];
-    freqFit = Module[{model, t, fit, a0, a1, a2, tFit = tFreqFit},
-      model = a0 + a1 t;
-      fit = FindFit[ToList[Slab[freq22, Span @@ tFit]], model, {a0, a1}, 
-        t];
-      <|(*"Plot" -> 
-      Show[PresentationListLinePlot[Slab[freq22, 0 ;; tFit[[2]] + 100], 
-        GridLines -> {tFit, None}], Plot[model /. fit, {t, 0, 200}]],*)
-      "Freq0" -> a0 /. fit|>];
-
-    omInit = freqFit["Freq0"];
-    omCutoff = 0.75*freqFit["Freq0"];
-    tJunkCactus = If[tMerger < 500, 50, 200];
-
+    omCutoff = ffiCutoffFrequency[sim];
     extrapStrain = 
       WaveformExtrapolationAnalysis[rads, 
         StrainFromPsi4[ReadPsi4[sim, 2, 2, #], omCutoff] & /@ rads, rads,
         ReadADMMass[sim]];
-
     extrapStrain["ExtrapolatedWaveform"]];
 
 configName[sim_String] := 
