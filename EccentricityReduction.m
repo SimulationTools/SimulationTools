@@ -1,4 +1,6 @@
-(* Copyright 2010-2016 Ian Hinder and Barry Wardell
+(* ::Package:: *)
+
+(* Copyright 2010-2016 Ian Hinder, Barry Wardell and Eliu Huerta
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -36,6 +38,7 @@ BeginPackage["SimulationTools`EccentricityReduction`",
  }];
 
 QuasiCircularParametersFromPostNewtonian;
+PostNewtonianEvolution;
 EccentricityReductionParameters;
 ReduceEccentricity;
 BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSeparationDerivative[sep, {t1, t2}] returns an association containing information about the eccentricity of a binary with separation sep.";
@@ -61,7 +64,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   Module[{eta, m1, m2, S1, S2, 
    S\[ScriptL], \[CapitalSigma]\[ScriptL], \[Delta]M, mu, en, 
    l, \[CapitalDelta], x, nu, enNum, lNum, xRule, rNum, rExpr, rDotExpr, 
-   rDotNum, r, rp0, \[Gamma], rDot, prExpr, prNum},
+   rDotNum, r, rp0, raxder, \[Gamma], \[Gamma]ammaE, rDot, drdx, dEdt, dEdx, a1, a2, a3, a4, a5, e4, e5, rax, j4, j5, V, prExpr1, prExpr2, prExpr3, prExpr, prNum, \[Nu], omDotExpr},
   (* TODO: the m-dependence of the expressions below is only correct for m=
   1 *)
   (* TODO: replace these symbols (\[CapitalSigma] etc) with names like "Sigma" *)
@@ -77,13 +80,26 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   \[CapitalSigma]\[ScriptL] = S2/m2 - S1/m1;
   \[Delta]M = m1 - m2;
   mu = eta;
+  \[Nu] = eta;
+  nu = eta;
+  e4 = -(123671/5760)+(9037 \[Pi]^2)/1536+(896 \[Gamma]ammaE)/15+(-(498449/3456)+(3157 \[Pi]^2)/576) \[Nu]+(301 \[Nu]^2)/1728+(77 \[Nu]^3)/31104+(1792 Log[2])/15;
+  e5 = -55.13;
+  j4 = -(5/7)e4+64/35;
+  j5 = -(2/3)e5-4988/945-656/135 eta;
+  a1 = -2.18522;
+  a2 = 1.05185;
+  a3 = -2.43395;
+  a4 = 0.400665;
+  a5 = -5.9991;
+  \[Gamma]ammaE = 0.5772156649;
   
-  (* Energy *)
+  (* Energy EAH: this new version now includes corrections up to 5PN order in the QC sector*)
   en = -((mu x)/
        2) (1 + x (-(3/4) - 1/12 eta) + 
         x^2 (-(27/8) + 19/8 eta - 1/24 eta^2) + 
         x^3 (-(675/64) + (34445/576 - 205/96 \[Pi]^2) eta - 
-           155/96 eta^2 - 35/5184 eta^3) + 
+           155/96 eta^2 - 35/5184 eta^3) + x^4*((-3969/128) + eta*e4 + (448*eta*Log[x]/15)) +
+            x^5*((-45927/512) + eta*e5 + ((-4988/35) - (656*eta/5))*eta*Log[x]) + 
         x^(3/2) (14/3 S\[ScriptL] + 2 \[Delta]M \[CapitalSigma]\[ScriptL]) + 
         x^(5/2) ((11 - 61/9 eta) S\[ScriptL] + \[Delta]M (3 - 
               10/3 eta) \[CapitalSigma]\[ScriptL]) + 
@@ -102,12 +118,14 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
            18) x^3) /. nu -> eta /. \[CapitalDelta] -> Sqrt[
      1 - 4 eta];
 
-  (* Angular momentum (not divided by mu) *)
+  (* Angular momentum (not divided by mu) EAH: this version include corrections up to 5PN order *)
   l = eta/x^(
       1/2) (1 + x (3/2 + 1/6 eta) + 
         x^2 (27/8 - 19/8 eta + 1/24 eta^2) + 
         x^3 (135/16 + (-6889/144 + 41/24 \[Pi]^2) eta + 31/24 eta^2 + 
            7/1296 eta^3) + 
+           x^4*((2835/128) + eta*j4 - (64*eta*Log[x]/3))+ 
+           x^5*((15309/256) + eta*j5 + ((9976/105) + (1312*eta/15))*eta*Log[x])+
         x^(3/2) (-(35/6) S\[ScriptL] - 
            5/2 \[Delta]M \[CapitalSigma]\[ScriptL]) + 
         x^(5/2) ((-(77/8) + 427/72 eta) S\[ScriptL] + \[Delta]M (-(21/8) + 
@@ -126,41 +144,97 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
            14 nu^2 chi2^2)/
            9) x^3) /. nu -> eta /. \[CapitalDelta] -> Sqrt[1 - 4 eta];
   
-  (* Based on Blanchet Eq.193 *)
+  (* Based on Blanchet Eq.193. EAH: new version below is from Blanchet but now includes spin corrections *)
+  (*Note that below rax=m/r *)
+  rax =(x+x^2-(eta x^2)/3+5/3 S\[ScriptL] x^(5/2)+x^3-(65 eta x^3)/12+10/3 S\[ScriptL] x^(7/2)+8/9 eta S\[ScriptL] x^(7/2)+x^4-(2203 eta x^4)/2520+(229 eta^2 x^4)/36+
+  (eta^3 x^4)/81-41/192 eta \[Pi]^2 x^4+(175 S\[ScriptL]^2 x^4)/18+5 S\[ScriptL] x^(9/2)-127/12 eta S\[ScriptL] x^(9/2)-6 eta^2 S\[ScriptL] x^(9/2)+Sqrt[1-4 eta] x^(5/2) \[CapitalSigma]\[ScriptL]+
+  2 Sqrt[1-4 eta] x^(7/2) \[CapitalSigma]\[ScriptL]+35/3 Sqrt[1-4 eta] S\[ScriptL] x^4 \[CapitalSigma]\[ScriptL]+3 Sqrt[1-4 eta] x^(9/2) \[CapitalSigma]\[ScriptL]-61/6 Sqrt[1-4 eta] eta x^(9/2) \[CapitalSigma]\[ScriptL]-
+  8/3 Sqrt[1-4 eta] eta^2 x^(9/2) \[CapitalSigma]\[ScriptL]+(7 x^4 \[CapitalSigma]\[ScriptL]^2)/2-14 eta x^4 \[CapitalSigma]\[ScriptL]^2-22/3 eta x^4 Log[r/rp0]);
+  rExpr = m/rax;
   
-  rExpr = m/x + 1/3 m (-3 + nu) + 1/36 m nu (171 + 4 nu) x + 
+  (*rExpr = m/x + 1/3 m (-3 + nu) + 1/36 m nu (171 + 4 nu) x + 
      m (-((37 nu^2)/12) + (2 nu^3)/
         81 + nu (-(24257/2520) + (41 Pi^2)/192) + 
-        22/3 nu Log[r/rp0]) x^2 /. {nu -> eta, rp0 -> r};
+        22/3 nu Log[r/rp0]) x^2 /. {nu -> eta, rp0 -> r};*)
   (* TODO: Not sure what to do with r,rp0 here *)
 
   (* TODO: add spin effects to this.  We can get these from Blanchet,
-     but need to do some manipulations. *)
+     but need to do some manipulations. EAH: I have done this. See above*)
 
   (* Blanchet 227a *)
-  rDotExpr = -64/5 m^3 nu/
-      r^3 (1 + \[Gamma] (-1751/336 - 7/4 nu)) /. nu -> eta;
+  (*EAH: To compute rDotExpr including spin corrections, I use rExpr, derived above, and then E(x,S) and the energy flux including HO spin corrections*)
   
+  raxder = (1+2 x-(2 eta x)/3+25/6 S\[ScriptL] x^(3/2)+3 x^2-(65 eta x^2)/4+35/3 S\[ScriptL] x^(5/2)+28/9 eta S\[ScriptL] x^(5/2)+4 x^3-(2203 eta x^3)/630+(229 eta^2 x^3)/9+
+  (4 eta^3 x^3)/81-41/48 eta \[Pi]^2 x^3+(350 S\[ScriptL]^2 x^3)/9+45/2 S\[ScriptL] x^(7/2)-381/8 eta S\[ScriptL] x^(7/2)-27 eta^2 S\[ScriptL] x^(7/2)+5/2 Sqrt[1-4 eta] x^(3/2) \[CapitalSigma]\[ScriptL]+7 Sqrt[1-4 eta] x^(5/2) \[CapitalSigma]\[ScriptL]+
+  140/3 Sqrt[1-4 eta] S\[ScriptL] x^3 \[CapitalSigma]\[ScriptL]+27/2 Sqrt[1-4 eta] x^(7/2) \[CapitalSigma]\[ScriptL]-183/4 Sqrt[1-4 eta] eta x^(7/2) \[CapitalSigma]\[ScriptL]-12 Sqrt[1-4 eta] eta^2 x^(7/2) \[CapitalSigma]\[ScriptL]+14 x^3 \[CapitalSigma]\[ScriptL]^2-56 eta x^3 \[CapitalSigma]\[ScriptL]^2-88/3 eta x^3 Log[r/rp0]);
+  
+  drdx = - raxder/(rax*rax);
+  
+  dEdx = (-(1/2) x (-(3/4)-eta/12-4 chi1 chi2 eta x+2 (-(27/8)+(19 eta)/8-eta^2/24) x-chi1^2 (1-2 eta+m1-m2) x-chi2^2 (1-2 eta-m1+m2) x+
+  3 (-((65 chi1^2)/36)-(65 chi2^2)/36-65/36 chi1^2 Sqrt[1-4 eta]+65/36 chi2^2 Sqrt[1-4 eta]+(275 chi1^2 eta)/36-(11 chi1 chi2 eta)/3+(275 chi2^2 eta)/36+
+  145/36 chi1^2 Sqrt[1-4 eta] eta-145/36 chi2^2 Sqrt[1-4 eta] eta-(35 chi1^2 eta^2)/18-14/9 chi1 chi2 eta^2-(35 chi2^2 eta^2)/18) x^2+
+  3 (-(675/64)-(155 eta^2)/96-(35 eta^3)/5184+eta (34445/576-(205 \[Pi]^2)/96)) x^2+(448 eta x^3)/15+(-(4988/35)-(656 eta)/5) eta x^4+3/2 Sqrt[x] ((14 S\[ScriptL])/3+2 \[Delta]M \[CapitalSigma]\[ScriptL])+
+  5/2 x^(3/2) ((11-(61 eta)/9) S\[ScriptL]+(3-(10 eta)/3) \[Delta]M \[CapitalSigma]\[ScriptL])+7/2 x^(5/2) ((135/4-(367 eta)/4+(29 eta^2)/12) S\[ScriptL]+(27/4-39 eta+(5 eta^2)/4) \[Delta]M \[CapitalSigma]\[ScriptL])+
+  4 x^3 (-(3969/128)+e4 eta+448/15 eta Log[x])+5 x^4 (-(45927/512)+e5 eta+(-(4988/35)-(656 eta)/5) eta Log[x]))+1/2 (-1-(-(3/4)-eta/12) x+
+  2 chi1 chi2 eta x^2-(-(27/8)+(19 eta)/8-eta^2/24) x^2+1/2 chi1^2 (1-2 eta+m1-m2) x^2+1/2 chi2^2 (1-2 eta-m1+m2) x^2-
+  (-((65 chi1^2)/36)-(65 chi2^2)/36-65/36 chi1^2 Sqrt[1-4 eta]+65/36 chi2^2 Sqrt[1-4 eta]+(275 chi1^2 eta)/36-(11 chi1 chi2 eta)/3+(275 chi2^2 eta)/36+
+  145/36 chi1^2 Sqrt[1-4 eta] eta-145/36 chi2^2 Sqrt[1-4 eta] eta-(35 chi1^2 eta^2)/18-14/9 chi1 chi2 eta^2-(35 chi2^2 eta^2)/18) x^3-
+  (-(675/64)-(155 eta^2)/96-(35 eta^3)/5184+eta (34445/576-(205 \[Pi]^2)/96)) x^3-x^(3/2) ((14 S\[ScriptL])/3+2 \[Delta]M \[CapitalSigma]\[ScriptL])-x^(5/2) ((11-(61 eta)/9) S\[ScriptL]+(3-(10 eta)/3) \[Delta]M \[CapitalSigma]\[ScriptL])-
+  x^(7/2) ((135/4-(367 eta)/4+(29 eta^2)/12) S\[ScriptL]+(27/4-39 eta+(5 eta^2)/4) \[Delta]M \[CapitalSigma]\[ScriptL])-x^4 (-(3969/128)+e4 eta+448/15 eta Log[x])-x^5 (-(45927/512)+e5 eta+(-(4988/35)-(656 eta)/5) eta Log[x]))); 
+  dEdt = (1+(-(1247/336)-(35 eta)/12) x+4 \[Pi] x^(3/2)+(-(44711/9072)+(9271 eta)/504+(65 eta^2)/18) x^2+(-(8191/672)-(583 eta)/24) \[Pi] x^(5/2)+
+  (-(16285/504)+(214745 eta)/1728+(193385 eta^2)/3024) \[Pi] x^(7/2)+x^(3/2) (-4 S\[ScriptL]-5/4 Sqrt[1-4 eta] \[CapitalSigma]\[ScriptL]+x ((-(9/2)+(272 eta)/9) S\[ScriptL]+Sqrt[1-4 eta] (-(13/16)+(43 eta)/4) \[CapitalSigma]\[ScriptL])+
+  x^2 ((476645/6804+(6172 eta)/189-(2810 eta^2)/27) S\[ScriptL]+Sqrt[1-4 eta] (9535/336+(1849 eta)/126-(1501 eta^2)/36) \[CapitalSigma]\[ScriptL])+
+  x^(3/2) (-16 \[Pi] S\[ScriptL]-31/6 Sqrt[1-4 eta] \[Pi] \[CapitalSigma]\[ScriptL])+x^(5/2) ((-((3485 \[Pi])/96)+(13879 eta \[Pi])/72) S\[ScriptL]+Sqrt[1-4 eta] (-((7163 \[Pi])/672)+(130583 eta \[Pi])/2016) \[CapitalSigma]\[ScriptL]))+
+  x^3 (6643739519/69854400-(94403 eta^2)/3024-(775 eta^3)/324+(16 \[Pi]^2)/3+eta (-(134543/7776)+(41 \[Pi]^2)/48)-(1712 \[Gamma]ammaE)/105-856/105 Log[16 x]));
+  rDotExpr = -(32/5)*nu*x^5*(drdx*dEdt/dEdx);
+  
+  xDotExpr = -1/(dEdx) (32/5 nu x^5) dEdt;
+
   (* Derived myself (ICH) in notebook "ETBBH 11 - Eccentricity
      reduction 2" from the Lagrangian in Blanchet.  This should be in
      ADMTT coordinates, and I'm not sure to what PN order it is.
-     Go back and checked. *)
+     Go back and checked. EAH: the below expression now goes to order 1/c^6*)
 
-  prExpr = mu rDot + 1/(2 m r) mu rDot (6 m^2 + 4 m mu + m om^2 r^3 - 
-       3 mu om^2 r^3 + (m - 3 mu) r rDot^2);
+  V = Sqrt[rDot^2 + (om*r)^2];
+  prExpr1 = 1 + (1/2)*(1 - 3*eta)*V^2 + (m/r)*(3+2*eta);
+  prExpr2 = ((3/8-(21 eta)/8+(39 eta^2)/8)*V^4 + 
+  (m/r)*(-(1/2) (-7+10 eta+14 eta^2) V^2-(-1+eta) eta rDot^2)+(m/r)^2 (4+eta+4 eta));
+  prExpr3 = ((5/16-(59 eta)/16+(119 eta^2)/8-(323 eta^3)/16)V^6 + 
+  (m/r)*(1/8 ((33-160 eta+129 eta^2+270 eta^3) V^4+2 eta (8-39 eta+42 eta^2) V^2 rDot^2+9 (1-2 eta) eta^2 rDot^4)) + 
+  (m/r)^2*(1/24 (-3 (-94+81 eta+108 eta^2+180 eta^3) V^2+eta (77-38 eta-132 eta^2) rDot^2)) + (m/r)^3*(13/4-(89 eta)/12+(5 eta^2)/4+8 eta^3+(eta \[Pi]^2)/16));
+  prExpr = mu*rDot*(prExpr1 + prExpr2 + prExpr3);
   
   xRule = {x -> (om^(2/3))};
   enNum = en /. xRule;
   lNum = l /. xRule;
   rNum = rExpr /. xRule;
   rDotNum = rDotExpr /. {r -> rNum, \[Gamma] -> 1/rNum};
-  prNum = prExpr /. {rDot -> rDotNum, r -> rNum};
+  prNum = prExpr /. {rDot -> rDotNum, r -> rNum} //. xRule;
+  omDotExpr = (D[x^(3/2),x] xDotExpr) /. xRule;
   
   Association["Energy" -> enNum, "OrbitalAngularMomentum" -> lNum,
    "Separation" -> rNum, "TotalAngularMomentum" -> lNum + S1 + S2,
    "RadialVelocity" -> rDotNum,
-   "RadialMomentum" -> prNum]];
+   "RadialMomentum" -> prNum,
+   "OmegaDot" -> omDotExpr]/.{rp0->2,r->10}
+];
 
+PostNewtonianEvolution[{M_, q_, chi1_, chi2_, om0_}] :=
+ Module[{pn, omEqs, soln, omSoln, phiSoln, tMax, om, phi, t},
+  pn = QuasiCircularParametersFromPostNewtonian[{M, q, chi1, chi2, om}];
+  omEqs = {om'[t] == (Normal@Series[Rationalize[pn["OmegaDot"]], {om, 0, 7}] /. 
+  om -> om[t]), 
+    phi'[t] == om[t], om[0] == om0, phi[0] == 0};
+  soln = NDSolve[
+     Join[omEqs, {WhenEvent[om[t] == 0.1, "StopIntegration"]}], {om, 
+      phi}, {t, 0, Infinity}][[1]];
+  omSoln = om /. soln;
+  phiSoln = phi /. soln;
+  tMax = omSoln[[1, 1, 2]];
+  
+  <|"Omega" -> omSoln, "Phi" -> phiSoln, 
+   "NumberOfOrbits" -> (phiSoln[tMax] - phiSoln[0])/(2 Pi), 
+   "TimeToMerger" -> tMax|>];
 
 (**********************************************************)
 (* BinaryEccentricityFromSeparationDerivative             *)
@@ -242,7 +316,7 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
        "PN" :>
        (If[!OptionValue[CorrectedSemiMajorAxis],
          Error["Inspiral -> PN requires CorrectedSemiMajorAxis -> True"]];
-         model = model + a1 (tc-t)^(-3/4) + f(tc-t)^(-9/8);
+         model = model + a1 (tc-t)^(-3/4) + f (tc-t)^(-9/8);
          params = Join[params, {{f,0}, {a1,0},{tc,600*2}}]),
        _ :> Error["Unrecognised value for option Inspiral in BinaryEccentricityFromSeparationDerivative"]}];
    
