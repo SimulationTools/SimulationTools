@@ -28,10 +28,14 @@ chi1z = getArg["chi1z"];
 chi2z = getArg["chi2z"];
 omOrb = getArg["om"];
 
+pn = PostNewtonianEvolution[{M,q,chi1z,chi2z,omOrb}];
+
 params = QuasiCircularParametersFromPostNewtonian[{M, q, chi1z, chi2z, omOrb}];
 Print["Q="<>ToString[q,CForm]];
 Print["L="<>ToString[params["OrbitalAngularMomentum"],CForm]];
 Print["D="<>ToString[params["Separation"],CForm]];
 Print["PR="<>ToString[params["RadialMomentum"],CForm]];
+Print["ORBITS="<>ToString[pn["NumberOfOrbits"],CForm]];
+Print["MERGERTIME="<>ToString[pn["TimeToMerger"],CForm]];
 
   , Quit[1]];
