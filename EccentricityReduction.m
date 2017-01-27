@@ -38,6 +38,7 @@ BeginPackage["SimulationTools`EccentricityReduction`",
  }];
 
 QuasiCircularParametersFromPostNewtonian;
+PostNewtonianEvolution;
 EccentricityReductionParameters;
 ReduceEccentricity;
 BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSeparationDerivative[sep, {t1, t2}] returns an association containing information about the eccentricity of a binary with separation sep.";
@@ -218,6 +219,22 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
    "OmegaDot" -> omDotExpr]/.{rp0->2,r->10}
 ];
 
+PostNewtonianEvolution[{M_, q_, chi1_, chi2_, om0_}] :=
+ Module[{pn, omEqs, soln, omSoln, phiSoln, tMax, om, phi, t},
+  pn = QuasiCircularParametersFromPostNewtonian[{M, q, chi1, chi2, om}];
+  omEqs = {om'[t] == (Normal@Series[Rationalize[pn["OmegaDot"]], {om, 0, 7}] /. 
+  om -> om[t]), 
+    phi'[t] == om[t], om[0] == om0, phi[0] == 0};
+  soln = NDSolve[
+     Join[omEqs, {WhenEvent[om[t] == 0.1, "StopIntegration"]}], {om, 
+      phi}, {t, 0, Infinity}][[1]];
+  omSoln = om /. soln;
+  phiSoln = phi /. soln;
+  tMax = omSoln[[1, 1, 2]];
+  
+  <|"Omega" -> omSoln, "Phi" -> phiSoln, 
+   "NumberOfOrbits" -> (phiSoln[tMax] - phiSoln[0])/(2 Pi), 
+   "TimeToMerger" -> tMax|>];
 
 (**********************************************************)
 (* BinaryEccentricityFromSeparationDerivative             *)
