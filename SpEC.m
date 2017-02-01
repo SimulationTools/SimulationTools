@@ -1106,35 +1106,45 @@ nv[x_?NumberQ] :=
   {0.,0.,x};
 
 computeExtraMetadata[ap_] :=
- Module[{a, a1, a2, requiredKeys, missingKeys},
+ Module[{a, a1, a2, requiredKeys, missingKeys, relaxedChi1, relaxedChi2},
    a=ap;
 
    If[!MemberQ[Keys[a], "initial-mass1"],
      Print["WARNING: No initial-mass keys in metadata; using relaxed values instead"];
      a = Join[a, <|"initial-mass1" -> a["relaxed-mass1"], "initial-mass2" -> a["relaxed-mass2"]|>]];
 
-  requiredKeys = {"relaxed-mass1", "relaxed-mass2", "relaxed-spin1",
-    "relaxed-spin2", "relaxed-orbital-frequency", "initial-mass1", "initial-mass2"};
+  requiredKeys = {"relaxed-mass1", "relaxed-mass2",
+    "relaxed-orbital-frequency", "initial-mass1", "initial-mass2"};
+
    missingKeys = Complement[requiredKeys, Keys[a]];
    If[missingKeys =!= {},
      Error["Keys "<>ToString[missingKeys]<>" not found in metadata"]];
+
+   If[MemberQ[Keys[a], "relaxed-dimensionless-spin1"],
+     relaxedChi1 = a["relaxed-dimensionless-spin1"];
+     relaxedChi2 = a["relaxed-dimensionless-spin2"],
+     (* else *)
+     relaxedChi1 = nv[a["relaxed-spin1"]]/a["relaxed-mass1"]^2;
+     relaxedChi2 = nv[a["relaxed-spin2"]]/a["relaxed-mass2"]^2];
 
   a1 = Join[a,
     Association[
      "initial-mass-ratio" -> a["initial-mass1"]/a["initial-mass2"],
      "relaxed-mass-ratio" -> a["relaxed-mass1"]/a["relaxed-mass2"],
-     "relaxed-chi1" -> nv[a["relaxed-spin1"]]/a["relaxed-mass1"]^2,
-     "relaxed-chi2" -> 
-      nv[a["relaxed-spin2"]]/a["relaxed-mass2"]^2]];
-  a2 = Join[a1,
-    Association[
-     "in-plane-chi1" ->
-      Norm[Cross[Normal[a1["relaxed-chi1"]], 
-        Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]],
-     "in-plane-chi2" -> 
-      Norm[
-       Cross[Normal[a1["relaxed-chi2"]], 
-        Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]]]]];
+     "relaxed-chi1" -> relaxedChi1,
+     "relaxed-chi2" -> relaxedChi2
+      ]];
+   If[MemberQ[a1,"relaxed-orbital-frequency"],
+     a1 = Join[a1,
+       Association[
+         "in-plane-chi1" ->
+         Norm[Cross[Normal[a1["relaxed-chi1"]], 
+           Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]],
+         "in-plane-chi2" -> 
+         Norm[
+           Cross[Normal[a1["relaxed-chi2"]], 
+             Normal[Normalize@nv[a1["relaxed-orbital-frequency"]]]]]]]];
+   a1];
 
 ReadSXSMetadataKeys[sim_String] :=
   Keys[ReadSXSMetadataFile[sim]];
