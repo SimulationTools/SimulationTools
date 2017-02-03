@@ -208,7 +208,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
   enNum = en /. xRule;
   lNum = l /. xRule;
   rNum = rExpr /. xRule;
-  rDotNum = rDotExpr /. {r -> rNum, \[Gamma] -> 1/rNum};
+  rDotNum = rDotExpr /. {r -> rNum, \[Gamma] -> 1/rNum} /. xRule;
   prNum = prExpr /. {rDot -> rDotNum, r -> rNum} //. xRule;
   omDotExpr = (D[x^(3/2),x] xDotExpr) /. xRule;
   
