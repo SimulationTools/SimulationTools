@@ -24,7 +24,9 @@ WaveformMatch(*::usage = "WaveformMatch[{h1, h2}, s] gives the match "<>
  "of the time-domain waveforms h1 and h2 with the noise function s."*);
 SolarMassInSeconds(*::usage = "SolarMassInSeconds gives the value of GM/c^3 in seconds, "<>
  "where M is the mass of the sun."*);
-
+SolarMassInMegaParsecs := 
+ UnitConvert[Quantity["SolarMass"] Quantity["GravitationalConstant"]/
+    Quantity["SpeedOfLight"]^2/Quantity["MegaParsec"]];
 
 (****************************************************************)
 (* Deprecated *)
