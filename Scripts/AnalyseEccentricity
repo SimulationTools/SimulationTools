@@ -68,11 +68,15 @@ If[SimulationNames[sim] === {},
   ecc = Last[eccs];
   
   f = OpenWrite[outfile];
-  WriteLine[f, "Eccentricity="<>ToString[ecc["Eccentricity"], CForm]];
 
-  {nextD, nextPr} = ReduceEccentricity[sim, ecc];
-
-  WriteLine[f, "NextD="<>ToString[nextD,CForm]];
-  WriteLine[f, "NextPr="<>ToString[nextPr,CForm]];
+  If[ecc["Failed"] === False,
+    WriteLine[f, "Eccentricity="<>ToString[ecc["Eccentricity"], CForm]];
+    {nextD, nextPr} = ReduceEccentricity[sim, ecc];
+    WriteLine[f, "NextD="<>ToString[nextD,CForm]];
+    WriteLine[f, "NextPr="<>ToString[nextPr,CForm]],
+    (* else *)
+    Print["Failed to determine eccentricity"];
+    Quit[1]
+    ];
   Close[f];
   , Quit[1]];
