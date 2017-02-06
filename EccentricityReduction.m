@@ -458,7 +458,9 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     "PericentreTime" -> (-l0/meanMotion) /.fit, "CompletePeriod" -> completePeriod,
     "OrbitalFrequency"->OptionValue[OrbitalFrequency],
     "Failed" -> failed, "RadialPeriodTooShort" ->radPeriodTooShort,
-    "ConvergenceFailure" ->convFail, "MeanMotion" -> meanMotion, "Separation" -> sep]];
+    "ConvergenceFailure" ->convFail, "MeanMotion" -> meanMotion, "Separation" -> sep,
+    "FitWindow" -> window,
+    "Inspiral" -> OptionValue[Inspiral]]];
 
 (* Analyse an eccentricity reduction series.  Each result is passed to
    the next analysis so that the mean motion can be used in case it
