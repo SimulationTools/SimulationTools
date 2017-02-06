@@ -557,7 +557,7 @@ EccentricityParameterSpacePlot[params_List, es_List] :=
     Log10[Sqrt[Abs@fitFn]], {d, Min[Ds] - 0.1, Max[Ds] + 0.1}, {pr, 
      Min[prs] - 0.0001, Max[prs] + 0.0001}, 
     Contours -> Range[-4, 1, 0.1], PlotLegends -> Automatic], 
-   ListPlot[params, PlotStyle -> Black]]];
+   ListPlot[params, PlotStyle -> Black, Joined -> True]]];
 
 End[];
 
