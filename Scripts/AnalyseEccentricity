@@ -64,7 +64,7 @@ If[SimulationNames[sim] === {},
      preferentially. *)
   eccs = SimulationEccentricityAnalysis[FileNameJoin[{$SimulationPath[[1]],#}] & /@ sims];
 
-  Print[eccs[[All, {"Eccentricity", "ResidualNorm", "RadialPeriod", "OrbitalPeriod"}]]];
+  Print[CForm/@eccs[[All, {"Eccentricity", "ResidualNorm", "RadialPeriod", "OrbitalPeriod"}]]];
   ecc = Last[eccs];
   
   f = OpenWrite[outfile];
