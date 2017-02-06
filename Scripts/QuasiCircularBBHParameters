@@ -22,11 +22,27 @@ getArg[name_String] :=
     {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
       _ :> Error["Missing argument: --"<>name]}];
 
+getArg[name_String, default_] :=
+  Replace[$ScriptCommandLine, 
+    {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
+      _ :> default}];
+
 M = 1;
 q = getArg["q"];
 chi1z = getArg["chi1z"];
 chi2z = getArg["chi2z"];
-omOrb = getArg["om"];
+omOrb = getArg["om", None];
+If[omOrb === None,
+  nOrbits = getArg["orbits", None];
+  If[nOrbits === None,
+    Error["Neither --om nor --orbits was specified; unable to determine parameters"]];
+
+  orbsOfOm[om_?NumberQ] :=
+  PostNewtonianEvolution[{M,q,chi1z,chi2z,om}]["NumberOfOrbits"];
+
+  omOrb = om /. FindRoot[orbsOfOm[om] == nOrbits, {om, 0.01}];
+  If[!NumberQ[omOrb],
+    Error["Could not determine initial frequency for "<>ToString[nOrbs]<>" orbits"]]];
 
 pn = PostNewtonianEvolution[{M,q,chi1z,chi2z,omOrb}];
 
@@ -35,6 +51,7 @@ Print["Q="<>ToString[q,CForm]];
 Print["L="<>ToString[params["OrbitalAngularMomentum"],CForm]];
 Print["D="<>ToString[params["Separation"],CForm]];
 Print["PR="<>ToString[params["RadialMomentum"],CForm]];
+Print["OM="<>ToString[omOrb,CForm]];
 Print["ORBITS="<>ToString[pn["NumberOfOrbits"],CForm]];
 Print["MERGERTIME="<>ToString[pn["TimeToMerger"],CForm]];
 
