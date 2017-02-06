@@ -494,14 +494,23 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
       ") for fitting in " <> ToString[eccFitWindow]]];
     
     calcEcc[opts_List] :=
-     Module[{e},
+     Module[{e, tooShort, tooDifferent},
       e = 
        BinaryEccentricityFromSeparationDerivative[sep, eccFitWindow, 
         opts, Inspiral -> "PN", CorrectedSemiMajorAxis -> True, 
         MeanMotionGuess -> om0, SemiMajorAxisGuess -> D0, 
         OrbitalFrequency -> om0];
-      If[e["RadialPeriodTooShort"] ,
-       Print["Radial period too short"];
+
+       tooShort = e["RadialPeriodTooShort"];
+       tooDifferent = If[prevEcc =!= None,
+         Abs[1-e["MeanMotion"]/prevEcc["MeanMotion"]] > 0.2,
+         False];
+
+      If[tooShort || tooDifferent,
+        If[tooShort,
+          Print["Radial period too short"]];
+        If[tooDifferent,
+          Print["Radial period too different to previous"]];
        If[ ! MemberQ[opts[[All, 1]], "FixEccentricFrequency"] && 
          prevEcc =!= None,
         Print["Using previous mean motion"];
