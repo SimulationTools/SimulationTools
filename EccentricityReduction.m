@@ -44,6 +44,8 @@ ReduceEccentricity;
 BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSeparationDerivative[sep, {t1, t2}] returns an association containing information about the eccentricity of a binary with separation sep.";
 EccentricityParameterSpacePlot;
 SimulationEccentricityAnalysis;
+$EccentricityFitWindow;
+$EccentricFitOpts = {};
 
 Begin["`Private`"];
 
@@ -482,7 +484,9 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
     D0 = BinaryBlackHoleParameters[sim]["D"]; 
     params = EccentricityReductionParameters[sim];
     
-    eccFitWindow = 150 + {0, 2*2 Pi/om0};
+    eccFitWindow = Replace[$EccentricityFitWindow,
+      {x_List :> x,
+       _ :> 150 + {0, 2*2 Pi/om0}}];
     eps = 5; 
     If[MaxCoordinate[sep] + eps < eccFitWindow[[2]], 
      Print["WARNING: Simulation ", sim, " too short (", 
@@ -514,7 +518,7 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
          Join[e, <|"Failed" -> True|>]],
         e]]];
     
-    ecc = calcEcc[{}];
+    ecc = calcEcc[$EccentricFitOpts];
     eccMeasured = ecc["Eccentricity"];
     {nextD, nextPr} = ReduceEccentricity[sim, ecc];
     ecc2 = 
