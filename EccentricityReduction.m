@@ -44,6 +44,8 @@ ReduceEccentricity;
 BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSeparationDerivative[sep, {t1, t2}] returns an association containing information about the eccentricity of a binary with separation sep.";
 EccentricityParameterSpacePlot;
 SimulationEccentricityAnalysis;
+EccentricityReductionParameters;
+
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
 
@@ -548,6 +550,16 @@ ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
   mu = SymmetricMassRatio[sim] TotalMass[sim];
   deltax = Values[newEcc[[{"DeltaD0", "DeltaPr"}]]] /. "mu" -> mu;
   x0 + deltax];
+
+EccentricityReductionParameters[sim_String] :=
+ Module[{D0, pr0, pphi0},
+  D0 = 2 ToExpression@
+     ReadSimulationParameter[sim, "TwoPunctures::par_b"];
+  pr0 = ToExpression@
+    ReadSimulationParameter[sim, "TwoPunctures::par_P_plus[0]"];
+  pphi0 = ToExpression@
+    ReadSimulationParameter[sim, "TwoPunctures::par_P_plus[1]"];
+   <|"D" -> D0, "Pr" -> pr0, "Pphi" -> pphi0|>];
 
 EccentricityParameterSpacePlot[params_List, es_List] :=
  Module[{Ds, prs, eData, eModel, fit, fitFn, e0, d2edpr2, pr, pr0, 
