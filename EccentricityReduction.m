@@ -486,22 +486,31 @@ SimulationEccentricityAnalysis[sims_List] :=
 (* Analyse the eccentricity of a simulation *)
 SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
  Module[{sep, om0, D0, params, ecc, eccMeasured, nextD, nextPr, ecc2, 
-   result, eccFitWindow, eps, calcEcc},
-   
+   result, eccFitWindow, eps=50 (* TODO: this is too large *), calcEcc, simTooShort = False, noDataInFitWindow = False},
+   Print["Analysing eccentricity of ", sim];
   (* Any unhandled message leads to a failure report *)
   result = Check[
     (* This is a simple way to remove high frequency noise which
        sometimes causes the fit to fail to converge *)
     sep = Resampled[ReadBinarySeparation[sim], {5.0}];
-    om0 = InitialOrbitalFrequency[sim]; 
-    D0 = BinaryBlackHoleParameters[sim]["D"]; 
-    params = EccentricityReductionParameters[sim];
-    
+
     eccFitWindow = Replace[$EccentricityFitWindow,
       {x_List :> x,
        _ :> 150 + {0, 2*2 Pi/om0}}];
-    eps = 5; 
+
+    (* TODO: Refuse to fit if not enough data, unless told this is OK by an option *)
+
+    If[MaxCoordinate[sep] < eccFitWindow[[1]] + 50, 
+      noDataInFitWindow = True;
+      Print["Simulation "<>sim<>" does not have enough data within the eccentricity fit window "  <> ToString[eccFitWindow,CForm]<>"; it only goes up to "<>ToString[MaxCoordinate[sep]]];
+      Return[<|"Simulation" -> sim, "NoDataInFitWindow" -> True|>]];
+
+    om0 = InitialOrbitalFrequency[sim]; 
+    D0 = BinaryBlackHoleParameters[sim]["D"]; 
+    params = EccentricityReductionParameters[sim];
+
     If[MaxCoordinate[sep] + eps < eccFitWindow[[2]], 
+      simTooShort = True;
      Print["WARNING: Simulation ", sim, " too short (", 
       MaxCoordinate[sep], 
       ") for fitting in " <> ToString[eccFitWindow]]];
@@ -546,9 +555,11 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
     ecc2 = 
      Join[ecc, <|"NextD" -> nextD, "NextPr" -> nextPr, 
        "RadialPeriod" -> (2 Pi/ecc["MeanMotion"]), 
-       "OrbitalPeriod" -> 2 Pi/om0, 
-       "Simulation" -> sim|>];, $Failed];
-  Join[ecc2, <|"Failed" -> (result === $Failed || ecc2["Failed"])|>]];
+       "OrbitalPeriod" -> 2 Pi/om0|>];, $Failed];
+  Join[ecc2, <|"Failed" -> (result === $Failed || ecc2["Failed"]),
+    "SimulationTooShort" -> simTooShort,
+    "Simulation" -> sim,
+    "NoDataInFitWindow" -> noDataInFitWindow|>]];
 
 Options[ReduceEccentricity] = {};
 ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
