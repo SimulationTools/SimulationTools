@@ -46,6 +46,7 @@ EccentricityParameterSpacePlot;
 SimulationEccentricityAnalysis;
 EccentricityReductionParameters;
 InitialOrbitalFrequencyFromPN;
+EccentricityReductionPlot;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
@@ -610,6 +611,23 @@ EccentricityReductionIterationNumber[sim_String] :=
    ___ :> 
     Error["Cannot find eccentricity iteration from simulation name " <>
        sim]}];
+
+EccentricityReductionPlot[eccs1_List] :=
+  Module[{its, es, data, simNames, eccs},
+    eccs = DeleteCases[eccs1, ecc_ /; ecc["SimulationTooShort"]];
+    its = EccentricityReductionIterationNumber /@ eccs[[All, "Simulation"]];
+    es = eccs[[All, "Eccentricity"]];
+    data = ToDataTable[its, es];
+    simNames = eccs1[[-1, "Simulation"]];
+    
+    PresentationListLinePlot[Log10@data, PlotMarkers -> Automatic, 
+      PlotLabel -> simNames, 
+      PlotRange -> {If[Length[eccs] > 0, {Min[its] - 0.1, Max[its] + 0.1}, {-0.5, 1.5}],
+        {-5, -1}},
+      FrameTicks -> {{(*Log10Ticks[]*)Automatic,
+                             None},{Range[0,10],None}},GridLines -> {None, Range[-5, 1]}, 
+    ImageSize -> 250, Axes -> None,
+    FrameLabel->{"iteration","e"}]];
 
 End[];
 
