@@ -591,6 +591,15 @@ EccentricityParameterSpacePlot[params_List, es_List] :=
     Contours -> Range[-4, 1, 0.1], PlotLegends -> Automatic], 
    ListPlot[params, PlotStyle -> Black, Joined -> True]]];
 
+EccentricityReductionIterationNumber[sim_String] :=
+ Replace[StringCases[
+   sim, (___ ~~ "_e" ~~ n : NumberString ~~ "_" ~~ ___) :> 
+    ToExpression[n]],
+  {{i_} :> i,
+   ___ :> 
+    Error["Cannot find eccentricity iteration from simulation name " <>
+       sim]}];
+
 End[];
 
 EndPackage[];
