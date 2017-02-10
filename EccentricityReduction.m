@@ -45,6 +45,7 @@ BinaryEccentricityFromSeparationDerivative::usage = "BinaryEccentricityFromSepar
 EccentricityParameterSpacePlot;
 SimulationEccentricityAnalysis;
 EccentricityReductionParameters;
+InitialOrbitalFrequencyFromPN;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
@@ -239,6 +240,16 @@ PostNewtonianEvolution[{M_, q_, chi1_, chi2_, om0_}] :=
   <|"Omega" -> omSoln, "Phi" -> phiSoln, 
    "NumberOfOrbits" -> (phiSoln[tMax] - phiSoln[0])/(2 Pi), 
    "TimeToMerger" -> tMax|>];
+
+InitialOrbitalFrequencyFromPN[sim_String] :=
+  Module[{params, LInitNR, om, omGuess, LInitOfOm, omOrbPN, omGWPN, omCutoff},
+    params = BinaryBlackHoleParameters[sim];
+    LInitNR = InitialOrbitalAngularMomentum[sim][[3]];
+    LInitOfOm =
+    QuasiCircularParametersFromPostNewtonian[
+      {params["M"], params["q"], params["chi1"], params["chi2"], om}]["OrbitalAngularMomentum"];
+    omGuess = om /. Solve[LInitNR == LeadingTerm[Series[LInitOfOm,{om,0,10}]], om][[1]];
+    omOrbPN = om /. FindRoot[LInitOfOm == LInitNR, {om, omGuess}]];
 
 (**********************************************************)
 (* BinaryEccentricityFromSeparationDerivative             *)
