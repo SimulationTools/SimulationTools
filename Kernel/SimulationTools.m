@@ -108,6 +108,7 @@ packages = {
     "SimulationTools`SimFactory`",
     "SimulationTools`SimulationCompare`",
     "SimulationTools`SimulationProperties`",
+    "SimulationTools`SimulationWeb`",
     "SimulationTools`SimView`",
     "SimulationTools`SimViewRRMHD`",
     "SimulationTools`SpEC`",
