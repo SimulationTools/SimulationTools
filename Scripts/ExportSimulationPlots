@@ -1,0 +1,39 @@
+#!/usr/bin/env RunMathematicaScript
+(* -*- mode: mathematica -*- *)
+
+$Path = Prepend[$Path, "/home/ianhin/Cactus/ETBG/repos"];
+
+If[FindFile["SimulationTools`"] === $Failed,
+  Print["Cannot find SimulationTools.  Please make sure that it is accessible on your $Path."];
+  Quit[1]];
+
+(* Needs["CCompilerDriver`"]; *)
+(* $CCompiler = {"Compiler" -> CCompilerDriver`IntelCompiler`IntelCompiler}; *)
+
+Get["SimulationTools`"];
+
+SetOptions[$Output, FormatType -> OutputForm];
+AbortOnMessagesST[True];
+
+CheckAbort[
+
+getArg[name_String] :=
+  Replace[$ScriptCommandLine, 
+    {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
+      _ :> Error["Missing argument: --"<>name]}];
+
+getArg[name_String, default_] :=
+  Replace[$ScriptCommandLine, 
+    {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
+      _ :> default}];
+
+outDir = getArg["outdir"];
+simPattern = getArg["simpattern"];
+
+sims = SimulationNames[simPattern];
+
+plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot};
+
+ExportPlots[sims, plotFns, outDir];
+
+  , Quit[1]];
