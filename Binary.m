@@ -39,6 +39,8 @@ ReadBinaryPhase::usage = "ReadBinaryPhase[sim] gives the phase, phi, (in the xy 
 
 ToListOfPoints::usage = "ToListOfPoints[{x, y, ...}] takes DataTables representing x, y, ... coordinates and gives a list {{x1, y1, ...}, {x2, y2, ...}, ...} suitable for plotting with Line or ListPointPlot3D.";
 
+BinaryTrajectoriesPlot;
+
 Begin["`Private`"];
 
 Options[binaryTracker] = {"Trackers" -> Automatic};
@@ -143,6 +145,19 @@ SimulationTools`Binary`SimulationOverview`Plots[runNames1_] :=
            PlotRange -> {0, Automatic}, PlotLabel -> "Frequency"]}}];
     plots
 ];
+
+BinaryTrajectoriesPlot[sims1_List] :=
+  Association["Plot" ->
+    Module[{sims, coords},
+      sims = Select[sims1, (binaryTrackerNoFail[#,1] =!= None && binaryTrackerNoFail[#,2] =!= None) &];
+      coords = Table[ReadBinaryCoordinates[sim, {1,2}], {sim, sims}];
+      PresentationListLinePlot[
+        Flatten[tracks2D/@coords,1],
+        AspectRatio -> Automatic, PlotRange -> All,
+        FrameLabel -> {"x/M", "y/M"},
+        PlotLegend -> sims1]],
+    "Filename" -> "trajectories",
+    "Title" -> "Trajectories"];
 
 End[];
 EndPackage[];
