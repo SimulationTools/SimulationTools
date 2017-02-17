@@ -111,6 +111,8 @@ ReadStrainRadii;
 $UniformGridExtrapolation;
 ffiDataTable;
 
+Psi4RePlot;
+
 (* Exceptions *)
 Psi4RadiusNotFound;
 
@@ -718,6 +720,16 @@ SimulationTools`Waveforms`SimulationOverview`Plots[runNames1_] :=
            PlotRange -> All, PlotLabel -> "|Psi422|, R = "<>ToString[r],
            PlotLegend -> runNames,
            FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]}}]];
+
+Psi4RePlot[sims_List] :=
+  Module[{r = 100},
+  Association["Plot" ->
+    PresentationListLinePlot[
+      Map[Re[Shifted[r ReadPsi4[#, 2, 2, r], -r]] &, sims],
+      PlotRange -> All,
+      PlotLegend -> sims],
+    "Filename" -> "repsi4",
+    "Title" -> "Re[Psi422], r = "<>ToString[r]]];
 
 (****************************************************************)
 (* Extrapolation                                                *)
