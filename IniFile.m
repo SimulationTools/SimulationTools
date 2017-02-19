@@ -35,7 +35,7 @@ DefineMemoFunction[ReadIniFile[file_],
 
 IniVariable[file_, key_] :=
   Module[{map = ReadIniFile[file]},
-    If[!MemberQ[First/@map, key], Error["Key not found"],
+    If[!MemberQ[First/@map, key], Error["Key "<>key<>" not found in "<>file],
     Return[key /. map]]];
 
 End[];
