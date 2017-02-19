@@ -110,41 +110,44 @@ DefineMemoFunction[ReadPunctureBareMassParameters[run_String],
 
     mdFiles = FindSimulationFiles[run, "TwoPunctures.bbh"];
     If[mdFiles =!= {},
-      Return[ToExpression@IniVariable[mdFiles[[1]], #] & /@
-        {"initial-bh-puncture-bare-mass1", "initial-bh-puncture-bare-mass2"}]];
+      CheckAbort[
+        Return[ToExpression@IniVariable[mdFiles[[1]], #] & /@
+          {"initial-bh-puncture-bare-mass1", "initial-bh-puncture-bare-mass2"}]
+        ,
+        If[LookupParameter[run, "TwoPunctures::give_bare_mass"] != "no",
+          (* First try the parameter file *)
+          masses = ToExpression/@{LookupParameter[run, "TwoPunctures::par_m_plus"],
+                                  LookupParameter[run, "TwoPunctures::par_m_minus"]};
+        ,
+          (* If the bare masses were not given explicitly, then search stdout *)
+          stdout = StandardOutputOfRun[run];
 
-  If[LookupParameter[run, "TwoPunctures::give_bare_mass"] != "no",
-    (* First try the parameter file *)
-    masses = ToExpression/@{LookupParameter[run, "TwoPunctures::par_m_plus"],
-                            LookupParameter[run, "TwoPunctures::par_m_minus"]};
-  ,
-    (* If the bare masses were not given explicitly, then search stdout *)
-    stdout = StandardOutputOfRun[run];
+          If[Length[stdout] < 1,
+            Error["Cannot find standard output for run "<>run]];
 
-    If[Length[stdout] < 1,
-      Error["Cannot find standard output for run "<>run]];
+          (* New-style standard output *)
+          lines = FindList[First[stdout], "The two puncture masses are", 1];
+          masses = StringCases[lines,
+             "mp=" ~~ mp : NumberString ~~ ___ ~~ "mm=" ~~ mm : NumberString :>
+              ToExpression /@ {mp, mm}];
 
-    (* New-style standard output *)
-    lines = FindList[First[stdout], "The two puncture masses are", 1];
-    masses = StringCases[lines,
-       "mp=" ~~ mp : NumberString ~~ ___ ~~ "mm=" ~~ mm : NumberString :>
-        ToExpression /@ {mp, mm}];
+          (* Old-style standard output *)
+          If[Dimensions[masses] != {1,1,2},
+            lines = FindList[First[stdout], "bare mass: mp="];
+            masses = StringCases[lines,
+               "mp=" ~~ mp : NumberString ~~ ___ ~~ "mm=" ~~ mm : NumberString :>
+                ToExpression /@ {mp, mm}];
+          ];
 
-    (* Old-style standard output *)
-    If[Dimensions[masses] != {1,1,2},
-      lines = FindList[First[stdout], "bare mass: mp="];
-      masses = StringCases[lines,
-         "mp=" ~~ mp : NumberString ~~ ___ ~~ "mm=" ~~ mm : NumberString :>
-          ToExpression /@ {mp, mm}];
+          If[!MatchQ[Dimensions[masses], {_Integer,1,2}],
+            Error["Cannot determine bare masses from standard output of run "<>run]];
+
+          (*  Need to take the last matched bare mass lines in case old-style output was used *)
+          masses = masses[[-1,1]];
+        ];
+        Return[masses];
+      ];
     ];
-
-    If[!MatchQ[Dimensions[masses], {_Integer,1,2}],
-      Error["Cannot determine bare masses from standard output of run "<>run]];
-
-    (*  Need to take the last matched bare mass lines in case old-style output was used *)
-    masses = masses[[-1,1]];
-  ];
-  masses
  ]
 ];
 
