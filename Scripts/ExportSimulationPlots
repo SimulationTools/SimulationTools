@@ -32,7 +32,7 @@ simPattern = getArg["simpattern"];
 
 sims = SimulationNames[simPattern];
 
-plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, OrbitalPhaseErrorPlot};
+plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot};
 
 ExportPlots[sims, plotFns, outDir];
 
