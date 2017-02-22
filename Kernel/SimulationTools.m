@@ -188,7 +188,10 @@ SimulationPath[] :=
              {ToExpression["Global`RunDirectory"]},
              Error["Invalid RunDirectory; it should be a atring, but it is currently "<>
                    ToString[ToExpression["Global`RunDirectory"],InputForm]]],
-          {}]];
+          {}],
+    If[Environment["SIMULATIONTOOLS_SIMULATIONPATH"] =!= $Failed,
+      StringSplit[Environment["SIMULATIONTOOLS_SIMULATIONPATH"],":"],
+      {}]];
 
 (****************************************************************)
 (* Deprecated                                                   *)
