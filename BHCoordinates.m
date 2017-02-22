@@ -19,8 +19,10 @@ BeginPackage["SimulationTools`BHCoordinates`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
+  "SimulationTools`Grids`",
   "SimulationTools`Memo`",
   "SimulationTools`Providers`",
+  "SimulationTools`Plotting`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -39,6 +41,8 @@ ReadBHSpeed(*::usage = "ReadBHSpeed[sim, i] returns a DataTable of the coordinat
 BHCoordinateMergerTime(*::usage = "BHCoordinateMergerTime[sim,eps] returns the time at which the BHs in sim reach a separation of eps (eps defaults to 0.01 if omitted)."*);
 InitialSeparation;
 InitialPosition(*::usage = "InitialPosition[sim, bh] returns a vector containing the initial coordinate position of BH numbered bh"*);
+OrbitalPhaseErrorPlot;
+OrbitalPhaseErrors;
 InitialOrbitalFrequency;
 RelaxedOrbitalFrequency;
 
@@ -140,6 +144,24 @@ DefineMemoFunction[InitialSeparation[run_],
 
 DefineMemoFunction[InitialPosition[run_, bh_],
   First@DepVar@ReadBHCoordinates[run, bh]];
+
+OrbitalPhaseErrors[sims:{__String}] :=
+  Module[{phis, hs, phiErrs},
+    phis = ReadBHPhase /@ sims;
+    hs = ReadCoarseGridSpacing /@ sims;
+    phiErrs = 
+    Table[(phis[[i]] - 
+      phis[[i + 1]]) hs[[i]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
+        Length[sims] - 1}] // WithResampling];
+
+OrbitalPhaseErrorPlot[sims:{__String}, opts___] :=
+  OrbitalPhaseErrorPlot[OrbitalPhaseErrors[sims], opts];
+
+OrbitalPhaseErrorPlot[phiErrs:{__DataTable}, opts___] :=
+  Module[{},
+    PresentationListLinePlot[Log10 /@ Abs /@ phiErrs, opts, 
+      PlotRange -> {{0, All}, {-5, 2}}, Axes -> None,
+      LegendPosition -> {Right, Bottom}, GridLines -> Automatic]];
 
 InitialOrbitalFrequency[sim_String] :=
   Module[{omOrb,fit},
