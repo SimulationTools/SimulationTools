@@ -40,6 +40,7 @@ ReadBinaryPhase::usage = "ReadBinaryPhase[sim] gives the phase, phi, (in the xy 
 ToListOfPoints::usage = "ToListOfPoints[{x, y, ...}] takes DataTables representing x, y, ... coordinates and gives a list {{x1, y1, ...}, {x2, y2, ...}, ...} suitable for plotting with Line or ListPointPlot3D.";
 
 BinaryTrajectoriesPlot;
+BinarySeparationPlot;
 
 Begin["`Private`"];
 
@@ -158,6 +159,18 @@ BinaryTrajectoriesPlot[sims1_List] :=
         PlotLegend -> sims1]],
     "Filename" -> "trajectories",
     "Title" -> "Trajectories"];
+
+BinarySeparationPlot[sims1_List] :=
+  Association["Plot" ->
+    Module[{sims, coords},
+      sims = Select[sims1, (binaryTrackerNoFail[#,1] =!= None && binaryTrackerNoFail[#,2] =!= None) &];
+      seps = ReadBinarySeparation/@sims;
+      PresentationListLinePlot[
+        seps, PlotRange -> All,
+        (* FrameLabel -> {"t/M", "r/M"}, *)
+        PlotLegend -> sims]],
+    "Filename" -> "binary_separation",
+    "Title" -> "Binary separation"];
 
 End[];
 EndPackage[];
