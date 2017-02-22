@@ -721,8 +721,8 @@ SimulationTools`Waveforms`SimulationOverview`Plots[runNames1_] :=
            PlotLegend -> runNames,
            FrameTicks -> {{Table[{x,Superscript[10,x]}, {x,-10,10,2}],None},{Automatic,None}}]}}]];
 
-Psi4RePlot[sims_List] :=
-  Module[{r = 100},
+Psi4RePlot[sims1_List] :=
+  Module[{r = 100, sims = Select[sims1, HaveData["Waveforms",#] &]},
   Association["Plot" ->
     PresentationListLinePlot[
       Map[Re[Shifted[r ReadPsi4[#, 2, 2, r], -r]] &, sims],
