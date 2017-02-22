@@ -48,6 +48,8 @@ pn = PostNewtonianEvolution[{M,q,chi1z,chi2z,omOrb}];
 
 params = QuasiCircularParametersFromPostNewtonian[{M, q, chi1z, chi2z, omOrb}];
 Print["Q="<>ToString[q,CForm]];
+Print["CHI1Z="<>ToString[chi1z,CForm]];
+Print["CHI2Z="<>ToString[chi2z,CForm]];
 Print["L="<>ToString[params["OrbitalAngularMomentum"],CForm]];
 Print["D="<>ToString[params["Separation"],CForm]];
 Print["PR="<>ToString[params["RadialMomentum"],CForm]];
