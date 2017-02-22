@@ -17,23 +17,52 @@ AbortOnMessagesST[True];
 
 CheckAbort[
 
-getArg[name_String] :=
+  getArg[name_String] :=
   Replace[$ScriptCommandLine, 
     {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
       _ :> Error["Missing argument: --"<>name]}];
 
-getArg[name_String, default_] :=
+  getArg[name_String, default_] :=
   Replace[$ScriptCommandLine, 
     {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
       _ :> default}];
 
-outDir = getArg["outdir"];
-simPattern = getArg["simpattern"];
+  fromFile = getArg["from-file", None];
+  If[fromFile === None,
 
-sims = SimulationNames[simPattern];
+    outDir = getArg["outdir"];
+    simPattern = getArg["simpattern"],
 
-plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot};
+    (* else *)
 
-ExportPlots[sims, plotFns, outDir];
+    If[fromFile === "-",
+      in = OpenRead["!cat"],
+      in = OpenRead[fromFile]];
+    ];
+
+  line = None
+  While[(line = Read[in, String]) =!= EndOfFile,
+    Print["ExportSimulationPlots: line = ", line];
+    words = StringSplit[line];
+
+    outDir = words[[1]];
+    simPattern = words[[2]];
+
+    Print["line = ", line];
+    Print["words = ", words];
+    Print["outDir = ", outDir];
+    Print["simPattern = ", simPattern];
+
+    sims = SimulationNames[simPattern~~"_"~~NumberString];
+
+    plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, SimulationProgressPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot};
+    Print["sims = ", sims];
+    Print["plotFns = ", plotFns];
+    If[FileExistsQ[outDir<>"/ploterror.html"],
+      DeleteFile[outDir<>"/ploterror.html"]];
+    CheckAbort[ExportPlots[sims, plotFns, outDir];
+      Export[outDir<>"/lastupdate.html", "<div><hr/><p>Page last updated: "<>DateString[]<>"</p></div>","Text"],
+      Export[outDir<>"/ploterror.html", "<p>Error while generating plots</p>","Text"]];
+    Run["cd "<>outDir<>"; makepage"]];
 
   , Quit[1]];
