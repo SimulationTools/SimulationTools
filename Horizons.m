@@ -57,6 +57,7 @@ HaveIsolatedHorizonSpinData;
 HaveChristodoulouMassData;
 SimpleHorizonPlot2D;
 ReadRelaxedHorizonSizes;
+ReadAHSpeed;
 
 Begin["`Private`"];
 
@@ -294,6 +295,9 @@ ReadRelaxedHorizonSizes[sim_String] :=
    "MaximumRadius1" -> ahrsRel[[2]],
    "MinimumRadius2" -> ahrsRel[[3]], 
    "MaximumRadius2" -> ahrsRel[[4]]]];
+
+ReadAHSpeed[sim_String, ah_Integer] :=
+  Norm@Table[NDerivative[1]@ReadAHCentroidCoord[sim, ah, i], {i, 1, 3}];
 
 End[];
 
