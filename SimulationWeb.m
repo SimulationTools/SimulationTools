@@ -32,17 +32,19 @@ ExportPlots[sims_List, plotFunctions_List, outDir_String] :=
     plot = fn[sims];
     a = Replace[plot,
       {a_Association :> a,
-       g_Graphics :> 
+       g:(_Graphics|_Legended) :> 
         Module[{title = 
            StringReplace[ToString[fn], "Plot" ~~ EndOfString -> ""]},
          Association["Plot" -> g, "Filename" -> title,
           "Title" -> title]],
-       _ :> Error["Invalid value returned by " <> ToString[fn]]}];
+        None :> None,
+       x_ :> Error["Invalid value returned by " <> ToString[fn]<>": "<>ToString[Short[x]]]}];
     
-    Export[outDir <> "/" <> a["Filename"] <> ".png", 
-     Labeled[Show[a["Plot"], PlotLabel -> None], 
-      Style[a["Title"], FontFamily -> "Sans", 16, 
-       FontWeight -> "Bold"], Top]]],
+     If[a =!= None,
+       Export[outDir <> "/" <> a["Filename"] <> ".png", 
+         Labeled[Show[a["Plot"], PlotLabel -> None], 
+           Style[a["Title"], FontFamily -> "Sans", 16, 
+             FontWeight -> "Bold"], Top]]]],
    {fn, plotFunctions}]];
 
 End[];
