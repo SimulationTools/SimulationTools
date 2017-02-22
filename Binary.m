@@ -156,7 +156,7 @@ BinaryTrajectoriesPlot[sims1_List] :=
         Flatten[tracks2D/@coords,1],
         AspectRatio -> Automatic, PlotRange -> All,
         FrameLabel -> {"x/M", "y/M"},
-        PlotLegend -> sims1]],
+        PlotLegend -> sims]],
     "Filename" -> "trajectories",
     "Title" -> "Trajectories"];
 
