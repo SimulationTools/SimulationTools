@@ -145,22 +145,34 @@ DefineMemoFunction[InitialSeparation[run_],
 DefineMemoFunction[InitialPosition[run_, bh_],
   First@DepVar@ReadBHCoordinates[run, bh]];
 
-OrbitalPhaseErrors[sims:{__String}] :=
+OrbitalPhaseErrors[sims:{___String}] :=
   Module[{phis, hs, phiErrs},
+    If[Length[sims] < 2, Return[{}]];
     phis = ReadBHPhase /@ sims;
     hs = ReadCoarseGridSpacing /@ sims;
-    phiErrs = 
+    Quiet[phiErrs = 
     Table[(phis[[i]] - 
-      phis[[i + 1]]) hs[[i]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
-        Length[sims] - 1}] // WithResampling];
+      phis[[i + 1]]) hs[[i+1]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
+        Length[sims] - 1}],InterpolatingFunction::dmval] // WithResampling];
 
-OrbitalPhaseErrorPlot[sims:{__String}, opts___] :=
-  OrbitalPhaseErrorPlot[OrbitalPhaseErrors[sims], opts];
+resOfSim[s_String]:=
+  If[StringMatchQ[s,__~~"_"~~NumberString~~EndOfString],
+    StringSplit[s,"_"][[-1]],
+    s];
 
-OrbitalPhaseErrorPlot[phiErrs:{__DataTable}, opts___] :=
-  Module[{},
-    PresentationListLinePlot[Log10 /@ Abs /@ phiErrs, opts, 
+OrbitalPhaseErrorPlot[sims:{__String}, opts:OptionsPattern[]] :=
+  OrbitalPhaseErrorPlot[OrbitalPhaseErrors[sims], opts, Resolutions -> (resOfSim/@sims)];
+
+Options[OrbitalPhaseErrorPlot] = {"Resolutions" -> Automatic};
+OrbitalPhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
+  Module[{legend},
+    legend = If[OptionValue[Resolutions] === Automatic,
+      None,
+      MapThread[Subscript["\[CapitalDelta]\[Phi]",#2] &, {Drop[OptionValue[Resolutions], -1], Drop[RotateLeft[OptionValue[Resolutions]], -1]}]];
+
+    PresentationListLinePlot[Log10 /@ Abs /@ phiErrs, FilterRules[opts,Options[PresentationListLinePlot]], 
       PlotRange -> {{0, All}, {-5, 2}}, Axes -> None,
+      PlotLegend -> legend,
       LegendPosition -> {Right, Bottom}, GridLines -> Automatic]];
 
 InitialOrbitalFrequency[sim_String] :=
