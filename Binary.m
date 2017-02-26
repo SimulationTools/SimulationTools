@@ -165,8 +165,12 @@ BinarySeparationPlot[sims1_List] :=
     Module[{sims, coords},
       sims = Select[sims1, (binaryTrackerNoFail[#,1] =!= None && binaryTrackerNoFail[#,2] =!= None) &];
       seps = ReadBinarySeparation/@sims;
+
+      tMax = Max[MaxCoordinate/@seps];
+      dt = tMax/100;
+
       PresentationListLinePlot[
-        seps, PlotRange -> All,
+        Map[Resampled[#,{dt}]&, seps], PlotRange -> All,
         (* FrameLabel -> {"t/M", "r/M"}, *)
         PlotLegend -> sims]],
     "Filename" -> "binary_separation",
