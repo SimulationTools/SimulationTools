@@ -174,22 +174,38 @@ SimulationSpeedPlot[runNames1_] :=
 ReadSimulationMachine[sim_String] :=
   CallProvidedFunction["RunFiles","ReadSimulationMachine",{FindRunDir[sim],sim}];  
 
-SimulationProgressPlot[sim_String, style_: PresentationPlotStyles[[1]], opts___] :=
-  Module[{progresses, markers, ranges, t1, t2},
+simulationProgressData[sim_String] :=
+ Module[{progresses, markers, ranges, t1, t2},
   progresses = ReadSimulationSegmentProgress[sim];
-  markers = ToList[#][[{1, -1}]] & /@ progresses;
-  ranges = CoordinateRange/@progresses;
-  t1 = Min[ranges[[All,1]]];
-  t2 = Max[ranges[[All,2]]];
-  Show[DateListPlot[ToList /@ progresses, opts, Frame -> True, PlotRange->{{t1,t2},All},
-    LabelStyle -> "Medium", PlotStyle -> style, PlotLegends -> {sim}, 
-    FrameLabel -> {None, "t"}], Graphics[{Point /@ markers}]]];
+  markers = ToList[#][[{1, -1}]] & /@ progresses; 
+  ranges = CoordinateRange /@ progresses; t1 = Min[ranges[[All, 1]]]; 
+  t2 = Max[ranges[[All, 2]]];
+  <|"TimeRange" -> {t1, t2}, "Progresses" -> progresses, 
+   "Markers" -> markers|>];
 
-SimulationProgressPlot[sims_List, opts___] :=
-  Module[{styles},
-    styles = Take[PresentationPlotStyles, Length[sims]];
-    Show[Sequence @@ MapThread[SimulationProgressPlot[#1,#2,opts] &, {sims, styles}], 
-      opts]];
+SimulationProgressPlot[sims_List] :=
+ Module[{progDatas, t1, t2, f1, f2, lines, points, styles, tNow, 
+   legend},
+  progDatas = Dataset[simulationProgressData /@ sims];
+  t1 = Min[progDatas[[All, "TimeRange", 1]]];
+  t2 = Max[progDatas[[All, "TimeRange", 2]]];
+  f1 = Min[Min /@ Flatten[progDatas[[All, "Progresses"]]]];
+  f2 = Max[Max /@ Flatten[progDatas[[All, "Progresses"]]]];
+  
+  lines = 
+   Table[Line[ToList[#]] & /@ pd["Progresses"], {pd, 
+     Normal@progDatas}];
+  points = Table[Point /@ pd["Markers"], {pd, Normal@progDatas}];
+  styles = Take[PresentationPlotStyles, Length[lines]];
+  tNow = AbsoluteTime[];
+  legend = LineLegend[styles, sims, LabelStyle -> "Medium"];
+  Show[DateListPlot[{}, Frame -> True, 
+    PlotRange -> {{t1, t2 + 0.1 (t2 - t1)}, {f1, f2 + 0.1 (f2 - f1)}},
+     LabelStyle -> "Medium", FrameLabel -> {None, "t"}(*,PlotLegends->
+    LineLegend[styles,sims]*)],
+   Graphics[{Thread[{styles, lines, points}], {Dashed, Gray, 
+      Line[{{tNow, f1}, {tNow, 2 f2}}]}}], 
+   Epilog -> Inset[legend, Scaled[{0.05, 0.95}], {-1, 1}]]];
 
 End[];
 EndPackage[];
