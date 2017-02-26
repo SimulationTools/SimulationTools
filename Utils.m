@@ -33,6 +33,8 @@ MovingAverageOperator;
 UserEmailDisplayName;
 LeadingTerm;
 
+$SimulationToolsEmail;
+
 Begin["`Private`"];
 
 (**********************************************************)
@@ -150,14 +152,17 @@ UserEmailDisplayName[] :=
  Module[{userName, userEmail},
   (* TODO: catch exception or look at exit code, 
   and return None or Missing *)
-  
-  userName = 
-   RunSubprocess[{"git", "config", "--get", "user.name"}, 
-     Exceptions -> True, "StringLists" -> False][[2]];
-  userEmail = 
-   RunSubprocess[{"git", "config", "--get", "user.email"}, 
-     Exceptions -> True, "StringLists" -> False][[2]];
-   userName <> " <" <> userEmail <> ">"];
+
+  If[StringQ[$SimulationToolsEmail],
+    $SimulationToolsEmail,
+    (* else *)
+    userName = 
+    RunSubprocess[{"git", "config", "--get", "user.name"}, 
+      Exceptions -> True, "StringLists" -> False][[2]];
+    userEmail = 
+    RunSubprocess[{"git", "config", "--get", "user.email"}, 
+      Exceptions -> True, "StringLists" -> False][[2]];
+    userName <> " <" <> userEmail <> ">"]];
 
 LeadingTerm[sd_SeriesData] :=
   sd[[3, 1]] (sd[[1]] - sd[[2]])^(sd[[4]]/sd[[6]]);
