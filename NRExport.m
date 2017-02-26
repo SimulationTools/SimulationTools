@@ -687,7 +687,7 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
          "initial-bh-spin" <> ToString[i + 1] -> 
          ReadPunctureSpinParameters[sim, i], {i, 0, 1}],
       Sequence@@Flatten[If[OptionValue[Eccentricity] =!= None,
-         "relaxed-eccentricity" -> OptionValue[Eccentricity],
+         {"relaxed-eccentricity" -> OptionValue[Eccentricity]},
          {"relaxed-eccentricity" -> ecc[[1, "Eccentricity"]],
           "relaxed-mean-anomaly" -> ("l0"+"n" tRelaxed) /. ecc[[1, "FitParameters"]]}]]
        
