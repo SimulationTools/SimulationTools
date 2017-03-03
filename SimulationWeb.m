@@ -55,7 +55,8 @@ ExportTables[sims_List, tableFunctions_List, outDir_String] :=
   Do[
    If[! FileExistsQ[outDir], CreateDirectory[outDir]];
    Module[{table, a},
-    table = fn[sims];
+    Print[fn];
+    table = CheckAbort[fn[sims], None];
     a = Replace[table,
       {a_Association :> a,
        d_Dataset :> 
@@ -70,7 +71,7 @@ ExportTables[sims_List, tableFunctions_List, outDir_String] :=
        Print["  Exporting ", a["Filename"] <> ".html"];
        Export[outDir <> "/" <> a["Filename"] <> ".html", 
          XMLElement["div",{},
-           {XMLElement["h2",{},{}],
+           {XMLElement["h2",{},{a["Title"]}],
              ToHTML[a["Table"]]}], "XML"]]],
    {fn, tableFunctions}]];
 
