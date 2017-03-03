@@ -56,13 +56,17 @@ CheckAbort[
     sims = SimulationNames[simPattern~~"_"~~NumberString];
 
     plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, SimulationProgressPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot};
+    tableFns = {SimulationCompletionStatsTable};
     Print["sims = ", sims];
     Print["plotFns = ", plotFns];
+    Print["tableFns = ", tableFns];
     If[FileExistsQ[outDir<>"/ploterror.html"],
       DeleteFile[outDir<>"/ploterror.html"]];
-    CheckAbort[ExportPlots[sims, plotFns, outDir];
+    CheckAbort[
+      Quiet[ExportTables[sims, tableFns, outDir];
+      ExportPlots[sims, plotFns, outDir],InterpolatingFunction::dmval];
       Export[outDir<>"/lastupdate.html", "<div><hr/><p>Page last updated: "<>DateString[]<>"</p></div>","Text"],
-      Export[outDir<>"/ploterror.html", "<p>Error while generating plots</p>","Text"]];
+      Export[outDir<>"/ploterror.html", "<p>Error while generating page</p>","Text"]];
     Run["cd "<>outDir<>"; makepage"]];
 
   , Quit[1]];
