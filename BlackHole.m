@@ -70,7 +70,7 @@ EstimateBinaryMergerTime[sim_String] :=
       Last[chi2], currentOm}];
    tCurrent + pnEv["TimeToMerger"]]];
 
-SimulationCompletionEstimate[sim_String] := SimulationCompletionEstimate[sim] = 
+SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] = *)
  Module[{tMerger, speed, currentSpeed, currentTime, timeAfterMerger, 
    endTime, remainingWalltimeHours, remainingWalltimeDays, 
    elapsedWalltimeHours, completionFraction},
