@@ -21,6 +21,7 @@ BeginPackage["SimulationTools`SimulationWeb`",
 
 
 ExportPlots;
+ExportTables;
 
 Begin["`Private`"];
 
@@ -47,6 +48,43 @@ ExportPlots[sims_List, plotFunctions_List, outDir_String] :=
            Style[a["Title"], FontFamily -> "Sans", 16, 
              FontWeight -> "Bold"], Top]]]],
    {fn, plotFunctions}]];
+
+ExportTables[sims_List, tableFunctions_List, outDir_String] :=
+ Module[{},
+  Do[
+   If[! FileExistsQ[outDir], CreateDirectory[outDir]];
+   Module[{table, a},
+    table = fn[sims];
+    a = Replace[table,
+      {a_Association :> a,
+       d_Dataset :> 
+        Module[{title = 
+           StringReplace[ToString[fn], "Table" ~~ EndOfString -> ""]},
+         Association["Table" -> d, "Filename" -> title,
+          "Title" -> title]],
+        None :> None,
+       x_ :> Error["Invalid value returned by " <> ToString[fn]<>": "<>ToString[Short[x]]]}];
+    
+     If[a =!= None,
+       Print["Exporting ", a["Filename"] <> ".html"];
+       Export[outDir <> "/" <> a["Filename"] <> ".html", 
+         XMLElement["div",{},
+           {XMLElement["h2",{},{}],
+             ToHTML[a["Table"]]}], "XML"]]],
+   {fn, tableFunctions}]];
+
+ToHTML[x_] := ToString[x]
+
+ToHTML[d_Dataset] :=
+ Module[{keys, row},
+  keys = Keys[d[1]];
+  row[l_, tag_String] :=
+   
+   XMLElement["tr", {}, Normal@Map[XMLElement[tag, {},
+        {ToString[#]}] &, l]];
+  XMLElement["table", {},
+   Join[{row[keys, "th"]},
+    row[#, "td"] & /@ Values /@ d]]];
 
 End[];
 EndPackage[];
