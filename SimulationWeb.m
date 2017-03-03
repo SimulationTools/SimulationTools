@@ -41,6 +41,7 @@ ExportPlots[sims_List, plotFunctions_List, outDir_String] :=
        x_ :> Error["Invalid value returned by " <> ToString[fn]<>": "<>ToString[Short[x]]]}];
     
      If[a =!= None,
+       Print["Exporting ", a["Filename"] <> ".png"];
        Export[outDir <> "/" <> a["Filename"] <> ".png", 
          Labeled[Show[a["Plot"], PlotLabel -> None], 
            Style[a["Title"], FontFamily -> "Sans", 16, 
