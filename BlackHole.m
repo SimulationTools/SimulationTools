@@ -62,8 +62,8 @@ EstimateBinaryMergerTime[sim_String] :=
   If[Last[sep] < 0.1 || currentOm > 0.08,
    LocateMaximum[-(sep - 0.1)^2],
    (* else *)
-   chi1 = ReadBlackHoleDimensionlessSpin[sim, 1][[3]];
-   chi2 = ReadBlackHoleDimensionlessSpin[sim, 2][[3]];
+   chi1 = Quiet[ReadBlackHoleDimensionlessSpin[sim, 1][[3]],InterpolatingFunction::dmval];
+   chi2 = Quiet[ReadBlackHoleDimensionlessSpin[sim, 2][[3]],InterpolatingFunction::dmval];
    tCurrent = MaxCoordinate[omData];
    pnEv = 
     PostNewtonianEvolution[{1, 1/MassRatio[sim], Last[chi1], 
