@@ -107,7 +107,8 @@ SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] 
 
 SimulationCompletionStatsTable[d_Dataset] := 
   <|"Table" ->
-  Map[<|"% complete" -> Floor[100 #CompletionFraction],
+  Map[<|"Simulation" -> #Simulation,
+    "% complete" -> Floor[100 #CompletionFraction],
     "Elapsed days" -> 
     NumberForm[
       N@Floor[10 (If[# < 0, 0, #] &)@#ElapsedWalltimeHours/24]/
