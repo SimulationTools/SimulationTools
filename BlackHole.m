@@ -91,7 +91,8 @@ SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] 
   completionFraction = 
    elapsedWalltimeHours/(elapsedWalltimeHours + 
       remainingWalltimeHours);
-  <|"CurrentTime" -> currentTime,
+  <|"Simulation" -> sim,
+   "CurrentTime" -> currentTime,
    "TimeOfMerger" -> tMerger,
    "CurrentSpeed" -> currentSpeed,
    "CurrentTime" -> currentTime,
