@@ -30,6 +30,7 @@ ExportPlots[sims_List, plotFunctions_List, outDir_String] :=
   Do[
    If[! FileExistsQ[outDir], CreateDirectory[outDir]];
    Module[{plot, a},
+    Print[fn];
     plot = fn[sims];
     a = Replace[plot,
       {a_Association :> a,
@@ -42,7 +43,7 @@ ExportPlots[sims_List, plotFunctions_List, outDir_String] :=
        x_ :> Error["Invalid value returned by " <> ToString[fn]<>": "<>ToString[Short[x]]]}];
     
      If[a =!= None,
-       Print["Exporting ", a["Filename"] <> ".png"];
+       Print["  Exporting ", a["Filename"] <> ".png"];
        Export[outDir <> "/" <> a["Filename"] <> ".png", 
          Labeled[Show[a["Plot"], PlotLabel -> None], 
            Style[a["Title"], FontFamily -> "Sans", 16, 
@@ -66,7 +67,7 @@ ExportTables[sims_List, tableFunctions_List, outDir_String] :=
        x_ :> Error["Invalid value returned by " <> ToString[fn]<>": "<>ToString[Short[x]]]}];
     
      If[a =!= None,
-       Print["Exporting ", a["Filename"] <> ".html"];
+       Print["  Exporting ", a["Filename"] <> ".html"];
        Export[outDir <> "/" <> a["Filename"] <> ".html", 
          XMLElement["div",{},
            {XMLElement["h2",{},{}],
