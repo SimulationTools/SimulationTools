@@ -27,6 +27,7 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
   "SimulationTools`ReadHDF5`",
+  "SimulationTools`Grids`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -112,6 +113,10 @@ $UniformGridExtrapolation;
 ffiDataTable;
 
 Psi4RePlot;
+
+Psi4PhaseErrors;
+Psi4PhaseErrorPlot;
+
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -1049,6 +1054,46 @@ ToSchwarzschildRetardedTime[rSch:(_DataTable|_?NumberQ), f_DataTable, MADM_] :=
 ReadWaveExtractRadii[sim_String] :=
   Module[{},
     Union[ToExpression[StringSplit[FileNameTake[#,-1],"_"][[5]]] & /@ FindSimulationFiles[sim,"Qeven_Re_Detector_Radius_*_l*_m*.asc"]]]
+
+
+
+
+(****************************************************************)
+(* Psi4 phase errors                                            *)
+(****************************************************************)
+
+Psi4PhaseErrors[sims:{___String}] :=
+  Module[{psi4s, phis, hs, phiErrs},
+    If[Length[sims] < 2, Return[{}]];
+    psi4s = Shifted[100 ReadPsi4[#, 2, 2, 100], -100] & /@ sims;
+    phis = AlignPhases[Phase/@psi4s,200];
+    hs = ReadCoarseGridSpacing /@ sims;
+    Quiet[phiErrs = 
+    Prepend[Table[(phis[[i]] - 
+      phis[[i + 1]]) hs[[i+1]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
+        Length[sims] - 1}],(phis[[1]] - 
+      phis[[2]]) hs[[1]]^8/(hs[[1]]^8 - hs[[2]]^8)],InterpolatingFunction::dmval] // WithResampling];
+
+resOfSim[s_String]:=
+  If[StringMatchQ[s,__~~"_"~~NumberString~~EndOfString],
+    StringSplit[s,"_"][[-1]],
+    s];
+
+Psi4PhaseErrorPlot[sims:{__String}, opts:OptionsPattern[]] :=
+  Psi4PhaseErrorPlot[Psi4PhaseErrors[sims], opts, Resolutions -> (resOfSim/@sims)];
+
+(* TODO: this is duplicated from OrbitalPhaseErrorPlot *)
+Options[Psi4PhaseErrorPlot] = {"Resolutions" -> Automatic};
+Psi4PhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
+  Module[{legend},
+    legend = If[OptionValue[Resolutions] === Automatic,
+      None,
+      Map[Subscript["\[CapitalDelta]\[Phi]",#] &, OptionValue[Resolutions]]];
+
+    PresentationListLinePlot[Log10 /@ Abs /@ phiErrs, FilterRules[opts,Options[PresentationListLinePlot]], 
+      PlotRange -> {{0, All}, {-5, 2}}, Axes -> None,
+      PlotLegend -> legend,
+      LegendPosition -> {Right, Bottom}, GridLines -> Automatic]];
 
 End[];
 
