@@ -565,10 +565,11 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
 Options[ReduceEccentricity] = {};
 ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
  Module[{D0, pr0, deltax, x0, mu},
-  D0 = 2 ToExpression@
-     ReadSimulationParameter[sim, "TwoPunctures::par_b"];
-  pr0 = ToExpression@
-    ReadSimulationParameter[sim, "TwoPunctures::par_P_plus[0]"];
+  D0 = 2 ImportString[
+     ReadSimulationParameter[sim, "TwoPunctures::par_b"], "List"][[1]];
+  pr0 = ImportString[
+    ReadSimulationParameter[sim, "TwoPunctures::par_P_plus[0]"], "List"][[1]];
+
   x0 = {D0, pr0};
   mu = SymmetricMassRatio[sim] TotalMass[sim];
   deltax = Values[newEcc[[{"DeltaD0", "DeltaPr"}]]] /. "mu" -> mu;
