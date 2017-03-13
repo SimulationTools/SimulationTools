@@ -979,6 +979,7 @@ MonotonicQ[d_DataTable] := Abs[Plus @@ Sign[Differences[ToListOfCoordinates[d]]]
 (**********************************************************)
 
 monotonisePreferLastCompiled =
+Block[{CCompilerDriver`$CCompiler = SimulationToolsCCompiler[]},
  Compile[{{l1, _Real, 2}},
   Module[{l = Reverse[l1], output, j, i, n},
    If[Length[l] < 2, Return[Reverse[l]]];
@@ -991,7 +992,7 @@ monotonisePreferLastCompiled =
      output[[j]] = l[[i]];
      j = j + 1]];
    Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
-  RuntimeOptions -> "Speed"];
+  RuntimeOptions -> "Speed"]];
 
 monoPreferLast[d_DataTable] :=
   ToDataTable[monotonisePreferLastCompiled[ToList[d]]];

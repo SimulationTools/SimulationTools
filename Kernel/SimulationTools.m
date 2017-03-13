@@ -16,7 +16,8 @@
 
 BeginPackage["SimulationTools`",
  {
-  "SimulationTools`Error`"
+  "SimulationTools`Error`",
+  "CCompilerDriver`"
  }
 ];
 
@@ -32,6 +33,7 @@ $SimulationToolsVersion::usage = "$SimulationToolsVersionNumber is a string that
 SimulationPath::usage = "SimulationPath[] gives the list of directories which SimulationTools will search for simulations.  It contains those directories listed in $SimulationPath as well as (for backward compatibility) the value of RunDirectory if it exists.";
 
 $SimulationPath::usage = "$SimulationPath is the default list of directories to search in attempting to find a simulation.";
+SimulationToolsCCompiler;
 
 (****************************************************************)
 (* Experimental                                                 *)
@@ -192,6 +194,23 @@ SimulationPath[] :=
     If[Environment["SIMULATIONTOOLS_SIMULATIONPATH"] =!= $Failed,
       StringSplit[Environment["SIMULATIONTOOLS_SIMULATIONPATH"],":"],
       {}]];
+
+(*********************************************************************
+  SimulationToolsCCompiler
+ *********************************************************************)
+
+(* If the Intel compiler is available in the environment, it adds its
+   include path to CPATH, and gcc cannot be used due to Intel's math.h
+   being incompatible with gcc.  So if the Intel compiler is
+   available, use it instead. *)
+
+SimulationToolsCCompiler[] :=
+  If[$CCompiler === Automatic && DefaultCCompiler[] === CCompilerDriver`GCCCompiler`GCCCompiler &&
+    MemberQ["Compiler" /. CCompilers[], CCompilerDriver`IntelCompiler`IntelCompiler],
+    (* then *)
+    CCompilerDriver`IntelCompiler`IntelCompiler,
+    (* else *)
+    Automatic];
 
 (****************************************************************)
 (* Deprecated                                                   *)

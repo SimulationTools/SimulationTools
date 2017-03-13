@@ -135,6 +135,7 @@ mergeDataTables[ds_List] :=
   ToDataTable[mergeDataLists[ToList/@ds]];
 
 monotonisePreferLastCompiled =
+ Block[{CCompilerDriver`$CCompiler = SimulationToolsCCompiler[]},
  Compile[{{l1, _Real, 2}},
   Module[{l = Reverse[l1], output, j, i, n},
    If[Length[l] < 2, Return[Reverse[l]]];
@@ -147,7 +148,7 @@ monotonisePreferLastCompiled =
      output[[j]] = l[[i]];
      j = j + 1]];
    Reverse[output[[1 ;; j - 1]]]], CompilationTarget -> "C", 
-  RuntimeOptions -> "Speed"];
+  RuntimeOptions -> "Speed"]];
 
 monoPreferFirst[d_DataTable] :=
   ToDataTable[monotonisePreferLastCompiled[Reverse[ToList[d]]]];
