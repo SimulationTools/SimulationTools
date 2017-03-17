@@ -656,7 +656,12 @@ exportHorizons[sim_String, horizonFile_String] :=
     (* Print[UniformGridQ/@masses]; *)
     (* Print[Map[UniformGridQ, centroids, {2}]]; *)
 
-    Export[horizonFile, tableOfCentroid/@Join[centroids,List/@masses, spins], {"HDF5", "Datasets", {"AhA.dir/CoordCenterInertial.dat", "AhB.dir/CoordCenterInertial.dat", "AhC.dir/CoordCenterInertial.dat", "AhA.dir/ChristodoulouMass.dat", "AhB.dir/ChristodoulouMass.dat", "AhC.dir/ChristodoulouMass.dat", "/AhA.dir/chiInertial.dat", "/AhB.dir/chiInertial.dat", "/AhC.dir/chiInertial.dat"}}]];
+    Export[horizonFile, tableOfCentroid/@centroids,
+      {"HDF5", "Datasets", Table["Ah"<>a<>".dir/CoordCenterInertial.dat",{a,{"A","B","C"}}]}];
+    Export[horizonFile, tableOfCentroid/@List/@masses,
+      {"HDF5", "Datasets", Table["Ah"<>a<>".dir/ChristodoulouMass.dat",{a,{"A","B","C"}}]}, "Append" -> True];
+    Export[horizonFile, tableOfCentroid/@spins,
+      {"HDF5", "Datasets", Table["Ah"<>a<>".dir/chiInertial.dat",{a,{"A","B","C"}}]}, "Append" -> True]];
 
 configName[sim_String] := 
  StringReplace[sim, x__ ~~ "_" ~~ NumberString ~~ EndOfString :> x];
