@@ -628,6 +628,36 @@ exportExtrapolatedWaveform[sim_String, waveformFile_String] :=
       DeleteFile[tmpFile]];
     modes];
 
+readAHCentroid[sim_, hn_] :=
+ Table[ReadAHCentroidCoord[sim, hn, i], {i, 1, 3}];
+
+tableOfCentroid[centroid_List] :=
+  Transpose[Flatten[{{ToListOfCoordinates[centroid[[1]]]}, ToListOfData/@centroid},1]];
+
+exportHorizons[sim_String, horizonFile_String] :=
+  Module[{centroids, masses},
+    Print["Exporting horizons from ", sim, " to ", horizonFile];
+    centroids = Table[readAHCentroid[sim, hn], {hn, 1, 3}];
+    maxCoord = Min[MaxCoordinate/@centroids[[All,1]]];
+    masses = Table[ReadBlackHoleMass[sim, hn], {hn, 1, 3}];
+    spins = Table[ReadBlackHoleDimensionlessSpin[sim, hn], {hn, 1, 3}];
+
+    (* Some analysis codes assume that the inspiral horizons have the same time coordinates for all data *)
+    masses[[1]] = Slab[masses[[1]],All;;maxCoord];
+    masses[[2]] = Slab[masses[[2]],All;;maxCoord];
+    ref = Slab[masses[[1]], All;;maxCoord];
+    centroids[[1;;2]] = Map[Resampled[#,ref] &, centroids[[1;;2]], {2}];
+    spins[[1;;2]] = Map[Resampled[#,ref] &, spins[[1;;2]], {2}];
+
+    (* Print["masses = ", masses]; *)
+    (* Print["centroids = ", centroids]; *)
+    (* Print["spins = ", spins]; *)
+
+    (* Print[UniformGridQ/@masses]; *)
+    (* Print[Map[UniformGridQ, centroids, {2}]]; *)
+
+    Export[horizonFile, tableOfCentroid/@Join[centroids,List/@masses, spins], {"HDF5", "Datasets", {"AhA.dir/CoordCenterInertial.dat", "AhB.dir/CoordCenterInertial.dat", "AhC.dir/CoordCenterInertial.dat", "AhA.dir/ChristodoulouMass.dat", "AhB.dir/ChristodoulouMass.dat", "AhC.dir/ChristodoulouMass.dat", "/AhA.dir/chiInertial.dat", "/AhB.dir/chiInertial.dat", "/AhC.dir/chiInertial.dat"}}]];
+
 configName[sim_String] := 
  StringReplace[sim, x__ ~~ "_" ~~ NumberString ~~ EndOfString :> x];
 
@@ -654,6 +684,8 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
 
   h22 = modes[{2,2}];
 
+  exportHorizons[sim, dir <> "/Horizons.h5"];
+
   Print["Exporting metadata"];
   (* TODO: handle relaxed time for short waveforms *)
    tRelaxed = Replace[OptionValue[RelaxedTime],{
@@ -678,6 +710,8 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
       "initial-mass2" -> initialPunctureADMMasses[[2]],
 
       "relaxed-measurement-time" -> tRelaxed,
+      "common-horizon-time"  -> MinCoordinate[readAHCentroid[sim,3][[1]]],
+
       "relaxed-mass1" -> Interpolation[masses[[1]], tRelaxed], 
       "relaxed-mass2" -> Interpolation[masses[[2]], tRelaxed], 
       "relaxed-spin1" -> (Interpolation[#, tRelaxed] & /@ spins[[1]]),
