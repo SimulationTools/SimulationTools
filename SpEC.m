@@ -112,6 +112,7 @@ FindSpECLevelSimulations;
 ReadSpECNormalizedConstraintNorm;
 ReadSpECConstraintNorm;
 FindSXSSimulation;
+ReadSXSHorizonCentroid;
 
 Begin["`Private`"];
 
@@ -1042,6 +1043,10 @@ ReadSXSHorizonDisplacement[run_String] :=
  Module[{file = FileNameJoin[{run, "Horizons.h5"}]},
   ReadSpECHorizonCentroidFromFile[file, 1] - 
    ReadSpECHorizonCentroidFromFile[file, 2]];
+
+ReadSXSHorizonCentroid[run_String, hn_Integer] :=
+ Module[{file = FileNameJoin[{run, "Horizons.h5"}]},
+  ReadSpECHorizonCentroidFromFile[file, hn]];
 
 toAngularVelocity[sep_List] :=
  Cross[sep, NDerivative[1] /@ sep]/Norm[sep]^2;
