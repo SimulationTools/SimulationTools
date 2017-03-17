@@ -7,9 +7,8 @@ If[FindFile["SimulationTools`"] === $Failed,
   Print["Cannot find SimulationTools.  Please make sure that it is accessible on your $Path."];
   Quit[1]];
 
-(*
 Needs["CCompilerDriver`"];
-$CCompiler = {"Compiler" -> CCompilerDriver`IntelCompiler`IntelCompiler};*)
+$CCompiler = {"Compiler" -> CCompilerDriver`IntelCompiler`IntelCompiler};
 
 Get["SimulationTools`"];
 
