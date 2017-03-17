@@ -19,8 +19,10 @@ BeginPackage["SimulationTools`BHCoordinates`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
+  "SimulationTools`Grids`",
   "SimulationTools`Memo`",
   "SimulationTools`Providers`",
+  "SimulationTools`Plotting`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -39,6 +41,8 @@ ReadBHSpeed(*::usage = "ReadBHSpeed[sim, i] returns a DataTable of the coordinat
 BHCoordinateMergerTime(*::usage = "BHCoordinateMergerTime[sim,eps] returns the time at which the BHs in sim reach a separation of eps (eps defaults to 0.01 if omitted)."*);
 InitialSeparation;
 InitialPosition(*::usage = "InitialPosition[sim, bh] returns a vector containing the initial coordinate position of BH numbered bh"*);
+OrbitalPhaseErrorPlot;
+OrbitalPhaseErrors;
 InitialOrbitalFrequency;
 RelaxedOrbitalFrequency;
 
@@ -140,6 +144,36 @@ DefineMemoFunction[InitialSeparation[run_],
 
 DefineMemoFunction[InitialPosition[run_, bh_],
   First@DepVar@ReadBHCoordinates[run, bh]];
+
+OrbitalPhaseErrors[sims:{___String}] :=
+  Module[{phis, hs, phiErrs},
+    If[Length[sims] < 2, Return[{}]];
+    phis = ReadBHPhase /@ sims;
+    hs = ReadCoarseGridSpacing /@ sims;
+    Quiet[phiErrs = 
+    Table[(phis[[i]] - 
+      phis[[i + 1]]) hs[[i+1]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
+        Length[sims] - 1}],InterpolatingFunction::dmval] // WithResampling];
+
+resOfSim[s_String]:=
+  If[StringMatchQ[s,__~~"_"~~NumberString~~EndOfString],
+    StringSplit[s,"_"][[-1]],
+    s];
+
+OrbitalPhaseErrorPlot[sims:{__String}, opts:OptionsPattern[]] :=
+  OrbitalPhaseErrorPlot[OrbitalPhaseErrors[sims], opts, Resolutions -> (resOfSim/@sims)];
+
+Options[OrbitalPhaseErrorPlot] = {"Resolutions" -> Automatic};
+OrbitalPhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
+  Module[{legend},
+    legend = If[OptionValue[Resolutions] === Automatic,
+      None,
+      MapThread[Subscript["\[CapitalDelta]\[Phi]",#2] &, {Drop[OptionValue[Resolutions], -1], Drop[RotateLeft[OptionValue[Resolutions]], -1]}]];
+
+    PresentationListLinePlot[Log10 /@ Abs /@ phiErrs, FilterRules[opts,Options[PresentationListLinePlot]], 
+      PlotRange -> {{0, All}, {-5, 2}}, Axes -> None,
+      PlotLegend -> legend,
+      LegendPosition -> {Right, Bottom}, GridLines -> Automatic]];
 
 InitialOrbitalFrequency[sim_String] :=
   Module[{omOrb,fit},

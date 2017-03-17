@@ -580,15 +580,53 @@ ffiCutoffFrequency[sim_String] :=
     omCutoff = 0.75 omGWPN;
     omCutoff];
 
-extrapolatedWaveform[sim_String] :=
+extrapolatedWaveform[sim_String, {l_Integer, m_Integer}] :=
   Module[{rads, extrapStrain, omCutoff},
     rads = ReadPsi4Radii[sim];
-    omCutoff = ffiCutoffFrequency[sim];
-    extrapStrain = 
+
+    (* m=0 mode is non-oscillatory, and cannot be computed using
+       FFI, so we would instead like to use time domain
+       integration.  Unfortunately, that seems to also give bad
+       results, so we instead return a datatable with the same
+       coords as the 2,2 mode, but with 0 as the data. *)
+
+    With[{mm = If[m === 0, 2, m]},
+      omCutoff = ffiCutoffFrequency[sim] Abs[mm]/2;
+      extrapStrain = 
       WaveformExtrapolationAnalysis[rads, 
-        StrainFromPsi4[ReadPsi4[sim, 2, 2, #], omCutoff] & /@ rads, rads,
-        ReadADMMass[sim]];
-    extrapStrain["ExtrapolatedWaveform"]];
+        StrainFromPsi4[ReadPsi4[sim, l, mm, #], omCutoff] & /@ rads, rads,
+        ReadADMMass[sim]]];
+
+    If[m===0,0,1] extrapStrain["ExtrapolatedWaveform"]];
+
+exportExtrapolatedWaveform[sim_String, waveformFile_String] :=
+  Module[{lms, modes, dsNames, tmpFile, hlms},
+    Print["Exporting waveforms from ", sim, " to ", waveformFile];
+
+    lms = Flatten[Table[{l,m}, {l, 2, 4}, {m, -l, l}], 1];
+    lms = {{2,2}, {2,-2}};
+
+    modes = Association[Table[
+      Print["Calculating h[",lm[[1]],",",lm[[2]],"]"];
+      lm -> extrapolatedWaveform[sim, {lm[[1]],lm[[2]]}], {lm, lms}]];
+    dsNames = Table["Extrapolated_N2.dir/Y_l"<>ToString[lm[[1]]]<>"_m"<>ToString[lm[[2]]]<>".dat", {lm, Keys[modes]}];
+    tmpFile = waveformFile<>".tmp";  
+
+    tableOfWaveform[hlm_DataTable] :=
+    Transpose[{ToListOfCoordinates[hlm], Re@ToListOfData[hlm], Im@ToListOfData[hlm]}];
+
+    hlms = tableOfWaveform /@ modes;
+
+    Export[tmpFile, Values[hlms], {"HDF5", "Datasets", dsNames}];
+    
+    If[!FileExistsQ[waveformFile] || HDF5FilesDiffer[tmpFile, waveformFile],
+      Print["Writing ", waveformFile];
+      If[FileExistsQ[waveformFile], DeleteFile[waveformFile]];
+      RenameFile[tmpFile, waveformFile],
+      (* else *)
+      Print["Skipping empty update of ", waveformFile];
+      DeleteFile[tmpFile]];
+    modes];
 
 configName[sim_String] := 
  StringReplace[sim, x__ ~~ "_" ~~ NumberString ~~ EndOfString :> x];
@@ -603,37 +641,20 @@ ExportSXSSimulationResolutions[sims_List, outDir_, opts___] :=
       FileNameJoin[{outDir, configName[sim], resolutionCode[sim]}], opts],
     {sim, sims}];
 
-Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None, "h22" -> Automatic};
-
-ExportSXSSimulation[sim_String, dir_, h22_DataTable, opts:OptionsPattern[]] :=
-  ExportSXSSimulation[sim, dir, "h22" -> h22, opts];
+Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None};
 
 ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   Module[{waveformFile, mdFile, tRelaxed, masses, spins, md, mdText, i, coord, tPeak,
-         ecc, tmpFile, h22, initialPunctureADMMasses},
+         ecc, tmpFile, modes, h22, initialPunctureADMMasses},
 
-    h22 = Replace[OptionValue["h22"],
-      {d_DataTable :> d,
-        Automatic :> extrapolatedWaveform[sim],
-        _ :> Error["Unrecognised option value"]}];
-
-  waveformFile = dir <> "/rhOverM_Asymptotic_GeometricUnits.h5";
-  mdFile = dir <> "/metadata.txt";
   If[! FileExistsQ[dir], 
     CreateDirectory[dir, CreateIntermediateDirectories -> True]];
 
-  tmpFile = waveformFile<>".tmp";  
-    Export[tmpFile, {Map[{#[[1]], Re[#[[2]]], Im[#[[2]]]} &,
-      ToList[h22]]}, {"HDF5", "Datasets", {"Extrapolated_N2.dir/Y_l2_m2.dat"}}];
-    
-    (* Print[{FileExistsQ[waveformFile],HDF5FilesDiffer[tmpFile, waveformFile]}]; *)
-    If[!FileExistsQ[waveformFile] || HDF5FilesDiffer[tmpFile, waveformFile],
-      Print["Writing ", waveformFile];
-      If[FileExistsQ[waveformFile], DeleteFile[waveformFile]];
-      RenameFile[tmpFile, waveformFile],
-      Print["Skipping empty update of ", waveformFile];
-      DeleteFile[tmpFile]];
+  modes = exportExtrapolatedWaveform[sim, dir <> "/rhOverM_Asymptotic_GeometricUnits.h5"];
 
+  h22 = modes[{2,2}];
+
+  Print["Exporting metadata"];
   (* TODO: handle relaxed time for short waveforms *)
    tRelaxed = Replace[OptionValue[RelaxedTime],{
      Automatic :> BinaryBlackHoleRelaxedTime[sim],
@@ -687,12 +708,14 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
          "initial-bh-spin" <> ToString[i + 1] -> 
          ReadPunctureSpinParameters[sim, i], {i, 0, 1}],
       Sequence@@Flatten[If[OptionValue[Eccentricity] =!= None,
-         "relaxed-eccentricity" -> OptionValue[Eccentricity],
+         {"relaxed-eccentricity" -> OptionValue[Eccentricity]},
          {"relaxed-eccentricity" -> ecc[[1, "Eccentricity"]],
           "relaxed-mean-anomaly" -> ("l0"+"n" tRelaxed) /. ecc[[1, "FitParameters"]]}]]
        
       },Null]};
+
   mdText = makeMetadataFile[md];
+  mdFile = dir <> "/metadata.txt";
   Export[mdFile, mdText, "Text"]];
 
 End[];

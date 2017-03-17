@@ -416,7 +416,9 @@ UnwrapPhaseVector[data_List] :=
 
 (* Only compile this when it is first used. This both speeds up the package
    loading and avoids problems caused by our argument checker. *)
-unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
+unwrapPhaseVector := unwrapPhaseVector = 
+Block[{CCompilerDriver`$CCompiler = SimulationToolsCCompiler[]},
+Compile[{{data, _Real, 1}},
  Module[{diffs, corr, cumulcorr},
   (* Compute the differences between successive points *)
   diffs = Differences[data];
@@ -428,7 +430,7 @@ unwrapPhaseVector := unwrapPhaseVector = Compile[{{data, _Real, 1}},
 
   (* Add the corrections to the original data *)
   Join[data[[{1}]], data[[2 ;; -1]] + cumulcorr]
- ], CompilationTarget -> "C", RuntimeOptions -> "Speed"];
+ ], CompilationTarget -> "C", RuntimeOptions -> "Speed"]];
 
 UnwrapPhaseVector[data_List] :=
   Switch[Length[data],

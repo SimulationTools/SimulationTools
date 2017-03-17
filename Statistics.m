@@ -35,6 +35,7 @@ TailStandardErrorOfSimulation;
 SimulationStatus;
 SimulationErrorReason;
 SimulationPerformancePanel;
+LastOutputTime;
 
 Begin["`Private`"];
 

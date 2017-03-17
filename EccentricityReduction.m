@@ -565,10 +565,11 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
 Options[ReduceEccentricity] = {};
 ReduceEccentricity[sim_String, newEcc_Association, opts:OptionsPattern[]] :=
  Module[{D0, pr0, deltax, x0, mu},
-  D0 = 2 ToExpression@
-     ReadSimulationParameter[sim, "TwoPunctures::par_b"];
-  pr0 = ToExpression@
-    ReadSimulationParameter[sim, "TwoPunctures::par_P_plus[0]"];
+  D0 = 2 ImportString[
+     ReadSimulationParameter[sim, "TwoPunctures::par_b"], "List"][[1]];
+  pr0 = ImportString[
+    ReadSimulationParameter[sim, "TwoPunctures::par_P_plus[0]"], "List"][[1]];
+
   x0 = {D0, pr0};
   mu = SymmetricMassRatio[sim] TotalMass[sim];
   deltax = Values[newEcc[[{"DeltaD0", "DeltaPr"}]]] /. "mu" -> mu;
@@ -612,7 +613,7 @@ EccentricityReductionIterationNumber[sim_String] :=
     Error["Cannot find eccentricity iteration from simulation name " <>
        sim]}];
 
-EccentricityReductionPlot[eccs1_List] :=
+EccentricityReductionPlot[eccs1:{__Association}] :=
   Module[{its, es, data, simNames, eccs},
     eccs = DeleteCases[eccs1, ecc_ /; ecc["SimulationTooShort"]];
     its = EccentricityReductionIterationNumber /@ eccs[[All, "Simulation"]];
@@ -628,6 +629,29 @@ EccentricityReductionPlot[eccs1_List] :=
                              None},{Range[0,10],None}},GridLines -> {None, Range[-5, 1]}, 
     ImageSize -> 250, Axes -> None,
     FrameLabel->{"iteration","e"}]];
+
+FindEccentricityReductionSimulations[sim_String] :=
+ Module[{pattern, sims},
+  pattern = 
+   StringCases[sim, 
+    a__ ~~ "_e" ~~ NumberString ~~ "_" ~~ b__ :> 
+     a ~~ "_e" ~~ NumberString ~~ "_" ~~ b];
+  sims = Select[SimulationNames[pattern], 
+    EccentricityReductionIterationNumber[#] <= EccentricityReductionIterationNumber[sim] &]]
+
+EccentricityReductionPlot[sims:{__String}] :=
+  Module[{},
+    (* The sims passed are different resolutions.  We return a
+       reduction plot for each resolution.  Typically, only one
+       resolution will have multiple iterations, but in some cases we
+       may have manually used a higher resolution for later
+       iterations.  TODO: handle this case somehow *)
+    Table[
+      Module[{eccSims, eccs},
+        eccSims = FindEccentricityReductionSimulations[sim];
+        eccs = SimulationEccentricityAnalysis[eccSims];
+        EccentricityReductionPlot[eccs]],
+      {sim, sims}]];
 
 End[];
 

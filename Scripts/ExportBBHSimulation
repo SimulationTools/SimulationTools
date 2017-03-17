@@ -1,0 +1,35 @@
+#!/usr/bin/env RunMathematicaScript
+(* -*- mode: mathematica -*- *)
+
+$Path = Prepend[$Path, "/home/ianhin/Cactus/ETBG/repos"];
+
+If[FindFile["SimulationTools`"] === $Failed,
+  Print["Cannot find SimulationTools.  Please make sure that it is accessible on your $Path."];
+  Quit[1]];
+
+Get["SimulationTools`"];
+
+SetOptions[$Output, FormatType -> OutputForm];
+AbortOnMessagesST[True];
+
+CheckAbort[
+
+  getArg[name_String] :=
+  Replace[$ScriptCommandLine, 
+    {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
+      _ :> Error["Missing argument: --"<>name]}];
+
+  getArg[name_String, default_] :=
+  Replace[$ScriptCommandLine, 
+    {{___,"--"<>name,x_,___} :> ImportString[x,"List"][[1]],
+      _ :> default}];
+
+  sim = getArg["simulation"];
+  outDir = getArg["exportDir"];
+  email = getArg["email", None];
+
+  If[email =!= None, $SimulationToolsEmail = email];
+
+  ExportSXSSimulation[sim, outDir];
+
+  , Quit[1]];

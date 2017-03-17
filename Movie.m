@@ -117,7 +117,7 @@ EncodeMovieFrameFiles[movieFile_String, frameFilePattern_String, OptionsPattern[
     ];
 
 Options[ExportMovie] = {"FFMPEG" -> "ffmpeg",
-  "FrameRate" -> 1};
+  "FrameRate" -> 1, "Parallel" -> False};
 
 ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
   Module[
@@ -129,6 +129,57 @@ ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
     (* TODO: what about extra files from previous longer movies? *)
     ExportMovieFrames[base, frames, opts];
     EncodeMovieFrameFiles[movieFile, base <> ".%5d.png", opts]];
+
+ExportMovie[movieFile_String, frameFn_, args_List, opts:OptionsPattern[]] :=
+  Module[
+    {framesDir, base, j, k, status, timeout=120, inds, exportFrame, failures, lastFailures,
+    parallel = OptionValue[Parallel]},
+
+    inds = Range[1,Length[args]];
+
+    framesDir = StringReplace[movieFile, Shortest["."~~ext__~~EndOfString] :> ".frames"];
+
+    If[!DirectoryQ[framesDir], CreateDirectory[framesDir]];
+    base = FileNameJoin[{framesDir,"frame"}];
+
+    exportFrame[ind_Integer] :=
+    Module[{file, temp},
+      file = base<>"."<>PadIndex[ind-1,5]<>".png";
+      temp = file <> ".tmp";
+      If[FileExistsQ[temp],
+        DeleteFile[temp]];
+      If[FileExistsQ[file],
+        True,
+        Print["Generating frame ", ind-1, " for argument ", args[[ind]]];
+        img = frameFn[args[[ind]]];
+        Export[temp, img, "PNG"];
+        RenameFile[temp, file];
+        Print[file];
+        True]];
+
+    failures = Infinity;
+    lastFailures = Infinity;
+    While[failures > 0,
+    status = If[parallel,
+      DistributeDefinitions[timeout,exportFrame,ind,inds];
+      ParallelTable[TimeConstrained[CheckAbort[exportFrame[ind], $Aborted],timeout,Print["Frame ", ind-1, " took more than ", timeout, " seconds to generate; skipping."]; $Timeout], {ind, inds}, Method -> "FinestGrained"],
+      (* else *)
+      (* Print["exportMovie: inds = ", inds]; *)
+      Table[exportFrame[ind], {ind, inds}]];
+
+      failures = Count[status, $Timeout|$Aborted];
+
+      If[failures === lastFailures,
+        Print["There were ", failures, " failures, which is the same as on the previous run. Skipping remaining frames."];
+        failures = 0];
+
+      If[failures > 0,
+        Print["There were ", failures, " failures. Retrying."];
+        If[parallel,ParallelEvaluate[Get["h5mma`"]],Get["h5mma`"]];
+        Pause[5]]];
+
+    EncodeMovieFrameFiles[movieFile, base <> ".%5d.png",
+      FilterRules[{opts},Options[EncodeMovieFrameFiles]]]];
 
 (* TODO: given a base name, create the movie in a temporary location,
    and return the full path to it, or reveal it in the finder, so it

@@ -133,7 +133,7 @@ WaveformExtrapolationAnalysis[rads_, waveforms_, schRads_, MADM_] :=
    tCheck = 100, retardedPhasesAtRadiiCheck, retardedPhasesAtRadii,
    extrapWaveformPlot, ords, ord, extrapPhases, extrapAmps, 
    extrapPhase, extrapAmp, extrapWaveform, extrapAmpPlot, 
-   extrapFreqPlot, ampErrPlot, phaseErrPlot, plotGrid},
+   extrapFreqPlot, ampErrPlot, phaseErrPlot, plotGrid, padGraphics},
   
   (* Waveforms *)
   
@@ -183,10 +183,16 @@ WaveformExtrapolationAnalysis[rads_, waveforms_, schRads_, MADM_] :=
   ampErrPlot = amplitudeExtrapolationErrorPlot[extrapAmps];
   phaseErrPlot = phaseExtrapolationErrorPlot[extrapPhases];
   
+  padGraphics[gs_List] :=
+   If[$FrontEnd === Null,
+     (* Cannot use Rasterize without a frontend *)
+     gs,
+     PadGraphics[gs]];
+
   plotGrid = 
    GraphicsGrid[
     PartitionComplete[
-     PadGraphics[{waveformPlot, freqPlot, ampCheckPlot, 
+     padGraphics[{waveformPlot, freqPlot, ampCheckPlot, 
        phaseCheckPlot, extrapWaveformPlot, extrapAmpPlot, 
        extrapFreqPlot, ampErrPlot, phaseErrPlot}], 2], 
     ImageSize -> 800(*, 
