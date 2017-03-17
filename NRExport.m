@@ -580,13 +580,13 @@ ffiCutoffFrequency[sim_String] :=
     omCutoff = 0.75 omGWPN;
     omCutoff];
 
-extrapolatedWaveform[sim_String] :=
+extrapolatedWaveform[sim_String, {l_Integer, m_Integer}] :=
   Module[{rads, extrapStrain, omCutoff},
     rads = ReadPsi4Radii[sim];
-    omCutoff = ffiCutoffFrequency[sim];
+    omCutoff = ffiCutoffFrequency[sim] Abs[m]/2;
     extrapStrain = 
       WaveformExtrapolationAnalysis[rads, 
-        StrainFromPsi4[ReadPsi4[sim, 2, 2, #], omCutoff] & /@ rads, rads,
+        StrainFromPsi4[ReadPsi4[sim, l, m, #], omCutoff] & /@ rads, rads,
         ReadADMMass[sim]];
     extrapStrain["ExtrapolatedWaveform"]];
 
@@ -614,7 +614,7 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
 
     h22 = Replace[OptionValue["h22"],
       {d_DataTable :> d,
-        Automatic :> extrapolatedWaveform[sim],
+        Automatic :> extrapolatedWaveform[sim, {2,2}],
         _ :> Error["Unrecognised option value"]}];
 
   waveformFile = dir <> "/rhOverM_Asymptotic_GeometricUnits.h5";
