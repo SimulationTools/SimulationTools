@@ -1006,7 +1006,7 @@ ReadSXSStrain[sim_String] :=
 
 Options[ReadSXSStrain] = {"FileName" -> "rhOverM_Asymptotic_GeometricUnits.h5"};
 ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] :=
-  Module[{simDir},
+  Module[{simDir, file},
     simDir = FindSXSSimulation[sim];
     file = FileNameJoin[{simDir, OptionValue[FileName]}];
    Block[{$status = {sim, l, m, ord}},
