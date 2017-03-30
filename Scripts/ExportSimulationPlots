@@ -66,7 +66,9 @@ CheckAbort[
     CheckAbort[
       Quiet[ExportTables[sims, tableFns, outDir];
       ExportPlots[sims, plotFns, outDir],InterpolatingFunction::dmval];
-      Export[outDir<>"/lastupdate.html", "<div><hr/><p>Page last updated: "<>DateString[]<>"</p></div>","Text"],
+      Export[outDir<>"/lastupdate.html", "<div><hr/><p>Page last updated: "<>DateString[]<>"</p></div>","Text"];
+      If[FileExistsQ[outDir<>"/ploterror.html"], DeleteFile[outDir<>"/ploterror.html"]],
+      Print["  Error while generating plots and tables for ", simPattern];
       Export[outDir<>"/ploterror.html", "<p>Error while generating page</p>","Text"]];
     Run["cd "<>outDir<>"; makepage"]];
 
