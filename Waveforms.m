@@ -28,6 +28,7 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`Providers`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`Grids`",
+  "SimulationTools`SpEC`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -116,7 +117,10 @@ Psi4RePlot;
 
 Psi4PhaseErrors;
 Psi4PhaseErrorPlot;
-
+WaveformPhaseErrors;
+WaveformPhaseErrorPlot;
+StrainPlot;
+StrainPhaseErrorPlot;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -1094,6 +1098,82 @@ Psi4PhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
       PlotRange -> {{0, All}, {-5, 2}}, Axes -> None,
       PlotLegend -> legend,
       LegendPosition -> {Right, Bottom}, GridLines -> Automatic]];
+
+(****************************************************************)
+(* Waveform phase errors                                        *)
+(****************************************************************)
+
+WaveformPhaseErrors[sims_List] :=
+  Module[{},
+    WaveformPhaseErrors[ReadSXSStrain[#,2,2,2] & /@ sims, None]];
+
+WaveformPhaseErrors[waveforms_List, hs_List] :=
+  Module[{phis, phiErrs, p=8},
+    If[Length[waveforms] < 2, Return[{}]];
+    phis = AlignPhases[Phase/@waveforms,200];
+    Quiet[phiErrs = 
+      Prepend[Table[(phis[[i]] - phis[[i + 1]]) hs[[i+1]]^p/(hs[[i]]^p - hs[[i + 1]]^p),
+        {i, 1, Length[waveforms] - 1}],
+        (phis[[1]] - phis[[2]]) hs[[1]]^p/(hs[[1]]^p - hs[[2]]^p)],
+      InterpolatingFunction::dmval] // WithResampling];
+
+WaveformPhaseErrorPlot[sims:{__String}, opts:OptionsPattern[]] :=
+  WaveformPhaseErrorPlot[WaveformPhaseErrors[sims], opts, Resolutions -> (resOfSim/@sims)];
+
+Options[WaveformPhaseErrorPlot] = {"Resolutions" -> Automatic};
+WaveformPhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
+  Module[{legend},
+    legend = If[OptionValue[Resolutions] === Automatic,
+      None,
+      Map[Subscript["\[CapitalDelta]\[Phi]",#] &, OptionValue[Resolutions]]];
+
+    PresentationListLinePlot[Log10 /@ Abs /@ phiErrs, FilterRules[{opts},Options[PresentationListLinePlot]], 
+      PlotRange -> {{0, All}, {-5, 2}}, Axes -> None,
+      If[legend =!= None, PlotLegend -> legend, {}],
+      LegendPosition -> {Right, Bottom}, GridLines -> Automatic]];
+
+(****************************************************************)
+(* StrainPlot                                                   *)
+(****************************************************************)
+
+StrainPlot[simsp : {_String ...}] :=
+  Module[{strains, sims},
+    (* Only currently supports simulations which have exported data *)
+    (* Include only those simulations for which we have exported strain data *)
+    sims = Select[simsp, 
+      FileExistsQ[
+        FileNameJoin[{FindRunDir[#], "exported", 
+          "rhOverM_Asymptotic_GeometricUnits.h5"}]] &];
+    strains = 
+    ReadSXSStrain[FileNameJoin[{#, "exported"}], 2, 2, 2] & /@ sims;
+    StrainPlot[strains, FileNameTake[#, -1] & /@ sims]];
+
+StrainPlot[strains:{_DataTable...}, labels_List] :=
+  PresentationListLinePlot[Re /@ strains, PlotRange -> All, 
+    PlotLegend -> labels];
+
+StrainPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
+  PresentationListLinePlot[Re /@ strains, PlotLegend -> labels];
+
+(****************************************************************)
+(* StrainPhaseErrorPlot                                         *)
+(****************************************************************)
+
+StrainPhaseErrorPlot[simsp : {_String ...}] :=
+  Module[{sims, strains},
+    sims = Select[simsp, 
+      FileExistsQ[
+        FileNameJoin[{FindRunDir[#], "exported", 
+          "rhOverM_Asymptotic_GeometricUnits.h5"}]] &];
+    strains = 
+    ReadSXSStrain[FileNameJoin[{#, "exported"}], 2, 2, 2] & /@ sims;
+    StrainPhaseErrorPlot[strains, FileNameTake[#, -1] & /@ sims]];
+
+StrainPhaseErrorPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
+  Module[{ns, errs},
+    ns = ToExpression[StringSplit[#, "_"][[-1]]] & /@ labels;
+    errs = WaveformPhaseErrors[strains, 1/ns];
+    WaveformPhaseErrorPlot[errs, Resolutions -> ns]];
 
 End[];
 
