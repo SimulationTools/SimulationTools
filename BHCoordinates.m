@@ -150,10 +150,11 @@ OrbitalPhaseErrors[sims:{___String}] :=
     If[Length[sims] < 2, Return[{}]];
     phis = ReadBHPhase /@ sims;
     hs = ReadCoarseGridSpacing /@ sims;
-    Quiet[phiErrs = 
+    Quiet[
+      Quiet[phiErrs = 
     Table[(phis[[i]] - 
       phis[[i + 1]]) hs[[i+1]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
-        Length[sims] - 1}],InterpolatingFunction::dmval] // WithResampling];
+        Length[sims] - 1}],InterpolatingFunction::dmval] // WithResampling, Power::infy]];
 
 resOfSim[s_String]:=
   If[StringMatchQ[s,__~~"_"~~NumberString~~EndOfString],
