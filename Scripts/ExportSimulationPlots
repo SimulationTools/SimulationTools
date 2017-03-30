@@ -39,24 +39,28 @@ CheckAbort[
 
   line = None
   While[(line = Read[in, String]) =!= EndOfFile,
-    Print["ExportSimulationPlots: line = ", line];
+    (* Print["ExportSimulationPlots: line = ", line]; *)
+
+    Print[];
+    Print["ExportSimulationPlots ", line];
+
     words = StringSplit[line];
 
     outDir = words[[1]];
     simPattern = words[[2]];
 
-    Print["line = ", line];
-    Print["words = ", words];
-    Print["outDir = ", outDir];
-    Print["simPattern = ", simPattern];
+    (* Print["line = ", line]; *)
+    (* Print["words = ", words]; *)
+    (* Print["outDir = ", outDir]; *)
+    (* Print["simPattern = ", simPattern]; *)
 
     sims = SimulationNames[simPattern~~"_"~~NumberString];
-
+    Print["Simulations: ", StringJoin[Riffle[sims," "]]];
     plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, SimulationProgressPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot};
     tableFns = {SimulationCompletionStatsTable};
-    Print["sims = ", sims];
-    Print["plotFns = ", plotFns];
-    Print["tableFns = ", tableFns];
+    (* Print["sims = ", sims]; *)
+    (* Print["plotFns = ", plotFns]; *)
+    (* Print["tableFns = ", tableFns]; *)
     If[FileExistsQ[outDir<>"/ploterror.html"],
       DeleteFile[outDir<>"/ploterror.html"]];
     CheckAbort[
