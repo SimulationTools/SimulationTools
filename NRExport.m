@@ -641,14 +641,14 @@ exportHorizons[sim_String, horizonFile_String] :=
     maxCoord = Min[MaxCoordinate/@centroids[[All,1]]];
     masses = Table[ReadBlackHoleMass[sim, hn], {hn, 1, 3}];
     spins = Table[ReadBlackHoleDimensionlessSpin[sim, hn], {hn, 1, 3}];
-
+Quiet[
     (* Some analysis codes assume that the inspiral horizons have the same time coordinates for all data *)
     masses[[1]] = Slab[masses[[1]],All;;maxCoord];
     masses[[2]] = Slab[masses[[2]],All;;maxCoord];
     ref = Slab[masses[[1]], All;;maxCoord];
     centroids[[1;;2]] = Map[Resampled[#,ref] &, centroids[[1;;2]], {2}];
     spins[[1;;2]] = Map[Resampled[#,ref] &, spins[[1;;2]], {2}];
-
+,InterpolatingFunction::dmval];
     (* Print["masses = ", masses]; *)
     (* Print["centroids = ", centroids]; *)
     (* Print["spins = ", spins]; *)
