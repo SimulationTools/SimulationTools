@@ -604,7 +604,7 @@ exportExtrapolatedWaveform[sim_String, waveformFile_String] :=
     Print["Exporting waveforms from ", sim, " to ", waveformFile];
 
     lms = Flatten[Table[{l,m}, {l, 2, 4}, {m, -l, l}], 1];
-    lms = {{2,2}, {2,-2}};
+    (* lms = {{2,2}, {2,-2}}; *)
 
     modes = Association[Table[
       Print["Calculating h[",lm[[1]],",",lm[[2]],"]"];
