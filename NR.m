@@ -272,9 +272,9 @@ WaveformFrequencyAlignmentTime[{om1_DataTable, om2_DataTable}, {t1_,
       deltat, {t1, t2}]}, {deltat, -10000, 10000, 10}], {_,10000}];
 (* Print["ordering = ", Ordering[Abs[diffs[[All,2]]], 1][[1]]]; *)
     deltatGuess = diffs[[Ordering[Abs[diffs[[All,2]]], 1],1]][[1]];
-    Print["diffs = ", diffs];
-    Print[ListLinePlot[diffs]];
-    Print["deltatGuess = ",deltatGuess];
+    (* Print["diffs = ", diffs]; *)
+    (* Print[ListLinePlot[diffs]]; *)
+    (* Print["deltatGuess = ",deltatGuess]; *)
     min = 
     FindMinimum[
      WaveformFrequencyDifference[{om1, om2}, 
