@@ -24,7 +24,10 @@ BeginPackage["SimulationTools`NR`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`Plotting`",
   "SimulationTools`TwoPunctures`",
+  "SimulationTools`ArgumentChecker`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -43,6 +46,9 @@ ToFixedWidth;
 LRange;
 InitialDimensionlessSpin;
 BinaryEccentricityFromSeparation;
+AlignTimeAndPhaseOfPhases;
+AlignTimeAndPhaseOfWaveforms;
+TimeAndPhaseShiftOfPhase;
 
 Begin["`Private`"];
 
@@ -201,6 +207,7 @@ BinaryEccentricityFromSeparation[sep_DataTable] :=
         l0 -> "l0", f -> "f"}), "Plot" -> plot, 
       "Eccentricity" -> Abs[e /. fit]]];
 
+
 ToFixedWidth[n_Integer, width_Integer] :=
   StringJoin[PadLeft[Characters[ToString[n]], width, "0"]];
 
@@ -212,6 +219,115 @@ DefineMemoFunction[InitialDimensionlessSpin[run_],
   If[Norm@S0 > Norm@S1,
    S0/mp^2,
    S1/mm^2]]];
+
+Clear[WaveformFrequencyDifference];
+StandardDefinition[WaveformFrequencyDifference]=True;
+WaveformFrequencyDifference[{om1_DataTable, om2_DataTable}, 
+  deltat_?NumberQ, {t1_, t2_}] :=
+ Module[{om1b, om2b, diff, omsSlabbed, eps, tJunk2},
+  (* If[MaxCoordinate[om2] + deltat < t2 ||  *)
+   (*   MinCoordinate[om2] + deltat > t1, Return[10000]]; *)
+   eps = 1;
+   tJunk2 = MinCoordinate[om2] + 200;
+  If[MinCoordinate[om2] + deltat > t2-eps || 
+    MaxCoordinate[om2] + deltat < t1+eps || tJunk2 + deltat > t2-eps, Return[10000]];
+   om1b = Slab[om1, t1 ;; t2];
+   (* If[deltat === 3050, *)
+   (*   Print["deltat = ", deltat]; *)
+   (*   Print[{om2, t1, t2}]; *)
+   (*   Print[{100+deltat, MaxCoordinate[om2]+deltat}]; *)
+   (*   ]; *)
+   om2b = Slab[Shifted[Slab[om2,tJunk2;;All], deltat], t1 ;; t2];
+   (* If[$debug == True, *)
+   (* Print[ListLinePlot[Slab[om2,tJunk2;;All]]]]; *)
+
+   (*   Print["slabbed"];*)
+  (*Print[deltat];*)(*
+  Print[{Interval[{t1,t2}],MinCoordinate[om2]+
+  deltat}];
+  If[!IntervalMemberQ[Interval[{t1,t2}],MinCoordinate[om2]+
+  deltat]||!IntervalMemberQ[Interval[{t1,t2}],MaxCoordinate[om2]+
+  deltat],
+  Print["Out of range"];Return[10000]];
+                       *)
+
+   omsSlabbed = ResampleDataTables[{om1b, om2b}];
+   (* If[$debug == True, *)
+   (* Print[ListLinePlot[omsSlabbed]]]; *)
+   
+   diff = GridNorm[Subtract@@omsSlabbed] / Sqrt[GridNorm[omsSlabbed[[1]]] GridNorm[omsSlabbed[[2]]]];
+   (* Print["diff = ", diff]; *)
+   diff];
+
+(* Options[WaveformFrequencyAlignmentTime] = {"JunkTime" -> Automatic}; *)
+WaveformFrequencyAlignmentTime[{om1_DataTable, om2_DataTable}, {t1_, 
+   t2_} , deltatGuessX_(*, opts:OptionsPattern[]*)] :=
+  Module[{min,deltat, omsChopped, newDeltatGuess, diffs},
+
+    (* omsChopped = Slab[#,(MinCoordinate[#]+200);;All] & /@ {om1, om2}; *)
+    newDeltatGuess = (t1 - Mean[CoordinateRange[om2]]);
+    (* Print["newDeltatGuess = ", newDeltatGuess]; *)
+
+    diffs = DeleteCases[Table[{deltat, WaveformFrequencyDifference[{om1, om2}, 
+      deltat, {t1, t2}]}, {deltat, -10000, 10000, 10}], {_,10000}];
+(* Print["ordering = ", Ordering[Abs[diffs[[All,2]]], 1][[1]]]; *)
+    deltatGuess = diffs[[Ordering[Abs[diffs[[All,2]]], 1],1]][[1]];
+    Print["diffs = ", diffs];
+    Print[ListLinePlot[diffs]];
+    Print["deltatGuess = ",deltatGuess];
+    min = 
+    FindMinimum[
+     WaveformFrequencyDifference[{om1, om2}, 
+      deltat, {t1, t2}], {deltat, deltatGuess}];
+    (* Print["Frequency alignment time: ",min]; *)
+  If[ListQ[min],
+   min[[2, 1, 2]],
+   Error["Failed to find minimum"]]];
+
+WaveformPhaseAlignment[{phi1_DataTable, phi2_DataTable}, {t1_, t2_}] :=
+  Module[{min, deltaPhi, f, dpGuess, tGuess, samples},
+
+    tCommon = {Max[{t1,MinCoordinate[phi1],MinCoordinate[phi2]}],
+      Min[{t2,MaxCoordinate[phi1],MaxCoordinate[phi2]}]};
+    
+    (* dpGuess = Interpolation[phi1,tGuess] - Interpolation[phi2,tGuess]; *)
+
+    dpGuess = Mean[Slab[phi1,Span@@tCommon]] - Mean[Slab[phi2,Span@@tCommon]];
+    
+    (* Print["dpGuess = ", dpGuess]; *)
+    samples = {};
+    f[dp_?NumberQ] :=
+      Module[{d},
+        (* Print["dp=",dp]; *)
+        d = WaveformFrequencyDifference[{phi1, phi2 + dp}, 0, {t1, t2}];
+        AppendTo[samples,{dp,d}];
+        d];
+    
+    min = FindMinimum[f[deltaPhi], {deltaPhi, dpGuess, dpGuess+1}];
+
+      (* Print[ListLinePlot[samples,PlotRange->{All,{0,All}}, PlotMarkers->Automatic]]; *)
+      (* Print["WaveformPhaseAlignment: min=",min]; *)
+  If[ListQ[min],
+   min[[2, 1, 2]],
+   Error["Failed to find minimum"]]];
+
+TimeAndPhaseShiftOfPhase[phis:{phi1_DataTable, phi2_DataTable}, tWindow:{t1_, t2_}] :=
+  Module[{deltat,deltaPhi},
+    deltat = WaveformFrequencyAlignmentTime[NDerivative[1]/@phis, tWindow, 0];
+    Block[{$debug = True},
+      deltaPhi = WaveformPhaseAlignment[{phi1,Shifted[phi2,deltat]},tWindow]];
+    {deltat, deltaPhi}];
+
+AlignTimeAndPhaseOfPhases[phis:{phi1_DataTable, phi2_DataTable}, tWindow:{t1_, t2_}] :=
+  Module[{deltat,deltaPhi},
+    {deltat,deltaPhi} = TimeAndPhaseShiftOfPhase[phis,tWindow];
+    {phi1,Shifted[phi2,deltat] + deltaPhi}];
+
+AlignTimeAndPhaseOfWaveforms[hs:{h1_DataTable, h2_DataTable}, tWindow:{t1_, t2_}] :=
+  Module[{deltat,deltaPhi,phis},
+    phis = Phase/@hs;
+    {deltat,deltaPhi} = TimeAndPhaseShiftOfPhase[phis,tWindow];
+    {hs[[1]],Shifted[hs[[2]],deltat] Exp[I deltaPhi]}];
 
 End[];
 
