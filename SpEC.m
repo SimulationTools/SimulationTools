@@ -1078,7 +1078,12 @@ ReadSXSMetadataFile[name_String] :=
    If[keyValues === {}, Error["ReadSXSMetadataFile: No metadata found for " <> name]];
   md1 = Association[
     Map[#[[1]] -> processValue[#[[2]]] &, keyValues]];
-  md = computeExtraMetadata[md1]];
+
+  md1 = Join[md1, <|"relaxed-orbital-frequency" -> nv[md1["relaxed-orbital-frequency"]]|>];
+
+  If[OptionValue[ComputeExtraMetadata]===True,
+    computeExtraMetadata[md1],
+    md1]];
 
 processValue["string"[s_]] := s;
 
