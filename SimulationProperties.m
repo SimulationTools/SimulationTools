@@ -20,6 +20,7 @@ BeginPackage["SimulationTools`SimulationProperties`",
   "SimulationTools`DataRepresentations`",
   "SimulationTools`DataTable`",
   "SimulationTools`Error`",
+  "SimulationTools`Parameters`",
   "SimulationTools`Plotting`",
   "SimulationTools`Providers`",
   "SimulationTools`RunFiles`",
@@ -41,6 +42,7 @@ WallTimeDays;
 CostAnalysis;
 PresentationCostAnalysis;
 ReadCarpetSpeed;
+ReadSimulationDescription;
 
 (* Deprecated *)
 
@@ -206,6 +208,9 @@ SimulationProgressPlot[sims_List] :=
    Graphics[{Thread[{styles, lines, points}], {Dashed, Gray, 
       Line[{{tNow, f1}, {tNow, 2 f2}}]}}], 
    Epilog -> Inset[legend, Scaled[{0.05, 0.95}], {-1, 1}]]];
+
+ReadSimulationDescription[sim_String] :=
+  ReadSimulationParameter[sim, "Cactus::cctk_run_title"];
 
 End[];
 EndPackage[];
