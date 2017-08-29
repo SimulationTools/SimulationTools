@@ -51,14 +51,23 @@ getDataSubDir[output_String] :=
 
 SimulationTools`SimFactory`RunFiles`FindRunDirSegments[dir_String] :=
   Module[
-    {restarts, merged, dataSubDir, dataDirs, segments},
+    {restarts, merged, dataSubDir, dataDirs, segments, parentFile, parentSegs, parentSim},
+    parentFile = FileNameJoin[{dir,"parent-simulation.txt"}];
+    parentSegs = 
+    If[FileExistsQ[parentFile],
+      parentSim = Import[parentFile,"Text"];
+      FindRunSegments[parentSim],
+      (* else *)
+      {}];
+
     restarts = Select[FileNames["output-*", dir], ! StringMatchQ[#, "*" <> $PathnameSeparator <> "output-*-*"] &];
     merged = FileNames["merged", dir];
     dataSubDir = getDataSubDir[restarts[[1]]];
     If[dataSubDir === None, Error["Unable to locate data directories in simulation "<>dir]];
     dataDirs = FileNameJoin[{#, dataSubDir}] & /@ restarts;
     dataDirs = Join[merged, dataDirs];
-    segments = Select[dataDirs, DirectoryQ]
+    segments = Select[dataDirs, DirectoryQ];
+    Join[parentSegs, segments]
 ];
 
 SimulationTools`SimFactory`RunFiles`ReadCores[dir_, runName_] :=
