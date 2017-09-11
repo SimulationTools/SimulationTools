@@ -49,7 +49,7 @@ findParameterFile[sim_String] :=
     fileNames = FindSimulationFiles[sim, "*.par"];
     If[fileNames === {},
       Error["Cannot find parameter file in simulation "<>sim]];
-    fileName = First[fileNames]];
+    fileName = Last[fileNames]];
 
 parseParameterFile[fileName_String] :=
   parseParameterFile[fileName, FileDate[fileName]];
