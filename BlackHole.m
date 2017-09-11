@@ -71,21 +71,29 @@ EstimateBinaryMergerTime[sim_String] :=
    tCurrent + pnEv["TimeToMerger"]]];
 
 SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] = *)
- Module[{tMerger, speed, currentSpeed, currentTime, timeAfterMerger, 
+ Module[{tMerger, speed, currentSpeed, currentTime, timeAfterMerger, finalTimePar,
    endTime, remainingWalltimeHours, remainingWalltimeDays, 
    elapsedWalltimeHours, completionFraction},
   tMerger = EstimateBinaryMergerTime[sim];
   speed = ReadSimulationSpeed[sim];
   currentSpeed = Last[speed];
   currentTime = MaxCoordinate[speed];
-  timeAfterMerger = 600;
-  endTime = tMerger + timeAfterMerger;
+
+  (* TODO: work out what to do if this parameter is not found *)
+  timeAfterMerger = ToExpression@ReadSimulationParameter[sim, "TrackTriggers::trigger_termination_after_delay", 600];
+
+  finalTimePar = FinalCoordinateTime[sim];
+  endTime = Min[tMerger + timeAfterMerger, finalTimePar];
   remainingWalltimeHours =
-   If[currentTime > tMerger,
-    (endTime - currentTime)/currentSpeed,
-    (* else *)
-    (tMerger - currentTime)/currentSpeed +
-     timeAfterMerger/(1.3 currentSpeed)];
+    If[currentTime > tMerger,
+      (endTime - currentTime) / currentSpeed,
+      (* else *)
+      If[endTime < tMerger,
+        (endTime - currentTime) / currentSpeed,
+        (* else *)
+        (tMerger - currentTime) / currentSpeed +
+        (endTime - tMerger) / (1.3 currentSpeed)]];
+
   elapsedWalltimeHours = ReadWalltimeHours[sim];
   remainingWalltimeDays = remainingWalltimeHours/24;
   completionFraction = 
@@ -94,6 +102,7 @@ SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] 
   <|"Simulation" -> sim,
    "CurrentTime" -> currentTime,
    "TimeOfMerger" -> tMerger,
+   "FinalTimeParameter" -> finalTimePar,
    "CurrentSpeed" -> currentSpeed,
    "CurrentTime" -> currentTime,
    "TimeAfterMerger" -> timeAfterMerger,
@@ -101,6 +110,7 @@ SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] 
    "ElapsedWalltimeHours" -> elapsedWalltimeHours,
    "RemainingWalltimeHours" -> remainingWalltimeHours,
    "CompletionFraction" -> completionFraction,
+   "LastOutputTime" -> LastOutputTime[sim],
    "CompletionDate" -> 
     DatePlus[LastOutputTime[sim], remainingWalltimeDays]|>
   ];
