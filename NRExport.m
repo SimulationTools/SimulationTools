@@ -580,9 +580,14 @@ ffiCutoffFrequency[sim_String] :=
     omCutoff = 0.75 omGWPN;
     omCutoff];
 
-extrapolatedWaveform[sim_String, {l_Integer, m_Integer}] :=
-  Module[{rads, extrapStrain, omCutoff},
-    rads = ReadPsi4Radii[sim];
+extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All] :=
+  Module[{allRads, rads, extrapStrain, omCutoff},
+    allRads = ReadPsi4Radii[sim];
+
+    rads = Replace[radRange, {
+      All :> allRads,
+      {rMin_, rMax_} :> Select[allRads, rMin <= # <= rMax &],
+      _ :> Error["extrapolatedWaveform: Unrecognised form for radius range: "<>ToString[radRange]]}];
 
     (* m=0 mode is non-oscillatory, and cannot be computed using
        FFI, so we would instead like to use time domain
@@ -599,7 +604,7 @@ extrapolatedWaveform[sim_String, {l_Integer, m_Integer}] :=
 
     If[m===0,0,1] extrapStrain["ExtrapolatedWaveform"]];
 
-exportExtrapolatedWaveform[sim_String, waveformFile_String] :=
+exportExtrapolatedWaveform[sim_String, waveformFile_String, radRange_ : All] :=
   Module[{lms, modes, dsNames, tmpFile, hlms},
     Print["Exporting waveforms from ", sim, " to ", waveformFile];
 
@@ -608,7 +613,7 @@ exportExtrapolatedWaveform[sim_String, waveformFile_String] :=
 
     modes = Association[Table[
       Print["Calculating h[",lm[[1]],",",lm[[2]],"]"];
-      lm -> extrapolatedWaveform[sim, {lm[[1]],lm[[2]]}], {lm, lms}]];
+      lm -> extrapolatedWaveform[sim, {lm[[1]],lm[[2]]}, radRange], {lm, lms}]];
     dsNames = Table["Extrapolated_N2.dir/Y_l"<>ToString[lm[[1]]]<>"_m"<>ToString[lm[[2]]]<>".dat", {lm, Keys[modes]}];
     tmpFile = waveformFile<>".tmp";  
 
@@ -676,7 +681,8 @@ ExportSXSSimulationResolutions[sims_List, outDir_, opts___] :=
       FileNameJoin[{outDir, configName[sim], resolutionCode[sim]}], opts],
     {sim, sims}];
 
-Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None};
+Options[ExportSXSSimulation] = {"RelaxedTime" -> Automatic, "Eccentricity" -> None,
+  "RadiusRange" -> All};
 
 ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   Module[{waveformFile, mdFile, tRelaxed, masses, spins, md, mdText, i, coord, tPeak,
@@ -685,7 +691,8 @@ ExportSXSSimulation[sim_String, dir_String, opts:OptionsPattern[]] :=
   If[! FileExistsQ[dir], 
     CreateDirectory[dir, CreateIntermediateDirectories -> True]];
 
-  modes = exportExtrapolatedWaveform[sim, dir <> "/rhOverM_Asymptotic_GeometricUnits.h5"];
+  modes = exportExtrapolatedWaveform[sim, dir <> "/rhOverM_Asymptotic_GeometricUnits.h5",
+    OptionValue[RadiusRange]];
 
   h22 = modes[{2,2}];
 
