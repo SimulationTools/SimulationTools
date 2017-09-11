@@ -24,7 +24,9 @@ BeginPackage["SimulationTools`BlackHole`",
   "SimulationTools`TwoPunctures`",
   "SimulationTools`DataTable`",
   "SimulationTools`DataRepresentations`",
-  "SimulationTools`EccentricityReduction`"
+  "SimulationTools`EccentricityReduction`",
+  "SimulationTools`Parameters`",
+  "SimulationTools`Utils`"
  }];
 
 ReadBlackHoleMass::usage = "ReadBlackHoleMass[sim, i] gives the mass of the ith black hole in the simulation as a function of time as a DataTable.";
