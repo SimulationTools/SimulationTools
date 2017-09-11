@@ -16,6 +16,7 @@
 
 BeginPackage["SimulationTools`BlackHole`",
  {
+  "SimulationTools`CarpetGrids`",
   "SimulationTools`Horizons`",
   "SimulationTools`SimulationProperties`",
   "SimulationTools`Statistics`",
@@ -33,6 +34,7 @@ ReadBlackHoleDimensionlessSpin;
 EstimateBinaryMergerTime;
 SimulationCompletionEstimate;
 SimulationCompletionStatsTable;
+BinaryBlackHolePlot2D;
 
 Begin["`Private`"];
 
@@ -133,6 +135,12 @@ SimulationCompletionStatsTable[d_Dataset] :=
 
 SimulationCompletionStatsTable[sims:{_String..}] :=
   SimulationCompletionStatsTable[Dataset[SimulationCompletionEstimate /@ sims]];
+
+BinaryBlackHolePlot2D[sim_String, t_, opts___] :=
+  Module[{gridPlot, hnPlots},
+    gridPlot = GridPlot2D[sim, t, opts];
+    hnPlots = Table[SimpleHorizonPlot2D[sim, i, t], {i, 1, 2}];
+    Show[gridPlot, hnPlots]];
 
 End[];
 EndPackage[];
