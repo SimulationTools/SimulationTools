@@ -114,6 +114,7 @@ ReadSpECConstraintNorm;
 FindSXSSimulation;
 ReadSXSHorizonCentroid;
 
+ReadSXSRelaxedTime;
 Begin["`Private`"];
 
 (****************************************************************)
@@ -1156,6 +1157,9 @@ ReadSXSMetadataKeys[sim_String] :=
 
 ReadSXSMetadata[sim_String, key_String] :=
   ReadSXSMetadataFile[sim][key];
+
+ReadSXSRelaxedTime[sim_String] :=
+  ReadSXSMetadata[sim, "relaxed-measurement-time"];
 
 (****************************************************************)
 (* Waveform rotation (provided by Andrea Taracchini)            *)
