@@ -1121,8 +1121,8 @@ computeExtraMetadata[ap_] :=
      Error["Keys "<>ToString[missingKeys]<>" not found in metadata"]];
 
    If[MemberQ[Keys[a], "relaxed-dimensionless-spin1"],
-     relaxedChi1 = a["relaxed-dimensionless-spin1"];
-     relaxedChi2 = a["relaxed-dimensionless-spin2"],
+     relaxedChi1 = nv[a["relaxed-dimensionless-spin1"]];
+     relaxedChi2 = nv[a["relaxed-dimensionless-spin2"]],
      (* else *)
      relaxedChi1 = nv[a["relaxed-spin1"]]/a["relaxed-mass1"]^2;
      relaxedChi2 = nv[a["relaxed-spin2"]]/a["relaxed-mass2"]^2];
