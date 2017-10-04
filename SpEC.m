@@ -1105,8 +1105,14 @@ nv[s_String] :=
 nv[x_?NumberQ] :=
   {0.,0.,x};
 
-computeExtraMetadata[a_] :=
- Module[{a1, a2, requiredKeys, missingKeys},
+computeExtraMetadata[ap_] :=
+ Module[{a, a1, a2, requiredKeys, missingKeys},
+   a=ap;
+
+   If[!MemberQ[Keys[a], "initial-mass1"],
+     Print["WARNING: No initial-mass keys in metadata; using relaxed values instead"];
+     a = Join[a, <|"initial-mass1" -> a["relaxed-mass1"], "initial-mass2" -> a["relaxed-mass2"]|>]];
+
   requiredKeys = {"relaxed-mass1", "relaxed-mass2", "relaxed-spin1",
     "relaxed-spin2", "relaxed-orbital-frequency", "initial-mass1", "initial-mass2"};
    missingKeys = Complement[requiredKeys, Keys[a]];
