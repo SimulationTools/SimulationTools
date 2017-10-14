@@ -175,8 +175,10 @@ FindSpECSegments[sim_String] :=
     simPath = FindSpECSimulation[runBase];
     evPath = If[FileExistsQ[simPath<>"/Ev"], simPath<>"/Ev", simPath];
     segPatterns = {"Lev"~~res~~"_"~~_~~_, 
-      "Lev"~~res~~"_Ringdown/Lev"~~res~~"_"~~_~~_}[[1;;2]];
-    Map[FileNames[#, evPath] &, segPatterns]];
+      "Lev"~~res~~"_Ringdown/Lev"~~res~~"_"~~_~~_};
+
+    {FileNames[segPatterns[[1]], evPath],
+     FileNames[segPatterns[[1]], evPath<>"/Lev"<>res<>"_Ringdown"]}]; 
 
 FindSpECSimulationFiles = findSpECFiles;
 findSpECFiles[sim_String, file_String] :=
@@ -314,12 +316,12 @@ ReadSpECColumnFile[file_String, cols_List] :=
 (*   ReadSpECColumnFile[findFirstSpECSimulationFile[sim,file], cols]; *)
 
 ReadSpECASCIIData = readSpECASCIIData;
-
+Clear[readSpECASCIIData];
 Options[readSpECASCIIData] = {"SeparateRingdown" -> False, "SeparateSegments" -> False};
-readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := readSpECASCIIData[sim,file,opts] =
+readSpECASCIIData[sim_String, file_String, opts:OptionsPattern[]] := (*readSpECASCIIData[sim,file,opts] =*)
  Module[{runFiles, dataSegments},
 
-  runFiles = findSpECFiles[sim, file];
+   runFiles = findSpECFiles[sim, file];
   dataSegments = Map[withDot@ReadColumnFile, runFiles, {2}];
   print["\n"];
 
@@ -1539,13 +1541,16 @@ ReadSpECNormalizedConstraintNorm[sim_String] :=
   ReadSpECASCIIData[sim, "ConstraintNorms/NormalizedGhCe_Norms.dat", 
     SeparateRingdown -> False][[All, {1, 3}]]];
 
-PlotState5Diagnostics[sim_String] :=
-  Module[{diag, datas},
+PlotState5Diagnostics[sim_String, opts___] :=
+  Module[{diag, datasA, datasB},
+    diag = ReadSpECASCIIData[sim, "DiagAhSpeedA.dat"];
+    datasA = Table[ToDataTable[diag[[All, 1]], diag[[All, i]]], {i, {2, 10, 21, 17}}];
     diag = ReadSpECASCIIData[sim, "DiagAhSpeedB.dat"];
-    datas = Table[ToDataTable[diag[[All, 1]], diag[[All, i]]], {i, {21, 2, 10}}];
-    PresentationListLinePlot[datas,
-      PlotLegend -> {"MinRelDeltaR0", "Activation state", "TDamp"}, 
-      PlotRange -> {{MaxCoordinate[datas[[1]]] - 100, All}, All}]];
+    datasB = Table[ToDataTable[diag[[All, 1]], diag[[All, i]]], {i, {2, 10, 21, 17}}];
+    PresentationListLinePlot[Join[datasA,datasB] Join[{1,1,10^2,10^2},{1,1,10^2,10^2}], opts,
+      PlotLegend -> {"Activation state A", "TDamp A", "10^2 MinRelDeltaR0 A", "10^2 RelDeltaR0 A",
+                    "Activation state B", "TDamp B", "10^2 MinRelDeltaR0 B", "10^2 RelDeltaR0 B"}, 
+      PlotRange -> {{MaxCoordinate[datasA[[1]]] - 100, All}, All}]];
 
 End[];
 EndPackage[];
