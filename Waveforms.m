@@ -109,6 +109,7 @@ ReadStrainCPMHDF5;
 ReadStrainCPMHDF5Direct;
 ReadStrain;
 ReadStrainRadii;
+ReadSchwarzschildRadiusHDF5;
 
 $UniformGridExtrapolation;
 ffiDataTable;
@@ -1059,6 +1060,13 @@ ReadWaveExtractRadii[sim_String] :=
   Module[{},
     Union[ToExpression[StringSplit[FileNameTake[#,-1],"_"][[5]]] & /@ FindSimulationFiles[sim,"Qeven_Re_Detector_Radius_*_l*_m*.asc"]]]
 
+ReadSchwarzschildRadiusHDF5[sim_String, r_] :=
+  Module[{components, psiEvenRe, psiEvenIm, psiOddRe, psiOddIm, data, filename, dataset},
+    filename = "waveextractcpm.h5";
+    dataset = "Schwarzschild_Radius_Detector_Radius_" <> ToString[NumberForm[r,{Infinity,2}]] <> "";  
+    Check[ToDataTable[readHDF5Table[sim, filename, dataset]],
+     Error["Failed to read dataset "<>#<>" from " <> filename <> " in simulation "<>sim],
+     {h5mma::mlink}]];
 
 
 
