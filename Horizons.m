@@ -219,7 +219,7 @@ ChristodoulouMass[run_, ahn_, ihn_] :=
   (* TODO: We don't need to resample here; it would be sufficient to
      restrict mIrr to the grid of S, as mIrr must exist everywhere S
      does *)
-  {mIrr, S} = ResampleDataTables[{mIrr, S}];
+  {mIrr, S} = Quiet[ResampleDataTables[{mIrr, S}],Interpolation::inhr];
   Sqrt[mIrr^2 + S^2/(4 mIrr^2)]];
 
 ReadAHPhase[runName_String] :=
