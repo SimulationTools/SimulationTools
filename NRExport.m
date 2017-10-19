@@ -611,10 +611,12 @@ extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All] :=
     If[m===0,0,1] extrapStrain["ExtrapolatedWaveform"]];
 
 exportExtrapolatedWaveform[sim_String, waveformFile_String, radRange_ : All] :=
-  Module[{lms, modes, dsNames, tmpFile, hlms},
+  Module[{lms, modes, dsNames, tmpFile, hlms, lMax},
     Print["Exporting waveforms from ", sim, " to ", waveformFile];
 
-    lms = Flatten[Table[{l,m}, {l, 2, 4}, {m, -l, l}], 1];
+    lMax = ToExpression@ReadSimulationParameter[sim, "Multipole::l_max"];
+
+    lms = Flatten[Table[{l,m}, {l, 2, lMax}, {m, -l, l}], 1];
     (* lms = {{2,2}, {2,-2}}; *)
 
     modes = Association[Table[
