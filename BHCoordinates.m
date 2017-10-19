@@ -154,7 +154,7 @@ OrbitalPhaseErrors[sims:{___String}] :=
       Quiet[phiErrs = 
     Table[(phis[[i]] - 
       phis[[i + 1]]) hs[[i+1]]^8/(hs[[i]]^8 - hs[[i + 1]]^8), {i, 1, 
-        Length[sims] - 1}],InterpolatingFunction::dmval] // WithResampling, Power::infy]];
+        Length[sims] - 1}],{InterpolatingFunction::dmval,Interpolation::inhr}] // WithResampling, Power::infy]];
 
 resOfSim[s_String]:=
   If[StringMatchQ[s,__~~"_"~~NumberString~~EndOfString],
