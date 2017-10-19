@@ -73,6 +73,7 @@ LevelExistsEvery;
 RadialPoints;
 GridStructure;
 ReadRefinementLevelsOfCentre;
+ReadRadiusOfCentre;
 
 Begin["`Private`"];
 
@@ -572,6 +573,17 @@ ReadRefinementLevelsOfCentre[sim_String, c_Integer] :=
   ReadColumnFile[sim, 
    "carpetregrid2-num_levels..asc", {"time", 
     "num_levels[" <> ToString[c - 1] <> "]"}]];
+
+ReadRadiusOfCentre[sim_String, c_Integer, rl_] := 
+  readRadiusOfCentre[sim, c, rl] =
+  Module[{data, thisRL, withoutNone, tStart = SessionTime[]},
+    data = 
+    ReadColumnFile[sim, 
+      "carpetregrid2-radii.x.asc", {"time", "ix", 
+        "radius[" <> ToString[c - 1] <> "]"}];
+    thisRL = Select[data, #[[2]] == rl &][[All, {1, 3}]];
+    withoutNone = thisRL /. (-1 -> None);
+    ToDataTable[withoutNone]]
 
 End[];
 
