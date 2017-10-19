@@ -47,6 +47,7 @@ SimulationEccentricityAnalysis;
 EccentricityReductionParameters;
 InitialOrbitalFrequencyFromPN;
 EccentricityReductionPlot;
+FindEccentricityReductionSimulations;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
