@@ -57,6 +57,7 @@ ExportSXSSimulation;
 ExportSXSSimulationResolutions;
 BinaryBlackHoleRelaxedTime;
 HDF5FilesDiffer;
+RelaxedOrbitalFrequencyVector;
 
 Begin["`Private`"];
 
@@ -552,6 +553,11 @@ HDF5FilesDiffer[f1_String, f2_String] :=
 
 BinaryBlackHoleRelaxedTime[sim_String] :=
   200;
+
+RelaxedOrbitalFrequencyVector = relaxedOrbitalFrequencyVector;
+
+relaxedOrbitalFrequencyVector[sim_String] :=
+  relaxedOrbitalFrequencyVector[sim, BinaryBlackHoleRelaxedTime[sim]];
 
 relaxedOrbitalFrequencyVector[sim_String, tRelaxed_] :=
   Module[{pos,vel,om},
