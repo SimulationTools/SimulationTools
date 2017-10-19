@@ -85,8 +85,8 @@ extrapolatedWaveformPlot[extrapWaveform_] :=
     "Waveform"}, PlotLabel -> "Extrapolated waveform", 
   LegendPosition -> {Right, Top}]
 
-extrapolatedAmplitudePlot[extrapAmp_] :=
- PresentationListLinePlot[extrapAmp, 
+extrapolatedAmplitudePlot[extrapAmps_] :=
+ PresentationListLinePlot[extrapAmps, 
   FrameLabel -> {"(t-\!\(\*SuperscriptBox[\(r\), \(*\)]\))/M", "A"}, 
   PlotLabel -> "Extrapolated amplitude", 
   LegendPosition -> {Right, Top}]
@@ -127,7 +127,11 @@ amplitudeExtrapolationErrorPlot[extrapAmps_] :=
 \)]\)"}, LegendPosition -> {Right, Top}, 
   PlotLabel -> "Amplitude extrapolation error", Axes -> {None, True}];
                                                     
-WaveformExtrapolationAnalysis[rads_, waveforms_, schRads_, MADM_] :=
+Options[WaveformExtrapolationAnalysis] =
+  {"PhaseOrder" -> 1,
+   "AmplitudeOrder" -> 2};
+
+WaveformExtrapolationAnalysis[rads_, waveforms_, schRads_, MADM_, OptionsPattern[]] :=
  Module[{scaledRetardedWaveformsAtRadii, waveformPlot, freqPlot, 
    ampCheckPlot, scaledRetardedAmpsAtRadiiCheck, phaseCheckPlot, 
    tCheck = 100, retardedPhasesAtRadiiCheck, retardedPhasesAtRadii,
@@ -161,21 +165,26 @@ WaveformExtrapolationAnalysis[rads_, waveforms_, schRads_, MADM_] :=
    phaseExtrapolationFitPlot[rads, retardedPhasesAtRadiiCheck, tCheck];
   
   (* Extrapolation *)
-  ords = {1, 2, 3};
+  phaseOrds = OptionValue[PhaseOrder] + {0, 1, 2};
+
   extrapPhases = 
    Table[RadialExtrapolation[{rads, 
-      ResampleDataTables[retardedPhasesAtRadii]}, ord], {ord, ords}]; 
+      ResampleDataTables[retardedPhasesAtRadii]}, ord], {ord, phaseOrds}]; 
+
+  ampOrds = OptionValue[AmplitudeOrder] + {0, 1, 2, 3};
   extrapAmps = 
    Table[RadialExtrapolation[{rads, 
       ResampleDataTables[Abs /@ scaledRetardedWaveformsAtRadii]}, 
-     ord], {ord, ords}]; extrapPhase = extrapPhases[[1]]; 
-  extrapAmp = extrapAmps[[2]]; 
+     ord], {ord, ampOrds}];
+
+  extrapPhase = extrapPhases[[1]]; 
+  extrapAmp = extrapAmps[[1]]; 
   extrapWaveform = extrapAmp Exp[I extrapPhase];
   
   (* Extrapolated waveform plots *)
   
   extrapWaveformPlot = extrapolatedWaveformPlot[Re@extrapWaveform];
-  extrapAmpPlot = extrapolatedAmplitudePlot[extrapAmp];
+  extrapAmpPlot = extrapolatedAmplitudePlot[extrapAmps];
   extrapFreqPlot = extrapolatedFrequencyPlot[Frequency@extrapWaveform];
   
   (* Extrapolation errors plots *)
@@ -200,8 +209,10 @@ WaveformExtrapolationAnalysis[rads_, waveforms_, schRads_, MADM_] :=
   
   Association["PlotGrid" -> plotGrid,
    "ExtrapolatedWaveform" -> extrapWaveform,
+   "ExtrapolatedAmplitudes" -> extrapAmps,
+   "AmplitudeOrders" -> ampOrds,
    "PhaseExtrapolationError" -> Differences[extrapPhases][[1]],
-   "AmplitudeExtrapolationError" -> Differences[extrapAmps][[2]]]];
+   "AmplitudeExtrapolationError" -> Differences[extrapAmps][[1]]]];
 
 End[];
 EndPackage[];
