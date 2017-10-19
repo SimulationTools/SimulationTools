@@ -586,7 +586,8 @@ ffiCutoffFrequency[sim_String] :=
     omCutoff = 0.75 omGWPN;
     omCutoff];
 
-extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All] :=
+extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All, order_:{2,1},
+  return_:"Waveform"] :=
   Module[{allRads, rads, extrapStrain, omCutoff},
     allRads = ReadPsi4Radii[sim];
 
@@ -606,9 +607,12 @@ extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All] :=
       extrapStrain = 
       WaveformExtrapolationAnalysis[rads, 
         StrainFromPsi4[ReadPsi4[sim, l, mm, #], omCutoff] & /@ rads, rads,
-        ReadADMMass[sim]]];
+        ReadADMMass[sim], AmplitudeOrder -> order[[1]], PhaseOrder -> order[[2]]]];
 
-    If[m===0,0,1] extrapStrain["ExtrapolatedWaveform"]];
+    If[m===0,0,1] * Replace[return,
+      {"Waveform" -> extrapStrain["ExtrapolatedWaveform"],
+       "Association" -> extrapStrain,
+        _ :> Error["Unrecognised return key "<>ToString[return]]}]];
 
 exportExtrapolatedWaveform[sim_String, waveformFile_String, radRange_ : All] :=
   Module[{lms, modes, dsNames, tmpFile, hlms, lMax},
