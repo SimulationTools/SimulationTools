@@ -566,6 +566,8 @@ GridPlot2D[sim_String, t_, opts : OptionsPattern[]] :=
    buffers = readBufferSize[sim], 
    its},
   grids = readGrids[sim];
+   (* TODO: Show an empty plot in this case *)
+   If[Length[grids] === 0, Error["No grid information for simulation "<>sim]];
   dt = readIterationTimeStep[sim];
   it = Round[t/dt];
   its = grids[[All, 1]];
