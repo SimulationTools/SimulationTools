@@ -270,6 +270,9 @@ WaveformFrequencyAlignmentTime[{om1_DataTable, om2_DataTable}, {t1_,
 
     diffs = DeleteCases[Table[{deltat, WaveformFrequencyDifference[{om1, om2}, 
       deltat, {t1, t2}]}, {deltat, -10000, 10000, 10}], {_,10000}];
+
+    If[Length[diffs] == 0, Error["WaveformFrequencyAlignmentTime: diffs = {}"]];
+
 (* Print["ordering = ", Ordering[Abs[diffs[[All,2]]], 1][[1]]]; *)
     deltatGuess = diffs[[Ordering[Abs[diffs[[All,2]]], 1],1]][[1]];
     (* Print["diffs = ", diffs]; *)
