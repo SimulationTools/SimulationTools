@@ -56,7 +56,7 @@ ReadBlackHoleDimensionlessSpin[sim_, i_] :=
  Module[{s, m},
   s = ReadBlackHoleSpin[sim, i];
   m = ReadBlackHoleMass[sim, i];
-  Quiet[WithResampling[s/m^2],InterpolatingFunction::dmval]];
+  Quiet[WithResampling[s/m^2],{InterpolatingFunction::dmval,Interpolation::inhr}]];
 
 EstimateBinaryMergerTime[sim_String] :=
  Module[{omData, q, chi1, chi2, pnEv, tCurrent, sep, currentOm},
