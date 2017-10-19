@@ -611,7 +611,7 @@ HorizonGridCellsPlotData[sims : {_String ...}] :=
     Table[Table[ToDataTable[{{0,0},{1,0}}], {sim, sims}], {ah, 
       1, 2}],
     (* else *)
-    Table[Table[ReadHorizonRadiusGridCells[sim, ah], {sim, sims}], {ah, 
+    Table[Table[Quiet[ReadHorizonRadiusGridCells[sim, ah],Interpolation::inhr], {sim, sims}], {ah, 
       1, 2}]];
 
 HorizonGridCellsPlot[sims : {_String ...}] :=
