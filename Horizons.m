@@ -55,6 +55,7 @@ InitialSpinAngle;
 HaveHorizonData;
 HaveIsolatedHorizonSpinData;
 HaveChristodoulouMassData;
+SimpleHorizonPlot2D;
 
 Begin["`Private`"];
 
@@ -268,6 +269,16 @@ HaveHorizonData[run_, i_] :=
 
 HaveIsolatedHorizonSpinData[run_, i_] :=
   FileIsInRun[run, "quasilocalmeasures"~~("-"|"::")~~"qlm_scalars..asc"] || FileIsInRun[run, "isolatedhorizon"~~("-"|"::")~~"ih_scalars..asc"];
+
+SimpleHorizonPlot2D[sim_String, hn_Integer, t_, style_:{}, opts___] :=
+ Module[{ahPos, ahr},
+  ahPosData = Table[ReadAHCentroidCoord[sim, hn, i], {i, 1, 2}];
+  If[IntervalMemberQ[Interval[CoordinateRange[ahPosData[[1]]]], t],
+    ahPos = Map[Interpolation[#,t] &, ahPosData];
+    ahr = Interpolation[ReadAHRadius[sim, hn], t];
+    Graphics[{style,Circle[ahPos, ahr]}],
+    (* else *)
+    Graphics[{}]]];
 
 End[];
 
