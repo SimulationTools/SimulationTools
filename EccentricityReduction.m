@@ -225,7 +225,7 @@ QuasiCircularParametersFromPostNewtonian[{m_, q_, chi1_, chi2_, om_}] :=
    "OmegaDot" -> omDotExpr]/.{rp0->2,r->10}
 ];
 
-PostNewtonianEvolution[{M_, q_, chi1_, chi2_, om0_}] :=
+PostNewtonianEvolution[{M_, q_, chi1_, chi2_, om0_}, tMin_:0.] :=
  Module[{pn, omEqs, soln, omSoln, phiSoln, tMax, om, phi, t},
   pn = QuasiCircularParametersFromPostNewtonian[{M, q, chi1, chi2, om}];
   omEqs = {om'[t] == (Normal@Series[Rationalize[pn["OmegaDot"]], {om, 0, 7}] /. 
@@ -233,7 +233,7 @@ PostNewtonianEvolution[{M_, q_, chi1_, chi2_, om0_}] :=
     phi'[t] == om[t], om[0] == om0, phi[0] == 0};
   soln = NDSolve[
      Join[omEqs, {WhenEvent[om[t] == 0.1, "StopIntegration"]}], {om, 
-      phi}, {t, 0, Infinity}][[1]];
+      phi}, {t, tMin, Infinity}][[1]];
   omSoln = om /. soln;
   phiSoln = phi /. soln;
   tMax = omSoln[[1, 1, 2]];
