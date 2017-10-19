@@ -1,6 +1,19 @@
 #!/usr/bin/env RunMathematicaScript
 (* -*- mode: mathematica -*- *)
 
+(* Usage: ExportSimulationPlots 
+
+   Generate monitoring plots for a set of simulations.
+
+   --outdir DIR           Write plots to directory DIR
+   --simpattern PATTERN   Generate plots for simulations matching PATTERN
+   --from-file FILE       Read DIR PATTERN pairs from FILE (can
+                          be '-' to read from STDIN)
+
+*)
+
+
+
 $Path = Prepend[$Path, "/home/ianhin/Cactus/ETBG/repos"];
 
 If[FindFile["SimulationTools`"] === $Failed,
