@@ -620,10 +620,10 @@ EccentricityReductionPlot[eccs1:{__Association}] :=
     its = EccentricityReductionIterationNumber /@ eccs[[All, "Simulation"]];
     es = eccs[[All, "Eccentricity"]];
     data = ToDataTable[its, es];
-    simNames = eccs1[[-1, "Simulation"]];
+    simNames = eccs1[[All, "Simulation"]];
     
     PresentationListLinePlot[Log10@data, PlotMarkers -> Automatic, 
-      PlotLabel -> simNames, 
+      PlotLabel -> StringJoin[Riffle[simNames,","]], 
       PlotRange -> {If[Length[eccs] > 0, {Min[its] - 0.1, Max[its] + 0.1}, {-0.5, 1.5}],
         {-5, -1}},
       FrameTicks -> {{(*Log10Ticks[]*)Automatic,
