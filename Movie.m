@@ -132,7 +132,7 @@ ExportMovie[movieFile_String, frames_List, opts:OptionsPattern[]] :=
 
 ExportMovie[movieFile_String, frameFn_, args_List, opts:OptionsPattern[]] :=
   Module[
-    {framesDir, base, j, k, status, timeout=120, inds, exportFrame, failures, lastFailures,
+    {framesDir, base, j, k, status, timeout=180, inds, exportFrame, failures, lastFailures,
     parallel = OptionValue[Parallel]},
 
     inds = Range[1,Length[args]];
