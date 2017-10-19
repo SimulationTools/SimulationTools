@@ -170,7 +170,7 @@ BinarySeparationPlot[sims1_List] :=
       dt = tMax/100;
 
       PresentationListLinePlot[
-        Map[Resampled[#,{dt}]&, seps], PlotRange -> All,
+        Quiet[Map[Resampled[#,{dt}]&, seps],Interpolation::inhr], PlotRange -> All,
         (* FrameLabel -> {"t/M", "r/M"}, *)
         PlotLegend -> sims]],
     "Filename" -> "binary_separation",
