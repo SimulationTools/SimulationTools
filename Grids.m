@@ -78,7 +78,7 @@ ReadRefinementLevelsOfCentre;
 ReadRadiusOfCentre;
 ReadGridSpacingOfCentre;
 ReadHorizonRadiusGridCells;
-HorizonGridCellPlot;
+HorizonGridCellsPlot;
 
 Begin["`Private`"];
 
@@ -606,7 +606,7 @@ ReadHorizonRadiusGridCells[sim_String, ah_Integer] :=
   ahrMin = ReadAHMinRadius[sim, ah];
   ahrMin/dx // WithResampling];
 
-HorizonGridCellPlotData[sims : {_String ...}] :=
+HorizonGridCellsPlotData[sims : {_String ...}] :=
   If[FindRunFile[sims[[1]], "carpetregrid2-num_levels..asc"] === {},
     Table[Table[ToDataTable[{{0,0},{1,0}}], {sim, sims}], {ah, 
       1, 2}],
@@ -614,10 +614,10 @@ HorizonGridCellPlotData[sims : {_String ...}] :=
     Table[Table[ReadHorizonRadiusGridCells[sim, ah], {sim, sims}], {ah, 
       1, 2}]];
 
-HorizonGridCellPlot[sims : {_String ...}] :=
-  HorizonGridCellPlot[sims, HorizonGridCellPlotData[sims]]
+HorizonGridCellsPlot[sims : {_String ...}] :=
+  HorizonGridCellsPlot[sims, HorizonGridCellsPlotData[sims]]
 
-HorizonGridCellPlot[sims_List, cellss_List] :=
+HorizonGridCellsPlot[sims_List, cellss_List] :=
   Module[{n, styles, labels},
     n = Length[sims];
     styles = Take[PresentationPlotStyles, n];
