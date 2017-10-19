@@ -83,6 +83,8 @@ SimulationCompletionEstimate[sim_String] := (*SimulationCompletionEstimate[sim] 
   currentSpeed = Last[speed];
   currentTime = MaxCoordinate[speed];
 
+  If[currentSpeed === 0., Print["WARNING: current speed is 0"]];
+
   (* TODO: work out what to do if this parameter is not found *)
   timeAfterMerger = ToExpression@ReadSimulationParameter[sim, "TrackTriggers::trigger_termination_after_delay", 600];
 
