@@ -641,7 +641,7 @@ FindEccentricityReductionSimulations[sim_String] :=
     EccentricityReductionIterationNumber[#] <= EccentricityReductionIterationNumber[sim] &]]
 
 EccentricityReductionPlot[sims:{__String}] :=
-  Module[{},
+  Module[{sim},
     (* The sims passed are different resolutions.  We return a
        reduction plot for each resolution.  Typically, only one
        resolution will have multiple iterations, but in some cases we
