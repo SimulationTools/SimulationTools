@@ -18,6 +18,7 @@ BeginPackage["SimulationTools`Grids`",
  {
   "SimulationTools`BHCoordinates`",
   "SimulationTools`ColumnFile`",
+  "SimulationTools`DataTable`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",
@@ -71,6 +72,7 @@ CourantFactorOnLevel;
 LevelExistsEvery;
 RadialPoints;
 GridStructure;
+ReadRefinementLevelsOfCentre;
 
 Begin["`Private`"];
 
@@ -564,6 +566,12 @@ ReadFineTimeStep[run_] :=
     2];
   {{it1, t1}, {it2, t2}} = pairs;
   dtFine = (t2 - t1)/(it2 - it1)];
+
+ReadRefinementLevelsOfCentre[sim_String, c_Integer] :=
+ ToDataTable[
+  ReadColumnFile[sim, 
+   "carpetregrid2-num_levels..asc", {"time", 
+    "num_levels[" <> ToString[c - 1] <> "]"}]];
 
 End[];
 
