@@ -24,6 +24,7 @@ BeginPackage["SimulationTools`Grids`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",
   "SimulationTools`Parameters`",
+  "SimulationTools`Plotting`",
   "SimulationTools`RunFiles`",
   "SimulationTools`Segments`"
  }];
@@ -77,6 +78,7 @@ ReadRefinementLevelsOfCentre;
 ReadRadiusOfCentre;
 ReadGridSpacingOfCentre;
 ReadHorizonRadiusGridCells;
+HorizonGridCellPlot;
 
 Begin["`Private`"];
 
@@ -603,6 +605,33 @@ ReadHorizonRadiusGridCells[sim_String, ah_Integer] :=
   dx = ReadGridSpacingOfCentre[sim, centreOfAH[ah]];
   ahrMin = ReadAHMinRadius[sim, ah];
   ahrMin/dx // WithResampling];
+
+HorizonGridCellPlotData[sims : {_String ...}] :=
+  If[FindRunFile[sims[[1]], "carpetregrid2-num_levels..asc"] === {},
+    Table[Table[ToDataTable[{{0,0},{1,0}}], {sim, sims}], {ah, 
+      1, 2}],
+    (* else *)
+    Table[Table[ReadHorizonRadiusGridCells[sim, ah], {sim, sims}], {ah, 
+      1, 2}]];
+
+HorizonGridCellPlot[sims : {_String ...}] :=
+  HorizonGridCellPlot[sims, HorizonGridCellPlotData[sims]]
+
+HorizonGridCellPlot[sims_List, cellss_List] :=
+  Module[{n, styles, labels},
+    n = Length[sims];
+    styles = Take[PresentationPlotStyles, n];
+    (* Only show labels for first AH.  Otherwise it is too cluttered. *)
+    labels = 
+    Flatten[Table[
+      Table[sim <> " AH" <> ToString[ah], {sim, sims}], {ah, 1, 1}], 1];
+    PresentationListLinePlot[Flatten[cellss, 1], PlotRange -> {0, All}, 
+      PlotLegend -> labels,
+      PlotStyle -> Join[styles, Map[{#, Dashed} &, styles]],
+      LegendPosition -> {Left, Bottom},
+      FrameLabel -> {"t/M", 
+        "\!\(\*SubscriptBox[\(r\), \(AH\)]\)/\!\(\*SubscriptBox[\(h\), \
+          \(fine\)]\)"}]]
 
 End[];
 
