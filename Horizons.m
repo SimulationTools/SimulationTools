@@ -56,6 +56,7 @@ HaveHorizonData;
 HaveIsolatedHorizonSpinData;
 HaveChristodoulouMassData;
 SimpleHorizonPlot2D;
+ReadRelaxedHorizonSizes;
 
 Begin["`Private`"];
 
@@ -279,6 +280,20 @@ SimpleHorizonPlot2D[sim_String, hn_Integer, t_, style_:{}, opts___] :=
     Graphics[{style,Circle[ahPos, ahr]}],
     (* else *)
     Graphics[{}]]];
+
+ReadRelaxedHorizonSizes[sim_String] :=
+ Module[{ahrpMin, ahrpMax, ahrmMin, ahrmMax, tRel, ahrs, ahrsRel},
+  ahrpMin = ReadAHMinRadius[sim, 1];
+  ahrpMax = ReadAHMaxRadius[sim, 1];
+  ahrmMin = ReadAHMinRadius[sim, 2];
+  ahrmMax = ReadAHMaxRadius[sim, 2];
+  tRel = 100; (* TODO: choose this more intelligently *)
+  ahrs = {ahrpMin, ahrpMax, ahrmMin, ahrmMax};
+  ahrsRel = Interpolation[#, tRel] & /@ ahrs;
+  Association["MinimumRadius1" -> ahrsRel[[1]], 
+   "MaximumRadius1" -> ahrsRel[[2]],
+   "MinimumRadius2" -> ahrsRel[[3]], 
+   "MaximumRadius2" -> ahrsRel[[4]]]];
 
 End[];
 
