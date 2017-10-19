@@ -1,11 +1,16 @@
 #!/usr/bin/env RunMathematicaScript
 (* -*- mode: mathematica -*- *)
 
-$Path = Prepend[$Path, "/home/ianhin/Cactus/ETBG/repos"];
+$Path = Join[Replace[Environment["MATHEMATICA_PREPEND_PATH"],
+  {s_String :> StringSplit[s,":"],
+    $Failed :> {},
+    s_ :> (Print["Invalid value for MATHEMATICA_PREPEND_PATH: ", s]; Abort[])}], $Path];
 
 If[FindFile["SimulationTools`"] === $Failed,
   Print["Cannot find SimulationTools.  Please make sure that it is accessible on your $Path."];
   Quit[1]];
+
+(* Print["Loading SimulationTools from ", FindFile["SimulationTools`"]]; *)
 
 Get["SimulationTools`"];
 
