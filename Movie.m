@@ -142,19 +142,40 @@ ExportMovie[movieFile_String, frameFn_, args_List, opts:OptionsPattern[]] :=
     If[!DirectoryQ[framesDir], CreateDirectory[framesDir]];
     base = FileNameJoin[{framesDir,"frame"}];
 
-    exportFrame[ind_Integer] :=
-    Module[{file, temp},
-      file = base<>"."<>PadIndex[ind-1,5]<>".png";
-      temp = file <> ".tmp";
+    generateFrame[ind_Integer] :=
+    Module[{pngfile, temp, mFile},
+      pngfile = base<>"."<>PadIndex[ind-1,5]<>".png";
+      (* mFile = StringReplace[pngfile,".png"->".m"]; *)
+      mFile = pngfile<>".mx";
+      temp = mFile <> ".tmp";
       If[FileExistsQ[temp],
         DeleteFile[temp]];
-      If[FileExistsQ[file],
-        True,
+      If[FileExistsQ[mFile],
+        Print["Skipping existing ", mFile];
+        None,
         Print["Generating frame ", ind-1, " for argument ", args[[ind]]];
-        img = frameFn[args[[ind]]];
+        {time,img} = AbsoluteTiming[frameFn[args[[ind]]]];
+        Print["Frame generation took ", time, " s"];
+        Export[temp, img, "MX"];
+        RenameFile[temp, mFile];
+        Print[mFile]]];
+
+    exportFrame[ind_Integer] :=
+    Module[{pngfile, temp, mFile, img},
+      pngfile = base<>"."<>PadIndex[ind-1,5]<>".png";
+      temp = pngfile <> ".tmp";
+      (* mFile = StringReplace[pngfile,".png"->".m"]; *)
+      mFile = pngfile<>".mx";
+      If[FileExistsQ[pngfile],
+        True,
+        (* else *)
+        Print["Exporting frame ", ind-1, " for argument ", args[[ind]]];
+        img = Import[mFile, "MX"];
+        Print["Exporting"];
         Export[temp, img, "PNG"];
-        RenameFile[temp, file];
-        Print[file];
+        Print["Export done"];
+        RenameFile[temp, pngfile];
+        Print[pngfile];
         True]];
 
     failures = Infinity;
@@ -162,10 +183,14 @@ ExportMovie[movieFile_String, frameFn_, args_List, opts:OptionsPattern[]] :=
     While[failures > 0,
     status = If[parallel,
       DistributeDefinitions[timeout,exportFrame,ind,inds];
-      ParallelTable[TimeConstrained[CheckAbort[exportFrame[ind], $Aborted],timeout,Print["Frame ", ind-1, " took more than ", timeout, " seconds to generate; skipping."]; $Timeout], {ind, inds}, Method -> "FinestGrained"],
+      ParallelTable[TimeConstrained[CheckAbort[generateFrame[ind], $Aborted],timeout,Print["Frame ", ind-1, " took more than ", timeout, " seconds to generate; skipping."]; $Timeout], {ind, inds}, Method -> "FinestGrained" ]
+      ParallelTable[exportFrame[ind], {ind, inds}, Method -> "FinestGrained"],
+
       (* else *)
+
       (* Print["exportMovie: inds = ", inds]; *)
-      Table[exportFrame[ind], {ind, inds}]];
+      (* Do export only on the master kernel *)
+      Table[generateFrame[ind]; exportFrame[ind], {ind, inds}]];
 
       failures = Count[status, $Timeout|$Aborted];
 
