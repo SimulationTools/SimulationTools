@@ -56,7 +56,9 @@ CheckAbort[
 
     sims = SimulationNames[simPattern~~"_"~~NumberString];
     Print["Simulations: ", StringJoin[Riffle[sims," "]]];
-    plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot, SimulationProgressPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot};
+    plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot,
+      SimulationProgressPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot,
+      HorizonGridCellPlot};
     tableFns = {SimulationCompletionStatsTable};
     (* Print["sims = ", sims]; *)
     (* Print["plotFns = ", plotFns]; *)
