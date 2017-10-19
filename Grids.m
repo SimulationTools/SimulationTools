@@ -74,6 +74,7 @@ RadialPoints;
 GridStructure;
 ReadRefinementLevelsOfCentre;
 ReadRadiusOfCentre;
+ReadGridSpacingOfCentre;
 
 Begin["`Private`"];
 
@@ -586,6 +587,10 @@ ReadRadiusOfCentre[sim_String, c_Integer, rl_] :=
     thisRL = Select[data, #[[2]] == rl &][[All, {1, 3}]];
     withoutNone = thisRL /. (-1 -> None);
     ToDataTable[withoutNone]]
+
+ReadGridSpacingOfCentre[sim_String, cen_Integer] :=
+ ReadCoarseGridSpacing[sim]/
+  2^(ReadRefinementLevelsOfCentre[sim, cen] - 1);
 
 End[];
 
