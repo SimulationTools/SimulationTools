@@ -19,6 +19,7 @@ BeginPackage["SimulationTools`Grids`",
   "SimulationTools`BHCoordinates`",
   "SimulationTools`ColumnFile`",
   "SimulationTools`DataTable`",
+  "SimulationTools`DataRepresentations`",
   "SimulationTools`Error`",
   "SimulationTools`Horizons`",
   "SimulationTools`Memo`",
@@ -75,6 +76,7 @@ GridStructure;
 ReadRefinementLevelsOfCentre;
 ReadRadiusOfCentre;
 ReadGridSpacingOfCentre;
+ReadHorizonRadiusGridCells;
 
 Begin["`Private`"];
 
@@ -591,6 +593,16 @@ ReadRadiusOfCentre[sim_String, c_Integer, rl_] :=
 ReadGridSpacingOfCentre[sim_String, cen_Integer] :=
  ReadCoarseGridSpacing[sim]/
   2^(ReadRefinementLevelsOfCentre[sim, cen] - 1);
+
+ReadHorizonRadiusGridCells[sim_String, ah_Integer] :=
+ Module[{centreOfAH, dx, ahrMin},
+  (* Assume that the CarpetRegrid2 centres and AH indices coincide.  
+  How to check this? *)
+  centreOfAH[ahp_Integer] :=
+   ahp;
+  dx = ReadGridSpacingOfCentre[sim, centreOfAH[ah]];
+  ahrMin = ReadAHMinRadius[sim, ah];
+  ahrMin/dx // WithResampling];
 
 End[];
 
