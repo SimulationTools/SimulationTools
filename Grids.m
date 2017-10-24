@@ -125,7 +125,8 @@ ReadTimeStep[run_, OptionsPattern[]] :=
 
   trf = TimeRefinementFactors[run];
 
-  rl  = OptionValue[RefinementLevel] /. Automatic -> 0;
+  rl  = OptionValue[RefinementLevel] /.
+   {Automatic -> 0, Max -> Length[trf]-1};
 
   If[rl >= ReadMaxRefinementLevels[run],
   	Error["Refinement level " <> ToString[rl] <> " does not exist."];
