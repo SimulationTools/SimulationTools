@@ -58,6 +58,7 @@ ExportSXSSimulationResolutions;
 BinaryBlackHoleRelaxedTime;
 HDF5FilesDiffer;
 RelaxedOrbitalFrequencyVector;
+$FFICutoffFactor = 1;
 
 Begin["`Private`"];
 
@@ -603,7 +604,7 @@ extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All, order_
        coords as the 2,2 mode, but with 0 as the data. *)
 
     With[{mm = If[m === 0, 2, m]},
-      omCutoff = ffiCutoffFrequency[sim] Abs[mm]/2;
+      omCutoff = $FFICutoffFactor ffiCutoffFrequency[sim] Abs[mm]/2;
       extrapStrain = 
       WaveformExtrapolationAnalysis[rads, 
         StrainFromPsi4[ReadPsi4[sim, l, mm, #], omCutoff] & /@ rads, rads,
