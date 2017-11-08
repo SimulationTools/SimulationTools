@@ -614,8 +614,11 @@ extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All, order_
        "Association" -> extrapStrain,
         _ :> Error["Unrecognised return key "<>ToString[return]]}]];
 
+tableOfWaveform[hlm_DataTable] :=
+  Transpose[{ToListOfCoordinates[hlm], Re@ToListOfData[hlm], Im@ToListOfData[hlm]}];
+
 exportExtrapolatedWaveform[sim_String, waveformFile_String, radRange_ : All] :=
-  Module[{lms, modes, dsNames, tmpFile, hlms, lMax},
+  Module[{lms, modes, dsNames, tmpFile, hlms, lMax, order},
     Print["Exporting waveforms from ", sim, " to ", waveformFile];
 
     lMax = ToExpression@ReadSimulationParameter[sim, "Multipole::l_max"];
@@ -623,18 +626,17 @@ exportExtrapolatedWaveform[sim_String, waveformFile_String, radRange_ : All] :=
     lms = Flatten[Table[{l,m}, {l, 2, lMax}, {m, -l, l}], 1];
     (* lms = {{2,2}, {2,-2}}; *)
 
+    results = Table[
+    Print["Extrapolating with order ", order];
     modes = Association[Table[
       Print["Calculating h[",lm[[1]],",",lm[[2]],"]"];
-      lm -> extrapolatedWaveform[sim, {lm[[1]],lm[[2]]}, radRange], {lm, lms}]];
-    dsNames = Table["Extrapolated_N2.dir/Y_l"<>ToString[lm[[1]]]<>"_m"<>ToString[lm[[2]]]<>".dat", {lm, Keys[modes]}];
+      lm -> extrapolatedWaveform[sim, {lm[[1]],lm[[2]]}, radRange, order], {lm, lms}]];
+    dsNames = Table["Extrapolated_N"<>ToString[order[[1]]]<>".dir/Y_l"<>ToString[lm[[1]]]<>"_m"<>ToString[lm[[2]]]<>".dat", {lm, Keys[modes]}];
     tmpFile = waveformFile<>".tmp";  
 
-    tableOfWaveform[hlm_DataTable] :=
-    Transpose[{ToListOfCoordinates[hlm], Re@ToListOfData[hlm], Im@ToListOfData[hlm]}];
+    {dsNames, tableOfWaveform /@ modes}, {order, {{2,1},{3,2}}}];
 
-    hlms = tableOfWaveform /@ modes;
-
-    Export[tmpFile, Values[hlms], {"HDF5", "Datasets", dsNames}];
+    Export[tmpFile, Flatten[Values@results[[All,2]],1], {"HDF5", "Datasets", Join@@results[[All,1]]}];
     
     If[!FileExistsQ[waveformFile] || HDF5FilesDiffer[tmpFile, waveformFile],
       Print["Writing ", waveformFile];
