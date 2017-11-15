@@ -59,6 +59,7 @@ BinaryBlackHoleRelaxedTime;
 HDF5FilesDiffer;
 RelaxedOrbitalFrequencyVector;
 $FFICutoffFactor = 1;
+$ExtrapolatedWaveformFromCPM;
 
 Begin["`Private`"];
 
@@ -589,7 +590,7 @@ ffiCutoffFrequency[sim_String] :=
 
 extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All, order_:{2,1},
   return_:"Waveform"] :=
-  Module[{allRads, rads, extrapStrain, omCutoff},
+  Module[{allRads, rads, extrapStrain, omCutoff, strains},
     allRads = ReadPsi4Radii[sim];
 
     rads = Replace[radRange, {
@@ -604,10 +605,16 @@ extrapolatedWaveform[sim_String, {l_Integer, m_Integer}, radRange_ : All, order_
        coords as the 2,2 mode, but with 0 as the data. *)
 
     With[{mm = If[m === 0, 2, m]},
-      omCutoff = $FFICutoffFactor ffiCutoffFrequency[sim] Abs[mm]/2;
+
+      If[$ExtrapolatedWaveformFromCPM =!= True,
+        omCutoff = $FFICutoffFactor ffiCutoffFrequency[sim] Abs[mm]/2;
+        strains = StrainFromPsi4[ReadPsi4[sim, l, mm, #], omCutoff] & /@ rads,
+        (* else *)
+        strains = 4 ReadStrainCPMHDF5[sim, l, m, #]& /@ rads];
+
       extrapStrain = 
       WaveformExtrapolationAnalysis[rads, 
-        StrainFromPsi4[ReadPsi4[sim, l, mm, #], omCutoff] & /@ rads, rads,
+        strains, rads,
         ReadADMMass[sim], AmplitudeOrder -> order[[1]], PhaseOrder -> order[[2]]]];
 
     If[m===0,0,1] * Replace[return,
