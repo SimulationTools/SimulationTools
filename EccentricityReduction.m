@@ -277,7 +277,7 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
    deltaD0, deltapr, mu, sepModel, sepFit, sepParams, aFit, n2, psi, 
    n3, residual, ecc, residualNorm, fittedP, completePeriod, circData,
    fitOptions = {PrecisionGoal -> 6, AccuracyGoal -> 6, MaxIterations -> 100},
-   convFail, meanMotion, norm},
+   convFail, meanMotion, norm, min, max},
 
   (* Notation:
 
@@ -445,11 +445,16 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     (*      3 mu om^2 r^3 + (m - 3 mu) r rDot^2) *)
 
   (* Generate a diagnostic plot of the fit *)
+
+  min = Min[Slab[sepDot, Span @@ tInterval]];
+  max = Max[Slab[sepDot, Span @@ tInterval]];
+
   plot = PresentationListLinePlot[{sepDot, fittedData, (*guessData, *)circData}, 
     PlotLegend -> {"NR", 
       SequenceForm["Fit (e=", ScientificForm[ecc, 2], ")"], 
       (*"Initial fit guess",*) "Circular fit"}, LegendPosition -> {Left, Bottom}, 
-    GridLines -> {List @@ tInterval, None}, PlotRange -> All(*{{0,1.2 t2}, #[Slab[sepDot,t1;;t2]] & /@ {Min,Max}}*)];
+    GridLines -> {List @@ tInterval, None},
+    PlotRange -> {{0,tInterval[[2]]+50},{1.2 min, Max[0,max]}}(*{{0,1.2 t2}, #[Slab[sepDot,t1;;t2]] & /@ {Min,Max}}*)];
 
    meanMotion = If[OptionValue[FixEccentricFrequency] =!= False,
      OptionValue[FixEccentricFrequency],
