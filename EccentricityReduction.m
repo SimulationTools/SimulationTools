@@ -656,17 +656,16 @@ FindEccentricityReductionSimulations[sim_String] :=
 
 EccentricityReductionPlot[sims:{__String}] :=
   Module[{sim},
-    (* The sims passed are different resolutions.  We return a
-       reduction plot for each resolution.  Typically, only one
-       resolution will have multiple iterations, but in some cases we
-       may have manually used a higher resolution for later
-       iterations.  TODO: handle this case somehow *)
+    (* The sims passed are different resolutions.  We assume
+       ecc-reduction was run on the lowest resolution, and look for
+       all the previous iterations of this resolution.  TODO: improve
+       this *)
     Table[
       Module[{eccSims, eccs},
         eccSims = FindEccentricityReductionSimulations[sim];
         eccs = SimulationEccentricityAnalysis[eccSims];
         EccentricityReductionPlot[eccs]],
-      {sim, sims}]];
+      {sim, sims[[1;;1]]}][[1]]];
 
 minMax[d_DataTable] :=
  {Min[d], Max[d]}
