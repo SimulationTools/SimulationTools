@@ -637,12 +637,12 @@ EccentricityReductionPlot[eccs1:{__Association}] :=
     simNames = eccs1[[All, "Simulation"]];
     
     PresentationListLinePlot[Log10@data, PlotMarkers -> Automatic, 
-      PlotLabel -> StringJoin[Riffle[simNames,","]], 
+      (* PlotLabel -> StringJoin[Riffle[simNames,","]],  *)
       PlotRange -> {If[Length[eccs] > 0, {Min[its] - 0.1, Max[its] + 0.1}, {-0.5, 1.5}],
         {-5, -1}},
       FrameTicks -> {{(*Log10Ticks[]*)Automatic,
                              None},{Range[0,10],None}},GridLines -> {None, Range[-5, 1]}, 
-    ImageSize -> 250, Axes -> None,
+    Axes -> None,
     FrameLabel->{"iteration","e"}]];
 
 FindEccentricityReductionSimulations[sim_String] :=
