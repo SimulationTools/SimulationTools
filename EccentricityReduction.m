@@ -48,6 +48,7 @@ EccentricityReductionParameters;
 InitialOrbitalFrequencyFromPN;
 EccentricityReductionPlot;
 FindEccentricityReductionSimulations;
+EccentricityFitWindow;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
@@ -479,6 +480,12 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     "FitWindow" -> window,
     "Inspiral" -> OptionValue[Inspiral]]];
 
+EccentricityFitWindow[sim_String] :=
+  EccentricityFitWindow[InitialOrbitalFrequency[sim]]
+  
+EccentricityFitWindow[om0_?NumberQ] :=
+  150 + {0, 2*2 Pi/om0};
+
 (* Analyse an eccentricity reduction series.  Each result is passed to
    the next analysis so that the mean motion can be used in case it
    cannot be determined automatically. *)
@@ -502,7 +509,7 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
 
     eccFitWindow = Replace[$EccentricityFitWindow,
       {x_List :> x,
-       _ :> 150 + {0, 2*2 Pi/om0}}];
+       _ :> EccentricityFitWindow[om0]}];
 
     (* TODO: Refuse to fit if not enough data, unless told this is OK by an option *)
 
