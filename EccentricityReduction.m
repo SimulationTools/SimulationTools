@@ -496,6 +496,10 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
        sometimes causes the fit to fail to converge *)
     sep = Resampled[ReadBinarySeparation[sim], {5.0}];
 
+    om0 = InitialOrbitalFrequency[sim]; 
+    D0 = BinaryBlackHoleParameters[sim]["D"]; 
+    params = EccentricityReductionParameters[sim];
+
     eccFitWindow = Replace[$EccentricityFitWindow,
       {x_List :> x,
        _ :> 150 + {0, 2*2 Pi/om0}}];
@@ -507,9 +511,6 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
       Print["Simulation "<>sim<>" does not have enough data within the eccentricity fit window "  <> ToString[eccFitWindow,CForm]<>"; it only goes up to "<>ToString[MaxCoordinate[sep]]];
       Return[<|"Simulation" -> sim, "NoDataInFitWindow" -> True|>]];
 
-    om0 = InitialOrbitalFrequency[sim]; 
-    D0 = BinaryBlackHoleParameters[sim]["D"]; 
-    params = EccentricityReductionParameters[sim];
 
     If[MaxCoordinate[sep] + eps < eccFitWindow[[2]], 
       simTooShort = True;
