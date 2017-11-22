@@ -49,6 +49,7 @@ InitialOrbitalFrequencyFromPN;
 EccentricityReductionPlot;
 FindEccentricityReductionSimulations;
 EccentricityFitWindow;
+RadialVelocityPlot;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
@@ -661,6 +662,20 @@ EccentricityReductionPlot[sims:{__String}] :=
         eccs = SimulationEccentricityAnalysis[eccSims];
         EccentricityReductionPlot[eccs]],
       {sim, sims}]];
+
+minMax[d_DataTable] :=
+ {Min[d], Max[d]}
+
+RadialVelocityPlot[sims_List] :=
+ Module[{seps, sepDots, fitWindow, mins, maxes},
+  sepDots = NDerivative[1][ReadBHSeparation[#]] & /@ sims;
+  fitWindow = EccentricityFitWindow[sims[[1]]];
+  mins = Min[Slab[#, Span @@ fitWindow] & /@ sepDots];
+  maxes = Max[Slab[#, Span @@ fitWindow] & /@ sepDots];
+  PresentationListLinePlot[sepDots, 
+   PlotRange -> {{0, fitWindow[[2]] + 50}, {1.2 Min[mins], 
+      Max[0, Max[maxes]]}}, GridLines -> {fitWindow, None}, 
+   PlotLegend -> sims, LegendPosition -> {Right, Top}]];
 
 End[];
 
