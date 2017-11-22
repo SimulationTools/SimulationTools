@@ -50,6 +50,7 @@ EccentricityReductionPlot;
 FindEccentricityReductionSimulations;
 EccentricityFitWindow;
 RadialVelocityPlot;
+EccentricityFitPlot;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
@@ -680,6 +681,13 @@ RadialVelocityPlot[sims_List] :=
    PlotRange -> {{0, fitWindow[[2]] + 50}, {1.2 Min[mins], 
       Max[0, Max[maxes]]}}, GridLines -> {fitWindow, None}, 
    PlotLegend -> sims, LegendPosition -> {Right, Top}]];
+
+EccentricityFitPlot[sims_List] :=
+ Module[{sim, eccSims, eccs},
+  sim = sims[[1]];
+  eccSims = FindEccentricityReductionSimulations[sim];
+  eccs = SimulationEccentricityAnalysis[eccSims];
+  eccs[[-1]]["Plot"]];
 
 End[];
 
