@@ -72,7 +72,7 @@ CheckAbort[
     If[sims === {}, Print["WARNING: simulations list is empty"]; Continue[]];
     plotFns = {Psi4RePlot, BinaryTrajectoriesPlot, SimulationSpeedPlot,
       SimulationProgressPlot, OrbitalPhaseErrorPlot, BinarySeparationPlot,
-      HorizonGridCellsPlot};
+      HorizonGridCellsPlot, RadialVelocityPlot, EccentricityReductionPlot, EccentricityFitPlot};
     tableFns = {SimulationCompletionStatsTable};
     (* Print["sims = ", sims]; *)
     (* Print["plotFns = ", plotFns]; *)
