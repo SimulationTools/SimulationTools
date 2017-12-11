@@ -45,6 +45,7 @@ OrbitalPhaseErrorPlot;
 OrbitalPhaseErrors;
 InitialOrbitalFrequency;
 RelaxedOrbitalFrequency;
+InitialOrbitalFrequencyDataTooShort;
 
 Begin["`Private`"];
 
@@ -180,7 +181,7 @@ InitialOrbitalFrequency[sim_String] :=
   Module[{omOrb,fit},
     omOrb = NDerivative[1][ReadBHPhase[sim]];
     If[MaxCoordinate[omOrb] < 75,
-      Error["Cannot determine initial orbital frequency in "<>sim<>" because the data does not reach t = 75"]];
+      Error[InitialOrbitalFrequencyDataTooShort, "Cannot determine initial orbital frequency in "<>sim<>" because the data does not reach t = 75"]];
     fit = LinearModelFit[ToList[Slab[omOrb, 50 ;; 75]], {1, t}, t];
     fit[0]];
 
