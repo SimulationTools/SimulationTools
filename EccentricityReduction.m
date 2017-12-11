@@ -51,6 +51,7 @@ FindEccentricityReductionSimulations;
 EccentricityFitWindow;
 RadialVelocityPlot;
 EccentricityFitPlot;
+EccentricityReductionIterationNumber;
 
 $EccentricityFitWindow;
 $EccentricFitOpts = {};
