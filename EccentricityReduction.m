@@ -488,8 +488,11 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     "Inspiral" -> OptionValue[Inspiral]]];
 
 EccentricityFitWindow[sim_String] :=
-  EccentricityFitWindow[InitialOrbitalFrequency[sim]]
-  
+  Module[{om0},
+    om0 = WithExceptions[InitialOrbitalFrequency[sim],
+      InitialOrbitalFrequencyDataTooShort -> InitialOrbitalFrequencyFromPN[sim]];
+    EccentricityFitWindow[om0]];
+
 EccentricityFitWindow[om0_?NumberQ] :=
   150 + {0, 2*2 Pi/om0};
 
