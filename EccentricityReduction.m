@@ -682,6 +682,14 @@ RadialVelocityPlot[sims_List] :=
       Max[0, Max[maxes]]}}, GridLines -> {fitWindow, None}, 
    PlotLegend -> sims, LegendPosition -> {Right, Top}]];
 
+combinePlotRanges[prs_] :=
+  Module[{},
+    xMin = Min[prs[[All,1,1]]];
+    xMax = Max[prs[[All,1,2]]];
+    yMin = Min[prs[[All,2,1]]];
+    yMax = Max[prs[[All,2,2]]];
+    {{xMin, xMax}, {yMin, yMax}}];
+
 EccentricityFitPlot[sims_List] :=
  Module[{sim, eccSims, eccs},
   sim = sims[[1]];
