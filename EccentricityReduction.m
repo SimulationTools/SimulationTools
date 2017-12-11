@@ -384,6 +384,12 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
    convFail = Quiet[Check[fit = FindFit[ToList[Slab[sepDot, tInterval]], model, params, t,
      fitOptions], FindFit::cvmit, FindFit::cvmit],FindFit::cvmit] === FindFit::cvmit;
 
+
+   unphysParams = If[OptionValue[Inspiral] === "PN" && (tc /. fit) < tInterval[[2]] + tLength/4,
+     True,
+     (* else *)
+     False];
+
   fittedData = model /. fit /. t -> Coordinate[sepDot];
   residual = (model /. fit /. 
       t -> Coordinate[Slab[sepDot, tInterval]]) - 
@@ -486,7 +492,8 @@ BinaryEccentricityFromSeparationDerivative[sep_DataTable,
     "Failed" -> failed, "RadialPeriodTooShort" ->radPeriodTooShort,
     "ConvergenceFailure" ->convFail, "MeanMotion" -> meanMotion, "Separation" -> sep,
     "FitWindow" -> window,
-    "Inspiral" -> OptionValue[Inspiral]]];
+    "Inspiral" -> OptionValue[Inspiral],
+    "UnphysicalParameters" -> unphysParams]];
 
 EccentricityFitWindow[sim_String] :=
   Module[{om0},
@@ -561,8 +568,8 @@ SimulationEccentricityAnalysis[sim_String, prevEcc_: None] :=
          Join[{FixEccentricFrequency -> prevEcc["MeanMotion"]}, opts]],
         Print["No previous mean motion, or it didn't help"];
         Join[e, <|"Failed" -> True|>]],
-       If[e["ConvergenceFailure"],
-        Print["Convergence failure"];
+       If[e["ConvergenceFailure"] || e["UnphysicalParameters"],
+        Print["Convergence failure or unphysical parameters"];
         If[! MemberQ[opts, Inspiral -> "Polynomial"],
          Print["Using linear inspiral"];
          calcEcc[Join[{Inspiral -> "Polynomial"}, opts]],
