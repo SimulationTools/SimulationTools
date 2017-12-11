@@ -672,15 +672,33 @@ minMax[d_DataTable] :=
  {Min[d], Max[d]}
 
 RadialVelocityPlot[sims_List] :=
- Module[{seps, sepDots, fitWindow, mins, maxes},
-  sepDots = NDerivative[1][ReadBHSeparation[#]] & /@ sims;
-  fitWindow = EccentricityFitWindow[sims[[1]]];
-  mins = Min[Slab[#, Span @@ fitWindow] & /@ sepDots];
-  maxes = Max[Slab[#, Span @@ fitWindow] & /@ sepDots];
-  PresentationListLinePlot[sepDots, 
-   PlotRange -> {{0, fitWindow[[2]] + 50}, {1.2 Min[mins], 
-      Max[0, Max[maxes]]}}, GridLines -> {fitWindow, None}, 
-   PlotLegend -> sims, LegendPosition -> {Right, Top}]];
+  Module[{seps, sepDots, fitWindow, tMaxes, yPlotRange, yRanges, allRanges, range},
+
+    seps = Resampled[ReadBinarySeparation[#], {5.0}] & /@ sims;
+    sepDots = NDerivative[1] /@ seps;
+    fitWindow = EccentricityFitWindow[sims[[1]]];
+
+    yPlotRange[d_DataTable] :=
+    Module[{yRange, fitData},
+      If[MaxCoordinate[d] < fitWindow[[1]],
+        None,
+        (* else *)
+        fitData = Slab[d, Span@@fitWindow];
+        yRange = {Min[fitData], Max[fitData]};
+        ySpan = -Subtract@@yRange;
+        yRange + {-1,1} 0.2 ySpan]];
+
+    yRanges = Map[yPlotRange[Slab[#, Span@@fitWindow]] &,
+      Select[sepDots, MaxCoordinate[#] > fitWindow[[1]] &]];
+
+    allRanges = Map[{{0,fitWindow[[2]]+50}, #} &, yRanges];
+
+    range = If[allRanges === {}, Automatic, combinePlotRanges[allRanges]];
+
+    PresentationListLinePlot[sepDots, 
+      PlotRange -> range, GridLines -> {fitWindow, None}, 
+      FrameLabel -> {"t/M",Subscript["v","r"]},
+      PlotLegend -> sims, LegendPosition -> {Right, Top}]];
 
 combinePlotRanges[prs_] :=
   Module[{},
