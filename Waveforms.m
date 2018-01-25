@@ -971,7 +971,8 @@ readHDF5Table[sim_String, file_String, dataset_String] :=
   Module[{files,dataSegments,data},
     files = FindSimulationFiles[sim, file];
     If[files === {}, Error["File "<>file<>" not found in simulation "<>sim]];
-    dataSegments = Map[ReadHDF5[#,{"Datasets", dataset}] &, files];
+    dataSegments = Map[Check[ReadHDF5[#,{"Datasets", dataset}],Error["Failed to read dataset "<>#<>" from " <> filename <> " in simulation "<>sim],
+     {h5mma::mlink}] &, files];
     data = MergeFiles[dataSegments]];
 
 readHDF5Datasets[sim_String, file_String] :=
