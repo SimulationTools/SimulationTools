@@ -122,6 +122,7 @@ WaveformPhaseErrors;
 WaveformPhaseErrorPlot;
 StrainPlot;
 StrainPhaseErrorPlot;
+WaveformPlot;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -1200,6 +1201,44 @@ StrainPhaseErrorPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
     errs = WaveformPhaseErrors[strains, 1/ns];
     WaveformPhaseErrorPlot[errs, Resolutions -> ns]];
 
+
+(****************************************************************)
+(* WaveformPlot                                                 *)
+(****************************************************************)
+
+WaveformPlot[simsp:{_String...}] :=
+  Module[{strainFile, sims, strains, legend},
+
+    strainFile[sim_] :=
+    Replace[Select[{FileNameJoin[{FindRunDir[sim],"rhOverM_Asymptotic_GeometricUnits.h5"}],
+      FileNameJoin[{FindRunDir[sim],"exported","rhOverM_Asymptotic_GeometricUnits.h5"}]},
+      FileExistsQ],{{}:>None,l_:>First[l]}];
+
+    sims = Select[simsp, strainFile[#] =!= None &];
+
+    strains = 
+    ReadSXSStrain[#, 2, 2, 2] & /@ sims;
+
+    legend = readResolution/@sims;
+
+    Association[
+      "Plot" -> WaveformPlot[strains, PlotLegend -> legend],
+      "Title" -> "Strain (l=2,m=2)",
+      "Filename" -> "WaveformPlot"]];
+
+Options[WaveformPlot] = Options[PresentationListLinePlot];
+WaveformPlot[waveforms:{_DataTable...}, opts:OptionsPattern[]] :=
+  Module[{tPeak, peakRange},
+    If[Length[waveforms] === 0, Error["WaveformPlot: empty waveform list"]];
+    tPeak = LocateMaximum[Abs[waveforms[[-1]]]];
+    peakRange = tPeak+{-100,100};
+    GraphicsRow[MapThread[Function[{pr},
+      Show@@MapThread[Function[{fn,styles},
+        PresentationListLinePlot[fn /@ waveforms, PlotRange -> pr, ImageSize->350,
+          GridLines -> {peakRange, None}, PlotStyle -> styles,
+          FilterRules[{opts},Options[PresentationListLinePlot]]]],
+        {{Re,Abs},{PresentationPlotStyles,PresentationPlotStyles}}]],
+      {{{All,All},{peakRange,All}}}]]];
 End[];
 
 EndPackage[];
