@@ -1196,7 +1196,7 @@ readResolution[sim_String] :=
 
 StrainPhaseErrorPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
   Module[{ns, errs},
-    ns = ToExpression[StringSplit[#, "_"][[-1]]] & /@ labels;
+    ns = readResolution/@labels;
     errs = WaveformPhaseErrors[strains, 1/ns];
     WaveformPhaseErrorPlot[errs, Resolutions -> ns]];
 
