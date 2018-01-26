@@ -41,6 +41,7 @@ RescaledDifferences;
 
 RichardsonExtrapolate = RichardsonExtrapolant;
 ConvergenceOrder;
+SimulationResolutionLabelFromName;
 
 Begin["`Private`"];
 
@@ -300,6 +301,26 @@ ConvergenceOrder[{d12_?NumberQ, d23_?NumberQ}, {h1_?NumberQ, h2_?NumberQ, h3_?Nu
         Error["Could not determine convergence order: " <> 
           ToString[x]]}]]]]];
 
+SimulationResolutionLabelFromName[sim_String] :=
+  Module[{},
+
+    (* Need to handle the following cases:
+
+       [/path/to/]sim_NNN => NNN
+
+       [/path/to/]sim/Ev/LevN -> N
+
+       [/path/to/]sim/nNN => NN
+
+       I think we can always strip the dirname of the simulation name,
+       if present. *)
+
+    simName = FileNameTake[sim, -1];
+
+    StringReplace[simName, {
+      StartOfString ~~ __ ~~ "_" ~~ n:(DigitCharacter..) ~~ EndOfString :> "n="<>n,
+      StartOfString ~~ "Lev" ~~ n:(DigitCharacter..) ~~ EndOfString :> "Lev"<>n,
+      StartOfString ~~ "n" ~~ n:(DigitCharacter..) ~~ EndOfString :> "n="<>n}]];
 
 End[];
 
