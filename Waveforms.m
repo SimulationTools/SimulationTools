@@ -1169,14 +1169,30 @@ StrainPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
 (****************************************************************)
 
 StrainPhaseErrorPlot[simsp : {_String ...}] :=
-  Module[{sims, strains},
-    sims = Select[simsp, 
-      FileExistsQ[
-        FileNameJoin[{FindRunDir[#], "exported", 
-          "rhOverM_Asymptotic_GeometricUnits.h5"}]] &];
+  Module[{strainFile, sims, strains},
+
+    strainFile[sim_] :=
+    Replace[Select[{FileNameJoin[{FindRunDir[sim],"rhOverM_Asymptotic_GeometricUnits.h5"}],
+      FileNameJoin[{FindRunDir[sim],"exported","rhOverM_Asymptotic_GeometricUnits.h5"}]},
+      FileExistsQ],{{}:>None,l_:>First[l]}];
+
+    sims = Select[simsp, strainFile[#] =!= None &];
+
     strains = 
-    ReadSXSStrain[FileNameJoin[{#, "exported"}], 2, 2, 2] & /@ sims;
+    ReadSXSStrain[#, 2, 2, 2] & /@ sims;
+
     StrainPhaseErrorPlot[strains, FileNameTake[#, -1] & /@ sims]];
+
+firstOrError[l_] :=
+  If[Length[l] === 0, Error["Empty list"], First[l]];
+
+firstOrNone[l_] :=
+  If[Length[l] === 0, None, First[l]];
+
+readResolution[sim_String] :=
+  firstOrNone@Join[
+    StringCases[FileNameTake[sim,-1], "n"~~(n:NumberString) :> ToExpression[n]],
+    StringCases[FileNameTake[sim,-1], __~~"_"~~(n:NumberString) :> ToExpression[n]]]
 
 StrainPhaseErrorPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
   Module[{ns, errs},
