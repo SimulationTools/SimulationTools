@@ -17,6 +17,7 @@
 BeginPackage["SimulationTools`Waveforms`",
  {
   "SimulationTools`CoordinateTransformations`",
+  "SimulationTools`Convergence`",
   "SimulationTools`ColumnFile`",
   "SimulationTools`RunFiles`",
   "SimulationTools`DataRepresentations`",
@@ -1210,26 +1211,15 @@ StrainPhaseErrorPlot[strains : {_DataTable ...}, labels : {_String ...}] :=
     errs = WaveformPhaseErrors[strains, 1/ns];
     WaveformPhaseErrorPlot[errs, Resolutions -> ns]];
 
-
 (****************************************************************)
 (* WaveformPlot                                                 *)
 (****************************************************************)
 
 WaveformPlot[simsp:{_String...}] :=
   Module[{strainFile, sims, strains, legend},
-
-    strainFile[sim_] :=
-    Replace[Select[{FileNameJoin[{FindRunDir[sim],"rhOverM_Asymptotic_GeometricUnits.h5"}],
-      FileNameJoin[{FindRunDir[sim],"exported","rhOverM_Asymptotic_GeometricUnits.h5"}]},
-      FileExistsQ],{{}:>None,l_:>First[l]}];
-
-    sims = Select[simsp, strainFile[#] =!= None &];
-
-    strains = 
-    ReadSXSStrain[#, 2, 2, 2] & /@ sims;
-
-    legend = readResolution/@sims;
-
+    sims = simsp;
+    strains = ReadStrain[#, 2, 2, Infinity, 2] & /@ sims;
+    legend = SimulationResolutionLabelFromName /@ sims;
     Association[
       "Plot" -> WaveformPlot[strains, PlotLegend -> legend],
       "Title" -> "Strain (l=2,m=2)",
