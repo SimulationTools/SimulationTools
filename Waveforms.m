@@ -1099,9 +1099,7 @@ Psi4PhaseErrors[sims:{___String}] :=
       phis[[2]]) hs[[1]]^8/(hs[[1]]^8 - hs[[2]]^8)],InterpolatingFunction::dmval] // WithResampling];
 
 resOfSim[s_String]:=
-  If[StringMatchQ[s,__~~"_"~~NumberString~~EndOfString],
-    StringSplit[s,"_"][[-1]],
-    s];
+  StringReplace[SimulationResolutionLabelFromName[s],{"Lev"->"", "n="->""}];
 
 Psi4PhaseErrorPlot[sims:{__String}, opts:OptionsPattern[]] :=
   Psi4PhaseErrorPlot[Psi4PhaseErrors[sims], opts, Resolutions -> (resOfSim/@sims)];
@@ -1123,24 +1121,51 @@ Psi4PhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
 (* Waveform phase errors                                        *)
 (****************************************************************)
 
-WaveformPhaseErrors[sims_List] :=
+WaveformPhaseErrors[sims:{_String..}] :=
   Module[{},
-    WaveformPhaseErrors[ReadSXSStrain[#,2,2,2] & /@ sims, None]];
+    WaveformPhaseErrors[ReadStrain[#,2,2,Infinity,2] & /@ sims,
+      SimulationResolutionFromName/@sims]];
 
-WaveformPhaseErrors[waveforms_List, hs_List] :=
-  Module[{phis, phiErrs, p=8},
+WaveformPhaseErrors[waveforms:{_DataTable..}, resolutions:{_Association..}] :=
+  Module[{phis, method, phiErrs, hs, p=8},
     If[Length[waveforms] < 2, Return[{}]];
     phis = AlignPhases[Phase/@waveforms,200];
-    Quiet[phiErrs = 
-      Prepend[Table[(phis[[i]] - phis[[i + 1]]) hs[[i+1]]^p/(hs[[i]]^p - hs[[i + 1]]^p),
-        {i, 1, Length[waveforms] - 1}],
-        (phis[[1]] - phis[[2]]) hs[[1]]^p/(hs[[1]]^p - hs[[2]]^p)],
-      InterpolatingFunction::dmval] // WithResampling];
+    
+    method = resolutions[[1]]["Method"];
+
+    Which[
+      method === "FiniteDifference",
+      hs = 1/resolutions[[All,"NumberOfCells"]];
+      
+      Quiet[phiErrs = 
+        Prepend[Table[(phis[[i]] - phis[[i + 1]]) hs[[i+1]]^p/(hs[[i]]^p - hs[[i + 1]]^p),
+          {i, 1, Length[waveforms] - 1}],
+          (phis[[1]] - phis[[2]]) hs[[1]]^p/(hs[[1]]^p - hs[[2]]^p)],
+        InterpolatingFunction::dmval] // WithResampling,
+
+      method === "Spectral",
+      levs = resolutions[[All,"Level"]];
+
+      If[Union[Differences[Sort[levs]]] =!= {1},
+        Error["Cannot compute errors when levels are not adjacent"]];
+
+      (* TODO: Figure out how to determine the expected convergence
+         rate; we are assuming it is e here. *)
+
+      Quiet[phiErrs = 
+        Append[Table[(phis[[i]] - phis[[i + 1]]),
+          {i, 1, Length[waveforms] - 1}],
+          Exp[-1] (phis[[-2]] - phis[[-1]])],
+        InterpolatingFunction::dmval] // WithResampling,
+
+    True,
+    Error["WaveformPhaseErrors: Unrecognised numerical method "<>ToString[method]]]];
+
+Options[WaveformPhaseErrorPlot] = {"Resolutions" -> Automatic, "Radius" -> Infinity};
 
 WaveformPhaseErrorPlot[sims:{__String}, opts:OptionsPattern[]] :=
   WaveformPhaseErrorPlot[WaveformPhaseErrors[sims], opts, Resolutions -> (resOfSim/@sims)];
 
-Options[WaveformPhaseErrorPlot] = {"Resolutions" -> Automatic};
 WaveformPhaseErrorPlot[phiErrs:{___DataTable}, opts:OptionsPattern[]] :=
   Module[{legend},
     legend = If[OptionValue[Resolutions] === Automatic,
