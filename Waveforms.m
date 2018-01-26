@@ -993,9 +993,9 @@ ReadStrainCPMHDF5[sim_String, l_, m_, r_] :=
      "_l" <> ToString[l] <> "_m" <> ToString[m],
      {x, {"even_Re", "even_Im", "odd_Re", "odd_Im"}}];
    data = {psiEvenRe, psiEvenIm, psiOddRe, psiOddIm} = 
-   Check[ToDataTable[readHDF5Table[sim, filename, #]],
+   ToDataTable[Check[readHDF5Table[sim, filename, #],
      Error["Failed to read dataset "<>#<>" from " <> filename <> " in simulation "<>sim],
-     {h5mma::mlink}] & /@ components;
+     {h5mma::mlink}]] & /@ components;
    
   (* TODO: This -1/4 seems necessary to make it agree with int int psi4 *)
   -1/4 1/(2 r) Sqrt[
