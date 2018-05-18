@@ -116,6 +116,8 @@ ReadSXSHorizonCentroid;
 ReadSXSPsi4;
 
 ReadSXSRelaxedTime;
+ReadSXSExtrapolationOrders;
+
 Begin["`Private`"];
 
 (****************************************************************)
@@ -1019,6 +1021,26 @@ ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern
         file, {"Datasets", 
          "/Extrapolated_N" <> ToString[ord] <> ".dir/Y_l" <> 
           ToString[l] <> "_m" <> ToString[m] <> ".dat"}]]]];
+
+Options[ReadSXSExtrapolationOrders] = {"FileName" -> "rhOverM_Asymptotic_GeometricUnits.h5"};
+ReadSXSExtrapolationOrders[sim_String, l_Integer, m_Integer, opts:OptionsPattern[]] :=
+  Module[{simDir, file, datasets, orders},
+    simDir = FindSXSSimulation[sim];
+    file = FileNameJoin[{simDir, OptionValue[FileName]}];
+
+    If[!FileExistsQ[file], 
+      If[FileExistsQ[exportedFile = FileNameJoin[{simDir, "exported", OptionValue[FileName]}]],
+        file = exportedFile,
+        (* else *)
+        Error["Cannot find strain file "<>ToString[OptionValue[FileName]]<>" in simulation " <>
+          sim]]];
+
+    datasets = ReadHDF5[file, "Datasets"];
+
+    orders = Union@Flatten[Map[StringCases[#,"/Extrapolated_N"~~n:NumberString~~".dir" :> ToExpression@n] &, datasets]];
+
+    orders
+];
 
 
 Options[ReadSXSPsi4] = {"FileName" -> "rMPsi4_Asymptotic_GeometricUnits.h5"};
