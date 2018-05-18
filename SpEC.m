@@ -1106,7 +1106,8 @@ ReadSXSAccumulatedPhase[sim_String] :=
 (* SXS metadata format *)
 (****************************************************************)
 
-ReadSXSMetadataFile[name_String] :=
+Options[ReadSXSMetadataFile] = {"ComputeExtraMetadata" -> True};
+ReadSXSMetadataFile[name_String, OptionsPattern[]] :=
   Module[{keyValues, md1, md},
   keyValues = 
    Cases[ParseMetadataFile[name], 
