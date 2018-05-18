@@ -113,6 +113,7 @@ ReadSpECNormalizedConstraintNorm;
 ReadSpECConstraintNorm;
 FindSXSSimulation;
 ReadSXSHorizonCentroid;
+ReadSXSPsi4;
 
 ReadSXSRelaxedTime;
 Begin["`Private`"];
@@ -1018,6 +1019,11 @@ ReadSXSStrain[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern
         file, {"Datasets", 
          "/Extrapolated_N" <> ToString[ord] <> ".dir/Y_l" <> 
           ToString[l] <> "_m" <> ToString[m] <> ".dat"}]]]];
+
+
+Options[ReadSXSPsi4] = {"FileName" -> "rMPsi4_Asymptotic_GeometricUnits.h5"};
+ReadSXSPsi4[sim_String, l_Integer, m_Integer, ord_Integer, opts:OptionsPattern[]] :=
+  ReadSXSStrain[sim,l,m,ord,FileName -> OptionValue[FileName]];
 
 ReadSXSSpin[sim_, hn_Integer] :=
  Module[{t, sx, sy, sz, hnAlpha = {"A", "B"}[[hn]]},
