@@ -1044,14 +1044,14 @@ ReadStrainWaveExtract[sim_String, l_, m_, r_] :=
 
 (* Generic interface to reading strain data from a simulation.
    Currently only supports WaveExtractCPM HDF5 format. *)
-ReadStrain[sim_String, l_, m_, r_, ord_ : 2] :=
+ReadStrain[sim_String, l_, m_, r_, ord_ : 2, opts___] :=
   Replace[r, {
     _?NumberQ :>
     (* TODO: generalise this to other methods *)
     ReadStrainCPMHDF5Direct[sim, l, m, r],
     
     Infinity :>
-    ReadSXSStrain[sim, l, m, ord],
+    ReadSXSStrain[sim, l, m, ord, opts],
 
     _ :>
     Error["ReadStrain: Unrecognised radius "<>ToString[r]]}];
