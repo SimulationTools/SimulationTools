@@ -30,6 +30,8 @@ BeginPackage["SimulationTools`Waveforms`",
   "SimulationTools`ReadHDF5`",
   "SimulationTools`Grids`",
   "SimulationTools`SpEC`",
+  "SimulationTools`Utils`",
+  "SimulationTools`WaveformAlignment`",
   If[$VersionNumber >= 10, "GeneralUtilities`", Unevaluated[Sequence[]]]
  }];
 
@@ -125,6 +127,7 @@ StrainPlot;
 StrainPhaseErrorPlot;
 WaveformPlot;
 ReadStrainFromRelaxedTime;
+WaveformHybridizationAlignmentWindow;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -1273,6 +1276,17 @@ WaveformPlot[waveforms:{_DataTable...}, opts:OptionsPattern[]] :=
           FilterRules[{opts},Options[PresentationListLinePlot]]]],
         {{Re,Abs},{PresentationPlotStyles,PresentationPlotStyles}}]],
       {{{All,All},{peakRange,All}}}]]];
+
+WaveformHybridizationAlignmentWindow[sim_String, tStrainEnd_] :=
+ Module[{length, rOutermost, tCAH, tEnd, t2},
+  length = 150;
+  rOutermost = 500; (* TODO: determine this from the simulation *)
+  
+  tCAH = ReadSXSMetadata[sim, "common-horizon-time"];
+  t2 = If[tCAH =!= "None" && tStrainEnd > tCAH - rOutermost + 500,
+    tCAH - rOutermost,
+    tStrainEnd];
+  t2 + {-length, 0}];
 End[];
 
 EndPackage[];
