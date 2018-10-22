@@ -128,6 +128,7 @@ StrainPhaseErrorPlot;
 WaveformPlot;
 ReadStrainFromRelaxedTime;
 WaveformHybridizationAlignmentWindow;
+HybridizeWaveforms;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -1287,6 +1288,66 @@ WaveformHybridizationAlignmentWindow[sim_String, tStrainEnd_] :=
     tCAH - rOutermost,
     tStrainEnd];
   t2 + {-length, 0}];
+
+HybridizeWaveforms[{h1_DataTable, h2_DataTable}, window : {t1_, t2_}] :=
+ Module[{shift, tPeak2, h2Shifted, hybrid},
+  tPeak2 = LocateMaximum[Abs[h2]];
+  shift = TimePhaseAlignmentShifts[Phase /@ {h1, Slab[h2, All ;; tPeak2]}, 
+    window];
+  h2Shifted = TimePhaseShifted[h2, shift];
+  
+  hybrid = blendWaveformsByPhaseAndAmplitude[{h1, h2Shifted}, window];
+  <|"Hybrid" -> hybrid, "h1" -> h1, "h2Shifted" -> h2Shifted, 
+   "Shift" -> shift|>];
+
+blendWaveformsByPhaseAndAmplitude[hs:{h1_DataTable, h2_DataTable}, window:{t1_, t2_}] := 
+ Module[{phaseBlend, ampBlend, hBlend},
+  phaseBlend = blend[AlignPhases[Phase/@hs,Mean[window]], window];
+  ampBlend = blend[Abs/@hs, window];
+  hBlend = ampBlend Exp[I phaseBlend]];
+
+blend[{f1_DataTable, f2_DataTable}, {t1_?NumberQ, t2_?NumberQ}] := 
+  Module[{g1, g2, t1Max, t2Min, g1Fn, g2Fn, ts1, ts2, ts, t, tau},
+   t = t1;
+   tau = t2 - t1;
+   g1 = planckTaperDataTable[f1, {{-1000000, -1000000 + 100}, {t, t + tau}}];
+   g2 = planckTaperDataTable[f2, {{t, t + tau}, {1000000, 1000000 + 100}}];
+   (*Print[{f1,f2}];*)(*ShowIt[{g1,g2}];*)(*ShowIt[t];*)
+   t1Max = MaxCoordinate[g1];
+   t2Min = MinCoordinate[g2];
+   If[t1Max < t + tau, 
+    Error["blend: First DataTable does not cover the blend region"]];
+   If[t2Min > t, 
+    Error["blend: Second DataTable does not cover the blend region " <> 
+      ToString[CoordinateRange[f2]] <> " and " <> ToString[{t1, t2}]]];
+   (*ShowIt[{t1Max,t2Min}];*)g1Fn = Interpolation[g1];
+   g2Fn = Interpolation[g2];
+   ts1 = Select[ToListOfCoordinates[g1], # < t &];
+   ts2 = Select[ToListOfCoordinates[g2], # > t &];
+   If[Length[ts1] === 0, Error["blend: No points in first DataTable"]];
+   If[Length[ts2] === 0, Error["blend: No points in second DataTable"]];
+   ts = Join[ts1, ts2];
+   ToDataTable[
+    Table[{tt, 
+      If[tt <= t1Max, g1Fn[tt], 0.] + If[tt >= t2Min, g2Fn[tt], 0.]}, {tt, 
+      ts}]]];
+
+planckTaper[d_DataTable, {t1_, t2_}] := 
+  Module[{f},(*If[t1===t2,Return[d*0.+1.]];*)
+   f[t_] := Piecewise[{{0., t <= t1}, {1., 
+       t >= t2}, {If[Abs[t - t1] < 10^-9 || Abs[t - t2] < 10^-9, 0., 
+        Chop[1./(1 + Exp[(t2 - t1) (1/(t - t1) + 1/(t - t2))])]], 
+       t1 < t < t2}}];
+   SetAttributes[f, {Listable, NumericFunction}];
+   f[d]];
+
+planckTaperDataTable[d_DataTable, {t1_, t2_}] := 
+  planckTaper[Coordinate[d], {t1, t2}] d;
+
+planckTaperDataTable[d_DataTable, {{t1_, t2_}, {t3_, t4_}}] := 
+  planckTaper[
+    Coordinate[d], {t1, t2}]*(1 - planckTaper[Coordinate[d], {t3, t4}]) d;
+
 End[];
 
 EndPackage[];
