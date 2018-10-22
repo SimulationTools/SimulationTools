@@ -124,6 +124,7 @@ WaveformPhaseErrorPlot;
 StrainPlot;
 StrainPhaseErrorPlot;
 WaveformPlot;
+ReadStrainFromRelaxedTime;
 
 (* Exceptions *)
 Psi4RadiusNotFound;
@@ -1055,6 +1056,15 @@ ReadStrain[sim_String, l_, m_, r_, ord_ : 2, opts___] :=
 
     _ :>
     Error["ReadStrain: Unrecognised radius "<>ToString[r]]}];
+
+ReadStrainFromRelaxedTime[sim_String, args___] :=
+ Module[{tRel, h, tPeak},
+  tRel = ReadSXSRelaxedTime[sim];
+  h = ReadStrain[sim, args];
+  (*tPeak=LocateMaximum[Abs[h]];*)
+  (*Print[ReadSXSMetadata[sim,
+  "common-horizon-time"]];*)
+  Slab[h, tRel ;; All (*tPeak+120*)]];
 
 ReadStrainRadii[sim_String] :=
   ReadStrainRadiiWaveExtractCPMHDF5[sim];
